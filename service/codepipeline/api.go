@@ -14,31 +14,37 @@ import (
 
 const opAcknowledgeJob = "AcknowledgeJob"
 
-// AcknowledgeJobRequest generates a "aws.Request" representing the
-// client's request for the AcknowledgeJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AcknowledgeJobRequest is a API request type for the AcknowledgeJob API operation.
+type AcknowledgeJobRequest struct {
+	*aws.Request
+	Input *AcknowledgeJobInput
+}
+
+// Send marshals and sends the AcknowledgeJob API request.
+func (r AcknowledgeJobRequest) Send() (*AcknowledgeJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AcknowledgeJobOutput), nil
+}
+
+// AcknowledgeJobRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AcknowledgeJob for more information on using the AcknowledgeJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specified job and whether that job has been received
+// by the job worker. Only used for custom actions.
 //
 //    // Example sending a request using the AcknowledgeJobRequest method.
-//    req, resp := client.AcknowledgeJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AcknowledgeJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJob
-func (c *CodePipeline) AcknowledgeJobRequest(input *AcknowledgeJobInput) (req *aws.Request, output *AcknowledgeJobOutput) {
+func (c *CodePipeline) AcknowledgeJobRequest(input *AcknowledgeJobInput) AcknowledgeJobRequest {
 	op := &aws.Operation{
 		Name:       opAcknowledgeJob,
 		HTTPMethod: "POST",
@@ -49,82 +55,43 @@ func (c *CodePipeline) AcknowledgeJobRequest(input *AcknowledgeJobInput) (req *a
 		input = &AcknowledgeJobInput{}
 	}
 
-	output = &AcknowledgeJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AcknowledgeJob API operation for AWS CodePipeline.
-//
-// Returns information about a specified job and whether that job has been received
-// by the job worker. Only used for custom actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation AcknowledgeJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeInvalidNonceException "InvalidNonceException"
-//   The specified nonce was specified in an invalid format.
-//
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJob
-func (c *CodePipeline) AcknowledgeJob(input *AcknowledgeJobInput) (*AcknowledgeJobOutput, error) {
-	req, out := c.AcknowledgeJobRequest(input)
-	return out, req.Send()
-}
-
-// AcknowledgeJobWithContext is the same as AcknowledgeJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AcknowledgeJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) AcknowledgeJobWithContext(ctx aws.Context, input *AcknowledgeJobInput, opts ...aws.Option) (*AcknowledgeJobOutput, error) {
-	req, out := c.AcknowledgeJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AcknowledgeJobOutput{})
+	return AcknowledgeJobRequest{Request: req, Input: input}
 }
 
 const opAcknowledgeThirdPartyJob = "AcknowledgeThirdPartyJob"
 
-// AcknowledgeThirdPartyJobRequest generates a "aws.Request" representing the
-// client's request for the AcknowledgeThirdPartyJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AcknowledgeThirdPartyJobRequest is a API request type for the AcknowledgeThirdPartyJob API operation.
+type AcknowledgeThirdPartyJobRequest struct {
+	*aws.Request
+	Input *AcknowledgeThirdPartyJobInput
+}
+
+// Send marshals and sends the AcknowledgeThirdPartyJob API request.
+func (r AcknowledgeThirdPartyJobRequest) Send() (*AcknowledgeThirdPartyJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AcknowledgeThirdPartyJobOutput), nil
+}
+
+// AcknowledgeThirdPartyJobRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AcknowledgeThirdPartyJob for more information on using the AcknowledgeThirdPartyJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Confirms a job worker has received the specified job. Only used for partner
+// actions.
 //
 //    // Example sending a request using the AcknowledgeThirdPartyJobRequest method.
-//    req, resp := client.AcknowledgeThirdPartyJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AcknowledgeThirdPartyJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeThirdPartyJob
-func (c *CodePipeline) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPartyJobInput) (req *aws.Request, output *AcknowledgeThirdPartyJobOutput) {
+func (c *CodePipeline) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPartyJobInput) AcknowledgeThirdPartyJobRequest {
 	op := &aws.Operation{
 		Name:       opAcknowledgeThirdPartyJob,
 		HTTPMethod: "POST",
@@ -135,85 +102,43 @@ func (c *CodePipeline) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPa
 		input = &AcknowledgeThirdPartyJobInput{}
 	}
 
-	output = &AcknowledgeThirdPartyJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AcknowledgeThirdPartyJob API operation for AWS CodePipeline.
-//
-// Confirms a job worker has received the specified job. Only used for partner
-// actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation AcknowledgeThirdPartyJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeInvalidNonceException "InvalidNonceException"
-//   The specified nonce was specified in an invalid format.
-//
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeInvalidClientTokenException "InvalidClientTokenException"
-//   The client token was specified in an invalid format
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeThirdPartyJob
-func (c *CodePipeline) AcknowledgeThirdPartyJob(input *AcknowledgeThirdPartyJobInput) (*AcknowledgeThirdPartyJobOutput, error) {
-	req, out := c.AcknowledgeThirdPartyJobRequest(input)
-	return out, req.Send()
-}
-
-// AcknowledgeThirdPartyJobWithContext is the same as AcknowledgeThirdPartyJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AcknowledgeThirdPartyJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) AcknowledgeThirdPartyJobWithContext(ctx aws.Context, input *AcknowledgeThirdPartyJobInput, opts ...aws.Option) (*AcknowledgeThirdPartyJobOutput, error) {
-	req, out := c.AcknowledgeThirdPartyJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AcknowledgeThirdPartyJobOutput{})
+	return AcknowledgeThirdPartyJobRequest{Request: req, Input: input}
 }
 
 const opCreateCustomActionType = "CreateCustomActionType"
 
-// CreateCustomActionTypeRequest generates a "aws.Request" representing the
-// client's request for the CreateCustomActionType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCustomActionTypeRequest is a API request type for the CreateCustomActionType API operation.
+type CreateCustomActionTypeRequest struct {
+	*aws.Request
+	Input *CreateCustomActionTypeInput
+}
+
+// Send marshals and sends the CreateCustomActionType API request.
+func (r CreateCustomActionTypeRequest) Send() (*CreateCustomActionTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCustomActionTypeOutput), nil
+}
+
+// CreateCustomActionTypeRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCustomActionType for more information on using the CreateCustomActionType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new custom action that can be used in all pipelines associated
+// with the AWS account. Only used for custom actions.
 //
 //    // Example sending a request using the CreateCustomActionTypeRequest method.
-//    req, resp := client.CreateCustomActionTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCustomActionTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionType
-func (c *CodePipeline) CreateCustomActionTypeRequest(input *CreateCustomActionTypeInput) (req *aws.Request, output *CreateCustomActionTypeOutput) {
+func (c *CodePipeline) CreateCustomActionTypeRequest(input *CreateCustomActionTypeInput) CreateCustomActionTypeRequest {
 	op := &aws.Operation{
 		Name:       opCreateCustomActionType,
 		HTTPMethod: "POST",
@@ -224,80 +149,42 @@ func (c *CodePipeline) CreateCustomActionTypeRequest(input *CreateCustomActionTy
 		input = &CreateCustomActionTypeInput{}
 	}
 
-	output = &CreateCustomActionTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCustomActionType API operation for AWS CodePipeline.
-//
-// Creates a new custom action that can be used in all pipelines associated
-// with the AWS account. Only used for custom actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation CreateCustomActionType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of pipelines associated with the AWS account has exceeded the
-//   limit allowed for the account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionType
-func (c *CodePipeline) CreateCustomActionType(input *CreateCustomActionTypeInput) (*CreateCustomActionTypeOutput, error) {
-	req, out := c.CreateCustomActionTypeRequest(input)
-	return out, req.Send()
-}
-
-// CreateCustomActionTypeWithContext is the same as CreateCustomActionType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCustomActionType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) CreateCustomActionTypeWithContext(ctx aws.Context, input *CreateCustomActionTypeInput, opts ...aws.Option) (*CreateCustomActionTypeOutput, error) {
-	req, out := c.CreateCustomActionTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCustomActionTypeOutput{})
+	return CreateCustomActionTypeRequest{Request: req, Input: input}
 }
 
 const opCreatePipeline = "CreatePipeline"
 
-// CreatePipelineRequest generates a "aws.Request" representing the
-// client's request for the CreatePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePipelineRequest is a API request type for the CreatePipeline API operation.
+type CreatePipelineRequest struct {
+	*aws.Request
+	Input *CreatePipelineInput
+}
+
+// Send marshals and sends the CreatePipeline API request.
+func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePipelineOutput), nil
+}
+
+// CreatePipelineRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePipeline for more information on using the CreatePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a pipeline.
 //
 //    // Example sending a request using the CreatePipelineRequest method.
-//    req, resp := client.CreatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipeline
-func (c *CodePipeline) CreatePipelineRequest(input *CreatePipelineInput) (req *aws.Request, output *CreatePipelineOutput) {
+func (c *CodePipeline) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opCreatePipeline,
 		HTTPMethod: "POST",
@@ -308,94 +195,46 @@ func (c *CodePipeline) CreatePipelineRequest(input *CreatePipelineInput) (req *a
 		input = &CreatePipelineInput{}
 	}
 
-	output = &CreatePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePipeline API operation for AWS CodePipeline.
-//
-// Creates a pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation CreatePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNameInUseException "PipelineNameInUseException"
-//   The specified pipeline name is already in use.
-//
-//   * ErrCodeInvalidStageDeclarationException "InvalidStageDeclarationException"
-//   The specified stage declaration was specified in an invalid format.
-//
-//   * ErrCodeInvalidActionDeclarationException "InvalidActionDeclarationException"
-//   The specified action declaration was specified in an invalid format.
-//
-//   * ErrCodeInvalidBlockerDeclarationException "InvalidBlockerDeclarationException"
-//   Reserved for future use.
-//
-//   * ErrCodeInvalidStructureException "InvalidStructureException"
-//   The specified structure was specified in an invalid format.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of pipelines associated with the AWS account has exceeded the
-//   limit allowed for the account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipeline
-func (c *CodePipeline) CreatePipeline(input *CreatePipelineInput) (*CreatePipelineOutput, error) {
-	req, out := c.CreatePipelineRequest(input)
-	return out, req.Send()
-}
-
-// CreatePipelineWithContext is the same as CreatePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) CreatePipelineWithContext(ctx aws.Context, input *CreatePipelineInput, opts ...aws.Option) (*CreatePipelineOutput, error) {
-	req, out := c.CreatePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	return CreatePipelineRequest{Request: req, Input: input}
 }
 
 const opDeleteCustomActionType = "DeleteCustomActionType"
 
-// DeleteCustomActionTypeRequest generates a "aws.Request" representing the
-// client's request for the DeleteCustomActionType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCustomActionTypeRequest is a API request type for the DeleteCustomActionType API operation.
+type DeleteCustomActionTypeRequest struct {
+	*aws.Request
+	Input *DeleteCustomActionTypeInput
+}
+
+// Send marshals and sends the DeleteCustomActionType API request.
+func (r DeleteCustomActionTypeRequest) Send() (*DeleteCustomActionTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCustomActionTypeOutput), nil
+}
+
+// DeleteCustomActionTypeRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Marks a custom action as deleted. PollForJobs for the custom action will
+// fail after the action is marked for deletion. Only used for custom actions.
 //
-// See DeleteCustomActionType for more information on using the DeleteCustomActionType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot recreate a custom action after it has been deleted unless you
+// increase the version number of the action.
 //
 //    // Example sending a request using the DeleteCustomActionTypeRequest method.
-//    req, resp := client.DeleteCustomActionTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCustomActionTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionType
-func (c *CodePipeline) DeleteCustomActionTypeRequest(input *DeleteCustomActionTypeInput) (req *aws.Request, output *DeleteCustomActionTypeOutput) {
+func (c *CodePipeline) DeleteCustomActionTypeRequest(input *DeleteCustomActionTypeInput) DeleteCustomActionTypeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCustomActionType,
 		HTTPMethod: "POST",
@@ -406,81 +245,44 @@ func (c *CodePipeline) DeleteCustomActionTypeRequest(input *DeleteCustomActionTy
 		input = &DeleteCustomActionTypeInput{}
 	}
 
-	output = &DeleteCustomActionTypeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteCustomActionTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteCustomActionType API operation for AWS CodePipeline.
-//
-// Marks a custom action as deleted. PollForJobs for the custom action will
-// fail after the action is marked for deletion. Only used for custom actions.
-//
-// You cannot recreate a custom action after it has been deleted unless you
-// increase the version number of the action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation DeleteCustomActionType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionType
-func (c *CodePipeline) DeleteCustomActionType(input *DeleteCustomActionTypeInput) (*DeleteCustomActionTypeOutput, error) {
-	req, out := c.DeleteCustomActionTypeRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCustomActionTypeWithContext is the same as DeleteCustomActionType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCustomActionType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) DeleteCustomActionTypeWithContext(ctx aws.Context, input *DeleteCustomActionTypeInput, opts ...aws.Option) (*DeleteCustomActionTypeOutput, error) {
-	req, out := c.DeleteCustomActionTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteCustomActionTypeRequest{Request: req, Input: input}
 }
 
 const opDeletePipeline = "DeletePipeline"
 
-// DeletePipelineRequest generates a "aws.Request" representing the
-// client's request for the DeletePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePipelineRequest is a API request type for the DeletePipeline API operation.
+type DeletePipelineRequest struct {
+	*aws.Request
+	Input *DeletePipelineInput
+}
+
+// Send marshals and sends the DeletePipeline API request.
+func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePipelineOutput), nil
+}
+
+// DeletePipelineRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePipeline for more information on using the DeletePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified pipeline.
 //
 //    // Example sending a request using the DeletePipelineRequest method.
-//    req, resp := client.DeletePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeletePipeline
-func (c *CodePipeline) DeletePipelineRequest(input *DeletePipelineInput) (req *aws.Request, output *DeletePipelineOutput) {
+func (c *CodePipeline) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelineRequest {
 	op := &aws.Operation{
 		Name:       opDeletePipeline,
 		HTTPMethod: "POST",
@@ -491,77 +293,45 @@ func (c *CodePipeline) DeletePipelineRequest(input *DeletePipelineInput) (req *a
 		input = &DeletePipelineInput{}
 	}
 
-	output = &DeletePipelineOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeletePipelineOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeletePipeline API operation for AWS CodePipeline.
-//
-// Deletes the specified pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation DeletePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeletePipeline
-func (c *CodePipeline) DeletePipeline(input *DeletePipelineInput) (*DeletePipelineOutput, error) {
-	req, out := c.DeletePipelineRequest(input)
-	return out, req.Send()
-}
-
-// DeletePipelineWithContext is the same as DeletePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) DeletePipelineWithContext(ctx aws.Context, input *DeletePipelineInput, opts ...aws.Option) (*DeletePipelineOutput, error) {
-	req, out := c.DeletePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeletePipelineRequest{Request: req, Input: input}
 }
 
 const opDisableStageTransition = "DisableStageTransition"
 
-// DisableStageTransitionRequest generates a "aws.Request" representing the
-// client's request for the DisableStageTransition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableStageTransitionRequest is a API request type for the DisableStageTransition API operation.
+type DisableStageTransitionRequest struct {
+	*aws.Request
+	Input *DisableStageTransitionInput
+}
+
+// Send marshals and sends the DisableStageTransition API request.
+func (r DisableStageTransitionRequest) Send() (*DisableStageTransitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableStageTransitionOutput), nil
+}
+
+// DisableStageTransitionRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableStageTransition for more information on using the DisableStageTransition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Prevents artifacts in a pipeline from transitioning to the next stage in
+// the pipeline.
 //
 //    // Example sending a request using the DisableStageTransitionRequest method.
-//    req, resp := client.DisableStageTransitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableStageTransitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DisableStageTransition
-func (c *CodePipeline) DisableStageTransitionRequest(input *DisableStageTransitionInput) (req *aws.Request, output *DisableStageTransitionOutput) {
+func (c *CodePipeline) DisableStageTransitionRequest(input *DisableStageTransitionInput) DisableStageTransitionRequest {
 	op := &aws.Operation{
 		Name:       opDisableStageTransition,
 		HTTPMethod: "POST",
@@ -572,84 +342,44 @@ func (c *CodePipeline) DisableStageTransitionRequest(input *DisableStageTransiti
 		input = &DisableStageTransitionInput{}
 	}
 
-	output = &DisableStageTransitionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DisableStageTransitionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DisableStageTransition API operation for AWS CodePipeline.
-//
-// Prevents artifacts in a pipeline from transitioning to the next stage in
-// the pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation DisableStageTransition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeStageNotFoundException "StageNotFoundException"
-//   The specified stage was specified in an invalid format or cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DisableStageTransition
-func (c *CodePipeline) DisableStageTransition(input *DisableStageTransitionInput) (*DisableStageTransitionOutput, error) {
-	req, out := c.DisableStageTransitionRequest(input)
-	return out, req.Send()
-}
-
-// DisableStageTransitionWithContext is the same as DisableStageTransition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableStageTransition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) DisableStageTransitionWithContext(ctx aws.Context, input *DisableStageTransitionInput, opts ...aws.Option) (*DisableStageTransitionOutput, error) {
-	req, out := c.DisableStageTransitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DisableStageTransitionRequest{Request: req, Input: input}
 }
 
 const opEnableStageTransition = "EnableStageTransition"
 
-// EnableStageTransitionRequest generates a "aws.Request" representing the
-// client's request for the EnableStageTransition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableStageTransitionRequest is a API request type for the EnableStageTransition API operation.
+type EnableStageTransitionRequest struct {
+	*aws.Request
+	Input *EnableStageTransitionInput
+}
+
+// Send marshals and sends the EnableStageTransition API request.
+func (r EnableStageTransitionRequest) Send() (*EnableStageTransitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableStageTransitionOutput), nil
+}
+
+// EnableStageTransitionRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableStageTransition for more information on using the EnableStageTransition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables artifacts in a pipeline to transition to a stage in a pipeline.
 //
 //    // Example sending a request using the EnableStageTransitionRequest method.
-//    req, resp := client.EnableStageTransitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableStageTransitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnableStageTransition
-func (c *CodePipeline) EnableStageTransitionRequest(input *EnableStageTransitionInput) (req *aws.Request, output *EnableStageTransitionOutput) {
+func (c *CodePipeline) EnableStageTransitionRequest(input *EnableStageTransitionInput) EnableStageTransitionRequest {
 	op := &aws.Operation{
 		Name:       opEnableStageTransition,
 		HTTPMethod: "POST",
@@ -660,83 +390,49 @@ func (c *CodePipeline) EnableStageTransitionRequest(input *EnableStageTransition
 		input = &EnableStageTransitionInput{}
 	}
 
-	output = &EnableStageTransitionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &EnableStageTransitionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// EnableStageTransition API operation for AWS CodePipeline.
-//
-// Enables artifacts in a pipeline to transition to a stage in a pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation EnableStageTransition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeStageNotFoundException "StageNotFoundException"
-//   The specified stage was specified in an invalid format or cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnableStageTransition
-func (c *CodePipeline) EnableStageTransition(input *EnableStageTransitionInput) (*EnableStageTransitionOutput, error) {
-	req, out := c.EnableStageTransitionRequest(input)
-	return out, req.Send()
-}
-
-// EnableStageTransitionWithContext is the same as EnableStageTransition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableStageTransition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) EnableStageTransitionWithContext(ctx aws.Context, input *EnableStageTransitionInput, opts ...aws.Option) (*EnableStageTransitionOutput, error) {
-	req, out := c.EnableStageTransitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return EnableStageTransitionRequest{Request: req, Input: input}
 }
 
 const opGetJobDetails = "GetJobDetails"
 
-// GetJobDetailsRequest generates a "aws.Request" representing the
-// client's request for the GetJobDetails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetJobDetailsRequest is a API request type for the GetJobDetails API operation.
+type GetJobDetailsRequest struct {
+	*aws.Request
+	Input *GetJobDetailsInput
+}
+
+// Send marshals and sends the GetJobDetails API request.
+func (r GetJobDetailsRequest) Send() (*GetJobDetailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobDetailsOutput), nil
+}
+
+// GetJobDetailsRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about a job. Only used for custom actions.
 //
-// See GetJobDetails for more information on using the GetJobDetails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When this API is called, AWS CodePipeline returns temporary credentials for
+// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
+// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
+// this API returns any secret values defined for the action.
 //
 //    // Example sending a request using the GetJobDetailsRequest method.
-//    req, resp := client.GetJobDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetJobDetailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetails
-func (c *CodePipeline) GetJobDetailsRequest(input *GetJobDetailsInput) (req *aws.Request, output *GetJobDetailsOutput) {
+func (c *CodePipeline) GetJobDetailsRequest(input *GetJobDetailsInput) GetJobDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetJobDetails,
 		HTTPMethod: "POST",
@@ -747,83 +443,44 @@ func (c *CodePipeline) GetJobDetailsRequest(input *GetJobDetailsInput) (req *aws
 		input = &GetJobDetailsInput{}
 	}
 
-	output = &GetJobDetailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetJobDetails API operation for AWS CodePipeline.
-//
-// Returns information about a job. Only used for custom actions.
-//
-// When this API is called, AWS CodePipeline returns temporary credentials for
-// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
-// this API returns any secret values defined for the action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation GetJobDetails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetails
-func (c *CodePipeline) GetJobDetails(input *GetJobDetailsInput) (*GetJobDetailsOutput, error) {
-	req, out := c.GetJobDetailsRequest(input)
-	return out, req.Send()
-}
-
-// GetJobDetailsWithContext is the same as GetJobDetails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJobDetails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) GetJobDetailsWithContext(ctx aws.Context, input *GetJobDetailsInput, opts ...aws.Option) (*GetJobDetailsOutput, error) {
-	req, out := c.GetJobDetailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetJobDetailsOutput{})
+	return GetJobDetailsRequest{Request: req, Input: input}
 }
 
 const opGetPipeline = "GetPipeline"
 
-// GetPipelineRequest generates a "aws.Request" representing the
-// client's request for the GetPipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPipelineRequest is a API request type for the GetPipeline API operation.
+type GetPipelineRequest struct {
+	*aws.Request
+	Input *GetPipelineInput
+}
+
+// Send marshals and sends the GetPipeline API request.
+func (r GetPipelineRequest) Send() (*GetPipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPipelineOutput), nil
+}
+
+// GetPipelineRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPipeline for more information on using the GetPipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the metadata, structure, stages, and actions of a pipeline. Can be
+// used to return the entire structure of a pipeline in JSON format, which can
+// then be modified and used to update the pipeline structure with UpdatePipeline.
 //
 //    // Example sending a request using the GetPipelineRequest method.
-//    req, resp := client.GetPipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipeline
-func (c *CodePipeline) GetPipelineRequest(input *GetPipelineInput) (req *aws.Request, output *GetPipelineOutput) {
+func (c *CodePipeline) GetPipelineRequest(input *GetPipelineInput) GetPipelineRequest {
 	op := &aws.Operation{
 		Name:       opGetPipeline,
 		HTTPMethod: "POST",
@@ -834,84 +491,44 @@ func (c *CodePipeline) GetPipelineRequest(input *GetPipelineInput) (req *aws.Req
 		input = &GetPipelineInput{}
 	}
 
-	output = &GetPipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPipeline API operation for AWS CodePipeline.
-//
-// Returns the metadata, structure, stages, and actions of a pipeline. Can be
-// used to return the entire structure of a pipeline in JSON format, which can
-// then be modified and used to update the pipeline structure with UpdatePipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation GetPipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodePipelineVersionNotFoundException "PipelineVersionNotFoundException"
-//   The specified pipeline version was specified in an invalid format or cannot
-//   be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipeline
-func (c *CodePipeline) GetPipeline(input *GetPipelineInput) (*GetPipelineOutput, error) {
-	req, out := c.GetPipelineRequest(input)
-	return out, req.Send()
-}
-
-// GetPipelineWithContext is the same as GetPipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) GetPipelineWithContext(ctx aws.Context, input *GetPipelineInput, opts ...aws.Option) (*GetPipelineOutput, error) {
-	req, out := c.GetPipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPipelineOutput{})
+	return GetPipelineRequest{Request: req, Input: input}
 }
 
 const opGetPipelineExecution = "GetPipelineExecution"
 
-// GetPipelineExecutionRequest generates a "aws.Request" representing the
-// client's request for the GetPipelineExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPipelineExecutionRequest is a API request type for the GetPipelineExecution API operation.
+type GetPipelineExecutionRequest struct {
+	*aws.Request
+	Input *GetPipelineExecutionInput
+}
+
+// Send marshals and sends the GetPipelineExecution API request.
+func (r GetPipelineExecutionRequest) Send() (*GetPipelineExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPipelineExecutionOutput), nil
+}
+
+// GetPipelineExecutionRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPipelineExecution for more information on using the GetPipelineExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about an execution of a pipeline, including details about
+// artifacts, the pipeline execution ID, and the name, version, and status of
+// the pipeline.
 //
 //    // Example sending a request using the GetPipelineExecutionRequest method.
-//    req, resp := client.GetPipelineExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPipelineExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution
-func (c *CodePipeline) GetPipelineExecutionRequest(input *GetPipelineExecutionInput) (req *aws.Request, output *GetPipelineExecutionOutput) {
+func (c *CodePipeline) GetPipelineExecutionRequest(input *GetPipelineExecutionInput) GetPipelineExecutionRequest {
 	op := &aws.Operation{
 		Name:       opGetPipelineExecution,
 		HTTPMethod: "POST",
@@ -922,84 +539,43 @@ func (c *CodePipeline) GetPipelineExecutionRequest(input *GetPipelineExecutionIn
 		input = &GetPipelineExecutionInput{}
 	}
 
-	output = &GetPipelineExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPipelineExecution API operation for AWS CodePipeline.
-//
-// Returns information about an execution of a pipeline, including details about
-// artifacts, the pipeline execution ID, and the name, version, and status of
-// the pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation GetPipelineExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodePipelineExecutionNotFoundException "PipelineExecutionNotFoundException"
-//   The pipeline execution was specified in an invalid format or cannot be found,
-//   or an execution ID does not belong to the specified pipeline.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution
-func (c *CodePipeline) GetPipelineExecution(input *GetPipelineExecutionInput) (*GetPipelineExecutionOutput, error) {
-	req, out := c.GetPipelineExecutionRequest(input)
-	return out, req.Send()
-}
-
-// GetPipelineExecutionWithContext is the same as GetPipelineExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPipelineExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) GetPipelineExecutionWithContext(ctx aws.Context, input *GetPipelineExecutionInput, opts ...aws.Option) (*GetPipelineExecutionOutput, error) {
-	req, out := c.GetPipelineExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPipelineExecutionOutput{})
+	return GetPipelineExecutionRequest{Request: req, Input: input}
 }
 
 const opGetPipelineState = "GetPipelineState"
 
-// GetPipelineStateRequest generates a "aws.Request" representing the
-// client's request for the GetPipelineState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPipelineStateRequest is a API request type for the GetPipelineState API operation.
+type GetPipelineStateRequest struct {
+	*aws.Request
+	Input *GetPipelineStateInput
+}
+
+// Send marshals and sends the GetPipelineState API request.
+func (r GetPipelineStateRequest) Send() (*GetPipelineStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPipelineStateOutput), nil
+}
+
+// GetPipelineStateRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPipelineState for more information on using the GetPipelineState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the state of a pipeline, including the stages and
+// actions.
 //
 //    // Example sending a request using the GetPipelineStateRequest method.
-//    req, resp := client.GetPipelineStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPipelineStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineState
-func (c *CodePipeline) GetPipelineStateRequest(input *GetPipelineStateInput) (req *aws.Request, output *GetPipelineStateOutput) {
+func (c *CodePipeline) GetPipelineStateRequest(input *GetPipelineStateInput) GetPipelineStateRequest {
 	op := &aws.Operation{
 		Name:       opGetPipelineState,
 		HTTPMethod: "POST",
@@ -1010,79 +586,48 @@ func (c *CodePipeline) GetPipelineStateRequest(input *GetPipelineStateInput) (re
 		input = &GetPipelineStateInput{}
 	}
 
-	output = &GetPipelineStateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPipelineState API operation for AWS CodePipeline.
-//
-// Returns information about the state of a pipeline, including the stages and
-// actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation GetPipelineState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineState
-func (c *CodePipeline) GetPipelineState(input *GetPipelineStateInput) (*GetPipelineStateOutput, error) {
-	req, out := c.GetPipelineStateRequest(input)
-	return out, req.Send()
-}
-
-// GetPipelineStateWithContext is the same as GetPipelineState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPipelineState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) GetPipelineStateWithContext(ctx aws.Context, input *GetPipelineStateInput, opts ...aws.Option) (*GetPipelineStateOutput, error) {
-	req, out := c.GetPipelineStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPipelineStateOutput{})
+	return GetPipelineStateRequest{Request: req, Input: input}
 }
 
 const opGetThirdPartyJobDetails = "GetThirdPartyJobDetails"
 
-// GetThirdPartyJobDetailsRequest generates a "aws.Request" representing the
-// client's request for the GetThirdPartyJobDetails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetThirdPartyJobDetailsRequest is a API request type for the GetThirdPartyJobDetails API operation.
+type GetThirdPartyJobDetailsRequest struct {
+	*aws.Request
+	Input *GetThirdPartyJobDetailsInput
+}
+
+// Send marshals and sends the GetThirdPartyJobDetails API request.
+func (r GetThirdPartyJobDetailsRequest) Send() (*GetThirdPartyJobDetailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetThirdPartyJobDetailsOutput), nil
+}
+
+// GetThirdPartyJobDetailsRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Requests the details of a job for a third party action. Only used for partner
+// actions.
 //
-// See GetThirdPartyJobDetails for more information on using the GetThirdPartyJobDetails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When this API is called, AWS CodePipeline returns temporary credentials for
+// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
+// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
+// this API returns any secret values defined for the action.
 //
 //    // Example sending a request using the GetThirdPartyJobDetailsRequest method.
-//    req, resp := client.GetThirdPartyJobDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetThirdPartyJobDetailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetThirdPartyJobDetails
-func (c *CodePipeline) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDetailsInput) (req *aws.Request, output *GetThirdPartyJobDetailsOutput) {
+func (c *CodePipeline) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDetailsInput) GetThirdPartyJobDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetThirdPartyJobDetails,
 		HTTPMethod: "POST",
@@ -1093,90 +638,43 @@ func (c *CodePipeline) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDet
 		input = &GetThirdPartyJobDetailsInput{}
 	}
 
-	output = &GetThirdPartyJobDetailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetThirdPartyJobDetails API operation for AWS CodePipeline.
-//
-// Requests the details of a job for a third party action. Only used for partner
-// actions.
-//
-// When this API is called, AWS CodePipeline returns temporary credentials for
-// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
-// this API returns any secret values defined for the action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation GetThirdPartyJobDetails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeInvalidClientTokenException "InvalidClientTokenException"
-//   The client token was specified in an invalid format
-//
-//   * ErrCodeInvalidJobException "InvalidJobException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetThirdPartyJobDetails
-func (c *CodePipeline) GetThirdPartyJobDetails(input *GetThirdPartyJobDetailsInput) (*GetThirdPartyJobDetailsOutput, error) {
-	req, out := c.GetThirdPartyJobDetailsRequest(input)
-	return out, req.Send()
-}
-
-// GetThirdPartyJobDetailsWithContext is the same as GetThirdPartyJobDetails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetThirdPartyJobDetails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) GetThirdPartyJobDetailsWithContext(ctx aws.Context, input *GetThirdPartyJobDetailsInput, opts ...aws.Option) (*GetThirdPartyJobDetailsOutput, error) {
-	req, out := c.GetThirdPartyJobDetailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetThirdPartyJobDetailsOutput{})
+	return GetThirdPartyJobDetailsRequest{Request: req, Input: input}
 }
 
 const opListActionTypes = "ListActionTypes"
 
-// ListActionTypesRequest generates a "aws.Request" representing the
-// client's request for the ListActionTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListActionTypesRequest is a API request type for the ListActionTypes API operation.
+type ListActionTypesRequest struct {
+	*aws.Request
+	Input *ListActionTypesInput
+}
+
+// Send marshals and sends the ListActionTypes API request.
+func (r ListActionTypesRequest) Send() (*ListActionTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListActionTypesOutput), nil
+}
+
+// ListActionTypesRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListActionTypes for more information on using the ListActionTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a summary of all AWS CodePipeline action types associated with your
+// account.
 //
 //    // Example sending a request using the ListActionTypesRequest method.
-//    req, resp := client.ListActionTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListActionTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypes
-func (c *CodePipeline) ListActionTypesRequest(input *ListActionTypesInput) (req *aws.Request, output *ListActionTypesOutput) {
+func (c *CodePipeline) ListActionTypesRequest(input *ListActionTypesInput) ListActionTypesRequest {
 	op := &aws.Operation{
 		Name:       opListActionTypes,
 		HTTPMethod: "POST",
@@ -1187,80 +685,42 @@ func (c *CodePipeline) ListActionTypesRequest(input *ListActionTypesInput) (req 
 		input = &ListActionTypesInput{}
 	}
 
-	output = &ListActionTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListActionTypes API operation for AWS CodePipeline.
-//
-// Gets a summary of all AWS CodePipeline action types associated with your
-// account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation ListActionTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format. Make sure that the next
-//   token you provided is the token returned by a previous call.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypes
-func (c *CodePipeline) ListActionTypes(input *ListActionTypesInput) (*ListActionTypesOutput, error) {
-	req, out := c.ListActionTypesRequest(input)
-	return out, req.Send()
-}
-
-// ListActionTypesWithContext is the same as ListActionTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListActionTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) ListActionTypesWithContext(ctx aws.Context, input *ListActionTypesInput, opts ...aws.Option) (*ListActionTypesOutput, error) {
-	req, out := c.ListActionTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListActionTypesOutput{})
+	return ListActionTypesRequest{Request: req, Input: input}
 }
 
 const opListPipelineExecutions = "ListPipelineExecutions"
 
-// ListPipelineExecutionsRequest generates a "aws.Request" representing the
-// client's request for the ListPipelineExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPipelineExecutionsRequest is a API request type for the ListPipelineExecutions API operation.
+type ListPipelineExecutionsRequest struct {
+	*aws.Request
+	Input *ListPipelineExecutionsInput
+}
+
+// Send marshals and sends the ListPipelineExecutions API request.
+func (r ListPipelineExecutionsRequest) Send() (*ListPipelineExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPipelineExecutionsOutput), nil
+}
+
+// ListPipelineExecutionsRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPipelineExecutions for more information on using the ListPipelineExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a summary of the most recent executions for a pipeline.
 //
 //    // Example sending a request using the ListPipelineExecutionsRequest method.
-//    req, resp := client.ListPipelineExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPipelineExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions
-func (c *CodePipeline) ListPipelineExecutionsRequest(input *ListPipelineExecutionsInput) (req *aws.Request, output *ListPipelineExecutionsOutput) {
+func (c *CodePipeline) ListPipelineExecutionsRequest(input *ListPipelineExecutionsInput) ListPipelineExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListPipelineExecutions,
 		HTTPMethod: "POST",
@@ -1271,82 +731,42 @@ func (c *CodePipeline) ListPipelineExecutionsRequest(input *ListPipelineExecutio
 		input = &ListPipelineExecutionsInput{}
 	}
 
-	output = &ListPipelineExecutionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPipelineExecutions API operation for AWS CodePipeline.
-//
-// Gets a summary of the most recent executions for a pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation ListPipelineExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format. Make sure that the next
-//   token you provided is the token returned by a previous call.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions
-func (c *CodePipeline) ListPipelineExecutions(input *ListPipelineExecutionsInput) (*ListPipelineExecutionsOutput, error) {
-	req, out := c.ListPipelineExecutionsRequest(input)
-	return out, req.Send()
-}
-
-// ListPipelineExecutionsWithContext is the same as ListPipelineExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPipelineExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) ListPipelineExecutionsWithContext(ctx aws.Context, input *ListPipelineExecutionsInput, opts ...aws.Option) (*ListPipelineExecutionsOutput, error) {
-	req, out := c.ListPipelineExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPipelineExecutionsOutput{})
+	return ListPipelineExecutionsRequest{Request: req, Input: input}
 }
 
 const opListPipelines = "ListPipelines"
 
-// ListPipelinesRequest generates a "aws.Request" representing the
-// client's request for the ListPipelines operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPipelinesRequest is a API request type for the ListPipelines API operation.
+type ListPipelinesRequest struct {
+	*aws.Request
+	Input *ListPipelinesInput
+}
+
+// Send marshals and sends the ListPipelines API request.
+func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPipelinesOutput), nil
+}
+
+// ListPipelinesRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPipelines for more information on using the ListPipelines
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a summary of all of the pipelines associated with your account.
 //
 //    // Example sending a request using the ListPipelinesRequest method.
-//    req, resp := client.ListPipelinesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPipelinesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelines
-func (c *CodePipeline) ListPipelinesRequest(input *ListPipelinesInput) (req *aws.Request, output *ListPipelinesOutput) {
+func (c *CodePipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRequest {
 	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "POST",
@@ -1357,76 +777,47 @@ func (c *CodePipeline) ListPipelinesRequest(input *ListPipelinesInput) (req *aws
 		input = &ListPipelinesInput{}
 	}
 
-	output = &ListPipelinesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPipelines API operation for AWS CodePipeline.
-//
-// Gets a summary of all of the pipelines associated with your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation ListPipelines for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format. Make sure that the next
-//   token you provided is the token returned by a previous call.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelines
-func (c *CodePipeline) ListPipelines(input *ListPipelinesInput) (*ListPipelinesOutput, error) {
-	req, out := c.ListPipelinesRequest(input)
-	return out, req.Send()
-}
-
-// ListPipelinesWithContext is the same as ListPipelines with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPipelines for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) ListPipelinesWithContext(ctx aws.Context, input *ListPipelinesInput, opts ...aws.Option) (*ListPipelinesOutput, error) {
-	req, out := c.ListPipelinesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	return ListPipelinesRequest{Request: req, Input: input}
 }
 
 const opPollForJobs = "PollForJobs"
 
-// PollForJobsRequest generates a "aws.Request" representing the
-// client's request for the PollForJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PollForJobsRequest is a API request type for the PollForJobs API operation.
+type PollForJobsRequest struct {
+	*aws.Request
+	Input *PollForJobsInput
+}
+
+// Send marshals and sends the PollForJobs API request.
+func (r PollForJobsRequest) Send() (*PollForJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PollForJobsOutput), nil
+}
+
+// PollForJobsRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about any jobs for AWS CodePipeline to act upon.
 //
-// See PollForJobs for more information on using the PollForJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When this API is called, AWS CodePipeline returns temporary credentials for
+// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
+// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
+// this API returns any secret values defined for the action.
 //
 //    // Example sending a request using the PollForJobsRequest method.
-//    req, resp := client.PollForJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PollForJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobs
-func (c *CodePipeline) PollForJobsRequest(input *PollForJobsInput) (req *aws.Request, output *PollForJobsOutput) {
+func (c *CodePipeline) PollForJobsRequest(input *PollForJobsInput) PollForJobsRequest {
 	op := &aws.Operation{
 		Name:       opPollForJobs,
 		HTTPMethod: "POST",
@@ -1437,83 +828,47 @@ func (c *CodePipeline) PollForJobsRequest(input *PollForJobsInput) (req *aws.Req
 		input = &PollForJobsInput{}
 	}
 
-	output = &PollForJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PollForJobs API operation for AWS CodePipeline.
-//
-// Returns information about any jobs for AWS CodePipeline to act upon.
-//
-// When this API is called, AWS CodePipeline returns temporary credentials for
-// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
-// this API returns any secret values defined for the action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PollForJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeActionTypeNotFoundException "ActionTypeNotFoundException"
-//   The specified action type cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobs
-func (c *CodePipeline) PollForJobs(input *PollForJobsInput) (*PollForJobsOutput, error) {
-	req, out := c.PollForJobsRequest(input)
-	return out, req.Send()
-}
-
-// PollForJobsWithContext is the same as PollForJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PollForJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PollForJobsWithContext(ctx aws.Context, input *PollForJobsInput, opts ...aws.Option) (*PollForJobsOutput, error) {
-	req, out := c.PollForJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PollForJobsOutput{})
+	return PollForJobsRequest{Request: req, Input: input}
 }
 
 const opPollForThirdPartyJobs = "PollForThirdPartyJobs"
 
-// PollForThirdPartyJobsRequest generates a "aws.Request" representing the
-// client's request for the PollForThirdPartyJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PollForThirdPartyJobsRequest is a API request type for the PollForThirdPartyJobs API operation.
+type PollForThirdPartyJobsRequest struct {
+	*aws.Request
+	Input *PollForThirdPartyJobsInput
+}
+
+// Send marshals and sends the PollForThirdPartyJobs API request.
+func (r PollForThirdPartyJobsRequest) Send() (*PollForThirdPartyJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PollForThirdPartyJobsOutput), nil
+}
+
+// PollForThirdPartyJobsRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Determines whether there are any third party jobs for a job worker to act
+// on. Only used for partner actions.
 //
-// See PollForThirdPartyJobs for more information on using the PollForThirdPartyJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When this API is called, AWS CodePipeline returns temporary credentials for
+// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
+// requires access to that Amazon S3 bucket for input or output artifacts.
 //
 //    // Example sending a request using the PollForThirdPartyJobsRequest method.
-//    req, resp := client.PollForThirdPartyJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PollForThirdPartyJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobs
-func (c *CodePipeline) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobsInput) (req *aws.Request, output *PollForThirdPartyJobsOutput) {
+func (c *CodePipeline) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobsInput) PollForThirdPartyJobsRequest {
 	op := &aws.Operation{
 		Name:       opPollForThirdPartyJobs,
 		HTTPMethod: "POST",
@@ -1524,83 +879,42 @@ func (c *CodePipeline) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobs
 		input = &PollForThirdPartyJobsInput{}
 	}
 
-	output = &PollForThirdPartyJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PollForThirdPartyJobs API operation for AWS CodePipeline.
-//
-// Determines whether there are any third party jobs for a job worker to act
-// on. Only used for partner actions.
-//
-// When this API is called, AWS CodePipeline returns temporary credentials for
-// the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PollForThirdPartyJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeActionTypeNotFoundException "ActionTypeNotFoundException"
-//   The specified action type cannot be found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobs
-func (c *CodePipeline) PollForThirdPartyJobs(input *PollForThirdPartyJobsInput) (*PollForThirdPartyJobsOutput, error) {
-	req, out := c.PollForThirdPartyJobsRequest(input)
-	return out, req.Send()
-}
-
-// PollForThirdPartyJobsWithContext is the same as PollForThirdPartyJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PollForThirdPartyJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PollForThirdPartyJobsWithContext(ctx aws.Context, input *PollForThirdPartyJobsInput, opts ...aws.Option) (*PollForThirdPartyJobsOutput, error) {
-	req, out := c.PollForThirdPartyJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PollForThirdPartyJobsOutput{})
+	return PollForThirdPartyJobsRequest{Request: req, Input: input}
 }
 
 const opPutActionRevision = "PutActionRevision"
 
-// PutActionRevisionRequest generates a "aws.Request" representing the
-// client's request for the PutActionRevision operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutActionRevisionRequest is a API request type for the PutActionRevision API operation.
+type PutActionRevisionRequest struct {
+	*aws.Request
+	Input *PutActionRevisionInput
+}
+
+// Send marshals and sends the PutActionRevision API request.
+func (r PutActionRevisionRequest) Send() (*PutActionRevisionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutActionRevisionOutput), nil
+}
+
+// PutActionRevisionRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutActionRevision for more information on using the PutActionRevision
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides information to AWS CodePipeline about new revisions to a source.
 //
 //    // Example sending a request using the PutActionRevisionRequest method.
-//    req, resp := client.PutActionRevisionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutActionRevisionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutActionRevision
-func (c *CodePipeline) PutActionRevisionRequest(input *PutActionRevisionInput) (req *aws.Request, output *PutActionRevisionOutput) {
+func (c *CodePipeline) PutActionRevisionRequest(input *PutActionRevisionInput) PutActionRevisionRequest {
 	op := &aws.Operation{
 		Name:       opPutActionRevision,
 		HTTPMethod: "POST",
@@ -1611,84 +925,43 @@ func (c *CodePipeline) PutActionRevisionRequest(input *PutActionRevisionInput) (
 		input = &PutActionRevisionInput{}
 	}
 
-	output = &PutActionRevisionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutActionRevision API operation for AWS CodePipeline.
-//
-// Provides information to AWS CodePipeline about new revisions to a source.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PutActionRevision for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeStageNotFoundException "StageNotFoundException"
-//   The specified stage was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeActionNotFoundException "ActionNotFoundException"
-//   The specified action cannot be found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutActionRevision
-func (c *CodePipeline) PutActionRevision(input *PutActionRevisionInput) (*PutActionRevisionOutput, error) {
-	req, out := c.PutActionRevisionRequest(input)
-	return out, req.Send()
-}
-
-// PutActionRevisionWithContext is the same as PutActionRevision with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutActionRevision for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PutActionRevisionWithContext(ctx aws.Context, input *PutActionRevisionInput, opts ...aws.Option) (*PutActionRevisionOutput, error) {
-	req, out := c.PutActionRevisionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutActionRevisionOutput{})
+	return PutActionRevisionRequest{Request: req, Input: input}
 }
 
 const opPutApprovalResult = "PutApprovalResult"
 
-// PutApprovalResultRequest generates a "aws.Request" representing the
-// client's request for the PutApprovalResult operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutApprovalResultRequest is a API request type for the PutApprovalResult API operation.
+type PutApprovalResultRequest struct {
+	*aws.Request
+	Input *PutApprovalResultInput
+}
+
+// Send marshals and sends the PutApprovalResult API request.
+func (r PutApprovalResultRequest) Send() (*PutApprovalResultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutApprovalResultOutput), nil
+}
+
+// PutApprovalResultRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutApprovalResult for more information on using the PutApprovalResult
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides the response to a manual approval request to AWS CodePipeline. Valid
+// responses include Approved and Rejected.
 //
 //    // Example sending a request using the PutApprovalResultRequest method.
-//    req, resp := client.PutApprovalResultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutApprovalResultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResult
-func (c *CodePipeline) PutApprovalResultRequest(input *PutApprovalResultInput) (req *aws.Request, output *PutApprovalResultOutput) {
+func (c *CodePipeline) PutApprovalResultRequest(input *PutApprovalResultInput) PutApprovalResultRequest {
 	op := &aws.Operation{
 		Name:       opPutApprovalResult,
 		HTTPMethod: "POST",
@@ -1699,91 +972,43 @@ func (c *CodePipeline) PutApprovalResultRequest(input *PutApprovalResultInput) (
 		input = &PutApprovalResultInput{}
 	}
 
-	output = &PutApprovalResultOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutApprovalResult API operation for AWS CodePipeline.
-//
-// Provides the response to a manual approval request to AWS CodePipeline. Valid
-// responses include Approved and Rejected.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PutApprovalResult for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidApprovalTokenException "InvalidApprovalTokenException"
-//   The approval request already received a response or has expired.
-//
-//   * ErrCodeApprovalAlreadyCompletedException "ApprovalAlreadyCompletedException"
-//   The approval action has already been approved or rejected.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeStageNotFoundException "StageNotFoundException"
-//   The specified stage was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeActionNotFoundException "ActionNotFoundException"
-//   The specified action cannot be found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResult
-func (c *CodePipeline) PutApprovalResult(input *PutApprovalResultInput) (*PutApprovalResultOutput, error) {
-	req, out := c.PutApprovalResultRequest(input)
-	return out, req.Send()
-}
-
-// PutApprovalResultWithContext is the same as PutApprovalResult with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutApprovalResult for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PutApprovalResultWithContext(ctx aws.Context, input *PutApprovalResultInput, opts ...aws.Option) (*PutApprovalResultOutput, error) {
-	req, out := c.PutApprovalResultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutApprovalResultOutput{})
+	return PutApprovalResultRequest{Request: req, Input: input}
 }
 
 const opPutJobFailureResult = "PutJobFailureResult"
 
-// PutJobFailureResultRequest generates a "aws.Request" representing the
-// client's request for the PutJobFailureResult operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutJobFailureResultRequest is a API request type for the PutJobFailureResult API operation.
+type PutJobFailureResultRequest struct {
+	*aws.Request
+	Input *PutJobFailureResultInput
+}
+
+// Send marshals and sends the PutJobFailureResult API request.
+func (r PutJobFailureResultRequest) Send() (*PutJobFailureResultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutJobFailureResultOutput), nil
+}
+
+// PutJobFailureResultRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutJobFailureResult for more information on using the PutJobFailureResult
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Represents the failure of a job as returned to the pipeline by a job worker.
+// Only used for custom actions.
 //
 //    // Example sending a request using the PutJobFailureResultRequest method.
-//    req, resp := client.PutJobFailureResultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutJobFailureResultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobFailureResult
-func (c *CodePipeline) PutJobFailureResultRequest(input *PutJobFailureResultInput) (req *aws.Request, output *PutJobFailureResultOutput) {
+func (c *CodePipeline) PutJobFailureResultRequest(input *PutJobFailureResultInput) PutJobFailureResultRequest {
 	op := &aws.Operation{
 		Name:       opPutJobFailureResult,
 		HTTPMethod: "POST",
@@ -1794,84 +1019,45 @@ func (c *CodePipeline) PutJobFailureResultRequest(input *PutJobFailureResultInpu
 		input = &PutJobFailureResultInput{}
 	}
 
-	output = &PutJobFailureResultOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutJobFailureResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutJobFailureResult API operation for AWS CodePipeline.
-//
-// Represents the failure of a job as returned to the pipeline by a job worker.
-// Only used for custom actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PutJobFailureResult for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The specified job state was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobFailureResult
-func (c *CodePipeline) PutJobFailureResult(input *PutJobFailureResultInput) (*PutJobFailureResultOutput, error) {
-	req, out := c.PutJobFailureResultRequest(input)
-	return out, req.Send()
-}
-
-// PutJobFailureResultWithContext is the same as PutJobFailureResult with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutJobFailureResult for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PutJobFailureResultWithContext(ctx aws.Context, input *PutJobFailureResultInput, opts ...aws.Option) (*PutJobFailureResultOutput, error) {
-	req, out := c.PutJobFailureResultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutJobFailureResultRequest{Request: req, Input: input}
 }
 
 const opPutJobSuccessResult = "PutJobSuccessResult"
 
-// PutJobSuccessResultRequest generates a "aws.Request" representing the
-// client's request for the PutJobSuccessResult operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutJobSuccessResultRequest is a API request type for the PutJobSuccessResult API operation.
+type PutJobSuccessResultRequest struct {
+	*aws.Request
+	Input *PutJobSuccessResultInput
+}
+
+// Send marshals and sends the PutJobSuccessResult API request.
+func (r PutJobSuccessResultRequest) Send() (*PutJobSuccessResultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutJobSuccessResultOutput), nil
+}
+
+// PutJobSuccessResultRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutJobSuccessResult for more information on using the PutJobSuccessResult
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Represents the success of a job as returned to the pipeline by a job worker.
+// Only used for custom actions.
 //
 //    // Example sending a request using the PutJobSuccessResultRequest method.
-//    req, resp := client.PutJobSuccessResultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutJobSuccessResultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResult
-func (c *CodePipeline) PutJobSuccessResultRequest(input *PutJobSuccessResultInput) (req *aws.Request, output *PutJobSuccessResultOutput) {
+func (c *CodePipeline) PutJobSuccessResultRequest(input *PutJobSuccessResultInput) PutJobSuccessResultRequest {
 	op := &aws.Operation{
 		Name:       opPutJobSuccessResult,
 		HTTPMethod: "POST",
@@ -1882,84 +1068,45 @@ func (c *CodePipeline) PutJobSuccessResultRequest(input *PutJobSuccessResultInpu
 		input = &PutJobSuccessResultInput{}
 	}
 
-	output = &PutJobSuccessResultOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutJobSuccessResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutJobSuccessResult API operation for AWS CodePipeline.
-//
-// Represents the success of a job as returned to the pipeline by a job worker.
-// Only used for custom actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PutJobSuccessResult for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The specified job state was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResult
-func (c *CodePipeline) PutJobSuccessResult(input *PutJobSuccessResultInput) (*PutJobSuccessResultOutput, error) {
-	req, out := c.PutJobSuccessResultRequest(input)
-	return out, req.Send()
-}
-
-// PutJobSuccessResultWithContext is the same as PutJobSuccessResult with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutJobSuccessResult for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PutJobSuccessResultWithContext(ctx aws.Context, input *PutJobSuccessResultInput, opts ...aws.Option) (*PutJobSuccessResultOutput, error) {
-	req, out := c.PutJobSuccessResultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutJobSuccessResultRequest{Request: req, Input: input}
 }
 
 const opPutThirdPartyJobFailureResult = "PutThirdPartyJobFailureResult"
 
-// PutThirdPartyJobFailureResultRequest generates a "aws.Request" representing the
-// client's request for the PutThirdPartyJobFailureResult operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutThirdPartyJobFailureResultRequest is a API request type for the PutThirdPartyJobFailureResult API operation.
+type PutThirdPartyJobFailureResultRequest struct {
+	*aws.Request
+	Input *PutThirdPartyJobFailureResultInput
+}
+
+// Send marshals and sends the PutThirdPartyJobFailureResult API request.
+func (r PutThirdPartyJobFailureResultRequest) Send() (*PutThirdPartyJobFailureResultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutThirdPartyJobFailureResultOutput), nil
+}
+
+// PutThirdPartyJobFailureResultRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutThirdPartyJobFailureResult for more information on using the PutThirdPartyJobFailureResult
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Represents the failure of a third party job as returned to the pipeline by
+// a job worker. Only used for partner actions.
 //
 //    // Example sending a request using the PutThirdPartyJobFailureResultRequest method.
-//    req, resp := client.PutThirdPartyJobFailureResultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutThirdPartyJobFailureResultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobFailureResult
-func (c *CodePipeline) PutThirdPartyJobFailureResultRequest(input *PutThirdPartyJobFailureResultInput) (req *aws.Request, output *PutThirdPartyJobFailureResultOutput) {
+func (c *CodePipeline) PutThirdPartyJobFailureResultRequest(input *PutThirdPartyJobFailureResultInput) PutThirdPartyJobFailureResultRequest {
 	op := &aws.Operation{
 		Name:       opPutThirdPartyJobFailureResult,
 		HTTPMethod: "POST",
@@ -1970,87 +1117,45 @@ func (c *CodePipeline) PutThirdPartyJobFailureResultRequest(input *PutThirdParty
 		input = &PutThirdPartyJobFailureResultInput{}
 	}
 
-	output = &PutThirdPartyJobFailureResultOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutThirdPartyJobFailureResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutThirdPartyJobFailureResult API operation for AWS CodePipeline.
-//
-// Represents the failure of a third party job as returned to the pipeline by
-// a job worker. Only used for partner actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PutThirdPartyJobFailureResult for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The specified job state was specified in an invalid format.
-//
-//   * ErrCodeInvalidClientTokenException "InvalidClientTokenException"
-//   The client token was specified in an invalid format
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobFailureResult
-func (c *CodePipeline) PutThirdPartyJobFailureResult(input *PutThirdPartyJobFailureResultInput) (*PutThirdPartyJobFailureResultOutput, error) {
-	req, out := c.PutThirdPartyJobFailureResultRequest(input)
-	return out, req.Send()
-}
-
-// PutThirdPartyJobFailureResultWithContext is the same as PutThirdPartyJobFailureResult with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutThirdPartyJobFailureResult for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PutThirdPartyJobFailureResultWithContext(ctx aws.Context, input *PutThirdPartyJobFailureResultInput, opts ...aws.Option) (*PutThirdPartyJobFailureResultOutput, error) {
-	req, out := c.PutThirdPartyJobFailureResultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutThirdPartyJobFailureResultRequest{Request: req, Input: input}
 }
 
 const opPutThirdPartyJobSuccessResult = "PutThirdPartyJobSuccessResult"
 
-// PutThirdPartyJobSuccessResultRequest generates a "aws.Request" representing the
-// client's request for the PutThirdPartyJobSuccessResult operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutThirdPartyJobSuccessResultRequest is a API request type for the PutThirdPartyJobSuccessResult API operation.
+type PutThirdPartyJobSuccessResultRequest struct {
+	*aws.Request
+	Input *PutThirdPartyJobSuccessResultInput
+}
+
+// Send marshals and sends the PutThirdPartyJobSuccessResult API request.
+func (r PutThirdPartyJobSuccessResultRequest) Send() (*PutThirdPartyJobSuccessResultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutThirdPartyJobSuccessResultOutput), nil
+}
+
+// PutThirdPartyJobSuccessResultRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutThirdPartyJobSuccessResult for more information on using the PutThirdPartyJobSuccessResult
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Represents the success of a third party job as returned to the pipeline by
+// a job worker. Only used for partner actions.
 //
 //    // Example sending a request using the PutThirdPartyJobSuccessResultRequest method.
-//    req, resp := client.PutThirdPartyJobSuccessResultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutThirdPartyJobSuccessResultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobSuccessResult
-func (c *CodePipeline) PutThirdPartyJobSuccessResultRequest(input *PutThirdPartyJobSuccessResultInput) (req *aws.Request, output *PutThirdPartyJobSuccessResultOutput) {
+func (c *CodePipeline) PutThirdPartyJobSuccessResultRequest(input *PutThirdPartyJobSuccessResultInput) PutThirdPartyJobSuccessResultRequest {
 	op := &aws.Operation{
 		Name:       opPutThirdPartyJobSuccessResult,
 		HTTPMethod: "POST",
@@ -2061,87 +1166,44 @@ func (c *CodePipeline) PutThirdPartyJobSuccessResultRequest(input *PutThirdParty
 		input = &PutThirdPartyJobSuccessResultInput{}
 	}
 
-	output = &PutThirdPartyJobSuccessResultOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutThirdPartyJobSuccessResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutThirdPartyJobSuccessResult API operation for AWS CodePipeline.
-//
-// Represents the success of a third party job as returned to the pipeline by
-// a job worker. Only used for partner actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation PutThirdPartyJobSuccessResult for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeJobNotFoundException "JobNotFoundException"
-//   The specified job was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The specified job state was specified in an invalid format.
-//
-//   * ErrCodeInvalidClientTokenException "InvalidClientTokenException"
-//   The client token was specified in an invalid format
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobSuccessResult
-func (c *CodePipeline) PutThirdPartyJobSuccessResult(input *PutThirdPartyJobSuccessResultInput) (*PutThirdPartyJobSuccessResultOutput, error) {
-	req, out := c.PutThirdPartyJobSuccessResultRequest(input)
-	return out, req.Send()
-}
-
-// PutThirdPartyJobSuccessResultWithContext is the same as PutThirdPartyJobSuccessResult with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutThirdPartyJobSuccessResult for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) PutThirdPartyJobSuccessResultWithContext(ctx aws.Context, input *PutThirdPartyJobSuccessResultInput, opts ...aws.Option) (*PutThirdPartyJobSuccessResultOutput, error) {
-	req, out := c.PutThirdPartyJobSuccessResultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutThirdPartyJobSuccessResultRequest{Request: req, Input: input}
 }
 
 const opRetryStageExecution = "RetryStageExecution"
 
-// RetryStageExecutionRequest generates a "aws.Request" representing the
-// client's request for the RetryStageExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RetryStageExecutionRequest is a API request type for the RetryStageExecution API operation.
+type RetryStageExecutionRequest struct {
+	*aws.Request
+	Input *RetryStageExecutionInput
+}
+
+// Send marshals and sends the RetryStageExecution API request.
+func (r RetryStageExecutionRequest) Send() (*RetryStageExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RetryStageExecutionOutput), nil
+}
+
+// RetryStageExecutionRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RetryStageExecution for more information on using the RetryStageExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Resumes the pipeline execution by retrying the last failed actions in a stage.
 //
 //    // Example sending a request using the RetryStageExecutionRequest method.
-//    req, resp := client.RetryStageExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RetryStageExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecution
-func (c *CodePipeline) RetryStageExecutionRequest(input *RetryStageExecutionInput) (req *aws.Request, output *RetryStageExecutionOutput) {
+func (c *CodePipeline) RetryStageExecutionRequest(input *RetryStageExecutionInput) RetryStageExecutionRequest {
 	op := &aws.Operation{
 		Name:       opRetryStageExecution,
 		HTTPMethod: "POST",
@@ -2152,91 +1214,43 @@ func (c *CodePipeline) RetryStageExecutionRequest(input *RetryStageExecutionInpu
 		input = &RetryStageExecutionInput{}
 	}
 
-	output = &RetryStageExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RetryStageExecution API operation for AWS CodePipeline.
-//
-// Resumes the pipeline execution by retrying the last failed actions in a stage.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation RetryStageExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeStageNotFoundException "StageNotFoundException"
-//   The specified stage was specified in an invalid format or cannot be found.
-//
-//   * ErrCodeStageNotRetryableException "StageNotRetryableException"
-//   The specified stage can't be retried because the pipeline structure or stage
-//   state changed after the stage was not completed; the stage contains no failed
-//   actions; one or more actions are still in progress; or another retry attempt
-//   is already in progress.
-//
-//   * ErrCodeNotLatestPipelineExecutionException "NotLatestPipelineExecutionException"
-//   The stage has failed in a later run of the pipeline and the pipelineExecutionId
-//   associated with the request is out of date.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecution
-func (c *CodePipeline) RetryStageExecution(input *RetryStageExecutionInput) (*RetryStageExecutionOutput, error) {
-	req, out := c.RetryStageExecutionRequest(input)
-	return out, req.Send()
-}
-
-// RetryStageExecutionWithContext is the same as RetryStageExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RetryStageExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) RetryStageExecutionWithContext(ctx aws.Context, input *RetryStageExecutionInput, opts ...aws.Option) (*RetryStageExecutionOutput, error) {
-	req, out := c.RetryStageExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RetryStageExecutionOutput{})
+	return RetryStageExecutionRequest{Request: req, Input: input}
 }
 
 const opStartPipelineExecution = "StartPipelineExecution"
 
-// StartPipelineExecutionRequest generates a "aws.Request" representing the
-// client's request for the StartPipelineExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartPipelineExecutionRequest is a API request type for the StartPipelineExecution API operation.
+type StartPipelineExecutionRequest struct {
+	*aws.Request
+	Input *StartPipelineExecutionInput
+}
+
+// Send marshals and sends the StartPipelineExecution API request.
+func (r StartPipelineExecutionRequest) Send() (*StartPipelineExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartPipelineExecutionOutput), nil
+}
+
+// StartPipelineExecutionRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartPipelineExecution for more information on using the StartPipelineExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts the specified pipeline. Specifically, it begins processing the latest
+// commit to the source location specified as part of the pipeline.
 //
 //    // Example sending a request using the StartPipelineExecutionRequest method.
-//    req, resp := client.StartPipelineExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartPipelineExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecution
-func (c *CodePipeline) StartPipelineExecutionRequest(input *StartPipelineExecutionInput) (req *aws.Request, output *StartPipelineExecutionOutput) {
+func (c *CodePipeline) StartPipelineExecutionRequest(input *StartPipelineExecutionInput) StartPipelineExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStartPipelineExecution,
 		HTTPMethod: "POST",
@@ -2247,79 +1261,45 @@ func (c *CodePipeline) StartPipelineExecutionRequest(input *StartPipelineExecuti
 		input = &StartPipelineExecutionInput{}
 	}
 
-	output = &StartPipelineExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartPipelineExecution API operation for AWS CodePipeline.
-//
-// Starts the specified pipeline. Specifically, it begins processing the latest
-// commit to the source location specified as part of the pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation StartPipelineExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was specified in an invalid format or cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecution
-func (c *CodePipeline) StartPipelineExecution(input *StartPipelineExecutionInput) (*StartPipelineExecutionOutput, error) {
-	req, out := c.StartPipelineExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StartPipelineExecutionWithContext is the same as StartPipelineExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartPipelineExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) StartPipelineExecutionWithContext(ctx aws.Context, input *StartPipelineExecutionInput, opts ...aws.Option) (*StartPipelineExecutionOutput, error) {
-	req, out := c.StartPipelineExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartPipelineExecutionOutput{})
+	return StartPipelineExecutionRequest{Request: req, Input: input}
 }
 
 const opUpdatePipeline = "UpdatePipeline"
 
-// UpdatePipelineRequest generates a "aws.Request" representing the
-// client's request for the UpdatePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdatePipelineRequest is a API request type for the UpdatePipeline API operation.
+type UpdatePipelineRequest struct {
+	*aws.Request
+	Input *UpdatePipelineInput
+}
+
+// Send marshals and sends the UpdatePipeline API request.
+func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePipelineOutput), nil
+}
+
+// UpdatePipelineRequest returns a request value for making API operation for
+// AWS CodePipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdatePipeline for more information on using the UpdatePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a specified pipeline with edits or changes to its structure. Use
+// a JSON file with the pipeline structure in conjunction with UpdatePipeline
+// to provide the full structure of the pipeline. Updating the pipeline increases
+// the version number of the pipeline by 1.
 //
 //    // Example sending a request using the UpdatePipelineRequest method.
-//    req, resp := client.UpdatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdatePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline
-func (c *CodePipeline) UpdatePipelineRequest(input *UpdatePipelineInput) (req *aws.Request, output *UpdatePipelineOutput) {
+func (c *CodePipeline) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePipeline,
 		HTTPMethod: "POST",
@@ -2330,61 +1310,8 @@ func (c *CodePipeline) UpdatePipelineRequest(input *UpdatePipelineInput) (req *a
 		input = &UpdatePipelineInput{}
 	}
 
-	output = &UpdatePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdatePipeline API operation for AWS CodePipeline.
-//
-// Updates a specified pipeline with edits or changes to its structure. Use
-// a JSON file with the pipeline structure in conjunction with UpdatePipeline
-// to provide the full structure of the pipeline. Updating the pipeline increases
-// the version number of the pipeline by 1.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodePipeline's
-// API operation UpdatePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The validation was specified in an invalid format.
-//
-//   * ErrCodeInvalidStageDeclarationException "InvalidStageDeclarationException"
-//   The specified stage declaration was specified in an invalid format.
-//
-//   * ErrCodeInvalidActionDeclarationException "InvalidActionDeclarationException"
-//   The specified action declaration was specified in an invalid format.
-//
-//   * ErrCodeInvalidBlockerDeclarationException "InvalidBlockerDeclarationException"
-//   Reserved for future use.
-//
-//   * ErrCodeInvalidStructureException "InvalidStructureException"
-//   The specified structure was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline
-func (c *CodePipeline) UpdatePipeline(input *UpdatePipelineInput) (*UpdatePipelineOutput, error) {
-	req, out := c.UpdatePipelineRequest(input)
-	return out, req.Send()
-}
-
-// UpdatePipelineWithContext is the same as UpdatePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdatePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodePipeline) UpdatePipelineWithContext(ctx aws.Context, input *UpdatePipelineInput, opts ...aws.Option) (*UpdatePipelineOutput, error) {
-	req, out := c.UpdatePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdatePipelineOutput{})
+	return UpdatePipelineRequest{Request: req, Input: input}
 }
 
 // Represents an AWS session credentials object. These credentials are temporary

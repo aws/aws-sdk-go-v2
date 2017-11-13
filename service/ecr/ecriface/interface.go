@@ -63,82 +63,48 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ECRAPI interface {
-	BatchCheckLayerAvailability(*ecr.BatchCheckLayerAvailabilityInput) (*ecr.BatchCheckLayerAvailabilityOutput, error)
-	BatchCheckLayerAvailabilityWithContext(aws.Context, *ecr.BatchCheckLayerAvailabilityInput, ...aws.Option) (*ecr.BatchCheckLayerAvailabilityOutput, error)
-	BatchCheckLayerAvailabilityRequest(*ecr.BatchCheckLayerAvailabilityInput) (*aws.Request, *ecr.BatchCheckLayerAvailabilityOutput)
+	BatchCheckLayerAvailabilityRequest(*ecr.BatchCheckLayerAvailabilityInput) ecr.BatchCheckLayerAvailabilityRequest
 
-	BatchDeleteImage(*ecr.BatchDeleteImageInput) (*ecr.BatchDeleteImageOutput, error)
-	BatchDeleteImageWithContext(aws.Context, *ecr.BatchDeleteImageInput, ...aws.Option) (*ecr.BatchDeleteImageOutput, error)
-	BatchDeleteImageRequest(*ecr.BatchDeleteImageInput) (*aws.Request, *ecr.BatchDeleteImageOutput)
+	BatchDeleteImageRequest(*ecr.BatchDeleteImageInput) ecr.BatchDeleteImageRequest
 
-	BatchGetImage(*ecr.BatchGetImageInput) (*ecr.BatchGetImageOutput, error)
-	BatchGetImageWithContext(aws.Context, *ecr.BatchGetImageInput, ...aws.Option) (*ecr.BatchGetImageOutput, error)
-	BatchGetImageRequest(*ecr.BatchGetImageInput) (*aws.Request, *ecr.BatchGetImageOutput)
+	BatchGetImageRequest(*ecr.BatchGetImageInput) ecr.BatchGetImageRequest
 
-	CompleteLayerUpload(*ecr.CompleteLayerUploadInput) (*ecr.CompleteLayerUploadOutput, error)
-	CompleteLayerUploadWithContext(aws.Context, *ecr.CompleteLayerUploadInput, ...aws.Option) (*ecr.CompleteLayerUploadOutput, error)
-	CompleteLayerUploadRequest(*ecr.CompleteLayerUploadInput) (*aws.Request, *ecr.CompleteLayerUploadOutput)
+	CompleteLayerUploadRequest(*ecr.CompleteLayerUploadInput) ecr.CompleteLayerUploadRequest
 
-	CreateRepository(*ecr.CreateRepositoryInput) (*ecr.CreateRepositoryOutput, error)
-	CreateRepositoryWithContext(aws.Context, *ecr.CreateRepositoryInput, ...aws.Option) (*ecr.CreateRepositoryOutput, error)
-	CreateRepositoryRequest(*ecr.CreateRepositoryInput) (*aws.Request, *ecr.CreateRepositoryOutput)
+	CreateRepositoryRequest(*ecr.CreateRepositoryInput) ecr.CreateRepositoryRequest
 
-	DeleteRepository(*ecr.DeleteRepositoryInput) (*ecr.DeleteRepositoryOutput, error)
-	DeleteRepositoryWithContext(aws.Context, *ecr.DeleteRepositoryInput, ...aws.Option) (*ecr.DeleteRepositoryOutput, error)
-	DeleteRepositoryRequest(*ecr.DeleteRepositoryInput) (*aws.Request, *ecr.DeleteRepositoryOutput)
+	DeleteRepositoryRequest(*ecr.DeleteRepositoryInput) ecr.DeleteRepositoryRequest
 
-	DeleteRepositoryPolicy(*ecr.DeleteRepositoryPolicyInput) (*ecr.DeleteRepositoryPolicyOutput, error)
-	DeleteRepositoryPolicyWithContext(aws.Context, *ecr.DeleteRepositoryPolicyInput, ...aws.Option) (*ecr.DeleteRepositoryPolicyOutput, error)
-	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) (*aws.Request, *ecr.DeleteRepositoryPolicyOutput)
+	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
 
-	DescribeImages(*ecr.DescribeImagesInput) (*ecr.DescribeImagesOutput, error)
-	DescribeImagesWithContext(aws.Context, *ecr.DescribeImagesInput, ...aws.Option) (*ecr.DescribeImagesOutput, error)
-	DescribeImagesRequest(*ecr.DescribeImagesInput) (*aws.Request, *ecr.DescribeImagesOutput)
+	DescribeImagesRequest(*ecr.DescribeImagesInput) ecr.DescribeImagesRequest
 
 	DescribeImagesPages(*ecr.DescribeImagesInput, func(*ecr.DescribeImagesOutput, bool) bool) error
 	DescribeImagesPagesWithContext(aws.Context, *ecr.DescribeImagesInput, func(*ecr.DescribeImagesOutput, bool) bool, ...aws.Option) error
 
-	DescribeRepositories(*ecr.DescribeRepositoriesInput) (*ecr.DescribeRepositoriesOutput, error)
-	DescribeRepositoriesWithContext(aws.Context, *ecr.DescribeRepositoriesInput, ...aws.Option) (*ecr.DescribeRepositoriesOutput, error)
-	DescribeRepositoriesRequest(*ecr.DescribeRepositoriesInput) (*aws.Request, *ecr.DescribeRepositoriesOutput)
+	DescribeRepositoriesRequest(*ecr.DescribeRepositoriesInput) ecr.DescribeRepositoriesRequest
 
 	DescribeRepositoriesPages(*ecr.DescribeRepositoriesInput, func(*ecr.DescribeRepositoriesOutput, bool) bool) error
 	DescribeRepositoriesPagesWithContext(aws.Context, *ecr.DescribeRepositoriesInput, func(*ecr.DescribeRepositoriesOutput, bool) bool, ...aws.Option) error
 
-	GetAuthorizationToken(*ecr.GetAuthorizationTokenInput) (*ecr.GetAuthorizationTokenOutput, error)
-	GetAuthorizationTokenWithContext(aws.Context, *ecr.GetAuthorizationTokenInput, ...aws.Option) (*ecr.GetAuthorizationTokenOutput, error)
-	GetAuthorizationTokenRequest(*ecr.GetAuthorizationTokenInput) (*aws.Request, *ecr.GetAuthorizationTokenOutput)
+	GetAuthorizationTokenRequest(*ecr.GetAuthorizationTokenInput) ecr.GetAuthorizationTokenRequest
 
-	GetDownloadUrlForLayer(*ecr.GetDownloadUrlForLayerInput) (*ecr.GetDownloadUrlForLayerOutput, error)
-	GetDownloadUrlForLayerWithContext(aws.Context, *ecr.GetDownloadUrlForLayerInput, ...aws.Option) (*ecr.GetDownloadUrlForLayerOutput, error)
-	GetDownloadUrlForLayerRequest(*ecr.GetDownloadUrlForLayerInput) (*aws.Request, *ecr.GetDownloadUrlForLayerOutput)
+	GetDownloadUrlForLayerRequest(*ecr.GetDownloadUrlForLayerInput) ecr.GetDownloadUrlForLayerRequest
 
-	GetRepositoryPolicy(*ecr.GetRepositoryPolicyInput) (*ecr.GetRepositoryPolicyOutput, error)
-	GetRepositoryPolicyWithContext(aws.Context, *ecr.GetRepositoryPolicyInput, ...aws.Option) (*ecr.GetRepositoryPolicyOutput, error)
-	GetRepositoryPolicyRequest(*ecr.GetRepositoryPolicyInput) (*aws.Request, *ecr.GetRepositoryPolicyOutput)
+	GetRepositoryPolicyRequest(*ecr.GetRepositoryPolicyInput) ecr.GetRepositoryPolicyRequest
 
-	InitiateLayerUpload(*ecr.InitiateLayerUploadInput) (*ecr.InitiateLayerUploadOutput, error)
-	InitiateLayerUploadWithContext(aws.Context, *ecr.InitiateLayerUploadInput, ...aws.Option) (*ecr.InitiateLayerUploadOutput, error)
-	InitiateLayerUploadRequest(*ecr.InitiateLayerUploadInput) (*aws.Request, *ecr.InitiateLayerUploadOutput)
+	InitiateLayerUploadRequest(*ecr.InitiateLayerUploadInput) ecr.InitiateLayerUploadRequest
 
-	ListImages(*ecr.ListImagesInput) (*ecr.ListImagesOutput, error)
-	ListImagesWithContext(aws.Context, *ecr.ListImagesInput, ...aws.Option) (*ecr.ListImagesOutput, error)
-	ListImagesRequest(*ecr.ListImagesInput) (*aws.Request, *ecr.ListImagesOutput)
+	ListImagesRequest(*ecr.ListImagesInput) ecr.ListImagesRequest
 
 	ListImagesPages(*ecr.ListImagesInput, func(*ecr.ListImagesOutput, bool) bool) error
 	ListImagesPagesWithContext(aws.Context, *ecr.ListImagesInput, func(*ecr.ListImagesOutput, bool) bool, ...aws.Option) error
 
-	PutImage(*ecr.PutImageInput) (*ecr.PutImageOutput, error)
-	PutImageWithContext(aws.Context, *ecr.PutImageInput, ...aws.Option) (*ecr.PutImageOutput, error)
-	PutImageRequest(*ecr.PutImageInput) (*aws.Request, *ecr.PutImageOutput)
+	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
 
-	SetRepositoryPolicy(*ecr.SetRepositoryPolicyInput) (*ecr.SetRepositoryPolicyOutput, error)
-	SetRepositoryPolicyWithContext(aws.Context, *ecr.SetRepositoryPolicyInput, ...aws.Option) (*ecr.SetRepositoryPolicyOutput, error)
-	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) (*aws.Request, *ecr.SetRepositoryPolicyOutput)
+	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
 
-	UploadLayerPart(*ecr.UploadLayerPartInput) (*ecr.UploadLayerPartOutput, error)
-	UploadLayerPartWithContext(aws.Context, *ecr.UploadLayerPartInput, ...aws.Option) (*ecr.UploadLayerPartOutput, error)
-	UploadLayerPartRequest(*ecr.UploadLayerPartInput) (*aws.Request, *ecr.UploadLayerPartOutput)
+	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
 }
 
 var _ ECRAPI = (*ecr.ECR)(nil)

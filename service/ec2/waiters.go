@@ -48,10 +48,10 @@ func (c *EC2) WaitUntilBundleTaskCompleteWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeBundleTasksRequest(inCpy)
+			req := c.DescribeBundleTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -94,10 +94,10 @@ func (c *EC2) WaitUntilConversionTaskCancelledWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeConversionTasksRequest(inCpy)
+			req := c.DescribeConversionTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -150,10 +150,10 @@ func (c *EC2) WaitUntilConversionTaskCompletedWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeConversionTasksRequest(inCpy)
+			req := c.DescribeConversionTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -196,10 +196,10 @@ func (c *EC2) WaitUntilConversionTaskDeletedWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeConversionTasksRequest(inCpy)
+			req := c.DescribeConversionTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -252,10 +252,10 @@ func (c *EC2) WaitUntilCustomerGatewayAvailableWithContext(ctx aws.Context, inpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCustomerGatewaysRequest(inCpy)
+			req := c.DescribeCustomerGatewaysRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -298,10 +298,10 @@ func (c *EC2) WaitUntilExportTaskCancelledWithContext(ctx aws.Context, input *De
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeExportTasksRequest(inCpy)
+			req := c.DescribeExportTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -344,10 +344,10 @@ func (c *EC2) WaitUntilExportTaskCompletedWithContext(ctx aws.Context, input *De
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeExportTasksRequest(inCpy)
+			req := c.DescribeExportTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -395,10 +395,10 @@ func (c *EC2) WaitUntilImageAvailableWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeImagesRequest(inCpy)
+			req := c.DescribeImagesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -446,10 +446,10 @@ func (c *EC2) WaitUntilImageExistsWithContext(ctx aws.Context, input *DescribeIm
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeImagesRequest(inCpy)
+			req := c.DescribeImagesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -497,10 +497,10 @@ func (c *EC2) WaitUntilInstanceExistsWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstancesRequest(inCpy)
+			req := c.DescribeInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -563,10 +563,10 @@ func (c *EC2) WaitUntilInstanceRunningWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstancesRequest(inCpy)
+			req := c.DescribeInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -614,10 +614,10 @@ func (c *EC2) WaitUntilInstanceStatusOkWithContext(ctx aws.Context, input *Descr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstanceStatusRequest(inCpy)
+			req := c.DescribeInstanceStatusRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -670,10 +670,10 @@ func (c *EC2) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstancesRequest(inCpy)
+			req := c.DescribeInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -726,10 +726,10 @@ func (c *EC2) WaitUntilInstanceTerminatedWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstancesRequest(inCpy)
+			req := c.DescribeInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -777,10 +777,10 @@ func (c *EC2) WaitUntilKeyPairExistsWithContext(ctx aws.Context, input *Describe
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeKeyPairsRequest(inCpy)
+			req := c.DescribeKeyPairsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -843,10 +843,10 @@ func (c *EC2) WaitUntilNatGatewayAvailableWithContext(ctx aws.Context, input *De
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeNatGatewaysRequest(inCpy)
+			req := c.DescribeNatGatewaysRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -894,10 +894,10 @@ func (c *EC2) WaitUntilNetworkInterfaceAvailableWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeNetworkInterfacesRequest(inCpy)
+			req := c.DescribeNetworkInterfacesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -940,10 +940,10 @@ func (c *EC2) WaitUntilPasswordDataAvailableWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetPasswordDataRequest(inCpy)
+			req := c.GetPasswordDataRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -986,10 +986,10 @@ func (c *EC2) WaitUntilSnapshotCompletedWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeSnapshotsRequest(inCpy)
+			req := c.DescribeSnapshotsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1062,10 +1062,10 @@ func (c *EC2) WaitUntilSpotInstanceRequestFulfilledWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeSpotInstanceRequestsRequest(inCpy)
+			req := c.DescribeSpotInstanceRequestsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1108,10 +1108,10 @@ func (c *EC2) WaitUntilSubnetAvailableWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeSubnetsRequest(inCpy)
+			req := c.DescribeSubnetsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1154,10 +1154,10 @@ func (c *EC2) WaitUntilSystemStatusOkWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstanceStatusRequest(inCpy)
+			req := c.DescribeInstanceStatusRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1205,10 +1205,10 @@ func (c *EC2) WaitUntilVolumeAvailableWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVolumesRequest(inCpy)
+			req := c.DescribeVolumesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1256,10 +1256,10 @@ func (c *EC2) WaitUntilVolumeDeletedWithContext(ctx aws.Context, input *Describe
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVolumesRequest(inCpy)
+			req := c.DescribeVolumesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1307,10 +1307,10 @@ func (c *EC2) WaitUntilVolumeInUseWithContext(ctx aws.Context, input *DescribeVo
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVolumesRequest(inCpy)
+			req := c.DescribeVolumesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1353,10 +1353,10 @@ func (c *EC2) WaitUntilVpcAvailableWithContext(ctx aws.Context, input *DescribeV
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVpcsRequest(inCpy)
+			req := c.DescribeVpcsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1404,10 +1404,10 @@ func (c *EC2) WaitUntilVpcExistsWithContext(ctx aws.Context, input *DescribeVpcs
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVpcsRequest(inCpy)
+			req := c.DescribeVpcsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1455,10 +1455,10 @@ func (c *EC2) WaitUntilVpcPeeringConnectionDeletedWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVpcPeeringConnectionsRequest(inCpy)
+			req := c.DescribeVpcPeeringConnectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1506,10 +1506,10 @@ func (c *EC2) WaitUntilVpcPeeringConnectionExistsWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVpcPeeringConnectionsRequest(inCpy)
+			req := c.DescribeVpcPeeringConnectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1562,10 +1562,10 @@ func (c *EC2) WaitUntilVpnConnectionAvailableWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVpnConnectionsRequest(inCpy)
+			req := c.DescribeVpnConnectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -1613,10 +1613,10 @@ func (c *EC2) WaitUntilVpnConnectionDeletedWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVpnConnectionsRequest(inCpy)
+			req := c.DescribeVpnConnectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

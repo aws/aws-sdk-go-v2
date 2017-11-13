@@ -11,31 +11,36 @@ import (
 
 const opCreateDevicePool = "CreateDevicePool"
 
-// CreateDevicePoolRequest generates a "aws.Request" representing the
-// client's request for the CreateDevicePool operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDevicePoolRequest is a API request type for the CreateDevicePool API operation.
+type CreateDevicePoolRequest struct {
+	*aws.Request
+	Input *CreateDevicePoolInput
+}
+
+// Send marshals and sends the CreateDevicePool API request.
+func (r CreateDevicePoolRequest) Send() (*CreateDevicePoolOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDevicePoolOutput), nil
+}
+
+// CreateDevicePoolRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDevicePool for more information on using the CreateDevicePool
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a device pool.
 //
 //    // Example sending a request using the CreateDevicePoolRequest method.
-//    req, resp := client.CreateDevicePoolRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDevicePoolRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePool
-func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) (req *aws.Request, output *CreateDevicePoolOutput) {
+func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) CreateDevicePoolRequest {
 	op := &aws.Operation{
 		Name:       opCreateDevicePool,
 		HTTPMethod: "POST",
@@ -46,84 +51,42 @@ func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) (req 
 		input = &CreateDevicePoolInput{}
 	}
 
-	output = &CreateDevicePoolOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDevicePool API operation for AWS Device Farm.
-//
-// Creates a device pool.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation CreateDevicePool for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePool
-func (c *DeviceFarm) CreateDevicePool(input *CreateDevicePoolInput) (*CreateDevicePoolOutput, error) {
-	req, out := c.CreateDevicePoolRequest(input)
-	return out, req.Send()
-}
-
-// CreateDevicePoolWithContext is the same as CreateDevicePool with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDevicePool for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) CreateDevicePoolWithContext(ctx aws.Context, input *CreateDevicePoolInput, opts ...aws.Option) (*CreateDevicePoolOutput, error) {
-	req, out := c.CreateDevicePoolRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDevicePoolOutput{})
+	return CreateDevicePoolRequest{Request: req, Input: input}
 }
 
 const opCreateNetworkProfile = "CreateNetworkProfile"
 
-// CreateNetworkProfileRequest generates a "aws.Request" representing the
-// client's request for the CreateNetworkProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateNetworkProfileRequest is a API request type for the CreateNetworkProfile API operation.
+type CreateNetworkProfileRequest struct {
+	*aws.Request
+	Input *CreateNetworkProfileInput
+}
+
+// Send marshals and sends the CreateNetworkProfile API request.
+func (r CreateNetworkProfileRequest) Send() (*CreateNetworkProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateNetworkProfileOutput), nil
+}
+
+// CreateNetworkProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateNetworkProfile for more information on using the CreateNetworkProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a network profile.
 //
 //    // Example sending a request using the CreateNetworkProfileRequest method.
-//    req, resp := client.CreateNetworkProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateNetworkProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfile
-func (c *DeviceFarm) CreateNetworkProfileRequest(input *CreateNetworkProfileInput) (req *aws.Request, output *CreateNetworkProfileOutput) {
+func (c *DeviceFarm) CreateNetworkProfileRequest(input *CreateNetworkProfileInput) CreateNetworkProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateNetworkProfile,
 		HTTPMethod: "POST",
@@ -134,84 +97,42 @@ func (c *DeviceFarm) CreateNetworkProfileRequest(input *CreateNetworkProfileInpu
 		input = &CreateNetworkProfileInput{}
 	}
 
-	output = &CreateNetworkProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateNetworkProfile API operation for AWS Device Farm.
-//
-// Creates a network profile.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation CreateNetworkProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfile
-func (c *DeviceFarm) CreateNetworkProfile(input *CreateNetworkProfileInput) (*CreateNetworkProfileOutput, error) {
-	req, out := c.CreateNetworkProfileRequest(input)
-	return out, req.Send()
-}
-
-// CreateNetworkProfileWithContext is the same as CreateNetworkProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateNetworkProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) CreateNetworkProfileWithContext(ctx aws.Context, input *CreateNetworkProfileInput, opts ...aws.Option) (*CreateNetworkProfileOutput, error) {
-	req, out := c.CreateNetworkProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateNetworkProfileOutput{})
+	return CreateNetworkProfileRequest{Request: req, Input: input}
 }
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws.Request" representing the
-// client's request for the CreateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProjectRequest is a API request type for the CreateProject API operation.
+type CreateProjectRequest struct {
+	*aws.Request
+	Input *CreateProjectInput
+}
+
+// Send marshals and sends the CreateProject API request.
+func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProjectOutput), nil
+}
+
+// CreateProjectRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProject for more information on using the CreateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new project.
 //
 //    // Example sending a request using the CreateProjectRequest method.
-//    req, resp := client.CreateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject
-func (c *DeviceFarm) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+func (c *DeviceFarm) CreateProjectRequest(input *CreateProjectInput) CreateProjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
@@ -222,84 +143,42 @@ func (c *DeviceFarm) CreateProjectRequest(input *CreateProjectInput) (req *aws.R
 		input = &CreateProjectInput{}
 	}
 
-	output = &CreateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProject API operation for AWS Device Farm.
-//
-// Creates a new project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation CreateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject
-func (c *DeviceFarm) CreateProject(input *CreateProjectInput) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	return out, req.Send()
-}
-
-// CreateProjectWithContext is the same as CreateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProjectOutput{})
+	return CreateProjectRequest{Request: req, Input: input}
 }
 
 const opCreateRemoteAccessSession = "CreateRemoteAccessSession"
 
-// CreateRemoteAccessSessionRequest generates a "aws.Request" representing the
-// client's request for the CreateRemoteAccessSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateRemoteAccessSessionRequest is a API request type for the CreateRemoteAccessSession API operation.
+type CreateRemoteAccessSessionRequest struct {
+	*aws.Request
+	Input *CreateRemoteAccessSessionInput
+}
+
+// Send marshals and sends the CreateRemoteAccessSession API request.
+func (r CreateRemoteAccessSessionRequest) Send() (*CreateRemoteAccessSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRemoteAccessSessionOutput), nil
+}
+
+// CreateRemoteAccessSessionRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateRemoteAccessSession for more information on using the CreateRemoteAccessSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Specifies and starts a remote access session.
 //
 //    // Example sending a request using the CreateRemoteAccessSessionRequest method.
-//    req, resp := client.CreateRemoteAccessSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateRemoteAccessSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession
-func (c *DeviceFarm) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessSessionInput) (req *aws.Request, output *CreateRemoteAccessSessionOutput) {
+func (c *DeviceFarm) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessSessionInput) CreateRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opCreateRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -310,84 +189,42 @@ func (c *DeviceFarm) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessS
 		input = &CreateRemoteAccessSessionInput{}
 	}
 
-	output = &CreateRemoteAccessSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateRemoteAccessSession API operation for AWS Device Farm.
-//
-// Specifies and starts a remote access session.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation CreateRemoteAccessSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession
-func (c *DeviceFarm) CreateRemoteAccessSession(input *CreateRemoteAccessSessionInput) (*CreateRemoteAccessSessionOutput, error) {
-	req, out := c.CreateRemoteAccessSessionRequest(input)
-	return out, req.Send()
-}
-
-// CreateRemoteAccessSessionWithContext is the same as CreateRemoteAccessSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateRemoteAccessSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) CreateRemoteAccessSessionWithContext(ctx aws.Context, input *CreateRemoteAccessSessionInput, opts ...aws.Option) (*CreateRemoteAccessSessionOutput, error) {
-	req, out := c.CreateRemoteAccessSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateRemoteAccessSessionOutput{})
+	return CreateRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
 const opCreateUpload = "CreateUpload"
 
-// CreateUploadRequest generates a "aws.Request" representing the
-// client's request for the CreateUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateUploadRequest is a API request type for the CreateUpload API operation.
+type CreateUploadRequest struct {
+	*aws.Request
+	Input *CreateUploadInput
+}
+
+// Send marshals and sends the CreateUpload API request.
+func (r CreateUploadRequest) Send() (*CreateUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateUploadOutput), nil
+}
+
+// CreateUploadRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateUpload for more information on using the CreateUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Uploads an app or test scripts.
 //
 //    // Example sending a request using the CreateUploadRequest method.
-//    req, resp := client.CreateUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUpload
-func (c *DeviceFarm) CreateUploadRequest(input *CreateUploadInput) (req *aws.Request, output *CreateUploadOutput) {
+func (c *DeviceFarm) CreateUploadRequest(input *CreateUploadInput) CreateUploadRequest {
 	op := &aws.Operation{
 		Name:       opCreateUpload,
 		HTTPMethod: "POST",
@@ -398,84 +235,43 @@ func (c *DeviceFarm) CreateUploadRequest(input *CreateUploadInput) (req *aws.Req
 		input = &CreateUploadInput{}
 	}
 
-	output = &CreateUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateUpload API operation for AWS Device Farm.
-//
-// Uploads an app or test scripts.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation CreateUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUpload
-func (c *DeviceFarm) CreateUpload(input *CreateUploadInput) (*CreateUploadOutput, error) {
-	req, out := c.CreateUploadRequest(input)
-	return out, req.Send()
-}
-
-// CreateUploadWithContext is the same as CreateUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) CreateUploadWithContext(ctx aws.Context, input *CreateUploadInput, opts ...aws.Option) (*CreateUploadOutput, error) {
-	req, out := c.CreateUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateUploadOutput{})
+	return CreateUploadRequest{Request: req, Input: input}
 }
 
 const opDeleteDevicePool = "DeleteDevicePool"
 
-// DeleteDevicePoolRequest generates a "aws.Request" representing the
-// client's request for the DeleteDevicePool operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDevicePoolRequest is a API request type for the DeleteDevicePool API operation.
+type DeleteDevicePoolRequest struct {
+	*aws.Request
+	Input *DeleteDevicePoolInput
+}
+
+// Send marshals and sends the DeleteDevicePool API request.
+func (r DeleteDevicePoolRequest) Send() (*DeleteDevicePoolOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDevicePoolOutput), nil
+}
+
+// DeleteDevicePoolRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDevicePool for more information on using the DeleteDevicePool
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a device pool given the pool ARN. Does not allow deletion of curated
+// pools owned by the system.
 //
 //    // Example sending a request using the DeleteDevicePoolRequest method.
-//    req, resp := client.DeleteDevicePoolRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDevicePoolRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePool
-func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) (req *aws.Request, output *DeleteDevicePoolOutput) {
+func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) DeleteDevicePoolRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDevicePool,
 		HTTPMethod: "POST",
@@ -486,85 +282,42 @@ func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) (req 
 		input = &DeleteDevicePoolInput{}
 	}
 
-	output = &DeleteDevicePoolOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDevicePool API operation for AWS Device Farm.
-//
-// Deletes a device pool given the pool ARN. Does not allow deletion of curated
-// pools owned by the system.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation DeleteDevicePool for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePool
-func (c *DeviceFarm) DeleteDevicePool(input *DeleteDevicePoolInput) (*DeleteDevicePoolOutput, error) {
-	req, out := c.DeleteDevicePoolRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDevicePoolWithContext is the same as DeleteDevicePool with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDevicePool for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) DeleteDevicePoolWithContext(ctx aws.Context, input *DeleteDevicePoolInput, opts ...aws.Option) (*DeleteDevicePoolOutput, error) {
-	req, out := c.DeleteDevicePoolRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDevicePoolOutput{})
+	return DeleteDevicePoolRequest{Request: req, Input: input}
 }
 
 const opDeleteNetworkProfile = "DeleteNetworkProfile"
 
-// DeleteNetworkProfileRequest generates a "aws.Request" representing the
-// client's request for the DeleteNetworkProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteNetworkProfileRequest is a API request type for the DeleteNetworkProfile API operation.
+type DeleteNetworkProfileRequest struct {
+	*aws.Request
+	Input *DeleteNetworkProfileInput
+}
+
+// Send marshals and sends the DeleteNetworkProfile API request.
+func (r DeleteNetworkProfileRequest) Send() (*DeleteNetworkProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteNetworkProfileOutput), nil
+}
+
+// DeleteNetworkProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteNetworkProfile for more information on using the DeleteNetworkProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a network profile.
 //
 //    // Example sending a request using the DeleteNetworkProfileRequest method.
-//    req, resp := client.DeleteNetworkProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteNetworkProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfile
-func (c *DeviceFarm) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) (req *aws.Request, output *DeleteNetworkProfileOutput) {
+func (c *DeviceFarm) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) DeleteNetworkProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNetworkProfile,
 		HTTPMethod: "POST",
@@ -575,84 +328,44 @@ func (c *DeviceFarm) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInpu
 		input = &DeleteNetworkProfileInput{}
 	}
 
-	output = &DeleteNetworkProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteNetworkProfile API operation for AWS Device Farm.
-//
-// Deletes a network profile.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation DeleteNetworkProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfile
-func (c *DeviceFarm) DeleteNetworkProfile(input *DeleteNetworkProfileInput) (*DeleteNetworkProfileOutput, error) {
-	req, out := c.DeleteNetworkProfileRequest(input)
-	return out, req.Send()
-}
-
-// DeleteNetworkProfileWithContext is the same as DeleteNetworkProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteNetworkProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) DeleteNetworkProfileWithContext(ctx aws.Context, input *DeleteNetworkProfileInput, opts ...aws.Option) (*DeleteNetworkProfileOutput, error) {
-	req, out := c.DeleteNetworkProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteNetworkProfileOutput{})
+	return DeleteNetworkProfileRequest{Request: req, Input: input}
 }
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws.Request" representing the
-// client's request for the DeleteProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteProjectRequest is a API request type for the DeleteProject API operation.
+type DeleteProjectRequest struct {
+	*aws.Request
+	Input *DeleteProjectInput
+}
+
+// Send marshals and sends the DeleteProject API request.
+func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProjectOutput), nil
+}
+
+// DeleteProjectRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes an AWS Device Farm project, given the project ARN.
 //
-// See DeleteProject for more information on using the DeleteProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Note Deleting this resource does not stop an in-progress run.
 //
 //    // Example sending a request using the DeleteProjectRequest method.
-//    req, resp := client.DeleteProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteProject
-func (c *DeviceFarm) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+func (c *DeviceFarm) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "POST",
@@ -663,86 +376,42 @@ func (c *DeviceFarm) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.R
 		input = &DeleteProjectInput{}
 	}
 
-	output = &DeleteProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteProject API operation for AWS Device Farm.
-//
-// Deletes an AWS Device Farm project, given the project ARN.
-//
-// Note Deleting this resource does not stop an in-progress run.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation DeleteProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteProject
-func (c *DeviceFarm) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	return out, req.Send()
-}
-
-// DeleteProjectWithContext is the same as DeleteProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	return DeleteProjectRequest{Request: req, Input: input}
 }
 
 const opDeleteRemoteAccessSession = "DeleteRemoteAccessSession"
 
-// DeleteRemoteAccessSessionRequest generates a "aws.Request" representing the
-// client's request for the DeleteRemoteAccessSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRemoteAccessSessionRequest is a API request type for the DeleteRemoteAccessSession API operation.
+type DeleteRemoteAccessSessionRequest struct {
+	*aws.Request
+	Input *DeleteRemoteAccessSessionInput
+}
+
+// Send marshals and sends the DeleteRemoteAccessSession API request.
+func (r DeleteRemoteAccessSessionRequest) Send() (*DeleteRemoteAccessSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRemoteAccessSessionOutput), nil
+}
+
+// DeleteRemoteAccessSessionRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteRemoteAccessSession for more information on using the DeleteRemoteAccessSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a completed remote access session and its results.
 //
 //    // Example sending a request using the DeleteRemoteAccessSessionRequest method.
-//    req, resp := client.DeleteRemoteAccessSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRemoteAccessSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSession
-func (c *DeviceFarm) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessionInput) (req *aws.Request, output *DeleteRemoteAccessSessionOutput) {
+func (c *DeviceFarm) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessionInput) DeleteRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -753,84 +422,44 @@ func (c *DeviceFarm) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessS
 		input = &DeleteRemoteAccessSessionInput{}
 	}
 
-	output = &DeleteRemoteAccessSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteRemoteAccessSession API operation for AWS Device Farm.
-//
-// Deletes a completed remote access session and its results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation DeleteRemoteAccessSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSession
-func (c *DeviceFarm) DeleteRemoteAccessSession(input *DeleteRemoteAccessSessionInput) (*DeleteRemoteAccessSessionOutput, error) {
-	req, out := c.DeleteRemoteAccessSessionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRemoteAccessSessionWithContext is the same as DeleteRemoteAccessSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRemoteAccessSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) DeleteRemoteAccessSessionWithContext(ctx aws.Context, input *DeleteRemoteAccessSessionInput, opts ...aws.Option) (*DeleteRemoteAccessSessionOutput, error) {
-	req, out := c.DeleteRemoteAccessSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteRemoteAccessSessionOutput{})
+	return DeleteRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
 const opDeleteRun = "DeleteRun"
 
-// DeleteRunRequest generates a "aws.Request" representing the
-// client's request for the DeleteRun operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRunRequest is a API request type for the DeleteRun API operation.
+type DeleteRunRequest struct {
+	*aws.Request
+	Input *DeleteRunInput
+}
+
+// Send marshals and sends the DeleteRun API request.
+func (r DeleteRunRequest) Send() (*DeleteRunOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRunOutput), nil
+}
+
+// DeleteRunRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the run, given the run ARN.
 //
-// See DeleteRun for more information on using the DeleteRun
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Note Deleting this resource does not stop an in-progress run.
 //
 //    // Example sending a request using the DeleteRunRequest method.
-//    req, resp := client.DeleteRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRunRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRun
-func (c *DeviceFarm) DeleteRunRequest(input *DeleteRunInput) (req *aws.Request, output *DeleteRunOutput) {
+func (c *DeviceFarm) DeleteRunRequest(input *DeleteRunInput) DeleteRunRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRun,
 		HTTPMethod: "POST",
@@ -841,86 +470,42 @@ func (c *DeviceFarm) DeleteRunRequest(input *DeleteRunInput) (req *aws.Request, 
 		input = &DeleteRunInput{}
 	}
 
-	output = &DeleteRunOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteRun API operation for AWS Device Farm.
-//
-// Deletes the run, given the run ARN.
-//
-// Note Deleting this resource does not stop an in-progress run.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation DeleteRun for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRun
-func (c *DeviceFarm) DeleteRun(input *DeleteRunInput) (*DeleteRunOutput, error) {
-	req, out := c.DeleteRunRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRunWithContext is the same as DeleteRun with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRun for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) DeleteRunWithContext(ctx aws.Context, input *DeleteRunInput, opts ...aws.Option) (*DeleteRunOutput, error) {
-	req, out := c.DeleteRunRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteRunOutput{})
+	return DeleteRunRequest{Request: req, Input: input}
 }
 
 const opDeleteUpload = "DeleteUpload"
 
-// DeleteUploadRequest generates a "aws.Request" representing the
-// client's request for the DeleteUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteUploadRequest is a API request type for the DeleteUpload API operation.
+type DeleteUploadRequest struct {
+	*aws.Request
+	Input *DeleteUploadInput
+}
+
+// Send marshals and sends the DeleteUpload API request.
+func (r DeleteUploadRequest) Send() (*DeleteUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUploadOutput), nil
+}
+
+// DeleteUploadRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteUpload for more information on using the DeleteUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an upload given the upload ARN.
 //
 //    // Example sending a request using the DeleteUploadRequest method.
-//    req, resp := client.DeleteUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUpload
-func (c *DeviceFarm) DeleteUploadRequest(input *DeleteUploadInput) (req *aws.Request, output *DeleteUploadOutput) {
+func (c *DeviceFarm) DeleteUploadRequest(input *DeleteUploadInput) DeleteUploadRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUpload,
 		HTTPMethod: "POST",
@@ -931,84 +516,43 @@ func (c *DeviceFarm) DeleteUploadRequest(input *DeleteUploadInput) (req *aws.Req
 		input = &DeleteUploadInput{}
 	}
 
-	output = &DeleteUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteUpload API operation for AWS Device Farm.
-//
-// Deletes an upload given the upload ARN.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation DeleteUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUpload
-func (c *DeviceFarm) DeleteUpload(input *DeleteUploadInput) (*DeleteUploadOutput, error) {
-	req, out := c.DeleteUploadRequest(input)
-	return out, req.Send()
-}
-
-// DeleteUploadWithContext is the same as DeleteUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) DeleteUploadWithContext(ctx aws.Context, input *DeleteUploadInput, opts ...aws.Option) (*DeleteUploadOutput, error) {
-	req, out := c.DeleteUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteUploadOutput{})
+	return DeleteUploadRequest{Request: req, Input: input}
 }
 
 const opGetAccountSettings = "GetAccountSettings"
 
-// GetAccountSettingsRequest generates a "aws.Request" representing the
-// client's request for the GetAccountSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAccountSettingsRequest is a API request type for the GetAccountSettings API operation.
+type GetAccountSettingsRequest struct {
+	*aws.Request
+	Input *GetAccountSettingsInput
+}
+
+// Send marshals and sends the GetAccountSettings API request.
+func (r GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAccountSettingsOutput), nil
+}
+
+// GetAccountSettingsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAccountSettings for more information on using the GetAccountSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the number of unmetered iOS and/or unmetered Android devices that
+// have been purchased by the account.
 //
 //    // Example sending a request using the GetAccountSettingsRequest method.
-//    req, resp := client.GetAccountSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAccountSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettings
-func (c *DeviceFarm) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req *aws.Request, output *GetAccountSettingsOutput) {
+func (c *DeviceFarm) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAccountSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "POST",
@@ -1019,85 +563,42 @@ func (c *DeviceFarm) GetAccountSettingsRequest(input *GetAccountSettingsInput) (
 		input = &GetAccountSettingsInput{}
 	}
 
-	output = &GetAccountSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAccountSettings API operation for AWS Device Farm.
-//
-// Returns the number of unmetered iOS and/or unmetered Android devices that
-// have been purchased by the account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetAccountSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettings
-func (c *DeviceFarm) GetAccountSettings(input *GetAccountSettingsInput) (*GetAccountSettingsOutput, error) {
-	req, out := c.GetAccountSettingsRequest(input)
-	return out, req.Send()
-}
-
-// GetAccountSettingsWithContext is the same as GetAccountSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAccountSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetAccountSettingsWithContext(ctx aws.Context, input *GetAccountSettingsInput, opts ...aws.Option) (*GetAccountSettingsOutput, error) {
-	req, out := c.GetAccountSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+	return GetAccountSettingsRequest{Request: req, Input: input}
 }
 
 const opGetDevice = "GetDevice"
 
-// GetDeviceRequest generates a "aws.Request" representing the
-// client's request for the GetDevice operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeviceRequest is a API request type for the GetDevice API operation.
+type GetDeviceRequest struct {
+	*aws.Request
+	Input *GetDeviceInput
+}
+
+// Send marshals and sends the GetDevice API request.
+func (r GetDeviceRequest) Send() (*GetDeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeviceOutput), nil
+}
+
+// GetDeviceRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDevice for more information on using the GetDevice
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a unique device type.
 //
 //    // Example sending a request using the GetDeviceRequest method.
-//    req, resp := client.GetDeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevice
-func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) (req *aws.Request, output *GetDeviceOutput) {
+func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 	op := &aws.Operation{
 		Name:       opGetDevice,
 		HTTPMethod: "POST",
@@ -1108,84 +609,42 @@ func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) (req *aws.Request, 
 		input = &GetDeviceInput{}
 	}
 
-	output = &GetDeviceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDevice API operation for AWS Device Farm.
-//
-// Gets information about a unique device type.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetDevice for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevice
-func (c *DeviceFarm) GetDevice(input *GetDeviceInput) (*GetDeviceOutput, error) {
-	req, out := c.GetDeviceRequest(input)
-	return out, req.Send()
-}
-
-// GetDeviceWithContext is the same as GetDevice with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDevice for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetDeviceWithContext(ctx aws.Context, input *GetDeviceInput, opts ...aws.Option) (*GetDeviceOutput, error) {
-	req, out := c.GetDeviceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeviceOutput{})
+	return GetDeviceRequest{Request: req, Input: input}
 }
 
 const opGetDevicePool = "GetDevicePool"
 
-// GetDevicePoolRequest generates a "aws.Request" representing the
-// client's request for the GetDevicePool operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDevicePoolRequest is a API request type for the GetDevicePool API operation.
+type GetDevicePoolRequest struct {
+	*aws.Request
+	Input *GetDevicePoolInput
+}
+
+// Send marshals and sends the GetDevicePool API request.
+func (r GetDevicePoolRequest) Send() (*GetDevicePoolOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDevicePoolOutput), nil
+}
+
+// GetDevicePoolRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDevicePool for more information on using the GetDevicePool
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a device pool.
 //
 //    // Example sending a request using the GetDevicePoolRequest method.
-//    req, resp := client.GetDevicePoolRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDevicePoolRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePool
-func (c *DeviceFarm) GetDevicePoolRequest(input *GetDevicePoolInput) (req *aws.Request, output *GetDevicePoolOutput) {
+func (c *DeviceFarm) GetDevicePoolRequest(input *GetDevicePoolInput) GetDevicePoolRequest {
 	op := &aws.Operation{
 		Name:       opGetDevicePool,
 		HTTPMethod: "POST",
@@ -1196,84 +655,42 @@ func (c *DeviceFarm) GetDevicePoolRequest(input *GetDevicePoolInput) (req *aws.R
 		input = &GetDevicePoolInput{}
 	}
 
-	output = &GetDevicePoolOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDevicePool API operation for AWS Device Farm.
-//
-// Gets information about a device pool.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetDevicePool for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePool
-func (c *DeviceFarm) GetDevicePool(input *GetDevicePoolInput) (*GetDevicePoolOutput, error) {
-	req, out := c.GetDevicePoolRequest(input)
-	return out, req.Send()
-}
-
-// GetDevicePoolWithContext is the same as GetDevicePool with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDevicePool for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetDevicePoolWithContext(ctx aws.Context, input *GetDevicePoolInput, opts ...aws.Option) (*GetDevicePoolOutput, error) {
-	req, out := c.GetDevicePoolRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDevicePoolOutput{})
+	return GetDevicePoolRequest{Request: req, Input: input}
 }
 
 const opGetDevicePoolCompatibility = "GetDevicePoolCompatibility"
 
-// GetDevicePoolCompatibilityRequest generates a "aws.Request" representing the
-// client's request for the GetDevicePoolCompatibility operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDevicePoolCompatibilityRequest is a API request type for the GetDevicePoolCompatibility API operation.
+type GetDevicePoolCompatibilityRequest struct {
+	*aws.Request
+	Input *GetDevicePoolCompatibilityInput
+}
+
+// Send marshals and sends the GetDevicePoolCompatibility API request.
+func (r GetDevicePoolCompatibilityRequest) Send() (*GetDevicePoolCompatibilityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDevicePoolCompatibilityOutput), nil
+}
+
+// GetDevicePoolCompatibilityRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDevicePoolCompatibility for more information on using the GetDevicePoolCompatibility
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about compatibility with a device pool.
 //
 //    // Example sending a request using the GetDevicePoolCompatibilityRequest method.
-//    req, resp := client.GetDevicePoolCompatibilityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDevicePoolCompatibilityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility
-func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompatibilityInput) (req *aws.Request, output *GetDevicePoolCompatibilityOutput) {
+func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompatibilityInput) GetDevicePoolCompatibilityRequest {
 	op := &aws.Operation{
 		Name:       opGetDevicePoolCompatibility,
 		HTTPMethod: "POST",
@@ -1284,84 +701,42 @@ func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompa
 		input = &GetDevicePoolCompatibilityInput{}
 	}
 
-	output = &GetDevicePoolCompatibilityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDevicePoolCompatibility API operation for AWS Device Farm.
-//
-// Gets information about compatibility with a device pool.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetDevicePoolCompatibility for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility
-func (c *DeviceFarm) GetDevicePoolCompatibility(input *GetDevicePoolCompatibilityInput) (*GetDevicePoolCompatibilityOutput, error) {
-	req, out := c.GetDevicePoolCompatibilityRequest(input)
-	return out, req.Send()
-}
-
-// GetDevicePoolCompatibilityWithContext is the same as GetDevicePoolCompatibility with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDevicePoolCompatibility for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetDevicePoolCompatibilityWithContext(ctx aws.Context, input *GetDevicePoolCompatibilityInput, opts ...aws.Option) (*GetDevicePoolCompatibilityOutput, error) {
-	req, out := c.GetDevicePoolCompatibilityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDevicePoolCompatibilityOutput{})
+	return GetDevicePoolCompatibilityRequest{Request: req, Input: input}
 }
 
 const opGetJob = "GetJob"
 
-// GetJobRequest generates a "aws.Request" representing the
-// client's request for the GetJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetJobRequest is a API request type for the GetJob API operation.
+type GetJobRequest struct {
+	*aws.Request
+	Input *GetJobInput
+}
+
+// Send marshals and sends the GetJob API request.
+func (r GetJobRequest) Send() (*GetJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobOutput), nil
+}
+
+// GetJobRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJob for more information on using the GetJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a job.
 //
 //    // Example sending a request using the GetJobRequest method.
-//    req, resp := client.GetJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJob
-func (c *DeviceFarm) GetJobRequest(input *GetJobInput) (req *aws.Request, output *GetJobOutput) {
+func (c *DeviceFarm) GetJobRequest(input *GetJobInput) GetJobRequest {
 	op := &aws.Operation{
 		Name:       opGetJob,
 		HTTPMethod: "POST",
@@ -1372,84 +747,42 @@ func (c *DeviceFarm) GetJobRequest(input *GetJobInput) (req *aws.Request, output
 		input = &GetJobInput{}
 	}
 
-	output = &GetJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetJob API operation for AWS Device Farm.
-//
-// Gets information about a job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJob
-func (c *DeviceFarm) GetJob(input *GetJobInput) (*GetJobOutput, error) {
-	req, out := c.GetJobRequest(input)
-	return out, req.Send()
-}
-
-// GetJobWithContext is the same as GetJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts ...aws.Option) (*GetJobOutput, error) {
-	req, out := c.GetJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetJobOutput{})
+	return GetJobRequest{Request: req, Input: input}
 }
 
 const opGetNetworkProfile = "GetNetworkProfile"
 
-// GetNetworkProfileRequest generates a "aws.Request" representing the
-// client's request for the GetNetworkProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetNetworkProfileRequest is a API request type for the GetNetworkProfile API operation.
+type GetNetworkProfileRequest struct {
+	*aws.Request
+	Input *GetNetworkProfileInput
+}
+
+// Send marshals and sends the GetNetworkProfile API request.
+func (r GetNetworkProfileRequest) Send() (*GetNetworkProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetNetworkProfileOutput), nil
+}
+
+// GetNetworkProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetNetworkProfile for more information on using the GetNetworkProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a network profile.
 //
 //    // Example sending a request using the GetNetworkProfileRequest method.
-//    req, resp := client.GetNetworkProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetNetworkProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfile
-func (c *DeviceFarm) GetNetworkProfileRequest(input *GetNetworkProfileInput) (req *aws.Request, output *GetNetworkProfileOutput) {
+func (c *DeviceFarm) GetNetworkProfileRequest(input *GetNetworkProfileInput) GetNetworkProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetNetworkProfile,
 		HTTPMethod: "POST",
@@ -1460,84 +793,47 @@ func (c *DeviceFarm) GetNetworkProfileRequest(input *GetNetworkProfileInput) (re
 		input = &GetNetworkProfileInput{}
 	}
 
-	output = &GetNetworkProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetNetworkProfile API operation for AWS Device Farm.
-//
-// Returns information about a network profile.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetNetworkProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfile
-func (c *DeviceFarm) GetNetworkProfile(input *GetNetworkProfileInput) (*GetNetworkProfileOutput, error) {
-	req, out := c.GetNetworkProfileRequest(input)
-	return out, req.Send()
-}
-
-// GetNetworkProfileWithContext is the same as GetNetworkProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetNetworkProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetNetworkProfileWithContext(ctx aws.Context, input *GetNetworkProfileInput, opts ...aws.Option) (*GetNetworkProfileOutput, error) {
-	req, out := c.GetNetworkProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetNetworkProfileOutput{})
+	return GetNetworkProfileRequest{Request: req, Input: input}
 }
 
 const opGetOfferingStatus = "GetOfferingStatus"
 
-// GetOfferingStatusRequest generates a "aws.Request" representing the
-// client's request for the GetOfferingStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetOfferingStatusRequest is a API request type for the GetOfferingStatus API operation.
+type GetOfferingStatusRequest struct {
+	*aws.Request
+	Input *GetOfferingStatusInput
+}
+
+// Send marshals and sends the GetOfferingStatus API request.
+func (r GetOfferingStatusRequest) Send() (*GetOfferingStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetOfferingStatusOutput), nil
+}
+
+// GetOfferingStatusRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetOfferingStatus for more information on using the GetOfferingStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the current status and future status of all offerings purchased by an
+// AWS account. The response indicates how many offerings are currently available
+// and the offerings that will be available in the next period. The API returns
+// a NotEligible error if the user is not permitted to invoke the operation.
+// Please contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// if you believe that you should be able to invoke this operation.
 //
 //    // Example sending a request using the GetOfferingStatusRequest method.
-//    req, resp := client.GetOfferingStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetOfferingStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatus
-func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) (req *aws.Request, output *GetOfferingStatusOutput) {
+func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) GetOfferingStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetOfferingStatus,
 		HTTPMethod: "POST",
@@ -1554,64 +850,8 @@ func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) (re
 		input = &GetOfferingStatusInput{}
 	}
 
-	output = &GetOfferingStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetOfferingStatus API operation for AWS Device Farm.
-//
-// Gets the current status and future status of all offerings purchased by an
-// AWS account. The response indicates how many offerings are currently available
-// and the offerings that will be available in the next period. The API returns
-// a NotEligible error if the user is not permitted to invoke the operation.
-// Please contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
-// if you believe that you should be able to invoke this operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetOfferingStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeNotEligibleException "NotEligibleException"
-//   Exception gets thrown when a user is not eligible to perform the specified
-//   transaction.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatus
-func (c *DeviceFarm) GetOfferingStatus(input *GetOfferingStatusInput) (*GetOfferingStatusOutput, error) {
-	req, out := c.GetOfferingStatusRequest(input)
-	return out, req.Send()
-}
-
-// GetOfferingStatusWithContext is the same as GetOfferingStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetOfferingStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetOfferingStatusWithContext(ctx aws.Context, input *GetOfferingStatusInput, opts ...aws.Option) (*GetOfferingStatusOutput, error) {
-	req, out := c.GetOfferingStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetOfferingStatusOutput{})
+	return GetOfferingStatusRequest{Request: req, Input: input}
 }
 
 // GetOfferingStatusPages iterates over the pages of a GetOfferingStatus operation,
@@ -1650,10 +890,10 @@ func (c *DeviceFarm) GetOfferingStatusPagesWithContext(ctx aws.Context, input *G
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetOfferingStatusRequest(inCpy)
+			req := c.GetOfferingStatusRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1666,31 +906,36 @@ func (c *DeviceFarm) GetOfferingStatusPagesWithContext(ctx aws.Context, input *G
 
 const opGetProject = "GetProject"
 
-// GetProjectRequest generates a "aws.Request" representing the
-// client's request for the GetProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetProjectRequest is a API request type for the GetProject API operation.
+type GetProjectRequest struct {
+	*aws.Request
+	Input *GetProjectInput
+}
+
+// Send marshals and sends the GetProject API request.
+func (r GetProjectRequest) Send() (*GetProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetProjectOutput), nil
+}
+
+// GetProjectRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetProject for more information on using the GetProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a project.
 //
 //    // Example sending a request using the GetProjectRequest method.
-//    req, resp := client.GetProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject
-func (c *DeviceFarm) GetProjectRequest(input *GetProjectInput) (req *aws.Request, output *GetProjectOutput) {
+func (c *DeviceFarm) GetProjectRequest(input *GetProjectInput) GetProjectRequest {
 	op := &aws.Operation{
 		Name:       opGetProject,
 		HTTPMethod: "POST",
@@ -1701,84 +946,42 @@ func (c *DeviceFarm) GetProjectRequest(input *GetProjectInput) (req *aws.Request
 		input = &GetProjectInput{}
 	}
 
-	output = &GetProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetProject API operation for AWS Device Farm.
-//
-// Gets information about a project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject
-func (c *DeviceFarm) GetProject(input *GetProjectInput) (*GetProjectOutput, error) {
-	req, out := c.GetProjectRequest(input)
-	return out, req.Send()
-}
-
-// GetProjectWithContext is the same as GetProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetProjectWithContext(ctx aws.Context, input *GetProjectInput, opts ...aws.Option) (*GetProjectOutput, error) {
-	req, out := c.GetProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetProjectOutput{})
+	return GetProjectRequest{Request: req, Input: input}
 }
 
 const opGetRemoteAccessSession = "GetRemoteAccessSession"
 
-// GetRemoteAccessSessionRequest generates a "aws.Request" representing the
-// client's request for the GetRemoteAccessSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetRemoteAccessSessionRequest is a API request type for the GetRemoteAccessSession API operation.
+type GetRemoteAccessSessionRequest struct {
+	*aws.Request
+	Input *GetRemoteAccessSessionInput
+}
+
+// Send marshals and sends the GetRemoteAccessSession API request.
+func (r GetRemoteAccessSessionRequest) Send() (*GetRemoteAccessSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRemoteAccessSessionOutput), nil
+}
+
+// GetRemoteAccessSessionRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRemoteAccessSession for more information on using the GetRemoteAccessSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a link to a currently running remote access session.
 //
 //    // Example sending a request using the GetRemoteAccessSessionRequest method.
-//    req, resp := client.GetRemoteAccessSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetRemoteAccessSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession
-func (c *DeviceFarm) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInput) (req *aws.Request, output *GetRemoteAccessSessionOutput) {
+func (c *DeviceFarm) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInput) GetRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opGetRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -1789,84 +992,42 @@ func (c *DeviceFarm) GetRemoteAccessSessionRequest(input *GetRemoteAccessSession
 		input = &GetRemoteAccessSessionInput{}
 	}
 
-	output = &GetRemoteAccessSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetRemoteAccessSession API operation for AWS Device Farm.
-//
-// Returns a link to a currently running remote access session.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetRemoteAccessSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession
-func (c *DeviceFarm) GetRemoteAccessSession(input *GetRemoteAccessSessionInput) (*GetRemoteAccessSessionOutput, error) {
-	req, out := c.GetRemoteAccessSessionRequest(input)
-	return out, req.Send()
-}
-
-// GetRemoteAccessSessionWithContext is the same as GetRemoteAccessSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRemoteAccessSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetRemoteAccessSessionWithContext(ctx aws.Context, input *GetRemoteAccessSessionInput, opts ...aws.Option) (*GetRemoteAccessSessionOutput, error) {
-	req, out := c.GetRemoteAccessSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetRemoteAccessSessionOutput{})
+	return GetRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
 const opGetRun = "GetRun"
 
-// GetRunRequest generates a "aws.Request" representing the
-// client's request for the GetRun operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetRunRequest is a API request type for the GetRun API operation.
+type GetRunRequest struct {
+	*aws.Request
+	Input *GetRunInput
+}
+
+// Send marshals and sends the GetRun API request.
+func (r GetRunRequest) Send() (*GetRunOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRunOutput), nil
+}
+
+// GetRunRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRun for more information on using the GetRun
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a run.
 //
 //    // Example sending a request using the GetRunRequest method.
-//    req, resp := client.GetRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetRunRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun
-func (c *DeviceFarm) GetRunRequest(input *GetRunInput) (req *aws.Request, output *GetRunOutput) {
+func (c *DeviceFarm) GetRunRequest(input *GetRunInput) GetRunRequest {
 	op := &aws.Operation{
 		Name:       opGetRun,
 		HTTPMethod: "POST",
@@ -1877,84 +1038,42 @@ func (c *DeviceFarm) GetRunRequest(input *GetRunInput) (req *aws.Request, output
 		input = &GetRunInput{}
 	}
 
-	output = &GetRunOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetRun API operation for AWS Device Farm.
-//
-// Gets information about a run.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetRun for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun
-func (c *DeviceFarm) GetRun(input *GetRunInput) (*GetRunOutput, error) {
-	req, out := c.GetRunRequest(input)
-	return out, req.Send()
-}
-
-// GetRunWithContext is the same as GetRun with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRun for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetRunWithContext(ctx aws.Context, input *GetRunInput, opts ...aws.Option) (*GetRunOutput, error) {
-	req, out := c.GetRunRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetRunOutput{})
+	return GetRunRequest{Request: req, Input: input}
 }
 
 const opGetSuite = "GetSuite"
 
-// GetSuiteRequest generates a "aws.Request" representing the
-// client's request for the GetSuite operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSuiteRequest is a API request type for the GetSuite API operation.
+type GetSuiteRequest struct {
+	*aws.Request
+	Input *GetSuiteInput
+}
+
+// Send marshals and sends the GetSuite API request.
+func (r GetSuiteRequest) Send() (*GetSuiteOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSuiteOutput), nil
+}
+
+// GetSuiteRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSuite for more information on using the GetSuite
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a suite.
 //
 //    // Example sending a request using the GetSuiteRequest method.
-//    req, resp := client.GetSuiteRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSuiteRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuite
-func (c *DeviceFarm) GetSuiteRequest(input *GetSuiteInput) (req *aws.Request, output *GetSuiteOutput) {
+func (c *DeviceFarm) GetSuiteRequest(input *GetSuiteInput) GetSuiteRequest {
 	op := &aws.Operation{
 		Name:       opGetSuite,
 		HTTPMethod: "POST",
@@ -1965,84 +1084,42 @@ func (c *DeviceFarm) GetSuiteRequest(input *GetSuiteInput) (req *aws.Request, ou
 		input = &GetSuiteInput{}
 	}
 
-	output = &GetSuiteOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSuite API operation for AWS Device Farm.
-//
-// Gets information about a suite.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetSuite for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuite
-func (c *DeviceFarm) GetSuite(input *GetSuiteInput) (*GetSuiteOutput, error) {
-	req, out := c.GetSuiteRequest(input)
-	return out, req.Send()
-}
-
-// GetSuiteWithContext is the same as GetSuite with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSuite for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetSuiteWithContext(ctx aws.Context, input *GetSuiteInput, opts ...aws.Option) (*GetSuiteOutput, error) {
-	req, out := c.GetSuiteRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSuiteOutput{})
+	return GetSuiteRequest{Request: req, Input: input}
 }
 
 const opGetTest = "GetTest"
 
-// GetTestRequest generates a "aws.Request" representing the
-// client's request for the GetTest operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTestRequest is a API request type for the GetTest API operation.
+type GetTestRequest struct {
+	*aws.Request
+	Input *GetTestInput
+}
+
+// Send marshals and sends the GetTest API request.
+func (r GetTestRequest) Send() (*GetTestOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTestOutput), nil
+}
+
+// GetTestRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTest for more information on using the GetTest
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a test.
 //
 //    // Example sending a request using the GetTestRequest method.
-//    req, resp := client.GetTestRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTestRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTest
-func (c *DeviceFarm) GetTestRequest(input *GetTestInput) (req *aws.Request, output *GetTestOutput) {
+func (c *DeviceFarm) GetTestRequest(input *GetTestInput) GetTestRequest {
 	op := &aws.Operation{
 		Name:       opGetTest,
 		HTTPMethod: "POST",
@@ -2053,84 +1130,42 @@ func (c *DeviceFarm) GetTestRequest(input *GetTestInput) (req *aws.Request, outp
 		input = &GetTestInput{}
 	}
 
-	output = &GetTestOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTest API operation for AWS Device Farm.
-//
-// Gets information about a test.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetTest for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTest
-func (c *DeviceFarm) GetTest(input *GetTestInput) (*GetTestOutput, error) {
-	req, out := c.GetTestRequest(input)
-	return out, req.Send()
-}
-
-// GetTestWithContext is the same as GetTest with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTest for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetTestWithContext(ctx aws.Context, input *GetTestInput, opts ...aws.Option) (*GetTestOutput, error) {
-	req, out := c.GetTestRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTestOutput{})
+	return GetTestRequest{Request: req, Input: input}
 }
 
 const opGetUpload = "GetUpload"
 
-// GetUploadRequest generates a "aws.Request" representing the
-// client's request for the GetUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetUploadRequest is a API request type for the GetUpload API operation.
+type GetUploadRequest struct {
+	*aws.Request
+	Input *GetUploadInput
+}
+
+// Send marshals and sends the GetUpload API request.
+func (r GetUploadRequest) Send() (*GetUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUploadOutput), nil
+}
+
+// GetUploadRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetUpload for more information on using the GetUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about an upload.
 //
 //    // Example sending a request using the GetUploadRequest method.
-//    req, resp := client.GetUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUpload
-func (c *DeviceFarm) GetUploadRequest(input *GetUploadInput) (req *aws.Request, output *GetUploadOutput) {
+func (c *DeviceFarm) GetUploadRequest(input *GetUploadInput) GetUploadRequest {
 	op := &aws.Operation{
 		Name:       opGetUpload,
 		HTTPMethod: "POST",
@@ -2141,84 +1176,44 @@ func (c *DeviceFarm) GetUploadRequest(input *GetUploadInput) (req *aws.Request, 
 		input = &GetUploadInput{}
 	}
 
-	output = &GetUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetUpload API operation for AWS Device Farm.
-//
-// Gets information about an upload.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation GetUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUpload
-func (c *DeviceFarm) GetUpload(input *GetUploadInput) (*GetUploadOutput, error) {
-	req, out := c.GetUploadRequest(input)
-	return out, req.Send()
-}
-
-// GetUploadWithContext is the same as GetUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) GetUploadWithContext(ctx aws.Context, input *GetUploadInput, opts ...aws.Option) (*GetUploadOutput, error) {
-	req, out := c.GetUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetUploadOutput{})
+	return GetUploadRequest{Request: req, Input: input}
 }
 
 const opInstallToRemoteAccessSession = "InstallToRemoteAccessSession"
 
-// InstallToRemoteAccessSessionRequest generates a "aws.Request" representing the
-// client's request for the InstallToRemoteAccessSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// InstallToRemoteAccessSessionRequest is a API request type for the InstallToRemoteAccessSession API operation.
+type InstallToRemoteAccessSessionRequest struct {
+	*aws.Request
+	Input *InstallToRemoteAccessSessionInput
+}
+
+// Send marshals and sends the InstallToRemoteAccessSession API request.
+func (r InstallToRemoteAccessSessionRequest) Send() (*InstallToRemoteAccessSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InstallToRemoteAccessSessionOutput), nil
+}
+
+// InstallToRemoteAccessSessionRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See InstallToRemoteAccessSession for more information on using the InstallToRemoteAccessSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Installs an application to the device in a remote access session. For Android
+// applications, the file must be in .apk format. For iOS applications, the
+// file must be in .ipa format.
 //
 //    // Example sending a request using the InstallToRemoteAccessSessionRequest method.
-//    req, resp := client.InstallToRemoteAccessSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.InstallToRemoteAccessSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSession
-func (c *DeviceFarm) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAccessSessionInput) (req *aws.Request, output *InstallToRemoteAccessSessionOutput) {
+func (c *DeviceFarm) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAccessSessionInput) InstallToRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opInstallToRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -2229,86 +1224,42 @@ func (c *DeviceFarm) InstallToRemoteAccessSessionRequest(input *InstallToRemoteA
 		input = &InstallToRemoteAccessSessionInput{}
 	}
 
-	output = &InstallToRemoteAccessSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// InstallToRemoteAccessSession API operation for AWS Device Farm.
-//
-// Installs an application to the device in a remote access session. For Android
-// applications, the file must be in .apk format. For iOS applications, the
-// file must be in .ipa format.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation InstallToRemoteAccessSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSession
-func (c *DeviceFarm) InstallToRemoteAccessSession(input *InstallToRemoteAccessSessionInput) (*InstallToRemoteAccessSessionOutput, error) {
-	req, out := c.InstallToRemoteAccessSessionRequest(input)
-	return out, req.Send()
-}
-
-// InstallToRemoteAccessSessionWithContext is the same as InstallToRemoteAccessSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See InstallToRemoteAccessSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) InstallToRemoteAccessSessionWithContext(ctx aws.Context, input *InstallToRemoteAccessSessionInput, opts ...aws.Option) (*InstallToRemoteAccessSessionOutput, error) {
-	req, out := c.InstallToRemoteAccessSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &InstallToRemoteAccessSessionOutput{})
+	return InstallToRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
 const opListArtifacts = "ListArtifacts"
 
-// ListArtifactsRequest generates a "aws.Request" representing the
-// client's request for the ListArtifacts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListArtifactsRequest is a API request type for the ListArtifacts API operation.
+type ListArtifactsRequest struct {
+	*aws.Request
+	Input *ListArtifactsInput
+}
+
+// Send marshals and sends the ListArtifacts API request.
+func (r ListArtifactsRequest) Send() (*ListArtifactsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListArtifactsOutput), nil
+}
+
+// ListArtifactsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListArtifacts for more information on using the ListArtifacts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about artifacts.
 //
 //    // Example sending a request using the ListArtifactsRequest method.
-//    req, resp := client.ListArtifactsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListArtifactsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifacts
-func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) (req *aws.Request, output *ListArtifactsOutput) {
+func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRequest {
 	op := &aws.Operation{
 		Name:       opListArtifacts,
 		HTTPMethod: "POST",
@@ -2325,55 +1276,8 @@ func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) (req *aws.R
 		input = &ListArtifactsInput{}
 	}
 
-	output = &ListArtifactsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListArtifacts API operation for AWS Device Farm.
-//
-// Gets information about artifacts.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListArtifacts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifacts
-func (c *DeviceFarm) ListArtifacts(input *ListArtifactsInput) (*ListArtifactsOutput, error) {
-	req, out := c.ListArtifactsRequest(input)
-	return out, req.Send()
-}
-
-// ListArtifactsWithContext is the same as ListArtifacts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListArtifacts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListArtifactsWithContext(ctx aws.Context, input *ListArtifactsInput, opts ...aws.Option) (*ListArtifactsOutput, error) {
-	req, out := c.ListArtifactsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListArtifactsOutput{})
+	return ListArtifactsRequest{Request: req, Input: input}
 }
 
 // ListArtifactsPages iterates over the pages of a ListArtifacts operation,
@@ -2412,10 +1316,10 @@ func (c *DeviceFarm) ListArtifactsPagesWithContext(ctx aws.Context, input *ListA
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListArtifactsRequest(inCpy)
+			req := c.ListArtifactsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2428,31 +1332,36 @@ func (c *DeviceFarm) ListArtifactsPagesWithContext(ctx aws.Context, input *ListA
 
 const opListDevicePools = "ListDevicePools"
 
-// ListDevicePoolsRequest generates a "aws.Request" representing the
-// client's request for the ListDevicePools operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDevicePoolsRequest is a API request type for the ListDevicePools API operation.
+type ListDevicePoolsRequest struct {
+	*aws.Request
+	Input *ListDevicePoolsInput
+}
+
+// Send marshals and sends the ListDevicePools API request.
+func (r ListDevicePoolsRequest) Send() (*ListDevicePoolsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDevicePoolsOutput), nil
+}
+
+// ListDevicePoolsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDevicePools for more information on using the ListDevicePools
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about device pools.
 //
 //    // Example sending a request using the ListDevicePoolsRequest method.
-//    req, resp := client.ListDevicePoolsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDevicePoolsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePools
-func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) (req *aws.Request, output *ListDevicePoolsOutput) {
+func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDevicePoolsRequest {
 	op := &aws.Operation{
 		Name:       opListDevicePools,
 		HTTPMethod: "POST",
@@ -2469,55 +1378,8 @@ func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) (req *a
 		input = &ListDevicePoolsInput{}
 	}
 
-	output = &ListDevicePoolsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDevicePools API operation for AWS Device Farm.
-//
-// Gets information about device pools.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListDevicePools for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePools
-func (c *DeviceFarm) ListDevicePools(input *ListDevicePoolsInput) (*ListDevicePoolsOutput, error) {
-	req, out := c.ListDevicePoolsRequest(input)
-	return out, req.Send()
-}
-
-// ListDevicePoolsWithContext is the same as ListDevicePools with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDevicePools for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListDevicePoolsWithContext(ctx aws.Context, input *ListDevicePoolsInput, opts ...aws.Option) (*ListDevicePoolsOutput, error) {
-	req, out := c.ListDevicePoolsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDevicePoolsOutput{})
+	return ListDevicePoolsRequest{Request: req, Input: input}
 }
 
 // ListDevicePoolsPages iterates over the pages of a ListDevicePools operation,
@@ -2556,10 +1418,10 @@ func (c *DeviceFarm) ListDevicePoolsPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDevicePoolsRequest(inCpy)
+			req := c.ListDevicePoolsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2572,31 +1434,36 @@ func (c *DeviceFarm) ListDevicePoolsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListDevices = "ListDevices"
 
-// ListDevicesRequest generates a "aws.Request" representing the
-// client's request for the ListDevices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDevicesRequest is a API request type for the ListDevices API operation.
+type ListDevicesRequest struct {
+	*aws.Request
+	Input *ListDevicesInput
+}
+
+// Send marshals and sends the ListDevices API request.
+func (r ListDevicesRequest) Send() (*ListDevicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDevicesOutput), nil
+}
+
+// ListDevicesRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDevices for more information on using the ListDevices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about unique device types.
 //
 //    // Example sending a request using the ListDevicesRequest method.
-//    req, resp := client.ListDevicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDevicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevices
-func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) (req *aws.Request, output *ListDevicesOutput) {
+func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest {
 	op := &aws.Operation{
 		Name:       opListDevices,
 		HTTPMethod: "POST",
@@ -2613,55 +1480,8 @@ func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) (req *aws.Reque
 		input = &ListDevicesInput{}
 	}
 
-	output = &ListDevicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDevices API operation for AWS Device Farm.
-//
-// Gets information about unique device types.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListDevices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevices
-func (c *DeviceFarm) ListDevices(input *ListDevicesInput) (*ListDevicesOutput, error) {
-	req, out := c.ListDevicesRequest(input)
-	return out, req.Send()
-}
-
-// ListDevicesWithContext is the same as ListDevices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDevices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListDevicesWithContext(ctx aws.Context, input *ListDevicesInput, opts ...aws.Option) (*ListDevicesOutput, error) {
-	req, out := c.ListDevicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDevicesOutput{})
+	return ListDevicesRequest{Request: req, Input: input}
 }
 
 // ListDevicesPages iterates over the pages of a ListDevices operation,
@@ -2700,10 +1520,10 @@ func (c *DeviceFarm) ListDevicesPagesWithContext(ctx aws.Context, input *ListDev
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDevicesRequest(inCpy)
+			req := c.ListDevicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2716,31 +1536,36 @@ func (c *DeviceFarm) ListDevicesPagesWithContext(ctx aws.Context, input *ListDev
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws.Request" representing the
-// client's request for the ListJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListJobsRequest is a API request type for the ListJobs API operation.
+type ListJobsRequest struct {
+	*aws.Request
+	Input *ListJobsInput
+}
+
+// Send marshals and sends the ListJobs API request.
+func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListJobsOutput), nil
+}
+
+// ListJobsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListJobs for more information on using the ListJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about jobs.
 //
 //    // Example sending a request using the ListJobsRequest method.
-//    req, resp := client.ListJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobs
-func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
+func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
@@ -2757,55 +1582,8 @@ func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) (req *aws.Request, ou
 		input = &ListJobsInput{}
 	}
 
-	output = &ListJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListJobs API operation for AWS Device Farm.
-//
-// Gets information about jobs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobs
-func (c *DeviceFarm) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	return out, req.Send()
-}
-
-// ListJobsWithContext is the same as ListJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListJobsOutput{})
+	return ListJobsRequest{Request: req, Input: input}
 }
 
 // ListJobsPages iterates over the pages of a ListJobs operation,
@@ -2844,10 +1622,10 @@ func (c *DeviceFarm) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsIn
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListJobsRequest(inCpy)
+			req := c.ListJobsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2860,31 +1638,36 @@ func (c *DeviceFarm) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsIn
 
 const opListNetworkProfiles = "ListNetworkProfiles"
 
-// ListNetworkProfilesRequest generates a "aws.Request" representing the
-// client's request for the ListNetworkProfiles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListNetworkProfilesRequest is a API request type for the ListNetworkProfiles API operation.
+type ListNetworkProfilesRequest struct {
+	*aws.Request
+	Input *ListNetworkProfilesInput
+}
+
+// Send marshals and sends the ListNetworkProfiles API request.
+func (r ListNetworkProfilesRequest) Send() (*ListNetworkProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListNetworkProfilesOutput), nil
+}
+
+// ListNetworkProfilesRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListNetworkProfiles for more information on using the ListNetworkProfiles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the list of available network profiles.
 //
 //    // Example sending a request using the ListNetworkProfilesRequest method.
-//    req, resp := client.ListNetworkProfilesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListNetworkProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfiles
-func (c *DeviceFarm) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) (req *aws.Request, output *ListNetworkProfilesOutput) {
+func (c *DeviceFarm) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) ListNetworkProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListNetworkProfiles,
 		HTTPMethod: "POST",
@@ -2895,84 +1678,46 @@ func (c *DeviceFarm) ListNetworkProfilesRequest(input *ListNetworkProfilesInput)
 		input = &ListNetworkProfilesInput{}
 	}
 
-	output = &ListNetworkProfilesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListNetworkProfiles API operation for AWS Device Farm.
-//
-// Returns the list of available network profiles.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListNetworkProfiles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfiles
-func (c *DeviceFarm) ListNetworkProfiles(input *ListNetworkProfilesInput) (*ListNetworkProfilesOutput, error) {
-	req, out := c.ListNetworkProfilesRequest(input)
-	return out, req.Send()
-}
-
-// ListNetworkProfilesWithContext is the same as ListNetworkProfiles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListNetworkProfiles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListNetworkProfilesWithContext(ctx aws.Context, input *ListNetworkProfilesInput, opts ...aws.Option) (*ListNetworkProfilesOutput, error) {
-	req, out := c.ListNetworkProfilesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListNetworkProfilesOutput{})
+	return ListNetworkProfilesRequest{Request: req, Input: input}
 }
 
 const opListOfferingPromotions = "ListOfferingPromotions"
 
-// ListOfferingPromotionsRequest generates a "aws.Request" representing the
-// client's request for the ListOfferingPromotions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListOfferingPromotionsRequest is a API request type for the ListOfferingPromotions API operation.
+type ListOfferingPromotionsRequest struct {
+	*aws.Request
+	Input *ListOfferingPromotionsInput
+}
+
+// Send marshals and sends the ListOfferingPromotions API request.
+func (r ListOfferingPromotionsRequest) Send() (*ListOfferingPromotionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOfferingPromotionsOutput), nil
+}
+
+// ListOfferingPromotionsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListOfferingPromotions for more information on using the ListOfferingPromotions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of offering promotions. Each offering promotion record contains
+// the ID and description of the promotion. The API returns a NotEligible error
+// if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com
+// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
+// be able to invoke this operation.
 //
 //    // Example sending a request using the ListOfferingPromotionsRequest method.
-//    req, resp := client.ListOfferingPromotionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListOfferingPromotionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotions
-func (c *DeviceFarm) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInput) (req *aws.Request, output *ListOfferingPromotionsOutput) {
+func (c *DeviceFarm) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInput) ListOfferingPromotionsRequest {
 	op := &aws.Operation{
 		Name:       opListOfferingPromotions,
 		HTTPMethod: "POST",
@@ -2983,92 +1728,47 @@ func (c *DeviceFarm) ListOfferingPromotionsRequest(input *ListOfferingPromotions
 		input = &ListOfferingPromotionsInput{}
 	}
 
-	output = &ListOfferingPromotionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListOfferingPromotions API operation for AWS Device Farm.
-//
-// Returns a list of offering promotions. Each offering promotion record contains
-// the ID and description of the promotion. The API returns a NotEligible error
-// if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
-// be able to invoke this operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListOfferingPromotions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeNotEligibleException "NotEligibleException"
-//   Exception gets thrown when a user is not eligible to perform the specified
-//   transaction.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotions
-func (c *DeviceFarm) ListOfferingPromotions(input *ListOfferingPromotionsInput) (*ListOfferingPromotionsOutput, error) {
-	req, out := c.ListOfferingPromotionsRequest(input)
-	return out, req.Send()
-}
-
-// ListOfferingPromotionsWithContext is the same as ListOfferingPromotions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListOfferingPromotions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingPromotionsWithContext(ctx aws.Context, input *ListOfferingPromotionsInput, opts ...aws.Option) (*ListOfferingPromotionsOutput, error) {
-	req, out := c.ListOfferingPromotionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListOfferingPromotionsOutput{})
+	return ListOfferingPromotionsRequest{Request: req, Input: input}
 }
 
 const opListOfferingTransactions = "ListOfferingTransactions"
 
-// ListOfferingTransactionsRequest generates a "aws.Request" representing the
-// client's request for the ListOfferingTransactions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListOfferingTransactionsRequest is a API request type for the ListOfferingTransactions API operation.
+type ListOfferingTransactionsRequest struct {
+	*aws.Request
+	Input *ListOfferingTransactionsInput
+}
+
+// Send marshals and sends the ListOfferingTransactions API request.
+func (r ListOfferingTransactionsRequest) Send() (*ListOfferingTransactionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOfferingTransactionsOutput), nil
+}
+
+// ListOfferingTransactionsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListOfferingTransactions for more information on using the ListOfferingTransactions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of all historical purchases, renewals, and system renewal
+// transactions for an AWS account. The list is paginated and ordered by a descending
+// timestamp (most recent transactions are first). The API returns a NotEligible
+// error if the user is not permitted to invoke the operation. Please contact
+// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// if you believe that you should be able to invoke this operation.
 //
 //    // Example sending a request using the ListOfferingTransactionsRequest method.
-//    req, resp := client.ListOfferingTransactionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListOfferingTransactionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactions
-func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransactionsInput) (req *aws.Request, output *ListOfferingTransactionsOutput) {
+func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransactionsInput) ListOfferingTransactionsRequest {
 	op := &aws.Operation{
 		Name:       opListOfferingTransactions,
 		HTTPMethod: "POST",
@@ -3085,64 +1785,8 @@ func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransact
 		input = &ListOfferingTransactionsInput{}
 	}
 
-	output = &ListOfferingTransactionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListOfferingTransactions API operation for AWS Device Farm.
-//
-// Returns a list of all historical purchases, renewals, and system renewal
-// transactions for an AWS account. The list is paginated and ordered by a descending
-// timestamp (most recent transactions are first). The API returns a NotEligible
-// error if the user is not permitted to invoke the operation. Please contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
-// if you believe that you should be able to invoke this operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListOfferingTransactions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeNotEligibleException "NotEligibleException"
-//   Exception gets thrown when a user is not eligible to perform the specified
-//   transaction.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactions
-func (c *DeviceFarm) ListOfferingTransactions(input *ListOfferingTransactionsInput) (*ListOfferingTransactionsOutput, error) {
-	req, out := c.ListOfferingTransactionsRequest(input)
-	return out, req.Send()
-}
-
-// ListOfferingTransactionsWithContext is the same as ListOfferingTransactions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListOfferingTransactions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingTransactionsWithContext(ctx aws.Context, input *ListOfferingTransactionsInput, opts ...aws.Option) (*ListOfferingTransactionsOutput, error) {
-	req, out := c.ListOfferingTransactionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListOfferingTransactionsOutput{})
+	return ListOfferingTransactionsRequest{Request: req, Input: input}
 }
 
 // ListOfferingTransactionsPages iterates over the pages of a ListOfferingTransactions operation,
@@ -3181,10 +1825,10 @@ func (c *DeviceFarm) ListOfferingTransactionsPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListOfferingTransactionsRequest(inCpy)
+			req := c.ListOfferingTransactionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3197,31 +1841,41 @@ func (c *DeviceFarm) ListOfferingTransactionsPagesWithContext(ctx aws.Context, i
 
 const opListOfferings = "ListOfferings"
 
-// ListOfferingsRequest generates a "aws.Request" representing the
-// client's request for the ListOfferings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListOfferingsRequest is a API request type for the ListOfferings API operation.
+type ListOfferingsRequest struct {
+	*aws.Request
+	Input *ListOfferingsInput
+}
+
+// Send marshals and sends the ListOfferings API request.
+func (r ListOfferingsRequest) Send() (*ListOfferingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOfferingsOutput), nil
+}
+
+// ListOfferingsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListOfferings for more information on using the ListOfferings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of products or offerings that the user can manage through
+// the API. Each offering record indicates the recurring price per unit and
+// the frequency for that offering. The API returns a NotEligible error if the
+// user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com
+// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
+// be able to invoke this operation.
 //
 //    // Example sending a request using the ListOfferingsRequest method.
-//    req, resp := client.ListOfferingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListOfferingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferings
-func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) (req *aws.Request, output *ListOfferingsOutput) {
+func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opListOfferings,
 		HTTPMethod: "POST",
@@ -3238,64 +1892,8 @@ func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) (req *aws.R
 		input = &ListOfferingsInput{}
 	}
 
-	output = &ListOfferingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListOfferings API operation for AWS Device Farm.
-//
-// Returns a list of products or offerings that the user can manage through
-// the API. Each offering record indicates the recurring price per unit and
-// the frequency for that offering. The API returns a NotEligible error if the
-// user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
-// be able to invoke this operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListOfferings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeNotEligibleException "NotEligibleException"
-//   Exception gets thrown when a user is not eligible to perform the specified
-//   transaction.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferings
-func (c *DeviceFarm) ListOfferings(input *ListOfferingsInput) (*ListOfferingsOutput, error) {
-	req, out := c.ListOfferingsRequest(input)
-	return out, req.Send()
-}
-
-// ListOfferingsWithContext is the same as ListOfferings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListOfferings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingsWithContext(ctx aws.Context, input *ListOfferingsInput, opts ...aws.Option) (*ListOfferingsOutput, error) {
-	req, out := c.ListOfferingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListOfferingsOutput{})
+	return ListOfferingsRequest{Request: req, Input: input}
 }
 
 // ListOfferingsPages iterates over the pages of a ListOfferings operation,
@@ -3334,10 +1932,10 @@ func (c *DeviceFarm) ListOfferingsPagesWithContext(ctx aws.Context, input *ListO
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListOfferingsRequest(inCpy)
+			req := c.ListOfferingsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3350,31 +1948,36 @@ func (c *DeviceFarm) ListOfferingsPagesWithContext(ctx aws.Context, input *ListO
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws.Request" representing the
-// client's request for the ListProjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProjectsRequest is a API request type for the ListProjects API operation.
+type ListProjectsRequest struct {
+	*aws.Request
+	Input *ListProjectsInput
+}
+
+// Send marshals and sends the ListProjects API request.
+func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProjectsOutput), nil
+}
+
+// ListProjectsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProjects for more information on using the ListProjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about projects.
 //
 //    // Example sending a request using the ListProjectsRequest method.
-//    req, resp := client.ListProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjects
-func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) ListProjectsRequest {
 	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
@@ -3391,55 +1994,8 @@ func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) (req *aws.Req
 		input = &ListProjectsInput{}
 	}
 
-	output = &ListProjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProjects API operation for AWS Device Farm.
-//
-// Gets information about projects.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListProjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjects
-func (c *DeviceFarm) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	return out, req.Send()
-}
-
-// ListProjectsWithContext is the same as ListProjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProjectsOutput{})
+	return ListProjectsRequest{Request: req, Input: input}
 }
 
 // ListProjectsPages iterates over the pages of a ListProjects operation,
@@ -3478,10 +2034,10 @@ func (c *DeviceFarm) ListProjectsPagesWithContext(ctx aws.Context, input *ListPr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListProjectsRequest(inCpy)
+			req := c.ListProjectsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3494,31 +2050,36 @@ func (c *DeviceFarm) ListProjectsPagesWithContext(ctx aws.Context, input *ListPr
 
 const opListRemoteAccessSessions = "ListRemoteAccessSessions"
 
-// ListRemoteAccessSessionsRequest generates a "aws.Request" representing the
-// client's request for the ListRemoteAccessSessions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRemoteAccessSessionsRequest is a API request type for the ListRemoteAccessSessions API operation.
+type ListRemoteAccessSessionsRequest struct {
+	*aws.Request
+	Input *ListRemoteAccessSessionsInput
+}
+
+// Send marshals and sends the ListRemoteAccessSessions API request.
+func (r ListRemoteAccessSessionsRequest) Send() (*ListRemoteAccessSessionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRemoteAccessSessionsOutput), nil
+}
+
+// ListRemoteAccessSessionsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListRemoteAccessSessions for more information on using the ListRemoteAccessSessions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of all currently running remote access sessions.
 //
 //    // Example sending a request using the ListRemoteAccessSessionsRequest method.
-//    req, resp := client.ListRemoteAccessSessionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRemoteAccessSessionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions
-func (c *DeviceFarm) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessionsInput) (req *aws.Request, output *ListRemoteAccessSessionsOutput) {
+func (c *DeviceFarm) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessionsInput) ListRemoteAccessSessionsRequest {
 	op := &aws.Operation{
 		Name:       opListRemoteAccessSessions,
 		HTTPMethod: "POST",
@@ -3529,84 +2090,42 @@ func (c *DeviceFarm) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSess
 		input = &ListRemoteAccessSessionsInput{}
 	}
 
-	output = &ListRemoteAccessSessionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRemoteAccessSessions API operation for AWS Device Farm.
-//
-// Returns a list of all currently running remote access sessions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListRemoteAccessSessions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions
-func (c *DeviceFarm) ListRemoteAccessSessions(input *ListRemoteAccessSessionsInput) (*ListRemoteAccessSessionsOutput, error) {
-	req, out := c.ListRemoteAccessSessionsRequest(input)
-	return out, req.Send()
-}
-
-// ListRemoteAccessSessionsWithContext is the same as ListRemoteAccessSessions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRemoteAccessSessions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListRemoteAccessSessionsWithContext(ctx aws.Context, input *ListRemoteAccessSessionsInput, opts ...aws.Option) (*ListRemoteAccessSessionsOutput, error) {
-	req, out := c.ListRemoteAccessSessionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRemoteAccessSessionsOutput{})
+	return ListRemoteAccessSessionsRequest{Request: req, Input: input}
 }
 
 const opListRuns = "ListRuns"
 
-// ListRunsRequest generates a "aws.Request" representing the
-// client's request for the ListRuns operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRunsRequest is a API request type for the ListRuns API operation.
+type ListRunsRequest struct {
+	*aws.Request
+	Input *ListRunsInput
+}
+
+// Send marshals and sends the ListRuns API request.
+func (r ListRunsRequest) Send() (*ListRunsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRunsOutput), nil
+}
+
+// ListRunsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListRuns for more information on using the ListRuns
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about runs, given an AWS Device Farm project ARN.
 //
 //    // Example sending a request using the ListRunsRequest method.
-//    req, resp := client.ListRunsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRunsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns
-func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) (req *aws.Request, output *ListRunsOutput) {
+func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
 	op := &aws.Operation{
 		Name:       opListRuns,
 		HTTPMethod: "POST",
@@ -3623,55 +2142,8 @@ func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) (req *aws.Request, ou
 		input = &ListRunsInput{}
 	}
 
-	output = &ListRunsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRuns API operation for AWS Device Farm.
-//
-// Gets information about runs, given an AWS Device Farm project ARN.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListRuns for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns
-func (c *DeviceFarm) ListRuns(input *ListRunsInput) (*ListRunsOutput, error) {
-	req, out := c.ListRunsRequest(input)
-	return out, req.Send()
-}
-
-// ListRunsWithContext is the same as ListRuns with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRuns for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListRunsWithContext(ctx aws.Context, input *ListRunsInput, opts ...aws.Option) (*ListRunsOutput, error) {
-	req, out := c.ListRunsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRunsOutput{})
+	return ListRunsRequest{Request: req, Input: input}
 }
 
 // ListRunsPages iterates over the pages of a ListRuns operation,
@@ -3710,10 +2182,10 @@ func (c *DeviceFarm) ListRunsPagesWithContext(ctx aws.Context, input *ListRunsIn
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListRunsRequest(inCpy)
+			req := c.ListRunsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3726,31 +2198,36 @@ func (c *DeviceFarm) ListRunsPagesWithContext(ctx aws.Context, input *ListRunsIn
 
 const opListSamples = "ListSamples"
 
-// ListSamplesRequest generates a "aws.Request" representing the
-// client's request for the ListSamples operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSamplesRequest is a API request type for the ListSamples API operation.
+type ListSamplesRequest struct {
+	*aws.Request
+	Input *ListSamplesInput
+}
+
+// Send marshals and sends the ListSamples API request.
+func (r ListSamplesRequest) Send() (*ListSamplesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSamplesOutput), nil
+}
+
+// ListSamplesRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSamples for more information on using the ListSamples
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about samples, given an AWS Device Farm project ARN
 //
 //    // Example sending a request using the ListSamplesRequest method.
-//    req, resp := client.ListSamplesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSamplesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSamples
-func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) (req *aws.Request, output *ListSamplesOutput) {
+func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) ListSamplesRequest {
 	op := &aws.Operation{
 		Name:       opListSamples,
 		HTTPMethod: "POST",
@@ -3767,55 +2244,8 @@ func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) (req *aws.Reque
 		input = &ListSamplesInput{}
 	}
 
-	output = &ListSamplesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSamples API operation for AWS Device Farm.
-//
-// Gets information about samples, given an AWS Device Farm project ARN
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListSamples for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSamples
-func (c *DeviceFarm) ListSamples(input *ListSamplesInput) (*ListSamplesOutput, error) {
-	req, out := c.ListSamplesRequest(input)
-	return out, req.Send()
-}
-
-// ListSamplesWithContext is the same as ListSamples with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSamples for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListSamplesWithContext(ctx aws.Context, input *ListSamplesInput, opts ...aws.Option) (*ListSamplesOutput, error) {
-	req, out := c.ListSamplesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSamplesOutput{})
+	return ListSamplesRequest{Request: req, Input: input}
 }
 
 // ListSamplesPages iterates over the pages of a ListSamples operation,
@@ -3854,10 +2284,10 @@ func (c *DeviceFarm) ListSamplesPagesWithContext(ctx aws.Context, input *ListSam
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListSamplesRequest(inCpy)
+			req := c.ListSamplesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3870,31 +2300,36 @@ func (c *DeviceFarm) ListSamplesPagesWithContext(ctx aws.Context, input *ListSam
 
 const opListSuites = "ListSuites"
 
-// ListSuitesRequest generates a "aws.Request" representing the
-// client's request for the ListSuites operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSuitesRequest is a API request type for the ListSuites API operation.
+type ListSuitesRequest struct {
+	*aws.Request
+	Input *ListSuitesInput
+}
+
+// Send marshals and sends the ListSuites API request.
+func (r ListSuitesRequest) Send() (*ListSuitesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSuitesOutput), nil
+}
+
+// ListSuitesRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSuites for more information on using the ListSuites
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about suites.
 //
 //    // Example sending a request using the ListSuitesRequest method.
-//    req, resp := client.ListSuitesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSuitesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuites
-func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) (req *aws.Request, output *ListSuitesOutput) {
+func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest {
 	op := &aws.Operation{
 		Name:       opListSuites,
 		HTTPMethod: "POST",
@@ -3911,55 +2346,8 @@ func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) (req *aws.Request
 		input = &ListSuitesInput{}
 	}
 
-	output = &ListSuitesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSuites API operation for AWS Device Farm.
-//
-// Gets information about suites.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListSuites for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuites
-func (c *DeviceFarm) ListSuites(input *ListSuitesInput) (*ListSuitesOutput, error) {
-	req, out := c.ListSuitesRequest(input)
-	return out, req.Send()
-}
-
-// ListSuitesWithContext is the same as ListSuites with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSuites for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListSuitesWithContext(ctx aws.Context, input *ListSuitesInput, opts ...aws.Option) (*ListSuitesOutput, error) {
-	req, out := c.ListSuitesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSuitesOutput{})
+	return ListSuitesRequest{Request: req, Input: input}
 }
 
 // ListSuitesPages iterates over the pages of a ListSuites operation,
@@ -3998,10 +2386,10 @@ func (c *DeviceFarm) ListSuitesPagesWithContext(ctx aws.Context, input *ListSuit
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListSuitesRequest(inCpy)
+			req := c.ListSuitesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4014,31 +2402,36 @@ func (c *DeviceFarm) ListSuitesPagesWithContext(ctx aws.Context, input *ListSuit
 
 const opListTests = "ListTests"
 
-// ListTestsRequest generates a "aws.Request" representing the
-// client's request for the ListTests operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTestsRequest is a API request type for the ListTests API operation.
+type ListTestsRequest struct {
+	*aws.Request
+	Input *ListTestsInput
+}
+
+// Send marshals and sends the ListTests API request.
+func (r ListTestsRequest) Send() (*ListTestsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTestsOutput), nil
+}
+
+// ListTestsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTests for more information on using the ListTests
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about tests.
 //
 //    // Example sending a request using the ListTestsRequest method.
-//    req, resp := client.ListTestsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTestsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTests
-func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) (req *aws.Request, output *ListTestsOutput) {
+func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) ListTestsRequest {
 	op := &aws.Operation{
 		Name:       opListTests,
 		HTTPMethod: "POST",
@@ -4055,55 +2448,8 @@ func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) (req *aws.Request, 
 		input = &ListTestsInput{}
 	}
 
-	output = &ListTestsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTests API operation for AWS Device Farm.
-//
-// Gets information about tests.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListTests for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTests
-func (c *DeviceFarm) ListTests(input *ListTestsInput) (*ListTestsOutput, error) {
-	req, out := c.ListTestsRequest(input)
-	return out, req.Send()
-}
-
-// ListTestsWithContext is the same as ListTests with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTests for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListTestsWithContext(ctx aws.Context, input *ListTestsInput, opts ...aws.Option) (*ListTestsOutput, error) {
-	req, out := c.ListTestsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTestsOutput{})
+	return ListTestsRequest{Request: req, Input: input}
 }
 
 // ListTestsPages iterates over the pages of a ListTests operation,
@@ -4142,10 +2488,10 @@ func (c *DeviceFarm) ListTestsPagesWithContext(ctx aws.Context, input *ListTests
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTestsRequest(inCpy)
+			req := c.ListTestsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4158,31 +2504,36 @@ func (c *DeviceFarm) ListTestsPagesWithContext(ctx aws.Context, input *ListTests
 
 const opListUniqueProblems = "ListUniqueProblems"
 
-// ListUniqueProblemsRequest generates a "aws.Request" representing the
-// client's request for the ListUniqueProblems operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListUniqueProblemsRequest is a API request type for the ListUniqueProblems API operation.
+type ListUniqueProblemsRequest struct {
+	*aws.Request
+	Input *ListUniqueProblemsInput
+}
+
+// Send marshals and sends the ListUniqueProblems API request.
+func (r ListUniqueProblemsRequest) Send() (*ListUniqueProblemsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUniqueProblemsOutput), nil
+}
+
+// ListUniqueProblemsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListUniqueProblems for more information on using the ListUniqueProblems
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about unique problems.
 //
 //    // Example sending a request using the ListUniqueProblemsRequest method.
-//    req, resp := client.ListUniqueProblemsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListUniqueProblemsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblems
-func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) (req *aws.Request, output *ListUniqueProblemsOutput) {
+func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) ListUniqueProblemsRequest {
 	op := &aws.Operation{
 		Name:       opListUniqueProblems,
 		HTTPMethod: "POST",
@@ -4199,55 +2550,8 @@ func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) (
 		input = &ListUniqueProblemsInput{}
 	}
 
-	output = &ListUniqueProblemsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListUniqueProblems API operation for AWS Device Farm.
-//
-// Gets information about unique problems.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListUniqueProblems for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblems
-func (c *DeviceFarm) ListUniqueProblems(input *ListUniqueProblemsInput) (*ListUniqueProblemsOutput, error) {
-	req, out := c.ListUniqueProblemsRequest(input)
-	return out, req.Send()
-}
-
-// ListUniqueProblemsWithContext is the same as ListUniqueProblems with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListUniqueProblems for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListUniqueProblemsWithContext(ctx aws.Context, input *ListUniqueProblemsInput, opts ...aws.Option) (*ListUniqueProblemsOutput, error) {
-	req, out := c.ListUniqueProblemsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListUniqueProblemsOutput{})
+	return ListUniqueProblemsRequest{Request: req, Input: input}
 }
 
 // ListUniqueProblemsPages iterates over the pages of a ListUniqueProblems operation,
@@ -4286,10 +2590,10 @@ func (c *DeviceFarm) ListUniqueProblemsPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListUniqueProblemsRequest(inCpy)
+			req := c.ListUniqueProblemsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4302,31 +2606,36 @@ func (c *DeviceFarm) ListUniqueProblemsPagesWithContext(ctx aws.Context, input *
 
 const opListUploads = "ListUploads"
 
-// ListUploadsRequest generates a "aws.Request" representing the
-// client's request for the ListUploads operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListUploadsRequest is a API request type for the ListUploads API operation.
+type ListUploadsRequest struct {
+	*aws.Request
+	Input *ListUploadsInput
+}
+
+// Send marshals and sends the ListUploads API request.
+func (r ListUploadsRequest) Send() (*ListUploadsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUploadsOutput), nil
+}
+
+// ListUploadsRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListUploads for more information on using the ListUploads
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about uploads, given an AWS Device Farm project ARN.
 //
 //    // Example sending a request using the ListUploadsRequest method.
-//    req, resp := client.ListUploadsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListUploadsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploads
-func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) (req *aws.Request, output *ListUploadsOutput) {
+func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) ListUploadsRequest {
 	op := &aws.Operation{
 		Name:       opListUploads,
 		HTTPMethod: "POST",
@@ -4343,55 +2652,8 @@ func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) (req *aws.Reque
 		input = &ListUploadsInput{}
 	}
 
-	output = &ListUploadsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListUploads API operation for AWS Device Farm.
-//
-// Gets information about uploads, given an AWS Device Farm project ARN.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ListUploads for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploads
-func (c *DeviceFarm) ListUploads(input *ListUploadsInput) (*ListUploadsOutput, error) {
-	req, out := c.ListUploadsRequest(input)
-	return out, req.Send()
-}
-
-// ListUploadsWithContext is the same as ListUploads with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListUploads for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ListUploadsWithContext(ctx aws.Context, input *ListUploadsInput, opts ...aws.Option) (*ListUploadsOutput, error) {
-	req, out := c.ListUploadsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListUploadsOutput{})
+	return ListUploadsRequest{Request: req, Input: input}
 }
 
 // ListUploadsPages iterates over the pages of a ListUploads operation,
@@ -4430,10 +2692,10 @@ func (c *DeviceFarm) ListUploadsPagesWithContext(ctx aws.Context, input *ListUpl
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListUploadsRequest(inCpy)
+			req := c.ListUploadsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4446,31 +2708,41 @@ func (c *DeviceFarm) ListUploadsPagesWithContext(ctx aws.Context, input *ListUpl
 
 const opPurchaseOffering = "PurchaseOffering"
 
-// PurchaseOfferingRequest generates a "aws.Request" representing the
-// client's request for the PurchaseOffering operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PurchaseOfferingRequest is a API request type for the PurchaseOffering API operation.
+type PurchaseOfferingRequest struct {
+	*aws.Request
+	Input *PurchaseOfferingInput
+}
+
+// Send marshals and sends the PurchaseOffering API request.
+func (r PurchaseOfferingRequest) Send() (*PurchaseOfferingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PurchaseOfferingOutput), nil
+}
+
+// PurchaseOfferingRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PurchaseOffering for more information on using the PurchaseOffering
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Immediately purchases offerings for an AWS account. Offerings renew with
+// the latest total purchased quantity for an offering, unless the renewal was
+// overridden. The API returns a NotEligible error if the user is not permitted
+// to invoke the operation. Please contact aws-devicefarm-support@amazon.com
+// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
+// be able to invoke this operation.
 //
 //    // Example sending a request using the PurchaseOfferingRequest method.
-//    req, resp := client.PurchaseOfferingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PurchaseOfferingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOffering
-func (c *DeviceFarm) PurchaseOfferingRequest(input *PurchaseOfferingInput) (req *aws.Request, output *PurchaseOfferingOutput) {
+func (c *DeviceFarm) PurchaseOfferingRequest(input *PurchaseOfferingInput) PurchaseOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseOffering,
 		HTTPMethod: "POST",
@@ -4481,93 +2753,46 @@ func (c *DeviceFarm) PurchaseOfferingRequest(input *PurchaseOfferingInput) (req 
 		input = &PurchaseOfferingInput{}
 	}
 
-	output = &PurchaseOfferingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PurchaseOffering API operation for AWS Device Farm.
-//
-// Immediately purchases offerings for an AWS account. Offerings renew with
-// the latest total purchased quantity for an offering, unless the renewal was
-// overridden. The API returns a NotEligible error if the user is not permitted
-// to invoke the operation. Please contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com) if you believe that you should
-// be able to invoke this operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation PurchaseOffering for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeNotEligibleException "NotEligibleException"
-//   Exception gets thrown when a user is not eligible to perform the specified
-//   transaction.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOffering
-func (c *DeviceFarm) PurchaseOffering(input *PurchaseOfferingInput) (*PurchaseOfferingOutput, error) {
-	req, out := c.PurchaseOfferingRequest(input)
-	return out, req.Send()
-}
-
-// PurchaseOfferingWithContext is the same as PurchaseOffering with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PurchaseOffering for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) PurchaseOfferingWithContext(ctx aws.Context, input *PurchaseOfferingInput, opts ...aws.Option) (*PurchaseOfferingOutput, error) {
-	req, out := c.PurchaseOfferingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PurchaseOfferingOutput{})
+	return PurchaseOfferingRequest{Request: req, Input: input}
 }
 
 const opRenewOffering = "RenewOffering"
 
-// RenewOfferingRequest generates a "aws.Request" representing the
-// client's request for the RenewOffering operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RenewOfferingRequest is a API request type for the RenewOffering API operation.
+type RenewOfferingRequest struct {
+	*aws.Request
+	Input *RenewOfferingInput
+}
+
+// Send marshals and sends the RenewOffering API request.
+func (r RenewOfferingRequest) Send() (*RenewOfferingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RenewOfferingOutput), nil
+}
+
+// RenewOfferingRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RenewOffering for more information on using the RenewOffering
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Explicitly sets the quantity of devices to renew for an offering, starting
+// from the effectiveDate of the next period. The API returns a NotEligible
+// error if the user is not permitted to invoke the operation. Please contact
+// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// if you believe that you should be able to invoke this operation.
 //
 //    // Example sending a request using the RenewOfferingRequest method.
-//    req, resp := client.RenewOfferingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RenewOfferingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOffering
-func (c *DeviceFarm) RenewOfferingRequest(input *RenewOfferingInput) (req *aws.Request, output *RenewOfferingOutput) {
+func (c *DeviceFarm) RenewOfferingRequest(input *RenewOfferingInput) RenewOfferingRequest {
 	op := &aws.Operation{
 		Name:       opRenewOffering,
 		HTTPMethod: "POST",
@@ -4578,92 +2803,42 @@ func (c *DeviceFarm) RenewOfferingRequest(input *RenewOfferingInput) (req *aws.R
 		input = &RenewOfferingInput{}
 	}
 
-	output = &RenewOfferingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RenewOffering API operation for AWS Device Farm.
-//
-// Explicitly sets the quantity of devices to renew for an offering, starting
-// from the effectiveDate of the next period. The API returns a NotEligible
-// error if the user is not permitted to invoke the operation. Please contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
-// if you believe that you should be able to invoke this operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation RenewOffering for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeNotEligibleException "NotEligibleException"
-//   Exception gets thrown when a user is not eligible to perform the specified
-//   transaction.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOffering
-func (c *DeviceFarm) RenewOffering(input *RenewOfferingInput) (*RenewOfferingOutput, error) {
-	req, out := c.RenewOfferingRequest(input)
-	return out, req.Send()
-}
-
-// RenewOfferingWithContext is the same as RenewOffering with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RenewOffering for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) RenewOfferingWithContext(ctx aws.Context, input *RenewOfferingInput, opts ...aws.Option) (*RenewOfferingOutput, error) {
-	req, out := c.RenewOfferingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RenewOfferingOutput{})
+	return RenewOfferingRequest{Request: req, Input: input}
 }
 
 const opScheduleRun = "ScheduleRun"
 
-// ScheduleRunRequest generates a "aws.Request" representing the
-// client's request for the ScheduleRun operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ScheduleRunRequest is a API request type for the ScheduleRun API operation.
+type ScheduleRunRequest struct {
+	*aws.Request
+	Input *ScheduleRunInput
+}
+
+// Send marshals and sends the ScheduleRun API request.
+func (r ScheduleRunRequest) Send() (*ScheduleRunOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ScheduleRunOutput), nil
+}
+
+// ScheduleRunRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ScheduleRun for more information on using the ScheduleRun
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Schedules a run.
 //
 //    // Example sending a request using the ScheduleRunRequest method.
-//    req, resp := client.ScheduleRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ScheduleRunRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun
-func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) (req *aws.Request, output *ScheduleRunOutput) {
+func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequest {
 	op := &aws.Operation{
 		Name:       opScheduleRun,
 		HTTPMethod: "POST",
@@ -4674,87 +2849,42 @@ func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) (req *aws.Reque
 		input = &ScheduleRunInput{}
 	}
 
-	output = &ScheduleRunOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ScheduleRun API operation for AWS Device Farm.
-//
-// Schedules a run.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation ScheduleRun for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeIdempotencyException "IdempotencyException"
-//   An entity with the same name already exists.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun
-func (c *DeviceFarm) ScheduleRun(input *ScheduleRunInput) (*ScheduleRunOutput, error) {
-	req, out := c.ScheduleRunRequest(input)
-	return out, req.Send()
-}
-
-// ScheduleRunWithContext is the same as ScheduleRun with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ScheduleRun for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) ScheduleRunWithContext(ctx aws.Context, input *ScheduleRunInput, opts ...aws.Option) (*ScheduleRunOutput, error) {
-	req, out := c.ScheduleRunRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ScheduleRunOutput{})
+	return ScheduleRunRequest{Request: req, Input: input}
 }
 
 const opStopRemoteAccessSession = "StopRemoteAccessSession"
 
-// StopRemoteAccessSessionRequest generates a "aws.Request" representing the
-// client's request for the StopRemoteAccessSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopRemoteAccessSessionRequest is a API request type for the StopRemoteAccessSession API operation.
+type StopRemoteAccessSessionRequest struct {
+	*aws.Request
+	Input *StopRemoteAccessSessionInput
+}
+
+// Send marshals and sends the StopRemoteAccessSession API request.
+func (r StopRemoteAccessSessionRequest) Send() (*StopRemoteAccessSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopRemoteAccessSessionOutput), nil
+}
+
+// StopRemoteAccessSessionRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopRemoteAccessSession for more information on using the StopRemoteAccessSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Ends a specified remote access session.
 //
 //    // Example sending a request using the StopRemoteAccessSessionRequest method.
-//    req, resp := client.StopRemoteAccessSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopRemoteAccessSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession
-func (c *DeviceFarm) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionInput) (req *aws.Request, output *StopRemoteAccessSessionOutput) {
+func (c *DeviceFarm) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionInput) StopRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opStopRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -4765,84 +2895,47 @@ func (c *DeviceFarm) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessi
 		input = &StopRemoteAccessSessionInput{}
 	}
 
-	output = &StopRemoteAccessSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopRemoteAccessSession API operation for AWS Device Farm.
-//
-// Ends a specified remote access session.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation StopRemoteAccessSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession
-func (c *DeviceFarm) StopRemoteAccessSession(input *StopRemoteAccessSessionInput) (*StopRemoteAccessSessionOutput, error) {
-	req, out := c.StopRemoteAccessSessionRequest(input)
-	return out, req.Send()
-}
-
-// StopRemoteAccessSessionWithContext is the same as StopRemoteAccessSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopRemoteAccessSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) StopRemoteAccessSessionWithContext(ctx aws.Context, input *StopRemoteAccessSessionInput, opts ...aws.Option) (*StopRemoteAccessSessionOutput, error) {
-	req, out := c.StopRemoteAccessSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopRemoteAccessSessionOutput{})
+	return StopRemoteAccessSessionRequest{Request: req, Input: input}
 }
 
 const opStopRun = "StopRun"
 
-// StopRunRequest generates a "aws.Request" representing the
-// client's request for the StopRun operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopRunRequest is a API request type for the StopRun API operation.
+type StopRunRequest struct {
+	*aws.Request
+	Input *StopRunInput
+}
+
+// Send marshals and sends the StopRun API request.
+func (r StopRunRequest) Send() (*StopRunOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopRunOutput), nil
+}
+
+// StopRunRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopRun for more information on using the StopRun
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Initiates a stop request for the current test run. AWS Device Farm will immediately
+// stop the run on devices where tests have not started executing, and you will
+// not be billed for these devices. On devices where tests have started executing,
+// Setup Suite and Teardown Suite tests will run to completion before stopping
+// execution on those devices. You will be billed for Setup, Teardown, and any
+// tests that were in progress or already completed.
 //
 //    // Example sending a request using the StopRunRequest method.
-//    req, resp := client.StopRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopRunRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun
-func (c *DeviceFarm) StopRunRequest(input *StopRunInput) (req *aws.Request, output *StopRunOutput) {
+func (c *DeviceFarm) StopRunRequest(input *StopRunInput) StopRunRequest {
 	op := &aws.Operation{
 		Name:       opStopRun,
 		HTTPMethod: "POST",
@@ -4853,89 +2946,44 @@ func (c *DeviceFarm) StopRunRequest(input *StopRunInput) (req *aws.Request, outp
 		input = &StopRunInput{}
 	}
 
-	output = &StopRunOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopRun API operation for AWS Device Farm.
-//
-// Initiates a stop request for the current test run. AWS Device Farm will immediately
-// stop the run on devices where tests have not started executing, and you will
-// not be billed for these devices. On devices where tests have started executing,
-// Setup Suite and Teardown Suite tests will run to completion before stopping
-// execution on those devices. You will be billed for Setup, Teardown, and any
-// tests that were in progress or already completed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation StopRun for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun
-func (c *DeviceFarm) StopRun(input *StopRunInput) (*StopRunOutput, error) {
-	req, out := c.StopRunRequest(input)
-	return out, req.Send()
-}
-
-// StopRunWithContext is the same as StopRun with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopRun for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) StopRunWithContext(ctx aws.Context, input *StopRunInput, opts ...aws.Option) (*StopRunOutput, error) {
-	req, out := c.StopRunRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopRunOutput{})
+	return StopRunRequest{Request: req, Input: input}
 }
 
 const opUpdateDevicePool = "UpdateDevicePool"
 
-// UpdateDevicePoolRequest generates a "aws.Request" representing the
-// client's request for the UpdateDevicePool operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDevicePoolRequest is a API request type for the UpdateDevicePool API operation.
+type UpdateDevicePoolRequest struct {
+	*aws.Request
+	Input *UpdateDevicePoolInput
+}
+
+// Send marshals and sends the UpdateDevicePool API request.
+func (r UpdateDevicePoolRequest) Send() (*UpdateDevicePoolOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDevicePoolOutput), nil
+}
+
+// UpdateDevicePoolRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDevicePool for more information on using the UpdateDevicePool
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the name, description, and rules in a device pool given the attributes
+// and the pool ARN. Rule updates are all-or-nothing, meaning they can only
+// be updated as a whole (or not at all).
 //
 //    // Example sending a request using the UpdateDevicePoolRequest method.
-//    req, resp := client.UpdateDevicePoolRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDevicePoolRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePool
-func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) (req *aws.Request, output *UpdateDevicePoolOutput) {
+func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) UpdateDevicePoolRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDevicePool,
 		HTTPMethod: "POST",
@@ -4946,86 +2994,42 @@ func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) (req 
 		input = &UpdateDevicePoolInput{}
 	}
 
-	output = &UpdateDevicePoolOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDevicePool API operation for AWS Device Farm.
-//
-// Modifies the name, description, and rules in a device pool given the attributes
-// and the pool ARN. Rule updates are all-or-nothing, meaning they can only
-// be updated as a whole (or not at all).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation UpdateDevicePool for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePool
-func (c *DeviceFarm) UpdateDevicePool(input *UpdateDevicePoolInput) (*UpdateDevicePoolOutput, error) {
-	req, out := c.UpdateDevicePoolRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDevicePoolWithContext is the same as UpdateDevicePool with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDevicePool for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) UpdateDevicePoolWithContext(ctx aws.Context, input *UpdateDevicePoolInput, opts ...aws.Option) (*UpdateDevicePoolOutput, error) {
-	req, out := c.UpdateDevicePoolRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDevicePoolOutput{})
+	return UpdateDevicePoolRequest{Request: req, Input: input}
 }
 
 const opUpdateNetworkProfile = "UpdateNetworkProfile"
 
-// UpdateNetworkProfileRequest generates a "aws.Request" representing the
-// client's request for the UpdateNetworkProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateNetworkProfileRequest is a API request type for the UpdateNetworkProfile API operation.
+type UpdateNetworkProfileRequest struct {
+	*aws.Request
+	Input *UpdateNetworkProfileInput
+}
+
+// Send marshals and sends the UpdateNetworkProfile API request.
+func (r UpdateNetworkProfileRequest) Send() (*UpdateNetworkProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateNetworkProfileOutput), nil
+}
+
+// UpdateNetworkProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateNetworkProfile for more information on using the UpdateNetworkProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the network profile with specific settings.
 //
 //    // Example sending a request using the UpdateNetworkProfileRequest method.
-//    req, resp := client.UpdateNetworkProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateNetworkProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfile
-func (c *DeviceFarm) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInput) (req *aws.Request, output *UpdateNetworkProfileOutput) {
+func (c *DeviceFarm) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInput) UpdateNetworkProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateNetworkProfile,
 		HTTPMethod: "POST",
@@ -5036,84 +3040,42 @@ func (c *DeviceFarm) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInpu
 		input = &UpdateNetworkProfileInput{}
 	}
 
-	output = &UpdateNetworkProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateNetworkProfile API operation for AWS Device Farm.
-//
-// Updates the network profile with specific settings.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation UpdateNetworkProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfile
-func (c *DeviceFarm) UpdateNetworkProfile(input *UpdateNetworkProfileInput) (*UpdateNetworkProfileOutput, error) {
-	req, out := c.UpdateNetworkProfileRequest(input)
-	return out, req.Send()
-}
-
-// UpdateNetworkProfileWithContext is the same as UpdateNetworkProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateNetworkProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) UpdateNetworkProfileWithContext(ctx aws.Context, input *UpdateNetworkProfileInput, opts ...aws.Option) (*UpdateNetworkProfileOutput, error) {
-	req, out := c.UpdateNetworkProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateNetworkProfileOutput{})
+	return UpdateNetworkProfileRequest{Request: req, Input: input}
 }
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws.Request" representing the
-// client's request for the UpdateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateProjectRequest is a API request type for the UpdateProject API operation.
+type UpdateProjectRequest struct {
+	*aws.Request
+	Input *UpdateProjectInput
+}
+
+// Send marshals and sends the UpdateProject API request.
+func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateProjectOutput), nil
+}
+
+// UpdateProjectRequest returns a request value for making API operation for
+// AWS Device Farm.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateProject for more information on using the UpdateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the specified project name, given the project ARN and a new name.
 //
 //    // Example sending a request using the UpdateProjectRequest method.
-//    req, resp := client.UpdateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject
-func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
@@ -5124,55 +3086,8 @@ func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.R
 		input = &UpdateProjectInput{}
 	}
 
-	output = &UpdateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateProject API operation for AWS Device Farm.
-//
-// Modifies the specified project name, given the project ARN and a new name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Device Farm's
-// API operation UpdateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeArgumentException "ArgumentException"
-//   An invalid argument was specified.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The specified entity was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A limit was exceeded.
-//
-//   * ErrCodeServiceAccountException "ServiceAccountException"
-//   There was a problem with the service account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject
-func (c *DeviceFarm) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	return out, req.Send()
-}
-
-// UpdateProjectWithContext is the same as UpdateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DeviceFarm) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	return UpdateProjectRequest{Request: req, Input: input}
 }
 
 // A container for account-level settings within AWS Device Farm.

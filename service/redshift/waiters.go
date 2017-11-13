@@ -53,10 +53,10 @@ func (c *Redshift) WaitUntilClusterAvailableWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClustersRequest(inCpy)
+			req := c.DescribeClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -109,10 +109,10 @@ func (c *Redshift) WaitUntilClusterDeletedWithContext(ctx aws.Context, input *De
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClustersRequest(inCpy)
+			req := c.DescribeClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -160,10 +160,10 @@ func (c *Redshift) WaitUntilClusterRestoredWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClustersRequest(inCpy)
+			req := c.DescribeClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -216,10 +216,10 @@ func (c *Redshift) WaitUntilSnapshotAvailableWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterSnapshotsRequest(inCpy)
+			req := c.DescribeClusterSnapshotsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

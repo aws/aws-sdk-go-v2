@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // The following code aborts a running application version deployment for an environment
 // named my-env:
-func ExampleElasticBeanstalk_AbortEnvironmentUpdate_shared00() {
+func ExampleElasticBeanstalk_AbortEnvironmentUpdateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -40,7 +40,8 @@ func ExampleElasticBeanstalk_AbortEnvironmentUpdate_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.AbortEnvironmentUpdate(input)
+	req := svc.AbortEnvironmentUpdateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -63,7 +64,7 @@ func ExampleElasticBeanstalk_AbortEnvironmentUpdate_shared00() {
 // To check the availability of a CNAME
 //
 // The following operation checks the availability of the subdomain my-cname:
-func ExampleElasticBeanstalk_CheckDNSAvailability_shared00() {
+func ExampleElasticBeanstalk_CheckDNSAvailabilityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -74,7 +75,8 @@ func ExampleElasticBeanstalk_CheckDNSAvailability_shared00() {
 		CNAMEPrefix: aws.String("my-cname"),
 	}
 
-	result, err := svc.CheckDNSAvailability(input)
+	req := svc.CheckDNSAvailabilityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -95,7 +97,7 @@ func ExampleElasticBeanstalk_CheckDNSAvailability_shared00() {
 // To create a new application
 //
 // The following operation creates a new application named my-app:
-func ExampleElasticBeanstalk_CreateApplication_shared00() {
+func ExampleElasticBeanstalk_CreateApplicationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -107,7 +109,8 @@ func ExampleElasticBeanstalk_CreateApplication_shared00() {
 		Description:     aws.String("my application"),
 	}
 
-	result, err := svc.CreateApplication(input)
+	req := svc.CreateApplicationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -130,7 +133,7 @@ func ExampleElasticBeanstalk_CreateApplication_shared00() {
 // To create a new application
 //
 // The following operation creates a new version (v1) of an application named my-app:
-func ExampleElasticBeanstalk_CreateApplicationVersion_shared00() {
+func ExampleElasticBeanstalk_CreateApplicationVersionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -149,7 +152,8 @@ func ExampleElasticBeanstalk_CreateApplicationVersion_shared00() {
 		VersionLabel: aws.String("v1"),
 	}
 
-	result, err := svc.CreateApplicationVersion(input)
+	req := svc.CreateApplicationVersionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -181,7 +185,7 @@ func ExampleElasticBeanstalk_CreateApplicationVersion_shared00() {
 //
 // The following operation creates a configuration template named my-app-v1 from the
 // settings applied to an environment with the id e-rpqsewtp2j:
-func ExampleElasticBeanstalk_CreateConfigurationTemplate_shared00() {
+func ExampleElasticBeanstalk_CreateConfigurationTemplateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -194,7 +198,8 @@ func ExampleElasticBeanstalk_CreateConfigurationTemplate_shared00() {
 		TemplateName:    aws.String("my-app-v1"),
 	}
 
-	result, err := svc.CreateConfigurationTemplate(input)
+	req := svc.CreateConfigurationTemplateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -222,7 +227,7 @@ func ExampleElasticBeanstalk_CreateConfigurationTemplate_shared00() {
 //
 // The following operation creates a new environment for version v1 of a java application
 // named my-app:
-func ExampleElasticBeanstalk_CreateEnvironment_shared00() {
+func ExampleElasticBeanstalk_CreateEnvironmentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -237,7 +242,8 @@ func ExampleElasticBeanstalk_CreateEnvironment_shared00() {
 		VersionLabel:      aws.String("v1"),
 	}
 
-	result, err := svc.CreateEnvironment(input)
+	req := svc.CreateEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -263,7 +269,7 @@ func ExampleElasticBeanstalk_CreateEnvironment_shared00() {
 //
 // The following operation creates a new environment for version v1 of a java application
 // named my-app:
-func ExampleElasticBeanstalk_CreateStorageLocation_shared00() {
+func ExampleElasticBeanstalk_CreateStorageLocationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -272,7 +278,8 @@ func ExampleElasticBeanstalk_CreateStorageLocation_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.CreateStorageLocationInput{}
 
-	result, err := svc.CreateStorageLocation(input)
+	req := svc.CreateStorageLocationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -299,7 +306,7 @@ func ExampleElasticBeanstalk_CreateStorageLocation_shared00() {
 // To delete an application
 //
 // The following operation deletes an application named my-app:
-func ExampleElasticBeanstalk_DeleteApplication_shared00() {
+func ExampleElasticBeanstalk_DeleteApplicationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -310,7 +317,8 @@ func ExampleElasticBeanstalk_DeleteApplication_shared00() {
 		ApplicationName: aws.String("my-app"),
 	}
 
-	result, err := svc.DeleteApplication(input)
+	req := svc.DeleteApplicationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -334,7 +342,7 @@ func ExampleElasticBeanstalk_DeleteApplication_shared00() {
 //
 // The following operation deletes an application version named 22a0-stage-150819_182129
 // for an application named my-app:
-func ExampleElasticBeanstalk_DeleteApplicationVersion_shared00() {
+func ExampleElasticBeanstalk_DeleteApplicationVersionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -347,7 +355,8 @@ func ExampleElasticBeanstalk_DeleteApplicationVersion_shared00() {
 		VersionLabel:       aws.String("22a0-stage-150819_182129"),
 	}
 
-	result, err := svc.DeleteApplicationVersion(input)
+	req := svc.DeleteApplicationVersionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -377,7 +386,7 @@ func ExampleElasticBeanstalk_DeleteApplicationVersion_shared00() {
 //
 // The following operation deletes a configuration template named my-template for an
 // application named my-app:
-func ExampleElasticBeanstalk_DeleteConfigurationTemplate_shared00() {
+func ExampleElasticBeanstalk_DeleteConfigurationTemplateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -389,7 +398,8 @@ func ExampleElasticBeanstalk_DeleteConfigurationTemplate_shared00() {
 		TemplateName:    aws.String("my-template"),
 	}
 
-	result, err := svc.DeleteConfigurationTemplate(input)
+	req := svc.DeleteConfigurationTemplateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -412,7 +422,7 @@ func ExampleElasticBeanstalk_DeleteConfigurationTemplate_shared00() {
 // To delete a draft configuration
 //
 // The following operation deletes a draft configuration for an environment named my-env:
-func ExampleElasticBeanstalk_DeleteEnvironmentConfiguration_shared00() {
+func ExampleElasticBeanstalk_DeleteEnvironmentConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -424,7 +434,8 @@ func ExampleElasticBeanstalk_DeleteEnvironmentConfiguration_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.DeleteEnvironmentConfiguration(input)
+	req := svc.DeleteEnvironmentConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -446,7 +457,7 @@ func ExampleElasticBeanstalk_DeleteEnvironmentConfiguration_shared00() {
 //
 // The following operation retrieves information about an application version labeled
 // v2:
-func ExampleElasticBeanstalk_DescribeApplicationVersions_shared00() {
+func ExampleElasticBeanstalk_DescribeApplicationVersionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -460,7 +471,8 @@ func ExampleElasticBeanstalk_DescribeApplicationVersions_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeApplicationVersions(input)
+	req := svc.DescribeApplicationVersionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -481,7 +493,7 @@ func ExampleElasticBeanstalk_DescribeApplicationVersions_shared00() {
 // To view a list of applications
 //
 // The following operation retrieves information about applications in the current region:
-func ExampleElasticBeanstalk_DescribeApplications_shared00() {
+func ExampleElasticBeanstalk_DescribeApplicationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -490,7 +502,8 @@ func ExampleElasticBeanstalk_DescribeApplications_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.DescribeApplicationsInput{}
 
-	result, err := svc.DescribeApplications(input)
+	req := svc.DescribeApplicationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -512,7 +525,7 @@ func ExampleElasticBeanstalk_DescribeApplications_shared00() {
 //
 // The following operation retrieves descriptions of all available configuration options
 // for an environment named my-env:
-func ExampleElasticBeanstalk_DescribeConfigurationOptions_shared00() {
+func ExampleElasticBeanstalk_DescribeConfigurationOptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -524,7 +537,8 @@ func ExampleElasticBeanstalk_DescribeConfigurationOptions_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.DescribeConfigurationOptions(input)
+	req := svc.DescribeConfigurationOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -548,7 +562,7 @@ func ExampleElasticBeanstalk_DescribeConfigurationOptions_shared00() {
 //
 // The following operation retrieves configuration settings for an environment named
 // my-env:
-func ExampleElasticBeanstalk_DescribeConfigurationSettings_shared00() {
+func ExampleElasticBeanstalk_DescribeConfigurationSettingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -560,7 +574,8 @@ func ExampleElasticBeanstalk_DescribeConfigurationSettings_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.DescribeConfigurationSettings(input)
+	req := svc.DescribeConfigurationSettingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -584,7 +599,7 @@ func ExampleElasticBeanstalk_DescribeConfigurationSettings_shared00() {
 //
 // The following operation retrieves overall health information for an environment named
 // my-env:
-func ExampleElasticBeanstalk_DescribeEnvironmentHealth_shared00() {
+func ExampleElasticBeanstalk_DescribeEnvironmentHealthRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -598,7 +613,8 @@ func ExampleElasticBeanstalk_DescribeEnvironmentHealth_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.DescribeEnvironmentHealth(input)
+	req := svc.DescribeEnvironmentHealthRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -624,7 +640,7 @@ func ExampleElasticBeanstalk_DescribeEnvironmentHealth_shared00() {
 //
 // The following operation retrieves information about resources in an environment named
 // my-env:
-func ExampleElasticBeanstalk_DescribeEnvironmentResources_shared00() {
+func ExampleElasticBeanstalk_DescribeEnvironmentResourcesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -635,7 +651,8 @@ func ExampleElasticBeanstalk_DescribeEnvironmentResources_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.DescribeEnvironmentResources(input)
+	req := svc.DescribeEnvironmentResourcesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -658,7 +675,7 @@ func ExampleElasticBeanstalk_DescribeEnvironmentResources_shared00() {
 // To view information about an environment
 //
 // The following operation retrieves information about an environment named my-env:
-func ExampleElasticBeanstalk_DescribeEnvironments_shared00() {
+func ExampleElasticBeanstalk_DescribeEnvironmentsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -671,7 +688,8 @@ func ExampleElasticBeanstalk_DescribeEnvironments_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeEnvironments(input)
+	req := svc.DescribeEnvironmentsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -692,7 +710,7 @@ func ExampleElasticBeanstalk_DescribeEnvironments_shared00() {
 // To view events for an environment
 //
 // The following operation retrieves events for an environment named my-env:
-func ExampleElasticBeanstalk_DescribeEvents_shared00() {
+func ExampleElasticBeanstalk_DescribeEventsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -703,7 +721,8 @@ func ExampleElasticBeanstalk_DescribeEvents_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.DescribeEvents(input)
+	req := svc.DescribeEventsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -725,7 +744,7 @@ func ExampleElasticBeanstalk_DescribeEvents_shared00() {
 //
 // The following operation retrieves health information for instances in an environment
 // named my-env:
-func ExampleElasticBeanstalk_DescribeInstancesHealth_shared00() {
+func ExampleElasticBeanstalk_DescribeInstancesHealthRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -739,7 +758,8 @@ func ExampleElasticBeanstalk_DescribeInstancesHealth_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.DescribeInstancesHealth(input)
+	req := svc.DescribeInstancesHealthRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -765,7 +785,7 @@ func ExampleElasticBeanstalk_DescribeInstancesHealth_shared00() {
 //
 // The following operation lists solution stacks for all currently available platform
 // configurations and any that you have used in the past:
-func ExampleElasticBeanstalk_ListAvailableSolutionStacks_shared00() {
+func ExampleElasticBeanstalk_ListAvailableSolutionStacksRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -774,7 +794,8 @@ func ExampleElasticBeanstalk_ListAvailableSolutionStacks_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.ListAvailableSolutionStacksInput{}
 
-	result, err := svc.ListAvailableSolutionStacks(input)
+	req := svc.ListAvailableSolutionStacksRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -796,7 +817,7 @@ func ExampleElasticBeanstalk_ListAvailableSolutionStacks_shared00() {
 //
 // The following operation terminates and recreates the resources in an environment
 // named my-env:
-func ExampleElasticBeanstalk_RebuildEnvironment_shared00() {
+func ExampleElasticBeanstalk_RebuildEnvironmentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -807,7 +828,8 @@ func ExampleElasticBeanstalk_RebuildEnvironment_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.RebuildEnvironment(input)
+	req := svc.RebuildEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -830,7 +852,7 @@ func ExampleElasticBeanstalk_RebuildEnvironment_shared00() {
 // To request tailed logs
 //
 // The following operation requests logs from an environment named my-env:
-func ExampleElasticBeanstalk_RequestEnvironmentInfo_shared00() {
+func ExampleElasticBeanstalk_RequestEnvironmentInfoRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -842,7 +864,8 @@ func ExampleElasticBeanstalk_RequestEnvironmentInfo_shared00() {
 		InfoType:        elasticbeanstalk.EnvironmentInfoTypeTail,
 	}
 
-	result, err := svc.RequestEnvironmentInfo(input)
+	req := svc.RequestEnvironmentInfoRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -864,7 +887,7 @@ func ExampleElasticBeanstalk_RequestEnvironmentInfo_shared00() {
 //
 // The following operation restarts application servers on all instances in an environment
 // named my-env:
-func ExampleElasticBeanstalk_RestartAppServer_shared00() {
+func ExampleElasticBeanstalk_RestartAppServerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -875,7 +898,8 @@ func ExampleElasticBeanstalk_RestartAppServer_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.RestartAppServer(input)
+	req := svc.RestartAppServerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -896,7 +920,7 @@ func ExampleElasticBeanstalk_RestartAppServer_shared00() {
 // To retrieve tailed logs
 //
 // The following operation retrieves a link to logs from an environment named my-env:
-func ExampleElasticBeanstalk_RetrieveEnvironmentInfo_shared00() {
+func ExampleElasticBeanstalk_RetrieveEnvironmentInfoRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -908,7 +932,8 @@ func ExampleElasticBeanstalk_RetrieveEnvironmentInfo_shared00() {
 		InfoType:        elasticbeanstalk.EnvironmentInfoTypeTail,
 	}
 
-	result, err := svc.RetrieveEnvironmentInfo(input)
+	req := svc.RetrieveEnvironmentInfoRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -929,7 +954,7 @@ func ExampleElasticBeanstalk_RetrieveEnvironmentInfo_shared00() {
 // To swap environment CNAMES
 //
 // The following operation swaps the assigned subdomains of two environments:
-func ExampleElasticBeanstalk_SwapEnvironmentCNAMEs_shared00() {
+func ExampleElasticBeanstalk_SwapEnvironmentCNAMEsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -941,7 +966,8 @@ func ExampleElasticBeanstalk_SwapEnvironmentCNAMEs_shared00() {
 		SourceEnvironmentName:      aws.String("my-env-blue"),
 	}
 
-	result, err := svc.SwapEnvironmentCNAMEs(input)
+	req := svc.SwapEnvironmentCNAMEsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -962,7 +988,7 @@ func ExampleElasticBeanstalk_SwapEnvironmentCNAMEs_shared00() {
 // To terminate an environment
 //
 // The following operation terminates an Elastic Beanstalk environment named my-env:
-func ExampleElasticBeanstalk_TerminateEnvironment_shared00() {
+func ExampleElasticBeanstalk_TerminateEnvironmentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -973,7 +999,8 @@ func ExampleElasticBeanstalk_TerminateEnvironment_shared00() {
 		EnvironmentName: aws.String("my-env"),
 	}
 
-	result, err := svc.TerminateEnvironment(input)
+	req := svc.TerminateEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -996,7 +1023,7 @@ func ExampleElasticBeanstalk_TerminateEnvironment_shared00() {
 // To change an application's description
 //
 // The following operation updates the description of an application named my-app:
-func ExampleElasticBeanstalk_UpdateApplication_shared00() {
+func ExampleElasticBeanstalk_UpdateApplicationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1008,7 +1035,8 @@ func ExampleElasticBeanstalk_UpdateApplication_shared00() {
 		Description:     aws.String("my Elastic Beanstalk application"),
 	}
 
-	result, err := svc.UpdateApplication(input)
+	req := svc.UpdateApplicationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1029,7 +1057,7 @@ func ExampleElasticBeanstalk_UpdateApplication_shared00() {
 // To change an application version's description
 //
 // The following operation updates the description of an application version named 22a0-stage-150819_185942:
-func ExampleElasticBeanstalk_UpdateApplicationVersion_shared00() {
+func ExampleElasticBeanstalk_UpdateApplicationVersionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1042,7 +1070,8 @@ func ExampleElasticBeanstalk_UpdateApplicationVersion_shared00() {
 		VersionLabel:    aws.String("22a0-stage-150819_185942"),
 	}
 
-	result, err := svc.UpdateApplicationVersion(input)
+	req := svc.UpdateApplicationVersionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1064,7 +1093,7 @@ func ExampleElasticBeanstalk_UpdateApplicationVersion_shared00() {
 //
 // The following operation removes the configured CloudWatch custom health metrics configuration
 // ConfigDocument from a saved configuration template named my-template:
-func ExampleElasticBeanstalk_UpdateConfigurationTemplate_shared00() {
+func ExampleElasticBeanstalk_UpdateConfigurationTemplateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1082,7 +1111,8 @@ func ExampleElasticBeanstalk_UpdateConfigurationTemplate_shared00() {
 		TemplateName: aws.String("my-template"),
 	}
 
-	result, err := svc.UpdateConfigurationTemplate(input)
+	req := svc.UpdateConfigurationTemplateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1108,7 +1138,7 @@ func ExampleElasticBeanstalk_UpdateConfigurationTemplate_shared00() {
 //
 // The following operation updates an environment named "my-env" to version "v2" of
 // the application to which it belongs:
-func ExampleElasticBeanstalk_UpdateEnvironment_shared00() {
+func ExampleElasticBeanstalk_UpdateEnvironmentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1120,7 +1150,8 @@ func ExampleElasticBeanstalk_UpdateEnvironment_shared00() {
 		VersionLabel:    aws.String("v2"),
 	}
 
-	result, err := svc.UpdateEnvironment(input)
+	req := svc.UpdateEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1145,7 +1176,7 @@ func ExampleElasticBeanstalk_UpdateEnvironment_shared00() {
 // To configure option settings
 //
 // The following operation configures several options in the aws:elb:loadbalancer namespace:
-func ExampleElasticBeanstalk_UpdateEnvironment_shared01() {
+func ExampleElasticBeanstalk_UpdateEnvironmentRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1178,7 +1209,8 @@ func ExampleElasticBeanstalk_UpdateEnvironment_shared01() {
 		},
 	}
 
-	result, err := svc.UpdateEnvironment(input)
+	req := svc.UpdateEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1203,7 +1235,7 @@ func ExampleElasticBeanstalk_UpdateEnvironment_shared01() {
 // To validate configuration settings
 //
 // The following operation validates a CloudWatch custom metrics config document:
-func ExampleElasticBeanstalk_ValidateConfigurationSettings_shared00() {
+func ExampleElasticBeanstalk_ValidateConfigurationSettingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1222,7 +1254,8 @@ func ExampleElasticBeanstalk_ValidateConfigurationSettings_shared00() {
 		},
 	}
 
-	result, err := svc.ValidateConfigurationSettings(input)
+	req := svc.ValidateConfigurationSettingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

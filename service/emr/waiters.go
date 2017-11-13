@@ -63,10 +63,10 @@ func (c *EMR) WaitUntilClusterRunningWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterRequest(inCpy)
+			req := c.DescribeClusterRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -114,10 +114,10 @@ func (c *EMR) WaitUntilClusterTerminatedWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterRequest(inCpy)
+			req := c.DescribeClusterRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -170,10 +170,10 @@ func (c *EMR) WaitUntilStepCompleteWithContext(ctx aws.Context, input *DescribeS
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStepRequest(inCpy)
+			req := c.DescribeStepRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

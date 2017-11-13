@@ -152,9 +152,10 @@ func TestUnmarshalError(t *testing.T) {
 					http.StatusText(r.HTTPResponse.StatusCode))
 			}
 		})
-		_, err := s.PutBucketAcl(&s3.PutBucketAclInput{
+		req := s.PutBucketAclRequest(&s3.PutBucketAclInput{
 			Bucket: aws.String("bucket"), ACL: s3.BucketCannedACLPublicRead,
 		})
+		_, err := req.Send()
 
 		if err == nil {
 			t.Fatalf("%d, expected error, got nil", i)
@@ -197,13 +198,14 @@ func Test200NoErrorUnmarshalError(t *testing.T) {
 		}
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 	})
-	_, err := s.CompleteMultipartUpload(&s3.CompleteMultipartUploadInput{
+	req := s.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
 		Bucket: aws.String("bucket"), Key: aws.String("key"),
 		UploadId: aws.String("id"),
 		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []*s3.CompletedPart{
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})
+	_, err := req.Send()
 
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -227,13 +229,14 @@ func Test200WithErrorUnmarshalError(t *testing.T) {
 		}
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 	})
-	_, err := s.CompleteMultipartUpload(&s3.CompleteMultipartUploadInput{
+	req := s.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
 		Bucket: aws.String("bucket"), Key: aws.String("key"),
 		UploadId: aws.String("id"),
 		MultipartUpload: &s3.CompletedMultipartUpload{Parts: []*s3.CompletedPart{
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})
+	_, err := req.Send()
 
 	if err == nil {
 		t.Fatalf("expected error, got nil")

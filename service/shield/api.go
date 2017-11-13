@@ -11,31 +11,38 @@ import (
 
 const opCreateProtection = "CreateProtection"
 
-// CreateProtectionRequest generates a "aws.Request" representing the
-// client's request for the CreateProtection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProtectionRequest is a API request type for the CreateProtection API operation.
+type CreateProtectionRequest struct {
+	*aws.Request
+	Input *CreateProtectionInput
+}
+
+// Send marshals and sends the CreateProtection API request.
+func (r CreateProtectionRequest) Send() (*CreateProtectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProtectionOutput), nil
+}
+
+// CreateProtectionRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProtection for more information on using the CreateProtection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables AWS Shield Advanced for a specific AWS resource. The resource can
+// be an Amazon CloudFront distribution, Elastic Load Balancing load balancer,
+// or an Amazon Route 53 hosted zone.
 //
 //    // Example sending a request using the CreateProtectionRequest method.
-//    req, resp := client.CreateProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProtectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtection
-func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) (req *aws.Request, output *CreateProtectionOutput) {
+func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) CreateProtectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateProtection,
 		HTTPMethod: "POST",
@@ -46,99 +53,42 @@ func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) (req *aws
 		input = &CreateProtectionInput{}
 	}
 
-	output = &CreateProtectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProtection API operation for AWS Shield.
-//
-// Enables AWS Shield Advanced for a specific AWS resource. The resource can
-// be an Amazon CloudFront distribution, Elastic Load Balancing load balancer,
-// or an Amazon Route 53 hosted zone.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation CreateProtection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   Exception that indicates that the resource is invalid. You might not have
-//   access to the resource, or the resource might not exist.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
-//
-//   * ErrCodeLimitsExceededException "LimitsExceededException"
-//   Exception that indicates that the operation would exceed a limit.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   Exception indicating the specified resource already exists.
-//
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtection
-func (c *Shield) CreateProtection(input *CreateProtectionInput) (*CreateProtectionOutput, error) {
-	req, out := c.CreateProtectionRequest(input)
-	return out, req.Send()
-}
-
-// CreateProtectionWithContext is the same as CreateProtection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProtection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) CreateProtectionWithContext(ctx aws.Context, input *CreateProtectionInput, opts ...aws.Option) (*CreateProtectionOutput, error) {
-	req, out := c.CreateProtectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProtectionOutput{})
+	return CreateProtectionRequest{Request: req, Input: input}
 }
 
 const opCreateSubscription = "CreateSubscription"
 
-// CreateSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the CreateSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSubscriptionRequest is a API request type for the CreateSubscription API operation.
+type CreateSubscriptionRequest struct {
+	*aws.Request
+	Input *CreateSubscriptionInput
+}
+
+// Send marshals and sends the CreateSubscription API request.
+func (r CreateSubscriptionRequest) Send() (*CreateSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSubscriptionOutput), nil
+}
+
+// CreateSubscriptionRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSubscription for more information on using the CreateSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Activates AWS Shield Advanced for an account.
 //
 //    // Example sending a request using the CreateSubscriptionRequest method.
-//    req, resp := client.CreateSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscription
-func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) (req *aws.Request, output *CreateSubscriptionOutput) {
+func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) CreateSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubscription,
 		HTTPMethod: "POST",
@@ -149,79 +99,42 @@ func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) (req 
 		input = &CreateSubscriptionInput{}
 	}
 
-	output = &CreateSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSubscription API operation for AWS Shield.
-//
-// Activates AWS Shield Advanced for an account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation CreateSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   Exception indicating the specified resource already exists.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscription
-func (c *Shield) CreateSubscription(input *CreateSubscriptionInput) (*CreateSubscriptionOutput, error) {
-	req, out := c.CreateSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// CreateSubscriptionWithContext is the same as CreateSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) CreateSubscriptionWithContext(ctx aws.Context, input *CreateSubscriptionInput, opts ...aws.Option) (*CreateSubscriptionOutput, error) {
-	req, out := c.CreateSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSubscriptionOutput{})
+	return CreateSubscriptionRequest{Request: req, Input: input}
 }
 
 const opDeleteProtection = "DeleteProtection"
 
-// DeleteProtectionRequest generates a "aws.Request" representing the
-// client's request for the DeleteProtection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteProtectionRequest is a API request type for the DeleteProtection API operation.
+type DeleteProtectionRequest struct {
+	*aws.Request
+	Input *DeleteProtectionInput
+}
+
+// Send marshals and sends the DeleteProtection API request.
+func (r DeleteProtectionRequest) Send() (*DeleteProtectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProtectionOutput), nil
+}
+
+// DeleteProtectionRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteProtection for more information on using the DeleteProtection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an AWS Shield Advanced Protection.
 //
 //    // Example sending a request using the DeleteProtectionRequest method.
-//    req, resp := client.DeleteProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteProtectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtection
-func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) (req *aws.Request, output *DeleteProtectionOutput) {
+func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) DeleteProtectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProtection,
 		HTTPMethod: "POST",
@@ -232,83 +145,42 @@ func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) (req *aws
 		input = &DeleteProtectionInput{}
 	}
 
-	output = &DeleteProtectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteProtection API operation for AWS Shield.
-//
-// Deletes an AWS Shield Advanced Protection.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation DeleteProtection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
-//
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtection
-func (c *Shield) DeleteProtection(input *DeleteProtectionInput) (*DeleteProtectionOutput, error) {
-	req, out := c.DeleteProtectionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteProtectionWithContext is the same as DeleteProtection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProtection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) DeleteProtectionWithContext(ctx aws.Context, input *DeleteProtectionInput, opts ...aws.Option) (*DeleteProtectionOutput, error) {
-	req, out := c.DeleteProtectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteProtectionOutput{})
+	return DeleteProtectionRequest{Request: req, Input: input}
 }
 
 const opDeleteSubscription = "DeleteSubscription"
 
-// DeleteSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the DeleteSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSubscriptionRequest is a API request type for the DeleteSubscription API operation.
+type DeleteSubscriptionRequest struct {
+	*aws.Request
+	Input *DeleteSubscriptionInput
+}
+
+// Send marshals and sends the DeleteSubscription API request.
+func (r DeleteSubscriptionRequest) Send() (*DeleteSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSubscriptionOutput), nil
+}
+
+// DeleteSubscriptionRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSubscription for more information on using the DeleteSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes AWS Shield Advanced from an account.
 //
 //    // Example sending a request using the DeleteSubscriptionRequest method.
-//    req, resp := client.DeleteSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscription
-func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) (req *aws.Request, output *DeleteSubscriptionOutput) {
+func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) DeleteSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubscription,
 		HTTPMethod: "POST",
@@ -319,83 +191,42 @@ func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) (req 
 		input = &DeleteSubscriptionInput{}
 	}
 
-	output = &DeleteSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSubscription API operation for AWS Shield.
-//
-// Removes AWS Shield Advanced from an account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation DeleteSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeLockedSubscriptionException "LockedSubscriptionException"
-//   Exception that indicates that the subscription has been modified by another
-//   client. You can retry the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscription
-func (c *Shield) DeleteSubscription(input *DeleteSubscriptionInput) (*DeleteSubscriptionOutput, error) {
-	req, out := c.DeleteSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSubscriptionWithContext is the same as DeleteSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) DeleteSubscriptionWithContext(ctx aws.Context, input *DeleteSubscriptionInput, opts ...aws.Option) (*DeleteSubscriptionOutput, error) {
-	req, out := c.DeleteSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSubscriptionOutput{})
+	return DeleteSubscriptionRequest{Request: req, Input: input}
 }
 
 const opDescribeAttack = "DescribeAttack"
 
-// DescribeAttackRequest generates a "aws.Request" representing the
-// client's request for the DescribeAttack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAttackRequest is a API request type for the DescribeAttack API operation.
+type DescribeAttackRequest struct {
+	*aws.Request
+	Input *DescribeAttackInput
+}
+
+// Send marshals and sends the DescribeAttack API request.
+func (r DescribeAttackRequest) Send() (*DescribeAttackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAttackOutput), nil
+}
+
+// DescribeAttackRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAttack for more information on using the DescribeAttack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the details of a DDoS attack.
 //
 //    // Example sending a request using the DescribeAttackRequest method.
-//    req, resp := client.DescribeAttackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAttackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttack
-func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) (req *aws.Request, output *DescribeAttackOutput) {
+func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) DescribeAttackRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAttack,
 		HTTPMethod: "POST",
@@ -406,79 +237,42 @@ func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) (req *aws.Req
 		input = &DescribeAttackInput{}
 	}
 
-	output = &DescribeAttackOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAttack API operation for AWS Shield.
-//
-// Describes the details of a DDoS attack.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation DescribeAttack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttack
-func (c *Shield) DescribeAttack(input *DescribeAttackInput) (*DescribeAttackOutput, error) {
-	req, out := c.DescribeAttackRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAttackWithContext is the same as DescribeAttack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAttack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) DescribeAttackWithContext(ctx aws.Context, input *DescribeAttackInput, opts ...aws.Option) (*DescribeAttackOutput, error) {
-	req, out := c.DescribeAttackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAttackOutput{})
+	return DescribeAttackRequest{Request: req, Input: input}
 }
 
 const opDescribeProtection = "DescribeProtection"
 
-// DescribeProtectionRequest generates a "aws.Request" representing the
-// client's request for the DescribeProtection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProtectionRequest is a API request type for the DescribeProtection API operation.
+type DescribeProtectionRequest struct {
+	*aws.Request
+	Input *DescribeProtectionInput
+}
+
+// Send marshals and sends the DescribeProtection API request.
+func (r DescribeProtectionRequest) Send() (*DescribeProtectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProtectionOutput), nil
+}
+
+// DescribeProtectionRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeProtection for more information on using the DescribeProtection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the details of a Protection object.
 //
 //    // Example sending a request using the DescribeProtectionRequest method.
-//    req, resp := client.DescribeProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProtectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection
-func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) (req *aws.Request, output *DescribeProtectionOutput) {
+func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) DescribeProtectionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProtection,
 		HTTPMethod: "POST",
@@ -489,79 +283,42 @@ func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) (req 
 		input = &DescribeProtectionInput{}
 	}
 
-	output = &DescribeProtectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProtection API operation for AWS Shield.
-//
-// Lists the details of a Protection object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation DescribeProtection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection
-func (c *Shield) DescribeProtection(input *DescribeProtectionInput) (*DescribeProtectionOutput, error) {
-	req, out := c.DescribeProtectionRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProtectionWithContext is the same as DescribeProtection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProtection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) DescribeProtectionWithContext(ctx aws.Context, input *DescribeProtectionInput, opts ...aws.Option) (*DescribeProtectionOutput, error) {
-	req, out := c.DescribeProtectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProtectionOutput{})
+	return DescribeProtectionRequest{Request: req, Input: input}
 }
 
 const opDescribeSubscription = "DescribeSubscription"
 
-// DescribeSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the DescribeSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSubscriptionRequest is a API request type for the DescribeSubscription API operation.
+type DescribeSubscriptionRequest struct {
+	*aws.Request
+	Input *DescribeSubscriptionInput
+}
+
+// Send marshals and sends the DescribeSubscription API request.
+func (r DescribeSubscriptionRequest) Send() (*DescribeSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSubscriptionOutput), nil
+}
+
+// DescribeSubscriptionRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSubscription for more information on using the DescribeSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides details about the AWS Shield Advanced subscription for an account.
 //
 //    // Example sending a request using the DescribeSubscriptionRequest method.
-//    req, resp := client.DescribeSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription
-func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) (req *aws.Request, output *DescribeSubscriptionOutput) {
+func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) DescribeSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubscription,
 		HTTPMethod: "POST",
@@ -572,79 +329,43 @@ func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) (
 		input = &DescribeSubscriptionInput{}
 	}
 
-	output = &DescribeSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSubscription API operation for AWS Shield.
-//
-// Provides details about the AWS Shield Advanced subscription for an account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation DescribeSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription
-func (c *Shield) DescribeSubscription(input *DescribeSubscriptionInput) (*DescribeSubscriptionOutput, error) {
-	req, out := c.DescribeSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSubscriptionWithContext is the same as DescribeSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) DescribeSubscriptionWithContext(ctx aws.Context, input *DescribeSubscriptionInput, opts ...aws.Option) (*DescribeSubscriptionOutput, error) {
-	req, out := c.DescribeSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSubscriptionOutput{})
+	return DescribeSubscriptionRequest{Request: req, Input: input}
 }
 
 const opListAttacks = "ListAttacks"
 
-// ListAttacksRequest generates a "aws.Request" representing the
-// client's request for the ListAttacks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAttacksRequest is a API request type for the ListAttacks API operation.
+type ListAttacksRequest struct {
+	*aws.Request
+	Input *ListAttacksInput
+}
+
+// Send marshals and sends the ListAttacks API request.
+func (r ListAttacksRequest) Send() (*ListAttacksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAttacksOutput), nil
+}
+
+// ListAttacksRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAttacks for more information on using the ListAttacks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all ongoing DDoS attacks or all DDoS attacks during a specified time
+// period.
 //
 //    // Example sending a request using the ListAttacksRequest method.
-//    req, resp := client.ListAttacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAttacksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacks
-func (c *Shield) ListAttacksRequest(input *ListAttacksInput) (req *aws.Request, output *ListAttacksOutput) {
+func (c *Shield) ListAttacksRequest(input *ListAttacksInput) ListAttacksRequest {
 	op := &aws.Operation{
 		Name:       opListAttacks,
 		HTTPMethod: "POST",
@@ -655,84 +376,42 @@ func (c *Shield) ListAttacksRequest(input *ListAttacksInput) (req *aws.Request, 
 		input = &ListAttacksInput{}
 	}
 
-	output = &ListAttacksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAttacks API operation for AWS Shield.
-//
-// Returns all ongoing DDoS attacks or all DDoS attacks during a specified time
-// period.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation ListAttacks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacks
-func (c *Shield) ListAttacks(input *ListAttacksInput) (*ListAttacksOutput, error) {
-	req, out := c.ListAttacksRequest(input)
-	return out, req.Send()
-}
-
-// ListAttacksWithContext is the same as ListAttacks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAttacks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) ListAttacksWithContext(ctx aws.Context, input *ListAttacksInput, opts ...aws.Option) (*ListAttacksOutput, error) {
-	req, out := c.ListAttacksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAttacksOutput{})
+	return ListAttacksRequest{Request: req, Input: input}
 }
 
 const opListProtections = "ListProtections"
 
-// ListProtectionsRequest generates a "aws.Request" representing the
-// client's request for the ListProtections operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProtectionsRequest is a API request type for the ListProtections API operation.
+type ListProtectionsRequest struct {
+	*aws.Request
+	Input *ListProtectionsInput
+}
+
+// Send marshals and sends the ListProtections API request.
+func (r ListProtectionsRequest) Send() (*ListProtectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProtectionsOutput), nil
+}
+
+// ListProtectionsRequest returns a request value for making API operation for
+// AWS Shield.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProtections for more information on using the ListProtections
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all Protection objects for the account.
 //
 //    // Example sending a request using the ListProtectionsRequest method.
-//    req, resp := client.ListProtectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProtectionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections
-func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *aws.Request, output *ListProtectionsOutput) {
+func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) ListProtectionsRequest {
 	op := &aws.Operation{
 		Name:       opListProtections,
 		HTTPMethod: "POST",
@@ -743,50 +422,8 @@ func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *aws.R
 		input = &ListProtectionsInput{}
 	}
 
-	output = &ListProtectionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProtections API operation for AWS Shield.
-//
-// Lists all Protection objects for the account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Shield's
-// API operation ListProtections for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections
-func (c *Shield) ListProtections(input *ListProtectionsInput) (*ListProtectionsOutput, error) {
-	req, out := c.ListProtectionsRequest(input)
-	return out, req.Send()
-}
-
-// ListProtectionsWithContext is the same as ListProtections with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProtections for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Shield) ListProtectionsWithContext(ctx aws.Context, input *ListProtectionsInput, opts ...aws.Option) (*ListProtectionsOutput, error) {
-	req, out := c.ListProtectionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProtectionsOutput{})
+	return ListProtectionsRequest{Request: req, Input: input}
 }
 
 // The details of a DDoS attack.

@@ -12,31 +12,38 @@ import (
 
 const opAddApplicationCloudWatchLoggingOption = "AddApplicationCloudWatchLoggingOption"
 
-// AddApplicationCloudWatchLoggingOptionRequest generates a "aws.Request" representing the
-// client's request for the AddApplicationCloudWatchLoggingOption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddApplicationCloudWatchLoggingOptionRequest is a API request type for the AddApplicationCloudWatchLoggingOption API operation.
+type AddApplicationCloudWatchLoggingOptionRequest struct {
+	*aws.Request
+	Input *AddApplicationCloudWatchLoggingOptionInput
+}
+
+// Send marshals and sends the AddApplicationCloudWatchLoggingOption API request.
+func (r AddApplicationCloudWatchLoggingOptionRequest) Send() (*AddApplicationCloudWatchLoggingOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddApplicationCloudWatchLoggingOptionOutput), nil
+}
+
+// AddApplicationCloudWatchLoggingOptionRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddApplicationCloudWatchLoggingOption for more information on using the AddApplicationCloudWatchLoggingOption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds a CloudWatch log stream to monitor application configuration errors.
+// For more information about using CloudWatch log streams with Amazon Kinesis
+// Analytics applications, see Working with Amazon CloudWatch Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
 //
 //    // Example sending a request using the AddApplicationCloudWatchLoggingOptionRequest method.
-//    req, resp := client.AddApplicationCloudWatchLoggingOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddApplicationCloudWatchLoggingOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOption
-func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionRequest(input *AddApplicationCloudWatchLoggingOptionInput) (req *aws.Request, output *AddApplicationCloudWatchLoggingOptionOutput) {
+func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionRequest(input *AddApplicationCloudWatchLoggingOptionInput) AddApplicationCloudWatchLoggingOptionRequest {
 	op := &aws.Operation{
 		Name:       opAddApplicationCloudWatchLoggingOption,
 		HTTPMethod: "POST",
@@ -47,104 +54,30 @@ func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionRequest(input *A
 		input = &AddApplicationCloudWatchLoggingOptionInput{}
 	}
 
-	output = &AddApplicationCloudWatchLoggingOptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddApplicationCloudWatchLoggingOption API operation for Amazon Kinesis Analytics.
-//
-// Adds a CloudWatch log stream to monitor application configuration errors.
-// For more information about using CloudWatch log streams with Amazon Kinesis
-// Analytics applications, see Working with Amazon CloudWatch Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation AddApplicationCloudWatchLoggingOption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOption
-func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOption(input *AddApplicationCloudWatchLoggingOptionInput) (*AddApplicationCloudWatchLoggingOptionOutput, error) {
-	req, out := c.AddApplicationCloudWatchLoggingOptionRequest(input)
-	return out, req.Send()
-}
-
-// AddApplicationCloudWatchLoggingOptionWithContext is the same as AddApplicationCloudWatchLoggingOption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddApplicationCloudWatchLoggingOption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionWithContext(ctx aws.Context, input *AddApplicationCloudWatchLoggingOptionInput, opts ...aws.Option) (*AddApplicationCloudWatchLoggingOptionOutput, error) {
-	req, out := c.AddApplicationCloudWatchLoggingOptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddApplicationCloudWatchLoggingOptionOutput{})
+	return AddApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input}
 }
 
 const opAddApplicationInput = "AddApplicationInput"
 
-// AddApplicationInputRequest generates a "aws.Request" representing the
-// client's request for the AddApplicationInput operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddApplicationInput for more information on using the AddApplicationInput
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddApplicationInputRequest method.
-//    req, resp := client.AddApplicationInputRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInput
-func (c *KinesisAnalytics) AddApplicationInputRequest(input *AddApplicationInputInput) (req *aws.Request, output *AddApplicationInputOutput) {
-	op := &aws.Operation{
-		Name:       opAddApplicationInput,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddApplicationInputInput{}
-	}
-
-	output = &AddApplicationInputOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddApplicationInputRequest is a API request type for the AddApplicationInput API operation.
+type AddApplicationInputRequest struct {
+	*aws.Request
+	Input *AddApplicationInputInput
 }
 
-// AddApplicationInput API operation for Amazon Kinesis Analytics.
+// Send marshals and sends the AddApplicationInput API request.
+func (r AddApplicationInputRequest) Send() (*AddApplicationInputOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddApplicationInputOutput), nil
+}
+
+// AddApplicationInputRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Adds a streaming source to your Amazon Kinesis application. For conceptual
 // information, see Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
@@ -160,81 +93,63 @@ func (c *KinesisAnalytics) AddApplicationInputRequest(input *AddApplicationInput
 // This operation requires permissions to perform the kinesisanalytics:AddApplicationInput
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation AddApplicationInput for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-//   * ErrCodeCodeValidationException "CodeValidationException"
-//   User-provided application code (query) is invalid. This can be a simple syntax
-//   error.
+//    // Example sending a request using the AddApplicationInputRequest method.
+//    req := client.AddApplicationInputRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInput
-func (c *KinesisAnalytics) AddApplicationInput(input *AddApplicationInputInput) (*AddApplicationInputOutput, error) {
-	req, out := c.AddApplicationInputRequest(input)
-	return out, req.Send()
-}
+func (c *KinesisAnalytics) AddApplicationInputRequest(input *AddApplicationInputInput) AddApplicationInputRequest {
+	op := &aws.Operation{
+		Name:       opAddApplicationInput,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddApplicationInputWithContext is the same as AddApplicationInput with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddApplicationInput for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationInputWithContext(ctx aws.Context, input *AddApplicationInputInput, opts ...aws.Option) (*AddApplicationInputOutput, error) {
-	req, out := c.AddApplicationInputRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddApplicationInputInput{}
+	}
+
+	req := c.newRequest(op, input, &AddApplicationInputOutput{})
+	return AddApplicationInputRequest{Request: req, Input: input}
 }
 
 const opAddApplicationInputProcessingConfiguration = "AddApplicationInputProcessingConfiguration"
 
-// AddApplicationInputProcessingConfigurationRequest generates a "aws.Request" representing the
-// client's request for the AddApplicationInputProcessingConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddApplicationInputProcessingConfigurationRequest is a API request type for the AddApplicationInputProcessingConfiguration API operation.
+type AddApplicationInputProcessingConfigurationRequest struct {
+	*aws.Request
+	Input *AddApplicationInputProcessingConfigurationInput
+}
+
+// Send marshals and sends the AddApplicationInputProcessingConfiguration API request.
+func (r AddApplicationInputProcessingConfigurationRequest) Send() (*AddApplicationInputProcessingConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddApplicationInputProcessingConfigurationOutput), nil
+}
+
+// AddApplicationInputProcessingConfigurationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddApplicationInputProcessingConfiguration for more information on using the AddApplicationInputProcessingConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds an InputProcessingConfiguration to an application. An input processor
+// preprocesses records on the input stream before the application's SQL code
+// executes. Currently, the only input processor available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
 //
 //    // Example sending a request using the AddApplicationInputProcessingConfigurationRequest method.
-//    req, resp := client.AddApplicationInputProcessingConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddApplicationInputProcessingConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfiguration
-func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationRequest(input *AddApplicationInputProcessingConfigurationInput) (req *aws.Request, output *AddApplicationInputProcessingConfigurationOutput) {
+func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationRequest(input *AddApplicationInputProcessingConfigurationInput) AddApplicationInputProcessingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opAddApplicationInputProcessingConfiguration,
 		HTTPMethod: "POST",
@@ -245,104 +160,30 @@ func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationRequest(inp
 		input = &AddApplicationInputProcessingConfigurationInput{}
 	}
 
-	output = &AddApplicationInputProcessingConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddApplicationInputProcessingConfiguration API operation for Amazon Kinesis Analytics.
-//
-// Adds an InputProcessingConfiguration to an application. An input processor
-// preprocesses records on the input stream before the application's SQL code
-// executes. Currently, the only input processor available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation AddApplicationInputProcessingConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfiguration
-func (c *KinesisAnalytics) AddApplicationInputProcessingConfiguration(input *AddApplicationInputProcessingConfigurationInput) (*AddApplicationInputProcessingConfigurationOutput, error) {
-	req, out := c.AddApplicationInputProcessingConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// AddApplicationInputProcessingConfigurationWithContext is the same as AddApplicationInputProcessingConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddApplicationInputProcessingConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationWithContext(ctx aws.Context, input *AddApplicationInputProcessingConfigurationInput, opts ...aws.Option) (*AddApplicationInputProcessingConfigurationOutput, error) {
-	req, out := c.AddApplicationInputProcessingConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddApplicationInputProcessingConfigurationOutput{})
+	return AddApplicationInputProcessingConfigurationRequest{Request: req, Input: input}
 }
 
 const opAddApplicationOutput = "AddApplicationOutput"
 
-// AddApplicationOutputRequest generates a "aws.Request" representing the
-// client's request for the AddApplicationOutput operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddApplicationOutput for more information on using the AddApplicationOutput
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddApplicationOutputRequest method.
-//    req, resp := client.AddApplicationOutputRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutput
-func (c *KinesisAnalytics) AddApplicationOutputRequest(input *AddApplicationOutputInput) (req *aws.Request, output *AddApplicationOutputOutput) {
-	op := &aws.Operation{
-		Name:       opAddApplicationOutput,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddApplicationOutputInput{}
-	}
-
-	output = &AddApplicationOutputOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddApplicationOutputRequest is a API request type for the AddApplicationOutput API operation.
+type AddApplicationOutputRequest struct {
+	*aws.Request
+	Input *AddApplicationOutputInput
 }
 
-// AddApplicationOutput API operation for Amazon Kinesis Analytics.
+// Send marshals and sends the AddApplicationOutput API request.
+func (r AddApplicationOutputRequest) Send() (*AddApplicationOutputOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddApplicationOutputOutput), nil
+}
+
+// AddApplicationOutputRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Adds an external destination to your Amazon Kinesis Analytics application.
 //
@@ -368,93 +209,49 @@ func (c *KinesisAnalytics) AddApplicationOutputRequest(input *AddApplicationOutp
 // This operation requires permissions to perform the kinesisanalytics:AddApplicationOutput
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation AddApplicationOutput for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutput
-func (c *KinesisAnalytics) AddApplicationOutput(input *AddApplicationOutputInput) (*AddApplicationOutputOutput, error) {
-	req, out := c.AddApplicationOutputRequest(input)
-	return out, req.Send()
-}
-
-// AddApplicationOutputWithContext is the same as AddApplicationOutput with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddApplicationOutput for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationOutputWithContext(ctx aws.Context, input *AddApplicationOutputInput, opts ...aws.Option) (*AddApplicationOutputOutput, error) {
-	req, out := c.AddApplicationOutputRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAddApplicationReferenceDataSource = "AddApplicationReferenceDataSource"
-
-// AddApplicationReferenceDataSourceRequest generates a "aws.Request" representing the
-// client's request for the AddApplicationReferenceDataSource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddApplicationReferenceDataSource for more information on using the AddApplicationReferenceDataSource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddApplicationReferenceDataSourceRequest method.
-//    req, resp := client.AddApplicationReferenceDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AddApplicationOutputRequest method.
+//    req := client.AddApplicationOutputRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSource
-func (c *KinesisAnalytics) AddApplicationReferenceDataSourceRequest(input *AddApplicationReferenceDataSourceInput) (req *aws.Request, output *AddApplicationReferenceDataSourceOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutput
+func (c *KinesisAnalytics) AddApplicationOutputRequest(input *AddApplicationOutputInput) AddApplicationOutputRequest {
 	op := &aws.Operation{
-		Name:       opAddApplicationReferenceDataSource,
+		Name:       opAddApplicationOutput,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AddApplicationReferenceDataSourceInput{}
+		input = &AddApplicationOutputInput{}
 	}
 
-	output = &AddApplicationReferenceDataSourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AddApplicationOutputOutput{})
+	return AddApplicationOutputRequest{Request: req, Input: input}
 }
 
-// AddApplicationReferenceDataSource API operation for Amazon Kinesis Analytics.
+const opAddApplicationReferenceDataSource = "AddApplicationReferenceDataSource"
+
+// AddApplicationReferenceDataSourceRequest is a API request type for the AddApplicationReferenceDataSource API operation.
+type AddApplicationReferenceDataSourceRequest struct {
+	*aws.Request
+	Input *AddApplicationReferenceDataSourceInput
+}
+
+// Send marshals and sends the AddApplicationReferenceDataSource API request.
+func (r AddApplicationReferenceDataSourceRequest) Send() (*AddApplicationReferenceDataSourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddApplicationReferenceDataSourceOutput), nil
+}
+
+// AddApplicationReferenceDataSourceRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Adds a reference data source to an existing application.
 //
@@ -472,93 +269,49 @@ func (c *KinesisAnalytics) AddApplicationReferenceDataSourceRequest(input *AddAp
 // This operation requires permissions to perform the kinesisanalytics:AddApplicationOutput
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation AddApplicationReferenceDataSource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSource
-func (c *KinesisAnalytics) AddApplicationReferenceDataSource(input *AddApplicationReferenceDataSourceInput) (*AddApplicationReferenceDataSourceOutput, error) {
-	req, out := c.AddApplicationReferenceDataSourceRequest(input)
-	return out, req.Send()
-}
-
-// AddApplicationReferenceDataSourceWithContext is the same as AddApplicationReferenceDataSource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddApplicationReferenceDataSource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationReferenceDataSourceWithContext(ctx aws.Context, input *AddApplicationReferenceDataSourceInput, opts ...aws.Option) (*AddApplicationReferenceDataSourceOutput, error) {
-	req, out := c.AddApplicationReferenceDataSourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateApplication = "CreateApplication"
-
-// CreateApplicationRequest generates a "aws.Request" representing the
-// client's request for the CreateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateApplication for more information on using the CreateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateApplicationRequest method.
-//    req, resp := client.CreateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AddApplicationReferenceDataSourceRequest method.
+//    req := client.AddApplicationReferenceDataSourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplication
-func (c *KinesisAnalytics) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *CreateApplicationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSource
+func (c *KinesisAnalytics) AddApplicationReferenceDataSourceRequest(input *AddApplicationReferenceDataSourceInput) AddApplicationReferenceDataSourceRequest {
 	op := &aws.Operation{
-		Name:       opCreateApplication,
+		Name:       opAddApplicationReferenceDataSource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateApplicationInput{}
+		input = &AddApplicationReferenceDataSourceInput{}
 	}
 
-	output = &CreateApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AddApplicationReferenceDataSourceOutput{})
+	return AddApplicationReferenceDataSourceRequest{Request: req, Input: input}
 }
 
-// CreateApplication API operation for Amazon Kinesis Analytics.
+const opCreateApplication = "CreateApplication"
+
+// CreateApplicationRequest is a API request type for the CreateApplication API operation.
+type CreateApplicationRequest struct {
+	*aws.Request
+	Input *CreateApplicationInput
+}
+
+// Send marshals and sends the CreateApplication API request.
+func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateApplicationOutput), nil
+}
+
+// CreateApplicationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Creates an Amazon Kinesis Analytics application. You can configure each application
 // with one streaming source as input, application code to process the input,
@@ -587,76 +340,66 @@ func (c *KinesisAnalytics) CreateApplicationRequest(input *CreateApplicationInpu
 // For introductory exercises to create an Amazon Kinesis Analytics application,
 // see Getting Started (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation CreateApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCodeValidationException "CodeValidationException"
-//   User-provided application code (query) is invalid. This can be a simple syntax
-//   error.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Exceeded the number of applications allowed.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
+//    // Example sending a request using the CreateApplicationRequest method.
+//    req := client.CreateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplication
-func (c *KinesisAnalytics) CreateApplication(input *CreateApplicationInput) (*CreateApplicationOutput, error) {
-	req, out := c.CreateApplicationRequest(input)
-	return out, req.Send()
-}
+func (c *KinesisAnalytics) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
+	op := &aws.Operation{
+		Name:       opCreateApplication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateApplicationWithContext is the same as CreateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*CreateApplicationOutput, error) {
-	req, out := c.CreateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateApplicationInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	return CreateApplicationRequest{Request: req, Input: input}
 }
 
 const opDeleteApplication = "DeleteApplication"
 
-// DeleteApplicationRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationRequest is a API request type for the DeleteApplication API operation.
+type DeleteApplicationRequest struct {
+	*aws.Request
+	Input *DeleteApplicationInput
+}
+
+// Send marshals and sends the DeleteApplication API request.
+func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationOutput), nil
+}
+
+// DeleteApplicationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified application. Amazon Kinesis Analytics halts application
+// execution and deletes the application, including any application artifacts
+// (such as in-application streams, reference table, and application code).
 //
-// See DeleteApplication for more information on using the DeleteApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the kinesisanalytics:DeleteApplication
+// action.
 //
 //    // Example sending a request using the DeleteApplicationRequest method.
-//    req, resp := client.DeleteApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplication
-func (c *KinesisAnalytics) DeleteApplicationRequest(input *DeleteApplicationInput) (req *aws.Request, output *DeleteApplicationOutput) {
+func (c *KinesisAnalytics) DeleteApplicationRequest(input *DeleteApplicationInput) DeleteApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplication,
 		HTTPMethod: "POST",
@@ -667,88 +410,44 @@ func (c *KinesisAnalytics) DeleteApplicationRequest(input *DeleteApplicationInpu
 		input = &DeleteApplicationInput{}
 	}
 
-	output = &DeleteApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApplication API operation for Amazon Kinesis Analytics.
-//
-// Deletes the specified application. Amazon Kinesis Analytics halts application
-// execution and deletes the application, including any application artifacts
-// (such as in-application streams, reference table, and application code).
-//
-// This operation requires permissions to perform the kinesisanalytics:DeleteApplication
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation DeleteApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplication
-func (c *KinesisAnalytics) DeleteApplication(input *DeleteApplicationInput) (*DeleteApplicationOutput, error) {
-	req, out := c.DeleteApplicationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationWithContext is the same as DeleteApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...aws.Option) (*DeleteApplicationOutput, error) {
-	req, out := c.DeleteApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteApplicationOutput{})
+	return DeleteApplicationRequest{Request: req, Input: input}
 }
 
 const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchLoggingOption"
 
-// DeleteApplicationCloudWatchLoggingOptionRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplicationCloudWatchLoggingOption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationCloudWatchLoggingOptionRequest is a API request type for the DeleteApplicationCloudWatchLoggingOption API operation.
+type DeleteApplicationCloudWatchLoggingOptionRequest struct {
+	*aws.Request
+	Input *DeleteApplicationCloudWatchLoggingOptionInput
+}
+
+// Send marshals and sends the DeleteApplicationCloudWatchLoggingOption API request.
+func (r DeleteApplicationCloudWatchLoggingOptionRequest) Send() (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationCloudWatchLoggingOptionOutput), nil
+}
+
+// DeleteApplicationCloudWatchLoggingOptionRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApplicationCloudWatchLoggingOption for more information on using the DeleteApplicationCloudWatchLoggingOption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a CloudWatch log stream from an application. For more information
+// about using CloudWatch log streams with Amazon Kinesis Analytics applications,
+// see Working with Amazon CloudWatch Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
 //
 //    // Example sending a request using the DeleteApplicationCloudWatchLoggingOptionRequest method.
-//    req, resp := client.DeleteApplicationCloudWatchLoggingOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationCloudWatchLoggingOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOption
-func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteApplicationCloudWatchLoggingOptionInput) (req *aws.Request, output *DeleteApplicationCloudWatchLoggingOptionOutput) {
+func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteApplicationCloudWatchLoggingOptionInput) DeleteApplicationCloudWatchLoggingOptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationCloudWatchLoggingOption,
 		HTTPMethod: "POST",
@@ -759,88 +458,42 @@ func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionRequest(input
 		input = &DeleteApplicationCloudWatchLoggingOptionInput{}
 	}
 
-	output = &DeleteApplicationCloudWatchLoggingOptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApplicationCloudWatchLoggingOption API operation for Amazon Kinesis Analytics.
-//
-// Deletes a CloudWatch log stream from an application. For more information
-// about using CloudWatch log streams with Amazon Kinesis Analytics applications,
-// see Working with Amazon CloudWatch Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation DeleteApplicationCloudWatchLoggingOption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOption
-func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOption(input *DeleteApplicationCloudWatchLoggingOptionInput) (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
-	req, out := c.DeleteApplicationCloudWatchLoggingOptionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationCloudWatchLoggingOptionWithContext is the same as DeleteApplicationCloudWatchLoggingOption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplicationCloudWatchLoggingOption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionWithContext(ctx aws.Context, input *DeleteApplicationCloudWatchLoggingOptionInput, opts ...aws.Option) (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
-	req, out := c.DeleteApplicationCloudWatchLoggingOptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteApplicationCloudWatchLoggingOptionOutput{})
+	return DeleteApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input}
 }
 
 const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputProcessingConfiguration"
 
-// DeleteApplicationInputProcessingConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplicationInputProcessingConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationInputProcessingConfigurationRequest is a API request type for the DeleteApplicationInputProcessingConfiguration API operation.
+type DeleteApplicationInputProcessingConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteApplicationInputProcessingConfigurationInput
+}
+
+// Send marshals and sends the DeleteApplicationInputProcessingConfiguration API request.
+func (r DeleteApplicationInputProcessingConfigurationRequest) Send() (*DeleteApplicationInputProcessingConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationInputProcessingConfigurationOutput), nil
+}
+
+// DeleteApplicationInputProcessingConfigurationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApplicationInputProcessingConfiguration for more information on using the DeleteApplicationInputProcessingConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an InputProcessingConfiguration from an input.
 //
 //    // Example sending a request using the DeleteApplicationInputProcessingConfigurationRequest method.
-//    req, resp := client.DeleteApplicationInputProcessingConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationInputProcessingConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfiguration
-func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationRequest(input *DeleteApplicationInputProcessingConfigurationInput) (req *aws.Request, output *DeleteApplicationInputProcessingConfigurationOutput) {
+func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationRequest(input *DeleteApplicationInputProcessingConfigurationInput) DeleteApplicationInputProcessingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationInputProcessingConfiguration,
 		HTTPMethod: "POST",
@@ -851,86 +504,47 @@ func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationRequest(
 		input = &DeleteApplicationInputProcessingConfigurationInput{}
 	}
 
-	output = &DeleteApplicationInputProcessingConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApplicationInputProcessingConfiguration API operation for Amazon Kinesis Analytics.
-//
-// Deletes an InputProcessingConfiguration from an input.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation DeleteApplicationInputProcessingConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfiguration
-func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfiguration(input *DeleteApplicationInputProcessingConfigurationInput) (*DeleteApplicationInputProcessingConfigurationOutput, error) {
-	req, out := c.DeleteApplicationInputProcessingConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationInputProcessingConfigurationWithContext is the same as DeleteApplicationInputProcessingConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplicationInputProcessingConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationWithContext(ctx aws.Context, input *DeleteApplicationInputProcessingConfigurationInput, opts ...aws.Option) (*DeleteApplicationInputProcessingConfigurationOutput, error) {
-	req, out := c.DeleteApplicationInputProcessingConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteApplicationInputProcessingConfigurationOutput{})
+	return DeleteApplicationInputProcessingConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeleteApplicationOutput = "DeleteApplicationOutput"
 
-// DeleteApplicationOutputRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplicationOutput operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationOutputRequest is a API request type for the DeleteApplicationOutput API operation.
+type DeleteApplicationOutputRequest struct {
+	*aws.Request
+	Input *DeleteApplicationOutputInput
+}
+
+// Send marshals and sends the DeleteApplicationOutput API request.
+func (r DeleteApplicationOutputRequest) Send() (*DeleteApplicationOutputOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationOutputOutput), nil
+}
+
+// DeleteApplicationOutputRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes output destination configuration from your application configuration.
+// Amazon Kinesis Analytics will no longer write data from the corresponding
+// in-application stream to the external output destination.
 //
-// See DeleteApplicationOutput for more information on using the DeleteApplicationOutput
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the kinesisanalytics:DeleteApplicationOutput
+// action.
 //
 //    // Example sending a request using the DeleteApplicationOutputRequest method.
-//    req, resp := client.DeleteApplicationOutputRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationOutputRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutput
-func (c *KinesisAnalytics) DeleteApplicationOutputRequest(input *DeleteApplicationOutputInput) (req *aws.Request, output *DeleteApplicationOutputOutput) {
+func (c *KinesisAnalytics) DeleteApplicationOutputRequest(input *DeleteApplicationOutputInput) DeleteApplicationOutputRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationOutput,
 		HTTPMethod: "POST",
@@ -941,107 +555,30 @@ func (c *KinesisAnalytics) DeleteApplicationOutputRequest(input *DeleteApplicati
 		input = &DeleteApplicationOutputInput{}
 	}
 
-	output = &DeleteApplicationOutputOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApplicationOutput API operation for Amazon Kinesis Analytics.
-//
-// Deletes output destination configuration from your application configuration.
-// Amazon Kinesis Analytics will no longer write data from the corresponding
-// in-application stream to the external output destination.
-//
-// This operation requires permissions to perform the kinesisanalytics:DeleteApplicationOutput
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation DeleteApplicationOutput for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutput
-func (c *KinesisAnalytics) DeleteApplicationOutput(input *DeleteApplicationOutputInput) (*DeleteApplicationOutputOutput, error) {
-	req, out := c.DeleteApplicationOutputRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationOutputWithContext is the same as DeleteApplicationOutput with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplicationOutput for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationOutputWithContext(ctx aws.Context, input *DeleteApplicationOutputInput, opts ...aws.Option) (*DeleteApplicationOutputOutput, error) {
-	req, out := c.DeleteApplicationOutputRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteApplicationOutputOutput{})
+	return DeleteApplicationOutputRequest{Request: req, Input: input}
 }
 
 const opDeleteApplicationReferenceDataSource = "DeleteApplicationReferenceDataSource"
 
-// DeleteApplicationReferenceDataSourceRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplicationReferenceDataSource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApplicationReferenceDataSource for more information on using the DeleteApplicationReferenceDataSource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteApplicationReferenceDataSourceRequest method.
-//    req, resp := client.DeleteApplicationReferenceDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSource
-func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceRequest(input *DeleteApplicationReferenceDataSourceInput) (req *aws.Request, output *DeleteApplicationReferenceDataSourceOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteApplicationReferenceDataSource,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteApplicationReferenceDataSourceInput{}
-	}
-
-	output = &DeleteApplicationReferenceDataSourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteApplicationReferenceDataSourceRequest is a API request type for the DeleteApplicationReferenceDataSource API operation.
+type DeleteApplicationReferenceDataSourceRequest struct {
+	*aws.Request
+	Input *DeleteApplicationReferenceDataSourceInput
 }
 
-// DeleteApplicationReferenceDataSource API operation for Amazon Kinesis Analytics.
+// Send marshals and sends the DeleteApplicationReferenceDataSource API request.
+func (r DeleteApplicationReferenceDataSourceRequest) Send() (*DeleteApplicationReferenceDataSourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationReferenceDataSourceOutput), nil
+}
+
+// DeleteApplicationReferenceDataSourceRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Deletes a reference data source configuration from the specified application
 // configuration.
@@ -1053,93 +590,49 @@ func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceRequest(input *De
 // This operation requires permissions to perform the kinesisanalytics.DeleteApplicationReferenceDataSource
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation DeleteApplicationReferenceDataSource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSource
-func (c *KinesisAnalytics) DeleteApplicationReferenceDataSource(input *DeleteApplicationReferenceDataSourceInput) (*DeleteApplicationReferenceDataSourceOutput, error) {
-	req, out := c.DeleteApplicationReferenceDataSourceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationReferenceDataSourceWithContext is the same as DeleteApplicationReferenceDataSource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplicationReferenceDataSource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceWithContext(ctx aws.Context, input *DeleteApplicationReferenceDataSourceInput, opts ...aws.Option) (*DeleteApplicationReferenceDataSourceOutput, error) {
-	req, out := c.DeleteApplicationReferenceDataSourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeApplication = "DescribeApplication"
-
-// DescribeApplicationRequest generates a "aws.Request" representing the
-// client's request for the DescribeApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeApplication for more information on using the DescribeApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeApplicationRequest method.
-//    req, resp := client.DescribeApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteApplicationReferenceDataSourceRequest method.
+//    req := client.DeleteApplicationReferenceDataSourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplication
-func (c *KinesisAnalytics) DescribeApplicationRequest(input *DescribeApplicationInput) (req *aws.Request, output *DescribeApplicationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSource
+func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceRequest(input *DeleteApplicationReferenceDataSourceInput) DeleteApplicationReferenceDataSourceRequest {
 	op := &aws.Operation{
-		Name:       opDescribeApplication,
+		Name:       opDeleteApplicationReferenceDataSource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeApplicationInput{}
+		input = &DeleteApplicationReferenceDataSourceInput{}
 	}
 
-	output = &DescribeApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteApplicationReferenceDataSourceOutput{})
+	return DeleteApplicationReferenceDataSourceRequest{Request: req, Input: input}
 }
 
-// DescribeApplication API operation for Amazon Kinesis Analytics.
+const opDescribeApplication = "DescribeApplication"
+
+// DescribeApplicationRequest is a API request type for the DescribeApplication API operation.
+type DescribeApplicationRequest struct {
+	*aws.Request
+	Input *DescribeApplicationInput
+}
+
+// Send marshals and sends the DescribeApplication API request.
+func (r DescribeApplicationRequest) Send() (*DescribeApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeApplicationOutput), nil
+}
+
+// DescribeApplicationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Returns information about a specific Amazon Kinesis Analytics application.
 //
@@ -1150,82 +643,49 @@ func (c *KinesisAnalytics) DescribeApplicationRequest(input *DescribeApplication
 // action. You can use DescribeApplication to get the current application versionId,
 // which you need to call other operations such as Update.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation DescribeApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplication
-func (c *KinesisAnalytics) DescribeApplication(input *DescribeApplicationInput) (*DescribeApplicationOutput, error) {
-	req, out := c.DescribeApplicationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeApplicationWithContext is the same as DescribeApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) DescribeApplicationWithContext(ctx aws.Context, input *DescribeApplicationInput, opts ...aws.Option) (*DescribeApplicationOutput, error) {
-	req, out := c.DescribeApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDiscoverInputSchema = "DiscoverInputSchema"
-
-// DiscoverInputSchemaRequest generates a "aws.Request" representing the
-// client's request for the DiscoverInputSchema operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DiscoverInputSchema for more information on using the DiscoverInputSchema
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DiscoverInputSchemaRequest method.
-//    req, resp := client.DiscoverInputSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeApplicationRequest method.
+//    req := client.DescribeApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchema
-func (c *KinesisAnalytics) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) (req *aws.Request, output *DiscoverInputSchemaOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplication
+func (c *KinesisAnalytics) DescribeApplicationRequest(input *DescribeApplicationInput) DescribeApplicationRequest {
 	op := &aws.Operation{
-		Name:       opDiscoverInputSchema,
+		Name:       opDescribeApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DiscoverInputSchemaInput{}
+		input = &DescribeApplicationInput{}
 	}
 
-	output = &DiscoverInputSchemaOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeApplicationOutput{})
+	return DescribeApplicationRequest{Request: req, Input: input}
 }
 
-// DiscoverInputSchema API operation for Amazon Kinesis Analytics.
+const opDiscoverInputSchema = "DiscoverInputSchema"
+
+// DiscoverInputSchemaRequest is a API request type for the DiscoverInputSchema API operation.
+type DiscoverInputSchemaRequest struct {
+	*aws.Request
+	Input *DiscoverInputSchemaInput
+}
+
+// Send marshals and sends the DiscoverInputSchema API request.
+func (r DiscoverInputSchemaRequest) Send() (*DiscoverInputSchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DiscoverInputSchemaOutput), nil
+}
+
+// DiscoverInputSchemaRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Infers a schema by evaluating sample records on the specified streaming source
 // (Amazon Kinesis stream or Amazon Kinesis Firehose delivery stream). In the
@@ -1242,95 +702,49 @@ func (c *KinesisAnalytics) DiscoverInputSchemaRequest(input *DiscoverInputSchema
 // This operation requires permissions to perform the kinesisanalytics:DiscoverInputSchema
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation DiscoverInputSchema for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeUnableToDetectSchemaException "UnableToDetectSchemaException"
-//   Data format is not valid, Amazon Kinesis Analytics is not able to detect
-//   schema for the given streaming source.
-//
-//   * ErrCodeResourceProvisionedThroughputExceededException "ResourceProvisionedThroughputExceededException"
-//   Discovery failed to get a record from the streaming source because of the
-//   Amazon Kinesis Streams ProvisionedThroughputExceededException. For more information,
-//   see GetRecords (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
-//   in the Amazon Kinesis Streams API Reference.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is unavailable, back off and retry the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchema
-func (c *KinesisAnalytics) DiscoverInputSchema(input *DiscoverInputSchemaInput) (*DiscoverInputSchemaOutput, error) {
-	req, out := c.DiscoverInputSchemaRequest(input)
-	return out, req.Send()
-}
-
-// DiscoverInputSchemaWithContext is the same as DiscoverInputSchema with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DiscoverInputSchema for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) DiscoverInputSchemaWithContext(ctx aws.Context, input *DiscoverInputSchemaInput, opts ...aws.Option) (*DiscoverInputSchemaOutput, error) {
-	req, out := c.DiscoverInputSchemaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opListApplications = "ListApplications"
-
-// ListApplicationsRequest generates a "aws.Request" representing the
-// client's request for the ListApplications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListApplications for more information on using the ListApplications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListApplicationsRequest method.
-//    req, resp := client.ListApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DiscoverInputSchemaRequest method.
+//    req := client.DiscoverInputSchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplications
-func (c *KinesisAnalytics) ListApplicationsRequest(input *ListApplicationsInput) (req *aws.Request, output *ListApplicationsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchema
+func (c *KinesisAnalytics) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) DiscoverInputSchemaRequest {
 	op := &aws.Operation{
-		Name:       opListApplications,
+		Name:       opDiscoverInputSchema,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ListApplicationsInput{}
+		input = &DiscoverInputSchemaInput{}
 	}
 
-	output = &ListApplicationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DiscoverInputSchemaOutput{})
+	return DiscoverInputSchemaRequest{Request: req, Input: input}
 }
 
-// ListApplications API operation for Amazon Kinesis Analytics.
+const opListApplications = "ListApplications"
+
+// ListApplicationsRequest is a API request type for the ListApplications API operation.
+type ListApplicationsRequest struct {
+	*aws.Request
+	Input *ListApplicationsInput
+}
+
+// Send marshals and sends the ListApplications API request.
+func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListApplicationsOutput), nil
+}
+
+// ListApplicationsRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Returns a list of Amazon Kinesis Analytics applications in your account.
 // For each application, the response includes the application name, Amazon
@@ -1344,77 +758,49 @@ func (c *KinesisAnalytics) ListApplicationsRequest(input *ListApplicationsInput)
 // This operation requires permissions to perform the kinesisanalytics:ListApplications
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation ListApplications for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplications
-func (c *KinesisAnalytics) ListApplications(input *ListApplicationsInput) (*ListApplicationsOutput, error) {
-	req, out := c.ListApplicationsRequest(input)
-	return out, req.Send()
-}
-
-// ListApplicationsWithContext is the same as ListApplications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListApplications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) ListApplicationsWithContext(ctx aws.Context, input *ListApplicationsInput, opts ...aws.Option) (*ListApplicationsOutput, error) {
-	req, out := c.ListApplicationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartApplication = "StartApplication"
-
-// StartApplicationRequest generates a "aws.Request" representing the
-// client's request for the StartApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartApplication for more information on using the StartApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartApplicationRequest method.
-//    req, resp := client.StartApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ListApplicationsRequest method.
+//    req := client.ListApplicationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplication
-func (c *KinesisAnalytics) StartApplicationRequest(input *StartApplicationInput) (req *aws.Request, output *StartApplicationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplications
+func (c *KinesisAnalytics) ListApplicationsRequest(input *ListApplicationsInput) ListApplicationsRequest {
 	op := &aws.Operation{
-		Name:       opStartApplication,
+		Name:       opListApplications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartApplicationInput{}
+		input = &ListApplicationsInput{}
 	}
 
-	output = &StartApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	return ListApplicationsRequest{Request: req, Input: input}
 }
 
-// StartApplication API operation for Amazon Kinesis Analytics.
+const opStartApplication = "StartApplication"
+
+// StartApplicationRequest is a API request type for the StartApplication API operation.
+type StartApplicationRequest struct {
+	*aws.Request
+	Input *StartApplicationInput
+}
+
+// Send marshals and sends the StartApplication API request.
+func (r StartApplicationRequest) Send() (*StartApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartApplicationOutput), nil
+}
+
+// StartApplicationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Starts the specified Amazon Kinesis Analytics application. After creating
 // an application, you must exclusively call this operation to start your application.
@@ -1432,91 +818,49 @@ func (c *KinesisAnalytics) StartApplicationRequest(input *StartApplicationInput)
 // This operation requires permissions to perform the kinesisanalytics:StartApplication
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation StartApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeInvalidApplicationConfigurationException "InvalidApplicationConfigurationException"
-//   User-provided application configuration is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplication
-func (c *KinesisAnalytics) StartApplication(input *StartApplicationInput) (*StartApplicationOutput, error) {
-	req, out := c.StartApplicationRequest(input)
-	return out, req.Send()
-}
-
-// StartApplicationWithContext is the same as StartApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) StartApplicationWithContext(ctx aws.Context, input *StartApplicationInput, opts ...aws.Option) (*StartApplicationOutput, error) {
-	req, out := c.StartApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStopApplication = "StopApplication"
-
-// StopApplicationRequest generates a "aws.Request" representing the
-// client's request for the StopApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopApplication for more information on using the StopApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StopApplicationRequest method.
-//    req, resp := client.StopApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StartApplicationRequest method.
+//    req := client.StartApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplication
-func (c *KinesisAnalytics) StopApplicationRequest(input *StopApplicationInput) (req *aws.Request, output *StopApplicationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplication
+func (c *KinesisAnalytics) StartApplicationRequest(input *StartApplicationInput) StartApplicationRequest {
 	op := &aws.Operation{
-		Name:       opStopApplication,
+		Name:       opStartApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StopApplicationInput{}
+		input = &StartApplicationInput{}
 	}
 
-	output = &StopApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StartApplicationOutput{})
+	return StartApplicationRequest{Request: req, Input: input}
 }
 
-// StopApplication API operation for Amazon Kinesis Analytics.
+const opStopApplication = "StopApplication"
+
+// StopApplicationRequest is a API request type for the StopApplication API operation.
+type StopApplicationRequest struct {
+	*aws.Request
+	Input *StopApplicationInput
+}
+
+// Send marshals and sends the StopApplication API request.
+func (r StopApplicationRequest) Send() (*StopApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopApplicationOutput), nil
+}
+
+// StopApplicationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Stops the application from processing input data. You can stop an application
 // only if it is in the running state. You can use the DescribeApplication operation
@@ -1527,85 +871,49 @@ func (c *KinesisAnalytics) StopApplicationRequest(input *StopApplicationInput) (
 // This operation requires permissions to perform the kinesisanalytics:StopApplication
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation StopApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplication
-func (c *KinesisAnalytics) StopApplication(input *StopApplicationInput) (*StopApplicationOutput, error) {
-	req, out := c.StopApplicationRequest(input)
-	return out, req.Send()
-}
-
-// StopApplicationWithContext is the same as StopApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) StopApplicationWithContext(ctx aws.Context, input *StopApplicationInput, opts ...aws.Option) (*StopApplicationOutput, error) {
-	req, out := c.StopApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateApplication = "UpdateApplication"
-
-// UpdateApplicationRequest generates a "aws.Request" representing the
-// client's request for the UpdateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateApplication for more information on using the UpdateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateApplicationRequest method.
-//    req, resp := client.UpdateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StopApplicationRequest method.
+//    req := client.StopApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplication
-func (c *KinesisAnalytics) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *UpdateApplicationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplication
+func (c *KinesisAnalytics) StopApplicationRequest(input *StopApplicationInput) StopApplicationRequest {
 	op := &aws.Operation{
-		Name:       opUpdateApplication,
+		Name:       opStopApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateApplicationInput{}
+		input = &StopApplicationInput{}
 	}
 
-	output = &UpdateApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StopApplicationOutput{})
+	return StopApplicationRequest{Request: req, Input: input}
 }
 
-// UpdateApplication API operation for Amazon Kinesis Analytics.
+const opUpdateApplication = "UpdateApplication"
+
+// UpdateApplicationRequest is a API request type for the UpdateApplication API operation.
+type UpdateApplicationRequest struct {
+	*aws.Request
+	Input *UpdateApplicationInput
+}
+
+// Send marshals and sends the UpdateApplication API request.
+func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationOutput), nil
+}
+
+// UpdateApplicationRequest returns a request value for making API operation for
+// Amazon Kinesis Analytics.
 //
 // Updates an existing Amazon Kinesis Analytics application. Using this API,
 // you can update application code, input configuration, and output configuration.
@@ -1616,52 +924,27 @@ func (c *KinesisAnalytics) UpdateApplicationRequest(input *UpdateApplicationInpu
 // This operation requires permission for the kinesisanalytics:UpdateApplication
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Analytics's
-// API operation UpdateApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCodeValidationException "CodeValidationException"
-//   User-provided application code (query) is invalid. This can be a simple syntax
-//   error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Application is not available for this operation.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   Specified input parameter value is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modification to an application.
-//   For example, two individuals attempting to edit the same application at the
-//   same time.
+//    // Example sending a request using the UpdateApplicationRequest method.
+//    req := client.UpdateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplication
-func (c *KinesisAnalytics) UpdateApplication(input *UpdateApplicationInput) (*UpdateApplicationOutput, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	return out, req.Send()
-}
+func (c *KinesisAnalytics) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateApplicationRequest {
+	op := &aws.Operation{
+		Name:       opUpdateApplication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateApplicationWithContext is the same as UpdateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KinesisAnalytics) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*UpdateApplicationOutput, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateApplicationInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOptionRequest

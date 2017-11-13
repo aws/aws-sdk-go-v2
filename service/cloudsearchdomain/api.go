@@ -11,45 +11,24 @@ import (
 
 const opSearch = "Search"
 
-// SearchRequest generates a "aws.Request" representing the
-// client's request for the Search operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Search for more information on using the Search
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SearchRequest method.
-//    req, resp := client.SearchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *CloudSearchDomain) SearchRequest(input *SearchInput) (req *aws.Request, output *SearchOutput) {
-	op := &aws.Operation{
-		Name:       opSearch,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-01-01/search?format=sdk&pretty=true",
-	}
-
-	if input == nil {
-		input = &SearchInput{}
-	}
-
-	output = &SearchOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// SearchRequest is a API request type for the Search API operation.
+type SearchRequest struct {
+	*aws.Request
+	Input *SearchInput
 }
 
-// Search API operation for Amazon CloudSearch Domain.
+// Send marshals and sends the Search API request.
+func (r SearchRequest) Send() (*SearchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchOutput), nil
+}
+
+// SearchRequest returns a request value for making API operation for
+// Amazon CloudSearch Domain.
 //
 // Retrieves a list of documents that match the specified search criteria. How
 // you specify the search criteria depends on which query parser you use. Amazon
@@ -73,79 +52,47 @@ func (c *CloudSearchDomain) SearchRequest(input *SearchInput) (req *aws.Request,
 // action. A domain's endpoints are also displayed on the domain dashboard in
 // the Amazon CloudSearch console.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch Domain's
-// API operation Search for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSearchException "SearchException"
-//   Information about any problems encountered while processing a search request.
-//
-func (c *CloudSearchDomain) Search(input *SearchInput) (*SearchOutput, error) {
-	req, out := c.SearchRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the SearchRequest method.
+//    req := client.SearchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *CloudSearchDomain) SearchRequest(input *SearchInput) SearchRequest {
+	op := &aws.Operation{
+		Name:       opSearch,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-01-01/search?format=sdk&pretty=true",
+	}
 
-// SearchWithContext is the same as Search with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Search for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearchDomain) SearchWithContext(ctx aws.Context, input *SearchInput, opts ...aws.Option) (*SearchOutput, error) {
-	req, out := c.SearchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SearchInput{}
+	}
+
+	req := c.newRequest(op, input, &SearchOutput{})
+	return SearchRequest{Request: req, Input: input}
 }
 
 const opSuggest = "Suggest"
 
-// SuggestRequest generates a "aws.Request" representing the
-// client's request for the Suggest operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Suggest for more information on using the Suggest
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SuggestRequest method.
-//    req, resp := client.SuggestRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *CloudSearchDomain) SuggestRequest(input *SuggestInput) (req *aws.Request, output *SuggestOutput) {
-	op := &aws.Operation{
-		Name:       opSuggest,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-01-01/suggest?format=sdk&pretty=true",
-	}
-
-	if input == nil {
-		input = &SuggestInput{}
-	}
-
-	output = &SuggestOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// SuggestRequest is a API request type for the Suggest API operation.
+type SuggestRequest struct {
+	*aws.Request
+	Input *SuggestInput
 }
 
-// Suggest API operation for Amazon CloudSearch Domain.
+// Send marshals and sends the Suggest API request.
+func (r SuggestRequest) Send() (*SuggestOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SuggestOutput), nil
+}
+
+// SuggestRequest returns a request value for making API operation for
+// Amazon CloudSearch Domain.
 //
 // Retrieves autocomplete suggestions for a partial query string. You can use
 // suggestions enable you to display likely matches before users finish typing.
@@ -165,79 +112,47 @@ func (c *CloudSearchDomain) SuggestRequest(input *SuggestInput) (req *aws.Reques
 // action. A domain's endpoints are also displayed on the domain dashboard in
 // the Amazon CloudSearch console.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch Domain's
-// API operation Suggest for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSearchException "SearchException"
-//   Information about any problems encountered while processing a search request.
-//
-func (c *CloudSearchDomain) Suggest(input *SuggestInput) (*SuggestOutput, error) {
-	req, out := c.SuggestRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the SuggestRequest method.
+//    req := client.SuggestRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *CloudSearchDomain) SuggestRequest(input *SuggestInput) SuggestRequest {
+	op := &aws.Operation{
+		Name:       opSuggest,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-01-01/suggest?format=sdk&pretty=true",
+	}
 
-// SuggestWithContext is the same as Suggest with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Suggest for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearchDomain) SuggestWithContext(ctx aws.Context, input *SuggestInput, opts ...aws.Option) (*SuggestOutput, error) {
-	req, out := c.SuggestRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SuggestInput{}
+	}
+
+	req := c.newRequest(op, input, &SuggestOutput{})
+	return SuggestRequest{Request: req, Input: input}
 }
 
 const opUploadDocuments = "UploadDocuments"
 
-// UploadDocumentsRequest generates a "aws.Request" representing the
-// client's request for the UploadDocuments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UploadDocuments for more information on using the UploadDocuments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UploadDocumentsRequest method.
-//    req, resp := client.UploadDocumentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *CloudSearchDomain) UploadDocumentsRequest(input *UploadDocumentsInput) (req *aws.Request, output *UploadDocumentsOutput) {
-	op := &aws.Operation{
-		Name:       opUploadDocuments,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-01-01/documents/batch?format=sdk",
-	}
-
-	if input == nil {
-		input = &UploadDocumentsInput{}
-	}
-
-	output = &UploadDocumentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UploadDocumentsRequest is a API request type for the UploadDocuments API operation.
+type UploadDocumentsRequest struct {
+	*aws.Request
+	Input *UploadDocumentsInput
 }
 
-// UploadDocuments API operation for Amazon CloudSearch Domain.
+// Send marshals and sends the UploadDocuments API request.
+func (r UploadDocumentsRequest) Send() (*UploadDocumentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadDocumentsOutput), nil
+}
+
+// UploadDocumentsRequest returns a request value for making API operation for
+// Amazon CloudSearch Domain.
 //
 // Posts a batch of documents to a search domain for indexing. A document batch
 // is a collection of add and delete operations that represent the documents
@@ -262,36 +177,25 @@ func (c *CloudSearchDomain) UploadDocumentsRequest(input *UploadDocumentsInput) 
 // data for indexing, see Uploading Data (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/uploading-data.html)
 // in the Amazon CloudSearch Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch Domain's
-// API operation UploadDocuments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDocumentServiceException "DocumentServiceException"
-//   Information about any problems encountered while processing an upload request.
-//
-func (c *CloudSearchDomain) UploadDocuments(input *UploadDocumentsInput) (*UploadDocumentsOutput, error) {
-	req, out := c.UploadDocumentsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the UploadDocumentsRequest method.
+//    req := client.UploadDocumentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *CloudSearchDomain) UploadDocumentsRequest(input *UploadDocumentsInput) UploadDocumentsRequest {
+	op := &aws.Operation{
+		Name:       opUploadDocuments,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-01-01/documents/batch?format=sdk",
+	}
 
-// UploadDocumentsWithContext is the same as UploadDocuments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadDocuments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearchDomain) UploadDocumentsWithContext(ctx aws.Context, input *UploadDocumentsInput, opts ...aws.Option) (*UploadDocumentsOutput, error) {
-	req, out := c.UploadDocumentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UploadDocumentsInput{}
+	}
+
+	req := c.newRequest(op, input, &UploadDocumentsOutput{})
+	return UploadDocumentsRequest{Request: req, Input: input}
 }
 
 // A container for facet information.

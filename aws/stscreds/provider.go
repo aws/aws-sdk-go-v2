@@ -111,7 +111,7 @@ const ProviderName = "AssumeRoleProvider"
 
 // AssumeRoler represents the minimal subset of the STS client API used by this provider.
 type AssumeRoler interface {
-	AssumeRole(input *sts.AssumeRoleInput) (*sts.AssumeRoleOutput, error)
+	AssumeRoleRequest(input *sts.AssumeRoleInput) sts.AssumeRoleRequest
 }
 
 // DefaultDuration is the default amount of time in minutes that the credentials
@@ -243,7 +243,8 @@ func (p *AssumeRoleProvider) retrieveFn() (aws.Credentials, error) {
 		}
 	}
 
-	resp, err := p.Client.AssumeRole(input)
+	req := p.Client.AssumeRoleRequest(input)
+	resp, err := req.Send()
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err
 	}

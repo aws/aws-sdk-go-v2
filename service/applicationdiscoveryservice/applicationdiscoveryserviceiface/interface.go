@@ -9,7 +9,6 @@
 package applicationdiscoveryserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice"
 )
 
@@ -63,81 +62,43 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ApplicationDiscoveryServiceAPI interface {
-	AssociateConfigurationItemsToApplication(*applicationdiscoveryservice.AssociateConfigurationItemsToApplicationInput) (*applicationdiscoveryservice.AssociateConfigurationItemsToApplicationOutput, error)
-	AssociateConfigurationItemsToApplicationWithContext(aws.Context, *applicationdiscoveryservice.AssociateConfigurationItemsToApplicationInput, ...aws.Option) (*applicationdiscoveryservice.AssociateConfigurationItemsToApplicationOutput, error)
-	AssociateConfigurationItemsToApplicationRequest(*applicationdiscoveryservice.AssociateConfigurationItemsToApplicationInput) (*aws.Request, *applicationdiscoveryservice.AssociateConfigurationItemsToApplicationOutput)
+	AssociateConfigurationItemsToApplicationRequest(*applicationdiscoveryservice.AssociateConfigurationItemsToApplicationInput) applicationdiscoveryservice.AssociateConfigurationItemsToApplicationRequest
 
-	CreateApplication(*applicationdiscoveryservice.CreateApplicationInput) (*applicationdiscoveryservice.CreateApplicationOutput, error)
-	CreateApplicationWithContext(aws.Context, *applicationdiscoveryservice.CreateApplicationInput, ...aws.Option) (*applicationdiscoveryservice.CreateApplicationOutput, error)
-	CreateApplicationRequest(*applicationdiscoveryservice.CreateApplicationInput) (*aws.Request, *applicationdiscoveryservice.CreateApplicationOutput)
+	CreateApplicationRequest(*applicationdiscoveryservice.CreateApplicationInput) applicationdiscoveryservice.CreateApplicationRequest
 
-	CreateTags(*applicationdiscoveryservice.CreateTagsInput) (*applicationdiscoveryservice.CreateTagsOutput, error)
-	CreateTagsWithContext(aws.Context, *applicationdiscoveryservice.CreateTagsInput, ...aws.Option) (*applicationdiscoveryservice.CreateTagsOutput, error)
-	CreateTagsRequest(*applicationdiscoveryservice.CreateTagsInput) (*aws.Request, *applicationdiscoveryservice.CreateTagsOutput)
+	CreateTagsRequest(*applicationdiscoveryservice.CreateTagsInput) applicationdiscoveryservice.CreateTagsRequest
 
-	DeleteApplications(*applicationdiscoveryservice.DeleteApplicationsInput) (*applicationdiscoveryservice.DeleteApplicationsOutput, error)
-	DeleteApplicationsWithContext(aws.Context, *applicationdiscoveryservice.DeleteApplicationsInput, ...aws.Option) (*applicationdiscoveryservice.DeleteApplicationsOutput, error)
-	DeleteApplicationsRequest(*applicationdiscoveryservice.DeleteApplicationsInput) (*aws.Request, *applicationdiscoveryservice.DeleteApplicationsOutput)
+	DeleteApplicationsRequest(*applicationdiscoveryservice.DeleteApplicationsInput) applicationdiscoveryservice.DeleteApplicationsRequest
 
-	DeleteTags(*applicationdiscoveryservice.DeleteTagsInput) (*applicationdiscoveryservice.DeleteTagsOutput, error)
-	DeleteTagsWithContext(aws.Context, *applicationdiscoveryservice.DeleteTagsInput, ...aws.Option) (*applicationdiscoveryservice.DeleteTagsOutput, error)
-	DeleteTagsRequest(*applicationdiscoveryservice.DeleteTagsInput) (*aws.Request, *applicationdiscoveryservice.DeleteTagsOutput)
+	DeleteTagsRequest(*applicationdiscoveryservice.DeleteTagsInput) applicationdiscoveryservice.DeleteTagsRequest
 
-	DescribeAgents(*applicationdiscoveryservice.DescribeAgentsInput) (*applicationdiscoveryservice.DescribeAgentsOutput, error)
-	DescribeAgentsWithContext(aws.Context, *applicationdiscoveryservice.DescribeAgentsInput, ...aws.Option) (*applicationdiscoveryservice.DescribeAgentsOutput, error)
-	DescribeAgentsRequest(*applicationdiscoveryservice.DescribeAgentsInput) (*aws.Request, *applicationdiscoveryservice.DescribeAgentsOutput)
+	DescribeAgentsRequest(*applicationdiscoveryservice.DescribeAgentsInput) applicationdiscoveryservice.DescribeAgentsRequest
 
-	DescribeConfigurations(*applicationdiscoveryservice.DescribeConfigurationsInput) (*applicationdiscoveryservice.DescribeConfigurationsOutput, error)
-	DescribeConfigurationsWithContext(aws.Context, *applicationdiscoveryservice.DescribeConfigurationsInput, ...aws.Option) (*applicationdiscoveryservice.DescribeConfigurationsOutput, error)
-	DescribeConfigurationsRequest(*applicationdiscoveryservice.DescribeConfigurationsInput) (*aws.Request, *applicationdiscoveryservice.DescribeConfigurationsOutput)
+	DescribeConfigurationsRequest(*applicationdiscoveryservice.DescribeConfigurationsInput) applicationdiscoveryservice.DescribeConfigurationsRequest
 
-	DescribeExportConfigurations(*applicationdiscoveryservice.DescribeExportConfigurationsInput) (*applicationdiscoveryservice.DescribeExportConfigurationsOutput, error)
-	DescribeExportConfigurationsWithContext(aws.Context, *applicationdiscoveryservice.DescribeExportConfigurationsInput, ...aws.Option) (*applicationdiscoveryservice.DescribeExportConfigurationsOutput, error)
-	DescribeExportConfigurationsRequest(*applicationdiscoveryservice.DescribeExportConfigurationsInput) (*aws.Request, *applicationdiscoveryservice.DescribeExportConfigurationsOutput)
+	DescribeExportConfigurationsRequest(*applicationdiscoveryservice.DescribeExportConfigurationsInput) applicationdiscoveryservice.DescribeExportConfigurationsRequest
 
-	DescribeExportTasks(*applicationdiscoveryservice.DescribeExportTasksInput) (*applicationdiscoveryservice.DescribeExportTasksOutput, error)
-	DescribeExportTasksWithContext(aws.Context, *applicationdiscoveryservice.DescribeExportTasksInput, ...aws.Option) (*applicationdiscoveryservice.DescribeExportTasksOutput, error)
-	DescribeExportTasksRequest(*applicationdiscoveryservice.DescribeExportTasksInput) (*aws.Request, *applicationdiscoveryservice.DescribeExportTasksOutput)
+	DescribeExportTasksRequest(*applicationdiscoveryservice.DescribeExportTasksInput) applicationdiscoveryservice.DescribeExportTasksRequest
 
-	DescribeTags(*applicationdiscoveryservice.DescribeTagsInput) (*applicationdiscoveryservice.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *applicationdiscoveryservice.DescribeTagsInput, ...aws.Option) (*applicationdiscoveryservice.DescribeTagsOutput, error)
-	DescribeTagsRequest(*applicationdiscoveryservice.DescribeTagsInput) (*aws.Request, *applicationdiscoveryservice.DescribeTagsOutput)
+	DescribeTagsRequest(*applicationdiscoveryservice.DescribeTagsInput) applicationdiscoveryservice.DescribeTagsRequest
 
-	DisassociateConfigurationItemsFromApplication(*applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationInput) (*applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationOutput, error)
-	DisassociateConfigurationItemsFromApplicationWithContext(aws.Context, *applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationInput, ...aws.Option) (*applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationOutput, error)
-	DisassociateConfigurationItemsFromApplicationRequest(*applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationInput) (*aws.Request, *applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationOutput)
+	DisassociateConfigurationItemsFromApplicationRequest(*applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationInput) applicationdiscoveryservice.DisassociateConfigurationItemsFromApplicationRequest
 
-	ExportConfigurations(*applicationdiscoveryservice.ExportConfigurationsInput) (*applicationdiscoveryservice.ExportConfigurationsOutput, error)
-	ExportConfigurationsWithContext(aws.Context, *applicationdiscoveryservice.ExportConfigurationsInput, ...aws.Option) (*applicationdiscoveryservice.ExportConfigurationsOutput, error)
-	ExportConfigurationsRequest(*applicationdiscoveryservice.ExportConfigurationsInput) (*aws.Request, *applicationdiscoveryservice.ExportConfigurationsOutput)
+	ExportConfigurationsRequest(*applicationdiscoveryservice.ExportConfigurationsInput) applicationdiscoveryservice.ExportConfigurationsRequest
 
-	GetDiscoverySummary(*applicationdiscoveryservice.GetDiscoverySummaryInput) (*applicationdiscoveryservice.GetDiscoverySummaryOutput, error)
-	GetDiscoverySummaryWithContext(aws.Context, *applicationdiscoveryservice.GetDiscoverySummaryInput, ...aws.Option) (*applicationdiscoveryservice.GetDiscoverySummaryOutput, error)
-	GetDiscoverySummaryRequest(*applicationdiscoveryservice.GetDiscoverySummaryInput) (*aws.Request, *applicationdiscoveryservice.GetDiscoverySummaryOutput)
+	GetDiscoverySummaryRequest(*applicationdiscoveryservice.GetDiscoverySummaryInput) applicationdiscoveryservice.GetDiscoverySummaryRequest
 
-	ListConfigurations(*applicationdiscoveryservice.ListConfigurationsInput) (*applicationdiscoveryservice.ListConfigurationsOutput, error)
-	ListConfigurationsWithContext(aws.Context, *applicationdiscoveryservice.ListConfigurationsInput, ...aws.Option) (*applicationdiscoveryservice.ListConfigurationsOutput, error)
-	ListConfigurationsRequest(*applicationdiscoveryservice.ListConfigurationsInput) (*aws.Request, *applicationdiscoveryservice.ListConfigurationsOutput)
+	ListConfigurationsRequest(*applicationdiscoveryservice.ListConfigurationsInput) applicationdiscoveryservice.ListConfigurationsRequest
 
-	ListServerNeighbors(*applicationdiscoveryservice.ListServerNeighborsInput) (*applicationdiscoveryservice.ListServerNeighborsOutput, error)
-	ListServerNeighborsWithContext(aws.Context, *applicationdiscoveryservice.ListServerNeighborsInput, ...aws.Option) (*applicationdiscoveryservice.ListServerNeighborsOutput, error)
-	ListServerNeighborsRequest(*applicationdiscoveryservice.ListServerNeighborsInput) (*aws.Request, *applicationdiscoveryservice.ListServerNeighborsOutput)
+	ListServerNeighborsRequest(*applicationdiscoveryservice.ListServerNeighborsInput) applicationdiscoveryservice.ListServerNeighborsRequest
 
-	StartDataCollectionByAgentIds(*applicationdiscoveryservice.StartDataCollectionByAgentIdsInput) (*applicationdiscoveryservice.StartDataCollectionByAgentIdsOutput, error)
-	StartDataCollectionByAgentIdsWithContext(aws.Context, *applicationdiscoveryservice.StartDataCollectionByAgentIdsInput, ...aws.Option) (*applicationdiscoveryservice.StartDataCollectionByAgentIdsOutput, error)
-	StartDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StartDataCollectionByAgentIdsInput) (*aws.Request, *applicationdiscoveryservice.StartDataCollectionByAgentIdsOutput)
+	StartDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StartDataCollectionByAgentIdsInput) applicationdiscoveryservice.StartDataCollectionByAgentIdsRequest
 
-	StartExportTask(*applicationdiscoveryservice.StartExportTaskInput) (*applicationdiscoveryservice.StartExportTaskOutput, error)
-	StartExportTaskWithContext(aws.Context, *applicationdiscoveryservice.StartExportTaskInput, ...aws.Option) (*applicationdiscoveryservice.StartExportTaskOutput, error)
-	StartExportTaskRequest(*applicationdiscoveryservice.StartExportTaskInput) (*aws.Request, *applicationdiscoveryservice.StartExportTaskOutput)
+	StartExportTaskRequest(*applicationdiscoveryservice.StartExportTaskInput) applicationdiscoveryservice.StartExportTaskRequest
 
-	StopDataCollectionByAgentIds(*applicationdiscoveryservice.StopDataCollectionByAgentIdsInput) (*applicationdiscoveryservice.StopDataCollectionByAgentIdsOutput, error)
-	StopDataCollectionByAgentIdsWithContext(aws.Context, *applicationdiscoveryservice.StopDataCollectionByAgentIdsInput, ...aws.Option) (*applicationdiscoveryservice.StopDataCollectionByAgentIdsOutput, error)
-	StopDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StopDataCollectionByAgentIdsInput) (*aws.Request, *applicationdiscoveryservice.StopDataCollectionByAgentIdsOutput)
+	StopDataCollectionByAgentIdsRequest(*applicationdiscoveryservice.StopDataCollectionByAgentIdsInput) applicationdiscoveryservice.StopDataCollectionByAgentIdsRequest
 
-	UpdateApplication(*applicationdiscoveryservice.UpdateApplicationInput) (*applicationdiscoveryservice.UpdateApplicationOutput, error)
-	UpdateApplicationWithContext(aws.Context, *applicationdiscoveryservice.UpdateApplicationInput, ...aws.Option) (*applicationdiscoveryservice.UpdateApplicationOutput, error)
-	UpdateApplicationRequest(*applicationdiscoveryservice.UpdateApplicationInput) (*aws.Request, *applicationdiscoveryservice.UpdateApplicationOutput)
+	UpdateApplicationRequest(*applicationdiscoveryservice.UpdateApplicationInput) applicationdiscoveryservice.UpdateApplicationRequest
 }
 
 var _ ApplicationDiscoveryServiceAPI = (*applicationdiscoveryservice.ApplicationDiscoveryService)(nil)

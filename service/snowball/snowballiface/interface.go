@@ -63,79 +63,45 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SnowballAPI interface {
-	CancelCluster(*snowball.CancelClusterInput) (*snowball.CancelClusterOutput, error)
-	CancelClusterWithContext(aws.Context, *snowball.CancelClusterInput, ...aws.Option) (*snowball.CancelClusterOutput, error)
-	CancelClusterRequest(*snowball.CancelClusterInput) (*aws.Request, *snowball.CancelClusterOutput)
+	CancelClusterRequest(*snowball.CancelClusterInput) snowball.CancelClusterRequest
 
-	CancelJob(*snowball.CancelJobInput) (*snowball.CancelJobOutput, error)
-	CancelJobWithContext(aws.Context, *snowball.CancelJobInput, ...aws.Option) (*snowball.CancelJobOutput, error)
-	CancelJobRequest(*snowball.CancelJobInput) (*aws.Request, *snowball.CancelJobOutput)
+	CancelJobRequest(*snowball.CancelJobInput) snowball.CancelJobRequest
 
-	CreateAddress(*snowball.CreateAddressInput) (*snowball.CreateAddressOutput, error)
-	CreateAddressWithContext(aws.Context, *snowball.CreateAddressInput, ...aws.Option) (*snowball.CreateAddressOutput, error)
-	CreateAddressRequest(*snowball.CreateAddressInput) (*aws.Request, *snowball.CreateAddressOutput)
+	CreateAddressRequest(*snowball.CreateAddressInput) snowball.CreateAddressRequest
 
-	CreateCluster(*snowball.CreateClusterInput) (*snowball.CreateClusterOutput, error)
-	CreateClusterWithContext(aws.Context, *snowball.CreateClusterInput, ...aws.Option) (*snowball.CreateClusterOutput, error)
-	CreateClusterRequest(*snowball.CreateClusterInput) (*aws.Request, *snowball.CreateClusterOutput)
+	CreateClusterRequest(*snowball.CreateClusterInput) snowball.CreateClusterRequest
 
-	CreateJob(*snowball.CreateJobInput) (*snowball.CreateJobOutput, error)
-	CreateJobWithContext(aws.Context, *snowball.CreateJobInput, ...aws.Option) (*snowball.CreateJobOutput, error)
-	CreateJobRequest(*snowball.CreateJobInput) (*aws.Request, *snowball.CreateJobOutput)
+	CreateJobRequest(*snowball.CreateJobInput) snowball.CreateJobRequest
 
-	DescribeAddress(*snowball.DescribeAddressInput) (*snowball.DescribeAddressOutput, error)
-	DescribeAddressWithContext(aws.Context, *snowball.DescribeAddressInput, ...aws.Option) (*snowball.DescribeAddressOutput, error)
-	DescribeAddressRequest(*snowball.DescribeAddressInput) (*aws.Request, *snowball.DescribeAddressOutput)
+	DescribeAddressRequest(*snowball.DescribeAddressInput) snowball.DescribeAddressRequest
 
-	DescribeAddresses(*snowball.DescribeAddressesInput) (*snowball.DescribeAddressesOutput, error)
-	DescribeAddressesWithContext(aws.Context, *snowball.DescribeAddressesInput, ...aws.Option) (*snowball.DescribeAddressesOutput, error)
-	DescribeAddressesRequest(*snowball.DescribeAddressesInput) (*aws.Request, *snowball.DescribeAddressesOutput)
+	DescribeAddressesRequest(*snowball.DescribeAddressesInput) snowball.DescribeAddressesRequest
 
 	DescribeAddressesPages(*snowball.DescribeAddressesInput, func(*snowball.DescribeAddressesOutput, bool) bool) error
 	DescribeAddressesPagesWithContext(aws.Context, *snowball.DescribeAddressesInput, func(*snowball.DescribeAddressesOutput, bool) bool, ...aws.Option) error
 
-	DescribeCluster(*snowball.DescribeClusterInput) (*snowball.DescribeClusterOutput, error)
-	DescribeClusterWithContext(aws.Context, *snowball.DescribeClusterInput, ...aws.Option) (*snowball.DescribeClusterOutput, error)
-	DescribeClusterRequest(*snowball.DescribeClusterInput) (*aws.Request, *snowball.DescribeClusterOutput)
+	DescribeClusterRequest(*snowball.DescribeClusterInput) snowball.DescribeClusterRequest
 
-	DescribeJob(*snowball.DescribeJobInput) (*snowball.DescribeJobOutput, error)
-	DescribeJobWithContext(aws.Context, *snowball.DescribeJobInput, ...aws.Option) (*snowball.DescribeJobOutput, error)
-	DescribeJobRequest(*snowball.DescribeJobInput) (*aws.Request, *snowball.DescribeJobOutput)
+	DescribeJobRequest(*snowball.DescribeJobInput) snowball.DescribeJobRequest
 
-	GetJobManifest(*snowball.GetJobManifestInput) (*snowball.GetJobManifestOutput, error)
-	GetJobManifestWithContext(aws.Context, *snowball.GetJobManifestInput, ...aws.Option) (*snowball.GetJobManifestOutput, error)
-	GetJobManifestRequest(*snowball.GetJobManifestInput) (*aws.Request, *snowball.GetJobManifestOutput)
+	GetJobManifestRequest(*snowball.GetJobManifestInput) snowball.GetJobManifestRequest
 
-	GetJobUnlockCode(*snowball.GetJobUnlockCodeInput) (*snowball.GetJobUnlockCodeOutput, error)
-	GetJobUnlockCodeWithContext(aws.Context, *snowball.GetJobUnlockCodeInput, ...aws.Option) (*snowball.GetJobUnlockCodeOutput, error)
-	GetJobUnlockCodeRequest(*snowball.GetJobUnlockCodeInput) (*aws.Request, *snowball.GetJobUnlockCodeOutput)
+	GetJobUnlockCodeRequest(*snowball.GetJobUnlockCodeInput) snowball.GetJobUnlockCodeRequest
 
-	GetSnowballUsage(*snowball.GetSnowballUsageInput) (*snowball.GetSnowballUsageOutput, error)
-	GetSnowballUsageWithContext(aws.Context, *snowball.GetSnowballUsageInput, ...aws.Option) (*snowball.GetSnowballUsageOutput, error)
-	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) (*aws.Request, *snowball.GetSnowballUsageOutput)
+	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) snowball.GetSnowballUsageRequest
 
-	ListClusterJobs(*snowball.ListClusterJobsInput) (*snowball.ListClusterJobsOutput, error)
-	ListClusterJobsWithContext(aws.Context, *snowball.ListClusterJobsInput, ...aws.Option) (*snowball.ListClusterJobsOutput, error)
-	ListClusterJobsRequest(*snowball.ListClusterJobsInput) (*aws.Request, *snowball.ListClusterJobsOutput)
+	ListClusterJobsRequest(*snowball.ListClusterJobsInput) snowball.ListClusterJobsRequest
 
-	ListClusters(*snowball.ListClustersInput) (*snowball.ListClustersOutput, error)
-	ListClustersWithContext(aws.Context, *snowball.ListClustersInput, ...aws.Option) (*snowball.ListClustersOutput, error)
-	ListClustersRequest(*snowball.ListClustersInput) (*aws.Request, *snowball.ListClustersOutput)
+	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest
 
-	ListJobs(*snowball.ListJobsInput) (*snowball.ListJobsOutput, error)
-	ListJobsWithContext(aws.Context, *snowball.ListJobsInput, ...aws.Option) (*snowball.ListJobsOutput, error)
-	ListJobsRequest(*snowball.ListJobsInput) (*aws.Request, *snowball.ListJobsOutput)
+	ListJobsRequest(*snowball.ListJobsInput) snowball.ListJobsRequest
 
 	ListJobsPages(*snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool) error
 	ListJobsPagesWithContext(aws.Context, *snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool, ...aws.Option) error
 
-	UpdateCluster(*snowball.UpdateClusterInput) (*snowball.UpdateClusterOutput, error)
-	UpdateClusterWithContext(aws.Context, *snowball.UpdateClusterInput, ...aws.Option) (*snowball.UpdateClusterOutput, error)
-	UpdateClusterRequest(*snowball.UpdateClusterInput) (*aws.Request, *snowball.UpdateClusterOutput)
+	UpdateClusterRequest(*snowball.UpdateClusterInput) snowball.UpdateClusterRequest
 
-	UpdateJob(*snowball.UpdateJobInput) (*snowball.UpdateJobOutput, error)
-	UpdateJobWithContext(aws.Context, *snowball.UpdateJobInput, ...aws.Option) (*snowball.UpdateJobOutput, error)
-	UpdateJobRequest(*snowball.UpdateJobInput) (*aws.Request, *snowball.UpdateJobOutput)
+	UpdateJobRequest(*snowball.UpdateJobInput) snowball.UpdateJobRequest
 }
 
 var _ SnowballAPI = (*snowball.Snowball)(nil)

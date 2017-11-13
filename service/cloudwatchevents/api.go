@@ -14,31 +14,42 @@ import (
 
 const opDeleteRule = "DeleteRule"
 
-// DeleteRuleRequest generates a "aws.Request" representing the
-// client's request for the DeleteRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRuleRequest is a API request type for the DeleteRule API operation.
+type DeleteRuleRequest struct {
+	*aws.Request
+	Input *DeleteRuleInput
+}
+
+// Send marshals and sends the DeleteRule API request.
+func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRuleOutput), nil
+}
+
+// DeleteRuleRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified rule.
 //
-// See DeleteRule for more information on using the DeleteRule
-// API call, and error handling.
+// You must remove all targets from a rule using RemoveTargets before you can
+// delete the rule.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you delete a rule, incoming events might continue to match to the deleted
+// rule. Please allow a short period of time for changes to take effect.
 //
 //    // Example sending a request using the DeleteRuleRequest method.
-//    req, resp := client.DeleteRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRule
-func (c *CloudWatchEvents) DeleteRuleRequest(input *DeleteRuleInput) (req *aws.Request, output *DeleteRuleOutput) {
+func (c *CloudWatchEvents) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRule,
 		HTTPMethod: "POST",
@@ -49,86 +60,46 @@ func (c *CloudWatchEvents) DeleteRuleRequest(input *DeleteRuleInput) (req *aws.R
 		input = &DeleteRuleInput{}
 	}
 
-	output = &DeleteRuleOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteRule API operation for Amazon CloudWatch Events.
-//
-// Deletes the specified rule.
-//
-// You must remove all targets from a rule using RemoveTargets before you can
-// delete the rule.
-//
-// When you delete a rule, incoming events might continue to match to the deleted
-// rule. Please allow a short period of time for changes to take effect.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation DeleteRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRule
-func (c *CloudWatchEvents) DeleteRule(input *DeleteRuleInput) (*DeleteRuleOutput, error) {
-	req, out := c.DeleteRuleRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRuleWithContext is the same as DeleteRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opts ...aws.Option) (*DeleteRuleOutput, error) {
-	req, out := c.DeleteRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteRuleRequest{Request: req, Input: input}
 }
 
 const opDescribeEventBus = "DescribeEventBus"
 
-// DescribeEventBusRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventBus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventBusRequest is a API request type for the DescribeEventBus API operation.
+type DescribeEventBusRequest struct {
+	*aws.Request
+	Input *DescribeEventBusInput
+}
+
+// Send marshals and sends the DescribeEventBus API request.
+func (r DescribeEventBusRequest) Send() (*DescribeEventBusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventBusOutput), nil
+}
+
+// DescribeEventBusRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEventBus for more information on using the DescribeEventBus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Displays the external AWS accounts that are permitted to write events to
+// your account using your account's event bus, and the associated policy. To
+// enable your account to receive events from other accounts, use PutPermission.
 //
 //    // Example sending a request using the DescribeEventBusRequest method.
-//    req, resp := client.DescribeEventBusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventBusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBus
-func (c *CloudWatchEvents) DescribeEventBusRequest(input *DescribeEventBusInput) (req *aws.Request, output *DescribeEventBusOutput) {
+func (c *CloudWatchEvents) DescribeEventBusRequest(input *DescribeEventBusInput) DescribeEventBusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventBus,
 		HTTPMethod: "POST",
@@ -139,80 +110,42 @@ func (c *CloudWatchEvents) DescribeEventBusRequest(input *DescribeEventBusInput)
 		input = &DescribeEventBusInput{}
 	}
 
-	output = &DescribeEventBusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventBus API operation for Amazon CloudWatch Events.
-//
-// Displays the external AWS accounts that are permitted to write events to
-// your account using your account's event bus, and the associated policy. To
-// enable your account to receive events from other accounts, use PutPermission.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation DescribeEventBus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBus
-func (c *CloudWatchEvents) DescribeEventBus(input *DescribeEventBusInput) (*DescribeEventBusOutput, error) {
-	req, out := c.DescribeEventBusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventBusWithContext is the same as DescribeEventBus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventBus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) DescribeEventBusWithContext(ctx aws.Context, input *DescribeEventBusInput, opts ...aws.Option) (*DescribeEventBusOutput, error) {
-	req, out := c.DescribeEventBusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventBusOutput{})
+	return DescribeEventBusRequest{Request: req, Input: input}
 }
 
 const opDescribeRule = "DescribeRule"
 
-// DescribeRuleRequest generates a "aws.Request" representing the
-// client's request for the DescribeRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeRuleRequest is a API request type for the DescribeRule API operation.
+type DescribeRuleRequest struct {
+	*aws.Request
+	Input *DescribeRuleInput
+}
+
+// Send marshals and sends the DescribeRule API request.
+func (r DescribeRuleRequest) Send() (*DescribeRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRuleOutput), nil
+}
+
+// DescribeRuleRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeRule for more information on using the DescribeRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified rule.
 //
 //    // Example sending a request using the DescribeRuleRequest method.
-//    req, resp := client.DescribeRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule
-func (c *CloudWatchEvents) DescribeRuleRequest(input *DescribeRuleInput) (req *aws.Request, output *DescribeRuleOutput) {
+func (c *CloudWatchEvents) DescribeRuleRequest(input *DescribeRuleInput) DescribeRuleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRule,
 		HTTPMethod: "POST",
@@ -223,78 +156,46 @@ func (c *CloudWatchEvents) DescribeRuleRequest(input *DescribeRuleInput) (req *a
 		input = &DescribeRuleInput{}
 	}
 
-	output = &DescribeRuleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeRule API operation for Amazon CloudWatch Events.
-//
-// Describes the specified rule.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation DescribeRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule
-func (c *CloudWatchEvents) DescribeRule(input *DescribeRuleInput) (*DescribeRuleOutput, error) {
-	req, out := c.DescribeRuleRequest(input)
-	return out, req.Send()
-}
-
-// DescribeRuleWithContext is the same as DescribeRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) DescribeRuleWithContext(ctx aws.Context, input *DescribeRuleInput, opts ...aws.Option) (*DescribeRuleOutput, error) {
-	req, out := c.DescribeRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeRuleOutput{})
+	return DescribeRuleRequest{Request: req, Input: input}
 }
 
 const opDisableRule = "DisableRule"
 
-// DisableRuleRequest generates a "aws.Request" representing the
-// client's request for the DisableRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableRuleRequest is a API request type for the DisableRule API operation.
+type DisableRuleRequest struct {
+	*aws.Request
+	Input *DisableRuleInput
+}
+
+// Send marshals and sends the DisableRule API request.
+func (r DisableRuleRequest) Send() (*DisableRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableRuleOutput), nil
+}
+
+// DisableRuleRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Disables the specified rule. A disabled rule won't match any events, and
+// won't self-trigger if it has a schedule expression.
 //
-// See DisableRule for more information on using the DisableRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you disable a rule, incoming events might continue to match to the disabled
+// rule. Please allow a short period of time for changes to take effect.
 //
 //    // Example sending a request using the DisableRuleRequest method.
-//    req, resp := client.DisableRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRule
-func (c *CloudWatchEvents) DisableRuleRequest(input *DisableRuleInput) (req *aws.Request, output *DisableRuleOutput) {
+func (c *CloudWatchEvents) DisableRuleRequest(input *DisableRuleInput) DisableRuleRequest {
 	op := &aws.Operation{
 		Name:       opDisableRule,
 		HTTPMethod: "POST",
@@ -305,87 +206,48 @@ func (c *CloudWatchEvents) DisableRuleRequest(input *DisableRuleInput) (req *aws
 		input = &DisableRuleInput{}
 	}
 
-	output = &DisableRuleOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DisableRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DisableRule API operation for Amazon CloudWatch Events.
-//
-// Disables the specified rule. A disabled rule won't match any events, and
-// won't self-trigger if it has a schedule expression.
-//
-// When you disable a rule, incoming events might continue to match to the disabled
-// rule. Please allow a short period of time for changes to take effect.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation DisableRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRule
-func (c *CloudWatchEvents) DisableRule(input *DisableRuleInput) (*DisableRuleOutput, error) {
-	req, out := c.DisableRuleRequest(input)
-	return out, req.Send()
-}
-
-// DisableRuleWithContext is the same as DisableRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) DisableRuleWithContext(ctx aws.Context, input *DisableRuleInput, opts ...aws.Option) (*DisableRuleOutput, error) {
-	req, out := c.DisableRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DisableRuleRequest{Request: req, Input: input}
 }
 
 const opEnableRule = "EnableRule"
 
-// EnableRuleRequest generates a "aws.Request" representing the
-// client's request for the EnableRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableRuleRequest is a API request type for the EnableRule API operation.
+type EnableRuleRequest struct {
+	*aws.Request
+	Input *EnableRuleInput
+}
+
+// Send marshals and sends the EnableRule API request.
+func (r EnableRuleRequest) Send() (*EnableRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableRuleOutput), nil
+}
+
+// EnableRuleRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Enables the specified rule. If the rule does not exist, the operation fails.
 //
-// See EnableRule for more information on using the EnableRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you enable a rule, incoming events might not immediately start matching
+// to a newly enabled rule. Please allow a short period of time for changes
+// to take effect.
 //
 //    // Example sending a request using the EnableRuleRequest method.
-//    req, resp := client.EnableRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule
-func (c *CloudWatchEvents) EnableRuleRequest(input *EnableRuleInput) (req *aws.Request, output *EnableRuleOutput) {
+func (c *CloudWatchEvents) EnableRuleRequest(input *EnableRuleInput) EnableRuleRequest {
 	op := &aws.Operation{
 		Name:       opEnableRule,
 		HTTPMethod: "POST",
@@ -396,87 +258,45 @@ func (c *CloudWatchEvents) EnableRuleRequest(input *EnableRuleInput) (req *aws.R
 		input = &EnableRuleInput{}
 	}
 
-	output = &EnableRuleOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &EnableRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// EnableRule API operation for Amazon CloudWatch Events.
-//
-// Enables the specified rule. If the rule does not exist, the operation fails.
-//
-// When you enable a rule, incoming events might not immediately start matching
-// to a newly enabled rule. Please allow a short period of time for changes
-// to take effect.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation EnableRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule
-func (c *CloudWatchEvents) EnableRule(input *EnableRuleInput) (*EnableRuleOutput, error) {
-	req, out := c.EnableRuleRequest(input)
-	return out, req.Send()
-}
-
-// EnableRuleWithContext is the same as EnableRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) EnableRuleWithContext(ctx aws.Context, input *EnableRuleInput, opts ...aws.Option) (*EnableRuleOutput, error) {
-	req, out := c.EnableRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return EnableRuleRequest{Request: req, Input: input}
 }
 
 const opListRuleNamesByTarget = "ListRuleNamesByTarget"
 
-// ListRuleNamesByTargetRequest generates a "aws.Request" representing the
-// client's request for the ListRuleNamesByTarget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRuleNamesByTargetRequest is a API request type for the ListRuleNamesByTarget API operation.
+type ListRuleNamesByTargetRequest struct {
+	*aws.Request
+	Input *ListRuleNamesByTargetInput
+}
+
+// Send marshals and sends the ListRuleNamesByTarget API request.
+func (r ListRuleNamesByTargetRequest) Send() (*ListRuleNamesByTargetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRuleNamesByTargetOutput), nil
+}
+
+// ListRuleNamesByTargetRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListRuleNamesByTarget for more information on using the ListRuleNamesByTarget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the rules for the specified target. You can see which of the rules
+// in Amazon CloudWatch Events can invoke a specific target in your account.
 //
 //    // Example sending a request using the ListRuleNamesByTargetRequest method.
-//    req, resp := client.ListRuleNamesByTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRuleNamesByTargetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTarget
-func (c *CloudWatchEvents) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput) (req *aws.Request, output *ListRuleNamesByTargetOutput) {
+func (c *CloudWatchEvents) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput) ListRuleNamesByTargetRequest {
 	op := &aws.Operation{
 		Name:       opListRuleNamesByTarget,
 		HTTPMethod: "POST",
@@ -487,76 +307,43 @@ func (c *CloudWatchEvents) ListRuleNamesByTargetRequest(input *ListRuleNamesByTa
 		input = &ListRuleNamesByTargetInput{}
 	}
 
-	output = &ListRuleNamesByTargetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRuleNamesByTarget API operation for Amazon CloudWatch Events.
-//
-// Lists the rules for the specified target. You can see which of the rules
-// in Amazon CloudWatch Events can invoke a specific target in your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation ListRuleNamesByTarget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTarget
-func (c *CloudWatchEvents) ListRuleNamesByTarget(input *ListRuleNamesByTargetInput) (*ListRuleNamesByTargetOutput, error) {
-	req, out := c.ListRuleNamesByTargetRequest(input)
-	return out, req.Send()
-}
-
-// ListRuleNamesByTargetWithContext is the same as ListRuleNamesByTarget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRuleNamesByTarget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) ListRuleNamesByTargetWithContext(ctx aws.Context, input *ListRuleNamesByTargetInput, opts ...aws.Option) (*ListRuleNamesByTargetOutput, error) {
-	req, out := c.ListRuleNamesByTargetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRuleNamesByTargetOutput{})
+	return ListRuleNamesByTargetRequest{Request: req, Input: input}
 }
 
 const opListRules = "ListRules"
 
-// ListRulesRequest generates a "aws.Request" representing the
-// client's request for the ListRules operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRulesRequest is a API request type for the ListRules API operation.
+type ListRulesRequest struct {
+	*aws.Request
+	Input *ListRulesInput
+}
+
+// Send marshals and sends the ListRules API request.
+func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRulesOutput), nil
+}
+
+// ListRulesRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListRules for more information on using the ListRules
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists your Amazon CloudWatch Events rules. You can either list all the rules
+// or you can provide a prefix to match to the rule names.
 //
 //    // Example sending a request using the ListRulesRequest method.
-//    req, resp := client.ListRulesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRulesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules
-func (c *CloudWatchEvents) ListRulesRequest(input *ListRulesInput) (req *aws.Request, output *ListRulesOutput) {
+func (c *CloudWatchEvents) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 	op := &aws.Operation{
 		Name:       opListRules,
 		HTTPMethod: "POST",
@@ -567,76 +354,42 @@ func (c *CloudWatchEvents) ListRulesRequest(input *ListRulesInput) (req *aws.Req
 		input = &ListRulesInput{}
 	}
 
-	output = &ListRulesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRules API operation for Amazon CloudWatch Events.
-//
-// Lists your Amazon CloudWatch Events rules. You can either list all the rules
-// or you can provide a prefix to match to the rule names.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation ListRules for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules
-func (c *CloudWatchEvents) ListRules(input *ListRulesInput) (*ListRulesOutput, error) {
-	req, out := c.ListRulesRequest(input)
-	return out, req.Send()
-}
-
-// ListRulesWithContext is the same as ListRules with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRules for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) ListRulesWithContext(ctx aws.Context, input *ListRulesInput, opts ...aws.Option) (*ListRulesOutput, error) {
-	req, out := c.ListRulesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRulesOutput{})
+	return ListRulesRequest{Request: req, Input: input}
 }
 
 const opListTargetsByRule = "ListTargetsByRule"
 
-// ListTargetsByRuleRequest generates a "aws.Request" representing the
-// client's request for the ListTargetsByRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTargetsByRuleRequest is a API request type for the ListTargetsByRule API operation.
+type ListTargetsByRuleRequest struct {
+	*aws.Request
+	Input *ListTargetsByRuleInput
+}
+
+// Send marshals and sends the ListTargetsByRule API request.
+func (r ListTargetsByRuleRequest) Send() (*ListTargetsByRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTargetsByRuleOutput), nil
+}
+
+// ListTargetsByRuleRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTargetsByRule for more information on using the ListTargetsByRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the targets assigned to the specified rule.
 //
 //    // Example sending a request using the ListTargetsByRuleRequest method.
-//    req, resp := client.ListTargetsByRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTargetsByRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule
-func (c *CloudWatchEvents) ListTargetsByRuleRequest(input *ListTargetsByRuleInput) (req *aws.Request, output *ListTargetsByRuleOutput) {
+func (c *CloudWatchEvents) ListTargetsByRuleRequest(input *ListTargetsByRuleInput) ListTargetsByRuleRequest {
 	op := &aws.Operation{
 		Name:       opListTargetsByRule,
 		HTTPMethod: "POST",
@@ -647,78 +400,43 @@ func (c *CloudWatchEvents) ListTargetsByRuleRequest(input *ListTargetsByRuleInpu
 		input = &ListTargetsByRuleInput{}
 	}
 
-	output = &ListTargetsByRuleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTargetsByRule API operation for Amazon CloudWatch Events.
-//
-// Lists the targets assigned to the specified rule.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation ListTargetsByRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule
-func (c *CloudWatchEvents) ListTargetsByRule(input *ListTargetsByRuleInput) (*ListTargetsByRuleOutput, error) {
-	req, out := c.ListTargetsByRuleRequest(input)
-	return out, req.Send()
-}
-
-// ListTargetsByRuleWithContext is the same as ListTargetsByRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTargetsByRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) ListTargetsByRuleWithContext(ctx aws.Context, input *ListTargetsByRuleInput, opts ...aws.Option) (*ListTargetsByRuleOutput, error) {
-	req, out := c.ListTargetsByRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTargetsByRuleOutput{})
+	return ListTargetsByRuleRequest{Request: req, Input: input}
 }
 
 const opPutEvents = "PutEvents"
 
-// PutEventsRequest generates a "aws.Request" representing the
-// client's request for the PutEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutEventsRequest is a API request type for the PutEvents API operation.
+type PutEventsRequest struct {
+	*aws.Request
+	Input *PutEventsInput
+}
+
+// Send marshals and sends the PutEvents API request.
+func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutEventsOutput), nil
+}
+
+// PutEventsRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutEvents for more information on using the PutEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sends custom events to Amazon CloudWatch Events so that they can be matched
+// to rules.
 //
 //    // Example sending a request using the PutEventsRequest method.
-//    req, resp := client.PutEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEvents
-func (c *CloudWatchEvents) PutEventsRequest(input *PutEventsInput) (req *aws.Request, output *PutEventsOutput) {
+func (c *CloudWatchEvents) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 	op := &aws.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
@@ -729,94 +447,30 @@ func (c *CloudWatchEvents) PutEventsRequest(input *PutEventsInput) (req *aws.Req
 		input = &PutEventsInput{}
 	}
 
-	output = &PutEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutEvents API operation for Amazon CloudWatch Events.
-//
-// Sends custom events to Amazon CloudWatch Events so that they can be matched
-// to rules.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation PutEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEvents
-func (c *CloudWatchEvents) PutEvents(input *PutEventsInput) (*PutEventsOutput, error) {
-	req, out := c.PutEventsRequest(input)
-	return out, req.Send()
-}
-
-// PutEventsWithContext is the same as PutEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) PutEventsWithContext(ctx aws.Context, input *PutEventsInput, opts ...aws.Option) (*PutEventsOutput, error) {
-	req, out := c.PutEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutEventsOutput{})
+	return PutEventsRequest{Request: req, Input: input}
 }
 
 const opPutPermission = "PutPermission"
 
-// PutPermissionRequest generates a "aws.Request" representing the
-// client's request for the PutPermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutPermission for more information on using the PutPermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutPermissionRequest method.
-//    req, resp := client.PutPermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission
-func (c *CloudWatchEvents) PutPermissionRequest(input *PutPermissionInput) (req *aws.Request, output *PutPermissionOutput) {
-	op := &aws.Operation{
-		Name:       opPutPermission,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutPermissionInput{}
-	}
-
-	output = &PutPermissionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// PutPermissionRequest is a API request type for the PutPermission API operation.
+type PutPermissionRequest struct {
+	*aws.Request
+	Input *PutPermissionInput
 }
 
-// PutPermission API operation for Amazon CloudWatch Events.
+// Send marshals and sends the PutPermission API request.
+func (r PutPermissionRequest) Send() (*PutPermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutPermissionOutput), nil
+}
+
+// PutPermissionRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
 // Running PutPermission permits the specified AWS account to put events to
 // your account's default event bus. CloudWatch Events rules in your account
@@ -831,91 +485,51 @@ func (c *CloudWatchEvents) PutPermissionRequest(input *PutPermissionInput) (req 
 //
 // The permission policy on the default event bus cannot exceed 10KB in size.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation PutPermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodePolicyLengthExceededException "PolicyLengthExceededException"
-//   The event bus policy is too long. For more information, see the limits.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission
-func (c *CloudWatchEvents) PutPermission(input *PutPermissionInput) (*PutPermissionOutput, error) {
-	req, out := c.PutPermissionRequest(input)
-	return out, req.Send()
-}
-
-// PutPermissionWithContext is the same as PutPermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutPermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) PutPermissionWithContext(ctx aws.Context, input *PutPermissionInput, opts ...aws.Option) (*PutPermissionOutput, error) {
-	req, out := c.PutPermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutRule = "PutRule"
-
-// PutRuleRequest generates a "aws.Request" representing the
-// client's request for the PutRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRule for more information on using the PutRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutRuleRequest method.
-//    req, resp := client.PutRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutPermissionRequest method.
+//    req := client.PutPermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRule
-func (c *CloudWatchEvents) PutRuleRequest(input *PutRuleInput) (req *aws.Request, output *PutRuleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission
+func (c *CloudWatchEvents) PutPermissionRequest(input *PutPermissionInput) PutPermissionRequest {
 	op := &aws.Operation{
-		Name:       opPutRule,
+		Name:       opPutPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutRuleInput{}
+		input = &PutPermissionInput{}
 	}
 
-	output = &PutRuleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PutPermissionOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return PutPermissionRequest{Request: req, Input: input}
 }
 
-// PutRule API operation for Amazon CloudWatch Events.
+const opPutRule = "PutRule"
+
+// PutRuleRequest is a API request type for the PutRule API operation.
+type PutRuleRequest struct {
+	*aws.Request
+	Input *PutRuleInput
+}
+
+// Send marshals and sends the PutRule API request.
+func (r PutRuleRequest) Send() (*PutRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRuleOutput), nil
+}
+
+// PutRuleRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
 // Creates or updates the specified rule. Rules are enabled by default, or based
 // on value of the state. You can disable a rule using DisableRule.
@@ -935,91 +549,49 @@ func (c *CloudWatchEvents) PutRuleRequest(input *PutRuleInput) (req *aws.Request
 // and rules. Be sure to use the correct ARN characters when creating event
 // patterns so that they match the ARN syntax in the event you want to match.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation PutRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidEventPatternException "InvalidEventPatternException"
-//   The event pattern is not valid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You tried to create more rules or add more targets to a rule than is allowed.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRule
-func (c *CloudWatchEvents) PutRule(input *PutRuleInput) (*PutRuleOutput, error) {
-	req, out := c.PutRuleRequest(input)
-	return out, req.Send()
-}
-
-// PutRuleWithContext is the same as PutRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) PutRuleWithContext(ctx aws.Context, input *PutRuleInput, opts ...aws.Option) (*PutRuleOutput, error) {
-	req, out := c.PutRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutTargets = "PutTargets"
-
-// PutTargetsRequest generates a "aws.Request" representing the
-// client's request for the PutTargets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutTargets for more information on using the PutTargets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutTargetsRequest method.
-//    req, resp := client.PutTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutRuleRequest method.
+//    req := client.PutRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargets
-func (c *CloudWatchEvents) PutTargetsRequest(input *PutTargetsInput) (req *aws.Request, output *PutTargetsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRule
+func (c *CloudWatchEvents) PutRuleRequest(input *PutRuleInput) PutRuleRequest {
 	op := &aws.Operation{
-		Name:       opPutTargets,
+		Name:       opPutRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutTargetsInput{}
+		input = &PutRuleInput{}
 	}
 
-	output = &PutTargetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PutRuleOutput{})
+	return PutRuleRequest{Request: req, Input: input}
 }
 
-// PutTargets API operation for Amazon CloudWatch Events.
+const opPutTargets = "PutTargets"
+
+// PutTargetsRequest is a API request type for the PutTargets API operation.
+type PutTargetsRequest struct {
+	*aws.Request
+	Input *PutTargetsInput
+}
+
+// Send marshals and sends the PutTargets API request.
+func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutTargetsOutput), nil
+}
+
+// PutTargetsRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
 // Adds the specified targets to the specified rule, or updates the targets
 // if they are already associated with the rule.
@@ -1110,75 +682,64 @@ func (c *CloudWatchEvents) PutTargetsRequest(input *PutTargetsInput) (req *aws.R
 // entry in FailedEntries provides the ID of the failed target and the error
 // code.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation PutTargets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You tried to create more rules or add more targets to a rule than is allowed.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
+//    // Example sending a request using the PutTargetsRequest method.
+//    req := client.PutTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargets
-func (c *CloudWatchEvents) PutTargets(input *PutTargetsInput) (*PutTargetsOutput, error) {
-	req, out := c.PutTargetsRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchEvents) PutTargetsRequest(input *PutTargetsInput) PutTargetsRequest {
+	op := &aws.Operation{
+		Name:       opPutTargets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutTargetsWithContext is the same as PutTargets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutTargets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) PutTargetsWithContext(ctx aws.Context, input *PutTargetsInput, opts ...aws.Option) (*PutTargetsOutput, error) {
-	req, out := c.PutTargetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutTargetsInput{}
+	}
+
+	req := c.newRequest(op, input, &PutTargetsOutput{})
+	return PutTargetsRequest{Request: req, Input: input}
 }
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws.Request" representing the
-// client's request for the RemovePermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemovePermissionRequest is a API request type for the RemovePermission API operation.
+type RemovePermissionRequest struct {
+	*aws.Request
+	Input *RemovePermissionInput
+}
+
+// Send marshals and sends the RemovePermission API request.
+func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemovePermissionOutput), nil
+}
+
+// RemovePermissionRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemovePermission for more information on using the RemovePermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Revokes the permission of another AWS account to be able to put events to
+// your default event bus. Specify the account to revoke by the StatementId
+// value that you associated with the account when you granted it permission
+// with PutPermission. You can find the StatementId by using DescribeEventBus.
 //
 //    // Example sending a request using the RemovePermissionRequest method.
-//    req, resp := client.RemovePermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemovePermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermission
-func (c *CloudWatchEvents) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
+func (c *CloudWatchEvents) RemovePermissionRequest(input *RemovePermissionInput) RemovePermissionRequest {
 	op := &aws.Operation{
 		Name:       opRemovePermission,
 		HTTPMethod: "POST",
@@ -1189,102 +750,32 @@ func (c *CloudWatchEvents) RemovePermissionRequest(input *RemovePermissionInput)
 		input = &RemovePermissionInput{}
 	}
 
-	output = &RemovePermissionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemovePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemovePermission API operation for Amazon CloudWatch Events.
-//
-// Revokes the permission of another AWS account to be able to put events to
-// your default event bus. Specify the account to revoke by the StatementId
-// value that you associated with the account when you granted it permission
-// with PutPermission. You can find the StatementId by using DescribeEventBus.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation RemovePermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermission
-func (c *CloudWatchEvents) RemovePermission(input *RemovePermissionInput) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	return out, req.Send()
-}
-
-// RemovePermissionWithContext is the same as RemovePermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemovePermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemovePermissionRequest{Request: req, Input: input}
 }
 
 const opRemoveTargets = "RemoveTargets"
 
-// RemoveTargetsRequest generates a "aws.Request" representing the
-// client's request for the RemoveTargets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTargets for more information on using the RemoveTargets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RemoveTargetsRequest method.
-//    req, resp := client.RemoveTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargets
-func (c *CloudWatchEvents) RemoveTargetsRequest(input *RemoveTargetsInput) (req *aws.Request, output *RemoveTargetsOutput) {
-	op := &aws.Operation{
-		Name:       opRemoveTargets,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RemoveTargetsInput{}
-	}
-
-	output = &RemoveTargetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RemoveTargetsRequest is a API request type for the RemoveTargets API operation.
+type RemoveTargetsRequest struct {
+	*aws.Request
+	Input *RemoveTargetsInput
 }
 
-// RemoveTargets API operation for Amazon CloudWatch Events.
+// Send marshals and sends the RemoveTargets API request.
+func (r RemoveTargetsRequest) Send() (*RemoveTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTargetsOutput), nil
+}
+
+// RemoveTargetsRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
 // Removes the specified targets from the specified rule. When the rule is triggered,
 // those targets are no longer be invoked.
@@ -1298,72 +789,66 @@ func (c *CloudWatchEvents) RemoveTargetsRequest(input *RemoveTargetsInput) (req 
 // entry in FailedEntries provides the ID of the failed target and the error
 // code.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation RemoveTargets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An entity that you specified does not exist.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   There is concurrent modification on a rule or target.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
+//    // Example sending a request using the RemoveTargetsRequest method.
+//    req := client.RemoveTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargets
-func (c *CloudWatchEvents) RemoveTargets(input *RemoveTargetsInput) (*RemoveTargetsOutput, error) {
-	req, out := c.RemoveTargetsRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchEvents) RemoveTargetsRequest(input *RemoveTargetsInput) RemoveTargetsRequest {
+	op := &aws.Operation{
+		Name:       opRemoveTargets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RemoveTargetsWithContext is the same as RemoveTargets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTargets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) RemoveTargetsWithContext(ctx aws.Context, input *RemoveTargetsInput, opts ...aws.Option) (*RemoveTargetsOutput, error) {
-	req, out := c.RemoveTargetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RemoveTargetsInput{}
+	}
+
+	req := c.newRequest(op, input, &RemoveTargetsOutput{})
+	return RemoveTargetsRequest{Request: req, Input: input}
 }
 
 const opTestEventPattern = "TestEventPattern"
 
-// TestEventPatternRequest generates a "aws.Request" representing the
-// client's request for the TestEventPattern operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TestEventPatternRequest is a API request type for the TestEventPattern API operation.
+type TestEventPatternRequest struct {
+	*aws.Request
+	Input *TestEventPatternInput
+}
+
+// Send marshals and sends the TestEventPattern API request.
+func (r TestEventPatternRequest) Send() (*TestEventPatternOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TestEventPatternOutput), nil
+}
+
+// TestEventPatternRequest returns a request value for making API operation for
+// Amazon CloudWatch Events.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Tests whether the specified event pattern matches the provided event.
 //
-// See TestEventPattern for more information on using the TestEventPattern
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Most services in AWS treat : or / as the same character in Amazon Resource
+// Names (ARNs). However, CloudWatch Events uses an exact match in event patterns
+// and rules. Be sure to use the correct ARN characters when creating event
+// patterns so that they match the ARN syntax in the event you want to match.
 //
 //    // Example sending a request using the TestEventPatternRequest method.
-//    req, resp := client.TestEventPatternRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TestEventPatternRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPattern
-func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput) (req *aws.Request, output *TestEventPatternOutput) {
+func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput) TestEventPatternRequest {
 	op := &aws.Operation{
 		Name:       opTestEventPattern,
 		HTTPMethod: "POST",
@@ -1374,54 +859,8 @@ func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput)
 		input = &TestEventPatternInput{}
 	}
 
-	output = &TestEventPatternOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TestEventPattern API operation for Amazon CloudWatch Events.
-//
-// Tests whether the specified event pattern matches the provided event.
-//
-// Most services in AWS treat : or / as the same character in Amazon Resource
-// Names (ARNs). However, CloudWatch Events uses an exact match in event patterns
-// and rules. Be sure to use the correct ARN characters when creating event
-// patterns so that they match the ARN syntax in the event you want to match.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Events's
-// API operation TestEventPattern for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidEventPatternException "InvalidEventPatternException"
-//   The event pattern is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   This exception occurs due to unexpected causes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPattern
-func (c *CloudWatchEvents) TestEventPattern(input *TestEventPatternInput) (*TestEventPatternOutput, error) {
-	req, out := c.TestEventPatternRequest(input)
-	return out, req.Send()
-}
-
-// TestEventPatternWithContext is the same as TestEventPattern with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TestEventPattern for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchEvents) TestEventPatternWithContext(ctx aws.Context, input *TestEventPatternInput, opts ...aws.Option) (*TestEventPatternOutput, error) {
-	req, out := c.TestEventPatternRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TestEventPatternOutput{})
+	return TestEventPatternRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest

@@ -31,7 +31,7 @@ func parseTime(layout, value string) *time.Time {
 // security group, and migration task. These tags can also be used with cost allocation
 // reporting to track cost associated with AWS DMS resources, or used in a Condition
 // statement in an IAM policy for AWS DMS.
-func ExampleDatabaseMigrationService_AddTagsToResource_shared00() {
+func ExampleDatabaseMigrationService_AddTagsToResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -48,7 +48,8 @@ func ExampleDatabaseMigrationService_AddTagsToResource_shared00() {
 		},
 	}
 
-	result, err := svc.AddTagsToResource(input)
+	req := svc.AddTagsToResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -71,7 +72,7 @@ func ExampleDatabaseMigrationService_AddTagsToResource_shared00() {
 // Create endpoint
 //
 // Creates an endpoint using the provided settings.
-func ExampleDatabaseMigrationService_CreateEndpoint_shared00() {
+func ExampleDatabaseMigrationService_CreateEndpointRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -99,7 +100,8 @@ func ExampleDatabaseMigrationService_CreateEndpoint_shared00() {
 		Username: aws.String("username"),
 	}
 
-	result, err := svc.CreateEndpoint(input)
+	req := svc.CreateEndpointRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -132,7 +134,7 @@ func ExampleDatabaseMigrationService_CreateEndpoint_shared00() {
 // Create replication instance
 //
 // Creates the replication instance using the specified parameters.
-func ExampleDatabaseMigrationService_CreateReplicationInstance_shared00() {
+func ExampleDatabaseMigrationService_CreateReplicationInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -159,7 +161,8 @@ func ExampleDatabaseMigrationService_CreateReplicationInstance_shared00() {
 		},
 	}
 
-	result, err := svc.CreateReplicationInstance(input)
+	req := svc.CreateReplicationInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -200,7 +203,7 @@ func ExampleDatabaseMigrationService_CreateReplicationInstance_shared00() {
 // Create replication subnet group
 //
 // Creates a replication subnet group given a list of the subnet IDs in a VPC.
-func ExampleDatabaseMigrationService_CreateReplicationSubnetGroup_shared00() {
+func ExampleDatabaseMigrationService_CreateReplicationSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -222,7 +225,8 @@ func ExampleDatabaseMigrationService_CreateReplicationSubnetGroup_shared00() {
 		},
 	}
 
-	result, err := svc.CreateReplicationSubnetGroup(input)
+	req := svc.CreateReplicationSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -255,7 +259,7 @@ func ExampleDatabaseMigrationService_CreateReplicationSubnetGroup_shared00() {
 // Create replication task
 //
 // Creates a replication task using the specified parameters.
-func ExampleDatabaseMigrationService_CreateReplicationTask_shared00() {
+func ExampleDatabaseMigrationService_CreateReplicationTaskRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -279,7 +283,8 @@ func ExampleDatabaseMigrationService_CreateReplicationTask_shared00() {
 		TargetEndpointArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E"),
 	}
 
-	result, err := svc.CreateReplicationTask(input)
+	req := svc.CreateReplicationTaskRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -312,7 +317,7 @@ func ExampleDatabaseMigrationService_CreateReplicationTask_shared00() {
 // Delete Certificate
 //
 // Deletes the specified certificate.
-func ExampleDatabaseMigrationService_DeleteCertificate_shared00() {
+func ExampleDatabaseMigrationService_DeleteCertificateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -323,7 +328,8 @@ func ExampleDatabaseMigrationService_DeleteCertificate_shared00() {
 		CertificateArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUSM457DE6XFJCJQ"),
 	}
 
-	result, err := svc.DeleteCertificate(input)
+	req := svc.DeleteCertificateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -350,7 +356,7 @@ func ExampleDatabaseMigrationService_DeleteCertificate_shared00() {
 // Deletes the specified endpoint. All tasks associated with the endpoint must be deleted
 // before you can delete the endpoint.
 //
-func ExampleDatabaseMigrationService_DeleteEndpoint_shared00() {
+func ExampleDatabaseMigrationService_DeleteEndpointRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -361,7 +367,8 @@ func ExampleDatabaseMigrationService_DeleteEndpoint_shared00() {
 		EndpointArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM"),
 	}
 
-	result, err := svc.DeleteEndpoint(input)
+	req := svc.DeleteEndpointRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -388,7 +395,7 @@ func ExampleDatabaseMigrationService_DeleteEndpoint_shared00() {
 // Deletes the specified replication instance. You must delete any migration tasks that
 // are associated with the replication instance before you can delete it.
 //
-func ExampleDatabaseMigrationService_DeleteReplicationInstance_shared00() {
+func ExampleDatabaseMigrationService_DeleteReplicationInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -399,7 +406,8 @@ func ExampleDatabaseMigrationService_DeleteReplicationInstance_shared00() {
 		ReplicationInstanceArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 	}
 
-	result, err := svc.DeleteReplicationInstance(input)
+	req := svc.DeleteReplicationInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -424,7 +432,7 @@ func ExampleDatabaseMigrationService_DeleteReplicationInstance_shared00() {
 // Delete Replication Subnet Group
 //
 // Deletes a replication subnet group.
-func ExampleDatabaseMigrationService_DeleteReplicationSubnetGroup_shared00() {
+func ExampleDatabaseMigrationService_DeleteReplicationSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -435,7 +443,8 @@ func ExampleDatabaseMigrationService_DeleteReplicationSubnetGroup_shared00() {
 		ReplicationSubnetGroupIdentifier: aws.String("us-west-2ab-vpc-215ds366"),
 	}
 
-	result, err := svc.DeleteReplicationSubnetGroup(input)
+	req := svc.DeleteReplicationSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -460,7 +469,7 @@ func ExampleDatabaseMigrationService_DeleteReplicationSubnetGroup_shared00() {
 // Delete Replication Task
 //
 // Deletes the specified replication task.
-func ExampleDatabaseMigrationService_DeleteReplicationTask_shared00() {
+func ExampleDatabaseMigrationService_DeleteReplicationTaskRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -471,7 +480,8 @@ func ExampleDatabaseMigrationService_DeleteReplicationTask_shared00() {
 		ReplicationTaskArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 	}
 
-	result, err := svc.DeleteReplicationTask(input)
+	req := svc.DeleteReplicationTaskRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -499,7 +509,7 @@ func ExampleDatabaseMigrationService_DeleteReplicationTask_shared00() {
 // AWS DMS quotas for the account, such as the number of replication instances allowed.
 // The description for a quota includes the quota name, current usage toward that quota,
 // and the quota's maximum value. This operation does not take any parameters.
-func ExampleDatabaseMigrationService_DescribeAccountAttributes_shared00() {
+func ExampleDatabaseMigrationService_DescribeAccountAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -508,7 +518,8 @@ func ExampleDatabaseMigrationService_DescribeAccountAttributes_shared00() {
 	svc := databasemigrationservice.New(cfg)
 	input := &databasemigrationservice.DescribeAccountAttributesInput{}
 
-	result, err := svc.DescribeAccountAttributes(input)
+	req := svc.DescribeAccountAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -529,7 +540,7 @@ func ExampleDatabaseMigrationService_DescribeAccountAttributes_shared00() {
 // Describe certificates
 //
 // Provides a description of the certificate.
-func ExampleDatabaseMigrationService_DescribeCertificates_shared00() {
+func ExampleDatabaseMigrationService_DescribeCertificatesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -550,7 +561,8 @@ func ExampleDatabaseMigrationService_DescribeCertificates_shared00() {
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeCertificates(input)
+	req := svc.DescribeCertificatesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -574,7 +586,7 @@ func ExampleDatabaseMigrationService_DescribeCertificates_shared00() {
 //
 // Describes the status of the connections that have been made between the replication
 // instance and an endpoint. Connections are created when you test an endpoint.
-func ExampleDatabaseMigrationService_DescribeConnections_shared00() {
+func ExampleDatabaseMigrationService_DescribeConnectionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -595,7 +607,8 @@ func ExampleDatabaseMigrationService_DescribeConnections_shared00() {
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeConnections(input)
+	req := svc.DescribeConnectionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -618,7 +631,7 @@ func ExampleDatabaseMigrationService_DescribeConnections_shared00() {
 // Describe endpoint types
 //
 // Returns information about the type of endpoints available.
-func ExampleDatabaseMigrationService_DescribeEndpointTypes_shared00() {
+func ExampleDatabaseMigrationService_DescribeEndpointTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -639,7 +652,8 @@ func ExampleDatabaseMigrationService_DescribeEndpointTypes_shared00() {
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeEndpointTypes(input)
+	req := svc.DescribeEndpointTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -660,7 +674,7 @@ func ExampleDatabaseMigrationService_DescribeEndpointTypes_shared00() {
 // Describe endpoints
 //
 // Returns information about the endpoints for your account in the current region.
-func ExampleDatabaseMigrationService_DescribeEndpoints_shared00() {
+func ExampleDatabaseMigrationService_DescribeEndpointsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -681,7 +695,8 @@ func ExampleDatabaseMigrationService_DescribeEndpoints_shared00() {
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeEndpoints(input)
+	req := svc.DescribeEndpointsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -705,7 +720,7 @@ func ExampleDatabaseMigrationService_DescribeEndpoints_shared00() {
 //
 // Returns information about the replication instance types that can be created in the
 // specified region.
-func ExampleDatabaseMigrationService_DescribeOrderableReplicationInstances_shared00() {
+func ExampleDatabaseMigrationService_DescribeOrderableReplicationInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -717,7 +732,8 @@ func ExampleDatabaseMigrationService_DescribeOrderableReplicationInstances_share
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeOrderableReplicationInstances(input)
+	req := svc.DescribeOrderableReplicationInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -738,7 +754,7 @@ func ExampleDatabaseMigrationService_DescribeOrderableReplicationInstances_share
 // Describe refresh schema status
 //
 // Returns the status of the refresh-schemas operation.
-func ExampleDatabaseMigrationService_DescribeRefreshSchemasStatus_shared00() {
+func ExampleDatabaseMigrationService_DescribeRefreshSchemasStatusRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -749,7 +765,8 @@ func ExampleDatabaseMigrationService_DescribeRefreshSchemasStatus_shared00() {
 		EndpointArn: aws.String(""),
 	}
 
-	result, err := svc.DescribeRefreshSchemasStatus(input)
+	req := svc.DescribeRefreshSchemasStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -774,7 +791,7 @@ func ExampleDatabaseMigrationService_DescribeRefreshSchemasStatus_shared00() {
 // Describe replication instances
 //
 // Returns the status of the refresh-schemas operation.
-func ExampleDatabaseMigrationService_DescribeReplicationInstances_shared00() {
+func ExampleDatabaseMigrationService_DescribeReplicationInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -795,7 +812,8 @@ func ExampleDatabaseMigrationService_DescribeReplicationInstances_shared00() {
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeReplicationInstances(input)
+	req := svc.DescribeReplicationInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -818,7 +836,7 @@ func ExampleDatabaseMigrationService_DescribeReplicationInstances_shared00() {
 // Describe replication subnet groups
 //
 // Returns information about the replication subnet groups.
-func ExampleDatabaseMigrationService_DescribeReplicationSubnetGroups_shared00() {
+func ExampleDatabaseMigrationService_DescribeReplicationSubnetGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -839,7 +857,8 @@ func ExampleDatabaseMigrationService_DescribeReplicationSubnetGroups_shared00() 
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeReplicationSubnetGroups(input)
+	req := svc.DescribeReplicationSubnetGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -862,7 +881,7 @@ func ExampleDatabaseMigrationService_DescribeReplicationSubnetGroups_shared00() 
 // Describe replication tasks
 //
 // Returns information about replication tasks for your account in the current region.
-func ExampleDatabaseMigrationService_DescribeReplicationTasks_shared00() {
+func ExampleDatabaseMigrationService_DescribeReplicationTasksRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -883,7 +902,8 @@ func ExampleDatabaseMigrationService_DescribeReplicationTasks_shared00() {
 		MaxRecords: aws.Int64(123),
 	}
 
-	result, err := svc.DescribeReplicationTasks(input)
+	req := svc.DescribeReplicationTasksRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -906,7 +926,7 @@ func ExampleDatabaseMigrationService_DescribeReplicationTasks_shared00() {
 // Describe schemas
 //
 // Returns information about the schema for the specified endpoint.
-func ExampleDatabaseMigrationService_DescribeSchemas_shared00() {
+func ExampleDatabaseMigrationService_DescribeSchemasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -919,7 +939,8 @@ func ExampleDatabaseMigrationService_DescribeSchemas_shared00() {
 		MaxRecords:  aws.Int64(123),
 	}
 
-	result, err := svc.DescribeSchemas(input)
+	req := svc.DescribeSchemasRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -945,7 +966,7 @@ func ExampleDatabaseMigrationService_DescribeSchemas_shared00() {
 //
 // Returns table statistics on the database migration task, including table name, rows
 // inserted, rows updated, and rows deleted.
-func ExampleDatabaseMigrationService_DescribeTableStatistics_shared00() {
+func ExampleDatabaseMigrationService_DescribeTableStatisticsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -958,7 +979,8 @@ func ExampleDatabaseMigrationService_DescribeTableStatistics_shared00() {
 		ReplicationTaskArn: aws.String(""),
 	}
 
-	result, err := svc.DescribeTableStatistics(input)
+	req := svc.DescribeTableStatisticsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -983,7 +1005,7 @@ func ExampleDatabaseMigrationService_DescribeTableStatistics_shared00() {
 // Import certificate
 //
 // Uploads the specified certificate.
-func ExampleDatabaseMigrationService_ImportCertificate_shared00() {
+func ExampleDatabaseMigrationService_ImportCertificateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -995,7 +1017,8 @@ func ExampleDatabaseMigrationService_ImportCertificate_shared00() {
 		CertificatePem:        aws.String(""),
 	}
 
-	result, err := svc.ImportCertificate(input)
+	req := svc.ImportCertificateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1020,7 +1043,7 @@ func ExampleDatabaseMigrationService_ImportCertificate_shared00() {
 // List tags for resource
 //
 // Lists all tags for an AWS DMS resource.
-func ExampleDatabaseMigrationService_ListTagsForResource_shared00() {
+func ExampleDatabaseMigrationService_ListTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1031,7 +1054,8 @@ func ExampleDatabaseMigrationService_ListTagsForResource_shared00() {
 		ResourceArn: aws.String(""),
 	}
 
-	result, err := svc.ListTagsForResource(input)
+	req := svc.ListTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1054,7 +1078,7 @@ func ExampleDatabaseMigrationService_ListTagsForResource_shared00() {
 // Modify endpoint
 //
 // Modifies the specified endpoint.
-func ExampleDatabaseMigrationService_ModifyEndpoint_shared00() {
+func ExampleDatabaseMigrationService_ModifyEndpointRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1076,7 +1100,8 @@ func ExampleDatabaseMigrationService_ModifyEndpoint_shared00() {
 		Username:                  aws.String(""),
 	}
 
-	result, err := svc.ModifyEndpoint(input)
+	req := svc.ModifyEndpointRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1109,7 +1134,7 @@ func ExampleDatabaseMigrationService_ModifyEndpoint_shared00() {
 // Modifies the replication instance to apply new settings. You can change one or more
 // parameters by specifying these parameters and the new values in the request. Some
 // settings are applied during the maintenance window.
-func ExampleDatabaseMigrationService_ModifyReplicationInstance_shared00() {
+func ExampleDatabaseMigrationService_ModifyReplicationInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1129,7 +1154,8 @@ func ExampleDatabaseMigrationService_ModifyReplicationInstance_shared00() {
 		ReplicationInstanceIdentifier: aws.String("test-rep-1"),
 	}
 
-	result, err := svc.ModifyReplicationInstance(input)
+	req := svc.ModifyReplicationInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1162,7 +1188,7 @@ func ExampleDatabaseMigrationService_ModifyReplicationInstance_shared00() {
 // Modify replication subnet group
 //
 // Modifies the settings for the specified replication subnet group.
-func ExampleDatabaseMigrationService_ModifyReplicationSubnetGroup_shared00() {
+func ExampleDatabaseMigrationService_ModifyReplicationSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1174,7 +1200,8 @@ func ExampleDatabaseMigrationService_ModifyReplicationSubnetGroup_shared00() {
 		ReplicationSubnetGroupIdentifier:  aws.String(""),
 	}
 
-	result, err := svc.ModifyReplicationSubnetGroup(input)
+	req := svc.ModifyReplicationSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1209,7 +1236,7 @@ func ExampleDatabaseMigrationService_ModifyReplicationSubnetGroup_shared00() {
 // Populates the schema for the specified endpoint. This is an asynchronous operation
 // and can take several minutes. You can check the status of this operation by calling
 // the describe-refresh-schemas-status operation.
-func ExampleDatabaseMigrationService_RefreshSchemas_shared00() {
+func ExampleDatabaseMigrationService_RefreshSchemasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1221,7 +1248,8 @@ func ExampleDatabaseMigrationService_RefreshSchemas_shared00() {
 		ReplicationInstanceArn: aws.String(""),
 	}
 
-	result, err := svc.RefreshSchemas(input)
+	req := svc.RefreshSchemasRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1250,7 +1278,7 @@ func ExampleDatabaseMigrationService_RefreshSchemas_shared00() {
 // Remove tags from resource
 //
 // Removes metadata tags from an AWS DMS resource.
-func ExampleDatabaseMigrationService_RemoveTagsFromResource_shared00() {
+func ExampleDatabaseMigrationService_RemoveTagsFromResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1261,7 +1289,8 @@ func ExampleDatabaseMigrationService_RemoveTagsFromResource_shared00() {
 		ResourceArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E"),
 	}
 
-	result, err := svc.RemoveTagsFromResource(input)
+	req := svc.RemoveTagsFromResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1284,7 +1313,7 @@ func ExampleDatabaseMigrationService_RemoveTagsFromResource_shared00() {
 // Start replication task
 //
 // Starts the replication task.
-func ExampleDatabaseMigrationService_StartReplicationTask_shared00() {
+func ExampleDatabaseMigrationService_StartReplicationTaskRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1297,7 +1326,8 @@ func ExampleDatabaseMigrationService_StartReplicationTask_shared00() {
 		StartReplicationTaskType: databasemigrationservice.StartReplicationTaskTypeValueStartReplication,
 	}
 
-	result, err := svc.StartReplicationTask(input)
+	req := svc.StartReplicationTaskRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1322,7 +1352,7 @@ func ExampleDatabaseMigrationService_StartReplicationTask_shared00() {
 // Stop replication task
 //
 // Stops the replication task.
-func ExampleDatabaseMigrationService_StopReplicationTask_shared00() {
+func ExampleDatabaseMigrationService_StopReplicationTaskRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1333,7 +1363,8 @@ func ExampleDatabaseMigrationService_StopReplicationTask_shared00() {
 		ReplicationTaskArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E"),
 	}
 
-	result, err := svc.StopReplicationTask(input)
+	req := svc.StopReplicationTaskRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1358,7 +1389,7 @@ func ExampleDatabaseMigrationService_StopReplicationTask_shared00() {
 // Test conection
 //
 // Tests the connection between the replication instance and the endpoint.
-func ExampleDatabaseMigrationService_TestConnection_shared00() {
+func ExampleDatabaseMigrationService_TestConnectionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1370,7 +1401,8 @@ func ExampleDatabaseMigrationService_TestConnection_shared00() {
 		ReplicationInstanceArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 	}
 
-	result, err := svc.TestConnection(input)
+	req := svc.TestConnectionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

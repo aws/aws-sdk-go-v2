@@ -518,8 +518,6 @@ func (a *API) ServicePackageDoc() string {
 func (a *API) ServiceGoCode() string {
 	a.resetImports()
 	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
 	if a.Metadata.SignatureVersion == "v2" {
 		a.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v2"] = true
 		a.imports["github.com/aws/aws-sdk-go-v2/aws/defaults"] = true
@@ -633,10 +631,21 @@ var _ {{ .StructName }}API = (*{{ .PackageName }}.{{ .StructName }})(nil)
 // interface{}. Assumes that the interface is being created in a different
 // package than the service API's package.
 func (a *API) InterfaceGoCode() string {
+	var hasPaginator bool
+	for _, op := range a.Operations {
+		if op.Paginator != nil {
+			hasPaginator = true
+			break
+		}
+	}
+
 	a.resetImports()
 	a.imports = map[string]bool{
-		"github.com/aws/aws-sdk-go-v2/aws":                true,
 		path.Join(a.SvcClientImportPath, a.PackageName()): true,
+	}
+
+	if hasPaginator || len(a.Waiters) > 0 {
+		a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
 	}
 
 	var buf bytes.Buffer

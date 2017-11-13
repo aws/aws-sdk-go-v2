@@ -63,149 +63,83 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type GlacierAPI interface {
-	AbortMultipartUpload(*glacier.AbortMultipartUploadInput) (*glacier.AbortMultipartUploadOutput, error)
-	AbortMultipartUploadWithContext(aws.Context, *glacier.AbortMultipartUploadInput, ...aws.Option) (*glacier.AbortMultipartUploadOutput, error)
-	AbortMultipartUploadRequest(*glacier.AbortMultipartUploadInput) (*aws.Request, *glacier.AbortMultipartUploadOutput)
+	AbortMultipartUploadRequest(*glacier.AbortMultipartUploadInput) glacier.AbortMultipartUploadRequest
 
-	AbortVaultLock(*glacier.AbortVaultLockInput) (*glacier.AbortVaultLockOutput, error)
-	AbortVaultLockWithContext(aws.Context, *glacier.AbortVaultLockInput, ...aws.Option) (*glacier.AbortVaultLockOutput, error)
-	AbortVaultLockRequest(*glacier.AbortVaultLockInput) (*aws.Request, *glacier.AbortVaultLockOutput)
+	AbortVaultLockRequest(*glacier.AbortVaultLockInput) glacier.AbortVaultLockRequest
 
-	AddTagsToVault(*glacier.AddTagsToVaultInput) (*glacier.AddTagsToVaultOutput, error)
-	AddTagsToVaultWithContext(aws.Context, *glacier.AddTagsToVaultInput, ...aws.Option) (*glacier.AddTagsToVaultOutput, error)
-	AddTagsToVaultRequest(*glacier.AddTagsToVaultInput) (*aws.Request, *glacier.AddTagsToVaultOutput)
+	AddTagsToVaultRequest(*glacier.AddTagsToVaultInput) glacier.AddTagsToVaultRequest
 
-	CompleteMultipartUpload(*glacier.CompleteMultipartUploadInput) (*glacier.ArchiveCreationOutput, error)
-	CompleteMultipartUploadWithContext(aws.Context, *glacier.CompleteMultipartUploadInput, ...aws.Option) (*glacier.ArchiveCreationOutput, error)
-	CompleteMultipartUploadRequest(*glacier.CompleteMultipartUploadInput) (*aws.Request, *glacier.ArchiveCreationOutput)
+	CompleteMultipartUploadRequest(*glacier.CompleteMultipartUploadInput) glacier.CompleteMultipartUploadRequest
 
-	CompleteVaultLock(*glacier.CompleteVaultLockInput) (*glacier.CompleteVaultLockOutput, error)
-	CompleteVaultLockWithContext(aws.Context, *glacier.CompleteVaultLockInput, ...aws.Option) (*glacier.CompleteVaultLockOutput, error)
-	CompleteVaultLockRequest(*glacier.CompleteVaultLockInput) (*aws.Request, *glacier.CompleteVaultLockOutput)
+	CompleteVaultLockRequest(*glacier.CompleteVaultLockInput) glacier.CompleteVaultLockRequest
 
-	CreateVault(*glacier.CreateVaultInput) (*glacier.CreateVaultOutput, error)
-	CreateVaultWithContext(aws.Context, *glacier.CreateVaultInput, ...aws.Option) (*glacier.CreateVaultOutput, error)
-	CreateVaultRequest(*glacier.CreateVaultInput) (*aws.Request, *glacier.CreateVaultOutput)
+	CreateVaultRequest(*glacier.CreateVaultInput) glacier.CreateVaultRequest
 
-	DeleteArchive(*glacier.DeleteArchiveInput) (*glacier.DeleteArchiveOutput, error)
-	DeleteArchiveWithContext(aws.Context, *glacier.DeleteArchiveInput, ...aws.Option) (*glacier.DeleteArchiveOutput, error)
-	DeleteArchiveRequest(*glacier.DeleteArchiveInput) (*aws.Request, *glacier.DeleteArchiveOutput)
+	DeleteArchiveRequest(*glacier.DeleteArchiveInput) glacier.DeleteArchiveRequest
 
-	DeleteVault(*glacier.DeleteVaultInput) (*glacier.DeleteVaultOutput, error)
-	DeleteVaultWithContext(aws.Context, *glacier.DeleteVaultInput, ...aws.Option) (*glacier.DeleteVaultOutput, error)
-	DeleteVaultRequest(*glacier.DeleteVaultInput) (*aws.Request, *glacier.DeleteVaultOutput)
+	DeleteVaultRequest(*glacier.DeleteVaultInput) glacier.DeleteVaultRequest
 
-	DeleteVaultAccessPolicy(*glacier.DeleteVaultAccessPolicyInput) (*glacier.DeleteVaultAccessPolicyOutput, error)
-	DeleteVaultAccessPolicyWithContext(aws.Context, *glacier.DeleteVaultAccessPolicyInput, ...aws.Option) (*glacier.DeleteVaultAccessPolicyOutput, error)
-	DeleteVaultAccessPolicyRequest(*glacier.DeleteVaultAccessPolicyInput) (*aws.Request, *glacier.DeleteVaultAccessPolicyOutput)
+	DeleteVaultAccessPolicyRequest(*glacier.DeleteVaultAccessPolicyInput) glacier.DeleteVaultAccessPolicyRequest
 
-	DeleteVaultNotifications(*glacier.DeleteVaultNotificationsInput) (*glacier.DeleteVaultNotificationsOutput, error)
-	DeleteVaultNotificationsWithContext(aws.Context, *glacier.DeleteVaultNotificationsInput, ...aws.Option) (*glacier.DeleteVaultNotificationsOutput, error)
-	DeleteVaultNotificationsRequest(*glacier.DeleteVaultNotificationsInput) (*aws.Request, *glacier.DeleteVaultNotificationsOutput)
+	DeleteVaultNotificationsRequest(*glacier.DeleteVaultNotificationsInput) glacier.DeleteVaultNotificationsRequest
 
-	DescribeJob(*glacier.DescribeJobInput) (*glacier.JobDescription, error)
-	DescribeJobWithContext(aws.Context, *glacier.DescribeJobInput, ...aws.Option) (*glacier.JobDescription, error)
-	DescribeJobRequest(*glacier.DescribeJobInput) (*aws.Request, *glacier.JobDescription)
+	DescribeJobRequest(*glacier.DescribeJobInput) glacier.DescribeJobRequest
 
-	DescribeVault(*glacier.DescribeVaultInput) (*glacier.DescribeVaultOutput, error)
-	DescribeVaultWithContext(aws.Context, *glacier.DescribeVaultInput, ...aws.Option) (*glacier.DescribeVaultOutput, error)
-	DescribeVaultRequest(*glacier.DescribeVaultInput) (*aws.Request, *glacier.DescribeVaultOutput)
+	DescribeVaultRequest(*glacier.DescribeVaultInput) glacier.DescribeVaultRequest
 
-	GetDataRetrievalPolicy(*glacier.GetDataRetrievalPolicyInput) (*glacier.GetDataRetrievalPolicyOutput, error)
-	GetDataRetrievalPolicyWithContext(aws.Context, *glacier.GetDataRetrievalPolicyInput, ...aws.Option) (*glacier.GetDataRetrievalPolicyOutput, error)
-	GetDataRetrievalPolicyRequest(*glacier.GetDataRetrievalPolicyInput) (*aws.Request, *glacier.GetDataRetrievalPolicyOutput)
+	GetDataRetrievalPolicyRequest(*glacier.GetDataRetrievalPolicyInput) glacier.GetDataRetrievalPolicyRequest
 
-	GetJobOutput(*glacier.GetJobOutputInput) (*glacier.GetJobOutputOutput, error)
-	GetJobOutputWithContext(aws.Context, *glacier.GetJobOutputInput, ...aws.Option) (*glacier.GetJobOutputOutput, error)
-	GetJobOutputRequest(*glacier.GetJobOutputInput) (*aws.Request, *glacier.GetJobOutputOutput)
+	GetJobOutputRequest(*glacier.GetJobOutputInput) glacier.GetJobOutputRequest
 
-	GetVaultAccessPolicy(*glacier.GetVaultAccessPolicyInput) (*glacier.GetVaultAccessPolicyOutput, error)
-	GetVaultAccessPolicyWithContext(aws.Context, *glacier.GetVaultAccessPolicyInput, ...aws.Option) (*glacier.GetVaultAccessPolicyOutput, error)
-	GetVaultAccessPolicyRequest(*glacier.GetVaultAccessPolicyInput) (*aws.Request, *glacier.GetVaultAccessPolicyOutput)
+	GetVaultAccessPolicyRequest(*glacier.GetVaultAccessPolicyInput) glacier.GetVaultAccessPolicyRequest
 
-	GetVaultLock(*glacier.GetVaultLockInput) (*glacier.GetVaultLockOutput, error)
-	GetVaultLockWithContext(aws.Context, *glacier.GetVaultLockInput, ...aws.Option) (*glacier.GetVaultLockOutput, error)
-	GetVaultLockRequest(*glacier.GetVaultLockInput) (*aws.Request, *glacier.GetVaultLockOutput)
+	GetVaultLockRequest(*glacier.GetVaultLockInput) glacier.GetVaultLockRequest
 
-	GetVaultNotifications(*glacier.GetVaultNotificationsInput) (*glacier.GetVaultNotificationsOutput, error)
-	GetVaultNotificationsWithContext(aws.Context, *glacier.GetVaultNotificationsInput, ...aws.Option) (*glacier.GetVaultNotificationsOutput, error)
-	GetVaultNotificationsRequest(*glacier.GetVaultNotificationsInput) (*aws.Request, *glacier.GetVaultNotificationsOutput)
+	GetVaultNotificationsRequest(*glacier.GetVaultNotificationsInput) glacier.GetVaultNotificationsRequest
 
-	InitiateJob(*glacier.InitiateJobInput) (*glacier.InitiateJobOutput, error)
-	InitiateJobWithContext(aws.Context, *glacier.InitiateJobInput, ...aws.Option) (*glacier.InitiateJobOutput, error)
-	InitiateJobRequest(*glacier.InitiateJobInput) (*aws.Request, *glacier.InitiateJobOutput)
+	InitiateJobRequest(*glacier.InitiateJobInput) glacier.InitiateJobRequest
 
-	InitiateMultipartUpload(*glacier.InitiateMultipartUploadInput) (*glacier.InitiateMultipartUploadOutput, error)
-	InitiateMultipartUploadWithContext(aws.Context, *glacier.InitiateMultipartUploadInput, ...aws.Option) (*glacier.InitiateMultipartUploadOutput, error)
-	InitiateMultipartUploadRequest(*glacier.InitiateMultipartUploadInput) (*aws.Request, *glacier.InitiateMultipartUploadOutput)
+	InitiateMultipartUploadRequest(*glacier.InitiateMultipartUploadInput) glacier.InitiateMultipartUploadRequest
 
-	InitiateVaultLock(*glacier.InitiateVaultLockInput) (*glacier.InitiateVaultLockOutput, error)
-	InitiateVaultLockWithContext(aws.Context, *glacier.InitiateVaultLockInput, ...aws.Option) (*glacier.InitiateVaultLockOutput, error)
-	InitiateVaultLockRequest(*glacier.InitiateVaultLockInput) (*aws.Request, *glacier.InitiateVaultLockOutput)
+	InitiateVaultLockRequest(*glacier.InitiateVaultLockInput) glacier.InitiateVaultLockRequest
 
-	ListJobs(*glacier.ListJobsInput) (*glacier.ListJobsOutput, error)
-	ListJobsWithContext(aws.Context, *glacier.ListJobsInput, ...aws.Option) (*glacier.ListJobsOutput, error)
-	ListJobsRequest(*glacier.ListJobsInput) (*aws.Request, *glacier.ListJobsOutput)
+	ListJobsRequest(*glacier.ListJobsInput) glacier.ListJobsRequest
 
 	ListJobsPages(*glacier.ListJobsInput, func(*glacier.ListJobsOutput, bool) bool) error
 	ListJobsPagesWithContext(aws.Context, *glacier.ListJobsInput, func(*glacier.ListJobsOutput, bool) bool, ...aws.Option) error
 
-	ListMultipartUploads(*glacier.ListMultipartUploadsInput) (*glacier.ListMultipartUploadsOutput, error)
-	ListMultipartUploadsWithContext(aws.Context, *glacier.ListMultipartUploadsInput, ...aws.Option) (*glacier.ListMultipartUploadsOutput, error)
-	ListMultipartUploadsRequest(*glacier.ListMultipartUploadsInput) (*aws.Request, *glacier.ListMultipartUploadsOutput)
+	ListMultipartUploadsRequest(*glacier.ListMultipartUploadsInput) glacier.ListMultipartUploadsRequest
 
 	ListMultipartUploadsPages(*glacier.ListMultipartUploadsInput, func(*glacier.ListMultipartUploadsOutput, bool) bool) error
 	ListMultipartUploadsPagesWithContext(aws.Context, *glacier.ListMultipartUploadsInput, func(*glacier.ListMultipartUploadsOutput, bool) bool, ...aws.Option) error
 
-	ListParts(*glacier.ListPartsInput) (*glacier.ListPartsOutput, error)
-	ListPartsWithContext(aws.Context, *glacier.ListPartsInput, ...aws.Option) (*glacier.ListPartsOutput, error)
-	ListPartsRequest(*glacier.ListPartsInput) (*aws.Request, *glacier.ListPartsOutput)
+	ListPartsRequest(*glacier.ListPartsInput) glacier.ListPartsRequest
 
 	ListPartsPages(*glacier.ListPartsInput, func(*glacier.ListPartsOutput, bool) bool) error
 	ListPartsPagesWithContext(aws.Context, *glacier.ListPartsInput, func(*glacier.ListPartsOutput, bool) bool, ...aws.Option) error
 
-	ListProvisionedCapacity(*glacier.ListProvisionedCapacityInput) (*glacier.ListProvisionedCapacityOutput, error)
-	ListProvisionedCapacityWithContext(aws.Context, *glacier.ListProvisionedCapacityInput, ...aws.Option) (*glacier.ListProvisionedCapacityOutput, error)
-	ListProvisionedCapacityRequest(*glacier.ListProvisionedCapacityInput) (*aws.Request, *glacier.ListProvisionedCapacityOutput)
+	ListProvisionedCapacityRequest(*glacier.ListProvisionedCapacityInput) glacier.ListProvisionedCapacityRequest
 
-	ListTagsForVault(*glacier.ListTagsForVaultInput) (*glacier.ListTagsForVaultOutput, error)
-	ListTagsForVaultWithContext(aws.Context, *glacier.ListTagsForVaultInput, ...aws.Option) (*glacier.ListTagsForVaultOutput, error)
-	ListTagsForVaultRequest(*glacier.ListTagsForVaultInput) (*aws.Request, *glacier.ListTagsForVaultOutput)
+	ListTagsForVaultRequest(*glacier.ListTagsForVaultInput) glacier.ListTagsForVaultRequest
 
-	ListVaults(*glacier.ListVaultsInput) (*glacier.ListVaultsOutput, error)
-	ListVaultsWithContext(aws.Context, *glacier.ListVaultsInput, ...aws.Option) (*glacier.ListVaultsOutput, error)
-	ListVaultsRequest(*glacier.ListVaultsInput) (*aws.Request, *glacier.ListVaultsOutput)
+	ListVaultsRequest(*glacier.ListVaultsInput) glacier.ListVaultsRequest
 
 	ListVaultsPages(*glacier.ListVaultsInput, func(*glacier.ListVaultsOutput, bool) bool) error
 	ListVaultsPagesWithContext(aws.Context, *glacier.ListVaultsInput, func(*glacier.ListVaultsOutput, bool) bool, ...aws.Option) error
 
-	PurchaseProvisionedCapacity(*glacier.PurchaseProvisionedCapacityInput) (*glacier.PurchaseProvisionedCapacityOutput, error)
-	PurchaseProvisionedCapacityWithContext(aws.Context, *glacier.PurchaseProvisionedCapacityInput, ...aws.Option) (*glacier.PurchaseProvisionedCapacityOutput, error)
-	PurchaseProvisionedCapacityRequest(*glacier.PurchaseProvisionedCapacityInput) (*aws.Request, *glacier.PurchaseProvisionedCapacityOutput)
+	PurchaseProvisionedCapacityRequest(*glacier.PurchaseProvisionedCapacityInput) glacier.PurchaseProvisionedCapacityRequest
 
-	RemoveTagsFromVault(*glacier.RemoveTagsFromVaultInput) (*glacier.RemoveTagsFromVaultOutput, error)
-	RemoveTagsFromVaultWithContext(aws.Context, *glacier.RemoveTagsFromVaultInput, ...aws.Option) (*glacier.RemoveTagsFromVaultOutput, error)
-	RemoveTagsFromVaultRequest(*glacier.RemoveTagsFromVaultInput) (*aws.Request, *glacier.RemoveTagsFromVaultOutput)
+	RemoveTagsFromVaultRequest(*glacier.RemoveTagsFromVaultInput) glacier.RemoveTagsFromVaultRequest
 
-	SetDataRetrievalPolicy(*glacier.SetDataRetrievalPolicyInput) (*glacier.SetDataRetrievalPolicyOutput, error)
-	SetDataRetrievalPolicyWithContext(aws.Context, *glacier.SetDataRetrievalPolicyInput, ...aws.Option) (*glacier.SetDataRetrievalPolicyOutput, error)
-	SetDataRetrievalPolicyRequest(*glacier.SetDataRetrievalPolicyInput) (*aws.Request, *glacier.SetDataRetrievalPolicyOutput)
+	SetDataRetrievalPolicyRequest(*glacier.SetDataRetrievalPolicyInput) glacier.SetDataRetrievalPolicyRequest
 
-	SetVaultAccessPolicy(*glacier.SetVaultAccessPolicyInput) (*glacier.SetVaultAccessPolicyOutput, error)
-	SetVaultAccessPolicyWithContext(aws.Context, *glacier.SetVaultAccessPolicyInput, ...aws.Option) (*glacier.SetVaultAccessPolicyOutput, error)
-	SetVaultAccessPolicyRequest(*glacier.SetVaultAccessPolicyInput) (*aws.Request, *glacier.SetVaultAccessPolicyOutput)
+	SetVaultAccessPolicyRequest(*glacier.SetVaultAccessPolicyInput) glacier.SetVaultAccessPolicyRequest
 
-	SetVaultNotifications(*glacier.SetVaultNotificationsInput) (*glacier.SetVaultNotificationsOutput, error)
-	SetVaultNotificationsWithContext(aws.Context, *glacier.SetVaultNotificationsInput, ...aws.Option) (*glacier.SetVaultNotificationsOutput, error)
-	SetVaultNotificationsRequest(*glacier.SetVaultNotificationsInput) (*aws.Request, *glacier.SetVaultNotificationsOutput)
+	SetVaultNotificationsRequest(*glacier.SetVaultNotificationsInput) glacier.SetVaultNotificationsRequest
 
-	UploadArchive(*glacier.UploadArchiveInput) (*glacier.ArchiveCreationOutput, error)
-	UploadArchiveWithContext(aws.Context, *glacier.UploadArchiveInput, ...aws.Option) (*glacier.ArchiveCreationOutput, error)
-	UploadArchiveRequest(*glacier.UploadArchiveInput) (*aws.Request, *glacier.ArchiveCreationOutput)
+	UploadArchiveRequest(*glacier.UploadArchiveInput) glacier.UploadArchiveRequest
 
-	UploadMultipartPart(*glacier.UploadMultipartPartInput) (*glacier.UploadMultipartPartOutput, error)
-	UploadMultipartPartWithContext(aws.Context, *glacier.UploadMultipartPartInput, ...aws.Option) (*glacier.UploadMultipartPartOutput, error)
-	UploadMultipartPartRequest(*glacier.UploadMultipartPartInput) (*aws.Request, *glacier.UploadMultipartPartOutput)
+	UploadMultipartPartRequest(*glacier.UploadMultipartPartInput) glacier.UploadMultipartPartRequest
 
 	WaitUntilVaultExists(*glacier.DescribeVaultInput) error
 	WaitUntilVaultExistsWithContext(aws.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error

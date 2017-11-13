@@ -63,116 +63,62 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ConfigServiceAPI interface {
-	DeleteConfigRule(*configservice.DeleteConfigRuleInput) (*configservice.DeleteConfigRuleOutput, error)
-	DeleteConfigRuleWithContext(aws.Context, *configservice.DeleteConfigRuleInput, ...aws.Option) (*configservice.DeleteConfigRuleOutput, error)
-	DeleteConfigRuleRequest(*configservice.DeleteConfigRuleInput) (*aws.Request, *configservice.DeleteConfigRuleOutput)
+	DeleteConfigRuleRequest(*configservice.DeleteConfigRuleInput) configservice.DeleteConfigRuleRequest
 
-	DeleteConfigurationRecorder(*configservice.DeleteConfigurationRecorderInput) (*configservice.DeleteConfigurationRecorderOutput, error)
-	DeleteConfigurationRecorderWithContext(aws.Context, *configservice.DeleteConfigurationRecorderInput, ...aws.Option) (*configservice.DeleteConfigurationRecorderOutput, error)
-	DeleteConfigurationRecorderRequest(*configservice.DeleteConfigurationRecorderInput) (*aws.Request, *configservice.DeleteConfigurationRecorderOutput)
+	DeleteConfigurationRecorderRequest(*configservice.DeleteConfigurationRecorderInput) configservice.DeleteConfigurationRecorderRequest
 
-	DeleteDeliveryChannel(*configservice.DeleteDeliveryChannelInput) (*configservice.DeleteDeliveryChannelOutput, error)
-	DeleteDeliveryChannelWithContext(aws.Context, *configservice.DeleteDeliveryChannelInput, ...aws.Option) (*configservice.DeleteDeliveryChannelOutput, error)
-	DeleteDeliveryChannelRequest(*configservice.DeleteDeliveryChannelInput) (*aws.Request, *configservice.DeleteDeliveryChannelOutput)
+	DeleteDeliveryChannelRequest(*configservice.DeleteDeliveryChannelInput) configservice.DeleteDeliveryChannelRequest
 
-	DeleteEvaluationResults(*configservice.DeleteEvaluationResultsInput) (*configservice.DeleteEvaluationResultsOutput, error)
-	DeleteEvaluationResultsWithContext(aws.Context, *configservice.DeleteEvaluationResultsInput, ...aws.Option) (*configservice.DeleteEvaluationResultsOutput, error)
-	DeleteEvaluationResultsRequest(*configservice.DeleteEvaluationResultsInput) (*aws.Request, *configservice.DeleteEvaluationResultsOutput)
+	DeleteEvaluationResultsRequest(*configservice.DeleteEvaluationResultsInput) configservice.DeleteEvaluationResultsRequest
 
-	DeliverConfigSnapshot(*configservice.DeliverConfigSnapshotInput) (*configservice.DeliverConfigSnapshotOutput, error)
-	DeliverConfigSnapshotWithContext(aws.Context, *configservice.DeliverConfigSnapshotInput, ...aws.Option) (*configservice.DeliverConfigSnapshotOutput, error)
-	DeliverConfigSnapshotRequest(*configservice.DeliverConfigSnapshotInput) (*aws.Request, *configservice.DeliverConfigSnapshotOutput)
+	DeliverConfigSnapshotRequest(*configservice.DeliverConfigSnapshotInput) configservice.DeliverConfigSnapshotRequest
 
-	DescribeComplianceByConfigRule(*configservice.DescribeComplianceByConfigRuleInput) (*configservice.DescribeComplianceByConfigRuleOutput, error)
-	DescribeComplianceByConfigRuleWithContext(aws.Context, *configservice.DescribeComplianceByConfigRuleInput, ...aws.Option) (*configservice.DescribeComplianceByConfigRuleOutput, error)
-	DescribeComplianceByConfigRuleRequest(*configservice.DescribeComplianceByConfigRuleInput) (*aws.Request, *configservice.DescribeComplianceByConfigRuleOutput)
+	DescribeComplianceByConfigRuleRequest(*configservice.DescribeComplianceByConfigRuleInput) configservice.DescribeComplianceByConfigRuleRequest
 
-	DescribeComplianceByResource(*configservice.DescribeComplianceByResourceInput) (*configservice.DescribeComplianceByResourceOutput, error)
-	DescribeComplianceByResourceWithContext(aws.Context, *configservice.DescribeComplianceByResourceInput, ...aws.Option) (*configservice.DescribeComplianceByResourceOutput, error)
-	DescribeComplianceByResourceRequest(*configservice.DescribeComplianceByResourceInput) (*aws.Request, *configservice.DescribeComplianceByResourceOutput)
+	DescribeComplianceByResourceRequest(*configservice.DescribeComplianceByResourceInput) configservice.DescribeComplianceByResourceRequest
 
-	DescribeConfigRuleEvaluationStatus(*configservice.DescribeConfigRuleEvaluationStatusInput) (*configservice.DescribeConfigRuleEvaluationStatusOutput, error)
-	DescribeConfigRuleEvaluationStatusWithContext(aws.Context, *configservice.DescribeConfigRuleEvaluationStatusInput, ...aws.Option) (*configservice.DescribeConfigRuleEvaluationStatusOutput, error)
-	DescribeConfigRuleEvaluationStatusRequest(*configservice.DescribeConfigRuleEvaluationStatusInput) (*aws.Request, *configservice.DescribeConfigRuleEvaluationStatusOutput)
+	DescribeConfigRuleEvaluationStatusRequest(*configservice.DescribeConfigRuleEvaluationStatusInput) configservice.DescribeConfigRuleEvaluationStatusRequest
 
-	DescribeConfigRules(*configservice.DescribeConfigRulesInput) (*configservice.DescribeConfigRulesOutput, error)
-	DescribeConfigRulesWithContext(aws.Context, *configservice.DescribeConfigRulesInput, ...aws.Option) (*configservice.DescribeConfigRulesOutput, error)
-	DescribeConfigRulesRequest(*configservice.DescribeConfigRulesInput) (*aws.Request, *configservice.DescribeConfigRulesOutput)
+	DescribeConfigRulesRequest(*configservice.DescribeConfigRulesInput) configservice.DescribeConfigRulesRequest
 
-	DescribeConfigurationRecorderStatus(*configservice.DescribeConfigurationRecorderStatusInput) (*configservice.DescribeConfigurationRecorderStatusOutput, error)
-	DescribeConfigurationRecorderStatusWithContext(aws.Context, *configservice.DescribeConfigurationRecorderStatusInput, ...aws.Option) (*configservice.DescribeConfigurationRecorderStatusOutput, error)
-	DescribeConfigurationRecorderStatusRequest(*configservice.DescribeConfigurationRecorderStatusInput) (*aws.Request, *configservice.DescribeConfigurationRecorderStatusOutput)
+	DescribeConfigurationRecorderStatusRequest(*configservice.DescribeConfigurationRecorderStatusInput) configservice.DescribeConfigurationRecorderStatusRequest
 
-	DescribeConfigurationRecorders(*configservice.DescribeConfigurationRecordersInput) (*configservice.DescribeConfigurationRecordersOutput, error)
-	DescribeConfigurationRecordersWithContext(aws.Context, *configservice.DescribeConfigurationRecordersInput, ...aws.Option) (*configservice.DescribeConfigurationRecordersOutput, error)
-	DescribeConfigurationRecordersRequest(*configservice.DescribeConfigurationRecordersInput) (*aws.Request, *configservice.DescribeConfigurationRecordersOutput)
+	DescribeConfigurationRecordersRequest(*configservice.DescribeConfigurationRecordersInput) configservice.DescribeConfigurationRecordersRequest
 
-	DescribeDeliveryChannelStatus(*configservice.DescribeDeliveryChannelStatusInput) (*configservice.DescribeDeliveryChannelStatusOutput, error)
-	DescribeDeliveryChannelStatusWithContext(aws.Context, *configservice.DescribeDeliveryChannelStatusInput, ...aws.Option) (*configservice.DescribeDeliveryChannelStatusOutput, error)
-	DescribeDeliveryChannelStatusRequest(*configservice.DescribeDeliveryChannelStatusInput) (*aws.Request, *configservice.DescribeDeliveryChannelStatusOutput)
+	DescribeDeliveryChannelStatusRequest(*configservice.DescribeDeliveryChannelStatusInput) configservice.DescribeDeliveryChannelStatusRequest
 
-	DescribeDeliveryChannels(*configservice.DescribeDeliveryChannelsInput) (*configservice.DescribeDeliveryChannelsOutput, error)
-	DescribeDeliveryChannelsWithContext(aws.Context, *configservice.DescribeDeliveryChannelsInput, ...aws.Option) (*configservice.DescribeDeliveryChannelsOutput, error)
-	DescribeDeliveryChannelsRequest(*configservice.DescribeDeliveryChannelsInput) (*aws.Request, *configservice.DescribeDeliveryChannelsOutput)
+	DescribeDeliveryChannelsRequest(*configservice.DescribeDeliveryChannelsInput) configservice.DescribeDeliveryChannelsRequest
 
-	GetComplianceDetailsByConfigRule(*configservice.GetComplianceDetailsByConfigRuleInput) (*configservice.GetComplianceDetailsByConfigRuleOutput, error)
-	GetComplianceDetailsByConfigRuleWithContext(aws.Context, *configservice.GetComplianceDetailsByConfigRuleInput, ...aws.Option) (*configservice.GetComplianceDetailsByConfigRuleOutput, error)
-	GetComplianceDetailsByConfigRuleRequest(*configservice.GetComplianceDetailsByConfigRuleInput) (*aws.Request, *configservice.GetComplianceDetailsByConfigRuleOutput)
+	GetComplianceDetailsByConfigRuleRequest(*configservice.GetComplianceDetailsByConfigRuleInput) configservice.GetComplianceDetailsByConfigRuleRequest
 
-	GetComplianceDetailsByResource(*configservice.GetComplianceDetailsByResourceInput) (*configservice.GetComplianceDetailsByResourceOutput, error)
-	GetComplianceDetailsByResourceWithContext(aws.Context, *configservice.GetComplianceDetailsByResourceInput, ...aws.Option) (*configservice.GetComplianceDetailsByResourceOutput, error)
-	GetComplianceDetailsByResourceRequest(*configservice.GetComplianceDetailsByResourceInput) (*aws.Request, *configservice.GetComplianceDetailsByResourceOutput)
+	GetComplianceDetailsByResourceRequest(*configservice.GetComplianceDetailsByResourceInput) configservice.GetComplianceDetailsByResourceRequest
 
-	GetComplianceSummaryByConfigRule(*configservice.GetComplianceSummaryByConfigRuleInput) (*configservice.GetComplianceSummaryByConfigRuleOutput, error)
-	GetComplianceSummaryByConfigRuleWithContext(aws.Context, *configservice.GetComplianceSummaryByConfigRuleInput, ...aws.Option) (*configservice.GetComplianceSummaryByConfigRuleOutput, error)
-	GetComplianceSummaryByConfigRuleRequest(*configservice.GetComplianceSummaryByConfigRuleInput) (*aws.Request, *configservice.GetComplianceSummaryByConfigRuleOutput)
+	GetComplianceSummaryByConfigRuleRequest(*configservice.GetComplianceSummaryByConfigRuleInput) configservice.GetComplianceSummaryByConfigRuleRequest
 
-	GetComplianceSummaryByResourceType(*configservice.GetComplianceSummaryByResourceTypeInput) (*configservice.GetComplianceSummaryByResourceTypeOutput, error)
-	GetComplianceSummaryByResourceTypeWithContext(aws.Context, *configservice.GetComplianceSummaryByResourceTypeInput, ...aws.Option) (*configservice.GetComplianceSummaryByResourceTypeOutput, error)
-	GetComplianceSummaryByResourceTypeRequest(*configservice.GetComplianceSummaryByResourceTypeInput) (*aws.Request, *configservice.GetComplianceSummaryByResourceTypeOutput)
+	GetComplianceSummaryByResourceTypeRequest(*configservice.GetComplianceSummaryByResourceTypeInput) configservice.GetComplianceSummaryByResourceTypeRequest
 
-	GetDiscoveredResourceCounts(*configservice.GetDiscoveredResourceCountsInput) (*configservice.GetDiscoveredResourceCountsOutput, error)
-	GetDiscoveredResourceCountsWithContext(aws.Context, *configservice.GetDiscoveredResourceCountsInput, ...aws.Option) (*configservice.GetDiscoveredResourceCountsOutput, error)
-	GetDiscoveredResourceCountsRequest(*configservice.GetDiscoveredResourceCountsInput) (*aws.Request, *configservice.GetDiscoveredResourceCountsOutput)
+	GetDiscoveredResourceCountsRequest(*configservice.GetDiscoveredResourceCountsInput) configservice.GetDiscoveredResourceCountsRequest
 
-	GetResourceConfigHistory(*configservice.GetResourceConfigHistoryInput) (*configservice.GetResourceConfigHistoryOutput, error)
-	GetResourceConfigHistoryWithContext(aws.Context, *configservice.GetResourceConfigHistoryInput, ...aws.Option) (*configservice.GetResourceConfigHistoryOutput, error)
-	GetResourceConfigHistoryRequest(*configservice.GetResourceConfigHistoryInput) (*aws.Request, *configservice.GetResourceConfigHistoryOutput)
+	GetResourceConfigHistoryRequest(*configservice.GetResourceConfigHistoryInput) configservice.GetResourceConfigHistoryRequest
 
 	GetResourceConfigHistoryPages(*configservice.GetResourceConfigHistoryInput, func(*configservice.GetResourceConfigHistoryOutput, bool) bool) error
 	GetResourceConfigHistoryPagesWithContext(aws.Context, *configservice.GetResourceConfigHistoryInput, func(*configservice.GetResourceConfigHistoryOutput, bool) bool, ...aws.Option) error
 
-	ListDiscoveredResources(*configservice.ListDiscoveredResourcesInput) (*configservice.ListDiscoveredResourcesOutput, error)
-	ListDiscoveredResourcesWithContext(aws.Context, *configservice.ListDiscoveredResourcesInput, ...aws.Option) (*configservice.ListDiscoveredResourcesOutput, error)
-	ListDiscoveredResourcesRequest(*configservice.ListDiscoveredResourcesInput) (*aws.Request, *configservice.ListDiscoveredResourcesOutput)
+	ListDiscoveredResourcesRequest(*configservice.ListDiscoveredResourcesInput) configservice.ListDiscoveredResourcesRequest
 
-	PutConfigRule(*configservice.PutConfigRuleInput) (*configservice.PutConfigRuleOutput, error)
-	PutConfigRuleWithContext(aws.Context, *configservice.PutConfigRuleInput, ...aws.Option) (*configservice.PutConfigRuleOutput, error)
-	PutConfigRuleRequest(*configservice.PutConfigRuleInput) (*aws.Request, *configservice.PutConfigRuleOutput)
+	PutConfigRuleRequest(*configservice.PutConfigRuleInput) configservice.PutConfigRuleRequest
 
-	PutConfigurationRecorder(*configservice.PutConfigurationRecorderInput) (*configservice.PutConfigurationRecorderOutput, error)
-	PutConfigurationRecorderWithContext(aws.Context, *configservice.PutConfigurationRecorderInput, ...aws.Option) (*configservice.PutConfigurationRecorderOutput, error)
-	PutConfigurationRecorderRequest(*configservice.PutConfigurationRecorderInput) (*aws.Request, *configservice.PutConfigurationRecorderOutput)
+	PutConfigurationRecorderRequest(*configservice.PutConfigurationRecorderInput) configservice.PutConfigurationRecorderRequest
 
-	PutDeliveryChannel(*configservice.PutDeliveryChannelInput) (*configservice.PutDeliveryChannelOutput, error)
-	PutDeliveryChannelWithContext(aws.Context, *configservice.PutDeliveryChannelInput, ...aws.Option) (*configservice.PutDeliveryChannelOutput, error)
-	PutDeliveryChannelRequest(*configservice.PutDeliveryChannelInput) (*aws.Request, *configservice.PutDeliveryChannelOutput)
+	PutDeliveryChannelRequest(*configservice.PutDeliveryChannelInput) configservice.PutDeliveryChannelRequest
 
-	PutEvaluations(*configservice.PutEvaluationsInput) (*configservice.PutEvaluationsOutput, error)
-	PutEvaluationsWithContext(aws.Context, *configservice.PutEvaluationsInput, ...aws.Option) (*configservice.PutEvaluationsOutput, error)
-	PutEvaluationsRequest(*configservice.PutEvaluationsInput) (*aws.Request, *configservice.PutEvaluationsOutput)
+	PutEvaluationsRequest(*configservice.PutEvaluationsInput) configservice.PutEvaluationsRequest
 
-	StartConfigRulesEvaluation(*configservice.StartConfigRulesEvaluationInput) (*configservice.StartConfigRulesEvaluationOutput, error)
-	StartConfigRulesEvaluationWithContext(aws.Context, *configservice.StartConfigRulesEvaluationInput, ...aws.Option) (*configservice.StartConfigRulesEvaluationOutput, error)
-	StartConfigRulesEvaluationRequest(*configservice.StartConfigRulesEvaluationInput) (*aws.Request, *configservice.StartConfigRulesEvaluationOutput)
+	StartConfigRulesEvaluationRequest(*configservice.StartConfigRulesEvaluationInput) configservice.StartConfigRulesEvaluationRequest
 
-	StartConfigurationRecorder(*configservice.StartConfigurationRecorderInput) (*configservice.StartConfigurationRecorderOutput, error)
-	StartConfigurationRecorderWithContext(aws.Context, *configservice.StartConfigurationRecorderInput, ...aws.Option) (*configservice.StartConfigurationRecorderOutput, error)
-	StartConfigurationRecorderRequest(*configservice.StartConfigurationRecorderInput) (*aws.Request, *configservice.StartConfigurationRecorderOutput)
+	StartConfigurationRecorderRequest(*configservice.StartConfigurationRecorderInput) configservice.StartConfigurationRecorderRequest
 
-	StopConfigurationRecorder(*configservice.StopConfigurationRecorderInput) (*configservice.StopConfigurationRecorderOutput, error)
-	StopConfigurationRecorderWithContext(aws.Context, *configservice.StopConfigurationRecorderInput, ...aws.Option) (*configservice.StopConfigurationRecorderOutput, error)
-	StopConfigurationRecorderRequest(*configservice.StopConfigurationRecorderInput) (*aws.Request, *configservice.StopConfigurationRecorderOutput)
+	StopConfigurationRecorderRequest(*configservice.StopConfigurationRecorderInput) configservice.StopConfigurationRecorderRequest
 }
 
 var _ ConfigServiceAPI = (*configservice.ConfigService)(nil)

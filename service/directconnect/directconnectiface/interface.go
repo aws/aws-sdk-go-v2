@@ -9,7 +9,6 @@
 package directconnectiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect"
 )
 
@@ -45,7 +44,7 @@ import (
 //    type mockDirectConnectClient struct {
 //        directconnectiface.DirectConnectAPI
 //    }
-//    func (m *mockDirectConnectClient) AllocateConnectionOnInterconnect(input *directconnect.AllocateConnectionOnInterconnectInput) (*directconnect.Connection, error) {
+//    func (m *mockDirectConnectClient) AllocateConnectionOnInterconnect(input *directconnect.AllocateConnectionOnInterconnectInput) (*directconnect.DisassociateConnectionFromLagOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -63,153 +62,79 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type DirectConnectAPI interface {
-	AllocateConnectionOnInterconnect(*directconnect.AllocateConnectionOnInterconnectInput) (*directconnect.Connection, error)
-	AllocateConnectionOnInterconnectWithContext(aws.Context, *directconnect.AllocateConnectionOnInterconnectInput, ...aws.Option) (*directconnect.Connection, error)
-	AllocateConnectionOnInterconnectRequest(*directconnect.AllocateConnectionOnInterconnectInput) (*aws.Request, *directconnect.Connection)
+	AllocateConnectionOnInterconnectRequest(*directconnect.AllocateConnectionOnInterconnectInput) directconnect.AllocateConnectionOnInterconnectRequest
 
-	AllocateHostedConnection(*directconnect.AllocateHostedConnectionInput) (*directconnect.Connection, error)
-	AllocateHostedConnectionWithContext(aws.Context, *directconnect.AllocateHostedConnectionInput, ...aws.Option) (*directconnect.Connection, error)
-	AllocateHostedConnectionRequest(*directconnect.AllocateHostedConnectionInput) (*aws.Request, *directconnect.Connection)
+	AllocateHostedConnectionRequest(*directconnect.AllocateHostedConnectionInput) directconnect.AllocateHostedConnectionRequest
 
-	AllocatePrivateVirtualInterface(*directconnect.AllocatePrivateVirtualInterfaceInput) (*directconnect.VirtualInterface, error)
-	AllocatePrivateVirtualInterfaceWithContext(aws.Context, *directconnect.AllocatePrivateVirtualInterfaceInput, ...aws.Option) (*directconnect.VirtualInterface, error)
-	AllocatePrivateVirtualInterfaceRequest(*directconnect.AllocatePrivateVirtualInterfaceInput) (*aws.Request, *directconnect.VirtualInterface)
+	AllocatePrivateVirtualInterfaceRequest(*directconnect.AllocatePrivateVirtualInterfaceInput) directconnect.AllocatePrivateVirtualInterfaceRequest
 
-	AllocatePublicVirtualInterface(*directconnect.AllocatePublicVirtualInterfaceInput) (*directconnect.VirtualInterface, error)
-	AllocatePublicVirtualInterfaceWithContext(aws.Context, *directconnect.AllocatePublicVirtualInterfaceInput, ...aws.Option) (*directconnect.VirtualInterface, error)
-	AllocatePublicVirtualInterfaceRequest(*directconnect.AllocatePublicVirtualInterfaceInput) (*aws.Request, *directconnect.VirtualInterface)
+	AllocatePublicVirtualInterfaceRequest(*directconnect.AllocatePublicVirtualInterfaceInput) directconnect.AllocatePublicVirtualInterfaceRequest
 
-	AssociateConnectionWithLag(*directconnect.AssociateConnectionWithLagInput) (*directconnect.Connection, error)
-	AssociateConnectionWithLagWithContext(aws.Context, *directconnect.AssociateConnectionWithLagInput, ...aws.Option) (*directconnect.Connection, error)
-	AssociateConnectionWithLagRequest(*directconnect.AssociateConnectionWithLagInput) (*aws.Request, *directconnect.Connection)
+	AssociateConnectionWithLagRequest(*directconnect.AssociateConnectionWithLagInput) directconnect.AssociateConnectionWithLagRequest
 
-	AssociateHostedConnection(*directconnect.AssociateHostedConnectionInput) (*directconnect.Connection, error)
-	AssociateHostedConnectionWithContext(aws.Context, *directconnect.AssociateHostedConnectionInput, ...aws.Option) (*directconnect.Connection, error)
-	AssociateHostedConnectionRequest(*directconnect.AssociateHostedConnectionInput) (*aws.Request, *directconnect.Connection)
+	AssociateHostedConnectionRequest(*directconnect.AssociateHostedConnectionInput) directconnect.AssociateHostedConnectionRequest
 
-	AssociateVirtualInterface(*directconnect.AssociateVirtualInterfaceInput) (*directconnect.VirtualInterface, error)
-	AssociateVirtualInterfaceWithContext(aws.Context, *directconnect.AssociateVirtualInterfaceInput, ...aws.Option) (*directconnect.VirtualInterface, error)
-	AssociateVirtualInterfaceRequest(*directconnect.AssociateVirtualInterfaceInput) (*aws.Request, *directconnect.VirtualInterface)
+	AssociateVirtualInterfaceRequest(*directconnect.AssociateVirtualInterfaceInput) directconnect.AssociateVirtualInterfaceRequest
 
-	ConfirmConnection(*directconnect.ConfirmConnectionInput) (*directconnect.ConfirmConnectionOutput, error)
-	ConfirmConnectionWithContext(aws.Context, *directconnect.ConfirmConnectionInput, ...aws.Option) (*directconnect.ConfirmConnectionOutput, error)
-	ConfirmConnectionRequest(*directconnect.ConfirmConnectionInput) (*aws.Request, *directconnect.ConfirmConnectionOutput)
+	ConfirmConnectionRequest(*directconnect.ConfirmConnectionInput) directconnect.ConfirmConnectionRequest
 
-	ConfirmPrivateVirtualInterface(*directconnect.ConfirmPrivateVirtualInterfaceInput) (*directconnect.ConfirmPrivateVirtualInterfaceOutput, error)
-	ConfirmPrivateVirtualInterfaceWithContext(aws.Context, *directconnect.ConfirmPrivateVirtualInterfaceInput, ...aws.Option) (*directconnect.ConfirmPrivateVirtualInterfaceOutput, error)
-	ConfirmPrivateVirtualInterfaceRequest(*directconnect.ConfirmPrivateVirtualInterfaceInput) (*aws.Request, *directconnect.ConfirmPrivateVirtualInterfaceOutput)
+	ConfirmPrivateVirtualInterfaceRequest(*directconnect.ConfirmPrivateVirtualInterfaceInput) directconnect.ConfirmPrivateVirtualInterfaceRequest
 
-	ConfirmPublicVirtualInterface(*directconnect.ConfirmPublicVirtualInterfaceInput) (*directconnect.ConfirmPublicVirtualInterfaceOutput, error)
-	ConfirmPublicVirtualInterfaceWithContext(aws.Context, *directconnect.ConfirmPublicVirtualInterfaceInput, ...aws.Option) (*directconnect.ConfirmPublicVirtualInterfaceOutput, error)
-	ConfirmPublicVirtualInterfaceRequest(*directconnect.ConfirmPublicVirtualInterfaceInput) (*aws.Request, *directconnect.ConfirmPublicVirtualInterfaceOutput)
+	ConfirmPublicVirtualInterfaceRequest(*directconnect.ConfirmPublicVirtualInterfaceInput) directconnect.ConfirmPublicVirtualInterfaceRequest
 
-	CreateBGPPeer(*directconnect.CreateBGPPeerInput) (*directconnect.CreateBGPPeerOutput, error)
-	CreateBGPPeerWithContext(aws.Context, *directconnect.CreateBGPPeerInput, ...aws.Option) (*directconnect.CreateBGPPeerOutput, error)
-	CreateBGPPeerRequest(*directconnect.CreateBGPPeerInput) (*aws.Request, *directconnect.CreateBGPPeerOutput)
+	CreateBGPPeerRequest(*directconnect.CreateBGPPeerInput) directconnect.CreateBGPPeerRequest
 
-	CreateConnection(*directconnect.CreateConnectionInput) (*directconnect.Connection, error)
-	CreateConnectionWithContext(aws.Context, *directconnect.CreateConnectionInput, ...aws.Option) (*directconnect.Connection, error)
-	CreateConnectionRequest(*directconnect.CreateConnectionInput) (*aws.Request, *directconnect.Connection)
+	CreateConnectionRequest(*directconnect.CreateConnectionInput) directconnect.CreateConnectionRequest
 
-	CreateInterconnect(*directconnect.CreateInterconnectInput) (*directconnect.Interconnect, error)
-	CreateInterconnectWithContext(aws.Context, *directconnect.CreateInterconnectInput, ...aws.Option) (*directconnect.Interconnect, error)
-	CreateInterconnectRequest(*directconnect.CreateInterconnectInput) (*aws.Request, *directconnect.Interconnect)
+	CreateInterconnectRequest(*directconnect.CreateInterconnectInput) directconnect.CreateInterconnectRequest
 
-	CreateLag(*directconnect.CreateLagInput) (*directconnect.Lag, error)
-	CreateLagWithContext(aws.Context, *directconnect.CreateLagInput, ...aws.Option) (*directconnect.Lag, error)
-	CreateLagRequest(*directconnect.CreateLagInput) (*aws.Request, *directconnect.Lag)
+	CreateLagRequest(*directconnect.CreateLagInput) directconnect.CreateLagRequest
 
-	CreatePrivateVirtualInterface(*directconnect.CreatePrivateVirtualInterfaceInput) (*directconnect.VirtualInterface, error)
-	CreatePrivateVirtualInterfaceWithContext(aws.Context, *directconnect.CreatePrivateVirtualInterfaceInput, ...aws.Option) (*directconnect.VirtualInterface, error)
-	CreatePrivateVirtualInterfaceRequest(*directconnect.CreatePrivateVirtualInterfaceInput) (*aws.Request, *directconnect.VirtualInterface)
+	CreatePrivateVirtualInterfaceRequest(*directconnect.CreatePrivateVirtualInterfaceInput) directconnect.CreatePrivateVirtualInterfaceRequest
 
-	CreatePublicVirtualInterface(*directconnect.CreatePublicVirtualInterfaceInput) (*directconnect.VirtualInterface, error)
-	CreatePublicVirtualInterfaceWithContext(aws.Context, *directconnect.CreatePublicVirtualInterfaceInput, ...aws.Option) (*directconnect.VirtualInterface, error)
-	CreatePublicVirtualInterfaceRequest(*directconnect.CreatePublicVirtualInterfaceInput) (*aws.Request, *directconnect.VirtualInterface)
+	CreatePublicVirtualInterfaceRequest(*directconnect.CreatePublicVirtualInterfaceInput) directconnect.CreatePublicVirtualInterfaceRequest
 
-	DeleteBGPPeer(*directconnect.DeleteBGPPeerInput) (*directconnect.DeleteBGPPeerOutput, error)
-	DeleteBGPPeerWithContext(aws.Context, *directconnect.DeleteBGPPeerInput, ...aws.Option) (*directconnect.DeleteBGPPeerOutput, error)
-	DeleteBGPPeerRequest(*directconnect.DeleteBGPPeerInput) (*aws.Request, *directconnect.DeleteBGPPeerOutput)
+	DeleteBGPPeerRequest(*directconnect.DeleteBGPPeerInput) directconnect.DeleteBGPPeerRequest
 
-	DeleteConnection(*directconnect.DeleteConnectionInput) (*directconnect.Connection, error)
-	DeleteConnectionWithContext(aws.Context, *directconnect.DeleteConnectionInput, ...aws.Option) (*directconnect.Connection, error)
-	DeleteConnectionRequest(*directconnect.DeleteConnectionInput) (*aws.Request, *directconnect.Connection)
+	DeleteConnectionRequest(*directconnect.DeleteConnectionInput) directconnect.DeleteConnectionRequest
 
-	DeleteInterconnect(*directconnect.DeleteInterconnectInput) (*directconnect.DeleteInterconnectOutput, error)
-	DeleteInterconnectWithContext(aws.Context, *directconnect.DeleteInterconnectInput, ...aws.Option) (*directconnect.DeleteInterconnectOutput, error)
-	DeleteInterconnectRequest(*directconnect.DeleteInterconnectInput) (*aws.Request, *directconnect.DeleteInterconnectOutput)
+	DeleteInterconnectRequest(*directconnect.DeleteInterconnectInput) directconnect.DeleteInterconnectRequest
 
-	DeleteLag(*directconnect.DeleteLagInput) (*directconnect.Lag, error)
-	DeleteLagWithContext(aws.Context, *directconnect.DeleteLagInput, ...aws.Option) (*directconnect.Lag, error)
-	DeleteLagRequest(*directconnect.DeleteLagInput) (*aws.Request, *directconnect.Lag)
+	DeleteLagRequest(*directconnect.DeleteLagInput) directconnect.DeleteLagRequest
 
-	DeleteVirtualInterface(*directconnect.DeleteVirtualInterfaceInput) (*directconnect.DeleteVirtualInterfaceOutput, error)
-	DeleteVirtualInterfaceWithContext(aws.Context, *directconnect.DeleteVirtualInterfaceInput, ...aws.Option) (*directconnect.DeleteVirtualInterfaceOutput, error)
-	DeleteVirtualInterfaceRequest(*directconnect.DeleteVirtualInterfaceInput) (*aws.Request, *directconnect.DeleteVirtualInterfaceOutput)
+	DeleteVirtualInterfaceRequest(*directconnect.DeleteVirtualInterfaceInput) directconnect.DeleteVirtualInterfaceRequest
 
-	DescribeConnectionLoa(*directconnect.DescribeConnectionLoaInput) (*directconnect.DescribeConnectionLoaOutput, error)
-	DescribeConnectionLoaWithContext(aws.Context, *directconnect.DescribeConnectionLoaInput, ...aws.Option) (*directconnect.DescribeConnectionLoaOutput, error)
-	DescribeConnectionLoaRequest(*directconnect.DescribeConnectionLoaInput) (*aws.Request, *directconnect.DescribeConnectionLoaOutput)
+	DescribeConnectionLoaRequest(*directconnect.DescribeConnectionLoaInput) directconnect.DescribeConnectionLoaRequest
 
-	DescribeConnections(*directconnect.DescribeConnectionsInput) (*directconnect.Connections, error)
-	DescribeConnectionsWithContext(aws.Context, *directconnect.DescribeConnectionsInput, ...aws.Option) (*directconnect.Connections, error)
-	DescribeConnectionsRequest(*directconnect.DescribeConnectionsInput) (*aws.Request, *directconnect.Connections)
+	DescribeConnectionsRequest(*directconnect.DescribeConnectionsInput) directconnect.DescribeConnectionsRequest
 
-	DescribeConnectionsOnInterconnect(*directconnect.DescribeConnectionsOnInterconnectInput) (*directconnect.Connections, error)
-	DescribeConnectionsOnInterconnectWithContext(aws.Context, *directconnect.DescribeConnectionsOnInterconnectInput, ...aws.Option) (*directconnect.Connections, error)
-	DescribeConnectionsOnInterconnectRequest(*directconnect.DescribeConnectionsOnInterconnectInput) (*aws.Request, *directconnect.Connections)
+	DescribeConnectionsOnInterconnectRequest(*directconnect.DescribeConnectionsOnInterconnectInput) directconnect.DescribeConnectionsOnInterconnectRequest
 
-	DescribeHostedConnections(*directconnect.DescribeHostedConnectionsInput) (*directconnect.Connections, error)
-	DescribeHostedConnectionsWithContext(aws.Context, *directconnect.DescribeHostedConnectionsInput, ...aws.Option) (*directconnect.Connections, error)
-	DescribeHostedConnectionsRequest(*directconnect.DescribeHostedConnectionsInput) (*aws.Request, *directconnect.Connections)
+	DescribeHostedConnectionsRequest(*directconnect.DescribeHostedConnectionsInput) directconnect.DescribeHostedConnectionsRequest
 
-	DescribeInterconnectLoa(*directconnect.DescribeInterconnectLoaInput) (*directconnect.DescribeInterconnectLoaOutput, error)
-	DescribeInterconnectLoaWithContext(aws.Context, *directconnect.DescribeInterconnectLoaInput, ...aws.Option) (*directconnect.DescribeInterconnectLoaOutput, error)
-	DescribeInterconnectLoaRequest(*directconnect.DescribeInterconnectLoaInput) (*aws.Request, *directconnect.DescribeInterconnectLoaOutput)
+	DescribeInterconnectLoaRequest(*directconnect.DescribeInterconnectLoaInput) directconnect.DescribeInterconnectLoaRequest
 
-	DescribeInterconnects(*directconnect.DescribeInterconnectsInput) (*directconnect.DescribeInterconnectsOutput, error)
-	DescribeInterconnectsWithContext(aws.Context, *directconnect.DescribeInterconnectsInput, ...aws.Option) (*directconnect.DescribeInterconnectsOutput, error)
-	DescribeInterconnectsRequest(*directconnect.DescribeInterconnectsInput) (*aws.Request, *directconnect.DescribeInterconnectsOutput)
+	DescribeInterconnectsRequest(*directconnect.DescribeInterconnectsInput) directconnect.DescribeInterconnectsRequest
 
-	DescribeLags(*directconnect.DescribeLagsInput) (*directconnect.DescribeLagsOutput, error)
-	DescribeLagsWithContext(aws.Context, *directconnect.DescribeLagsInput, ...aws.Option) (*directconnect.DescribeLagsOutput, error)
-	DescribeLagsRequest(*directconnect.DescribeLagsInput) (*aws.Request, *directconnect.DescribeLagsOutput)
+	DescribeLagsRequest(*directconnect.DescribeLagsInput) directconnect.DescribeLagsRequest
 
-	DescribeLoa(*directconnect.DescribeLoaInput) (*directconnect.Loa, error)
-	DescribeLoaWithContext(aws.Context, *directconnect.DescribeLoaInput, ...aws.Option) (*directconnect.Loa, error)
-	DescribeLoaRequest(*directconnect.DescribeLoaInput) (*aws.Request, *directconnect.Loa)
+	DescribeLoaRequest(*directconnect.DescribeLoaInput) directconnect.DescribeLoaRequest
 
-	DescribeLocations(*directconnect.DescribeLocationsInput) (*directconnect.DescribeLocationsOutput, error)
-	DescribeLocationsWithContext(aws.Context, *directconnect.DescribeLocationsInput, ...aws.Option) (*directconnect.DescribeLocationsOutput, error)
-	DescribeLocationsRequest(*directconnect.DescribeLocationsInput) (*aws.Request, *directconnect.DescribeLocationsOutput)
+	DescribeLocationsRequest(*directconnect.DescribeLocationsInput) directconnect.DescribeLocationsRequest
 
-	DescribeTags(*directconnect.DescribeTagsInput) (*directconnect.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *directconnect.DescribeTagsInput, ...aws.Option) (*directconnect.DescribeTagsOutput, error)
-	DescribeTagsRequest(*directconnect.DescribeTagsInput) (*aws.Request, *directconnect.DescribeTagsOutput)
+	DescribeTagsRequest(*directconnect.DescribeTagsInput) directconnect.DescribeTagsRequest
 
-	DescribeVirtualGateways(*directconnect.DescribeVirtualGatewaysInput) (*directconnect.DescribeVirtualGatewaysOutput, error)
-	DescribeVirtualGatewaysWithContext(aws.Context, *directconnect.DescribeVirtualGatewaysInput, ...aws.Option) (*directconnect.DescribeVirtualGatewaysOutput, error)
-	DescribeVirtualGatewaysRequest(*directconnect.DescribeVirtualGatewaysInput) (*aws.Request, *directconnect.DescribeVirtualGatewaysOutput)
+	DescribeVirtualGatewaysRequest(*directconnect.DescribeVirtualGatewaysInput) directconnect.DescribeVirtualGatewaysRequest
 
-	DescribeVirtualInterfaces(*directconnect.DescribeVirtualInterfacesInput) (*directconnect.DescribeVirtualInterfacesOutput, error)
-	DescribeVirtualInterfacesWithContext(aws.Context, *directconnect.DescribeVirtualInterfacesInput, ...aws.Option) (*directconnect.DescribeVirtualInterfacesOutput, error)
-	DescribeVirtualInterfacesRequest(*directconnect.DescribeVirtualInterfacesInput) (*aws.Request, *directconnect.DescribeVirtualInterfacesOutput)
+	DescribeVirtualInterfacesRequest(*directconnect.DescribeVirtualInterfacesInput) directconnect.DescribeVirtualInterfacesRequest
 
-	DisassociateConnectionFromLag(*directconnect.DisassociateConnectionFromLagInput) (*directconnect.Connection, error)
-	DisassociateConnectionFromLagWithContext(aws.Context, *directconnect.DisassociateConnectionFromLagInput, ...aws.Option) (*directconnect.Connection, error)
-	DisassociateConnectionFromLagRequest(*directconnect.DisassociateConnectionFromLagInput) (*aws.Request, *directconnect.Connection)
+	DisassociateConnectionFromLagRequest(*directconnect.DisassociateConnectionFromLagInput) directconnect.DisassociateConnectionFromLagRequest
 
-	TagResource(*directconnect.TagResourceInput) (*directconnect.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *directconnect.TagResourceInput, ...aws.Option) (*directconnect.TagResourceOutput, error)
-	TagResourceRequest(*directconnect.TagResourceInput) (*aws.Request, *directconnect.TagResourceOutput)
+	TagResourceRequest(*directconnect.TagResourceInput) directconnect.TagResourceRequest
 
-	UntagResource(*directconnect.UntagResourceInput) (*directconnect.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *directconnect.UntagResourceInput, ...aws.Option) (*directconnect.UntagResourceOutput, error)
-	UntagResourceRequest(*directconnect.UntagResourceInput) (*aws.Request, *directconnect.UntagResourceOutput)
+	UntagResourceRequest(*directconnect.UntagResourceInput) directconnect.UntagResourceRequest
 
-	UpdateLag(*directconnect.UpdateLagInput) (*directconnect.Lag, error)
-	UpdateLagWithContext(aws.Context, *directconnect.UpdateLagInput, ...aws.Option) (*directconnect.Lag, error)
-	UpdateLagRequest(*directconnect.UpdateLagInput) (*aws.Request, *directconnect.Lag)
+	UpdateLagRequest(*directconnect.UpdateLagInput) directconnect.UpdateLagRequest
 }
 
 var _ DirectConnectAPI = (*directconnect.DirectConnect)(nil)

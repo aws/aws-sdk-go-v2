@@ -36,7 +36,7 @@ func TestPresignHandler(t *testing.T) {
 	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
-	req, _ := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
 		ContentDisposition: aws.String("a+b c$d"),
@@ -89,7 +89,7 @@ func TestPresignRequest(t *testing.T) {
 	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
-	req, _ := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
 		ContentDisposition: aws.String("a+b c$d"),

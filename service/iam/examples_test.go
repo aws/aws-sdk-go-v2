@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // The following add-client-id-to-open-id-connect-provider command adds the client ID
 // my-application-ID to the OIDC provider named server.example.com:
-func ExampleIAM_AddClientIDToOpenIDConnectProvider_shared00() {
+func ExampleIAM_AddClientIDToOpenIDConnectProviderRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -41,7 +41,8 @@ func ExampleIAM_AddClientIDToOpenIDConnectProvider_shared00() {
 		OpenIDConnectProviderArn: aws.String("arn:aws:iam::123456789012:oidc-provider/server.example.com"),
 	}
 
-	result, err := svc.AddClientIDToOpenIDConnectProvider(input)
+	req := svc.AddClientIDToOpenIDConnectProviderRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -71,7 +72,7 @@ func ExampleIAM_AddClientIDToOpenIDConnectProvider_shared00() {
 //
 // The following command adds the role named S3Access to the instance profile named
 // Webserver:
-func ExampleIAM_AddRoleToInstanceProfile_shared00() {
+func ExampleIAM_AddRoleToInstanceProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -83,7 +84,8 @@ func ExampleIAM_AddRoleToInstanceProfile_shared00() {
 		RoleName:            aws.String("S3Access"),
 	}
 
-	result, err := svc.AddRoleToInstanceProfile(input)
+	req := svc.AddRoleToInstanceProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -114,7 +116,7 @@ func ExampleIAM_AddRoleToInstanceProfile_shared00() {
 // To add a user to an IAM group
 //
 // The following command adds an IAM user named Bob to the IAM group named Admins:
-func ExampleIAM_AddUserToGroup_shared00() {
+func ExampleIAM_AddUserToGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -126,7 +128,8 @@ func ExampleIAM_AddUserToGroup_shared00() {
 		UserName:  aws.String("Bob"),
 	}
 
-	result, err := svc.AddUserToGroup(input)
+	req := svc.AddUserToGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -154,7 +157,7 @@ func ExampleIAM_AddUserToGroup_shared00() {
 //
 // The following command attaches the AWS managed policy named ReadOnlyAccess to the
 // IAM group named Finance.
-func ExampleIAM_AttachGroupPolicy_shared00() {
+func ExampleIAM_AttachGroupPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -166,7 +169,8 @@ func ExampleIAM_AttachGroupPolicy_shared00() {
 		PolicyArn: aws.String("arn:aws:iam::aws:policy/ReadOnlyAccess"),
 	}
 
-	result, err := svc.AttachGroupPolicy(input)
+	req := svc.AttachGroupPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -198,7 +202,7 @@ func ExampleIAM_AttachGroupPolicy_shared00() {
 //
 // The following command attaches the AWS managed policy named ReadOnlyAccess to the
 // IAM role named ReadOnlyRole.
-func ExampleIAM_AttachRolePolicy_shared00() {
+func ExampleIAM_AttachRolePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -210,7 +214,8 @@ func ExampleIAM_AttachRolePolicy_shared00() {
 		RoleName:  aws.String("ReadOnlyRole"),
 	}
 
-	result, err := svc.AttachRolePolicy(input)
+	req := svc.AttachRolePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -244,7 +249,7 @@ func ExampleIAM_AttachRolePolicy_shared00() {
 //
 // The following command attaches the AWS managed policy named AdministratorAccess to
 // the IAM user named Alice.
-func ExampleIAM_AttachUserPolicy_shared00() {
+func ExampleIAM_AttachUserPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -256,7 +261,8 @@ func ExampleIAM_AttachUserPolicy_shared00() {
 		UserName:  aws.String("Alice"),
 	}
 
-	result, err := svc.AttachUserPolicy(input)
+	req := svc.AttachUserPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -287,7 +293,7 @@ func ExampleIAM_AttachUserPolicy_shared00() {
 // To change the password for your IAM user
 //
 // The following command changes the password for the current IAM user.
-func ExampleIAM_ChangePassword_shared00() {
+func ExampleIAM_ChangePasswordRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -299,7 +305,8 @@ func ExampleIAM_ChangePassword_shared00() {
 		OldPassword: aws.String("3s0K_;xh4~8XXI"),
 	}
 
-	result, err := svc.ChangePassword(input)
+	req := svc.ChangePasswordRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -333,7 +340,7 @@ func ExampleIAM_ChangePassword_shared00() {
 //
 // The following command creates an access key (access key ID and secret access key)
 // for the IAM user named Bob.
-func ExampleIAM_CreateAccessKey_shared00() {
+func ExampleIAM_CreateAccessKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -344,7 +351,8 @@ func ExampleIAM_CreateAccessKey_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.CreateAccessKey(input)
+	req := svc.CreateAccessKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -371,7 +379,7 @@ func ExampleIAM_CreateAccessKey_shared00() {
 // To create an account alias
 //
 // The following command associates the alias examplecorp to your AWS account.
-func ExampleIAM_CreateAccountAlias_shared00() {
+func ExampleIAM_CreateAccountAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -382,7 +390,8 @@ func ExampleIAM_CreateAccountAlias_shared00() {
 		AccountAlias: aws.String("examplecorp"),
 	}
 
-	result, err := svc.CreateAccountAlias(input)
+	req := svc.CreateAccountAliasRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -409,7 +418,7 @@ func ExampleIAM_CreateAccountAlias_shared00() {
 // To create an IAM group
 //
 // The following command creates an IAM group named Admins.
-func ExampleIAM_CreateGroup_shared00() {
+func ExampleIAM_CreateGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -420,7 +429,8 @@ func ExampleIAM_CreateGroup_shared00() {
 		GroupName: aws.String("Admins"),
 	}
 
-	result, err := svc.CreateGroup(input)
+	req := svc.CreateGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -450,7 +460,7 @@ func ExampleIAM_CreateGroup_shared00() {
 //
 // The following command creates an instance profile named Webserver that is ready to
 // have a role attached and then be associated with an EC2 instance.
-func ExampleIAM_CreateInstanceProfile_shared00() {
+func ExampleIAM_CreateInstanceProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -461,7 +471,8 @@ func ExampleIAM_CreateInstanceProfile_shared00() {
 		InstanceProfileName: aws.String("Webserver"),
 	}
 
-	result, err := svc.CreateInstanceProfile(input)
+	req := svc.CreateInstanceProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -489,7 +500,7 @@ func ExampleIAM_CreateInstanceProfile_shared00() {
 //
 // The following command changes IAM user Bob's password and sets the flag that required
 // Bob to change the password the next time he signs in.
-func ExampleIAM_CreateLoginProfile_shared00() {
+func ExampleIAM_CreateLoginProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -502,7 +513,8 @@ func ExampleIAM_CreateLoginProfile_shared00() {
 		UserName:              aws.String("Bob"),
 	}
 
-	result, err := svc.CreateLoginProfile(input)
+	req := svc.CreateLoginProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -534,7 +546,7 @@ func ExampleIAM_CreateLoginProfile_shared00() {
 //
 // The following example defines a new OIDC provider in IAM with a client ID of my-application-id
 // and pointing at the server with a URL of https://server.example.com.
-func ExampleIAM_CreateOpenIDConnectProvider_shared00() {
+func ExampleIAM_CreateOpenIDConnectProviderRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -551,7 +563,8 @@ func ExampleIAM_CreateOpenIDConnectProvider_shared00() {
 		Url: aws.String("https://server.example.com"),
 	}
 
-	result, err := svc.CreateOpenIDConnectProvider(input)
+	req := svc.CreateOpenIDConnectProviderRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -581,7 +594,7 @@ func ExampleIAM_CreateOpenIDConnectProvider_shared00() {
 //
 // The following command creates a role named Test-Role and attaches a trust policy
 // to it that is provided as a URL-encoded JSON string.
-func ExampleIAM_CreateRole_shared00() {
+func ExampleIAM_CreateRoleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -594,7 +607,8 @@ func ExampleIAM_CreateRole_shared00() {
 		RoleName: aws.String("Test-Role"),
 	}
 
-	result, err := svc.CreateRole(input)
+	req := svc.CreateRoleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -625,7 +639,7 @@ func ExampleIAM_CreateRole_shared00() {
 // To create an IAM user
 //
 // The following create-user command creates an IAM user named Bob in the current account.
-func ExampleIAM_CreateUser_shared00() {
+func ExampleIAM_CreateUserRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -636,7 +650,8 @@ func ExampleIAM_CreateUser_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.CreateUser(input)
+	req := svc.CreateUserRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -666,7 +681,7 @@ func ExampleIAM_CreateUser_shared00() {
 //
 // The following command deletes one access key (access key ID and secret access key)
 // assigned to the IAM user named Bob.
-func ExampleIAM_DeleteAccessKey_shared00() {
+func ExampleIAM_DeleteAccessKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -678,7 +693,8 @@ func ExampleIAM_DeleteAccessKey_shared00() {
 		UserName:    aws.String("Bob"),
 	}
 
-	result, err := svc.DeleteAccessKey(input)
+	req := svc.DeleteAccessKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -705,7 +721,7 @@ func ExampleIAM_DeleteAccessKey_shared00() {
 // To delete an account alias
 //
 // The following command removes the alias mycompany from the current AWS account:
-func ExampleIAM_DeleteAccountAlias_shared00() {
+func ExampleIAM_DeleteAccountAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -716,7 +732,8 @@ func ExampleIAM_DeleteAccountAlias_shared00() {
 		AccountAlias: aws.String("mycompany"),
 	}
 
-	result, err := svc.DeleteAccountAlias(input)
+	req := svc.DeleteAccountAliasRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -743,7 +760,7 @@ func ExampleIAM_DeleteAccountAlias_shared00() {
 // To delete the current account password policy
 //
 // The following command removes the password policy from the current AWS account:
-func ExampleIAM_DeleteAccountPasswordPolicy_shared00() {
+func ExampleIAM_DeleteAccountPasswordPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -752,7 +769,8 @@ func ExampleIAM_DeleteAccountPasswordPolicy_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.DeleteAccountPasswordPolicyInput{}
 
-	result, err := svc.DeleteAccountPasswordPolicy(input)
+	req := svc.DeleteAccountPasswordPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -780,7 +798,7 @@ func ExampleIAM_DeleteAccountPasswordPolicy_shared00() {
 //
 // The following command deletes the policy named ExamplePolicy from the group named
 // Admins:
-func ExampleIAM_DeleteGroupPolicy_shared00() {
+func ExampleIAM_DeleteGroupPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -792,7 +810,8 @@ func ExampleIAM_DeleteGroupPolicy_shared00() {
 		PolicyName: aws.String("ExamplePolicy"),
 	}
 
-	result, err := svc.DeleteGroupPolicy(input)
+	req := svc.DeleteGroupPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -819,7 +838,7 @@ func ExampleIAM_DeleteGroupPolicy_shared00() {
 // To delete an instance profile
 //
 // The following command deletes the instance profile named ExampleInstanceProfile
-func ExampleIAM_DeleteInstanceProfile_shared00() {
+func ExampleIAM_DeleteInstanceProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -830,7 +849,8 @@ func ExampleIAM_DeleteInstanceProfile_shared00() {
 		InstanceProfileName: aws.String("ExampleInstanceProfile"),
 	}
 
-	result, err := svc.DeleteInstanceProfile(input)
+	req := svc.DeleteInstanceProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -859,7 +879,7 @@ func ExampleIAM_DeleteInstanceProfile_shared00() {
 // To delete a password for an IAM user
 //
 // The following command deletes the password for the IAM user named Bob.
-func ExampleIAM_DeleteLoginProfile_shared00() {
+func ExampleIAM_DeleteLoginProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -870,7 +890,8 @@ func ExampleIAM_DeleteLoginProfile_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.DeleteLoginProfile(input)
+	req := svc.DeleteLoginProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -899,7 +920,7 @@ func ExampleIAM_DeleteLoginProfile_shared00() {
 // To delete an IAM role
 //
 // The following command removes the role named Test-Role.
-func ExampleIAM_DeleteRole_shared00() {
+func ExampleIAM_DeleteRoleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -910,7 +931,8 @@ func ExampleIAM_DeleteRole_shared00() {
 		RoleName: aws.String("Test-Role"),
 	}
 
-	result, err := svc.DeleteRole(input)
+	req := svc.DeleteRoleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -942,7 +964,7 @@ func ExampleIAM_DeleteRole_shared00() {
 //
 // The following command removes the policy named ExamplePolicy from the role named
 // Test-Role.
-func ExampleIAM_DeleteRolePolicy_shared00() {
+func ExampleIAM_DeleteRolePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -954,7 +976,8 @@ func ExampleIAM_DeleteRolePolicy_shared00() {
 		RoleName:   aws.String("Test-Role"),
 	}
 
-	result, err := svc.DeleteRolePolicy(input)
+	req := svc.DeleteRolePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -984,7 +1007,7 @@ func ExampleIAM_DeleteRolePolicy_shared00() {
 //
 // The following command deletes the specified signing certificate for the IAM user
 // named Anika.
-func ExampleIAM_DeleteSigningCertificate_shared00() {
+func ExampleIAM_DeleteSigningCertificateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -996,7 +1019,8 @@ func ExampleIAM_DeleteSigningCertificate_shared00() {
 		UserName:      aws.String("Anika"),
 	}
 
-	result, err := svc.DeleteSigningCertificate(input)
+	req := svc.DeleteSigningCertificateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1023,7 +1047,7 @@ func ExampleIAM_DeleteSigningCertificate_shared00() {
 // To delete an IAM user
 //
 // The following command removes the IAM user named Bob from the current account.
-func ExampleIAM_DeleteUser_shared00() {
+func ExampleIAM_DeleteUserRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1034,7 +1058,8 @@ func ExampleIAM_DeleteUser_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.DeleteUser(input)
+	req := svc.DeleteUserRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1064,7 +1089,7 @@ func ExampleIAM_DeleteUser_shared00() {
 //
 // The following delete-user-policy command removes the specified policy from the IAM
 // user named Juan:
-func ExampleIAM_DeleteUserPolicy_shared00() {
+func ExampleIAM_DeleteUserPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1076,7 +1101,8 @@ func ExampleIAM_DeleteUserPolicy_shared00() {
 		UserName:   aws.String("Juan"),
 	}
 
-	result, err := svc.DeleteUserPolicy(input)
+	req := svc.DeleteUserPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1104,7 +1130,7 @@ func ExampleIAM_DeleteUserPolicy_shared00() {
 //
 // The following delete-virtual-mfa-device command removes the specified MFA device
 // from the current AWS account.
-func ExampleIAM_DeleteVirtualMFADevice_shared00() {
+func ExampleIAM_DeleteVirtualMFADeviceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1115,7 +1141,8 @@ func ExampleIAM_DeleteVirtualMFADevice_shared00() {
 		SerialNumber: aws.String("arn:aws:iam::123456789012:mfa/ExampleName"),
 	}
 
-	result, err := svc.DeleteVirtualMFADevice(input)
+	req := svc.DeleteVirtualMFADeviceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1145,7 +1172,7 @@ func ExampleIAM_DeleteVirtualMFADevice_shared00() {
 //
 // The following command displays details about the password policy for the current
 // AWS account.
-func ExampleIAM_GetAccountPasswordPolicy_shared00() {
+func ExampleIAM_GetAccountPasswordPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1154,7 +1181,8 @@ func ExampleIAM_GetAccountPasswordPolicy_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.GetAccountPasswordPolicyInput{}
 
-	result, err := svc.GetAccountPasswordPolicy(input)
+	req := svc.GetAccountPasswordPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1180,7 +1208,7 @@ func ExampleIAM_GetAccountPasswordPolicy_shared00() {
 //
 // The following command returns information about the IAM entity quotas and usage in
 // the current AWS account.
-func ExampleIAM_GetAccountSummary_shared00() {
+func ExampleIAM_GetAccountSummaryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1189,7 +1217,8 @@ func ExampleIAM_GetAccountSummary_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.GetAccountSummaryInput{}
 
-	result, err := svc.GetAccountSummary(input)
+	req := svc.GetAccountSummaryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1212,7 +1241,7 @@ func ExampleIAM_GetAccountSummary_shared00() {
 // To get information about an instance profile
 //
 // The following command gets information about the instance profile named ExampleInstanceProfile.
-func ExampleIAM_GetInstanceProfile_shared00() {
+func ExampleIAM_GetInstanceProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1223,7 +1252,8 @@ func ExampleIAM_GetInstanceProfile_shared00() {
 		InstanceProfileName: aws.String("ExampleInstanceProfile"),
 	}
 
-	result, err := svc.GetInstanceProfile(input)
+	req := svc.GetInstanceProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1249,7 +1279,7 @@ func ExampleIAM_GetInstanceProfile_shared00() {
 //
 // The following command gets information about the password for the IAM user named
 // Anika.
-func ExampleIAM_GetLoginProfile_shared00() {
+func ExampleIAM_GetLoginProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1260,7 +1290,8 @@ func ExampleIAM_GetLoginProfile_shared00() {
 		UserName: aws.String("Anika"),
 	}
 
-	result, err := svc.GetLoginProfile(input)
+	req := svc.GetLoginProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1285,7 +1316,7 @@ func ExampleIAM_GetLoginProfile_shared00() {
 // To get information about an IAM role
 //
 // The following command gets information about the role named Test-Role.
-func ExampleIAM_GetRole_shared00() {
+func ExampleIAM_GetRoleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1296,7 +1327,8 @@ func ExampleIAM_GetRole_shared00() {
 		RoleName: aws.String("Test-Role"),
 	}
 
-	result, err := svc.GetRole(input)
+	req := svc.GetRoleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1321,7 +1353,7 @@ func ExampleIAM_GetRole_shared00() {
 // To get information about an IAM user
 //
 // The following command gets information about the IAM user named Bob.
-func ExampleIAM_GetUser_shared00() {
+func ExampleIAM_GetUserRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1332,7 +1364,8 @@ func ExampleIAM_GetUser_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.GetUser(input)
+	req := svc.GetUserRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1357,7 +1390,7 @@ func ExampleIAM_GetUser_shared00() {
 // To list the access key IDs for an IAM user
 //
 // The following command lists the access keys IDs for the IAM user named Alice.
-func ExampleIAM_ListAccessKeys_shared00() {
+func ExampleIAM_ListAccessKeysRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1368,7 +1401,8 @@ func ExampleIAM_ListAccessKeys_shared00() {
 		UserName: aws.String("Alice"),
 	}
 
-	result, err := svc.ListAccessKeys(input)
+	req := svc.ListAccessKeysRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1393,7 +1427,7 @@ func ExampleIAM_ListAccessKeys_shared00() {
 // To list account aliases
 //
 // The following command lists the aliases for the current account.
-func ExampleIAM_ListAccountAliases_shared00() {
+func ExampleIAM_ListAccountAliasesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1402,7 +1436,8 @@ func ExampleIAM_ListAccountAliases_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.ListAccountAliasesInput{}
 
-	result, err := svc.ListAccountAliases(input)
+	req := svc.ListAccountAliasesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1426,7 +1461,7 @@ func ExampleIAM_ListAccountAliases_shared00() {
 //
 // The following command lists the names of in-line policies that are embedded in the
 // IAM group named Admins.
-func ExampleIAM_ListGroupPolicies_shared00() {
+func ExampleIAM_ListGroupPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1437,7 +1472,8 @@ func ExampleIAM_ListGroupPolicies_shared00() {
 		GroupName: aws.String("Admins"),
 	}
 
-	result, err := svc.ListGroupPolicies(input)
+	req := svc.ListGroupPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1462,7 +1498,7 @@ func ExampleIAM_ListGroupPolicies_shared00() {
 // To list the IAM groups for the current account
 //
 // The following command lists the IAM groups in the current account:
-func ExampleIAM_ListGroups_shared00() {
+func ExampleIAM_ListGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1471,7 +1507,8 @@ func ExampleIAM_ListGroups_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.ListGroupsInput{}
 
-	result, err := svc.ListGroups(input)
+	req := svc.ListGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1494,7 +1531,7 @@ func ExampleIAM_ListGroups_shared00() {
 // To list the groups that an IAM user belongs to
 //
 // The following command displays the groups that the IAM user named Bob belongs to.
-func ExampleIAM_ListGroupsForUser_shared00() {
+func ExampleIAM_ListGroupsForUserRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1505,7 +1542,8 @@ func ExampleIAM_ListGroupsForUser_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.ListGroupsForUser(input)
+	req := svc.ListGroupsForUserRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1530,7 +1568,7 @@ func ExampleIAM_ListGroupsForUser_shared00() {
 // To list the signing certificates for an IAM user
 //
 // The following command lists the signing certificates for the IAM user named Bob.
-func ExampleIAM_ListSigningCertificates_shared00() {
+func ExampleIAM_ListSigningCertificatesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1541,7 +1579,8 @@ func ExampleIAM_ListSigningCertificates_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.ListSigningCertificates(input)
+	req := svc.ListSigningCertificatesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1566,7 +1605,7 @@ func ExampleIAM_ListSigningCertificates_shared00() {
 // To list IAM users
 //
 // The following command lists the IAM users in the current account.
-func ExampleIAM_ListUsers_shared00() {
+func ExampleIAM_ListUsersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1575,7 +1614,8 @@ func ExampleIAM_ListUsers_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.ListUsersInput{}
 
-	result, err := svc.ListUsers(input)
+	req := svc.ListUsersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1599,7 +1639,7 @@ func ExampleIAM_ListUsers_shared00() {
 //
 // The following command lists the virtual MFA devices that have been configured for
 // the current account.
-func ExampleIAM_ListVirtualMFADevices_shared00() {
+func ExampleIAM_ListVirtualMFADevicesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1608,7 +1648,8 @@ func ExampleIAM_ListVirtualMFADevices_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.ListVirtualMFADevicesInput{}
 
-	result, err := svc.ListVirtualMFADevices(input)
+	req := svc.ListVirtualMFADevicesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1629,7 +1670,7 @@ func ExampleIAM_ListVirtualMFADevices_shared00() {
 // To add a policy to a group
 //
 // The following command adds a policy named AllPerms to the IAM group named Admins.
-func ExampleIAM_PutGroupPolicy_shared00() {
+func ExampleIAM_PutGroupPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1642,7 +1683,8 @@ func ExampleIAM_PutGroupPolicy_shared00() {
 		PolicyName:     aws.String("AllPerms"),
 	}
 
-	result, err := svc.PutGroupPolicy(input)
+	req := svc.PutGroupPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1671,7 +1713,7 @@ func ExampleIAM_PutGroupPolicy_shared00() {
 // To attach a permissions policy to an IAM role
 //
 // The following command adds a permissions policy to the role named Test-Role.
-func ExampleIAM_PutRolePolicy_shared00() {
+func ExampleIAM_PutRolePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1684,7 +1726,8 @@ func ExampleIAM_PutRolePolicy_shared00() {
 		RoleName:       aws.String("S3Access"),
 	}
 
-	result, err := svc.PutRolePolicy(input)
+	req := svc.PutRolePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1715,7 +1758,7 @@ func ExampleIAM_PutRolePolicy_shared00() {
 // To attach a policy to an IAM user
 //
 // The following command attaches a policy to the IAM user named Bob.
-func ExampleIAM_PutUserPolicy_shared00() {
+func ExampleIAM_PutUserPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1728,7 +1771,8 @@ func ExampleIAM_PutUserPolicy_shared00() {
 		UserName:       aws.String("Bob"),
 	}
 
-	result, err := svc.PutUserPolicy(input)
+	req := svc.PutUserPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1758,7 +1802,7 @@ func ExampleIAM_PutUserPolicy_shared00() {
 //
 // The following command removes the role named Test-Role from the instance profile
 // named ExampleInstanceProfile.
-func ExampleIAM_RemoveRoleFromInstanceProfile_shared00() {
+func ExampleIAM_RemoveRoleFromInstanceProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1770,7 +1814,8 @@ func ExampleIAM_RemoveRoleFromInstanceProfile_shared00() {
 		RoleName:            aws.String("Test-Role"),
 	}
 
-	result, err := svc.RemoveRoleFromInstanceProfile(input)
+	req := svc.RemoveRoleFromInstanceProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1799,7 +1844,7 @@ func ExampleIAM_RemoveRoleFromInstanceProfile_shared00() {
 // To remove a user from an IAM group
 //
 // The following command removes the user named Bob from the IAM group named Admins.
-func ExampleIAM_RemoveUserFromGroup_shared00() {
+func ExampleIAM_RemoveUserFromGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1811,7 +1856,8 @@ func ExampleIAM_RemoveUserFromGroup_shared00() {
 		UserName:  aws.String("Bob"),
 	}
 
-	result, err := svc.RemoveUserFromGroup(input)
+	req := svc.RemoveUserFromGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1839,7 +1885,7 @@ func ExampleIAM_RemoveUserFromGroup_shared00() {
 //
 // The following command deactivates the specified access key (access key ID and secret
 // access key) for the IAM user named Bob.
-func ExampleIAM_UpdateAccessKey_shared00() {
+func ExampleIAM_UpdateAccessKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1852,7 +1898,8 @@ func ExampleIAM_UpdateAccessKey_shared00() {
 		UserName:    aws.String("Bob"),
 	}
 
-	result, err := svc.UpdateAccessKey(input)
+	req := svc.UpdateAccessKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1880,7 +1927,7 @@ func ExampleIAM_UpdateAccessKey_shared00() {
 //
 // The following command sets the password policy to require a minimum length of eight
 // characters and to require one or more numbers in the password:
-func ExampleIAM_UpdateAccountPasswordPolicy_shared00() {
+func ExampleIAM_UpdateAccountPasswordPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1892,7 +1939,8 @@ func ExampleIAM_UpdateAccountPasswordPolicy_shared00() {
 		RequireNumbers:        aws.Bool(true),
 	}
 
-	result, err := svc.UpdateAccountPasswordPolicy(input)
+	req := svc.UpdateAccountPasswordPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1921,7 +1969,7 @@ func ExampleIAM_UpdateAccountPasswordPolicy_shared00() {
 // To update the trust policy for an IAM role
 //
 // The following command updates the role trust policy for the role named Test-Role:
-func ExampleIAM_UpdateAssumeRolePolicy_shared00() {
+func ExampleIAM_UpdateAssumeRolePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1933,7 +1981,8 @@ func ExampleIAM_UpdateAssumeRolePolicy_shared00() {
 		RoleName:       aws.String("S3AccessForEC2Instances"),
 	}
 
-	result, err := svc.UpdateAssumeRolePolicy(input)
+	req := svc.UpdateAssumeRolePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1964,7 +2013,7 @@ func ExampleIAM_UpdateAssumeRolePolicy_shared00() {
 // To rename an IAM group
 //
 // The following command changes the name of the IAM group Test to Test-1.
-func ExampleIAM_UpdateGroup_shared00() {
+func ExampleIAM_UpdateGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1976,7 +2025,8 @@ func ExampleIAM_UpdateGroup_shared00() {
 		NewGroupName: aws.String("Test-1"),
 	}
 
-	result, err := svc.UpdateGroup(input)
+	req := svc.UpdateGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2005,7 +2055,7 @@ func ExampleIAM_UpdateGroup_shared00() {
 // To change the password for an IAM user
 //
 // The following command creates or changes the password for the IAM user named Bob.
-func ExampleIAM_UpdateLoginProfile_shared00() {
+func ExampleIAM_UpdateLoginProfileRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2017,7 +2067,8 @@ func ExampleIAM_UpdateLoginProfile_shared00() {
 		UserName: aws.String("Bob"),
 	}
 
-	result, err := svc.UpdateLoginProfile(input)
+	req := svc.UpdateLoginProfileRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2049,7 +2100,7 @@ func ExampleIAM_UpdateLoginProfile_shared00() {
 //
 // The following command changes the status of a signing certificate for a user named
 // Bob to Inactive.
-func ExampleIAM_UpdateSigningCertificate_shared00() {
+func ExampleIAM_UpdateSigningCertificateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2062,7 +2113,8 @@ func ExampleIAM_UpdateSigningCertificate_shared00() {
 		UserName:      aws.String("Bob"),
 	}
 
-	result, err := svc.UpdateSigningCertificate(input)
+	req := svc.UpdateSigningCertificateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2090,7 +2142,7 @@ func ExampleIAM_UpdateSigningCertificate_shared00() {
 //
 // The following command changes the name of the IAM user Bob to Robert. It does not
 // change the user's path.
-func ExampleIAM_UpdateUser_shared00() {
+func ExampleIAM_UpdateUserRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2102,7 +2154,8 @@ func ExampleIAM_UpdateUser_shared00() {
 		UserName:    aws.String("Bob"),
 	}
 
-	result, err := svc.UpdateUser(input)
+	req := svc.UpdateUserRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2134,7 +2187,7 @@ func ExampleIAM_UpdateUser_shared00() {
 //
 // The following upload-server-certificate command uploads a server certificate to your
 // AWS account:
-func ExampleIAM_UploadServerCertificate_shared00() {
+func ExampleIAM_UploadServerCertificateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2148,7 +2201,8 @@ func ExampleIAM_UploadServerCertificate_shared00() {
 		ServerCertificateName: aws.String("ProdServerCert"),
 	}
 
-	result, err := svc.UploadServerCertificate(input)
+	req := svc.UploadServerCertificateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2179,7 +2233,7 @@ func ExampleIAM_UploadServerCertificate_shared00() {
 // To upload a signing certificate for an IAM user
 //
 // The following command uploads a signing certificate for the IAM user named Bob.
-func ExampleIAM_UploadSigningCertificate_shared00() {
+func ExampleIAM_UploadSigningCertificateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2191,7 +2245,8 @@ func ExampleIAM_UploadSigningCertificate_shared00() {
 		UserName:        aws.String("Bob"),
 	}
 
-	result, err := svc.UploadSigningCertificate(input)
+	req := svc.UploadSigningCertificateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

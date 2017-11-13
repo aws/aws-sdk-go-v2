@@ -63,95 +63,53 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type KinesisAPI interface {
-	AddTagsToStream(*kinesis.AddTagsToStreamInput) (*kinesis.AddTagsToStreamOutput, error)
-	AddTagsToStreamWithContext(aws.Context, *kinesis.AddTagsToStreamInput, ...aws.Option) (*kinesis.AddTagsToStreamOutput, error)
-	AddTagsToStreamRequest(*kinesis.AddTagsToStreamInput) (*aws.Request, *kinesis.AddTagsToStreamOutput)
+	AddTagsToStreamRequest(*kinesis.AddTagsToStreamInput) kinesis.AddTagsToStreamRequest
 
-	CreateStream(*kinesis.CreateStreamInput) (*kinesis.CreateStreamOutput, error)
-	CreateStreamWithContext(aws.Context, *kinesis.CreateStreamInput, ...aws.Option) (*kinesis.CreateStreamOutput, error)
-	CreateStreamRequest(*kinesis.CreateStreamInput) (*aws.Request, *kinesis.CreateStreamOutput)
+	CreateStreamRequest(*kinesis.CreateStreamInput) kinesis.CreateStreamRequest
 
-	DecreaseStreamRetentionPeriod(*kinesis.DecreaseStreamRetentionPeriodInput) (*kinesis.DecreaseStreamRetentionPeriodOutput, error)
-	DecreaseStreamRetentionPeriodWithContext(aws.Context, *kinesis.DecreaseStreamRetentionPeriodInput, ...aws.Option) (*kinesis.DecreaseStreamRetentionPeriodOutput, error)
-	DecreaseStreamRetentionPeriodRequest(*kinesis.DecreaseStreamRetentionPeriodInput) (*aws.Request, *kinesis.DecreaseStreamRetentionPeriodOutput)
+	DecreaseStreamRetentionPeriodRequest(*kinesis.DecreaseStreamRetentionPeriodInput) kinesis.DecreaseStreamRetentionPeriodRequest
 
-	DeleteStream(*kinesis.DeleteStreamInput) (*kinesis.DeleteStreamOutput, error)
-	DeleteStreamWithContext(aws.Context, *kinesis.DeleteStreamInput, ...aws.Option) (*kinesis.DeleteStreamOutput, error)
-	DeleteStreamRequest(*kinesis.DeleteStreamInput) (*aws.Request, *kinesis.DeleteStreamOutput)
+	DeleteStreamRequest(*kinesis.DeleteStreamInput) kinesis.DeleteStreamRequest
 
-	DescribeLimits(*kinesis.DescribeLimitsInput) (*kinesis.DescribeLimitsOutput, error)
-	DescribeLimitsWithContext(aws.Context, *kinesis.DescribeLimitsInput, ...aws.Option) (*kinesis.DescribeLimitsOutput, error)
-	DescribeLimitsRequest(*kinesis.DescribeLimitsInput) (*aws.Request, *kinesis.DescribeLimitsOutput)
+	DescribeLimitsRequest(*kinesis.DescribeLimitsInput) kinesis.DescribeLimitsRequest
 
-	DescribeStream(*kinesis.DescribeStreamInput) (*kinesis.DescribeStreamOutput, error)
-	DescribeStreamWithContext(aws.Context, *kinesis.DescribeStreamInput, ...aws.Option) (*kinesis.DescribeStreamOutput, error)
-	DescribeStreamRequest(*kinesis.DescribeStreamInput) (*aws.Request, *kinesis.DescribeStreamOutput)
+	DescribeStreamRequest(*kinesis.DescribeStreamInput) kinesis.DescribeStreamRequest
 
 	DescribeStreamPages(*kinesis.DescribeStreamInput, func(*kinesis.DescribeStreamOutput, bool) bool) error
 	DescribeStreamPagesWithContext(aws.Context, *kinesis.DescribeStreamInput, func(*kinesis.DescribeStreamOutput, bool) bool, ...aws.Option) error
 
-	DisableEnhancedMonitoring(*kinesis.DisableEnhancedMonitoringInput) (*kinesis.EnhancedMonitoringOutput, error)
-	DisableEnhancedMonitoringWithContext(aws.Context, *kinesis.DisableEnhancedMonitoringInput, ...aws.Option) (*kinesis.EnhancedMonitoringOutput, error)
-	DisableEnhancedMonitoringRequest(*kinesis.DisableEnhancedMonitoringInput) (*aws.Request, *kinesis.EnhancedMonitoringOutput)
+	DisableEnhancedMonitoringRequest(*kinesis.DisableEnhancedMonitoringInput) kinesis.DisableEnhancedMonitoringRequest
 
-	EnableEnhancedMonitoring(*kinesis.EnableEnhancedMonitoringInput) (*kinesis.EnhancedMonitoringOutput, error)
-	EnableEnhancedMonitoringWithContext(aws.Context, *kinesis.EnableEnhancedMonitoringInput, ...aws.Option) (*kinesis.EnhancedMonitoringOutput, error)
-	EnableEnhancedMonitoringRequest(*kinesis.EnableEnhancedMonitoringInput) (*aws.Request, *kinesis.EnhancedMonitoringOutput)
+	EnableEnhancedMonitoringRequest(*kinesis.EnableEnhancedMonitoringInput) kinesis.EnableEnhancedMonitoringRequest
 
-	GetRecords(*kinesis.GetRecordsInput) (*kinesis.GetRecordsOutput, error)
-	GetRecordsWithContext(aws.Context, *kinesis.GetRecordsInput, ...aws.Option) (*kinesis.GetRecordsOutput, error)
-	GetRecordsRequest(*kinesis.GetRecordsInput) (*aws.Request, *kinesis.GetRecordsOutput)
+	GetRecordsRequest(*kinesis.GetRecordsInput) kinesis.GetRecordsRequest
 
-	GetShardIterator(*kinesis.GetShardIteratorInput) (*kinesis.GetShardIteratorOutput, error)
-	GetShardIteratorWithContext(aws.Context, *kinesis.GetShardIteratorInput, ...aws.Option) (*kinesis.GetShardIteratorOutput, error)
-	GetShardIteratorRequest(*kinesis.GetShardIteratorInput) (*aws.Request, *kinesis.GetShardIteratorOutput)
+	GetShardIteratorRequest(*kinesis.GetShardIteratorInput) kinesis.GetShardIteratorRequest
 
-	IncreaseStreamRetentionPeriod(*kinesis.IncreaseStreamRetentionPeriodInput) (*kinesis.IncreaseStreamRetentionPeriodOutput, error)
-	IncreaseStreamRetentionPeriodWithContext(aws.Context, *kinesis.IncreaseStreamRetentionPeriodInput, ...aws.Option) (*kinesis.IncreaseStreamRetentionPeriodOutput, error)
-	IncreaseStreamRetentionPeriodRequest(*kinesis.IncreaseStreamRetentionPeriodInput) (*aws.Request, *kinesis.IncreaseStreamRetentionPeriodOutput)
+	IncreaseStreamRetentionPeriodRequest(*kinesis.IncreaseStreamRetentionPeriodInput) kinesis.IncreaseStreamRetentionPeriodRequest
 
-	ListStreams(*kinesis.ListStreamsInput) (*kinesis.ListStreamsOutput, error)
-	ListStreamsWithContext(aws.Context, *kinesis.ListStreamsInput, ...aws.Option) (*kinesis.ListStreamsOutput, error)
-	ListStreamsRequest(*kinesis.ListStreamsInput) (*aws.Request, *kinesis.ListStreamsOutput)
+	ListStreamsRequest(*kinesis.ListStreamsInput) kinesis.ListStreamsRequest
 
 	ListStreamsPages(*kinesis.ListStreamsInput, func(*kinesis.ListStreamsOutput, bool) bool) error
 	ListStreamsPagesWithContext(aws.Context, *kinesis.ListStreamsInput, func(*kinesis.ListStreamsOutput, bool) bool, ...aws.Option) error
 
-	ListTagsForStream(*kinesis.ListTagsForStreamInput) (*kinesis.ListTagsForStreamOutput, error)
-	ListTagsForStreamWithContext(aws.Context, *kinesis.ListTagsForStreamInput, ...aws.Option) (*kinesis.ListTagsForStreamOutput, error)
-	ListTagsForStreamRequest(*kinesis.ListTagsForStreamInput) (*aws.Request, *kinesis.ListTagsForStreamOutput)
+	ListTagsForStreamRequest(*kinesis.ListTagsForStreamInput) kinesis.ListTagsForStreamRequest
 
-	MergeShards(*kinesis.MergeShardsInput) (*kinesis.MergeShardsOutput, error)
-	MergeShardsWithContext(aws.Context, *kinesis.MergeShardsInput, ...aws.Option) (*kinesis.MergeShardsOutput, error)
-	MergeShardsRequest(*kinesis.MergeShardsInput) (*aws.Request, *kinesis.MergeShardsOutput)
+	MergeShardsRequest(*kinesis.MergeShardsInput) kinesis.MergeShardsRequest
 
-	PutRecord(*kinesis.PutRecordInput) (*kinesis.PutRecordOutput, error)
-	PutRecordWithContext(aws.Context, *kinesis.PutRecordInput, ...aws.Option) (*kinesis.PutRecordOutput, error)
-	PutRecordRequest(*kinesis.PutRecordInput) (*aws.Request, *kinesis.PutRecordOutput)
+	PutRecordRequest(*kinesis.PutRecordInput) kinesis.PutRecordRequest
 
-	PutRecords(*kinesis.PutRecordsInput) (*kinesis.PutRecordsOutput, error)
-	PutRecordsWithContext(aws.Context, *kinesis.PutRecordsInput, ...aws.Option) (*kinesis.PutRecordsOutput, error)
-	PutRecordsRequest(*kinesis.PutRecordsInput) (*aws.Request, *kinesis.PutRecordsOutput)
+	PutRecordsRequest(*kinesis.PutRecordsInput) kinesis.PutRecordsRequest
 
-	RemoveTagsFromStream(*kinesis.RemoveTagsFromStreamInput) (*kinesis.RemoveTagsFromStreamOutput, error)
-	RemoveTagsFromStreamWithContext(aws.Context, *kinesis.RemoveTagsFromStreamInput, ...aws.Option) (*kinesis.RemoveTagsFromStreamOutput, error)
-	RemoveTagsFromStreamRequest(*kinesis.RemoveTagsFromStreamInput) (*aws.Request, *kinesis.RemoveTagsFromStreamOutput)
+	RemoveTagsFromStreamRequest(*kinesis.RemoveTagsFromStreamInput) kinesis.RemoveTagsFromStreamRequest
 
-	SplitShard(*kinesis.SplitShardInput) (*kinesis.SplitShardOutput, error)
-	SplitShardWithContext(aws.Context, *kinesis.SplitShardInput, ...aws.Option) (*kinesis.SplitShardOutput, error)
-	SplitShardRequest(*kinesis.SplitShardInput) (*aws.Request, *kinesis.SplitShardOutput)
+	SplitShardRequest(*kinesis.SplitShardInput) kinesis.SplitShardRequest
 
-	StartStreamEncryption(*kinesis.StartStreamEncryptionInput) (*kinesis.StartStreamEncryptionOutput, error)
-	StartStreamEncryptionWithContext(aws.Context, *kinesis.StartStreamEncryptionInput, ...aws.Option) (*kinesis.StartStreamEncryptionOutput, error)
-	StartStreamEncryptionRequest(*kinesis.StartStreamEncryptionInput) (*aws.Request, *kinesis.StartStreamEncryptionOutput)
+	StartStreamEncryptionRequest(*kinesis.StartStreamEncryptionInput) kinesis.StartStreamEncryptionRequest
 
-	StopStreamEncryption(*kinesis.StopStreamEncryptionInput) (*kinesis.StopStreamEncryptionOutput, error)
-	StopStreamEncryptionWithContext(aws.Context, *kinesis.StopStreamEncryptionInput, ...aws.Option) (*kinesis.StopStreamEncryptionOutput, error)
-	StopStreamEncryptionRequest(*kinesis.StopStreamEncryptionInput) (*aws.Request, *kinesis.StopStreamEncryptionOutput)
+	StopStreamEncryptionRequest(*kinesis.StopStreamEncryptionInput) kinesis.StopStreamEncryptionRequest
 
-	UpdateShardCount(*kinesis.UpdateShardCountInput) (*kinesis.UpdateShardCountOutput, error)
-	UpdateShardCountWithContext(aws.Context, *kinesis.UpdateShardCountInput, ...aws.Option) (*kinesis.UpdateShardCountOutput, error)
-	UpdateShardCountRequest(*kinesis.UpdateShardCountInput) (*aws.Request, *kinesis.UpdateShardCountOutput)
+	UpdateShardCountRequest(*kinesis.UpdateShardCountInput) kinesis.UpdateShardCountRequest
 
 	WaitUntilStreamExists(*kinesis.DescribeStreamInput) error
 	WaitUntilStreamExistsWithContext(aws.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error

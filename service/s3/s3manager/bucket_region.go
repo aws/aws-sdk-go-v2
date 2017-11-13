@@ -45,7 +45,7 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 //
 // See GetBucketRegion for more information.
 func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string, opts ...aws.Option) (string, error) {
-	req, _ := svc.HeadBucketRequest(&s3.HeadBucketInput{
+	req := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
 	req.Config.S3ForcePathStyle = true
@@ -71,7 +71,7 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 
 	req.ApplyOptions(opts...)
 
-	if err := req.Send(); err != nil {
+	if _, err := req.Send(); err != nil {
 		return "", err
 	}
 

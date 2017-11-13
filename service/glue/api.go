@@ -12,31 +12,36 @@ import (
 
 const opBatchCreatePartition = "BatchCreatePartition"
 
-// BatchCreatePartitionRequest generates a "aws.Request" representing the
-// client's request for the BatchCreatePartition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchCreatePartitionRequest is a API request type for the BatchCreatePartition API operation.
+type BatchCreatePartitionRequest struct {
+	*aws.Request
+	Input *BatchCreatePartitionInput
+}
+
+// Send marshals and sends the BatchCreatePartition API request.
+func (r BatchCreatePartitionRequest) Send() (*BatchCreatePartitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchCreatePartitionOutput), nil
+}
+
+// BatchCreatePartitionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchCreatePartition for more information on using the BatchCreatePartition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates one or more partitions in a batch operation.
 //
 //    // Example sending a request using the BatchCreatePartitionRequest method.
-//    req, resp := client.BatchCreatePartitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchCreatePartitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchCreatePartition
-func (c *Glue) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) (req *aws.Request, output *BatchCreatePartitionOutput) {
+func (c *Glue) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) BatchCreatePartitionRequest {
 	op := &aws.Operation{
 		Name:       opBatchCreatePartition,
 		HTTPMethod: "POST",
@@ -47,90 +52,42 @@ func (c *Glue) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) (re
 		input = &BatchCreatePartitionInput{}
 	}
 
-	output = &BatchCreatePartitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchCreatePartition API operation for AWS Glue.
-//
-// Creates one or more partitions in a batch operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation BatchCreatePartition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchCreatePartition
-func (c *Glue) BatchCreatePartition(input *BatchCreatePartitionInput) (*BatchCreatePartitionOutput, error) {
-	req, out := c.BatchCreatePartitionRequest(input)
-	return out, req.Send()
-}
-
-// BatchCreatePartitionWithContext is the same as BatchCreatePartition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchCreatePartition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) BatchCreatePartitionWithContext(ctx aws.Context, input *BatchCreatePartitionInput, opts ...aws.Option) (*BatchCreatePartitionOutput, error) {
-	req, out := c.BatchCreatePartitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchCreatePartitionOutput{})
+	return BatchCreatePartitionRequest{Request: req, Input: input}
 }
 
 const opBatchDeleteConnection = "BatchDeleteConnection"
 
-// BatchDeleteConnectionRequest generates a "aws.Request" representing the
-// client's request for the BatchDeleteConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchDeleteConnectionRequest is a API request type for the BatchDeleteConnection API operation.
+type BatchDeleteConnectionRequest struct {
+	*aws.Request
+	Input *BatchDeleteConnectionInput
+}
+
+// Send marshals and sends the BatchDeleteConnection API request.
+func (r BatchDeleteConnectionRequest) Send() (*BatchDeleteConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeleteConnectionOutput), nil
+}
+
+// BatchDeleteConnectionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchDeleteConnection for more information on using the BatchDeleteConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a list of connection definitions from the Data Catalog.
 //
 //    // Example sending a request using the BatchDeleteConnectionRequest method.
-//    req, resp := client.BatchDeleteConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchDeleteConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteConnection
-func (c *Glue) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) (req *aws.Request, output *BatchDeleteConnectionOutput) {
+func (c *Glue) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) BatchDeleteConnectionRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteConnection,
 		HTTPMethod: "POST",
@@ -141,78 +98,42 @@ func (c *Glue) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) (
 		input = &BatchDeleteConnectionInput{}
 	}
 
-	output = &BatchDeleteConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchDeleteConnection API operation for AWS Glue.
-//
-// Deletes a list of connection definitions from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation BatchDeleteConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteConnection
-func (c *Glue) BatchDeleteConnection(input *BatchDeleteConnectionInput) (*BatchDeleteConnectionOutput, error) {
-	req, out := c.BatchDeleteConnectionRequest(input)
-	return out, req.Send()
-}
-
-// BatchDeleteConnectionWithContext is the same as BatchDeleteConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchDeleteConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) BatchDeleteConnectionWithContext(ctx aws.Context, input *BatchDeleteConnectionInput, opts ...aws.Option) (*BatchDeleteConnectionOutput, error) {
-	req, out := c.BatchDeleteConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchDeleteConnectionOutput{})
+	return BatchDeleteConnectionRequest{Request: req, Input: input}
 }
 
 const opBatchDeletePartition = "BatchDeletePartition"
 
-// BatchDeletePartitionRequest generates a "aws.Request" representing the
-// client's request for the BatchDeletePartition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchDeletePartitionRequest is a API request type for the BatchDeletePartition API operation.
+type BatchDeletePartitionRequest struct {
+	*aws.Request
+	Input *BatchDeletePartitionInput
+}
+
+// Send marshals and sends the BatchDeletePartition API request.
+func (r BatchDeletePartitionRequest) Send() (*BatchDeletePartitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeletePartitionOutput), nil
+}
+
+// BatchDeletePartitionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchDeletePartition for more information on using the BatchDeletePartition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes one or more partitions in a batch operation.
 //
 //    // Example sending a request using the BatchDeletePartitionRequest method.
-//    req, resp := client.BatchDeletePartitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchDeletePartitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeletePartition
-func (c *Glue) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) (req *aws.Request, output *BatchDeletePartitionOutput) {
+func (c *Glue) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) BatchDeletePartitionRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeletePartition,
 		HTTPMethod: "POST",
@@ -223,84 +144,42 @@ func (c *Glue) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) (re
 		input = &BatchDeletePartitionInput{}
 	}
 
-	output = &BatchDeletePartitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchDeletePartition API operation for AWS Glue.
-//
-// Deletes one or more partitions in a batch operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation BatchDeletePartition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeletePartition
-func (c *Glue) BatchDeletePartition(input *BatchDeletePartitionInput) (*BatchDeletePartitionOutput, error) {
-	req, out := c.BatchDeletePartitionRequest(input)
-	return out, req.Send()
-}
-
-// BatchDeletePartitionWithContext is the same as BatchDeletePartition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchDeletePartition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) BatchDeletePartitionWithContext(ctx aws.Context, input *BatchDeletePartitionInput, opts ...aws.Option) (*BatchDeletePartitionOutput, error) {
-	req, out := c.BatchDeletePartitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchDeletePartitionOutput{})
+	return BatchDeletePartitionRequest{Request: req, Input: input}
 }
 
 const opBatchDeleteTable = "BatchDeleteTable"
 
-// BatchDeleteTableRequest generates a "aws.Request" representing the
-// client's request for the BatchDeleteTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchDeleteTableRequest is a API request type for the BatchDeleteTable API operation.
+type BatchDeleteTableRequest struct {
+	*aws.Request
+	Input *BatchDeleteTableInput
+}
+
+// Send marshals and sends the BatchDeleteTable API request.
+func (r BatchDeleteTableRequest) Send() (*BatchDeleteTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeleteTableOutput), nil
+}
+
+// BatchDeleteTableRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchDeleteTable for more information on using the BatchDeleteTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes multiple tables at once.
 //
 //    // Example sending a request using the BatchDeleteTableRequest method.
-//    req, resp := client.BatchDeleteTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchDeleteTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTable
-func (c *Glue) BatchDeleteTableRequest(input *BatchDeleteTableInput) (req *aws.Request, output *BatchDeleteTableOutput) {
+func (c *Glue) BatchDeleteTableRequest(input *BatchDeleteTableInput) BatchDeleteTableRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteTable,
 		HTTPMethod: "POST",
@@ -311,84 +190,42 @@ func (c *Glue) BatchDeleteTableRequest(input *BatchDeleteTableInput) (req *aws.R
 		input = &BatchDeleteTableInput{}
 	}
 
-	output = &BatchDeleteTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchDeleteTable API operation for AWS Glue.
-//
-// Deletes multiple tables at once.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation BatchDeleteTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTable
-func (c *Glue) BatchDeleteTable(input *BatchDeleteTableInput) (*BatchDeleteTableOutput, error) {
-	req, out := c.BatchDeleteTableRequest(input)
-	return out, req.Send()
-}
-
-// BatchDeleteTableWithContext is the same as BatchDeleteTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchDeleteTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) BatchDeleteTableWithContext(ctx aws.Context, input *BatchDeleteTableInput, opts ...aws.Option) (*BatchDeleteTableOutput, error) {
-	req, out := c.BatchDeleteTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchDeleteTableOutput{})
+	return BatchDeleteTableRequest{Request: req, Input: input}
 }
 
 const opBatchGetPartition = "BatchGetPartition"
 
-// BatchGetPartitionRequest generates a "aws.Request" representing the
-// client's request for the BatchGetPartition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetPartitionRequest is a API request type for the BatchGetPartition API operation.
+type BatchGetPartitionRequest struct {
+	*aws.Request
+	Input *BatchGetPartitionInput
+}
+
+// Send marshals and sends the BatchGetPartition API request.
+func (r BatchGetPartitionRequest) Send() (*BatchGetPartitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetPartitionOutput), nil
+}
+
+// BatchGetPartitionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetPartition for more information on using the BatchGetPartition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves partitions in a batch request.
 //
 //    // Example sending a request using the BatchGetPartitionRequest method.
-//    req, resp := client.BatchGetPartitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetPartitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetPartition
-func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) (req *aws.Request, output *BatchGetPartitionOutput) {
+func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) BatchGetPartitionRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetPartition,
 		HTTPMethod: "POST",
@@ -399,84 +236,42 @@ func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) (req *aws
 		input = &BatchGetPartitionInput{}
 	}
 
-	output = &BatchGetPartitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetPartition API operation for AWS Glue.
-//
-// Retrieves partitions in a batch request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation BatchGetPartition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetPartition
-func (c *Glue) BatchGetPartition(input *BatchGetPartitionInput) (*BatchGetPartitionOutput, error) {
-	req, out := c.BatchGetPartitionRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetPartitionWithContext is the same as BatchGetPartition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetPartition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) BatchGetPartitionWithContext(ctx aws.Context, input *BatchGetPartitionInput, opts ...aws.Option) (*BatchGetPartitionOutput, error) {
-	req, out := c.BatchGetPartitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetPartitionOutput{})
+	return BatchGetPartitionRequest{Request: req, Input: input}
 }
 
 const opCreateClassifier = "CreateClassifier"
 
-// CreateClassifierRequest generates a "aws.Request" representing the
-// client's request for the CreateClassifier operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClassifierRequest is a API request type for the CreateClassifier API operation.
+type CreateClassifierRequest struct {
+	*aws.Request
+	Input *CreateClassifierInput
+}
+
+// Send marshals and sends the CreateClassifier API request.
+func (r CreateClassifierRequest) Send() (*CreateClassifierOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClassifierOutput), nil
+}
+
+// CreateClassifierRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateClassifier for more information on using the CreateClassifier
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a Classifier in the user's account.
 //
 //    // Example sending a request using the CreateClassifierRequest method.
-//    req, resp := client.CreateClassifierRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClassifierRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifier
-func (c *Glue) CreateClassifierRequest(input *CreateClassifierInput) (req *aws.Request, output *CreateClassifierOutput) {
+func (c *Glue) CreateClassifierRequest(input *CreateClassifierInput) CreateClassifierRequest {
 	op := &aws.Operation{
 		Name:       opCreateClassifier,
 		HTTPMethod: "POST",
@@ -487,81 +282,42 @@ func (c *Glue) CreateClassifierRequest(input *CreateClassifierInput) (req *aws.R
 		input = &CreateClassifierInput{}
 	}
 
-	output = &CreateClassifierOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateClassifier API operation for AWS Glue.
-//
-// Creates a Classifier in the user's account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateClassifier for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifier
-func (c *Glue) CreateClassifier(input *CreateClassifierInput) (*CreateClassifierOutput, error) {
-	req, out := c.CreateClassifierRequest(input)
-	return out, req.Send()
-}
-
-// CreateClassifierWithContext is the same as CreateClassifier with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateClassifier for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateClassifierWithContext(ctx aws.Context, input *CreateClassifierInput, opts ...aws.Option) (*CreateClassifierOutput, error) {
-	req, out := c.CreateClassifierRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClassifierOutput{})
+	return CreateClassifierRequest{Request: req, Input: input}
 }
 
 const opCreateConnection = "CreateConnection"
 
-// CreateConnectionRequest generates a "aws.Request" representing the
-// client's request for the CreateConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateConnectionRequest is a API request type for the CreateConnection API operation.
+type CreateConnectionRequest struct {
+	*aws.Request
+	Input *CreateConnectionInput
+}
+
+// Send marshals and sends the CreateConnection API request.
+func (r CreateConnectionRequest) Send() (*CreateConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateConnectionOutput), nil
+}
+
+// CreateConnectionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateConnection for more information on using the CreateConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a connection definition in the Data Catalog.
 //
 //    // Example sending a request using the CreateConnectionRequest method.
-//    req, resp := client.CreateConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnection
-func (c *Glue) CreateConnectionRequest(input *CreateConnectionInput) (req *aws.Request, output *CreateConnectionOutput) {
+func (c *Glue) CreateConnectionRequest(input *CreateConnectionInput) CreateConnectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateConnection,
 		HTTPMethod: "POST",
@@ -572,81 +328,44 @@ func (c *Glue) CreateConnectionRequest(input *CreateConnectionInput) (req *aws.R
 		input = &CreateConnectionInput{}
 	}
 
-	output = &CreateConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateConnection API operation for AWS Glue.
-//
-// Creates a connection definition in the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnection
-func (c *Glue) CreateConnection(input *CreateConnectionInput) (*CreateConnectionOutput, error) {
-	req, out := c.CreateConnectionRequest(input)
-	return out, req.Send()
-}
-
-// CreateConnectionWithContext is the same as CreateConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateConnectionWithContext(ctx aws.Context, input *CreateConnectionInput, opts ...aws.Option) (*CreateConnectionOutput, error) {
-	req, out := c.CreateConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateConnectionOutput{})
+	return CreateConnectionRequest{Request: req, Input: input}
 }
 
 const opCreateCrawler = "CreateCrawler"
 
-// CreateCrawlerRequest generates a "aws.Request" representing the
-// client's request for the CreateCrawler operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCrawlerRequest is a API request type for the CreateCrawler API operation.
+type CreateCrawlerRequest struct {
+	*aws.Request
+	Input *CreateCrawlerInput
+}
+
+// Send marshals and sends the CreateCrawler API request.
+func (r CreateCrawlerRequest) Send() (*CreateCrawlerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCrawlerOutput), nil
+}
+
+// CreateCrawlerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCrawler for more information on using the CreateCrawler
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new Crawler with specified targets, role, configuration, and optional
+// schedule. At least one crawl target must be specified, in either the s3Targets
+// or the jdbcTargets field.
 //
 //    // Example sending a request using the CreateCrawlerRequest method.
-//    req, resp := client.CreateCrawlerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCrawlerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler
-func (c *Glue) CreateCrawlerRequest(input *CreateCrawlerInput) (req *aws.Request, output *CreateCrawlerOutput) {
+func (c *Glue) CreateCrawlerRequest(input *CreateCrawlerInput) CreateCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opCreateCrawler,
 		HTTPMethod: "POST",
@@ -657,86 +376,42 @@ func (c *Glue) CreateCrawlerRequest(input *CreateCrawlerInput) (req *aws.Request
 		input = &CreateCrawlerInput{}
 	}
 
-	output = &CreateCrawlerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCrawler API operation for AWS Glue.
-//
-// Creates a new Crawler with specified targets, role, configuration, and optional
-// schedule. At least one crawl target must be specified, in either the s3Targets
-// or the jdbcTargets field.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateCrawler for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler
-func (c *Glue) CreateCrawler(input *CreateCrawlerInput) (*CreateCrawlerOutput, error) {
-	req, out := c.CreateCrawlerRequest(input)
-	return out, req.Send()
-}
-
-// CreateCrawlerWithContext is the same as CreateCrawler with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCrawler for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateCrawlerWithContext(ctx aws.Context, input *CreateCrawlerInput, opts ...aws.Option) (*CreateCrawlerOutput, error) {
-	req, out := c.CreateCrawlerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCrawlerOutput{})
+	return CreateCrawlerRequest{Request: req, Input: input}
 }
 
 const opCreateDatabase = "CreateDatabase"
 
-// CreateDatabaseRequest generates a "aws.Request" representing the
-// client's request for the CreateDatabase operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDatabaseRequest is a API request type for the CreateDatabase API operation.
+type CreateDatabaseRequest struct {
+	*aws.Request
+	Input *CreateDatabaseInput
+}
+
+// Send marshals and sends the CreateDatabase API request.
+func (r CreateDatabaseRequest) Send() (*CreateDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDatabaseOutput), nil
+}
+
+// CreateDatabaseRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDatabase for more information on using the CreateDatabase
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new database in a Data Catalog.
 //
 //    // Example sending a request using the CreateDatabaseRequest method.
-//    req, resp := client.CreateDatabaseRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabase
-func (c *Glue) CreateDatabaseRequest(input *CreateDatabaseInput) (req *aws.Request, output *CreateDatabaseOutput) {
+func (c *Glue) CreateDatabaseRequest(input *CreateDatabaseInput) CreateDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opCreateDatabase,
 		HTTPMethod: "POST",
@@ -747,87 +422,42 @@ func (c *Glue) CreateDatabaseRequest(input *CreateDatabaseInput) (req *aws.Reque
 		input = &CreateDatabaseInput{}
 	}
 
-	output = &CreateDatabaseOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDatabase API operation for AWS Glue.
-//
-// Creates a new database in a Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateDatabase for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabase
-func (c *Glue) CreateDatabase(input *CreateDatabaseInput) (*CreateDatabaseOutput, error) {
-	req, out := c.CreateDatabaseRequest(input)
-	return out, req.Send()
-}
-
-// CreateDatabaseWithContext is the same as CreateDatabase with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDatabase for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateDatabaseWithContext(ctx aws.Context, input *CreateDatabaseInput, opts ...aws.Option) (*CreateDatabaseOutput, error) {
-	req, out := c.CreateDatabaseRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDatabaseOutput{})
+	return CreateDatabaseRequest{Request: req, Input: input}
 }
 
 const opCreateDevEndpoint = "CreateDevEndpoint"
 
-// CreateDevEndpointRequest generates a "aws.Request" representing the
-// client's request for the CreateDevEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDevEndpointRequest is a API request type for the CreateDevEndpoint API operation.
+type CreateDevEndpointRequest struct {
+	*aws.Request
+	Input *CreateDevEndpointInput
+}
+
+// Send marshals and sends the CreateDevEndpoint API request.
+func (r CreateDevEndpointRequest) Send() (*CreateDevEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDevEndpointOutput), nil
+}
+
+// CreateDevEndpointRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDevEndpoint for more information on using the CreateDevEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new DevEndpoint.
 //
 //    // Example sending a request using the CreateDevEndpointRequest method.
-//    req, resp := client.CreateDevEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDevEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpoint
-func (c *Glue) CreateDevEndpointRequest(input *CreateDevEndpointInput) (req *aws.Request, output *CreateDevEndpointOutput) {
+func (c *Glue) CreateDevEndpointRequest(input *CreateDevEndpointInput) CreateDevEndpointRequest {
 	op := &aws.Operation{
 		Name:       opCreateDevEndpoint,
 		HTTPMethod: "POST",
@@ -838,96 +468,42 @@ func (c *Glue) CreateDevEndpointRequest(input *CreateDevEndpointInput) (req *aws
 		input = &CreateDevEndpointInput{}
 	}
 
-	output = &CreateDevEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDevEndpoint API operation for AWS Glue.
-//
-// Creates a new DevEndpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateDevEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access to a resource was denied.
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   The same unique identifier was associated with two different records.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   A value could not be validated.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpoint
-func (c *Glue) CreateDevEndpoint(input *CreateDevEndpointInput) (*CreateDevEndpointOutput, error) {
-	req, out := c.CreateDevEndpointRequest(input)
-	return out, req.Send()
-}
-
-// CreateDevEndpointWithContext is the same as CreateDevEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDevEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateDevEndpointWithContext(ctx aws.Context, input *CreateDevEndpointInput, opts ...aws.Option) (*CreateDevEndpointOutput, error) {
-	req, out := c.CreateDevEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDevEndpointOutput{})
+	return CreateDevEndpointRequest{Request: req, Input: input}
 }
 
 const opCreateJob = "CreateJob"
 
-// CreateJobRequest generates a "aws.Request" representing the
-// client's request for the CreateJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateJobRequest is a API request type for the CreateJob API operation.
+type CreateJobRequest struct {
+	*aws.Request
+	Input *CreateJobInput
+}
+
+// Send marshals and sends the CreateJob API request.
+func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateJobOutput), nil
+}
+
+// CreateJobRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateJob for more information on using the CreateJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new job.
 //
 //    // Example sending a request using the CreateJobRequest method.
-//    req, resp := client.CreateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJob
-func (c *Glue) CreateJobRequest(input *CreateJobInput) (req *aws.Request, output *CreateJobOutput) {
+func (c *Glue) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
@@ -938,90 +514,42 @@ func (c *Glue) CreateJobRequest(input *CreateJobInput) (req *aws.Request, output
 		input = &CreateJobInput{}
 	}
 
-	output = &CreateJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateJob API operation for AWS Glue.
-//
-// Creates a new job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   The same unique identifier was associated with two different records.
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJob
-func (c *Glue) CreateJob(input *CreateJobInput) (*CreateJobOutput, error) {
-	req, out := c.CreateJobRequest(input)
-	return out, req.Send()
-}
-
-// CreateJobWithContext is the same as CreateJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...aws.Option) (*CreateJobOutput, error) {
-	req, out := c.CreateJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateJobOutput{})
+	return CreateJobRequest{Request: req, Input: input}
 }
 
 const opCreatePartition = "CreatePartition"
 
-// CreatePartitionRequest generates a "aws.Request" representing the
-// client's request for the CreatePartition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePartitionRequest is a API request type for the CreatePartition API operation.
+type CreatePartitionRequest struct {
+	*aws.Request
+	Input *CreatePartitionInput
+}
+
+// Send marshals and sends the CreatePartition API request.
+func (r CreatePartitionRequest) Send() (*CreatePartitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePartitionOutput), nil
+}
+
+// CreatePartitionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePartition for more information on using the CreatePartition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new partition.
 //
 //    // Example sending a request using the CreatePartitionRequest method.
-//    req, resp := client.CreatePartitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePartitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartition
-func (c *Glue) CreatePartitionRequest(input *CreatePartitionInput) (req *aws.Request, output *CreatePartitionOutput) {
+func (c *Glue) CreatePartitionRequest(input *CreatePartitionInput) CreatePartitionRequest {
 	op := &aws.Operation{
 		Name:       opCreatePartition,
 		HTTPMethod: "POST",
@@ -1032,90 +560,42 @@ func (c *Glue) CreatePartitionRequest(input *CreatePartitionInput) (req *aws.Req
 		input = &CreatePartitionInput{}
 	}
 
-	output = &CreatePartitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePartition API operation for AWS Glue.
-//
-// Creates a new partition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreatePartition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartition
-func (c *Glue) CreatePartition(input *CreatePartitionInput) (*CreatePartitionOutput, error) {
-	req, out := c.CreatePartitionRequest(input)
-	return out, req.Send()
-}
-
-// CreatePartitionWithContext is the same as CreatePartition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePartition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreatePartitionWithContext(ctx aws.Context, input *CreatePartitionInput, opts ...aws.Option) (*CreatePartitionOutput, error) {
-	req, out := c.CreatePartitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePartitionOutput{})
+	return CreatePartitionRequest{Request: req, Input: input}
 }
 
 const opCreateScript = "CreateScript"
 
-// CreateScriptRequest generates a "aws.Request" representing the
-// client's request for the CreateScript operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateScriptRequest is a API request type for the CreateScript API operation.
+type CreateScriptRequest struct {
+	*aws.Request
+	Input *CreateScriptInput
+}
+
+// Send marshals and sends the CreateScript API request.
+func (r CreateScriptRequest) Send() (*CreateScriptOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateScriptOutput), nil
+}
+
+// CreateScriptRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateScript for more information on using the CreateScript
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Transforms a directed acyclic graph (DAG) into a Python script.
 //
 //    // Example sending a request using the CreateScriptRequest method.
-//    req, resp := client.CreateScriptRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateScriptRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScript
-func (c *Glue) CreateScriptRequest(input *CreateScriptInput) (req *aws.Request, output *CreateScriptOutput) {
+func (c *Glue) CreateScriptRequest(input *CreateScriptInput) CreateScriptRequest {
 	op := &aws.Operation{
 		Name:       opCreateScript,
 		HTTPMethod: "POST",
@@ -1126,81 +606,42 @@ func (c *Glue) CreateScriptRequest(input *CreateScriptInput) (req *aws.Request, 
 		input = &CreateScriptInput{}
 	}
 
-	output = &CreateScriptOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateScript API operation for AWS Glue.
-//
-// Transforms a directed acyclic graph (DAG) into a Python script.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateScript for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScript
-func (c *Glue) CreateScript(input *CreateScriptInput) (*CreateScriptOutput, error) {
-	req, out := c.CreateScriptRequest(input)
-	return out, req.Send()
-}
-
-// CreateScriptWithContext is the same as CreateScript with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateScript for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateScriptWithContext(ctx aws.Context, input *CreateScriptInput, opts ...aws.Option) (*CreateScriptOutput, error) {
-	req, out := c.CreateScriptRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateScriptOutput{})
+	return CreateScriptRequest{Request: req, Input: input}
 }
 
 const opCreateTable = "CreateTable"
 
-// CreateTableRequest generates a "aws.Request" representing the
-// client's request for the CreateTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTableRequest is a API request type for the CreateTable API operation.
+type CreateTableRequest struct {
+	*aws.Request
+	Input *CreateTableInput
+}
+
+// Send marshals and sends the CreateTable API request.
+func (r CreateTableRequest) Send() (*CreateTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTableOutput), nil
+}
+
+// CreateTableRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTable for more information on using the CreateTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new table definition in the Data Catalog.
 //
 //    // Example sending a request using the CreateTableRequest method.
-//    req, resp := client.CreateTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable
-func (c *Glue) CreateTableRequest(input *CreateTableInput) (req *aws.Request, output *CreateTableOutput) {
+func (c *Glue) CreateTableRequest(input *CreateTableInput) CreateTableRequest {
 	op := &aws.Operation{
 		Name:       opCreateTable,
 		HTTPMethod: "POST",
@@ -1211,90 +652,42 @@ func (c *Glue) CreateTableRequest(input *CreateTableInput) (req *aws.Request, ou
 		input = &CreateTableInput{}
 	}
 
-	output = &CreateTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTable API operation for AWS Glue.
-//
-// Creates a new table definition in the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable
-func (c *Glue) CreateTable(input *CreateTableInput) (*CreateTableOutput, error) {
-	req, out := c.CreateTableRequest(input)
-	return out, req.Send()
-}
-
-// CreateTableWithContext is the same as CreateTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateTableWithContext(ctx aws.Context, input *CreateTableInput, opts ...aws.Option) (*CreateTableOutput, error) {
-	req, out := c.CreateTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTableOutput{})
+	return CreateTableRequest{Request: req, Input: input}
 }
 
 const opCreateTrigger = "CreateTrigger"
 
-// CreateTriggerRequest generates a "aws.Request" representing the
-// client's request for the CreateTrigger operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTriggerRequest is a API request type for the CreateTrigger API operation.
+type CreateTriggerRequest struct {
+	*aws.Request
+	Input *CreateTriggerInput
+}
+
+// Send marshals and sends the CreateTrigger API request.
+func (r CreateTriggerRequest) Send() (*CreateTriggerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTriggerOutput), nil
+}
+
+// CreateTriggerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTrigger for more information on using the CreateTrigger
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new trigger.
 //
 //    // Example sending a request using the CreateTriggerRequest method.
-//    req, resp := client.CreateTriggerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTriggerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTrigger
-func (c *Glue) CreateTriggerRequest(input *CreateTriggerInput) (req *aws.Request, output *CreateTriggerOutput) {
+func (c *Glue) CreateTriggerRequest(input *CreateTriggerInput) CreateTriggerRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrigger,
 		HTTPMethod: "POST",
@@ -1305,87 +698,42 @@ func (c *Glue) CreateTriggerRequest(input *CreateTriggerInput) (req *aws.Request
 		input = &CreateTriggerInput{}
 	}
 
-	output = &CreateTriggerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTrigger API operation for AWS Glue.
-//
-// Creates a new trigger.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateTrigger for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTrigger
-func (c *Glue) CreateTrigger(input *CreateTriggerInput) (*CreateTriggerOutput, error) {
-	req, out := c.CreateTriggerRequest(input)
-	return out, req.Send()
-}
-
-// CreateTriggerWithContext is the same as CreateTrigger with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTrigger for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateTriggerWithContext(ctx aws.Context, input *CreateTriggerInput, opts ...aws.Option) (*CreateTriggerOutput, error) {
-	req, out := c.CreateTriggerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTriggerOutput{})
+	return CreateTriggerRequest{Request: req, Input: input}
 }
 
 const opCreateUserDefinedFunction = "CreateUserDefinedFunction"
 
-// CreateUserDefinedFunctionRequest generates a "aws.Request" representing the
-// client's request for the CreateUserDefinedFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateUserDefinedFunctionRequest is a API request type for the CreateUserDefinedFunction API operation.
+type CreateUserDefinedFunctionRequest struct {
+	*aws.Request
+	Input *CreateUserDefinedFunctionInput
+}
+
+// Send marshals and sends the CreateUserDefinedFunction API request.
+func (r CreateUserDefinedFunctionRequest) Send() (*CreateUserDefinedFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateUserDefinedFunctionOutput), nil
+}
+
+// CreateUserDefinedFunctionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateUserDefinedFunction for more information on using the CreateUserDefinedFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new function definition in the Data Catalog.
 //
 //    // Example sending a request using the CreateUserDefinedFunctionRequest method.
-//    req, resp := client.CreateUserDefinedFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateUserDefinedFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUserDefinedFunction
-func (c *Glue) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunctionInput) (req *aws.Request, output *CreateUserDefinedFunctionOutput) {
+func (c *Glue) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunctionInput) CreateUserDefinedFunctionRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserDefinedFunction,
 		HTTPMethod: "POST",
@@ -1396,87 +744,42 @@ func (c *Glue) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunction
 		input = &CreateUserDefinedFunctionInput{}
 	}
 
-	output = &CreateUserDefinedFunctionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateUserDefinedFunction API operation for AWS Glue.
-//
-// Creates a new function definition in the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation CreateUserDefinedFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   A resource to be created or added already exists.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUserDefinedFunction
-func (c *Glue) CreateUserDefinedFunction(input *CreateUserDefinedFunctionInput) (*CreateUserDefinedFunctionOutput, error) {
-	req, out := c.CreateUserDefinedFunctionRequest(input)
-	return out, req.Send()
-}
-
-// CreateUserDefinedFunctionWithContext is the same as CreateUserDefinedFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateUserDefinedFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) CreateUserDefinedFunctionWithContext(ctx aws.Context, input *CreateUserDefinedFunctionInput, opts ...aws.Option) (*CreateUserDefinedFunctionOutput, error) {
-	req, out := c.CreateUserDefinedFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateUserDefinedFunctionOutput{})
+	return CreateUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
 const opDeleteClassifier = "DeleteClassifier"
 
-// DeleteClassifierRequest generates a "aws.Request" representing the
-// client's request for the DeleteClassifier operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteClassifierRequest is a API request type for the DeleteClassifier API operation.
+type DeleteClassifierRequest struct {
+	*aws.Request
+	Input *DeleteClassifierInput
+}
+
+// Send marshals and sends the DeleteClassifier API request.
+func (r DeleteClassifierRequest) Send() (*DeleteClassifierOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClassifierOutput), nil
+}
+
+// DeleteClassifierRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteClassifier for more information on using the DeleteClassifier
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a Classifier from the metadata store.
 //
 //    // Example sending a request using the DeleteClassifierRequest method.
-//    req, resp := client.DeleteClassifierRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteClassifierRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteClassifier
-func (c *Glue) DeleteClassifierRequest(input *DeleteClassifierInput) (req *aws.Request, output *DeleteClassifierOutput) {
+func (c *Glue) DeleteClassifierRequest(input *DeleteClassifierInput) DeleteClassifierRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClassifier,
 		HTTPMethod: "POST",
@@ -1487,78 +790,42 @@ func (c *Glue) DeleteClassifierRequest(input *DeleteClassifierInput) (req *aws.R
 		input = &DeleteClassifierInput{}
 	}
 
-	output = &DeleteClassifierOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteClassifier API operation for AWS Glue.
-//
-// Removes a Classifier from the metadata store.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteClassifier for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteClassifier
-func (c *Glue) DeleteClassifier(input *DeleteClassifierInput) (*DeleteClassifierOutput, error) {
-	req, out := c.DeleteClassifierRequest(input)
-	return out, req.Send()
-}
-
-// DeleteClassifierWithContext is the same as DeleteClassifier with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteClassifier for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteClassifierWithContext(ctx aws.Context, input *DeleteClassifierInput, opts ...aws.Option) (*DeleteClassifierOutput, error) {
-	req, out := c.DeleteClassifierRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteClassifierOutput{})
+	return DeleteClassifierRequest{Request: req, Input: input}
 }
 
 const opDeleteConnection = "DeleteConnection"
 
-// DeleteConnectionRequest generates a "aws.Request" representing the
-// client's request for the DeleteConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteConnectionRequest is a API request type for the DeleteConnection API operation.
+type DeleteConnectionRequest struct {
+	*aws.Request
+	Input *DeleteConnectionInput
+}
+
+// Send marshals and sends the DeleteConnection API request.
+func (r DeleteConnectionRequest) Send() (*DeleteConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteConnectionOutput), nil
+}
+
+// DeleteConnectionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteConnection for more information on using the DeleteConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a connection from the Data Catalog.
 //
 //    // Example sending a request using the DeleteConnectionRequest method.
-//    req, resp := client.DeleteConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnection
-func (c *Glue) DeleteConnectionRequest(input *DeleteConnectionInput) (req *aws.Request, output *DeleteConnectionOutput) {
+func (c *Glue) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteConnectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConnection,
 		HTTPMethod: "POST",
@@ -1569,78 +836,43 @@ func (c *Glue) DeleteConnectionRequest(input *DeleteConnectionInput) (req *aws.R
 		input = &DeleteConnectionInput{}
 	}
 
-	output = &DeleteConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteConnection API operation for AWS Glue.
-//
-// Deletes a connection from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnection
-func (c *Glue) DeleteConnection(input *DeleteConnectionInput) (*DeleteConnectionOutput, error) {
-	req, out := c.DeleteConnectionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteConnectionWithContext is the same as DeleteConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteConnectionWithContext(ctx aws.Context, input *DeleteConnectionInput, opts ...aws.Option) (*DeleteConnectionOutput, error) {
-	req, out := c.DeleteConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteConnectionOutput{})
+	return DeleteConnectionRequest{Request: req, Input: input}
 }
 
 const opDeleteCrawler = "DeleteCrawler"
 
-// DeleteCrawlerRequest generates a "aws.Request" representing the
-// client's request for the DeleteCrawler operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCrawlerRequest is a API request type for the DeleteCrawler API operation.
+type DeleteCrawlerRequest struct {
+	*aws.Request
+	Input *DeleteCrawlerInput
+}
+
+// Send marshals and sends the DeleteCrawler API request.
+func (r DeleteCrawlerRequest) Send() (*DeleteCrawlerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCrawlerOutput), nil
+}
+
+// DeleteCrawlerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCrawler for more information on using the DeleteCrawler
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a specified Crawler from the metadata store, unless the Crawler state
+// is RUNNING.
 //
 //    // Example sending a request using the DeleteCrawlerRequest method.
-//    req, resp := client.DeleteCrawlerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCrawlerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawler
-func (c *Glue) DeleteCrawlerRequest(input *DeleteCrawlerInput) (req *aws.Request, output *DeleteCrawlerOutput) {
+func (c *Glue) DeleteCrawlerRequest(input *DeleteCrawlerInput) DeleteCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCrawler,
 		HTTPMethod: "POST",
@@ -1651,85 +883,42 @@ func (c *Glue) DeleteCrawlerRequest(input *DeleteCrawlerInput) (req *aws.Request
 		input = &DeleteCrawlerInput{}
 	}
 
-	output = &DeleteCrawlerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCrawler API operation for AWS Glue.
-//
-// Removes a specified Crawler from the metadata store, unless the Crawler state
-// is RUNNING.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteCrawler for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeCrawlerRunningException "CrawlerRunningException"
-//   The operation cannot be performed because the crawler is already running.
-//
-//   * ErrCodeSchedulerTransitioningException "SchedulerTransitioningException"
-//   The specified scheduler is transitioning.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawler
-func (c *Glue) DeleteCrawler(input *DeleteCrawlerInput) (*DeleteCrawlerOutput, error) {
-	req, out := c.DeleteCrawlerRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCrawlerWithContext is the same as DeleteCrawler with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCrawler for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteCrawlerWithContext(ctx aws.Context, input *DeleteCrawlerInput, opts ...aws.Option) (*DeleteCrawlerOutput, error) {
-	req, out := c.DeleteCrawlerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteCrawlerOutput{})
+	return DeleteCrawlerRequest{Request: req, Input: input}
 }
 
 const opDeleteDatabase = "DeleteDatabase"
 
-// DeleteDatabaseRequest generates a "aws.Request" representing the
-// client's request for the DeleteDatabase operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDatabaseRequest is a API request type for the DeleteDatabase API operation.
+type DeleteDatabaseRequest struct {
+	*aws.Request
+	Input *DeleteDatabaseInput
+}
+
+// Send marshals and sends the DeleteDatabase API request.
+func (r DeleteDatabaseRequest) Send() (*DeleteDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDatabaseOutput), nil
+}
+
+// DeleteDatabaseRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDatabase for more information on using the DeleteDatabase
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a specified Database from a Data Catalog.
 //
 //    // Example sending a request using the DeleteDatabaseRequest method.
-//    req, resp := client.DeleteDatabaseRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDatabase
-func (c *Glue) DeleteDatabaseRequest(input *DeleteDatabaseInput) (req *aws.Request, output *DeleteDatabaseOutput) {
+func (c *Glue) DeleteDatabaseRequest(input *DeleteDatabaseInput) DeleteDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDatabase,
 		HTTPMethod: "POST",
@@ -1740,84 +929,42 @@ func (c *Glue) DeleteDatabaseRequest(input *DeleteDatabaseInput) (req *aws.Reque
 		input = &DeleteDatabaseInput{}
 	}
 
-	output = &DeleteDatabaseOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDatabase API operation for AWS Glue.
-//
-// Removes a specified Database from a Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteDatabase for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDatabase
-func (c *Glue) DeleteDatabase(input *DeleteDatabaseInput) (*DeleteDatabaseOutput, error) {
-	req, out := c.DeleteDatabaseRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDatabaseWithContext is the same as DeleteDatabase with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDatabase for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteDatabaseWithContext(ctx aws.Context, input *DeleteDatabaseInput, opts ...aws.Option) (*DeleteDatabaseOutput, error) {
-	req, out := c.DeleteDatabaseRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDatabaseOutput{})
+	return DeleteDatabaseRequest{Request: req, Input: input}
 }
 
 const opDeleteDevEndpoint = "DeleteDevEndpoint"
 
-// DeleteDevEndpointRequest generates a "aws.Request" representing the
-// client's request for the DeleteDevEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDevEndpointRequest is a API request type for the DeleteDevEndpoint API operation.
+type DeleteDevEndpointRequest struct {
+	*aws.Request
+	Input *DeleteDevEndpointInput
+}
+
+// Send marshals and sends the DeleteDevEndpoint API request.
+func (r DeleteDevEndpointRequest) Send() (*DeleteDevEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDevEndpointOutput), nil
+}
+
+// DeleteDevEndpointRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDevEndpoint for more information on using the DeleteDevEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specified DevEndpoint.
 //
 //    // Example sending a request using the DeleteDevEndpointRequest method.
-//    req, resp := client.DeleteDevEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDevEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpoint
-func (c *Glue) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) (req *aws.Request, output *DeleteDevEndpointOutput) {
+func (c *Glue) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) DeleteDevEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDevEndpoint,
 		HTTPMethod: "POST",
@@ -1828,84 +975,42 @@ func (c *Glue) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) (req *aws
 		input = &DeleteDevEndpointInput{}
 	}
 
-	output = &DeleteDevEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDevEndpoint API operation for AWS Glue.
-//
-// Deletes a specified DevEndpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteDevEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpoint
-func (c *Glue) DeleteDevEndpoint(input *DeleteDevEndpointInput) (*DeleteDevEndpointOutput, error) {
-	req, out := c.DeleteDevEndpointRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDevEndpointWithContext is the same as DeleteDevEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDevEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteDevEndpointWithContext(ctx aws.Context, input *DeleteDevEndpointInput, opts ...aws.Option) (*DeleteDevEndpointOutput, error) {
-	req, out := c.DeleteDevEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDevEndpointOutput{})
+	return DeleteDevEndpointRequest{Request: req, Input: input}
 }
 
 const opDeleteJob = "DeleteJob"
 
-// DeleteJobRequest generates a "aws.Request" representing the
-// client's request for the DeleteJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteJobRequest is a API request type for the DeleteJob API operation.
+type DeleteJobRequest struct {
+	*aws.Request
+	Input *DeleteJobInput
+}
+
+// Send marshals and sends the DeleteJob API request.
+func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteJobOutput), nil
+}
+
+// DeleteJobRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteJob for more information on using the DeleteJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specified job.
 //
 //    // Example sending a request using the DeleteJobRequest method.
-//    req, resp := client.DeleteJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteJob
-func (c *Glue) DeleteJobRequest(input *DeleteJobInput) (req *aws.Request, output *DeleteJobOutput) {
+func (c *Glue) DeleteJobRequest(input *DeleteJobInput) DeleteJobRequest {
 	op := &aws.Operation{
 		Name:       opDeleteJob,
 		HTTPMethod: "POST",
@@ -1916,81 +1021,42 @@ func (c *Glue) DeleteJobRequest(input *DeleteJobInput) (req *aws.Request, output
 		input = &DeleteJobInput{}
 	}
 
-	output = &DeleteJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteJob API operation for AWS Glue.
-//
-// Deletes a specified job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteJob
-func (c *Glue) DeleteJob(input *DeleteJobInput) (*DeleteJobOutput, error) {
-	req, out := c.DeleteJobRequest(input)
-	return out, req.Send()
-}
-
-// DeleteJobWithContext is the same as DeleteJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteJobWithContext(ctx aws.Context, input *DeleteJobInput, opts ...aws.Option) (*DeleteJobOutput, error) {
-	req, out := c.DeleteJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteJobOutput{})
+	return DeleteJobRequest{Request: req, Input: input}
 }
 
 const opDeletePartition = "DeletePartition"
 
-// DeletePartitionRequest generates a "aws.Request" representing the
-// client's request for the DeletePartition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePartitionRequest is a API request type for the DeletePartition API operation.
+type DeletePartitionRequest struct {
+	*aws.Request
+	Input *DeletePartitionInput
+}
+
+// Send marshals and sends the DeletePartition API request.
+func (r DeletePartitionRequest) Send() (*DeletePartitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePartitionOutput), nil
+}
+
+// DeletePartitionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePartition for more information on using the DeletePartition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specified partition.
 //
 //    // Example sending a request using the DeletePartitionRequest method.
-//    req, resp := client.DeletePartitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePartitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartition
-func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) (req *aws.Request, output *DeletePartitionOutput) {
+func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) DeletePartitionRequest {
 	op := &aws.Operation{
 		Name:       opDeletePartition,
 		HTTPMethod: "POST",
@@ -2001,84 +1067,42 @@ func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) (req *aws.Req
 		input = &DeletePartitionInput{}
 	}
 
-	output = &DeletePartitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeletePartition API operation for AWS Glue.
-//
-// Deletes a specified partition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeletePartition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartition
-func (c *Glue) DeletePartition(input *DeletePartitionInput) (*DeletePartitionOutput, error) {
-	req, out := c.DeletePartitionRequest(input)
-	return out, req.Send()
-}
-
-// DeletePartitionWithContext is the same as DeletePartition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePartition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeletePartitionWithContext(ctx aws.Context, input *DeletePartitionInput, opts ...aws.Option) (*DeletePartitionOutput, error) {
-	req, out := c.DeletePartitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeletePartitionOutput{})
+	return DeletePartitionRequest{Request: req, Input: input}
 }
 
 const opDeleteTable = "DeleteTable"
 
-// DeleteTableRequest generates a "aws.Request" representing the
-// client's request for the DeleteTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTableRequest is a API request type for the DeleteTable API operation.
+type DeleteTableRequest struct {
+	*aws.Request
+	Input *DeleteTableInput
+}
+
+// Send marshals and sends the DeleteTable API request.
+func (r DeleteTableRequest) Send() (*DeleteTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTableOutput), nil
+}
+
+// DeleteTableRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTable for more information on using the DeleteTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a table definition from the Data Catalog.
 //
 //    // Example sending a request using the DeleteTableRequest method.
-//    req, resp := client.DeleteTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTable
-func (c *Glue) DeleteTableRequest(input *DeleteTableInput) (req *aws.Request, output *DeleteTableOutput) {
+func (c *Glue) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTable,
 		HTTPMethod: "POST",
@@ -2089,84 +1113,42 @@ func (c *Glue) DeleteTableRequest(input *DeleteTableInput) (req *aws.Request, ou
 		input = &DeleteTableInput{}
 	}
 
-	output = &DeleteTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTable API operation for AWS Glue.
-//
-// Removes a table definition from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTable
-func (c *Glue) DeleteTable(input *DeleteTableInput) (*DeleteTableOutput, error) {
-	req, out := c.DeleteTableRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTableWithContext is the same as DeleteTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInput, opts ...aws.Option) (*DeleteTableOutput, error) {
-	req, out := c.DeleteTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTableOutput{})
+	return DeleteTableRequest{Request: req, Input: input}
 }
 
 const opDeleteTrigger = "DeleteTrigger"
 
-// DeleteTriggerRequest generates a "aws.Request" representing the
-// client's request for the DeleteTrigger operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTriggerRequest is a API request type for the DeleteTrigger API operation.
+type DeleteTriggerRequest struct {
+	*aws.Request
+	Input *DeleteTriggerInput
+}
+
+// Send marshals and sends the DeleteTrigger API request.
+func (r DeleteTriggerRequest) Send() (*DeleteTriggerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTriggerOutput), nil
+}
+
+// DeleteTriggerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTrigger for more information on using the DeleteTrigger
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specified trigger.
 //
 //    // Example sending a request using the DeleteTriggerRequest method.
-//    req, resp := client.DeleteTriggerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTriggerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTrigger
-func (c *Glue) DeleteTriggerRequest(input *DeleteTriggerInput) (req *aws.Request, output *DeleteTriggerOutput) {
+func (c *Glue) DeleteTriggerRequest(input *DeleteTriggerInput) DeleteTriggerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrigger,
 		HTTPMethod: "POST",
@@ -2177,81 +1159,42 @@ func (c *Glue) DeleteTriggerRequest(input *DeleteTriggerInput) (req *aws.Request
 		input = &DeleteTriggerInput{}
 	}
 
-	output = &DeleteTriggerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTrigger API operation for AWS Glue.
-//
-// Deletes a specified trigger.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteTrigger for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTrigger
-func (c *Glue) DeleteTrigger(input *DeleteTriggerInput) (*DeleteTriggerOutput, error) {
-	req, out := c.DeleteTriggerRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTriggerWithContext is the same as DeleteTrigger with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTrigger for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteTriggerWithContext(ctx aws.Context, input *DeleteTriggerInput, opts ...aws.Option) (*DeleteTriggerOutput, error) {
-	req, out := c.DeleteTriggerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTriggerOutput{})
+	return DeleteTriggerRequest{Request: req, Input: input}
 }
 
 const opDeleteUserDefinedFunction = "DeleteUserDefinedFunction"
 
-// DeleteUserDefinedFunctionRequest generates a "aws.Request" representing the
-// client's request for the DeleteUserDefinedFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteUserDefinedFunctionRequest is a API request type for the DeleteUserDefinedFunction API operation.
+type DeleteUserDefinedFunctionRequest struct {
+	*aws.Request
+	Input *DeleteUserDefinedFunctionInput
+}
+
+// Send marshals and sends the DeleteUserDefinedFunction API request.
+func (r DeleteUserDefinedFunctionRequest) Send() (*DeleteUserDefinedFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserDefinedFunctionOutput), nil
+}
+
+// DeleteUserDefinedFunctionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteUserDefinedFunction for more information on using the DeleteUserDefinedFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an existing function definition from the Data Catalog.
 //
 //    // Example sending a request using the DeleteUserDefinedFunctionRequest method.
-//    req, resp := client.DeleteUserDefinedFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteUserDefinedFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUserDefinedFunction
-func (c *Glue) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunctionInput) (req *aws.Request, output *DeleteUserDefinedFunctionOutput) {
+func (c *Glue) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunctionInput) DeleteUserDefinedFunctionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserDefinedFunction,
 		HTTPMethod: "POST",
@@ -2262,84 +1205,42 @@ func (c *Glue) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunction
 		input = &DeleteUserDefinedFunctionInput{}
 	}
 
-	output = &DeleteUserDefinedFunctionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteUserDefinedFunction API operation for AWS Glue.
-//
-// Deletes an existing function definition from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation DeleteUserDefinedFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUserDefinedFunction
-func (c *Glue) DeleteUserDefinedFunction(input *DeleteUserDefinedFunctionInput) (*DeleteUserDefinedFunctionOutput, error) {
-	req, out := c.DeleteUserDefinedFunctionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteUserDefinedFunctionWithContext is the same as DeleteUserDefinedFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteUserDefinedFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) DeleteUserDefinedFunctionWithContext(ctx aws.Context, input *DeleteUserDefinedFunctionInput, opts ...aws.Option) (*DeleteUserDefinedFunctionOutput, error) {
-	req, out := c.DeleteUserDefinedFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteUserDefinedFunctionOutput{})
+	return DeleteUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
 const opGetCatalogImportStatus = "GetCatalogImportStatus"
 
-// GetCatalogImportStatusRequest generates a "aws.Request" representing the
-// client's request for the GetCatalogImportStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCatalogImportStatusRequest is a API request type for the GetCatalogImportStatus API operation.
+type GetCatalogImportStatusRequest struct {
+	*aws.Request
+	Input *GetCatalogImportStatusInput
+}
+
+// Send marshals and sends the GetCatalogImportStatus API request.
+func (r GetCatalogImportStatusRequest) Send() (*GetCatalogImportStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCatalogImportStatusOutput), nil
+}
+
+// GetCatalogImportStatusRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCatalogImportStatus for more information on using the GetCatalogImportStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the status of a migration operation.
 //
 //    // Example sending a request using the GetCatalogImportStatusRequest method.
-//    req, resp := client.GetCatalogImportStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCatalogImportStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCatalogImportStatus
-func (c *Glue) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput) (req *aws.Request, output *GetCatalogImportStatusOutput) {
+func (c *Glue) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput) GetCatalogImportStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetCatalogImportStatus,
 		HTTPMethod: "POST",
@@ -2350,78 +1251,42 @@ func (c *Glue) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput)
 		input = &GetCatalogImportStatusInput{}
 	}
 
-	output = &GetCatalogImportStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCatalogImportStatus API operation for AWS Glue.
-//
-// Retrieves the status of a migration operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetCatalogImportStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCatalogImportStatus
-func (c *Glue) GetCatalogImportStatus(input *GetCatalogImportStatusInput) (*GetCatalogImportStatusOutput, error) {
-	req, out := c.GetCatalogImportStatusRequest(input)
-	return out, req.Send()
-}
-
-// GetCatalogImportStatusWithContext is the same as GetCatalogImportStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCatalogImportStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetCatalogImportStatusWithContext(ctx aws.Context, input *GetCatalogImportStatusInput, opts ...aws.Option) (*GetCatalogImportStatusOutput, error) {
-	req, out := c.GetCatalogImportStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCatalogImportStatusOutput{})
+	return GetCatalogImportStatusRequest{Request: req, Input: input}
 }
 
 const opGetClassifier = "GetClassifier"
 
-// GetClassifierRequest generates a "aws.Request" representing the
-// client's request for the GetClassifier operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetClassifierRequest is a API request type for the GetClassifier API operation.
+type GetClassifierRequest struct {
+	*aws.Request
+	Input *GetClassifierInput
+}
+
+// Send marshals and sends the GetClassifier API request.
+func (r GetClassifierRequest) Send() (*GetClassifierOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetClassifierOutput), nil
+}
+
+// GetClassifierRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetClassifier for more information on using the GetClassifier
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieve a Classifier by name.
 //
 //    // Example sending a request using the GetClassifierRequest method.
-//    req, resp := client.GetClassifierRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetClassifierRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier
-func (c *Glue) GetClassifierRequest(input *GetClassifierInput) (req *aws.Request, output *GetClassifierOutput) {
+func (c *Glue) GetClassifierRequest(input *GetClassifierInput) GetClassifierRequest {
 	op := &aws.Operation{
 		Name:       opGetClassifier,
 		HTTPMethod: "POST",
@@ -2432,78 +1297,42 @@ func (c *Glue) GetClassifierRequest(input *GetClassifierInput) (req *aws.Request
 		input = &GetClassifierInput{}
 	}
 
-	output = &GetClassifierOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetClassifier API operation for AWS Glue.
-//
-// Retrieve a Classifier by name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetClassifier for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier
-func (c *Glue) GetClassifier(input *GetClassifierInput) (*GetClassifierOutput, error) {
-	req, out := c.GetClassifierRequest(input)
-	return out, req.Send()
-}
-
-// GetClassifierWithContext is the same as GetClassifier with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetClassifier for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetClassifierWithContext(ctx aws.Context, input *GetClassifierInput, opts ...aws.Option) (*GetClassifierOutput, error) {
-	req, out := c.GetClassifierRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetClassifierOutput{})
+	return GetClassifierRequest{Request: req, Input: input}
 }
 
 const opGetClassifiers = "GetClassifiers"
 
-// GetClassifiersRequest generates a "aws.Request" representing the
-// client's request for the GetClassifiers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetClassifiersRequest is a API request type for the GetClassifiers API operation.
+type GetClassifiersRequest struct {
+	*aws.Request
+	Input *GetClassifiersInput
+}
+
+// Send marshals and sends the GetClassifiers API request.
+func (r GetClassifiersRequest) Send() (*GetClassifiersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetClassifiersOutput), nil
+}
+
+// GetClassifiersRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetClassifiers for more information on using the GetClassifiers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all Classifier objects in the metadata store.
 //
 //    // Example sending a request using the GetClassifiersRequest method.
-//    req, resp := client.GetClassifiersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetClassifiersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers
-func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) (req *aws.Request, output *GetClassifiersOutput) {
+func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) GetClassifiersRequest {
 	op := &aws.Operation{
 		Name:       opGetClassifiers,
 		HTTPMethod: "POST",
@@ -2520,46 +1349,8 @@ func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) (req *aws.Reque
 		input = &GetClassifiersInput{}
 	}
 
-	output = &GetClassifiersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetClassifiers API operation for AWS Glue.
-//
-// Lists all Classifier objects in the metadata store.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetClassifiers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers
-func (c *Glue) GetClassifiers(input *GetClassifiersInput) (*GetClassifiersOutput, error) {
-	req, out := c.GetClassifiersRequest(input)
-	return out, req.Send()
-}
-
-// GetClassifiersWithContext is the same as GetClassifiers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetClassifiers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetClassifiersWithContext(ctx aws.Context, input *GetClassifiersInput, opts ...aws.Option) (*GetClassifiersOutput, error) {
-	req, out := c.GetClassifiersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetClassifiersOutput{})
+	return GetClassifiersRequest{Request: req, Input: input}
 }
 
 // GetClassifiersPages iterates over the pages of a GetClassifiers operation,
@@ -2598,10 +1389,10 @@ func (c *Glue) GetClassifiersPagesWithContext(ctx aws.Context, input *GetClassif
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetClassifiersRequest(inCpy)
+			req := c.GetClassifiersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2614,31 +1405,36 @@ func (c *Glue) GetClassifiersPagesWithContext(ctx aws.Context, input *GetClassif
 
 const opGetConnection = "GetConnection"
 
-// GetConnectionRequest generates a "aws.Request" representing the
-// client's request for the GetConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetConnectionRequest is a API request type for the GetConnection API operation.
+type GetConnectionRequest struct {
+	*aws.Request
+	Input *GetConnectionInput
+}
+
+// Send marshals and sends the GetConnection API request.
+func (r GetConnectionRequest) Send() (*GetConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetConnectionOutput), nil
+}
+
+// GetConnectionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetConnection for more information on using the GetConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a connection definition from the Data Catalog.
 //
 //    // Example sending a request using the GetConnectionRequest method.
-//    req, resp := client.GetConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnection
-func (c *Glue) GetConnectionRequest(input *GetConnectionInput) (req *aws.Request, output *GetConnectionOutput) {
+func (c *Glue) GetConnectionRequest(input *GetConnectionInput) GetConnectionRequest {
 	op := &aws.Operation{
 		Name:       opGetConnection,
 		HTTPMethod: "POST",
@@ -2649,78 +1445,42 @@ func (c *Glue) GetConnectionRequest(input *GetConnectionInput) (req *aws.Request
 		input = &GetConnectionInput{}
 	}
 
-	output = &GetConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetConnection API operation for AWS Glue.
-//
-// Retrieves a connection definition from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnection
-func (c *Glue) GetConnection(input *GetConnectionInput) (*GetConnectionOutput, error) {
-	req, out := c.GetConnectionRequest(input)
-	return out, req.Send()
-}
-
-// GetConnectionWithContext is the same as GetConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetConnectionWithContext(ctx aws.Context, input *GetConnectionInput, opts ...aws.Option) (*GetConnectionOutput, error) {
-	req, out := c.GetConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetConnectionOutput{})
+	return GetConnectionRequest{Request: req, Input: input}
 }
 
 const opGetConnections = "GetConnections"
 
-// GetConnectionsRequest generates a "aws.Request" representing the
-// client's request for the GetConnections operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetConnectionsRequest is a API request type for the GetConnections API operation.
+type GetConnectionsRequest struct {
+	*aws.Request
+	Input *GetConnectionsInput
+}
+
+// Send marshals and sends the GetConnections API request.
+func (r GetConnectionsRequest) Send() (*GetConnectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetConnectionsOutput), nil
+}
+
+// GetConnectionsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetConnections for more information on using the GetConnections
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of connection definitions from the Data Catalog.
 //
 //    // Example sending a request using the GetConnectionsRequest method.
-//    req, resp := client.GetConnectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetConnectionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnections
-func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) (req *aws.Request, output *GetConnectionsOutput) {
+func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) GetConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opGetConnections,
 		HTTPMethod: "POST",
@@ -2737,49 +1497,8 @@ func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) (req *aws.Reque
 		input = &GetConnectionsInput{}
 	}
 
-	output = &GetConnectionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetConnections API operation for AWS Glue.
-//
-// Retrieves a list of connection definitions from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetConnections for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnections
-func (c *Glue) GetConnections(input *GetConnectionsInput) (*GetConnectionsOutput, error) {
-	req, out := c.GetConnectionsRequest(input)
-	return out, req.Send()
-}
-
-// GetConnectionsWithContext is the same as GetConnections with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetConnections for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetConnectionsWithContext(ctx aws.Context, input *GetConnectionsInput, opts ...aws.Option) (*GetConnectionsOutput, error) {
-	req, out := c.GetConnectionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetConnectionsOutput{})
+	return GetConnectionsRequest{Request: req, Input: input}
 }
 
 // GetConnectionsPages iterates over the pages of a GetConnections operation,
@@ -2818,10 +1537,10 @@ func (c *Glue) GetConnectionsPagesWithContext(ctx aws.Context, input *GetConnect
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetConnectionsRequest(inCpy)
+			req := c.GetConnectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2834,31 +1553,36 @@ func (c *Glue) GetConnectionsPagesWithContext(ctx aws.Context, input *GetConnect
 
 const opGetCrawler = "GetCrawler"
 
-// GetCrawlerRequest generates a "aws.Request" representing the
-// client's request for the GetCrawler operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCrawlerRequest is a API request type for the GetCrawler API operation.
+type GetCrawlerRequest struct {
+	*aws.Request
+	Input *GetCrawlerInput
+}
+
+// Send marshals and sends the GetCrawler API request.
+func (r GetCrawlerRequest) Send() (*GetCrawlerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCrawlerOutput), nil
+}
+
+// GetCrawlerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCrawler for more information on using the GetCrawler
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves metadata for a specified Crawler.
 //
 //    // Example sending a request using the GetCrawlerRequest method.
-//    req, resp := client.GetCrawlerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCrawlerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler
-func (c *Glue) GetCrawlerRequest(input *GetCrawlerInput) (req *aws.Request, output *GetCrawlerOutput) {
+func (c *Glue) GetCrawlerRequest(input *GetCrawlerInput) GetCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opGetCrawler,
 		HTTPMethod: "POST",
@@ -2869,78 +1593,42 @@ func (c *Glue) GetCrawlerRequest(input *GetCrawlerInput) (req *aws.Request, outp
 		input = &GetCrawlerInput{}
 	}
 
-	output = &GetCrawlerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCrawler API operation for AWS Glue.
-//
-// Retrieves metadata for a specified Crawler.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetCrawler for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler
-func (c *Glue) GetCrawler(input *GetCrawlerInput) (*GetCrawlerOutput, error) {
-	req, out := c.GetCrawlerRequest(input)
-	return out, req.Send()
-}
-
-// GetCrawlerWithContext is the same as GetCrawler with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCrawler for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetCrawlerWithContext(ctx aws.Context, input *GetCrawlerInput, opts ...aws.Option) (*GetCrawlerOutput, error) {
-	req, out := c.GetCrawlerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCrawlerOutput{})
+	return GetCrawlerRequest{Request: req, Input: input}
 }
 
 const opGetCrawlerMetrics = "GetCrawlerMetrics"
 
-// GetCrawlerMetricsRequest generates a "aws.Request" representing the
-// client's request for the GetCrawlerMetrics operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCrawlerMetricsRequest is a API request type for the GetCrawlerMetrics API operation.
+type GetCrawlerMetricsRequest struct {
+	*aws.Request
+	Input *GetCrawlerMetricsInput
+}
+
+// Send marshals and sends the GetCrawlerMetrics API request.
+func (r GetCrawlerMetricsRequest) Send() (*GetCrawlerMetricsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCrawlerMetricsOutput), nil
+}
+
+// GetCrawlerMetricsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCrawlerMetrics for more information on using the GetCrawlerMetrics
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves metrics about specified crawlers.
 //
 //    // Example sending a request using the GetCrawlerMetricsRequest method.
-//    req, resp := client.GetCrawlerMetricsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCrawlerMetricsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlerMetrics
-func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) (req *aws.Request, output *GetCrawlerMetricsOutput) {
+func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCrawlerMetricsRequest {
 	op := &aws.Operation{
 		Name:       opGetCrawlerMetrics,
 		HTTPMethod: "POST",
@@ -2957,46 +1645,8 @@ func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) (req *aws
 		input = &GetCrawlerMetricsInput{}
 	}
 
-	output = &GetCrawlerMetricsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCrawlerMetrics API operation for AWS Glue.
-//
-// Retrieves metrics about specified crawlers.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetCrawlerMetrics for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlerMetrics
-func (c *Glue) GetCrawlerMetrics(input *GetCrawlerMetricsInput) (*GetCrawlerMetricsOutput, error) {
-	req, out := c.GetCrawlerMetricsRequest(input)
-	return out, req.Send()
-}
-
-// GetCrawlerMetricsWithContext is the same as GetCrawlerMetrics with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCrawlerMetrics for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetCrawlerMetricsWithContext(ctx aws.Context, input *GetCrawlerMetricsInput, opts ...aws.Option) (*GetCrawlerMetricsOutput, error) {
-	req, out := c.GetCrawlerMetricsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCrawlerMetricsOutput{})
+	return GetCrawlerMetricsRequest{Request: req, Input: input}
 }
 
 // GetCrawlerMetricsPages iterates over the pages of a GetCrawlerMetrics operation,
@@ -3035,10 +1685,10 @@ func (c *Glue) GetCrawlerMetricsPagesWithContext(ctx aws.Context, input *GetCraw
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetCrawlerMetricsRequest(inCpy)
+			req := c.GetCrawlerMetricsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3051,31 +1701,36 @@ func (c *Glue) GetCrawlerMetricsPagesWithContext(ctx aws.Context, input *GetCraw
 
 const opGetCrawlers = "GetCrawlers"
 
-// GetCrawlersRequest generates a "aws.Request" representing the
-// client's request for the GetCrawlers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCrawlersRequest is a API request type for the GetCrawlers API operation.
+type GetCrawlersRequest struct {
+	*aws.Request
+	Input *GetCrawlersInput
+}
+
+// Send marshals and sends the GetCrawlers API request.
+func (r GetCrawlersRequest) Send() (*GetCrawlersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCrawlersOutput), nil
+}
+
+// GetCrawlersRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCrawlers for more information on using the GetCrawlers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves metadata for all Crawlers defined in the customer account.
 //
 //    // Example sending a request using the GetCrawlersRequest method.
-//    req, resp := client.GetCrawlersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCrawlersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers
-func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) (req *aws.Request, output *GetCrawlersOutput) {
+func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest {
 	op := &aws.Operation{
 		Name:       opGetCrawlers,
 		HTTPMethod: "POST",
@@ -3092,46 +1747,8 @@ func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) (req *aws.Request, ou
 		input = &GetCrawlersInput{}
 	}
 
-	output = &GetCrawlersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCrawlers API operation for AWS Glue.
-//
-// Retrieves metadata for all Crawlers defined in the customer account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetCrawlers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers
-func (c *Glue) GetCrawlers(input *GetCrawlersInput) (*GetCrawlersOutput, error) {
-	req, out := c.GetCrawlersRequest(input)
-	return out, req.Send()
-}
-
-// GetCrawlersWithContext is the same as GetCrawlers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCrawlers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetCrawlersWithContext(ctx aws.Context, input *GetCrawlersInput, opts ...aws.Option) (*GetCrawlersOutput, error) {
-	req, out := c.GetCrawlersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCrawlersOutput{})
+	return GetCrawlersRequest{Request: req, Input: input}
 }
 
 // GetCrawlersPages iterates over the pages of a GetCrawlers operation,
@@ -3170,10 +1787,10 @@ func (c *Glue) GetCrawlersPagesWithContext(ctx aws.Context, input *GetCrawlersIn
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetCrawlersRequest(inCpy)
+			req := c.GetCrawlersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3186,31 +1803,36 @@ func (c *Glue) GetCrawlersPagesWithContext(ctx aws.Context, input *GetCrawlersIn
 
 const opGetDatabase = "GetDatabase"
 
-// GetDatabaseRequest generates a "aws.Request" representing the
-// client's request for the GetDatabase operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDatabaseRequest is a API request type for the GetDatabase API operation.
+type GetDatabaseRequest struct {
+	*aws.Request
+	Input *GetDatabaseInput
+}
+
+// Send marshals and sends the GetDatabase API request.
+func (r GetDatabaseRequest) Send() (*GetDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDatabaseOutput), nil
+}
+
+// GetDatabaseRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDatabase for more information on using the GetDatabase
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the definition of a specified database.
 //
 //    // Example sending a request using the GetDatabaseRequest method.
-//    req, resp := client.GetDatabaseRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabase
-func (c *Glue) GetDatabaseRequest(input *GetDatabaseInput) (req *aws.Request, output *GetDatabaseOutput) {
+func (c *Glue) GetDatabaseRequest(input *GetDatabaseInput) GetDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opGetDatabase,
 		HTTPMethod: "POST",
@@ -3221,84 +1843,42 @@ func (c *Glue) GetDatabaseRequest(input *GetDatabaseInput) (req *aws.Request, ou
 		input = &GetDatabaseInput{}
 	}
 
-	output = &GetDatabaseOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDatabase API operation for AWS Glue.
-//
-// Retrieves the definition of a specified database.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetDatabase for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabase
-func (c *Glue) GetDatabase(input *GetDatabaseInput) (*GetDatabaseOutput, error) {
-	req, out := c.GetDatabaseRequest(input)
-	return out, req.Send()
-}
-
-// GetDatabaseWithContext is the same as GetDatabase with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDatabase for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetDatabaseWithContext(ctx aws.Context, input *GetDatabaseInput, opts ...aws.Option) (*GetDatabaseOutput, error) {
-	req, out := c.GetDatabaseRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDatabaseOutput{})
+	return GetDatabaseRequest{Request: req, Input: input}
 }
 
 const opGetDatabases = "GetDatabases"
 
-// GetDatabasesRequest generates a "aws.Request" representing the
-// client's request for the GetDatabases operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDatabasesRequest is a API request type for the GetDatabases API operation.
+type GetDatabasesRequest struct {
+	*aws.Request
+	Input *GetDatabasesInput
+}
+
+// Send marshals and sends the GetDatabases API request.
+func (r GetDatabasesRequest) Send() (*GetDatabasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDatabasesOutput), nil
+}
+
+// GetDatabasesRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDatabases for more information on using the GetDatabases
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves all Databases defined in a given Data Catalog.
 //
 //    // Example sending a request using the GetDatabasesRequest method.
-//    req, resp := client.GetDatabasesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDatabasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases
-func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) (req *aws.Request, output *GetDatabasesOutput) {
+func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesRequest {
 	op := &aws.Operation{
 		Name:       opGetDatabases,
 		HTTPMethod: "POST",
@@ -3315,52 +1895,8 @@ func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) (req *aws.Request, 
 		input = &GetDatabasesInput{}
 	}
 
-	output = &GetDatabasesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDatabases API operation for AWS Glue.
-//
-// Retrieves all Databases defined in a given Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetDatabases for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases
-func (c *Glue) GetDatabases(input *GetDatabasesInput) (*GetDatabasesOutput, error) {
-	req, out := c.GetDatabasesRequest(input)
-	return out, req.Send()
-}
-
-// GetDatabasesWithContext is the same as GetDatabases with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDatabases for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetDatabasesWithContext(ctx aws.Context, input *GetDatabasesInput, opts ...aws.Option) (*GetDatabasesOutput, error) {
-	req, out := c.GetDatabasesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDatabasesOutput{})
+	return GetDatabasesRequest{Request: req, Input: input}
 }
 
 // GetDatabasesPages iterates over the pages of a GetDatabases operation,
@@ -3399,10 +1935,10 @@ func (c *Glue) GetDatabasesPagesWithContext(ctx aws.Context, input *GetDatabases
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetDatabasesRequest(inCpy)
+			req := c.GetDatabasesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3415,31 +1951,36 @@ func (c *Glue) GetDatabasesPagesWithContext(ctx aws.Context, input *GetDatabases
 
 const opGetDataflowGraph = "GetDataflowGraph"
 
-// GetDataflowGraphRequest generates a "aws.Request" representing the
-// client's request for the GetDataflowGraph operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDataflowGraphRequest is a API request type for the GetDataflowGraph API operation.
+type GetDataflowGraphRequest struct {
+	*aws.Request
+	Input *GetDataflowGraphInput
+}
+
+// Send marshals and sends the GetDataflowGraph API request.
+func (r GetDataflowGraphRequest) Send() (*GetDataflowGraphOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDataflowGraphOutput), nil
+}
+
+// GetDataflowGraphRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDataflowGraph for more information on using the GetDataflowGraph
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Transforms a Python script into a directed acyclic graph (DAG).
 //
 //    // Example sending a request using the GetDataflowGraphRequest method.
-//    req, resp := client.GetDataflowGraphRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDataflowGraphRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataflowGraph
-func (c *Glue) GetDataflowGraphRequest(input *GetDataflowGraphInput) (req *aws.Request, output *GetDataflowGraphOutput) {
+func (c *Glue) GetDataflowGraphRequest(input *GetDataflowGraphInput) GetDataflowGraphRequest {
 	op := &aws.Operation{
 		Name:       opGetDataflowGraph,
 		HTTPMethod: "POST",
@@ -3450,81 +1991,42 @@ func (c *Glue) GetDataflowGraphRequest(input *GetDataflowGraphInput) (req *aws.R
 		input = &GetDataflowGraphInput{}
 	}
 
-	output = &GetDataflowGraphOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDataflowGraph API operation for AWS Glue.
-//
-// Transforms a Python script into a directed acyclic graph (DAG).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetDataflowGraph for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataflowGraph
-func (c *Glue) GetDataflowGraph(input *GetDataflowGraphInput) (*GetDataflowGraphOutput, error) {
-	req, out := c.GetDataflowGraphRequest(input)
-	return out, req.Send()
-}
-
-// GetDataflowGraphWithContext is the same as GetDataflowGraph with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDataflowGraph for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetDataflowGraphWithContext(ctx aws.Context, input *GetDataflowGraphInput, opts ...aws.Option) (*GetDataflowGraphOutput, error) {
-	req, out := c.GetDataflowGraphRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDataflowGraphOutput{})
+	return GetDataflowGraphRequest{Request: req, Input: input}
 }
 
 const opGetDevEndpoint = "GetDevEndpoint"
 
-// GetDevEndpointRequest generates a "aws.Request" representing the
-// client's request for the GetDevEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDevEndpointRequest is a API request type for the GetDevEndpoint API operation.
+type GetDevEndpointRequest struct {
+	*aws.Request
+	Input *GetDevEndpointInput
+}
+
+// Send marshals and sends the GetDevEndpoint API request.
+func (r GetDevEndpointRequest) Send() (*GetDevEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDevEndpointOutput), nil
+}
+
+// GetDevEndpointRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDevEndpoint for more information on using the GetDevEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a specified DevEndpoint.
 //
 //    // Example sending a request using the GetDevEndpointRequest method.
-//    req, resp := client.GetDevEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDevEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint
-func (c *Glue) GetDevEndpointRequest(input *GetDevEndpointInput) (req *aws.Request, output *GetDevEndpointOutput) {
+func (c *Glue) GetDevEndpointRequest(input *GetDevEndpointInput) GetDevEndpointRequest {
 	op := &aws.Operation{
 		Name:       opGetDevEndpoint,
 		HTTPMethod: "POST",
@@ -3535,84 +2037,42 @@ func (c *Glue) GetDevEndpointRequest(input *GetDevEndpointInput) (req *aws.Reque
 		input = &GetDevEndpointInput{}
 	}
 
-	output = &GetDevEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDevEndpoint API operation for AWS Glue.
-//
-// Retrieves information about a specified DevEndpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetDevEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint
-func (c *Glue) GetDevEndpoint(input *GetDevEndpointInput) (*GetDevEndpointOutput, error) {
-	req, out := c.GetDevEndpointRequest(input)
-	return out, req.Send()
-}
-
-// GetDevEndpointWithContext is the same as GetDevEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDevEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetDevEndpointWithContext(ctx aws.Context, input *GetDevEndpointInput, opts ...aws.Option) (*GetDevEndpointOutput, error) {
-	req, out := c.GetDevEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDevEndpointOutput{})
+	return GetDevEndpointRequest{Request: req, Input: input}
 }
 
 const opGetDevEndpoints = "GetDevEndpoints"
 
-// GetDevEndpointsRequest generates a "aws.Request" representing the
-// client's request for the GetDevEndpoints operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDevEndpointsRequest is a API request type for the GetDevEndpoints API operation.
+type GetDevEndpointsRequest struct {
+	*aws.Request
+	Input *GetDevEndpointsInput
+}
+
+// Send marshals and sends the GetDevEndpoints API request.
+func (r GetDevEndpointsRequest) Send() (*GetDevEndpointsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDevEndpointsOutput), nil
+}
+
+// GetDevEndpointsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDevEndpoints for more information on using the GetDevEndpoints
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves all the DevEndpoints in this AWS account.
 //
 //    // Example sending a request using the GetDevEndpointsRequest method.
-//    req, resp := client.GetDevEndpointsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDevEndpointsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints
-func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) (req *aws.Request, output *GetDevEndpointsOutput) {
+func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opGetDevEndpoints,
 		HTTPMethod: "POST",
@@ -3629,55 +2089,8 @@ func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) (req *aws.Req
 		input = &GetDevEndpointsInput{}
 	}
 
-	output = &GetDevEndpointsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDevEndpoints API operation for AWS Glue.
-//
-// Retrieves all the DevEndpoints in this AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetDevEndpoints for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints
-func (c *Glue) GetDevEndpoints(input *GetDevEndpointsInput) (*GetDevEndpointsOutput, error) {
-	req, out := c.GetDevEndpointsRequest(input)
-	return out, req.Send()
-}
-
-// GetDevEndpointsWithContext is the same as GetDevEndpoints with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDevEndpoints for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetDevEndpointsWithContext(ctx aws.Context, input *GetDevEndpointsInput, opts ...aws.Option) (*GetDevEndpointsOutput, error) {
-	req, out := c.GetDevEndpointsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDevEndpointsOutput{})
+	return GetDevEndpointsRequest{Request: req, Input: input}
 }
 
 // GetDevEndpointsPages iterates over the pages of a GetDevEndpoints operation,
@@ -3716,10 +2129,10 @@ func (c *Glue) GetDevEndpointsPagesWithContext(ctx aws.Context, input *GetDevEnd
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetDevEndpointsRequest(inCpy)
+			req := c.GetDevEndpointsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3732,31 +2145,36 @@ func (c *Glue) GetDevEndpointsPagesWithContext(ctx aws.Context, input *GetDevEnd
 
 const opGetJob = "GetJob"
 
-// GetJobRequest generates a "aws.Request" representing the
-// client's request for the GetJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetJobRequest is a API request type for the GetJob API operation.
+type GetJobRequest struct {
+	*aws.Request
+	Input *GetJobInput
+}
+
+// Send marshals and sends the GetJob API request.
+func (r GetJobRequest) Send() (*GetJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobOutput), nil
+}
+
+// GetJobRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJob for more information on using the GetJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves an existing job definition.
 //
 //    // Example sending a request using the GetJobRequest method.
-//    req, resp := client.GetJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob
-func (c *Glue) GetJobRequest(input *GetJobInput) (req *aws.Request, output *GetJobOutput) {
+func (c *Glue) GetJobRequest(input *GetJobInput) GetJobRequest {
 	op := &aws.Operation{
 		Name:       opGetJob,
 		HTTPMethod: "POST",
@@ -3767,84 +2185,42 @@ func (c *Glue) GetJobRequest(input *GetJobInput) (req *aws.Request, output *GetJ
 		input = &GetJobInput{}
 	}
 
-	output = &GetJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetJob API operation for AWS Glue.
-//
-// Retrieves an existing job definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob
-func (c *Glue) GetJob(input *GetJobInput) (*GetJobOutput, error) {
-	req, out := c.GetJobRequest(input)
-	return out, req.Send()
-}
-
-// GetJobWithContext is the same as GetJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts ...aws.Option) (*GetJobOutput, error) {
-	req, out := c.GetJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetJobOutput{})
+	return GetJobRequest{Request: req, Input: input}
 }
 
 const opGetJobRun = "GetJobRun"
 
-// GetJobRunRequest generates a "aws.Request" representing the
-// client's request for the GetJobRun operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetJobRunRequest is a API request type for the GetJobRun API operation.
+type GetJobRunRequest struct {
+	*aws.Request
+	Input *GetJobRunInput
+}
+
+// Send marshals and sends the GetJobRun API request.
+func (r GetJobRunRequest) Send() (*GetJobRunOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobRunOutput), nil
+}
+
+// GetJobRunRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJobRun for more information on using the GetJobRun
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the metadata for a given job run.
 //
 //    // Example sending a request using the GetJobRunRequest method.
-//    req, resp := client.GetJobRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetJobRunRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun
-func (c *Glue) GetJobRunRequest(input *GetJobRunInput) (req *aws.Request, output *GetJobRunOutput) {
+func (c *Glue) GetJobRunRequest(input *GetJobRunInput) GetJobRunRequest {
 	op := &aws.Operation{
 		Name:       opGetJobRun,
 		HTTPMethod: "POST",
@@ -3855,84 +2231,42 @@ func (c *Glue) GetJobRunRequest(input *GetJobRunInput) (req *aws.Request, output
 		input = &GetJobRunInput{}
 	}
 
-	output = &GetJobRunOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetJobRun API operation for AWS Glue.
-//
-// Retrieves the metadata for a given job run.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetJobRun for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun
-func (c *Glue) GetJobRun(input *GetJobRunInput) (*GetJobRunOutput, error) {
-	req, out := c.GetJobRunRequest(input)
-	return out, req.Send()
-}
-
-// GetJobRunWithContext is the same as GetJobRun with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJobRun for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetJobRunWithContext(ctx aws.Context, input *GetJobRunInput, opts ...aws.Option) (*GetJobRunOutput, error) {
-	req, out := c.GetJobRunRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetJobRunOutput{})
+	return GetJobRunRequest{Request: req, Input: input}
 }
 
 const opGetJobRuns = "GetJobRuns"
 
-// GetJobRunsRequest generates a "aws.Request" representing the
-// client's request for the GetJobRuns operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetJobRunsRequest is a API request type for the GetJobRuns API operation.
+type GetJobRunsRequest struct {
+	*aws.Request
+	Input *GetJobRunsInput
+}
+
+// Send marshals and sends the GetJobRuns API request.
+func (r GetJobRunsRequest) Send() (*GetJobRunsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobRunsOutput), nil
+}
+
+// GetJobRunsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJobRuns for more information on using the GetJobRuns
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves metadata for all runs of a given job.
 //
 //    // Example sending a request using the GetJobRunsRequest method.
-//    req, resp := client.GetJobRunsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetJobRunsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns
-func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) (req *aws.Request, output *GetJobRunsOutput) {
+func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 	op := &aws.Operation{
 		Name:       opGetJobRuns,
 		HTTPMethod: "POST",
@@ -3949,55 +2283,8 @@ func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) (req *aws.Request, outp
 		input = &GetJobRunsInput{}
 	}
 
-	output = &GetJobRunsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetJobRuns API operation for AWS Glue.
-//
-// Retrieves metadata for all runs of a given job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetJobRuns for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns
-func (c *Glue) GetJobRuns(input *GetJobRunsInput) (*GetJobRunsOutput, error) {
-	req, out := c.GetJobRunsRequest(input)
-	return out, req.Send()
-}
-
-// GetJobRunsWithContext is the same as GetJobRuns with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJobRuns for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetJobRunsWithContext(ctx aws.Context, input *GetJobRunsInput, opts ...aws.Option) (*GetJobRunsOutput, error) {
-	req, out := c.GetJobRunsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetJobRunsOutput{})
+	return GetJobRunsRequest{Request: req, Input: input}
 }
 
 // GetJobRunsPages iterates over the pages of a GetJobRuns operation,
@@ -4036,10 +2323,10 @@ func (c *Glue) GetJobRunsPagesWithContext(ctx aws.Context, input *GetJobRunsInpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetJobRunsRequest(inCpy)
+			req := c.GetJobRunsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4052,31 +2339,36 @@ func (c *Glue) GetJobRunsPagesWithContext(ctx aws.Context, input *GetJobRunsInpu
 
 const opGetJobs = "GetJobs"
 
-// GetJobsRequest generates a "aws.Request" representing the
-// client's request for the GetJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetJobsRequest is a API request type for the GetJobs API operation.
+type GetJobsRequest struct {
+	*aws.Request
+	Input *GetJobsInput
+}
+
+// Send marshals and sends the GetJobs API request.
+func (r GetJobsRequest) Send() (*GetJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobsOutput), nil
+}
+
+// GetJobsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJobs for more information on using the GetJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves all current jobs.
 //
 //    // Example sending a request using the GetJobsRequest method.
-//    req, resp := client.GetJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs
-func (c *Glue) GetJobsRequest(input *GetJobsInput) (req *aws.Request, output *GetJobsOutput) {
+func (c *Glue) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetJobs,
 		HTTPMethod: "POST",
@@ -4093,55 +2385,8 @@ func (c *Glue) GetJobsRequest(input *GetJobsInput) (req *aws.Request, output *Ge
 		input = &GetJobsInput{}
 	}
 
-	output = &GetJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetJobs API operation for AWS Glue.
-//
-// Retrieves all current jobs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs
-func (c *Glue) GetJobs(input *GetJobsInput) (*GetJobsOutput, error) {
-	req, out := c.GetJobsRequest(input)
-	return out, req.Send()
-}
-
-// GetJobsWithContext is the same as GetJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetJobsWithContext(ctx aws.Context, input *GetJobsInput, opts ...aws.Option) (*GetJobsOutput, error) {
-	req, out := c.GetJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetJobsOutput{})
+	return GetJobsRequest{Request: req, Input: input}
 }
 
 // GetJobsPages iterates over the pages of a GetJobs operation,
@@ -4180,10 +2425,10 @@ func (c *Glue) GetJobsPagesWithContext(ctx aws.Context, input *GetJobsInput, fn 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetJobsRequest(inCpy)
+			req := c.GetJobsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4196,31 +2441,36 @@ func (c *Glue) GetJobsPagesWithContext(ctx aws.Context, input *GetJobsInput, fn 
 
 const opGetMapping = "GetMapping"
 
-// GetMappingRequest generates a "aws.Request" representing the
-// client's request for the GetMapping operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetMappingRequest is a API request type for the GetMapping API operation.
+type GetMappingRequest struct {
+	*aws.Request
+	Input *GetMappingInput
+}
+
+// Send marshals and sends the GetMapping API request.
+func (r GetMappingRequest) Send() (*GetMappingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMappingOutput), nil
+}
+
+// GetMappingRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetMapping for more information on using the GetMapping
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates mappings.
 //
 //    // Example sending a request using the GetMappingRequest method.
-//    req, resp := client.GetMappingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetMappingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMapping
-func (c *Glue) GetMappingRequest(input *GetMappingInput) (req *aws.Request, output *GetMappingOutput) {
+func (c *Glue) GetMappingRequest(input *GetMappingInput) GetMappingRequest {
 	op := &aws.Operation{
 		Name:       opGetMapping,
 		HTTPMethod: "POST",
@@ -4231,81 +2481,42 @@ func (c *Glue) GetMappingRequest(input *GetMappingInput) (req *aws.Request, outp
 		input = &GetMappingInput{}
 	}
 
-	output = &GetMappingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetMapping API operation for AWS Glue.
-//
-// Creates mappings.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetMapping for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMapping
-func (c *Glue) GetMapping(input *GetMappingInput) (*GetMappingOutput, error) {
-	req, out := c.GetMappingRequest(input)
-	return out, req.Send()
-}
-
-// GetMappingWithContext is the same as GetMapping with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMapping for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetMappingWithContext(ctx aws.Context, input *GetMappingInput, opts ...aws.Option) (*GetMappingOutput, error) {
-	req, out := c.GetMappingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetMappingOutput{})
+	return GetMappingRequest{Request: req, Input: input}
 }
 
 const opGetPartition = "GetPartition"
 
-// GetPartitionRequest generates a "aws.Request" representing the
-// client's request for the GetPartition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPartitionRequest is a API request type for the GetPartition API operation.
+type GetPartitionRequest struct {
+	*aws.Request
+	Input *GetPartitionInput
+}
+
+// Send marshals and sends the GetPartition API request.
+func (r GetPartitionRequest) Send() (*GetPartitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPartitionOutput), nil
+}
+
+// GetPartitionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPartition for more information on using the GetPartition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a specified partition.
 //
 //    // Example sending a request using the GetPartitionRequest method.
-//    req, resp := client.GetPartitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPartitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartition
-func (c *Glue) GetPartitionRequest(input *GetPartitionInput) (req *aws.Request, output *GetPartitionOutput) {
+func (c *Glue) GetPartitionRequest(input *GetPartitionInput) GetPartitionRequest {
 	op := &aws.Operation{
 		Name:       opGetPartition,
 		HTTPMethod: "POST",
@@ -4316,84 +2527,42 @@ func (c *Glue) GetPartitionRequest(input *GetPartitionInput) (req *aws.Request, 
 		input = &GetPartitionInput{}
 	}
 
-	output = &GetPartitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPartition API operation for AWS Glue.
-//
-// Retrieves information about a specified partition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetPartition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartition
-func (c *Glue) GetPartition(input *GetPartitionInput) (*GetPartitionOutput, error) {
-	req, out := c.GetPartitionRequest(input)
-	return out, req.Send()
-}
-
-// GetPartitionWithContext is the same as GetPartition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPartition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetPartitionWithContext(ctx aws.Context, input *GetPartitionInput, opts ...aws.Option) (*GetPartitionOutput, error) {
-	req, out := c.GetPartitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPartitionOutput{})
+	return GetPartitionRequest{Request: req, Input: input}
 }
 
 const opGetPartitions = "GetPartitions"
 
-// GetPartitionsRequest generates a "aws.Request" representing the
-// client's request for the GetPartitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPartitionsRequest is a API request type for the GetPartitions API operation.
+type GetPartitionsRequest struct {
+	*aws.Request
+	Input *GetPartitionsInput
+}
+
+// Send marshals and sends the GetPartitions API request.
+func (r GetPartitionsRequest) Send() (*GetPartitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPartitionsOutput), nil
+}
+
+// GetPartitionsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPartitions for more information on using the GetPartitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about the partitions in a table.
 //
 //    // Example sending a request using the GetPartitionsRequest method.
-//    req, resp := client.GetPartitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPartitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitions
-func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) (req *aws.Request, output *GetPartitionsOutput) {
+func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) GetPartitionsRequest {
 	op := &aws.Operation{
 		Name:       opGetPartitions,
 		HTTPMethod: "POST",
@@ -4410,55 +2579,8 @@ func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) (req *aws.Request
 		input = &GetPartitionsInput{}
 	}
 
-	output = &GetPartitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPartitions API operation for AWS Glue.
-//
-// Retrieves information about the partitions in a table.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetPartitions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitions
-func (c *Glue) GetPartitions(input *GetPartitionsInput) (*GetPartitionsOutput, error) {
-	req, out := c.GetPartitionsRequest(input)
-	return out, req.Send()
-}
-
-// GetPartitionsWithContext is the same as GetPartitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPartitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetPartitionsWithContext(ctx aws.Context, input *GetPartitionsInput, opts ...aws.Option) (*GetPartitionsOutput, error) {
-	req, out := c.GetPartitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPartitionsOutput{})
+	return GetPartitionsRequest{Request: req, Input: input}
 }
 
 // GetPartitionsPages iterates over the pages of a GetPartitions operation,
@@ -4497,10 +2619,10 @@ func (c *Glue) GetPartitionsPagesWithContext(ctx aws.Context, input *GetPartitio
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetPartitionsRequest(inCpy)
+			req := c.GetPartitionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4513,31 +2635,36 @@ func (c *Glue) GetPartitionsPagesWithContext(ctx aws.Context, input *GetPartitio
 
 const opGetPlan = "GetPlan"
 
-// GetPlanRequest generates a "aws.Request" representing the
-// client's request for the GetPlan operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPlanRequest is a API request type for the GetPlan API operation.
+type GetPlanRequest struct {
+	*aws.Request
+	Input *GetPlanInput
+}
+
+// Send marshals and sends the GetPlan API request.
+func (r GetPlanRequest) Send() (*GetPlanOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPlanOutput), nil
+}
+
+// GetPlanRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPlan for more information on using the GetPlan
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a Python script to perform a specified mapping.
 //
 //    // Example sending a request using the GetPlanRequest method.
-//    req, resp := client.GetPlanRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPlanRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlan
-func (c *Glue) GetPlanRequest(input *GetPlanInput) (req *aws.Request, output *GetPlanOutput) {
+func (c *Glue) GetPlanRequest(input *GetPlanInput) GetPlanRequest {
 	op := &aws.Operation{
 		Name:       opGetPlan,
 		HTTPMethod: "POST",
@@ -4548,81 +2675,42 @@ func (c *Glue) GetPlanRequest(input *GetPlanInput) (req *aws.Request, output *Ge
 		input = &GetPlanInput{}
 	}
 
-	output = &GetPlanOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPlan API operation for AWS Glue.
-//
-// Gets a Python script to perform a specified mapping.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetPlan for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlan
-func (c *Glue) GetPlan(input *GetPlanInput) (*GetPlanOutput, error) {
-	req, out := c.GetPlanRequest(input)
-	return out, req.Send()
-}
-
-// GetPlanWithContext is the same as GetPlan with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPlan for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetPlanWithContext(ctx aws.Context, input *GetPlanInput, opts ...aws.Option) (*GetPlanOutput, error) {
-	req, out := c.GetPlanRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPlanOutput{})
+	return GetPlanRequest{Request: req, Input: input}
 }
 
 const opGetTable = "GetTable"
 
-// GetTableRequest generates a "aws.Request" representing the
-// client's request for the GetTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTableRequest is a API request type for the GetTable API operation.
+type GetTableRequest struct {
+	*aws.Request
+	Input *GetTableInput
+}
+
+// Send marshals and sends the GetTable API request.
+func (r GetTableRequest) Send() (*GetTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTableOutput), nil
+}
+
+// GetTableRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTable for more information on using the GetTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the Table definition in a Data Catalog for a specified table.
 //
 //    // Example sending a request using the GetTableRequest method.
-//    req, resp := client.GetTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable
-func (c *Glue) GetTableRequest(input *GetTableInput) (req *aws.Request, output *GetTableOutput) {
+func (c *Glue) GetTableRequest(input *GetTableInput) GetTableRequest {
 	op := &aws.Operation{
 		Name:       opGetTable,
 		HTTPMethod: "POST",
@@ -4633,84 +2721,43 @@ func (c *Glue) GetTableRequest(input *GetTableInput) (req *aws.Request, output *
 		input = &GetTableInput{}
 	}
 
-	output = &GetTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTable API operation for AWS Glue.
-//
-// Retrieves the Table definition in a Data Catalog for a specified table.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable
-func (c *Glue) GetTable(input *GetTableInput) (*GetTableOutput, error) {
-	req, out := c.GetTableRequest(input)
-	return out, req.Send()
-}
-
-// GetTableWithContext is the same as GetTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTableWithContext(ctx aws.Context, input *GetTableInput, opts ...aws.Option) (*GetTableOutput, error) {
-	req, out := c.GetTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTableOutput{})
+	return GetTableRequest{Request: req, Input: input}
 }
 
 const opGetTableVersions = "GetTableVersions"
 
-// GetTableVersionsRequest generates a "aws.Request" representing the
-// client's request for the GetTableVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTableVersionsRequest is a API request type for the GetTableVersions API operation.
+type GetTableVersionsRequest struct {
+	*aws.Request
+	Input *GetTableVersionsInput
+}
+
+// Send marshals and sends the GetTableVersions API request.
+func (r GetTableVersionsRequest) Send() (*GetTableVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTableVersionsOutput), nil
+}
+
+// GetTableVersionsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTableVersions for more information on using the GetTableVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of strings that identify available versions of a specified
+// table.
 //
 //    // Example sending a request using the GetTableVersionsRequest method.
-//    req, resp := client.GetTableVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTableVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersions
-func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) (req *aws.Request, output *GetTableVersionsOutput) {
+func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetTableVersions,
 		HTTPMethod: "POST",
@@ -4727,56 +2774,8 @@ func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) (req *aws.R
 		input = &GetTableVersionsInput{}
 	}
 
-	output = &GetTableVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTableVersions API operation for AWS Glue.
-//
-// Retrieves a list of strings that identify available versions of a specified
-// table.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetTableVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersions
-func (c *Glue) GetTableVersions(input *GetTableVersionsInput) (*GetTableVersionsOutput, error) {
-	req, out := c.GetTableVersionsRequest(input)
-	return out, req.Send()
-}
-
-// GetTableVersionsWithContext is the same as GetTableVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTableVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTableVersionsWithContext(ctx aws.Context, input *GetTableVersionsInput, opts ...aws.Option) (*GetTableVersionsOutput, error) {
-	req, out := c.GetTableVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTableVersionsOutput{})
+	return GetTableVersionsRequest{Request: req, Input: input}
 }
 
 // GetTableVersionsPages iterates over the pages of a GetTableVersions operation,
@@ -4815,10 +2814,10 @@ func (c *Glue) GetTableVersionsPagesWithContext(ctx aws.Context, input *GetTable
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetTableVersionsRequest(inCpy)
+			req := c.GetTableVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4831,31 +2830,36 @@ func (c *Glue) GetTableVersionsPagesWithContext(ctx aws.Context, input *GetTable
 
 const opGetTables = "GetTables"
 
-// GetTablesRequest generates a "aws.Request" representing the
-// client's request for the GetTables operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTablesRequest is a API request type for the GetTables API operation.
+type GetTablesRequest struct {
+	*aws.Request
+	Input *GetTablesInput
+}
+
+// Send marshals and sends the GetTables API request.
+func (r GetTablesRequest) Send() (*GetTablesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTablesOutput), nil
+}
+
+// GetTablesRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTables for more information on using the GetTables
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the definitions of some or all of the tables in a given Database.
 //
 //    // Example sending a request using the GetTablesRequest method.
-//    req, resp := client.GetTablesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTablesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables
-func (c *Glue) GetTablesRequest(input *GetTablesInput) (req *aws.Request, output *GetTablesOutput) {
+func (c *Glue) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 	op := &aws.Operation{
 		Name:       opGetTables,
 		HTTPMethod: "POST",
@@ -4872,55 +2876,8 @@ func (c *Glue) GetTablesRequest(input *GetTablesInput) (req *aws.Request, output
 		input = &GetTablesInput{}
 	}
 
-	output = &GetTablesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTables API operation for AWS Glue.
-//
-// Retrieves the definitions of some or all of the tables in a given Database.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetTables for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables
-func (c *Glue) GetTables(input *GetTablesInput) (*GetTablesOutput, error) {
-	req, out := c.GetTablesRequest(input)
-	return out, req.Send()
-}
-
-// GetTablesWithContext is the same as GetTables with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTables for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTablesWithContext(ctx aws.Context, input *GetTablesInput, opts ...aws.Option) (*GetTablesOutput, error) {
-	req, out := c.GetTablesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTablesOutput{})
+	return GetTablesRequest{Request: req, Input: input}
 }
 
 // GetTablesPages iterates over the pages of a GetTables operation,
@@ -4959,10 +2916,10 @@ func (c *Glue) GetTablesPagesWithContext(ctx aws.Context, input *GetTablesInput,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetTablesRequest(inCpy)
+			req := c.GetTablesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4975,31 +2932,36 @@ func (c *Glue) GetTablesPagesWithContext(ctx aws.Context, input *GetTablesInput,
 
 const opGetTrigger = "GetTrigger"
 
-// GetTriggerRequest generates a "aws.Request" representing the
-// client's request for the GetTrigger operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTriggerRequest is a API request type for the GetTrigger API operation.
+type GetTriggerRequest struct {
+	*aws.Request
+	Input *GetTriggerInput
+}
+
+// Send marshals and sends the GetTrigger API request.
+func (r GetTriggerRequest) Send() (*GetTriggerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTriggerOutput), nil
+}
+
+// GetTriggerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTrigger for more information on using the GetTrigger
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the definition of a trigger.
 //
 //    // Example sending a request using the GetTriggerRequest method.
-//    req, resp := client.GetTriggerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTriggerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger
-func (c *Glue) GetTriggerRequest(input *GetTriggerInput) (req *aws.Request, output *GetTriggerOutput) {
+func (c *Glue) GetTriggerRequest(input *GetTriggerInput) GetTriggerRequest {
 	op := &aws.Operation{
 		Name:       opGetTrigger,
 		HTTPMethod: "POST",
@@ -5010,84 +2972,42 @@ func (c *Glue) GetTriggerRequest(input *GetTriggerInput) (req *aws.Request, outp
 		input = &GetTriggerInput{}
 	}
 
-	output = &GetTriggerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTrigger API operation for AWS Glue.
-//
-// Retrieves the definition of a trigger.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetTrigger for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger
-func (c *Glue) GetTrigger(input *GetTriggerInput) (*GetTriggerOutput, error) {
-	req, out := c.GetTriggerRequest(input)
-	return out, req.Send()
-}
-
-// GetTriggerWithContext is the same as GetTrigger with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTrigger for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTriggerWithContext(ctx aws.Context, input *GetTriggerInput, opts ...aws.Option) (*GetTriggerOutput, error) {
-	req, out := c.GetTriggerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTriggerOutput{})
+	return GetTriggerRequest{Request: req, Input: input}
 }
 
 const opGetTriggers = "GetTriggers"
 
-// GetTriggersRequest generates a "aws.Request" representing the
-// client's request for the GetTriggers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTriggersRequest is a API request type for the GetTriggers API operation.
+type GetTriggersRequest struct {
+	*aws.Request
+	Input *GetTriggersInput
+}
+
+// Send marshals and sends the GetTriggers API request.
+func (r GetTriggersRequest) Send() (*GetTriggersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTriggersOutput), nil
+}
+
+// GetTriggersRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTriggers for more information on using the GetTriggers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets all the triggers associated with a job.
 //
 //    // Example sending a request using the GetTriggersRequest method.
-//    req, resp := client.GetTriggersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTriggersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers
-func (c *Glue) GetTriggersRequest(input *GetTriggersInput) (req *aws.Request, output *GetTriggersOutput) {
+func (c *Glue) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest {
 	op := &aws.Operation{
 		Name:       opGetTriggers,
 		HTTPMethod: "POST",
@@ -5104,55 +3024,8 @@ func (c *Glue) GetTriggersRequest(input *GetTriggersInput) (req *aws.Request, ou
 		input = &GetTriggersInput{}
 	}
 
-	output = &GetTriggersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTriggers API operation for AWS Glue.
-//
-// Gets all the triggers associated with a job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetTriggers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers
-func (c *Glue) GetTriggers(input *GetTriggersInput) (*GetTriggersOutput, error) {
-	req, out := c.GetTriggersRequest(input)
-	return out, req.Send()
-}
-
-// GetTriggersWithContext is the same as GetTriggers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTriggers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTriggersWithContext(ctx aws.Context, input *GetTriggersInput, opts ...aws.Option) (*GetTriggersOutput, error) {
-	req, out := c.GetTriggersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTriggersOutput{})
+	return GetTriggersRequest{Request: req, Input: input}
 }
 
 // GetTriggersPages iterates over the pages of a GetTriggers operation,
@@ -5191,10 +3064,10 @@ func (c *Glue) GetTriggersPagesWithContext(ctx aws.Context, input *GetTriggersIn
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetTriggersRequest(inCpy)
+			req := c.GetTriggersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5207,31 +3080,36 @@ func (c *Glue) GetTriggersPagesWithContext(ctx aws.Context, input *GetTriggersIn
 
 const opGetUserDefinedFunction = "GetUserDefinedFunction"
 
-// GetUserDefinedFunctionRequest generates a "aws.Request" representing the
-// client's request for the GetUserDefinedFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetUserDefinedFunctionRequest is a API request type for the GetUserDefinedFunction API operation.
+type GetUserDefinedFunctionRequest struct {
+	*aws.Request
+	Input *GetUserDefinedFunctionInput
+}
+
+// Send marshals and sends the GetUserDefinedFunction API request.
+func (r GetUserDefinedFunctionRequest) Send() (*GetUserDefinedFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUserDefinedFunctionOutput), nil
+}
+
+// GetUserDefinedFunctionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetUserDefinedFunction for more information on using the GetUserDefinedFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a specified function definition from the Data Catalog.
 //
 //    // Example sending a request using the GetUserDefinedFunctionRequest method.
-//    req, resp := client.GetUserDefinedFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetUserDefinedFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunction
-func (c *Glue) GetUserDefinedFunctionRequest(input *GetUserDefinedFunctionInput) (req *aws.Request, output *GetUserDefinedFunctionOutput) {
+func (c *Glue) GetUserDefinedFunctionRequest(input *GetUserDefinedFunctionInput) GetUserDefinedFunctionRequest {
 	op := &aws.Operation{
 		Name:       opGetUserDefinedFunction,
 		HTTPMethod: "POST",
@@ -5242,84 +3120,42 @@ func (c *Glue) GetUserDefinedFunctionRequest(input *GetUserDefinedFunctionInput)
 		input = &GetUserDefinedFunctionInput{}
 	}
 
-	output = &GetUserDefinedFunctionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetUserDefinedFunction API operation for AWS Glue.
-//
-// Retrieves a specified function definition from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetUserDefinedFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunction
-func (c *Glue) GetUserDefinedFunction(input *GetUserDefinedFunctionInput) (*GetUserDefinedFunctionOutput, error) {
-	req, out := c.GetUserDefinedFunctionRequest(input)
-	return out, req.Send()
-}
-
-// GetUserDefinedFunctionWithContext is the same as GetUserDefinedFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetUserDefinedFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetUserDefinedFunctionWithContext(ctx aws.Context, input *GetUserDefinedFunctionInput, opts ...aws.Option) (*GetUserDefinedFunctionOutput, error) {
-	req, out := c.GetUserDefinedFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetUserDefinedFunctionOutput{})
+	return GetUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
 const opGetUserDefinedFunctions = "GetUserDefinedFunctions"
 
-// GetUserDefinedFunctionsRequest generates a "aws.Request" representing the
-// client's request for the GetUserDefinedFunctions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetUserDefinedFunctionsRequest is a API request type for the GetUserDefinedFunctions API operation.
+type GetUserDefinedFunctionsRequest struct {
+	*aws.Request
+	Input *GetUserDefinedFunctionsInput
+}
+
+// Send marshals and sends the GetUserDefinedFunctions API request.
+func (r GetUserDefinedFunctionsRequest) Send() (*GetUserDefinedFunctionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUserDefinedFunctionsOutput), nil
+}
+
+// GetUserDefinedFunctionsRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetUserDefinedFunctions for more information on using the GetUserDefinedFunctions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a multiple function definitions from the Data Catalog.
 //
 //    // Example sending a request using the GetUserDefinedFunctionsRequest method.
-//    req, resp := client.GetUserDefinedFunctionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetUserDefinedFunctionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunctions
-func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInput) (req *aws.Request, output *GetUserDefinedFunctionsOutput) {
+func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInput) GetUserDefinedFunctionsRequest {
 	op := &aws.Operation{
 		Name:       opGetUserDefinedFunctions,
 		HTTPMethod: "POST",
@@ -5336,55 +3172,8 @@ func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInpu
 		input = &GetUserDefinedFunctionsInput{}
 	}
 
-	output = &GetUserDefinedFunctionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetUserDefinedFunctions API operation for AWS Glue.
-//
-// Retrieves a multiple function definitions from the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation GetUserDefinedFunctions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunctions
-func (c *Glue) GetUserDefinedFunctions(input *GetUserDefinedFunctionsInput) (*GetUserDefinedFunctionsOutput, error) {
-	req, out := c.GetUserDefinedFunctionsRequest(input)
-	return out, req.Send()
-}
-
-// GetUserDefinedFunctionsWithContext is the same as GetUserDefinedFunctions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetUserDefinedFunctions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetUserDefinedFunctionsWithContext(ctx aws.Context, input *GetUserDefinedFunctionsInput, opts ...aws.Option) (*GetUserDefinedFunctionsOutput, error) {
-	req, out := c.GetUserDefinedFunctionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetUserDefinedFunctionsOutput{})
+	return GetUserDefinedFunctionsRequest{Request: req, Input: input}
 }
 
 // GetUserDefinedFunctionsPages iterates over the pages of a GetUserDefinedFunctions operation,
@@ -5423,10 +3212,10 @@ func (c *Glue) GetUserDefinedFunctionsPagesWithContext(ctx aws.Context, input *G
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetUserDefinedFunctionsRequest(inCpy)
+			req := c.GetUserDefinedFunctionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5439,31 +3228,36 @@ func (c *Glue) GetUserDefinedFunctionsPagesWithContext(ctx aws.Context, input *G
 
 const opImportCatalogToGlue = "ImportCatalogToGlue"
 
-// ImportCatalogToGlueRequest generates a "aws.Request" representing the
-// client's request for the ImportCatalogToGlue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ImportCatalogToGlueRequest is a API request type for the ImportCatalogToGlue API operation.
+type ImportCatalogToGlueRequest struct {
+	*aws.Request
+	Input *ImportCatalogToGlueInput
+}
+
+// Send marshals and sends the ImportCatalogToGlue API request.
+func (r ImportCatalogToGlueRequest) Send() (*ImportCatalogToGlueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportCatalogToGlueOutput), nil
+}
+
+// ImportCatalogToGlueRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ImportCatalogToGlue for more information on using the ImportCatalogToGlue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Imports an existing Athena Data Catalog to AWS Glue
 //
 //    // Example sending a request using the ImportCatalogToGlueRequest method.
-//    req, resp := client.ImportCatalogToGlueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ImportCatalogToGlueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportCatalogToGlue
-func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) (req *aws.Request, output *ImportCatalogToGlueOutput) {
+func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) ImportCatalogToGlueRequest {
 	op := &aws.Operation{
 		Name:       opImportCatalogToGlue,
 		HTTPMethod: "POST",
@@ -5474,78 +3268,42 @@ func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) (req 
 		input = &ImportCatalogToGlueInput{}
 	}
 
-	output = &ImportCatalogToGlueOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ImportCatalogToGlue API operation for AWS Glue.
-//
-// Imports an existing Athena Data Catalog to AWS Glue
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation ImportCatalogToGlue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportCatalogToGlue
-func (c *Glue) ImportCatalogToGlue(input *ImportCatalogToGlueInput) (*ImportCatalogToGlueOutput, error) {
-	req, out := c.ImportCatalogToGlueRequest(input)
-	return out, req.Send()
-}
-
-// ImportCatalogToGlueWithContext is the same as ImportCatalogToGlue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ImportCatalogToGlue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) ImportCatalogToGlueWithContext(ctx aws.Context, input *ImportCatalogToGlueInput, opts ...aws.Option) (*ImportCatalogToGlueOutput, error) {
-	req, out := c.ImportCatalogToGlueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ImportCatalogToGlueOutput{})
+	return ImportCatalogToGlueRequest{Request: req, Input: input}
 }
 
 const opResetJobBookmark = "ResetJobBookmark"
 
-// ResetJobBookmarkRequest generates a "aws.Request" representing the
-// client's request for the ResetJobBookmark operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResetJobBookmarkRequest is a API request type for the ResetJobBookmark API operation.
+type ResetJobBookmarkRequest struct {
+	*aws.Request
+	Input *ResetJobBookmarkInput
+}
+
+// Send marshals and sends the ResetJobBookmark API request.
+func (r ResetJobBookmarkRequest) Send() (*ResetJobBookmarkOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetJobBookmarkOutput), nil
+}
+
+// ResetJobBookmarkRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetJobBookmark for more information on using the ResetJobBookmark
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Resets a bookmark entry.
 //
 //    // Example sending a request using the ResetJobBookmarkRequest method.
-//    req, resp := client.ResetJobBookmarkRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResetJobBookmarkRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResetJobBookmark
-func (c *Glue) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) (req *aws.Request, output *ResetJobBookmarkOutput) {
+func (c *Glue) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) ResetJobBookmarkRequest {
 	op := &aws.Operation{
 		Name:       opResetJobBookmark,
 		HTTPMethod: "POST",
@@ -5556,84 +3314,43 @@ func (c *Glue) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) (req *aws.R
 		input = &ResetJobBookmarkInput{}
 	}
 
-	output = &ResetJobBookmarkOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResetJobBookmark API operation for AWS Glue.
-//
-// Resets a bookmark entry.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation ResetJobBookmark for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResetJobBookmark
-func (c *Glue) ResetJobBookmark(input *ResetJobBookmarkInput) (*ResetJobBookmarkOutput, error) {
-	req, out := c.ResetJobBookmarkRequest(input)
-	return out, req.Send()
-}
-
-// ResetJobBookmarkWithContext is the same as ResetJobBookmark with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetJobBookmark for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) ResetJobBookmarkWithContext(ctx aws.Context, input *ResetJobBookmarkInput, opts ...aws.Option) (*ResetJobBookmarkOutput, error) {
-	req, out := c.ResetJobBookmarkRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetJobBookmarkOutput{})
+	return ResetJobBookmarkRequest{Request: req, Input: input}
 }
 
 const opStartCrawler = "StartCrawler"
 
-// StartCrawlerRequest generates a "aws.Request" representing the
-// client's request for the StartCrawler operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartCrawlerRequest is a API request type for the StartCrawler API operation.
+type StartCrawlerRequest struct {
+	*aws.Request
+	Input *StartCrawlerInput
+}
+
+// Send marshals and sends the StartCrawler API request.
+func (r StartCrawlerRequest) Send() (*StartCrawlerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartCrawlerOutput), nil
+}
+
+// StartCrawlerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartCrawler for more information on using the StartCrawler
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts a crawl using the specified Crawler, regardless of what is scheduled.
+// If the Crawler is already running, does nothing.
 //
 //    // Example sending a request using the StartCrawlerRequest method.
-//    req, resp := client.StartCrawlerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartCrawlerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawler
-func (c *Glue) StartCrawlerRequest(input *StartCrawlerInput) (req *aws.Request, output *StartCrawlerOutput) {
+func (c *Glue) StartCrawlerRequest(input *StartCrawlerInput) StartCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opStartCrawler,
 		HTTPMethod: "POST",
@@ -5644,82 +3361,43 @@ func (c *Glue) StartCrawlerRequest(input *StartCrawlerInput) (req *aws.Request, 
 		input = &StartCrawlerInput{}
 	}
 
-	output = &StartCrawlerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartCrawler API operation for AWS Glue.
-//
-// Starts a crawl using the specified Crawler, regardless of what is scheduled.
-// If the Crawler is already running, does nothing.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation StartCrawler for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeCrawlerRunningException "CrawlerRunningException"
-//   The operation cannot be performed because the crawler is already running.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawler
-func (c *Glue) StartCrawler(input *StartCrawlerInput) (*StartCrawlerOutput, error) {
-	req, out := c.StartCrawlerRequest(input)
-	return out, req.Send()
-}
-
-// StartCrawlerWithContext is the same as StartCrawler with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartCrawler for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) StartCrawlerWithContext(ctx aws.Context, input *StartCrawlerInput, opts ...aws.Option) (*StartCrawlerOutput, error) {
-	req, out := c.StartCrawlerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartCrawlerOutput{})
+	return StartCrawlerRequest{Request: req, Input: input}
 }
 
 const opStartCrawlerSchedule = "StartCrawlerSchedule"
 
-// StartCrawlerScheduleRequest generates a "aws.Request" representing the
-// client's request for the StartCrawlerSchedule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartCrawlerScheduleRequest is a API request type for the StartCrawlerSchedule API operation.
+type StartCrawlerScheduleRequest struct {
+	*aws.Request
+	Input *StartCrawlerScheduleInput
+}
+
+// Send marshals and sends the StartCrawlerSchedule API request.
+func (r StartCrawlerScheduleRequest) Send() (*StartCrawlerScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartCrawlerScheduleOutput), nil
+}
+
+// StartCrawlerScheduleRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartCrawlerSchedule for more information on using the StartCrawlerSchedule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Changes the schedule state of the specified crawler to SCHEDULED, unless
+// the crawler is already running or the schedule state is already SCHEDULED.
 //
 //    // Example sending a request using the StartCrawlerScheduleRequest method.
-//    req, resp := client.StartCrawlerScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartCrawlerScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawlerSchedule
-func (c *Glue) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) (req *aws.Request, output *StartCrawlerScheduleOutput) {
+func (c *Glue) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) StartCrawlerScheduleRequest {
 	op := &aws.Operation{
 		Name:       opStartCrawlerSchedule,
 		HTTPMethod: "POST",
@@ -5730,88 +3408,42 @@ func (c *Glue) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) (re
 		input = &StartCrawlerScheduleInput{}
 	}
 
-	output = &StartCrawlerScheduleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartCrawlerSchedule API operation for AWS Glue.
-//
-// Changes the schedule state of the specified crawler to SCHEDULED, unless
-// the crawler is already running or the schedule state is already SCHEDULED.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation StartCrawlerSchedule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeSchedulerRunningException "SchedulerRunningException"
-//   The specified scheduler is already running.
-//
-//   * ErrCodeSchedulerTransitioningException "SchedulerTransitioningException"
-//   The specified scheduler is transitioning.
-//
-//   * ErrCodeNoScheduleException "NoScheduleException"
-//   There is no applicable schedule.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawlerSchedule
-func (c *Glue) StartCrawlerSchedule(input *StartCrawlerScheduleInput) (*StartCrawlerScheduleOutput, error) {
-	req, out := c.StartCrawlerScheduleRequest(input)
-	return out, req.Send()
-}
-
-// StartCrawlerScheduleWithContext is the same as StartCrawlerSchedule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartCrawlerSchedule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) StartCrawlerScheduleWithContext(ctx aws.Context, input *StartCrawlerScheduleInput, opts ...aws.Option) (*StartCrawlerScheduleOutput, error) {
-	req, out := c.StartCrawlerScheduleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartCrawlerScheduleOutput{})
+	return StartCrawlerScheduleRequest{Request: req, Input: input}
 }
 
 const opStartJobRun = "StartJobRun"
 
-// StartJobRunRequest generates a "aws.Request" representing the
-// client's request for the StartJobRun operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartJobRunRequest is a API request type for the StartJobRun API operation.
+type StartJobRunRequest struct {
+	*aws.Request
+	Input *StartJobRunInput
+}
+
+// Send marshals and sends the StartJobRun API request.
+func (r StartJobRunRequest) Send() (*StartJobRunOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartJobRunOutput), nil
+}
+
+// StartJobRunRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartJobRun for more information on using the StartJobRun
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Runs a job.
 //
 //    // Example sending a request using the StartJobRunRequest method.
-//    req, resp := client.StartJobRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartJobRunRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRun
-func (c *Glue) StartJobRunRequest(input *StartJobRunInput) (req *aws.Request, output *StartJobRunOutput) {
+func (c *Glue) StartJobRunRequest(input *StartJobRunInput) StartJobRunRequest {
 	op := &aws.Operation{
 		Name:       opStartJobRun,
 		HTTPMethod: "POST",
@@ -5822,90 +3454,42 @@ func (c *Glue) StartJobRunRequest(input *StartJobRunInput) (req *aws.Request, ou
 		input = &StartJobRunInput{}
 	}
 
-	output = &StartJobRunOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartJobRun API operation for AWS Glue.
-//
-// Runs a job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation StartJobRun for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-//   * ErrCodeConcurrentRunsExceededException "ConcurrentRunsExceededException"
-//   Too many jobs are being run concurrently.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRun
-func (c *Glue) StartJobRun(input *StartJobRunInput) (*StartJobRunOutput, error) {
-	req, out := c.StartJobRunRequest(input)
-	return out, req.Send()
-}
-
-// StartJobRunWithContext is the same as StartJobRun with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartJobRun for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) StartJobRunWithContext(ctx aws.Context, input *StartJobRunInput, opts ...aws.Option) (*StartJobRunOutput, error) {
-	req, out := c.StartJobRunRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartJobRunOutput{})
+	return StartJobRunRequest{Request: req, Input: input}
 }
 
 const opStartTrigger = "StartTrigger"
 
-// StartTriggerRequest generates a "aws.Request" representing the
-// client's request for the StartTrigger operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartTriggerRequest is a API request type for the StartTrigger API operation.
+type StartTriggerRequest struct {
+	*aws.Request
+	Input *StartTriggerInput
+}
+
+// Send marshals and sends the StartTrigger API request.
+func (r StartTriggerRequest) Send() (*StartTriggerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartTriggerOutput), nil
+}
+
+// StartTriggerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartTrigger for more information on using the StartTrigger
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts an existing trigger.
 //
 //    // Example sending a request using the StartTriggerRequest method.
-//    req, resp := client.StartTriggerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartTriggerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartTrigger
-func (c *Glue) StartTriggerRequest(input *StartTriggerInput) (req *aws.Request, output *StartTriggerOutput) {
+func (c *Glue) StartTriggerRequest(input *StartTriggerInput) StartTriggerRequest {
 	op := &aws.Operation{
 		Name:       opStartTrigger,
 		HTTPMethod: "POST",
@@ -5916,90 +3500,42 @@ func (c *Glue) StartTriggerRequest(input *StartTriggerInput) (req *aws.Request, 
 		input = &StartTriggerInput{}
 	}
 
-	output = &StartTriggerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartTrigger API operation for AWS Glue.
-//
-// Starts an existing trigger.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation StartTrigger for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeResourceNumberLimitExceededException "ResourceNumberLimitExceededException"
-//   A resource numerical limit was exceeded.
-//
-//   * ErrCodeConcurrentRunsExceededException "ConcurrentRunsExceededException"
-//   Too many jobs are being run concurrently.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartTrigger
-func (c *Glue) StartTrigger(input *StartTriggerInput) (*StartTriggerOutput, error) {
-	req, out := c.StartTriggerRequest(input)
-	return out, req.Send()
-}
-
-// StartTriggerWithContext is the same as StartTrigger with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartTrigger for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) StartTriggerWithContext(ctx aws.Context, input *StartTriggerInput, opts ...aws.Option) (*StartTriggerOutput, error) {
-	req, out := c.StartTriggerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartTriggerOutput{})
+	return StartTriggerRequest{Request: req, Input: input}
 }
 
 const opStopCrawler = "StopCrawler"
 
-// StopCrawlerRequest generates a "aws.Request" representing the
-// client's request for the StopCrawler operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopCrawlerRequest is a API request type for the StopCrawler API operation.
+type StopCrawlerRequest struct {
+	*aws.Request
+	Input *StopCrawlerInput
+}
+
+// Send marshals and sends the StopCrawler API request.
+func (r StopCrawlerRequest) Send() (*StopCrawlerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopCrawlerOutput), nil
+}
+
+// StopCrawlerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopCrawler for more information on using the StopCrawler
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If the specified Crawler is running, stops the crawl.
 //
 //    // Example sending a request using the StopCrawlerRequest method.
-//    req, resp := client.StopCrawlerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopCrawlerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawler
-func (c *Glue) StopCrawlerRequest(input *StopCrawlerInput) (req *aws.Request, output *StopCrawlerOutput) {
+func (c *Glue) StopCrawlerRequest(input *StopCrawlerInput) StopCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opStopCrawler,
 		HTTPMethod: "POST",
@@ -6010,84 +3546,43 @@ func (c *Glue) StopCrawlerRequest(input *StopCrawlerInput) (req *aws.Request, ou
 		input = &StopCrawlerInput{}
 	}
 
-	output = &StopCrawlerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopCrawler API operation for AWS Glue.
-//
-// If the specified Crawler is running, stops the crawl.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation StopCrawler for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeCrawlerNotRunningException "CrawlerNotRunningException"
-//   The specified crawler is not running.
-//
-//   * ErrCodeCrawlerStoppingException "CrawlerStoppingException"
-//   The specified crawler is stopping.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawler
-func (c *Glue) StopCrawler(input *StopCrawlerInput) (*StopCrawlerOutput, error) {
-	req, out := c.StopCrawlerRequest(input)
-	return out, req.Send()
-}
-
-// StopCrawlerWithContext is the same as StopCrawler with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopCrawler for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) StopCrawlerWithContext(ctx aws.Context, input *StopCrawlerInput, opts ...aws.Option) (*StopCrawlerOutput, error) {
-	req, out := c.StopCrawlerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopCrawlerOutput{})
+	return StopCrawlerRequest{Request: req, Input: input}
 }
 
 const opStopCrawlerSchedule = "StopCrawlerSchedule"
 
-// StopCrawlerScheduleRequest generates a "aws.Request" representing the
-// client's request for the StopCrawlerSchedule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopCrawlerScheduleRequest is a API request type for the StopCrawlerSchedule API operation.
+type StopCrawlerScheduleRequest struct {
+	*aws.Request
+	Input *StopCrawlerScheduleInput
+}
+
+// Send marshals and sends the StopCrawlerSchedule API request.
+func (r StopCrawlerScheduleRequest) Send() (*StopCrawlerScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopCrawlerScheduleOutput), nil
+}
+
+// StopCrawlerScheduleRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopCrawlerSchedule for more information on using the StopCrawlerSchedule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the schedule state of the specified crawler to NOT_SCHEDULED, but does
+// not stop the crawler if it is already running.
 //
 //    // Example sending a request using the StopCrawlerScheduleRequest method.
-//    req, resp := client.StopCrawlerScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopCrawlerScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerSchedule
-func (c *Glue) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) (req *aws.Request, output *StopCrawlerScheduleOutput) {
+func (c *Glue) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) StopCrawlerScheduleRequest {
 	op := &aws.Operation{
 		Name:       opStopCrawlerSchedule,
 		HTTPMethod: "POST",
@@ -6098,85 +3593,42 @@ func (c *Glue) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) (req 
 		input = &StopCrawlerScheduleInput{}
 	}
 
-	output = &StopCrawlerScheduleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopCrawlerSchedule API operation for AWS Glue.
-//
-// Sets the schedule state of the specified crawler to NOT_SCHEDULED, but does
-// not stop the crawler if it is already running.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation StopCrawlerSchedule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeSchedulerNotRunningException "SchedulerNotRunningException"
-//   The specified scheduler is not running.
-//
-//   * ErrCodeSchedulerTransitioningException "SchedulerTransitioningException"
-//   The specified scheduler is transitioning.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerSchedule
-func (c *Glue) StopCrawlerSchedule(input *StopCrawlerScheduleInput) (*StopCrawlerScheduleOutput, error) {
-	req, out := c.StopCrawlerScheduleRequest(input)
-	return out, req.Send()
-}
-
-// StopCrawlerScheduleWithContext is the same as StopCrawlerSchedule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopCrawlerSchedule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) StopCrawlerScheduleWithContext(ctx aws.Context, input *StopCrawlerScheduleInput, opts ...aws.Option) (*StopCrawlerScheduleOutput, error) {
-	req, out := c.StopCrawlerScheduleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopCrawlerScheduleOutput{})
+	return StopCrawlerScheduleRequest{Request: req, Input: input}
 }
 
 const opStopTrigger = "StopTrigger"
 
-// StopTriggerRequest generates a "aws.Request" representing the
-// client's request for the StopTrigger operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopTriggerRequest is a API request type for the StopTrigger API operation.
+type StopTriggerRequest struct {
+	*aws.Request
+	Input *StopTriggerInput
+}
+
+// Send marshals and sends the StopTrigger API request.
+func (r StopTriggerRequest) Send() (*StopTriggerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopTriggerOutput), nil
+}
+
+// StopTriggerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopTrigger for more information on using the StopTrigger
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops a specified trigger.
 //
 //    // Example sending a request using the StopTriggerRequest method.
-//    req, resp := client.StopTriggerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopTriggerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopTrigger
-func (c *Glue) StopTriggerRequest(input *StopTriggerInput) (req *aws.Request, output *StopTriggerOutput) {
+func (c *Glue) StopTriggerRequest(input *StopTriggerInput) StopTriggerRequest {
 	op := &aws.Operation{
 		Name:       opStopTrigger,
 		HTTPMethod: "POST",
@@ -6187,84 +3639,42 @@ func (c *Glue) StopTriggerRequest(input *StopTriggerInput) (req *aws.Request, ou
 		input = &StopTriggerInput{}
 	}
 
-	output = &StopTriggerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopTrigger API operation for AWS Glue.
-//
-// Stops a specified trigger.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation StopTrigger for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopTrigger
-func (c *Glue) StopTrigger(input *StopTriggerInput) (*StopTriggerOutput, error) {
-	req, out := c.StopTriggerRequest(input)
-	return out, req.Send()
-}
-
-// StopTriggerWithContext is the same as StopTrigger with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopTrigger for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) StopTriggerWithContext(ctx aws.Context, input *StopTriggerInput, opts ...aws.Option) (*StopTriggerOutput, error) {
-	req, out := c.StopTriggerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopTriggerOutput{})
+	return StopTriggerRequest{Request: req, Input: input}
 }
 
 const opUpdateClassifier = "UpdateClassifier"
 
-// UpdateClassifierRequest generates a "aws.Request" representing the
-// client's request for the UpdateClassifier operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateClassifierRequest is a API request type for the UpdateClassifier API operation.
+type UpdateClassifierRequest struct {
+	*aws.Request
+	Input *UpdateClassifierInput
+}
+
+// Send marshals and sends the UpdateClassifier API request.
+func (r UpdateClassifierRequest) Send() (*UpdateClassifierOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateClassifierOutput), nil
+}
+
+// UpdateClassifierRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateClassifier for more information on using the UpdateClassifier
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing Classifier.
 //
 //    // Example sending a request using the UpdateClassifierRequest method.
-//    req, resp := client.UpdateClassifierRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateClassifierRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifier
-func (c *Glue) UpdateClassifierRequest(input *UpdateClassifierInput) (req *aws.Request, output *UpdateClassifierOutput) {
+func (c *Glue) UpdateClassifierRequest(input *UpdateClassifierInput) UpdateClassifierRequest {
 	op := &aws.Operation{
 		Name:       opUpdateClassifier,
 		HTTPMethod: "POST",
@@ -6275,84 +3685,42 @@ func (c *Glue) UpdateClassifierRequest(input *UpdateClassifierInput) (req *aws.R
 		input = &UpdateClassifierInput{}
 	}
 
-	output = &UpdateClassifierOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateClassifier API operation for AWS Glue.
-//
-// Modifies an existing Classifier.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateClassifier for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeVersionMismatchException "VersionMismatchException"
-//   There was a version conflict.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifier
-func (c *Glue) UpdateClassifier(input *UpdateClassifierInput) (*UpdateClassifierOutput, error) {
-	req, out := c.UpdateClassifierRequest(input)
-	return out, req.Send()
-}
-
-// UpdateClassifierWithContext is the same as UpdateClassifier with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateClassifier for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateClassifierWithContext(ctx aws.Context, input *UpdateClassifierInput, opts ...aws.Option) (*UpdateClassifierOutput, error) {
-	req, out := c.UpdateClassifierRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateClassifierOutput{})
+	return UpdateClassifierRequest{Request: req, Input: input}
 }
 
 const opUpdateConnection = "UpdateConnection"
 
-// UpdateConnectionRequest generates a "aws.Request" representing the
-// client's request for the UpdateConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateConnectionRequest is a API request type for the UpdateConnection API operation.
+type UpdateConnectionRequest struct {
+	*aws.Request
+	Input *UpdateConnectionInput
+}
+
+// Send marshals and sends the UpdateConnection API request.
+func (r UpdateConnectionRequest) Send() (*UpdateConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateConnectionOutput), nil
+}
+
+// UpdateConnectionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateConnection for more information on using the UpdateConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a connection definition in the Data Catalog.
 //
 //    // Example sending a request using the UpdateConnectionRequest method.
-//    req, resp := client.UpdateConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateConnection
-func (c *Glue) UpdateConnectionRequest(input *UpdateConnectionInput) (req *aws.Request, output *UpdateConnectionOutput) {
+func (c *Glue) UpdateConnectionRequest(input *UpdateConnectionInput) UpdateConnectionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConnection,
 		HTTPMethod: "POST",
@@ -6363,81 +3731,43 @@ func (c *Glue) UpdateConnectionRequest(input *UpdateConnectionInput) (req *aws.R
 		input = &UpdateConnectionInput{}
 	}
 
-	output = &UpdateConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateConnection API operation for AWS Glue.
-//
-// Updates a connection definition in the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateConnection
-func (c *Glue) UpdateConnection(input *UpdateConnectionInput) (*UpdateConnectionOutput, error) {
-	req, out := c.UpdateConnectionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateConnectionWithContext is the same as UpdateConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateConnectionWithContext(ctx aws.Context, input *UpdateConnectionInput, opts ...aws.Option) (*UpdateConnectionOutput, error) {
-	req, out := c.UpdateConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateConnectionOutput{})
+	return UpdateConnectionRequest{Request: req, Input: input}
 }
 
 const opUpdateCrawler = "UpdateCrawler"
 
-// UpdateCrawlerRequest generates a "aws.Request" representing the
-// client's request for the UpdateCrawler operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateCrawlerRequest is a API request type for the UpdateCrawler API operation.
+type UpdateCrawlerRequest struct {
+	*aws.Request
+	Input *UpdateCrawlerInput
+}
+
+// Send marshals and sends the UpdateCrawler API request.
+func (r UpdateCrawlerRequest) Send() (*UpdateCrawlerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateCrawlerOutput), nil
+}
+
+// UpdateCrawlerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateCrawler for more information on using the UpdateCrawler
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a Crawler. If a Crawler is running, you must stop it using StopCrawler
+// before updating it.
 //
 //    // Example sending a request using the UpdateCrawlerRequest method.
-//    req, resp := client.UpdateCrawlerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateCrawlerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler
-func (c *Glue) UpdateCrawlerRequest(input *UpdateCrawlerInput) (req *aws.Request, output *UpdateCrawlerOutput) {
+func (c *Glue) UpdateCrawlerRequest(input *UpdateCrawlerInput) UpdateCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCrawler,
 		HTTPMethod: "POST",
@@ -6448,88 +3778,42 @@ func (c *Glue) UpdateCrawlerRequest(input *UpdateCrawlerInput) (req *aws.Request
 		input = &UpdateCrawlerInput{}
 	}
 
-	output = &UpdateCrawlerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateCrawler API operation for AWS Glue.
-//
-// Updates a Crawler. If a Crawler is running, you must stop it using StopCrawler
-// before updating it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateCrawler for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeVersionMismatchException "VersionMismatchException"
-//   There was a version conflict.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeCrawlerRunningException "CrawlerRunningException"
-//   The operation cannot be performed because the crawler is already running.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler
-func (c *Glue) UpdateCrawler(input *UpdateCrawlerInput) (*UpdateCrawlerOutput, error) {
-	req, out := c.UpdateCrawlerRequest(input)
-	return out, req.Send()
-}
-
-// UpdateCrawlerWithContext is the same as UpdateCrawler with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateCrawler for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateCrawlerWithContext(ctx aws.Context, input *UpdateCrawlerInput, opts ...aws.Option) (*UpdateCrawlerOutput, error) {
-	req, out := c.UpdateCrawlerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateCrawlerOutput{})
+	return UpdateCrawlerRequest{Request: req, Input: input}
 }
 
 const opUpdateCrawlerSchedule = "UpdateCrawlerSchedule"
 
-// UpdateCrawlerScheduleRequest generates a "aws.Request" representing the
-// client's request for the UpdateCrawlerSchedule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateCrawlerScheduleRequest is a API request type for the UpdateCrawlerSchedule API operation.
+type UpdateCrawlerScheduleRequest struct {
+	*aws.Request
+	Input *UpdateCrawlerScheduleInput
+}
+
+// Send marshals and sends the UpdateCrawlerSchedule API request.
+func (r UpdateCrawlerScheduleRequest) Send() (*UpdateCrawlerScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateCrawlerScheduleOutput), nil
+}
+
+// UpdateCrawlerScheduleRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateCrawlerSchedule for more information on using the UpdateCrawlerSchedule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the schedule of a crawler using a Cron expression.
 //
 //    // Example sending a request using the UpdateCrawlerScheduleRequest method.
-//    req, resp := client.UpdateCrawlerScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateCrawlerScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerSchedule
-func (c *Glue) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) (req *aws.Request, output *UpdateCrawlerScheduleOutput) {
+func (c *Glue) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) UpdateCrawlerScheduleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCrawlerSchedule,
 		HTTPMethod: "POST",
@@ -6540,87 +3824,42 @@ func (c *Glue) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) (
 		input = &UpdateCrawlerScheduleInput{}
 	}
 
-	output = &UpdateCrawlerScheduleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateCrawlerSchedule API operation for AWS Glue.
-//
-// Updates the schedule of a crawler using a Cron expression.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateCrawlerSchedule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeVersionMismatchException "VersionMismatchException"
-//   There was a version conflict.
-//
-//   * ErrCodeSchedulerTransitioningException "SchedulerTransitioningException"
-//   The specified scheduler is transitioning.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerSchedule
-func (c *Glue) UpdateCrawlerSchedule(input *UpdateCrawlerScheduleInput) (*UpdateCrawlerScheduleOutput, error) {
-	req, out := c.UpdateCrawlerScheduleRequest(input)
-	return out, req.Send()
-}
-
-// UpdateCrawlerScheduleWithContext is the same as UpdateCrawlerSchedule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateCrawlerSchedule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateCrawlerScheduleWithContext(ctx aws.Context, input *UpdateCrawlerScheduleInput, opts ...aws.Option) (*UpdateCrawlerScheduleOutput, error) {
-	req, out := c.UpdateCrawlerScheduleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateCrawlerScheduleOutput{})
+	return UpdateCrawlerScheduleRequest{Request: req, Input: input}
 }
 
 const opUpdateDatabase = "UpdateDatabase"
 
-// UpdateDatabaseRequest generates a "aws.Request" representing the
-// client's request for the UpdateDatabase operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDatabaseRequest is a API request type for the UpdateDatabase API operation.
+type UpdateDatabaseRequest struct {
+	*aws.Request
+	Input *UpdateDatabaseInput
+}
+
+// Send marshals and sends the UpdateDatabase API request.
+func (r UpdateDatabaseRequest) Send() (*UpdateDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDatabaseOutput), nil
+}
+
+// UpdateDatabaseRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDatabase for more information on using the UpdateDatabase
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing database definition in a Data Catalog.
 //
 //    // Example sending a request using the UpdateDatabaseRequest method.
-//    req, resp := client.UpdateDatabaseRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDatabase
-func (c *Glue) UpdateDatabaseRequest(input *UpdateDatabaseInput) (req *aws.Request, output *UpdateDatabaseOutput) {
+func (c *Glue) UpdateDatabaseRequest(input *UpdateDatabaseInput) UpdateDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDatabase,
 		HTTPMethod: "POST",
@@ -6631,84 +3870,42 @@ func (c *Glue) UpdateDatabaseRequest(input *UpdateDatabaseInput) (req *aws.Reque
 		input = &UpdateDatabaseInput{}
 	}
 
-	output = &UpdateDatabaseOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDatabase API operation for AWS Glue.
-//
-// Updates an existing database definition in a Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateDatabase for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDatabase
-func (c *Glue) UpdateDatabase(input *UpdateDatabaseInput) (*UpdateDatabaseOutput, error) {
-	req, out := c.UpdateDatabaseRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDatabaseWithContext is the same as UpdateDatabase with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDatabase for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateDatabaseWithContext(ctx aws.Context, input *UpdateDatabaseInput, opts ...aws.Option) (*UpdateDatabaseOutput, error) {
-	req, out := c.UpdateDatabaseRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDatabaseOutput{})
+	return UpdateDatabaseRequest{Request: req, Input: input}
 }
 
 const opUpdateDevEndpoint = "UpdateDevEndpoint"
 
-// UpdateDevEndpointRequest generates a "aws.Request" representing the
-// client's request for the UpdateDevEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDevEndpointRequest is a API request type for the UpdateDevEndpoint API operation.
+type UpdateDevEndpointRequest struct {
+	*aws.Request
+	Input *UpdateDevEndpointInput
+}
+
+// Send marshals and sends the UpdateDevEndpoint API request.
+func (r UpdateDevEndpointRequest) Send() (*UpdateDevEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDevEndpointOutput), nil
+}
+
+// UpdateDevEndpointRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDevEndpoint for more information on using the UpdateDevEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a specified DevEndpoint.
 //
 //    // Example sending a request using the UpdateDevEndpointRequest method.
-//    req, resp := client.UpdateDevEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDevEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpoint
-func (c *Glue) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) (req *aws.Request, output *UpdateDevEndpointOutput) {
+func (c *Glue) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) UpdateDevEndpointRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDevEndpoint,
 		HTTPMethod: "POST",
@@ -6719,87 +3916,42 @@ func (c *Glue) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) (req *aws
 		input = &UpdateDevEndpointInput{}
 	}
 
-	output = &UpdateDevEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDevEndpoint API operation for AWS Glue.
-//
-// Updates a specified DevEndpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateDevEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   A value could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpoint
-func (c *Glue) UpdateDevEndpoint(input *UpdateDevEndpointInput) (*UpdateDevEndpointOutput, error) {
-	req, out := c.UpdateDevEndpointRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDevEndpointWithContext is the same as UpdateDevEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDevEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateDevEndpointWithContext(ctx aws.Context, input *UpdateDevEndpointInput, opts ...aws.Option) (*UpdateDevEndpointOutput, error) {
-	req, out := c.UpdateDevEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDevEndpointOutput{})
+	return UpdateDevEndpointRequest{Request: req, Input: input}
 }
 
 const opUpdateJob = "UpdateJob"
 
-// UpdateJobRequest generates a "aws.Request" representing the
-// client's request for the UpdateJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateJobRequest is a API request type for the UpdateJob API operation.
+type UpdateJobRequest struct {
+	*aws.Request
+	Input *UpdateJobInput
+}
+
+// Send marshals and sends the UpdateJob API request.
+func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateJobOutput), nil
+}
+
+// UpdateJobRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateJob for more information on using the UpdateJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing job definition.
 //
 //    // Example sending a request using the UpdateJobRequest method.
-//    req, resp := client.UpdateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJob
-func (c *Glue) UpdateJobRequest(input *UpdateJobInput) (req *aws.Request, output *UpdateJobOutput) {
+func (c *Glue) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJob,
 		HTTPMethod: "POST",
@@ -6810,84 +3962,42 @@ func (c *Glue) UpdateJobRequest(input *UpdateJobInput) (req *aws.Request, output
 		input = &UpdateJobInput{}
 	}
 
-	output = &UpdateJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateJob API operation for AWS Glue.
-//
-// Updates an existing job definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJob
-func (c *Glue) UpdateJob(input *UpdateJobInput) (*UpdateJobOutput, error) {
-	req, out := c.UpdateJobRequest(input)
-	return out, req.Send()
-}
-
-// UpdateJobWithContext is the same as UpdateJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateJobWithContext(ctx aws.Context, input *UpdateJobInput, opts ...aws.Option) (*UpdateJobOutput, error) {
-	req, out := c.UpdateJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateJobOutput{})
+	return UpdateJobRequest{Request: req, Input: input}
 }
 
 const opUpdatePartition = "UpdatePartition"
 
-// UpdatePartitionRequest generates a "aws.Request" representing the
-// client's request for the UpdatePartition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdatePartitionRequest is a API request type for the UpdatePartition API operation.
+type UpdatePartitionRequest struct {
+	*aws.Request
+	Input *UpdatePartitionInput
+}
+
+// Send marshals and sends the UpdatePartition API request.
+func (r UpdatePartitionRequest) Send() (*UpdatePartitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePartitionOutput), nil
+}
+
+// UpdatePartitionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdatePartition for more information on using the UpdatePartition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a partition.
 //
 //    // Example sending a request using the UpdatePartitionRequest method.
-//    req, resp := client.UpdatePartitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdatePartitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartition
-func (c *Glue) UpdatePartitionRequest(input *UpdatePartitionInput) (req *aws.Request, output *UpdatePartitionOutput) {
+func (c *Glue) UpdatePartitionRequest(input *UpdatePartitionInput) UpdatePartitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePartition,
 		HTTPMethod: "POST",
@@ -6898,84 +4008,42 @@ func (c *Glue) UpdatePartitionRequest(input *UpdatePartitionInput) (req *aws.Req
 		input = &UpdatePartitionInput{}
 	}
 
-	output = &UpdatePartitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdatePartition API operation for AWS Glue.
-//
-// Updates a partition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdatePartition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartition
-func (c *Glue) UpdatePartition(input *UpdatePartitionInput) (*UpdatePartitionOutput, error) {
-	req, out := c.UpdatePartitionRequest(input)
-	return out, req.Send()
-}
-
-// UpdatePartitionWithContext is the same as UpdatePartition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdatePartition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdatePartitionWithContext(ctx aws.Context, input *UpdatePartitionInput, opts ...aws.Option) (*UpdatePartitionOutput, error) {
-	req, out := c.UpdatePartitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdatePartitionOutput{})
+	return UpdatePartitionRequest{Request: req, Input: input}
 }
 
 const opUpdateTable = "UpdateTable"
 
-// UpdateTableRequest generates a "aws.Request" representing the
-// client's request for the UpdateTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateTableRequest is a API request type for the UpdateTable API operation.
+type UpdateTableRequest struct {
+	*aws.Request
+	Input *UpdateTableInput
+}
+
+// Send marshals and sends the UpdateTable API request.
+func (r UpdateTableRequest) Send() (*UpdateTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTableOutput), nil
+}
+
+// UpdateTableRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTable for more information on using the UpdateTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a metadata table in the Data Catalog.
 //
 //    // Example sending a request using the UpdateTableRequest method.
-//    req, resp := client.UpdateTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable
-func (c *Glue) UpdateTableRequest(input *UpdateTableInput) (req *aws.Request, output *UpdateTableOutput) {
+func (c *Glue) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTable,
 		HTTPMethod: "POST",
@@ -6986,87 +4054,42 @@ func (c *Glue) UpdateTableRequest(input *UpdateTableInput) (req *aws.Request, ou
 		input = &UpdateTableInput{}
 	}
 
-	output = &UpdateTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateTable API operation for AWS Glue.
-//
-// Updates a metadata table in the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Two processes are trying to modify a resource simultaneously.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable
-func (c *Glue) UpdateTable(input *UpdateTableInput) (*UpdateTableOutput, error) {
-	req, out := c.UpdateTableRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTableWithContext is the same as UpdateTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInput, opts ...aws.Option) (*UpdateTableOutput, error) {
-	req, out := c.UpdateTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateTableOutput{})
+	return UpdateTableRequest{Request: req, Input: input}
 }
 
 const opUpdateTrigger = "UpdateTrigger"
 
-// UpdateTriggerRequest generates a "aws.Request" representing the
-// client's request for the UpdateTrigger operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateTriggerRequest is a API request type for the UpdateTrigger API operation.
+type UpdateTriggerRequest struct {
+	*aws.Request
+	Input *UpdateTriggerInput
+}
+
+// Send marshals and sends the UpdateTrigger API request.
+func (r UpdateTriggerRequest) Send() (*UpdateTriggerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTriggerOutput), nil
+}
+
+// UpdateTriggerRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTrigger for more information on using the UpdateTrigger
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a trigger definition.
 //
 //    // Example sending a request using the UpdateTriggerRequest method.
-//    req, resp := client.UpdateTriggerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateTriggerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger
-func (c *Glue) UpdateTriggerRequest(input *UpdateTriggerInput) (req *aws.Request, output *UpdateTriggerOutput) {
+func (c *Glue) UpdateTriggerRequest(input *UpdateTriggerInput) UpdateTriggerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTrigger,
 		HTTPMethod: "POST",
@@ -7077,84 +4100,42 @@ func (c *Glue) UpdateTriggerRequest(input *UpdateTriggerInput) (req *aws.Request
 		input = &UpdateTriggerInput{}
 	}
 
-	output = &UpdateTriggerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateTrigger API operation for AWS Glue.
-//
-// Updates a trigger definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateTrigger for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger
-func (c *Glue) UpdateTrigger(input *UpdateTriggerInput) (*UpdateTriggerOutput, error) {
-	req, out := c.UpdateTriggerRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTriggerWithContext is the same as UpdateTrigger with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTrigger for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateTriggerWithContext(ctx aws.Context, input *UpdateTriggerInput, opts ...aws.Option) (*UpdateTriggerOutput, error) {
-	req, out := c.UpdateTriggerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateTriggerOutput{})
+	return UpdateTriggerRequest{Request: req, Input: input}
 }
 
 const opUpdateUserDefinedFunction = "UpdateUserDefinedFunction"
 
-// UpdateUserDefinedFunctionRequest generates a "aws.Request" representing the
-// client's request for the UpdateUserDefinedFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateUserDefinedFunctionRequest is a API request type for the UpdateUserDefinedFunction API operation.
+type UpdateUserDefinedFunctionRequest struct {
+	*aws.Request
+	Input *UpdateUserDefinedFunctionInput
+}
+
+// Send marshals and sends the UpdateUserDefinedFunction API request.
+func (r UpdateUserDefinedFunctionRequest) Send() (*UpdateUserDefinedFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserDefinedFunctionOutput), nil
+}
+
+// UpdateUserDefinedFunctionRequest returns a request value for making API operation for
+// AWS Glue.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateUserDefinedFunction for more information on using the UpdateUserDefinedFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing function definition in the Data Catalog.
 //
 //    // Example sending a request using the UpdateUserDefinedFunctionRequest method.
-//    req, resp := client.UpdateUserDefinedFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateUserDefinedFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUserDefinedFunction
-func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunctionInput) (req *aws.Request, output *UpdateUserDefinedFunctionOutput) {
+func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunctionInput) UpdateUserDefinedFunctionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUserDefinedFunction,
 		HTTPMethod: "POST",
@@ -7165,55 +4146,8 @@ func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunction
 		input = &UpdateUserDefinedFunctionInput{}
 	}
 
-	output = &UpdateUserDefinedFunctionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateUserDefinedFunction API operation for AWS Glue.
-//
-// Updates an existing function definition in the Data Catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Glue's
-// API operation UpdateUserDefinedFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityNotFoundException "EntityNotFoundException"
-//   A specified entity does not exist
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input provided was not valid.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   An internal service error occurred.
-//
-//   * ErrCodeOperationTimeoutException "OperationTimeoutException"
-//   The operation timed out.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUserDefinedFunction
-func (c *Glue) UpdateUserDefinedFunction(input *UpdateUserDefinedFunctionInput) (*UpdateUserDefinedFunctionOutput, error) {
-	req, out := c.UpdateUserDefinedFunctionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateUserDefinedFunctionWithContext is the same as UpdateUserDefinedFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateUserDefinedFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) UpdateUserDefinedFunctionWithContext(ctx aws.Context, input *UpdateUserDefinedFunctionInput, opts ...aws.Option) (*UpdateUserDefinedFunctionOutput, error) {
-	req, out := c.UpdateUserDefinedFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateUserDefinedFunctionOutput{})
+	return UpdateUserDefinedFunctionRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action

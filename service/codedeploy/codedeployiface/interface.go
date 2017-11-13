@@ -63,175 +63,99 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type CodeDeployAPI interface {
-	AddTagsToOnPremisesInstances(*codedeploy.AddTagsToOnPremisesInstancesInput) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error)
-	AddTagsToOnPremisesInstancesWithContext(aws.Context, *codedeploy.AddTagsToOnPremisesInstancesInput, ...aws.Option) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error)
-	AddTagsToOnPremisesInstancesRequest(*codedeploy.AddTagsToOnPremisesInstancesInput) (*aws.Request, *codedeploy.AddTagsToOnPremisesInstancesOutput)
+	AddTagsToOnPremisesInstancesRequest(*codedeploy.AddTagsToOnPremisesInstancesInput) codedeploy.AddTagsToOnPremisesInstancesRequest
 
-	BatchGetApplicationRevisions(*codedeploy.BatchGetApplicationRevisionsInput) (*codedeploy.BatchGetApplicationRevisionsOutput, error)
-	BatchGetApplicationRevisionsWithContext(aws.Context, *codedeploy.BatchGetApplicationRevisionsInput, ...aws.Option) (*codedeploy.BatchGetApplicationRevisionsOutput, error)
-	BatchGetApplicationRevisionsRequest(*codedeploy.BatchGetApplicationRevisionsInput) (*aws.Request, *codedeploy.BatchGetApplicationRevisionsOutput)
+	BatchGetApplicationRevisionsRequest(*codedeploy.BatchGetApplicationRevisionsInput) codedeploy.BatchGetApplicationRevisionsRequest
 
-	BatchGetApplications(*codedeploy.BatchGetApplicationsInput) (*codedeploy.BatchGetApplicationsOutput, error)
-	BatchGetApplicationsWithContext(aws.Context, *codedeploy.BatchGetApplicationsInput, ...aws.Option) (*codedeploy.BatchGetApplicationsOutput, error)
-	BatchGetApplicationsRequest(*codedeploy.BatchGetApplicationsInput) (*aws.Request, *codedeploy.BatchGetApplicationsOutput)
+	BatchGetApplicationsRequest(*codedeploy.BatchGetApplicationsInput) codedeploy.BatchGetApplicationsRequest
 
-	BatchGetDeploymentGroups(*codedeploy.BatchGetDeploymentGroupsInput) (*codedeploy.BatchGetDeploymentGroupsOutput, error)
-	BatchGetDeploymentGroupsWithContext(aws.Context, *codedeploy.BatchGetDeploymentGroupsInput, ...aws.Option) (*codedeploy.BatchGetDeploymentGroupsOutput, error)
-	BatchGetDeploymentGroupsRequest(*codedeploy.BatchGetDeploymentGroupsInput) (*aws.Request, *codedeploy.BatchGetDeploymentGroupsOutput)
+	BatchGetDeploymentGroupsRequest(*codedeploy.BatchGetDeploymentGroupsInput) codedeploy.BatchGetDeploymentGroupsRequest
 
-	BatchGetDeploymentInstances(*codedeploy.BatchGetDeploymentInstancesInput) (*codedeploy.BatchGetDeploymentInstancesOutput, error)
-	BatchGetDeploymentInstancesWithContext(aws.Context, *codedeploy.BatchGetDeploymentInstancesInput, ...aws.Option) (*codedeploy.BatchGetDeploymentInstancesOutput, error)
-	BatchGetDeploymentInstancesRequest(*codedeploy.BatchGetDeploymentInstancesInput) (*aws.Request, *codedeploy.BatchGetDeploymentInstancesOutput)
+	BatchGetDeploymentInstancesRequest(*codedeploy.BatchGetDeploymentInstancesInput) codedeploy.BatchGetDeploymentInstancesRequest
 
-	BatchGetDeployments(*codedeploy.BatchGetDeploymentsInput) (*codedeploy.BatchGetDeploymentsOutput, error)
-	BatchGetDeploymentsWithContext(aws.Context, *codedeploy.BatchGetDeploymentsInput, ...aws.Option) (*codedeploy.BatchGetDeploymentsOutput, error)
-	BatchGetDeploymentsRequest(*codedeploy.BatchGetDeploymentsInput) (*aws.Request, *codedeploy.BatchGetDeploymentsOutput)
+	BatchGetDeploymentsRequest(*codedeploy.BatchGetDeploymentsInput) codedeploy.BatchGetDeploymentsRequest
 
-	BatchGetOnPremisesInstances(*codedeploy.BatchGetOnPremisesInstancesInput) (*codedeploy.BatchGetOnPremisesInstancesOutput, error)
-	BatchGetOnPremisesInstancesWithContext(aws.Context, *codedeploy.BatchGetOnPremisesInstancesInput, ...aws.Option) (*codedeploy.BatchGetOnPremisesInstancesOutput, error)
-	BatchGetOnPremisesInstancesRequest(*codedeploy.BatchGetOnPremisesInstancesInput) (*aws.Request, *codedeploy.BatchGetOnPremisesInstancesOutput)
+	BatchGetOnPremisesInstancesRequest(*codedeploy.BatchGetOnPremisesInstancesInput) codedeploy.BatchGetOnPremisesInstancesRequest
 
-	ContinueDeployment(*codedeploy.ContinueDeploymentInput) (*codedeploy.ContinueDeploymentOutput, error)
-	ContinueDeploymentWithContext(aws.Context, *codedeploy.ContinueDeploymentInput, ...aws.Option) (*codedeploy.ContinueDeploymentOutput, error)
-	ContinueDeploymentRequest(*codedeploy.ContinueDeploymentInput) (*aws.Request, *codedeploy.ContinueDeploymentOutput)
+	ContinueDeploymentRequest(*codedeploy.ContinueDeploymentInput) codedeploy.ContinueDeploymentRequest
 
-	CreateApplication(*codedeploy.CreateApplicationInput) (*codedeploy.CreateApplicationOutput, error)
-	CreateApplicationWithContext(aws.Context, *codedeploy.CreateApplicationInput, ...aws.Option) (*codedeploy.CreateApplicationOutput, error)
-	CreateApplicationRequest(*codedeploy.CreateApplicationInput) (*aws.Request, *codedeploy.CreateApplicationOutput)
+	CreateApplicationRequest(*codedeploy.CreateApplicationInput) codedeploy.CreateApplicationRequest
 
-	CreateDeployment(*codedeploy.CreateDeploymentInput) (*codedeploy.CreateDeploymentOutput, error)
-	CreateDeploymentWithContext(aws.Context, *codedeploy.CreateDeploymentInput, ...aws.Option) (*codedeploy.CreateDeploymentOutput, error)
-	CreateDeploymentRequest(*codedeploy.CreateDeploymentInput) (*aws.Request, *codedeploy.CreateDeploymentOutput)
+	CreateDeploymentRequest(*codedeploy.CreateDeploymentInput) codedeploy.CreateDeploymentRequest
 
-	CreateDeploymentConfig(*codedeploy.CreateDeploymentConfigInput) (*codedeploy.CreateDeploymentConfigOutput, error)
-	CreateDeploymentConfigWithContext(aws.Context, *codedeploy.CreateDeploymentConfigInput, ...aws.Option) (*codedeploy.CreateDeploymentConfigOutput, error)
-	CreateDeploymentConfigRequest(*codedeploy.CreateDeploymentConfigInput) (*aws.Request, *codedeploy.CreateDeploymentConfigOutput)
+	CreateDeploymentConfigRequest(*codedeploy.CreateDeploymentConfigInput) codedeploy.CreateDeploymentConfigRequest
 
-	CreateDeploymentGroup(*codedeploy.CreateDeploymentGroupInput) (*codedeploy.CreateDeploymentGroupOutput, error)
-	CreateDeploymentGroupWithContext(aws.Context, *codedeploy.CreateDeploymentGroupInput, ...aws.Option) (*codedeploy.CreateDeploymentGroupOutput, error)
-	CreateDeploymentGroupRequest(*codedeploy.CreateDeploymentGroupInput) (*aws.Request, *codedeploy.CreateDeploymentGroupOutput)
+	CreateDeploymentGroupRequest(*codedeploy.CreateDeploymentGroupInput) codedeploy.CreateDeploymentGroupRequest
 
-	DeleteApplication(*codedeploy.DeleteApplicationInput) (*codedeploy.DeleteApplicationOutput, error)
-	DeleteApplicationWithContext(aws.Context, *codedeploy.DeleteApplicationInput, ...aws.Option) (*codedeploy.DeleteApplicationOutput, error)
-	DeleteApplicationRequest(*codedeploy.DeleteApplicationInput) (*aws.Request, *codedeploy.DeleteApplicationOutput)
+	DeleteApplicationRequest(*codedeploy.DeleteApplicationInput) codedeploy.DeleteApplicationRequest
 
-	DeleteDeploymentConfig(*codedeploy.DeleteDeploymentConfigInput) (*codedeploy.DeleteDeploymentConfigOutput, error)
-	DeleteDeploymentConfigWithContext(aws.Context, *codedeploy.DeleteDeploymentConfigInput, ...aws.Option) (*codedeploy.DeleteDeploymentConfigOutput, error)
-	DeleteDeploymentConfigRequest(*codedeploy.DeleteDeploymentConfigInput) (*aws.Request, *codedeploy.DeleteDeploymentConfigOutput)
+	DeleteDeploymentConfigRequest(*codedeploy.DeleteDeploymentConfigInput) codedeploy.DeleteDeploymentConfigRequest
 
-	DeleteDeploymentGroup(*codedeploy.DeleteDeploymentGroupInput) (*codedeploy.DeleteDeploymentGroupOutput, error)
-	DeleteDeploymentGroupWithContext(aws.Context, *codedeploy.DeleteDeploymentGroupInput, ...aws.Option) (*codedeploy.DeleteDeploymentGroupOutput, error)
-	DeleteDeploymentGroupRequest(*codedeploy.DeleteDeploymentGroupInput) (*aws.Request, *codedeploy.DeleteDeploymentGroupOutput)
+	DeleteDeploymentGroupRequest(*codedeploy.DeleteDeploymentGroupInput) codedeploy.DeleteDeploymentGroupRequest
 
-	DeregisterOnPremisesInstance(*codedeploy.DeregisterOnPremisesInstanceInput) (*codedeploy.DeregisterOnPremisesInstanceOutput, error)
-	DeregisterOnPremisesInstanceWithContext(aws.Context, *codedeploy.DeregisterOnPremisesInstanceInput, ...aws.Option) (*codedeploy.DeregisterOnPremisesInstanceOutput, error)
-	DeregisterOnPremisesInstanceRequest(*codedeploy.DeregisterOnPremisesInstanceInput) (*aws.Request, *codedeploy.DeregisterOnPremisesInstanceOutput)
+	DeregisterOnPremisesInstanceRequest(*codedeploy.DeregisterOnPremisesInstanceInput) codedeploy.DeregisterOnPremisesInstanceRequest
 
-	GetApplication(*codedeploy.GetApplicationInput) (*codedeploy.GetApplicationOutput, error)
-	GetApplicationWithContext(aws.Context, *codedeploy.GetApplicationInput, ...aws.Option) (*codedeploy.GetApplicationOutput, error)
-	GetApplicationRequest(*codedeploy.GetApplicationInput) (*aws.Request, *codedeploy.GetApplicationOutput)
+	GetApplicationRequest(*codedeploy.GetApplicationInput) codedeploy.GetApplicationRequest
 
-	GetApplicationRevision(*codedeploy.GetApplicationRevisionInput) (*codedeploy.GetApplicationRevisionOutput, error)
-	GetApplicationRevisionWithContext(aws.Context, *codedeploy.GetApplicationRevisionInput, ...aws.Option) (*codedeploy.GetApplicationRevisionOutput, error)
-	GetApplicationRevisionRequest(*codedeploy.GetApplicationRevisionInput) (*aws.Request, *codedeploy.GetApplicationRevisionOutput)
+	GetApplicationRevisionRequest(*codedeploy.GetApplicationRevisionInput) codedeploy.GetApplicationRevisionRequest
 
-	GetDeployment(*codedeploy.GetDeploymentInput) (*codedeploy.GetDeploymentOutput, error)
-	GetDeploymentWithContext(aws.Context, *codedeploy.GetDeploymentInput, ...aws.Option) (*codedeploy.GetDeploymentOutput, error)
-	GetDeploymentRequest(*codedeploy.GetDeploymentInput) (*aws.Request, *codedeploy.GetDeploymentOutput)
+	GetDeploymentRequest(*codedeploy.GetDeploymentInput) codedeploy.GetDeploymentRequest
 
-	GetDeploymentConfig(*codedeploy.GetDeploymentConfigInput) (*codedeploy.GetDeploymentConfigOutput, error)
-	GetDeploymentConfigWithContext(aws.Context, *codedeploy.GetDeploymentConfigInput, ...aws.Option) (*codedeploy.GetDeploymentConfigOutput, error)
-	GetDeploymentConfigRequest(*codedeploy.GetDeploymentConfigInput) (*aws.Request, *codedeploy.GetDeploymentConfigOutput)
+	GetDeploymentConfigRequest(*codedeploy.GetDeploymentConfigInput) codedeploy.GetDeploymentConfigRequest
 
-	GetDeploymentGroup(*codedeploy.GetDeploymentGroupInput) (*codedeploy.GetDeploymentGroupOutput, error)
-	GetDeploymentGroupWithContext(aws.Context, *codedeploy.GetDeploymentGroupInput, ...aws.Option) (*codedeploy.GetDeploymentGroupOutput, error)
-	GetDeploymentGroupRequest(*codedeploy.GetDeploymentGroupInput) (*aws.Request, *codedeploy.GetDeploymentGroupOutput)
+	GetDeploymentGroupRequest(*codedeploy.GetDeploymentGroupInput) codedeploy.GetDeploymentGroupRequest
 
-	GetDeploymentInstance(*codedeploy.GetDeploymentInstanceInput) (*codedeploy.GetDeploymentInstanceOutput, error)
-	GetDeploymentInstanceWithContext(aws.Context, *codedeploy.GetDeploymentInstanceInput, ...aws.Option) (*codedeploy.GetDeploymentInstanceOutput, error)
-	GetDeploymentInstanceRequest(*codedeploy.GetDeploymentInstanceInput) (*aws.Request, *codedeploy.GetDeploymentInstanceOutput)
+	GetDeploymentInstanceRequest(*codedeploy.GetDeploymentInstanceInput) codedeploy.GetDeploymentInstanceRequest
 
-	GetOnPremisesInstance(*codedeploy.GetOnPremisesInstanceInput) (*codedeploy.GetOnPremisesInstanceOutput, error)
-	GetOnPremisesInstanceWithContext(aws.Context, *codedeploy.GetOnPremisesInstanceInput, ...aws.Option) (*codedeploy.GetOnPremisesInstanceOutput, error)
-	GetOnPremisesInstanceRequest(*codedeploy.GetOnPremisesInstanceInput) (*aws.Request, *codedeploy.GetOnPremisesInstanceOutput)
+	GetOnPremisesInstanceRequest(*codedeploy.GetOnPremisesInstanceInput) codedeploy.GetOnPremisesInstanceRequest
 
-	ListApplicationRevisions(*codedeploy.ListApplicationRevisionsInput) (*codedeploy.ListApplicationRevisionsOutput, error)
-	ListApplicationRevisionsWithContext(aws.Context, *codedeploy.ListApplicationRevisionsInput, ...aws.Option) (*codedeploy.ListApplicationRevisionsOutput, error)
-	ListApplicationRevisionsRequest(*codedeploy.ListApplicationRevisionsInput) (*aws.Request, *codedeploy.ListApplicationRevisionsOutput)
+	ListApplicationRevisionsRequest(*codedeploy.ListApplicationRevisionsInput) codedeploy.ListApplicationRevisionsRequest
 
 	ListApplicationRevisionsPages(*codedeploy.ListApplicationRevisionsInput, func(*codedeploy.ListApplicationRevisionsOutput, bool) bool) error
 	ListApplicationRevisionsPagesWithContext(aws.Context, *codedeploy.ListApplicationRevisionsInput, func(*codedeploy.ListApplicationRevisionsOutput, bool) bool, ...aws.Option) error
 
-	ListApplications(*codedeploy.ListApplicationsInput) (*codedeploy.ListApplicationsOutput, error)
-	ListApplicationsWithContext(aws.Context, *codedeploy.ListApplicationsInput, ...aws.Option) (*codedeploy.ListApplicationsOutput, error)
-	ListApplicationsRequest(*codedeploy.ListApplicationsInput) (*aws.Request, *codedeploy.ListApplicationsOutput)
+	ListApplicationsRequest(*codedeploy.ListApplicationsInput) codedeploy.ListApplicationsRequest
 
 	ListApplicationsPages(*codedeploy.ListApplicationsInput, func(*codedeploy.ListApplicationsOutput, bool) bool) error
 	ListApplicationsPagesWithContext(aws.Context, *codedeploy.ListApplicationsInput, func(*codedeploy.ListApplicationsOutput, bool) bool, ...aws.Option) error
 
-	ListDeploymentConfigs(*codedeploy.ListDeploymentConfigsInput) (*codedeploy.ListDeploymentConfigsOutput, error)
-	ListDeploymentConfigsWithContext(aws.Context, *codedeploy.ListDeploymentConfigsInput, ...aws.Option) (*codedeploy.ListDeploymentConfigsOutput, error)
-	ListDeploymentConfigsRequest(*codedeploy.ListDeploymentConfigsInput) (*aws.Request, *codedeploy.ListDeploymentConfigsOutput)
+	ListDeploymentConfigsRequest(*codedeploy.ListDeploymentConfigsInput) codedeploy.ListDeploymentConfigsRequest
 
 	ListDeploymentConfigsPages(*codedeploy.ListDeploymentConfigsInput, func(*codedeploy.ListDeploymentConfigsOutput, bool) bool) error
 	ListDeploymentConfigsPagesWithContext(aws.Context, *codedeploy.ListDeploymentConfigsInput, func(*codedeploy.ListDeploymentConfigsOutput, bool) bool, ...aws.Option) error
 
-	ListDeploymentGroups(*codedeploy.ListDeploymentGroupsInput) (*codedeploy.ListDeploymentGroupsOutput, error)
-	ListDeploymentGroupsWithContext(aws.Context, *codedeploy.ListDeploymentGroupsInput, ...aws.Option) (*codedeploy.ListDeploymentGroupsOutput, error)
-	ListDeploymentGroupsRequest(*codedeploy.ListDeploymentGroupsInput) (*aws.Request, *codedeploy.ListDeploymentGroupsOutput)
+	ListDeploymentGroupsRequest(*codedeploy.ListDeploymentGroupsInput) codedeploy.ListDeploymentGroupsRequest
 
 	ListDeploymentGroupsPages(*codedeploy.ListDeploymentGroupsInput, func(*codedeploy.ListDeploymentGroupsOutput, bool) bool) error
 	ListDeploymentGroupsPagesWithContext(aws.Context, *codedeploy.ListDeploymentGroupsInput, func(*codedeploy.ListDeploymentGroupsOutput, bool) bool, ...aws.Option) error
 
-	ListDeploymentInstances(*codedeploy.ListDeploymentInstancesInput) (*codedeploy.ListDeploymentInstancesOutput, error)
-	ListDeploymentInstancesWithContext(aws.Context, *codedeploy.ListDeploymentInstancesInput, ...aws.Option) (*codedeploy.ListDeploymentInstancesOutput, error)
-	ListDeploymentInstancesRequest(*codedeploy.ListDeploymentInstancesInput) (*aws.Request, *codedeploy.ListDeploymentInstancesOutput)
+	ListDeploymentInstancesRequest(*codedeploy.ListDeploymentInstancesInput) codedeploy.ListDeploymentInstancesRequest
 
 	ListDeploymentInstancesPages(*codedeploy.ListDeploymentInstancesInput, func(*codedeploy.ListDeploymentInstancesOutput, bool) bool) error
 	ListDeploymentInstancesPagesWithContext(aws.Context, *codedeploy.ListDeploymentInstancesInput, func(*codedeploy.ListDeploymentInstancesOutput, bool) bool, ...aws.Option) error
 
-	ListDeployments(*codedeploy.ListDeploymentsInput) (*codedeploy.ListDeploymentsOutput, error)
-	ListDeploymentsWithContext(aws.Context, *codedeploy.ListDeploymentsInput, ...aws.Option) (*codedeploy.ListDeploymentsOutput, error)
-	ListDeploymentsRequest(*codedeploy.ListDeploymentsInput) (*aws.Request, *codedeploy.ListDeploymentsOutput)
+	ListDeploymentsRequest(*codedeploy.ListDeploymentsInput) codedeploy.ListDeploymentsRequest
 
 	ListDeploymentsPages(*codedeploy.ListDeploymentsInput, func(*codedeploy.ListDeploymentsOutput, bool) bool) error
 	ListDeploymentsPagesWithContext(aws.Context, *codedeploy.ListDeploymentsInput, func(*codedeploy.ListDeploymentsOutput, bool) bool, ...aws.Option) error
 
-	ListGitHubAccountTokenNames(*codedeploy.ListGitHubAccountTokenNamesInput) (*codedeploy.ListGitHubAccountTokenNamesOutput, error)
-	ListGitHubAccountTokenNamesWithContext(aws.Context, *codedeploy.ListGitHubAccountTokenNamesInput, ...aws.Option) (*codedeploy.ListGitHubAccountTokenNamesOutput, error)
-	ListGitHubAccountTokenNamesRequest(*codedeploy.ListGitHubAccountTokenNamesInput) (*aws.Request, *codedeploy.ListGitHubAccountTokenNamesOutput)
+	ListGitHubAccountTokenNamesRequest(*codedeploy.ListGitHubAccountTokenNamesInput) codedeploy.ListGitHubAccountTokenNamesRequest
 
-	ListOnPremisesInstances(*codedeploy.ListOnPremisesInstancesInput) (*codedeploy.ListOnPremisesInstancesOutput, error)
-	ListOnPremisesInstancesWithContext(aws.Context, *codedeploy.ListOnPremisesInstancesInput, ...aws.Option) (*codedeploy.ListOnPremisesInstancesOutput, error)
-	ListOnPremisesInstancesRequest(*codedeploy.ListOnPremisesInstancesInput) (*aws.Request, *codedeploy.ListOnPremisesInstancesOutput)
+	ListOnPremisesInstancesRequest(*codedeploy.ListOnPremisesInstancesInput) codedeploy.ListOnPremisesInstancesRequest
 
-	RegisterApplicationRevision(*codedeploy.RegisterApplicationRevisionInput) (*codedeploy.RegisterApplicationRevisionOutput, error)
-	RegisterApplicationRevisionWithContext(aws.Context, *codedeploy.RegisterApplicationRevisionInput, ...aws.Option) (*codedeploy.RegisterApplicationRevisionOutput, error)
-	RegisterApplicationRevisionRequest(*codedeploy.RegisterApplicationRevisionInput) (*aws.Request, *codedeploy.RegisterApplicationRevisionOutput)
+	RegisterApplicationRevisionRequest(*codedeploy.RegisterApplicationRevisionInput) codedeploy.RegisterApplicationRevisionRequest
 
-	RegisterOnPremisesInstance(*codedeploy.RegisterOnPremisesInstanceInput) (*codedeploy.RegisterOnPremisesInstanceOutput, error)
-	RegisterOnPremisesInstanceWithContext(aws.Context, *codedeploy.RegisterOnPremisesInstanceInput, ...aws.Option) (*codedeploy.RegisterOnPremisesInstanceOutput, error)
-	RegisterOnPremisesInstanceRequest(*codedeploy.RegisterOnPremisesInstanceInput) (*aws.Request, *codedeploy.RegisterOnPremisesInstanceOutput)
+	RegisterOnPremisesInstanceRequest(*codedeploy.RegisterOnPremisesInstanceInput) codedeploy.RegisterOnPremisesInstanceRequest
 
-	RemoveTagsFromOnPremisesInstances(*codedeploy.RemoveTagsFromOnPremisesInstancesInput) (*codedeploy.RemoveTagsFromOnPremisesInstancesOutput, error)
-	RemoveTagsFromOnPremisesInstancesWithContext(aws.Context, *codedeploy.RemoveTagsFromOnPremisesInstancesInput, ...aws.Option) (*codedeploy.RemoveTagsFromOnPremisesInstancesOutput, error)
-	RemoveTagsFromOnPremisesInstancesRequest(*codedeploy.RemoveTagsFromOnPremisesInstancesInput) (*aws.Request, *codedeploy.RemoveTagsFromOnPremisesInstancesOutput)
+	RemoveTagsFromOnPremisesInstancesRequest(*codedeploy.RemoveTagsFromOnPremisesInstancesInput) codedeploy.RemoveTagsFromOnPremisesInstancesRequest
 
-	SkipWaitTimeForInstanceTermination(*codedeploy.SkipWaitTimeForInstanceTerminationInput) (*codedeploy.SkipWaitTimeForInstanceTerminationOutput, error)
-	SkipWaitTimeForInstanceTerminationWithContext(aws.Context, *codedeploy.SkipWaitTimeForInstanceTerminationInput, ...aws.Option) (*codedeploy.SkipWaitTimeForInstanceTerminationOutput, error)
-	SkipWaitTimeForInstanceTerminationRequest(*codedeploy.SkipWaitTimeForInstanceTerminationInput) (*aws.Request, *codedeploy.SkipWaitTimeForInstanceTerminationOutput)
+	SkipWaitTimeForInstanceTerminationRequest(*codedeploy.SkipWaitTimeForInstanceTerminationInput) codedeploy.SkipWaitTimeForInstanceTerminationRequest
 
-	StopDeployment(*codedeploy.StopDeploymentInput) (*codedeploy.StopDeploymentOutput, error)
-	StopDeploymentWithContext(aws.Context, *codedeploy.StopDeploymentInput, ...aws.Option) (*codedeploy.StopDeploymentOutput, error)
-	StopDeploymentRequest(*codedeploy.StopDeploymentInput) (*aws.Request, *codedeploy.StopDeploymentOutput)
+	StopDeploymentRequest(*codedeploy.StopDeploymentInput) codedeploy.StopDeploymentRequest
 
-	UpdateApplication(*codedeploy.UpdateApplicationInput) (*codedeploy.UpdateApplicationOutput, error)
-	UpdateApplicationWithContext(aws.Context, *codedeploy.UpdateApplicationInput, ...aws.Option) (*codedeploy.UpdateApplicationOutput, error)
-	UpdateApplicationRequest(*codedeploy.UpdateApplicationInput) (*aws.Request, *codedeploy.UpdateApplicationOutput)
+	UpdateApplicationRequest(*codedeploy.UpdateApplicationInput) codedeploy.UpdateApplicationRequest
 
-	UpdateDeploymentGroup(*codedeploy.UpdateDeploymentGroupInput) (*codedeploy.UpdateDeploymentGroupOutput, error)
-	UpdateDeploymentGroupWithContext(aws.Context, *codedeploy.UpdateDeploymentGroupInput, ...aws.Option) (*codedeploy.UpdateDeploymentGroupOutput, error)
-	UpdateDeploymentGroupRequest(*codedeploy.UpdateDeploymentGroupInput) (*aws.Request, *codedeploy.UpdateDeploymentGroupOutput)
+	UpdateDeploymentGroupRequest(*codedeploy.UpdateDeploymentGroupInput) codedeploy.UpdateDeploymentGroupRequest
 
 	WaitUntilDeploymentSuccessful(*codedeploy.GetDeploymentInput) error
 	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error

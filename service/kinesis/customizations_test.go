@@ -35,7 +35,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 4}
 
 	svc := New(cfg)
-	req, _ := svc.GetRecordsRequest(&GetRecordsInput{
+	req := svc.GetRecordsRequest(&GetRecordsInput{
 		ShardIterator: aws.String("foo"),
 	})
 	req.Handlers.Send.Clear()
@@ -52,7 +52,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 		retryCount++
 	})
 	req.ApplyOptions(request.WithResponseReadTimeout(time.Second))
-	err := req.Send()
+	_, err := req.Send()
 	if err == nil {
 		t.Errorf("Expected error, but received nil")
 	} else if v, ok := err.(awserr.Error); !ok {
@@ -68,7 +68,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 	readDuration = time.Second
 	svc := New(unit.Config())
-	req, _ := svc.GetRecordsRequest(&GetRecordsInput{
+	req := svc.GetRecordsRequest(&GetRecordsInput{
 		ShardIterator: aws.String("foo"),
 	})
 	req.Handlers.Send.Clear()
@@ -84,7 +84,7 @@ func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 	})
 	req.ApplyOptions(request.WithResponseReadTimeout(time.Second))
-	err := req.Send()
+	_, err := req.Send()
 	if err != nil {
 		t.Errorf("Expected no error, but received %v", err)
 	}

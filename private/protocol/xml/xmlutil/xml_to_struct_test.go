@@ -40,9 +40,10 @@ func TestUnmarshal(t *testing.T) {
 
 	svc := s3.New(cfg)
 
-	out, err := svc.GetBucketAcl(&s3.GetBucketAclInput{
+	req := svc.GetBucketAclRequest(&s3.GetBucketAclInput{
 		Bucket: aws.String("foo"),
 	})
+	out, err := req.Send()
 
 	assert.NoError(t, err)
 

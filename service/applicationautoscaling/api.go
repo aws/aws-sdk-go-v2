@@ -12,31 +12,42 @@ import (
 
 const opDeleteScalingPolicy = "DeleteScalingPolicy"
 
-// DeleteScalingPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteScalingPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteScalingPolicyRequest is a API request type for the DeleteScalingPolicy API operation.
+type DeleteScalingPolicyRequest struct {
+	*aws.Request
+	Input *DeleteScalingPolicyInput
+}
+
+// Send marshals and sends the DeleteScalingPolicy API request.
+func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteScalingPolicyOutput), nil
+}
+
+// DeleteScalingPolicyRequest returns a request value for making API operation for
+// Application Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified Application Auto Scaling scaling policy.
 //
-// See DeleteScalingPolicy for more information on using the DeleteScalingPolicy
-// API call, and error handling.
+// Deleting a policy deletes the underlying alarm action, but does not delete
+// the CloudWatch alarm associated with the scaling policy, even if it no longer
+// has an associated action.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To create a scaling policy or update an existing one, see PutScalingPolicy.
 //
 //    // Example sending a request using the DeleteScalingPolicyRequest method.
-//    req, resp := client.DeleteScalingPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteScalingPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy
-func (c *ApplicationAutoScaling) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) (req *aws.Request, output *DeleteScalingPolicyOutput) {
+func (c *ApplicationAutoScaling) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) DeleteScalingPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteScalingPolicy,
 		HTTPMethod: "POST",
@@ -47,97 +58,47 @@ func (c *ApplicationAutoScaling) DeleteScalingPolicyRequest(input *DeleteScaling
 		input = &DeleteScalingPolicyInput{}
 	}
 
-	output = &DeleteScalingPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteScalingPolicy API operation for Application Auto Scaling.
-//
-// Deletes the specified Application Auto Scaling scaling policy.
-//
-// Deleting a policy deletes the underlying alarm action, but does not delete
-// the CloudWatch alarm associated with the scaling policy, even if it no longer
-// has an associated action.
-//
-// To create a scaling policy or update an existing one, see PutScalingPolicy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Application Auto Scaling's
-// API operation DeleteScalingPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the available parameters
-//   for the API request.
-//
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   The specified object could not be found. For any Put or Register API operation,
-//   which depends on the existence of a scalable target, this exception is thrown
-//   if the scalable target with the specified service namespace, resource ID,
-//   and scalable dimension does not exist. For any Delete or Deregister API operation,
-//   this exception is thrown if the resource that is to be deleted or deregistered
-//   cannot be found.
-//
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to an Application Auto Scaling resource that already has a pending update.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy
-func (c *ApplicationAutoScaling) DeleteScalingPolicy(input *DeleteScalingPolicyInput) (*DeleteScalingPolicyOutput, error) {
-	req, out := c.DeleteScalingPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteScalingPolicyWithContext is the same as DeleteScalingPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteScalingPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DeleteScalingPolicyWithContext(ctx aws.Context, input *DeleteScalingPolicyInput, opts ...aws.Option) (*DeleteScalingPolicyOutput, error) {
-	req, out := c.DeleteScalingPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteScalingPolicyOutput{})
+	return DeleteScalingPolicyRequest{Request: req, Input: input}
 }
 
 const opDeregisterScalableTarget = "DeregisterScalableTarget"
 
-// DeregisterScalableTargetRequest generates a "aws.Request" representing the
-// client's request for the DeregisterScalableTarget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterScalableTargetRequest is a API request type for the DeregisterScalableTarget API operation.
+type DeregisterScalableTargetRequest struct {
+	*aws.Request
+	Input *DeregisterScalableTargetInput
+}
+
+// Send marshals and sends the DeregisterScalableTarget API request.
+func (r DeregisterScalableTargetRequest) Send() (*DeregisterScalableTargetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterScalableTargetOutput), nil
+}
+
+// DeregisterScalableTargetRequest returns a request value for making API operation for
+// Application Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deregisters a scalable target.
 //
-// See DeregisterScalableTarget for more information on using the DeregisterScalableTarget
-// API call, and error handling.
+// Deregistering a scalable target deletes the scaling policies that are associated
+// with it.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To create a scalable target or update an existing one, see RegisterScalableTarget.
 //
 //    // Example sending a request using the DeregisterScalableTargetRequest method.
-//    req, resp := client.DeregisterScalableTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterScalableTargetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget
-func (c *ApplicationAutoScaling) DeregisterScalableTargetRequest(input *DeregisterScalableTargetInput) (req *aws.Request, output *DeregisterScalableTargetOutput) {
+func (c *ApplicationAutoScaling) DeregisterScalableTargetRequest(input *DeregisterScalableTargetInput) DeregisterScalableTargetRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterScalableTarget,
 		HTTPMethod: "POST",
@@ -148,96 +109,49 @@ func (c *ApplicationAutoScaling) DeregisterScalableTargetRequest(input *Deregist
 		input = &DeregisterScalableTargetInput{}
 	}
 
-	output = &DeregisterScalableTargetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeregisterScalableTarget API operation for Application Auto Scaling.
-//
-// Deregisters a scalable target.
-//
-// Deregistering a scalable target deletes the scaling policies that are associated
-// with it.
-//
-// To create a scalable target or update an existing one, see RegisterScalableTarget.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Application Auto Scaling's
-// API operation DeregisterScalableTarget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the available parameters
-//   for the API request.
-//
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   The specified object could not be found. For any Put or Register API operation,
-//   which depends on the existence of a scalable target, this exception is thrown
-//   if the scalable target with the specified service namespace, resource ID,
-//   and scalable dimension does not exist. For any Delete or Deregister API operation,
-//   this exception is thrown if the resource that is to be deleted or deregistered
-//   cannot be found.
-//
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to an Application Auto Scaling resource that already has a pending update.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget
-func (c *ApplicationAutoScaling) DeregisterScalableTarget(input *DeregisterScalableTargetInput) (*DeregisterScalableTargetOutput, error) {
-	req, out := c.DeregisterScalableTargetRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterScalableTargetWithContext is the same as DeregisterScalableTarget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterScalableTarget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DeregisterScalableTargetWithContext(ctx aws.Context, input *DeregisterScalableTargetInput, opts ...aws.Option) (*DeregisterScalableTargetOutput, error) {
-	req, out := c.DeregisterScalableTargetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeregisterScalableTargetOutput{})
+	return DeregisterScalableTargetRequest{Request: req, Input: input}
 }
 
 const opDescribeScalableTargets = "DescribeScalableTargets"
 
-// DescribeScalableTargetsRequest generates a "aws.Request" representing the
-// client's request for the DescribeScalableTargets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeScalableTargetsRequest is a API request type for the DescribeScalableTargets API operation.
+type DescribeScalableTargetsRequest struct {
+	*aws.Request
+	Input *DescribeScalableTargetsInput
+}
+
+// Send marshals and sends the DescribeScalableTargets API request.
+func (r DescribeScalableTargetsRequest) Send() (*DescribeScalableTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScalableTargetsOutput), nil
+}
+
+// DescribeScalableTargetsRequest returns a request value for making API operation for
+// Application Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Provides descriptive information about the scalable targets in the specified
+// namespace.
 //
-// See DescribeScalableTargets for more information on using the DescribeScalableTargets
-// API call, and error handling.
+// You can filter the results using the ResourceIds and ScalableDimension parameters.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To create a scalable target or update an existing one, see RegisterScalableTarget.
+// If you are no longer using a scalable target, you can deregister it using
+// DeregisterScalableTarget.
 //
 //    // Example sending a request using the DescribeScalableTargetsRequest method.
-//    req, resp := client.DescribeScalableTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeScalableTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets
-func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeScalableTargetsInput) (req *aws.Request, output *DescribeScalableTargetsOutput) {
+func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeScalableTargetsInput) DescribeScalableTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalableTargets,
 		HTTPMethod: "POST",
@@ -254,64 +168,8 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeS
 		input = &DescribeScalableTargetsInput{}
 	}
 
-	output = &DescribeScalableTargetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeScalableTargets API operation for Application Auto Scaling.
-//
-// Provides descriptive information about the scalable targets in the specified
-// namespace.
-//
-// You can filter the results using the ResourceIds and ScalableDimension parameters.
-//
-// To create a scalable target or update an existing one, see RegisterScalableTarget.
-// If you are no longer using a scalable target, you can deregister it using
-// DeregisterScalableTarget.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Application Auto Scaling's
-// API operation DescribeScalableTargets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the available parameters
-//   for the API request.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token supplied was invalid.
-//
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to an Application Auto Scaling resource that already has a pending update.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets
-func (c *ApplicationAutoScaling) DescribeScalableTargets(input *DescribeScalableTargetsInput) (*DescribeScalableTargetsOutput, error) {
-	req, out := c.DescribeScalableTargetsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScalableTargetsWithContext is the same as DescribeScalableTargets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScalableTargets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalableTargetsWithContext(ctx aws.Context, input *DescribeScalableTargetsInput, opts ...aws.Option) (*DescribeScalableTargetsOutput, error) {
-	req, out := c.DescribeScalableTargetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeScalableTargetsOutput{})
+	return DescribeScalableTargetsRequest{Request: req, Input: input}
 }
 
 // DescribeScalableTargetsPages iterates over the pages of a DescribeScalableTargets operation,
@@ -350,10 +208,10 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsPagesWithContext(ctx aws
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeScalableTargetsRequest(inCpy)
+			req := c.DescribeScalableTargetsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -366,31 +224,44 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsPagesWithContext(ctx aws
 
 const opDescribeScalingActivities = "DescribeScalingActivities"
 
-// DescribeScalingActivitiesRequest generates a "aws.Request" representing the
-// client's request for the DescribeScalingActivities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeScalingActivitiesRequest is a API request type for the DescribeScalingActivities API operation.
+type DescribeScalingActivitiesRequest struct {
+	*aws.Request
+	Input *DescribeScalingActivitiesInput
+}
+
+// Send marshals and sends the DescribeScalingActivities API request.
+func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScalingActivitiesOutput), nil
+}
+
+// DescribeScalingActivitiesRequest returns a request value for making API operation for
+// Application Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Provides descriptive information about the scaling activities in the specified
+// namespace from the previous six weeks.
 //
-// See DescribeScalingActivities for more information on using the DescribeScalingActivities
-// API call, and error handling.
+// You can filter the results using the ResourceId and ScalableDimension parameters.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Scaling activities are triggered by CloudWatch alarms that are associated
+// with scaling policies. To view the scaling policies for a service namespace,
+// see DescribeScalingPolicies. To create a scaling policy or update an existing
+// one, see PutScalingPolicy.
 //
 //    // Example sending a request using the DescribeScalingActivitiesRequest method.
-//    req, resp := client.DescribeScalingActivitiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeScalingActivitiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivities
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingActivitiesInput) (req *aws.Request, output *DescribeScalingActivitiesOutput) {
+func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingActivities,
 		HTTPMethod: "POST",
@@ -407,65 +278,8 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *Describ
 		input = &DescribeScalingActivitiesInput{}
 	}
 
-	output = &DescribeScalingActivitiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeScalingActivities API operation for Application Auto Scaling.
-//
-// Provides descriptive information about the scaling activities in the specified
-// namespace from the previous six weeks.
-//
-// You can filter the results using the ResourceId and ScalableDimension parameters.
-//
-// Scaling activities are triggered by CloudWatch alarms that are associated
-// with scaling policies. To view the scaling policies for a service namespace,
-// see DescribeScalingPolicies. To create a scaling policy or update an existing
-// one, see PutScalingPolicy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Application Auto Scaling's
-// API operation DescribeScalingActivities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the available parameters
-//   for the API request.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token supplied was invalid.
-//
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to an Application Auto Scaling resource that already has a pending update.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivities
-func (c *ApplicationAutoScaling) DescribeScalingActivities(input *DescribeScalingActivitiesInput) (*DescribeScalingActivitiesOutput, error) {
-	req, out := c.DescribeScalingActivitiesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScalingActivitiesWithContext is the same as DescribeScalingActivities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScalingActivities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, opts ...aws.Option) (*DescribeScalingActivitiesOutput, error) {
-	req, out := c.DescribeScalingActivitiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeScalingActivitiesOutput{})
+	return DescribeScalingActivitiesRequest{Request: req, Input: input}
 }
 
 // DescribeScalingActivitiesPages iterates over the pages of a DescribeScalingActivities operation,
@@ -504,10 +318,10 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesPagesWithContext(ctx a
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeScalingActivitiesRequest(inCpy)
+			req := c.DescribeScalingActivitiesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -520,31 +334,43 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesPagesWithContext(ctx a
 
 const opDescribeScalingPolicies = "DescribeScalingPolicies"
 
-// DescribeScalingPoliciesRequest generates a "aws.Request" representing the
-// client's request for the DescribeScalingPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeScalingPoliciesRequest is a API request type for the DescribeScalingPolicies API operation.
+type DescribeScalingPoliciesRequest struct {
+	*aws.Request
+	Input *DescribeScalingPoliciesInput
+}
+
+// Send marshals and sends the DescribeScalingPolicies API request.
+func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScalingPoliciesOutput), nil
+}
+
+// DescribeScalingPoliciesRequest returns a request value for making API operation for
+// Application Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Provides descriptive information about the scaling policies in the specified
+// namespace.
 //
-// See DescribeScalingPolicies for more information on using the DescribeScalingPolicies
-// API call, and error handling.
+// You can filter the results using the ResourceId, ScalableDimension, and PolicyNames
+// parameters.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To create a scaling policy or update an existing one, see PutScalingPolicy.
+// If you are no longer using a scaling policy, you can delete it using DeleteScalingPolicy.
 //
 //    // Example sending a request using the DescribeScalingPoliciesRequest method.
-//    req, resp := client.DescribeScalingPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeScalingPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPolicies
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) (req *aws.Request, output *DescribeScalingPoliciesOutput) {
+func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingPolicies,
 		HTTPMethod: "POST",
@@ -561,72 +387,8 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeS
 		input = &DescribeScalingPoliciesInput{}
 	}
 
-	output = &DescribeScalingPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeScalingPolicies API operation for Application Auto Scaling.
-//
-// Provides descriptive information about the scaling policies in the specified
-// namespace.
-//
-// You can filter the results using the ResourceId, ScalableDimension, and PolicyNames
-// parameters.
-//
-// To create a scaling policy or update an existing one, see PutScalingPolicy.
-// If you are no longer using a scaling policy, you can delete it using DeleteScalingPolicy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Application Auto Scaling's
-// API operation DescribeScalingPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the available parameters
-//   for the API request.
-//
-//   * ErrCodeFailedResourceAccessException "FailedResourceAccessException"
-//   Failed access to resources caused an exception. This exception is thrown
-//   when Application Auto Scaling is unable to retrieve the alarms associated
-//   with a scaling policy due to a client error, for example, if the role ARN
-//   specified for a scalable target does not have permission to call the CloudWatch
-//   DescribeAlarms (http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html)
-//   API operation on behalf of your account.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token supplied was invalid.
-//
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to an Application Auto Scaling resource that already has a pending update.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPolicies
-func (c *ApplicationAutoScaling) DescribeScalingPolicies(input *DescribeScalingPoliciesInput) (*DescribeScalingPoliciesOutput, error) {
-	req, out := c.DescribeScalingPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScalingPoliciesWithContext is the same as DescribeScalingPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScalingPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, opts ...aws.Option) (*DescribeScalingPoliciesOutput, error) {
-	req, out := c.DescribeScalingPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeScalingPoliciesOutput{})
+	return DescribeScalingPoliciesRequest{Request: req, Input: input}
 }
 
 // DescribeScalingPoliciesPages iterates over the pages of a DescribeScalingPolicies operation,
@@ -665,10 +427,10 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesPagesWithContext(ctx aws
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeScalingPoliciesRequest(inCpy)
+			req := c.DescribeScalingPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -681,47 +443,24 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesPagesWithContext(ctx aws
 
 const opPutScalingPolicy = "PutScalingPolicy"
 
-// PutScalingPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutScalingPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutScalingPolicy for more information on using the PutScalingPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutScalingPolicyRequest method.
-//    req, resp := client.PutScalingPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicy
-func (c *ApplicationAutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *aws.Request, output *PutScalingPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opPutScalingPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutScalingPolicyInput{}
-	}
-
-	output = &PutScalingPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutScalingPolicyRequest is a API request type for the PutScalingPolicy API operation.
+type PutScalingPolicyRequest struct {
+	*aws.Request
+	Input *PutScalingPolicyInput
 }
 
-// PutScalingPolicy API operation for Application Auto Scaling.
+// Send marshals and sends the PutScalingPolicy API request.
+func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutScalingPolicyOutput), nil
+}
+
+// PutScalingPolicyRequest returns a request value for making API operation for
+// Application Auto Scaling.
 //
 // Creates or updates a policy for an Application Auto Scaling scalable target.
 //
@@ -737,111 +476,49 @@ func (c *ApplicationAutoScaling) PutScalingPolicyRequest(input *PutScalingPolicy
 // You can view the scaling policies for a service namespace using DescribeScalingPolicies.
 // If you are no longer using a scaling policy, you can delete it using DeleteScalingPolicy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Application Auto Scaling's
-// API operation PutScalingPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the available parameters
-//   for the API request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Your account exceeded a limit. This exception is thrown when a per-account
-//   resource limit is exceeded. For more information, see Application Auto Scaling
-//   Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_as-app).
-//
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   The specified object could not be found. For any Put or Register API operation,
-//   which depends on the existence of a scalable target, this exception is thrown
-//   if the scalable target with the specified service namespace, resource ID,
-//   and scalable dimension does not exist. For any Delete or Deregister API operation,
-//   this exception is thrown if the resource that is to be deleted or deregistered
-//   cannot be found.
-//
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to an Application Auto Scaling resource that already has a pending update.
-//
-//   * ErrCodeFailedResourceAccessException "FailedResourceAccessException"
-//   Failed access to resources caused an exception. This exception is thrown
-//   when Application Auto Scaling is unable to retrieve the alarms associated
-//   with a scaling policy due to a client error, for example, if the role ARN
-//   specified for a scalable target does not have permission to call the CloudWatch
-//   DescribeAlarms (http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html)
-//   API operation on behalf of your account.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicy
-func (c *ApplicationAutoScaling) PutScalingPolicy(input *PutScalingPolicyInput) (*PutScalingPolicyOutput, error) {
-	req, out := c.PutScalingPolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutScalingPolicyWithContext is the same as PutScalingPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutScalingPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalingPolicyInput, opts ...aws.Option) (*PutScalingPolicyOutput, error) {
-	req, out := c.PutScalingPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRegisterScalableTarget = "RegisterScalableTarget"
-
-// RegisterScalableTargetRequest generates a "aws.Request" representing the
-// client's request for the RegisterScalableTarget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterScalableTarget for more information on using the RegisterScalableTarget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterScalableTargetRequest method.
-//    req, resp := client.RegisterScalableTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutScalingPolicyRequest method.
+//    req := client.PutScalingPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget
-func (c *ApplicationAutoScaling) RegisterScalableTargetRequest(input *RegisterScalableTargetInput) (req *aws.Request, output *RegisterScalableTargetOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicy
+func (c *ApplicationAutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScalingPolicyRequest {
 	op := &aws.Operation{
-		Name:       opRegisterScalableTarget,
+		Name:       opPutScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RegisterScalableTargetInput{}
+		input = &PutScalingPolicyInput{}
 	}
 
-	output = &RegisterScalableTargetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+	return PutScalingPolicyRequest{Request: req, Input: input}
 }
 
-// RegisterScalableTarget API operation for Application Auto Scaling.
+const opRegisterScalableTarget = "RegisterScalableTarget"
+
+// RegisterScalableTargetRequest is a API request type for the RegisterScalableTarget API operation.
+type RegisterScalableTargetRequest struct {
+	*aws.Request
+	Input *RegisterScalableTargetInput
+}
+
+// Send marshals and sends the RegisterScalableTarget API request.
+func (r RegisterScalableTargetRequest) Send() (*RegisterScalableTargetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterScalableTargetOutput), nil
+}
+
+// RegisterScalableTargetRequest returns a request value for making API operation for
+// Application Auto Scaling.
 //
 // Registers or updates a scalable target. A scalable target is a resource that
 // Application Auto Scaling can scale out or scale in. After you have registered
@@ -853,50 +530,27 @@ func (c *ApplicationAutoScaling) RegisterScalableTargetRequest(input *RegisterSc
 // using DescribeScalableTargets. If you are no longer using a scalable target,
 // you can deregister it using DeregisterScalableTarget.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Application Auto Scaling's
-// API operation RegisterScalableTarget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the available parameters
-//   for the API request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Your account exceeded a limit. This exception is thrown when a per-account
-//   resource limit is exceeded. For more information, see Application Auto Scaling
-//   Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_as-app).
-//
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to an Application Auto Scaling resource that already has a pending update.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
+//    // Example sending a request using the RegisterScalableTargetRequest method.
+//    req := client.RegisterScalableTargetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget
-func (c *ApplicationAutoScaling) RegisterScalableTarget(input *RegisterScalableTargetInput) (*RegisterScalableTargetOutput, error) {
-	req, out := c.RegisterScalableTargetRequest(input)
-	return out, req.Send()
-}
+func (c *ApplicationAutoScaling) RegisterScalableTargetRequest(input *RegisterScalableTargetInput) RegisterScalableTargetRequest {
+	op := &aws.Operation{
+		Name:       opRegisterScalableTarget,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RegisterScalableTargetWithContext is the same as RegisterScalableTarget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterScalableTarget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) RegisterScalableTargetWithContext(ctx aws.Context, input *RegisterScalableTargetInput, opts ...aws.Option) (*RegisterScalableTargetOutput, error) {
-	req, out := c.RegisterScalableTargetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RegisterScalableTargetInput{}
+	}
+
+	req := c.newRequest(op, input, &RegisterScalableTargetOutput{})
+	return RegisterScalableTargetRequest{Request: req, Input: input}
 }
 
 // Represents a CloudWatch alarm associated with a scaling policy.

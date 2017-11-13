@@ -14,31 +14,42 @@ import (
 
 const opCancelKeyDeletion = "CancelKeyDeletion"
 
-// CancelKeyDeletionRequest generates a "aws.Request" representing the
-// client's request for the CancelKeyDeletion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelKeyDeletionRequest is a API request type for the CancelKeyDeletion API operation.
+type CancelKeyDeletionRequest struct {
+	*aws.Request
+	Input *CancelKeyDeletionInput
+}
+
+// Send marshals and sends the CancelKeyDeletion API request.
+func (r CancelKeyDeletionRequest) Send() (*CancelKeyDeletionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelKeyDeletionOutput), nil
+}
+
+// CancelKeyDeletionRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Cancels the deletion of a customer master key (CMK). When this operation
+// is successful, the CMK is set to the Disabled state. To enable a CMK, use
+// EnableKey.
 //
-// See CancelKeyDeletion for more information on using the CancelKeyDeletion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about scheduling and canceling deletion of a CMK, see
+// Deleting Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the CancelKeyDeletionRequest method.
-//    req, resp := client.CancelKeyDeletionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelKeyDeletionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletion
-func (c *KMS) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) (req *aws.Request, output *CancelKeyDeletionOutput) {
+func (c *KMS) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) CancelKeyDeletionRequest {
 	op := &aws.Operation{
 		Name:       opCancelKeyDeletion,
 		HTTPMethod: "POST",
@@ -49,119 +60,30 @@ func (c *KMS) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) (req *aws.
 		input = &CancelKeyDeletionInput{}
 	}
 
-	output = &CancelKeyDeletionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelKeyDeletion API operation for AWS Key Management Service.
-//
-// Cancels the deletion of a customer master key (CMK). When this operation
-// is successful, the CMK is set to the Disabled state. To enable a CMK, use
-// EnableKey.
-//
-// For more information about scheduling and canceling deletion of a CMK, see
-// Deleting Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
-// in the AWS Key Management Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation CancelKeyDeletion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletion
-func (c *KMS) CancelKeyDeletion(input *CancelKeyDeletionInput) (*CancelKeyDeletionOutput, error) {
-	req, out := c.CancelKeyDeletionRequest(input)
-	return out, req.Send()
-}
-
-// CancelKeyDeletionWithContext is the same as CancelKeyDeletion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelKeyDeletion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) CancelKeyDeletionWithContext(ctx aws.Context, input *CancelKeyDeletionInput, opts ...aws.Option) (*CancelKeyDeletionOutput, error) {
-	req, out := c.CancelKeyDeletionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelKeyDeletionOutput{})
+	return CancelKeyDeletionRequest{Request: req, Input: input}
 }
 
 const opCreateAlias = "CreateAlias"
 
-// CreateAliasRequest generates a "aws.Request" representing the
-// client's request for the CreateAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAlias for more information on using the CreateAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateAliasRequest method.
-//    req, resp := client.CreateAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAlias
-func (c *KMS) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, output *CreateAliasOutput) {
-	op := &aws.Operation{
-		Name:       opCreateAlias,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateAliasInput{}
-	}
-
-	output = &CreateAliasOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// CreateAliasRequest is a API request type for the CreateAlias API operation.
+type CreateAliasRequest struct {
+	*aws.Request
+	Input *CreateAliasInput
 }
 
-// CreateAlias API operation for AWS Key Management Service.
+// Send marshals and sends the CreateAlias API request.
+func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAliasOutput), nil
+}
+
+// CreateAliasRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Creates a display name for a customer master key. An alias can be used to
 // identify a key and should be unique. The console enforces a one-to-one mapping
@@ -176,95 +98,67 @@ func (c *KMS) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, out
 //
 // To map an alias to a different key, call UpdateAlias.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation CreateAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidAliasNameException "InvalidAliasNameException"
-//   The request was rejected because the specified alias name is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because a limit was exceeded. For more information,
-//   see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
+//    // Example sending a request using the CreateAliasRequest method.
+//    req := client.CreateAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAlias
-func (c *KMS) CreateAlias(input *CreateAliasInput) (*CreateAliasOutput, error) {
-	req, out := c.CreateAliasRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
+	op := &aws.Operation{
+		Name:       opCreateAlias,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateAliasWithContext is the same as CreateAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...aws.Option) (*CreateAliasOutput, error) {
-	req, out := c.CreateAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateAliasInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateAliasOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return CreateAliasRequest{Request: req, Input: input}
 }
 
 const opCreateGrant = "CreateGrant"
 
-// CreateGrantRequest generates a "aws.Request" representing the
-// client's request for the CreateGrant operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateGrantRequest is a API request type for the CreateGrant API operation.
+type CreateGrantRequest struct {
+	*aws.Request
+	Input *CreateGrantInput
+}
+
+// Send marshals and sends the CreateGrant API request.
+func (r CreateGrantRequest) Send() (*CreateGrantOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGrantOutput), nil
+}
+
+// CreateGrantRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds a grant to a key to specify who can use the key and under what conditions.
+// Grants are alternate permission mechanisms to key policies.
 //
-// See CreateGrant for more information on using the CreateGrant
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about grants, see Grants (http://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the CreateGrantRequest method.
-//    req, resp := client.CreateGrantRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateGrantRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrant
-func (c *KMS) CreateGrantRequest(input *CreateGrantInput) (req *aws.Request, output *CreateGrantOutput) {
+func (c *KMS) CreateGrantRequest(input *CreateGrantInput) CreateGrantRequest {
 	op := &aws.Operation{
 		Name:       opCreateGrant,
 		HTTPMethod: "POST",
@@ -275,126 +169,30 @@ func (c *KMS) CreateGrantRequest(input *CreateGrantInput) (req *aws.Request, out
 		input = &CreateGrantInput{}
 	}
 
-	output = &CreateGrantOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateGrant API operation for AWS Key Management Service.
-//
-// Adds a grant to a key to specify who can use the key and under what conditions.
-// Grants are alternate permission mechanisms to key policies.
-//
-// For more information about grants, see Grants (http://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
-// in the AWS Key Management Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation CreateGrant for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidGrantTokenException "InvalidGrantTokenException"
-//   The request was rejected because the specified grant token is not valid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because a limit was exceeded. For more information,
-//   see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrant
-func (c *KMS) CreateGrant(input *CreateGrantInput) (*CreateGrantOutput, error) {
-	req, out := c.CreateGrantRequest(input)
-	return out, req.Send()
-}
-
-// CreateGrantWithContext is the same as CreateGrant with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateGrant for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) CreateGrantWithContext(ctx aws.Context, input *CreateGrantInput, opts ...aws.Option) (*CreateGrantOutput, error) {
-	req, out := c.CreateGrantRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateGrantOutput{})
+	return CreateGrantRequest{Request: req, Input: input}
 }
 
 const opCreateKey = "CreateKey"
 
-// CreateKeyRequest generates a "aws.Request" representing the
-// client's request for the CreateKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateKey for more information on using the CreateKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateKeyRequest method.
-//    req, resp := client.CreateKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey
-func (c *KMS) CreateKeyRequest(input *CreateKeyInput) (req *aws.Request, output *CreateKeyOutput) {
-	op := &aws.Operation{
-		Name:       opCreateKey,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateKeyInput{}
-	}
-
-	output = &CreateKeyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateKeyRequest is a API request type for the CreateKey API operation.
+type CreateKeyRequest struct {
+	*aws.Request
+	Input *CreateKeyInput
 }
 
-// CreateKey API operation for AWS Key Management Service.
+// Send marshals and sends the CreateKey API request.
+func (r CreateKeyRequest) Send() (*CreateKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateKeyOutput), nil
+}
+
+// CreateKeyRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Creates a customer master key (CMK).
 //
@@ -408,106 +206,49 @@ func (c *KMS) CreateKeyRequest(input *CreateKeyInput) (req *aws.Request, output 
 //    * AWS Key Management Service Concepts (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html)
 //    in the AWS Key Management Service Developer Guide
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation CreateKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocumentException"
-//   The request was rejected because the specified policy is not syntactically
-//   or semantically correct.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because a limit was exceeded. For more information,
-//   see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeTagException "TagException"
-//   The request was rejected because one or more tags are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey
-func (c *KMS) CreateKey(input *CreateKeyInput) (*CreateKeyOutput, error) {
-	req, out := c.CreateKeyRequest(input)
-	return out, req.Send()
-}
-
-// CreateKeyWithContext is the same as CreateKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) CreateKeyWithContext(ctx aws.Context, input *CreateKeyInput, opts ...aws.Option) (*CreateKeyOutput, error) {
-	req, out := c.CreateKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDecrypt = "Decrypt"
-
-// DecryptRequest generates a "aws.Request" representing the
-// client's request for the Decrypt operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Decrypt for more information on using the Decrypt
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DecryptRequest method.
-//    req, resp := client.DecryptRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateKeyRequest method.
+//    req := client.CreateKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Decrypt
-func (c *KMS) DecryptRequest(input *DecryptInput) (req *aws.Request, output *DecryptOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey
+func (c *KMS) CreateKeyRequest(input *CreateKeyInput) CreateKeyRequest {
 	op := &aws.Operation{
-		Name:       opDecrypt,
+		Name:       opCreateKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DecryptInput{}
+		input = &CreateKeyInput{}
 	}
 
-	output = &DecryptOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateKeyOutput{})
+	return CreateKeyRequest{Request: req, Input: input}
 }
 
-// Decrypt API operation for AWS Key Management Service.
+const opDecrypt = "Decrypt"
+
+// DecryptRequest is a API request type for the Decrypt API operation.
+type DecryptRequest struct {
+	*aws.Request
+	Input *DecryptInput
+}
+
+// Send marshals and sends the Decrypt API request.
+func (r DecryptRequest) Send() (*DecryptOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DecryptOutput), nil
+}
+
+// DecryptRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Decrypts ciphertext. Ciphertext is plaintext that has been previously encrypted
 // by using any of the following functions:
@@ -527,97 +268,61 @@ func (c *KMS) DecryptRequest(input *DecryptInput) (req *aws.Request, output *Dec
 // policy, you should scope the resource to specific keys or to specific trusted
 // accounts.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation Decrypt for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeInvalidCiphertextException "InvalidCiphertextException"
-//   The request was rejected because the specified ciphertext has been corrupted
-//   or is otherwise invalid.
-//
-//   * ErrCodeKeyUnavailableException "KeyUnavailableException"
-//   The request was rejected because the specified CMK was not available. The
-//   request can be retried.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidGrantTokenException "InvalidGrantTokenException"
-//   The request was rejected because the specified grant token is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
+//    // Example sending a request using the DecryptRequest method.
+//    req := client.DecryptRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Decrypt
-func (c *KMS) Decrypt(input *DecryptInput) (*DecryptOutput, error) {
-	req, out := c.DecryptRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) DecryptRequest(input *DecryptInput) DecryptRequest {
+	op := &aws.Operation{
+		Name:       opDecrypt,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DecryptWithContext is the same as Decrypt with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Decrypt for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) DecryptWithContext(ctx aws.Context, input *DecryptInput, opts ...aws.Option) (*DecryptOutput, error) {
-	req, out := c.DecryptRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DecryptInput{}
+	}
+
+	req := c.newRequest(op, input, &DecryptOutput{})
+	return DecryptRequest{Request: req, Input: input}
 }
 
 const opDeleteAlias = "DeleteAlias"
 
-// DeleteAliasRequest generates a "aws.Request" representing the
-// client's request for the DeleteAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAliasRequest is a API request type for the DeleteAlias API operation.
+type DeleteAliasRequest struct {
+	*aws.Request
+	Input *DeleteAliasInput
+}
+
+// Send marshals and sends the DeleteAlias API request.
+func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAliasOutput), nil
+}
+
+// DeleteAliasRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAlias for more information on using the DeleteAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified alias. To map an alias to a different key, call UpdateAlias.
 //
 //    // Example sending a request using the DeleteAliasRequest method.
-//    req, resp := client.DeleteAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAlias
-func (c *KMS) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, output *DeleteAliasOutput) {
+func (c *KMS) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAlias,
 		HTTPMethod: "POST",
@@ -628,112 +333,32 @@ func (c *KMS) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, out
 		input = &DeleteAliasInput{}
 	}
 
-	output = &DeleteAliasOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAliasOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteAlias API operation for AWS Key Management Service.
-//
-// Deletes the specified alias. To map an alias to a different key, call UpdateAlias.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation DeleteAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAlias
-func (c *KMS) DeleteAlias(input *DeleteAliasInput) (*DeleteAliasOutput, error) {
-	req, out := c.DeleteAliasRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAliasWithContext is the same as DeleteAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...aws.Option) (*DeleteAliasOutput, error) {
-	req, out := c.DeleteAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteAliasRequest{Request: req, Input: input}
 }
 
 const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 
-// DeleteImportedKeyMaterialRequest generates a "aws.Request" representing the
-// client's request for the DeleteImportedKeyMaterial operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteImportedKeyMaterial for more information on using the DeleteImportedKeyMaterial
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteImportedKeyMaterialRequest method.
-//    req, resp := client.DeleteImportedKeyMaterialRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterial
-func (c *KMS) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialInput) (req *aws.Request, output *DeleteImportedKeyMaterialOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteImportedKeyMaterial,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteImportedKeyMaterialInput{}
-	}
-
-	output = &DeleteImportedKeyMaterialOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteImportedKeyMaterialRequest is a API request type for the DeleteImportedKeyMaterial API operation.
+type DeleteImportedKeyMaterialRequest struct {
+	*aws.Request
+	Input *DeleteImportedKeyMaterialInput
 }
 
-// DeleteImportedKeyMaterial API operation for AWS Key Management Service.
+// Send marshals and sends the DeleteImportedKeyMaterial API request.
+func (r DeleteImportedKeyMaterialRequest) Send() (*DeleteImportedKeyMaterialOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteImportedKeyMaterialOutput), nil
+}
+
+// DeleteImportedKeyMaterialRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Deletes key material that you previously imported and makes the specified
 // customer master key (CMK) unusable. For more information about importing
@@ -746,90 +371,63 @@ func (c *KMS) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialI
 // After you delete key material, you can use ImportKeyMaterial to reimport
 // the same key material into the CMK.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation DeleteImportedKeyMaterial for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
+//    // Example sending a request using the DeleteImportedKeyMaterialRequest method.
+//    req := client.DeleteImportedKeyMaterialRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterial
-func (c *KMS) DeleteImportedKeyMaterial(input *DeleteImportedKeyMaterialInput) (*DeleteImportedKeyMaterialOutput, error) {
-	req, out := c.DeleteImportedKeyMaterialRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialInput) DeleteImportedKeyMaterialRequest {
+	op := &aws.Operation{
+		Name:       opDeleteImportedKeyMaterial,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteImportedKeyMaterialWithContext is the same as DeleteImportedKeyMaterial with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteImportedKeyMaterial for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) DeleteImportedKeyMaterialWithContext(ctx aws.Context, input *DeleteImportedKeyMaterialInput, opts ...aws.Option) (*DeleteImportedKeyMaterialOutput, error) {
-	req, out := c.DeleteImportedKeyMaterialRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteImportedKeyMaterialInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteImportedKeyMaterialOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteImportedKeyMaterialRequest{Request: req, Input: input}
 }
 
 const opDescribeKey = "DescribeKey"
 
-// DescribeKeyRequest generates a "aws.Request" representing the
-// client's request for the DescribeKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeKeyRequest is a API request type for the DescribeKey API operation.
+type DescribeKeyRequest struct {
+	*aws.Request
+	Input *DescribeKeyInput
+}
+
+// Send marshals and sends the DescribeKey API request.
+func (r DescribeKeyRequest) Send() (*DescribeKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeKeyOutput), nil
+}
+
+// DescribeKeyRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeKey for more information on using the DescribeKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides detailed information about the specified customer master key.
 //
 //    // Example sending a request using the DescribeKeyRequest method.
-//    req, resp := client.DescribeKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKey
-func (c *KMS) DescribeKeyRequest(input *DescribeKeyInput) (req *aws.Request, output *DescribeKeyOutput) {
+func (c *KMS) DescribeKeyRequest(input *DescribeKeyInput) DescribeKeyRequest {
 	op := &aws.Operation{
 		Name:       opDescribeKey,
 		HTTPMethod: "POST",
@@ -840,87 +438,46 @@ func (c *KMS) DescribeKeyRequest(input *DescribeKeyInput) (req *aws.Request, out
 		input = &DescribeKeyInput{}
 	}
 
-	output = &DescribeKeyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeKey API operation for AWS Key Management Service.
-//
-// Provides detailed information about the specified customer master key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation DescribeKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKey
-func (c *KMS) DescribeKey(input *DescribeKeyInput) (*DescribeKeyOutput, error) {
-	req, out := c.DescribeKeyRequest(input)
-	return out, req.Send()
-}
-
-// DescribeKeyWithContext is the same as DescribeKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) DescribeKeyWithContext(ctx aws.Context, input *DescribeKeyInput, opts ...aws.Option) (*DescribeKeyOutput, error) {
-	req, out := c.DescribeKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeKeyOutput{})
+	return DescribeKeyRequest{Request: req, Input: input}
 }
 
 const opDisableKey = "DisableKey"
 
-// DisableKeyRequest generates a "aws.Request" representing the
-// client's request for the DisableKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableKeyRequest is a API request type for the DisableKey API operation.
+type DisableKeyRequest struct {
+	*aws.Request
+	Input *DisableKeyInput
+}
+
+// Send marshals and sends the DisableKey API request.
+func (r DisableKeyRequest) Send() (*DisableKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableKeyOutput), nil
+}
+
+// DisableKeyRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableKey for more information on using the DisableKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the state of a customer master key (CMK) to disabled, thereby preventing
+// its use for cryptographic operations. For more information about how key
+// state affects the use of a CMK, see How Key State Affects the Use of a Customer
+// Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the DisableKeyRequest method.
-//    req, resp := client.DisableKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKey
-func (c *KMS) DisableKeyRequest(input *DisableKeyInput) (req *aws.Request, output *DisableKeyOutput) {
+func (c *KMS) DisableKeyRequest(input *DisableKeyInput) DisableKeyRequest {
 	op := &aws.Operation{
 		Name:       opDisableKey,
 		HTTPMethod: "POST",
@@ -931,101 +488,44 @@ func (c *KMS) DisableKeyRequest(input *DisableKeyInput) (req *aws.Request, outpu
 		input = &DisableKeyInput{}
 	}
 
-	output = &DisableKeyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DisableKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DisableKey API operation for AWS Key Management Service.
-//
-// Sets the state of a customer master key (CMK) to disabled, thereby preventing
-// its use for cryptographic operations. For more information about how key
-// state affects the use of a CMK, see How Key State Affects the Use of a Customer
-// Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the AWS Key Management Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation DisableKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKey
-func (c *KMS) DisableKey(input *DisableKeyInput) (*DisableKeyOutput, error) {
-	req, out := c.DisableKeyRequest(input)
-	return out, req.Send()
-}
-
-// DisableKeyWithContext is the same as DisableKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) DisableKeyWithContext(ctx aws.Context, input *DisableKeyInput, opts ...aws.Option) (*DisableKeyOutput, error) {
-	req, out := c.DisableKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DisableKeyRequest{Request: req, Input: input}
 }
 
 const opDisableKeyRotation = "DisableKeyRotation"
 
-// DisableKeyRotationRequest generates a "aws.Request" representing the
-// client's request for the DisableKeyRotation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableKeyRotationRequest is a API request type for the DisableKeyRotation API operation.
+type DisableKeyRotationRequest struct {
+	*aws.Request
+	Input *DisableKeyRotationInput
+}
+
+// Send marshals and sends the DisableKeyRotation API request.
+func (r DisableKeyRotationRequest) Send() (*DisableKeyRotationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableKeyRotationOutput), nil
+}
+
+// DisableKeyRotationRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableKeyRotation for more information on using the DisableKeyRotation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disables rotation of the specified key.
 //
 //    // Example sending a request using the DisableKeyRotationRequest method.
-//    req, resp := client.DisableKeyRotationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableKeyRotationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotation
-func (c *KMS) DisableKeyRotationRequest(input *DisableKeyRotationInput) (req *aws.Request, output *DisableKeyRotationOutput) {
+func (c *KMS) DisableKeyRotationRequest(input *DisableKeyRotationInput) DisableKeyRotationRequest {
 	op := &aws.Operation{
 		Name:       opDisableKeyRotation,
 		HTTPMethod: "POST",
@@ -1036,104 +536,44 @@ func (c *KMS) DisableKeyRotationRequest(input *DisableKeyRotationInput) (req *aw
 		input = &DisableKeyRotationInput{}
 	}
 
-	output = &DisableKeyRotationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DisableKeyRotationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DisableKeyRotation API operation for AWS Key Management Service.
-//
-// Disables rotation of the specified key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation DisableKeyRotation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotation
-func (c *KMS) DisableKeyRotation(input *DisableKeyRotationInput) (*DisableKeyRotationOutput, error) {
-	req, out := c.DisableKeyRotationRequest(input)
-	return out, req.Send()
-}
-
-// DisableKeyRotationWithContext is the same as DisableKeyRotation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableKeyRotation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) DisableKeyRotationWithContext(ctx aws.Context, input *DisableKeyRotationInput, opts ...aws.Option) (*DisableKeyRotationOutput, error) {
-	req, out := c.DisableKeyRotationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DisableKeyRotationRequest{Request: req, Input: input}
 }
 
 const opEnableKey = "EnableKey"
 
-// EnableKeyRequest generates a "aws.Request" representing the
-// client's request for the EnableKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableKeyRequest is a API request type for the EnableKey API operation.
+type EnableKeyRequest struct {
+	*aws.Request
+	Input *EnableKeyInput
+}
+
+// Send marshals and sends the EnableKey API request.
+func (r EnableKeyRequest) Send() (*EnableKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableKeyOutput), nil
+}
+
+// EnableKeyRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableKey for more information on using the EnableKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Marks a key as enabled, thereby permitting its use.
 //
 //    // Example sending a request using the EnableKeyRequest method.
-//    req, resp := client.EnableKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKey
-func (c *KMS) EnableKeyRequest(input *EnableKeyInput) (req *aws.Request, output *EnableKeyOutput) {
+func (c *KMS) EnableKeyRequest(input *EnableKeyInput) EnableKeyRequest {
 	op := &aws.Operation{
 		Name:       opEnableKey,
 		HTTPMethod: "POST",
@@ -1144,102 +584,44 @@ func (c *KMS) EnableKeyRequest(input *EnableKeyInput) (req *aws.Request, output 
 		input = &EnableKeyInput{}
 	}
 
-	output = &EnableKeyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &EnableKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// EnableKey API operation for AWS Key Management Service.
-//
-// Marks a key as enabled, thereby permitting its use.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation EnableKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because a limit was exceeded. For more information,
-//   see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKey
-func (c *KMS) EnableKey(input *EnableKeyInput) (*EnableKeyOutput, error) {
-	req, out := c.EnableKeyRequest(input)
-	return out, req.Send()
-}
-
-// EnableKeyWithContext is the same as EnableKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) EnableKeyWithContext(ctx aws.Context, input *EnableKeyInput, opts ...aws.Option) (*EnableKeyOutput, error) {
-	req, out := c.EnableKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return EnableKeyRequest{Request: req, Input: input}
 }
 
 const opEnableKeyRotation = "EnableKeyRotation"
 
-// EnableKeyRotationRequest generates a "aws.Request" representing the
-// client's request for the EnableKeyRotation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableKeyRotationRequest is a API request type for the EnableKeyRotation API operation.
+type EnableKeyRotationRequest struct {
+	*aws.Request
+	Input *EnableKeyRotationInput
+}
+
+// Send marshals and sends the EnableKeyRotation API request.
+func (r EnableKeyRotationRequest) Send() (*EnableKeyRotationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableKeyRotationOutput), nil
+}
+
+// EnableKeyRotationRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableKeyRotation for more information on using the EnableKeyRotation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables rotation of the specified customer master key.
 //
 //    // Example sending a request using the EnableKeyRotationRequest method.
-//    req, resp := client.EnableKeyRotationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableKeyRotationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotation
-func (c *KMS) EnableKeyRotationRequest(input *EnableKeyRotationInput) (req *aws.Request, output *EnableKeyRotationOutput) {
+func (c *KMS) EnableKeyRotationRequest(input *EnableKeyRotationInput) EnableKeyRotationRequest {
 	op := &aws.Operation{
 		Name:       opEnableKeyRotation,
 		HTTPMethod: "POST",
@@ -1250,120 +632,32 @@ func (c *KMS) EnableKeyRotationRequest(input *EnableKeyRotationInput) (req *aws.
 		input = &EnableKeyRotationInput{}
 	}
 
-	output = &EnableKeyRotationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &EnableKeyRotationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// EnableKeyRotation API operation for AWS Key Management Service.
-//
-// Enables rotation of the specified customer master key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation EnableKeyRotation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotation
-func (c *KMS) EnableKeyRotation(input *EnableKeyRotationInput) (*EnableKeyRotationOutput, error) {
-	req, out := c.EnableKeyRotationRequest(input)
-	return out, req.Send()
-}
-
-// EnableKeyRotationWithContext is the same as EnableKeyRotation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableKeyRotation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) EnableKeyRotationWithContext(ctx aws.Context, input *EnableKeyRotationInput, opts ...aws.Option) (*EnableKeyRotationOutput, error) {
-	req, out := c.EnableKeyRotationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return EnableKeyRotationRequest{Request: req, Input: input}
 }
 
 const opEncrypt = "Encrypt"
 
-// EncryptRequest generates a "aws.Request" representing the
-// client's request for the Encrypt operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Encrypt for more information on using the Encrypt
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the EncryptRequest method.
-//    req, resp := client.EncryptRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Encrypt
-func (c *KMS) EncryptRequest(input *EncryptInput) (req *aws.Request, output *EncryptOutput) {
-	op := &aws.Operation{
-		Name:       opEncrypt,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &EncryptInput{}
-	}
-
-	output = &EncryptOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// EncryptRequest is a API request type for the Encrypt API operation.
+type EncryptRequest struct {
+	*aws.Request
+	Input *EncryptInput
 }
 
-// Encrypt API operation for AWS Key Management Service.
+// Send marshals and sends the Encrypt API request.
+func (r EncryptRequest) Send() (*EncryptOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EncryptOutput), nil
+}
+
+// EncryptRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Encrypts plaintext into ciphertext by using a customer master key. The Encrypt
 // function has two primary use cases:
@@ -1386,112 +680,49 @@ func (c *KMS) EncryptRequest(input *EncryptInput) (req *aws.Request, output *Enc
 // GenerateDataKey function to return a plaintext data encryption key and a
 // copy of the key encrypted under the customer master key (CMK) of your choosing.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation Encrypt for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeKeyUnavailableException "KeyUnavailableException"
-//   The request was rejected because the specified CMK was not available. The
-//   request can be retried.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidKeyUsageException "InvalidKeyUsageException"
-//   The request was rejected because the specified KeySpec value is not valid.
-//
-//   * ErrCodeInvalidGrantTokenException "InvalidGrantTokenException"
-//   The request was rejected because the specified grant token is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Encrypt
-func (c *KMS) Encrypt(input *EncryptInput) (*EncryptOutput, error) {
-	req, out := c.EncryptRequest(input)
-	return out, req.Send()
-}
-
-// EncryptWithContext is the same as Encrypt with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Encrypt for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) EncryptWithContext(ctx aws.Context, input *EncryptInput, opts ...aws.Option) (*EncryptOutput, error) {
-	req, out := c.EncryptRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGenerateDataKey = "GenerateDataKey"
-
-// GenerateDataKeyRequest generates a "aws.Request" representing the
-// client's request for the GenerateDataKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GenerateDataKey for more information on using the GenerateDataKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GenerateDataKeyRequest method.
-//    req, resp := client.GenerateDataKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the EncryptRequest method.
+//    req := client.EncryptRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKey
-func (c *KMS) GenerateDataKeyRequest(input *GenerateDataKeyInput) (req *aws.Request, output *GenerateDataKeyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Encrypt
+func (c *KMS) EncryptRequest(input *EncryptInput) EncryptRequest {
 	op := &aws.Operation{
-		Name:       opGenerateDataKey,
+		Name:       opEncrypt,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GenerateDataKeyInput{}
+		input = &EncryptInput{}
 	}
 
-	output = &GenerateDataKeyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &EncryptOutput{})
+	return EncryptRequest{Request: req, Input: input}
 }
 
-// GenerateDataKey API operation for AWS Key Management Service.
+const opGenerateDataKey = "GenerateDataKey"
+
+// GenerateDataKeyRequest is a API request type for the GenerateDataKey API operation.
+type GenerateDataKeyRequest struct {
+	*aws.Request
+	Input *GenerateDataKeyInput
+}
+
+// Send marshals and sends the GenerateDataKey API request.
+func (r GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GenerateDataKeyOutput), nil
+}
+
+// GenerateDataKeyRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Returns a data encryption key that you can use in your application to encrypt
 // data locally.
@@ -1538,112 +769,49 @@ func (c *KMS) GenerateDataKeyRequest(input *GenerateDataKeyInput) (req *aws.Requ
 // Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
 // in the AWS Key Management Service Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation GenerateDataKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeKeyUnavailableException "KeyUnavailableException"
-//   The request was rejected because the specified CMK was not available. The
-//   request can be retried.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidKeyUsageException "InvalidKeyUsageException"
-//   The request was rejected because the specified KeySpec value is not valid.
-//
-//   * ErrCodeInvalidGrantTokenException "InvalidGrantTokenException"
-//   The request was rejected because the specified grant token is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKey
-func (c *KMS) GenerateDataKey(input *GenerateDataKeyInput) (*GenerateDataKeyOutput, error) {
-	req, out := c.GenerateDataKeyRequest(input)
-	return out, req.Send()
-}
-
-// GenerateDataKeyWithContext is the same as GenerateDataKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GenerateDataKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) GenerateDataKeyWithContext(ctx aws.Context, input *GenerateDataKeyInput, opts ...aws.Option) (*GenerateDataKeyOutput, error) {
-	req, out := c.GenerateDataKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGenerateDataKeyWithoutPlaintext = "GenerateDataKeyWithoutPlaintext"
-
-// GenerateDataKeyWithoutPlaintextRequest generates a "aws.Request" representing the
-// client's request for the GenerateDataKeyWithoutPlaintext operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GenerateDataKeyWithoutPlaintext for more information on using the GenerateDataKeyWithoutPlaintext
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GenerateDataKeyWithoutPlaintextRequest method.
-//    req, resp := client.GenerateDataKeyWithoutPlaintextRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GenerateDataKeyRequest method.
+//    req := client.GenerateDataKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintext
-func (c *KMS) GenerateDataKeyWithoutPlaintextRequest(input *GenerateDataKeyWithoutPlaintextInput) (req *aws.Request, output *GenerateDataKeyWithoutPlaintextOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKey
+func (c *KMS) GenerateDataKeyRequest(input *GenerateDataKeyInput) GenerateDataKeyRequest {
 	op := &aws.Operation{
-		Name:       opGenerateDataKeyWithoutPlaintext,
+		Name:       opGenerateDataKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GenerateDataKeyWithoutPlaintextInput{}
+		input = &GenerateDataKeyInput{}
 	}
 
-	output = &GenerateDataKeyWithoutPlaintextOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GenerateDataKeyOutput{})
+	return GenerateDataKeyRequest{Request: req, Input: input}
 }
 
-// GenerateDataKeyWithoutPlaintext API operation for AWS Key Management Service.
+const opGenerateDataKeyWithoutPlaintext = "GenerateDataKeyWithoutPlaintext"
+
+// GenerateDataKeyWithoutPlaintextRequest is a API request type for the GenerateDataKeyWithoutPlaintext API operation.
+type GenerateDataKeyWithoutPlaintextRequest struct {
+	*aws.Request
+	Input *GenerateDataKeyWithoutPlaintextInput
+}
+
+// Send marshals and sends the GenerateDataKeyWithoutPlaintext API request.
+func (r GenerateDataKeyWithoutPlaintextRequest) Send() (*GenerateDataKeyWithoutPlaintextOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GenerateDataKeyWithoutPlaintextOutput), nil
+}
+
+// GenerateDataKeyWithoutPlaintextRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Returns a data encryption key encrypted under a customer master key (CMK).
 // This operation is identical to GenerateDataKey but returns only the encrypted
@@ -1661,96 +829,65 @@ func (c *KMS) GenerateDataKeyWithoutPlaintextRequest(input *GenerateDataKeyWitho
 // data key to encrypt data, and finally stores the encrypted data in the container.
 // In this system, the control plane never sees the plaintext data key.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation GenerateDataKeyWithoutPlaintext for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeKeyUnavailableException "KeyUnavailableException"
-//   The request was rejected because the specified CMK was not available. The
-//   request can be retried.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidKeyUsageException "InvalidKeyUsageException"
-//   The request was rejected because the specified KeySpec value is not valid.
-//
-//   * ErrCodeInvalidGrantTokenException "InvalidGrantTokenException"
-//   The request was rejected because the specified grant token is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
+//    // Example sending a request using the GenerateDataKeyWithoutPlaintextRequest method.
+//    req := client.GenerateDataKeyWithoutPlaintextRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintext
-func (c *KMS) GenerateDataKeyWithoutPlaintext(input *GenerateDataKeyWithoutPlaintextInput) (*GenerateDataKeyWithoutPlaintextOutput, error) {
-	req, out := c.GenerateDataKeyWithoutPlaintextRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) GenerateDataKeyWithoutPlaintextRequest(input *GenerateDataKeyWithoutPlaintextInput) GenerateDataKeyWithoutPlaintextRequest {
+	op := &aws.Operation{
+		Name:       opGenerateDataKeyWithoutPlaintext,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GenerateDataKeyWithoutPlaintextWithContext is the same as GenerateDataKeyWithoutPlaintext with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GenerateDataKeyWithoutPlaintext for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) GenerateDataKeyWithoutPlaintextWithContext(ctx aws.Context, input *GenerateDataKeyWithoutPlaintextInput, opts ...aws.Option) (*GenerateDataKeyWithoutPlaintextOutput, error) {
-	req, out := c.GenerateDataKeyWithoutPlaintextRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GenerateDataKeyWithoutPlaintextInput{}
+	}
+
+	req := c.newRequest(op, input, &GenerateDataKeyWithoutPlaintextOutput{})
+	return GenerateDataKeyWithoutPlaintextRequest{Request: req, Input: input}
 }
 
 const opGenerateRandom = "GenerateRandom"
 
-// GenerateRandomRequest generates a "aws.Request" representing the
-// client's request for the GenerateRandom operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GenerateRandomRequest is a API request type for the GenerateRandom API operation.
+type GenerateRandomRequest struct {
+	*aws.Request
+	Input *GenerateRandomInput
+}
+
+// Send marshals and sends the GenerateRandom API request.
+func (r GenerateRandomRequest) Send() (*GenerateRandomOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GenerateRandomOutput), nil
+}
+
+// GenerateRandomRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a random byte string that is cryptographically secure.
 //
-// See GenerateRandom for more information on using the GenerateRandom
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about entropy and random number generation, see the
+// AWS Key Management Service Cryptographic Details (https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf)
+// whitepaper.
 //
 //    // Example sending a request using the GenerateRandomRequest method.
-//    req, resp := client.GenerateRandomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GenerateRandomRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandom
-func (c *KMS) GenerateRandomRequest(input *GenerateRandomInput) (req *aws.Request, output *GenerateRandomOutput) {
+func (c *KMS) GenerateRandomRequest(input *GenerateRandomInput) GenerateRandomRequest {
 	op := &aws.Operation{
 		Name:       opGenerateRandom,
 		HTTPMethod: "POST",
@@ -1761,84 +898,42 @@ func (c *KMS) GenerateRandomRequest(input *GenerateRandomInput) (req *aws.Reques
 		input = &GenerateRandomInput{}
 	}
 
-	output = &GenerateRandomOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GenerateRandom API operation for AWS Key Management Service.
-//
-// Returns a random byte string that is cryptographically secure.
-//
-// For more information about entropy and random number generation, see the
-// AWS Key Management Service Cryptographic Details (https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf)
-// whitepaper.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation GenerateRandom for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandom
-func (c *KMS) GenerateRandom(input *GenerateRandomInput) (*GenerateRandomOutput, error) {
-	req, out := c.GenerateRandomRequest(input)
-	return out, req.Send()
-}
-
-// GenerateRandomWithContext is the same as GenerateRandom with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GenerateRandom for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) GenerateRandomWithContext(ctx aws.Context, input *GenerateRandomInput, opts ...aws.Option) (*GenerateRandomOutput, error) {
-	req, out := c.GenerateRandomRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GenerateRandomOutput{})
+	return GenerateRandomRequest{Request: req, Input: input}
 }
 
 const opGetKeyPolicy = "GetKeyPolicy"
 
-// GetKeyPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetKeyPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetKeyPolicyRequest is a API request type for the GetKeyPolicy API operation.
+type GetKeyPolicyRequest struct {
+	*aws.Request
+	Input *GetKeyPolicyInput
+}
+
+// Send marshals and sends the GetKeyPolicy API request.
+func (r GetKeyPolicyRequest) Send() (*GetKeyPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetKeyPolicyOutput), nil
+}
+
+// GetKeyPolicyRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetKeyPolicy for more information on using the GetKeyPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a policy attached to the specified key.
 //
 //    // Example sending a request using the GetKeyPolicyRequest method.
-//    req, resp := client.GetKeyPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetKeyPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicy
-func (c *KMS) GetKeyPolicyRequest(input *GetKeyPolicyInput) (req *aws.Request, output *GetKeyPolicyOutput) {
+func (c *KMS) GetKeyPolicyRequest(input *GetKeyPolicyInput) GetKeyPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetKeyPolicy,
 		HTTPMethod: "POST",
@@ -1849,95 +944,43 @@ func (c *KMS) GetKeyPolicyRequest(input *GetKeyPolicyInput) (req *aws.Request, o
 		input = &GetKeyPolicyInput{}
 	}
 
-	output = &GetKeyPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetKeyPolicy API operation for AWS Key Management Service.
-//
-// Retrieves a policy attached to the specified key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation GetKeyPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicy
-func (c *KMS) GetKeyPolicy(input *GetKeyPolicyInput) (*GetKeyPolicyOutput, error) {
-	req, out := c.GetKeyPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetKeyPolicyWithContext is the same as GetKeyPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetKeyPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) GetKeyPolicyWithContext(ctx aws.Context, input *GetKeyPolicyInput, opts ...aws.Option) (*GetKeyPolicyOutput, error) {
-	req, out := c.GetKeyPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetKeyPolicyOutput{})
+	return GetKeyPolicyRequest{Request: req, Input: input}
 }
 
 const opGetKeyRotationStatus = "GetKeyRotationStatus"
 
-// GetKeyRotationStatusRequest generates a "aws.Request" representing the
-// client's request for the GetKeyRotationStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetKeyRotationStatusRequest is a API request type for the GetKeyRotationStatus API operation.
+type GetKeyRotationStatusRequest struct {
+	*aws.Request
+	Input *GetKeyRotationStatusInput
+}
+
+// Send marshals and sends the GetKeyRotationStatus API request.
+func (r GetKeyRotationStatusRequest) Send() (*GetKeyRotationStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetKeyRotationStatusOutput), nil
+}
+
+// GetKeyRotationStatusRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetKeyRotationStatus for more information on using the GetKeyRotationStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a Boolean value that indicates whether key rotation is enabled
+// for the specified key.
 //
 //    // Example sending a request using the GetKeyRotationStatusRequest method.
-//    req, resp := client.GetKeyRotationStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetKeyRotationStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatus
-func (c *KMS) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) (req *aws.Request, output *GetKeyRotationStatusOutput) {
+func (c *KMS) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) GetKeyRotationStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetKeyRotationStatus,
 		HTTPMethod: "POST",
@@ -1948,116 +991,30 @@ func (c *KMS) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) (req
 		input = &GetKeyRotationStatusInput{}
 	}
 
-	output = &GetKeyRotationStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetKeyRotationStatus API operation for AWS Key Management Service.
-//
-// Retrieves a Boolean value that indicates whether key rotation is enabled
-// for the specified key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation GetKeyRotationStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatus
-func (c *KMS) GetKeyRotationStatus(input *GetKeyRotationStatusInput) (*GetKeyRotationStatusOutput, error) {
-	req, out := c.GetKeyRotationStatusRequest(input)
-	return out, req.Send()
-}
-
-// GetKeyRotationStatusWithContext is the same as GetKeyRotationStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetKeyRotationStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) GetKeyRotationStatusWithContext(ctx aws.Context, input *GetKeyRotationStatusInput, opts ...aws.Option) (*GetKeyRotationStatusOutput, error) {
-	req, out := c.GetKeyRotationStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetKeyRotationStatusOutput{})
+	return GetKeyRotationStatusRequest{Request: req, Input: input}
 }
 
 const opGetParametersForImport = "GetParametersForImport"
 
-// GetParametersForImportRequest generates a "aws.Request" representing the
-// client's request for the GetParametersForImport operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetParametersForImport for more information on using the GetParametersForImport
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetParametersForImportRequest method.
-//    req, resp := client.GetParametersForImportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImport
-func (c *KMS) GetParametersForImportRequest(input *GetParametersForImportInput) (req *aws.Request, output *GetParametersForImportOutput) {
-	op := &aws.Operation{
-		Name:       opGetParametersForImport,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetParametersForImportInput{}
-	}
-
-	output = &GetParametersForImportOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetParametersForImportRequest is a API request type for the GetParametersForImport API operation.
+type GetParametersForImportRequest struct {
+	*aws.Request
+	Input *GetParametersForImportInput
 }
 
-// GetParametersForImport API operation for AWS Key Management Service.
+// Send marshals and sends the GetParametersForImport API request.
+func (r GetParametersForImportRequest) Send() (*GetParametersForImportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetParametersForImportOutput), nil
+}
+
+// GetParametersForImportRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Returns the items you need in order to import key material into AWS KMS from
 // your existing key management infrastructure. For more information about importing
@@ -2076,106 +1033,49 @@ func (c *KMS) GetParametersForImportRequest(input *GetParametersForImportInput) 
 // which they cannot be used for a subsequent ImportKeyMaterial request. To
 // retrieve new ones, send another GetParametersForImport request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation GetParametersForImport for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImport
-func (c *KMS) GetParametersForImport(input *GetParametersForImportInput) (*GetParametersForImportOutput, error) {
-	req, out := c.GetParametersForImportRequest(input)
-	return out, req.Send()
-}
-
-// GetParametersForImportWithContext is the same as GetParametersForImport with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetParametersForImport for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) GetParametersForImportWithContext(ctx aws.Context, input *GetParametersForImportInput, opts ...aws.Option) (*GetParametersForImportOutput, error) {
-	req, out := c.GetParametersForImportRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opImportKeyMaterial = "ImportKeyMaterial"
-
-// ImportKeyMaterialRequest generates a "aws.Request" representing the
-// client's request for the ImportKeyMaterial operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ImportKeyMaterial for more information on using the ImportKeyMaterial
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ImportKeyMaterialRequest method.
-//    req, resp := client.ImportKeyMaterialRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetParametersForImportRequest method.
+//    req := client.GetParametersForImportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterial
-func (c *KMS) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) (req *aws.Request, output *ImportKeyMaterialOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImport
+func (c *KMS) GetParametersForImportRequest(input *GetParametersForImportInput) GetParametersForImportRequest {
 	op := &aws.Operation{
-		Name:       opImportKeyMaterial,
+		Name:       opGetParametersForImport,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ImportKeyMaterialInput{}
+		input = &GetParametersForImportInput{}
 	}
 
-	output = &ImportKeyMaterialOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetParametersForImportOutput{})
+	return GetParametersForImportRequest{Request: req, Input: input}
 }
 
-// ImportKeyMaterial API operation for AWS Key Management Service.
+const opImportKeyMaterial = "ImportKeyMaterial"
+
+// ImportKeyMaterialRequest is a API request type for the ImportKeyMaterial API operation.
+type ImportKeyMaterialRequest struct {
+	*aws.Request
+	Input *ImportKeyMaterialInput
+}
+
+// Send marshals and sends the ImportKeyMaterial API request.
+func (r ImportKeyMaterialRequest) Send() (*ImportKeyMaterialOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportKeyMaterialOutput), nil
+}
+
+// ImportKeyMaterialRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Imports key material into an AWS KMS customer master key (CMK) from your
 // existing key management infrastructure. For more information about importing
@@ -2199,109 +1099,61 @@ func (c *KMS) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) (req *aws.
 // After you successfully import key material into a CMK, you can reimport the
 // same key material into that CMK, but you cannot import different key material.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ImportKeyMaterial for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeInvalidCiphertextException "InvalidCiphertextException"
-//   The request was rejected because the specified ciphertext has been corrupted
-//   or is otherwise invalid.
-//
-//   * ErrCodeIncorrectKeyMaterialException "IncorrectKeyMaterialException"
-//   The request was rejected because the provided key material is invalid or
-//   is not the same key material that was previously imported into this customer
-//   master key (CMK).
-//
-//   * ErrCodeExpiredImportTokenException "ExpiredImportTokenException"
-//   The request was rejected because the provided import token is expired. Use
-//   GetParametersForImport to retrieve a new import token and public key, use
-//   the new public key to encrypt the key material, and then try the request
-//   again.
-//
-//   * ErrCodeInvalidImportTokenException "InvalidImportTokenException"
-//   The request was rejected because the provided import token is invalid or
-//   is associated with a different customer master key (CMK).
+//    // Example sending a request using the ImportKeyMaterialRequest method.
+//    req := client.ImportKeyMaterialRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterial
-func (c *KMS) ImportKeyMaterial(input *ImportKeyMaterialInput) (*ImportKeyMaterialOutput, error) {
-	req, out := c.ImportKeyMaterialRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) ImportKeyMaterialRequest {
+	op := &aws.Operation{
+		Name:       opImportKeyMaterial,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ImportKeyMaterialWithContext is the same as ImportKeyMaterial with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ImportKeyMaterial for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ImportKeyMaterialWithContext(ctx aws.Context, input *ImportKeyMaterialInput, opts ...aws.Option) (*ImportKeyMaterialOutput, error) {
-	req, out := c.ImportKeyMaterialRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ImportKeyMaterialInput{}
+	}
+
+	req := c.newRequest(op, input, &ImportKeyMaterialOutput{})
+	return ImportKeyMaterialRequest{Request: req, Input: input}
 }
 
 const opListAliases = "ListAliases"
 
-// ListAliasesRequest generates a "aws.Request" representing the
-// client's request for the ListAliases operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAliasesRequest is a API request type for the ListAliases API operation.
+type ListAliasesRequest struct {
+	*aws.Request
+	Input *ListAliasesInput
+}
+
+// Send marshals and sends the ListAliases API request.
+func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAliasesOutput), nil
+}
+
+// ListAliasesRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAliases for more information on using the ListAliases
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all of the key aliases in the account.
 //
 //    // Example sending a request using the ListAliasesRequest method.
-//    req, resp := client.ListAliasesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAliasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliases
-func (c *KMS) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, output *ListAliasesOutput) {
+func (c *KMS) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
 	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "POST",
@@ -2318,55 +1170,8 @@ func (c *KMS) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, out
 		input = &ListAliasesInput{}
 	}
 
-	output = &ListAliasesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAliases API operation for AWS Key Management Service.
-//
-// Lists all of the key aliases in the account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ListAliases for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidMarkerException "InvalidMarkerException"
-//   The request was rejected because the marker that specifies where pagination
-//   should next begin is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliases
-func (c *KMS) ListAliases(input *ListAliasesInput) (*ListAliasesOutput, error) {
-	req, out := c.ListAliasesRequest(input)
-	return out, req.Send()
-}
-
-// ListAliasesWithContext is the same as ListAliases with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAliases for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...aws.Option) (*ListAliasesOutput, error) {
-	req, out := c.ListAliasesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAliasesOutput{})
+	return ListAliasesRequest{Request: req, Input: input}
 }
 
 // ListAliasesPages iterates over the pages of a ListAliases operation,
@@ -2405,10 +1210,10 @@ func (c *KMS) ListAliasesPagesWithContext(ctx aws.Context, input *ListAliasesInp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAliasesRequest(inCpy)
+			req := c.ListAliasesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2421,31 +1226,36 @@ func (c *KMS) ListAliasesPagesWithContext(ctx aws.Context, input *ListAliasesInp
 
 const opListGrants = "ListGrants"
 
-// ListGrantsRequest generates a "aws.Request" representing the
-// client's request for the ListGrants operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGrantsRequest is a API request type for the ListGrants API operation.
+type ListGrantsRequest struct {
+	*aws.Request
+	Input *ListGrantsInput
+}
+
+// Send marshals and sends the ListGrants API request.
+func (r ListGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRetirableGrantsOutput), nil
+}
+
+// ListGrantsRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListGrants for more information on using the ListGrants
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List the grants for a specified key.
 //
 //    // Example sending a request using the ListGrantsRequest method.
-//    req, resp := client.ListGrantsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGrantsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrants
-func (c *KMS) ListGrantsRequest(input *ListGrantsInput) (req *aws.Request, output *ListGrantsResponse) {
+func (c *KMS) ListGrantsRequest(input *ListGrantsInput) ListGrantsRequest {
 	op := &aws.Operation{
 		Name:       opListGrants,
 		HTTPMethod: "POST",
@@ -2462,70 +1272,8 @@ func (c *KMS) ListGrantsRequest(input *ListGrantsInput) (req *aws.Request, outpu
 		input = &ListGrantsInput{}
 	}
 
-	output = &ListGrantsResponse{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGrants API operation for AWS Key Management Service.
-//
-// List the grants for a specified key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ListGrants for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidMarkerException "InvalidMarkerException"
-//   The request was rejected because the marker that specifies where pagination
-//   should next begin is not valid.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrants
-func (c *KMS) ListGrants(input *ListGrantsInput) (*ListGrantsResponse, error) {
-	req, out := c.ListGrantsRequest(input)
-	return out, req.Send()
-}
-
-// ListGrantsWithContext is the same as ListGrants with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGrants for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ListGrantsWithContext(ctx aws.Context, input *ListGrantsInput, opts ...aws.Option) (*ListGrantsResponse, error) {
-	req, out := c.ListGrantsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRetirableGrantsOutput{})
+	return ListGrantsRequest{Request: req, Input: input}
 }
 
 // ListGrantsPages iterates over the pages of a ListGrants operation,
@@ -2539,13 +1287,13 @@ func (c *KMS) ListGrantsWithContext(ctx aws.Context, input *ListGrantsInput, opt
 //    // Example iterating over at most 3 pages of a ListGrants operation.
 //    pageNum := 0
 //    err := client.ListGrantsPages(params,
-//        func(page *ListGrantsResponse, lastPage bool) bool {
+//        func(page *ListRetirableGrantsOutput, lastPage bool) bool {
 //            pageNum++
 //            fmt.Println(page)
 //            return pageNum <= 3
 //        })
 //
-func (c *KMS) ListGrantsPages(input *ListGrantsInput, fn func(*ListGrantsResponse, bool) bool) error {
+func (c *KMS) ListGrantsPages(input *ListGrantsInput, fn func(*ListRetirableGrantsOutput, bool) bool) error {
 	return c.ListGrantsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
 
@@ -2556,7 +1304,7 @@ func (c *KMS) ListGrantsPages(input *ListGrantsInput, fn func(*ListGrantsRespons
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListGrantsPagesWithContext(ctx aws.Context, input *ListGrantsInput, fn func(*ListGrantsResponse, bool) bool, opts ...aws.Option) error {
+func (c *KMS) ListGrantsPagesWithContext(ctx aws.Context, input *ListGrantsInput, fn func(*ListRetirableGrantsOutput, bool) bool, opts ...aws.Option) error {
 	p := aws.Pagination{
 		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListGrantsInput
@@ -2564,47 +1312,52 @@ func (c *KMS) ListGrantsPagesWithContext(ctx aws.Context, input *ListGrantsInput
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListGrantsRequest(inCpy)
+			req := c.ListGrantsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
 	cont := true
 	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGrantsResponse), !p.HasNextPage())
+		cont = fn(p.Page().(*ListRetirableGrantsOutput), !p.HasNextPage())
 	}
 	return p.Err()
 }
 
 const opListKeyPolicies = "ListKeyPolicies"
 
-// ListKeyPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListKeyPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListKeyPoliciesRequest is a API request type for the ListKeyPolicies API operation.
+type ListKeyPoliciesRequest struct {
+	*aws.Request
+	Input *ListKeyPoliciesInput
+}
+
+// Send marshals and sends the ListKeyPolicies API request.
+func (r ListKeyPoliciesRequest) Send() (*ListKeyPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListKeyPoliciesOutput), nil
+}
+
+// ListKeyPoliciesRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListKeyPolicies for more information on using the ListKeyPolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of policies attached to a key.
 //
 //    // Example sending a request using the ListKeyPoliciesRequest method.
-//    req, resp := client.ListKeyPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListKeyPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPolicies
-func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) (req *aws.Request, output *ListKeyPoliciesOutput) {
+func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListKeyPolicies,
 		HTTPMethod: "POST",
@@ -2621,66 +1374,8 @@ func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) (req *aws.Requ
 		input = &ListKeyPoliciesInput{}
 	}
 
-	output = &ListKeyPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListKeyPolicies API operation for AWS Key Management Service.
-//
-// Retrieves a list of policies attached to a key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ListKeyPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPolicies
-func (c *KMS) ListKeyPolicies(input *ListKeyPoliciesInput) (*ListKeyPoliciesOutput, error) {
-	req, out := c.ListKeyPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListKeyPoliciesWithContext is the same as ListKeyPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListKeyPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ListKeyPoliciesWithContext(ctx aws.Context, input *ListKeyPoliciesInput, opts ...aws.Option) (*ListKeyPoliciesOutput, error) {
-	req, out := c.ListKeyPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListKeyPoliciesOutput{})
+	return ListKeyPoliciesRequest{Request: req, Input: input}
 }
 
 // ListKeyPoliciesPages iterates over the pages of a ListKeyPolicies operation,
@@ -2719,10 +1414,10 @@ func (c *KMS) ListKeyPoliciesPagesWithContext(ctx aws.Context, input *ListKeyPol
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListKeyPoliciesRequest(inCpy)
+			req := c.ListKeyPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2735,31 +1430,36 @@ func (c *KMS) ListKeyPoliciesPagesWithContext(ctx aws.Context, input *ListKeyPol
 
 const opListKeys = "ListKeys"
 
-// ListKeysRequest generates a "aws.Request" representing the
-// client's request for the ListKeys operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListKeysRequest is a API request type for the ListKeys API operation.
+type ListKeysRequest struct {
+	*aws.Request
+	Input *ListKeysInput
+}
+
+// Send marshals and sends the ListKeys API request.
+func (r ListKeysRequest) Send() (*ListKeysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListKeysOutput), nil
+}
+
+// ListKeysRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListKeys for more information on using the ListKeys
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the customer master keys.
 //
 //    // Example sending a request using the ListKeysRequest method.
-//    req, resp := client.ListKeysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListKeysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeys
-func (c *KMS) ListKeysRequest(input *ListKeysInput) (req *aws.Request, output *ListKeysOutput) {
+func (c *KMS) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 	op := &aws.Operation{
 		Name:       opListKeys,
 		HTTPMethod: "POST",
@@ -2776,55 +1476,8 @@ func (c *KMS) ListKeysRequest(input *ListKeysInput) (req *aws.Request, output *L
 		input = &ListKeysInput{}
 	}
 
-	output = &ListKeysOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListKeys API operation for AWS Key Management Service.
-//
-// Lists the customer master keys.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ListKeys for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidMarkerException "InvalidMarkerException"
-//   The request was rejected because the marker that specifies where pagination
-//   should next begin is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeys
-func (c *KMS) ListKeys(input *ListKeysInput) (*ListKeysOutput, error) {
-	req, out := c.ListKeysRequest(input)
-	return out, req.Send()
-}
-
-// ListKeysWithContext is the same as ListKeys with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListKeys for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ListKeysWithContext(ctx aws.Context, input *ListKeysInput, opts ...aws.Option) (*ListKeysOutput, error) {
-	req, out := c.ListKeysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListKeysOutput{})
+	return ListKeysRequest{Request: req, Input: input}
 }
 
 // ListKeysPages iterates over the pages of a ListKeys operation,
@@ -2863,10 +1516,10 @@ func (c *KMS) ListKeysPagesWithContext(ctx aws.Context, input *ListKeysInput, fn
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListKeysRequest(inCpy)
+			req := c.ListKeysRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2879,31 +1532,36 @@ func (c *KMS) ListKeysPagesWithContext(ctx aws.Context, input *ListKeysInput, fn
 
 const opListResourceTags = "ListResourceTags"
 
-// ListResourceTagsRequest generates a "aws.Request" representing the
-// client's request for the ListResourceTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListResourceTagsRequest is a API request type for the ListResourceTags API operation.
+type ListResourceTagsRequest struct {
+	*aws.Request
+	Input *ListResourceTagsInput
+}
+
+// Send marshals and sends the ListResourceTags API request.
+func (r ListResourceTagsRequest) Send() (*ListResourceTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourceTagsOutput), nil
+}
+
+// ListResourceTagsRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListResourceTags for more information on using the ListResourceTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of all tags for the specified customer master key (CMK).
 //
 //    // Example sending a request using the ListResourceTagsRequest method.
-//    req, resp := client.ListResourceTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListResourceTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTags
-func (c *KMS) ListResourceTagsRequest(input *ListResourceTagsInput) (req *aws.Request, output *ListResourceTagsOutput) {
+func (c *KMS) ListResourceTagsRequest(input *ListResourceTagsInput) ListResourceTagsRequest {
 	op := &aws.Operation{
 		Name:       opListResourceTags,
 		HTTPMethod: "POST",
@@ -2914,87 +1572,46 @@ func (c *KMS) ListResourceTagsRequest(input *ListResourceTagsInput) (req *aws.Re
 		input = &ListResourceTagsInput{}
 	}
 
-	output = &ListResourceTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListResourceTags API operation for AWS Key Management Service.
-//
-// Returns a list of all tags for the specified customer master key (CMK).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ListResourceTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeInvalidMarkerException "InvalidMarkerException"
-//   The request was rejected because the marker that specifies where pagination
-//   should next begin is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTags
-func (c *KMS) ListResourceTags(input *ListResourceTagsInput) (*ListResourceTagsOutput, error) {
-	req, out := c.ListResourceTagsRequest(input)
-	return out, req.Send()
-}
-
-// ListResourceTagsWithContext is the same as ListResourceTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListResourceTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ListResourceTagsWithContext(ctx aws.Context, input *ListResourceTagsInput, opts ...aws.Option) (*ListResourceTagsOutput, error) {
-	req, out := c.ListResourceTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListResourceTagsOutput{})
+	return ListResourceTagsRequest{Request: req, Input: input}
 }
 
 const opListRetirableGrants = "ListRetirableGrants"
 
-// ListRetirableGrantsRequest generates a "aws.Request" representing the
-// client's request for the ListRetirableGrants operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRetirableGrantsRequest is a API request type for the ListRetirableGrants API operation.
+type ListRetirableGrantsRequest struct {
+	*aws.Request
+	Input *ListRetirableGrantsInput
+}
+
+// Send marshals and sends the ListRetirableGrants API request.
+func (r ListRetirableGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRetirableGrantsOutput), nil
+}
+
+// ListRetirableGrantsRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of all grants for which the grant's RetiringPrincipal matches
+// the one specified.
 //
-// See ListRetirableGrants for more information on using the ListRetirableGrants
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A typical use is to list all grants that you are able to retire. To retire
+// a grant, use RetireGrant.
 //
 //    // Example sending a request using the ListRetirableGrantsRequest method.
-//    req, resp := client.ListRetirableGrantsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRetirableGrantsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrants
-func (c *KMS) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) (req *aws.Request, output *ListGrantsResponse) {
+func (c *KMS) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) ListRetirableGrantsRequest {
 	op := &aws.Operation{
 		Name:       opListRetirableGrants,
 		HTTPMethod: "POST",
@@ -3005,95 +1622,45 @@ func (c *KMS) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) (req *
 		input = &ListRetirableGrantsInput{}
 	}
 
-	output = &ListGrantsResponse{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRetirableGrants API operation for AWS Key Management Service.
-//
-// Returns a list of all grants for which the grant's RetiringPrincipal matches
-// the one specified.
-//
-// A typical use is to list all grants that you are able to retire. To retire
-// a grant, use RetireGrant.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ListRetirableGrants for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidMarkerException "InvalidMarkerException"
-//   The request was rejected because the marker that specifies where pagination
-//   should next begin is not valid.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrants
-func (c *KMS) ListRetirableGrants(input *ListRetirableGrantsInput) (*ListGrantsResponse, error) {
-	req, out := c.ListRetirableGrantsRequest(input)
-	return out, req.Send()
-}
-
-// ListRetirableGrantsWithContext is the same as ListRetirableGrants with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRetirableGrants for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ListRetirableGrantsWithContext(ctx aws.Context, input *ListRetirableGrantsInput, opts ...aws.Option) (*ListGrantsResponse, error) {
-	req, out := c.ListRetirableGrantsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRetirableGrantsOutput{})
+	return ListRetirableGrantsRequest{Request: req, Input: input}
 }
 
 const opPutKeyPolicy = "PutKeyPolicy"
 
-// PutKeyPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutKeyPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutKeyPolicyRequest is a API request type for the PutKeyPolicy API operation.
+type PutKeyPolicyRequest struct {
+	*aws.Request
+	Input *PutKeyPolicyInput
+}
+
+// Send marshals and sends the PutKeyPolicy API request.
+func (r PutKeyPolicyRequest) Send() (*PutKeyPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutKeyPolicyOutput), nil
+}
+
+// PutKeyPolicyRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Attaches a key policy to the specified customer master key (CMK).
 //
-// See PutKeyPolicy for more information on using the PutKeyPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about key policies, see Key Policies (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the PutKeyPolicyRequest method.
-//    req, resp := client.PutKeyPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutKeyPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicy
-func (c *KMS) PutKeyPolicyRequest(input *PutKeyPolicyInput) (req *aws.Request, output *PutKeyPolicyOutput) {
+func (c *KMS) PutKeyPolicyRequest(input *PutKeyPolicyInput) PutKeyPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutKeyPolicy,
 		HTTPMethod: "POST",
@@ -3104,129 +1671,32 @@ func (c *KMS) PutKeyPolicyRequest(input *PutKeyPolicyInput) (req *aws.Request, o
 		input = &PutKeyPolicyInput{}
 	}
 
-	output = &PutKeyPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutKeyPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutKeyPolicy API operation for AWS Key Management Service.
-//
-// Attaches a key policy to the specified customer master key (CMK).
-//
-// For more information about key policies, see Key Policies (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
-// in the AWS Key Management Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation PutKeyPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocumentException"
-//   The request was rejected because the specified policy is not syntactically
-//   or semantically correct.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because a limit was exceeded. For more information,
-//   see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicy
-func (c *KMS) PutKeyPolicy(input *PutKeyPolicyInput) (*PutKeyPolicyOutput, error) {
-	req, out := c.PutKeyPolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutKeyPolicyWithContext is the same as PutKeyPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutKeyPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) PutKeyPolicyWithContext(ctx aws.Context, input *PutKeyPolicyInput, opts ...aws.Option) (*PutKeyPolicyOutput, error) {
-	req, out := c.PutKeyPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutKeyPolicyRequest{Request: req, Input: input}
 }
 
 const opReEncrypt = "ReEncrypt"
 
-// ReEncryptRequest generates a "aws.Request" representing the
-// client's request for the ReEncrypt operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReEncrypt for more information on using the ReEncrypt
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ReEncryptRequest method.
-//    req, resp := client.ReEncryptRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncrypt
-func (c *KMS) ReEncryptRequest(input *ReEncryptInput) (req *aws.Request, output *ReEncryptOutput) {
-	op := &aws.Operation{
-		Name:       opReEncrypt,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ReEncryptInput{}
-	}
-
-	output = &ReEncryptOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ReEncryptRequest is a API request type for the ReEncrypt API operation.
+type ReEncryptRequest struct {
+	*aws.Request
+	Input *ReEncryptInput
 }
 
-// ReEncrypt API operation for AWS Key Management Service.
+// Send marshals and sends the ReEncrypt API request.
+func (r ReEncryptRequest) Send() (*ReEncryptOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReEncryptOutput), nil
+}
+
+// ReEncryptRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Encrypts data on the server side with a new customer master key (CMK) without
 // exposing the plaintext of the data on the client side. The data is first
@@ -3241,118 +1711,49 @@ func (c *KMS) ReEncryptRequest(input *ReEncryptInput) (req *aws.Request, output 
 // you must include it manually when you create a CMK programmatically or when
 // you set a key policy with the PutKeyPolicy operation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ReEncrypt for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDisabledException "DisabledException"
-//   The request was rejected because the specified CMK is not enabled.
-//
-//   * ErrCodeInvalidCiphertextException "InvalidCiphertextException"
-//   The request was rejected because the specified ciphertext has been corrupted
-//   or is otherwise invalid.
-//
-//   * ErrCodeKeyUnavailableException "KeyUnavailableException"
-//   The request was rejected because the specified CMK was not available. The
-//   request can be retried.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidKeyUsageException "InvalidKeyUsageException"
-//   The request was rejected because the specified KeySpec value is not valid.
-//
-//   * ErrCodeInvalidGrantTokenException "InvalidGrantTokenException"
-//   The request was rejected because the specified grant token is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncrypt
-func (c *KMS) ReEncrypt(input *ReEncryptInput) (*ReEncryptOutput, error) {
-	req, out := c.ReEncryptRequest(input)
-	return out, req.Send()
-}
-
-// ReEncryptWithContext is the same as ReEncrypt with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReEncrypt for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ReEncryptWithContext(ctx aws.Context, input *ReEncryptInput, opts ...aws.Option) (*ReEncryptOutput, error) {
-	req, out := c.ReEncryptRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRetireGrant = "RetireGrant"
-
-// RetireGrantRequest generates a "aws.Request" representing the
-// client's request for the RetireGrant operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RetireGrant for more information on using the RetireGrant
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RetireGrantRequest method.
-//    req, resp := client.RetireGrantRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ReEncryptRequest method.
+//    req := client.ReEncryptRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrant
-func (c *KMS) RetireGrantRequest(input *RetireGrantInput) (req *aws.Request, output *RetireGrantOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncrypt
+func (c *KMS) ReEncryptRequest(input *ReEncryptInput) ReEncryptRequest {
 	op := &aws.Operation{
-		Name:       opRetireGrant,
+		Name:       opReEncrypt,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RetireGrantInput{}
+		input = &ReEncryptInput{}
 	}
 
-	output = &RetireGrantOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &ReEncryptOutput{})
+	return ReEncryptRequest{Request: req, Input: input}
 }
 
-// RetireGrant API operation for AWS Key Management Service.
+const opRetireGrant = "RetireGrant"
+
+// RetireGrantRequest is a API request type for the RetireGrant API operation.
+type RetireGrantRequest struct {
+	*aws.Request
+	Input *RetireGrantInput
+}
+
+// Send marshals and sends the RetireGrant API request.
+func (r RetireGrantRequest) Send() (*RetireGrantOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RetireGrantOutput), nil
+}
+
+// RetireGrantRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Retires a grant. To clean up, you can retire a grant when you're done using
 // it. You should revoke a grant when you intend to actively deny operations
@@ -3371,89 +1772,64 @@ func (c *KMS) RetireGrantRequest(input *RetireGrantInput) (req *aws.Request, out
 // A grant ID is a 64 character unique identifier of a grant. The CreateGrant
 // operation returns both.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation RetireGrant for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGrantTokenException "InvalidGrantTokenException"
-//   The request was rejected because the specified grant token is not valid.
-//
-//   * ErrCodeInvalidGrantIdException "InvalidGrantIdException"
-//   The request was rejected because the specified GrantId is not valid.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
+//    // Example sending a request using the RetireGrantRequest method.
+//    req := client.RetireGrantRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrant
-func (c *KMS) RetireGrant(input *RetireGrantInput) (*RetireGrantOutput, error) {
-	req, out := c.RetireGrantRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) RetireGrantRequest(input *RetireGrantInput) RetireGrantRequest {
+	op := &aws.Operation{
+		Name:       opRetireGrant,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RetireGrantWithContext is the same as RetireGrant with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RetireGrant for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) RetireGrantWithContext(ctx aws.Context, input *RetireGrantInput, opts ...aws.Option) (*RetireGrantOutput, error) {
-	req, out := c.RetireGrantRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RetireGrantInput{}
+	}
+
+	req := c.newRequest(op, input, &RetireGrantOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return RetireGrantRequest{Request: req, Input: input}
 }
 
 const opRevokeGrant = "RevokeGrant"
 
-// RevokeGrantRequest generates a "aws.Request" representing the
-// client's request for the RevokeGrant operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RevokeGrantRequest is a API request type for the RevokeGrant API operation.
+type RevokeGrantRequest struct {
+	*aws.Request
+	Input *RevokeGrantInput
+}
+
+// Send marshals and sends the RevokeGrant API request.
+func (r RevokeGrantRequest) Send() (*RevokeGrantOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RevokeGrantOutput), nil
+}
+
+// RevokeGrantRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RevokeGrant for more information on using the RevokeGrant
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Revokes a grant. You can revoke a grant to actively deny operations that
+// depend on it.
 //
 //    // Example sending a request using the RevokeGrantRequest method.
-//    req, resp := client.RevokeGrantRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RevokeGrantRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrant
-func (c *KMS) RevokeGrantRequest(input *RevokeGrantInput) (req *aws.Request, output *RevokeGrantOutput) {
+func (c *KMS) RevokeGrantRequest(input *RevokeGrantInput) RevokeGrantRequest {
 	op := &aws.Operation{
 		Name:       opRevokeGrant,
 		HTTPMethod: "POST",
@@ -3464,117 +1840,32 @@ func (c *KMS) RevokeGrantRequest(input *RevokeGrantInput) (req *aws.Request, out
 		input = &RevokeGrantInput{}
 	}
 
-	output = &RevokeGrantOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RevokeGrantOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RevokeGrant API operation for AWS Key Management Service.
-//
-// Revokes a grant. You can revoke a grant to actively deny operations that
-// depend on it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation RevokeGrant for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeInvalidGrantIdException "InvalidGrantIdException"
-//   The request was rejected because the specified GrantId is not valid.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrant
-func (c *KMS) RevokeGrant(input *RevokeGrantInput) (*RevokeGrantOutput, error) {
-	req, out := c.RevokeGrantRequest(input)
-	return out, req.Send()
-}
-
-// RevokeGrantWithContext is the same as RevokeGrant with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RevokeGrant for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) RevokeGrantWithContext(ctx aws.Context, input *RevokeGrantInput, opts ...aws.Option) (*RevokeGrantOutput, error) {
-	req, out := c.RevokeGrantRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RevokeGrantRequest{Request: req, Input: input}
 }
 
 const opScheduleKeyDeletion = "ScheduleKeyDeletion"
 
-// ScheduleKeyDeletionRequest generates a "aws.Request" representing the
-// client's request for the ScheduleKeyDeletion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ScheduleKeyDeletion for more information on using the ScheduleKeyDeletion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ScheduleKeyDeletionRequest method.
-//    req, resp := client.ScheduleKeyDeletionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletion
-func (c *KMS) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) (req *aws.Request, output *ScheduleKeyDeletionOutput) {
-	op := &aws.Operation{
-		Name:       opScheduleKeyDeletion,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ScheduleKeyDeletionInput{}
-	}
-
-	output = &ScheduleKeyDeletionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ScheduleKeyDeletionRequest is a API request type for the ScheduleKeyDeletion API operation.
+type ScheduleKeyDeletionRequest struct {
+	*aws.Request
+	Input *ScheduleKeyDeletionInput
 }
 
-// ScheduleKeyDeletion API operation for AWS Key Management Service.
+// Send marshals and sends the ScheduleKeyDeletion API request.
+func (r ScheduleKeyDeletionRequest) Send() (*ScheduleKeyDeletionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ScheduleKeyDeletionOutput), nil
+}
+
+// ScheduleKeyDeletionRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Schedules the deletion of a customer master key (CMK). You may provide a
 // waiting period, specified in days, before deletion occurs. If you do not
@@ -3593,104 +1884,49 @@ func (c *KMS) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) (req *
 // Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
 // in the AWS Key Management Service Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation ScheduleKeyDeletion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletion
-func (c *KMS) ScheduleKeyDeletion(input *ScheduleKeyDeletionInput) (*ScheduleKeyDeletionOutput, error) {
-	req, out := c.ScheduleKeyDeletionRequest(input)
-	return out, req.Send()
-}
-
-// ScheduleKeyDeletionWithContext is the same as ScheduleKeyDeletion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ScheduleKeyDeletion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) ScheduleKeyDeletionWithContext(ctx aws.Context, input *ScheduleKeyDeletionInput, opts ...aws.Option) (*ScheduleKeyDeletionOutput, error) {
-	req, out := c.ScheduleKeyDeletionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opTagResource = "TagResource"
-
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ScheduleKeyDeletionRequest method.
+//    req := client.ScheduleKeyDeletionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResource
-func (c *KMS) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletion
+func (c *KMS) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) ScheduleKeyDeletionRequest {
 	op := &aws.Operation{
-		Name:       opTagResource,
+		Name:       opScheduleKeyDeletion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &TagResourceInput{}
+		input = &ScheduleKeyDeletionInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &ScheduleKeyDeletionOutput{})
+	return ScheduleKeyDeletionRequest{Request: req, Input: input}
 }
 
-// TagResource API operation for AWS Key Management Service.
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Adds or overwrites one or more tags for the specified customer master key
 // (CMK).
@@ -3704,90 +1940,68 @@ func (c *KMS) TagResourceRequest(input *TagResourceInput) (req *aws.Request, out
 // value of Prod, it does not create a second tag. Instead, the original tag
 // is overwritten with the new tag value.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because a limit was exceeded. For more information,
-//   see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeTagException "TagException"
-//   The request was rejected because one or more tags are not valid.
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResource
-func (c *KMS) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	req := c.newRequest(op, input, &TagResourceOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the specified tag or tags from the specified customer master key
+// (CMK).
 //
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To remove a tag, you specify the tag key for each tag to remove. You do not
+// specify the tag value. To overwrite the tag value for an existing tag, use
+// TagResource.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResource
-func (c *KMS) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *KMS) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -3798,119 +2012,32 @@ func (c *KMS) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request,
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UntagResource API operation for AWS Key Management Service.
-//
-// Removes the specified tag or tags from the specified customer master key
-// (CMK).
-//
-// To remove a tag, you specify the tag key for each tag to remove. You do not
-// specify the tag value. To overwrite the tag value for an existing tag, use
-// TagResource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeTagException "TagException"
-//   The request was rejected because one or more tags are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResource
-func (c *KMS) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateAlias = "UpdateAlias"
 
-// UpdateAliasRequest generates a "aws.Request" representing the
-// client's request for the UpdateAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAlias for more information on using the UpdateAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateAliasRequest method.
-//    req, resp := client.UpdateAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAlias
-func (c *KMS) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, output *UpdateAliasOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateAlias,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateAliasInput{}
-	}
-
-	output = &UpdateAliasOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UpdateAliasRequest is a API request type for the UpdateAlias API operation.
+type UpdateAliasRequest struct {
+	*aws.Request
+	Input *UpdateAliasInput
 }
 
-// UpdateAlias API operation for AWS Key Management Service.
+// Send marshals and sends the UpdateAlias API request.
+func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAliasOutput), nil
+}
+
+// UpdateAliasRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
 // Updates an alias to map it to a different key.
 //
@@ -3926,83 +2053,63 @@ func (c *KMS) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, out
 // The alias and the key it is mapped to must be in the same AWS account and
 // the same region.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation UpdateAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
+//    // Example sending a request using the UpdateAliasRequest method.
+//    req := client.UpdateAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAlias
-func (c *KMS) UpdateAlias(input *UpdateAliasInput) (*UpdateAliasOutput, error) {
-	req, out := c.UpdateAliasRequest(input)
-	return out, req.Send()
-}
+func (c *KMS) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest {
+	op := &aws.Operation{
+		Name:       opUpdateAlias,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateAliasWithContext is the same as UpdateAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...aws.Option) (*UpdateAliasOutput, error) {
-	req, out := c.UpdateAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateAliasInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UpdateAliasRequest{Request: req, Input: input}
 }
 
 const opUpdateKeyDescription = "UpdateKeyDescription"
 
-// UpdateKeyDescriptionRequest generates a "aws.Request" representing the
-// client's request for the UpdateKeyDescription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateKeyDescriptionRequest is a API request type for the UpdateKeyDescription API operation.
+type UpdateKeyDescriptionRequest struct {
+	*aws.Request
+	Input *UpdateKeyDescriptionInput
+}
+
+// Send marshals and sends the UpdateKeyDescription API request.
+func (r UpdateKeyDescriptionRequest) Send() (*UpdateKeyDescriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateKeyDescriptionOutput), nil
+}
+
+// UpdateKeyDescriptionRequest returns a request value for making API operation for
+// AWS Key Management Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateKeyDescription for more information on using the UpdateKeyDescription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the description of a customer master key (CMK).
 //
 //    // Example sending a request using the UpdateKeyDescriptionRequest method.
-//    req, resp := client.UpdateKeyDescriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateKeyDescriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescription
-func (c *KMS) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) (req *aws.Request, output *UpdateKeyDescriptionOutput) {
+func (c *KMS) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) UpdateKeyDescriptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateKeyDescription,
 		HTTPMethod: "POST",
@@ -4013,68 +2120,10 @@ func (c *KMS) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) (req
 		input = &UpdateKeyDescriptionInput{}
 	}
 
-	output = &UpdateKeyDescriptionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateKeyDescriptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateKeyDescription API operation for AWS Key Management Service.
-//
-// Updates the description of a customer master key (CMK).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Key Management Service's
-// API operation UpdateKeyDescription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The request was rejected because the specified entity or resource could not
-//   be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The request was rejected because a specified ARN was not valid.
-//
-//   * ErrCodeDependencyTimeoutException "DependencyTimeoutException"
-//   The system timed out while trying to fulfill the request. The request can
-//   be retried.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request was rejected because an internal exception occurred. The request
-//   can be retried.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The request was rejected because the state of the specified resource is not
-//   valid for this request.
-//
-//   For more information about how key state affects the use of a CMK, see How
-//   Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescription
-func (c *KMS) UpdateKeyDescription(input *UpdateKeyDescriptionInput) (*UpdateKeyDescriptionOutput, error) {
-	req, out := c.UpdateKeyDescriptionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateKeyDescriptionWithContext is the same as UpdateKeyDescription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateKeyDescription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *KMS) UpdateKeyDescriptionWithContext(ctx aws.Context, input *UpdateKeyDescriptionInput, opts ...aws.Option) (*UpdateKeyDescriptionOutput, error) {
-	req, out := c.UpdateKeyDescriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateKeyDescriptionRequest{Request: req, Input: input}
 }
 
 // Contains information about an alias.
@@ -6667,52 +4716,6 @@ func (s *ListGrantsInput) SetMarker(v string) *ListGrantsInput {
 	return s
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsResponse
-type ListGrantsResponse struct {
-	_ struct{} `type:"structure"`
-
-	// A list of grants.
-	Grants []*GrantListEntry `type:"list"`
-
-	// When Truncated is true, this element is present and contains the value to
-	// use for the Marker parameter in a subsequent request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To retrieve more items,
-	// pass the value of the NextMarker element in this response to the Marker parameter
-	// in a subsequent request.
-	Truncated *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ListGrantsResponse) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ListGrantsResponse) GoString() string {
-	return s.String()
-}
-
-// SetGrants sets the Grants field's value.
-func (s *ListGrantsResponse) SetGrants(v []*GrantListEntry) *ListGrantsResponse {
-	s.Grants = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListGrantsResponse) SetNextMarker(v string) *ListGrantsResponse {
-	s.NextMarker = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *ListGrantsResponse) SetTruncated(v bool) *ListGrantsResponse {
-	s.Truncated = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesRequest
 type ListKeyPoliciesInput struct {
 	_ struct{} `type:"structure"`
@@ -7151,6 +5154,52 @@ func (s *ListRetirableGrantsInput) SetMarker(v string) *ListRetirableGrantsInput
 // SetRetiringPrincipal sets the RetiringPrincipal field's value.
 func (s *ListRetirableGrantsInput) SetRetiringPrincipal(v string) *ListRetirableGrantsInput {
 	s.RetiringPrincipal = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsOutput
+type ListRetirableGrantsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of grants.
+	Grants []*GrantListEntry `type:"list"`
+
+	// When Truncated is true, this element is present and contains the value to
+	// use for the Marker parameter in a subsequent request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// A flag that indicates whether there are more items in the list. When this
+	// value is true, the list in this response is truncated. To retrieve more items,
+	// pass the value of the NextMarker element in this response to the Marker parameter
+	// in a subsequent request.
+	Truncated *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s ListRetirableGrantsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRetirableGrantsOutput) GoString() string {
+	return s.String()
+}
+
+// SetGrants sets the Grants field's value.
+func (s *ListRetirableGrantsOutput) SetGrants(v []*GrantListEntry) *ListRetirableGrantsOutput {
+	s.Grants = v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRetirableGrantsOutput) SetNextMarker(v string) *ListRetirableGrantsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetTruncated sets the Truncated field's value.
+func (s *ListRetirableGrantsOutput) SetTruncated(v bool) *ListRetirableGrantsOutput {
+	s.Truncated = &v
 	return s
 }
 

@@ -64,7 +64,7 @@ func main() {
 
 	svc := s3.New(cfg)
 
-	resp, err := svc.PutObjectAcl(&s3.PutObjectAclInput{
+	req := svc.PutObjectAclRequest(&s3.PutObjectAclInput{
 		Bucket: bucketPtr,
 		Key:    keyPtr,
 		AccessControlPolicy: &s3.AccessControlPolicy{
@@ -86,7 +86,7 @@ func main() {
 			},
 		},
 	})
-
+	resp, err := req.Send()
 	if err != nil {
 		exitErrorf("failed, %v", err)
 	}

@@ -63,170 +63,92 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type WorkDocsAPI interface {
-	AbortDocumentVersionUpload(*workdocs.AbortDocumentVersionUploadInput) (*workdocs.AbortDocumentVersionUploadOutput, error)
-	AbortDocumentVersionUploadWithContext(aws.Context, *workdocs.AbortDocumentVersionUploadInput, ...aws.Option) (*workdocs.AbortDocumentVersionUploadOutput, error)
-	AbortDocumentVersionUploadRequest(*workdocs.AbortDocumentVersionUploadInput) (*aws.Request, *workdocs.AbortDocumentVersionUploadOutput)
+	AbortDocumentVersionUploadRequest(*workdocs.AbortDocumentVersionUploadInput) workdocs.AbortDocumentVersionUploadRequest
 
-	ActivateUser(*workdocs.ActivateUserInput) (*workdocs.ActivateUserOutput, error)
-	ActivateUserWithContext(aws.Context, *workdocs.ActivateUserInput, ...aws.Option) (*workdocs.ActivateUserOutput, error)
-	ActivateUserRequest(*workdocs.ActivateUserInput) (*aws.Request, *workdocs.ActivateUserOutput)
+	ActivateUserRequest(*workdocs.ActivateUserInput) workdocs.ActivateUserRequest
 
-	AddResourcePermissions(*workdocs.AddResourcePermissionsInput) (*workdocs.AddResourcePermissionsOutput, error)
-	AddResourcePermissionsWithContext(aws.Context, *workdocs.AddResourcePermissionsInput, ...aws.Option) (*workdocs.AddResourcePermissionsOutput, error)
-	AddResourcePermissionsRequest(*workdocs.AddResourcePermissionsInput) (*aws.Request, *workdocs.AddResourcePermissionsOutput)
+	AddResourcePermissionsRequest(*workdocs.AddResourcePermissionsInput) workdocs.AddResourcePermissionsRequest
 
-	CreateComment(*workdocs.CreateCommentInput) (*workdocs.CreateCommentOutput, error)
-	CreateCommentWithContext(aws.Context, *workdocs.CreateCommentInput, ...aws.Option) (*workdocs.CreateCommentOutput, error)
-	CreateCommentRequest(*workdocs.CreateCommentInput) (*aws.Request, *workdocs.CreateCommentOutput)
+	CreateCommentRequest(*workdocs.CreateCommentInput) workdocs.CreateCommentRequest
 
-	CreateCustomMetadata(*workdocs.CreateCustomMetadataInput) (*workdocs.CreateCustomMetadataOutput, error)
-	CreateCustomMetadataWithContext(aws.Context, *workdocs.CreateCustomMetadataInput, ...aws.Option) (*workdocs.CreateCustomMetadataOutput, error)
-	CreateCustomMetadataRequest(*workdocs.CreateCustomMetadataInput) (*aws.Request, *workdocs.CreateCustomMetadataOutput)
+	CreateCustomMetadataRequest(*workdocs.CreateCustomMetadataInput) workdocs.CreateCustomMetadataRequest
 
-	CreateFolder(*workdocs.CreateFolderInput) (*workdocs.CreateFolderOutput, error)
-	CreateFolderWithContext(aws.Context, *workdocs.CreateFolderInput, ...aws.Option) (*workdocs.CreateFolderOutput, error)
-	CreateFolderRequest(*workdocs.CreateFolderInput) (*aws.Request, *workdocs.CreateFolderOutput)
+	CreateFolderRequest(*workdocs.CreateFolderInput) workdocs.CreateFolderRequest
 
-	CreateLabels(*workdocs.CreateLabelsInput) (*workdocs.CreateLabelsOutput, error)
-	CreateLabelsWithContext(aws.Context, *workdocs.CreateLabelsInput, ...aws.Option) (*workdocs.CreateLabelsOutput, error)
-	CreateLabelsRequest(*workdocs.CreateLabelsInput) (*aws.Request, *workdocs.CreateLabelsOutput)
+	CreateLabelsRequest(*workdocs.CreateLabelsInput) workdocs.CreateLabelsRequest
 
-	CreateNotificationSubscription(*workdocs.CreateNotificationSubscriptionInput) (*workdocs.CreateNotificationSubscriptionOutput, error)
-	CreateNotificationSubscriptionWithContext(aws.Context, *workdocs.CreateNotificationSubscriptionInput, ...aws.Option) (*workdocs.CreateNotificationSubscriptionOutput, error)
-	CreateNotificationSubscriptionRequest(*workdocs.CreateNotificationSubscriptionInput) (*aws.Request, *workdocs.CreateNotificationSubscriptionOutput)
+	CreateNotificationSubscriptionRequest(*workdocs.CreateNotificationSubscriptionInput) workdocs.CreateNotificationSubscriptionRequest
 
-	CreateUser(*workdocs.CreateUserInput) (*workdocs.CreateUserOutput, error)
-	CreateUserWithContext(aws.Context, *workdocs.CreateUserInput, ...aws.Option) (*workdocs.CreateUserOutput, error)
-	CreateUserRequest(*workdocs.CreateUserInput) (*aws.Request, *workdocs.CreateUserOutput)
+	CreateUserRequest(*workdocs.CreateUserInput) workdocs.CreateUserRequest
 
-	DeactivateUser(*workdocs.DeactivateUserInput) (*workdocs.DeactivateUserOutput, error)
-	DeactivateUserWithContext(aws.Context, *workdocs.DeactivateUserInput, ...aws.Option) (*workdocs.DeactivateUserOutput, error)
-	DeactivateUserRequest(*workdocs.DeactivateUserInput) (*aws.Request, *workdocs.DeactivateUserOutput)
+	DeactivateUserRequest(*workdocs.DeactivateUserInput) workdocs.DeactivateUserRequest
 
-	DeleteComment(*workdocs.DeleteCommentInput) (*workdocs.DeleteCommentOutput, error)
-	DeleteCommentWithContext(aws.Context, *workdocs.DeleteCommentInput, ...aws.Option) (*workdocs.DeleteCommentOutput, error)
-	DeleteCommentRequest(*workdocs.DeleteCommentInput) (*aws.Request, *workdocs.DeleteCommentOutput)
+	DeleteCommentRequest(*workdocs.DeleteCommentInput) workdocs.DeleteCommentRequest
 
-	DeleteCustomMetadata(*workdocs.DeleteCustomMetadataInput) (*workdocs.DeleteCustomMetadataOutput, error)
-	DeleteCustomMetadataWithContext(aws.Context, *workdocs.DeleteCustomMetadataInput, ...aws.Option) (*workdocs.DeleteCustomMetadataOutput, error)
-	DeleteCustomMetadataRequest(*workdocs.DeleteCustomMetadataInput) (*aws.Request, *workdocs.DeleteCustomMetadataOutput)
+	DeleteCustomMetadataRequest(*workdocs.DeleteCustomMetadataInput) workdocs.DeleteCustomMetadataRequest
 
-	DeleteDocument(*workdocs.DeleteDocumentInput) (*workdocs.DeleteDocumentOutput, error)
-	DeleteDocumentWithContext(aws.Context, *workdocs.DeleteDocumentInput, ...aws.Option) (*workdocs.DeleteDocumentOutput, error)
-	DeleteDocumentRequest(*workdocs.DeleteDocumentInput) (*aws.Request, *workdocs.DeleteDocumentOutput)
+	DeleteDocumentRequest(*workdocs.DeleteDocumentInput) workdocs.DeleteDocumentRequest
 
-	DeleteFolder(*workdocs.DeleteFolderInput) (*workdocs.DeleteFolderOutput, error)
-	DeleteFolderWithContext(aws.Context, *workdocs.DeleteFolderInput, ...aws.Option) (*workdocs.DeleteFolderOutput, error)
-	DeleteFolderRequest(*workdocs.DeleteFolderInput) (*aws.Request, *workdocs.DeleteFolderOutput)
+	DeleteFolderRequest(*workdocs.DeleteFolderInput) workdocs.DeleteFolderRequest
 
-	DeleteFolderContents(*workdocs.DeleteFolderContentsInput) (*workdocs.DeleteFolderContentsOutput, error)
-	DeleteFolderContentsWithContext(aws.Context, *workdocs.DeleteFolderContentsInput, ...aws.Option) (*workdocs.DeleteFolderContentsOutput, error)
-	DeleteFolderContentsRequest(*workdocs.DeleteFolderContentsInput) (*aws.Request, *workdocs.DeleteFolderContentsOutput)
+	DeleteFolderContentsRequest(*workdocs.DeleteFolderContentsInput) workdocs.DeleteFolderContentsRequest
 
-	DeleteLabels(*workdocs.DeleteLabelsInput) (*workdocs.DeleteLabelsOutput, error)
-	DeleteLabelsWithContext(aws.Context, *workdocs.DeleteLabelsInput, ...aws.Option) (*workdocs.DeleteLabelsOutput, error)
-	DeleteLabelsRequest(*workdocs.DeleteLabelsInput) (*aws.Request, *workdocs.DeleteLabelsOutput)
+	DeleteLabelsRequest(*workdocs.DeleteLabelsInput) workdocs.DeleteLabelsRequest
 
-	DeleteNotificationSubscription(*workdocs.DeleteNotificationSubscriptionInput) (*workdocs.DeleteNotificationSubscriptionOutput, error)
-	DeleteNotificationSubscriptionWithContext(aws.Context, *workdocs.DeleteNotificationSubscriptionInput, ...aws.Option) (*workdocs.DeleteNotificationSubscriptionOutput, error)
-	DeleteNotificationSubscriptionRequest(*workdocs.DeleteNotificationSubscriptionInput) (*aws.Request, *workdocs.DeleteNotificationSubscriptionOutput)
+	DeleteNotificationSubscriptionRequest(*workdocs.DeleteNotificationSubscriptionInput) workdocs.DeleteNotificationSubscriptionRequest
 
-	DeleteUser(*workdocs.DeleteUserInput) (*workdocs.DeleteUserOutput, error)
-	DeleteUserWithContext(aws.Context, *workdocs.DeleteUserInput, ...aws.Option) (*workdocs.DeleteUserOutput, error)
-	DeleteUserRequest(*workdocs.DeleteUserInput) (*aws.Request, *workdocs.DeleteUserOutput)
+	DeleteUserRequest(*workdocs.DeleteUserInput) workdocs.DeleteUserRequest
 
-	DescribeActivities(*workdocs.DescribeActivitiesInput) (*workdocs.DescribeActivitiesOutput, error)
-	DescribeActivitiesWithContext(aws.Context, *workdocs.DescribeActivitiesInput, ...aws.Option) (*workdocs.DescribeActivitiesOutput, error)
-	DescribeActivitiesRequest(*workdocs.DescribeActivitiesInput) (*aws.Request, *workdocs.DescribeActivitiesOutput)
+	DescribeActivitiesRequest(*workdocs.DescribeActivitiesInput) workdocs.DescribeActivitiesRequest
 
-	DescribeComments(*workdocs.DescribeCommentsInput) (*workdocs.DescribeCommentsOutput, error)
-	DescribeCommentsWithContext(aws.Context, *workdocs.DescribeCommentsInput, ...aws.Option) (*workdocs.DescribeCommentsOutput, error)
-	DescribeCommentsRequest(*workdocs.DescribeCommentsInput) (*aws.Request, *workdocs.DescribeCommentsOutput)
+	DescribeCommentsRequest(*workdocs.DescribeCommentsInput) workdocs.DescribeCommentsRequest
 
-	DescribeDocumentVersions(*workdocs.DescribeDocumentVersionsInput) (*workdocs.DescribeDocumentVersionsOutput, error)
-	DescribeDocumentVersionsWithContext(aws.Context, *workdocs.DescribeDocumentVersionsInput, ...aws.Option) (*workdocs.DescribeDocumentVersionsOutput, error)
-	DescribeDocumentVersionsRequest(*workdocs.DescribeDocumentVersionsInput) (*aws.Request, *workdocs.DescribeDocumentVersionsOutput)
+	DescribeDocumentVersionsRequest(*workdocs.DescribeDocumentVersionsInput) workdocs.DescribeDocumentVersionsRequest
 
 	DescribeDocumentVersionsPages(*workdocs.DescribeDocumentVersionsInput, func(*workdocs.DescribeDocumentVersionsOutput, bool) bool) error
 	DescribeDocumentVersionsPagesWithContext(aws.Context, *workdocs.DescribeDocumentVersionsInput, func(*workdocs.DescribeDocumentVersionsOutput, bool) bool, ...aws.Option) error
 
-	DescribeFolderContents(*workdocs.DescribeFolderContentsInput) (*workdocs.DescribeFolderContentsOutput, error)
-	DescribeFolderContentsWithContext(aws.Context, *workdocs.DescribeFolderContentsInput, ...aws.Option) (*workdocs.DescribeFolderContentsOutput, error)
-	DescribeFolderContentsRequest(*workdocs.DescribeFolderContentsInput) (*aws.Request, *workdocs.DescribeFolderContentsOutput)
+	DescribeFolderContentsRequest(*workdocs.DescribeFolderContentsInput) workdocs.DescribeFolderContentsRequest
 
 	DescribeFolderContentsPages(*workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool) error
 	DescribeFolderContentsPagesWithContext(aws.Context, *workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool, ...aws.Option) error
 
-	DescribeNotificationSubscriptions(*workdocs.DescribeNotificationSubscriptionsInput) (*workdocs.DescribeNotificationSubscriptionsOutput, error)
-	DescribeNotificationSubscriptionsWithContext(aws.Context, *workdocs.DescribeNotificationSubscriptionsInput, ...aws.Option) (*workdocs.DescribeNotificationSubscriptionsOutput, error)
-	DescribeNotificationSubscriptionsRequest(*workdocs.DescribeNotificationSubscriptionsInput) (*aws.Request, *workdocs.DescribeNotificationSubscriptionsOutput)
+	DescribeNotificationSubscriptionsRequest(*workdocs.DescribeNotificationSubscriptionsInput) workdocs.DescribeNotificationSubscriptionsRequest
 
-	DescribeResourcePermissions(*workdocs.DescribeResourcePermissionsInput) (*workdocs.DescribeResourcePermissionsOutput, error)
-	DescribeResourcePermissionsWithContext(aws.Context, *workdocs.DescribeResourcePermissionsInput, ...aws.Option) (*workdocs.DescribeResourcePermissionsOutput, error)
-	DescribeResourcePermissionsRequest(*workdocs.DescribeResourcePermissionsInput) (*aws.Request, *workdocs.DescribeResourcePermissionsOutput)
+	DescribeResourcePermissionsRequest(*workdocs.DescribeResourcePermissionsInput) workdocs.DescribeResourcePermissionsRequest
 
-	DescribeRootFolders(*workdocs.DescribeRootFoldersInput) (*workdocs.DescribeRootFoldersOutput, error)
-	DescribeRootFoldersWithContext(aws.Context, *workdocs.DescribeRootFoldersInput, ...aws.Option) (*workdocs.DescribeRootFoldersOutput, error)
-	DescribeRootFoldersRequest(*workdocs.DescribeRootFoldersInput) (*aws.Request, *workdocs.DescribeRootFoldersOutput)
+	DescribeRootFoldersRequest(*workdocs.DescribeRootFoldersInput) workdocs.DescribeRootFoldersRequest
 
-	DescribeUsers(*workdocs.DescribeUsersInput) (*workdocs.DescribeUsersOutput, error)
-	DescribeUsersWithContext(aws.Context, *workdocs.DescribeUsersInput, ...aws.Option) (*workdocs.DescribeUsersOutput, error)
-	DescribeUsersRequest(*workdocs.DescribeUsersInput) (*aws.Request, *workdocs.DescribeUsersOutput)
+	DescribeUsersRequest(*workdocs.DescribeUsersInput) workdocs.DescribeUsersRequest
 
 	DescribeUsersPages(*workdocs.DescribeUsersInput, func(*workdocs.DescribeUsersOutput, bool) bool) error
 	DescribeUsersPagesWithContext(aws.Context, *workdocs.DescribeUsersInput, func(*workdocs.DescribeUsersOutput, bool) bool, ...aws.Option) error
 
-	GetCurrentUser(*workdocs.GetCurrentUserInput) (*workdocs.GetCurrentUserOutput, error)
-	GetCurrentUserWithContext(aws.Context, *workdocs.GetCurrentUserInput, ...aws.Option) (*workdocs.GetCurrentUserOutput, error)
-	GetCurrentUserRequest(*workdocs.GetCurrentUserInput) (*aws.Request, *workdocs.GetCurrentUserOutput)
+	GetCurrentUserRequest(*workdocs.GetCurrentUserInput) workdocs.GetCurrentUserRequest
 
-	GetDocument(*workdocs.GetDocumentInput) (*workdocs.GetDocumentOutput, error)
-	GetDocumentWithContext(aws.Context, *workdocs.GetDocumentInput, ...aws.Option) (*workdocs.GetDocumentOutput, error)
-	GetDocumentRequest(*workdocs.GetDocumentInput) (*aws.Request, *workdocs.GetDocumentOutput)
+	GetDocumentRequest(*workdocs.GetDocumentInput) workdocs.GetDocumentRequest
 
-	GetDocumentPath(*workdocs.GetDocumentPathInput) (*workdocs.GetDocumentPathOutput, error)
-	GetDocumentPathWithContext(aws.Context, *workdocs.GetDocumentPathInput, ...aws.Option) (*workdocs.GetDocumentPathOutput, error)
-	GetDocumentPathRequest(*workdocs.GetDocumentPathInput) (*aws.Request, *workdocs.GetDocumentPathOutput)
+	GetDocumentPathRequest(*workdocs.GetDocumentPathInput) workdocs.GetDocumentPathRequest
 
-	GetDocumentVersion(*workdocs.GetDocumentVersionInput) (*workdocs.GetDocumentVersionOutput, error)
-	GetDocumentVersionWithContext(aws.Context, *workdocs.GetDocumentVersionInput, ...aws.Option) (*workdocs.GetDocumentVersionOutput, error)
-	GetDocumentVersionRequest(*workdocs.GetDocumentVersionInput) (*aws.Request, *workdocs.GetDocumentVersionOutput)
+	GetDocumentVersionRequest(*workdocs.GetDocumentVersionInput) workdocs.GetDocumentVersionRequest
 
-	GetFolder(*workdocs.GetFolderInput) (*workdocs.GetFolderOutput, error)
-	GetFolderWithContext(aws.Context, *workdocs.GetFolderInput, ...aws.Option) (*workdocs.GetFolderOutput, error)
-	GetFolderRequest(*workdocs.GetFolderInput) (*aws.Request, *workdocs.GetFolderOutput)
+	GetFolderRequest(*workdocs.GetFolderInput) workdocs.GetFolderRequest
 
-	GetFolderPath(*workdocs.GetFolderPathInput) (*workdocs.GetFolderPathOutput, error)
-	GetFolderPathWithContext(aws.Context, *workdocs.GetFolderPathInput, ...aws.Option) (*workdocs.GetFolderPathOutput, error)
-	GetFolderPathRequest(*workdocs.GetFolderPathInput) (*aws.Request, *workdocs.GetFolderPathOutput)
+	GetFolderPathRequest(*workdocs.GetFolderPathInput) workdocs.GetFolderPathRequest
 
-	InitiateDocumentVersionUpload(*workdocs.InitiateDocumentVersionUploadInput) (*workdocs.InitiateDocumentVersionUploadOutput, error)
-	InitiateDocumentVersionUploadWithContext(aws.Context, *workdocs.InitiateDocumentVersionUploadInput, ...aws.Option) (*workdocs.InitiateDocumentVersionUploadOutput, error)
-	InitiateDocumentVersionUploadRequest(*workdocs.InitiateDocumentVersionUploadInput) (*aws.Request, *workdocs.InitiateDocumentVersionUploadOutput)
+	InitiateDocumentVersionUploadRequest(*workdocs.InitiateDocumentVersionUploadInput) workdocs.InitiateDocumentVersionUploadRequest
 
-	RemoveAllResourcePermissions(*workdocs.RemoveAllResourcePermissionsInput) (*workdocs.RemoveAllResourcePermissionsOutput, error)
-	RemoveAllResourcePermissionsWithContext(aws.Context, *workdocs.RemoveAllResourcePermissionsInput, ...aws.Option) (*workdocs.RemoveAllResourcePermissionsOutput, error)
-	RemoveAllResourcePermissionsRequest(*workdocs.RemoveAllResourcePermissionsInput) (*aws.Request, *workdocs.RemoveAllResourcePermissionsOutput)
+	RemoveAllResourcePermissionsRequest(*workdocs.RemoveAllResourcePermissionsInput) workdocs.RemoveAllResourcePermissionsRequest
 
-	RemoveResourcePermission(*workdocs.RemoveResourcePermissionInput) (*workdocs.RemoveResourcePermissionOutput, error)
-	RemoveResourcePermissionWithContext(aws.Context, *workdocs.RemoveResourcePermissionInput, ...aws.Option) (*workdocs.RemoveResourcePermissionOutput, error)
-	RemoveResourcePermissionRequest(*workdocs.RemoveResourcePermissionInput) (*aws.Request, *workdocs.RemoveResourcePermissionOutput)
+	RemoveResourcePermissionRequest(*workdocs.RemoveResourcePermissionInput) workdocs.RemoveResourcePermissionRequest
 
-	UpdateDocument(*workdocs.UpdateDocumentInput) (*workdocs.UpdateDocumentOutput, error)
-	UpdateDocumentWithContext(aws.Context, *workdocs.UpdateDocumentInput, ...aws.Option) (*workdocs.UpdateDocumentOutput, error)
-	UpdateDocumentRequest(*workdocs.UpdateDocumentInput) (*aws.Request, *workdocs.UpdateDocumentOutput)
+	UpdateDocumentRequest(*workdocs.UpdateDocumentInput) workdocs.UpdateDocumentRequest
 
-	UpdateDocumentVersion(*workdocs.UpdateDocumentVersionInput) (*workdocs.UpdateDocumentVersionOutput, error)
-	UpdateDocumentVersionWithContext(aws.Context, *workdocs.UpdateDocumentVersionInput, ...aws.Option) (*workdocs.UpdateDocumentVersionOutput, error)
-	UpdateDocumentVersionRequest(*workdocs.UpdateDocumentVersionInput) (*aws.Request, *workdocs.UpdateDocumentVersionOutput)
+	UpdateDocumentVersionRequest(*workdocs.UpdateDocumentVersionInput) workdocs.UpdateDocumentVersionRequest
 
-	UpdateFolder(*workdocs.UpdateFolderInput) (*workdocs.UpdateFolderOutput, error)
-	UpdateFolderWithContext(aws.Context, *workdocs.UpdateFolderInput, ...aws.Option) (*workdocs.UpdateFolderOutput, error)
-	UpdateFolderRequest(*workdocs.UpdateFolderInput) (*aws.Request, *workdocs.UpdateFolderOutput)
+	UpdateFolderRequest(*workdocs.UpdateFolderInput) workdocs.UpdateFolderRequest
 
-	UpdateUser(*workdocs.UpdateUserInput) (*workdocs.UpdateUserOutput, error)
-	UpdateUserWithContext(aws.Context, *workdocs.UpdateUserInput, ...aws.Option) (*workdocs.UpdateUserOutput, error)
-	UpdateUserRequest(*workdocs.UpdateUserInput) (*aws.Request, *workdocs.UpdateUserOutput)
+	UpdateUserRequest(*workdocs.UpdateUserInput) workdocs.UpdateUserRequest
 }
 
 var _ WorkDocsAPI = (*workdocs.WorkDocs)(nil)

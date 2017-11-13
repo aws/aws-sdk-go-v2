@@ -12,47 +12,24 @@ import (
 
 const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 
-// AssociateCreatedArtifactRequest generates a "aws.Request" representing the
-// client's request for the AssociateCreatedArtifact operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateCreatedArtifact for more information on using the AssociateCreatedArtifact
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateCreatedArtifactRequest method.
-//    req, resp := client.AssociateCreatedArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
-func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifactInput) (req *aws.Request, output *AssociateCreatedArtifactOutput) {
-	op := &aws.Operation{
-		Name:       opAssociateCreatedArtifact,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AssociateCreatedArtifactInput{}
-	}
-
-	output = &AssociateCreatedArtifactOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AssociateCreatedArtifactRequest is a API request type for the AssociateCreatedArtifact API operation.
+type AssociateCreatedArtifactRequest struct {
+	*aws.Request
+	Input *AssociateCreatedArtifactInput
 }
 
-// AssociateCreatedArtifact API operation for AWS Migration Hub.
+// Send marshals and sends the AssociateCreatedArtifact API request.
+func (r AssociateCreatedArtifactRequest) Send() (*AssociateCreatedArtifactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateCreatedArtifactOutput), nil
+}
+
+// AssociateCreatedArtifactRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
 // Associates a created artifact of an AWS cloud resource, the target receiving
 // the migration, with the migration task performed by a migration tool. This
@@ -68,92 +45,62 @@ func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedAr
 //    * Examples of the AWS resource behind the created artifact are, AMI's,
 //    EC2 instance, or DMS endpoint, etc.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation AssociateCreatedArtifact for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//    // Example sending a request using the AssociateCreatedArtifactRequest method.
+//    req := client.AssociateCreatedArtifactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
-func (c *MigrationHub) AssociateCreatedArtifact(input *AssociateCreatedArtifactInput) (*AssociateCreatedArtifactOutput, error) {
-	req, out := c.AssociateCreatedArtifactRequest(input)
-	return out, req.Send()
-}
+func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifactInput) AssociateCreatedArtifactRequest {
+	op := &aws.Operation{
+		Name:       opAssociateCreatedArtifact,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AssociateCreatedArtifactWithContext is the same as AssociateCreatedArtifact with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateCreatedArtifact for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) AssociateCreatedArtifactWithContext(ctx aws.Context, input *AssociateCreatedArtifactInput, opts ...aws.Option) (*AssociateCreatedArtifactOutput, error) {
-	req, out := c.AssociateCreatedArtifactRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AssociateCreatedArtifactInput{}
+	}
+
+	req := c.newRequest(op, input, &AssociateCreatedArtifactOutput{})
+	return AssociateCreatedArtifactRequest{Request: req, Input: input}
 }
 
 const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
 
-// AssociateDiscoveredResourceRequest generates a "aws.Request" representing the
-// client's request for the AssociateDiscoveredResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateDiscoveredResourceRequest is a API request type for the AssociateDiscoveredResource API operation.
+type AssociateDiscoveredResourceRequest struct {
+	*aws.Request
+	Input *AssociateDiscoveredResourceInput
+}
+
+// Send marshals and sends the AssociateDiscoveredResource API request.
+func (r AssociateDiscoveredResourceRequest) Send() (*AssociateDiscoveredResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateDiscoveredResourceOutput), nil
+}
+
+// AssociateDiscoveredResourceRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateDiscoveredResource for more information on using the AssociateDiscoveredResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates a discovered resource ID from Application Discovery Service (ADS)
+// with a migration task.
 //
 //    // Example sending a request using the AssociateDiscoveredResourceRequest method.
-//    req, resp := client.AssociateDiscoveredResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateDiscoveredResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
-func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscoveredResourceInput) (req *aws.Request, output *AssociateDiscoveredResourceOutput) {
+func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscoveredResourceInput) AssociateDiscoveredResourceRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDiscoveredResource,
 		HTTPMethod: "POST",
@@ -164,107 +111,46 @@ func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscov
 		input = &AssociateDiscoveredResourceInput{}
 	}
 
-	output = &AssociateDiscoveredResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateDiscoveredResource API operation for AWS Migration Hub.
-//
-// Associates a discovered resource ID from Application Discovery Service (ADS)
-// with a migration task.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation AssociateDiscoveredResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the ADSCaller role
-//   is missing or not configured correctly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
-func (c *MigrationHub) AssociateDiscoveredResource(input *AssociateDiscoveredResourceInput) (*AssociateDiscoveredResourceOutput, error) {
-	req, out := c.AssociateDiscoveredResourceRequest(input)
-	return out, req.Send()
-}
-
-// AssociateDiscoveredResourceWithContext is the same as AssociateDiscoveredResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateDiscoveredResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) AssociateDiscoveredResourceWithContext(ctx aws.Context, input *AssociateDiscoveredResourceInput, opts ...aws.Option) (*AssociateDiscoveredResourceOutput, error) {
-	req, out := c.AssociateDiscoveredResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateDiscoveredResourceOutput{})
+	return AssociateDiscoveredResourceRequest{Request: req, Input: input}
 }
 
 const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 
-// CreateProgressUpdateStreamRequest generates a "aws.Request" representing the
-// client's request for the CreateProgressUpdateStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProgressUpdateStreamRequest is a API request type for the CreateProgressUpdateStream API operation.
+type CreateProgressUpdateStreamRequest struct {
+	*aws.Request
+	Input *CreateProgressUpdateStreamInput
+}
+
+// Send marshals and sends the CreateProgressUpdateStream API request.
+func (r CreateProgressUpdateStreamRequest) Send() (*CreateProgressUpdateStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProgressUpdateStreamOutput), nil
+}
+
+// CreateProgressUpdateStreamRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProgressUpdateStream for more information on using the CreateProgressUpdateStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a progress update stream which is an AWS resource used for access
+// control as well as a namespace for migration task names that is implicitly
+// linked to your AWS account. It must uniquely identify the migration tool
+// as it is used for all updates made by the tool; however, it does not need
+// to be unique for each AWS account because it is scoped to the AWS account.
 //
 //    // Example sending a request using the CreateProgressUpdateStreamRequest method.
-//    req, resp := client.CreateProgressUpdateStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProgressUpdateStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
-func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateStreamInput) (req *aws.Request, output *CreateProgressUpdateStreamOutput) {
+func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateStreamInput) CreateProgressUpdateStreamRequest {
 	op := &aws.Operation{
 		Name:       opCreateProgressUpdateStream,
 		HTTPMethod: "POST",
@@ -275,116 +161,30 @@ func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUp
 		input = &CreateProgressUpdateStreamInput{}
 	}
 
-	output = &CreateProgressUpdateStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProgressUpdateStream API operation for AWS Migration Hub.
-//
-// Creates a progress update stream which is an AWS resource used for access
-// control as well as a namespace for migration task names that is implicitly
-// linked to your AWS account. It must uniquely identify the migration tool
-// as it is used for all updates made by the tool; however, it does not need
-// to be unique for each AWS account because it is scoped to the AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation CreateProgressUpdateStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
-func (c *MigrationHub) CreateProgressUpdateStream(input *CreateProgressUpdateStreamInput) (*CreateProgressUpdateStreamOutput, error) {
-	req, out := c.CreateProgressUpdateStreamRequest(input)
-	return out, req.Send()
-}
-
-// CreateProgressUpdateStreamWithContext is the same as CreateProgressUpdateStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProgressUpdateStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) CreateProgressUpdateStreamWithContext(ctx aws.Context, input *CreateProgressUpdateStreamInput, opts ...aws.Option) (*CreateProgressUpdateStreamOutput, error) {
-	req, out := c.CreateProgressUpdateStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProgressUpdateStreamOutput{})
+	return CreateProgressUpdateStreamRequest{Request: req, Input: input}
 }
 
 const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 
-// DeleteProgressUpdateStreamRequest generates a "aws.Request" representing the
-// client's request for the DeleteProgressUpdateStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteProgressUpdateStream for more information on using the DeleteProgressUpdateStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteProgressUpdateStreamRequest method.
-//    req, resp := client.DeleteProgressUpdateStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
-func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateStreamInput) (req *aws.Request, output *DeleteProgressUpdateStreamOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteProgressUpdateStream,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteProgressUpdateStreamInput{}
-	}
-
-	output = &DeleteProgressUpdateStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteProgressUpdateStreamRequest is a API request type for the DeleteProgressUpdateStream API operation.
+type DeleteProgressUpdateStreamRequest struct {
+	*aws.Request
+	Input *DeleteProgressUpdateStreamInput
 }
 
-// DeleteProgressUpdateStream API operation for AWS Migration Hub.
+// Send marshals and sends the DeleteProgressUpdateStream API request.
+func (r DeleteProgressUpdateStreamRequest) Send() (*DeleteProgressUpdateStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProgressUpdateStreamOutput), nil
+}
+
+// DeleteProgressUpdateStreamRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
 // Deletes a progress update stream, including all of its tasks, which was previously
 // created as an AWS resource used for access control. This API has the following
@@ -410,92 +210,61 @@ func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUp
 //    entirely new logical resource (without any resources associated with the
 //    old stream).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation DeleteProgressUpdateStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//    // Example sending a request using the DeleteProgressUpdateStreamRequest method.
+//    req := client.DeleteProgressUpdateStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
-func (c *MigrationHub) DeleteProgressUpdateStream(input *DeleteProgressUpdateStreamInput) (*DeleteProgressUpdateStreamOutput, error) {
-	req, out := c.DeleteProgressUpdateStreamRequest(input)
-	return out, req.Send()
-}
+func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateStreamInput) DeleteProgressUpdateStreamRequest {
+	op := &aws.Operation{
+		Name:       opDeleteProgressUpdateStream,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteProgressUpdateStreamWithContext is the same as DeleteProgressUpdateStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProgressUpdateStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) DeleteProgressUpdateStreamWithContext(ctx aws.Context, input *DeleteProgressUpdateStreamInput, opts ...aws.Option) (*DeleteProgressUpdateStreamOutput, error) {
-	req, out := c.DeleteProgressUpdateStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteProgressUpdateStreamInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteProgressUpdateStreamOutput{})
+	return DeleteProgressUpdateStreamRequest{Request: req, Input: input}
 }
 
 const opDescribeApplicationState = "DescribeApplicationState"
 
-// DescribeApplicationStateRequest generates a "aws.Request" representing the
-// client's request for the DescribeApplicationState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeApplicationStateRequest is a API request type for the DescribeApplicationState API operation.
+type DescribeApplicationStateRequest struct {
+	*aws.Request
+	Input *DescribeApplicationStateInput
+}
+
+// Send marshals and sends the DescribeApplicationState API request.
+func (r DescribeApplicationStateRequest) Send() (*DescribeApplicationStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeApplicationStateOutput), nil
+}
+
+// DescribeApplicationStateRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeApplicationState for more information on using the DescribeApplicationState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the migration status of an application.
 //
 //    // Example sending a request using the DescribeApplicationStateRequest method.
-//    req, resp := client.DescribeApplicationStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeApplicationStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
-func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicationStateInput) (req *aws.Request, output *DescribeApplicationStateOutput) {
+func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicationStateInput) DescribeApplicationStateRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApplicationState,
 		HTTPMethod: "POST",
@@ -506,98 +275,42 @@ func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicatio
 		input = &DescribeApplicationStateInput{}
 	}
 
-	output = &DescribeApplicationStateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeApplicationState API operation for AWS Migration Hub.
-//
-// Gets the migration status of an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation DescribeApplicationState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the ADSCaller role
-//   is missing or not configured correctly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
-func (c *MigrationHub) DescribeApplicationState(input *DescribeApplicationStateInput) (*DescribeApplicationStateOutput, error) {
-	req, out := c.DescribeApplicationStateRequest(input)
-	return out, req.Send()
-}
-
-// DescribeApplicationStateWithContext is the same as DescribeApplicationState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeApplicationState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) DescribeApplicationStateWithContext(ctx aws.Context, input *DescribeApplicationStateInput, opts ...aws.Option) (*DescribeApplicationStateOutput, error) {
-	req, out := c.DescribeApplicationStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeApplicationStateOutput{})
+	return DescribeApplicationStateRequest{Request: req, Input: input}
 }
 
 const opDescribeMigrationTask = "DescribeMigrationTask"
 
-// DescribeMigrationTaskRequest generates a "aws.Request" representing the
-// client's request for the DescribeMigrationTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMigrationTaskRequest is a API request type for the DescribeMigrationTask API operation.
+type DescribeMigrationTaskRequest struct {
+	*aws.Request
+	Input *DescribeMigrationTaskInput
+}
+
+// Send marshals and sends the DescribeMigrationTask API request.
+func (r DescribeMigrationTaskRequest) Send() (*DescribeMigrationTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMigrationTaskOutput), nil
+}
+
+// DescribeMigrationTaskRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMigrationTask for more information on using the DescribeMigrationTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of all attributes associated with a specific migration task.
 //
 //    // Example sending a request using the DescribeMigrationTaskRequest method.
-//    req, resp := client.DescribeMigrationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMigrationTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
-func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput) (req *aws.Request, output *DescribeMigrationTaskOutput) {
+func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput) DescribeMigrationTaskRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMigrationTask,
 		HTTPMethod: "POST",
@@ -608,109 +321,30 @@ func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTask
 		input = &DescribeMigrationTaskInput{}
 	}
 
-	output = &DescribeMigrationTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMigrationTask API operation for AWS Migration Hub.
-//
-// Retrieves a list of all attributes associated with a specific migration task.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation DescribeMigrationTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
-func (c *MigrationHub) DescribeMigrationTask(input *DescribeMigrationTaskInput) (*DescribeMigrationTaskOutput, error) {
-	req, out := c.DescribeMigrationTaskRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMigrationTaskWithContext is the same as DescribeMigrationTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMigrationTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) DescribeMigrationTaskWithContext(ctx aws.Context, input *DescribeMigrationTaskInput, opts ...aws.Option) (*DescribeMigrationTaskOutput, error) {
-	req, out := c.DescribeMigrationTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMigrationTaskOutput{})
+	return DescribeMigrationTaskRequest{Request: req, Input: input}
 }
 
 const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 
-// DisassociateCreatedArtifactRequest generates a "aws.Request" representing the
-// client's request for the DisassociateCreatedArtifact operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateCreatedArtifact for more information on using the DisassociateCreatedArtifact
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DisassociateCreatedArtifactRequest method.
-//    req, resp := client.DisassociateCreatedArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
-func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCreatedArtifactInput) (req *aws.Request, output *DisassociateCreatedArtifactOutput) {
-	op := &aws.Operation{
-		Name:       opDisassociateCreatedArtifact,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DisassociateCreatedArtifactInput{}
-	}
-
-	output = &DisassociateCreatedArtifactOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DisassociateCreatedArtifactRequest is a API request type for the DisassociateCreatedArtifact API operation.
+type DisassociateCreatedArtifactRequest struct {
+	*aws.Request
+	Input *DisassociateCreatedArtifactInput
 }
 
-// DisassociateCreatedArtifact API operation for AWS Migration Hub.
+// Send marshals and sends the DisassociateCreatedArtifact API request.
+func (r DisassociateCreatedArtifactRequest) Send() (*DisassociateCreatedArtifactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateCreatedArtifactOutput), nil
+}
+
+// DisassociateCreatedArtifactRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
 // Disassociates a created artifact of an AWS resource with a migration task
 // performed by a migration tool that was previously associated. This API has
@@ -726,92 +360,62 @@ func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCre
 //    * Examples of the AWS resource behind the created artifact are, AMI's,
 //    EC2 instance, or RDS instance, etc.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation DisassociateCreatedArtifact for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//    // Example sending a request using the DisassociateCreatedArtifactRequest method.
+//    req := client.DisassociateCreatedArtifactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
-func (c *MigrationHub) DisassociateCreatedArtifact(input *DisassociateCreatedArtifactInput) (*DisassociateCreatedArtifactOutput, error) {
-	req, out := c.DisassociateCreatedArtifactRequest(input)
-	return out, req.Send()
-}
+func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCreatedArtifactInput) DisassociateCreatedArtifactRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateCreatedArtifact,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DisassociateCreatedArtifactWithContext is the same as DisassociateCreatedArtifact with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateCreatedArtifact for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) DisassociateCreatedArtifactWithContext(ctx aws.Context, input *DisassociateCreatedArtifactInput, opts ...aws.Option) (*DisassociateCreatedArtifactOutput, error) {
-	req, out := c.DisassociateCreatedArtifactRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DisassociateCreatedArtifactInput{}
+	}
+
+	req := c.newRequest(op, input, &DisassociateCreatedArtifactOutput{})
+	return DisassociateCreatedArtifactRequest{Request: req, Input: input}
 }
 
 const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 
-// DisassociateDiscoveredResourceRequest generates a "aws.Request" representing the
-// client's request for the DisassociateDiscoveredResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateDiscoveredResourceRequest is a API request type for the DisassociateDiscoveredResource API operation.
+type DisassociateDiscoveredResourceRequest struct {
+	*aws.Request
+	Input *DisassociateDiscoveredResourceInput
+}
+
+// Send marshals and sends the DisassociateDiscoveredResource API request.
+func (r DisassociateDiscoveredResourceRequest) Send() (*DisassociateDiscoveredResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateDiscoveredResourceOutput), nil
+}
+
+// DisassociateDiscoveredResourceRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateDiscoveredResource for more information on using the DisassociateDiscoveredResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociate an Application Discovery Service (ADS) discovered resource from
+// a migration task.
 //
 //    // Example sending a request using the DisassociateDiscoveredResourceRequest method.
-//    req, resp := client.DisassociateDiscoveredResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateDiscoveredResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
-func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *DisassociateDiscoveredResourceInput) (req *aws.Request, output *DisassociateDiscoveredResourceOutput) {
+func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *DisassociateDiscoveredResourceInput) DisassociateDiscoveredResourceRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateDiscoveredResource,
 		HTTPMethod: "POST",
@@ -822,102 +426,47 @@ func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *Disassociate
 		input = &DisassociateDiscoveredResourceInput{}
 	}
 
-	output = &DisassociateDiscoveredResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateDiscoveredResource API operation for AWS Migration Hub.
-//
-// Disassociate an Application Discovery Service (ADS) discovered resource from
-// a migration task.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation DisassociateDiscoveredResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
-func (c *MigrationHub) DisassociateDiscoveredResource(input *DisassociateDiscoveredResourceInput) (*DisassociateDiscoveredResourceOutput, error) {
-	req, out := c.DisassociateDiscoveredResourceRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateDiscoveredResourceWithContext is the same as DisassociateDiscoveredResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateDiscoveredResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) DisassociateDiscoveredResourceWithContext(ctx aws.Context, input *DisassociateDiscoveredResourceInput, opts ...aws.Option) (*DisassociateDiscoveredResourceOutput, error) {
-	req, out := c.DisassociateDiscoveredResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateDiscoveredResourceOutput{})
+	return DisassociateDiscoveredResourceRequest{Request: req, Input: input}
 }
 
 const opImportMigrationTask = "ImportMigrationTask"
 
-// ImportMigrationTaskRequest generates a "aws.Request" representing the
-// client's request for the ImportMigrationTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ImportMigrationTaskRequest is a API request type for the ImportMigrationTask API operation.
+type ImportMigrationTaskRequest struct {
+	*aws.Request
+	Input *ImportMigrationTaskInput
+}
+
+// Send marshals and sends the ImportMigrationTask API request.
+func (r ImportMigrationTaskRequest) Send() (*ImportMigrationTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportMigrationTaskOutput), nil
+}
+
+// ImportMigrationTaskRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Registers a new migration task which represents a server, database, etc.,
+// being migrated to AWS by a migration tool.
 //
-// See ImportMigrationTask for more information on using the ImportMigrationTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API is a prerequisite to calling the NotifyMigrationTaskState API as
+// the migration tool must first register the migration task with Migration
+// Hub.
 //
 //    // Example sending a request using the ImportMigrationTaskRequest method.
-//    req, resp := client.ImportMigrationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ImportMigrationTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
-func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInput) (req *aws.Request, output *ImportMigrationTaskOutput) {
+func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInput) ImportMigrationTaskRequest {
 	op := &aws.Operation{
 		Name:       opImportMigrationTask,
 		HTTPMethod: "POST",
@@ -928,122 +477,30 @@ func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInpu
 		input = &ImportMigrationTaskInput{}
 	}
 
-	output = &ImportMigrationTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ImportMigrationTask API operation for AWS Migration Hub.
-//
-// Registers a new migration task which represents a server, database, etc.,
-// being migrated to AWS by a migration tool.
-//
-// This API is a prerequisite to calling the NotifyMigrationTaskState API as
-// the migration tool must first register the migration task with Migration
-// Hub.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation ImportMigrationTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
-func (c *MigrationHub) ImportMigrationTask(input *ImportMigrationTaskInput) (*ImportMigrationTaskOutput, error) {
-	req, out := c.ImportMigrationTaskRequest(input)
-	return out, req.Send()
-}
-
-// ImportMigrationTaskWithContext is the same as ImportMigrationTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ImportMigrationTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) ImportMigrationTaskWithContext(ctx aws.Context, input *ImportMigrationTaskInput, opts ...aws.Option) (*ImportMigrationTaskOutput, error) {
-	req, out := c.ImportMigrationTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ImportMigrationTaskOutput{})
+	return ImportMigrationTaskRequest{Request: req, Input: input}
 }
 
 const opListCreatedArtifacts = "ListCreatedArtifacts"
 
-// ListCreatedArtifactsRequest generates a "aws.Request" representing the
-// client's request for the ListCreatedArtifacts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCreatedArtifacts for more information on using the ListCreatedArtifacts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListCreatedArtifactsRequest method.
-//    req, resp := client.ListCreatedArtifactsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
-func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) (req *aws.Request, output *ListCreatedArtifactsOutput) {
-	op := &aws.Operation{
-		Name:       opListCreatedArtifacts,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListCreatedArtifactsInput{}
-	}
-
-	output = &ListCreatedArtifactsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListCreatedArtifactsRequest is a API request type for the ListCreatedArtifacts API operation.
+type ListCreatedArtifactsRequest struct {
+	*aws.Request
+	Input *ListCreatedArtifactsInput
 }
 
-// ListCreatedArtifacts API operation for AWS Migration Hub.
+// Send marshals and sends the ListCreatedArtifacts API request.
+func (r ListCreatedArtifactsRequest) Send() (*ListCreatedArtifactsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCreatedArtifactsOutput), nil
+}
+
+// ListCreatedArtifactsRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
 // Lists the created artifacts attached to a given migration task in an update
 // stream. This API has the following traits:
@@ -1055,84 +512,61 @@ func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsIn
 //
 //    * Lists created artifacts in a paginated interface.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation ListCreatedArtifacts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//    // Example sending a request using the ListCreatedArtifactsRequest method.
+//    req := client.ListCreatedArtifactsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
-func (c *MigrationHub) ListCreatedArtifacts(input *ListCreatedArtifactsInput) (*ListCreatedArtifactsOutput, error) {
-	req, out := c.ListCreatedArtifactsRequest(input)
-	return out, req.Send()
-}
+func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) ListCreatedArtifactsRequest {
+	op := &aws.Operation{
+		Name:       opListCreatedArtifacts,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListCreatedArtifactsWithContext is the same as ListCreatedArtifacts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCreatedArtifacts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) ListCreatedArtifactsWithContext(ctx aws.Context, input *ListCreatedArtifactsInput, opts ...aws.Option) (*ListCreatedArtifactsOutput, error) {
-	req, out := c.ListCreatedArtifactsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListCreatedArtifactsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListCreatedArtifactsOutput{})
+	return ListCreatedArtifactsRequest{Request: req, Input: input}
 }
 
 const opListDiscoveredResources = "ListDiscoveredResources"
 
-// ListDiscoveredResourcesRequest generates a "aws.Request" representing the
-// client's request for the ListDiscoveredResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDiscoveredResourcesRequest is a API request type for the ListDiscoveredResources API operation.
+type ListDiscoveredResourcesRequest struct {
+	*aws.Request
+	Input *ListDiscoveredResourcesInput
+}
+
+// Send marshals and sends the ListDiscoveredResources API request.
+func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDiscoveredResourcesOutput), nil
+}
+
+// ListDiscoveredResourcesRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDiscoveredResources for more information on using the ListDiscoveredResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists discovered resources associated with the given MigrationTask.
 //
 //    // Example sending a request using the ListDiscoveredResourcesRequest method.
-//    req, resp := client.ListDiscoveredResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDiscoveredResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
-func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *aws.Request, output *ListDiscoveredResourcesOutput) {
+func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListDiscoveredResources,
 		HTTPMethod: "POST",
@@ -1143,109 +577,30 @@ func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResou
 		input = &ListDiscoveredResourcesInput{}
 	}
 
-	output = &ListDiscoveredResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDiscoveredResources API operation for AWS Migration Hub.
-//
-// Lists discovered resources associated with the given MigrationTask.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation ListDiscoveredResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
-func (c *MigrationHub) ListDiscoveredResources(input *ListDiscoveredResourcesInput) (*ListDiscoveredResourcesOutput, error) {
-	req, out := c.ListDiscoveredResourcesRequest(input)
-	return out, req.Send()
-}
-
-// ListDiscoveredResourcesWithContext is the same as ListDiscoveredResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDiscoveredResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) ListDiscoveredResourcesWithContext(ctx aws.Context, input *ListDiscoveredResourcesInput, opts ...aws.Option) (*ListDiscoveredResourcesOutput, error) {
-	req, out := c.ListDiscoveredResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDiscoveredResourcesOutput{})
+	return ListDiscoveredResourcesRequest{Request: req, Input: input}
 }
 
 const opListMigrationTasks = "ListMigrationTasks"
 
-// ListMigrationTasksRequest generates a "aws.Request" representing the
-// client's request for the ListMigrationTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListMigrationTasks for more information on using the ListMigrationTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListMigrationTasksRequest method.
-//    req, resp := client.ListMigrationTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
-func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput) (req *aws.Request, output *ListMigrationTasksOutput) {
-	op := &aws.Operation{
-		Name:       opListMigrationTasks,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListMigrationTasksInput{}
-	}
-
-	output = &ListMigrationTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListMigrationTasksRequest is a API request type for the ListMigrationTasks API operation.
+type ListMigrationTasksRequest struct {
+	*aws.Request
+	Input *ListMigrationTasksInput
 }
 
-// ListMigrationTasks API operation for AWS Migration Hub.
+// Send marshals and sends the ListMigrationTasks API request.
+func (r ListMigrationTasksRequest) Send() (*ListMigrationTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListMigrationTasksOutput), nil
+}
+
+// ListMigrationTasksRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
 // Lists all, or filtered by resource name, migration tasks associated with
 // the user account making this call. This API has the following traits:
@@ -1257,89 +612,62 @@ func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput)
 //
 //    * Lists migration tasks in a paginated interface.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation ListMigrationTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the ADSCaller role
-//   is missing or not configured correctly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//    // Example sending a request using the ListMigrationTasksRequest method.
+//    req := client.ListMigrationTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
-func (c *MigrationHub) ListMigrationTasks(input *ListMigrationTasksInput) (*ListMigrationTasksOutput, error) {
-	req, out := c.ListMigrationTasksRequest(input)
-	return out, req.Send()
-}
+func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput) ListMigrationTasksRequest {
+	op := &aws.Operation{
+		Name:       opListMigrationTasks,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListMigrationTasksWithContext is the same as ListMigrationTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListMigrationTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) ListMigrationTasksWithContext(ctx aws.Context, input *ListMigrationTasksInput, opts ...aws.Option) (*ListMigrationTasksOutput, error) {
-	req, out := c.ListMigrationTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListMigrationTasksInput{}
+	}
+
+	req := c.newRequest(op, input, &ListMigrationTasksOutput{})
+	return ListMigrationTasksRequest{Request: req, Input: input}
 }
 
 const opListProgressUpdateStreams = "ListProgressUpdateStreams"
 
-// ListProgressUpdateStreamsRequest generates a "aws.Request" representing the
-// client's request for the ListProgressUpdateStreams operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProgressUpdateStreamsRequest is a API request type for the ListProgressUpdateStreams API operation.
+type ListProgressUpdateStreamsRequest struct {
+	*aws.Request
+	Input *ListProgressUpdateStreamsInput
+}
+
+// Send marshals and sends the ListProgressUpdateStreams API request.
+func (r ListProgressUpdateStreamsRequest) Send() (*ListProgressUpdateStreamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProgressUpdateStreamsOutput), nil
+}
+
+// ListProgressUpdateStreamsRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProgressUpdateStreams for more information on using the ListProgressUpdateStreams
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists progress update streams associated with the user account making this
+// call.
 //
 //    // Example sending a request using the ListProgressUpdateStreamsRequest method.
-//    req, resp := client.ListProgressUpdateStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProgressUpdateStreamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
-func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdateStreamsInput) (req *aws.Request, output *ListProgressUpdateStreamsOutput) {
+func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdateStreamsInput) ListProgressUpdateStreamsRequest {
 	op := &aws.Operation{
 		Name:       opListProgressUpdateStreams,
 		HTTPMethod: "POST",
@@ -1350,89 +678,44 @@ func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdat
 		input = &ListProgressUpdateStreamsInput{}
 	}
 
-	output = &ListProgressUpdateStreamsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProgressUpdateStreams API operation for AWS Migration Hub.
-//
-// Lists progress update streams associated with the user account making this
-// call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation ListProgressUpdateStreams for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
-func (c *MigrationHub) ListProgressUpdateStreams(input *ListProgressUpdateStreamsInput) (*ListProgressUpdateStreamsOutput, error) {
-	req, out := c.ListProgressUpdateStreamsRequest(input)
-	return out, req.Send()
-}
-
-// ListProgressUpdateStreamsWithContext is the same as ListProgressUpdateStreams with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProgressUpdateStreams for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) ListProgressUpdateStreamsWithContext(ctx aws.Context, input *ListProgressUpdateStreamsInput, opts ...aws.Option) (*ListProgressUpdateStreamsOutput, error) {
-	req, out := c.ListProgressUpdateStreamsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProgressUpdateStreamsOutput{})
+	return ListProgressUpdateStreamsRequest{Request: req, Input: input}
 }
 
 const opNotifyApplicationState = "NotifyApplicationState"
 
-// NotifyApplicationStateRequest generates a "aws.Request" representing the
-// client's request for the NotifyApplicationState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// NotifyApplicationStateRequest is a API request type for the NotifyApplicationState API operation.
+type NotifyApplicationStateRequest struct {
+	*aws.Request
+	Input *NotifyApplicationStateInput
+}
+
+// Send marshals and sends the NotifyApplicationState API request.
+func (r NotifyApplicationStateRequest) Send() (*NotifyApplicationStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*NotifyApplicationStateOutput), nil
+}
+
+// NotifyApplicationStateRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See NotifyApplicationState for more information on using the NotifyApplicationState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the migration state of an application. For a given application identified
+// by the value passed to ApplicationId, its status is set or updated by passing
+// one of three values to Status: NOT_STARTED | IN_PROGRESS | COMPLETED.
 //
 //    // Example sending a request using the NotifyApplicationStateRequest method.
-//    req, resp := client.NotifyApplicationStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.NotifyApplicationStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
-func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationStateInput) (req *aws.Request, output *NotifyApplicationStateOutput) {
+func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationStateInput) NotifyApplicationStateRequest {
 	op := &aws.Operation{
 		Name:       opNotifyApplicationState,
 		HTTPMethod: "POST",
@@ -1443,124 +726,30 @@ func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationSta
 		input = &NotifyApplicationStateInput{}
 	}
 
-	output = &NotifyApplicationStateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// NotifyApplicationState API operation for AWS Migration Hub.
-//
-// Sets the migration state of an application. For a given application identified
-// by the value passed to ApplicationId, its status is set or updated by passing
-// one of three values to Status: NOT_STARTED | IN_PROGRESS | COMPLETED.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation NotifyApplicationState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the ADSCaller role
-//   is missing or not configured correctly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
-func (c *MigrationHub) NotifyApplicationState(input *NotifyApplicationStateInput) (*NotifyApplicationStateOutput, error) {
-	req, out := c.NotifyApplicationStateRequest(input)
-	return out, req.Send()
-}
-
-// NotifyApplicationStateWithContext is the same as NotifyApplicationState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See NotifyApplicationState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) NotifyApplicationStateWithContext(ctx aws.Context, input *NotifyApplicationStateInput, opts ...aws.Option) (*NotifyApplicationStateOutput, error) {
-	req, out := c.NotifyApplicationStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &NotifyApplicationStateOutput{})
+	return NotifyApplicationStateRequest{Request: req, Input: input}
 }
 
 const opNotifyMigrationTaskState = "NotifyMigrationTaskState"
 
-// NotifyMigrationTaskStateRequest generates a "aws.Request" representing the
-// client's request for the NotifyMigrationTaskState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See NotifyMigrationTaskState for more information on using the NotifyMigrationTaskState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the NotifyMigrationTaskStateRequest method.
-//    req, resp := client.NotifyMigrationTaskStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
-func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTaskStateInput) (req *aws.Request, output *NotifyMigrationTaskStateOutput) {
-	op := &aws.Operation{
-		Name:       opNotifyMigrationTaskState,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &NotifyMigrationTaskStateInput{}
-	}
-
-	output = &NotifyMigrationTaskStateOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// NotifyMigrationTaskStateRequest is a API request type for the NotifyMigrationTaskState API operation.
+type NotifyMigrationTaskStateRequest struct {
+	*aws.Request
+	Input *NotifyMigrationTaskStateInput
 }
 
-// NotifyMigrationTaskState API operation for AWS Migration Hub.
+// Send marshals and sends the NotifyMigrationTaskState API request.
+func (r NotifyMigrationTaskStateRequest) Send() (*NotifyMigrationTaskStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*NotifyMigrationTaskStateOutput), nil
+}
+
+// NotifyMigrationTaskStateRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
 // Notifies Migration Hub of the current status, progress, or other detail regarding
 // a migration task. This API has the following traits:
@@ -1573,108 +762,49 @@ func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTas
 //    * ProgressUpdateStream is used for access control and to provide a namespace
 //    for each migration tool.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation NotifyMigrationTaskState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
-func (c *MigrationHub) NotifyMigrationTaskState(input *NotifyMigrationTaskStateInput) (*NotifyMigrationTaskStateOutput, error) {
-	req, out := c.NotifyMigrationTaskStateRequest(input)
-	return out, req.Send()
-}
-
-// NotifyMigrationTaskStateWithContext is the same as NotifyMigrationTaskState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See NotifyMigrationTaskState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) NotifyMigrationTaskStateWithContext(ctx aws.Context, input *NotifyMigrationTaskStateInput, opts ...aws.Option) (*NotifyMigrationTaskStateOutput, error) {
-	req, out := c.NotifyMigrationTaskStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutResourceAttributes = "PutResourceAttributes"
-
-// PutResourceAttributesRequest generates a "aws.Request" representing the
-// client's request for the PutResourceAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutResourceAttributes for more information on using the PutResourceAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutResourceAttributesRequest method.
-//    req, resp := client.PutResourceAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the NotifyMigrationTaskStateRequest method.
+//    req := client.NotifyMigrationTaskStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
-func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributesInput) (req *aws.Request, output *PutResourceAttributesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
+func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTaskStateInput) NotifyMigrationTaskStateRequest {
 	op := &aws.Operation{
-		Name:       opPutResourceAttributes,
+		Name:       opNotifyMigrationTaskState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutResourceAttributesInput{}
+		input = &NotifyMigrationTaskStateInput{}
 	}
 
-	output = &PutResourceAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &NotifyMigrationTaskStateOutput{})
+	return NotifyMigrationTaskStateRequest{Request: req, Input: input}
 }
 
-// PutResourceAttributes API operation for AWS Migration Hub.
+const opPutResourceAttributes = "PutResourceAttributes"
+
+// PutResourceAttributesRequest is a API request type for the PutResourceAttributes API operation.
+type PutResourceAttributesRequest struct {
+	*aws.Request
+	Input *PutResourceAttributesInput
+}
+
+// Send marshals and sends the PutResourceAttributes API request.
+func (r PutResourceAttributesRequest) Send() (*PutResourceAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutResourceAttributesOutput), nil
+}
+
+// PutResourceAttributesRequest returns a request value for making API operation for
+// AWS Migration Hub.
 //
 // Provides identifying details of the resource being migrated so that it can
 // be associated in the Application Discovery Service (ADS)'s repository. This
@@ -1690,63 +820,27 @@ func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributes
 // an association occurs or not. To confirm if an association was found based
 // on the provided details, call ListAssociatedResource.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Migration Hub's
-// API operation PutResourceAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception raised when the account making the call is not whitelisted or there
-//   are other authentication errors.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when the service encounters throttled communication with
-//   upstream dependencies or is overloaded with requests.
-//
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//    // Example sending a request using the PutResourceAttributesRequest method.
+//    req := client.PutResourceAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
-func (c *MigrationHub) PutResourceAttributes(input *PutResourceAttributesInput) (*PutResourceAttributesOutput, error) {
-	req, out := c.PutResourceAttributesRequest(input)
-	return out, req.Send()
-}
+func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributesInput) PutResourceAttributesRequest {
+	op := &aws.Operation{
+		Name:       opPutResourceAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutResourceAttributesWithContext is the same as PutResourceAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutResourceAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MigrationHub) PutResourceAttributesWithContext(ctx aws.Context, input *PutResourceAttributesInput, opts ...aws.Option) (*PutResourceAttributesOutput, error) {
-	req, out := c.PutResourceAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutResourceAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &PutResourceAttributesOutput{})
+	return PutResourceAttributesRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactRequest

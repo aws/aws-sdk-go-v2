@@ -14,47 +14,24 @@ import (
 
 const opCreateBotVersion = "CreateBotVersion"
 
-// CreateBotVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateBotVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateBotVersion for more information on using the CreateBotVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateBotVersionRequest method.
-//    req, resp := client.CreateBotVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersion
-func (c *LexModelBuildingService) CreateBotVersionRequest(input *CreateBotVersionInput) (req *aws.Request, output *CreateBotVersionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateBotVersion,
-		HTTPMethod: "POST",
-		HTTPPath:   "/bots/{name}/versions",
-	}
-
-	if input == nil {
-		input = &CreateBotVersionInput{}
-	}
-
-	output = &CreateBotVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateBotVersionRequest is a API request type for the CreateBotVersion API operation.
+type CreateBotVersionRequest struct {
+	*aws.Request
+	Input *CreateBotVersionInput
 }
 
-// CreateBotVersion API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the CreateBotVersion API request.
+func (r CreateBotVersionRequest) Send() (*CreateBotVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBotVersionOutput), nil
+}
+
+// CreateBotVersionRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Creates a new version of the bot based on the $LATEST version. If the $LATEST
 // version of this resource hasn't changed since you created the last version,
@@ -68,100 +45,49 @@ func (c *LexModelBuildingService) CreateBotVersionRequest(input *CreateBotVersio
 //
 // This operation requires permission for the lex:CreateBotVersion action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation CreateBotVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodePreconditionFailedException "PreconditionFailedException"
-//   The checksum of the resource that you are trying to change does not match
-//   the checksum in the request. Check the resource's checksum and try again.
+//    // Example sending a request using the CreateBotVersionRequest method.
+//    req := client.CreateBotVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersion
-func (c *LexModelBuildingService) CreateBotVersion(input *CreateBotVersionInput) (*CreateBotVersionOutput, error) {
-	req, out := c.CreateBotVersionRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) CreateBotVersionRequest(input *CreateBotVersionInput) CreateBotVersionRequest {
+	op := &aws.Operation{
+		Name:       opCreateBotVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/bots/{name}/versions",
+	}
 
-// CreateBotVersionWithContext is the same as CreateBotVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBotVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) CreateBotVersionWithContext(ctx aws.Context, input *CreateBotVersionInput, opts ...aws.Option) (*CreateBotVersionOutput, error) {
-	req, out := c.CreateBotVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateBotVersionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateBotVersionOutput{})
+	return CreateBotVersionRequest{Request: req, Input: input}
 }
 
 const opCreateIntentVersion = "CreateIntentVersion"
 
-// CreateIntentVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateIntentVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateIntentVersion for more information on using the CreateIntentVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateIntentVersionRequest method.
-//    req, resp := client.CreateIntentVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersion
-func (c *LexModelBuildingService) CreateIntentVersionRequest(input *CreateIntentVersionInput) (req *aws.Request, output *CreateIntentVersionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateIntentVersion,
-		HTTPMethod: "POST",
-		HTTPPath:   "/intents/{name}/versions",
-	}
-
-	if input == nil {
-		input = &CreateIntentVersionInput{}
-	}
-
-	output = &CreateIntentVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateIntentVersionRequest is a API request type for the CreateIntentVersion API operation.
+type CreateIntentVersionRequest struct {
+	*aws.Request
+	Input *CreateIntentVersionInput
 }
 
-// CreateIntentVersion API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the CreateIntentVersion API request.
+func (r CreateIntentVersionRequest) Send() (*CreateIntentVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateIntentVersionOutput), nil
+}
+
+// CreateIntentVersionRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Creates a new version of an intent based on the $LATEST version of the intent.
 // If the $LATEST version of this intent hasn't changed since you last updated
@@ -177,100 +103,49 @@ func (c *LexModelBuildingService) CreateIntentVersionRequest(input *CreateIntent
 // This operation requires permissions to perform the lex:CreateIntentVersion
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation CreateIntentVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodePreconditionFailedException "PreconditionFailedException"
-//   The checksum of the resource that you are trying to change does not match
-//   the checksum in the request. Check the resource's checksum and try again.
+//    // Example sending a request using the CreateIntentVersionRequest method.
+//    req := client.CreateIntentVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersion
-func (c *LexModelBuildingService) CreateIntentVersion(input *CreateIntentVersionInput) (*CreateIntentVersionOutput, error) {
-	req, out := c.CreateIntentVersionRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) CreateIntentVersionRequest(input *CreateIntentVersionInput) CreateIntentVersionRequest {
+	op := &aws.Operation{
+		Name:       opCreateIntentVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/intents/{name}/versions",
+	}
 
-// CreateIntentVersionWithContext is the same as CreateIntentVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateIntentVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) CreateIntentVersionWithContext(ctx aws.Context, input *CreateIntentVersionInput, opts ...aws.Option) (*CreateIntentVersionOutput, error) {
-	req, out := c.CreateIntentVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateIntentVersionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateIntentVersionOutput{})
+	return CreateIntentVersionRequest{Request: req, Input: input}
 }
 
 const opCreateSlotTypeVersion = "CreateSlotTypeVersion"
 
-// CreateSlotTypeVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateSlotTypeVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSlotTypeVersion for more information on using the CreateSlotTypeVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateSlotTypeVersionRequest method.
-//    req, resp := client.CreateSlotTypeVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersion
-func (c *LexModelBuildingService) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput) (req *aws.Request, output *CreateSlotTypeVersionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateSlotTypeVersion,
-		HTTPMethod: "POST",
-		HTTPPath:   "/slottypes/{name}/versions",
-	}
-
-	if input == nil {
-		input = &CreateSlotTypeVersionInput{}
-	}
-
-	output = &CreateSlotTypeVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateSlotTypeVersionRequest is a API request type for the CreateSlotTypeVersion API operation.
+type CreateSlotTypeVersionRequest struct {
+	*aws.Request
+	Input *CreateSlotTypeVersionInput
 }
 
-// CreateSlotTypeVersion API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the CreateSlotTypeVersion API request.
+func (r CreateSlotTypeVersionRequest) Send() (*CreateSlotTypeVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSlotTypeVersionOutput), nil
+}
+
+// CreateSlotTypeVersionRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Creates a new version of a slot type based on the $LATEST version of the
 // specified slot type. If the $LATEST version of this resource has not changed
@@ -285,102 +160,49 @@ func (c *LexModelBuildingService) CreateSlotTypeVersionRequest(input *CreateSlot
 //
 // This operation requires permissions for the lex:CreateSlotTypeVersion action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation CreateSlotTypeVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodePreconditionFailedException "PreconditionFailedException"
-//   The checksum of the resource that you are trying to change does not match
-//   the checksum in the request. Check the resource's checksum and try again.
+//    // Example sending a request using the CreateSlotTypeVersionRequest method.
+//    req := client.CreateSlotTypeVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersion
-func (c *LexModelBuildingService) CreateSlotTypeVersion(input *CreateSlotTypeVersionInput) (*CreateSlotTypeVersionOutput, error) {
-	req, out := c.CreateSlotTypeVersionRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput) CreateSlotTypeVersionRequest {
+	op := &aws.Operation{
+		Name:       opCreateSlotTypeVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/slottypes/{name}/versions",
+	}
 
-// CreateSlotTypeVersionWithContext is the same as CreateSlotTypeVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSlotTypeVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) CreateSlotTypeVersionWithContext(ctx aws.Context, input *CreateSlotTypeVersionInput, opts ...aws.Option) (*CreateSlotTypeVersionOutput, error) {
-	req, out := c.CreateSlotTypeVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateSlotTypeVersionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateSlotTypeVersionOutput{})
+	return CreateSlotTypeVersionRequest{Request: req, Input: input}
 }
 
 const opDeleteBot = "DeleteBot"
 
-// DeleteBotRequest generates a "aws.Request" representing the
-// client's request for the DeleteBot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBot for more information on using the DeleteBot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteBotRequest method.
-//    req, resp := client.DeleteBotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBot
-func (c *LexModelBuildingService) DeleteBotRequest(input *DeleteBotInput) (req *aws.Request, output *DeleteBotOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteBot,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/bots/{name}",
-	}
-
-	if input == nil {
-		input = &DeleteBotInput{}
-	}
-
-	output = &DeleteBotOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteBotRequest is a API request type for the DeleteBot API operation.
+type DeleteBotRequest struct {
+	*aws.Request
+	Input *DeleteBotInput
 }
 
-// DeleteBot API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the DeleteBot API request.
+func (r DeleteBotRequest) Send() (*DeleteBotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBotOutput), nil
+}
+
+// DeleteBotRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Deletes all versions of the bot, including the $LATEST version. To delete
 // a specific version of the bot, use the DeleteBotVersion operation.
@@ -393,111 +215,51 @@ func (c *LexModelBuildingService) DeleteBotRequest(input *DeleteBotInput) (req *
 //
 // This operation requires permissions for the lex:DeleteBot action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteBot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource that you are attempting to delete is referred to by another
-//   resource. Use this information to remove references to the resource that
-//   you are trying to delete.
-//
-//   The body of the exception contains a JSON object that describes the resource.
-//
-//   { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
-//
-//   "resourceReference": {
-//
-//   "name": string, "version": string } }
+//    // Example sending a request using the DeleteBotRequest method.
+//    req := client.DeleteBotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBot
-func (c *LexModelBuildingService) DeleteBot(input *DeleteBotInput) (*DeleteBotOutput, error) {
-	req, out := c.DeleteBotRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) DeleteBotRequest(input *DeleteBotInput) DeleteBotRequest {
+	op := &aws.Operation{
+		Name:       opDeleteBot,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/bots/{name}",
+	}
 
-// DeleteBotWithContext is the same as DeleteBot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotWithContext(ctx aws.Context, input *DeleteBotInput, opts ...aws.Option) (*DeleteBotOutput, error) {
-	req, out := c.DeleteBotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteBotInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteBotOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteBotRequest{Request: req, Input: input}
 }
 
 const opDeleteBotAlias = "DeleteBotAlias"
 
-// DeleteBotAliasRequest generates a "aws.Request" representing the
-// client's request for the DeleteBotAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBotAlias for more information on using the DeleteBotAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteBotAliasRequest method.
-//    req, resp := client.DeleteBotAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotAlias
-func (c *LexModelBuildingService) DeleteBotAliasRequest(input *DeleteBotAliasInput) (req *aws.Request, output *DeleteBotAliasOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteBotAlias,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/bots/{botName}/aliases/{name}",
-	}
-
-	if input == nil {
-		input = &DeleteBotAliasInput{}
-	}
-
-	output = &DeleteBotAliasOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteBotAliasRequest is a API request type for the DeleteBotAlias API operation.
+type DeleteBotAliasRequest struct {
+	*aws.Request
+	Input *DeleteBotAliasInput
 }
 
-// DeleteBotAlias API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the DeleteBotAlias API request.
+func (r DeleteBotAliasRequest) Send() (*DeleteBotAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBotAliasOutput), nil
+}
+
+// DeleteBotAliasRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Deletes an alias for the specified bot.
 //
@@ -509,93 +271,66 @@ func (c *LexModelBuildingService) DeleteBotAliasRequest(input *DeleteBotAliasInp
 // again, delete the referring association until the DeleteBotAlias operation
 // is successful.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteBotAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource that you are attempting to delete is referred to by another
-//   resource. Use this information to remove references to the resource that
-//   you are trying to delete.
-//
-//   The body of the exception contains a JSON object that describes the resource.
-//
-//   { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
-//
-//   "resourceReference": {
-//
-//   "name": string, "version": string } }
+//    // Example sending a request using the DeleteBotAliasRequest method.
+//    req := client.DeleteBotAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotAlias
-func (c *LexModelBuildingService) DeleteBotAlias(input *DeleteBotAliasInput) (*DeleteBotAliasOutput, error) {
-	req, out := c.DeleteBotAliasRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) DeleteBotAliasRequest(input *DeleteBotAliasInput) DeleteBotAliasRequest {
+	op := &aws.Operation{
+		Name:       opDeleteBotAlias,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/bots/{botName}/aliases/{name}",
+	}
 
-// DeleteBotAliasWithContext is the same as DeleteBotAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBotAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotAliasWithContext(ctx aws.Context, input *DeleteBotAliasInput, opts ...aws.Option) (*DeleteBotAliasOutput, error) {
-	req, out := c.DeleteBotAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteBotAliasInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteBotAliasOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteBotAliasRequest{Request: req, Input: input}
 }
 
 const opDeleteBotChannelAssociation = "DeleteBotChannelAssociation"
 
-// DeleteBotChannelAssociationRequest generates a "aws.Request" representing the
-// client's request for the DeleteBotChannelAssociation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBotChannelAssociationRequest is a API request type for the DeleteBotChannelAssociation API operation.
+type DeleteBotChannelAssociationRequest struct {
+	*aws.Request
+	Input *DeleteBotChannelAssociationInput
+}
+
+// Send marshals and sends the DeleteBotChannelAssociation API request.
+func (r DeleteBotChannelAssociationRequest) Send() (*DeleteBotChannelAssociationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBotChannelAssociationOutput), nil
+}
+
+// DeleteBotChannelAssociationRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the association between an Amazon Lex bot and a messaging platform.
 //
-// See DeleteBotChannelAssociation for more information on using the DeleteBotChannelAssociation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the lex:DeleteBotChannelAssociation
+// action.
 //
 //    // Example sending a request using the DeleteBotChannelAssociationRequest method.
-//    req, resp := client.DeleteBotChannelAssociationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBotChannelAssociationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotChannelAssociation
-func (c *LexModelBuildingService) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssociationInput) (req *aws.Request, output *DeleteBotChannelAssociationOutput) {
+func (c *LexModelBuildingService) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssociationInput) DeleteBotChannelAssociationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBotChannelAssociation,
 		HTTPMethod: "DELETE",
@@ -606,94 +341,47 @@ func (c *LexModelBuildingService) DeleteBotChannelAssociationRequest(input *Dele
 		input = &DeleteBotChannelAssociationInput{}
 	}
 
-	output = &DeleteBotChannelAssociationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBotChannelAssociationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBotChannelAssociation API operation for Amazon Lex Model Building Service.
-//
-// Deletes the association between an Amazon Lex bot and a messaging platform.
-//
-// This operation requires permission for the lex:DeleteBotChannelAssociation
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteBotChannelAssociation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotChannelAssociation
-func (c *LexModelBuildingService) DeleteBotChannelAssociation(input *DeleteBotChannelAssociationInput) (*DeleteBotChannelAssociationOutput, error) {
-	req, out := c.DeleteBotChannelAssociationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBotChannelAssociationWithContext is the same as DeleteBotChannelAssociation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBotChannelAssociation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotChannelAssociationWithContext(ctx aws.Context, input *DeleteBotChannelAssociationInput, opts ...aws.Option) (*DeleteBotChannelAssociationOutput, error) {
-	req, out := c.DeleteBotChannelAssociationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBotChannelAssociationRequest{Request: req, Input: input}
 }
 
 const opDeleteBotVersion = "DeleteBotVersion"
 
-// DeleteBotVersionRequest generates a "aws.Request" representing the
-// client's request for the DeleteBotVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBotVersionRequest is a API request type for the DeleteBotVersion API operation.
+type DeleteBotVersionRequest struct {
+	*aws.Request
+	Input *DeleteBotVersionInput
+}
+
+// Send marshals and sends the DeleteBotVersion API request.
+func (r DeleteBotVersionRequest) Send() (*DeleteBotVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBotVersionOutput), nil
+}
+
+// DeleteBotVersionRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a specific version of a bot. To delete all versions of a bot, use
+// the DeleteBot operation.
 //
-// See DeleteBotVersion for more information on using the DeleteBotVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:DeleteBotVersion action.
 //
 //    // Example sending a request using the DeleteBotVersionRequest method.
-//    req, resp := client.DeleteBotVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBotVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersion
-func (c *LexModelBuildingService) DeleteBotVersionRequest(input *DeleteBotVersionInput) (req *aws.Request, output *DeleteBotVersionOutput) {
+func (c *LexModelBuildingService) DeleteBotVersionRequest(input *DeleteBotVersionInput) DeleteBotVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBotVersion,
 		HTTPMethod: "DELETE",
@@ -704,125 +392,32 @@ func (c *LexModelBuildingService) DeleteBotVersionRequest(input *DeleteBotVersio
 		input = &DeleteBotVersionInput{}
 	}
 
-	output = &DeleteBotVersionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBotVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBotVersion API operation for Amazon Lex Model Building Service.
-//
-// Deletes a specific version of a bot. To delete all versions of a bot, use
-// the DeleteBot operation.
-//
-// This operation requires permissions for the lex:DeleteBotVersion action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteBotVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource that you are attempting to delete is referred to by another
-//   resource. Use this information to remove references to the resource that
-//   you are trying to delete.
-//
-//   The body of the exception contains a JSON object that describes the resource.
-//
-//   { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
-//
-//   "resourceReference": {
-//
-//   "name": string, "version": string } }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersion
-func (c *LexModelBuildingService) DeleteBotVersion(input *DeleteBotVersionInput) (*DeleteBotVersionOutput, error) {
-	req, out := c.DeleteBotVersionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBotVersionWithContext is the same as DeleteBotVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBotVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotVersionWithContext(ctx aws.Context, input *DeleteBotVersionInput, opts ...aws.Option) (*DeleteBotVersionOutput, error) {
-	req, out := c.DeleteBotVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBotVersionRequest{Request: req, Input: input}
 }
 
 const opDeleteIntent = "DeleteIntent"
 
-// DeleteIntentRequest generates a "aws.Request" representing the
-// client's request for the DeleteIntent operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteIntent for more information on using the DeleteIntent
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteIntentRequest method.
-//    req, resp := client.DeleteIntentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntent
-func (c *LexModelBuildingService) DeleteIntentRequest(input *DeleteIntentInput) (req *aws.Request, output *DeleteIntentOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteIntent,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/intents/{name}",
-	}
-
-	if input == nil {
-		input = &DeleteIntentInput{}
-	}
-
-	output = &DeleteIntentOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteIntentRequest is a API request type for the DeleteIntent API operation.
+type DeleteIntentRequest struct {
+	*aws.Request
+	Input *DeleteIntentInput
 }
 
-// DeleteIntent API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the DeleteIntent API request.
+func (r DeleteIntentRequest) Send() (*DeleteIntentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteIntentOutput), nil
+}
+
+// DeleteIntentRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Deletes all versions of the intent, including the $LATEST version. To delete
 // a specific version of the intent, use the DeleteIntentVersion operation.
@@ -839,93 +434,66 @@ func (c *LexModelBuildingService) DeleteIntentRequest(input *DeleteIntentInput) 
 //
 // This operation requires permission for the lex:DeleteIntent action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteIntent for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource that you are attempting to delete is referred to by another
-//   resource. Use this information to remove references to the resource that
-//   you are trying to delete.
-//
-//   The body of the exception contains a JSON object that describes the resource.
-//
-//   { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
-//
-//   "resourceReference": {
-//
-//   "name": string, "version": string } }
+//    // Example sending a request using the DeleteIntentRequest method.
+//    req := client.DeleteIntentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntent
-func (c *LexModelBuildingService) DeleteIntent(input *DeleteIntentInput) (*DeleteIntentOutput, error) {
-	req, out := c.DeleteIntentRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) DeleteIntentRequest(input *DeleteIntentInput) DeleteIntentRequest {
+	op := &aws.Operation{
+		Name:       opDeleteIntent,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/intents/{name}",
+	}
 
-// DeleteIntentWithContext is the same as DeleteIntent with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteIntent for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteIntentWithContext(ctx aws.Context, input *DeleteIntentInput, opts ...aws.Option) (*DeleteIntentOutput, error) {
-	req, out := c.DeleteIntentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteIntentInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteIntentOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteIntentRequest{Request: req, Input: input}
 }
 
 const opDeleteIntentVersion = "DeleteIntentVersion"
 
-// DeleteIntentVersionRequest generates a "aws.Request" representing the
-// client's request for the DeleteIntentVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteIntentVersionRequest is a API request type for the DeleteIntentVersion API operation.
+type DeleteIntentVersionRequest struct {
+	*aws.Request
+	Input *DeleteIntentVersionInput
+}
+
+// Send marshals and sends the DeleteIntentVersion API request.
+func (r DeleteIntentVersionRequest) Send() (*DeleteIntentVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteIntentVersionOutput), nil
+}
+
+// DeleteIntentVersionRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a specific version of an intent. To delete all versions of a intent,
+// use the DeleteIntent operation.
 //
-// See DeleteIntentVersion for more information on using the DeleteIntentVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:DeleteIntentVersion action.
 //
 //    // Example sending a request using the DeleteIntentVersionRequest method.
-//    req, resp := client.DeleteIntentVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteIntentVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersion
-func (c *LexModelBuildingService) DeleteIntentVersionRequest(input *DeleteIntentVersionInput) (req *aws.Request, output *DeleteIntentVersionOutput) {
+func (c *LexModelBuildingService) DeleteIntentVersionRequest(input *DeleteIntentVersionInput) DeleteIntentVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIntentVersion,
 		HTTPMethod: "DELETE",
@@ -936,125 +504,32 @@ func (c *LexModelBuildingService) DeleteIntentVersionRequest(input *DeleteIntent
 		input = &DeleteIntentVersionInput{}
 	}
 
-	output = &DeleteIntentVersionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteIntentVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteIntentVersion API operation for Amazon Lex Model Building Service.
-//
-// Deletes a specific version of an intent. To delete all versions of a intent,
-// use the DeleteIntent operation.
-//
-// This operation requires permissions for the lex:DeleteIntentVersion action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteIntentVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource that you are attempting to delete is referred to by another
-//   resource. Use this information to remove references to the resource that
-//   you are trying to delete.
-//
-//   The body of the exception contains a JSON object that describes the resource.
-//
-//   { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
-//
-//   "resourceReference": {
-//
-//   "name": string, "version": string } }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersion
-func (c *LexModelBuildingService) DeleteIntentVersion(input *DeleteIntentVersionInput) (*DeleteIntentVersionOutput, error) {
-	req, out := c.DeleteIntentVersionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteIntentVersionWithContext is the same as DeleteIntentVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteIntentVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteIntentVersionWithContext(ctx aws.Context, input *DeleteIntentVersionInput, opts ...aws.Option) (*DeleteIntentVersionOutput, error) {
-	req, out := c.DeleteIntentVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteIntentVersionRequest{Request: req, Input: input}
 }
 
 const opDeleteSlotType = "DeleteSlotType"
 
-// DeleteSlotTypeRequest generates a "aws.Request" representing the
-// client's request for the DeleteSlotType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSlotType for more information on using the DeleteSlotType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteSlotTypeRequest method.
-//    req, resp := client.DeleteSlotTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotType
-func (c *LexModelBuildingService) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) (req *aws.Request, output *DeleteSlotTypeOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteSlotType,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/slottypes/{name}",
-	}
-
-	if input == nil {
-		input = &DeleteSlotTypeInput{}
-	}
-
-	output = &DeleteSlotTypeOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteSlotTypeRequest is a API request type for the DeleteSlotType API operation.
+type DeleteSlotTypeRequest struct {
+	*aws.Request
+	Input *DeleteSlotTypeInput
 }
 
-// DeleteSlotType API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the DeleteSlotType API request.
+func (r DeleteSlotTypeRequest) Send() (*DeleteSlotTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSlotTypeOutput), nil
+}
+
+// DeleteSlotTypeRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Deletes all versions of the slot type, including the $LATEST version. To
 // delete a specific version of the slot type, use the DeleteSlotTypeVersion
@@ -1073,93 +548,66 @@ func (c *LexModelBuildingService) DeleteSlotTypeRequest(input *DeleteSlotTypeInp
 //
 // This operation requires permission for the lex:DeleteSlotType action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteSlotType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource that you are attempting to delete is referred to by another
-//   resource. Use this information to remove references to the resource that
-//   you are trying to delete.
-//
-//   The body of the exception contains a JSON object that describes the resource.
-//
-//   { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
-//
-//   "resourceReference": {
-//
-//   "name": string, "version": string } }
+//    // Example sending a request using the DeleteSlotTypeRequest method.
+//    req := client.DeleteSlotTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotType
-func (c *LexModelBuildingService) DeleteSlotType(input *DeleteSlotTypeInput) (*DeleteSlotTypeOutput, error) {
-	req, out := c.DeleteSlotTypeRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) DeleteSlotTypeRequest {
+	op := &aws.Operation{
+		Name:       opDeleteSlotType,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/slottypes/{name}",
+	}
 
-// DeleteSlotTypeWithContext is the same as DeleteSlotType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSlotType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteSlotTypeWithContext(ctx aws.Context, input *DeleteSlotTypeInput, opts ...aws.Option) (*DeleteSlotTypeOutput, error) {
-	req, out := c.DeleteSlotTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteSlotTypeInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteSlotTypeOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteSlotTypeRequest{Request: req, Input: input}
 }
 
 const opDeleteSlotTypeVersion = "DeleteSlotTypeVersion"
 
-// DeleteSlotTypeVersionRequest generates a "aws.Request" representing the
-// client's request for the DeleteSlotTypeVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSlotTypeVersionRequest is a API request type for the DeleteSlotTypeVersion API operation.
+type DeleteSlotTypeVersionRequest struct {
+	*aws.Request
+	Input *DeleteSlotTypeVersionInput
+}
+
+// Send marshals and sends the DeleteSlotTypeVersion API request.
+func (r DeleteSlotTypeVersionRequest) Send() (*DeleteSlotTypeVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSlotTypeVersionOutput), nil
+}
+
+// DeleteSlotTypeVersionRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a specific version of a slot type. To delete all versions of a slot
+// type, use the DeleteSlotType operation.
 //
-// See DeleteSlotTypeVersion for more information on using the DeleteSlotTypeVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:DeleteSlotTypeVersion action.
 //
 //    // Example sending a request using the DeleteSlotTypeVersionRequest method.
-//    req, resp := client.DeleteSlotTypeVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSlotTypeVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersion
-func (c *LexModelBuildingService) DeleteSlotTypeVersionRequest(input *DeleteSlotTypeVersionInput) (req *aws.Request, output *DeleteSlotTypeVersionOutput) {
+func (c *LexModelBuildingService) DeleteSlotTypeVersionRequest(input *DeleteSlotTypeVersionInput) DeleteSlotTypeVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSlotTypeVersion,
 		HTTPMethod: "DELETE",
@@ -1170,125 +618,32 @@ func (c *LexModelBuildingService) DeleteSlotTypeVersionRequest(input *DeleteSlot
 		input = &DeleteSlotTypeVersionInput{}
 	}
 
-	output = &DeleteSlotTypeVersionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteSlotTypeVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteSlotTypeVersion API operation for Amazon Lex Model Building Service.
-//
-// Deletes a specific version of a slot type. To delete all versions of a slot
-// type, use the DeleteSlotType operation.
-//
-// This operation requires permissions for the lex:DeleteSlotTypeVersion action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteSlotTypeVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource that you are attempting to delete is referred to by another
-//   resource. Use this information to remove references to the resource that
-//   you are trying to delete.
-//
-//   The body of the exception contains a JSON object that describes the resource.
-//
-//   { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
-//
-//   "resourceReference": {
-//
-//   "name": string, "version": string } }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersion
-func (c *LexModelBuildingService) DeleteSlotTypeVersion(input *DeleteSlotTypeVersionInput) (*DeleteSlotTypeVersionOutput, error) {
-	req, out := c.DeleteSlotTypeVersionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSlotTypeVersionWithContext is the same as DeleteSlotTypeVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSlotTypeVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteSlotTypeVersionWithContext(ctx aws.Context, input *DeleteSlotTypeVersionInput, opts ...aws.Option) (*DeleteSlotTypeVersionOutput, error) {
-	req, out := c.DeleteSlotTypeVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteSlotTypeVersionRequest{Request: req, Input: input}
 }
 
 const opDeleteUtterances = "DeleteUtterances"
 
-// DeleteUtterancesRequest generates a "aws.Request" representing the
-// client's request for the DeleteUtterances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteUtterances for more information on using the DeleteUtterances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteUtterancesRequest method.
-//    req, resp := client.DeleteUtterancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterances
-func (c *LexModelBuildingService) DeleteUtterancesRequest(input *DeleteUtterancesInput) (req *aws.Request, output *DeleteUtterancesOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteUtterances,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/bots/{botName}/utterances/{userId}",
-	}
-
-	if input == nil {
-		input = &DeleteUtterancesInput{}
-	}
-
-	output = &DeleteUtterancesOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteUtterancesRequest is a API request type for the DeleteUtterances API operation.
+type DeleteUtterancesRequest struct {
+	*aws.Request
+	Input *DeleteUtterancesInput
 }
 
-// DeleteUtterances API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the DeleteUtterances API request.
+func (r DeleteUtterancesRequest) Send() (*DeleteUtterancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUtterancesOutput), nil
+}
+
+// DeleteUtterancesRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Deletes stored utterances.
 //
@@ -1302,77 +657,66 @@ func (c *LexModelBuildingService) DeleteUtterancesRequest(input *DeleteUtterance
 //
 // This operation requires permissions for the lex:DeleteUtterances action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation DeleteUtterances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
+//    // Example sending a request using the DeleteUtterancesRequest method.
+//    req := client.DeleteUtterancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterances
-func (c *LexModelBuildingService) DeleteUtterances(input *DeleteUtterancesInput) (*DeleteUtterancesOutput, error) {
-	req, out := c.DeleteUtterancesRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) DeleteUtterancesRequest(input *DeleteUtterancesInput) DeleteUtterancesRequest {
+	op := &aws.Operation{
+		Name:       opDeleteUtterances,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/bots/{botName}/utterances/{userId}",
+	}
 
-// DeleteUtterancesWithContext is the same as DeleteUtterances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteUtterances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteUtterancesWithContext(ctx aws.Context, input *DeleteUtterancesInput, opts ...aws.Option) (*DeleteUtterancesOutput, error) {
-	req, out := c.DeleteUtterancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteUtterancesInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteUtterancesOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteUtterancesRequest{Request: req, Input: input}
 }
 
 const opGetBot = "GetBot"
 
-// GetBotRequest generates a "aws.Request" representing the
-// client's request for the GetBot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBotRequest is a API request type for the GetBot API operation.
+type GetBotRequest struct {
+	*aws.Request
+	Input *GetBotInput
+}
+
+// Send marshals and sends the GetBot API request.
+func (r GetBotRequest) Send() (*GetBotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBotOutput), nil
+}
+
+// GetBotRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns metadata information for a specific bot. You must provide the bot
+// name and the bot version or alias.
 //
-// See GetBot for more information on using the GetBot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:GetBot action.
 //
 //    // Example sending a request using the GetBotRequest method.
-//    req, resp := client.GetBotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBot
-func (c *LexModelBuildingService) GetBotRequest(input *GetBotInput) (req *aws.Request, output *GetBotOutput) {
+func (c *LexModelBuildingService) GetBotRequest(input *GetBotInput) GetBotRequest {
 	op := &aws.Operation{
 		Name:       opGetBot,
 		HTTPMethod: "GET",
@@ -1383,89 +727,45 @@ func (c *LexModelBuildingService) GetBotRequest(input *GetBotInput) (req *aws.Re
 		input = &GetBotInput{}
 	}
 
-	output = &GetBotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBot API operation for Amazon Lex Model Building Service.
-//
-// Returns metadata information for a specific bot. You must provide the bot
-// name and the bot version or alias.
-//
-// This operation requires permissions for the lex:GetBot action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBot
-func (c *LexModelBuildingService) GetBot(input *GetBotInput) (*GetBotOutput, error) {
-	req, out := c.GetBotRequest(input)
-	return out, req.Send()
-}
-
-// GetBotWithContext is the same as GetBot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotWithContext(ctx aws.Context, input *GetBotInput, opts ...aws.Option) (*GetBotOutput, error) {
-	req, out := c.GetBotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBotOutput{})
+	return GetBotRequest{Request: req, Input: input}
 }
 
 const opGetBotAlias = "GetBotAlias"
 
-// GetBotAliasRequest generates a "aws.Request" representing the
-// client's request for the GetBotAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBotAliasRequest is a API request type for the GetBotAlias API operation.
+type GetBotAliasRequest struct {
+	*aws.Request
+	Input *GetBotAliasInput
+}
+
+// Send marshals and sends the GetBotAlias API request.
+func (r GetBotAliasRequest) Send() (*GetBotAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBotAliasOutput), nil
+}
+
+// GetBotAliasRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about an Amazon Lex bot alias. For more information about
+// aliases, see versioning-aliases.
 //
-// See GetBotAlias for more information on using the GetBotAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:GetBotAlias action.
 //
 //    // Example sending a request using the GetBotAliasRequest method.
-//    req, resp := client.GetBotAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBotAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAlias
-func (c *LexModelBuildingService) GetBotAliasRequest(input *GetBotAliasInput) (req *aws.Request, output *GetBotAliasOutput) {
+func (c *LexModelBuildingService) GetBotAliasRequest(input *GetBotAliasInput) GetBotAliasRequest {
 	op := &aws.Operation{
 		Name:       opGetBotAlias,
 		HTTPMethod: "GET",
@@ -1476,89 +776,44 @@ func (c *LexModelBuildingService) GetBotAliasRequest(input *GetBotAliasInput) (r
 		input = &GetBotAliasInput{}
 	}
 
-	output = &GetBotAliasOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBotAlias API operation for Amazon Lex Model Building Service.
-//
-// Returns information about an Amazon Lex bot alias. For more information about
-// aliases, see versioning-aliases.
-//
-// This operation requires permissions for the lex:GetBotAlias action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBotAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAlias
-func (c *LexModelBuildingService) GetBotAlias(input *GetBotAliasInput) (*GetBotAliasOutput, error) {
-	req, out := c.GetBotAliasRequest(input)
-	return out, req.Send()
-}
-
-// GetBotAliasWithContext is the same as GetBotAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBotAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotAliasWithContext(ctx aws.Context, input *GetBotAliasInput, opts ...aws.Option) (*GetBotAliasOutput, error) {
-	req, out := c.GetBotAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBotAliasOutput{})
+	return GetBotAliasRequest{Request: req, Input: input}
 }
 
 const opGetBotAliases = "GetBotAliases"
 
-// GetBotAliasesRequest generates a "aws.Request" representing the
-// client's request for the GetBotAliases operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBotAliasesRequest is a API request type for the GetBotAliases API operation.
+type GetBotAliasesRequest struct {
+	*aws.Request
+	Input *GetBotAliasesInput
+}
+
+// Send marshals and sends the GetBotAliases API request.
+func (r GetBotAliasesRequest) Send() (*GetBotAliasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBotAliasesOutput), nil
+}
+
+// GetBotAliasesRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of aliases for a specified Amazon Lex bot.
 //
-// See GetBotAliases for more information on using the GetBotAliases
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:GetBotAliases action.
 //
 //    // Example sending a request using the GetBotAliasesRequest method.
-//    req, resp := client.GetBotAliasesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBotAliasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliases
-func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput) (req *aws.Request, output *GetBotAliasesOutput) {
+func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput) GetBotAliasesRequest {
 	op := &aws.Operation{
 		Name:       opGetBotAliases,
 		HTTPMethod: "GET",
@@ -1575,55 +830,8 @@ func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput
 		input = &GetBotAliasesInput{}
 	}
 
-	output = &GetBotAliasesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBotAliases API operation for Amazon Lex Model Building Service.
-//
-// Returns a list of aliases for a specified Amazon Lex bot.
-//
-// This operation requires permissions for the lex:GetBotAliases action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBotAliases for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliases
-func (c *LexModelBuildingService) GetBotAliases(input *GetBotAliasesInput) (*GetBotAliasesOutput, error) {
-	req, out := c.GetBotAliasesRequest(input)
-	return out, req.Send()
-}
-
-// GetBotAliasesWithContext is the same as GetBotAliases with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBotAliases for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotAliasesWithContext(ctx aws.Context, input *GetBotAliasesInput, opts ...aws.Option) (*GetBotAliasesOutput, error) {
-	req, out := c.GetBotAliasesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBotAliasesOutput{})
+	return GetBotAliasesRequest{Request: req, Input: input}
 }
 
 // GetBotAliasesPages iterates over the pages of a GetBotAliases operation,
@@ -1662,10 +870,10 @@ func (c *LexModelBuildingService) GetBotAliasesPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetBotAliasesRequest(inCpy)
+			req := c.GetBotAliasesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1678,31 +886,40 @@ func (c *LexModelBuildingService) GetBotAliasesPagesWithContext(ctx aws.Context,
 
 const opGetBotChannelAssociation = "GetBotChannelAssociation"
 
-// GetBotChannelAssociationRequest generates a "aws.Request" representing the
-// client's request for the GetBotChannelAssociation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBotChannelAssociationRequest is a API request type for the GetBotChannelAssociation API operation.
+type GetBotChannelAssociationRequest struct {
+	*aws.Request
+	Input *GetBotChannelAssociationInput
+}
+
+// Send marshals and sends the GetBotChannelAssociation API request.
+func (r GetBotChannelAssociationRequest) Send() (*GetBotChannelAssociationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBotChannelAssociationOutput), nil
+}
+
+// GetBotChannelAssociationRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the association between an Amazon Lex bot and a
+// messaging platform.
 //
-// See GetBotChannelAssociation for more information on using the GetBotChannelAssociation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:GetBotChannelAssociation
+// action.
 //
 //    // Example sending a request using the GetBotChannelAssociationRequest method.
-//    req, resp := client.GetBotChannelAssociationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBotChannelAssociationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociation
-func (c *LexModelBuildingService) GetBotChannelAssociationRequest(input *GetBotChannelAssociationInput) (req *aws.Request, output *GetBotChannelAssociationOutput) {
+func (c *LexModelBuildingService) GetBotChannelAssociationRequest(input *GetBotChannelAssociationInput) GetBotChannelAssociationRequest {
 	op := &aws.Operation{
 		Name:       opGetBotChannelAssociation,
 		HTTPMethod: "GET",
@@ -1713,90 +930,45 @@ func (c *LexModelBuildingService) GetBotChannelAssociationRequest(input *GetBotC
 		input = &GetBotChannelAssociationInput{}
 	}
 
-	output = &GetBotChannelAssociationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBotChannelAssociation API operation for Amazon Lex Model Building Service.
-//
-// Returns information about the association between an Amazon Lex bot and a
-// messaging platform.
-//
-// This operation requires permissions for the lex:GetBotChannelAssociation
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBotChannelAssociation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociation
-func (c *LexModelBuildingService) GetBotChannelAssociation(input *GetBotChannelAssociationInput) (*GetBotChannelAssociationOutput, error) {
-	req, out := c.GetBotChannelAssociationRequest(input)
-	return out, req.Send()
-}
-
-// GetBotChannelAssociationWithContext is the same as GetBotChannelAssociation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBotChannelAssociation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotChannelAssociationWithContext(ctx aws.Context, input *GetBotChannelAssociationInput, opts ...aws.Option) (*GetBotChannelAssociationOutput, error) {
-	req, out := c.GetBotChannelAssociationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBotChannelAssociationOutput{})
+	return GetBotChannelAssociationRequest{Request: req, Input: input}
 }
 
 const opGetBotChannelAssociations = "GetBotChannelAssociations"
 
-// GetBotChannelAssociationsRequest generates a "aws.Request" representing the
-// client's request for the GetBotChannelAssociations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBotChannelAssociationsRequest is a API request type for the GetBotChannelAssociations API operation.
+type GetBotChannelAssociationsRequest struct {
+	*aws.Request
+	Input *GetBotChannelAssociationsInput
+}
+
+// Send marshals and sends the GetBotChannelAssociations API request.
+func (r GetBotChannelAssociationsRequest) Send() (*GetBotChannelAssociationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBotChannelAssociationsOutput), nil
+}
+
+// GetBotChannelAssociationsRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of all of the channels associated with the specified bot.
 //
-// See GetBotChannelAssociations for more information on using the GetBotChannelAssociations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetBotChannelAssociations operation requires permissions for the lex:GetBotChannelAssociations
+// action.
 //
 //    // Example sending a request using the GetBotChannelAssociationsRequest method.
-//    req, resp := client.GetBotChannelAssociationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBotChannelAssociationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociations
-func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBotChannelAssociationsInput) (req *aws.Request, output *GetBotChannelAssociationsOutput) {
+func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBotChannelAssociationsInput) GetBotChannelAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opGetBotChannelAssociations,
 		HTTPMethod: "GET",
@@ -1813,56 +985,8 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBot
 		input = &GetBotChannelAssociationsInput{}
 	}
 
-	output = &GetBotChannelAssociationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBotChannelAssociations API operation for Amazon Lex Model Building Service.
-//
-// Returns a list of all of the channels associated with the specified bot.
-//
-// The GetBotChannelAssociations operation requires permissions for the lex:GetBotChannelAssociations
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBotChannelAssociations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociations
-func (c *LexModelBuildingService) GetBotChannelAssociations(input *GetBotChannelAssociationsInput) (*GetBotChannelAssociationsOutput, error) {
-	req, out := c.GetBotChannelAssociationsRequest(input)
-	return out, req.Send()
-}
-
-// GetBotChannelAssociationsWithContext is the same as GetBotChannelAssociations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBotChannelAssociations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotChannelAssociationsWithContext(ctx aws.Context, input *GetBotChannelAssociationsInput, opts ...aws.Option) (*GetBotChannelAssociationsOutput, error) {
-	req, out := c.GetBotChannelAssociationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBotChannelAssociationsOutput{})
+	return GetBotChannelAssociationsRequest{Request: req, Input: input}
 }
 
 // GetBotChannelAssociationsPages iterates over the pages of a GetBotChannelAssociations operation,
@@ -1901,10 +1025,10 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsPagesWithContext(ctx 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetBotChannelAssociationsRequest(inCpy)
+			req := c.GetBotChannelAssociationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1917,31 +1041,46 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsPagesWithContext(ctx 
 
 const opGetBotVersions = "GetBotVersions"
 
-// GetBotVersionsRequest generates a "aws.Request" representing the
-// client's request for the GetBotVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBotVersionsRequest is a API request type for the GetBotVersions API operation.
+type GetBotVersionsRequest struct {
+	*aws.Request
+	Input *GetBotVersionsInput
+}
+
+// Send marshals and sends the GetBotVersions API request.
+func (r GetBotVersionsRequest) Send() (*GetBotVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBotVersionsOutput), nil
+}
+
+// GetBotVersionsRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets information about all of the versions of a bot.
 //
-// See GetBotVersions for more information on using the GetBotVersions
-// API call, and error handling.
+// The GetBotVersions operation returns a BotMetadata object for each version
+// of a bot. For example, if a bot has three numbered versions, the GetBotVersions
+// operation returns four BotMetadata objects in the response, one for each
+// numbered version and one for the $LATEST version.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// The GetBotVersions operation always returns at least one version, the $LATEST
+// version.
 //
+// This operation requires permissions for the lex:GetBotVersions action.
 //
 //    // Example sending a request using the GetBotVersionsRequest method.
-//    req, resp := client.GetBotVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBotVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersions
-func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInput) (req *aws.Request, output *GetBotVersionsOutput) {
+func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInput) GetBotVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetBotVersions,
 		HTTPMethod: "GET",
@@ -1958,67 +1097,8 @@ func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInp
 		input = &GetBotVersionsInput{}
 	}
 
-	output = &GetBotVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBotVersions API operation for Amazon Lex Model Building Service.
-//
-// Gets information about all of the versions of a bot.
-//
-// The GetBotVersions operation returns a BotMetadata object for each version
-// of a bot. For example, if a bot has three numbered versions, the GetBotVersions
-// operation returns four BotMetadata objects in the response, one for each
-// numbered version and one for the $LATEST version.
-//
-// The GetBotVersions operation always returns at least one version, the $LATEST
-// version.
-//
-// This operation requires permissions for the lex:GetBotVersions action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBotVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersions
-func (c *LexModelBuildingService) GetBotVersions(input *GetBotVersionsInput) (*GetBotVersionsOutput, error) {
-	req, out := c.GetBotVersionsRequest(input)
-	return out, req.Send()
-}
-
-// GetBotVersionsWithContext is the same as GetBotVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBotVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotVersionsWithContext(ctx aws.Context, input *GetBotVersionsInput, opts ...aws.Option) (*GetBotVersionsOutput, error) {
-	req, out := c.GetBotVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBotVersionsOutput{})
+	return GetBotVersionsRequest{Request: req, Input: input}
 }
 
 // GetBotVersionsPages iterates over the pages of a GetBotVersions operation,
@@ -2057,10 +1137,10 @@ func (c *LexModelBuildingService) GetBotVersionsPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetBotVersionsRequest(inCpy)
+			req := c.GetBotVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2073,31 +1153,45 @@ func (c *LexModelBuildingService) GetBotVersionsPagesWithContext(ctx aws.Context
 
 const opGetBots = "GetBots"
 
-// GetBotsRequest generates a "aws.Request" representing the
-// client's request for the GetBots operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBotsRequest is a API request type for the GetBots API operation.
+type GetBotsRequest struct {
+	*aws.Request
+	Input *GetBotsInput
+}
+
+// Send marshals and sends the GetBots API request.
+func (r GetBotsRequest) Send() (*GetBotsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBotsOutput), nil
+}
+
+// GetBotsRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns bot information as follows:
 //
-// See GetBots for more information on using the GetBots
-// API call, and error handling.
+//    * If you provide the nameContains field, the response includes information
+//    for the $LATEST version of all bots whose name contains the specified
+//    string.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//    * If you don't specify the nameContains field, the operation returns information
+//    about the $LATEST version of all of your bots.
 //
+// This operation requires permission for the lex:GetBots action.
 //
 //    // Example sending a request using the GetBotsRequest method.
-//    req, resp := client.GetBotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBotsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBots
-func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) (req *aws.Request, output *GetBotsOutput) {
+func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) GetBotsRequest {
 	op := &aws.Operation{
 		Name:       opGetBots,
 		HTTPMethod: "GET",
@@ -2114,66 +1208,8 @@ func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) (req *aws.
 		input = &GetBotsInput{}
 	}
 
-	output = &GetBotsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBots API operation for Amazon Lex Model Building Service.
-//
-// Returns bot information as follows:
-//
-//    * If you provide the nameContains field, the response includes information
-//    for the $LATEST version of all bots whose name contains the specified
-//    string.
-//
-//    * If you don't specify the nameContains field, the operation returns information
-//    about the $LATEST version of all of your bots.
-//
-// This operation requires permission for the lex:GetBots action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBots for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBots
-func (c *LexModelBuildingService) GetBots(input *GetBotsInput) (*GetBotsOutput, error) {
-	req, out := c.GetBotsRequest(input)
-	return out, req.Send()
-}
-
-// GetBotsWithContext is the same as GetBots with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBots for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotsWithContext(ctx aws.Context, input *GetBotsInput, opts ...aws.Option) (*GetBotsOutput, error) {
-	req, out := c.GetBotsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBotsOutput{})
+	return GetBotsRequest{Request: req, Input: input}
 }
 
 // GetBotsPages iterates over the pages of a GetBots operation,
@@ -2212,10 +1248,10 @@ func (c *LexModelBuildingService) GetBotsPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetBotsRequest(inCpy)
+			req := c.GetBotsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2228,31 +1264,38 @@ func (c *LexModelBuildingService) GetBotsPagesWithContext(ctx aws.Context, input
 
 const opGetBuiltinIntent = "GetBuiltinIntent"
 
-// GetBuiltinIntentRequest generates a "aws.Request" representing the
-// client's request for the GetBuiltinIntent operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBuiltinIntentRequest is a API request type for the GetBuiltinIntent API operation.
+type GetBuiltinIntentRequest struct {
+	*aws.Request
+	Input *GetBuiltinIntentInput
+}
+
+// Send marshals and sends the GetBuiltinIntent API request.
+func (r GetBuiltinIntentRequest) Send() (*GetBuiltinIntentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBuiltinIntentOutput), nil
+}
+
+// GetBuiltinIntentRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about a built-in intent.
 //
-// See GetBuiltinIntent for more information on using the GetBuiltinIntent
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the lex:GetBuiltinIntent action.
 //
 //    // Example sending a request using the GetBuiltinIntentRequest method.
-//    req, resp := client.GetBuiltinIntentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBuiltinIntentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntent
-func (c *LexModelBuildingService) GetBuiltinIntentRequest(input *GetBuiltinIntentInput) (req *aws.Request, output *GetBuiltinIntentOutput) {
+func (c *LexModelBuildingService) GetBuiltinIntentRequest(input *GetBuiltinIntentInput) GetBuiltinIntentRequest {
 	op := &aws.Operation{
 		Name:       opGetBuiltinIntent,
 		HTTPMethod: "GET",
@@ -2263,88 +1306,44 @@ func (c *LexModelBuildingService) GetBuiltinIntentRequest(input *GetBuiltinInten
 		input = &GetBuiltinIntentInput{}
 	}
 
-	output = &GetBuiltinIntentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBuiltinIntent API operation for Amazon Lex Model Building Service.
-//
-// Returns information about a built-in intent.
-//
-// This operation requires permission for the lex:GetBuiltinIntent action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBuiltinIntent for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntent
-func (c *LexModelBuildingService) GetBuiltinIntent(input *GetBuiltinIntentInput) (*GetBuiltinIntentOutput, error) {
-	req, out := c.GetBuiltinIntentRequest(input)
-	return out, req.Send()
-}
-
-// GetBuiltinIntentWithContext is the same as GetBuiltinIntent with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBuiltinIntent for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinIntentWithContext(ctx aws.Context, input *GetBuiltinIntentInput, opts ...aws.Option) (*GetBuiltinIntentOutput, error) {
-	req, out := c.GetBuiltinIntentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBuiltinIntentOutput{})
+	return GetBuiltinIntentRequest{Request: req, Input: input}
 }
 
 const opGetBuiltinIntents = "GetBuiltinIntents"
 
-// GetBuiltinIntentsRequest generates a "aws.Request" representing the
-// client's request for the GetBuiltinIntents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBuiltinIntentsRequest is a API request type for the GetBuiltinIntents API operation.
+type GetBuiltinIntentsRequest struct {
+	*aws.Request
+	Input *GetBuiltinIntentsInput
+}
+
+// Send marshals and sends the GetBuiltinIntents API request.
+func (r GetBuiltinIntentsRequest) Send() (*GetBuiltinIntentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBuiltinIntentsOutput), nil
+}
+
+// GetBuiltinIntentsRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets a list of built-in intents that meet the specified criteria.
 //
-// See GetBuiltinIntents for more information on using the GetBuiltinIntents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the lex:GetBuiltinIntents action.
 //
 //    // Example sending a request using the GetBuiltinIntentsRequest method.
-//    req, resp := client.GetBuiltinIntentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBuiltinIntentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntents
-func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) (req *aws.Request, output *GetBuiltinIntentsOutput) {
+func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) GetBuiltinIntentsRequest {
 	op := &aws.Operation{
 		Name:       opGetBuiltinIntents,
 		HTTPMethod: "GET",
@@ -2361,55 +1360,8 @@ func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinInte
 		input = &GetBuiltinIntentsInput{}
 	}
 
-	output = &GetBuiltinIntentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBuiltinIntents API operation for Amazon Lex Model Building Service.
-//
-// Gets a list of built-in intents that meet the specified criteria.
-//
-// This operation requires permission for the lex:GetBuiltinIntents action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBuiltinIntents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntents
-func (c *LexModelBuildingService) GetBuiltinIntents(input *GetBuiltinIntentsInput) (*GetBuiltinIntentsOutput, error) {
-	req, out := c.GetBuiltinIntentsRequest(input)
-	return out, req.Send()
-}
-
-// GetBuiltinIntentsWithContext is the same as GetBuiltinIntents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBuiltinIntents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinIntentsWithContext(ctx aws.Context, input *GetBuiltinIntentsInput, opts ...aws.Option) (*GetBuiltinIntentsOutput, error) {
-	req, out := c.GetBuiltinIntentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBuiltinIntentsOutput{})
+	return GetBuiltinIntentsRequest{Request: req, Input: input}
 }
 
 // GetBuiltinIntentsPages iterates over the pages of a GetBuiltinIntents operation,
@@ -2448,10 +1400,10 @@ func (c *LexModelBuildingService) GetBuiltinIntentsPagesWithContext(ctx aws.Cont
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetBuiltinIntentsRequest(inCpy)
+			req := c.GetBuiltinIntentsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2464,31 +1416,41 @@ func (c *LexModelBuildingService) GetBuiltinIntentsPagesWithContext(ctx aws.Cont
 
 const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
 
-// GetBuiltinSlotTypesRequest generates a "aws.Request" representing the
-// client's request for the GetBuiltinSlotTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBuiltinSlotTypesRequest is a API request type for the GetBuiltinSlotTypes API operation.
+type GetBuiltinSlotTypesRequest struct {
+	*aws.Request
+	Input *GetBuiltinSlotTypesInput
+}
+
+// Send marshals and sends the GetBuiltinSlotTypes API request.
+func (r GetBuiltinSlotTypesRequest) Send() (*GetBuiltinSlotTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBuiltinSlotTypesOutput), nil
+}
+
+// GetBuiltinSlotTypesRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets a list of built-in slot types that meet the specified criteria.
 //
-// See GetBuiltinSlotTypes for more information on using the GetBuiltinSlotTypes
-// API call, and error handling.
+// For a list of built-in slot types, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
+// in the Alexa Skills Kit.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the lex:GetBuiltInSlotTypes action.
 //
 //    // Example sending a request using the GetBuiltinSlotTypesRequest method.
-//    req, resp := client.GetBuiltinSlotTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBuiltinSlotTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypes
-func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) (req *aws.Request, output *GetBuiltinSlotTypesOutput) {
+func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) GetBuiltinSlotTypesRequest {
 	op := &aws.Operation{
 		Name:       opGetBuiltinSlotTypes,
 		HTTPMethod: "GET",
@@ -2505,58 +1467,8 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSl
 		input = &GetBuiltinSlotTypesInput{}
 	}
 
-	output = &GetBuiltinSlotTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBuiltinSlotTypes API operation for Amazon Lex Model Building Service.
-//
-// Gets a list of built-in slot types that meet the specified criteria.
-//
-// For a list of built-in slot types, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
-// in the Alexa Skills Kit.
-//
-// This operation requires permission for the lex:GetBuiltInSlotTypes action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetBuiltinSlotTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypes
-func (c *LexModelBuildingService) GetBuiltinSlotTypes(input *GetBuiltinSlotTypesInput) (*GetBuiltinSlotTypesOutput, error) {
-	req, out := c.GetBuiltinSlotTypesRequest(input)
-	return out, req.Send()
-}
-
-// GetBuiltinSlotTypesWithContext is the same as GetBuiltinSlotTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBuiltinSlotTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinSlotTypesWithContext(ctx aws.Context, input *GetBuiltinSlotTypesInput, opts ...aws.Option) (*GetBuiltinSlotTypesOutput, error) {
-	req, out := c.GetBuiltinSlotTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBuiltinSlotTypesOutput{})
+	return GetBuiltinSlotTypesRequest{Request: req, Input: input}
 }
 
 // GetBuiltinSlotTypesPages iterates over the pages of a GetBuiltinSlotTypes operation,
@@ -2595,10 +1507,10 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesPagesWithContext(ctx aws.Co
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetBuiltinSlotTypesRequest(inCpy)
+			req := c.GetBuiltinSlotTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2611,31 +1523,36 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesPagesWithContext(ctx aws.Co
 
 const opGetExport = "GetExport"
 
-// GetExportRequest generates a "aws.Request" representing the
-// client's request for the GetExport operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetExportRequest is a API request type for the GetExport API operation.
+type GetExportRequest struct {
+	*aws.Request
+	Input *GetExportInput
+}
+
+// Send marshals and sends the GetExport API request.
+func (r GetExportRequest) Send() (*GetExportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetExportOutput), nil
+}
+
+// GetExportRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetExport for more information on using the GetExport
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Exports the contents of a Amazon Lex resource in a specified format.
 //
 //    // Example sending a request using the GetExportRequest method.
-//    req, resp := client.GetExportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetExportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExport
-func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) (req *aws.Request, output *GetExportOutput) {
+func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) GetExportRequest {
 	op := &aws.Operation{
 		Name:       opGetExport,
 		HTTPMethod: "GET",
@@ -2646,86 +1563,45 @@ func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) (req *
 		input = &GetExportInput{}
 	}
 
-	output = &GetExportOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetExport API operation for Amazon Lex Model Building Service.
-//
-// Exports the contents of a Amazon Lex resource in a specified format.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetExport for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExport
-func (c *LexModelBuildingService) GetExport(input *GetExportInput) (*GetExportOutput, error) {
-	req, out := c.GetExportRequest(input)
-	return out, req.Send()
-}
-
-// GetExportWithContext is the same as GetExport with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetExport for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetExportWithContext(ctx aws.Context, input *GetExportInput, opts ...aws.Option) (*GetExportOutput, error) {
-	req, out := c.GetExportRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetExportOutput{})
+	return GetExportRequest{Request: req, Input: input}
 }
 
 const opGetIntent = "GetIntent"
 
-// GetIntentRequest generates a "aws.Request" representing the
-// client's request for the GetIntent operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetIntentRequest is a API request type for the GetIntent API operation.
+type GetIntentRequest struct {
+	*aws.Request
+	Input *GetIntentInput
+}
+
+// Send marshals and sends the GetIntent API request.
+func (r GetIntentRequest) Send() (*GetIntentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetIntentOutput), nil
+}
+
+// GetIntentRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about an intent. In addition to the intent name, you
+// must specify the intent version.
 //
-// See GetIntent for more information on using the GetIntent
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the lex:GetIntent action.
 //
 //    // Example sending a request using the GetIntentRequest method.
-//    req, resp := client.GetIntentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetIntentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntent
-func (c *LexModelBuildingService) GetIntentRequest(input *GetIntentInput) (req *aws.Request, output *GetIntentOutput) {
+func (c *LexModelBuildingService) GetIntentRequest(input *GetIntentInput) GetIntentRequest {
 	op := &aws.Operation{
 		Name:       opGetIntent,
 		HTTPMethod: "GET",
@@ -2736,89 +1612,52 @@ func (c *LexModelBuildingService) GetIntentRequest(input *GetIntentInput) (req *
 		input = &GetIntentInput{}
 	}
 
-	output = &GetIntentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetIntent API operation for Amazon Lex Model Building Service.
-//
-// Returns information about an intent. In addition to the intent name, you
-// must specify the intent version.
-//
-// This operation requires permissions to perform the lex:GetIntent action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetIntent for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntent
-func (c *LexModelBuildingService) GetIntent(input *GetIntentInput) (*GetIntentOutput, error) {
-	req, out := c.GetIntentRequest(input)
-	return out, req.Send()
-}
-
-// GetIntentWithContext is the same as GetIntent with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetIntent for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentWithContext(ctx aws.Context, input *GetIntentInput, opts ...aws.Option) (*GetIntentOutput, error) {
-	req, out := c.GetIntentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetIntentOutput{})
+	return GetIntentRequest{Request: req, Input: input}
 }
 
 const opGetIntentVersions = "GetIntentVersions"
 
-// GetIntentVersionsRequest generates a "aws.Request" representing the
-// client's request for the GetIntentVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetIntentVersionsRequest is a API request type for the GetIntentVersions API operation.
+type GetIntentVersionsRequest struct {
+	*aws.Request
+	Input *GetIntentVersionsInput
+}
+
+// Send marshals and sends the GetIntentVersions API request.
+func (r GetIntentVersionsRequest) Send() (*GetIntentVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetIntentVersionsOutput), nil
+}
+
+// GetIntentVersionsRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets information about all of the versions of an intent.
 //
-// See GetIntentVersions for more information on using the GetIntentVersions
-// API call, and error handling.
+// The GetIntentVersions operation returns an IntentMetadata object for each
+// version of an intent. For example, if an intent has three numbered versions,
+// the GetIntentVersions operation returns four IntentMetadata objects in the
+// response, one for each numbered version and one for the $LATEST version.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// The GetIntentVersions operation always returns at least one version, the
+// $LATEST version.
 //
+// This operation requires permissions for the lex:GetIntentVersions action.
 //
 //    // Example sending a request using the GetIntentVersionsRequest method.
-//    req, resp := client.GetIntentVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetIntentVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentVersions
-func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersionsInput) (req *aws.Request, output *GetIntentVersionsOutput) {
+func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersionsInput) GetIntentVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetIntentVersions,
 		HTTPMethod: "GET",
@@ -2835,67 +1674,8 @@ func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersi
 		input = &GetIntentVersionsInput{}
 	}
 
-	output = &GetIntentVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetIntentVersions API operation for Amazon Lex Model Building Service.
-//
-// Gets information about all of the versions of an intent.
-//
-// The GetIntentVersions operation returns an IntentMetadata object for each
-// version of an intent. For example, if an intent has three numbered versions,
-// the GetIntentVersions operation returns four IntentMetadata objects in the
-// response, one for each numbered version and one for the $LATEST version.
-//
-// The GetIntentVersions operation always returns at least one version, the
-// $LATEST version.
-//
-// This operation requires permissions for the lex:GetIntentVersions action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetIntentVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentVersions
-func (c *LexModelBuildingService) GetIntentVersions(input *GetIntentVersionsInput) (*GetIntentVersionsOutput, error) {
-	req, out := c.GetIntentVersionsRequest(input)
-	return out, req.Send()
-}
-
-// GetIntentVersionsWithContext is the same as GetIntentVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetIntentVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentVersionsWithContext(ctx aws.Context, input *GetIntentVersionsInput, opts ...aws.Option) (*GetIntentVersionsOutput, error) {
-	req, out := c.GetIntentVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetIntentVersionsOutput{})
+	return GetIntentVersionsRequest{Request: req, Input: input}
 }
 
 // GetIntentVersionsPages iterates over the pages of a GetIntentVersions operation,
@@ -2934,10 +1714,10 @@ func (c *LexModelBuildingService) GetIntentVersionsPagesWithContext(ctx aws.Cont
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetIntentVersionsRequest(inCpy)
+			req := c.GetIntentVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2950,31 +1730,44 @@ func (c *LexModelBuildingService) GetIntentVersionsPagesWithContext(ctx aws.Cont
 
 const opGetIntents = "GetIntents"
 
-// GetIntentsRequest generates a "aws.Request" representing the
-// client's request for the GetIntents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetIntentsRequest is a API request type for the GetIntents API operation.
+type GetIntentsRequest struct {
+	*aws.Request
+	Input *GetIntentsInput
+}
+
+// Send marshals and sends the GetIntents API request.
+func (r GetIntentsRequest) Send() (*GetIntentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetIntentsOutput), nil
+}
+
+// GetIntentsRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns intent information as follows:
 //
-// See GetIntents for more information on using the GetIntents
-// API call, and error handling.
+//    * If you specify the nameContains field, returns the $LATEST version of
+//    all intents that contain the specified string.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//    *  If you don't specify the nameContains field, returns information about
+//    the $LATEST version of all intents.
 //
+// The operation requires permission for the lex:GetIntents action.
 //
 //    // Example sending a request using the GetIntentsRequest method.
-//    req, resp := client.GetIntentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetIntentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntents
-func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) (req *aws.Request, output *GetIntentsOutput) {
+func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) GetIntentsRequest {
 	op := &aws.Operation{
 		Name:       opGetIntents,
 		HTTPMethod: "GET",
@@ -2991,65 +1784,8 @@ func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) (req
 		input = &GetIntentsInput{}
 	}
 
-	output = &GetIntentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetIntents API operation for Amazon Lex Model Building Service.
-//
-// Returns intent information as follows:
-//
-//    * If you specify the nameContains field, returns the $LATEST version of
-//    all intents that contain the specified string.
-//
-//    *  If you don't specify the nameContains field, returns information about
-//    the $LATEST version of all intents.
-//
-// The operation requires permission for the lex:GetIntents action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetIntents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntents
-func (c *LexModelBuildingService) GetIntents(input *GetIntentsInput) (*GetIntentsOutput, error) {
-	req, out := c.GetIntentsRequest(input)
-	return out, req.Send()
-}
-
-// GetIntentsWithContext is the same as GetIntents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetIntents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentsWithContext(ctx aws.Context, input *GetIntentsInput, opts ...aws.Option) (*GetIntentsOutput, error) {
-	req, out := c.GetIntentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetIntentsOutput{})
+	return GetIntentsRequest{Request: req, Input: input}
 }
 
 // GetIntentsPages iterates over the pages of a GetIntents operation,
@@ -3088,10 +1824,10 @@ func (c *LexModelBuildingService) GetIntentsPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetIntentsRequest(inCpy)
+			req := c.GetIntentsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3104,31 +1840,39 @@ func (c *LexModelBuildingService) GetIntentsPagesWithContext(ctx aws.Context, in
 
 const opGetSlotType = "GetSlotType"
 
-// GetSlotTypeRequest generates a "aws.Request" representing the
-// client's request for the GetSlotType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSlotTypeRequest is a API request type for the GetSlotType API operation.
+type GetSlotTypeRequest struct {
+	*aws.Request
+	Input *GetSlotTypeInput
+}
+
+// Send marshals and sends the GetSlotType API request.
+func (r GetSlotTypeRequest) Send() (*GetSlotTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSlotTypeOutput), nil
+}
+
+// GetSlotTypeRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about a specific version of a slot type. In addition
+// to specifying the slot type name, you must specify the slot type version.
 //
-// See GetSlotType for more information on using the GetSlotType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:GetSlotType action.
 //
 //    // Example sending a request using the GetSlotTypeRequest method.
-//    req, resp := client.GetSlotTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSlotTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotType
-func (c *LexModelBuildingService) GetSlotTypeRequest(input *GetSlotTypeInput) (req *aws.Request, output *GetSlotTypeOutput) {
+func (c *LexModelBuildingService) GetSlotTypeRequest(input *GetSlotTypeInput) GetSlotTypeRequest {
 	op := &aws.Operation{
 		Name:       opGetSlotType,
 		HTTPMethod: "GET",
@@ -3139,89 +1883,52 @@ func (c *LexModelBuildingService) GetSlotTypeRequest(input *GetSlotTypeInput) (r
 		input = &GetSlotTypeInput{}
 	}
 
-	output = &GetSlotTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSlotType API operation for Amazon Lex Model Building Service.
-//
-// Returns information about a specific version of a slot type. In addition
-// to specifying the slot type name, you must specify the slot type version.
-//
-// This operation requires permissions for the lex:GetSlotType action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetSlotType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotType
-func (c *LexModelBuildingService) GetSlotType(input *GetSlotTypeInput) (*GetSlotTypeOutput, error) {
-	req, out := c.GetSlotTypeRequest(input)
-	return out, req.Send()
-}
-
-// GetSlotTypeWithContext is the same as GetSlotType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSlotType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypeWithContext(ctx aws.Context, input *GetSlotTypeInput, opts ...aws.Option) (*GetSlotTypeOutput, error) {
-	req, out := c.GetSlotTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSlotTypeOutput{})
+	return GetSlotTypeRequest{Request: req, Input: input}
 }
 
 const opGetSlotTypeVersions = "GetSlotTypeVersions"
 
-// GetSlotTypeVersionsRequest generates a "aws.Request" representing the
-// client's request for the GetSlotTypeVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSlotTypeVersionsRequest is a API request type for the GetSlotTypeVersions API operation.
+type GetSlotTypeVersionsRequest struct {
+	*aws.Request
+	Input *GetSlotTypeVersionsInput
+}
+
+// Send marshals and sends the GetSlotTypeVersions API request.
+func (r GetSlotTypeVersionsRequest) Send() (*GetSlotTypeVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSlotTypeVersionsOutput), nil
+}
+
+// GetSlotTypeVersionsRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets information about all versions of a slot type.
 //
-// See GetSlotTypeVersions for more information on using the GetSlotTypeVersions
-// API call, and error handling.
+// The GetSlotTypeVersions operation returns a SlotTypeMetadata object for each
+// version of a slot type. For example, if a slot type has three numbered versions,
+// the GetSlotTypeVersions operation returns four SlotTypeMetadata objects in
+// the response, one for each numbered version and one for the $LATEST version.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// The GetSlotTypeVersions operation always returns at least one version, the
+// $LATEST version.
 //
+// This operation requires permissions for the lex:GetSlotTypeVersions action.
 //
 //    // Example sending a request using the GetSlotTypeVersionsRequest method.
-//    req, resp := client.GetSlotTypeVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSlotTypeVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeVersions
-func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeVersionsInput) (req *aws.Request, output *GetSlotTypeVersionsOutput) {
+func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeVersionsInput) GetSlotTypeVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetSlotTypeVersions,
 		HTTPMethod: "GET",
@@ -3238,67 +1945,8 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeV
 		input = &GetSlotTypeVersionsInput{}
 	}
 
-	output = &GetSlotTypeVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSlotTypeVersions API operation for Amazon Lex Model Building Service.
-//
-// Gets information about all versions of a slot type.
-//
-// The GetSlotTypeVersions operation returns a SlotTypeMetadata object for each
-// version of a slot type. For example, if a slot type has three numbered versions,
-// the GetSlotTypeVersions operation returns four SlotTypeMetadata objects in
-// the response, one for each numbered version and one for the $LATEST version.
-//
-// The GetSlotTypeVersions operation always returns at least one version, the
-// $LATEST version.
-//
-// This operation requires permissions for the lex:GetSlotTypeVersions action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetSlotTypeVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeVersions
-func (c *LexModelBuildingService) GetSlotTypeVersions(input *GetSlotTypeVersionsInput) (*GetSlotTypeVersionsOutput, error) {
-	req, out := c.GetSlotTypeVersionsRequest(input)
-	return out, req.Send()
-}
-
-// GetSlotTypeVersionsWithContext is the same as GetSlotTypeVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSlotTypeVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypeVersionsWithContext(ctx aws.Context, input *GetSlotTypeVersionsInput, opts ...aws.Option) (*GetSlotTypeVersionsOutput, error) {
-	req, out := c.GetSlotTypeVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSlotTypeVersionsOutput{})
+	return GetSlotTypeVersionsRequest{Request: req, Input: input}
 }
 
 // GetSlotTypeVersionsPages iterates over the pages of a GetSlotTypeVersions operation,
@@ -3337,10 +1985,10 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsPagesWithContext(ctx aws.Co
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetSlotTypeVersionsRequest(inCpy)
+			req := c.GetSlotTypeVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3353,31 +2001,44 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsPagesWithContext(ctx aws.Co
 
 const opGetSlotTypes = "GetSlotTypes"
 
-// GetSlotTypesRequest generates a "aws.Request" representing the
-// client's request for the GetSlotTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSlotTypesRequest is a API request type for the GetSlotTypes API operation.
+type GetSlotTypesRequest struct {
+	*aws.Request
+	Input *GetSlotTypesInput
+}
+
+// Send marshals and sends the GetSlotTypes API request.
+func (r GetSlotTypesRequest) Send() (*GetSlotTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSlotTypesOutput), nil
+}
+
+// GetSlotTypesRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns slot type information as follows:
 //
-// See GetSlotTypes for more information on using the GetSlotTypes
-// API call, and error handling.
+//    * If you specify the nameContains field, returns the $LATEST version of
+//    all slot types that contain the specified string.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//    *  If you don't specify the nameContains field, returns information about
+//    the $LATEST version of all slot types.
 //
+// The operation requires permission for the lex:GetSlotTypes action.
 //
 //    // Example sending a request using the GetSlotTypesRequest method.
-//    req, resp := client.GetSlotTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSlotTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypes
-func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) (req *aws.Request, output *GetSlotTypesOutput) {
+func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) GetSlotTypesRequest {
 	op := &aws.Operation{
 		Name:       opGetSlotTypes,
 		HTTPMethod: "GET",
@@ -3394,65 +2055,8 @@ func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) 
 		input = &GetSlotTypesInput{}
 	}
 
-	output = &GetSlotTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSlotTypes API operation for Amazon Lex Model Building Service.
-//
-// Returns slot type information as follows:
-//
-//    * If you specify the nameContains field, returns the $LATEST version of
-//    all slot types that contain the specified string.
-//
-//    *  If you don't specify the nameContains field, returns information about
-//    the $LATEST version of all slot types.
-//
-// The operation requires permission for the lex:GetSlotTypes action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetSlotTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource specified in the request was not found. Check the resource and
-//   try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypes
-func (c *LexModelBuildingService) GetSlotTypes(input *GetSlotTypesInput) (*GetSlotTypesOutput, error) {
-	req, out := c.GetSlotTypesRequest(input)
-	return out, req.Send()
-}
-
-// GetSlotTypesWithContext is the same as GetSlotTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSlotTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypesWithContext(ctx aws.Context, input *GetSlotTypesInput, opts ...aws.Option) (*GetSlotTypesOutput, error) {
-	req, out := c.GetSlotTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSlotTypesOutput{})
+	return GetSlotTypesRequest{Request: req, Input: input}
 }
 
 // GetSlotTypesPages iterates over the pages of a GetSlotTypes operation,
@@ -3491,10 +2095,10 @@ func (c *LexModelBuildingService) GetSlotTypesPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetSlotTypesRequest(inCpy)
+			req := c.GetSlotTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3507,47 +2111,24 @@ func (c *LexModelBuildingService) GetSlotTypesPagesWithContext(ctx aws.Context, 
 
 const opGetUtterancesView = "GetUtterancesView"
 
-// GetUtterancesViewRequest generates a "aws.Request" representing the
-// client's request for the GetUtterancesView operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetUtterancesView for more information on using the GetUtterancesView
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetUtterancesViewRequest method.
-//    req, resp := client.GetUtterancesViewRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesView
-func (c *LexModelBuildingService) GetUtterancesViewRequest(input *GetUtterancesViewInput) (req *aws.Request, output *GetUtterancesViewOutput) {
-	op := &aws.Operation{
-		Name:       opGetUtterancesView,
-		HTTPMethod: "GET",
-		HTTPPath:   "/bots/{botname}/utterances?view=aggregation",
-	}
-
-	if input == nil {
-		input = &GetUtterancesViewInput{}
-	}
-
-	output = &GetUtterancesViewOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetUtterancesViewRequest is a API request type for the GetUtterancesView API operation.
+type GetUtterancesViewRequest struct {
+	*aws.Request
+	Input *GetUtterancesViewInput
 }
 
-// GetUtterancesView API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the GetUtterancesView API request.
+func (r GetUtterancesViewRequest) Send() (*GetUtterancesViewOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUtterancesViewOutput), nil
+}
+
+// GetUtterancesViewRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Use the GetUtterancesView operation to get information about the utterances
 // that your users have made to your bot. You can use this list to tune the
@@ -3574,89 +2155,49 @@ func (c *LexModelBuildingService) GetUtterancesViewRequest(input *GetUtterancesV
 //
 // This operation requires permissions for the lex:GetUtterancesView action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation GetUtterancesView for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
+//    // Example sending a request using the GetUtterancesViewRequest method.
+//    req := client.GetUtterancesViewRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesView
-func (c *LexModelBuildingService) GetUtterancesView(input *GetUtterancesViewInput) (*GetUtterancesViewOutput, error) {
-	req, out := c.GetUtterancesViewRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) GetUtterancesViewRequest(input *GetUtterancesViewInput) GetUtterancesViewRequest {
+	op := &aws.Operation{
+		Name:       opGetUtterancesView,
+		HTTPMethod: "GET",
+		HTTPPath:   "/bots/{botname}/utterances?view=aggregation",
+	}
 
-// GetUtterancesViewWithContext is the same as GetUtterancesView with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetUtterancesView for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetUtterancesViewWithContext(ctx aws.Context, input *GetUtterancesViewInput, opts ...aws.Option) (*GetUtterancesViewOutput, error) {
-	req, out := c.GetUtterancesViewRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetUtterancesViewInput{}
+	}
+
+	req := c.newRequest(op, input, &GetUtterancesViewOutput{})
+	return GetUtterancesViewRequest{Request: req, Input: input}
 }
 
 const opPutBot = "PutBot"
 
-// PutBotRequest generates a "aws.Request" representing the
-// client's request for the PutBot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBot for more information on using the PutBot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutBotRequest method.
-//    req, resp := client.PutBotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot
-func (c *LexModelBuildingService) PutBotRequest(input *PutBotInput) (req *aws.Request, output *PutBotOutput) {
-	op := &aws.Operation{
-		Name:       opPutBot,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/bots/{name}/versions/$LATEST",
-	}
-
-	if input == nil {
-		input = &PutBotInput{}
-	}
-
-	output = &PutBotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutBotRequest is a API request type for the PutBot API operation.
+type PutBotRequest struct {
+	*aws.Request
+	Input *PutBotInput
 }
 
-// PutBot API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the PutBot API request.
+func (r PutBotRequest) Send() (*PutBotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBotOutput), nil
+}
+
+// PutBotRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Creates an Amazon Lex conversational bot or replaces an existing bot. When
 // you create or update a bot you are only required to specify a name. You can
@@ -3672,80 +2213,65 @@ func (c *LexModelBuildingService) PutBotRequest(input *PutBotInput) (req *aws.Re
 //
 // This operation requires permissions for the lex:PutBotaction. For more information, see auth-and-access-control
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation PutBot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodePreconditionFailedException "PreconditionFailedException"
-//   The checksum of the resource that you are trying to change does not match
-//   the checksum in the request. Check the resource's checksum and try again.
+//    // Example sending a request using the PutBotRequest method.
+//    req := client.PutBotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot
-func (c *LexModelBuildingService) PutBot(input *PutBotInput) (*PutBotOutput, error) {
-	req, out := c.PutBotRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) PutBotRequest(input *PutBotInput) PutBotRequest {
+	op := &aws.Operation{
+		Name:       opPutBot,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/bots/{name}/versions/$LATEST",
+	}
 
-// PutBotWithContext is the same as PutBot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) PutBotWithContext(ctx aws.Context, input *PutBotInput, opts ...aws.Option) (*PutBotOutput, error) {
-	req, out := c.PutBotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutBotInput{}
+	}
+
+	req := c.newRequest(op, input, &PutBotOutput{})
+	return PutBotRequest{Request: req, Input: input}
 }
 
 const opPutBotAlias = "PutBotAlias"
 
-// PutBotAliasRequest generates a "aws.Request" representing the
-// client's request for the PutBotAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBotAliasRequest is a API request type for the PutBotAlias API operation.
+type PutBotAliasRequest struct {
+	*aws.Request
+	Input *PutBotAliasInput
+}
+
+// Send marshals and sends the PutBotAlias API request.
+func (r PutBotAliasRequest) Send() (*PutBotAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBotAliasOutput), nil
+}
+
+// PutBotAliasRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates an alias for the specified version of the bot or replaces an alias
+// for the specified bot. To change the version of the bot that the alias points
+// to, replace the alias. For more information about aliases, see versioning-aliases.
 //
-// See PutBotAlias for more information on using the PutBotAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the lex:PutBotAlias action.
 //
 //    // Example sending a request using the PutBotAliasRequest method.
-//    req, resp := client.PutBotAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBotAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAlias
-func (c *LexModelBuildingService) PutBotAliasRequest(input *PutBotAliasInput) (req *aws.Request, output *PutBotAliasOutput) {
+func (c *LexModelBuildingService) PutBotAliasRequest(input *PutBotAliasInput) PutBotAliasRequest {
 	op := &aws.Operation{
 		Name:       opPutBotAlias,
 		HTTPMethod: "PUT",
@@ -3756,109 +2282,30 @@ func (c *LexModelBuildingService) PutBotAliasRequest(input *PutBotAliasInput) (r
 		input = &PutBotAliasInput{}
 	}
 
-	output = &PutBotAliasOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutBotAlias API operation for Amazon Lex Model Building Service.
-//
-// Creates an alias for the specified version of the bot or replaces an alias
-// for the specified bot. To change the version of the bot that the alias points
-// to, replace the alias. For more information about aliases, see versioning-aliases.
-//
-// This operation requires permissions for the lex:PutBotAlias action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation PutBotAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodePreconditionFailedException "PreconditionFailedException"
-//   The checksum of the resource that you are trying to change does not match
-//   the checksum in the request. Check the resource's checksum and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAlias
-func (c *LexModelBuildingService) PutBotAlias(input *PutBotAliasInput) (*PutBotAliasOutput, error) {
-	req, out := c.PutBotAliasRequest(input)
-	return out, req.Send()
-}
-
-// PutBotAliasWithContext is the same as PutBotAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBotAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) PutBotAliasWithContext(ctx aws.Context, input *PutBotAliasInput, opts ...aws.Option) (*PutBotAliasOutput, error) {
-	req, out := c.PutBotAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutBotAliasOutput{})
+	return PutBotAliasRequest{Request: req, Input: input}
 }
 
 const opPutIntent = "PutIntent"
 
-// PutIntentRequest generates a "aws.Request" representing the
-// client's request for the PutIntent operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutIntent for more information on using the PutIntent
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutIntentRequest method.
-//    req, resp := client.PutIntentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent
-func (c *LexModelBuildingService) PutIntentRequest(input *PutIntentInput) (req *aws.Request, output *PutIntentOutput) {
-	op := &aws.Operation{
-		Name:       opPutIntent,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/intents/{name}/versions/$LATEST",
-	}
-
-	if input == nil {
-		input = &PutIntentInput{}
-	}
-
-	output = &PutIntentOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutIntentRequest is a API request type for the PutIntent API operation.
+type PutIntentRequest struct {
+	*aws.Request
+	Input *PutIntentInput
 }
 
-// PutIntent API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the PutIntent API request.
+func (r PutIntentRequest) Send() (*PutIntentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutIntentOutput), nil
+}
+
+// PutIntentRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Creates an intent or replaces an existing intent.
 //
@@ -3905,96 +2352,49 @@ func (c *LexModelBuildingService) PutIntentRequest(input *PutIntentInput) (req *
 //
 // This operation requires permissions for the lex:PutIntent action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation PutIntent for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodePreconditionFailedException "PreconditionFailedException"
-//   The checksum of the resource that you are trying to change does not match
-//   the checksum in the request. Check the resource's checksum and try again.
+//    // Example sending a request using the PutIntentRequest method.
+//    req := client.PutIntentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent
-func (c *LexModelBuildingService) PutIntent(input *PutIntentInput) (*PutIntentOutput, error) {
-	req, out := c.PutIntentRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) PutIntentRequest(input *PutIntentInput) PutIntentRequest {
+	op := &aws.Operation{
+		Name:       opPutIntent,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/intents/{name}/versions/$LATEST",
+	}
 
-// PutIntentWithContext is the same as PutIntent with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutIntent for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) PutIntentWithContext(ctx aws.Context, input *PutIntentInput, opts ...aws.Option) (*PutIntentOutput, error) {
-	req, out := c.PutIntentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutIntentInput{}
+	}
+
+	req := c.newRequest(op, input, &PutIntentOutput{})
+	return PutIntentRequest{Request: req, Input: input}
 }
 
 const opPutSlotType = "PutSlotType"
 
-// PutSlotTypeRequest generates a "aws.Request" representing the
-// client's request for the PutSlotType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutSlotType for more information on using the PutSlotType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutSlotTypeRequest method.
-//    req, resp := client.PutSlotTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType
-func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) (req *aws.Request, output *PutSlotTypeOutput) {
-	op := &aws.Operation{
-		Name:       opPutSlotType,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/slottypes/{name}/versions/$LATEST",
-	}
-
-	if input == nil {
-		input = &PutSlotTypeInput{}
-	}
-
-	output = &PutSlotTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutSlotTypeRequest is a API request type for the PutSlotType API operation.
+type PutSlotTypeRequest struct {
+	*aws.Request
+	Input *PutSlotTypeInput
 }
 
-// PutSlotType API operation for Amazon Lex Model Building Service.
+// Send marshals and sends the PutSlotType API request.
+func (r PutSlotTypeRequest) Send() (*PutSlotTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutSlotTypeOutput), nil
+}
+
+// PutSlotTypeRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
 //
 // Creates a custom slot type or replaces an existing custom slot type.
 //
@@ -4009,51 +2409,27 @@ func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) (r
 //
 // This operation requires permissions for the lex:PutSlotType action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Model Building Service's
-// API operation PutSlotType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConflictException "ConflictException"
-//   There was a conflict processing the request. Try your request again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request exceeded a limit. Try your request again.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   An internal Amazon Lex error occurred. Try your request again.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request is not well formed. For example, a value is invalid or a required
-//   field is missing. Check the field values, and try again.
-//
-//   * ErrCodePreconditionFailedException "PreconditionFailedException"
-//   The checksum of the resource that you are trying to change does not match
-//   the checksum in the request. Check the resource's checksum and try again.
+//    // Example sending a request using the PutSlotTypeRequest method.
+//    req := client.PutSlotTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType
-func (c *LexModelBuildingService) PutSlotType(input *PutSlotTypeInput) (*PutSlotTypeOutput, error) {
-	req, out := c.PutSlotTypeRequest(input)
-	return out, req.Send()
-}
+func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) PutSlotTypeRequest {
+	op := &aws.Operation{
+		Name:       opPutSlotType,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/slottypes/{name}/versions/$LATEST",
+	}
 
-// PutSlotTypeWithContext is the same as PutSlotType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutSlotType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) PutSlotTypeWithContext(ctx aws.Context, input *PutSlotTypeInput, opts ...aws.Option) (*PutSlotTypeOutput, error) {
-	req, out := c.PutSlotTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutSlotTypeInput{}
+	}
+
+	req := c.newRequest(op, input, &PutSlotTypeOutput{})
+	return PutSlotTypeRequest{Request: req, Input: input}
 }
 
 // Provides information about a bot alias.

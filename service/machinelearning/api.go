@@ -12,29 +12,36 @@ import (
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws.Request" representing the
-// client's request for the AddTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsRequest is a API request type for the AddTags API operation.
+type AddTagsRequest struct {
+	*aws.Request
+	Input *AddTagsInput
+}
+
+// Send marshals and sends the AddTags API request.
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsOutput), nil
+}
+
+// AddTagsRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTags for more information on using the AddTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds one or more tags to an object, up to a limit of 10. Each tag consists
+// of a key and an optional value. If you add a tag using a key that is already
+// associated with the ML object, AddTags updates the tag's value.
 //
 //    // Example sending a request using the AddTagsRequest method.
-//    req, resp := client.AddTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -45,101 +52,30 @@ func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) (req *aws.Request,
 		input = &AddTagsInput{}
 	}
 
-	output = &AddTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddTags API operation for Amazon Machine Learning.
-//
-// Adds one or more tags to an object, up to a limit of 10. Each tag consists
-// of a key and an optional value. If you add a tag using a key that is already
-// associated with the ML object, AddTags updates the tag's value.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation AddTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//
-//   * ErrCodeTagLimitExceededException "TagLimitExceededException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsWithContext is the same as AddTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddTagsOutput{})
+	return AddTagsRequest{Request: req, Input: input}
 }
 
 const opCreateBatchPrediction = "CreateBatchPrediction"
 
-// CreateBatchPredictionRequest generates a "aws.Request" representing the
-// client's request for the CreateBatchPrediction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateBatchPrediction for more information on using the CreateBatchPrediction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateBatchPredictionRequest method.
-//    req, resp := client.CreateBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredictionInput) (req *aws.Request, output *CreateBatchPredictionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateBatchPrediction,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateBatchPredictionInput{}
-	}
-
-	output = &CreateBatchPredictionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateBatchPredictionRequest is a API request type for the CreateBatchPrediction API operation.
+type CreateBatchPredictionRequest struct {
+	*aws.Request
+	Input *CreateBatchPredictionInput
 }
 
-// CreateBatchPrediction API operation for Amazon Machine Learning.
+// Send marshals and sends the CreateBatchPrediction API request.
+func (r CreateBatchPredictionRequest) Send() (*CreateBatchPredictionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBatchPredictionOutput), nil
+}
+
+// CreateBatchPredictionRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
 // Generates predictions for a group of observations. The observations to process
 // exist in one or more data files referenced by a DataSource. This operation
@@ -156,88 +92,47 @@ func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredict
 // appears, the results are available in the location specified by the OutputUri
 // parameter.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation CreateBatchPrediction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
-//
-func (c *MachineLearning) CreateBatchPrediction(input *CreateBatchPredictionInput) (*CreateBatchPredictionOutput, error) {
-	req, out := c.CreateBatchPredictionRequest(input)
-	return out, req.Send()
-}
-
-// CreateBatchPredictionWithContext is the same as CreateBatchPrediction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBatchPrediction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) CreateBatchPredictionWithContext(ctx aws.Context, input *CreateBatchPredictionInput, opts ...aws.Option) (*CreateBatchPredictionOutput, error) {
-	req, out := c.CreateBatchPredictionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateDataSourceFromRDS = "CreateDataSourceFromRDS"
-
-// CreateDataSourceFromRDSRequest generates a "aws.Request" representing the
-// client's request for the CreateDataSourceFromRDS operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDataSourceFromRDS for more information on using the CreateDataSourceFromRDS
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDataSourceFromRDSRequest method.
-//    req, resp := client.CreateDataSourceFromRDSRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateBatchPredictionRequest method.
+//    req := client.CreateBatchPredictionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSourceFromRDSInput) (req *aws.Request, output *CreateDataSourceFromRDSOutput) {
+func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredictionInput) CreateBatchPredictionRequest {
 	op := &aws.Operation{
-		Name:       opCreateDataSourceFromRDS,
+		Name:       opCreateBatchPrediction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateDataSourceFromRDSInput{}
+		input = &CreateBatchPredictionInput{}
 	}
 
-	output = &CreateDataSourceFromRDSOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateBatchPredictionOutput{})
+	return CreateBatchPredictionRequest{Request: req, Input: input}
 }
 
-// CreateDataSourceFromRDS API operation for Amazon Machine Learning.
+const opCreateDataSourceFromRDS = "CreateDataSourceFromRDS"
+
+// CreateDataSourceFromRDSRequest is a API request type for the CreateDataSourceFromRDS API operation.
+type CreateDataSourceFromRDSRequest struct {
+	*aws.Request
+	Input *CreateDataSourceFromRDSInput
+}
+
+// Send marshals and sends the CreateDataSourceFromRDS API request.
+func (r CreateDataSourceFromRDSRequest) Send() (*CreateDataSourceFromRDSOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDataSourceFromRDSOutput), nil
+}
+
+// CreateDataSourceFromRDSRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
 // Creates a DataSource object from an  Amazon Relational Database Service (http://aws.amazon.com/rds/)
 // (Amazon RDS). A DataSource references data that can be used to perform CreateMLModel,
@@ -254,88 +149,47 @@ func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSource
 // to FAILED and includes an error message in the Message attribute of the GetDataSource
 // operation response.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation CreateDataSourceFromRDS for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
-//
-func (c *MachineLearning) CreateDataSourceFromRDS(input *CreateDataSourceFromRDSInput) (*CreateDataSourceFromRDSOutput, error) {
-	req, out := c.CreateDataSourceFromRDSRequest(input)
-	return out, req.Send()
-}
-
-// CreateDataSourceFromRDSWithContext is the same as CreateDataSourceFromRDS with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDataSourceFromRDS for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) CreateDataSourceFromRDSWithContext(ctx aws.Context, input *CreateDataSourceFromRDSInput, opts ...aws.Option) (*CreateDataSourceFromRDSOutput, error) {
-	req, out := c.CreateDataSourceFromRDSRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateDataSourceFromRedshift = "CreateDataSourceFromRedshift"
-
-// CreateDataSourceFromRedshiftRequest generates a "aws.Request" representing the
-// client's request for the CreateDataSourceFromRedshift operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDataSourceFromRedshift for more information on using the CreateDataSourceFromRedshift
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDataSourceFromRedshiftRequest method.
-//    req, resp := client.CreateDataSourceFromRedshiftRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateDataSourceFromRDSRequest method.
+//    req := client.CreateDataSourceFromRDSRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataSourceFromRedshiftInput) (req *aws.Request, output *CreateDataSourceFromRedshiftOutput) {
+func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSourceFromRDSInput) CreateDataSourceFromRDSRequest {
 	op := &aws.Operation{
-		Name:       opCreateDataSourceFromRedshift,
+		Name:       opCreateDataSourceFromRDS,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateDataSourceFromRedshiftInput{}
+		input = &CreateDataSourceFromRDSInput{}
 	}
 
-	output = &CreateDataSourceFromRedshiftOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateDataSourceFromRDSOutput{})
+	return CreateDataSourceFromRDSRequest{Request: req, Input: input}
 }
 
-// CreateDataSourceFromRedshift API operation for Amazon Machine Learning.
+const opCreateDataSourceFromRedshift = "CreateDataSourceFromRedshift"
+
+// CreateDataSourceFromRedshiftRequest is a API request type for the CreateDataSourceFromRedshift API operation.
+type CreateDataSourceFromRedshiftRequest struct {
+	*aws.Request
+	Input *CreateDataSourceFromRedshiftInput
+}
+
+// Send marshals and sends the CreateDataSourceFromRedshift API request.
+func (r CreateDataSourceFromRedshiftRequest) Send() (*CreateDataSourceFromRedshiftOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDataSourceFromRedshiftOutput), nil
+}
+
+// CreateDataSourceFromRedshiftRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
 // Creates a DataSource from a database hosted on an Amazon Redshift cluster.
 // A DataSource references data that can be used to perform either CreateMLModel,
@@ -371,88 +225,47 @@ func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataS
 // to a CreateDataSource call. Change the settings that you want to change and
 // make sure that all required fields have the appropriate values.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation CreateDataSourceFromRedshift for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
-//
-func (c *MachineLearning) CreateDataSourceFromRedshift(input *CreateDataSourceFromRedshiftInput) (*CreateDataSourceFromRedshiftOutput, error) {
-	req, out := c.CreateDataSourceFromRedshiftRequest(input)
-	return out, req.Send()
-}
-
-// CreateDataSourceFromRedshiftWithContext is the same as CreateDataSourceFromRedshift with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDataSourceFromRedshift for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) CreateDataSourceFromRedshiftWithContext(ctx aws.Context, input *CreateDataSourceFromRedshiftInput, opts ...aws.Option) (*CreateDataSourceFromRedshiftOutput, error) {
-	req, out := c.CreateDataSourceFromRedshiftRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
-
-// CreateDataSourceFromS3Request generates a "aws.Request" representing the
-// client's request for the CreateDataSourceFromS3 operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDataSourceFromS3 for more information on using the CreateDataSourceFromS3
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDataSourceFromS3Request method.
-//    req, resp := client.CreateDataSourceFromS3Request(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateDataSourceFromRedshiftRequest method.
+//    req := client.CreateDataSourceFromRedshiftRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Input) (req *aws.Request, output *CreateDataSourceFromS3Output) {
+func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataSourceFromRedshiftInput) CreateDataSourceFromRedshiftRequest {
 	op := &aws.Operation{
-		Name:       opCreateDataSourceFromS3,
+		Name:       opCreateDataSourceFromRedshift,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateDataSourceFromS3Input{}
+		input = &CreateDataSourceFromRedshiftInput{}
 	}
 
-	output = &CreateDataSourceFromS3Output{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateDataSourceFromRedshiftOutput{})
+	return CreateDataSourceFromRedshiftRequest{Request: req, Input: input}
 }
 
-// CreateDataSourceFromS3 API operation for Amazon Machine Learning.
+const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
+
+// CreateDataSourceFromS3Request is a API request type for the CreateDataSourceFromS3 API operation.
+type CreateDataSourceFromS3Request struct {
+	*aws.Request
+	Input *CreateDataSourceFromS3Input
+}
+
+// Send marshals and sends the CreateDataSourceFromS3 API request.
+func (r CreateDataSourceFromS3Request) Send() (*CreateDataSourceFromS3Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDataSourceFromS3Output), nil
+}
+
+// CreateDataSourceFromS3Request returns a request value for making API operation for
+// Amazon Machine Learning.
 //
 // Creates a DataSource object. A DataSource references data that can be used
 // to perform CreateMLModel, CreateEvaluation, or CreateBatchPrediction operations.
@@ -483,88 +296,47 @@ func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceF
 // combined with another variable or will it be split apart into word combinations?
 // The recipe provides answers to these questions.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation CreateDataSourceFromS3 for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
-//
-func (c *MachineLearning) CreateDataSourceFromS3(input *CreateDataSourceFromS3Input) (*CreateDataSourceFromS3Output, error) {
-	req, out := c.CreateDataSourceFromS3Request(input)
-	return out, req.Send()
-}
-
-// CreateDataSourceFromS3WithContext is the same as CreateDataSourceFromS3 with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDataSourceFromS3 for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) CreateDataSourceFromS3WithContext(ctx aws.Context, input *CreateDataSourceFromS3Input, opts ...aws.Option) (*CreateDataSourceFromS3Output, error) {
-	req, out := c.CreateDataSourceFromS3Request(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateEvaluation = "CreateEvaluation"
-
-// CreateEvaluationRequest generates a "aws.Request" representing the
-// client's request for the CreateEvaluation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateEvaluation for more information on using the CreateEvaluation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateEvaluationRequest method.
-//    req, resp := client.CreateEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateDataSourceFromS3Request method.
+//    req := client.CreateDataSourceFromS3Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) (req *aws.Request, output *CreateEvaluationOutput) {
+func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Input) CreateDataSourceFromS3Request {
 	op := &aws.Operation{
-		Name:       opCreateEvaluation,
+		Name:       opCreateDataSourceFromS3,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateEvaluationInput{}
+		input = &CreateDataSourceFromS3Input{}
 	}
 
-	output = &CreateEvaluationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateDataSourceFromS3Output{})
+	return CreateDataSourceFromS3Request{Request: req, Input: input}
 }
 
-// CreateEvaluation API operation for Amazon Machine Learning.
+const opCreateEvaluation = "CreateEvaluation"
+
+// CreateEvaluationRequest is a API request type for the CreateEvaluation API operation.
+type CreateEvaluationRequest struct {
+	*aws.Request
+	Input *CreateEvaluationInput
+}
+
+// Send marshals and sends the CreateEvaluation API request.
+func (r CreateEvaluationRequest) Send() (*CreateEvaluationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateEvaluationOutput), nil
+}
+
+// CreateEvaluationRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
 // Creates a new Evaluation of an MLModel. An MLModel is evaluated on a set
 // of observations associated to a DataSource. Like a DataSource for an MLModel,
@@ -583,88 +355,47 @@ func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) 
 // You can use the GetEvaluation operation to check progress of the evaluation
 // during the creation operation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation CreateEvaluation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
-//
-func (c *MachineLearning) CreateEvaluation(input *CreateEvaluationInput) (*CreateEvaluationOutput, error) {
-	req, out := c.CreateEvaluationRequest(input)
-	return out, req.Send()
-}
-
-// CreateEvaluationWithContext is the same as CreateEvaluation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateEvaluation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) CreateEvaluationWithContext(ctx aws.Context, input *CreateEvaluationInput, opts ...aws.Option) (*CreateEvaluationOutput, error) {
-	req, out := c.CreateEvaluationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateMLModel = "CreateMLModel"
-
-// CreateMLModelRequest generates a "aws.Request" representing the
-// client's request for the CreateMLModel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateMLModel for more information on using the CreateMLModel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateMLModelRequest method.
-//    req, resp := client.CreateMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateEvaluationRequest method.
+//    req := client.CreateEvaluationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) (req *aws.Request, output *CreateMLModelOutput) {
+func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) CreateEvaluationRequest {
 	op := &aws.Operation{
-		Name:       opCreateMLModel,
+		Name:       opCreateEvaluation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateMLModelInput{}
+		input = &CreateEvaluationInput{}
 	}
 
-	output = &CreateMLModelOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateEvaluationOutput{})
+	return CreateEvaluationRequest{Request: req, Input: input}
 }
 
-// CreateMLModel API operation for Amazon Machine Learning.
+const opCreateMLModel = "CreateMLModel"
+
+// CreateMLModelRequest is a API request type for the CreateMLModel API operation.
+type CreateMLModelRequest struct {
+	*aws.Request
+	Input *CreateMLModelInput
+}
+
+// Send marshals and sends the CreateMLModel API request.
+func (r CreateMLModelRequest) Send() (*CreateMLModelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateMLModelOutput), nil
+}
+
+// CreateMLModelRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
 // Creates a new MLModel using the DataSource and the recipe as information
 // sources.
@@ -684,72 +415,59 @@ func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) (req *
 // created by setting ComputeStatistics to true in CreateDataSourceFromRDS,
 // CreateDataSourceFromS3, or CreateDataSourceFromRedshift operations.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation CreateMLModel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
-//
-func (c *MachineLearning) CreateMLModel(input *CreateMLModelInput) (*CreateMLModelOutput, error) {
-	req, out := c.CreateMLModelRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the CreateMLModelRequest method.
+//    req := client.CreateMLModelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) CreateMLModelRequest {
+	op := &aws.Operation{
+		Name:       opCreateMLModel,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateMLModelWithContext is the same as CreateMLModel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateMLModel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) CreateMLModelWithContext(ctx aws.Context, input *CreateMLModelInput, opts ...aws.Option) (*CreateMLModelOutput, error) {
-	req, out := c.CreateMLModelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateMLModelInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateMLModelOutput{})
+	return CreateMLModelRequest{Request: req, Input: input}
 }
 
 const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
 
-// CreateRealtimeEndpointRequest generates a "aws.Request" representing the
-// client's request for the CreateRealtimeEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateRealtimeEndpointRequest is a API request type for the CreateRealtimeEndpoint API operation.
+type CreateRealtimeEndpointRequest struct {
+	*aws.Request
+	Input *CreateRealtimeEndpointInput
+}
+
+// Send marshals and sends the CreateRealtimeEndpoint API request.
+func (r CreateRealtimeEndpointRequest) Send() (*CreateRealtimeEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRealtimeEndpointOutput), nil
+}
+
+// CreateRealtimeEndpointRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateRealtimeEndpoint for more information on using the CreateRealtimeEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a real-time endpoint for the MLModel. The endpoint contains the URI
+// of the MLModel; that is, the location to send real-time prediction requests
+// for the specified MLModel.
 //
 //    // Example sending a request using the CreateRealtimeEndpointRequest method.
-//    req, resp := client.CreateRealtimeEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateRealtimeEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInput) (req *aws.Request, output *CreateRealtimeEndpointOutput) {
+func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInput) CreateRealtimeEndpointRequest {
 	op := &aws.Operation{
 		Name:       opCreateRealtimeEndpoint,
 		HTTPMethod: "POST",
@@ -760,81 +478,45 @@ func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEnd
 		input = &CreateRealtimeEndpointInput{}
 	}
 
-	output = &CreateRealtimeEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateRealtimeEndpoint API operation for Amazon Machine Learning.
-//
-// Creates a real-time endpoint for the MLModel. The endpoint contains the URI
-// of the MLModel; that is, the location to send real-time prediction requests
-// for the specified MLModel.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation CreateRealtimeEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) CreateRealtimeEndpoint(input *CreateRealtimeEndpointInput) (*CreateRealtimeEndpointOutput, error) {
-	req, out := c.CreateRealtimeEndpointRequest(input)
-	return out, req.Send()
-}
-
-// CreateRealtimeEndpointWithContext is the same as CreateRealtimeEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateRealtimeEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) CreateRealtimeEndpointWithContext(ctx aws.Context, input *CreateRealtimeEndpointInput, opts ...aws.Option) (*CreateRealtimeEndpointOutput, error) {
-	req, out := c.CreateRealtimeEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateRealtimeEndpointOutput{})
+	return CreateRealtimeEndpointRequest{Request: req, Input: input}
 }
 
 const opDeleteBatchPrediction = "DeleteBatchPrediction"
 
-// DeleteBatchPredictionRequest generates a "aws.Request" representing the
-// client's request for the DeleteBatchPrediction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBatchPredictionRequest is a API request type for the DeleteBatchPrediction API operation.
+type DeleteBatchPredictionRequest struct {
+	*aws.Request
+	Input *DeleteBatchPredictionInput
+}
+
+// Send marshals and sends the DeleteBatchPrediction API request.
+func (r DeleteBatchPredictionRequest) Send() (*DeleteBatchPredictionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBatchPredictionOutput), nil
+}
+
+// DeleteBatchPredictionRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Assigns the DELETED status to a BatchPrediction, rendering it unusable.
 //
-// See DeleteBatchPrediction for more information on using the DeleteBatchPrediction
-// API call, and error handling.
+// After using the DeleteBatchPrediction operation, you can use the GetBatchPrediction
+// operation to verify that the status of the BatchPrediction changed to DELETED.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Caution: The result of the DeleteBatchPrediction operation is irreversible.
 //
 //    // Example sending a request using the DeleteBatchPredictionRequest method.
-//    req, resp := client.DeleteBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBatchPredictionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredictionInput) (req *aws.Request, output *DeleteBatchPredictionOutput) {
+func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredictionInput) DeleteBatchPredictionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBatchPrediction,
 		HTTPMethod: "POST",
@@ -845,84 +527,45 @@ func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredict
 		input = &DeleteBatchPredictionInput{}
 	}
 
-	output = &DeleteBatchPredictionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteBatchPrediction API operation for Amazon Machine Learning.
-//
-// Assigns the DELETED status to a BatchPrediction, rendering it unusable.
-//
-// After using the DeleteBatchPrediction operation, you can use the GetBatchPrediction
-// operation to verify that the status of the BatchPrediction changed to DELETED.
-//
-// Caution: The result of the DeleteBatchPrediction operation is irreversible.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DeleteBatchPrediction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DeleteBatchPrediction(input *DeleteBatchPredictionInput) (*DeleteBatchPredictionOutput, error) {
-	req, out := c.DeleteBatchPredictionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBatchPredictionWithContext is the same as DeleteBatchPrediction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBatchPrediction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DeleteBatchPredictionWithContext(ctx aws.Context, input *DeleteBatchPredictionInput, opts ...aws.Option) (*DeleteBatchPredictionOutput, error) {
-	req, out := c.DeleteBatchPredictionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteBatchPredictionOutput{})
+	return DeleteBatchPredictionRequest{Request: req, Input: input}
 }
 
 const opDeleteDataSource = "DeleteDataSource"
 
-// DeleteDataSourceRequest generates a "aws.Request" representing the
-// client's request for the DeleteDataSource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDataSourceRequest is a API request type for the DeleteDataSource API operation.
+type DeleteDataSourceRequest struct {
+	*aws.Request
+	Input *DeleteDataSourceInput
+}
+
+// Send marshals and sends the DeleteDataSource API request.
+func (r DeleteDataSourceRequest) Send() (*DeleteDataSourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDataSourceOutput), nil
+}
+
+// DeleteDataSourceRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Assigns the DELETED status to a DataSource, rendering it unusable.
 //
-// See DeleteDataSource for more information on using the DeleteDataSource
-// API call, and error handling.
+// After using the DeleteDataSource operation, you can use the GetDataSource
+// operation to verify that the status of the DataSource changed to DELETED.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Caution: The results of the DeleteDataSource operation are irreversible.
 //
 //    // Example sending a request using the DeleteDataSourceRequest method.
-//    req, resp := client.DeleteDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDataSourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) (req *aws.Request, output *DeleteDataSourceOutput) {
+func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDataSourceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDataSource,
 		HTTPMethod: "POST",
@@ -933,84 +576,45 @@ func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) 
 		input = &DeleteDataSourceInput{}
 	}
 
-	output = &DeleteDataSourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDataSource API operation for Amazon Machine Learning.
-//
-// Assigns the DELETED status to a DataSource, rendering it unusable.
-//
-// After using the DeleteDataSource operation, you can use the GetDataSource
-// operation to verify that the status of the DataSource changed to DELETED.
-//
-// Caution: The results of the DeleteDataSource operation are irreversible.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DeleteDataSource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DeleteDataSource(input *DeleteDataSourceInput) (*DeleteDataSourceOutput, error) {
-	req, out := c.DeleteDataSourceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDataSourceWithContext is the same as DeleteDataSource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDataSource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DeleteDataSourceWithContext(ctx aws.Context, input *DeleteDataSourceInput, opts ...aws.Option) (*DeleteDataSourceOutput, error) {
-	req, out := c.DeleteDataSourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDataSourceOutput{})
+	return DeleteDataSourceRequest{Request: req, Input: input}
 }
 
 const opDeleteEvaluation = "DeleteEvaluation"
 
-// DeleteEvaluationRequest generates a "aws.Request" representing the
-// client's request for the DeleteEvaluation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEvaluationRequest is a API request type for the DeleteEvaluation API operation.
+type DeleteEvaluationRequest struct {
+	*aws.Request
+	Input *DeleteEvaluationInput
+}
+
+// Send marshals and sends the DeleteEvaluation API request.
+func (r DeleteEvaluationRequest) Send() (*DeleteEvaluationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEvaluationOutput), nil
+}
+
+// DeleteEvaluationRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Assigns the DELETED status to an Evaluation, rendering it unusable.
 //
-// See DeleteEvaluation for more information on using the DeleteEvaluation
-// API call, and error handling.
+// After invoking the DeleteEvaluation operation, you can use the GetEvaluation
+// operation to verify that the status of the Evaluation changed to DELETED.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// CautionThe results of the DeleteEvaluation operation are irreversible.
 //
 //    // Example sending a request using the DeleteEvaluationRequest method.
-//    req, resp := client.DeleteEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEvaluationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) (req *aws.Request, output *DeleteEvaluationOutput) {
+func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) DeleteEvaluationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEvaluation,
 		HTTPMethod: "POST",
@@ -1021,84 +625,45 @@ func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) 
 		input = &DeleteEvaluationInput{}
 	}
 
-	output = &DeleteEvaluationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEvaluation API operation for Amazon Machine Learning.
-//
-// Assigns the DELETED status to an Evaluation, rendering it unusable.
-//
-// After invoking the DeleteEvaluation operation, you can use the GetEvaluation
-// operation to verify that the status of the Evaluation changed to DELETED.
-//
-// CautionThe results of the DeleteEvaluation operation are irreversible.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DeleteEvaluation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DeleteEvaluation(input *DeleteEvaluationInput) (*DeleteEvaluationOutput, error) {
-	req, out := c.DeleteEvaluationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEvaluationWithContext is the same as DeleteEvaluation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEvaluation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DeleteEvaluationWithContext(ctx aws.Context, input *DeleteEvaluationInput, opts ...aws.Option) (*DeleteEvaluationOutput, error) {
-	req, out := c.DeleteEvaluationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteEvaluationOutput{})
+	return DeleteEvaluationRequest{Request: req, Input: input}
 }
 
 const opDeleteMLModel = "DeleteMLModel"
 
-// DeleteMLModelRequest generates a "aws.Request" representing the
-// client's request for the DeleteMLModel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteMLModelRequest is a API request type for the DeleteMLModel API operation.
+type DeleteMLModelRequest struct {
+	*aws.Request
+	Input *DeleteMLModelInput
+}
+
+// Send marshals and sends the DeleteMLModel API request.
+func (r DeleteMLModelRequest) Send() (*DeleteMLModelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMLModelOutput), nil
+}
+
+// DeleteMLModelRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Assigns the DELETED status to an MLModel, rendering it unusable.
 //
-// See DeleteMLModel for more information on using the DeleteMLModel
-// API call, and error handling.
+// After using the DeleteMLModel operation, you can use the GetMLModel operation
+// to verify that the status of the MLModel changed to DELETED.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Caution: The result of the DeleteMLModel operation is irreversible.
 //
 //    // Example sending a request using the DeleteMLModelRequest method.
-//    req, resp := client.DeleteMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteMLModelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) (req *aws.Request, output *DeleteMLModelOutput) {
+func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) DeleteMLModelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMLModel,
 		HTTPMethod: "POST",
@@ -1109,84 +674,40 @@ func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) (req *
 		input = &DeleteMLModelInput{}
 	}
 
-	output = &DeleteMLModelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteMLModel API operation for Amazon Machine Learning.
-//
-// Assigns the DELETED status to an MLModel, rendering it unusable.
-//
-// After using the DeleteMLModel operation, you can use the GetMLModel operation
-// to verify that the status of the MLModel changed to DELETED.
-//
-// Caution: The result of the DeleteMLModel operation is irreversible.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DeleteMLModel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DeleteMLModel(input *DeleteMLModelInput) (*DeleteMLModelOutput, error) {
-	req, out := c.DeleteMLModelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteMLModelWithContext is the same as DeleteMLModel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteMLModel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DeleteMLModelWithContext(ctx aws.Context, input *DeleteMLModelInput, opts ...aws.Option) (*DeleteMLModelOutput, error) {
-	req, out := c.DeleteMLModelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteMLModelOutput{})
+	return DeleteMLModelRequest{Request: req, Input: input}
 }
 
 const opDeleteRealtimeEndpoint = "DeleteRealtimeEndpoint"
 
-// DeleteRealtimeEndpointRequest generates a "aws.Request" representing the
-// client's request for the DeleteRealtimeEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRealtimeEndpointRequest is a API request type for the DeleteRealtimeEndpoint API operation.
+type DeleteRealtimeEndpointRequest struct {
+	*aws.Request
+	Input *DeleteRealtimeEndpointInput
+}
+
+// Send marshals and sends the DeleteRealtimeEndpoint API request.
+func (r DeleteRealtimeEndpointRequest) Send() (*DeleteRealtimeEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRealtimeEndpointOutput), nil
+}
+
+// DeleteRealtimeEndpointRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteRealtimeEndpoint for more information on using the DeleteRealtimeEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a real time endpoint of an MLModel.
 //
 //    // Example sending a request using the DeleteRealtimeEndpointRequest method.
-//    req, resp := client.DeleteRealtimeEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRealtimeEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEndpointInput) (req *aws.Request, output *DeleteRealtimeEndpointOutput) {
+func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEndpointInput) DeleteRealtimeEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRealtimeEndpoint,
 		HTTPMethod: "POST",
@@ -1197,79 +718,43 @@ func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEnd
 		input = &DeleteRealtimeEndpointInput{}
 	}
 
-	output = &DeleteRealtimeEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteRealtimeEndpoint API operation for Amazon Machine Learning.
-//
-// Deletes a real time endpoint of an MLModel.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DeleteRealtimeEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DeleteRealtimeEndpoint(input *DeleteRealtimeEndpointInput) (*DeleteRealtimeEndpointOutput, error) {
-	req, out := c.DeleteRealtimeEndpointRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRealtimeEndpointWithContext is the same as DeleteRealtimeEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRealtimeEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DeleteRealtimeEndpointWithContext(ctx aws.Context, input *DeleteRealtimeEndpointInput, opts ...aws.Option) (*DeleteRealtimeEndpointOutput, error) {
-	req, out := c.DeleteRealtimeEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteRealtimeEndpointOutput{})
+	return DeleteRealtimeEndpointRequest{Request: req, Input: input}
 }
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws.Request" representing the
-// client's request for the DeleteTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTagsRequest is a API request type for the DeleteTags API operation.
+type DeleteTagsRequest struct {
+	*aws.Request
+	Input *DeleteTagsInput
+}
+
+// Send marshals and sends the DeleteTags API request.
+func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagsOutput), nil
+}
+
+// DeleteTagsRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified tags associated with an ML object. After this operation
+// is complete, you can't recover deleted tags.
 //
-// See DeleteTags for more information on using the DeleteTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you specify a tag that doesn't exist, Amazon ML ignores it.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
@@ -1280,84 +765,41 @@ func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Re
 		input = &DeleteTagsInput{}
 	}
 
-	output = &DeleteTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTags API operation for Amazon Machine Learning.
-//
-// Deletes the specified tags associated with an ML object. After this operation
-// is complete, you can't recover deleted tags.
-//
-// If you specify a tag that doesn't exist, Amazon ML ignores it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DeleteTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTagsWithContext is the same as DeleteTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	return DeleteTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeBatchPredictions = "DescribeBatchPredictions"
 
-// DescribeBatchPredictionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeBatchPredictions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeBatchPredictionsRequest is a API request type for the DescribeBatchPredictions API operation.
+type DescribeBatchPredictionsRequest struct {
+	*aws.Request
+	Input *DescribeBatchPredictionsInput
+}
+
+// Send marshals and sends the DescribeBatchPredictions API request.
+func (r DescribeBatchPredictionsRequest) Send() (*DescribeBatchPredictionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBatchPredictionsOutput), nil
+}
+
+// DescribeBatchPredictionsRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeBatchPredictions for more information on using the DescribeBatchPredictions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of BatchPrediction operations that match the search criteria
+// in the request.
 //
 //    // Example sending a request using the DescribeBatchPredictionsRequest method.
-//    req, resp := client.DescribeBatchPredictionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeBatchPredictionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPredictionsInput) (req *aws.Request, output *DescribeBatchPredictionsOutput) {
+func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPredictionsInput) DescribeBatchPredictionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBatchPredictions,
 		HTTPMethod: "POST",
@@ -1374,50 +816,8 @@ func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPr
 		input = &DescribeBatchPredictionsInput{}
 	}
 
-	output = &DescribeBatchPredictionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeBatchPredictions API operation for Amazon Machine Learning.
-//
-// Returns a list of BatchPrediction operations that match the search criteria
-// in the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DescribeBatchPredictions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DescribeBatchPredictions(input *DescribeBatchPredictionsInput) (*DescribeBatchPredictionsOutput, error) {
-	req, out := c.DescribeBatchPredictionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBatchPredictionsWithContext is the same as DescribeBatchPredictions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBatchPredictions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeBatchPredictionsWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, opts ...aws.Option) (*DescribeBatchPredictionsOutput, error) {
-	req, out := c.DescribeBatchPredictionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeBatchPredictionsOutput{})
+	return DescribeBatchPredictionsRequest{Request: req, Input: input}
 }
 
 // DescribeBatchPredictionsPages iterates over the pages of a DescribeBatchPredictions operation,
@@ -1456,10 +856,10 @@ func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeBatchPredictionsRequest(inCpy)
+			req := c.DescribeBatchPredictionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1472,29 +872,34 @@ func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Conte
 
 const opDescribeDataSources = "DescribeDataSources"
 
-// DescribeDataSourcesRequest generates a "aws.Request" representing the
-// client's request for the DescribeDataSources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDataSourcesRequest is a API request type for the DescribeDataSources API operation.
+type DescribeDataSourcesRequest struct {
+	*aws.Request
+	Input *DescribeDataSourcesInput
+}
+
+// Send marshals and sends the DescribeDataSources API request.
+func (r DescribeDataSourcesRequest) Send() (*DescribeDataSourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDataSourcesOutput), nil
+}
+
+// DescribeDataSourcesRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDataSources for more information on using the DescribeDataSources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of DataSource that match the search criteria in the request.
 //
 //    // Example sending a request using the DescribeDataSourcesRequest method.
-//    req, resp := client.DescribeDataSourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDataSourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesInput) (req *aws.Request, output *DescribeDataSourcesOutput) {
+func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesInput) DescribeDataSourcesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDataSources,
 		HTTPMethod: "POST",
@@ -1511,49 +916,8 @@ func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesI
 		input = &DescribeDataSourcesInput{}
 	}
 
-	output = &DescribeDataSourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDataSources API operation for Amazon Machine Learning.
-//
-// Returns a list of DataSource that match the search criteria in the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DescribeDataSources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DescribeDataSources(input *DescribeDataSourcesInput) (*DescribeDataSourcesOutput, error) {
-	req, out := c.DescribeDataSourcesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDataSourcesWithContext is the same as DescribeDataSources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDataSources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeDataSourcesWithContext(ctx aws.Context, input *DescribeDataSourcesInput, opts ...aws.Option) (*DescribeDataSourcesOutput, error) {
-	req, out := c.DescribeDataSourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDataSourcesOutput{})
+	return DescribeDataSourcesRequest{Request: req, Input: input}
 }
 
 // DescribeDataSourcesPages iterates over the pages of a DescribeDataSources operation,
@@ -1592,10 +956,10 @@ func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDataSourcesRequest(inCpy)
+			req := c.DescribeDataSourcesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1608,29 +972,35 @@ func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, i
 
 const opDescribeEvaluations = "DescribeEvaluations"
 
-// DescribeEvaluationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvaluations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEvaluationsRequest is a API request type for the DescribeEvaluations API operation.
+type DescribeEvaluationsRequest struct {
+	*aws.Request
+	Input *DescribeEvaluationsInput
+}
+
+// Send marshals and sends the DescribeEvaluations API request.
+func (r DescribeEvaluationsRequest) Send() (*DescribeEvaluationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEvaluationsOutput), nil
+}
+
+// DescribeEvaluationsRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEvaluations for more information on using the DescribeEvaluations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of DescribeEvaluations that match the search criteria in the
+// request.
 //
 //    // Example sending a request using the DescribeEvaluationsRequest method.
-//    req, resp := client.DescribeEvaluationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEvaluationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsInput) (req *aws.Request, output *DescribeEvaluationsOutput) {
+func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsInput) DescribeEvaluationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvaluations,
 		HTTPMethod: "POST",
@@ -1647,50 +1017,8 @@ func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsI
 		input = &DescribeEvaluationsInput{}
 	}
 
-	output = &DescribeEvaluationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvaluations API operation for Amazon Machine Learning.
-//
-// Returns a list of DescribeEvaluations that match the search criteria in the
-// request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DescribeEvaluations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DescribeEvaluations(input *DescribeEvaluationsInput) (*DescribeEvaluationsOutput, error) {
-	req, out := c.DescribeEvaluationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEvaluationsWithContext is the same as DescribeEvaluations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvaluations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeEvaluationsWithContext(ctx aws.Context, input *DescribeEvaluationsInput, opts ...aws.Option) (*DescribeEvaluationsOutput, error) {
-	req, out := c.DescribeEvaluationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEvaluationsOutput{})
+	return DescribeEvaluationsRequest{Request: req, Input: input}
 }
 
 // DescribeEvaluationsPages iterates over the pages of a DescribeEvaluations operation,
@@ -1729,10 +1057,10 @@ func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEvaluationsRequest(inCpy)
+			req := c.DescribeEvaluationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1745,29 +1073,34 @@ func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, i
 
 const opDescribeMLModels = "DescribeMLModels"
 
-// DescribeMLModelsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMLModels operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMLModelsRequest is a API request type for the DescribeMLModels API operation.
+type DescribeMLModelsRequest struct {
+	*aws.Request
+	Input *DescribeMLModelsInput
+}
+
+// Send marshals and sends the DescribeMLModels API request.
+func (r DescribeMLModelsRequest) Send() (*DescribeMLModelsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMLModelsOutput), nil
+}
+
+// DescribeMLModelsRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMLModels for more information on using the DescribeMLModels
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of MLModel that match the search criteria in the request.
 //
 //    // Example sending a request using the DescribeMLModelsRequest method.
-//    req, resp := client.DescribeMLModelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMLModelsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) (req *aws.Request, output *DescribeMLModelsOutput) {
+func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) DescribeMLModelsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMLModels,
 		HTTPMethod: "POST",
@@ -1784,49 +1117,8 @@ func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) 
 		input = &DescribeMLModelsInput{}
 	}
 
-	output = &DescribeMLModelsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMLModels API operation for Amazon Machine Learning.
-//
-// Returns a list of MLModel that match the search criteria in the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DescribeMLModels for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DescribeMLModels(input *DescribeMLModelsInput) (*DescribeMLModelsOutput, error) {
-	req, out := c.DescribeMLModelsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMLModelsWithContext is the same as DescribeMLModels with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMLModels for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeMLModelsWithContext(ctx aws.Context, input *DescribeMLModelsInput, opts ...aws.Option) (*DescribeMLModelsOutput, error) {
-	req, out := c.DescribeMLModelsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMLModelsOutput{})
+	return DescribeMLModelsRequest{Request: req, Input: input}
 }
 
 // DescribeMLModelsPages iterates over the pages of a DescribeMLModels operation,
@@ -1865,10 +1157,10 @@ func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, inpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeMLModelsRequest(inCpy)
+			req := c.DescribeMLModelsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1881,29 +1173,34 @@ func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, inpu
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
+}
+
+// Send marshals and sends the DescribeTags API request.
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more of the tags for your Amazon ML object.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -1914,79 +1211,41 @@ func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) (req *aw
 		input = &DescribeTagsInput{}
 	}
 
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTags API operation for Amazon Machine Learning.
-//
-// Describes one or more of the tags for your Amazon ML object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 const opGetBatchPrediction = "GetBatchPrediction"
 
-// GetBatchPredictionRequest generates a "aws.Request" representing the
-// client's request for the GetBatchPrediction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBatchPredictionRequest is a API request type for the GetBatchPrediction API operation.
+type GetBatchPredictionRequest struct {
+	*aws.Request
+	Input *GetBatchPredictionInput
+}
+
+// Send marshals and sends the GetBatchPrediction API request.
+func (r GetBatchPredictionRequest) Send() (*GetBatchPredictionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBatchPredictionOutput), nil
+}
+
+// GetBatchPredictionRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBatchPrediction for more information on using the GetBatchPrediction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a BatchPrediction that includes detailed metadata, status, and data
+// file information for a Batch Prediction request.
 //
 //    // Example sending a request using the GetBatchPredictionRequest method.
-//    req, resp := client.GetBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBatchPredictionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInput) (req *aws.Request, output *GetBatchPredictionOutput) {
+func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInput) GetBatchPredictionRequest {
 	op := &aws.Operation{
 		Name:       opGetBatchPrediction,
 		HTTPMethod: "POST",
@@ -1997,80 +1256,45 @@ func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInp
 		input = &GetBatchPredictionInput{}
 	}
 
-	output = &GetBatchPredictionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBatchPrediction API operation for Amazon Machine Learning.
-//
-// Returns a BatchPrediction that includes detailed metadata, status, and data
-// file information for a Batch Prediction request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation GetBatchPrediction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) GetBatchPrediction(input *GetBatchPredictionInput) (*GetBatchPredictionOutput, error) {
-	req, out := c.GetBatchPredictionRequest(input)
-	return out, req.Send()
-}
-
-// GetBatchPredictionWithContext is the same as GetBatchPrediction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBatchPrediction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) GetBatchPredictionWithContext(ctx aws.Context, input *GetBatchPredictionInput, opts ...aws.Option) (*GetBatchPredictionOutput, error) {
-	req, out := c.GetBatchPredictionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBatchPredictionOutput{})
+	return GetBatchPredictionRequest{Request: req, Input: input}
 }
 
 const opGetDataSource = "GetDataSource"
 
-// GetDataSourceRequest generates a "aws.Request" representing the
-// client's request for the GetDataSource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDataSourceRequest is a API request type for the GetDataSource API operation.
+type GetDataSourceRequest struct {
+	*aws.Request
+	Input *GetDataSourceInput
+}
+
+// Send marshals and sends the GetDataSource API request.
+func (r GetDataSourceRequest) Send() (*GetDataSourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDataSourceOutput), nil
+}
+
+// GetDataSourceRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a DataSource that includes metadata and data file information, as
+// well as the current status of the DataSource.
 //
-// See GetDataSource for more information on using the GetDataSource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// GetDataSource provides results in normal or verbose format. The verbose format
+// adds the schema description and the list of files pointed to by the DataSource
+// to the normal format.
 //
 //    // Example sending a request using the GetDataSourceRequest method.
-//    req, resp := client.GetDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDataSourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) (req *aws.Request, output *GetDataSourceOutput) {
+func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) GetDataSourceRequest {
 	op := &aws.Operation{
 		Name:       opGetDataSource,
 		HTTPMethod: "POST",
@@ -2081,84 +1305,41 @@ func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) (req *
 		input = &GetDataSourceInput{}
 	}
 
-	output = &GetDataSourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDataSource API operation for Amazon Machine Learning.
-//
-// Returns a DataSource that includes metadata and data file information, as
-// well as the current status of the DataSource.
-//
-// GetDataSource provides results in normal or verbose format. The verbose format
-// adds the schema description and the list of files pointed to by the DataSource
-// to the normal format.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation GetDataSource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) GetDataSource(input *GetDataSourceInput) (*GetDataSourceOutput, error) {
-	req, out := c.GetDataSourceRequest(input)
-	return out, req.Send()
-}
-
-// GetDataSourceWithContext is the same as GetDataSource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDataSource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) GetDataSourceWithContext(ctx aws.Context, input *GetDataSourceInput, opts ...aws.Option) (*GetDataSourceOutput, error) {
-	req, out := c.GetDataSourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDataSourceOutput{})
+	return GetDataSourceRequest{Request: req, Input: input}
 }
 
 const opGetEvaluation = "GetEvaluation"
 
-// GetEvaluationRequest generates a "aws.Request" representing the
-// client's request for the GetEvaluation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetEvaluationRequest is a API request type for the GetEvaluation API operation.
+type GetEvaluationRequest struct {
+	*aws.Request
+	Input *GetEvaluationInput
+}
+
+// Send marshals and sends the GetEvaluation API request.
+func (r GetEvaluationRequest) Send() (*GetEvaluationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEvaluationOutput), nil
+}
+
+// GetEvaluationRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetEvaluation for more information on using the GetEvaluation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an Evaluation that includes metadata as well as the current status
+// of the Evaluation.
 //
 //    // Example sending a request using the GetEvaluationRequest method.
-//    req, resp := client.GetEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetEvaluationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) (req *aws.Request, output *GetEvaluationOutput) {
+func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) GetEvaluationRequest {
 	op := &aws.Operation{
 		Name:       opGetEvaluation,
 		HTTPMethod: "POST",
@@ -2169,80 +1350,43 @@ func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) (req *
 		input = &GetEvaluationInput{}
 	}
 
-	output = &GetEvaluationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetEvaluation API operation for Amazon Machine Learning.
-//
-// Returns an Evaluation that includes metadata as well as the current status
-// of the Evaluation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation GetEvaluation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) GetEvaluation(input *GetEvaluationInput) (*GetEvaluationOutput, error) {
-	req, out := c.GetEvaluationRequest(input)
-	return out, req.Send()
-}
-
-// GetEvaluationWithContext is the same as GetEvaluation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEvaluation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) GetEvaluationWithContext(ctx aws.Context, input *GetEvaluationInput, opts ...aws.Option) (*GetEvaluationOutput, error) {
-	req, out := c.GetEvaluationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetEvaluationOutput{})
+	return GetEvaluationRequest{Request: req, Input: input}
 }
 
 const opGetMLModel = "GetMLModel"
 
-// GetMLModelRequest generates a "aws.Request" representing the
-// client's request for the GetMLModel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetMLModelRequest is a API request type for the GetMLModel API operation.
+type GetMLModelRequest struct {
+	*aws.Request
+	Input *GetMLModelInput
+}
+
+// Send marshals and sends the GetMLModel API request.
+func (r GetMLModelRequest) Send() (*GetMLModelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMLModelOutput), nil
+}
+
+// GetMLModelRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns an MLModel that includes detailed metadata, data source information,
+// and the current status of the MLModel.
 //
-// See GetMLModel for more information on using the GetMLModel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// GetMLModel provides results in normal or verbose format.
 //
 //    // Example sending a request using the GetMLModelRequest method.
-//    req, resp := client.GetMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetMLModelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) (req *aws.Request, output *GetMLModelOutput) {
+func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) GetMLModelRequest {
 	op := &aws.Operation{
 		Name:       opGetMLModel,
 		HTTPMethod: "POST",
@@ -2253,82 +1397,43 @@ func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) (req *aws.Re
 		input = &GetMLModelInput{}
 	}
 
-	output = &GetMLModelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetMLModel API operation for Amazon Machine Learning.
-//
-// Returns an MLModel that includes detailed metadata, data source information,
-// and the current status of the MLModel.
-//
-// GetMLModel provides results in normal or verbose format.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation GetMLModel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) GetMLModel(input *GetMLModelInput) (*GetMLModelOutput, error) {
-	req, out := c.GetMLModelRequest(input)
-	return out, req.Send()
-}
-
-// GetMLModelWithContext is the same as GetMLModel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMLModel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) GetMLModelWithContext(ctx aws.Context, input *GetMLModelInput, opts ...aws.Option) (*GetMLModelOutput, error) {
-	req, out := c.GetMLModelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetMLModelOutput{})
+	return GetMLModelRequest{Request: req, Input: input}
 }
 
 const opPredict = "Predict"
 
-// PredictRequest generates a "aws.Request" representing the
-// client's request for the Predict operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PredictRequest is a API request type for the Predict API operation.
+type PredictRequest struct {
+	*aws.Request
+	Input *PredictInput
+}
+
+// Send marshals and sends the Predict API request.
+func (r PredictRequest) Send() (*PredictOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PredictOutput), nil
+}
+
+// PredictRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Generates a prediction for the observation using the specified ML Model.
 //
-// See Predict for more information on using the Predict
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// NoteNot all response parameters will be populated. Whether a response parameter
+// is populated depends on the type of model requested.
 //
 //    // Example sending a request using the PredictRequest method.
-//    req, resp := client.PredictRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PredictRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) PredictRequest(input *PredictInput) (req *aws.Request, output *PredictOutput) {
+func (c *MachineLearning) PredictRequest(input *PredictInput) PredictRequest {
 	op := &aws.Operation{
 		Name:       opPredict,
 		HTTPMethod: "POST",
@@ -2339,89 +1444,43 @@ func (c *MachineLearning) PredictRequest(input *PredictInput) (req *aws.Request,
 		input = &PredictInput{}
 	}
 
-	output = &PredictOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// Predict API operation for Amazon Machine Learning.
-//
-// Generates a prediction for the observation using the specified ML Model.
-//
-// NoteNot all response parameters will be populated. Whether a response parameter
-// is populated depends on the type of model requested.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation Predict for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The subscriber exceeded the maximum number of operations. This exception
-//   can occur when listing objects such as DataSource.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-//   * ErrCodePredictorNotMountedException "PredictorNotMountedException"
-//   The exception is thrown when a predict request is made to an unmounted MLModel.
-//
-func (c *MachineLearning) Predict(input *PredictInput) (*PredictOutput, error) {
-	req, out := c.PredictRequest(input)
-	return out, req.Send()
-}
-
-// PredictWithContext is the same as Predict with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Predict for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) PredictWithContext(ctx aws.Context, input *PredictInput, opts ...aws.Option) (*PredictOutput, error) {
-	req, out := c.PredictRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PredictOutput{})
+	return PredictRequest{Request: req, Input: input}
 }
 
 const opUpdateBatchPrediction = "UpdateBatchPrediction"
 
-// UpdateBatchPredictionRequest generates a "aws.Request" representing the
-// client's request for the UpdateBatchPrediction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateBatchPredictionRequest is a API request type for the UpdateBatchPrediction API operation.
+type UpdateBatchPredictionRequest struct {
+	*aws.Request
+	Input *UpdateBatchPredictionInput
+}
+
+// Send marshals and sends the UpdateBatchPrediction API request.
+func (r UpdateBatchPredictionRequest) Send() (*UpdateBatchPredictionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateBatchPredictionOutput), nil
+}
+
+// UpdateBatchPredictionRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the BatchPredictionName of a BatchPrediction.
 //
-// See UpdateBatchPrediction for more information on using the UpdateBatchPrediction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can use the GetBatchPrediction operation to view the contents of the
+// updated data element.
 //
 //    // Example sending a request using the UpdateBatchPredictionRequest method.
-//    req, resp := client.UpdateBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateBatchPredictionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput) (req *aws.Request, output *UpdateBatchPredictionOutput) {
+func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput) UpdateBatchPredictionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBatchPrediction,
 		HTTPMethod: "POST",
@@ -2432,82 +1491,43 @@ func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredict
 		input = &UpdateBatchPredictionInput{}
 	}
 
-	output = &UpdateBatchPredictionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateBatchPrediction API operation for Amazon Machine Learning.
-//
-// Updates the BatchPredictionName of a BatchPrediction.
-//
-// You can use the GetBatchPrediction operation to view the contents of the
-// updated data element.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation UpdateBatchPrediction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) UpdateBatchPrediction(input *UpdateBatchPredictionInput) (*UpdateBatchPredictionOutput, error) {
-	req, out := c.UpdateBatchPredictionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateBatchPredictionWithContext is the same as UpdateBatchPrediction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateBatchPrediction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) UpdateBatchPredictionWithContext(ctx aws.Context, input *UpdateBatchPredictionInput, opts ...aws.Option) (*UpdateBatchPredictionOutput, error) {
-	req, out := c.UpdateBatchPredictionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateBatchPredictionOutput{})
+	return UpdateBatchPredictionRequest{Request: req, Input: input}
 }
 
 const opUpdateDataSource = "UpdateDataSource"
 
-// UpdateDataSourceRequest generates a "aws.Request" representing the
-// client's request for the UpdateDataSource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDataSourceRequest is a API request type for the UpdateDataSource API operation.
+type UpdateDataSourceRequest struct {
+	*aws.Request
+	Input *UpdateDataSourceInput
+}
+
+// Send marshals and sends the UpdateDataSource API request.
+func (r UpdateDataSourceRequest) Send() (*UpdateDataSourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDataSourceOutput), nil
+}
+
+// UpdateDataSourceRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the DataSourceName of a DataSource.
 //
-// See UpdateDataSource for more information on using the UpdateDataSource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can use the GetDataSource operation to view the contents of the updated
+// data element.
 //
 //    // Example sending a request using the UpdateDataSourceRequest method.
-//    req, resp := client.UpdateDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDataSourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) (req *aws.Request, output *UpdateDataSourceOutput) {
+func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) UpdateDataSourceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDataSource,
 		HTTPMethod: "POST",
@@ -2518,82 +1538,43 @@ func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) 
 		input = &UpdateDataSourceInput{}
 	}
 
-	output = &UpdateDataSourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDataSource API operation for Amazon Machine Learning.
-//
-// Updates the DataSourceName of a DataSource.
-//
-// You can use the GetDataSource operation to view the contents of the updated
-// data element.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation UpdateDataSource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) UpdateDataSource(input *UpdateDataSourceInput) (*UpdateDataSourceOutput, error) {
-	req, out := c.UpdateDataSourceRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDataSourceWithContext is the same as UpdateDataSource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDataSource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) UpdateDataSourceWithContext(ctx aws.Context, input *UpdateDataSourceInput, opts ...aws.Option) (*UpdateDataSourceOutput, error) {
-	req, out := c.UpdateDataSourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDataSourceOutput{})
+	return UpdateDataSourceRequest{Request: req, Input: input}
 }
 
 const opUpdateEvaluation = "UpdateEvaluation"
 
-// UpdateEvaluationRequest generates a "aws.Request" representing the
-// client's request for the UpdateEvaluation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateEvaluationRequest is a API request type for the UpdateEvaluation API operation.
+type UpdateEvaluationRequest struct {
+	*aws.Request
+	Input *UpdateEvaluationInput
+}
+
+// Send marshals and sends the UpdateEvaluation API request.
+func (r UpdateEvaluationRequest) Send() (*UpdateEvaluationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEvaluationOutput), nil
+}
+
+// UpdateEvaluationRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the EvaluationName of an Evaluation.
 //
-// See UpdateEvaluation for more information on using the UpdateEvaluation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can use the GetEvaluation operation to view the contents of the updated
+// data element.
 //
 //    // Example sending a request using the UpdateEvaluationRequest method.
-//    req, resp := client.UpdateEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateEvaluationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) (req *aws.Request, output *UpdateEvaluationOutput) {
+func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) UpdateEvaluationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEvaluation,
 		HTTPMethod: "POST",
@@ -2604,82 +1585,43 @@ func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) 
 		input = &UpdateEvaluationInput{}
 	}
 
-	output = &UpdateEvaluationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateEvaluation API operation for Amazon Machine Learning.
-//
-// Updates the EvaluationName of an Evaluation.
-//
-// You can use the GetEvaluation operation to view the contents of the updated
-// data element.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation UpdateEvaluation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) UpdateEvaluation(input *UpdateEvaluationInput) (*UpdateEvaluationOutput, error) {
-	req, out := c.UpdateEvaluationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateEvaluationWithContext is the same as UpdateEvaluation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateEvaluation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) UpdateEvaluationWithContext(ctx aws.Context, input *UpdateEvaluationInput, opts ...aws.Option) (*UpdateEvaluationOutput, error) {
-	req, out := c.UpdateEvaluationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEvaluationOutput{})
+	return UpdateEvaluationRequest{Request: req, Input: input}
 }
 
 const opUpdateMLModel = "UpdateMLModel"
 
-// UpdateMLModelRequest generates a "aws.Request" representing the
-// client's request for the UpdateMLModel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateMLModelRequest is a API request type for the UpdateMLModel API operation.
+type UpdateMLModelRequest struct {
+	*aws.Request
+	Input *UpdateMLModelInput
+}
+
+// Send marshals and sends the UpdateMLModel API request.
+func (r UpdateMLModelRequest) Send() (*UpdateMLModelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMLModelOutput), nil
+}
+
+// UpdateMLModelRequest returns a request value for making API operation for
+// Amazon Machine Learning.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the MLModelName and the ScoreThreshold of an MLModel.
 //
-// See UpdateMLModel for more information on using the UpdateMLModel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can use the GetMLModel operation to view the contents of the updated
+// data element.
 //
 //    // Example sending a request using the UpdateMLModelRequest method.
-//    req, resp := client.UpdateMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateMLModelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) (req *aws.Request, output *UpdateMLModelOutput) {
+func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) UpdateMLModelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMLModel,
 		HTTPMethod: "POST",
@@ -2690,55 +1632,8 @@ func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) (req *
 		input = &UpdateMLModelInput{}
 	}
 
-	output = &UpdateMLModelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateMLModel API operation for Amazon Machine Learning.
-//
-// Updates the MLModelName and the ScoreThreshold of an MLModel.
-//
-// You can use the GetMLModel operation to view the contents of the updated
-// data element.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Machine Learning's
-// API operation UpdateMLModel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
-//
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
-//
-func (c *MachineLearning) UpdateMLModel(input *UpdateMLModelInput) (*UpdateMLModelOutput, error) {
-	req, out := c.UpdateMLModelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateMLModelWithContext is the same as UpdateMLModel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateMLModel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) UpdateMLModelWithContext(ctx aws.Context, input *UpdateMLModelInput, opts ...aws.Option) (*UpdateMLModelOutput, error) {
-	req, out := c.UpdateMLModelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateMLModelOutput{})
+	return UpdateMLModelRequest{Request: req, Input: input}
 }
 
 type AddTagsInput struct {

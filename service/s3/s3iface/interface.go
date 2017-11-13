@@ -63,316 +63,168 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type S3API interface {
-	AbortMultipartUpload(*s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error)
-	AbortMultipartUploadWithContext(aws.Context, *s3.AbortMultipartUploadInput, ...aws.Option) (*s3.AbortMultipartUploadOutput, error)
-	AbortMultipartUploadRequest(*s3.AbortMultipartUploadInput) (*aws.Request, *s3.AbortMultipartUploadOutput)
+	AbortMultipartUploadRequest(*s3.AbortMultipartUploadInput) s3.AbortMultipartUploadRequest
 
-	CompleteMultipartUpload(*s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
-	CompleteMultipartUploadWithContext(aws.Context, *s3.CompleteMultipartUploadInput, ...aws.Option) (*s3.CompleteMultipartUploadOutput, error)
-	CompleteMultipartUploadRequest(*s3.CompleteMultipartUploadInput) (*aws.Request, *s3.CompleteMultipartUploadOutput)
+	CompleteMultipartUploadRequest(*s3.CompleteMultipartUploadInput) s3.CompleteMultipartUploadRequest
 
-	CopyObject(*s3.CopyObjectInput) (*s3.CopyObjectOutput, error)
-	CopyObjectWithContext(aws.Context, *s3.CopyObjectInput, ...aws.Option) (*s3.CopyObjectOutput, error)
-	CopyObjectRequest(*s3.CopyObjectInput) (*aws.Request, *s3.CopyObjectOutput)
+	CopyObjectRequest(*s3.CopyObjectInput) s3.CopyObjectRequest
 
-	CreateBucket(*s3.CreateBucketInput) (*s3.CreateBucketOutput, error)
-	CreateBucketWithContext(aws.Context, *s3.CreateBucketInput, ...aws.Option) (*s3.CreateBucketOutput, error)
-	CreateBucketRequest(*s3.CreateBucketInput) (*aws.Request, *s3.CreateBucketOutput)
+	CreateBucketRequest(*s3.CreateBucketInput) s3.CreateBucketRequest
 
-	CreateMultipartUpload(*s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error)
-	CreateMultipartUploadWithContext(aws.Context, *s3.CreateMultipartUploadInput, ...aws.Option) (*s3.CreateMultipartUploadOutput, error)
-	CreateMultipartUploadRequest(*s3.CreateMultipartUploadInput) (*aws.Request, *s3.CreateMultipartUploadOutput)
+	CreateMultipartUploadRequest(*s3.CreateMultipartUploadInput) s3.CreateMultipartUploadRequest
 
-	DeleteBucket(*s3.DeleteBucketInput) (*s3.DeleteBucketOutput, error)
-	DeleteBucketWithContext(aws.Context, *s3.DeleteBucketInput, ...aws.Option) (*s3.DeleteBucketOutput, error)
-	DeleteBucketRequest(*s3.DeleteBucketInput) (*aws.Request, *s3.DeleteBucketOutput)
+	DeleteBucketRequest(*s3.DeleteBucketInput) s3.DeleteBucketRequest
 
-	DeleteBucketAnalyticsConfiguration(*s3.DeleteBucketAnalyticsConfigurationInput) (*s3.DeleteBucketAnalyticsConfigurationOutput, error)
-	DeleteBucketAnalyticsConfigurationWithContext(aws.Context, *s3.DeleteBucketAnalyticsConfigurationInput, ...aws.Option) (*s3.DeleteBucketAnalyticsConfigurationOutput, error)
-	DeleteBucketAnalyticsConfigurationRequest(*s3.DeleteBucketAnalyticsConfigurationInput) (*aws.Request, *s3.DeleteBucketAnalyticsConfigurationOutput)
+	DeleteBucketAnalyticsConfigurationRequest(*s3.DeleteBucketAnalyticsConfigurationInput) s3.DeleteBucketAnalyticsConfigurationRequest
 
-	DeleteBucketCors(*s3.DeleteBucketCorsInput) (*s3.DeleteBucketCorsOutput, error)
-	DeleteBucketCorsWithContext(aws.Context, *s3.DeleteBucketCorsInput, ...aws.Option) (*s3.DeleteBucketCorsOutput, error)
-	DeleteBucketCorsRequest(*s3.DeleteBucketCorsInput) (*aws.Request, *s3.DeleteBucketCorsOutput)
+	DeleteBucketCorsRequest(*s3.DeleteBucketCorsInput) s3.DeleteBucketCorsRequest
 
-	DeleteBucketInventoryConfiguration(*s3.DeleteBucketInventoryConfigurationInput) (*s3.DeleteBucketInventoryConfigurationOutput, error)
-	DeleteBucketInventoryConfigurationWithContext(aws.Context, *s3.DeleteBucketInventoryConfigurationInput, ...aws.Option) (*s3.DeleteBucketInventoryConfigurationOutput, error)
-	DeleteBucketInventoryConfigurationRequest(*s3.DeleteBucketInventoryConfigurationInput) (*aws.Request, *s3.DeleteBucketInventoryConfigurationOutput)
+	DeleteBucketInventoryConfigurationRequest(*s3.DeleteBucketInventoryConfigurationInput) s3.DeleteBucketInventoryConfigurationRequest
 
-	DeleteBucketLifecycle(*s3.DeleteBucketLifecycleInput) (*s3.DeleteBucketLifecycleOutput, error)
-	DeleteBucketLifecycleWithContext(aws.Context, *s3.DeleteBucketLifecycleInput, ...aws.Option) (*s3.DeleteBucketLifecycleOutput, error)
-	DeleteBucketLifecycleRequest(*s3.DeleteBucketLifecycleInput) (*aws.Request, *s3.DeleteBucketLifecycleOutput)
+	DeleteBucketLifecycleRequest(*s3.DeleteBucketLifecycleInput) s3.DeleteBucketLifecycleRequest
 
-	DeleteBucketMetricsConfiguration(*s3.DeleteBucketMetricsConfigurationInput) (*s3.DeleteBucketMetricsConfigurationOutput, error)
-	DeleteBucketMetricsConfigurationWithContext(aws.Context, *s3.DeleteBucketMetricsConfigurationInput, ...aws.Option) (*s3.DeleteBucketMetricsConfigurationOutput, error)
-	DeleteBucketMetricsConfigurationRequest(*s3.DeleteBucketMetricsConfigurationInput) (*aws.Request, *s3.DeleteBucketMetricsConfigurationOutput)
+	DeleteBucketMetricsConfigurationRequest(*s3.DeleteBucketMetricsConfigurationInput) s3.DeleteBucketMetricsConfigurationRequest
 
-	DeleteBucketPolicy(*s3.DeleteBucketPolicyInput) (*s3.DeleteBucketPolicyOutput, error)
-	DeleteBucketPolicyWithContext(aws.Context, *s3.DeleteBucketPolicyInput, ...aws.Option) (*s3.DeleteBucketPolicyOutput, error)
-	DeleteBucketPolicyRequest(*s3.DeleteBucketPolicyInput) (*aws.Request, *s3.DeleteBucketPolicyOutput)
+	DeleteBucketPolicyRequest(*s3.DeleteBucketPolicyInput) s3.DeleteBucketPolicyRequest
 
-	DeleteBucketReplication(*s3.DeleteBucketReplicationInput) (*s3.DeleteBucketReplicationOutput, error)
-	DeleteBucketReplicationWithContext(aws.Context, *s3.DeleteBucketReplicationInput, ...aws.Option) (*s3.DeleteBucketReplicationOutput, error)
-	DeleteBucketReplicationRequest(*s3.DeleteBucketReplicationInput) (*aws.Request, *s3.DeleteBucketReplicationOutput)
+	DeleteBucketReplicationRequest(*s3.DeleteBucketReplicationInput) s3.DeleteBucketReplicationRequest
 
-	DeleteBucketTagging(*s3.DeleteBucketTaggingInput) (*s3.DeleteBucketTaggingOutput, error)
-	DeleteBucketTaggingWithContext(aws.Context, *s3.DeleteBucketTaggingInput, ...aws.Option) (*s3.DeleteBucketTaggingOutput, error)
-	DeleteBucketTaggingRequest(*s3.DeleteBucketTaggingInput) (*aws.Request, *s3.DeleteBucketTaggingOutput)
+	DeleteBucketTaggingRequest(*s3.DeleteBucketTaggingInput) s3.DeleteBucketTaggingRequest
 
-	DeleteBucketWebsite(*s3.DeleteBucketWebsiteInput) (*s3.DeleteBucketWebsiteOutput, error)
-	DeleteBucketWebsiteWithContext(aws.Context, *s3.DeleteBucketWebsiteInput, ...aws.Option) (*s3.DeleteBucketWebsiteOutput, error)
-	DeleteBucketWebsiteRequest(*s3.DeleteBucketWebsiteInput) (*aws.Request, *s3.DeleteBucketWebsiteOutput)
+	DeleteBucketWebsiteRequest(*s3.DeleteBucketWebsiteInput) s3.DeleteBucketWebsiteRequest
 
-	DeleteObject(*s3.DeleteObjectInput) (*s3.DeleteObjectOutput, error)
-	DeleteObjectWithContext(aws.Context, *s3.DeleteObjectInput, ...aws.Option) (*s3.DeleteObjectOutput, error)
-	DeleteObjectRequest(*s3.DeleteObjectInput) (*aws.Request, *s3.DeleteObjectOutput)
+	DeleteObjectRequest(*s3.DeleteObjectInput) s3.DeleteObjectRequest
 
-	DeleteObjectTagging(*s3.DeleteObjectTaggingInput) (*s3.DeleteObjectTaggingOutput, error)
-	DeleteObjectTaggingWithContext(aws.Context, *s3.DeleteObjectTaggingInput, ...aws.Option) (*s3.DeleteObjectTaggingOutput, error)
-	DeleteObjectTaggingRequest(*s3.DeleteObjectTaggingInput) (*aws.Request, *s3.DeleteObjectTaggingOutput)
+	DeleteObjectTaggingRequest(*s3.DeleteObjectTaggingInput) s3.DeleteObjectTaggingRequest
 
-	DeleteObjects(*s3.DeleteObjectsInput) (*s3.DeleteObjectsOutput, error)
-	DeleteObjectsWithContext(aws.Context, *s3.DeleteObjectsInput, ...aws.Option) (*s3.DeleteObjectsOutput, error)
-	DeleteObjectsRequest(*s3.DeleteObjectsInput) (*aws.Request, *s3.DeleteObjectsOutput)
+	DeleteObjectsRequest(*s3.DeleteObjectsInput) s3.DeleteObjectsRequest
 
-	GetBucketAccelerateConfiguration(*s3.GetBucketAccelerateConfigurationInput) (*s3.GetBucketAccelerateConfigurationOutput, error)
-	GetBucketAccelerateConfigurationWithContext(aws.Context, *s3.GetBucketAccelerateConfigurationInput, ...aws.Option) (*s3.GetBucketAccelerateConfigurationOutput, error)
-	GetBucketAccelerateConfigurationRequest(*s3.GetBucketAccelerateConfigurationInput) (*aws.Request, *s3.GetBucketAccelerateConfigurationOutput)
+	GetBucketAccelerateConfigurationRequest(*s3.GetBucketAccelerateConfigurationInput) s3.GetBucketAccelerateConfigurationRequest
 
-	GetBucketAcl(*s3.GetBucketAclInput) (*s3.GetBucketAclOutput, error)
-	GetBucketAclWithContext(aws.Context, *s3.GetBucketAclInput, ...aws.Option) (*s3.GetBucketAclOutput, error)
-	GetBucketAclRequest(*s3.GetBucketAclInput) (*aws.Request, *s3.GetBucketAclOutput)
+	GetBucketAclRequest(*s3.GetBucketAclInput) s3.GetBucketAclRequest
 
-	GetBucketAnalyticsConfiguration(*s3.GetBucketAnalyticsConfigurationInput) (*s3.GetBucketAnalyticsConfigurationOutput, error)
-	GetBucketAnalyticsConfigurationWithContext(aws.Context, *s3.GetBucketAnalyticsConfigurationInput, ...aws.Option) (*s3.GetBucketAnalyticsConfigurationOutput, error)
-	GetBucketAnalyticsConfigurationRequest(*s3.GetBucketAnalyticsConfigurationInput) (*aws.Request, *s3.GetBucketAnalyticsConfigurationOutput)
+	GetBucketAnalyticsConfigurationRequest(*s3.GetBucketAnalyticsConfigurationInput) s3.GetBucketAnalyticsConfigurationRequest
 
-	GetBucketCors(*s3.GetBucketCorsInput) (*s3.GetBucketCorsOutput, error)
-	GetBucketCorsWithContext(aws.Context, *s3.GetBucketCorsInput, ...aws.Option) (*s3.GetBucketCorsOutput, error)
-	GetBucketCorsRequest(*s3.GetBucketCorsInput) (*aws.Request, *s3.GetBucketCorsOutput)
+	GetBucketCorsRequest(*s3.GetBucketCorsInput) s3.GetBucketCorsRequest
 
-	GetBucketInventoryConfiguration(*s3.GetBucketInventoryConfigurationInput) (*s3.GetBucketInventoryConfigurationOutput, error)
-	GetBucketInventoryConfigurationWithContext(aws.Context, *s3.GetBucketInventoryConfigurationInput, ...aws.Option) (*s3.GetBucketInventoryConfigurationOutput, error)
-	GetBucketInventoryConfigurationRequest(*s3.GetBucketInventoryConfigurationInput) (*aws.Request, *s3.GetBucketInventoryConfigurationOutput)
+	GetBucketInventoryConfigurationRequest(*s3.GetBucketInventoryConfigurationInput) s3.GetBucketInventoryConfigurationRequest
 
-	GetBucketLifecycle(*s3.GetBucketLifecycleInput) (*s3.GetBucketLifecycleOutput, error)
-	GetBucketLifecycleWithContext(aws.Context, *s3.GetBucketLifecycleInput, ...aws.Option) (*s3.GetBucketLifecycleOutput, error)
-	GetBucketLifecycleRequest(*s3.GetBucketLifecycleInput) (*aws.Request, *s3.GetBucketLifecycleOutput)
+	GetBucketLifecycleRequest(*s3.GetBucketLifecycleInput) s3.GetBucketLifecycleRequest
 
-	GetBucketLifecycleConfiguration(*s3.GetBucketLifecycleConfigurationInput) (*s3.GetBucketLifecycleConfigurationOutput, error)
-	GetBucketLifecycleConfigurationWithContext(aws.Context, *s3.GetBucketLifecycleConfigurationInput, ...aws.Option) (*s3.GetBucketLifecycleConfigurationOutput, error)
-	GetBucketLifecycleConfigurationRequest(*s3.GetBucketLifecycleConfigurationInput) (*aws.Request, *s3.GetBucketLifecycleConfigurationOutput)
+	GetBucketLifecycleConfigurationRequest(*s3.GetBucketLifecycleConfigurationInput) s3.GetBucketLifecycleConfigurationRequest
 
-	GetBucketLocation(*s3.GetBucketLocationInput) (*s3.GetBucketLocationOutput, error)
-	GetBucketLocationWithContext(aws.Context, *s3.GetBucketLocationInput, ...aws.Option) (*s3.GetBucketLocationOutput, error)
-	GetBucketLocationRequest(*s3.GetBucketLocationInput) (*aws.Request, *s3.GetBucketLocationOutput)
+	GetBucketLocationRequest(*s3.GetBucketLocationInput) s3.GetBucketLocationRequest
 
-	GetBucketLogging(*s3.GetBucketLoggingInput) (*s3.GetBucketLoggingOutput, error)
-	GetBucketLoggingWithContext(aws.Context, *s3.GetBucketLoggingInput, ...aws.Option) (*s3.GetBucketLoggingOutput, error)
-	GetBucketLoggingRequest(*s3.GetBucketLoggingInput) (*aws.Request, *s3.GetBucketLoggingOutput)
+	GetBucketLoggingRequest(*s3.GetBucketLoggingInput) s3.GetBucketLoggingRequest
 
-	GetBucketMetricsConfiguration(*s3.GetBucketMetricsConfigurationInput) (*s3.GetBucketMetricsConfigurationOutput, error)
-	GetBucketMetricsConfigurationWithContext(aws.Context, *s3.GetBucketMetricsConfigurationInput, ...aws.Option) (*s3.GetBucketMetricsConfigurationOutput, error)
-	GetBucketMetricsConfigurationRequest(*s3.GetBucketMetricsConfigurationInput) (*aws.Request, *s3.GetBucketMetricsConfigurationOutput)
+	GetBucketMetricsConfigurationRequest(*s3.GetBucketMetricsConfigurationInput) s3.GetBucketMetricsConfigurationRequest
 
-	GetBucketNotification(*s3.GetBucketNotificationConfigurationRequest) (*s3.NotificationConfigurationDeprecated, error)
-	GetBucketNotificationWithContext(aws.Context, *s3.GetBucketNotificationConfigurationRequest, ...aws.Option) (*s3.NotificationConfigurationDeprecated, error)
-	GetBucketNotificationRequest(*s3.GetBucketNotificationConfigurationRequest) (*aws.Request, *s3.NotificationConfigurationDeprecated)
+	GetBucketNotificationRequest(*s3.GetBucketNotificationConfigurationInput) s3.GetBucketNotificationRequest
 
-	GetBucketNotificationConfiguration(*s3.GetBucketNotificationConfigurationRequest) (*s3.NotificationConfiguration, error)
-	GetBucketNotificationConfigurationWithContext(aws.Context, *s3.GetBucketNotificationConfigurationRequest, ...aws.Option) (*s3.NotificationConfiguration, error)
-	GetBucketNotificationConfigurationRequest(*s3.GetBucketNotificationConfigurationRequest) (*aws.Request, *s3.NotificationConfiguration)
+	GetBucketNotificationConfigurationRequest(*s3.GetBucketNotificationConfigurationInput) s3.GetBucketNotificationConfigurationRequest
 
-	GetBucketPolicy(*s3.GetBucketPolicyInput) (*s3.GetBucketPolicyOutput, error)
-	GetBucketPolicyWithContext(aws.Context, *s3.GetBucketPolicyInput, ...aws.Option) (*s3.GetBucketPolicyOutput, error)
-	GetBucketPolicyRequest(*s3.GetBucketPolicyInput) (*aws.Request, *s3.GetBucketPolicyOutput)
+	GetBucketPolicyRequest(*s3.GetBucketPolicyInput) s3.GetBucketPolicyRequest
 
-	GetBucketReplication(*s3.GetBucketReplicationInput) (*s3.GetBucketReplicationOutput, error)
-	GetBucketReplicationWithContext(aws.Context, *s3.GetBucketReplicationInput, ...aws.Option) (*s3.GetBucketReplicationOutput, error)
-	GetBucketReplicationRequest(*s3.GetBucketReplicationInput) (*aws.Request, *s3.GetBucketReplicationOutput)
+	GetBucketReplicationRequest(*s3.GetBucketReplicationInput) s3.GetBucketReplicationRequest
 
-	GetBucketRequestPayment(*s3.GetBucketRequestPaymentInput) (*s3.GetBucketRequestPaymentOutput, error)
-	GetBucketRequestPaymentWithContext(aws.Context, *s3.GetBucketRequestPaymentInput, ...aws.Option) (*s3.GetBucketRequestPaymentOutput, error)
-	GetBucketRequestPaymentRequest(*s3.GetBucketRequestPaymentInput) (*aws.Request, *s3.GetBucketRequestPaymentOutput)
+	GetBucketRequestPaymentRequest(*s3.GetBucketRequestPaymentInput) s3.GetBucketRequestPaymentRequest
 
-	GetBucketTagging(*s3.GetBucketTaggingInput) (*s3.GetBucketTaggingOutput, error)
-	GetBucketTaggingWithContext(aws.Context, *s3.GetBucketTaggingInput, ...aws.Option) (*s3.GetBucketTaggingOutput, error)
-	GetBucketTaggingRequest(*s3.GetBucketTaggingInput) (*aws.Request, *s3.GetBucketTaggingOutput)
+	GetBucketTaggingRequest(*s3.GetBucketTaggingInput) s3.GetBucketTaggingRequest
 
-	GetBucketVersioning(*s3.GetBucketVersioningInput) (*s3.GetBucketVersioningOutput, error)
-	GetBucketVersioningWithContext(aws.Context, *s3.GetBucketVersioningInput, ...aws.Option) (*s3.GetBucketVersioningOutput, error)
-	GetBucketVersioningRequest(*s3.GetBucketVersioningInput) (*aws.Request, *s3.GetBucketVersioningOutput)
+	GetBucketVersioningRequest(*s3.GetBucketVersioningInput) s3.GetBucketVersioningRequest
 
-	GetBucketWebsite(*s3.GetBucketWebsiteInput) (*s3.GetBucketWebsiteOutput, error)
-	GetBucketWebsiteWithContext(aws.Context, *s3.GetBucketWebsiteInput, ...aws.Option) (*s3.GetBucketWebsiteOutput, error)
-	GetBucketWebsiteRequest(*s3.GetBucketWebsiteInput) (*aws.Request, *s3.GetBucketWebsiteOutput)
+	GetBucketWebsiteRequest(*s3.GetBucketWebsiteInput) s3.GetBucketWebsiteRequest
 
-	GetObject(*s3.GetObjectInput) (*s3.GetObjectOutput, error)
-	GetObjectWithContext(aws.Context, *s3.GetObjectInput, ...aws.Option) (*s3.GetObjectOutput, error)
-	GetObjectRequest(*s3.GetObjectInput) (*aws.Request, *s3.GetObjectOutput)
+	GetObjectRequest(*s3.GetObjectInput) s3.GetObjectRequest
 
-	GetObjectAcl(*s3.GetObjectAclInput) (*s3.GetObjectAclOutput, error)
-	GetObjectAclWithContext(aws.Context, *s3.GetObjectAclInput, ...aws.Option) (*s3.GetObjectAclOutput, error)
-	GetObjectAclRequest(*s3.GetObjectAclInput) (*aws.Request, *s3.GetObjectAclOutput)
+	GetObjectAclRequest(*s3.GetObjectAclInput) s3.GetObjectAclRequest
 
-	GetObjectTagging(*s3.GetObjectTaggingInput) (*s3.GetObjectTaggingOutput, error)
-	GetObjectTaggingWithContext(aws.Context, *s3.GetObjectTaggingInput, ...aws.Option) (*s3.GetObjectTaggingOutput, error)
-	GetObjectTaggingRequest(*s3.GetObjectTaggingInput) (*aws.Request, *s3.GetObjectTaggingOutput)
+	GetObjectTaggingRequest(*s3.GetObjectTaggingInput) s3.GetObjectTaggingRequest
 
-	GetObjectTorrent(*s3.GetObjectTorrentInput) (*s3.GetObjectTorrentOutput, error)
-	GetObjectTorrentWithContext(aws.Context, *s3.GetObjectTorrentInput, ...aws.Option) (*s3.GetObjectTorrentOutput, error)
-	GetObjectTorrentRequest(*s3.GetObjectTorrentInput) (*aws.Request, *s3.GetObjectTorrentOutput)
+	GetObjectTorrentRequest(*s3.GetObjectTorrentInput) s3.GetObjectTorrentRequest
 
-	HeadBucket(*s3.HeadBucketInput) (*s3.HeadBucketOutput, error)
-	HeadBucketWithContext(aws.Context, *s3.HeadBucketInput, ...aws.Option) (*s3.HeadBucketOutput, error)
-	HeadBucketRequest(*s3.HeadBucketInput) (*aws.Request, *s3.HeadBucketOutput)
+	HeadBucketRequest(*s3.HeadBucketInput) s3.HeadBucketRequest
 
-	HeadObject(*s3.HeadObjectInput) (*s3.HeadObjectOutput, error)
-	HeadObjectWithContext(aws.Context, *s3.HeadObjectInput, ...aws.Option) (*s3.HeadObjectOutput, error)
-	HeadObjectRequest(*s3.HeadObjectInput) (*aws.Request, *s3.HeadObjectOutput)
+	HeadObjectRequest(*s3.HeadObjectInput) s3.HeadObjectRequest
 
-	ListBucketAnalyticsConfigurations(*s3.ListBucketAnalyticsConfigurationsInput) (*s3.ListBucketAnalyticsConfigurationsOutput, error)
-	ListBucketAnalyticsConfigurationsWithContext(aws.Context, *s3.ListBucketAnalyticsConfigurationsInput, ...aws.Option) (*s3.ListBucketAnalyticsConfigurationsOutput, error)
-	ListBucketAnalyticsConfigurationsRequest(*s3.ListBucketAnalyticsConfigurationsInput) (*aws.Request, *s3.ListBucketAnalyticsConfigurationsOutput)
+	ListBucketAnalyticsConfigurationsRequest(*s3.ListBucketAnalyticsConfigurationsInput) s3.ListBucketAnalyticsConfigurationsRequest
 
-	ListBucketInventoryConfigurations(*s3.ListBucketInventoryConfigurationsInput) (*s3.ListBucketInventoryConfigurationsOutput, error)
-	ListBucketInventoryConfigurationsWithContext(aws.Context, *s3.ListBucketInventoryConfigurationsInput, ...aws.Option) (*s3.ListBucketInventoryConfigurationsOutput, error)
-	ListBucketInventoryConfigurationsRequest(*s3.ListBucketInventoryConfigurationsInput) (*aws.Request, *s3.ListBucketInventoryConfigurationsOutput)
+	ListBucketInventoryConfigurationsRequest(*s3.ListBucketInventoryConfigurationsInput) s3.ListBucketInventoryConfigurationsRequest
 
-	ListBucketMetricsConfigurations(*s3.ListBucketMetricsConfigurationsInput) (*s3.ListBucketMetricsConfigurationsOutput, error)
-	ListBucketMetricsConfigurationsWithContext(aws.Context, *s3.ListBucketMetricsConfigurationsInput, ...aws.Option) (*s3.ListBucketMetricsConfigurationsOutput, error)
-	ListBucketMetricsConfigurationsRequest(*s3.ListBucketMetricsConfigurationsInput) (*aws.Request, *s3.ListBucketMetricsConfigurationsOutput)
+	ListBucketMetricsConfigurationsRequest(*s3.ListBucketMetricsConfigurationsInput) s3.ListBucketMetricsConfigurationsRequest
 
-	ListBuckets(*s3.ListBucketsInput) (*s3.ListBucketsOutput, error)
-	ListBucketsWithContext(aws.Context, *s3.ListBucketsInput, ...aws.Option) (*s3.ListBucketsOutput, error)
-	ListBucketsRequest(*s3.ListBucketsInput) (*aws.Request, *s3.ListBucketsOutput)
+	ListBucketsRequest(*s3.ListBucketsInput) s3.ListBucketsRequest
 
-	ListMultipartUploads(*s3.ListMultipartUploadsInput) (*s3.ListMultipartUploadsOutput, error)
-	ListMultipartUploadsWithContext(aws.Context, *s3.ListMultipartUploadsInput, ...aws.Option) (*s3.ListMultipartUploadsOutput, error)
-	ListMultipartUploadsRequest(*s3.ListMultipartUploadsInput) (*aws.Request, *s3.ListMultipartUploadsOutput)
+	ListMultipartUploadsRequest(*s3.ListMultipartUploadsInput) s3.ListMultipartUploadsRequest
 
 	ListMultipartUploadsPages(*s3.ListMultipartUploadsInput, func(*s3.ListMultipartUploadsOutput, bool) bool) error
 	ListMultipartUploadsPagesWithContext(aws.Context, *s3.ListMultipartUploadsInput, func(*s3.ListMultipartUploadsOutput, bool) bool, ...aws.Option) error
 
-	ListObjectVersions(*s3.ListObjectVersionsInput) (*s3.ListObjectVersionsOutput, error)
-	ListObjectVersionsWithContext(aws.Context, *s3.ListObjectVersionsInput, ...aws.Option) (*s3.ListObjectVersionsOutput, error)
-	ListObjectVersionsRequest(*s3.ListObjectVersionsInput) (*aws.Request, *s3.ListObjectVersionsOutput)
+	ListObjectVersionsRequest(*s3.ListObjectVersionsInput) s3.ListObjectVersionsRequest
 
 	ListObjectVersionsPages(*s3.ListObjectVersionsInput, func(*s3.ListObjectVersionsOutput, bool) bool) error
 	ListObjectVersionsPagesWithContext(aws.Context, *s3.ListObjectVersionsInput, func(*s3.ListObjectVersionsOutput, bool) bool, ...aws.Option) error
 
-	ListObjects(*s3.ListObjectsInput) (*s3.ListObjectsOutput, error)
-	ListObjectsWithContext(aws.Context, *s3.ListObjectsInput, ...aws.Option) (*s3.ListObjectsOutput, error)
-	ListObjectsRequest(*s3.ListObjectsInput) (*aws.Request, *s3.ListObjectsOutput)
+	ListObjectsRequest(*s3.ListObjectsInput) s3.ListObjectsRequest
 
 	ListObjectsPages(*s3.ListObjectsInput, func(*s3.ListObjectsOutput, bool) bool) error
 	ListObjectsPagesWithContext(aws.Context, *s3.ListObjectsInput, func(*s3.ListObjectsOutput, bool) bool, ...aws.Option) error
 
-	ListObjectsV2(*s3.ListObjectsV2Input) (*s3.ListObjectsV2Output, error)
-	ListObjectsV2WithContext(aws.Context, *s3.ListObjectsV2Input, ...aws.Option) (*s3.ListObjectsV2Output, error)
-	ListObjectsV2Request(*s3.ListObjectsV2Input) (*aws.Request, *s3.ListObjectsV2Output)
+	ListObjectsV2Request(*s3.ListObjectsV2Input) s3.ListObjectsV2Request
 
 	ListObjectsV2Pages(*s3.ListObjectsV2Input, func(*s3.ListObjectsV2Output, bool) bool) error
 	ListObjectsV2PagesWithContext(aws.Context, *s3.ListObjectsV2Input, func(*s3.ListObjectsV2Output, bool) bool, ...aws.Option) error
 
-	ListParts(*s3.ListPartsInput) (*s3.ListPartsOutput, error)
-	ListPartsWithContext(aws.Context, *s3.ListPartsInput, ...aws.Option) (*s3.ListPartsOutput, error)
-	ListPartsRequest(*s3.ListPartsInput) (*aws.Request, *s3.ListPartsOutput)
+	ListPartsRequest(*s3.ListPartsInput) s3.ListPartsRequest
 
 	ListPartsPages(*s3.ListPartsInput, func(*s3.ListPartsOutput, bool) bool) error
 	ListPartsPagesWithContext(aws.Context, *s3.ListPartsInput, func(*s3.ListPartsOutput, bool) bool, ...aws.Option) error
 
-	PutBucketAccelerateConfiguration(*s3.PutBucketAccelerateConfigurationInput) (*s3.PutBucketAccelerateConfigurationOutput, error)
-	PutBucketAccelerateConfigurationWithContext(aws.Context, *s3.PutBucketAccelerateConfigurationInput, ...aws.Option) (*s3.PutBucketAccelerateConfigurationOutput, error)
-	PutBucketAccelerateConfigurationRequest(*s3.PutBucketAccelerateConfigurationInput) (*aws.Request, *s3.PutBucketAccelerateConfigurationOutput)
+	PutBucketAccelerateConfigurationRequest(*s3.PutBucketAccelerateConfigurationInput) s3.PutBucketAccelerateConfigurationRequest
 
-	PutBucketAcl(*s3.PutBucketAclInput) (*s3.PutBucketAclOutput, error)
-	PutBucketAclWithContext(aws.Context, *s3.PutBucketAclInput, ...aws.Option) (*s3.PutBucketAclOutput, error)
-	PutBucketAclRequest(*s3.PutBucketAclInput) (*aws.Request, *s3.PutBucketAclOutput)
+	PutBucketAclRequest(*s3.PutBucketAclInput) s3.PutBucketAclRequest
 
-	PutBucketAnalyticsConfiguration(*s3.PutBucketAnalyticsConfigurationInput) (*s3.PutBucketAnalyticsConfigurationOutput, error)
-	PutBucketAnalyticsConfigurationWithContext(aws.Context, *s3.PutBucketAnalyticsConfigurationInput, ...aws.Option) (*s3.PutBucketAnalyticsConfigurationOutput, error)
-	PutBucketAnalyticsConfigurationRequest(*s3.PutBucketAnalyticsConfigurationInput) (*aws.Request, *s3.PutBucketAnalyticsConfigurationOutput)
+	PutBucketAnalyticsConfigurationRequest(*s3.PutBucketAnalyticsConfigurationInput) s3.PutBucketAnalyticsConfigurationRequest
 
-	PutBucketCors(*s3.PutBucketCorsInput) (*s3.PutBucketCorsOutput, error)
-	PutBucketCorsWithContext(aws.Context, *s3.PutBucketCorsInput, ...aws.Option) (*s3.PutBucketCorsOutput, error)
-	PutBucketCorsRequest(*s3.PutBucketCorsInput) (*aws.Request, *s3.PutBucketCorsOutput)
+	PutBucketCorsRequest(*s3.PutBucketCorsInput) s3.PutBucketCorsRequest
 
-	PutBucketInventoryConfiguration(*s3.PutBucketInventoryConfigurationInput) (*s3.PutBucketInventoryConfigurationOutput, error)
-	PutBucketInventoryConfigurationWithContext(aws.Context, *s3.PutBucketInventoryConfigurationInput, ...aws.Option) (*s3.PutBucketInventoryConfigurationOutput, error)
-	PutBucketInventoryConfigurationRequest(*s3.PutBucketInventoryConfigurationInput) (*aws.Request, *s3.PutBucketInventoryConfigurationOutput)
+	PutBucketInventoryConfigurationRequest(*s3.PutBucketInventoryConfigurationInput) s3.PutBucketInventoryConfigurationRequest
 
-	PutBucketLifecycle(*s3.PutBucketLifecycleInput) (*s3.PutBucketLifecycleOutput, error)
-	PutBucketLifecycleWithContext(aws.Context, *s3.PutBucketLifecycleInput, ...aws.Option) (*s3.PutBucketLifecycleOutput, error)
-	PutBucketLifecycleRequest(*s3.PutBucketLifecycleInput) (*aws.Request, *s3.PutBucketLifecycleOutput)
+	PutBucketLifecycleRequest(*s3.PutBucketLifecycleInput) s3.PutBucketLifecycleRequest
 
-	PutBucketLifecycleConfiguration(*s3.PutBucketLifecycleConfigurationInput) (*s3.PutBucketLifecycleConfigurationOutput, error)
-	PutBucketLifecycleConfigurationWithContext(aws.Context, *s3.PutBucketLifecycleConfigurationInput, ...aws.Option) (*s3.PutBucketLifecycleConfigurationOutput, error)
-	PutBucketLifecycleConfigurationRequest(*s3.PutBucketLifecycleConfigurationInput) (*aws.Request, *s3.PutBucketLifecycleConfigurationOutput)
+	PutBucketLifecycleConfigurationRequest(*s3.PutBucketLifecycleConfigurationInput) s3.PutBucketLifecycleConfigurationRequest
 
-	PutBucketLogging(*s3.PutBucketLoggingInput) (*s3.PutBucketLoggingOutput, error)
-	PutBucketLoggingWithContext(aws.Context, *s3.PutBucketLoggingInput, ...aws.Option) (*s3.PutBucketLoggingOutput, error)
-	PutBucketLoggingRequest(*s3.PutBucketLoggingInput) (*aws.Request, *s3.PutBucketLoggingOutput)
+	PutBucketLoggingRequest(*s3.PutBucketLoggingInput) s3.PutBucketLoggingRequest
 
-	PutBucketMetricsConfiguration(*s3.PutBucketMetricsConfigurationInput) (*s3.PutBucketMetricsConfigurationOutput, error)
-	PutBucketMetricsConfigurationWithContext(aws.Context, *s3.PutBucketMetricsConfigurationInput, ...aws.Option) (*s3.PutBucketMetricsConfigurationOutput, error)
-	PutBucketMetricsConfigurationRequest(*s3.PutBucketMetricsConfigurationInput) (*aws.Request, *s3.PutBucketMetricsConfigurationOutput)
+	PutBucketMetricsConfigurationRequest(*s3.PutBucketMetricsConfigurationInput) s3.PutBucketMetricsConfigurationRequest
 
-	PutBucketNotification(*s3.PutBucketNotificationInput) (*s3.PutBucketNotificationOutput, error)
-	PutBucketNotificationWithContext(aws.Context, *s3.PutBucketNotificationInput, ...aws.Option) (*s3.PutBucketNotificationOutput, error)
-	PutBucketNotificationRequest(*s3.PutBucketNotificationInput) (*aws.Request, *s3.PutBucketNotificationOutput)
+	PutBucketNotificationRequest(*s3.PutBucketNotificationInput) s3.PutBucketNotificationRequest
 
-	PutBucketNotificationConfiguration(*s3.PutBucketNotificationConfigurationInput) (*s3.PutBucketNotificationConfigurationOutput, error)
-	PutBucketNotificationConfigurationWithContext(aws.Context, *s3.PutBucketNotificationConfigurationInput, ...aws.Option) (*s3.PutBucketNotificationConfigurationOutput, error)
-	PutBucketNotificationConfigurationRequest(*s3.PutBucketNotificationConfigurationInput) (*aws.Request, *s3.PutBucketNotificationConfigurationOutput)
+	PutBucketNotificationConfigurationRequest(*s3.PutBucketNotificationConfigurationInput) s3.PutBucketNotificationConfigurationRequest
 
-	PutBucketPolicy(*s3.PutBucketPolicyInput) (*s3.PutBucketPolicyOutput, error)
-	PutBucketPolicyWithContext(aws.Context, *s3.PutBucketPolicyInput, ...aws.Option) (*s3.PutBucketPolicyOutput, error)
-	PutBucketPolicyRequest(*s3.PutBucketPolicyInput) (*aws.Request, *s3.PutBucketPolicyOutput)
+	PutBucketPolicyRequest(*s3.PutBucketPolicyInput) s3.PutBucketPolicyRequest
 
-	PutBucketReplication(*s3.PutBucketReplicationInput) (*s3.PutBucketReplicationOutput, error)
-	PutBucketReplicationWithContext(aws.Context, *s3.PutBucketReplicationInput, ...aws.Option) (*s3.PutBucketReplicationOutput, error)
-	PutBucketReplicationRequest(*s3.PutBucketReplicationInput) (*aws.Request, *s3.PutBucketReplicationOutput)
+	PutBucketReplicationRequest(*s3.PutBucketReplicationInput) s3.PutBucketReplicationRequest
 
-	PutBucketRequestPayment(*s3.PutBucketRequestPaymentInput) (*s3.PutBucketRequestPaymentOutput, error)
-	PutBucketRequestPaymentWithContext(aws.Context, *s3.PutBucketRequestPaymentInput, ...aws.Option) (*s3.PutBucketRequestPaymentOutput, error)
-	PutBucketRequestPaymentRequest(*s3.PutBucketRequestPaymentInput) (*aws.Request, *s3.PutBucketRequestPaymentOutput)
+	PutBucketRequestPaymentRequest(*s3.PutBucketRequestPaymentInput) s3.PutBucketRequestPaymentRequest
 
-	PutBucketTagging(*s3.PutBucketTaggingInput) (*s3.PutBucketTaggingOutput, error)
-	PutBucketTaggingWithContext(aws.Context, *s3.PutBucketTaggingInput, ...aws.Option) (*s3.PutBucketTaggingOutput, error)
-	PutBucketTaggingRequest(*s3.PutBucketTaggingInput) (*aws.Request, *s3.PutBucketTaggingOutput)
+	PutBucketTaggingRequest(*s3.PutBucketTaggingInput) s3.PutBucketTaggingRequest
 
-	PutBucketVersioning(*s3.PutBucketVersioningInput) (*s3.PutBucketVersioningOutput, error)
-	PutBucketVersioningWithContext(aws.Context, *s3.PutBucketVersioningInput, ...aws.Option) (*s3.PutBucketVersioningOutput, error)
-	PutBucketVersioningRequest(*s3.PutBucketVersioningInput) (*aws.Request, *s3.PutBucketVersioningOutput)
+	PutBucketVersioningRequest(*s3.PutBucketVersioningInput) s3.PutBucketVersioningRequest
 
-	PutBucketWebsite(*s3.PutBucketWebsiteInput) (*s3.PutBucketWebsiteOutput, error)
-	PutBucketWebsiteWithContext(aws.Context, *s3.PutBucketWebsiteInput, ...aws.Option) (*s3.PutBucketWebsiteOutput, error)
-	PutBucketWebsiteRequest(*s3.PutBucketWebsiteInput) (*aws.Request, *s3.PutBucketWebsiteOutput)
+	PutBucketWebsiteRequest(*s3.PutBucketWebsiteInput) s3.PutBucketWebsiteRequest
 
-	PutObject(*s3.PutObjectInput) (*s3.PutObjectOutput, error)
-	PutObjectWithContext(aws.Context, *s3.PutObjectInput, ...aws.Option) (*s3.PutObjectOutput, error)
-	PutObjectRequest(*s3.PutObjectInput) (*aws.Request, *s3.PutObjectOutput)
+	PutObjectRequest(*s3.PutObjectInput) s3.PutObjectRequest
 
-	PutObjectAcl(*s3.PutObjectAclInput) (*s3.PutObjectAclOutput, error)
-	PutObjectAclWithContext(aws.Context, *s3.PutObjectAclInput, ...aws.Option) (*s3.PutObjectAclOutput, error)
-	PutObjectAclRequest(*s3.PutObjectAclInput) (*aws.Request, *s3.PutObjectAclOutput)
+	PutObjectAclRequest(*s3.PutObjectAclInput) s3.PutObjectAclRequest
 
-	PutObjectTagging(*s3.PutObjectTaggingInput) (*s3.PutObjectTaggingOutput, error)
-	PutObjectTaggingWithContext(aws.Context, *s3.PutObjectTaggingInput, ...aws.Option) (*s3.PutObjectTaggingOutput, error)
-	PutObjectTaggingRequest(*s3.PutObjectTaggingInput) (*aws.Request, *s3.PutObjectTaggingOutput)
+	PutObjectTaggingRequest(*s3.PutObjectTaggingInput) s3.PutObjectTaggingRequest
 
-	RestoreObject(*s3.RestoreObjectInput) (*s3.RestoreObjectOutput, error)
-	RestoreObjectWithContext(aws.Context, *s3.RestoreObjectInput, ...aws.Option) (*s3.RestoreObjectOutput, error)
-	RestoreObjectRequest(*s3.RestoreObjectInput) (*aws.Request, *s3.RestoreObjectOutput)
+	RestoreObjectRequest(*s3.RestoreObjectInput) s3.RestoreObjectRequest
 
-	UploadPart(*s3.UploadPartInput) (*s3.UploadPartOutput, error)
-	UploadPartWithContext(aws.Context, *s3.UploadPartInput, ...aws.Option) (*s3.UploadPartOutput, error)
-	UploadPartRequest(*s3.UploadPartInput) (*aws.Request, *s3.UploadPartOutput)
+	UploadPartRequest(*s3.UploadPartInput) s3.UploadPartRequest
 
-	UploadPartCopy(*s3.UploadPartCopyInput) (*s3.UploadPartCopyOutput, error)
-	UploadPartCopyWithContext(aws.Context, *s3.UploadPartCopyInput, ...aws.Option) (*s3.UploadPartCopyOutput, error)
-	UploadPartCopyRequest(*s3.UploadPartCopyInput) (*aws.Request, *s3.UploadPartCopyOutput)
+	UploadPartCopyRequest(*s3.UploadPartCopyInput) s3.UploadPartCopyRequest
 
 	WaitUntilBucketExists(*s3.HeadBucketInput) error
 	WaitUntilBucketExistsWithContext(aws.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error

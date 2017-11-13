@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To activate the gateway
 //
 // Activates the gateway you previously deployed on your host.
-func ExampleStorageGateway_ActivateGateway_shared00() {
+func ExampleStorageGateway_ActivateGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -45,7 +45,8 @@ func ExampleStorageGateway_ActivateGateway_shared00() {
 		TapeDriveType:     aws.String("IBM-ULT3580-TD5"),
 	}
 
-	result, err := svc.ActivateGateway(input)
+	req := svc.ActivateGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -70,7 +71,7 @@ func ExampleStorageGateway_ActivateGateway_shared00() {
 // To add a cache
 //
 // The following example shows a request that activates a gateway-stored volume.
-func ExampleStorageGateway_AddCache_shared00() {
+func ExampleStorageGateway_AddCacheRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -85,7 +86,8 @@ func ExampleStorageGateway_AddCache_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.AddCache(input)
+	req := svc.AddCacheRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -110,7 +112,7 @@ func ExampleStorageGateway_AddCache_shared00() {
 // To add tags to resource
 //
 // Adds one or more tags to the specified resource.
-func ExampleStorageGateway_AddTagsToResource_shared00() {
+func ExampleStorageGateway_AddTagsToResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -127,7 +129,8 @@ func ExampleStorageGateway_AddTagsToResource_shared00() {
 		},
 	}
 
-	result, err := svc.AddTagsToResource(input)
+	req := svc.AddTagsToResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -152,7 +155,7 @@ func ExampleStorageGateway_AddTagsToResource_shared00() {
 // To add upload buffer on local disk
 //
 // Configures one or more gateway local disks as upload buffer for a specified gateway.
-func ExampleStorageGateway_AddUploadBuffer_shared00() {
+func ExampleStorageGateway_AddUploadBufferRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -167,7 +170,8 @@ func ExampleStorageGateway_AddUploadBuffer_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.AddUploadBuffer(input)
+	req := svc.AddUploadBufferRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -193,7 +197,7 @@ func ExampleStorageGateway_AddUploadBuffer_shared00() {
 //
 // Configures one or more gateway local disks as working storage for a gateway. (Working
 // storage is also referred to as upload buffer.)
-func ExampleStorageGateway_AddWorkingStorage_shared00() {
+func ExampleStorageGateway_AddWorkingStorageRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -208,7 +212,8 @@ func ExampleStorageGateway_AddWorkingStorage_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.AddWorkingStorage(input)
+	req := svc.AddWorkingStorageRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -234,7 +239,7 @@ func ExampleStorageGateway_AddWorkingStorage_shared00() {
 //
 // Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving
 // process is initiated.
-func ExampleStorageGateway_CancelArchival_shared00() {
+func ExampleStorageGateway_CancelArchivalRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -246,7 +251,8 @@ func ExampleStorageGateway_CancelArchival_shared00() {
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4"),
 	}
 
-	result, err := svc.CancelArchival(input)
+	req := svc.CancelArchivalRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -272,7 +278,7 @@ func ExampleStorageGateway_CancelArchival_shared00() {
 //
 // Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway
 // after the retrieval process is initiated.
-func ExampleStorageGateway_CancelRetrieval_shared00() {
+func ExampleStorageGateway_CancelRetrievalRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -284,7 +290,8 @@ func ExampleStorageGateway_CancelRetrieval_shared00() {
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4"),
 	}
 
-	result, err := svc.CancelRetrieval(input)
+	req := svc.CancelRetrievalRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -309,7 +316,7 @@ func ExampleStorageGateway_CancelRetrieval_shared00() {
 // To create a cached iSCSI volume
 //
 // Creates a cached volume on a specified cached gateway.
-func ExampleStorageGateway_CreateCachediSCSIVolume_shared00() {
+func ExampleStorageGateway_CreateCachediSCSIVolumeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -325,7 +332,8 @@ func ExampleStorageGateway_CreateCachediSCSIVolume_shared00() {
 		VolumeSizeInBytes:  aws.Int64(536870912000),
 	}
 
-	result, err := svc.CreateCachediSCSIVolume(input)
+	req := svc.CreateCachediSCSIVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -350,7 +358,7 @@ func ExampleStorageGateway_CreateCachediSCSIVolume_shared00() {
 // To create a snapshot of a gateway volume
 //
 // Initiates an ad-hoc snapshot of a gateway volume.
-func ExampleStorageGateway_CreateSnapshot_shared00() {
+func ExampleStorageGateway_CreateSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -362,7 +370,8 @@ func ExampleStorageGateway_CreateSnapshot_shared00() {
 		VolumeARN:           aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
-	result, err := svc.CreateSnapshot(input)
+	req := svc.CreateSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -389,7 +398,7 @@ func ExampleStorageGateway_CreateSnapshot_shared00() {
 // To create a snapshot of a gateway volume
 //
 // Initiates a snapshot of a gateway from a volume recovery point.
-func ExampleStorageGateway_CreateSnapshotFromVolumeRecoveryPoint_shared00() {
+func ExampleStorageGateway_CreateSnapshotFromVolumeRecoveryPointRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -401,7 +410,8 @@ func ExampleStorageGateway_CreateSnapshotFromVolumeRecoveryPoint_shared00() {
 		VolumeARN:           aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
-	result, err := svc.CreateSnapshotFromVolumeRecoveryPoint(input)
+	req := svc.CreateSnapshotFromVolumeRecoveryPointRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -428,7 +438,7 @@ func ExampleStorageGateway_CreateSnapshotFromVolumeRecoveryPoint_shared00() {
 // To create a stored iSCSI volume
 //
 // Creates a stored volume on a specified stored gateway.
-func ExampleStorageGateway_CreateStorediSCSIVolume_shared00() {
+func ExampleStorageGateway_CreateStorediSCSIVolumeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -444,7 +454,8 @@ func ExampleStorageGateway_CreateStorediSCSIVolume_shared00() {
 		TargetName:           aws.String("my-volume"),
 	}
 
-	result, err := svc.CreateStorediSCSIVolume(input)
+	req := svc.CreateStorediSCSIVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -469,7 +480,7 @@ func ExampleStorageGateway_CreateStorediSCSIVolume_shared00() {
 // To create a virtual tape using a barcode
 //
 // Creates a virtual tape by using your own barcode.
-func ExampleStorageGateway_CreateTapeWithBarcode_shared00() {
+func ExampleStorageGateway_CreateTapeWithBarcodeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -482,7 +493,8 @@ func ExampleStorageGateway_CreateTapeWithBarcode_shared00() {
 		TapeSizeInBytes: aws.Int64(107374182400),
 	}
 
-	result, err := svc.CreateTapeWithBarcode(input)
+	req := svc.CreateTapeWithBarcodeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -507,7 +519,7 @@ func ExampleStorageGateway_CreateTapeWithBarcode_shared00() {
 // To create a virtual tape
 //
 // Creates one or more virtual tapes.
-func ExampleStorageGateway_CreateTapes_shared00() {
+func ExampleStorageGateway_CreateTapesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -522,7 +534,8 @@ func ExampleStorageGateway_CreateTapes_shared00() {
 		TapeSizeInBytes:   aws.Int64(107374182400),
 	}
 
-	result, err := svc.CreateTapes(input)
+	req := svc.CreateTapesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -548,7 +561,7 @@ func ExampleStorageGateway_CreateTapes_shared00() {
 //
 // Deletes the bandwidth rate limits of a gateway; either the upload or download limit,
 // or both.
-func ExampleStorageGateway_DeleteBandwidthRateLimit_shared00() {
+func ExampleStorageGateway_DeleteBandwidthRateLimitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -560,7 +573,8 @@ func ExampleStorageGateway_DeleteBandwidthRateLimit_shared00() {
 		GatewayARN:    aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DeleteBandwidthRateLimit(input)
+	req := svc.DeleteBandwidthRateLimitRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -586,7 +600,7 @@ func ExampleStorageGateway_DeleteBandwidthRateLimit_shared00() {
 //
 // Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified
 // iSCSI target and initiator pair.
-func ExampleStorageGateway_DeleteChapCredentials_shared00() {
+func ExampleStorageGateway_DeleteChapCredentialsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -598,7 +612,8 @@ func ExampleStorageGateway_DeleteChapCredentials_shared00() {
 		TargetARN:     aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume"),
 	}
 
-	result, err := svc.DeleteChapCredentials(input)
+	req := svc.DeleteChapCredentialsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -623,7 +638,7 @@ func ExampleStorageGateway_DeleteChapCredentials_shared00() {
 // To delete a gatgeway
 //
 // This operation deletes the gateway, but not the gateway's VM from the host computer.
-func ExampleStorageGateway_DeleteGateway_shared00() {
+func ExampleStorageGateway_DeleteGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -634,7 +649,8 @@ func ExampleStorageGateway_DeleteGateway_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DeleteGateway(input)
+	req := svc.DeleteGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -659,7 +675,7 @@ func ExampleStorageGateway_DeleteGateway_shared00() {
 // To delete a snapshot of a volume
 //
 // This action enables you to delete a snapshot schedule for a volume.
-func ExampleStorageGateway_DeleteSnapshotSchedule_shared00() {
+func ExampleStorageGateway_DeleteSnapshotScheduleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -670,7 +686,8 @@ func ExampleStorageGateway_DeleteSnapshotSchedule_shared00() {
 		VolumeARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
-	result, err := svc.DeleteSnapshotSchedule(input)
+	req := svc.DeleteSnapshotScheduleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -695,7 +712,7 @@ func ExampleStorageGateway_DeleteSnapshotSchedule_shared00() {
 // To delete a virtual tape
 //
 // This example deletes the specified virtual tape.
-func ExampleStorageGateway_DeleteTape_shared00() {
+func ExampleStorageGateway_DeleteTapeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -707,7 +724,8 @@ func ExampleStorageGateway_DeleteTape_shared00() {
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0"),
 	}
 
-	result, err := svc.DeleteTape(input)
+	req := svc.DeleteTapeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -732,7 +750,7 @@ func ExampleStorageGateway_DeleteTape_shared00() {
 // To delete a virtual tape from the shelf (VTS)
 //
 // Deletes the specified virtual tape from the virtual tape shelf (VTS).
-func ExampleStorageGateway_DeleteTapeArchive_shared00() {
+func ExampleStorageGateway_DeleteTapeArchiveRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -743,7 +761,8 @@ func ExampleStorageGateway_DeleteTapeArchive_shared00() {
 		TapeARN: aws.String("arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0"),
 	}
 
-	result, err := svc.DeleteTapeArchive(input)
+	req := svc.DeleteTapeArchiveRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -769,7 +788,7 @@ func ExampleStorageGateway_DeleteTapeArchive_shared00() {
 //
 // Deletes the specified gateway volume that you previously created using the CreateCachediSCSIVolume
 // or CreateStorediSCSIVolume API.
-func ExampleStorageGateway_DeleteVolume_shared00() {
+func ExampleStorageGateway_DeleteVolumeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -780,7 +799,8 @@ func ExampleStorageGateway_DeleteVolume_shared00() {
 		VolumeARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
-	result, err := svc.DeleteVolume(input)
+	req := svc.DeleteVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -806,7 +826,7 @@ func ExampleStorageGateway_DeleteVolume_shared00() {
 //
 // Returns a value for a bandwidth rate limit if set. If not set, then only the gateway
 // ARN is returned.
-func ExampleStorageGateway_DescribeBandwidthRateLimit_shared00() {
+func ExampleStorageGateway_DescribeBandwidthRateLimitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -817,7 +837,8 @@ func ExampleStorageGateway_DescribeBandwidthRateLimit_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DescribeBandwidthRateLimit(input)
+	req := svc.DescribeBandwidthRateLimitRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -842,7 +863,7 @@ func ExampleStorageGateway_DescribeBandwidthRateLimit_shared00() {
 // To describe cache information
 //
 // Returns information about the cache of a gateway.
-func ExampleStorageGateway_DescribeCache_shared00() {
+func ExampleStorageGateway_DescribeCacheRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -853,7 +874,8 @@ func ExampleStorageGateway_DescribeCache_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DescribeCache(input)
+	req := svc.DescribeCacheRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -878,7 +900,7 @@ func ExampleStorageGateway_DescribeCache_shared00() {
 // To describe gateway cached iSCSI volumes
 //
 // Returns a description of the gateway cached iSCSI volumes specified in the request.
-func ExampleStorageGateway_DescribeCachediSCSIVolumes_shared00() {
+func ExampleStorageGateway_DescribeCachediSCSIVolumesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -891,7 +913,8 @@ func ExampleStorageGateway_DescribeCachediSCSIVolumes_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeCachediSCSIVolumes(input)
+	req := svc.DescribeCachediSCSIVolumesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -917,7 +940,7 @@ func ExampleStorageGateway_DescribeCachediSCSIVolumes_shared00() {
 //
 // Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials
 // information for a specified iSCSI target, one for each target-initiator pair.
-func ExampleStorageGateway_DescribeChapCredentials_shared00() {
+func ExampleStorageGateway_DescribeChapCredentialsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -928,7 +951,8 @@ func ExampleStorageGateway_DescribeChapCredentials_shared00() {
 		TargetARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume"),
 	}
 
-	result, err := svc.DescribeChapCredentials(input)
+	req := svc.DescribeChapCredentialsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -954,7 +978,7 @@ func ExampleStorageGateway_DescribeChapCredentials_shared00() {
 //
 // Returns metadata about a gateway such as its name, network interfaces, configured
 // time zone, and the state (whether the gateway is running or not).
-func ExampleStorageGateway_DescribeGatewayInformation_shared00() {
+func ExampleStorageGateway_DescribeGatewayInformationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -965,7 +989,8 @@ func ExampleStorageGateway_DescribeGatewayInformation_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DescribeGatewayInformation(input)
+	req := svc.DescribeGatewayInformationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -991,7 +1016,7 @@ func ExampleStorageGateway_DescribeGatewayInformation_shared00() {
 //
 // Returns your gateway's weekly maintenance start time including the day and time of
 // the week.
-func ExampleStorageGateway_DescribeMaintenanceStartTime_shared00() {
+func ExampleStorageGateway_DescribeMaintenanceStartTimeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1002,7 +1027,8 @@ func ExampleStorageGateway_DescribeMaintenanceStartTime_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DescribeMaintenanceStartTime(input)
+	req := svc.DescribeMaintenanceStartTimeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1028,7 +1054,7 @@ func ExampleStorageGateway_DescribeMaintenanceStartTime_shared00() {
 //
 // Describes the snapshot schedule for the specified gateway volume including intervals
 // at which snapshots are automatically initiated.
-func ExampleStorageGateway_DescribeSnapshotSchedule_shared00() {
+func ExampleStorageGateway_DescribeSnapshotScheduleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1039,7 +1065,8 @@ func ExampleStorageGateway_DescribeSnapshotSchedule_shared00() {
 		VolumeARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
-	result, err := svc.DescribeSnapshotSchedule(input)
+	req := svc.DescribeSnapshotScheduleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1065,7 +1092,7 @@ func ExampleStorageGateway_DescribeSnapshotSchedule_shared00() {
 //
 // Returns the description of the gateway volumes specified in the request belonging
 // to the same gateway.
-func ExampleStorageGateway_DescribeStorediSCSIVolumes_shared00() {
+func ExampleStorageGateway_DescribeStorediSCSIVolumesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1078,7 +1105,8 @@ func ExampleStorageGateway_DescribeStorediSCSIVolumes_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeStorediSCSIVolumes(input)
+	req := svc.DescribeStorediSCSIVolumesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1103,7 +1131,7 @@ func ExampleStorageGateway_DescribeStorediSCSIVolumes_shared00() {
 // To describe virtual tapes in the VTS
 //
 // Returns a description of specified virtual tapes in the virtual tape shelf (VTS).
-func ExampleStorageGateway_DescribeTapeArchives_shared00() {
+func ExampleStorageGateway_DescribeTapeArchivesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1119,7 +1147,8 @@ func ExampleStorageGateway_DescribeTapeArchives_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeTapeArchives(input)
+	req := svc.DescribeTapeArchivesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1145,7 +1174,7 @@ func ExampleStorageGateway_DescribeTapeArchives_shared00() {
 //
 // Returns a list of virtual tape recovery points that are available for the specified
 // gateway-VTL.
-func ExampleStorageGateway_DescribeTapeRecoveryPoints_shared00() {
+func ExampleStorageGateway_DescribeTapeRecoveryPointsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1158,7 +1187,8 @@ func ExampleStorageGateway_DescribeTapeRecoveryPoints_shared00() {
 		Marker:     aws.String("1"),
 	}
 
-	result, err := svc.DescribeTapeRecoveryPoints(input)
+	req := svc.DescribeTapeRecoveryPointsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1184,7 +1214,7 @@ func ExampleStorageGateway_DescribeTapeRecoveryPoints_shared00() {
 //
 // Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes.
 // If a TapeARN is not specified, returns a description of all virtual tapes.
-func ExampleStorageGateway_DescribeTapes_shared00() {
+func ExampleStorageGateway_DescribeTapesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1201,7 +1231,8 @@ func ExampleStorageGateway_DescribeTapes_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeTapes(input)
+	req := svc.DescribeTapesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1227,7 +1258,7 @@ func ExampleStorageGateway_DescribeTapes_shared00() {
 //
 // Returns information about the upload buffer of a gateway including disk IDs and the
 // amount of upload buffer space allocated/used.
-func ExampleStorageGateway_DescribeUploadBuffer_shared00() {
+func ExampleStorageGateway_DescribeUploadBufferRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1238,7 +1269,8 @@ func ExampleStorageGateway_DescribeUploadBuffer_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DescribeUploadBuffer(input)
+	req := svc.DescribeUploadBufferRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1264,7 +1296,7 @@ func ExampleStorageGateway_DescribeUploadBuffer_shared00() {
 //
 // Returns information about the upload buffer of a gateway including disk IDs and the
 // amount of upload buffer space allocated and used.
-func ExampleStorageGateway_DescribeUploadBuffer_shared01() {
+func ExampleStorageGateway_DescribeUploadBufferRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1275,7 +1307,8 @@ func ExampleStorageGateway_DescribeUploadBuffer_shared01() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DescribeUploadBuffer(input)
+	req := svc.DescribeUploadBufferRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1300,7 +1333,7 @@ func ExampleStorageGateway_DescribeUploadBuffer_shared01() {
 // To describe virtual tape library (VTL) devices of a single gateway
 //
 // Returns a description of virtual tape library (VTL) devices for the specified gateway.
-func ExampleStorageGateway_DescribeVTLDevices_shared00() {
+func ExampleStorageGateway_DescribeVTLDevicesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1313,7 +1346,8 @@ func ExampleStorageGateway_DescribeVTLDevices_shared00() {
 		Marker:     aws.String("1"),
 	}
 
-	result, err := svc.DescribeVTLDevices(input)
+	req := svc.DescribeVTLDevicesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1340,7 +1374,7 @@ func ExampleStorageGateway_DescribeVTLDevices_shared00() {
 // This operation is supported only for the gateway-stored volume architecture. This
 // operation is deprecated in cached-volumes API version (20120630). Use DescribeUploadBuffer
 // instead.
-func ExampleStorageGateway_DescribeWorkingStorage_shared00() {
+func ExampleStorageGateway_DescribeWorkingStorageRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1351,7 +1385,8 @@ func ExampleStorageGateway_DescribeWorkingStorage_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DescribeWorkingStorage(input)
+	req := svc.DescribeWorkingStorageRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1377,7 +1412,7 @@ func ExampleStorageGateway_DescribeWorkingStorage_shared00() {
 //
 // Disables a gateway when the gateway is no longer functioning. Use this operation
 // for a gateway-VTL that is not reachable or not functioning.
-func ExampleStorageGateway_DisableGateway_shared00() {
+func ExampleStorageGateway_DisableGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1388,7 +1423,8 @@ func ExampleStorageGateway_DisableGateway_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.DisableGateway(input)
+	req := svc.DisableGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1414,7 +1450,7 @@ func ExampleStorageGateway_DisableGateway_shared00() {
 //
 // Lists gateways owned by an AWS account in a specified region as requested. Results
 // are sorted by gateway ARN up to a maximum of 100 gateways.
-func ExampleStorageGateway_ListGateways_shared00() {
+func ExampleStorageGateway_ListGatewaysRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1426,7 +1462,8 @@ func ExampleStorageGateway_ListGateways_shared00() {
 		Marker: aws.String("1"),
 	}
 
-	result, err := svc.ListGateways(input)
+	req := svc.ListGatewaysRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1452,7 +1489,7 @@ func ExampleStorageGateway_ListGateways_shared00() {
 //
 // The request returns a list of all disks, specifying which are configured as working
 // storage, cache storage, or stored volume or not configured at all.
-func ExampleStorageGateway_ListLocalDisks_shared00() {
+func ExampleStorageGateway_ListLocalDisksRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1463,7 +1500,8 @@ func ExampleStorageGateway_ListLocalDisks_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.ListLocalDisks(input)
+	req := svc.ListLocalDisksRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1488,7 +1526,7 @@ func ExampleStorageGateway_ListLocalDisks_shared00() {
 // To list tags that have been added to a resource
 //
 // Lists the tags that have been added to the specified resource.
-func ExampleStorageGateway_ListTagsForResource_shared00() {
+func ExampleStorageGateway_ListTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1501,7 +1539,8 @@ func ExampleStorageGateway_ListTagsForResource_shared00() {
 		ResourceARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B"),
 	}
 
-	result, err := svc.ListTagsForResource(input)
+	req := svc.ListTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1527,7 +1566,7 @@ func ExampleStorageGateway_ListTagsForResource_shared00() {
 //
 // Lists the recovery points for a specified gateway in which all data of the volume
 // is consistent and can be used to create a snapshot.
-func ExampleStorageGateway_ListVolumeRecoveryPoints_shared00() {
+func ExampleStorageGateway_ListVolumeRecoveryPointsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1538,7 +1577,8 @@ func ExampleStorageGateway_ListVolumeRecoveryPoints_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.ListVolumeRecoveryPoints(input)
+	req := svc.ListVolumeRecoveryPointsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1564,7 +1604,7 @@ func ExampleStorageGateway_ListVolumeRecoveryPoints_shared00() {
 //
 // Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN up
 // to a maximum of 100 volumes.
-func ExampleStorageGateway_ListVolumes_shared00() {
+func ExampleStorageGateway_ListVolumesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1577,7 +1617,8 @@ func ExampleStorageGateway_ListVolumes_shared00() {
 		Marker:     aws.String("1"),
 	}
 
-	result, err := svc.ListVolumes(input)
+	req := svc.ListVolumesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1603,7 +1644,7 @@ func ExampleStorageGateway_ListVolumes_shared00() {
 //
 // Lists the iSCSI stored volumes of a gateway. Removes one or more tags from the specified
 // resource.
-func ExampleStorageGateway_RemoveTagsFromResource_shared00() {
+func ExampleStorageGateway_RemoveTagsFromResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1618,7 +1659,8 @@ func ExampleStorageGateway_RemoveTagsFromResource_shared00() {
 		},
 	}
 
-	result, err := svc.RemoveTagsFromResource(input)
+	req := svc.RemoveTagsFromResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1644,7 +1686,7 @@ func ExampleStorageGateway_RemoveTagsFromResource_shared00() {
 //
 // Resets all cache disks that have encountered a error and makes the disks available
 // for reconfiguration as cache storage.
-func ExampleStorageGateway_ResetCache_shared00() {
+func ExampleStorageGateway_ResetCacheRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1655,7 +1697,8 @@ func ExampleStorageGateway_ResetCache_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C"),
 	}
 
-	result, err := svc.ResetCache(input)
+	req := svc.ResetCacheRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1681,7 +1724,7 @@ func ExampleStorageGateway_ResetCache_shared00() {
 //
 // Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a gateway-VTL.
 // Virtual tapes archived in the VTS are not associated with any gateway.
-func ExampleStorageGateway_RetrieveTapeArchive_shared00() {
+func ExampleStorageGateway_RetrieveTapeArchiveRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1693,7 +1736,8 @@ func ExampleStorageGateway_RetrieveTapeArchive_shared00() {
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF"),
 	}
 
-	result, err := svc.RetrieveTapeArchive(input)
+	req := svc.RetrieveTapeArchiveRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1718,7 +1762,7 @@ func ExampleStorageGateway_RetrieveTapeArchive_shared00() {
 // To retrieve the recovery point of a virtual tape
 //
 // Retrieves the recovery point for the specified virtual tape.
-func ExampleStorageGateway_RetrieveTapeRecoveryPoint_shared00() {
+func ExampleStorageGateway_RetrieveTapeRecoveryPointRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1730,7 +1774,8 @@ func ExampleStorageGateway_RetrieveTapeRecoveryPoint_shared00() {
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF"),
 	}
 
-	result, err := svc.RetrieveTapeRecoveryPoint(input)
+	req := svc.RetrieveTapeRecoveryPointRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1755,7 +1800,7 @@ func ExampleStorageGateway_RetrieveTapeRecoveryPoint_shared00() {
 // To set a password for your VM
 //
 // Sets the password for your VM local console.
-func ExampleStorageGateway_SetLocalConsolePassword_shared00() {
+func ExampleStorageGateway_SetLocalConsolePasswordRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1767,7 +1812,8 @@ func ExampleStorageGateway_SetLocalConsolePassword_shared00() {
 		LocalConsolePassword: aws.String("PassWordMustBeAtLeast6Chars."),
 	}
 
-	result, err := svc.SetLocalConsolePassword(input)
+	req := svc.SetLocalConsolePasswordRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1793,7 +1839,7 @@ func ExampleStorageGateway_SetLocalConsolePassword_shared00() {
 //
 // This operation shuts down the gateway service component running in the storage gateway's
 // virtual machine (VM) and not the VM.
-func ExampleStorageGateway_ShutdownGateway_shared00() {
+func ExampleStorageGateway_ShutdownGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1804,7 +1850,8 @@ func ExampleStorageGateway_ShutdownGateway_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.ShutdownGateway(input)
+	req := svc.ShutdownGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1829,7 +1876,7 @@ func ExampleStorageGateway_ShutdownGateway_shared00() {
 // To start a gateway service
 //
 // Starts a gateway service that was previously shut down.
-func ExampleStorageGateway_StartGateway_shared00() {
+func ExampleStorageGateway_StartGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1840,7 +1887,8 @@ func ExampleStorageGateway_StartGateway_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.StartGateway(input)
+	req := svc.StartGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1867,7 +1915,7 @@ func ExampleStorageGateway_StartGateway_shared00() {
 // Updates the bandwidth rate limits of a gateway. Both the upload and download bandwidth
 // rate limit can be set, or either one of the two. If a new limit is not set, the existing
 // rate limit remains.
-func ExampleStorageGateway_UpdateBandwidthRateLimit_shared00() {
+func ExampleStorageGateway_UpdateBandwidthRateLimitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1880,7 +1928,8 @@ func ExampleStorageGateway_UpdateBandwidthRateLimit_shared00() {
 		GatewayARN:                           aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.UpdateBandwidthRateLimit(input)
+	req := svc.UpdateBandwidthRateLimitRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1906,7 +1955,7 @@ func ExampleStorageGateway_UpdateBandwidthRateLimit_shared00() {
 //
 // Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a
 // specified iSCSI target.
-func ExampleStorageGateway_UpdateChapCredentials_shared00() {
+func ExampleStorageGateway_UpdateChapCredentialsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1920,7 +1969,8 @@ func ExampleStorageGateway_UpdateChapCredentials_shared00() {
 		TargetARN:                     aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume"),
 	}
 
-	result, err := svc.UpdateChapCredentials(input)
+	req := svc.UpdateChapCredentialsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1945,7 +1995,7 @@ func ExampleStorageGateway_UpdateChapCredentials_shared00() {
 // To update a gateway's metadata
 //
 // Updates a gateway's metadata, which includes the gateway's name and time zone.
-func ExampleStorageGateway_UpdateGatewayInformation_shared00() {
+func ExampleStorageGateway_UpdateGatewayInformationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1958,7 +2008,8 @@ func ExampleStorageGateway_UpdateGatewayInformation_shared00() {
 		GatewayTimezone: aws.String("GMT-12:00"),
 	}
 
-	result, err := svc.UpdateGatewayInformation(input)
+	req := svc.UpdateGatewayInformationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1984,7 +2035,7 @@ func ExampleStorageGateway_UpdateGatewayInformation_shared00() {
 //
 // Updates the gateway virtual machine (VM) software. The request immediately triggers
 // the software update.
-func ExampleStorageGateway_UpdateGatewaySoftwareNow_shared00() {
+func ExampleStorageGateway_UpdateGatewaySoftwareNowRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1995,7 +2046,8 @@ func ExampleStorageGateway_UpdateGatewaySoftwareNow_shared00() {
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
-	result, err := svc.UpdateGatewaySoftwareNow(input)
+	req := svc.UpdateGatewaySoftwareNowRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2021,7 +2073,7 @@ func ExampleStorageGateway_UpdateGatewaySoftwareNow_shared00() {
 //
 // Updates a gateway's weekly maintenance start time information, including day and
 // time of the week. The maintenance time is in your gateway's time zone.
-func ExampleStorageGateway_UpdateMaintenanceStartTime_shared00() {
+func ExampleStorageGateway_UpdateMaintenanceStartTimeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2035,7 +2087,8 @@ func ExampleStorageGateway_UpdateMaintenanceStartTime_shared00() {
 		MinuteOfHour: aws.Int64(30),
 	}
 
-	result, err := svc.UpdateMaintenanceStartTime(input)
+	req := svc.UpdateMaintenanceStartTimeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2060,7 +2113,7 @@ func ExampleStorageGateway_UpdateMaintenanceStartTime_shared00() {
 // To update a volume snapshot schedule
 //
 // Updates a snapshot schedule configured for a gateway volume.
-func ExampleStorageGateway_UpdateSnapshotSchedule_shared00() {
+func ExampleStorageGateway_UpdateSnapshotScheduleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2074,7 +2127,8 @@ func ExampleStorageGateway_UpdateSnapshotSchedule_shared00() {
 		VolumeARN:         aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
-	result, err := svc.UpdateSnapshotSchedule(input)
+	req := svc.UpdateSnapshotScheduleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2099,7 +2153,7 @@ func ExampleStorageGateway_UpdateSnapshotSchedule_shared00() {
 // To update a VTL device type
 //
 // Updates the type of medium changer in a gateway-VTL after a gateway-VTL is activated.
-func ExampleStorageGateway_UpdateVTLDeviceType_shared00() {
+func ExampleStorageGateway_UpdateVTLDeviceTypeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2111,7 +2165,8 @@ func ExampleStorageGateway_UpdateVTLDeviceType_shared00() {
 		VTLDeviceARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001"),
 	}
 
-	result, err := svc.UpdateVTLDeviceType(input)
+	req := svc.UpdateVTLDeviceTypeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

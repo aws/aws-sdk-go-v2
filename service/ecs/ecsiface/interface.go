@@ -63,147 +63,85 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ECSAPI interface {
-	CreateCluster(*ecs.CreateClusterInput) (*ecs.CreateClusterOutput, error)
-	CreateClusterWithContext(aws.Context, *ecs.CreateClusterInput, ...aws.Option) (*ecs.CreateClusterOutput, error)
-	CreateClusterRequest(*ecs.CreateClusterInput) (*aws.Request, *ecs.CreateClusterOutput)
+	CreateClusterRequest(*ecs.CreateClusterInput) ecs.CreateClusterRequest
 
-	CreateService(*ecs.CreateServiceInput) (*ecs.CreateServiceOutput, error)
-	CreateServiceWithContext(aws.Context, *ecs.CreateServiceInput, ...aws.Option) (*ecs.CreateServiceOutput, error)
-	CreateServiceRequest(*ecs.CreateServiceInput) (*aws.Request, *ecs.CreateServiceOutput)
+	CreateServiceRequest(*ecs.CreateServiceInput) ecs.CreateServiceRequest
 
-	DeleteAttributes(*ecs.DeleteAttributesInput) (*ecs.DeleteAttributesOutput, error)
-	DeleteAttributesWithContext(aws.Context, *ecs.DeleteAttributesInput, ...aws.Option) (*ecs.DeleteAttributesOutput, error)
-	DeleteAttributesRequest(*ecs.DeleteAttributesInput) (*aws.Request, *ecs.DeleteAttributesOutput)
+	DeleteAttributesRequest(*ecs.DeleteAttributesInput) ecs.DeleteAttributesRequest
 
-	DeleteCluster(*ecs.DeleteClusterInput) (*ecs.DeleteClusterOutput, error)
-	DeleteClusterWithContext(aws.Context, *ecs.DeleteClusterInput, ...aws.Option) (*ecs.DeleteClusterOutput, error)
-	DeleteClusterRequest(*ecs.DeleteClusterInput) (*aws.Request, *ecs.DeleteClusterOutput)
+	DeleteClusterRequest(*ecs.DeleteClusterInput) ecs.DeleteClusterRequest
 
-	DeleteService(*ecs.DeleteServiceInput) (*ecs.DeleteServiceOutput, error)
-	DeleteServiceWithContext(aws.Context, *ecs.DeleteServiceInput, ...aws.Option) (*ecs.DeleteServiceOutput, error)
-	DeleteServiceRequest(*ecs.DeleteServiceInput) (*aws.Request, *ecs.DeleteServiceOutput)
+	DeleteServiceRequest(*ecs.DeleteServiceInput) ecs.DeleteServiceRequest
 
-	DeregisterContainerInstance(*ecs.DeregisterContainerInstanceInput) (*ecs.DeregisterContainerInstanceOutput, error)
-	DeregisterContainerInstanceWithContext(aws.Context, *ecs.DeregisterContainerInstanceInput, ...aws.Option) (*ecs.DeregisterContainerInstanceOutput, error)
-	DeregisterContainerInstanceRequest(*ecs.DeregisterContainerInstanceInput) (*aws.Request, *ecs.DeregisterContainerInstanceOutput)
+	DeregisterContainerInstanceRequest(*ecs.DeregisterContainerInstanceInput) ecs.DeregisterContainerInstanceRequest
 
-	DeregisterTaskDefinition(*ecs.DeregisterTaskDefinitionInput) (*ecs.DeregisterTaskDefinitionOutput, error)
-	DeregisterTaskDefinitionWithContext(aws.Context, *ecs.DeregisterTaskDefinitionInput, ...aws.Option) (*ecs.DeregisterTaskDefinitionOutput, error)
-	DeregisterTaskDefinitionRequest(*ecs.DeregisterTaskDefinitionInput) (*aws.Request, *ecs.DeregisterTaskDefinitionOutput)
+	DeregisterTaskDefinitionRequest(*ecs.DeregisterTaskDefinitionInput) ecs.DeregisterTaskDefinitionRequest
 
-	DescribeClusters(*ecs.DescribeClustersInput) (*ecs.DescribeClustersOutput, error)
-	DescribeClustersWithContext(aws.Context, *ecs.DescribeClustersInput, ...aws.Option) (*ecs.DescribeClustersOutput, error)
-	DescribeClustersRequest(*ecs.DescribeClustersInput) (*aws.Request, *ecs.DescribeClustersOutput)
+	DescribeClustersRequest(*ecs.DescribeClustersInput) ecs.DescribeClustersRequest
 
-	DescribeContainerInstances(*ecs.DescribeContainerInstancesInput) (*ecs.DescribeContainerInstancesOutput, error)
-	DescribeContainerInstancesWithContext(aws.Context, *ecs.DescribeContainerInstancesInput, ...aws.Option) (*ecs.DescribeContainerInstancesOutput, error)
-	DescribeContainerInstancesRequest(*ecs.DescribeContainerInstancesInput) (*aws.Request, *ecs.DescribeContainerInstancesOutput)
+	DescribeContainerInstancesRequest(*ecs.DescribeContainerInstancesInput) ecs.DescribeContainerInstancesRequest
 
-	DescribeServices(*ecs.DescribeServicesInput) (*ecs.DescribeServicesOutput, error)
-	DescribeServicesWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.Option) (*ecs.DescribeServicesOutput, error)
-	DescribeServicesRequest(*ecs.DescribeServicesInput) (*aws.Request, *ecs.DescribeServicesOutput)
+	DescribeServicesRequest(*ecs.DescribeServicesInput) ecs.DescribeServicesRequest
 
-	DescribeTaskDefinition(*ecs.DescribeTaskDefinitionInput) (*ecs.DescribeTaskDefinitionOutput, error)
-	DescribeTaskDefinitionWithContext(aws.Context, *ecs.DescribeTaskDefinitionInput, ...aws.Option) (*ecs.DescribeTaskDefinitionOutput, error)
-	DescribeTaskDefinitionRequest(*ecs.DescribeTaskDefinitionInput) (*aws.Request, *ecs.DescribeTaskDefinitionOutput)
+	DescribeTaskDefinitionRequest(*ecs.DescribeTaskDefinitionInput) ecs.DescribeTaskDefinitionRequest
 
-	DescribeTasks(*ecs.DescribeTasksInput) (*ecs.DescribeTasksOutput, error)
-	DescribeTasksWithContext(aws.Context, *ecs.DescribeTasksInput, ...aws.Option) (*ecs.DescribeTasksOutput, error)
-	DescribeTasksRequest(*ecs.DescribeTasksInput) (*aws.Request, *ecs.DescribeTasksOutput)
+	DescribeTasksRequest(*ecs.DescribeTasksInput) ecs.DescribeTasksRequest
 
-	DiscoverPollEndpoint(*ecs.DiscoverPollEndpointInput) (*ecs.DiscoverPollEndpointOutput, error)
-	DiscoverPollEndpointWithContext(aws.Context, *ecs.DiscoverPollEndpointInput, ...aws.Option) (*ecs.DiscoverPollEndpointOutput, error)
-	DiscoverPollEndpointRequest(*ecs.DiscoverPollEndpointInput) (*aws.Request, *ecs.DiscoverPollEndpointOutput)
+	DiscoverPollEndpointRequest(*ecs.DiscoverPollEndpointInput) ecs.DiscoverPollEndpointRequest
 
-	ListAttributes(*ecs.ListAttributesInput) (*ecs.ListAttributesOutput, error)
-	ListAttributesWithContext(aws.Context, *ecs.ListAttributesInput, ...aws.Option) (*ecs.ListAttributesOutput, error)
-	ListAttributesRequest(*ecs.ListAttributesInput) (*aws.Request, *ecs.ListAttributesOutput)
+	ListAttributesRequest(*ecs.ListAttributesInput) ecs.ListAttributesRequest
 
-	ListClusters(*ecs.ListClustersInput) (*ecs.ListClustersOutput, error)
-	ListClustersWithContext(aws.Context, *ecs.ListClustersInput, ...aws.Option) (*ecs.ListClustersOutput, error)
-	ListClustersRequest(*ecs.ListClustersInput) (*aws.Request, *ecs.ListClustersOutput)
+	ListClustersRequest(*ecs.ListClustersInput) ecs.ListClustersRequest
 
 	ListClustersPages(*ecs.ListClustersInput, func(*ecs.ListClustersOutput, bool) bool) error
 	ListClustersPagesWithContext(aws.Context, *ecs.ListClustersInput, func(*ecs.ListClustersOutput, bool) bool, ...aws.Option) error
 
-	ListContainerInstances(*ecs.ListContainerInstancesInput) (*ecs.ListContainerInstancesOutput, error)
-	ListContainerInstancesWithContext(aws.Context, *ecs.ListContainerInstancesInput, ...aws.Option) (*ecs.ListContainerInstancesOutput, error)
-	ListContainerInstancesRequest(*ecs.ListContainerInstancesInput) (*aws.Request, *ecs.ListContainerInstancesOutput)
+	ListContainerInstancesRequest(*ecs.ListContainerInstancesInput) ecs.ListContainerInstancesRequest
 
 	ListContainerInstancesPages(*ecs.ListContainerInstancesInput, func(*ecs.ListContainerInstancesOutput, bool) bool) error
 	ListContainerInstancesPagesWithContext(aws.Context, *ecs.ListContainerInstancesInput, func(*ecs.ListContainerInstancesOutput, bool) bool, ...aws.Option) error
 
-	ListServices(*ecs.ListServicesInput) (*ecs.ListServicesOutput, error)
-	ListServicesWithContext(aws.Context, *ecs.ListServicesInput, ...aws.Option) (*ecs.ListServicesOutput, error)
-	ListServicesRequest(*ecs.ListServicesInput) (*aws.Request, *ecs.ListServicesOutput)
+	ListServicesRequest(*ecs.ListServicesInput) ecs.ListServicesRequest
 
 	ListServicesPages(*ecs.ListServicesInput, func(*ecs.ListServicesOutput, bool) bool) error
 	ListServicesPagesWithContext(aws.Context, *ecs.ListServicesInput, func(*ecs.ListServicesOutput, bool) bool, ...aws.Option) error
 
-	ListTaskDefinitionFamilies(*ecs.ListTaskDefinitionFamiliesInput) (*ecs.ListTaskDefinitionFamiliesOutput, error)
-	ListTaskDefinitionFamiliesWithContext(aws.Context, *ecs.ListTaskDefinitionFamiliesInput, ...aws.Option) (*ecs.ListTaskDefinitionFamiliesOutput, error)
-	ListTaskDefinitionFamiliesRequest(*ecs.ListTaskDefinitionFamiliesInput) (*aws.Request, *ecs.ListTaskDefinitionFamiliesOutput)
+	ListTaskDefinitionFamiliesRequest(*ecs.ListTaskDefinitionFamiliesInput) ecs.ListTaskDefinitionFamiliesRequest
 
 	ListTaskDefinitionFamiliesPages(*ecs.ListTaskDefinitionFamiliesInput, func(*ecs.ListTaskDefinitionFamiliesOutput, bool) bool) error
 	ListTaskDefinitionFamiliesPagesWithContext(aws.Context, *ecs.ListTaskDefinitionFamiliesInput, func(*ecs.ListTaskDefinitionFamiliesOutput, bool) bool, ...aws.Option) error
 
-	ListTaskDefinitions(*ecs.ListTaskDefinitionsInput) (*ecs.ListTaskDefinitionsOutput, error)
-	ListTaskDefinitionsWithContext(aws.Context, *ecs.ListTaskDefinitionsInput, ...aws.Option) (*ecs.ListTaskDefinitionsOutput, error)
-	ListTaskDefinitionsRequest(*ecs.ListTaskDefinitionsInput) (*aws.Request, *ecs.ListTaskDefinitionsOutput)
+	ListTaskDefinitionsRequest(*ecs.ListTaskDefinitionsInput) ecs.ListTaskDefinitionsRequest
 
 	ListTaskDefinitionsPages(*ecs.ListTaskDefinitionsInput, func(*ecs.ListTaskDefinitionsOutput, bool) bool) error
 	ListTaskDefinitionsPagesWithContext(aws.Context, *ecs.ListTaskDefinitionsInput, func(*ecs.ListTaskDefinitionsOutput, bool) bool, ...aws.Option) error
 
-	ListTasks(*ecs.ListTasksInput) (*ecs.ListTasksOutput, error)
-	ListTasksWithContext(aws.Context, *ecs.ListTasksInput, ...aws.Option) (*ecs.ListTasksOutput, error)
-	ListTasksRequest(*ecs.ListTasksInput) (*aws.Request, *ecs.ListTasksOutput)
+	ListTasksRequest(*ecs.ListTasksInput) ecs.ListTasksRequest
 
 	ListTasksPages(*ecs.ListTasksInput, func(*ecs.ListTasksOutput, bool) bool) error
 	ListTasksPagesWithContext(aws.Context, *ecs.ListTasksInput, func(*ecs.ListTasksOutput, bool) bool, ...aws.Option) error
 
-	PutAttributes(*ecs.PutAttributesInput) (*ecs.PutAttributesOutput, error)
-	PutAttributesWithContext(aws.Context, *ecs.PutAttributesInput, ...aws.Option) (*ecs.PutAttributesOutput, error)
-	PutAttributesRequest(*ecs.PutAttributesInput) (*aws.Request, *ecs.PutAttributesOutput)
+	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
 
-	RegisterContainerInstance(*ecs.RegisterContainerInstanceInput) (*ecs.RegisterContainerInstanceOutput, error)
-	RegisterContainerInstanceWithContext(aws.Context, *ecs.RegisterContainerInstanceInput, ...aws.Option) (*ecs.RegisterContainerInstanceOutput, error)
-	RegisterContainerInstanceRequest(*ecs.RegisterContainerInstanceInput) (*aws.Request, *ecs.RegisterContainerInstanceOutput)
+	RegisterContainerInstanceRequest(*ecs.RegisterContainerInstanceInput) ecs.RegisterContainerInstanceRequest
 
-	RegisterTaskDefinition(*ecs.RegisterTaskDefinitionInput) (*ecs.RegisterTaskDefinitionOutput, error)
-	RegisterTaskDefinitionWithContext(aws.Context, *ecs.RegisterTaskDefinitionInput, ...aws.Option) (*ecs.RegisterTaskDefinitionOutput, error)
-	RegisterTaskDefinitionRequest(*ecs.RegisterTaskDefinitionInput) (*aws.Request, *ecs.RegisterTaskDefinitionOutput)
+	RegisterTaskDefinitionRequest(*ecs.RegisterTaskDefinitionInput) ecs.RegisterTaskDefinitionRequest
 
-	RunTask(*ecs.RunTaskInput) (*ecs.RunTaskOutput, error)
-	RunTaskWithContext(aws.Context, *ecs.RunTaskInput, ...aws.Option) (*ecs.RunTaskOutput, error)
-	RunTaskRequest(*ecs.RunTaskInput) (*aws.Request, *ecs.RunTaskOutput)
+	RunTaskRequest(*ecs.RunTaskInput) ecs.RunTaskRequest
 
-	StartTask(*ecs.StartTaskInput) (*ecs.StartTaskOutput, error)
-	StartTaskWithContext(aws.Context, *ecs.StartTaskInput, ...aws.Option) (*ecs.StartTaskOutput, error)
-	StartTaskRequest(*ecs.StartTaskInput) (*aws.Request, *ecs.StartTaskOutput)
+	StartTaskRequest(*ecs.StartTaskInput) ecs.StartTaskRequest
 
-	StopTask(*ecs.StopTaskInput) (*ecs.StopTaskOutput, error)
-	StopTaskWithContext(aws.Context, *ecs.StopTaskInput, ...aws.Option) (*ecs.StopTaskOutput, error)
-	StopTaskRequest(*ecs.StopTaskInput) (*aws.Request, *ecs.StopTaskOutput)
+	StopTaskRequest(*ecs.StopTaskInput) ecs.StopTaskRequest
 
-	SubmitContainerStateChange(*ecs.SubmitContainerStateChangeInput) (*ecs.SubmitContainerStateChangeOutput, error)
-	SubmitContainerStateChangeWithContext(aws.Context, *ecs.SubmitContainerStateChangeInput, ...aws.Option) (*ecs.SubmitContainerStateChangeOutput, error)
-	SubmitContainerStateChangeRequest(*ecs.SubmitContainerStateChangeInput) (*aws.Request, *ecs.SubmitContainerStateChangeOutput)
+	SubmitContainerStateChangeRequest(*ecs.SubmitContainerStateChangeInput) ecs.SubmitContainerStateChangeRequest
 
-	SubmitTaskStateChange(*ecs.SubmitTaskStateChangeInput) (*ecs.SubmitTaskStateChangeOutput, error)
-	SubmitTaskStateChangeWithContext(aws.Context, *ecs.SubmitTaskStateChangeInput, ...aws.Option) (*ecs.SubmitTaskStateChangeOutput, error)
-	SubmitTaskStateChangeRequest(*ecs.SubmitTaskStateChangeInput) (*aws.Request, *ecs.SubmitTaskStateChangeOutput)
+	SubmitTaskStateChangeRequest(*ecs.SubmitTaskStateChangeInput) ecs.SubmitTaskStateChangeRequest
 
-	UpdateContainerAgent(*ecs.UpdateContainerAgentInput) (*ecs.UpdateContainerAgentOutput, error)
-	UpdateContainerAgentWithContext(aws.Context, *ecs.UpdateContainerAgentInput, ...aws.Option) (*ecs.UpdateContainerAgentOutput, error)
-	UpdateContainerAgentRequest(*ecs.UpdateContainerAgentInput) (*aws.Request, *ecs.UpdateContainerAgentOutput)
+	UpdateContainerAgentRequest(*ecs.UpdateContainerAgentInput) ecs.UpdateContainerAgentRequest
 
-	UpdateContainerInstancesState(*ecs.UpdateContainerInstancesStateInput) (*ecs.UpdateContainerInstancesStateOutput, error)
-	UpdateContainerInstancesStateWithContext(aws.Context, *ecs.UpdateContainerInstancesStateInput, ...aws.Option) (*ecs.UpdateContainerInstancesStateOutput, error)
-	UpdateContainerInstancesStateRequest(*ecs.UpdateContainerInstancesStateInput) (*aws.Request, *ecs.UpdateContainerInstancesStateOutput)
+	UpdateContainerInstancesStateRequest(*ecs.UpdateContainerInstancesStateInput) ecs.UpdateContainerInstancesStateRequest
 
-	UpdateService(*ecs.UpdateServiceInput) (*ecs.UpdateServiceOutput, error)
-	UpdateServiceWithContext(aws.Context, *ecs.UpdateServiceInput, ...aws.Option) (*ecs.UpdateServiceOutput, error)
-	UpdateServiceRequest(*ecs.UpdateServiceInput) (*aws.Request, *ecs.UpdateServiceOutput)
+	UpdateServiceRequest(*ecs.UpdateServiceInput) ecs.UpdateServiceRequest
 
 	WaitUntilServicesInactive(*ecs.DescribeServicesInput) error
 	WaitUntilServicesInactiveWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error

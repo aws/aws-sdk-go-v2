@@ -9,7 +9,6 @@
 package gameliftiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
 )
 
@@ -63,261 +62,133 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type GameLiftAPI interface {
-	AcceptMatch(*gamelift.AcceptMatchInput) (*gamelift.AcceptMatchOutput, error)
-	AcceptMatchWithContext(aws.Context, *gamelift.AcceptMatchInput, ...aws.Option) (*gamelift.AcceptMatchOutput, error)
-	AcceptMatchRequest(*gamelift.AcceptMatchInput) (*aws.Request, *gamelift.AcceptMatchOutput)
+	AcceptMatchRequest(*gamelift.AcceptMatchInput) gamelift.AcceptMatchRequest
 
-	CreateAlias(*gamelift.CreateAliasInput) (*gamelift.CreateAliasOutput, error)
-	CreateAliasWithContext(aws.Context, *gamelift.CreateAliasInput, ...aws.Option) (*gamelift.CreateAliasOutput, error)
-	CreateAliasRequest(*gamelift.CreateAliasInput) (*aws.Request, *gamelift.CreateAliasOutput)
+	CreateAliasRequest(*gamelift.CreateAliasInput) gamelift.CreateAliasRequest
 
-	CreateBuild(*gamelift.CreateBuildInput) (*gamelift.CreateBuildOutput, error)
-	CreateBuildWithContext(aws.Context, *gamelift.CreateBuildInput, ...aws.Option) (*gamelift.CreateBuildOutput, error)
-	CreateBuildRequest(*gamelift.CreateBuildInput) (*aws.Request, *gamelift.CreateBuildOutput)
+	CreateBuildRequest(*gamelift.CreateBuildInput) gamelift.CreateBuildRequest
 
-	CreateFleet(*gamelift.CreateFleetInput) (*gamelift.CreateFleetOutput, error)
-	CreateFleetWithContext(aws.Context, *gamelift.CreateFleetInput, ...aws.Option) (*gamelift.CreateFleetOutput, error)
-	CreateFleetRequest(*gamelift.CreateFleetInput) (*aws.Request, *gamelift.CreateFleetOutput)
+	CreateFleetRequest(*gamelift.CreateFleetInput) gamelift.CreateFleetRequest
 
-	CreateGameSession(*gamelift.CreateGameSessionInput) (*gamelift.CreateGameSessionOutput, error)
-	CreateGameSessionWithContext(aws.Context, *gamelift.CreateGameSessionInput, ...aws.Option) (*gamelift.CreateGameSessionOutput, error)
-	CreateGameSessionRequest(*gamelift.CreateGameSessionInput) (*aws.Request, *gamelift.CreateGameSessionOutput)
+	CreateGameSessionRequest(*gamelift.CreateGameSessionInput) gamelift.CreateGameSessionRequest
 
-	CreateGameSessionQueue(*gamelift.CreateGameSessionQueueInput) (*gamelift.CreateGameSessionQueueOutput, error)
-	CreateGameSessionQueueWithContext(aws.Context, *gamelift.CreateGameSessionQueueInput, ...aws.Option) (*gamelift.CreateGameSessionQueueOutput, error)
-	CreateGameSessionQueueRequest(*gamelift.CreateGameSessionQueueInput) (*aws.Request, *gamelift.CreateGameSessionQueueOutput)
+	CreateGameSessionQueueRequest(*gamelift.CreateGameSessionQueueInput) gamelift.CreateGameSessionQueueRequest
 
-	CreateMatchmakingConfiguration(*gamelift.CreateMatchmakingConfigurationInput) (*gamelift.CreateMatchmakingConfigurationOutput, error)
-	CreateMatchmakingConfigurationWithContext(aws.Context, *gamelift.CreateMatchmakingConfigurationInput, ...aws.Option) (*gamelift.CreateMatchmakingConfigurationOutput, error)
-	CreateMatchmakingConfigurationRequest(*gamelift.CreateMatchmakingConfigurationInput) (*aws.Request, *gamelift.CreateMatchmakingConfigurationOutput)
+	CreateMatchmakingConfigurationRequest(*gamelift.CreateMatchmakingConfigurationInput) gamelift.CreateMatchmakingConfigurationRequest
 
-	CreateMatchmakingRuleSet(*gamelift.CreateMatchmakingRuleSetInput) (*gamelift.CreateMatchmakingRuleSetOutput, error)
-	CreateMatchmakingRuleSetWithContext(aws.Context, *gamelift.CreateMatchmakingRuleSetInput, ...aws.Option) (*gamelift.CreateMatchmakingRuleSetOutput, error)
-	CreateMatchmakingRuleSetRequest(*gamelift.CreateMatchmakingRuleSetInput) (*aws.Request, *gamelift.CreateMatchmakingRuleSetOutput)
+	CreateMatchmakingRuleSetRequest(*gamelift.CreateMatchmakingRuleSetInput) gamelift.CreateMatchmakingRuleSetRequest
 
-	CreatePlayerSession(*gamelift.CreatePlayerSessionInput) (*gamelift.CreatePlayerSessionOutput, error)
-	CreatePlayerSessionWithContext(aws.Context, *gamelift.CreatePlayerSessionInput, ...aws.Option) (*gamelift.CreatePlayerSessionOutput, error)
-	CreatePlayerSessionRequest(*gamelift.CreatePlayerSessionInput) (*aws.Request, *gamelift.CreatePlayerSessionOutput)
+	CreatePlayerSessionRequest(*gamelift.CreatePlayerSessionInput) gamelift.CreatePlayerSessionRequest
 
-	CreatePlayerSessions(*gamelift.CreatePlayerSessionsInput) (*gamelift.CreatePlayerSessionsOutput, error)
-	CreatePlayerSessionsWithContext(aws.Context, *gamelift.CreatePlayerSessionsInput, ...aws.Option) (*gamelift.CreatePlayerSessionsOutput, error)
-	CreatePlayerSessionsRequest(*gamelift.CreatePlayerSessionsInput) (*aws.Request, *gamelift.CreatePlayerSessionsOutput)
+	CreatePlayerSessionsRequest(*gamelift.CreatePlayerSessionsInput) gamelift.CreatePlayerSessionsRequest
 
-	CreateVpcPeeringAuthorization(*gamelift.CreateVpcPeeringAuthorizationInput) (*gamelift.CreateVpcPeeringAuthorizationOutput, error)
-	CreateVpcPeeringAuthorizationWithContext(aws.Context, *gamelift.CreateVpcPeeringAuthorizationInput, ...aws.Option) (*gamelift.CreateVpcPeeringAuthorizationOutput, error)
-	CreateVpcPeeringAuthorizationRequest(*gamelift.CreateVpcPeeringAuthorizationInput) (*aws.Request, *gamelift.CreateVpcPeeringAuthorizationOutput)
+	CreateVpcPeeringAuthorizationRequest(*gamelift.CreateVpcPeeringAuthorizationInput) gamelift.CreateVpcPeeringAuthorizationRequest
 
-	CreateVpcPeeringConnection(*gamelift.CreateVpcPeeringConnectionInput) (*gamelift.CreateVpcPeeringConnectionOutput, error)
-	CreateVpcPeeringConnectionWithContext(aws.Context, *gamelift.CreateVpcPeeringConnectionInput, ...aws.Option) (*gamelift.CreateVpcPeeringConnectionOutput, error)
-	CreateVpcPeeringConnectionRequest(*gamelift.CreateVpcPeeringConnectionInput) (*aws.Request, *gamelift.CreateVpcPeeringConnectionOutput)
+	CreateVpcPeeringConnectionRequest(*gamelift.CreateVpcPeeringConnectionInput) gamelift.CreateVpcPeeringConnectionRequest
 
-	DeleteAlias(*gamelift.DeleteAliasInput) (*gamelift.DeleteAliasOutput, error)
-	DeleteAliasWithContext(aws.Context, *gamelift.DeleteAliasInput, ...aws.Option) (*gamelift.DeleteAliasOutput, error)
-	DeleteAliasRequest(*gamelift.DeleteAliasInput) (*aws.Request, *gamelift.DeleteAliasOutput)
+	DeleteAliasRequest(*gamelift.DeleteAliasInput) gamelift.DeleteAliasRequest
 
-	DeleteBuild(*gamelift.DeleteBuildInput) (*gamelift.DeleteBuildOutput, error)
-	DeleteBuildWithContext(aws.Context, *gamelift.DeleteBuildInput, ...aws.Option) (*gamelift.DeleteBuildOutput, error)
-	DeleteBuildRequest(*gamelift.DeleteBuildInput) (*aws.Request, *gamelift.DeleteBuildOutput)
+	DeleteBuildRequest(*gamelift.DeleteBuildInput) gamelift.DeleteBuildRequest
 
-	DeleteFleet(*gamelift.DeleteFleetInput) (*gamelift.DeleteFleetOutput, error)
-	DeleteFleetWithContext(aws.Context, *gamelift.DeleteFleetInput, ...aws.Option) (*gamelift.DeleteFleetOutput, error)
-	DeleteFleetRequest(*gamelift.DeleteFleetInput) (*aws.Request, *gamelift.DeleteFleetOutput)
+	DeleteFleetRequest(*gamelift.DeleteFleetInput) gamelift.DeleteFleetRequest
 
-	DeleteGameSessionQueue(*gamelift.DeleteGameSessionQueueInput) (*gamelift.DeleteGameSessionQueueOutput, error)
-	DeleteGameSessionQueueWithContext(aws.Context, *gamelift.DeleteGameSessionQueueInput, ...aws.Option) (*gamelift.DeleteGameSessionQueueOutput, error)
-	DeleteGameSessionQueueRequest(*gamelift.DeleteGameSessionQueueInput) (*aws.Request, *gamelift.DeleteGameSessionQueueOutput)
+	DeleteGameSessionQueueRequest(*gamelift.DeleteGameSessionQueueInput) gamelift.DeleteGameSessionQueueRequest
 
-	DeleteMatchmakingConfiguration(*gamelift.DeleteMatchmakingConfigurationInput) (*gamelift.DeleteMatchmakingConfigurationOutput, error)
-	DeleteMatchmakingConfigurationWithContext(aws.Context, *gamelift.DeleteMatchmakingConfigurationInput, ...aws.Option) (*gamelift.DeleteMatchmakingConfigurationOutput, error)
-	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) (*aws.Request, *gamelift.DeleteMatchmakingConfigurationOutput)
+	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
 
-	DeleteScalingPolicy(*gamelift.DeleteScalingPolicyInput) (*gamelift.DeleteScalingPolicyOutput, error)
-	DeleteScalingPolicyWithContext(aws.Context, *gamelift.DeleteScalingPolicyInput, ...aws.Option) (*gamelift.DeleteScalingPolicyOutput, error)
-	DeleteScalingPolicyRequest(*gamelift.DeleteScalingPolicyInput) (*aws.Request, *gamelift.DeleteScalingPolicyOutput)
+	DeleteScalingPolicyRequest(*gamelift.DeleteScalingPolicyInput) gamelift.DeleteScalingPolicyRequest
 
-	DeleteVpcPeeringAuthorization(*gamelift.DeleteVpcPeeringAuthorizationInput) (*gamelift.DeleteVpcPeeringAuthorizationOutput, error)
-	DeleteVpcPeeringAuthorizationWithContext(aws.Context, *gamelift.DeleteVpcPeeringAuthorizationInput, ...aws.Option) (*gamelift.DeleteVpcPeeringAuthorizationOutput, error)
-	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) (*aws.Request, *gamelift.DeleteVpcPeeringAuthorizationOutput)
+	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
 
-	DeleteVpcPeeringConnection(*gamelift.DeleteVpcPeeringConnectionInput) (*gamelift.DeleteVpcPeeringConnectionOutput, error)
-	DeleteVpcPeeringConnectionWithContext(aws.Context, *gamelift.DeleteVpcPeeringConnectionInput, ...aws.Option) (*gamelift.DeleteVpcPeeringConnectionOutput, error)
-	DeleteVpcPeeringConnectionRequest(*gamelift.DeleteVpcPeeringConnectionInput) (*aws.Request, *gamelift.DeleteVpcPeeringConnectionOutput)
+	DeleteVpcPeeringConnectionRequest(*gamelift.DeleteVpcPeeringConnectionInput) gamelift.DeleteVpcPeeringConnectionRequest
 
-	DescribeAlias(*gamelift.DescribeAliasInput) (*gamelift.DescribeAliasOutput, error)
-	DescribeAliasWithContext(aws.Context, *gamelift.DescribeAliasInput, ...aws.Option) (*gamelift.DescribeAliasOutput, error)
-	DescribeAliasRequest(*gamelift.DescribeAliasInput) (*aws.Request, *gamelift.DescribeAliasOutput)
+	DescribeAliasRequest(*gamelift.DescribeAliasInput) gamelift.DescribeAliasRequest
 
-	DescribeBuild(*gamelift.DescribeBuildInput) (*gamelift.DescribeBuildOutput, error)
-	DescribeBuildWithContext(aws.Context, *gamelift.DescribeBuildInput, ...aws.Option) (*gamelift.DescribeBuildOutput, error)
-	DescribeBuildRequest(*gamelift.DescribeBuildInput) (*aws.Request, *gamelift.DescribeBuildOutput)
+	DescribeBuildRequest(*gamelift.DescribeBuildInput) gamelift.DescribeBuildRequest
 
-	DescribeEC2InstanceLimits(*gamelift.DescribeEC2InstanceLimitsInput) (*gamelift.DescribeEC2InstanceLimitsOutput, error)
-	DescribeEC2InstanceLimitsWithContext(aws.Context, *gamelift.DescribeEC2InstanceLimitsInput, ...aws.Option) (*gamelift.DescribeEC2InstanceLimitsOutput, error)
-	DescribeEC2InstanceLimitsRequest(*gamelift.DescribeEC2InstanceLimitsInput) (*aws.Request, *gamelift.DescribeEC2InstanceLimitsOutput)
+	DescribeEC2InstanceLimitsRequest(*gamelift.DescribeEC2InstanceLimitsInput) gamelift.DescribeEC2InstanceLimitsRequest
 
-	DescribeFleetAttributes(*gamelift.DescribeFleetAttributesInput) (*gamelift.DescribeFleetAttributesOutput, error)
-	DescribeFleetAttributesWithContext(aws.Context, *gamelift.DescribeFleetAttributesInput, ...aws.Option) (*gamelift.DescribeFleetAttributesOutput, error)
-	DescribeFleetAttributesRequest(*gamelift.DescribeFleetAttributesInput) (*aws.Request, *gamelift.DescribeFleetAttributesOutput)
+	DescribeFleetAttributesRequest(*gamelift.DescribeFleetAttributesInput) gamelift.DescribeFleetAttributesRequest
 
-	DescribeFleetCapacity(*gamelift.DescribeFleetCapacityInput) (*gamelift.DescribeFleetCapacityOutput, error)
-	DescribeFleetCapacityWithContext(aws.Context, *gamelift.DescribeFleetCapacityInput, ...aws.Option) (*gamelift.DescribeFleetCapacityOutput, error)
-	DescribeFleetCapacityRequest(*gamelift.DescribeFleetCapacityInput) (*aws.Request, *gamelift.DescribeFleetCapacityOutput)
+	DescribeFleetCapacityRequest(*gamelift.DescribeFleetCapacityInput) gamelift.DescribeFleetCapacityRequest
 
-	DescribeFleetEvents(*gamelift.DescribeFleetEventsInput) (*gamelift.DescribeFleetEventsOutput, error)
-	DescribeFleetEventsWithContext(aws.Context, *gamelift.DescribeFleetEventsInput, ...aws.Option) (*gamelift.DescribeFleetEventsOutput, error)
-	DescribeFleetEventsRequest(*gamelift.DescribeFleetEventsInput) (*aws.Request, *gamelift.DescribeFleetEventsOutput)
+	DescribeFleetEventsRequest(*gamelift.DescribeFleetEventsInput) gamelift.DescribeFleetEventsRequest
 
-	DescribeFleetPortSettings(*gamelift.DescribeFleetPortSettingsInput) (*gamelift.DescribeFleetPortSettingsOutput, error)
-	DescribeFleetPortSettingsWithContext(aws.Context, *gamelift.DescribeFleetPortSettingsInput, ...aws.Option) (*gamelift.DescribeFleetPortSettingsOutput, error)
-	DescribeFleetPortSettingsRequest(*gamelift.DescribeFleetPortSettingsInput) (*aws.Request, *gamelift.DescribeFleetPortSettingsOutput)
+	DescribeFleetPortSettingsRequest(*gamelift.DescribeFleetPortSettingsInput) gamelift.DescribeFleetPortSettingsRequest
 
-	DescribeFleetUtilization(*gamelift.DescribeFleetUtilizationInput) (*gamelift.DescribeFleetUtilizationOutput, error)
-	DescribeFleetUtilizationWithContext(aws.Context, *gamelift.DescribeFleetUtilizationInput, ...aws.Option) (*gamelift.DescribeFleetUtilizationOutput, error)
-	DescribeFleetUtilizationRequest(*gamelift.DescribeFleetUtilizationInput) (*aws.Request, *gamelift.DescribeFleetUtilizationOutput)
+	DescribeFleetUtilizationRequest(*gamelift.DescribeFleetUtilizationInput) gamelift.DescribeFleetUtilizationRequest
 
-	DescribeGameSessionDetails(*gamelift.DescribeGameSessionDetailsInput) (*gamelift.DescribeGameSessionDetailsOutput, error)
-	DescribeGameSessionDetailsWithContext(aws.Context, *gamelift.DescribeGameSessionDetailsInput, ...aws.Option) (*gamelift.DescribeGameSessionDetailsOutput, error)
-	DescribeGameSessionDetailsRequest(*gamelift.DescribeGameSessionDetailsInput) (*aws.Request, *gamelift.DescribeGameSessionDetailsOutput)
+	DescribeGameSessionDetailsRequest(*gamelift.DescribeGameSessionDetailsInput) gamelift.DescribeGameSessionDetailsRequest
 
-	DescribeGameSessionPlacement(*gamelift.DescribeGameSessionPlacementInput) (*gamelift.DescribeGameSessionPlacementOutput, error)
-	DescribeGameSessionPlacementWithContext(aws.Context, *gamelift.DescribeGameSessionPlacementInput, ...aws.Option) (*gamelift.DescribeGameSessionPlacementOutput, error)
-	DescribeGameSessionPlacementRequest(*gamelift.DescribeGameSessionPlacementInput) (*aws.Request, *gamelift.DescribeGameSessionPlacementOutput)
+	DescribeGameSessionPlacementRequest(*gamelift.DescribeGameSessionPlacementInput) gamelift.DescribeGameSessionPlacementRequest
 
-	DescribeGameSessionQueues(*gamelift.DescribeGameSessionQueuesInput) (*gamelift.DescribeGameSessionQueuesOutput, error)
-	DescribeGameSessionQueuesWithContext(aws.Context, *gamelift.DescribeGameSessionQueuesInput, ...aws.Option) (*gamelift.DescribeGameSessionQueuesOutput, error)
-	DescribeGameSessionQueuesRequest(*gamelift.DescribeGameSessionQueuesInput) (*aws.Request, *gamelift.DescribeGameSessionQueuesOutput)
+	DescribeGameSessionQueuesRequest(*gamelift.DescribeGameSessionQueuesInput) gamelift.DescribeGameSessionQueuesRequest
 
-	DescribeGameSessions(*gamelift.DescribeGameSessionsInput) (*gamelift.DescribeGameSessionsOutput, error)
-	DescribeGameSessionsWithContext(aws.Context, *gamelift.DescribeGameSessionsInput, ...aws.Option) (*gamelift.DescribeGameSessionsOutput, error)
-	DescribeGameSessionsRequest(*gamelift.DescribeGameSessionsInput) (*aws.Request, *gamelift.DescribeGameSessionsOutput)
+	DescribeGameSessionsRequest(*gamelift.DescribeGameSessionsInput) gamelift.DescribeGameSessionsRequest
 
-	DescribeInstances(*gamelift.DescribeInstancesInput) (*gamelift.DescribeInstancesOutput, error)
-	DescribeInstancesWithContext(aws.Context, *gamelift.DescribeInstancesInput, ...aws.Option) (*gamelift.DescribeInstancesOutput, error)
-	DescribeInstancesRequest(*gamelift.DescribeInstancesInput) (*aws.Request, *gamelift.DescribeInstancesOutput)
+	DescribeInstancesRequest(*gamelift.DescribeInstancesInput) gamelift.DescribeInstancesRequest
 
-	DescribeMatchmaking(*gamelift.DescribeMatchmakingInput) (*gamelift.DescribeMatchmakingOutput, error)
-	DescribeMatchmakingWithContext(aws.Context, *gamelift.DescribeMatchmakingInput, ...aws.Option) (*gamelift.DescribeMatchmakingOutput, error)
-	DescribeMatchmakingRequest(*gamelift.DescribeMatchmakingInput) (*aws.Request, *gamelift.DescribeMatchmakingOutput)
+	DescribeMatchmakingRequest(*gamelift.DescribeMatchmakingInput) gamelift.DescribeMatchmakingRequest
 
-	DescribeMatchmakingConfigurations(*gamelift.DescribeMatchmakingConfigurationsInput) (*gamelift.DescribeMatchmakingConfigurationsOutput, error)
-	DescribeMatchmakingConfigurationsWithContext(aws.Context, *gamelift.DescribeMatchmakingConfigurationsInput, ...aws.Option) (*gamelift.DescribeMatchmakingConfigurationsOutput, error)
-	DescribeMatchmakingConfigurationsRequest(*gamelift.DescribeMatchmakingConfigurationsInput) (*aws.Request, *gamelift.DescribeMatchmakingConfigurationsOutput)
+	DescribeMatchmakingConfigurationsRequest(*gamelift.DescribeMatchmakingConfigurationsInput) gamelift.DescribeMatchmakingConfigurationsRequest
 
-	DescribeMatchmakingRuleSets(*gamelift.DescribeMatchmakingRuleSetsInput) (*gamelift.DescribeMatchmakingRuleSetsOutput, error)
-	DescribeMatchmakingRuleSetsWithContext(aws.Context, *gamelift.DescribeMatchmakingRuleSetsInput, ...aws.Option) (*gamelift.DescribeMatchmakingRuleSetsOutput, error)
-	DescribeMatchmakingRuleSetsRequest(*gamelift.DescribeMatchmakingRuleSetsInput) (*aws.Request, *gamelift.DescribeMatchmakingRuleSetsOutput)
+	DescribeMatchmakingRuleSetsRequest(*gamelift.DescribeMatchmakingRuleSetsInput) gamelift.DescribeMatchmakingRuleSetsRequest
 
-	DescribePlayerSessions(*gamelift.DescribePlayerSessionsInput) (*gamelift.DescribePlayerSessionsOutput, error)
-	DescribePlayerSessionsWithContext(aws.Context, *gamelift.DescribePlayerSessionsInput, ...aws.Option) (*gamelift.DescribePlayerSessionsOutput, error)
-	DescribePlayerSessionsRequest(*gamelift.DescribePlayerSessionsInput) (*aws.Request, *gamelift.DescribePlayerSessionsOutput)
+	DescribePlayerSessionsRequest(*gamelift.DescribePlayerSessionsInput) gamelift.DescribePlayerSessionsRequest
 
-	DescribeRuntimeConfiguration(*gamelift.DescribeRuntimeConfigurationInput) (*gamelift.DescribeRuntimeConfigurationOutput, error)
-	DescribeRuntimeConfigurationWithContext(aws.Context, *gamelift.DescribeRuntimeConfigurationInput, ...aws.Option) (*gamelift.DescribeRuntimeConfigurationOutput, error)
-	DescribeRuntimeConfigurationRequest(*gamelift.DescribeRuntimeConfigurationInput) (*aws.Request, *gamelift.DescribeRuntimeConfigurationOutput)
+	DescribeRuntimeConfigurationRequest(*gamelift.DescribeRuntimeConfigurationInput) gamelift.DescribeRuntimeConfigurationRequest
 
-	DescribeScalingPolicies(*gamelift.DescribeScalingPoliciesInput) (*gamelift.DescribeScalingPoliciesOutput, error)
-	DescribeScalingPoliciesWithContext(aws.Context, *gamelift.DescribeScalingPoliciesInput, ...aws.Option) (*gamelift.DescribeScalingPoliciesOutput, error)
-	DescribeScalingPoliciesRequest(*gamelift.DescribeScalingPoliciesInput) (*aws.Request, *gamelift.DescribeScalingPoliciesOutput)
+	DescribeScalingPoliciesRequest(*gamelift.DescribeScalingPoliciesInput) gamelift.DescribeScalingPoliciesRequest
 
-	DescribeVpcPeeringAuthorizations(*gamelift.DescribeVpcPeeringAuthorizationsInput) (*gamelift.DescribeVpcPeeringAuthorizationsOutput, error)
-	DescribeVpcPeeringAuthorizationsWithContext(aws.Context, *gamelift.DescribeVpcPeeringAuthorizationsInput, ...aws.Option) (*gamelift.DescribeVpcPeeringAuthorizationsOutput, error)
-	DescribeVpcPeeringAuthorizationsRequest(*gamelift.DescribeVpcPeeringAuthorizationsInput) (*aws.Request, *gamelift.DescribeVpcPeeringAuthorizationsOutput)
+	DescribeVpcPeeringAuthorizationsRequest(*gamelift.DescribeVpcPeeringAuthorizationsInput) gamelift.DescribeVpcPeeringAuthorizationsRequest
 
-	DescribeVpcPeeringConnections(*gamelift.DescribeVpcPeeringConnectionsInput) (*gamelift.DescribeVpcPeeringConnectionsOutput, error)
-	DescribeVpcPeeringConnectionsWithContext(aws.Context, *gamelift.DescribeVpcPeeringConnectionsInput, ...aws.Option) (*gamelift.DescribeVpcPeeringConnectionsOutput, error)
-	DescribeVpcPeeringConnectionsRequest(*gamelift.DescribeVpcPeeringConnectionsInput) (*aws.Request, *gamelift.DescribeVpcPeeringConnectionsOutput)
+	DescribeVpcPeeringConnectionsRequest(*gamelift.DescribeVpcPeeringConnectionsInput) gamelift.DescribeVpcPeeringConnectionsRequest
 
-	GetGameSessionLogUrl(*gamelift.GetGameSessionLogUrlInput) (*gamelift.GetGameSessionLogUrlOutput, error)
-	GetGameSessionLogUrlWithContext(aws.Context, *gamelift.GetGameSessionLogUrlInput, ...aws.Option) (*gamelift.GetGameSessionLogUrlOutput, error)
-	GetGameSessionLogUrlRequest(*gamelift.GetGameSessionLogUrlInput) (*aws.Request, *gamelift.GetGameSessionLogUrlOutput)
+	GetGameSessionLogUrlRequest(*gamelift.GetGameSessionLogUrlInput) gamelift.GetGameSessionLogUrlRequest
 
-	GetInstanceAccess(*gamelift.GetInstanceAccessInput) (*gamelift.GetInstanceAccessOutput, error)
-	GetInstanceAccessWithContext(aws.Context, *gamelift.GetInstanceAccessInput, ...aws.Option) (*gamelift.GetInstanceAccessOutput, error)
-	GetInstanceAccessRequest(*gamelift.GetInstanceAccessInput) (*aws.Request, *gamelift.GetInstanceAccessOutput)
+	GetInstanceAccessRequest(*gamelift.GetInstanceAccessInput) gamelift.GetInstanceAccessRequest
 
-	ListAliases(*gamelift.ListAliasesInput) (*gamelift.ListAliasesOutput, error)
-	ListAliasesWithContext(aws.Context, *gamelift.ListAliasesInput, ...aws.Option) (*gamelift.ListAliasesOutput, error)
-	ListAliasesRequest(*gamelift.ListAliasesInput) (*aws.Request, *gamelift.ListAliasesOutput)
+	ListAliasesRequest(*gamelift.ListAliasesInput) gamelift.ListAliasesRequest
 
-	ListBuilds(*gamelift.ListBuildsInput) (*gamelift.ListBuildsOutput, error)
-	ListBuildsWithContext(aws.Context, *gamelift.ListBuildsInput, ...aws.Option) (*gamelift.ListBuildsOutput, error)
-	ListBuildsRequest(*gamelift.ListBuildsInput) (*aws.Request, *gamelift.ListBuildsOutput)
+	ListBuildsRequest(*gamelift.ListBuildsInput) gamelift.ListBuildsRequest
 
-	ListFleets(*gamelift.ListFleetsInput) (*gamelift.ListFleetsOutput, error)
-	ListFleetsWithContext(aws.Context, *gamelift.ListFleetsInput, ...aws.Option) (*gamelift.ListFleetsOutput, error)
-	ListFleetsRequest(*gamelift.ListFleetsInput) (*aws.Request, *gamelift.ListFleetsOutput)
+	ListFleetsRequest(*gamelift.ListFleetsInput) gamelift.ListFleetsRequest
 
-	PutScalingPolicy(*gamelift.PutScalingPolicyInput) (*gamelift.PutScalingPolicyOutput, error)
-	PutScalingPolicyWithContext(aws.Context, *gamelift.PutScalingPolicyInput, ...aws.Option) (*gamelift.PutScalingPolicyOutput, error)
-	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) (*aws.Request, *gamelift.PutScalingPolicyOutput)
+	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
 
-	RequestUploadCredentials(*gamelift.RequestUploadCredentialsInput) (*gamelift.RequestUploadCredentialsOutput, error)
-	RequestUploadCredentialsWithContext(aws.Context, *gamelift.RequestUploadCredentialsInput, ...aws.Option) (*gamelift.RequestUploadCredentialsOutput, error)
-	RequestUploadCredentialsRequest(*gamelift.RequestUploadCredentialsInput) (*aws.Request, *gamelift.RequestUploadCredentialsOutput)
+	RequestUploadCredentialsRequest(*gamelift.RequestUploadCredentialsInput) gamelift.RequestUploadCredentialsRequest
 
-	ResolveAlias(*gamelift.ResolveAliasInput) (*gamelift.ResolveAliasOutput, error)
-	ResolveAliasWithContext(aws.Context, *gamelift.ResolveAliasInput, ...aws.Option) (*gamelift.ResolveAliasOutput, error)
-	ResolveAliasRequest(*gamelift.ResolveAliasInput) (*aws.Request, *gamelift.ResolveAliasOutput)
+	ResolveAliasRequest(*gamelift.ResolveAliasInput) gamelift.ResolveAliasRequest
 
-	SearchGameSessions(*gamelift.SearchGameSessionsInput) (*gamelift.SearchGameSessionsOutput, error)
-	SearchGameSessionsWithContext(aws.Context, *gamelift.SearchGameSessionsInput, ...aws.Option) (*gamelift.SearchGameSessionsOutput, error)
-	SearchGameSessionsRequest(*gamelift.SearchGameSessionsInput) (*aws.Request, *gamelift.SearchGameSessionsOutput)
+	SearchGameSessionsRequest(*gamelift.SearchGameSessionsInput) gamelift.SearchGameSessionsRequest
 
-	StartGameSessionPlacement(*gamelift.StartGameSessionPlacementInput) (*gamelift.StartGameSessionPlacementOutput, error)
-	StartGameSessionPlacementWithContext(aws.Context, *gamelift.StartGameSessionPlacementInput, ...aws.Option) (*gamelift.StartGameSessionPlacementOutput, error)
-	StartGameSessionPlacementRequest(*gamelift.StartGameSessionPlacementInput) (*aws.Request, *gamelift.StartGameSessionPlacementOutput)
+	StartGameSessionPlacementRequest(*gamelift.StartGameSessionPlacementInput) gamelift.StartGameSessionPlacementRequest
 
-	StartMatchmaking(*gamelift.StartMatchmakingInput) (*gamelift.StartMatchmakingOutput, error)
-	StartMatchmakingWithContext(aws.Context, *gamelift.StartMatchmakingInput, ...aws.Option) (*gamelift.StartMatchmakingOutput, error)
-	StartMatchmakingRequest(*gamelift.StartMatchmakingInput) (*aws.Request, *gamelift.StartMatchmakingOutput)
+	StartMatchmakingRequest(*gamelift.StartMatchmakingInput) gamelift.StartMatchmakingRequest
 
-	StopGameSessionPlacement(*gamelift.StopGameSessionPlacementInput) (*gamelift.StopGameSessionPlacementOutput, error)
-	StopGameSessionPlacementWithContext(aws.Context, *gamelift.StopGameSessionPlacementInput, ...aws.Option) (*gamelift.StopGameSessionPlacementOutput, error)
-	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) (*aws.Request, *gamelift.StopGameSessionPlacementOutput)
+	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest
 
-	StopMatchmaking(*gamelift.StopMatchmakingInput) (*gamelift.StopMatchmakingOutput, error)
-	StopMatchmakingWithContext(aws.Context, *gamelift.StopMatchmakingInput, ...aws.Option) (*gamelift.StopMatchmakingOutput, error)
-	StopMatchmakingRequest(*gamelift.StopMatchmakingInput) (*aws.Request, *gamelift.StopMatchmakingOutput)
+	StopMatchmakingRequest(*gamelift.StopMatchmakingInput) gamelift.StopMatchmakingRequest
 
-	UpdateAlias(*gamelift.UpdateAliasInput) (*gamelift.UpdateAliasOutput, error)
-	UpdateAliasWithContext(aws.Context, *gamelift.UpdateAliasInput, ...aws.Option) (*gamelift.UpdateAliasOutput, error)
-	UpdateAliasRequest(*gamelift.UpdateAliasInput) (*aws.Request, *gamelift.UpdateAliasOutput)
+	UpdateAliasRequest(*gamelift.UpdateAliasInput) gamelift.UpdateAliasRequest
 
-	UpdateBuild(*gamelift.UpdateBuildInput) (*gamelift.UpdateBuildOutput, error)
-	UpdateBuildWithContext(aws.Context, *gamelift.UpdateBuildInput, ...aws.Option) (*gamelift.UpdateBuildOutput, error)
-	UpdateBuildRequest(*gamelift.UpdateBuildInput) (*aws.Request, *gamelift.UpdateBuildOutput)
+	UpdateBuildRequest(*gamelift.UpdateBuildInput) gamelift.UpdateBuildRequest
 
-	UpdateFleetAttributes(*gamelift.UpdateFleetAttributesInput) (*gamelift.UpdateFleetAttributesOutput, error)
-	UpdateFleetAttributesWithContext(aws.Context, *gamelift.UpdateFleetAttributesInput, ...aws.Option) (*gamelift.UpdateFleetAttributesOutput, error)
-	UpdateFleetAttributesRequest(*gamelift.UpdateFleetAttributesInput) (*aws.Request, *gamelift.UpdateFleetAttributesOutput)
+	UpdateFleetAttributesRequest(*gamelift.UpdateFleetAttributesInput) gamelift.UpdateFleetAttributesRequest
 
-	UpdateFleetCapacity(*gamelift.UpdateFleetCapacityInput) (*gamelift.UpdateFleetCapacityOutput, error)
-	UpdateFleetCapacityWithContext(aws.Context, *gamelift.UpdateFleetCapacityInput, ...aws.Option) (*gamelift.UpdateFleetCapacityOutput, error)
-	UpdateFleetCapacityRequest(*gamelift.UpdateFleetCapacityInput) (*aws.Request, *gamelift.UpdateFleetCapacityOutput)
+	UpdateFleetCapacityRequest(*gamelift.UpdateFleetCapacityInput) gamelift.UpdateFleetCapacityRequest
 
-	UpdateFleetPortSettings(*gamelift.UpdateFleetPortSettingsInput) (*gamelift.UpdateFleetPortSettingsOutput, error)
-	UpdateFleetPortSettingsWithContext(aws.Context, *gamelift.UpdateFleetPortSettingsInput, ...aws.Option) (*gamelift.UpdateFleetPortSettingsOutput, error)
-	UpdateFleetPortSettingsRequest(*gamelift.UpdateFleetPortSettingsInput) (*aws.Request, *gamelift.UpdateFleetPortSettingsOutput)
+	UpdateFleetPortSettingsRequest(*gamelift.UpdateFleetPortSettingsInput) gamelift.UpdateFleetPortSettingsRequest
 
-	UpdateGameSession(*gamelift.UpdateGameSessionInput) (*gamelift.UpdateGameSessionOutput, error)
-	UpdateGameSessionWithContext(aws.Context, *gamelift.UpdateGameSessionInput, ...aws.Option) (*gamelift.UpdateGameSessionOutput, error)
-	UpdateGameSessionRequest(*gamelift.UpdateGameSessionInput) (*aws.Request, *gamelift.UpdateGameSessionOutput)
+	UpdateGameSessionRequest(*gamelift.UpdateGameSessionInput) gamelift.UpdateGameSessionRequest
 
-	UpdateGameSessionQueue(*gamelift.UpdateGameSessionQueueInput) (*gamelift.UpdateGameSessionQueueOutput, error)
-	UpdateGameSessionQueueWithContext(aws.Context, *gamelift.UpdateGameSessionQueueInput, ...aws.Option) (*gamelift.UpdateGameSessionQueueOutput, error)
-	UpdateGameSessionQueueRequest(*gamelift.UpdateGameSessionQueueInput) (*aws.Request, *gamelift.UpdateGameSessionQueueOutput)
+	UpdateGameSessionQueueRequest(*gamelift.UpdateGameSessionQueueInput) gamelift.UpdateGameSessionQueueRequest
 
-	UpdateMatchmakingConfiguration(*gamelift.UpdateMatchmakingConfigurationInput) (*gamelift.UpdateMatchmakingConfigurationOutput, error)
-	UpdateMatchmakingConfigurationWithContext(aws.Context, *gamelift.UpdateMatchmakingConfigurationInput, ...aws.Option) (*gamelift.UpdateMatchmakingConfigurationOutput, error)
-	UpdateMatchmakingConfigurationRequest(*gamelift.UpdateMatchmakingConfigurationInput) (*aws.Request, *gamelift.UpdateMatchmakingConfigurationOutput)
+	UpdateMatchmakingConfigurationRequest(*gamelift.UpdateMatchmakingConfigurationInput) gamelift.UpdateMatchmakingConfigurationRequest
 
-	UpdateRuntimeConfiguration(*gamelift.UpdateRuntimeConfigurationInput) (*gamelift.UpdateRuntimeConfigurationOutput, error)
-	UpdateRuntimeConfigurationWithContext(aws.Context, *gamelift.UpdateRuntimeConfigurationInput, ...aws.Option) (*gamelift.UpdateRuntimeConfigurationOutput, error)
-	UpdateRuntimeConfigurationRequest(*gamelift.UpdateRuntimeConfigurationInput) (*aws.Request, *gamelift.UpdateRuntimeConfigurationOutput)
+	UpdateRuntimeConfigurationRequest(*gamelift.UpdateRuntimeConfigurationInput) gamelift.UpdateRuntimeConfigurationRequest
 
-	ValidateMatchmakingRuleSet(*gamelift.ValidateMatchmakingRuleSetInput) (*gamelift.ValidateMatchmakingRuleSetOutput, error)
-	ValidateMatchmakingRuleSetWithContext(aws.Context, *gamelift.ValidateMatchmakingRuleSetInput, ...aws.Option) (*gamelift.ValidateMatchmakingRuleSetOutput, error)
-	ValidateMatchmakingRuleSetRequest(*gamelift.ValidateMatchmakingRuleSetInput) (*aws.Request, *gamelift.ValidateMatchmakingRuleSetOutput)
+	ValidateMatchmakingRuleSetRequest(*gamelift.ValidateMatchmakingRuleSetInput) gamelift.ValidateMatchmakingRuleSetRequest
 }
 
 var _ GameLiftAPI = (*gamelift.GameLift)(nil)

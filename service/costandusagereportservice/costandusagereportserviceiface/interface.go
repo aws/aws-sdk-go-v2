@@ -63,20 +63,14 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type CostandUsageReportServiceAPI interface {
-	DeleteReportDefinition(*costandusagereportservice.DeleteReportDefinitionInput) (*costandusagereportservice.DeleteReportDefinitionOutput, error)
-	DeleteReportDefinitionWithContext(aws.Context, *costandusagereportservice.DeleteReportDefinitionInput, ...aws.Option) (*costandusagereportservice.DeleteReportDefinitionOutput, error)
-	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) (*aws.Request, *costandusagereportservice.DeleteReportDefinitionOutput)
+	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) costandusagereportservice.DeleteReportDefinitionRequest
 
-	DescribeReportDefinitions(*costandusagereportservice.DescribeReportDefinitionsInput) (*costandusagereportservice.DescribeReportDefinitionsOutput, error)
-	DescribeReportDefinitionsWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, ...aws.Option) (*costandusagereportservice.DescribeReportDefinitionsOutput, error)
-	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) (*aws.Request, *costandusagereportservice.DescribeReportDefinitionsOutput)
+	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
 
 	DescribeReportDefinitionsPages(*costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool) error
 	DescribeReportDefinitionsPagesWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool, ...aws.Option) error
 
-	PutReportDefinition(*costandusagereportservice.PutReportDefinitionInput) (*costandusagereportservice.PutReportDefinitionOutput, error)
-	PutReportDefinitionWithContext(aws.Context, *costandusagereportservice.PutReportDefinitionInput, ...aws.Option) (*costandusagereportservice.PutReportDefinitionOutput, error)
-	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) (*aws.Request, *costandusagereportservice.PutReportDefinitionOutput)
+	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
 }
 
 var _ CostandUsageReportServiceAPI = (*costandusagereportservice.CostandUsageReportService)(nil)

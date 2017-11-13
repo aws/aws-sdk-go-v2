@@ -133,15 +133,19 @@ func Test{{ .OpName }}(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
 
 	svc := New{{ .TestCase.TestSuite.API.StructName }}(cfg)
-	{{ if ne .ParamsString "" }}input := {{ .ParamsString }}
-	{{ range $k, $v := .JSONValues -}}
-	input.{{ $k }} = {{ $v }} 
-	{{ end -}}
-	req, _ := svc.{{ .TestCase.Given.ExportedName }}Request(input){{ else }}req, _ := svc.{{ .TestCase.Given.ExportedName }}Request(nil){{ end }}
+	{{ if ne .ParamsString "" -}}
+		input := {{ .ParamsString }}
+		{{ range $k, $v := .JSONValues -}}
+			input.{{ $k }} = {{ $v }} 
+		{{- end }}
+		req := svc.{{ .TestCase.Given.ExportedName }}Request(input)
+	{{- else }}
+		req := svc.{{ .TestCase.Given.ExportedName }}Request(nil)
+	{{- end }}
 	r := req.HTTPRequest
 
 	// build request
-	{{ .TestCase.TestSuite.API.ProtocolPackage }}.Build(req)
+	{{ .TestCase.TestSuite.API.ProtocolPackage }}.Build(req.Request)
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -240,7 +244,7 @@ func Test{{ .OpName }}(t *testing.T) {
 	svc := New{{ .TestCase.TestSuite.API.StructName }}(cfg)
 
 	buf := bytes.NewReader([]byte({{ .Body }}))
-	req, out := svc.{{ .TestCase.Given.ExportedName }}Request(nil)
+	req := svc.{{ .TestCase.Given.ExportedName }}Request(nil)
 	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
 
 	// set headers
@@ -248,12 +252,13 @@ func Test{{ .OpName }}(t *testing.T) {
 	{{ end }}
 
 	// unmarshal response
-	{{ .TestCase.TestSuite.API.ProtocolPackage }}.UnmarshalMeta(req)
-	{{ .TestCase.TestSuite.API.ProtocolPackage }}.Unmarshal(req)
+	{{ .TestCase.TestSuite.API.ProtocolPackage }}.UnmarshalMeta(req.Request)
+	{{ .TestCase.TestSuite.API.ProtocolPackage }}.Unmarshal(req.Request)
 	if req.Error != nil {
 		t.Errorf("expect not error, got %v", req.Error)
 	}
 
+	out := req.Data.({{ .TestCase.Given.OutputRef.GoType }})
 	// assert response
 	if out == nil {
 		t.Errorf("expect not to be nil")

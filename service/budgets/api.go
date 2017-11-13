@@ -12,29 +12,34 @@ import (
 
 const opCreateBudget = "CreateBudget"
 
-// CreateBudgetRequest generates a "aws.Request" representing the
-// client's request for the CreateBudget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateBudgetRequest is a API request type for the CreateBudget API operation.
+type CreateBudgetRequest struct {
+	*aws.Request
+	Input *CreateBudgetInput
+}
+
+// Send marshals and sends the CreateBudget API request.
+func (r CreateBudgetRequest) Send() (*CreateBudgetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBudgetOutput), nil
+}
+
+// CreateBudgetRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateBudget for more information on using the CreateBudget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new budget
 //
 //    // Example sending a request using the CreateBudgetRequest method.
-//    req, resp := client.CreateBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateBudgetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) (req *aws.Request, output *CreateBudgetOutput) {
+func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) CreateBudgetRequest {
 	op := &aws.Operation{
 		Name:       opCreateBudget,
 		HTTPMethod: "POST",
@@ -45,84 +50,40 @@ func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) (req *aws.Reques
 		input = &CreateBudgetInput{}
 	}
 
-	output = &CreateBudgetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateBudget API operation for AWS Budgets.
-//
-// Create a new budget
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation CreateBudget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeCreationLimitExceededException "CreationLimitExceededException"
-//   The exception is thrown when customer tries to create a record (e.g. budget),
-//   but the number this record already exceeds the limitation.
-//
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The exception is thrown when customer tries to create a record (e.g. budget)
-//   that already exists.
-//
-func (c *Budgets) CreateBudget(input *CreateBudgetInput) (*CreateBudgetOutput, error) {
-	req, out := c.CreateBudgetRequest(input)
-	return out, req.Send()
-}
-
-// CreateBudgetWithContext is the same as CreateBudget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBudget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) CreateBudgetWithContext(ctx aws.Context, input *CreateBudgetInput, opts ...aws.Option) (*CreateBudgetOutput, error) {
-	req, out := c.CreateBudgetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateBudgetOutput{})
+	return CreateBudgetRequest{Request: req, Input: input}
 }
 
 const opCreateNotification = "CreateNotification"
 
-// CreateNotificationRequest generates a "aws.Request" representing the
-// client's request for the CreateNotification operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateNotificationRequest is a API request type for the CreateNotification API operation.
+type CreateNotificationRequest struct {
+	*aws.Request
+	Input *CreateNotificationInput
+}
+
+// Send marshals and sends the CreateNotification API request.
+func (r CreateNotificationRequest) Send() (*CreateNotificationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateNotificationOutput), nil
+}
+
+// CreateNotificationRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateNotification for more information on using the CreateNotification
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new Notification with subscribers for a budget
 //
 //    // Example sending a request using the CreateNotificationRequest method.
-//    req, resp := client.CreateNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateNotificationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) (req *aws.Request, output *CreateNotificationOutput) {
+func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) CreateNotificationRequest {
 	op := &aws.Operation{
 		Name:       opCreateNotification,
 		HTTPMethod: "POST",
@@ -133,88 +94,40 @@ func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) (req
 		input = &CreateNotificationInput{}
 	}
 
-	output = &CreateNotificationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateNotification API operation for AWS Budgets.
-//
-// Create a new Notification with subscribers for a budget
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation CreateNotification for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-//   * ErrCodeCreationLimitExceededException "CreationLimitExceededException"
-//   The exception is thrown when customer tries to create a record (e.g. budget),
-//   but the number this record already exceeds the limitation.
-//
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The exception is thrown when customer tries to create a record (e.g. budget)
-//   that already exists.
-//
-func (c *Budgets) CreateNotification(input *CreateNotificationInput) (*CreateNotificationOutput, error) {
-	req, out := c.CreateNotificationRequest(input)
-	return out, req.Send()
-}
-
-// CreateNotificationWithContext is the same as CreateNotification with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateNotification for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) CreateNotificationWithContext(ctx aws.Context, input *CreateNotificationInput, opts ...aws.Option) (*CreateNotificationOutput, error) {
-	req, out := c.CreateNotificationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateNotificationOutput{})
+	return CreateNotificationRequest{Request: req, Input: input}
 }
 
 const opCreateSubscriber = "CreateSubscriber"
 
-// CreateSubscriberRequest generates a "aws.Request" representing the
-// client's request for the CreateSubscriber operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSubscriberRequest is a API request type for the CreateSubscriber API operation.
+type CreateSubscriberRequest struct {
+	*aws.Request
+	Input *CreateSubscriberInput
+}
+
+// Send marshals and sends the CreateSubscriber API request.
+func (r CreateSubscriberRequest) Send() (*CreateSubscriberOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSubscriberOutput), nil
+}
+
+// CreateSubscriberRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSubscriber for more information on using the CreateSubscriber
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new Subscriber for a notification
 //
 //    // Example sending a request using the CreateSubscriberRequest method.
-//    req, resp := client.CreateSubscriberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSubscriberRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) (req *aws.Request, output *CreateSubscriberOutput) {
+func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) CreateSubscriberRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubscriber,
 		HTTPMethod: "POST",
@@ -225,88 +138,40 @@ func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) (req *aw
 		input = &CreateSubscriberInput{}
 	}
 
-	output = &CreateSubscriberOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSubscriber API operation for AWS Budgets.
-//
-// Create a new Subscriber for a notification
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation CreateSubscriber for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeCreationLimitExceededException "CreationLimitExceededException"
-//   The exception is thrown when customer tries to create a record (e.g. budget),
-//   but the number this record already exceeds the limitation.
-//
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The exception is thrown when customer tries to create a record (e.g. budget)
-//   that already exists.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-func (c *Budgets) CreateSubscriber(input *CreateSubscriberInput) (*CreateSubscriberOutput, error) {
-	req, out := c.CreateSubscriberRequest(input)
-	return out, req.Send()
-}
-
-// CreateSubscriberWithContext is the same as CreateSubscriber with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSubscriber for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) CreateSubscriberWithContext(ctx aws.Context, input *CreateSubscriberInput, opts ...aws.Option) (*CreateSubscriberOutput, error) {
-	req, out := c.CreateSubscriberRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSubscriberOutput{})
+	return CreateSubscriberRequest{Request: req, Input: input}
 }
 
 const opDeleteBudget = "DeleteBudget"
 
-// DeleteBudgetRequest generates a "aws.Request" representing the
-// client's request for the DeleteBudget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBudgetRequest is a API request type for the DeleteBudget API operation.
+type DeleteBudgetRequest struct {
+	*aws.Request
+	Input *DeleteBudgetInput
+}
+
+// Send marshals and sends the DeleteBudget API request.
+func (r DeleteBudgetRequest) Send() (*DeleteBudgetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBudgetOutput), nil
+}
+
+// DeleteBudgetRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBudget for more information on using the DeleteBudget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a budget and related notifications
 //
 //    // Example sending a request using the DeleteBudgetRequest method.
-//    req, resp := client.DeleteBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBudgetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) (req *aws.Request, output *DeleteBudgetOutput) {
+func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) DeleteBudgetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBudget,
 		HTTPMethod: "POST",
@@ -317,80 +182,40 @@ func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) (req *aws.Reques
 		input = &DeleteBudgetInput{}
 	}
 
-	output = &DeleteBudgetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteBudget API operation for AWS Budgets.
-//
-// Delete a budget and related notifications
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation DeleteBudget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-func (c *Budgets) DeleteBudget(input *DeleteBudgetInput) (*DeleteBudgetOutput, error) {
-	req, out := c.DeleteBudgetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBudgetWithContext is the same as DeleteBudget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBudget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) DeleteBudgetWithContext(ctx aws.Context, input *DeleteBudgetInput, opts ...aws.Option) (*DeleteBudgetOutput, error) {
-	req, out := c.DeleteBudgetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteBudgetOutput{})
+	return DeleteBudgetRequest{Request: req, Input: input}
 }
 
 const opDeleteNotification = "DeleteNotification"
 
-// DeleteNotificationRequest generates a "aws.Request" representing the
-// client's request for the DeleteNotification operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteNotificationRequest is a API request type for the DeleteNotification API operation.
+type DeleteNotificationRequest struct {
+	*aws.Request
+	Input *DeleteNotificationInput
+}
+
+// Send marshals and sends the DeleteNotification API request.
+func (r DeleteNotificationRequest) Send() (*DeleteNotificationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteNotificationOutput), nil
+}
+
+// DeleteNotificationRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteNotification for more information on using the DeleteNotification
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a notification and related subscribers
 //
 //    // Example sending a request using the DeleteNotificationRequest method.
-//    req, resp := client.DeleteNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteNotificationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) (req *aws.Request, output *DeleteNotificationOutput) {
+func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) DeleteNotificationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNotification,
 		HTTPMethod: "POST",
@@ -401,80 +226,40 @@ func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) (req
 		input = &DeleteNotificationInput{}
 	}
 
-	output = &DeleteNotificationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteNotification API operation for AWS Budgets.
-//
-// Delete a notification and related subscribers
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation DeleteNotification for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-func (c *Budgets) DeleteNotification(input *DeleteNotificationInput) (*DeleteNotificationOutput, error) {
-	req, out := c.DeleteNotificationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteNotificationWithContext is the same as DeleteNotification with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteNotification for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) DeleteNotificationWithContext(ctx aws.Context, input *DeleteNotificationInput, opts ...aws.Option) (*DeleteNotificationOutput, error) {
-	req, out := c.DeleteNotificationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteNotificationOutput{})
+	return DeleteNotificationRequest{Request: req, Input: input}
 }
 
 const opDeleteSubscriber = "DeleteSubscriber"
 
-// DeleteSubscriberRequest generates a "aws.Request" representing the
-// client's request for the DeleteSubscriber operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSubscriberRequest is a API request type for the DeleteSubscriber API operation.
+type DeleteSubscriberRequest struct {
+	*aws.Request
+	Input *DeleteSubscriberInput
+}
+
+// Send marshals and sends the DeleteSubscriber API request.
+func (r DeleteSubscriberRequest) Send() (*DeleteSubscriberOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSubscriberOutput), nil
+}
+
+// DeleteSubscriberRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSubscriber for more information on using the DeleteSubscriber
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a Subscriber for a notification
 //
 //    // Example sending a request using the DeleteSubscriberRequest method.
-//    req, resp := client.DeleteSubscriberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSubscriberRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) (req *aws.Request, output *DeleteSubscriberOutput) {
+func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) DeleteSubscriberRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubscriber,
 		HTTPMethod: "POST",
@@ -485,80 +270,40 @@ func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) (req *aw
 		input = &DeleteSubscriberInput{}
 	}
 
-	output = &DeleteSubscriberOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSubscriber API operation for AWS Budgets.
-//
-// Delete a Subscriber for a notification
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation DeleteSubscriber for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-func (c *Budgets) DeleteSubscriber(input *DeleteSubscriberInput) (*DeleteSubscriberOutput, error) {
-	req, out := c.DeleteSubscriberRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSubscriberWithContext is the same as DeleteSubscriber with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSubscriber for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) DeleteSubscriberWithContext(ctx aws.Context, input *DeleteSubscriberInput, opts ...aws.Option) (*DeleteSubscriberOutput, error) {
-	req, out := c.DeleteSubscriberRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSubscriberOutput{})
+	return DeleteSubscriberRequest{Request: req, Input: input}
 }
 
 const opDescribeBudget = "DescribeBudget"
 
-// DescribeBudgetRequest generates a "aws.Request" representing the
-// client's request for the DescribeBudget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeBudgetRequest is a API request type for the DescribeBudget API operation.
+type DescribeBudgetRequest struct {
+	*aws.Request
+	Input *DescribeBudgetInput
+}
+
+// Send marshals and sends the DescribeBudget API request.
+func (r DescribeBudgetRequest) Send() (*DescribeBudgetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBudgetOutput), nil
+}
+
+// DescribeBudgetRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeBudget for more information on using the DescribeBudget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get a single budget
 //
 //    // Example sending a request using the DescribeBudgetRequest method.
-//    req, resp := client.DescribeBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeBudgetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) (req *aws.Request, output *DescribeBudgetOutput) {
+func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudgetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBudget,
 		HTTPMethod: "POST",
@@ -569,80 +314,40 @@ func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) (req *aws.Re
 		input = &DescribeBudgetInput{}
 	}
 
-	output = &DescribeBudgetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeBudget API operation for AWS Budgets.
-//
-// Get a single budget
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation DescribeBudget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-func (c *Budgets) DescribeBudget(input *DescribeBudgetInput) (*DescribeBudgetOutput, error) {
-	req, out := c.DescribeBudgetRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBudgetWithContext is the same as DescribeBudget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBudget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) DescribeBudgetWithContext(ctx aws.Context, input *DescribeBudgetInput, opts ...aws.Option) (*DescribeBudgetOutput, error) {
-	req, out := c.DescribeBudgetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeBudgetOutput{})
+	return DescribeBudgetRequest{Request: req, Input: input}
 }
 
 const opDescribeBudgets = "DescribeBudgets"
 
-// DescribeBudgetsRequest generates a "aws.Request" representing the
-// client's request for the DescribeBudgets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeBudgetsRequest is a API request type for the DescribeBudgets API operation.
+type DescribeBudgetsRequest struct {
+	*aws.Request
+	Input *DescribeBudgetsInput
+}
+
+// Send marshals and sends the DescribeBudgets API request.
+func (r DescribeBudgetsRequest) Send() (*DescribeBudgetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBudgetsOutput), nil
+}
+
+// DescribeBudgetsRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeBudgets for more information on using the DescribeBudgets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get all budgets for an account
 //
 //    // Example sending a request using the DescribeBudgetsRequest method.
-//    req, resp := client.DescribeBudgetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeBudgetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) (req *aws.Request, output *DescribeBudgetsOutput) {
+func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) DescribeBudgetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBudgets,
 		HTTPMethod: "POST",
@@ -653,87 +358,40 @@ func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) (req *aws.
 		input = &DescribeBudgetsInput{}
 	}
 
-	output = &DescribeBudgetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeBudgets API operation for AWS Budgets.
-//
-// Get all budgets for an account
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation DescribeBudgets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   This exception is thrown if paging token signature didn't match the token,
-//   or the paging token isn't for this request
-//
-//   * ErrCodeExpiredNextTokenException "ExpiredNextTokenException"
-//   This exception is thrown if the paging token is expired - past its TTL
-//
-func (c *Budgets) DescribeBudgets(input *DescribeBudgetsInput) (*DescribeBudgetsOutput, error) {
-	req, out := c.DescribeBudgetsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBudgetsWithContext is the same as DescribeBudgets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBudgets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) DescribeBudgetsWithContext(ctx aws.Context, input *DescribeBudgetsInput, opts ...aws.Option) (*DescribeBudgetsOutput, error) {
-	req, out := c.DescribeBudgetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeBudgetsOutput{})
+	return DescribeBudgetsRequest{Request: req, Input: input}
 }
 
 const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 
-// DescribeNotificationsForBudgetRequest generates a "aws.Request" representing the
-// client's request for the DescribeNotificationsForBudget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeNotificationsForBudgetRequest is a API request type for the DescribeNotificationsForBudget API operation.
+type DescribeNotificationsForBudgetRequest struct {
+	*aws.Request
+	Input *DescribeNotificationsForBudgetInput
+}
+
+// Send marshals and sends the DescribeNotificationsForBudget API request.
+func (r DescribeNotificationsForBudgetRequest) Send() (*DescribeNotificationsForBudgetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeNotificationsForBudgetOutput), nil
+}
+
+// DescribeNotificationsForBudgetRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeNotificationsForBudget for more information on using the DescribeNotificationsForBudget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get notifications of a budget
 //
 //    // Example sending a request using the DescribeNotificationsForBudgetRequest method.
-//    req, resp := client.DescribeNotificationsForBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeNotificationsForBudgetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificationsForBudgetInput) (req *aws.Request, output *DescribeNotificationsForBudgetOutput) {
+func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificationsForBudgetInput) DescribeNotificationsForBudgetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNotificationsForBudget,
 		HTTPMethod: "POST",
@@ -744,87 +402,40 @@ func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificat
 		input = &DescribeNotificationsForBudgetInput{}
 	}
 
-	output = &DescribeNotificationsForBudgetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeNotificationsForBudget API operation for AWS Budgets.
-//
-// Get notifications of a budget
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation DescribeNotificationsForBudget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   This exception is thrown if paging token signature didn't match the token,
-//   or the paging token isn't for this request
-//
-//   * ErrCodeExpiredNextTokenException "ExpiredNextTokenException"
-//   This exception is thrown if the paging token is expired - past its TTL
-//
-func (c *Budgets) DescribeNotificationsForBudget(input *DescribeNotificationsForBudgetInput) (*DescribeNotificationsForBudgetOutput, error) {
-	req, out := c.DescribeNotificationsForBudgetRequest(input)
-	return out, req.Send()
-}
-
-// DescribeNotificationsForBudgetWithContext is the same as DescribeNotificationsForBudget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeNotificationsForBudget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) DescribeNotificationsForBudgetWithContext(ctx aws.Context, input *DescribeNotificationsForBudgetInput, opts ...aws.Option) (*DescribeNotificationsForBudgetOutput, error) {
-	req, out := c.DescribeNotificationsForBudgetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeNotificationsForBudgetOutput{})
+	return DescribeNotificationsForBudgetRequest{Request: req, Input: input}
 }
 
 const opDescribeSubscribersForNotification = "DescribeSubscribersForNotification"
 
-// DescribeSubscribersForNotificationRequest generates a "aws.Request" representing the
-// client's request for the DescribeSubscribersForNotification operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSubscribersForNotificationRequest is a API request type for the DescribeSubscribersForNotification API operation.
+type DescribeSubscribersForNotificationRequest struct {
+	*aws.Request
+	Input *DescribeSubscribersForNotificationInput
+}
+
+// Send marshals and sends the DescribeSubscribersForNotification API request.
+func (r DescribeSubscribersForNotificationRequest) Send() (*DescribeSubscribersForNotificationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSubscribersForNotificationOutput), nil
+}
+
+// DescribeSubscribersForNotificationRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSubscribersForNotification for more information on using the DescribeSubscribersForNotification
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get subscribers of a notification
 //
 //    // Example sending a request using the DescribeSubscribersForNotificationRequest method.
-//    req, resp := client.DescribeSubscribersForNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSubscribersForNotificationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubscribersForNotificationInput) (req *aws.Request, output *DescribeSubscribersForNotificationOutput) {
+func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubscribersForNotificationInput) DescribeSubscribersForNotificationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubscribersForNotification,
 		HTTPMethod: "POST",
@@ -835,87 +446,40 @@ func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubsc
 		input = &DescribeSubscribersForNotificationInput{}
 	}
 
-	output = &DescribeSubscribersForNotificationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSubscribersForNotification API operation for AWS Budgets.
-//
-// Get subscribers of a notification
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation DescribeSubscribersForNotification for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   This exception is thrown if paging token signature didn't match the token,
-//   or the paging token isn't for this request
-//
-//   * ErrCodeExpiredNextTokenException "ExpiredNextTokenException"
-//   This exception is thrown if the paging token is expired - past its TTL
-//
-func (c *Budgets) DescribeSubscribersForNotification(input *DescribeSubscribersForNotificationInput) (*DescribeSubscribersForNotificationOutput, error) {
-	req, out := c.DescribeSubscribersForNotificationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSubscribersForNotificationWithContext is the same as DescribeSubscribersForNotification with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSubscribersForNotification for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) DescribeSubscribersForNotificationWithContext(ctx aws.Context, input *DescribeSubscribersForNotificationInput, opts ...aws.Option) (*DescribeSubscribersForNotificationOutput, error) {
-	req, out := c.DescribeSubscribersForNotificationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSubscribersForNotificationOutput{})
+	return DescribeSubscribersForNotificationRequest{Request: req, Input: input}
 }
 
 const opUpdateBudget = "UpdateBudget"
 
-// UpdateBudgetRequest generates a "aws.Request" representing the
-// client's request for the UpdateBudget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateBudgetRequest is a API request type for the UpdateBudget API operation.
+type UpdateBudgetRequest struct {
+	*aws.Request
+	Input *UpdateBudgetInput
+}
+
+// Send marshals and sends the UpdateBudget API request.
+func (r UpdateBudgetRequest) Send() (*UpdateBudgetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateBudgetOutput), nil
+}
+
+// UpdateBudgetRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateBudget for more information on using the UpdateBudget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update the information of a budget already created
 //
 //    // Example sending a request using the UpdateBudgetRequest method.
-//    req, resp := client.UpdateBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateBudgetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) (req *aws.Request, output *UpdateBudgetOutput) {
+func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) UpdateBudgetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBudget,
 		HTTPMethod: "POST",
@@ -926,80 +490,40 @@ func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) (req *aws.Reques
 		input = &UpdateBudgetInput{}
 	}
 
-	output = &UpdateBudgetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateBudget API operation for AWS Budgets.
-//
-// Update the information of a budget already created
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation UpdateBudget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-func (c *Budgets) UpdateBudget(input *UpdateBudgetInput) (*UpdateBudgetOutput, error) {
-	req, out := c.UpdateBudgetRequest(input)
-	return out, req.Send()
-}
-
-// UpdateBudgetWithContext is the same as UpdateBudget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateBudget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) UpdateBudgetWithContext(ctx aws.Context, input *UpdateBudgetInput, opts ...aws.Option) (*UpdateBudgetOutput, error) {
-	req, out := c.UpdateBudgetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateBudgetOutput{})
+	return UpdateBudgetRequest{Request: req, Input: input}
 }
 
 const opUpdateNotification = "UpdateNotification"
 
-// UpdateNotificationRequest generates a "aws.Request" representing the
-// client's request for the UpdateNotification operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateNotificationRequest is a API request type for the UpdateNotification API operation.
+type UpdateNotificationRequest struct {
+	*aws.Request
+	Input *UpdateNotificationInput
+}
+
+// Send marshals and sends the UpdateNotification API request.
+func (r UpdateNotificationRequest) Send() (*UpdateNotificationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateNotificationOutput), nil
+}
+
+// UpdateNotificationRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateNotification for more information on using the UpdateNotification
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update the information about a notification already created
 //
 //    // Example sending a request using the UpdateNotificationRequest method.
-//    req, resp := client.UpdateNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateNotificationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) (req *aws.Request, output *UpdateNotificationOutput) {
+func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) UpdateNotificationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateNotification,
 		HTTPMethod: "POST",
@@ -1010,84 +534,40 @@ func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) (req
 		input = &UpdateNotificationInput{}
 	}
 
-	output = &UpdateNotificationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateNotification API operation for AWS Budgets.
-//
-// Update the information about a notification already created
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation UpdateNotification for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The exception is thrown when customer tries to create a record (e.g. budget)
-//   that already exists.
-//
-func (c *Budgets) UpdateNotification(input *UpdateNotificationInput) (*UpdateNotificationOutput, error) {
-	req, out := c.UpdateNotificationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateNotificationWithContext is the same as UpdateNotification with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateNotification for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) UpdateNotificationWithContext(ctx aws.Context, input *UpdateNotificationInput, opts ...aws.Option) (*UpdateNotificationOutput, error) {
-	req, out := c.UpdateNotificationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateNotificationOutput{})
+	return UpdateNotificationRequest{Request: req, Input: input}
 }
 
 const opUpdateSubscriber = "UpdateSubscriber"
 
-// UpdateSubscriberRequest generates a "aws.Request" representing the
-// client's request for the UpdateSubscriber operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateSubscriberRequest is a API request type for the UpdateSubscriber API operation.
+type UpdateSubscriberRequest struct {
+	*aws.Request
+	Input *UpdateSubscriberInput
+}
+
+// Send marshals and sends the UpdateSubscriber API request.
+func (r UpdateSubscriberRequest) Send() (*UpdateSubscriberOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSubscriberOutput), nil
+}
+
+// UpdateSubscriberRequest returns a request value for making API operation for
+// AWS Budgets.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSubscriber for more information on using the UpdateSubscriber
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update a subscriber
 //
 //    // Example sending a request using the UpdateSubscriberRequest method.
-//    req, resp := client.UpdateSubscriberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateSubscriberRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) (req *aws.Request, output *UpdateSubscriberOutput) {
+func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSubscriberRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSubscriber,
 		HTTPMethod: "POST",
@@ -1098,57 +578,8 @@ func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) (req *aw
 		input = &UpdateSubscriberInput{}
 	}
 
-	output = &UpdateSubscriberOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateSubscriber API operation for AWS Budgets.
-//
-// Update a subscriber
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Budgets's
-// API operation UpdateSubscriber for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on an unknown internal failure.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   This exception is thrown if any request is given an invalid parameter. E.g.,
-//   if a required Date field is null.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   This exception is thrown if a requested entity is not found. E.g., if a budget
-//   id doesn't exist for an account ID.
-//
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The exception is thrown when customer tries to create a record (e.g. budget)
-//   that already exists.
-//
-func (c *Budgets) UpdateSubscriber(input *UpdateSubscriberInput) (*UpdateSubscriberOutput, error) {
-	req, out := c.UpdateSubscriberRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSubscriberWithContext is the same as UpdateSubscriber with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSubscriber for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Budgets) UpdateSubscriberWithContext(ctx aws.Context, input *UpdateSubscriberInput, opts ...aws.Option) (*UpdateSubscriberOutput, error) {
-	req, out := c.UpdateSubscriberRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateSubscriberOutput{})
+	return UpdateSubscriberRequest{Request: req, Input: input}
 }
 
 // AWS Budget model

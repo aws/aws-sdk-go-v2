@@ -3,7 +3,7 @@
 Feature: Amazon API Gateway
 
   Scenario: Making a request
-    When I call the "GetAccountRequest" API
+    When I call the "GetAccount" API
     Then the request should be successful
 
   Scenario: Handing errors

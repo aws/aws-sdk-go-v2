@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To get information about a bot
 //
 // This example shows how to get configuration information for a bot.
-func ExampleLexModelBuildingService_GetBot_shared00() {
+func ExampleLexModelBuildingService_GetBotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -40,7 +40,8 @@ func ExampleLexModelBuildingService_GetBot_shared00() {
 		VersionOrAlias: aws.String("$LATEST"),
 	}
 
-	result, err := svc.GetBot(input)
+	req := svc.GetBotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -69,7 +70,7 @@ func ExampleLexModelBuildingService_GetBot_shared00() {
 // To get a list of bots
 //
 // This example shows how to get a list of all of the bots in your account.
-func ExampleLexModelBuildingService_GetBots_shared00() {
+func ExampleLexModelBuildingService_GetBotsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -81,7 +82,8 @@ func ExampleLexModelBuildingService_GetBots_shared00() {
 		NextToken:  aws.String(""),
 	}
 
-	result, err := svc.GetBots(input)
+	req := svc.GetBotsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -110,7 +112,7 @@ func ExampleLexModelBuildingService_GetBots_shared00() {
 // To get a information about an intent
 //
 // This example shows how to get information about an intent.
-func ExampleLexModelBuildingService_GetIntent_shared00() {
+func ExampleLexModelBuildingService_GetIntentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -122,7 +124,8 @@ func ExampleLexModelBuildingService_GetIntent_shared00() {
 		Version: aws.String("$LATEST"),
 	}
 
-	result, err := svc.GetIntent(input)
+	req := svc.GetIntentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -151,7 +154,7 @@ func ExampleLexModelBuildingService_GetIntent_shared00() {
 // To get a list of intents
 //
 // This example shows how to get a list of all of the intents in your account.
-func ExampleLexModelBuildingService_GetIntents_shared00() {
+func ExampleLexModelBuildingService_GetIntentsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -163,7 +166,8 @@ func ExampleLexModelBuildingService_GetIntents_shared00() {
 		NextToken:  aws.String(""),
 	}
 
-	result, err := svc.GetIntents(input)
+	req := svc.GetIntentsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -192,7 +196,7 @@ func ExampleLexModelBuildingService_GetIntents_shared00() {
 // To get information about a slot type
 //
 // This example shows how to get information about a slot type.
-func ExampleLexModelBuildingService_GetSlotType_shared00() {
+func ExampleLexModelBuildingService_GetSlotTypeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -204,7 +208,8 @@ func ExampleLexModelBuildingService_GetSlotType_shared00() {
 		Version: aws.String("$LATEST"),
 	}
 
-	result, err := svc.GetSlotType(input)
+	req := svc.GetSlotTypeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -233,7 +238,7 @@ func ExampleLexModelBuildingService_GetSlotType_shared00() {
 // To get a list of slot types
 //
 // This example shows how to get a list of all of the slot types in your account.
-func ExampleLexModelBuildingService_GetSlotTypes_shared00() {
+func ExampleLexModelBuildingService_GetSlotTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -245,7 +250,8 @@ func ExampleLexModelBuildingService_GetSlotTypes_shared00() {
 		NextToken:  aws.String(""),
 	}
 
-	result, err := svc.GetSlotTypes(input)
+	req := svc.GetSlotTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -274,7 +280,7 @@ func ExampleLexModelBuildingService_GetSlotTypes_shared00() {
 // To create a bot
 //
 // This example shows how to create a bot for ordering pizzas.
-func ExampleLexModelBuildingService_PutBot_shared00() {
+func ExampleLexModelBuildingService_PutBotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -321,7 +327,8 @@ func ExampleLexModelBuildingService_PutBot_shared00() {
 		ProcessBehavior: lexmodelbuildingservice.ProcessBehaviorSave,
 	}
 
-	result, err := svc.PutBot(input)
+	req := svc.PutBotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -352,7 +359,7 @@ func ExampleLexModelBuildingService_PutBot_shared00() {
 // To create an intent
 //
 // This example shows how to create an intent for ordering pizzas.
-func ExampleLexModelBuildingService_PutIntent_shared00() {
+func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -446,7 +453,8 @@ func ExampleLexModelBuildingService_PutIntent_shared00() {
 		},
 	}
 
-	result, err := svc.PutIntent(input)
+	req := svc.PutIntentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -477,7 +485,7 @@ func ExampleLexModelBuildingService_PutIntent_shared00() {
 // To Create a Slot Type
 //
 // This example shows how to create a slot type that describes pizza sauces.
-func ExampleLexModelBuildingService_PutSlotType_shared00() {
+func ExampleLexModelBuildingService_PutSlotTypeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -497,7 +505,8 @@ func ExampleLexModelBuildingService_PutSlotType_shared00() {
 		Name: aws.String("PizzaSauceType"),
 	}
 
-	result, err := svc.PutSlotType(input)
+	req := svc.PutSlotTypeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

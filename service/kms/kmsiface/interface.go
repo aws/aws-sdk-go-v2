@@ -63,157 +63,87 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type KMSAPI interface {
-	CancelKeyDeletion(*kms.CancelKeyDeletionInput) (*kms.CancelKeyDeletionOutput, error)
-	CancelKeyDeletionWithContext(aws.Context, *kms.CancelKeyDeletionInput, ...aws.Option) (*kms.CancelKeyDeletionOutput, error)
-	CancelKeyDeletionRequest(*kms.CancelKeyDeletionInput) (*aws.Request, *kms.CancelKeyDeletionOutput)
+	CancelKeyDeletionRequest(*kms.CancelKeyDeletionInput) kms.CancelKeyDeletionRequest
 
-	CreateAlias(*kms.CreateAliasInput) (*kms.CreateAliasOutput, error)
-	CreateAliasWithContext(aws.Context, *kms.CreateAliasInput, ...aws.Option) (*kms.CreateAliasOutput, error)
-	CreateAliasRequest(*kms.CreateAliasInput) (*aws.Request, *kms.CreateAliasOutput)
+	CreateAliasRequest(*kms.CreateAliasInput) kms.CreateAliasRequest
 
-	CreateGrant(*kms.CreateGrantInput) (*kms.CreateGrantOutput, error)
-	CreateGrantWithContext(aws.Context, *kms.CreateGrantInput, ...aws.Option) (*kms.CreateGrantOutput, error)
-	CreateGrantRequest(*kms.CreateGrantInput) (*aws.Request, *kms.CreateGrantOutput)
+	CreateGrantRequest(*kms.CreateGrantInput) kms.CreateGrantRequest
 
-	CreateKey(*kms.CreateKeyInput) (*kms.CreateKeyOutput, error)
-	CreateKeyWithContext(aws.Context, *kms.CreateKeyInput, ...aws.Option) (*kms.CreateKeyOutput, error)
-	CreateKeyRequest(*kms.CreateKeyInput) (*aws.Request, *kms.CreateKeyOutput)
+	CreateKeyRequest(*kms.CreateKeyInput) kms.CreateKeyRequest
 
-	Decrypt(*kms.DecryptInput) (*kms.DecryptOutput, error)
-	DecryptWithContext(aws.Context, *kms.DecryptInput, ...aws.Option) (*kms.DecryptOutput, error)
-	DecryptRequest(*kms.DecryptInput) (*aws.Request, *kms.DecryptOutput)
+	DecryptRequest(*kms.DecryptInput) kms.DecryptRequest
 
-	DeleteAlias(*kms.DeleteAliasInput) (*kms.DeleteAliasOutput, error)
-	DeleteAliasWithContext(aws.Context, *kms.DeleteAliasInput, ...aws.Option) (*kms.DeleteAliasOutput, error)
-	DeleteAliasRequest(*kms.DeleteAliasInput) (*aws.Request, *kms.DeleteAliasOutput)
+	DeleteAliasRequest(*kms.DeleteAliasInput) kms.DeleteAliasRequest
 
-	DeleteImportedKeyMaterial(*kms.DeleteImportedKeyMaterialInput) (*kms.DeleteImportedKeyMaterialOutput, error)
-	DeleteImportedKeyMaterialWithContext(aws.Context, *kms.DeleteImportedKeyMaterialInput, ...aws.Option) (*kms.DeleteImportedKeyMaterialOutput, error)
-	DeleteImportedKeyMaterialRequest(*kms.DeleteImportedKeyMaterialInput) (*aws.Request, *kms.DeleteImportedKeyMaterialOutput)
+	DeleteImportedKeyMaterialRequest(*kms.DeleteImportedKeyMaterialInput) kms.DeleteImportedKeyMaterialRequest
 
-	DescribeKey(*kms.DescribeKeyInput) (*kms.DescribeKeyOutput, error)
-	DescribeKeyWithContext(aws.Context, *kms.DescribeKeyInput, ...aws.Option) (*kms.DescribeKeyOutput, error)
-	DescribeKeyRequest(*kms.DescribeKeyInput) (*aws.Request, *kms.DescribeKeyOutput)
+	DescribeKeyRequest(*kms.DescribeKeyInput) kms.DescribeKeyRequest
 
-	DisableKey(*kms.DisableKeyInput) (*kms.DisableKeyOutput, error)
-	DisableKeyWithContext(aws.Context, *kms.DisableKeyInput, ...aws.Option) (*kms.DisableKeyOutput, error)
-	DisableKeyRequest(*kms.DisableKeyInput) (*aws.Request, *kms.DisableKeyOutput)
+	DisableKeyRequest(*kms.DisableKeyInput) kms.DisableKeyRequest
 
-	DisableKeyRotation(*kms.DisableKeyRotationInput) (*kms.DisableKeyRotationOutput, error)
-	DisableKeyRotationWithContext(aws.Context, *kms.DisableKeyRotationInput, ...aws.Option) (*kms.DisableKeyRotationOutput, error)
-	DisableKeyRotationRequest(*kms.DisableKeyRotationInput) (*aws.Request, *kms.DisableKeyRotationOutput)
+	DisableKeyRotationRequest(*kms.DisableKeyRotationInput) kms.DisableKeyRotationRequest
 
-	EnableKey(*kms.EnableKeyInput) (*kms.EnableKeyOutput, error)
-	EnableKeyWithContext(aws.Context, *kms.EnableKeyInput, ...aws.Option) (*kms.EnableKeyOutput, error)
-	EnableKeyRequest(*kms.EnableKeyInput) (*aws.Request, *kms.EnableKeyOutput)
+	EnableKeyRequest(*kms.EnableKeyInput) kms.EnableKeyRequest
 
-	EnableKeyRotation(*kms.EnableKeyRotationInput) (*kms.EnableKeyRotationOutput, error)
-	EnableKeyRotationWithContext(aws.Context, *kms.EnableKeyRotationInput, ...aws.Option) (*kms.EnableKeyRotationOutput, error)
-	EnableKeyRotationRequest(*kms.EnableKeyRotationInput) (*aws.Request, *kms.EnableKeyRotationOutput)
+	EnableKeyRotationRequest(*kms.EnableKeyRotationInput) kms.EnableKeyRotationRequest
 
-	Encrypt(*kms.EncryptInput) (*kms.EncryptOutput, error)
-	EncryptWithContext(aws.Context, *kms.EncryptInput, ...aws.Option) (*kms.EncryptOutput, error)
-	EncryptRequest(*kms.EncryptInput) (*aws.Request, *kms.EncryptOutput)
+	EncryptRequest(*kms.EncryptInput) kms.EncryptRequest
 
-	GenerateDataKey(*kms.GenerateDataKeyInput) (*kms.GenerateDataKeyOutput, error)
-	GenerateDataKeyWithContext(aws.Context, *kms.GenerateDataKeyInput, ...aws.Option) (*kms.GenerateDataKeyOutput, error)
-	GenerateDataKeyRequest(*kms.GenerateDataKeyInput) (*aws.Request, *kms.GenerateDataKeyOutput)
+	GenerateDataKeyRequest(*kms.GenerateDataKeyInput) kms.GenerateDataKeyRequest
 
-	GenerateDataKeyWithoutPlaintext(*kms.GenerateDataKeyWithoutPlaintextInput) (*kms.GenerateDataKeyWithoutPlaintextOutput, error)
-	GenerateDataKeyWithoutPlaintextWithContext(aws.Context, *kms.GenerateDataKeyWithoutPlaintextInput, ...aws.Option) (*kms.GenerateDataKeyWithoutPlaintextOutput, error)
-	GenerateDataKeyWithoutPlaintextRequest(*kms.GenerateDataKeyWithoutPlaintextInput) (*aws.Request, *kms.GenerateDataKeyWithoutPlaintextOutput)
+	GenerateDataKeyWithoutPlaintextRequest(*kms.GenerateDataKeyWithoutPlaintextInput) kms.GenerateDataKeyWithoutPlaintextRequest
 
-	GenerateRandom(*kms.GenerateRandomInput) (*kms.GenerateRandomOutput, error)
-	GenerateRandomWithContext(aws.Context, *kms.GenerateRandomInput, ...aws.Option) (*kms.GenerateRandomOutput, error)
-	GenerateRandomRequest(*kms.GenerateRandomInput) (*aws.Request, *kms.GenerateRandomOutput)
+	GenerateRandomRequest(*kms.GenerateRandomInput) kms.GenerateRandomRequest
 
-	GetKeyPolicy(*kms.GetKeyPolicyInput) (*kms.GetKeyPolicyOutput, error)
-	GetKeyPolicyWithContext(aws.Context, *kms.GetKeyPolicyInput, ...aws.Option) (*kms.GetKeyPolicyOutput, error)
-	GetKeyPolicyRequest(*kms.GetKeyPolicyInput) (*aws.Request, *kms.GetKeyPolicyOutput)
+	GetKeyPolicyRequest(*kms.GetKeyPolicyInput) kms.GetKeyPolicyRequest
 
-	GetKeyRotationStatus(*kms.GetKeyRotationStatusInput) (*kms.GetKeyRotationStatusOutput, error)
-	GetKeyRotationStatusWithContext(aws.Context, *kms.GetKeyRotationStatusInput, ...aws.Option) (*kms.GetKeyRotationStatusOutput, error)
-	GetKeyRotationStatusRequest(*kms.GetKeyRotationStatusInput) (*aws.Request, *kms.GetKeyRotationStatusOutput)
+	GetKeyRotationStatusRequest(*kms.GetKeyRotationStatusInput) kms.GetKeyRotationStatusRequest
 
-	GetParametersForImport(*kms.GetParametersForImportInput) (*kms.GetParametersForImportOutput, error)
-	GetParametersForImportWithContext(aws.Context, *kms.GetParametersForImportInput, ...aws.Option) (*kms.GetParametersForImportOutput, error)
-	GetParametersForImportRequest(*kms.GetParametersForImportInput) (*aws.Request, *kms.GetParametersForImportOutput)
+	GetParametersForImportRequest(*kms.GetParametersForImportInput) kms.GetParametersForImportRequest
 
-	ImportKeyMaterial(*kms.ImportKeyMaterialInput) (*kms.ImportKeyMaterialOutput, error)
-	ImportKeyMaterialWithContext(aws.Context, *kms.ImportKeyMaterialInput, ...aws.Option) (*kms.ImportKeyMaterialOutput, error)
-	ImportKeyMaterialRequest(*kms.ImportKeyMaterialInput) (*aws.Request, *kms.ImportKeyMaterialOutput)
+	ImportKeyMaterialRequest(*kms.ImportKeyMaterialInput) kms.ImportKeyMaterialRequest
 
-	ListAliases(*kms.ListAliasesInput) (*kms.ListAliasesOutput, error)
-	ListAliasesWithContext(aws.Context, *kms.ListAliasesInput, ...aws.Option) (*kms.ListAliasesOutput, error)
-	ListAliasesRequest(*kms.ListAliasesInput) (*aws.Request, *kms.ListAliasesOutput)
+	ListAliasesRequest(*kms.ListAliasesInput) kms.ListAliasesRequest
 
 	ListAliasesPages(*kms.ListAliasesInput, func(*kms.ListAliasesOutput, bool) bool) error
 	ListAliasesPagesWithContext(aws.Context, *kms.ListAliasesInput, func(*kms.ListAliasesOutput, bool) bool, ...aws.Option) error
 
-	ListGrants(*kms.ListGrantsInput) (*kms.ListGrantsResponse, error)
-	ListGrantsWithContext(aws.Context, *kms.ListGrantsInput, ...aws.Option) (*kms.ListGrantsResponse, error)
-	ListGrantsRequest(*kms.ListGrantsInput) (*aws.Request, *kms.ListGrantsResponse)
+	ListGrantsRequest(*kms.ListGrantsInput) kms.ListGrantsRequest
 
-	ListGrantsPages(*kms.ListGrantsInput, func(*kms.ListGrantsResponse, bool) bool) error
-	ListGrantsPagesWithContext(aws.Context, *kms.ListGrantsInput, func(*kms.ListGrantsResponse, bool) bool, ...aws.Option) error
+	ListGrantsPages(*kms.ListGrantsInput, func(*kms.ListRetirableGrantsOutput, bool) bool) error
+	ListGrantsPagesWithContext(aws.Context, *kms.ListGrantsInput, func(*kms.ListRetirableGrantsOutput, bool) bool, ...aws.Option) error
 
-	ListKeyPolicies(*kms.ListKeyPoliciesInput) (*kms.ListKeyPoliciesOutput, error)
-	ListKeyPoliciesWithContext(aws.Context, *kms.ListKeyPoliciesInput, ...aws.Option) (*kms.ListKeyPoliciesOutput, error)
-	ListKeyPoliciesRequest(*kms.ListKeyPoliciesInput) (*aws.Request, *kms.ListKeyPoliciesOutput)
+	ListKeyPoliciesRequest(*kms.ListKeyPoliciesInput) kms.ListKeyPoliciesRequest
 
 	ListKeyPoliciesPages(*kms.ListKeyPoliciesInput, func(*kms.ListKeyPoliciesOutput, bool) bool) error
 	ListKeyPoliciesPagesWithContext(aws.Context, *kms.ListKeyPoliciesInput, func(*kms.ListKeyPoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListKeys(*kms.ListKeysInput) (*kms.ListKeysOutput, error)
-	ListKeysWithContext(aws.Context, *kms.ListKeysInput, ...aws.Option) (*kms.ListKeysOutput, error)
-	ListKeysRequest(*kms.ListKeysInput) (*aws.Request, *kms.ListKeysOutput)
+	ListKeysRequest(*kms.ListKeysInput) kms.ListKeysRequest
 
 	ListKeysPages(*kms.ListKeysInput, func(*kms.ListKeysOutput, bool) bool) error
 	ListKeysPagesWithContext(aws.Context, *kms.ListKeysInput, func(*kms.ListKeysOutput, bool) bool, ...aws.Option) error
 
-	ListResourceTags(*kms.ListResourceTagsInput) (*kms.ListResourceTagsOutput, error)
-	ListResourceTagsWithContext(aws.Context, *kms.ListResourceTagsInput, ...aws.Option) (*kms.ListResourceTagsOutput, error)
-	ListResourceTagsRequest(*kms.ListResourceTagsInput) (*aws.Request, *kms.ListResourceTagsOutput)
+	ListResourceTagsRequest(*kms.ListResourceTagsInput) kms.ListResourceTagsRequest
 
-	ListRetirableGrants(*kms.ListRetirableGrantsInput) (*kms.ListGrantsResponse, error)
-	ListRetirableGrantsWithContext(aws.Context, *kms.ListRetirableGrantsInput, ...aws.Option) (*kms.ListGrantsResponse, error)
-	ListRetirableGrantsRequest(*kms.ListRetirableGrantsInput) (*aws.Request, *kms.ListGrantsResponse)
+	ListRetirableGrantsRequest(*kms.ListRetirableGrantsInput) kms.ListRetirableGrantsRequest
 
-	PutKeyPolicy(*kms.PutKeyPolicyInput) (*kms.PutKeyPolicyOutput, error)
-	PutKeyPolicyWithContext(aws.Context, *kms.PutKeyPolicyInput, ...aws.Option) (*kms.PutKeyPolicyOutput, error)
-	PutKeyPolicyRequest(*kms.PutKeyPolicyInput) (*aws.Request, *kms.PutKeyPolicyOutput)
+	PutKeyPolicyRequest(*kms.PutKeyPolicyInput) kms.PutKeyPolicyRequest
 
-	ReEncrypt(*kms.ReEncryptInput) (*kms.ReEncryptOutput, error)
-	ReEncryptWithContext(aws.Context, *kms.ReEncryptInput, ...aws.Option) (*kms.ReEncryptOutput, error)
-	ReEncryptRequest(*kms.ReEncryptInput) (*aws.Request, *kms.ReEncryptOutput)
+	ReEncryptRequest(*kms.ReEncryptInput) kms.ReEncryptRequest
 
-	RetireGrant(*kms.RetireGrantInput) (*kms.RetireGrantOutput, error)
-	RetireGrantWithContext(aws.Context, *kms.RetireGrantInput, ...aws.Option) (*kms.RetireGrantOutput, error)
-	RetireGrantRequest(*kms.RetireGrantInput) (*aws.Request, *kms.RetireGrantOutput)
+	RetireGrantRequest(*kms.RetireGrantInput) kms.RetireGrantRequest
 
-	RevokeGrant(*kms.RevokeGrantInput) (*kms.RevokeGrantOutput, error)
-	RevokeGrantWithContext(aws.Context, *kms.RevokeGrantInput, ...aws.Option) (*kms.RevokeGrantOutput, error)
-	RevokeGrantRequest(*kms.RevokeGrantInput) (*aws.Request, *kms.RevokeGrantOutput)
+	RevokeGrantRequest(*kms.RevokeGrantInput) kms.RevokeGrantRequest
 
-	ScheduleKeyDeletion(*kms.ScheduleKeyDeletionInput) (*kms.ScheduleKeyDeletionOutput, error)
-	ScheduleKeyDeletionWithContext(aws.Context, *kms.ScheduleKeyDeletionInput, ...aws.Option) (*kms.ScheduleKeyDeletionOutput, error)
-	ScheduleKeyDeletionRequest(*kms.ScheduleKeyDeletionInput) (*aws.Request, *kms.ScheduleKeyDeletionOutput)
+	ScheduleKeyDeletionRequest(*kms.ScheduleKeyDeletionInput) kms.ScheduleKeyDeletionRequest
 
-	TagResource(*kms.TagResourceInput) (*kms.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *kms.TagResourceInput, ...aws.Option) (*kms.TagResourceOutput, error)
-	TagResourceRequest(*kms.TagResourceInput) (*aws.Request, *kms.TagResourceOutput)
+	TagResourceRequest(*kms.TagResourceInput) kms.TagResourceRequest
 
-	UntagResource(*kms.UntagResourceInput) (*kms.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *kms.UntagResourceInput, ...aws.Option) (*kms.UntagResourceOutput, error)
-	UntagResourceRequest(*kms.UntagResourceInput) (*aws.Request, *kms.UntagResourceOutput)
+	UntagResourceRequest(*kms.UntagResourceInput) kms.UntagResourceRequest
 
-	UpdateAlias(*kms.UpdateAliasInput) (*kms.UpdateAliasOutput, error)
-	UpdateAliasWithContext(aws.Context, *kms.UpdateAliasInput, ...aws.Option) (*kms.UpdateAliasOutput, error)
-	UpdateAliasRequest(*kms.UpdateAliasInput) (*aws.Request, *kms.UpdateAliasOutput)
+	UpdateAliasRequest(*kms.UpdateAliasInput) kms.UpdateAliasRequest
 
-	UpdateKeyDescription(*kms.UpdateKeyDescriptionInput) (*kms.UpdateKeyDescriptionOutput, error)
-	UpdateKeyDescriptionWithContext(aws.Context, *kms.UpdateKeyDescriptionInput, ...aws.Option) (*kms.UpdateKeyDescriptionOutput, error)
-	UpdateKeyDescriptionRequest(*kms.UpdateKeyDescriptionInput) (*aws.Request, *kms.UpdateKeyDescriptionOutput)
+	UpdateKeyDescriptionRequest(*kms.UpdateKeyDescriptionInput) kms.UpdateKeyDescriptionRequest
 }
 
 var _ KMSAPI = (*kms.KMS)(nil)

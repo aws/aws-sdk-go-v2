@@ -53,10 +53,10 @@ func (c *AppStream) WaitUntilFleetStartedWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeFleetsRequest(inCpy)
+			req := c.DescribeFleetsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -109,10 +109,10 @@ func (c *AppStream) WaitUntilFleetStoppedWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeFleetsRequest(inCpy)
+			req := c.DescribeFleetsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

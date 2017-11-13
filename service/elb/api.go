@@ -12,47 +12,24 @@ import (
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws.Request" representing the
-// client's request for the AddTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTags for more information on using the AddTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddTagsRequest method.
-//    req, resp := client.AddTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTags
-func (c *ELB) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
-	op := &aws.Operation{
-		Name:       opAddTags,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddTagsInput{}
-	}
-
-	output = &AddTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddTagsRequest is a API request type for the AddTags API operation.
+type AddTagsRequest struct {
+	*aws.Request
+	Input *AddTagsInput
 }
 
-// AddTags API operation for Elastic Load Balancing.
+// Send marshals and sends the AddTags API request.
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsOutput), nil
+}
+
+// AddTagsRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Adds the specified tags to the specified load balancer. Each load balancer
 // can have a maximum of 10 tags.
@@ -63,73 +40,66 @@ func (c *ELB) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *Add
 // For more information, see Tag Your Classic Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation AddTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeTooManyTagsException "TooManyTags"
-//   The quota for the number of tags that can be assigned to a load balancer
-//   has been reached.
-//
-//   * ErrCodeDuplicateTagKeysException "DuplicateTagKeys"
-//   A tag key was specified more than once.
+//    // Example sending a request using the AddTagsRequest method.
+//    req := client.AddTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTags
-func (c *ELB) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	return out, req.Send()
-}
+func (c *ELB) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
+	op := &aws.Operation{
+		Name:       opAddTags,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddTagsWithContext is the same as AddTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddTagsInput{}
+	}
+
+	req := c.newRequest(op, input, &AddTagsOutput{})
+	return AddTagsRequest{Request: req, Input: input}
 }
 
 const opApplySecurityGroupsToLoadBalancer = "ApplySecurityGroupsToLoadBalancer"
 
-// ApplySecurityGroupsToLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the ApplySecurityGroupsToLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ApplySecurityGroupsToLoadBalancerRequest is a API request type for the ApplySecurityGroupsToLoadBalancer API operation.
+type ApplySecurityGroupsToLoadBalancerRequest struct {
+	*aws.Request
+	Input *ApplySecurityGroupsToLoadBalancerInput
+}
+
+// Send marshals and sends the ApplySecurityGroupsToLoadBalancer API request.
+func (r ApplySecurityGroupsToLoadBalancerRequest) Send() (*ApplySecurityGroupsToLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ApplySecurityGroupsToLoadBalancerOutput), nil
+}
+
+// ApplySecurityGroupsToLoadBalancerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Associates one or more security groups with your load balancer in a virtual
+// private cloud (VPC). The specified security groups override the previously
+// associated security groups.
 //
-// See ApplySecurityGroupsToLoadBalancer for more information on using the ApplySecurityGroupsToLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Security Groups for Load Balancers in a VPC (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups)
+// in the Classic Load Balancer Guide.
 //
 //    // Example sending a request using the ApplySecurityGroupsToLoadBalancerRequest method.
-//    req, resp := client.ApplySecurityGroupsToLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ApplySecurityGroupsToLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancer
-func (c *ELB) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroupsToLoadBalancerInput) (req *aws.Request, output *ApplySecurityGroupsToLoadBalancerOutput) {
+func (c *ELB) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroupsToLoadBalancerInput) ApplySecurityGroupsToLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opApplySecurityGroupsToLoadBalancer,
 		HTTPMethod: "POST",
@@ -140,86 +110,48 @@ func (c *ELB) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroup
 		input = &ApplySecurityGroupsToLoadBalancerInput{}
 	}
 
-	output = &ApplySecurityGroupsToLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ApplySecurityGroupsToLoadBalancer API operation for Elastic Load Balancing.
-//
-// Associates one or more security groups with your load balancer in a virtual
-// private cloud (VPC). The specified security groups override the previously
-// associated security groups.
-//
-// For more information, see Security Groups for Load Balancers in a VPC (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups)
-// in the Classic Load Balancer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation ApplySecurityGroupsToLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-//   * ErrCodeInvalidSecurityGroupException "InvalidSecurityGroup"
-//   One or more of the specified security groups do not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancer
-func (c *ELB) ApplySecurityGroupsToLoadBalancer(input *ApplySecurityGroupsToLoadBalancerInput) (*ApplySecurityGroupsToLoadBalancerOutput, error) {
-	req, out := c.ApplySecurityGroupsToLoadBalancerRequest(input)
-	return out, req.Send()
-}
-
-// ApplySecurityGroupsToLoadBalancerWithContext is the same as ApplySecurityGroupsToLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ApplySecurityGroupsToLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) ApplySecurityGroupsToLoadBalancerWithContext(ctx aws.Context, input *ApplySecurityGroupsToLoadBalancerInput, opts ...aws.Option) (*ApplySecurityGroupsToLoadBalancerOutput, error) {
-	req, out := c.ApplySecurityGroupsToLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ApplySecurityGroupsToLoadBalancerOutput{})
+	return ApplySecurityGroupsToLoadBalancerRequest{Request: req, Input: input}
 }
 
 const opAttachLoadBalancerToSubnets = "AttachLoadBalancerToSubnets"
 
-// AttachLoadBalancerToSubnetsRequest generates a "aws.Request" representing the
-// client's request for the AttachLoadBalancerToSubnets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AttachLoadBalancerToSubnetsRequest is a API request type for the AttachLoadBalancerToSubnets API operation.
+type AttachLoadBalancerToSubnetsRequest struct {
+	*aws.Request
+	Input *AttachLoadBalancerToSubnetsInput
+}
+
+// Send marshals and sends the AttachLoadBalancerToSubnets API request.
+func (r AttachLoadBalancerToSubnetsRequest) Send() (*AttachLoadBalancerToSubnetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachLoadBalancerToSubnetsOutput), nil
+}
+
+// AttachLoadBalancerToSubnetsRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds one or more subnets to the set of configured subnets for the specified
+// load balancer.
 //
-// See AttachLoadBalancerToSubnets for more information on using the AttachLoadBalancerToSubnets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The load balancer evenly distributes requests across all registered subnets.
+// For more information, see Add or Remove Subnets for Your Load Balancer in
+// a VPC (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html)
+// in the Classic Load Balancer Guide.
 //
 //    // Example sending a request using the AttachLoadBalancerToSubnetsRequest method.
-//    req, resp := client.AttachLoadBalancerToSubnetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AttachLoadBalancerToSubnetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnets
-func (c *ELB) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubnetsInput) (req *aws.Request, output *AttachLoadBalancerToSubnetsOutput) {
+func (c *ELB) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubnetsInput) AttachLoadBalancerToSubnetsRequest {
 	op := &aws.Operation{
 		Name:       opAttachLoadBalancerToSubnets,
 		HTTPMethod: "POST",
@@ -230,90 +162,47 @@ func (c *ELB) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubn
 		input = &AttachLoadBalancerToSubnetsInput{}
 	}
 
-	output = &AttachLoadBalancerToSubnetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AttachLoadBalancerToSubnets API operation for Elastic Load Balancing.
-//
-// Adds one or more subnets to the set of configured subnets for the specified
-// load balancer.
-//
-// The load balancer evenly distributes requests across all registered subnets.
-// For more information, see Add or Remove Subnets for Your Load Balancer in
-// a VPC (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html)
-// in the Classic Load Balancer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation AttachLoadBalancerToSubnets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-//   * ErrCodeSubnetNotFoundException "SubnetNotFound"
-//   One or more of the specified subnets do not exist.
-//
-//   * ErrCodeInvalidSubnetException "InvalidSubnet"
-//   The specified VPC has no associated Internet gateway.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnets
-func (c *ELB) AttachLoadBalancerToSubnets(input *AttachLoadBalancerToSubnetsInput) (*AttachLoadBalancerToSubnetsOutput, error) {
-	req, out := c.AttachLoadBalancerToSubnetsRequest(input)
-	return out, req.Send()
-}
-
-// AttachLoadBalancerToSubnetsWithContext is the same as AttachLoadBalancerToSubnets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachLoadBalancerToSubnets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) AttachLoadBalancerToSubnetsWithContext(ctx aws.Context, input *AttachLoadBalancerToSubnetsInput, opts ...aws.Option) (*AttachLoadBalancerToSubnetsOutput, error) {
-	req, out := c.AttachLoadBalancerToSubnetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AttachLoadBalancerToSubnetsOutput{})
+	return AttachLoadBalancerToSubnetsRequest{Request: req, Input: input}
 }
 
 const opConfigureHealthCheck = "ConfigureHealthCheck"
 
-// ConfigureHealthCheckRequest generates a "aws.Request" representing the
-// client's request for the ConfigureHealthCheck operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ConfigureHealthCheckRequest is a API request type for the ConfigureHealthCheck API operation.
+type ConfigureHealthCheckRequest struct {
+	*aws.Request
+	Input *ConfigureHealthCheckInput
+}
+
+// Send marshals and sends the ConfigureHealthCheck API request.
+func (r ConfigureHealthCheckRequest) Send() (*ConfigureHealthCheckOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ConfigureHealthCheckOutput), nil
+}
+
+// ConfigureHealthCheckRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Specifies the health check settings to use when evaluating the health state
+// of your EC2 instances.
 //
-// See ConfigureHealthCheck for more information on using the ConfigureHealthCheck
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Configure Health Checks for Your Load Balancer
+// (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html)
+// in the Classic Load Balancer Guide.
 //
 //    // Example sending a request using the ConfigureHealthCheckRequest method.
-//    req, resp := client.ConfigureHealthCheckRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ConfigureHealthCheckRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheck
-func (c *ELB) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) (req *aws.Request, output *ConfigureHealthCheckOutput) {
+func (c *ELB) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) ConfigureHealthCheckRequest {
 	op := &aws.Operation{
 		Name:       opConfigureHealthCheck,
 		HTTPMethod: "POST",
@@ -324,96 +213,30 @@ func (c *ELB) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) (req
 		input = &ConfigureHealthCheckInput{}
 	}
 
-	output = &ConfigureHealthCheckOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ConfigureHealthCheck API operation for Elastic Load Balancing.
-//
-// Specifies the health check settings to use when evaluating the health state
-// of your EC2 instances.
-//
-// For more information, see Configure Health Checks for Your Load Balancer
-// (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html)
-// in the Classic Load Balancer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation ConfigureHealthCheck for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheck
-func (c *ELB) ConfigureHealthCheck(input *ConfigureHealthCheckInput) (*ConfigureHealthCheckOutput, error) {
-	req, out := c.ConfigureHealthCheckRequest(input)
-	return out, req.Send()
-}
-
-// ConfigureHealthCheckWithContext is the same as ConfigureHealthCheck with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ConfigureHealthCheck for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) ConfigureHealthCheckWithContext(ctx aws.Context, input *ConfigureHealthCheckInput, opts ...aws.Option) (*ConfigureHealthCheckOutput, error) {
-	req, out := c.ConfigureHealthCheckRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ConfigureHealthCheckOutput{})
+	return ConfigureHealthCheckRequest{Request: req, Input: input}
 }
 
 const opCreateAppCookieStickinessPolicy = "CreateAppCookieStickinessPolicy"
 
-// CreateAppCookieStickinessPolicyRequest generates a "aws.Request" representing the
-// client's request for the CreateAppCookieStickinessPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAppCookieStickinessPolicy for more information on using the CreateAppCookieStickinessPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateAppCookieStickinessPolicyRequest method.
-//    req, resp := client.CreateAppCookieStickinessPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicy
-func (c *ELB) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieStickinessPolicyInput) (req *aws.Request, output *CreateAppCookieStickinessPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opCreateAppCookieStickinessPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateAppCookieStickinessPolicyInput{}
-	}
-
-	output = &CreateAppCookieStickinessPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateAppCookieStickinessPolicyRequest is a API request type for the CreateAppCookieStickinessPolicy API operation.
+type CreateAppCookieStickinessPolicyRequest struct {
+	*aws.Request
+	Input *CreateAppCookieStickinessPolicyInput
 }
 
-// CreateAppCookieStickinessPolicy API operation for Elastic Load Balancing.
+// Send marshals and sends the CreateAppCookieStickinessPolicy API request.
+func (r CreateAppCookieStickinessPolicyRequest) Send() (*CreateAppCookieStickinessPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAppCookieStickinessPolicyOutput), nil
+}
+
+// CreateAppCookieStickinessPolicyRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Generates a stickiness policy with sticky session lifetimes that follow that
 // of an application-generated cookie. This policy can be associated only with
@@ -431,91 +254,49 @@ func (c *ELB) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieStick
 // For more information, see Application-Controlled Session Stickiness (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation CreateAppCookieStickinessPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeDuplicatePolicyNameException "DuplicatePolicyName"
-//   A policy with the specified name already exists for this load balancer.
-//
-//   * ErrCodeTooManyPoliciesException "TooManyPolicies"
-//   The quota for the number of policies for this load balancer has been reached.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicy
-func (c *ELB) CreateAppCookieStickinessPolicy(input *CreateAppCookieStickinessPolicyInput) (*CreateAppCookieStickinessPolicyOutput, error) {
-	req, out := c.CreateAppCookieStickinessPolicyRequest(input)
-	return out, req.Send()
-}
-
-// CreateAppCookieStickinessPolicyWithContext is the same as CreateAppCookieStickinessPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAppCookieStickinessPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) CreateAppCookieStickinessPolicyWithContext(ctx aws.Context, input *CreateAppCookieStickinessPolicyInput, opts ...aws.Option) (*CreateAppCookieStickinessPolicyOutput, error) {
-	req, out := c.CreateAppCookieStickinessPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
-
-// CreateLBCookieStickinessPolicyRequest generates a "aws.Request" representing the
-// client's request for the CreateLBCookieStickinessPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLBCookieStickinessPolicy for more information on using the CreateLBCookieStickinessPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateLBCookieStickinessPolicyRequest method.
-//    req, resp := client.CreateLBCookieStickinessPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateAppCookieStickinessPolicyRequest method.
+//    req := client.CreateAppCookieStickinessPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicy
-func (c *ELB) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickinessPolicyInput) (req *aws.Request, output *CreateLBCookieStickinessPolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicy
+func (c *ELB) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieStickinessPolicyInput) CreateAppCookieStickinessPolicyRequest {
 	op := &aws.Operation{
-		Name:       opCreateLBCookieStickinessPolicy,
+		Name:       opCreateAppCookieStickinessPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateLBCookieStickinessPolicyInput{}
+		input = &CreateAppCookieStickinessPolicyInput{}
 	}
 
-	output = &CreateLBCookieStickinessPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateAppCookieStickinessPolicyOutput{})
+	return CreateAppCookieStickinessPolicyRequest{Request: req, Input: input}
 }
 
-// CreateLBCookieStickinessPolicy API operation for Elastic Load Balancing.
+const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
+
+// CreateLBCookieStickinessPolicyRequest is a API request type for the CreateLBCookieStickinessPolicy API operation.
+type CreateLBCookieStickinessPolicyRequest struct {
+	*aws.Request
+	Input *CreateLBCookieStickinessPolicyInput
+}
+
+// Send marshals and sends the CreateLBCookieStickinessPolicy API request.
+func (r CreateLBCookieStickinessPolicyRequest) Send() (*CreateLBCookieStickinessPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLBCookieStickinessPolicyOutput), nil
+}
+
+// CreateLBCookieStickinessPolicyRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Generates a stickiness policy with sticky session lifetimes controlled by
 // the lifetime of the browser (user-agent) or a specified expiration period.
@@ -535,91 +316,49 @@ func (c *ELB) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickin
 // For more information, see Duration-Based Session Stickiness (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation CreateLBCookieStickinessPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeDuplicatePolicyNameException "DuplicatePolicyName"
-//   A policy with the specified name already exists for this load balancer.
-//
-//   * ErrCodeTooManyPoliciesException "TooManyPolicies"
-//   The quota for the number of policies for this load balancer has been reached.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicy
-func (c *ELB) CreateLBCookieStickinessPolicy(input *CreateLBCookieStickinessPolicyInput) (*CreateLBCookieStickinessPolicyOutput, error) {
-	req, out := c.CreateLBCookieStickinessPolicyRequest(input)
-	return out, req.Send()
-}
-
-// CreateLBCookieStickinessPolicyWithContext is the same as CreateLBCookieStickinessPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLBCookieStickinessPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) CreateLBCookieStickinessPolicyWithContext(ctx aws.Context, input *CreateLBCookieStickinessPolicyInput, opts ...aws.Option) (*CreateLBCookieStickinessPolicyOutput, error) {
-	req, out := c.CreateLBCookieStickinessPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateLoadBalancer = "CreateLoadBalancer"
-
-// CreateLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the CreateLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLoadBalancer for more information on using the CreateLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateLoadBalancerRequest method.
-//    req, resp := client.CreateLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateLBCookieStickinessPolicyRequest method.
+//    req := client.CreateLBCookieStickinessPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancer
-func (c *ELB) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) (req *aws.Request, output *CreateLoadBalancerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicy
+func (c *ELB) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickinessPolicyInput) CreateLBCookieStickinessPolicyRequest {
 	op := &aws.Operation{
-		Name:       opCreateLoadBalancer,
+		Name:       opCreateLBCookieStickinessPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateLoadBalancerInput{}
+		input = &CreateLBCookieStickinessPolicyInput{}
 	}
 
-	output = &CreateLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateLBCookieStickinessPolicyOutput{})
+	return CreateLBCookieStickinessPolicyRequest{Request: req, Input: input}
 }
 
-// CreateLoadBalancer API operation for Elastic Load Balancing.
+const opCreateLoadBalancer = "CreateLoadBalancer"
+
+// CreateLoadBalancerRequest is a API request type for the CreateLoadBalancer API operation.
+type CreateLoadBalancerRequest struct {
+	*aws.Request
+	Input *CreateLoadBalancerInput
+}
+
+// Send marshals and sends the CreateLoadBalancer API request.
+func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLoadBalancerOutput), nil
+}
+
+// CreateLoadBalancerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Creates a Classic Load Balancer.
 //
@@ -635,101 +374,67 @@ func (c *ELB) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) (req *aw
 // see Limits for Your Classic Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation CreateLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDuplicateAccessPointNameException "DuplicateLoadBalancerName"
-//   The specified load balancer name already exists for this account.
-//
-//   * ErrCodeTooManyAccessPointsException "TooManyLoadBalancers"
-//   The quota for the number of load balancers has been reached.
-//
-//   * ErrCodeCertificateNotFoundException "CertificateNotFound"
-//   The specified ARN does not refer to a valid SSL certificate in AWS Identity
-//   and Access Management (IAM) or AWS Certificate Manager (ACM). Note that if
-//   you recently uploaded the certificate to IAM, this error might indicate that
-//   the certificate is not fully available yet.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-//   * ErrCodeSubnetNotFoundException "SubnetNotFound"
-//   One or more of the specified subnets do not exist.
-//
-//   * ErrCodeInvalidSubnetException "InvalidSubnet"
-//   The specified VPC has no associated Internet gateway.
-//
-//   * ErrCodeInvalidSecurityGroupException "InvalidSecurityGroup"
-//   One or more of the specified security groups do not exist.
-//
-//   * ErrCodeInvalidSchemeException "InvalidScheme"
-//   The specified value for the schema is not valid. You can only specify a scheme
-//   for load balancers in a VPC.
-//
-//   * ErrCodeTooManyTagsException "TooManyTags"
-//   The quota for the number of tags that can be assigned to a load balancer
-//   has been reached.
-//
-//   * ErrCodeDuplicateTagKeysException "DuplicateTagKeys"
-//   A tag key was specified more than once.
-//
-//   * ErrCodeUnsupportedProtocolException "UnsupportedProtocol"
-//   The specified protocol or signature version is not supported.
+//    // Example sending a request using the CreateLoadBalancerRequest method.
+//    req := client.CreateLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancer
-func (c *ELB) CreateLoadBalancer(input *CreateLoadBalancerInput) (*CreateLoadBalancerOutput, error) {
-	req, out := c.CreateLoadBalancerRequest(input)
-	return out, req.Send()
-}
+func (c *ELB) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) CreateLoadBalancerRequest {
+	op := &aws.Operation{
+		Name:       opCreateLoadBalancer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateLoadBalancerWithContext is the same as CreateLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) CreateLoadBalancerWithContext(ctx aws.Context, input *CreateLoadBalancerInput, opts ...aws.Option) (*CreateLoadBalancerOutput, error) {
-	req, out := c.CreateLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateLoadBalancerInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateLoadBalancerOutput{})
+	return CreateLoadBalancerRequest{Request: req, Input: input}
 }
 
 const opCreateLoadBalancerListeners = "CreateLoadBalancerListeners"
 
-// CreateLoadBalancerListenersRequest generates a "aws.Request" representing the
-// client's request for the CreateLoadBalancerListeners operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateLoadBalancerListenersRequest is a API request type for the CreateLoadBalancerListeners API operation.
+type CreateLoadBalancerListenersRequest struct {
+	*aws.Request
+	Input *CreateLoadBalancerListenersInput
+}
+
+// Send marshals and sends the CreateLoadBalancerListeners API request.
+func (r CreateLoadBalancerListenersRequest) Send() (*CreateLoadBalancerListenersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLoadBalancerListenersOutput), nil
+}
+
+// CreateLoadBalancerListenersRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates one or more listeners for the specified load balancer. If a listener
+// with the specified port does not already exist, it is created; otherwise,
+// the properties of the new listener must match the properties of the existing
+// listener.
 //
-// See CreateLoadBalancerListeners for more information on using the CreateLoadBalancerListeners
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Listeners for Your Classic Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
+// in the Classic Load Balancer Guide.
 //
 //    // Example sending a request using the CreateLoadBalancerListenersRequest method.
-//    req, resp := client.CreateLoadBalancerListenersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateLoadBalancerListenersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListeners
-func (c *ELB) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListenersInput) (req *aws.Request, output *CreateLoadBalancerListenersOutput) {
+func (c *ELB) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListenersInput) CreateLoadBalancerListenersRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoadBalancerListeners,
 		HTTPMethod: "POST",
@@ -740,97 +445,46 @@ func (c *ELB) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListen
 		input = &CreateLoadBalancerListenersInput{}
 	}
 
-	output = &CreateLoadBalancerListenersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateLoadBalancerListeners API operation for Elastic Load Balancing.
-//
-// Creates one or more listeners for the specified load balancer. If a listener
-// with the specified port does not already exist, it is created; otherwise,
-// the properties of the new listener must match the properties of the existing
-// listener.
-//
-// For more information, see Listeners for Your Classic Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
-// in the Classic Load Balancer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation CreateLoadBalancerListeners for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeDuplicateListenerException "DuplicateListener"
-//   A listener already exists for the specified load balancer name and port,
-//   but with a different instance port, protocol, or SSL certificate.
-//
-//   * ErrCodeCertificateNotFoundException "CertificateNotFound"
-//   The specified ARN does not refer to a valid SSL certificate in AWS Identity
-//   and Access Management (IAM) or AWS Certificate Manager (ACM). Note that if
-//   you recently uploaded the certificate to IAM, this error might indicate that
-//   the certificate is not fully available yet.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-//   * ErrCodeUnsupportedProtocolException "UnsupportedProtocol"
-//   The specified protocol or signature version is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListeners
-func (c *ELB) CreateLoadBalancerListeners(input *CreateLoadBalancerListenersInput) (*CreateLoadBalancerListenersOutput, error) {
-	req, out := c.CreateLoadBalancerListenersRequest(input)
-	return out, req.Send()
-}
-
-// CreateLoadBalancerListenersWithContext is the same as CreateLoadBalancerListeners with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLoadBalancerListeners for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) CreateLoadBalancerListenersWithContext(ctx aws.Context, input *CreateLoadBalancerListenersInput, opts ...aws.Option) (*CreateLoadBalancerListenersOutput, error) {
-	req, out := c.CreateLoadBalancerListenersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateLoadBalancerListenersOutput{})
+	return CreateLoadBalancerListenersRequest{Request: req, Input: input}
 }
 
 const opCreateLoadBalancerPolicy = "CreateLoadBalancerPolicy"
 
-// CreateLoadBalancerPolicyRequest generates a "aws.Request" representing the
-// client's request for the CreateLoadBalancerPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateLoadBalancerPolicyRequest is a API request type for the CreateLoadBalancerPolicy API operation.
+type CreateLoadBalancerPolicyRequest struct {
+	*aws.Request
+	Input *CreateLoadBalancerPolicyInput
+}
+
+// Send marshals and sends the CreateLoadBalancerPolicy API request.
+func (r CreateLoadBalancerPolicyRequest) Send() (*CreateLoadBalancerPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLoadBalancerPolicyOutput), nil
+}
+
+// CreateLoadBalancerPolicyRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a policy with the specified attributes for the specified load balancer.
 //
-// See CreateLoadBalancerPolicy for more information on using the CreateLoadBalancerPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Policies are settings that are saved for your load balancer and that can
+// be applied to the listener or the application server, depending on the policy
+// type.
 //
 //    // Example sending a request using the CreateLoadBalancerPolicyRequest method.
-//    req, resp := client.CreateLoadBalancerPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateLoadBalancerPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicy
-func (c *ELB) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInput) (req *aws.Request, output *CreateLoadBalancerPolicyOutput) {
+func (c *ELB) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInput) CreateLoadBalancerPolicyRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoadBalancerPolicy,
 		HTTPMethod: "POST",
@@ -841,107 +495,30 @@ func (c *ELB) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInp
 		input = &CreateLoadBalancerPolicyInput{}
 	}
 
-	output = &CreateLoadBalancerPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateLoadBalancerPolicy API operation for Elastic Load Balancing.
-//
-// Creates a policy with the specified attributes for the specified load balancer.
-//
-// Policies are settings that are saved for your load balancer and that can
-// be applied to the listener or the application server, depending on the policy
-// type.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation CreateLoadBalancerPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodePolicyTypeNotFoundException "PolicyTypeNotFound"
-//   One or more of the specified policy types do not exist.
-//
-//   * ErrCodeDuplicatePolicyNameException "DuplicatePolicyName"
-//   A policy with the specified name already exists for this load balancer.
-//
-//   * ErrCodeTooManyPoliciesException "TooManyPolicies"
-//   The quota for the number of policies for this load balancer has been reached.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicy
-func (c *ELB) CreateLoadBalancerPolicy(input *CreateLoadBalancerPolicyInput) (*CreateLoadBalancerPolicyOutput, error) {
-	req, out := c.CreateLoadBalancerPolicyRequest(input)
-	return out, req.Send()
-}
-
-// CreateLoadBalancerPolicyWithContext is the same as CreateLoadBalancerPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLoadBalancerPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) CreateLoadBalancerPolicyWithContext(ctx aws.Context, input *CreateLoadBalancerPolicyInput, opts ...aws.Option) (*CreateLoadBalancerPolicyOutput, error) {
-	req, out := c.CreateLoadBalancerPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateLoadBalancerPolicyOutput{})
+	return CreateLoadBalancerPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteLoadBalancer = "DeleteLoadBalancer"
 
-// DeleteLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the DeleteLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLoadBalancer for more information on using the DeleteLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteLoadBalancerRequest method.
-//    req, resp := client.DeleteLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancer
-func (c *ELB) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) (req *aws.Request, output *DeleteLoadBalancerOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteLoadBalancer,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteLoadBalancerInput{}
-	}
-
-	output = &DeleteLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteLoadBalancerRequest is a API request type for the DeleteLoadBalancer API operation.
+type DeleteLoadBalancerRequest struct {
+	*aws.Request
+	Input *DeleteLoadBalancerInput
 }
 
-// DeleteLoadBalancer API operation for Elastic Load Balancing.
+// Send marshals and sends the DeleteLoadBalancer API request.
+func (r DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLoadBalancerOutput), nil
+}
+
+// DeleteLoadBalancerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Deletes the specified load balancer.
 //
@@ -954,61 +531,61 @@ func (c *ELB) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) (req *aw
 // If the load balancer does not exist or has already been deleted, the call
 // to DeleteLoadBalancer still succeeds.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
+//    // Example sending a request using the DeleteLoadBalancerRequest method.
+//    req := client.DeleteLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DeleteLoadBalancer for usage and error information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancer
-func (c *ELB) DeleteLoadBalancer(input *DeleteLoadBalancerInput) (*DeleteLoadBalancerOutput, error) {
-	req, out := c.DeleteLoadBalancerRequest(input)
-	return out, req.Send()
-}
+func (c *ELB) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) DeleteLoadBalancerRequest {
+	op := &aws.Operation{
+		Name:       opDeleteLoadBalancer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteLoadBalancerWithContext is the same as DeleteLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DeleteLoadBalancerWithContext(ctx aws.Context, input *DeleteLoadBalancerInput, opts ...aws.Option) (*DeleteLoadBalancerOutput, error) {
-	req, out := c.DeleteLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteLoadBalancerInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteLoadBalancerOutput{})
+	return DeleteLoadBalancerRequest{Request: req, Input: input}
 }
 
 const opDeleteLoadBalancerListeners = "DeleteLoadBalancerListeners"
 
-// DeleteLoadBalancerListenersRequest generates a "aws.Request" representing the
-// client's request for the DeleteLoadBalancerListeners operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLoadBalancerListenersRequest is a API request type for the DeleteLoadBalancerListeners API operation.
+type DeleteLoadBalancerListenersRequest struct {
+	*aws.Request
+	Input *DeleteLoadBalancerListenersInput
+}
+
+// Send marshals and sends the DeleteLoadBalancerListeners API request.
+func (r DeleteLoadBalancerListenersRequest) Send() (*DeleteLoadBalancerListenersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLoadBalancerListenersOutput), nil
+}
+
+// DeleteLoadBalancerListenersRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLoadBalancerListeners for more information on using the DeleteLoadBalancerListeners
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified listeners from the specified load balancer.
 //
 //    // Example sending a request using the DeleteLoadBalancerListenersRequest method.
-//    req, resp := client.DeleteLoadBalancerListenersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLoadBalancerListenersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListeners
-func (c *ELB) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListenersInput) (req *aws.Request, output *DeleteLoadBalancerListenersOutput) {
+func (c *ELB) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListenersInput) DeleteLoadBalancerListenersRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoadBalancerListeners,
 		HTTPMethod: "POST",
@@ -1019,75 +596,43 @@ func (c *ELB) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListen
 		input = &DeleteLoadBalancerListenersInput{}
 	}
 
-	output = &DeleteLoadBalancerListenersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteLoadBalancerListeners API operation for Elastic Load Balancing.
-//
-// Deletes the specified listeners from the specified load balancer.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DeleteLoadBalancerListeners for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListeners
-func (c *ELB) DeleteLoadBalancerListeners(input *DeleteLoadBalancerListenersInput) (*DeleteLoadBalancerListenersOutput, error) {
-	req, out := c.DeleteLoadBalancerListenersRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLoadBalancerListenersWithContext is the same as DeleteLoadBalancerListeners with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLoadBalancerListeners for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DeleteLoadBalancerListenersWithContext(ctx aws.Context, input *DeleteLoadBalancerListenersInput, opts ...aws.Option) (*DeleteLoadBalancerListenersOutput, error) {
-	req, out := c.DeleteLoadBalancerListenersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteLoadBalancerListenersOutput{})
+	return DeleteLoadBalancerListenersRequest{Request: req, Input: input}
 }
 
 const opDeleteLoadBalancerPolicy = "DeleteLoadBalancerPolicy"
 
-// DeleteLoadBalancerPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteLoadBalancerPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLoadBalancerPolicyRequest is a API request type for the DeleteLoadBalancerPolicy API operation.
+type DeleteLoadBalancerPolicyRequest struct {
+	*aws.Request
+	Input *DeleteLoadBalancerPolicyInput
+}
+
+// Send marshals and sends the DeleteLoadBalancerPolicy API request.
+func (r DeleteLoadBalancerPolicyRequest) Send() (*DeleteLoadBalancerPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLoadBalancerPolicyOutput), nil
+}
+
+// DeleteLoadBalancerPolicyRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLoadBalancerPolicy for more information on using the DeleteLoadBalancerPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified policy from the specified load balancer. This policy
+// must not be enabled for any listeners.
 //
 //    // Example sending a request using the DeleteLoadBalancerPolicyRequest method.
-//    req, resp := client.DeleteLoadBalancerPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLoadBalancerPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicy
-func (c *ELB) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInput) (req *aws.Request, output *DeleteLoadBalancerPolicyOutput) {
+func (c *ELB) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInput) DeleteLoadBalancerPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoadBalancerPolicy,
 		HTTPMethod: "POST",
@@ -1098,95 +643,30 @@ func (c *ELB) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInp
 		input = &DeleteLoadBalancerPolicyInput{}
 	}
 
-	output = &DeleteLoadBalancerPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteLoadBalancerPolicy API operation for Elastic Load Balancing.
-//
-// Deletes the specified policy from the specified load balancer. This policy
-// must not be enabled for any listeners.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DeleteLoadBalancerPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicy
-func (c *ELB) DeleteLoadBalancerPolicy(input *DeleteLoadBalancerPolicyInput) (*DeleteLoadBalancerPolicyOutput, error) {
-	req, out := c.DeleteLoadBalancerPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLoadBalancerPolicyWithContext is the same as DeleteLoadBalancerPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLoadBalancerPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DeleteLoadBalancerPolicyWithContext(ctx aws.Context, input *DeleteLoadBalancerPolicyInput, opts ...aws.Option) (*DeleteLoadBalancerPolicyOutput, error) {
-	req, out := c.DeleteLoadBalancerPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteLoadBalancerPolicyOutput{})
+	return DeleteLoadBalancerPolicyRequest{Request: req, Input: input}
 }
 
 const opDeregisterInstancesFromLoadBalancer = "DeregisterInstancesFromLoadBalancer"
 
-// DeregisterInstancesFromLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the DeregisterInstancesFromLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterInstancesFromLoadBalancer for more information on using the DeregisterInstancesFromLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeregisterInstancesFromLoadBalancerRequest method.
-//    req, resp := client.DeregisterInstancesFromLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterInstancesFromLoadBalancer
-func (c *ELB) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstancesFromLoadBalancerInput) (req *aws.Request, output *DeregisterInstancesFromLoadBalancerOutput) {
-	op := &aws.Operation{
-		Name:       opDeregisterInstancesFromLoadBalancer,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeregisterInstancesFromLoadBalancerInput{}
-	}
-
-	output = &DeregisterInstancesFromLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeregisterInstancesFromLoadBalancerRequest is a API request type for the DeregisterInstancesFromLoadBalancer API operation.
+type DeregisterInstancesFromLoadBalancerRequest struct {
+	*aws.Request
+	Input *DeregisterInstancesFromLoadBalancerInput
 }
 
-// DeregisterInstancesFromLoadBalancer API operation for Elastic Load Balancing.
+// Send marshals and sends the DeregisterInstancesFromLoadBalancer API request.
+func (r DeregisterInstancesFromLoadBalancerRequest) Send() (*DeregisterInstancesFromLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterInstancesFromLoadBalancerOutput), nil
+}
+
+// DeregisterInstancesFromLoadBalancerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Deregisters the specified instances from the specified load balancer. After
 // the instance is deregistered, it no longer receives traffic from the load
@@ -1198,69 +678,65 @@ func (c *ELB) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstan
 // For more information, see Register or De-Register EC2 Instances (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DeregisterInstancesFromLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidEndPointException "InvalidInstance"
-//   The specified endpoint is not valid.
+//    // Example sending a request using the DeregisterInstancesFromLoadBalancerRequest method.
+//    req := client.DeregisterInstancesFromLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterInstancesFromLoadBalancer
-func (c *ELB) DeregisterInstancesFromLoadBalancer(input *DeregisterInstancesFromLoadBalancerInput) (*DeregisterInstancesFromLoadBalancerOutput, error) {
-	req, out := c.DeregisterInstancesFromLoadBalancerRequest(input)
-	return out, req.Send()
-}
+func (c *ELB) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstancesFromLoadBalancerInput) DeregisterInstancesFromLoadBalancerRequest {
+	op := &aws.Operation{
+		Name:       opDeregisterInstancesFromLoadBalancer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeregisterInstancesFromLoadBalancerWithContext is the same as DeregisterInstancesFromLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterInstancesFromLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DeregisterInstancesFromLoadBalancerWithContext(ctx aws.Context, input *DeregisterInstancesFromLoadBalancerInput, opts ...aws.Option) (*DeregisterInstancesFromLoadBalancerOutput, error) {
-	req, out := c.DeregisterInstancesFromLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeregisterInstancesFromLoadBalancerInput{}
+	}
+
+	req := c.newRequest(op, input, &DeregisterInstancesFromLoadBalancerOutput{})
+	return DeregisterInstancesFromLoadBalancerRequest{Request: req, Input: input}
 }
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
-// DescribeAccountLimitsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAccountLimits operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAccountLimitsRequest is a API request type for the DescribeAccountLimits API operation.
+type DescribeAccountLimitsRequest struct {
+	*aws.Request
+	Input *DescribeAccountLimitsInput
+}
+
+// Send marshals and sends the DescribeAccountLimits API request.
+func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountLimitsOutput), nil
+}
+
+// DescribeAccountLimitsRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the current Elastic Load Balancing resource limits for your AWS
+// account.
 //
-// See DescribeAccountLimits for more information on using the DescribeAccountLimits
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Limits for Your Classic Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
+// in the Classic Load Balancer Guide.
 //
 //    // Example sending a request using the DescribeAccountLimitsRequest method.
-//    req, resp := client.DescribeAccountLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAccountLimitsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimits
-func (c *ELB) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *aws.Request, output *DescribeAccountLimitsOutput) {
+func (c *ELB) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
@@ -1271,74 +747,47 @@ func (c *ELB) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (r
 		input = &DescribeAccountLimitsInput{}
 	}
 
-	output = &DescribeAccountLimitsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAccountLimits API operation for Elastic Load Balancing.
-//
-// Describes the current Elastic Load Balancing resource limits for your AWS
-// account.
-//
-// For more information, see Limits for Your Classic Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
-// in the Classic Load Balancer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DescribeAccountLimits for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimits
-func (c *ELB) DescribeAccountLimits(input *DescribeAccountLimitsInput) (*DescribeAccountLimitsOutput, error) {
-	req, out := c.DescribeAccountLimitsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAccountLimitsWithContext is the same as DescribeAccountLimits with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAccountLimits for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...aws.Option) (*DescribeAccountLimitsOutput, error) {
-	req, out := c.DescribeAccountLimitsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	return DescribeAccountLimitsRequest{Request: req, Input: input}
 }
 
 const opDescribeInstanceHealth = "DescribeInstanceHealth"
 
-// DescribeInstanceHealthRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstanceHealth operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInstanceHealthRequest is a API request type for the DescribeInstanceHealth API operation.
+type DescribeInstanceHealthRequest struct {
+	*aws.Request
+	Input *DescribeInstanceHealthInput
+}
+
+// Send marshals and sends the DescribeInstanceHealth API request.
+func (r DescribeInstanceHealthRequest) Send() (*DescribeInstanceHealthOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstanceHealthOutput), nil
+}
+
+// DescribeInstanceHealthRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstanceHealth for more information on using the DescribeInstanceHealth
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the state of the specified instances with respect to the specified
+// load balancer. If no instances are specified, the call describes the state
+// of all instances that are currently registered with the load balancer. If
+// instances are specified, their state is returned even if they are no longer
+// registered with the load balancer. The state of terminated instances is not
+// returned.
 //
 //    // Example sending a request using the DescribeInstanceHealthRequest method.
-//    req, resp := client.DescribeInstanceHealthRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInstanceHealthRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeInstanceHealth
-func (c *ELB) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) (req *aws.Request, output *DescribeInstanceHealthOutput) {
+func (c *ELB) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) DescribeInstanceHealthRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceHealth,
 		HTTPMethod: "POST",
@@ -1349,83 +798,42 @@ func (c *ELB) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) 
 		input = &DescribeInstanceHealthInput{}
 	}
 
-	output = &DescribeInstanceHealthOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInstanceHealth API operation for Elastic Load Balancing.
-//
-// Describes the state of the specified instances with respect to the specified
-// load balancer. If no instances are specified, the call describes the state
-// of all instances that are currently registered with the load balancer. If
-// instances are specified, their state is returned even if they are no longer
-// registered with the load balancer. The state of terminated instances is not
-// returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DescribeInstanceHealth for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidEndPointException "InvalidInstance"
-//   The specified endpoint is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeInstanceHealth
-func (c *ELB) DescribeInstanceHealth(input *DescribeInstanceHealthInput) (*DescribeInstanceHealthOutput, error) {
-	req, out := c.DescribeInstanceHealthRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstanceHealthWithContext is the same as DescribeInstanceHealth with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstanceHealth for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeInstanceHealthWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...aws.Option) (*DescribeInstanceHealthOutput, error) {
-	req, out := c.DescribeInstanceHealthRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInstanceHealthOutput{})
+	return DescribeInstanceHealthRequest{Request: req, Input: input}
 }
 
 const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 
-// DescribeLoadBalancerAttributesRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoadBalancerAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLoadBalancerAttributesRequest is a API request type for the DescribeLoadBalancerAttributes API operation.
+type DescribeLoadBalancerAttributesRequest struct {
+	*aws.Request
+	Input *DescribeLoadBalancerAttributesInput
+}
+
+// Send marshals and sends the DescribeLoadBalancerAttributes API request.
+func (r DescribeLoadBalancerAttributesRequest) Send() (*DescribeLoadBalancerAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoadBalancerAttributesOutput), nil
+}
+
+// DescribeLoadBalancerAttributesRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoadBalancerAttributes for more information on using the DescribeLoadBalancerAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the attributes for the specified load balancer.
 //
 //    // Example sending a request using the DescribeLoadBalancerAttributesRequest method.
-//    req, resp := client.DescribeLoadBalancerAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLoadBalancerAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributes
-func (c *ELB) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerAttributesInput) (req *aws.Request, output *DescribeLoadBalancerAttributesOutput) {
+func (c *ELB) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerAttributesInput) DescribeLoadBalancerAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerAttributes,
 		HTTPMethod: "POST",
@@ -1436,94 +844,30 @@ func (c *ELB) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerA
 		input = &DescribeLoadBalancerAttributesInput{}
 	}
 
-	output = &DescribeLoadBalancerAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLoadBalancerAttributes API operation for Elastic Load Balancing.
-//
-// Describes the attributes for the specified load balancer.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DescribeLoadBalancerAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeLoadBalancerAttributeNotFoundException "LoadBalancerAttributeNotFound"
-//   The specified load balancer attribute does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributes
-func (c *ELB) DescribeLoadBalancerAttributes(input *DescribeLoadBalancerAttributesInput) (*DescribeLoadBalancerAttributesOutput, error) {
-	req, out := c.DescribeLoadBalancerAttributesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLoadBalancerAttributesWithContext is the same as DescribeLoadBalancerAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoadBalancerAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancerAttributesWithContext(ctx aws.Context, input *DescribeLoadBalancerAttributesInput, opts ...aws.Option) (*DescribeLoadBalancerAttributesOutput, error) {
-	req, out := c.DescribeLoadBalancerAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLoadBalancerAttributesOutput{})
+	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input}
 }
 
 const opDescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
 
-// DescribeLoadBalancerPoliciesRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoadBalancerPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoadBalancerPolicies for more information on using the DescribeLoadBalancerPolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeLoadBalancerPoliciesRequest method.
-//    req, resp := client.DescribeLoadBalancerPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicies
-func (c *ELB) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPoliciesInput) (req *aws.Request, output *DescribeLoadBalancerPoliciesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeLoadBalancerPolicies,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeLoadBalancerPoliciesInput{}
-	}
-
-	output = &DescribeLoadBalancerPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeLoadBalancerPoliciesRequest is a API request type for the DescribeLoadBalancerPolicies API operation.
+type DescribeLoadBalancerPoliciesRequest struct {
+	*aws.Request
+	Input *DescribeLoadBalancerPoliciesInput
 }
 
-// DescribeLoadBalancerPolicies API operation for Elastic Load Balancing.
+// Send marshals and sends the DescribeLoadBalancerPolicies API request.
+func (r DescribeLoadBalancerPoliciesRequest) Send() (*DescribeLoadBalancerPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoadBalancerPoliciesOutput), nil
+}
+
+// DescribeLoadBalancerPoliciesRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Describes the specified policies.
 //
@@ -1534,85 +878,49 @@ func (c *ELB) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPol
 // descriptions of the specified sample policies, or descriptions of all sample
 // policies. The names of the sample policies have the ELBSample- prefix.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DescribeLoadBalancerPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodePolicyNotFoundException "PolicyNotFound"
-//   One or more of the specified policies do not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicies
-func (c *ELB) DescribeLoadBalancerPolicies(input *DescribeLoadBalancerPoliciesInput) (*DescribeLoadBalancerPoliciesOutput, error) {
-	req, out := c.DescribeLoadBalancerPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLoadBalancerPoliciesWithContext is the same as DescribeLoadBalancerPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoadBalancerPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancerPoliciesWithContext(ctx aws.Context, input *DescribeLoadBalancerPoliciesInput, opts ...aws.Option) (*DescribeLoadBalancerPoliciesOutput, error) {
-	req, out := c.DescribeLoadBalancerPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeLoadBalancerPolicyTypes = "DescribeLoadBalancerPolicyTypes"
-
-// DescribeLoadBalancerPolicyTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoadBalancerPolicyTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoadBalancerPolicyTypes for more information on using the DescribeLoadBalancerPolicyTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeLoadBalancerPolicyTypesRequest method.
-//    req, resp := client.DescribeLoadBalancerPolicyTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeLoadBalancerPoliciesRequest method.
+//    req := client.DescribeLoadBalancerPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypes
-func (c *ELB) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalancerPolicyTypesInput) (req *aws.Request, output *DescribeLoadBalancerPolicyTypesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicies
+func (c *ELB) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPoliciesInput) DescribeLoadBalancerPoliciesRequest {
 	op := &aws.Operation{
-		Name:       opDescribeLoadBalancerPolicyTypes,
+		Name:       opDescribeLoadBalancerPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeLoadBalancerPolicyTypesInput{}
+		input = &DescribeLoadBalancerPoliciesInput{}
 	}
 
-	output = &DescribeLoadBalancerPolicyTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeLoadBalancerPoliciesOutput{})
+	return DescribeLoadBalancerPoliciesRequest{Request: req, Input: input}
 }
 
-// DescribeLoadBalancerPolicyTypes API operation for Elastic Load Balancing.
+const opDescribeLoadBalancerPolicyTypes = "DescribeLoadBalancerPolicyTypes"
+
+// DescribeLoadBalancerPolicyTypesRequest is a API request type for the DescribeLoadBalancerPolicyTypes API operation.
+type DescribeLoadBalancerPolicyTypesRequest struct {
+	*aws.Request
+	Input *DescribeLoadBalancerPolicyTypesInput
+}
+
+// Send marshals and sends the DescribeLoadBalancerPolicyTypes API request.
+func (r DescribeLoadBalancerPolicyTypesRequest) Send() (*DescribeLoadBalancerPolicyTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoadBalancerPolicyTypesOutput), nil
+}
+
+// DescribeLoadBalancerPolicyTypesRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Describes the specified load balancer policy types or all load balancer policy
 // types.
@@ -1627,66 +935,62 @@ func (c *ELB) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalancer
 // SetLoadBalancerPoliciesOfListener or SetLoadBalancerPoliciesForBackendServer
 // to set the policy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DescribeLoadBalancerPolicyTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePolicyTypeNotFoundException "PolicyTypeNotFound"
-//   One or more of the specified policy types do not exist.
+//    // Example sending a request using the DescribeLoadBalancerPolicyTypesRequest method.
+//    req := client.DescribeLoadBalancerPolicyTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypes
-func (c *ELB) DescribeLoadBalancerPolicyTypes(input *DescribeLoadBalancerPolicyTypesInput) (*DescribeLoadBalancerPolicyTypesOutput, error) {
-	req, out := c.DescribeLoadBalancerPolicyTypesRequest(input)
-	return out, req.Send()
-}
+func (c *ELB) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalancerPolicyTypesInput) DescribeLoadBalancerPolicyTypesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeLoadBalancerPolicyTypes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeLoadBalancerPolicyTypesWithContext is the same as DescribeLoadBalancerPolicyTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoadBalancerPolicyTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancerPolicyTypesWithContext(ctx aws.Context, input *DescribeLoadBalancerPolicyTypesInput, opts ...aws.Option) (*DescribeLoadBalancerPolicyTypesOutput, error) {
-	req, out := c.DescribeLoadBalancerPolicyTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeLoadBalancerPolicyTypesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeLoadBalancerPolicyTypesOutput{})
+	return DescribeLoadBalancerPolicyTypesRequest{Request: req, Input: input}
 }
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
 
-// DescribeLoadBalancersRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoadBalancers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLoadBalancersRequest is a API request type for the DescribeLoadBalancers API operation.
+type DescribeLoadBalancersRequest struct {
+	*aws.Request
+	Input *DescribeLoadBalancersInput
+}
+
+// Send marshals and sends the DescribeLoadBalancers API request.
+func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoadBalancersOutput), nil
+}
+
+// DescribeLoadBalancersRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoadBalancers for more information on using the DescribeLoadBalancers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified the load balancers. If no load balancers are specified,
+// the call describes all of your load balancers.
 //
 //    // Example sending a request using the DescribeLoadBalancersRequest method.
-//    req, resp := client.DescribeLoadBalancersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLoadBalancersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancers
-func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) (req *aws.Request, output *DescribeLoadBalancersOutput) {
+func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) DescribeLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancers,
 		HTTPMethod: "POST",
@@ -1703,49 +1007,8 @@ func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) (r
 		input = &DescribeLoadBalancersInput{}
 	}
 
-	output = &DescribeLoadBalancersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLoadBalancers API operation for Elastic Load Balancing.
-//
-// Describes the specified the load balancers. If no load balancers are specified,
-// the call describes all of your load balancers.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DescribeLoadBalancers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeDependencyThrottleException "DependencyThrottle"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancers
-func (c *ELB) DescribeLoadBalancers(input *DescribeLoadBalancersInput) (*DescribeLoadBalancersOutput, error) {
-	req, out := c.DescribeLoadBalancersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLoadBalancersWithContext is the same as DescribeLoadBalancers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoadBalancers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancersWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.Option) (*DescribeLoadBalancersOutput, error) {
-	req, out := c.DescribeLoadBalancersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+	return DescribeLoadBalancersRequest{Request: req, Input: input}
 }
 
 // DescribeLoadBalancersPages iterates over the pages of a DescribeLoadBalancers operation,
@@ -1784,10 +1047,10 @@ func (c *ELB) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeLoadBalancersRequest(inCpy)
+			req := c.DescribeLoadBalancersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1800,31 +1063,36 @@ func (c *ELB) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
+}
+
+// Send marshals and sends the DescribeTags API request.
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the tags associated with the specified load balancers.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTags
-func (c *ELB) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+func (c *ELB) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -1835,75 +1103,47 @@ func (c *ELB) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, o
 		input = &DescribeTagsInput{}
 	}
 
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTags API operation for Elastic Load Balancing.
-//
-// Describes the tags associated with the specified load balancers.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTags
-func (c *ELB) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 const opDetachLoadBalancerFromSubnets = "DetachLoadBalancerFromSubnets"
 
-// DetachLoadBalancerFromSubnetsRequest generates a "aws.Request" representing the
-// client's request for the DetachLoadBalancerFromSubnets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachLoadBalancerFromSubnetsRequest is a API request type for the DetachLoadBalancerFromSubnets API operation.
+type DetachLoadBalancerFromSubnetsRequest struct {
+	*aws.Request
+	Input *DetachLoadBalancerFromSubnetsInput
+}
+
+// Send marshals and sends the DetachLoadBalancerFromSubnets API request.
+func (r DetachLoadBalancerFromSubnetsRequest) Send() (*DetachLoadBalancerFromSubnetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachLoadBalancerFromSubnetsOutput), nil
+}
+
+// DetachLoadBalancerFromSubnetsRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the specified subnets from the set of configured subnets for the
+// load balancer.
 //
-// See DetachLoadBalancerFromSubnets for more information on using the DetachLoadBalancerFromSubnets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// After a subnet is removed, all EC2 instances registered with the load balancer
+// in the removed subnet go into the OutOfService state. Then, the load balancer
+// balances the traffic among the remaining routable subnets.
 //
 //    // Example sending a request using the DetachLoadBalancerFromSubnetsRequest method.
-//    req, resp := client.DetachLoadBalancerFromSubnetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachLoadBalancerFromSubnetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnets
-func (c *ELB) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFromSubnetsInput) (req *aws.Request, output *DetachLoadBalancerFromSubnetsOutput) {
+func (c *ELB) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFromSubnetsInput) DetachLoadBalancerFromSubnetsRequest {
 	op := &aws.Operation{
 		Name:       opDetachLoadBalancerFromSubnets,
 		HTTPMethod: "POST",
@@ -1914,99 +1154,30 @@ func (c *ELB) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFrom
 		input = &DetachLoadBalancerFromSubnetsInput{}
 	}
 
-	output = &DetachLoadBalancerFromSubnetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DetachLoadBalancerFromSubnets API operation for Elastic Load Balancing.
-//
-// Removes the specified subnets from the set of configured subnets for the
-// load balancer.
-//
-// After a subnet is removed, all EC2 instances registered with the load balancer
-// in the removed subnet go into the OutOfService state. Then, the load balancer
-// balances the traffic among the remaining routable subnets.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DetachLoadBalancerFromSubnets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnets
-func (c *ELB) DetachLoadBalancerFromSubnets(input *DetachLoadBalancerFromSubnetsInput) (*DetachLoadBalancerFromSubnetsOutput, error) {
-	req, out := c.DetachLoadBalancerFromSubnetsRequest(input)
-	return out, req.Send()
-}
-
-// DetachLoadBalancerFromSubnetsWithContext is the same as DetachLoadBalancerFromSubnets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachLoadBalancerFromSubnets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DetachLoadBalancerFromSubnetsWithContext(ctx aws.Context, input *DetachLoadBalancerFromSubnetsInput, opts ...aws.Option) (*DetachLoadBalancerFromSubnetsOutput, error) {
-	req, out := c.DetachLoadBalancerFromSubnetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DetachLoadBalancerFromSubnetsOutput{})
+	return DetachLoadBalancerFromSubnetsRequest{Request: req, Input: input}
 }
 
 const opDisableAvailabilityZonesForLoadBalancer = "DisableAvailabilityZonesForLoadBalancer"
 
-// DisableAvailabilityZonesForLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the DisableAvailabilityZonesForLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableAvailabilityZonesForLoadBalancer for more information on using the DisableAvailabilityZonesForLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DisableAvailabilityZonesForLoadBalancerRequest method.
-//    req, resp := client.DisableAvailabilityZonesForLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DisableAvailabilityZonesForLoadBalancer
-func (c *ELB) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAvailabilityZonesForLoadBalancerInput) (req *aws.Request, output *DisableAvailabilityZonesForLoadBalancerOutput) {
-	op := &aws.Operation{
-		Name:       opDisableAvailabilityZonesForLoadBalancer,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DisableAvailabilityZonesForLoadBalancerInput{}
-	}
-
-	output = &DisableAvailabilityZonesForLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DisableAvailabilityZonesForLoadBalancerRequest is a API request type for the DisableAvailabilityZonesForLoadBalancer API operation.
+type DisableAvailabilityZonesForLoadBalancerRequest struct {
+	*aws.Request
+	Input *DisableAvailabilityZonesForLoadBalancerInput
 }
 
-// DisableAvailabilityZonesForLoadBalancer API operation for Elastic Load Balancing.
+// Send marshals and sends the DisableAvailabilityZonesForLoadBalancer API request.
+func (r DisableAvailabilityZonesForLoadBalancerRequest) Send() (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableAvailabilityZonesForLoadBalancerOutput), nil
+}
+
+// DisableAvailabilityZonesForLoadBalancerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Removes the specified Availability Zones from the set of Availability Zones
 // for the specified load balancer.
@@ -2020,85 +1191,49 @@ func (c *ELB) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAvail
 // For more information, see Add or Remove Availability Zones (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation DisableAvailabilityZonesForLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DisableAvailabilityZonesForLoadBalancer
-func (c *ELB) DisableAvailabilityZonesForLoadBalancer(input *DisableAvailabilityZonesForLoadBalancerInput) (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
-	req, out := c.DisableAvailabilityZonesForLoadBalancerRequest(input)
-	return out, req.Send()
-}
-
-// DisableAvailabilityZonesForLoadBalancerWithContext is the same as DisableAvailabilityZonesForLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableAvailabilityZonesForLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DisableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context, input *DisableAvailabilityZonesForLoadBalancerInput, opts ...aws.Option) (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
-	req, out := c.DisableAvailabilityZonesForLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoadBalancer"
-
-// EnableAvailabilityZonesForLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the EnableAvailabilityZonesForLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableAvailabilityZonesForLoadBalancer for more information on using the EnableAvailabilityZonesForLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the EnableAvailabilityZonesForLoadBalancerRequest method.
-//    req, resp := client.EnableAvailabilityZonesForLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DisableAvailabilityZonesForLoadBalancerRequest method.
+//    req := client.DisableAvailabilityZonesForLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/EnableAvailabilityZonesForLoadBalancer
-func (c *ELB) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailabilityZonesForLoadBalancerInput) (req *aws.Request, output *EnableAvailabilityZonesForLoadBalancerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DisableAvailabilityZonesForLoadBalancer
+func (c *ELB) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAvailabilityZonesForLoadBalancerInput) DisableAvailabilityZonesForLoadBalancerRequest {
 	op := &aws.Operation{
-		Name:       opEnableAvailabilityZonesForLoadBalancer,
+		Name:       opDisableAvailabilityZonesForLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &EnableAvailabilityZonesForLoadBalancerInput{}
+		input = &DisableAvailabilityZonesForLoadBalancerInput{}
 	}
 
-	output = &EnableAvailabilityZonesForLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DisableAvailabilityZonesForLoadBalancerOutput{})
+	return DisableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input}
 }
 
-// EnableAvailabilityZonesForLoadBalancer API operation for Elastic Load Balancing.
+const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoadBalancer"
+
+// EnableAvailabilityZonesForLoadBalancerRequest is a API request type for the EnableAvailabilityZonesForLoadBalancer API operation.
+type EnableAvailabilityZonesForLoadBalancerRequest struct {
+	*aws.Request
+	Input *EnableAvailabilityZonesForLoadBalancerInput
+}
+
+// Send marshals and sends the EnableAvailabilityZonesForLoadBalancer API request.
+func (r EnableAvailabilityZonesForLoadBalancerRequest) Send() (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableAvailabilityZonesForLoadBalancerOutput), nil
+}
+
+// EnableAvailabilityZonesForLoadBalancerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Adds the specified Availability Zones to the set of Availability Zones for
 // the specified load balancer.
@@ -2109,82 +1244,49 @@ func (c *ELB) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailab
 // For more information, see Add or Remove Availability Zones (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation EnableAvailabilityZonesForLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/EnableAvailabilityZonesForLoadBalancer
-func (c *ELB) EnableAvailabilityZonesForLoadBalancer(input *EnableAvailabilityZonesForLoadBalancerInput) (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
-	req, out := c.EnableAvailabilityZonesForLoadBalancerRequest(input)
-	return out, req.Send()
-}
-
-// EnableAvailabilityZonesForLoadBalancerWithContext is the same as EnableAvailabilityZonesForLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableAvailabilityZonesForLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) EnableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context, input *EnableAvailabilityZonesForLoadBalancerInput, opts ...aws.Option) (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
-	req, out := c.EnableAvailabilityZonesForLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
-
-// ModifyLoadBalancerAttributesRequest generates a "aws.Request" representing the
-// client's request for the ModifyLoadBalancerAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyLoadBalancerAttributes for more information on using the ModifyLoadBalancerAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyLoadBalancerAttributesRequest method.
-//    req, resp := client.ModifyLoadBalancerAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the EnableAvailabilityZonesForLoadBalancerRequest method.
+//    req := client.EnableAvailabilityZonesForLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributes
-func (c *ELB) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttributesInput) (req *aws.Request, output *ModifyLoadBalancerAttributesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/EnableAvailabilityZonesForLoadBalancer
+func (c *ELB) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailabilityZonesForLoadBalancerInput) EnableAvailabilityZonesForLoadBalancerRequest {
 	op := &aws.Operation{
-		Name:       opModifyLoadBalancerAttributes,
+		Name:       opEnableAvailabilityZonesForLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ModifyLoadBalancerAttributesInput{}
+		input = &EnableAvailabilityZonesForLoadBalancerInput{}
 	}
 
-	output = &ModifyLoadBalancerAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &EnableAvailabilityZonesForLoadBalancerOutput{})
+	return EnableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input}
 }
 
-// ModifyLoadBalancerAttributes API operation for Elastic Load Balancing.
+const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
+
+// ModifyLoadBalancerAttributesRequest is a API request type for the ModifyLoadBalancerAttributes API operation.
+type ModifyLoadBalancerAttributesRequest struct {
+	*aws.Request
+	Input *ModifyLoadBalancerAttributesInput
+}
+
+// Send marshals and sends the ModifyLoadBalancerAttributes API request.
+func (r ModifyLoadBalancerAttributesRequest) Send() (*ModifyLoadBalancerAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyLoadBalancerAttributesOutput), nil
+}
+
+// ModifyLoadBalancerAttributesRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Modifies the attributes of the specified load balancer.
 //
@@ -2203,88 +1305,49 @@ func (c *ELB) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttri
 //
 //    * Idle Connection Timeout (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation ModifyLoadBalancerAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeLoadBalancerAttributeNotFoundException "LoadBalancerAttributeNotFound"
-//   The specified load balancer attribute does not exist.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributes
-func (c *ELB) ModifyLoadBalancerAttributes(input *ModifyLoadBalancerAttributesInput) (*ModifyLoadBalancerAttributesOutput, error) {
-	req, out := c.ModifyLoadBalancerAttributesRequest(input)
-	return out, req.Send()
-}
-
-// ModifyLoadBalancerAttributesWithContext is the same as ModifyLoadBalancerAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyLoadBalancerAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) ModifyLoadBalancerAttributesWithContext(ctx aws.Context, input *ModifyLoadBalancerAttributesInput, opts ...aws.Option) (*ModifyLoadBalancerAttributesOutput, error) {
-	req, out := c.ModifyLoadBalancerAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
-
-// RegisterInstancesWithLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the RegisterInstancesWithLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterInstancesWithLoadBalancer for more information on using the RegisterInstancesWithLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterInstancesWithLoadBalancerRequest method.
-//    req, resp := client.RegisterInstancesWithLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ModifyLoadBalancerAttributesRequest method.
+//    req := client.ModifyLoadBalancerAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterInstancesWithLoadBalancer
-func (c *ELB) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesWithLoadBalancerInput) (req *aws.Request, output *RegisterInstancesWithLoadBalancerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributes
+func (c *ELB) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttributesInput) ModifyLoadBalancerAttributesRequest {
 	op := &aws.Operation{
-		Name:       opRegisterInstancesWithLoadBalancer,
+		Name:       opModifyLoadBalancerAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RegisterInstancesWithLoadBalancerInput{}
+		input = &ModifyLoadBalancerAttributesInput{}
 	}
 
-	output = &RegisterInstancesWithLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ModifyLoadBalancerAttributesOutput{})
+	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input}
 }
 
-// RegisterInstancesWithLoadBalancer API operation for Elastic Load Balancing.
+const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
+
+// RegisterInstancesWithLoadBalancerRequest is a API request type for the RegisterInstancesWithLoadBalancer API operation.
+type RegisterInstancesWithLoadBalancerRequest struct {
+	*aws.Request
+	Input *RegisterInstancesWithLoadBalancerInput
+}
+
+// Send marshals and sends the RegisterInstancesWithLoadBalancer API request.
+func (r RegisterInstancesWithLoadBalancerRequest) Send() (*RegisterInstancesWithLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterInstancesWithLoadBalancerOutput), nil
+}
+
+// RegisterInstancesWithLoadBalancerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Adds the specified instances to the specified load balancer.
 //
@@ -2310,69 +1373,61 @@ func (c *ELB) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesW
 // For more information, see Register or De-Register EC2 Instances (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation RegisterInstancesWithLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeInvalidEndPointException "InvalidInstance"
-//   The specified endpoint is not valid.
+//    // Example sending a request using the RegisterInstancesWithLoadBalancerRequest method.
+//    req := client.RegisterInstancesWithLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterInstancesWithLoadBalancer
-func (c *ELB) RegisterInstancesWithLoadBalancer(input *RegisterInstancesWithLoadBalancerInput) (*RegisterInstancesWithLoadBalancerOutput, error) {
-	req, out := c.RegisterInstancesWithLoadBalancerRequest(input)
-	return out, req.Send()
-}
+func (c *ELB) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesWithLoadBalancerInput) RegisterInstancesWithLoadBalancerRequest {
+	op := &aws.Operation{
+		Name:       opRegisterInstancesWithLoadBalancer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RegisterInstancesWithLoadBalancerWithContext is the same as RegisterInstancesWithLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterInstancesWithLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) RegisterInstancesWithLoadBalancerWithContext(ctx aws.Context, input *RegisterInstancesWithLoadBalancerInput, opts ...aws.Option) (*RegisterInstancesWithLoadBalancerOutput, error) {
-	req, out := c.RegisterInstancesWithLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RegisterInstancesWithLoadBalancerInput{}
+	}
+
+	req := c.newRequest(op, input, &RegisterInstancesWithLoadBalancerOutput{})
+	return RegisterInstancesWithLoadBalancerRequest{Request: req, Input: input}
 }
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws.Request" representing the
-// client's request for the RemoveTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsRequest is a API request type for the RemoveTags API operation.
+type RemoveTagsRequest struct {
+	*aws.Request
+	Input *RemoveTagsInput
+}
+
+// Send marshals and sends the RemoveTags API request.
+func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsOutput), nil
+}
+
+// RemoveTagsRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTags for more information on using the RemoveTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes one or more tags from the specified load balancer.
 //
 //    // Example sending a request using the RemoveTagsRequest method.
-//    req, resp := client.RemoveTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTags
-func (c *ELB) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+func (c *ELB) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -2383,75 +1438,48 @@ func (c *ELB) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, outpu
 		input = &RemoveTagsInput{}
 	}
 
-	output = &RemoveTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTags API operation for Elastic Load Balancing.
-//
-// Removes one or more tags from the specified load balancer.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation RemoveTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTags
-func (c *ELB) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsWithContext is the same as RemoveTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	return RemoveTagsRequest{Request: req, Input: input}
 }
 
 const opSetLoadBalancerListenerSSLCertificate = "SetLoadBalancerListenerSSLCertificate"
 
-// SetLoadBalancerListenerSSLCertificateRequest generates a "aws.Request" representing the
-// client's request for the SetLoadBalancerListenerSSLCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetLoadBalancerListenerSSLCertificateRequest is a API request type for the SetLoadBalancerListenerSSLCertificate API operation.
+type SetLoadBalancerListenerSSLCertificateRequest struct {
+	*aws.Request
+	Input *SetLoadBalancerListenerSSLCertificateInput
+}
+
+// Send marshals and sends the SetLoadBalancerListenerSSLCertificate API request.
+func (r SetLoadBalancerListenerSSLCertificateRequest) Send() (*SetLoadBalancerListenerSSLCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetLoadBalancerListenerSSLCertificateOutput), nil
+}
+
+// SetLoadBalancerListenerSSLCertificateRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Sets the certificate that terminates the specified listener's SSL connections.
+// The specified certificate replaces any prior certificate that was used on
+// the same load balancer and port.
 //
-// See SetLoadBalancerListenerSSLCertificate for more information on using the SetLoadBalancerListenerSSLCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about updating your SSL certificate, see Replace the
+// SSL Certificate for Your Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html)
+// in the Classic Load Balancer Guide.
 //
 //    // Example sending a request using the SetLoadBalancerListenerSSLCertificateRequest method.
-//    req, resp := client.SetLoadBalancerListenerSSLCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetLoadBalancerListenerSSLCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificate
-func (c *ELB) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBalancerListenerSSLCertificateInput) (req *aws.Request, output *SetLoadBalancerListenerSSLCertificateOutput) {
+func (c *ELB) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBalancerListenerSSLCertificateInput) SetLoadBalancerListenerSSLCertificateRequest {
 	op := &aws.Operation{
 		Name:       opSetLoadBalancerListenerSSLCertificate,
 		HTTPMethod: "POST",
@@ -2462,112 +1490,30 @@ func (c *ELB) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBalance
 		input = &SetLoadBalancerListenerSSLCertificateInput{}
 	}
 
-	output = &SetLoadBalancerListenerSSLCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SetLoadBalancerListenerSSLCertificate API operation for Elastic Load Balancing.
-//
-// Sets the certificate that terminates the specified listener's SSL connections.
-// The specified certificate replaces any prior certificate that was used on
-// the same load balancer and port.
-//
-// For more information about updating your SSL certificate, see Replace the
-// SSL Certificate for Your Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html)
-// in the Classic Load Balancer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation SetLoadBalancerListenerSSLCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCertificateNotFoundException "CertificateNotFound"
-//   The specified ARN does not refer to a valid SSL certificate in AWS Identity
-//   and Access Management (IAM) or AWS Certificate Manager (ACM). Note that if
-//   you recently uploaded the certificate to IAM, this error might indicate that
-//   the certificate is not fully available yet.
-//
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodeListenerNotFoundException "ListenerNotFound"
-//   The load balancer does not have a listener configured at the specified port.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-//   * ErrCodeUnsupportedProtocolException "UnsupportedProtocol"
-//   The specified protocol or signature version is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificate
-func (c *ELB) SetLoadBalancerListenerSSLCertificate(input *SetLoadBalancerListenerSSLCertificateInput) (*SetLoadBalancerListenerSSLCertificateOutput, error) {
-	req, out := c.SetLoadBalancerListenerSSLCertificateRequest(input)
-	return out, req.Send()
-}
-
-// SetLoadBalancerListenerSSLCertificateWithContext is the same as SetLoadBalancerListenerSSLCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetLoadBalancerListenerSSLCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) SetLoadBalancerListenerSSLCertificateWithContext(ctx aws.Context, input *SetLoadBalancerListenerSSLCertificateInput, opts ...aws.Option) (*SetLoadBalancerListenerSSLCertificateOutput, error) {
-	req, out := c.SetLoadBalancerListenerSSLCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SetLoadBalancerListenerSSLCertificateOutput{})
+	return SetLoadBalancerListenerSSLCertificateRequest{Request: req, Input: input}
 }
 
 const opSetLoadBalancerPoliciesForBackendServer = "SetLoadBalancerPoliciesForBackendServer"
 
-// SetLoadBalancerPoliciesForBackendServerRequest generates a "aws.Request" representing the
-// client's request for the SetLoadBalancerPoliciesForBackendServer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetLoadBalancerPoliciesForBackendServer for more information on using the SetLoadBalancerPoliciesForBackendServer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetLoadBalancerPoliciesForBackendServerRequest method.
-//    req, resp := client.SetLoadBalancerPoliciesForBackendServerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServer
-func (c *ELB) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalancerPoliciesForBackendServerInput) (req *aws.Request, output *SetLoadBalancerPoliciesForBackendServerOutput) {
-	op := &aws.Operation{
-		Name:       opSetLoadBalancerPoliciesForBackendServer,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &SetLoadBalancerPoliciesForBackendServerInput{}
-	}
-
-	output = &SetLoadBalancerPoliciesForBackendServerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// SetLoadBalancerPoliciesForBackendServerRequest is a API request type for the SetLoadBalancerPoliciesForBackendServer API operation.
+type SetLoadBalancerPoliciesForBackendServerRequest struct {
+	*aws.Request
+	Input *SetLoadBalancerPoliciesForBackendServerInput
 }
 
-// SetLoadBalancerPoliciesForBackendServer API operation for Elastic Load Balancing.
+// Send marshals and sends the SetLoadBalancerPoliciesForBackendServer API request.
+func (r SetLoadBalancerPoliciesForBackendServerRequest) Send() (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetLoadBalancerPoliciesForBackendServerOutput), nil
+}
+
+// SetLoadBalancerPoliciesForBackendServerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Replaces the set of policies associated with the specified port on which
 // the EC2 instance is listening with a new set of policies. At this time, only
@@ -2586,88 +1532,49 @@ func (c *ELB) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalan
 // see Configure Proxy Protocol Support (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation SetLoadBalancerPoliciesForBackendServer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodePolicyNotFoundException "PolicyNotFound"
-//   One or more of the specified policies do not exist.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServer
-func (c *ELB) SetLoadBalancerPoliciesForBackendServer(input *SetLoadBalancerPoliciesForBackendServerInput) (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
-	req, out := c.SetLoadBalancerPoliciesForBackendServerRequest(input)
-	return out, req.Send()
-}
-
-// SetLoadBalancerPoliciesForBackendServerWithContext is the same as SetLoadBalancerPoliciesForBackendServer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetLoadBalancerPoliciesForBackendServer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) SetLoadBalancerPoliciesForBackendServerWithContext(ctx aws.Context, input *SetLoadBalancerPoliciesForBackendServerInput, opts ...aws.Option) (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
-	req, out := c.SetLoadBalancerPoliciesForBackendServerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
-
-// SetLoadBalancerPoliciesOfListenerRequest generates a "aws.Request" representing the
-// client's request for the SetLoadBalancerPoliciesOfListener operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetLoadBalancerPoliciesOfListener for more information on using the SetLoadBalancerPoliciesOfListener
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetLoadBalancerPoliciesOfListenerRequest method.
-//    req, resp := client.SetLoadBalancerPoliciesOfListenerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the SetLoadBalancerPoliciesForBackendServerRequest method.
+//    req := client.SetLoadBalancerPoliciesForBackendServerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListener
-func (c *ELB) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPoliciesOfListenerInput) (req *aws.Request, output *SetLoadBalancerPoliciesOfListenerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServer
+func (c *ELB) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalancerPoliciesForBackendServerInput) SetLoadBalancerPoliciesForBackendServerRequest {
 	op := &aws.Operation{
-		Name:       opSetLoadBalancerPoliciesOfListener,
+		Name:       opSetLoadBalancerPoliciesForBackendServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SetLoadBalancerPoliciesOfListenerInput{}
+		input = &SetLoadBalancerPoliciesForBackendServerInput{}
 	}
 
-	output = &SetLoadBalancerPoliciesOfListenerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &SetLoadBalancerPoliciesForBackendServerOutput{})
+	return SetLoadBalancerPoliciesForBackendServerRequest{Request: req, Input: input}
 }
 
-// SetLoadBalancerPoliciesOfListener API operation for Elastic Load Balancing.
+const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
+
+// SetLoadBalancerPoliciesOfListenerRequest is a API request type for the SetLoadBalancerPoliciesOfListener API operation.
+type SetLoadBalancerPoliciesOfListenerRequest struct {
+	*aws.Request
+	Input *SetLoadBalancerPoliciesOfListenerInput
+}
+
+// Send marshals and sends the SetLoadBalancerPoliciesOfListener API request.
+func (r SetLoadBalancerPoliciesOfListenerRequest) Send() (*SetLoadBalancerPoliciesOfListenerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetLoadBalancerPoliciesOfListenerOutput), nil
+}
+
+// SetLoadBalancerPoliciesOfListenerRequest returns a request value for making API operation for
+// Elastic Load Balancing.
 //
 // Replaces the current set of policies for the specified load balancer port
 // with the specified set of policies.
@@ -2680,46 +1587,27 @@ func (c *ELB) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPol
 // and Application-Controlled Session Stickiness (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
 // in the Classic Load Balancer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Elastic Load Balancing's
-// API operation SetLoadBalancerPoliciesOfListener for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessPointNotFoundException "LoadBalancerNotFound"
-//   The specified load balancer does not exist.
-//
-//   * ErrCodePolicyNotFoundException "PolicyNotFound"
-//   One or more of the specified policies do not exist.
-//
-//   * ErrCodeListenerNotFoundException "ListenerNotFound"
-//   The load balancer does not have a listener configured at the specified port.
-//
-//   * ErrCodeInvalidConfigurationRequestException "InvalidConfigurationRequest"
-//   The requested configuration change is not valid.
+//    // Example sending a request using the SetLoadBalancerPoliciesOfListenerRequest method.
+//    req := client.SetLoadBalancerPoliciesOfListenerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListener
-func (c *ELB) SetLoadBalancerPoliciesOfListener(input *SetLoadBalancerPoliciesOfListenerInput) (*SetLoadBalancerPoliciesOfListenerOutput, error) {
-	req, out := c.SetLoadBalancerPoliciesOfListenerRequest(input)
-	return out, req.Send()
-}
+func (c *ELB) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPoliciesOfListenerInput) SetLoadBalancerPoliciesOfListenerRequest {
+	op := &aws.Operation{
+		Name:       opSetLoadBalancerPoliciesOfListener,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SetLoadBalancerPoliciesOfListenerWithContext is the same as SetLoadBalancerPoliciesOfListener with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetLoadBalancerPoliciesOfListener for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) SetLoadBalancerPoliciesOfListenerWithContext(ctx aws.Context, input *SetLoadBalancerPoliciesOfListenerInput, opts ...aws.Option) (*SetLoadBalancerPoliciesOfListenerOutput, error) {
-	req, out := c.SetLoadBalancerPoliciesOfListenerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetLoadBalancerPoliciesOfListenerInput{}
+	}
+
+	req := c.newRequest(op, input, &SetLoadBalancerPoliciesOfListenerOutput{})
+	return SetLoadBalancerPoliciesOfListenerRequest{Request: req, Input: input}
 }
 
 // Information about the AccessLog attribute.

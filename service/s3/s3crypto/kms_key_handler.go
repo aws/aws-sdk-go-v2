@@ -78,36 +78,38 @@ func (kp kmsKeyHandler) decryptHandler(env Envelope) (CipherDataDecrypter, error
 
 // DecryptKey makes a call to KMS to decrypt the key.
 func (kp *kmsKeyHandler) DecryptKey(key []byte) ([]byte, error) {
-	out, err := kp.kms.Decrypt(&kms.DecryptInput{
+	req := kp.kms.DecryptRequest(&kms.DecryptInput{
 		EncryptionContext: map[string]*string(kp.CipherData.MaterialDescription),
 		CiphertextBlob:    key,
 		GrantTokens:       []*string{},
 	})
+	resp, err := req.Send()
 	if err != nil {
 		return nil, err
 	}
-	return out.Plaintext, nil
+	return resp.Plaintext, nil
 }
 
 // GenerateCipherData makes a call to KMS to generate a data key, Upon making
 // the call, it also sets the encrypted key.
 func (kp *kmsKeyHandler) GenerateCipherData(keySize, ivSize int) (CipherData, error) {
-	out, err := kp.kms.GenerateDataKey(&kms.GenerateDataKeyInput{
+	req := kp.kms.GenerateDataKeyRequest(&kms.GenerateDataKeyInput{
 		EncryptionContext: kp.CipherData.MaterialDescription,
 		KeyId:             kp.cmkID,
 		KeySpec:           kms.DataKeySpecAes256,
 	})
+	resp, err := req.Send()
 	if err != nil {
 		return CipherData{}, err
 	}
 
 	iv := generateBytes(ivSize)
 	cd := CipherData{
-		Key:                 out.Plaintext,
+		Key:                 resp.Plaintext,
 		IV:                  iv,
 		WrapAlgorithm:       KMSWrap,
 		MaterialDescription: kp.CipherData.MaterialDescription,
-		EncryptedKey:        out.CiphertextBlob,
+		EncryptedKey:        resp.CiphertextBlob,
 	}
 	return cd, nil
 }

@@ -63,226 +63,120 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type Route53API interface {
-	AssociateVPCWithHostedZone(*route53.AssociateVPCWithHostedZoneInput) (*route53.AssociateVPCWithHostedZoneOutput, error)
-	AssociateVPCWithHostedZoneWithContext(aws.Context, *route53.AssociateVPCWithHostedZoneInput, ...aws.Option) (*route53.AssociateVPCWithHostedZoneOutput, error)
-	AssociateVPCWithHostedZoneRequest(*route53.AssociateVPCWithHostedZoneInput) (*aws.Request, *route53.AssociateVPCWithHostedZoneOutput)
+	AssociateVPCWithHostedZoneRequest(*route53.AssociateVPCWithHostedZoneInput) route53.AssociateVPCWithHostedZoneRequest
 
-	ChangeResourceRecordSets(*route53.ChangeResourceRecordSetsInput) (*route53.ChangeResourceRecordSetsOutput, error)
-	ChangeResourceRecordSetsWithContext(aws.Context, *route53.ChangeResourceRecordSetsInput, ...aws.Option) (*route53.ChangeResourceRecordSetsOutput, error)
-	ChangeResourceRecordSetsRequest(*route53.ChangeResourceRecordSetsInput) (*aws.Request, *route53.ChangeResourceRecordSetsOutput)
+	ChangeResourceRecordSetsRequest(*route53.ChangeResourceRecordSetsInput) route53.ChangeResourceRecordSetsRequest
 
-	ChangeTagsForResource(*route53.ChangeTagsForResourceInput) (*route53.ChangeTagsForResourceOutput, error)
-	ChangeTagsForResourceWithContext(aws.Context, *route53.ChangeTagsForResourceInput, ...aws.Option) (*route53.ChangeTagsForResourceOutput, error)
-	ChangeTagsForResourceRequest(*route53.ChangeTagsForResourceInput) (*aws.Request, *route53.ChangeTagsForResourceOutput)
+	ChangeTagsForResourceRequest(*route53.ChangeTagsForResourceInput) route53.ChangeTagsForResourceRequest
 
-	CreateHealthCheck(*route53.CreateHealthCheckInput) (*route53.CreateHealthCheckOutput, error)
-	CreateHealthCheckWithContext(aws.Context, *route53.CreateHealthCheckInput, ...aws.Option) (*route53.CreateHealthCheckOutput, error)
-	CreateHealthCheckRequest(*route53.CreateHealthCheckInput) (*aws.Request, *route53.CreateHealthCheckOutput)
+	CreateHealthCheckRequest(*route53.CreateHealthCheckInput) route53.CreateHealthCheckRequest
 
-	CreateHostedZone(*route53.CreateHostedZoneInput) (*route53.CreateHostedZoneOutput, error)
-	CreateHostedZoneWithContext(aws.Context, *route53.CreateHostedZoneInput, ...aws.Option) (*route53.CreateHostedZoneOutput, error)
-	CreateHostedZoneRequest(*route53.CreateHostedZoneInput) (*aws.Request, *route53.CreateHostedZoneOutput)
+	CreateHostedZoneRequest(*route53.CreateHostedZoneInput) route53.CreateHostedZoneRequest
 
-	CreateQueryLoggingConfig(*route53.CreateQueryLoggingConfigInput) (*route53.CreateQueryLoggingConfigOutput, error)
-	CreateQueryLoggingConfigWithContext(aws.Context, *route53.CreateQueryLoggingConfigInput, ...aws.Option) (*route53.CreateQueryLoggingConfigOutput, error)
-	CreateQueryLoggingConfigRequest(*route53.CreateQueryLoggingConfigInput) (*aws.Request, *route53.CreateQueryLoggingConfigOutput)
+	CreateQueryLoggingConfigRequest(*route53.CreateQueryLoggingConfigInput) route53.CreateQueryLoggingConfigRequest
 
-	CreateReusableDelegationSet(*route53.CreateReusableDelegationSetInput) (*route53.CreateReusableDelegationSetOutput, error)
-	CreateReusableDelegationSetWithContext(aws.Context, *route53.CreateReusableDelegationSetInput, ...aws.Option) (*route53.CreateReusableDelegationSetOutput, error)
-	CreateReusableDelegationSetRequest(*route53.CreateReusableDelegationSetInput) (*aws.Request, *route53.CreateReusableDelegationSetOutput)
+	CreateReusableDelegationSetRequest(*route53.CreateReusableDelegationSetInput) route53.CreateReusableDelegationSetRequest
 
-	CreateTrafficPolicy(*route53.CreateTrafficPolicyInput) (*route53.CreateTrafficPolicyOutput, error)
-	CreateTrafficPolicyWithContext(aws.Context, *route53.CreateTrafficPolicyInput, ...aws.Option) (*route53.CreateTrafficPolicyOutput, error)
-	CreateTrafficPolicyRequest(*route53.CreateTrafficPolicyInput) (*aws.Request, *route53.CreateTrafficPolicyOutput)
+	CreateTrafficPolicyRequest(*route53.CreateTrafficPolicyInput) route53.CreateTrafficPolicyRequest
 
-	CreateTrafficPolicyInstance(*route53.CreateTrafficPolicyInstanceInput) (*route53.CreateTrafficPolicyInstanceOutput, error)
-	CreateTrafficPolicyInstanceWithContext(aws.Context, *route53.CreateTrafficPolicyInstanceInput, ...aws.Option) (*route53.CreateTrafficPolicyInstanceOutput, error)
-	CreateTrafficPolicyInstanceRequest(*route53.CreateTrafficPolicyInstanceInput) (*aws.Request, *route53.CreateTrafficPolicyInstanceOutput)
+	CreateTrafficPolicyInstanceRequest(*route53.CreateTrafficPolicyInstanceInput) route53.CreateTrafficPolicyInstanceRequest
 
-	CreateTrafficPolicyVersion(*route53.CreateTrafficPolicyVersionInput) (*route53.CreateTrafficPolicyVersionOutput, error)
-	CreateTrafficPolicyVersionWithContext(aws.Context, *route53.CreateTrafficPolicyVersionInput, ...aws.Option) (*route53.CreateTrafficPolicyVersionOutput, error)
-	CreateTrafficPolicyVersionRequest(*route53.CreateTrafficPolicyVersionInput) (*aws.Request, *route53.CreateTrafficPolicyVersionOutput)
+	CreateTrafficPolicyVersionRequest(*route53.CreateTrafficPolicyVersionInput) route53.CreateTrafficPolicyVersionRequest
 
-	CreateVPCAssociationAuthorization(*route53.CreateVPCAssociationAuthorizationInput) (*route53.CreateVPCAssociationAuthorizationOutput, error)
-	CreateVPCAssociationAuthorizationWithContext(aws.Context, *route53.CreateVPCAssociationAuthorizationInput, ...aws.Option) (*route53.CreateVPCAssociationAuthorizationOutput, error)
-	CreateVPCAssociationAuthorizationRequest(*route53.CreateVPCAssociationAuthorizationInput) (*aws.Request, *route53.CreateVPCAssociationAuthorizationOutput)
+	CreateVPCAssociationAuthorizationRequest(*route53.CreateVPCAssociationAuthorizationInput) route53.CreateVPCAssociationAuthorizationRequest
 
-	DeleteHealthCheck(*route53.DeleteHealthCheckInput) (*route53.DeleteHealthCheckOutput, error)
-	DeleteHealthCheckWithContext(aws.Context, *route53.DeleteHealthCheckInput, ...aws.Option) (*route53.DeleteHealthCheckOutput, error)
-	DeleteHealthCheckRequest(*route53.DeleteHealthCheckInput) (*aws.Request, *route53.DeleteHealthCheckOutput)
+	DeleteHealthCheckRequest(*route53.DeleteHealthCheckInput) route53.DeleteHealthCheckRequest
 
-	DeleteHostedZone(*route53.DeleteHostedZoneInput) (*route53.DeleteHostedZoneOutput, error)
-	DeleteHostedZoneWithContext(aws.Context, *route53.DeleteHostedZoneInput, ...aws.Option) (*route53.DeleteHostedZoneOutput, error)
-	DeleteHostedZoneRequest(*route53.DeleteHostedZoneInput) (*aws.Request, *route53.DeleteHostedZoneOutput)
+	DeleteHostedZoneRequest(*route53.DeleteHostedZoneInput) route53.DeleteHostedZoneRequest
 
-	DeleteQueryLoggingConfig(*route53.DeleteQueryLoggingConfigInput) (*route53.DeleteQueryLoggingConfigOutput, error)
-	DeleteQueryLoggingConfigWithContext(aws.Context, *route53.DeleteQueryLoggingConfigInput, ...aws.Option) (*route53.DeleteQueryLoggingConfigOutput, error)
-	DeleteQueryLoggingConfigRequest(*route53.DeleteQueryLoggingConfigInput) (*aws.Request, *route53.DeleteQueryLoggingConfigOutput)
+	DeleteQueryLoggingConfigRequest(*route53.DeleteQueryLoggingConfigInput) route53.DeleteQueryLoggingConfigRequest
 
-	DeleteReusableDelegationSet(*route53.DeleteReusableDelegationSetInput) (*route53.DeleteReusableDelegationSetOutput, error)
-	DeleteReusableDelegationSetWithContext(aws.Context, *route53.DeleteReusableDelegationSetInput, ...aws.Option) (*route53.DeleteReusableDelegationSetOutput, error)
-	DeleteReusableDelegationSetRequest(*route53.DeleteReusableDelegationSetInput) (*aws.Request, *route53.DeleteReusableDelegationSetOutput)
+	DeleteReusableDelegationSetRequest(*route53.DeleteReusableDelegationSetInput) route53.DeleteReusableDelegationSetRequest
 
-	DeleteTrafficPolicy(*route53.DeleteTrafficPolicyInput) (*route53.DeleteTrafficPolicyOutput, error)
-	DeleteTrafficPolicyWithContext(aws.Context, *route53.DeleteTrafficPolicyInput, ...aws.Option) (*route53.DeleteTrafficPolicyOutput, error)
-	DeleteTrafficPolicyRequest(*route53.DeleteTrafficPolicyInput) (*aws.Request, *route53.DeleteTrafficPolicyOutput)
+	DeleteTrafficPolicyRequest(*route53.DeleteTrafficPolicyInput) route53.DeleteTrafficPolicyRequest
 
-	DeleteTrafficPolicyInstance(*route53.DeleteTrafficPolicyInstanceInput) (*route53.DeleteTrafficPolicyInstanceOutput, error)
-	DeleteTrafficPolicyInstanceWithContext(aws.Context, *route53.DeleteTrafficPolicyInstanceInput, ...aws.Option) (*route53.DeleteTrafficPolicyInstanceOutput, error)
-	DeleteTrafficPolicyInstanceRequest(*route53.DeleteTrafficPolicyInstanceInput) (*aws.Request, *route53.DeleteTrafficPolicyInstanceOutput)
+	DeleteTrafficPolicyInstanceRequest(*route53.DeleteTrafficPolicyInstanceInput) route53.DeleteTrafficPolicyInstanceRequest
 
-	DeleteVPCAssociationAuthorization(*route53.DeleteVPCAssociationAuthorizationInput) (*route53.DeleteVPCAssociationAuthorizationOutput, error)
-	DeleteVPCAssociationAuthorizationWithContext(aws.Context, *route53.DeleteVPCAssociationAuthorizationInput, ...aws.Option) (*route53.DeleteVPCAssociationAuthorizationOutput, error)
-	DeleteVPCAssociationAuthorizationRequest(*route53.DeleteVPCAssociationAuthorizationInput) (*aws.Request, *route53.DeleteVPCAssociationAuthorizationOutput)
+	DeleteVPCAssociationAuthorizationRequest(*route53.DeleteVPCAssociationAuthorizationInput) route53.DeleteVPCAssociationAuthorizationRequest
 
-	DisassociateVPCFromHostedZone(*route53.DisassociateVPCFromHostedZoneInput) (*route53.DisassociateVPCFromHostedZoneOutput, error)
-	DisassociateVPCFromHostedZoneWithContext(aws.Context, *route53.DisassociateVPCFromHostedZoneInput, ...aws.Option) (*route53.DisassociateVPCFromHostedZoneOutput, error)
-	DisassociateVPCFromHostedZoneRequest(*route53.DisassociateVPCFromHostedZoneInput) (*aws.Request, *route53.DisassociateVPCFromHostedZoneOutput)
+	DisassociateVPCFromHostedZoneRequest(*route53.DisassociateVPCFromHostedZoneInput) route53.DisassociateVPCFromHostedZoneRequest
 
-	GetChange(*route53.GetChangeInput) (*route53.GetChangeOutput, error)
-	GetChangeWithContext(aws.Context, *route53.GetChangeInput, ...aws.Option) (*route53.GetChangeOutput, error)
-	GetChangeRequest(*route53.GetChangeInput) (*aws.Request, *route53.GetChangeOutput)
+	GetChangeRequest(*route53.GetChangeInput) route53.GetChangeRequest
 
-	GetCheckerIpRanges(*route53.GetCheckerIpRangesInput) (*route53.GetCheckerIpRangesOutput, error)
-	GetCheckerIpRangesWithContext(aws.Context, *route53.GetCheckerIpRangesInput, ...aws.Option) (*route53.GetCheckerIpRangesOutput, error)
-	GetCheckerIpRangesRequest(*route53.GetCheckerIpRangesInput) (*aws.Request, *route53.GetCheckerIpRangesOutput)
+	GetCheckerIpRangesRequest(*route53.GetCheckerIpRangesInput) route53.GetCheckerIpRangesRequest
 
-	GetGeoLocation(*route53.GetGeoLocationInput) (*route53.GetGeoLocationOutput, error)
-	GetGeoLocationWithContext(aws.Context, *route53.GetGeoLocationInput, ...aws.Option) (*route53.GetGeoLocationOutput, error)
-	GetGeoLocationRequest(*route53.GetGeoLocationInput) (*aws.Request, *route53.GetGeoLocationOutput)
+	GetGeoLocationRequest(*route53.GetGeoLocationInput) route53.GetGeoLocationRequest
 
-	GetHealthCheck(*route53.GetHealthCheckInput) (*route53.GetHealthCheckOutput, error)
-	GetHealthCheckWithContext(aws.Context, *route53.GetHealthCheckInput, ...aws.Option) (*route53.GetHealthCheckOutput, error)
-	GetHealthCheckRequest(*route53.GetHealthCheckInput) (*aws.Request, *route53.GetHealthCheckOutput)
+	GetHealthCheckRequest(*route53.GetHealthCheckInput) route53.GetHealthCheckRequest
 
-	GetHealthCheckCount(*route53.GetHealthCheckCountInput) (*route53.GetHealthCheckCountOutput, error)
-	GetHealthCheckCountWithContext(aws.Context, *route53.GetHealthCheckCountInput, ...aws.Option) (*route53.GetHealthCheckCountOutput, error)
-	GetHealthCheckCountRequest(*route53.GetHealthCheckCountInput) (*aws.Request, *route53.GetHealthCheckCountOutput)
+	GetHealthCheckCountRequest(*route53.GetHealthCheckCountInput) route53.GetHealthCheckCountRequest
 
-	GetHealthCheckLastFailureReason(*route53.GetHealthCheckLastFailureReasonInput) (*route53.GetHealthCheckLastFailureReasonOutput, error)
-	GetHealthCheckLastFailureReasonWithContext(aws.Context, *route53.GetHealthCheckLastFailureReasonInput, ...aws.Option) (*route53.GetHealthCheckLastFailureReasonOutput, error)
-	GetHealthCheckLastFailureReasonRequest(*route53.GetHealthCheckLastFailureReasonInput) (*aws.Request, *route53.GetHealthCheckLastFailureReasonOutput)
+	GetHealthCheckLastFailureReasonRequest(*route53.GetHealthCheckLastFailureReasonInput) route53.GetHealthCheckLastFailureReasonRequest
 
-	GetHealthCheckStatus(*route53.GetHealthCheckStatusInput) (*route53.GetHealthCheckStatusOutput, error)
-	GetHealthCheckStatusWithContext(aws.Context, *route53.GetHealthCheckStatusInput, ...aws.Option) (*route53.GetHealthCheckStatusOutput, error)
-	GetHealthCheckStatusRequest(*route53.GetHealthCheckStatusInput) (*aws.Request, *route53.GetHealthCheckStatusOutput)
+	GetHealthCheckStatusRequest(*route53.GetHealthCheckStatusInput) route53.GetHealthCheckStatusRequest
 
-	GetHostedZone(*route53.GetHostedZoneInput) (*route53.GetHostedZoneOutput, error)
-	GetHostedZoneWithContext(aws.Context, *route53.GetHostedZoneInput, ...aws.Option) (*route53.GetHostedZoneOutput, error)
-	GetHostedZoneRequest(*route53.GetHostedZoneInput) (*aws.Request, *route53.GetHostedZoneOutput)
+	GetHostedZoneRequest(*route53.GetHostedZoneInput) route53.GetHostedZoneRequest
 
-	GetHostedZoneCount(*route53.GetHostedZoneCountInput) (*route53.GetHostedZoneCountOutput, error)
-	GetHostedZoneCountWithContext(aws.Context, *route53.GetHostedZoneCountInput, ...aws.Option) (*route53.GetHostedZoneCountOutput, error)
-	GetHostedZoneCountRequest(*route53.GetHostedZoneCountInput) (*aws.Request, *route53.GetHostedZoneCountOutput)
+	GetHostedZoneCountRequest(*route53.GetHostedZoneCountInput) route53.GetHostedZoneCountRequest
 
-	GetQueryLoggingConfig(*route53.GetQueryLoggingConfigInput) (*route53.GetQueryLoggingConfigOutput, error)
-	GetQueryLoggingConfigWithContext(aws.Context, *route53.GetQueryLoggingConfigInput, ...aws.Option) (*route53.GetQueryLoggingConfigOutput, error)
-	GetQueryLoggingConfigRequest(*route53.GetQueryLoggingConfigInput) (*aws.Request, *route53.GetQueryLoggingConfigOutput)
+	GetQueryLoggingConfigRequest(*route53.GetQueryLoggingConfigInput) route53.GetQueryLoggingConfigRequest
 
-	GetReusableDelegationSet(*route53.GetReusableDelegationSetInput) (*route53.GetReusableDelegationSetOutput, error)
-	GetReusableDelegationSetWithContext(aws.Context, *route53.GetReusableDelegationSetInput, ...aws.Option) (*route53.GetReusableDelegationSetOutput, error)
-	GetReusableDelegationSetRequest(*route53.GetReusableDelegationSetInput) (*aws.Request, *route53.GetReusableDelegationSetOutput)
+	GetReusableDelegationSetRequest(*route53.GetReusableDelegationSetInput) route53.GetReusableDelegationSetRequest
 
-	GetTrafficPolicy(*route53.GetTrafficPolicyInput) (*route53.GetTrafficPolicyOutput, error)
-	GetTrafficPolicyWithContext(aws.Context, *route53.GetTrafficPolicyInput, ...aws.Option) (*route53.GetTrafficPolicyOutput, error)
-	GetTrafficPolicyRequest(*route53.GetTrafficPolicyInput) (*aws.Request, *route53.GetTrafficPolicyOutput)
+	GetTrafficPolicyRequest(*route53.GetTrafficPolicyInput) route53.GetTrafficPolicyRequest
 
-	GetTrafficPolicyInstance(*route53.GetTrafficPolicyInstanceInput) (*route53.GetTrafficPolicyInstanceOutput, error)
-	GetTrafficPolicyInstanceWithContext(aws.Context, *route53.GetTrafficPolicyInstanceInput, ...aws.Option) (*route53.GetTrafficPolicyInstanceOutput, error)
-	GetTrafficPolicyInstanceRequest(*route53.GetTrafficPolicyInstanceInput) (*aws.Request, *route53.GetTrafficPolicyInstanceOutput)
+	GetTrafficPolicyInstanceRequest(*route53.GetTrafficPolicyInstanceInput) route53.GetTrafficPolicyInstanceRequest
 
-	GetTrafficPolicyInstanceCount(*route53.GetTrafficPolicyInstanceCountInput) (*route53.GetTrafficPolicyInstanceCountOutput, error)
-	GetTrafficPolicyInstanceCountWithContext(aws.Context, *route53.GetTrafficPolicyInstanceCountInput, ...aws.Option) (*route53.GetTrafficPolicyInstanceCountOutput, error)
-	GetTrafficPolicyInstanceCountRequest(*route53.GetTrafficPolicyInstanceCountInput) (*aws.Request, *route53.GetTrafficPolicyInstanceCountOutput)
+	GetTrafficPolicyInstanceCountRequest(*route53.GetTrafficPolicyInstanceCountInput) route53.GetTrafficPolicyInstanceCountRequest
 
-	ListGeoLocations(*route53.ListGeoLocationsInput) (*route53.ListGeoLocationsOutput, error)
-	ListGeoLocationsWithContext(aws.Context, *route53.ListGeoLocationsInput, ...aws.Option) (*route53.ListGeoLocationsOutput, error)
-	ListGeoLocationsRequest(*route53.ListGeoLocationsInput) (*aws.Request, *route53.ListGeoLocationsOutput)
+	ListGeoLocationsRequest(*route53.ListGeoLocationsInput) route53.ListGeoLocationsRequest
 
-	ListHealthChecks(*route53.ListHealthChecksInput) (*route53.ListHealthChecksOutput, error)
-	ListHealthChecksWithContext(aws.Context, *route53.ListHealthChecksInput, ...aws.Option) (*route53.ListHealthChecksOutput, error)
-	ListHealthChecksRequest(*route53.ListHealthChecksInput) (*aws.Request, *route53.ListHealthChecksOutput)
+	ListHealthChecksRequest(*route53.ListHealthChecksInput) route53.ListHealthChecksRequest
 
 	ListHealthChecksPages(*route53.ListHealthChecksInput, func(*route53.ListHealthChecksOutput, bool) bool) error
 	ListHealthChecksPagesWithContext(aws.Context, *route53.ListHealthChecksInput, func(*route53.ListHealthChecksOutput, bool) bool, ...aws.Option) error
 
-	ListHostedZones(*route53.ListHostedZonesInput) (*route53.ListHostedZonesOutput, error)
-	ListHostedZonesWithContext(aws.Context, *route53.ListHostedZonesInput, ...aws.Option) (*route53.ListHostedZonesOutput, error)
-	ListHostedZonesRequest(*route53.ListHostedZonesInput) (*aws.Request, *route53.ListHostedZonesOutput)
+	ListHostedZonesRequest(*route53.ListHostedZonesInput) route53.ListHostedZonesRequest
 
 	ListHostedZonesPages(*route53.ListHostedZonesInput, func(*route53.ListHostedZonesOutput, bool) bool) error
 	ListHostedZonesPagesWithContext(aws.Context, *route53.ListHostedZonesInput, func(*route53.ListHostedZonesOutput, bool) bool, ...aws.Option) error
 
-	ListHostedZonesByName(*route53.ListHostedZonesByNameInput) (*route53.ListHostedZonesByNameOutput, error)
-	ListHostedZonesByNameWithContext(aws.Context, *route53.ListHostedZonesByNameInput, ...aws.Option) (*route53.ListHostedZonesByNameOutput, error)
-	ListHostedZonesByNameRequest(*route53.ListHostedZonesByNameInput) (*aws.Request, *route53.ListHostedZonesByNameOutput)
+	ListHostedZonesByNameRequest(*route53.ListHostedZonesByNameInput) route53.ListHostedZonesByNameRequest
 
-	ListQueryLoggingConfigs(*route53.ListQueryLoggingConfigsInput) (*route53.ListQueryLoggingConfigsOutput, error)
-	ListQueryLoggingConfigsWithContext(aws.Context, *route53.ListQueryLoggingConfigsInput, ...aws.Option) (*route53.ListQueryLoggingConfigsOutput, error)
-	ListQueryLoggingConfigsRequest(*route53.ListQueryLoggingConfigsInput) (*aws.Request, *route53.ListQueryLoggingConfigsOutput)
+	ListQueryLoggingConfigsRequest(*route53.ListQueryLoggingConfigsInput) route53.ListQueryLoggingConfigsRequest
 
-	ListResourceRecordSets(*route53.ListResourceRecordSetsInput) (*route53.ListResourceRecordSetsOutput, error)
-	ListResourceRecordSetsWithContext(aws.Context, *route53.ListResourceRecordSetsInput, ...aws.Option) (*route53.ListResourceRecordSetsOutput, error)
-	ListResourceRecordSetsRequest(*route53.ListResourceRecordSetsInput) (*aws.Request, *route53.ListResourceRecordSetsOutput)
+	ListResourceRecordSetsRequest(*route53.ListResourceRecordSetsInput) route53.ListResourceRecordSetsRequest
 
 	ListResourceRecordSetsPages(*route53.ListResourceRecordSetsInput, func(*route53.ListResourceRecordSetsOutput, bool) bool) error
 	ListResourceRecordSetsPagesWithContext(aws.Context, *route53.ListResourceRecordSetsInput, func(*route53.ListResourceRecordSetsOutput, bool) bool, ...aws.Option) error
 
-	ListReusableDelegationSets(*route53.ListReusableDelegationSetsInput) (*route53.ListReusableDelegationSetsOutput, error)
-	ListReusableDelegationSetsWithContext(aws.Context, *route53.ListReusableDelegationSetsInput, ...aws.Option) (*route53.ListReusableDelegationSetsOutput, error)
-	ListReusableDelegationSetsRequest(*route53.ListReusableDelegationSetsInput) (*aws.Request, *route53.ListReusableDelegationSetsOutput)
+	ListReusableDelegationSetsRequest(*route53.ListReusableDelegationSetsInput) route53.ListReusableDelegationSetsRequest
 
-	ListTagsForResource(*route53.ListTagsForResourceInput) (*route53.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *route53.ListTagsForResourceInput, ...aws.Option) (*route53.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*route53.ListTagsForResourceInput) (*aws.Request, *route53.ListTagsForResourceOutput)
+	ListTagsForResourceRequest(*route53.ListTagsForResourceInput) route53.ListTagsForResourceRequest
 
-	ListTagsForResources(*route53.ListTagsForResourcesInput) (*route53.ListTagsForResourcesOutput, error)
-	ListTagsForResourcesWithContext(aws.Context, *route53.ListTagsForResourcesInput, ...aws.Option) (*route53.ListTagsForResourcesOutput, error)
-	ListTagsForResourcesRequest(*route53.ListTagsForResourcesInput) (*aws.Request, *route53.ListTagsForResourcesOutput)
+	ListTagsForResourcesRequest(*route53.ListTagsForResourcesInput) route53.ListTagsForResourcesRequest
 
-	ListTrafficPolicies(*route53.ListTrafficPoliciesInput) (*route53.ListTrafficPoliciesOutput, error)
-	ListTrafficPoliciesWithContext(aws.Context, *route53.ListTrafficPoliciesInput, ...aws.Option) (*route53.ListTrafficPoliciesOutput, error)
-	ListTrafficPoliciesRequest(*route53.ListTrafficPoliciesInput) (*aws.Request, *route53.ListTrafficPoliciesOutput)
+	ListTrafficPoliciesRequest(*route53.ListTrafficPoliciesInput) route53.ListTrafficPoliciesRequest
 
-	ListTrafficPolicyInstances(*route53.ListTrafficPolicyInstancesInput) (*route53.ListTrafficPolicyInstancesOutput, error)
-	ListTrafficPolicyInstancesWithContext(aws.Context, *route53.ListTrafficPolicyInstancesInput, ...aws.Option) (*route53.ListTrafficPolicyInstancesOutput, error)
-	ListTrafficPolicyInstancesRequest(*route53.ListTrafficPolicyInstancesInput) (*aws.Request, *route53.ListTrafficPolicyInstancesOutput)
+	ListTrafficPolicyInstancesRequest(*route53.ListTrafficPolicyInstancesInput) route53.ListTrafficPolicyInstancesRequest
 
-	ListTrafficPolicyInstancesByHostedZone(*route53.ListTrafficPolicyInstancesByHostedZoneInput) (*route53.ListTrafficPolicyInstancesByHostedZoneOutput, error)
-	ListTrafficPolicyInstancesByHostedZoneWithContext(aws.Context, *route53.ListTrafficPolicyInstancesByHostedZoneInput, ...aws.Option) (*route53.ListTrafficPolicyInstancesByHostedZoneOutput, error)
-	ListTrafficPolicyInstancesByHostedZoneRequest(*route53.ListTrafficPolicyInstancesByHostedZoneInput) (*aws.Request, *route53.ListTrafficPolicyInstancesByHostedZoneOutput)
+	ListTrafficPolicyInstancesByHostedZoneRequest(*route53.ListTrafficPolicyInstancesByHostedZoneInput) route53.ListTrafficPolicyInstancesByHostedZoneRequest
 
-	ListTrafficPolicyInstancesByPolicy(*route53.ListTrafficPolicyInstancesByPolicyInput) (*route53.ListTrafficPolicyInstancesByPolicyOutput, error)
-	ListTrafficPolicyInstancesByPolicyWithContext(aws.Context, *route53.ListTrafficPolicyInstancesByPolicyInput, ...aws.Option) (*route53.ListTrafficPolicyInstancesByPolicyOutput, error)
-	ListTrafficPolicyInstancesByPolicyRequest(*route53.ListTrafficPolicyInstancesByPolicyInput) (*aws.Request, *route53.ListTrafficPolicyInstancesByPolicyOutput)
+	ListTrafficPolicyInstancesByPolicyRequest(*route53.ListTrafficPolicyInstancesByPolicyInput) route53.ListTrafficPolicyInstancesByPolicyRequest
 
-	ListTrafficPolicyVersions(*route53.ListTrafficPolicyVersionsInput) (*route53.ListTrafficPolicyVersionsOutput, error)
-	ListTrafficPolicyVersionsWithContext(aws.Context, *route53.ListTrafficPolicyVersionsInput, ...aws.Option) (*route53.ListTrafficPolicyVersionsOutput, error)
-	ListTrafficPolicyVersionsRequest(*route53.ListTrafficPolicyVersionsInput) (*aws.Request, *route53.ListTrafficPolicyVersionsOutput)
+	ListTrafficPolicyVersionsRequest(*route53.ListTrafficPolicyVersionsInput) route53.ListTrafficPolicyVersionsRequest
 
-	ListVPCAssociationAuthorizations(*route53.ListVPCAssociationAuthorizationsInput) (*route53.ListVPCAssociationAuthorizationsOutput, error)
-	ListVPCAssociationAuthorizationsWithContext(aws.Context, *route53.ListVPCAssociationAuthorizationsInput, ...aws.Option) (*route53.ListVPCAssociationAuthorizationsOutput, error)
-	ListVPCAssociationAuthorizationsRequest(*route53.ListVPCAssociationAuthorizationsInput) (*aws.Request, *route53.ListVPCAssociationAuthorizationsOutput)
+	ListVPCAssociationAuthorizationsRequest(*route53.ListVPCAssociationAuthorizationsInput) route53.ListVPCAssociationAuthorizationsRequest
 
-	TestDNSAnswer(*route53.TestDNSAnswerInput) (*route53.TestDNSAnswerOutput, error)
-	TestDNSAnswerWithContext(aws.Context, *route53.TestDNSAnswerInput, ...aws.Option) (*route53.TestDNSAnswerOutput, error)
-	TestDNSAnswerRequest(*route53.TestDNSAnswerInput) (*aws.Request, *route53.TestDNSAnswerOutput)
+	TestDNSAnswerRequest(*route53.TestDNSAnswerInput) route53.TestDNSAnswerRequest
 
-	UpdateHealthCheck(*route53.UpdateHealthCheckInput) (*route53.UpdateHealthCheckOutput, error)
-	UpdateHealthCheckWithContext(aws.Context, *route53.UpdateHealthCheckInput, ...aws.Option) (*route53.UpdateHealthCheckOutput, error)
-	UpdateHealthCheckRequest(*route53.UpdateHealthCheckInput) (*aws.Request, *route53.UpdateHealthCheckOutput)
+	UpdateHealthCheckRequest(*route53.UpdateHealthCheckInput) route53.UpdateHealthCheckRequest
 
-	UpdateHostedZoneComment(*route53.UpdateHostedZoneCommentInput) (*route53.UpdateHostedZoneCommentOutput, error)
-	UpdateHostedZoneCommentWithContext(aws.Context, *route53.UpdateHostedZoneCommentInput, ...aws.Option) (*route53.UpdateHostedZoneCommentOutput, error)
-	UpdateHostedZoneCommentRequest(*route53.UpdateHostedZoneCommentInput) (*aws.Request, *route53.UpdateHostedZoneCommentOutput)
+	UpdateHostedZoneCommentRequest(*route53.UpdateHostedZoneCommentInput) route53.UpdateHostedZoneCommentRequest
 
-	UpdateTrafficPolicyComment(*route53.UpdateTrafficPolicyCommentInput) (*route53.UpdateTrafficPolicyCommentOutput, error)
-	UpdateTrafficPolicyCommentWithContext(aws.Context, *route53.UpdateTrafficPolicyCommentInput, ...aws.Option) (*route53.UpdateTrafficPolicyCommentOutput, error)
-	UpdateTrafficPolicyCommentRequest(*route53.UpdateTrafficPolicyCommentInput) (*aws.Request, *route53.UpdateTrafficPolicyCommentOutput)
+	UpdateTrafficPolicyCommentRequest(*route53.UpdateTrafficPolicyCommentInput) route53.UpdateTrafficPolicyCommentRequest
 
-	UpdateTrafficPolicyInstance(*route53.UpdateTrafficPolicyInstanceInput) (*route53.UpdateTrafficPolicyInstanceOutput, error)
-	UpdateTrafficPolicyInstanceWithContext(aws.Context, *route53.UpdateTrafficPolicyInstanceInput, ...aws.Option) (*route53.UpdateTrafficPolicyInstanceOutput, error)
-	UpdateTrafficPolicyInstanceRequest(*route53.UpdateTrafficPolicyInstanceInput) (*aws.Request, *route53.UpdateTrafficPolicyInstanceOutput)
+	UpdateTrafficPolicyInstanceRequest(*route53.UpdateTrafficPolicyInstanceInput) route53.UpdateTrafficPolicyInstanceRequest
 
 	WaitUntilResourceRecordSetsChanged(*route53.GetChangeInput) error
 	WaitUntilResourceRecordSetsChangedWithContext(aws.Context, *route53.GetChangeInput, ...aws.WaiterOption) error

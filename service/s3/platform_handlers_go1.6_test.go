@@ -13,7 +13,7 @@ import (
 
 func TestAdd100Continue_Added(t *testing.T) {
 	svc := s3.New(unit.Config())
-	r, _ := svc.PutObjectRequest(&s3.PutObjectInput{
+	r := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 		Body:   bytes.NewReader(make([]byte, 1024*1024*5)),
@@ -34,7 +34,7 @@ func TestAdd100Continue_SkipDisabled(t *testing.T) {
 	cfg.S3Disable100Continue = true
 
 	svc := s3.New(cfg)
-	r, _ := svc.PutObjectRequest(&s3.PutObjectInput{
+	r := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 		Body:   bytes.NewReader(make([]byte, 1024*1024*5)),
@@ -52,7 +52,7 @@ func TestAdd100Continue_SkipDisabled(t *testing.T) {
 
 func TestAdd100Continue_SkipNonPUT(t *testing.T) {
 	svc := s3.New(unit.Config())
-	r, _ := svc.GetObjectRequest(&s3.GetObjectInput{
+	r := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 	})
@@ -69,7 +69,7 @@ func TestAdd100Continue_SkipNonPUT(t *testing.T) {
 
 func TestAdd100Continue_SkipTooSmall(t *testing.T) {
 	svc := s3.New(unit.Config())
-	r, _ := svc.PutObjectRequest(&s3.PutObjectInput{
+	r := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 		Body:   bytes.NewReader(make([]byte, 1024*1024*1)),

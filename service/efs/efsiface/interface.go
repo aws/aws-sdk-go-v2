@@ -9,7 +9,6 @@
 package efsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
 )
 
@@ -45,7 +44,7 @@ import (
 //    type mockEFSClient struct {
 //        efsiface.EFSAPI
 //    }
-//    func (m *mockEFSClient) CreateFileSystem(input *efs.CreateFileSystemInput) (*efs.FileSystemDescription, error) {
+//    func (m *mockEFSClient) CreateFileSystem(input *efs.CreateFileSystemInput) (*efs.CreateFileSystemOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -63,49 +62,27 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type EFSAPI interface {
-	CreateFileSystem(*efs.CreateFileSystemInput) (*efs.FileSystemDescription, error)
-	CreateFileSystemWithContext(aws.Context, *efs.CreateFileSystemInput, ...aws.Option) (*efs.FileSystemDescription, error)
-	CreateFileSystemRequest(*efs.CreateFileSystemInput) (*aws.Request, *efs.FileSystemDescription)
+	CreateFileSystemRequest(*efs.CreateFileSystemInput) efs.CreateFileSystemRequest
 
-	CreateMountTarget(*efs.CreateMountTargetInput) (*efs.MountTargetDescription, error)
-	CreateMountTargetWithContext(aws.Context, *efs.CreateMountTargetInput, ...aws.Option) (*efs.MountTargetDescription, error)
-	CreateMountTargetRequest(*efs.CreateMountTargetInput) (*aws.Request, *efs.MountTargetDescription)
+	CreateMountTargetRequest(*efs.CreateMountTargetInput) efs.CreateMountTargetRequest
 
-	CreateTags(*efs.CreateTagsInput) (*efs.CreateTagsOutput, error)
-	CreateTagsWithContext(aws.Context, *efs.CreateTagsInput, ...aws.Option) (*efs.CreateTagsOutput, error)
-	CreateTagsRequest(*efs.CreateTagsInput) (*aws.Request, *efs.CreateTagsOutput)
+	CreateTagsRequest(*efs.CreateTagsInput) efs.CreateTagsRequest
 
-	DeleteFileSystem(*efs.DeleteFileSystemInput) (*efs.DeleteFileSystemOutput, error)
-	DeleteFileSystemWithContext(aws.Context, *efs.DeleteFileSystemInput, ...aws.Option) (*efs.DeleteFileSystemOutput, error)
-	DeleteFileSystemRequest(*efs.DeleteFileSystemInput) (*aws.Request, *efs.DeleteFileSystemOutput)
+	DeleteFileSystemRequest(*efs.DeleteFileSystemInput) efs.DeleteFileSystemRequest
 
-	DeleteMountTarget(*efs.DeleteMountTargetInput) (*efs.DeleteMountTargetOutput, error)
-	DeleteMountTargetWithContext(aws.Context, *efs.DeleteMountTargetInput, ...aws.Option) (*efs.DeleteMountTargetOutput, error)
-	DeleteMountTargetRequest(*efs.DeleteMountTargetInput) (*aws.Request, *efs.DeleteMountTargetOutput)
+	DeleteMountTargetRequest(*efs.DeleteMountTargetInput) efs.DeleteMountTargetRequest
 
-	DeleteTags(*efs.DeleteTagsInput) (*efs.DeleteTagsOutput, error)
-	DeleteTagsWithContext(aws.Context, *efs.DeleteTagsInput, ...aws.Option) (*efs.DeleteTagsOutput, error)
-	DeleteTagsRequest(*efs.DeleteTagsInput) (*aws.Request, *efs.DeleteTagsOutput)
+	DeleteTagsRequest(*efs.DeleteTagsInput) efs.DeleteTagsRequest
 
-	DescribeFileSystems(*efs.DescribeFileSystemsInput) (*efs.DescribeFileSystemsOutput, error)
-	DescribeFileSystemsWithContext(aws.Context, *efs.DescribeFileSystemsInput, ...aws.Option) (*efs.DescribeFileSystemsOutput, error)
-	DescribeFileSystemsRequest(*efs.DescribeFileSystemsInput) (*aws.Request, *efs.DescribeFileSystemsOutput)
+	DescribeFileSystemsRequest(*efs.DescribeFileSystemsInput) efs.DescribeFileSystemsRequest
 
-	DescribeMountTargetSecurityGroups(*efs.DescribeMountTargetSecurityGroupsInput) (*efs.DescribeMountTargetSecurityGroupsOutput, error)
-	DescribeMountTargetSecurityGroupsWithContext(aws.Context, *efs.DescribeMountTargetSecurityGroupsInput, ...aws.Option) (*efs.DescribeMountTargetSecurityGroupsOutput, error)
-	DescribeMountTargetSecurityGroupsRequest(*efs.DescribeMountTargetSecurityGroupsInput) (*aws.Request, *efs.DescribeMountTargetSecurityGroupsOutput)
+	DescribeMountTargetSecurityGroupsRequest(*efs.DescribeMountTargetSecurityGroupsInput) efs.DescribeMountTargetSecurityGroupsRequest
 
-	DescribeMountTargets(*efs.DescribeMountTargetsInput) (*efs.DescribeMountTargetsOutput, error)
-	DescribeMountTargetsWithContext(aws.Context, *efs.DescribeMountTargetsInput, ...aws.Option) (*efs.DescribeMountTargetsOutput, error)
-	DescribeMountTargetsRequest(*efs.DescribeMountTargetsInput) (*aws.Request, *efs.DescribeMountTargetsOutput)
+	DescribeMountTargetsRequest(*efs.DescribeMountTargetsInput) efs.DescribeMountTargetsRequest
 
-	DescribeTags(*efs.DescribeTagsInput) (*efs.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *efs.DescribeTagsInput, ...aws.Option) (*efs.DescribeTagsOutput, error)
-	DescribeTagsRequest(*efs.DescribeTagsInput) (*aws.Request, *efs.DescribeTagsOutput)
+	DescribeTagsRequest(*efs.DescribeTagsInput) efs.DescribeTagsRequest
 
-	ModifyMountTargetSecurityGroups(*efs.ModifyMountTargetSecurityGroupsInput) (*efs.ModifyMountTargetSecurityGroupsOutput, error)
-	ModifyMountTargetSecurityGroupsWithContext(aws.Context, *efs.ModifyMountTargetSecurityGroupsInput, ...aws.Option) (*efs.ModifyMountTargetSecurityGroupsOutput, error)
-	ModifyMountTargetSecurityGroupsRequest(*efs.ModifyMountTargetSecurityGroupsInput) (*aws.Request, *efs.ModifyMountTargetSecurityGroupsOutput)
+	ModifyMountTargetSecurityGroupsRequest(*efs.ModifyMountTargetSecurityGroupsInput) efs.ModifyMountTargetSecurityGroupsRequest
 }
 
 var _ EFSAPI = (*efs.EFS)(nil)

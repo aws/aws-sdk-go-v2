@@ -11,31 +11,38 @@ import (
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsToResourceRequest is a API request type for the AddTagsToResource API operation.
+type AddTagsToResourceRequest struct {
+	*aws.Request
+	Input *AddTagsToResourceInput
+}
+
+// Send marshals and sends the AddTagsToResource API request.
+func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToResourceOutput), nil
+}
+
+// AddTagsToResourceRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds or overwrites one or more tags for the specified AWS CloudHSM resource.
 //
-// See AddTagsToResource for more information on using the AddTagsToResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Each tag consists of a key and a value. Tag keys must be unique to each resource.
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsToResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResource
-func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
@@ -46,83 +53,43 @@ func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req 
 		input = &AddTagsToResourceInput{}
 	}
 
-	output = &AddTagsToResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddTagsToResource API operation for Amazon CloudHSM.
-//
-// Adds or overwrites one or more tags for the specified AWS CloudHSM resource.
-//
-// Each tag consists of a key and a value. Tag keys must be unique to each resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation AddTagsToResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResource
-func (c *CloudHSM) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsToResourceWithContext is the same as AddTagsToResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
 const opCreateHapg = "CreateHapg"
 
-// CreateHapgRequest generates a "aws.Request" representing the
-// client's request for the CreateHapg operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateHapgRequest is a API request type for the CreateHapg API operation.
+type CreateHapgRequest struct {
+	*aws.Request
+	Input *CreateHapgInput
+}
+
+// Send marshals and sends the CreateHapg API request.
+func (r CreateHapgRequest) Send() (*CreateHapgOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHapgOutput), nil
+}
+
+// CreateHapgRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHapg for more information on using the CreateHapg
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a high-availability partition group. A high-availability partition
+// group is a group of partitions that spans multiple physical HSMs.
 //
 //    // Example sending a request using the CreateHapgRequest method.
-//    req, resp := client.CreateHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateHapgRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapg
-func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) (req *aws.Request, output *CreateHapgOutput) {
+func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) CreateHapgRequest {
 	op := &aws.Operation{
 		Name:       opCreateHapg,
 		HTTPMethod: "POST",
@@ -133,98 +100,30 @@ func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) (req *aws.Request, 
 		input = &CreateHapgInput{}
 	}
 
-	output = &CreateHapgOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateHapg API operation for Amazon CloudHSM.
-//
-// Creates a high-availability partition group. A high-availability partition
-// group is a group of partitions that spans multiple physical HSMs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation CreateHapg for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapg
-func (c *CloudHSM) CreateHapg(input *CreateHapgInput) (*CreateHapgOutput, error) {
-	req, out := c.CreateHapgRequest(input)
-	return out, req.Send()
-}
-
-// CreateHapgWithContext is the same as CreateHapg with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHapg for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) CreateHapgWithContext(ctx aws.Context, input *CreateHapgInput, opts ...aws.Option) (*CreateHapgOutput, error) {
-	req, out := c.CreateHapgRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateHapgOutput{})
+	return CreateHapgRequest{Request: req, Input: input}
 }
 
 const opCreateHsm = "CreateHsm"
 
-// CreateHsmRequest generates a "aws.Request" representing the
-// client's request for the CreateHsm operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHsm for more information on using the CreateHsm
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateHsmRequest method.
-//    req, resp := client.CreateHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsm
-func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) (req *aws.Request, output *CreateHsmOutput) {
-	op := &aws.Operation{
-		Name:       opCreateHsm,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateHsmInput{}
-	}
-
-	output = &CreateHsmOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateHsmRequest is a API request type for the CreateHsm API operation.
+type CreateHsmRequest struct {
+	*aws.Request
+	Input *CreateHsmInput
 }
 
-// CreateHsm API operation for Amazon CloudHSM.
+// Send marshals and sends the CreateHsm API request.
+func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHsmOutput), nil
+}
+
+// CreateHsmRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
 // Creates an uninitialized HSM instance.
 //
@@ -238,72 +137,61 @@ func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) (req *aws.Request, ou
 // the status of the HSM with the DescribeHsm operation. The HSM is ready to
 // be initialized when the status changes to RUNNING.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation CreateHsm for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//    // Example sending a request using the CreateHsmRequest method.
+//    req := client.CreateHsmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsm
-func (c *CloudHSM) CreateHsm(input *CreateHsmInput) (*CreateHsmOutput, error) {
-	req, out := c.CreateHsmRequest(input)
-	return out, req.Send()
-}
+func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
+	op := &aws.Operation{
+		Name:       opCreateHsm,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateHsmWithContext is the same as CreateHsm with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHsm for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, opts ...aws.Option) (*CreateHsmOutput, error) {
-	req, out := c.CreateHsmRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateHsmInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateHsmOutput{})
+	return CreateHsmRequest{Request: req, Input: input}
 }
 
 const opCreateLunaClient = "CreateLunaClient"
 
-// CreateLunaClientRequest generates a "aws.Request" representing the
-// client's request for the CreateLunaClient operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateLunaClientRequest is a API request type for the CreateLunaClient API operation.
+type CreateLunaClientRequest struct {
+	*aws.Request
+	Input *CreateLunaClientInput
+}
+
+// Send marshals and sends the CreateLunaClient API request.
+func (r CreateLunaClientRequest) Send() (*CreateLunaClientOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLunaClientOutput), nil
+}
+
+// CreateLunaClientRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLunaClient for more information on using the CreateLunaClient
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an HSM client.
 //
 //    // Example sending a request using the CreateLunaClientRequest method.
-//    req, resp := client.CreateLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateLunaClientRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClient
-func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) (req *aws.Request, output *CreateLunaClientOutput) {
+func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) CreateLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opCreateLunaClient,
 		HTTPMethod: "POST",
@@ -314,81 +202,42 @@ func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) (req *a
 		input = &CreateLunaClientInput{}
 	}
 
-	output = &CreateLunaClientOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateLunaClient API operation for Amazon CloudHSM.
-//
-// Creates an HSM client.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation CreateLunaClient for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClient
-func (c *CloudHSM) CreateLunaClient(input *CreateLunaClientInput) (*CreateLunaClientOutput, error) {
-	req, out := c.CreateLunaClientRequest(input)
-	return out, req.Send()
-}
-
-// CreateLunaClientWithContext is the same as CreateLunaClient with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLunaClient for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) CreateLunaClientWithContext(ctx aws.Context, input *CreateLunaClientInput, opts ...aws.Option) (*CreateLunaClientOutput, error) {
-	req, out := c.CreateLunaClientRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateLunaClientOutput{})
+	return CreateLunaClientRequest{Request: req, Input: input}
 }
 
 const opDeleteHapg = "DeleteHapg"
 
-// DeleteHapgRequest generates a "aws.Request" representing the
-// client's request for the DeleteHapg operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteHapgRequest is a API request type for the DeleteHapg API operation.
+type DeleteHapgRequest struct {
+	*aws.Request
+	Input *DeleteHapgInput
+}
+
+// Send marshals and sends the DeleteHapg API request.
+func (r DeleteHapgRequest) Send() (*DeleteHapgOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHapgOutput), nil
+}
+
+// DeleteHapgRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHapg for more information on using the DeleteHapg
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a high-availability partition group.
 //
 //    // Example sending a request using the DeleteHapgRequest method.
-//    req, resp := client.DeleteHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteHapgRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapg
-func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) (req *aws.Request, output *DeleteHapgOutput) {
+func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) DeleteHapgRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHapg,
 		HTTPMethod: "POST",
@@ -399,81 +248,43 @@ func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) (req *aws.Request, 
 		input = &DeleteHapgInput{}
 	}
 
-	output = &DeleteHapgOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteHapg API operation for Amazon CloudHSM.
-//
-// Deletes a high-availability partition group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation DeleteHapg for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapg
-func (c *CloudHSM) DeleteHapg(input *DeleteHapgInput) (*DeleteHapgOutput, error) {
-	req, out := c.DeleteHapgRequest(input)
-	return out, req.Send()
-}
-
-// DeleteHapgWithContext is the same as DeleteHapg with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHapg for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) DeleteHapgWithContext(ctx aws.Context, input *DeleteHapgInput, opts ...aws.Option) (*DeleteHapgOutput, error) {
-	req, out := c.DeleteHapgRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteHapgOutput{})
+	return DeleteHapgRequest{Request: req, Input: input}
 }
 
 const opDeleteHsm = "DeleteHsm"
 
-// DeleteHsmRequest generates a "aws.Request" representing the
-// client's request for the DeleteHsm operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteHsmRequest is a API request type for the DeleteHsm API operation.
+type DeleteHsmRequest struct {
+	*aws.Request
+	Input *DeleteHsmInput
+}
+
+// Send marshals and sends the DeleteHsm API request.
+func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHsmOutput), nil
+}
+
+// DeleteHsmRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHsm for more information on using the DeleteHsm
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an HSM. After completion, this operation cannot be undone and your
+// key material cannot be recovered.
 //
 //    // Example sending a request using the DeleteHsmRequest method.
-//    req, resp := client.DeleteHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteHsmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsm
-func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) (req *aws.Request, output *DeleteHsmOutput) {
+func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHsm,
 		HTTPMethod: "POST",
@@ -484,82 +295,42 @@ func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) (req *aws.Request, ou
 		input = &DeleteHsmInput{}
 	}
 
-	output = &DeleteHsmOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteHsm API operation for Amazon CloudHSM.
-//
-// Deletes an HSM. After completion, this operation cannot be undone and your
-// key material cannot be recovered.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation DeleteHsm for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsm
-func (c *CloudHSM) DeleteHsm(input *DeleteHsmInput) (*DeleteHsmOutput, error) {
-	req, out := c.DeleteHsmRequest(input)
-	return out, req.Send()
-}
-
-// DeleteHsmWithContext is the same as DeleteHsm with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHsm for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, opts ...aws.Option) (*DeleteHsmOutput, error) {
-	req, out := c.DeleteHsmRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteHsmOutput{})
+	return DeleteHsmRequest{Request: req, Input: input}
 }
 
 const opDeleteLunaClient = "DeleteLunaClient"
 
-// DeleteLunaClientRequest generates a "aws.Request" representing the
-// client's request for the DeleteLunaClient operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLunaClientRequest is a API request type for the DeleteLunaClient API operation.
+type DeleteLunaClientRequest struct {
+	*aws.Request
+	Input *DeleteLunaClientInput
+}
+
+// Send marshals and sends the DeleteLunaClient API request.
+func (r DeleteLunaClientRequest) Send() (*DeleteLunaClientOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLunaClientOutput), nil
+}
+
+// DeleteLunaClientRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLunaClient for more information on using the DeleteLunaClient
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a client.
 //
 //    // Example sending a request using the DeleteLunaClientRequest method.
-//    req, resp := client.DeleteLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLunaClientRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClient
-func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) (req *aws.Request, output *DeleteLunaClientOutput) {
+func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) DeleteLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLunaClient,
 		HTTPMethod: "POST",
@@ -570,81 +341,42 @@ func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) (req *a
 		input = &DeleteLunaClientInput{}
 	}
 
-	output = &DeleteLunaClientOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteLunaClient API operation for Amazon CloudHSM.
-//
-// Deletes a client.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation DeleteLunaClient for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClient
-func (c *CloudHSM) DeleteLunaClient(input *DeleteLunaClientInput) (*DeleteLunaClientOutput, error) {
-	req, out := c.DeleteLunaClientRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLunaClientWithContext is the same as DeleteLunaClient with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLunaClient for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) DeleteLunaClientWithContext(ctx aws.Context, input *DeleteLunaClientInput, opts ...aws.Option) (*DeleteLunaClientOutput, error) {
-	req, out := c.DeleteLunaClientRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteLunaClientOutput{})
+	return DeleteLunaClientRequest{Request: req, Input: input}
 }
 
 const opDescribeHapg = "DescribeHapg"
 
-// DescribeHapgRequest generates a "aws.Request" representing the
-// client's request for the DescribeHapg operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeHapgRequest is a API request type for the DescribeHapg API operation.
+type DescribeHapgRequest struct {
+	*aws.Request
+	Input *DescribeHapgInput
+}
+
+// Send marshals and sends the DescribeHapg API request.
+func (r DescribeHapgRequest) Send() (*DescribeHapgOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeHapgOutput), nil
+}
+
+// DescribeHapgRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeHapg for more information on using the DescribeHapg
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a high-availability partition group.
 //
 //    // Example sending a request using the DescribeHapgRequest method.
-//    req, resp := client.DescribeHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeHapgRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapg
-func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) (req *aws.Request, output *DescribeHapgOutput) {
+func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) DescribeHapgRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHapg,
 		HTTPMethod: "POST",
@@ -655,81 +387,43 @@ func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) (req *aws.Reque
 		input = &DescribeHapgInput{}
 	}
 
-	output = &DescribeHapgOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeHapg API operation for Amazon CloudHSM.
-//
-// Retrieves information about a high-availability partition group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation DescribeHapg for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapg
-func (c *CloudHSM) DescribeHapg(input *DescribeHapgInput) (*DescribeHapgOutput, error) {
-	req, out := c.DescribeHapgRequest(input)
-	return out, req.Send()
-}
-
-// DescribeHapgWithContext is the same as DescribeHapg with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeHapg for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) DescribeHapgWithContext(ctx aws.Context, input *DescribeHapgInput, opts ...aws.Option) (*DescribeHapgOutput, error) {
-	req, out := c.DescribeHapgRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeHapgOutput{})
+	return DescribeHapgRequest{Request: req, Input: input}
 }
 
 const opDescribeHsm = "DescribeHsm"
 
-// DescribeHsmRequest generates a "aws.Request" representing the
-// client's request for the DescribeHsm operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeHsmRequest is a API request type for the DescribeHsm API operation.
+type DescribeHsmRequest struct {
+	*aws.Request
+	Input *DescribeHsmInput
+}
+
+// Send marshals and sends the DescribeHsm API request.
+func (r DescribeHsmRequest) Send() (*DescribeHsmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeHsmOutput), nil
+}
+
+// DescribeHsmRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeHsm for more information on using the DescribeHsm
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about an HSM. You can identify the HSM by its ARN or
+// its serial number.
 //
 //    // Example sending a request using the DescribeHsmRequest method.
-//    req, resp := client.DescribeHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeHsmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsm
-func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) (req *aws.Request, output *DescribeHsmOutput) {
+func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) DescribeHsmRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHsm,
 		HTTPMethod: "POST",
@@ -740,82 +434,42 @@ func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) (req *aws.Request
 		input = &DescribeHsmInput{}
 	}
 
-	output = &DescribeHsmOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeHsm API operation for Amazon CloudHSM.
-//
-// Retrieves information about an HSM. You can identify the HSM by its ARN or
-// its serial number.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation DescribeHsm for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsm
-func (c *CloudHSM) DescribeHsm(input *DescribeHsmInput) (*DescribeHsmOutput, error) {
-	req, out := c.DescribeHsmRequest(input)
-	return out, req.Send()
-}
-
-// DescribeHsmWithContext is the same as DescribeHsm with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeHsm for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) DescribeHsmWithContext(ctx aws.Context, input *DescribeHsmInput, opts ...aws.Option) (*DescribeHsmOutput, error) {
-	req, out := c.DescribeHsmRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeHsmOutput{})
+	return DescribeHsmRequest{Request: req, Input: input}
 }
 
 const opDescribeLunaClient = "DescribeLunaClient"
 
-// DescribeLunaClientRequest generates a "aws.Request" representing the
-// client's request for the DescribeLunaClient operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLunaClientRequest is a API request type for the DescribeLunaClient API operation.
+type DescribeLunaClientRequest struct {
+	*aws.Request
+	Input *DescribeLunaClientInput
+}
+
+// Send marshals and sends the DescribeLunaClient API request.
+func (r DescribeLunaClientRequest) Send() (*DescribeLunaClientOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLunaClientOutput), nil
+}
+
+// DescribeLunaClientRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLunaClient for more information on using the DescribeLunaClient
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about an HSM client.
 //
 //    // Example sending a request using the DescribeLunaClientRequest method.
-//    req, resp := client.DescribeLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLunaClientRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClient
-func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) (req *aws.Request, output *DescribeLunaClientOutput) {
+func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) DescribeLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLunaClient,
 		HTTPMethod: "POST",
@@ -826,81 +480,43 @@ func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) (re
 		input = &DescribeLunaClientInput{}
 	}
 
-	output = &DescribeLunaClientOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLunaClient API operation for Amazon CloudHSM.
-//
-// Retrieves information about an HSM client.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation DescribeLunaClient for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClient
-func (c *CloudHSM) DescribeLunaClient(input *DescribeLunaClientInput) (*DescribeLunaClientOutput, error) {
-	req, out := c.DescribeLunaClientRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLunaClientWithContext is the same as DescribeLunaClient with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLunaClient for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) DescribeLunaClientWithContext(ctx aws.Context, input *DescribeLunaClientInput, opts ...aws.Option) (*DescribeLunaClientOutput, error) {
-	req, out := c.DescribeLunaClientRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLunaClientOutput{})
+	return DescribeLunaClientRequest{Request: req, Input: input}
 }
 
 const opGetConfig = "GetConfig"
 
-// GetConfigRequest generates a "aws.Request" representing the
-// client's request for the GetConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetConfigRequest is a API request type for the GetConfig API operation.
+type GetConfigRequest struct {
+	*aws.Request
+	Input *GetConfigInput
+}
+
+// Send marshals and sends the GetConfig API request.
+func (r GetConfigRequest) Send() (*GetConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetConfigOutput), nil
+}
+
+// GetConfigRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetConfig for more information on using the GetConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the configuration files necessary to connect to all high availability
+// partition groups the client is associated with.
 //
 //    // Example sending a request using the GetConfigRequest method.
-//    req, resp := client.GetConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfig
-func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) (req *aws.Request, output *GetConfigOutput) {
+func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetConfig,
 		HTTPMethod: "POST",
@@ -911,82 +527,42 @@ func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) (req *aws.Request, ou
 		input = &GetConfigInput{}
 	}
 
-	output = &GetConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetConfig API operation for Amazon CloudHSM.
-//
-// Gets the configuration files necessary to connect to all high availability
-// partition groups the client is associated with.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation GetConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfig
-func (c *CloudHSM) GetConfig(input *GetConfigInput) (*GetConfigOutput, error) {
-	req, out := c.GetConfigRequest(input)
-	return out, req.Send()
-}
-
-// GetConfigWithContext is the same as GetConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) GetConfigWithContext(ctx aws.Context, input *GetConfigInput, opts ...aws.Option) (*GetConfigOutput, error) {
-	req, out := c.GetConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetConfigOutput{})
+	return GetConfigRequest{Request: req, Input: input}
 }
 
 const opListAvailableZones = "ListAvailableZones"
 
-// ListAvailableZonesRequest generates a "aws.Request" representing the
-// client's request for the ListAvailableZones operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAvailableZonesRequest is a API request type for the ListAvailableZones API operation.
+type ListAvailableZonesRequest struct {
+	*aws.Request
+	Input *ListAvailableZonesInput
+}
+
+// Send marshals and sends the ListAvailableZones API request.
+func (r ListAvailableZonesRequest) Send() (*ListAvailableZonesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAvailableZonesOutput), nil
+}
+
+// ListAvailableZonesRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAvailableZones for more information on using the ListAvailableZones
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the Availability Zones that have available AWS CloudHSM capacity.
 //
 //    // Example sending a request using the ListAvailableZonesRequest method.
-//    req, resp := client.ListAvailableZonesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAvailableZonesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZones
-func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) (req *aws.Request, output *ListAvailableZonesOutput) {
+func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) ListAvailableZonesRequest {
 	op := &aws.Operation{
 		Name:       opListAvailableZones,
 		HTTPMethod: "POST",
@@ -997,81 +573,47 @@ func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) (re
 		input = &ListAvailableZonesInput{}
 	}
 
-	output = &ListAvailableZonesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAvailableZones API operation for Amazon CloudHSM.
-//
-// Lists the Availability Zones that have available AWS CloudHSM capacity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ListAvailableZones for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZones
-func (c *CloudHSM) ListAvailableZones(input *ListAvailableZonesInput) (*ListAvailableZonesOutput, error) {
-	req, out := c.ListAvailableZonesRequest(input)
-	return out, req.Send()
-}
-
-// ListAvailableZonesWithContext is the same as ListAvailableZones with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAvailableZones for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ListAvailableZonesWithContext(ctx aws.Context, input *ListAvailableZonesInput, opts ...aws.Option) (*ListAvailableZonesOutput, error) {
-	req, out := c.ListAvailableZonesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAvailableZonesOutput{})
+	return ListAvailableZonesRequest{Request: req, Input: input}
 }
 
 const opListHapgs = "ListHapgs"
 
-// ListHapgsRequest generates a "aws.Request" representing the
-// client's request for the ListHapgs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListHapgsRequest is a API request type for the ListHapgs API operation.
+type ListHapgsRequest struct {
+	*aws.Request
+	Input *ListHapgsInput
+}
+
+// Send marshals and sends the ListHapgs API request.
+func (r ListHapgsRequest) Send() (*ListHapgsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListHapgsOutput), nil
+}
+
+// ListHapgsRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the high-availability partition groups for the account.
 //
-// See ListHapgs for more information on using the ListHapgs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation supports pagination with the use of the NextToken member.
+// If more results are available, the NextToken member of the response contains
+// a token that you pass in the next call to ListHapgs to retrieve the next
+// set of items.
 //
 //    // Example sending a request using the ListHapgsRequest method.
-//    req, resp := client.ListHapgsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListHapgsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgs
-func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) (req *aws.Request, output *ListHapgsOutput) {
+func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) ListHapgsRequest {
 	op := &aws.Operation{
 		Name:       opListHapgs,
 		HTTPMethod: "POST",
@@ -1082,86 +624,48 @@ func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) (req *aws.Request, ou
 		input = &ListHapgsInput{}
 	}
 
-	output = &ListHapgsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListHapgs API operation for Amazon CloudHSM.
-//
-// Lists the high-availability partition groups for the account.
-//
-// This operation supports pagination with the use of the NextToken member.
-// If more results are available, the NextToken member of the response contains
-// a token that you pass in the next call to ListHapgs to retrieve the next
-// set of items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ListHapgs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgs
-func (c *CloudHSM) ListHapgs(input *ListHapgsInput) (*ListHapgsOutput, error) {
-	req, out := c.ListHapgsRequest(input)
-	return out, req.Send()
-}
-
-// ListHapgsWithContext is the same as ListHapgs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListHapgs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ListHapgsWithContext(ctx aws.Context, input *ListHapgsInput, opts ...aws.Option) (*ListHapgsOutput, error) {
-	req, out := c.ListHapgsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListHapgsOutput{})
+	return ListHapgsRequest{Request: req, Input: input}
 }
 
 const opListHsms = "ListHsms"
 
-// ListHsmsRequest generates a "aws.Request" representing the
-// client's request for the ListHsms operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListHsmsRequest is a API request type for the ListHsms API operation.
+type ListHsmsRequest struct {
+	*aws.Request
+	Input *ListHsmsInput
+}
+
+// Send marshals and sends the ListHsms API request.
+func (r ListHsmsRequest) Send() (*ListHsmsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListHsmsOutput), nil
+}
+
+// ListHsmsRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves the identifiers of all of the HSMs provisioned for the current
+// customer.
 //
-// See ListHsms for more information on using the ListHsms
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation supports pagination with the use of the NextToken member.
+// If more results are available, the NextToken member of the response contains
+// a token that you pass in the next call to ListHsms to retrieve the next set
+// of items.
 //
 //    // Example sending a request using the ListHsmsRequest method.
-//    req, resp := client.ListHsmsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListHsmsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsms
-func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) (req *aws.Request, output *ListHsmsOutput) {
+func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) ListHsmsRequest {
 	op := &aws.Operation{
 		Name:       opListHsms,
 		HTTPMethod: "POST",
@@ -1172,87 +676,47 @@ func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) (req *aws.Request, outp
 		input = &ListHsmsInput{}
 	}
 
-	output = &ListHsmsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListHsms API operation for Amazon CloudHSM.
-//
-// Retrieves the identifiers of all of the HSMs provisioned for the current
-// customer.
-//
-// This operation supports pagination with the use of the NextToken member.
-// If more results are available, the NextToken member of the response contains
-// a token that you pass in the next call to ListHsms to retrieve the next set
-// of items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ListHsms for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsms
-func (c *CloudHSM) ListHsms(input *ListHsmsInput) (*ListHsmsOutput, error) {
-	req, out := c.ListHsmsRequest(input)
-	return out, req.Send()
-}
-
-// ListHsmsWithContext is the same as ListHsms with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListHsms for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ListHsmsWithContext(ctx aws.Context, input *ListHsmsInput, opts ...aws.Option) (*ListHsmsOutput, error) {
-	req, out := c.ListHsmsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListHsmsOutput{})
+	return ListHsmsRequest{Request: req, Input: input}
 }
 
 const opListLunaClients = "ListLunaClients"
 
-// ListLunaClientsRequest generates a "aws.Request" representing the
-// client's request for the ListLunaClients operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListLunaClientsRequest is a API request type for the ListLunaClients API operation.
+type ListLunaClientsRequest struct {
+	*aws.Request
+	Input *ListLunaClientsInput
+}
+
+// Send marshals and sends the ListLunaClients API request.
+func (r ListLunaClientsRequest) Send() (*ListLunaClientsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLunaClientsOutput), nil
+}
+
+// ListLunaClientsRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all of the clients.
 //
-// See ListLunaClients for more information on using the ListLunaClients
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation supports pagination with the use of the NextToken member.
+// If more results are available, the NextToken member of the response contains
+// a token that you pass in the next call to ListLunaClients to retrieve the
+// next set of items.
 //
 //    // Example sending a request using the ListLunaClientsRequest method.
-//    req, resp := client.ListLunaClientsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListLunaClientsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClients
-func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) (req *aws.Request, output *ListLunaClientsOutput) {
+func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) ListLunaClientsRequest {
 	op := &aws.Operation{
 		Name:       opListLunaClients,
 		HTTPMethod: "POST",
@@ -1263,86 +727,42 @@ func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) (req *aws
 		input = &ListLunaClientsInput{}
 	}
 
-	output = &ListLunaClientsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListLunaClients API operation for Amazon CloudHSM.
-//
-// Lists all of the clients.
-//
-// This operation supports pagination with the use of the NextToken member.
-// If more results are available, the NextToken member of the response contains
-// a token that you pass in the next call to ListLunaClients to retrieve the
-// next set of items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ListLunaClients for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClients
-func (c *CloudHSM) ListLunaClients(input *ListLunaClientsInput) (*ListLunaClientsOutput, error) {
-	req, out := c.ListLunaClientsRequest(input)
-	return out, req.Send()
-}
-
-// ListLunaClientsWithContext is the same as ListLunaClients with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListLunaClients for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ListLunaClientsWithContext(ctx aws.Context, input *ListLunaClientsInput, opts ...aws.Option) (*ListLunaClientsOutput, error) {
-	req, out := c.ListLunaClientsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListLunaClientsOutput{})
+	return ListLunaClientsRequest{Request: req, Input: input}
 }
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of all tags for the specified AWS CloudHSM resource.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResource
-func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -1353,81 +773,42 @@ func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResource API operation for Amazon CloudHSM.
-//
-// Returns a list of all tags for the specified AWS CloudHSM resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResource
-func (c *CloudHSM) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opModifyHapg = "ModifyHapg"
 
-// ModifyHapgRequest generates a "aws.Request" representing the
-// client's request for the ModifyHapg operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyHapgRequest is a API request type for the ModifyHapg API operation.
+type ModifyHapgRequest struct {
+	*aws.Request
+	Input *ModifyHapgInput
+}
+
+// Send marshals and sends the ModifyHapg API request.
+func (r ModifyHapgRequest) Send() (*ModifyHapgOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyHapgOutput), nil
+}
+
+// ModifyHapgRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyHapg for more information on using the ModifyHapg
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing high-availability partition group.
 //
 //    // Example sending a request using the ModifyHapgRequest method.
-//    req, resp := client.ModifyHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyHapgRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapg
-func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) (req *aws.Request, output *ModifyHapgOutput) {
+func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) ModifyHapgRequest {
 	op := &aws.Operation{
 		Name:       opModifyHapg,
 		HTTPMethod: "POST",
@@ -1438,81 +819,48 @@ func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) (req *aws.Request, 
 		input = &ModifyHapgInput{}
 	}
 
-	output = &ModifyHapgOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyHapg API operation for Amazon CloudHSM.
-//
-// Modifies an existing high-availability partition group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ModifyHapg for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapg
-func (c *CloudHSM) ModifyHapg(input *ModifyHapgInput) (*ModifyHapgOutput, error) {
-	req, out := c.ModifyHapgRequest(input)
-	return out, req.Send()
-}
-
-// ModifyHapgWithContext is the same as ModifyHapg with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyHapg for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ModifyHapgWithContext(ctx aws.Context, input *ModifyHapgInput, opts ...aws.Option) (*ModifyHapgOutput, error) {
-	req, out := c.ModifyHapgRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyHapgOutput{})
+	return ModifyHapgRequest{Request: req, Input: input}
 }
 
 const opModifyHsm = "ModifyHsm"
 
-// ModifyHsmRequest generates a "aws.Request" representing the
-// client's request for the ModifyHsm operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyHsmRequest is a API request type for the ModifyHsm API operation.
+type ModifyHsmRequest struct {
+	*aws.Request
+	Input *ModifyHsmInput
+}
+
+// Send marshals and sends the ModifyHsm API request.
+func (r ModifyHsmRequest) Send() (*ModifyHsmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyHsmOutput), nil
+}
+
+// ModifyHsmRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies an HSM.
 //
-// See ModifyHsm for more information on using the ModifyHsm
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation can result in the HSM being offline for up to 15 minutes while
+// the AWS CloudHSM service is reconfigured. If you are modifying a production
+// HSM, you should ensure that your AWS CloudHSM service is configured for high
+// availability, and consider executing this operation during a maintenance
+// window.
 //
 //    // Example sending a request using the ModifyHsmRequest method.
-//    req, resp := client.ModifyHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyHsmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsm
-func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) (req *aws.Request, output *ModifyHsmOutput) {
+func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) ModifyHsmRequest {
 	op := &aws.Operation{
 		Name:       opModifyHsm,
 		HTTPMethod: "POST",
@@ -1523,87 +871,45 @@ func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) (req *aws.Request, ou
 		input = &ModifyHsmInput{}
 	}
 
-	output = &ModifyHsmOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyHsm API operation for Amazon CloudHSM.
-//
-// Modifies an HSM.
-//
-// This operation can result in the HSM being offline for up to 15 minutes while
-// the AWS CloudHSM service is reconfigured. If you are modifying a production
-// HSM, you should ensure that your AWS CloudHSM service is configured for high
-// availability, and consider executing this operation during a maintenance
-// window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ModifyHsm for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsm
-func (c *CloudHSM) ModifyHsm(input *ModifyHsmInput) (*ModifyHsmOutput, error) {
-	req, out := c.ModifyHsmRequest(input)
-	return out, req.Send()
-}
-
-// ModifyHsmWithContext is the same as ModifyHsm with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyHsm for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ModifyHsmWithContext(ctx aws.Context, input *ModifyHsmInput, opts ...aws.Option) (*ModifyHsmOutput, error) {
-	req, out := c.ModifyHsmRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyHsmOutput{})
+	return ModifyHsmRequest{Request: req, Input: input}
 }
 
 const opModifyLunaClient = "ModifyLunaClient"
 
-// ModifyLunaClientRequest generates a "aws.Request" representing the
-// client's request for the ModifyLunaClient operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyLunaClientRequest is a API request type for the ModifyLunaClient API operation.
+type ModifyLunaClientRequest struct {
+	*aws.Request
+	Input *ModifyLunaClientInput
+}
+
+// Send marshals and sends the ModifyLunaClient API request.
+func (r ModifyLunaClientRequest) Send() (*ModifyLunaClientOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyLunaClientOutput), nil
+}
+
+// ModifyLunaClientRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies the certificate used by the client.
 //
-// See ModifyLunaClient for more information on using the ModifyLunaClient
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This action can potentially start a workflow to install the new certificate
+// on the client's HSMs.
 //
 //    // Example sending a request using the ModifyLunaClientRequest method.
-//    req, resp := client.ModifyLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyLunaClientRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClient
-func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) (req *aws.Request, output *ModifyLunaClientOutput) {
+func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) ModifyLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opModifyLunaClient,
 		HTTPMethod: "POST",
@@ -1614,78 +920,45 @@ func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) (req *a
 		input = &ModifyLunaClientInput{}
 	}
 
-	output = &ModifyLunaClientOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyLunaClient API operation for Amazon CloudHSM.
-//
-// Modifies the certificate used by the client.
-//
-// This action can potentially start a workflow to install the new certificate
-// on the client's HSMs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation ModifyLunaClient for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClient
-func (c *CloudHSM) ModifyLunaClient(input *ModifyLunaClientInput) (*ModifyLunaClientOutput, error) {
-	req, out := c.ModifyLunaClientRequest(input)
-	return out, req.Send()
-}
-
-// ModifyLunaClientWithContext is the same as ModifyLunaClient with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyLunaClient for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) ModifyLunaClientWithContext(ctx aws.Context, input *ModifyLunaClientInput, opts ...aws.Option) (*ModifyLunaClientOutput, error) {
-	req, out := c.ModifyLunaClientRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyLunaClientOutput{})
+	return ModifyLunaClientRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromResourceRequest is a API request type for the RemoveTagsFromResource API operation.
+type RemoveTagsFromResourceRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromResourceInput
+}
+
+// Send marshals and sends the RemoveTagsFromResource API request.
+func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// RemoveTagsFromResourceRequest returns a request value for making API operation for
+// Amazon CloudHSM.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes one or more tags from the specified AWS CloudHSM resource.
 //
-// See RemoveTagsFromResource for more information on using the RemoveTagsFromResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To remove a tag, specify only the tag key to remove (not the value). To overwrite
+// the value for an existing tag, use AddTagsToResource.
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResource
-func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -1696,55 +969,8 @@ func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceIn
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	output = &RemoveTagsFromResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTagsFromResource API operation for Amazon CloudHSM.
-//
-// Removes one or more tags from the specified AWS CloudHSM resource.
-//
-// To remove a tag, specify only the tag key to remove (not the value). To overwrite
-// the value for an existing tag, use AddTagsToResource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudHSM's
-// API operation RemoveTagsFromResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
-//
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResource
-func (c *CloudHSM) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromResourceWithContext is the same as RemoveTagsFromResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResourceRequest

@@ -63,172 +63,90 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ElasticBeanstalkAPI interface {
-	AbortEnvironmentUpdate(*elasticbeanstalk.AbortEnvironmentUpdateInput) (*elasticbeanstalk.AbortEnvironmentUpdateOutput, error)
-	AbortEnvironmentUpdateWithContext(aws.Context, *elasticbeanstalk.AbortEnvironmentUpdateInput, ...aws.Option) (*elasticbeanstalk.AbortEnvironmentUpdateOutput, error)
-	AbortEnvironmentUpdateRequest(*elasticbeanstalk.AbortEnvironmentUpdateInput) (*aws.Request, *elasticbeanstalk.AbortEnvironmentUpdateOutput)
+	AbortEnvironmentUpdateRequest(*elasticbeanstalk.AbortEnvironmentUpdateInput) elasticbeanstalk.AbortEnvironmentUpdateRequest
 
-	ApplyEnvironmentManagedAction(*elasticbeanstalk.ApplyEnvironmentManagedActionInput) (*elasticbeanstalk.ApplyEnvironmentManagedActionOutput, error)
-	ApplyEnvironmentManagedActionWithContext(aws.Context, *elasticbeanstalk.ApplyEnvironmentManagedActionInput, ...aws.Option) (*elasticbeanstalk.ApplyEnvironmentManagedActionOutput, error)
-	ApplyEnvironmentManagedActionRequest(*elasticbeanstalk.ApplyEnvironmentManagedActionInput) (*aws.Request, *elasticbeanstalk.ApplyEnvironmentManagedActionOutput)
+	ApplyEnvironmentManagedActionRequest(*elasticbeanstalk.ApplyEnvironmentManagedActionInput) elasticbeanstalk.ApplyEnvironmentManagedActionRequest
 
-	CheckDNSAvailability(*elasticbeanstalk.CheckDNSAvailabilityInput) (*elasticbeanstalk.CheckDNSAvailabilityOutput, error)
-	CheckDNSAvailabilityWithContext(aws.Context, *elasticbeanstalk.CheckDNSAvailabilityInput, ...aws.Option) (*elasticbeanstalk.CheckDNSAvailabilityOutput, error)
-	CheckDNSAvailabilityRequest(*elasticbeanstalk.CheckDNSAvailabilityInput) (*aws.Request, *elasticbeanstalk.CheckDNSAvailabilityOutput)
+	CheckDNSAvailabilityRequest(*elasticbeanstalk.CheckDNSAvailabilityInput) elasticbeanstalk.CheckDNSAvailabilityRequest
 
-	ComposeEnvironments(*elasticbeanstalk.ComposeEnvironmentsInput) (*elasticbeanstalk.EnvironmentDescriptionsMessage, error)
-	ComposeEnvironmentsWithContext(aws.Context, *elasticbeanstalk.ComposeEnvironmentsInput, ...aws.Option) (*elasticbeanstalk.EnvironmentDescriptionsMessage, error)
-	ComposeEnvironmentsRequest(*elasticbeanstalk.ComposeEnvironmentsInput) (*aws.Request, *elasticbeanstalk.EnvironmentDescriptionsMessage)
+	ComposeEnvironmentsRequest(*elasticbeanstalk.ComposeEnvironmentsInput) elasticbeanstalk.ComposeEnvironmentsRequest
 
-	CreateApplication(*elasticbeanstalk.CreateApplicationInput) (*elasticbeanstalk.ApplicationDescriptionMessage, error)
-	CreateApplicationWithContext(aws.Context, *elasticbeanstalk.CreateApplicationInput, ...aws.Option) (*elasticbeanstalk.ApplicationDescriptionMessage, error)
-	CreateApplicationRequest(*elasticbeanstalk.CreateApplicationInput) (*aws.Request, *elasticbeanstalk.ApplicationDescriptionMessage)
+	CreateApplicationRequest(*elasticbeanstalk.CreateApplicationInput) elasticbeanstalk.CreateApplicationRequest
 
-	CreateApplicationVersion(*elasticbeanstalk.CreateApplicationVersionInput) (*elasticbeanstalk.ApplicationVersionDescriptionMessage, error)
-	CreateApplicationVersionWithContext(aws.Context, *elasticbeanstalk.CreateApplicationVersionInput, ...aws.Option) (*elasticbeanstalk.ApplicationVersionDescriptionMessage, error)
-	CreateApplicationVersionRequest(*elasticbeanstalk.CreateApplicationVersionInput) (*aws.Request, *elasticbeanstalk.ApplicationVersionDescriptionMessage)
+	CreateApplicationVersionRequest(*elasticbeanstalk.CreateApplicationVersionInput) elasticbeanstalk.CreateApplicationVersionRequest
 
-	CreateConfigurationTemplate(*elasticbeanstalk.CreateConfigurationTemplateInput) (*elasticbeanstalk.ConfigurationSettingsDescription, error)
-	CreateConfigurationTemplateWithContext(aws.Context, *elasticbeanstalk.CreateConfigurationTemplateInput, ...aws.Option) (*elasticbeanstalk.ConfigurationSettingsDescription, error)
-	CreateConfigurationTemplateRequest(*elasticbeanstalk.CreateConfigurationTemplateInput) (*aws.Request, *elasticbeanstalk.ConfigurationSettingsDescription)
+	CreateConfigurationTemplateRequest(*elasticbeanstalk.CreateConfigurationTemplateInput) elasticbeanstalk.CreateConfigurationTemplateRequest
 
-	CreateEnvironment(*elasticbeanstalk.CreateEnvironmentInput) (*elasticbeanstalk.EnvironmentDescription, error)
-	CreateEnvironmentWithContext(aws.Context, *elasticbeanstalk.CreateEnvironmentInput, ...aws.Option) (*elasticbeanstalk.EnvironmentDescription, error)
-	CreateEnvironmentRequest(*elasticbeanstalk.CreateEnvironmentInput) (*aws.Request, *elasticbeanstalk.EnvironmentDescription)
+	CreateEnvironmentRequest(*elasticbeanstalk.CreateEnvironmentInput) elasticbeanstalk.CreateEnvironmentRequest
 
-	CreatePlatformVersion(*elasticbeanstalk.CreatePlatformVersionInput) (*elasticbeanstalk.CreatePlatformVersionOutput, error)
-	CreatePlatformVersionWithContext(aws.Context, *elasticbeanstalk.CreatePlatformVersionInput, ...aws.Option) (*elasticbeanstalk.CreatePlatformVersionOutput, error)
-	CreatePlatformVersionRequest(*elasticbeanstalk.CreatePlatformVersionInput) (*aws.Request, *elasticbeanstalk.CreatePlatformVersionOutput)
+	CreatePlatformVersionRequest(*elasticbeanstalk.CreatePlatformVersionInput) elasticbeanstalk.CreatePlatformVersionRequest
 
-	CreateStorageLocation(*elasticbeanstalk.CreateStorageLocationInput) (*elasticbeanstalk.CreateStorageLocationOutput, error)
-	CreateStorageLocationWithContext(aws.Context, *elasticbeanstalk.CreateStorageLocationInput, ...aws.Option) (*elasticbeanstalk.CreateStorageLocationOutput, error)
-	CreateStorageLocationRequest(*elasticbeanstalk.CreateStorageLocationInput) (*aws.Request, *elasticbeanstalk.CreateStorageLocationOutput)
+	CreateStorageLocationRequest(*elasticbeanstalk.CreateStorageLocationInput) elasticbeanstalk.CreateStorageLocationRequest
 
-	DeleteApplication(*elasticbeanstalk.DeleteApplicationInput) (*elasticbeanstalk.DeleteApplicationOutput, error)
-	DeleteApplicationWithContext(aws.Context, *elasticbeanstalk.DeleteApplicationInput, ...aws.Option) (*elasticbeanstalk.DeleteApplicationOutput, error)
-	DeleteApplicationRequest(*elasticbeanstalk.DeleteApplicationInput) (*aws.Request, *elasticbeanstalk.DeleteApplicationOutput)
+	DeleteApplicationRequest(*elasticbeanstalk.DeleteApplicationInput) elasticbeanstalk.DeleteApplicationRequest
 
-	DeleteApplicationVersion(*elasticbeanstalk.DeleteApplicationVersionInput) (*elasticbeanstalk.DeleteApplicationVersionOutput, error)
-	DeleteApplicationVersionWithContext(aws.Context, *elasticbeanstalk.DeleteApplicationVersionInput, ...aws.Option) (*elasticbeanstalk.DeleteApplicationVersionOutput, error)
-	DeleteApplicationVersionRequest(*elasticbeanstalk.DeleteApplicationVersionInput) (*aws.Request, *elasticbeanstalk.DeleteApplicationVersionOutput)
+	DeleteApplicationVersionRequest(*elasticbeanstalk.DeleteApplicationVersionInput) elasticbeanstalk.DeleteApplicationVersionRequest
 
-	DeleteConfigurationTemplate(*elasticbeanstalk.DeleteConfigurationTemplateInput) (*elasticbeanstalk.DeleteConfigurationTemplateOutput, error)
-	DeleteConfigurationTemplateWithContext(aws.Context, *elasticbeanstalk.DeleteConfigurationTemplateInput, ...aws.Option) (*elasticbeanstalk.DeleteConfigurationTemplateOutput, error)
-	DeleteConfigurationTemplateRequest(*elasticbeanstalk.DeleteConfigurationTemplateInput) (*aws.Request, *elasticbeanstalk.DeleteConfigurationTemplateOutput)
+	DeleteConfigurationTemplateRequest(*elasticbeanstalk.DeleteConfigurationTemplateInput) elasticbeanstalk.DeleteConfigurationTemplateRequest
 
-	DeleteEnvironmentConfiguration(*elasticbeanstalk.DeleteEnvironmentConfigurationInput) (*elasticbeanstalk.DeleteEnvironmentConfigurationOutput, error)
-	DeleteEnvironmentConfigurationWithContext(aws.Context, *elasticbeanstalk.DeleteEnvironmentConfigurationInput, ...aws.Option) (*elasticbeanstalk.DeleteEnvironmentConfigurationOutput, error)
-	DeleteEnvironmentConfigurationRequest(*elasticbeanstalk.DeleteEnvironmentConfigurationInput) (*aws.Request, *elasticbeanstalk.DeleteEnvironmentConfigurationOutput)
+	DeleteEnvironmentConfigurationRequest(*elasticbeanstalk.DeleteEnvironmentConfigurationInput) elasticbeanstalk.DeleteEnvironmentConfigurationRequest
 
-	DeletePlatformVersion(*elasticbeanstalk.DeletePlatformVersionInput) (*elasticbeanstalk.DeletePlatformVersionOutput, error)
-	DeletePlatformVersionWithContext(aws.Context, *elasticbeanstalk.DeletePlatformVersionInput, ...aws.Option) (*elasticbeanstalk.DeletePlatformVersionOutput, error)
-	DeletePlatformVersionRequest(*elasticbeanstalk.DeletePlatformVersionInput) (*aws.Request, *elasticbeanstalk.DeletePlatformVersionOutput)
+	DeletePlatformVersionRequest(*elasticbeanstalk.DeletePlatformVersionInput) elasticbeanstalk.DeletePlatformVersionRequest
 
-	DescribeApplicationVersions(*elasticbeanstalk.DescribeApplicationVersionsInput) (*elasticbeanstalk.DescribeApplicationVersionsOutput, error)
-	DescribeApplicationVersionsWithContext(aws.Context, *elasticbeanstalk.DescribeApplicationVersionsInput, ...aws.Option) (*elasticbeanstalk.DescribeApplicationVersionsOutput, error)
-	DescribeApplicationVersionsRequest(*elasticbeanstalk.DescribeApplicationVersionsInput) (*aws.Request, *elasticbeanstalk.DescribeApplicationVersionsOutput)
+	DescribeApplicationVersionsRequest(*elasticbeanstalk.DescribeApplicationVersionsInput) elasticbeanstalk.DescribeApplicationVersionsRequest
 
-	DescribeApplications(*elasticbeanstalk.DescribeApplicationsInput) (*elasticbeanstalk.DescribeApplicationsOutput, error)
-	DescribeApplicationsWithContext(aws.Context, *elasticbeanstalk.DescribeApplicationsInput, ...aws.Option) (*elasticbeanstalk.DescribeApplicationsOutput, error)
-	DescribeApplicationsRequest(*elasticbeanstalk.DescribeApplicationsInput) (*aws.Request, *elasticbeanstalk.DescribeApplicationsOutput)
+	DescribeApplicationsRequest(*elasticbeanstalk.DescribeApplicationsInput) elasticbeanstalk.DescribeApplicationsRequest
 
-	DescribeConfigurationOptions(*elasticbeanstalk.DescribeConfigurationOptionsInput) (*elasticbeanstalk.DescribeConfigurationOptionsOutput, error)
-	DescribeConfigurationOptionsWithContext(aws.Context, *elasticbeanstalk.DescribeConfigurationOptionsInput, ...aws.Option) (*elasticbeanstalk.DescribeConfigurationOptionsOutput, error)
-	DescribeConfigurationOptionsRequest(*elasticbeanstalk.DescribeConfigurationOptionsInput) (*aws.Request, *elasticbeanstalk.DescribeConfigurationOptionsOutput)
+	DescribeConfigurationOptionsRequest(*elasticbeanstalk.DescribeConfigurationOptionsInput) elasticbeanstalk.DescribeConfigurationOptionsRequest
 
-	DescribeConfigurationSettings(*elasticbeanstalk.DescribeConfigurationSettingsInput) (*elasticbeanstalk.DescribeConfigurationSettingsOutput, error)
-	DescribeConfigurationSettingsWithContext(aws.Context, *elasticbeanstalk.DescribeConfigurationSettingsInput, ...aws.Option) (*elasticbeanstalk.DescribeConfigurationSettingsOutput, error)
-	DescribeConfigurationSettingsRequest(*elasticbeanstalk.DescribeConfigurationSettingsInput) (*aws.Request, *elasticbeanstalk.DescribeConfigurationSettingsOutput)
+	DescribeConfigurationSettingsRequest(*elasticbeanstalk.DescribeConfigurationSettingsInput) elasticbeanstalk.DescribeConfigurationSettingsRequest
 
-	DescribeEnvironmentHealth(*elasticbeanstalk.DescribeEnvironmentHealthInput) (*elasticbeanstalk.DescribeEnvironmentHealthOutput, error)
-	DescribeEnvironmentHealthWithContext(aws.Context, *elasticbeanstalk.DescribeEnvironmentHealthInput, ...aws.Option) (*elasticbeanstalk.DescribeEnvironmentHealthOutput, error)
-	DescribeEnvironmentHealthRequest(*elasticbeanstalk.DescribeEnvironmentHealthInput) (*aws.Request, *elasticbeanstalk.DescribeEnvironmentHealthOutput)
+	DescribeEnvironmentHealthRequest(*elasticbeanstalk.DescribeEnvironmentHealthInput) elasticbeanstalk.DescribeEnvironmentHealthRequest
 
-	DescribeEnvironmentManagedActionHistory(*elasticbeanstalk.DescribeEnvironmentManagedActionHistoryInput) (*elasticbeanstalk.DescribeEnvironmentManagedActionHistoryOutput, error)
-	DescribeEnvironmentManagedActionHistoryWithContext(aws.Context, *elasticbeanstalk.DescribeEnvironmentManagedActionHistoryInput, ...aws.Option) (*elasticbeanstalk.DescribeEnvironmentManagedActionHistoryOutput, error)
-	DescribeEnvironmentManagedActionHistoryRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionHistoryInput) (*aws.Request, *elasticbeanstalk.DescribeEnvironmentManagedActionHistoryOutput)
+	DescribeEnvironmentManagedActionHistoryRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionHistoryInput) elasticbeanstalk.DescribeEnvironmentManagedActionHistoryRequest
 
-	DescribeEnvironmentManagedActions(*elasticbeanstalk.DescribeEnvironmentManagedActionsInput) (*elasticbeanstalk.DescribeEnvironmentManagedActionsOutput, error)
-	DescribeEnvironmentManagedActionsWithContext(aws.Context, *elasticbeanstalk.DescribeEnvironmentManagedActionsInput, ...aws.Option) (*elasticbeanstalk.DescribeEnvironmentManagedActionsOutput, error)
-	DescribeEnvironmentManagedActionsRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionsInput) (*aws.Request, *elasticbeanstalk.DescribeEnvironmentManagedActionsOutput)
+	DescribeEnvironmentManagedActionsRequest(*elasticbeanstalk.DescribeEnvironmentManagedActionsInput) elasticbeanstalk.DescribeEnvironmentManagedActionsRequest
 
-	DescribeEnvironmentResources(*elasticbeanstalk.DescribeEnvironmentResourcesInput) (*elasticbeanstalk.DescribeEnvironmentResourcesOutput, error)
-	DescribeEnvironmentResourcesWithContext(aws.Context, *elasticbeanstalk.DescribeEnvironmentResourcesInput, ...aws.Option) (*elasticbeanstalk.DescribeEnvironmentResourcesOutput, error)
-	DescribeEnvironmentResourcesRequest(*elasticbeanstalk.DescribeEnvironmentResourcesInput) (*aws.Request, *elasticbeanstalk.DescribeEnvironmentResourcesOutput)
+	DescribeEnvironmentResourcesRequest(*elasticbeanstalk.DescribeEnvironmentResourcesInput) elasticbeanstalk.DescribeEnvironmentResourcesRequest
 
-	DescribeEnvironments(*elasticbeanstalk.DescribeEnvironmentsInput) (*elasticbeanstalk.EnvironmentDescriptionsMessage, error)
-	DescribeEnvironmentsWithContext(aws.Context, *elasticbeanstalk.DescribeEnvironmentsInput, ...aws.Option) (*elasticbeanstalk.EnvironmentDescriptionsMessage, error)
-	DescribeEnvironmentsRequest(*elasticbeanstalk.DescribeEnvironmentsInput) (*aws.Request, *elasticbeanstalk.EnvironmentDescriptionsMessage)
+	DescribeEnvironmentsRequest(*elasticbeanstalk.DescribeEnvironmentsInput) elasticbeanstalk.DescribeEnvironmentsRequest
 
-	DescribeEvents(*elasticbeanstalk.DescribeEventsInput) (*elasticbeanstalk.DescribeEventsOutput, error)
-	DescribeEventsWithContext(aws.Context, *elasticbeanstalk.DescribeEventsInput, ...aws.Option) (*elasticbeanstalk.DescribeEventsOutput, error)
-	DescribeEventsRequest(*elasticbeanstalk.DescribeEventsInput) (*aws.Request, *elasticbeanstalk.DescribeEventsOutput)
+	DescribeEventsRequest(*elasticbeanstalk.DescribeEventsInput) elasticbeanstalk.DescribeEventsRequest
 
 	DescribeEventsPages(*elasticbeanstalk.DescribeEventsInput, func(*elasticbeanstalk.DescribeEventsOutput, bool) bool) error
 	DescribeEventsPagesWithContext(aws.Context, *elasticbeanstalk.DescribeEventsInput, func(*elasticbeanstalk.DescribeEventsOutput, bool) bool, ...aws.Option) error
 
-	DescribeInstancesHealth(*elasticbeanstalk.DescribeInstancesHealthInput) (*elasticbeanstalk.DescribeInstancesHealthOutput, error)
-	DescribeInstancesHealthWithContext(aws.Context, *elasticbeanstalk.DescribeInstancesHealthInput, ...aws.Option) (*elasticbeanstalk.DescribeInstancesHealthOutput, error)
-	DescribeInstancesHealthRequest(*elasticbeanstalk.DescribeInstancesHealthInput) (*aws.Request, *elasticbeanstalk.DescribeInstancesHealthOutput)
+	DescribeInstancesHealthRequest(*elasticbeanstalk.DescribeInstancesHealthInput) elasticbeanstalk.DescribeInstancesHealthRequest
 
-	DescribePlatformVersion(*elasticbeanstalk.DescribePlatformVersionInput) (*elasticbeanstalk.DescribePlatformVersionOutput, error)
-	DescribePlatformVersionWithContext(aws.Context, *elasticbeanstalk.DescribePlatformVersionInput, ...aws.Option) (*elasticbeanstalk.DescribePlatformVersionOutput, error)
-	DescribePlatformVersionRequest(*elasticbeanstalk.DescribePlatformVersionInput) (*aws.Request, *elasticbeanstalk.DescribePlatformVersionOutput)
+	DescribePlatformVersionRequest(*elasticbeanstalk.DescribePlatformVersionInput) elasticbeanstalk.DescribePlatformVersionRequest
 
-	ListAvailableSolutionStacks(*elasticbeanstalk.ListAvailableSolutionStacksInput) (*elasticbeanstalk.ListAvailableSolutionStacksOutput, error)
-	ListAvailableSolutionStacksWithContext(aws.Context, *elasticbeanstalk.ListAvailableSolutionStacksInput, ...aws.Option) (*elasticbeanstalk.ListAvailableSolutionStacksOutput, error)
-	ListAvailableSolutionStacksRequest(*elasticbeanstalk.ListAvailableSolutionStacksInput) (*aws.Request, *elasticbeanstalk.ListAvailableSolutionStacksOutput)
+	ListAvailableSolutionStacksRequest(*elasticbeanstalk.ListAvailableSolutionStacksInput) elasticbeanstalk.ListAvailableSolutionStacksRequest
 
-	ListPlatformVersions(*elasticbeanstalk.ListPlatformVersionsInput) (*elasticbeanstalk.ListPlatformVersionsOutput, error)
-	ListPlatformVersionsWithContext(aws.Context, *elasticbeanstalk.ListPlatformVersionsInput, ...aws.Option) (*elasticbeanstalk.ListPlatformVersionsOutput, error)
-	ListPlatformVersionsRequest(*elasticbeanstalk.ListPlatformVersionsInput) (*aws.Request, *elasticbeanstalk.ListPlatformVersionsOutput)
+	ListPlatformVersionsRequest(*elasticbeanstalk.ListPlatformVersionsInput) elasticbeanstalk.ListPlatformVersionsRequest
 
-	RebuildEnvironment(*elasticbeanstalk.RebuildEnvironmentInput) (*elasticbeanstalk.RebuildEnvironmentOutput, error)
-	RebuildEnvironmentWithContext(aws.Context, *elasticbeanstalk.RebuildEnvironmentInput, ...aws.Option) (*elasticbeanstalk.RebuildEnvironmentOutput, error)
-	RebuildEnvironmentRequest(*elasticbeanstalk.RebuildEnvironmentInput) (*aws.Request, *elasticbeanstalk.RebuildEnvironmentOutput)
+	RebuildEnvironmentRequest(*elasticbeanstalk.RebuildEnvironmentInput) elasticbeanstalk.RebuildEnvironmentRequest
 
-	RequestEnvironmentInfo(*elasticbeanstalk.RequestEnvironmentInfoInput) (*elasticbeanstalk.RequestEnvironmentInfoOutput, error)
-	RequestEnvironmentInfoWithContext(aws.Context, *elasticbeanstalk.RequestEnvironmentInfoInput, ...aws.Option) (*elasticbeanstalk.RequestEnvironmentInfoOutput, error)
-	RequestEnvironmentInfoRequest(*elasticbeanstalk.RequestEnvironmentInfoInput) (*aws.Request, *elasticbeanstalk.RequestEnvironmentInfoOutput)
+	RequestEnvironmentInfoRequest(*elasticbeanstalk.RequestEnvironmentInfoInput) elasticbeanstalk.RequestEnvironmentInfoRequest
 
-	RestartAppServer(*elasticbeanstalk.RestartAppServerInput) (*elasticbeanstalk.RestartAppServerOutput, error)
-	RestartAppServerWithContext(aws.Context, *elasticbeanstalk.RestartAppServerInput, ...aws.Option) (*elasticbeanstalk.RestartAppServerOutput, error)
-	RestartAppServerRequest(*elasticbeanstalk.RestartAppServerInput) (*aws.Request, *elasticbeanstalk.RestartAppServerOutput)
+	RestartAppServerRequest(*elasticbeanstalk.RestartAppServerInput) elasticbeanstalk.RestartAppServerRequest
 
-	RetrieveEnvironmentInfo(*elasticbeanstalk.RetrieveEnvironmentInfoInput) (*elasticbeanstalk.RetrieveEnvironmentInfoOutput, error)
-	RetrieveEnvironmentInfoWithContext(aws.Context, *elasticbeanstalk.RetrieveEnvironmentInfoInput, ...aws.Option) (*elasticbeanstalk.RetrieveEnvironmentInfoOutput, error)
-	RetrieveEnvironmentInfoRequest(*elasticbeanstalk.RetrieveEnvironmentInfoInput) (*aws.Request, *elasticbeanstalk.RetrieveEnvironmentInfoOutput)
+	RetrieveEnvironmentInfoRequest(*elasticbeanstalk.RetrieveEnvironmentInfoInput) elasticbeanstalk.RetrieveEnvironmentInfoRequest
 
-	SwapEnvironmentCNAMEs(*elasticbeanstalk.SwapEnvironmentCNAMEsInput) (*elasticbeanstalk.SwapEnvironmentCNAMEsOutput, error)
-	SwapEnvironmentCNAMEsWithContext(aws.Context, *elasticbeanstalk.SwapEnvironmentCNAMEsInput, ...aws.Option) (*elasticbeanstalk.SwapEnvironmentCNAMEsOutput, error)
-	SwapEnvironmentCNAMEsRequest(*elasticbeanstalk.SwapEnvironmentCNAMEsInput) (*aws.Request, *elasticbeanstalk.SwapEnvironmentCNAMEsOutput)
+	SwapEnvironmentCNAMEsRequest(*elasticbeanstalk.SwapEnvironmentCNAMEsInput) elasticbeanstalk.SwapEnvironmentCNAMEsRequest
 
-	TerminateEnvironment(*elasticbeanstalk.TerminateEnvironmentInput) (*elasticbeanstalk.EnvironmentDescription, error)
-	TerminateEnvironmentWithContext(aws.Context, *elasticbeanstalk.TerminateEnvironmentInput, ...aws.Option) (*elasticbeanstalk.EnvironmentDescription, error)
-	TerminateEnvironmentRequest(*elasticbeanstalk.TerminateEnvironmentInput) (*aws.Request, *elasticbeanstalk.EnvironmentDescription)
+	TerminateEnvironmentRequest(*elasticbeanstalk.TerminateEnvironmentInput) elasticbeanstalk.TerminateEnvironmentRequest
 
-	UpdateApplication(*elasticbeanstalk.UpdateApplicationInput) (*elasticbeanstalk.ApplicationDescriptionMessage, error)
-	UpdateApplicationWithContext(aws.Context, *elasticbeanstalk.UpdateApplicationInput, ...aws.Option) (*elasticbeanstalk.ApplicationDescriptionMessage, error)
-	UpdateApplicationRequest(*elasticbeanstalk.UpdateApplicationInput) (*aws.Request, *elasticbeanstalk.ApplicationDescriptionMessage)
+	UpdateApplicationRequest(*elasticbeanstalk.UpdateApplicationInput) elasticbeanstalk.UpdateApplicationRequest
 
-	UpdateApplicationResourceLifecycle(*elasticbeanstalk.UpdateApplicationResourceLifecycleInput) (*elasticbeanstalk.UpdateApplicationResourceLifecycleOutput, error)
-	UpdateApplicationResourceLifecycleWithContext(aws.Context, *elasticbeanstalk.UpdateApplicationResourceLifecycleInput, ...aws.Option) (*elasticbeanstalk.UpdateApplicationResourceLifecycleOutput, error)
-	UpdateApplicationResourceLifecycleRequest(*elasticbeanstalk.UpdateApplicationResourceLifecycleInput) (*aws.Request, *elasticbeanstalk.UpdateApplicationResourceLifecycleOutput)
+	UpdateApplicationResourceLifecycleRequest(*elasticbeanstalk.UpdateApplicationResourceLifecycleInput) elasticbeanstalk.UpdateApplicationResourceLifecycleRequest
 
-	UpdateApplicationVersion(*elasticbeanstalk.UpdateApplicationVersionInput) (*elasticbeanstalk.ApplicationVersionDescriptionMessage, error)
-	UpdateApplicationVersionWithContext(aws.Context, *elasticbeanstalk.UpdateApplicationVersionInput, ...aws.Option) (*elasticbeanstalk.ApplicationVersionDescriptionMessage, error)
-	UpdateApplicationVersionRequest(*elasticbeanstalk.UpdateApplicationVersionInput) (*aws.Request, *elasticbeanstalk.ApplicationVersionDescriptionMessage)
+	UpdateApplicationVersionRequest(*elasticbeanstalk.UpdateApplicationVersionInput) elasticbeanstalk.UpdateApplicationVersionRequest
 
-	UpdateConfigurationTemplate(*elasticbeanstalk.UpdateConfigurationTemplateInput) (*elasticbeanstalk.ConfigurationSettingsDescription, error)
-	UpdateConfigurationTemplateWithContext(aws.Context, *elasticbeanstalk.UpdateConfigurationTemplateInput, ...aws.Option) (*elasticbeanstalk.ConfigurationSettingsDescription, error)
-	UpdateConfigurationTemplateRequest(*elasticbeanstalk.UpdateConfigurationTemplateInput) (*aws.Request, *elasticbeanstalk.ConfigurationSettingsDescription)
+	UpdateConfigurationTemplateRequest(*elasticbeanstalk.UpdateConfigurationTemplateInput) elasticbeanstalk.UpdateConfigurationTemplateRequest
 
-	UpdateEnvironment(*elasticbeanstalk.UpdateEnvironmentInput) (*elasticbeanstalk.EnvironmentDescription, error)
-	UpdateEnvironmentWithContext(aws.Context, *elasticbeanstalk.UpdateEnvironmentInput, ...aws.Option) (*elasticbeanstalk.EnvironmentDescription, error)
-	UpdateEnvironmentRequest(*elasticbeanstalk.UpdateEnvironmentInput) (*aws.Request, *elasticbeanstalk.EnvironmentDescription)
+	UpdateEnvironmentRequest(*elasticbeanstalk.UpdateEnvironmentInput) elasticbeanstalk.UpdateEnvironmentRequest
 
-	ValidateConfigurationSettings(*elasticbeanstalk.ValidateConfigurationSettingsInput) (*elasticbeanstalk.ValidateConfigurationSettingsOutput, error)
-	ValidateConfigurationSettingsWithContext(aws.Context, *elasticbeanstalk.ValidateConfigurationSettingsInput, ...aws.Option) (*elasticbeanstalk.ValidateConfigurationSettingsOutput, error)
-	ValidateConfigurationSettingsRequest(*elasticbeanstalk.ValidateConfigurationSettingsInput) (*aws.Request, *elasticbeanstalk.ValidateConfigurationSettingsOutput)
+	ValidateConfigurationSettingsRequest(*elasticbeanstalk.ValidateConfigurationSettingsInput) elasticbeanstalk.ValidateConfigurationSettingsRequest
 }
 
 var _ ElasticBeanstalkAPI = (*elasticbeanstalk.ElasticBeanstalk)(nil)

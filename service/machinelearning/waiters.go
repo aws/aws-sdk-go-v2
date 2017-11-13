@@ -48,10 +48,10 @@ func (c *MachineLearning) WaitUntilBatchPredictionAvailableWithContext(ctx aws.C
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeBatchPredictionsRequest(inCpy)
+			req := c.DescribeBatchPredictionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -99,10 +99,10 @@ func (c *MachineLearning) WaitUntilDataSourceAvailableWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDataSourcesRequest(inCpy)
+			req := c.DescribeDataSourcesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -150,10 +150,10 @@ func (c *MachineLearning) WaitUntilEvaluationAvailableWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEvaluationsRequest(inCpy)
+			req := c.DescribeEvaluationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -201,10 +201,10 @@ func (c *MachineLearning) WaitUntilMLModelAvailableWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeMLModelsRequest(inCpy)
+			req := c.DescribeMLModelsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

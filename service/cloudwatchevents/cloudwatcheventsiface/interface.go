@@ -9,7 +9,6 @@
 package cloudwatcheventsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents"
 )
 
@@ -63,65 +62,35 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type CloudWatchEventsAPI interface {
-	DeleteRule(*cloudwatchevents.DeleteRuleInput) (*cloudwatchevents.DeleteRuleOutput, error)
-	DeleteRuleWithContext(aws.Context, *cloudwatchevents.DeleteRuleInput, ...aws.Option) (*cloudwatchevents.DeleteRuleOutput, error)
-	DeleteRuleRequest(*cloudwatchevents.DeleteRuleInput) (*aws.Request, *cloudwatchevents.DeleteRuleOutput)
+	DeleteRuleRequest(*cloudwatchevents.DeleteRuleInput) cloudwatchevents.DeleteRuleRequest
 
-	DescribeEventBus(*cloudwatchevents.DescribeEventBusInput) (*cloudwatchevents.DescribeEventBusOutput, error)
-	DescribeEventBusWithContext(aws.Context, *cloudwatchevents.DescribeEventBusInput, ...aws.Option) (*cloudwatchevents.DescribeEventBusOutput, error)
-	DescribeEventBusRequest(*cloudwatchevents.DescribeEventBusInput) (*aws.Request, *cloudwatchevents.DescribeEventBusOutput)
+	DescribeEventBusRequest(*cloudwatchevents.DescribeEventBusInput) cloudwatchevents.DescribeEventBusRequest
 
-	DescribeRule(*cloudwatchevents.DescribeRuleInput) (*cloudwatchevents.DescribeRuleOutput, error)
-	DescribeRuleWithContext(aws.Context, *cloudwatchevents.DescribeRuleInput, ...aws.Option) (*cloudwatchevents.DescribeRuleOutput, error)
-	DescribeRuleRequest(*cloudwatchevents.DescribeRuleInput) (*aws.Request, *cloudwatchevents.DescribeRuleOutput)
+	DescribeRuleRequest(*cloudwatchevents.DescribeRuleInput) cloudwatchevents.DescribeRuleRequest
 
-	DisableRule(*cloudwatchevents.DisableRuleInput) (*cloudwatchevents.DisableRuleOutput, error)
-	DisableRuleWithContext(aws.Context, *cloudwatchevents.DisableRuleInput, ...aws.Option) (*cloudwatchevents.DisableRuleOutput, error)
-	DisableRuleRequest(*cloudwatchevents.DisableRuleInput) (*aws.Request, *cloudwatchevents.DisableRuleOutput)
+	DisableRuleRequest(*cloudwatchevents.DisableRuleInput) cloudwatchevents.DisableRuleRequest
 
-	EnableRule(*cloudwatchevents.EnableRuleInput) (*cloudwatchevents.EnableRuleOutput, error)
-	EnableRuleWithContext(aws.Context, *cloudwatchevents.EnableRuleInput, ...aws.Option) (*cloudwatchevents.EnableRuleOutput, error)
-	EnableRuleRequest(*cloudwatchevents.EnableRuleInput) (*aws.Request, *cloudwatchevents.EnableRuleOutput)
+	EnableRuleRequest(*cloudwatchevents.EnableRuleInput) cloudwatchevents.EnableRuleRequest
 
-	ListRuleNamesByTarget(*cloudwatchevents.ListRuleNamesByTargetInput) (*cloudwatchevents.ListRuleNamesByTargetOutput, error)
-	ListRuleNamesByTargetWithContext(aws.Context, *cloudwatchevents.ListRuleNamesByTargetInput, ...aws.Option) (*cloudwatchevents.ListRuleNamesByTargetOutput, error)
-	ListRuleNamesByTargetRequest(*cloudwatchevents.ListRuleNamesByTargetInput) (*aws.Request, *cloudwatchevents.ListRuleNamesByTargetOutput)
+	ListRuleNamesByTargetRequest(*cloudwatchevents.ListRuleNamesByTargetInput) cloudwatchevents.ListRuleNamesByTargetRequest
 
-	ListRules(*cloudwatchevents.ListRulesInput) (*cloudwatchevents.ListRulesOutput, error)
-	ListRulesWithContext(aws.Context, *cloudwatchevents.ListRulesInput, ...aws.Option) (*cloudwatchevents.ListRulesOutput, error)
-	ListRulesRequest(*cloudwatchevents.ListRulesInput) (*aws.Request, *cloudwatchevents.ListRulesOutput)
+	ListRulesRequest(*cloudwatchevents.ListRulesInput) cloudwatchevents.ListRulesRequest
 
-	ListTargetsByRule(*cloudwatchevents.ListTargetsByRuleInput) (*cloudwatchevents.ListTargetsByRuleOutput, error)
-	ListTargetsByRuleWithContext(aws.Context, *cloudwatchevents.ListTargetsByRuleInput, ...aws.Option) (*cloudwatchevents.ListTargetsByRuleOutput, error)
-	ListTargetsByRuleRequest(*cloudwatchevents.ListTargetsByRuleInput) (*aws.Request, *cloudwatchevents.ListTargetsByRuleOutput)
+	ListTargetsByRuleRequest(*cloudwatchevents.ListTargetsByRuleInput) cloudwatchevents.ListTargetsByRuleRequest
 
-	PutEvents(*cloudwatchevents.PutEventsInput) (*cloudwatchevents.PutEventsOutput, error)
-	PutEventsWithContext(aws.Context, *cloudwatchevents.PutEventsInput, ...aws.Option) (*cloudwatchevents.PutEventsOutput, error)
-	PutEventsRequest(*cloudwatchevents.PutEventsInput) (*aws.Request, *cloudwatchevents.PutEventsOutput)
+	PutEventsRequest(*cloudwatchevents.PutEventsInput) cloudwatchevents.PutEventsRequest
 
-	PutPermission(*cloudwatchevents.PutPermissionInput) (*cloudwatchevents.PutPermissionOutput, error)
-	PutPermissionWithContext(aws.Context, *cloudwatchevents.PutPermissionInput, ...aws.Option) (*cloudwatchevents.PutPermissionOutput, error)
-	PutPermissionRequest(*cloudwatchevents.PutPermissionInput) (*aws.Request, *cloudwatchevents.PutPermissionOutput)
+	PutPermissionRequest(*cloudwatchevents.PutPermissionInput) cloudwatchevents.PutPermissionRequest
 
-	PutRule(*cloudwatchevents.PutRuleInput) (*cloudwatchevents.PutRuleOutput, error)
-	PutRuleWithContext(aws.Context, *cloudwatchevents.PutRuleInput, ...aws.Option) (*cloudwatchevents.PutRuleOutput, error)
-	PutRuleRequest(*cloudwatchevents.PutRuleInput) (*aws.Request, *cloudwatchevents.PutRuleOutput)
+	PutRuleRequest(*cloudwatchevents.PutRuleInput) cloudwatchevents.PutRuleRequest
 
-	PutTargets(*cloudwatchevents.PutTargetsInput) (*cloudwatchevents.PutTargetsOutput, error)
-	PutTargetsWithContext(aws.Context, *cloudwatchevents.PutTargetsInput, ...aws.Option) (*cloudwatchevents.PutTargetsOutput, error)
-	PutTargetsRequest(*cloudwatchevents.PutTargetsInput) (*aws.Request, *cloudwatchevents.PutTargetsOutput)
+	PutTargetsRequest(*cloudwatchevents.PutTargetsInput) cloudwatchevents.PutTargetsRequest
 
-	RemovePermission(*cloudwatchevents.RemovePermissionInput) (*cloudwatchevents.RemovePermissionOutput, error)
-	RemovePermissionWithContext(aws.Context, *cloudwatchevents.RemovePermissionInput, ...aws.Option) (*cloudwatchevents.RemovePermissionOutput, error)
-	RemovePermissionRequest(*cloudwatchevents.RemovePermissionInput) (*aws.Request, *cloudwatchevents.RemovePermissionOutput)
+	RemovePermissionRequest(*cloudwatchevents.RemovePermissionInput) cloudwatchevents.RemovePermissionRequest
 
-	RemoveTargets(*cloudwatchevents.RemoveTargetsInput) (*cloudwatchevents.RemoveTargetsOutput, error)
-	RemoveTargetsWithContext(aws.Context, *cloudwatchevents.RemoveTargetsInput, ...aws.Option) (*cloudwatchevents.RemoveTargetsOutput, error)
-	RemoveTargetsRequest(*cloudwatchevents.RemoveTargetsInput) (*aws.Request, *cloudwatchevents.RemoveTargetsOutput)
+	RemoveTargetsRequest(*cloudwatchevents.RemoveTargetsInput) cloudwatchevents.RemoveTargetsRequest
 
-	TestEventPattern(*cloudwatchevents.TestEventPatternInput) (*cloudwatchevents.TestEventPatternOutput, error)
-	TestEventPatternWithContext(aws.Context, *cloudwatchevents.TestEventPatternInput, ...aws.Option) (*cloudwatchevents.TestEventPatternOutput, error)
-	TestEventPatternRequest(*cloudwatchevents.TestEventPatternInput) (*aws.Request, *cloudwatchevents.TestEventPatternOutput)
+	TestEventPatternRequest(*cloudwatchevents.TestEventPatternInput) cloudwatchevents.TestEventPatternRequest
 }
 
 var _ CloudWatchEventsAPI = (*cloudwatchevents.CloudWatchEvents)(nil)

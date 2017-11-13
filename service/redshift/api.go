@@ -13,47 +13,24 @@ import (
 
 const opAuthorizeClusterSecurityGroupIngress = "AuthorizeClusterSecurityGroupIngress"
 
-// AuthorizeClusterSecurityGroupIngressRequest generates a "aws.Request" representing the
-// client's request for the AuthorizeClusterSecurityGroupIngress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AuthorizeClusterSecurityGroupIngress for more information on using the AuthorizeClusterSecurityGroupIngress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AuthorizeClusterSecurityGroupIngressRequest method.
-//    req, resp := client.AuthorizeClusterSecurityGroupIngressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngress
-func (c *Redshift) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClusterSecurityGroupIngressInput) (req *aws.Request, output *AuthorizeClusterSecurityGroupIngressOutput) {
-	op := &aws.Operation{
-		Name:       opAuthorizeClusterSecurityGroupIngress,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AuthorizeClusterSecurityGroupIngressInput{}
-	}
-
-	output = &AuthorizeClusterSecurityGroupIngressOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AuthorizeClusterSecurityGroupIngressRequest is a API request type for the AuthorizeClusterSecurityGroupIngress API operation.
+type AuthorizeClusterSecurityGroupIngressRequest struct {
+	*aws.Request
+	Input *AuthorizeClusterSecurityGroupIngressInput
 }
 
-// AuthorizeClusterSecurityGroupIngress API operation for Amazon Redshift.
+// Send marshals and sends the AuthorizeClusterSecurityGroupIngress API request.
+func (r AuthorizeClusterSecurityGroupIngressRequest) Send() (*AuthorizeClusterSecurityGroupIngressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AuthorizeClusterSecurityGroupIngressOutput), nil
+}
+
+// AuthorizeClusterSecurityGroupIngressRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending
 // on whether the application accessing your cluster is running on the Internet
@@ -76,77 +53,65 @@ func (c *Redshift) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeC
 // with Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation AuthorizeClusterSecurityGroupIngress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSecurityGroupNotFoundFault "ClusterSecurityGroupNotFound"
-//   The cluster security group name does not refer to an existing cluster security
-//   group.
-//
-//   * ErrCodeInvalidClusterSecurityGroupStateFault "InvalidClusterSecurityGroupState"
-//   The state of the cluster security group is not available.
-//
-//   * ErrCodeAuthorizationAlreadyExistsFault "AuthorizationAlreadyExists"
-//   The specified CIDR block or EC2 security group is already authorized for
-//   the specified cluster security group.
-//
-//   * ErrCodeAuthorizationQuotaExceededFault "AuthorizationQuotaExceeded"
-//   The authorization quota for the cluster security group has been reached.
+//    // Example sending a request using the AuthorizeClusterSecurityGroupIngressRequest method.
+//    req := client.AuthorizeClusterSecurityGroupIngressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngress
-func (c *Redshift) AuthorizeClusterSecurityGroupIngress(input *AuthorizeClusterSecurityGroupIngressInput) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
-	req, out := c.AuthorizeClusterSecurityGroupIngressRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClusterSecurityGroupIngressInput) AuthorizeClusterSecurityGroupIngressRequest {
+	op := &aws.Operation{
+		Name:       opAuthorizeClusterSecurityGroupIngress,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AuthorizeClusterSecurityGroupIngressWithContext is the same as AuthorizeClusterSecurityGroupIngress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AuthorizeClusterSecurityGroupIngress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) AuthorizeClusterSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeClusterSecurityGroupIngressInput, opts ...aws.Option) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
-	req, out := c.AuthorizeClusterSecurityGroupIngressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AuthorizeClusterSecurityGroupIngressInput{}
+	}
+
+	req := c.newRequest(op, input, &AuthorizeClusterSecurityGroupIngressOutput{})
+	return AuthorizeClusterSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
 const opAuthorizeSnapshotAccess = "AuthorizeSnapshotAccess"
 
-// AuthorizeSnapshotAccessRequest generates a "aws.Request" representing the
-// client's request for the AuthorizeSnapshotAccess operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AuthorizeSnapshotAccessRequest is a API request type for the AuthorizeSnapshotAccess API operation.
+type AuthorizeSnapshotAccessRequest struct {
+	*aws.Request
+	Input *AuthorizeSnapshotAccessInput
+}
+
+// Send marshals and sends the AuthorizeSnapshotAccess API request.
+func (r AuthorizeSnapshotAccessRequest) Send() (*AuthorizeSnapshotAccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AuthorizeSnapshotAccessOutput), nil
+}
+
+// AuthorizeSnapshotAccessRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Authorizes the specified AWS customer account to restore the specified snapshot.
 //
-// See AuthorizeSnapshotAccess for more information on using the AuthorizeSnapshotAccess
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about working with snapshots, go to Amazon Redshift
+// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the AuthorizeSnapshotAccessRequest method.
-//    req, resp := client.AuthorizeSnapshotAccessRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AuthorizeSnapshotAccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess
-func (c *Redshift) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessInput) (req *aws.Request, output *AuthorizeSnapshotAccessOutput) {
+func (c *Redshift) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessInput) AuthorizeSnapshotAccessRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeSnapshotAccess,
 		HTTPMethod: "POST",
@@ -157,113 +122,30 @@ func (c *Redshift) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccess
 		input = &AuthorizeSnapshotAccessInput{}
 	}
 
-	output = &AuthorizeSnapshotAccessOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AuthorizeSnapshotAccess API operation for Amazon Redshift.
-//
-// Authorizes the specified AWS customer account to restore the specified snapshot.
-//
-// For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation AuthorizeSnapshotAccess for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSnapshotNotFoundFault "ClusterSnapshotNotFound"
-//   The snapshot identifier does not refer to an existing cluster snapshot.
-//
-//   * ErrCodeAuthorizationAlreadyExistsFault "AuthorizationAlreadyExists"
-//   The specified CIDR block or EC2 security group is already authorized for
-//   the specified cluster security group.
-//
-//   * ErrCodeAuthorizationQuotaExceededFault "AuthorizationQuotaExceeded"
-//   The authorization quota for the cluster security group has been reached.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-//   * ErrCodeInvalidClusterSnapshotStateFault "InvalidClusterSnapshotState"
-//   The specified cluster snapshot is not in the available state, or other accounts
-//   are authorized to access the snapshot.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   The encryption key has exceeded its grant limit in AWS KMS.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess
-func (c *Redshift) AuthorizeSnapshotAccess(input *AuthorizeSnapshotAccessInput) (*AuthorizeSnapshotAccessOutput, error) {
-	req, out := c.AuthorizeSnapshotAccessRequest(input)
-	return out, req.Send()
-}
-
-// AuthorizeSnapshotAccessWithContext is the same as AuthorizeSnapshotAccess with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AuthorizeSnapshotAccess for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) AuthorizeSnapshotAccessWithContext(ctx aws.Context, input *AuthorizeSnapshotAccessInput, opts ...aws.Option) (*AuthorizeSnapshotAccessOutput, error) {
-	req, out := c.AuthorizeSnapshotAccessRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AuthorizeSnapshotAccessOutput{})
+	return AuthorizeSnapshotAccessRequest{Request: req, Input: input}
 }
 
 const opCopyClusterSnapshot = "CopyClusterSnapshot"
 
-// CopyClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CopyClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyClusterSnapshot for more information on using the CopyClusterSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CopyClusterSnapshotRequest method.
-//    req, resp := client.CopyClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot
-func (c *Redshift) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) (req *aws.Request, output *CopyClusterSnapshotOutput) {
-	op := &aws.Operation{
-		Name:       opCopyClusterSnapshot,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CopyClusterSnapshotInput{}
-	}
-
-	output = &CopyClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CopyClusterSnapshotRequest is a API request type for the CopyClusterSnapshot API operation.
+type CopyClusterSnapshotRequest struct {
+	*aws.Request
+	Input *CopyClusterSnapshotInput
 }
 
-// CopyClusterSnapshot API operation for Amazon Redshift.
+// Send marshals and sends the CopyClusterSnapshot API request.
+func (r CopyClusterSnapshotRequest) Send() (*CopyClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyClusterSnapshotOutput), nil
+}
+
+// CopyClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Copies the specified automated cluster snapshot to a new manual cluster snapshot.
 // The source must be an automated snapshot and it must be in the available
@@ -279,78 +161,67 @@ func (c *Redshift) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) (
 // Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CopyClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSnapshotAlreadyExistsFault "ClusterSnapshotAlreadyExists"
-//   The value specified as a snapshot identifier is already used by an existing
-//   snapshot.
-//
-//   * ErrCodeClusterSnapshotNotFoundFault "ClusterSnapshotNotFound"
-//   The snapshot identifier does not refer to an existing cluster snapshot.
-//
-//   * ErrCodeInvalidClusterSnapshotStateFault "InvalidClusterSnapshotState"
-//   The specified cluster snapshot is not in the available state, or other accounts
-//   are authorized to access the snapshot.
-//
-//   * ErrCodeClusterSnapshotQuotaExceededFault "ClusterSnapshotQuotaExceeded"
-//   The request would result in the user exceeding the allowed number of cluster
-//   snapshots.
+//    // Example sending a request using the CopyClusterSnapshotRequest method.
+//    req := client.CopyClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot
-func (c *Redshift) CopyClusterSnapshot(input *CopyClusterSnapshotInput) (*CopyClusterSnapshotOutput, error) {
-	req, out := c.CopyClusterSnapshotRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) CopyClusterSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opCopyClusterSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CopyClusterSnapshotWithContext is the same as CopyClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CopyClusterSnapshotWithContext(ctx aws.Context, input *CopyClusterSnapshotInput, opts ...aws.Option) (*CopyClusterSnapshotOutput, error) {
-	req, out := c.CopyClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CopyClusterSnapshotInput{}
+	}
+
+	req := c.newRequest(op, input, &CopyClusterSnapshotOutput{})
+	return CopyClusterSnapshotRequest{Request: req, Input: input}
 }
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws.Request" representing the
-// client's request for the CreateCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterRequest is a API request type for the CreateCluster API operation.
+type CreateClusterRequest struct {
+	*aws.Request
+	Input *CreateClusterInput
+}
+
+// Send marshals and sends the CreateCluster API request.
+func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterOutput), nil
+}
+
+// CreateClusterRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new cluster.
 //
-// See CreateCluster for more information on using the CreateCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To create the cluster in Virtual Private Cloud (VPC), you must provide a
+// cluster subnet group name. The cluster subnet group identifies the subnets
+// of your VPC that Amazon Redshift uses when creating the cluster. For more
+// information about managing clusters, go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterRequest method.
-//    req, resp := client.CreateClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster
-func (c *Redshift) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+func (c *Redshift) CreateClusterRequest(input *CreateClusterInput) CreateClusterRequest {
 	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
@@ -361,161 +232,30 @@ func (c *Redshift) CreateClusterRequest(input *CreateClusterInput) (req *aws.Req
 		input = &CreateClusterInput{}
 	}
 
-	output = &CreateClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCluster API operation for Amazon Redshift.
-//
-// Creates a new cluster.
-//
-// To create the cluster in Virtual Private Cloud (VPC), you must provide a
-// cluster subnet group name. The cluster subnet group identifies the subnets
-// of your VPC that Amazon Redshift uses when creating the cluster. For more
-// information about managing clusters, go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterAlreadyExistsFault "ClusterAlreadyExists"
-//   The account already has a cluster with the given identifier.
-//
-//   * ErrCodeInsufficientClusterCapacityFault "InsufficientClusterCapacity"
-//   The number of nodes specified exceeds the allotted capacity of the cluster.
-//
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-//   * ErrCodeClusterSecurityGroupNotFoundFault "ClusterSecurityGroupNotFound"
-//   The cluster security group name does not refer to an existing cluster security
-//   group.
-//
-//   * ErrCodeClusterQuotaExceededFault "ClusterQuotaExceeded"
-//   The request would exceed the allowed number of cluster instances for this
-//   account. For information about increasing your quota, go to Limits in Amazon
-//   Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeNumberOfNodesQuotaExceededFault "NumberOfNodesQuotaExceeded"
-//   The operation would exceed the number of nodes allotted to the account. For
-//   information about increasing your quota, go to Limits in Amazon Redshift
-//   (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeNumberOfNodesPerClusterLimitExceededFault "NumberOfNodesPerClusterLimitExceeded"
-//   The operation would exceed the number of nodes allowed for a cluster.
-//
-//   * ErrCodeClusterSubnetGroupNotFoundFault "ClusterSubnetGroupNotFoundFault"
-//   The cluster subnet group name does not refer to an existing cluster subnet
-//   group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The cluster subnet group does not cover all Availability Zones.
-//
-//   * ErrCodeInvalidClusterSubnetGroupStateFault "InvalidClusterSubnetGroupStateFault"
-//   The cluster subnet group cannot be deleted because it is in use.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or not all of the subnets are in the same
-//   VPC.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-//   * ErrCodeHsmClientCertificateNotFoundFault "HsmClientCertificateNotFoundFault"
-//   There is no Amazon Redshift HSM client certificate with the specified identifier.
-//
-//   * ErrCodeHsmConfigurationNotFoundFault "HsmConfigurationNotFoundFault"
-//   There is no Amazon Redshift HSM configuration with the specified identifier.
-//
-//   * ErrCodeInvalidElasticIpFault "InvalidElasticIpFault"
-//   The Elastic IP (EIP) is invalid or cannot be found.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   The encryption key has exceeded its grant limit in AWS KMS.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster
-func (c *Redshift) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterWithContext is the same as CreateCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterOutput{})
+	return CreateClusterRequest{Request: req, Input: input}
 }
 
 const opCreateClusterParameterGroup = "CreateClusterParameterGroup"
 
-// CreateClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateClusterParameterGroup for more information on using the CreateClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateClusterParameterGroupRequest method.
-//    req, resp := client.CreateClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroup
-func (c *Redshift) CreateClusterParameterGroupRequest(input *CreateClusterParameterGroupInput) (req *aws.Request, output *CreateClusterParameterGroupOutput) {
-	op := &aws.Operation{
-		Name:       opCreateClusterParameterGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateClusterParameterGroupInput{}
-	}
-
-	output = &CreateClusterParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateClusterParameterGroupRequest is a API request type for the CreateClusterParameterGroup API operation.
+type CreateClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *CreateClusterParameterGroupInput
 }
 
-// CreateClusterParameterGroup API operation for Amazon Redshift.
+// Send marshals and sends the CreateClusterParameterGroup API request.
+func (r CreateClusterParameterGroupRequest) Send() (*CreateClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterParameterGroupOutput), nil
+}
+
+// CreateClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Creates an Amazon Redshift parameter group.
 //
@@ -529,78 +269,66 @@ func (c *Redshift) CreateClusterParameterGroupRequest(input *CreateClusterParame
 // and parameter groups, go to Amazon Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterParameterGroupQuotaExceededFault "ClusterParameterGroupQuotaExceeded"
-//   The request would result in the user exceeding the allowed number of cluster
-//   parameter groups. For information about increasing your quota, go to Limits
-//   in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeClusterParameterGroupAlreadyExistsFault "ClusterParameterGroupAlreadyExists"
-//   A cluster parameter group with the same name already exists.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
+//    // Example sending a request using the CreateClusterParameterGroupRequest method.
+//    req := client.CreateClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroup
-func (c *Redshift) CreateClusterParameterGroup(input *CreateClusterParameterGroupInput) (*CreateClusterParameterGroupOutput, error) {
-	req, out := c.CreateClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) CreateClusterParameterGroupRequest(input *CreateClusterParameterGroupInput) CreateClusterParameterGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateClusterParameterGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateClusterParameterGroupWithContext is the same as CreateClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateClusterParameterGroupWithContext(ctx aws.Context, input *CreateClusterParameterGroupInput, opts ...aws.Option) (*CreateClusterParameterGroupOutput, error) {
-	req, out := c.CreateClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateClusterParameterGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateClusterParameterGroupOutput{})
+	return CreateClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opCreateClusterSecurityGroup = "CreateClusterSecurityGroup"
 
-// CreateClusterSecurityGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateClusterSecurityGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterSecurityGroupRequest is a API request type for the CreateClusterSecurityGroup API operation.
+type CreateClusterSecurityGroupRequest struct {
+	*aws.Request
+	Input *CreateClusterSecurityGroupInput
+}
+
+// Send marshals and sends the CreateClusterSecurityGroup API request.
+func (r CreateClusterSecurityGroupRequest) Send() (*CreateClusterSecurityGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterSecurityGroupOutput), nil
+}
+
+// CreateClusterSecurityGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new Amazon Redshift security group. You use security groups to
+// control access to non-VPC clusters.
 //
-// See CreateClusterSecurityGroup for more information on using the CreateClusterSecurityGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about managing security groups, go to Amazon Redshift Cluster
+// Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterSecurityGroupRequest method.
-//    req, resp := client.CreateClusterSecurityGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterSecurityGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroup
-func (c *Redshift) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityGroupInput) (req *aws.Request, output *CreateClusterSecurityGroupOutput) {
+func (c *Redshift) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityGroupInput) CreateClusterSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateClusterSecurityGroup,
 		HTTPMethod: "POST",
@@ -611,92 +339,47 @@ func (c *Redshift) CreateClusterSecurityGroupRequest(input *CreateClusterSecurit
 		input = &CreateClusterSecurityGroupInput{}
 	}
 
-	output = &CreateClusterSecurityGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateClusterSecurityGroup API operation for Amazon Redshift.
-//
-// Creates a new Amazon Redshift security group. You use security groups to
-// control access to non-VPC clusters.
-//
-// For information about managing security groups, go to Amazon Redshift Cluster
-// Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateClusterSecurityGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSecurityGroupAlreadyExistsFault "ClusterSecurityGroupAlreadyExists"
-//   A cluster security group with the same name already exists.
-//
-//   * ErrCodeClusterSecurityGroupQuotaExceededFault "QuotaExceeded.ClusterSecurityGroup"
-//   The request would result in the user exceeding the allowed number of cluster
-//   security groups. For information about increasing your quota, go to Limits
-//   in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroup
-func (c *Redshift) CreateClusterSecurityGroup(input *CreateClusterSecurityGroupInput) (*CreateClusterSecurityGroupOutput, error) {
-	req, out := c.CreateClusterSecurityGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterSecurityGroupWithContext is the same as CreateClusterSecurityGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateClusterSecurityGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateClusterSecurityGroupWithContext(ctx aws.Context, input *CreateClusterSecurityGroupInput, opts ...aws.Option) (*CreateClusterSecurityGroupOutput, error) {
-	req, out := c.CreateClusterSecurityGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterSecurityGroupOutput{})
+	return CreateClusterSecurityGroupRequest{Request: req, Input: input}
 }
 
 const opCreateClusterSnapshot = "CreateClusterSnapshot"
 
-// CreateClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CreateClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterSnapshotRequest is a API request type for the CreateClusterSnapshot API operation.
+type CreateClusterSnapshotRequest struct {
+	*aws.Request
+	Input *CreateClusterSnapshotInput
+}
+
+// Send marshals and sends the CreateClusterSnapshot API request.
+func (r CreateClusterSnapshotRequest) Send() (*CreateClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterSnapshotOutput), nil
+}
+
+// CreateClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a manual snapshot of the specified cluster. The cluster must be in
+// the available state.
 //
-// See CreateClusterSnapshot for more information on using the CreateClusterSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about working with snapshots, go to Amazon Redshift
+// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterSnapshotRequest method.
-//    req, resp := client.CreateClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot
-func (c *Redshift) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInput) (req *aws.Request, output *CreateClusterSnapshotOutput) {
+func (c *Redshift) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInput) CreateClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateClusterSnapshot,
 		HTTPMethod: "POST",
@@ -707,97 +390,48 @@ func (c *Redshift) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInpu
 		input = &CreateClusterSnapshotInput{}
 	}
 
-	output = &CreateClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateClusterSnapshot API operation for Amazon Redshift.
-//
-// Creates a manual snapshot of the specified cluster. The cluster must be in
-// the available state.
-//
-// For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSnapshotAlreadyExistsFault "ClusterSnapshotAlreadyExists"
-//   The value specified as a snapshot identifier is already used by an existing
-//   snapshot.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeClusterSnapshotQuotaExceededFault "ClusterSnapshotQuotaExceeded"
-//   The request would result in the user exceeding the allowed number of cluster
-//   snapshots.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot
-func (c *Redshift) CreateClusterSnapshot(input *CreateClusterSnapshotInput) (*CreateClusterSnapshotOutput, error) {
-	req, out := c.CreateClusterSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterSnapshotWithContext is the same as CreateClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateClusterSnapshotWithContext(ctx aws.Context, input *CreateClusterSnapshotInput, opts ...aws.Option) (*CreateClusterSnapshotOutput, error) {
-	req, out := c.CreateClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterSnapshotOutput{})
+	return CreateClusterSnapshotRequest{Request: req, Input: input}
 }
 
 const opCreateClusterSubnetGroup = "CreateClusterSubnetGroup"
 
-// CreateClusterSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateClusterSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterSubnetGroupRequest is a API request type for the CreateClusterSubnetGroup API operation.
+type CreateClusterSubnetGroupRequest struct {
+	*aws.Request
+	Input *CreateClusterSubnetGroupInput
+}
+
+// Send marshals and sends the CreateClusterSubnetGroup API request.
+func (r CreateClusterSubnetGroupRequest) Send() (*CreateClusterSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterSubnetGroupOutput), nil
+}
+
+// CreateClusterSubnetGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new Amazon Redshift subnet group. You must provide a list of one
+// or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC)
+// when creating Amazon Redshift subnet group.
 //
-// See CreateClusterSubnetGroup for more information on using the CreateClusterSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about subnet groups, go to Amazon Redshift Cluster Subnet
+// Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterSubnetGroupRequest method.
-//    req, resp := client.CreateClusterSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroup
-func (c *Redshift) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroupInput) (req *aws.Request, output *CreateClusterSubnetGroupOutput) {
+func (c *Redshift) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroupInput) CreateClusterSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateClusterSubnetGroup,
 		HTTPMethod: "POST",
@@ -808,126 +442,30 @@ func (c *Redshift) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGro
 		input = &CreateClusterSubnetGroupInput{}
 	}
 
-	output = &CreateClusterSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateClusterSubnetGroup API operation for Amazon Redshift.
-//
-// Creates a new Amazon Redshift subnet group. You must provide a list of one
-// or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC)
-// when creating Amazon Redshift subnet group.
-//
-// For information about subnet groups, go to Amazon Redshift Cluster Subnet
-// Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateClusterSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSubnetGroupAlreadyExistsFault "ClusterSubnetGroupAlreadyExists"
-//   A ClusterSubnetGroupName is already used by an existing cluster subnet group.
-//
-//   * ErrCodeClusterSubnetGroupQuotaExceededFault "ClusterSubnetGroupQuotaExceeded"
-//   The request would result in user exceeding the allowed number of cluster
-//   subnet groups. For information about increasing your quota, go to Limits
-//   in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeClusterSubnetQuotaExceededFault "ClusterSubnetQuotaExceededFault"
-//   The request would result in user exceeding the allowed number of subnets
-//   in a cluster subnet groups. For information about increasing your quota,
-//   go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or not all of the subnets are in the same
-//   VPC.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroup
-func (c *Redshift) CreateClusterSubnetGroup(input *CreateClusterSubnetGroupInput) (*CreateClusterSubnetGroupOutput, error) {
-	req, out := c.CreateClusterSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterSubnetGroupWithContext is the same as CreateClusterSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateClusterSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateClusterSubnetGroupWithContext(ctx aws.Context, input *CreateClusterSubnetGroupInput, opts ...aws.Option) (*CreateClusterSubnetGroupOutput, error) {
-	req, out := c.CreateClusterSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterSubnetGroupOutput{})
+	return CreateClusterSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opCreateEventSubscription = "CreateEventSubscription"
 
-// CreateEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the CreateEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateEventSubscription for more information on using the CreateEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateEventSubscriptionRequest method.
-//    req, resp := client.CreateEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscription
-func (c *Redshift) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *aws.Request, output *CreateEventSubscriptionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateEventSubscription,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateEventSubscriptionInput{}
-	}
-
-	output = &CreateEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateEventSubscriptionRequest is a API request type for the CreateEventSubscription API operation.
+type CreateEventSubscriptionRequest struct {
+	*aws.Request
+	Input *CreateEventSubscriptionInput
 }
 
-// CreateEventSubscription API operation for Amazon Redshift.
+// Send marshals and sends the CreateEventSubscription API request.
+func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateEventSubscriptionOutput), nil
+}
+
+// CreateEventSubscriptionRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Creates an Amazon Redshift event notification subscription. This action requires
 // an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the
@@ -952,122 +490,49 @@ func (c *Redshift) CreateEventSubscriptionRequest(input *CreateEventSubscription
 // from all Amazon Redshift sources belonging to your AWS account. You must
 // specify a source type if you specify a source ID.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEventSubscriptionQuotaExceededFault "EventSubscriptionQuotaExceeded"
-//   The request would exceed the allowed number of event subscriptions for this
-//   account. For information about increasing your quota, go to Limits in Amazon
-//   Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeSubscriptionAlreadyExistFault "SubscriptionAlreadyExist"
-//   There is already an existing event notification subscription with the specified
-//   name.
-//
-//   * ErrCodeSNSInvalidTopicFault "SNSInvalidTopic"
-//   Amazon SNS has responded that there is a problem with the specified Amazon
-//   SNS topic.
-//
-//   * ErrCodeSNSNoAuthorizationFault "SNSNoAuthorization"
-//   You do not have permission to publish to the specified Amazon SNS topic.
-//
-//   * ErrCodeSNSTopicArnNotFoundFault "SNSTopicArnNotFound"
-//   An Amazon SNS topic with the specified Amazon Resource Name (ARN) does not
-//   exist.
-//
-//   * ErrCodeSubscriptionEventIdNotFoundFault "SubscriptionEventIdNotFound"
-//   An Amazon Redshift event with the specified event ID does not exist.
-//
-//   * ErrCodeSubscriptionCategoryNotFoundFault "SubscriptionCategoryNotFound"
-//   The value specified for the event category was not one of the allowed values,
-//   or it specified a category that does not apply to the specified source type.
-//   The allowed values are Configuration, Management, Monitoring, and Security.
-//
-//   * ErrCodeSubscriptionSeverityNotFoundFault "SubscriptionSeverityNotFound"
-//   The value specified for the event severity was not one of the allowed values,
-//   or it specified a severity that does not apply to the specified source type.
-//   The allowed values are ERROR and INFO.
-//
-//   * ErrCodeSourceNotFoundFault "SourceNotFound"
-//   The specified Amazon Redshift event source could not be found.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscription
-func (c *Redshift) CreateEventSubscription(input *CreateEventSubscriptionInput) (*CreateEventSubscriptionOutput, error) {
-	req, out := c.CreateEventSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// CreateEventSubscriptionWithContext is the same as CreateEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...aws.Option) (*CreateEventSubscriptionOutput, error) {
-	req, out := c.CreateEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateHsmClientCertificate = "CreateHsmClientCertificate"
-
-// CreateHsmClientCertificateRequest generates a "aws.Request" representing the
-// client's request for the CreateHsmClientCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHsmClientCertificate for more information on using the CreateHsmClientCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateHsmClientCertificateRequest method.
-//    req, resp := client.CreateHsmClientCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateEventSubscriptionRequest method.
+//    req := client.CreateEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificate
-func (c *Redshift) CreateHsmClientCertificateRequest(input *CreateHsmClientCertificateInput) (req *aws.Request, output *CreateHsmClientCertificateOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscription
+func (c *Redshift) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) CreateEventSubscriptionRequest {
 	op := &aws.Operation{
-		Name:       opCreateHsmClientCertificate,
+		Name:       opCreateEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateHsmClientCertificateInput{}
+		input = &CreateEventSubscriptionInput{}
 	}
 
-	output = &CreateHsmClientCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateEventSubscriptionOutput{})
+	return CreateEventSubscriptionRequest{Request: req, Input: input}
 }
 
-// CreateHsmClientCertificate API operation for Amazon Redshift.
+const opCreateHsmClientCertificate = "CreateHsmClientCertificate"
+
+// CreateHsmClientCertificateRequest is a API request type for the CreateHsmClientCertificate API operation.
+type CreateHsmClientCertificateRequest struct {
+	*aws.Request
+	Input *CreateHsmClientCertificateInput
+}
+
+// Send marshals and sends the CreateHsmClientCertificate API request.
+func (r CreateHsmClientCertificateRequest) Send() (*CreateHsmClientCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHsmClientCertificateOutput), nil
+}
+
+// CreateHsmClientCertificateRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Creates an HSM client certificate that an Amazon Redshift cluster will use
 // to connect to the client's HSM in order to store and retrieve the keys used
@@ -1079,94 +544,49 @@ func (c *Redshift) CreateHsmClientCertificateRequest(input *CreateHsmClientCerti
 // keys in the HSM. For more information, go to Hardware Security Modules (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateHsmClientCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeHsmClientCertificateAlreadyExistsFault "HsmClientCertificateAlreadyExistsFault"
-//   There is already an existing Amazon Redshift HSM client certificate with
-//   the specified identifier.
-//
-//   * ErrCodeHsmClientCertificateQuotaExceededFault "HsmClientCertificateQuotaExceededFault"
-//   The quota for HSM client certificates has been reached. For information about
-//   increasing your quota, go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificate
-func (c *Redshift) CreateHsmClientCertificate(input *CreateHsmClientCertificateInput) (*CreateHsmClientCertificateOutput, error) {
-	req, out := c.CreateHsmClientCertificateRequest(input)
-	return out, req.Send()
-}
-
-// CreateHsmClientCertificateWithContext is the same as CreateHsmClientCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHsmClientCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateHsmClientCertificateWithContext(ctx aws.Context, input *CreateHsmClientCertificateInput, opts ...aws.Option) (*CreateHsmClientCertificateOutput, error) {
-	req, out := c.CreateHsmClientCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateHsmConfiguration = "CreateHsmConfiguration"
-
-// CreateHsmConfigurationRequest generates a "aws.Request" representing the
-// client's request for the CreateHsmConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHsmConfiguration for more information on using the CreateHsmConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateHsmConfigurationRequest method.
-//    req, resp := client.CreateHsmConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateHsmClientCertificateRequest method.
+//    req := client.CreateHsmClientCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfiguration
-func (c *Redshift) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInput) (req *aws.Request, output *CreateHsmConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificate
+func (c *Redshift) CreateHsmClientCertificateRequest(input *CreateHsmClientCertificateInput) CreateHsmClientCertificateRequest {
 	op := &aws.Operation{
-		Name:       opCreateHsmConfiguration,
+		Name:       opCreateHsmClientCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateHsmConfigurationInput{}
+		input = &CreateHsmClientCertificateInput{}
 	}
 
-	output = &CreateHsmConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateHsmClientCertificateOutput{})
+	return CreateHsmClientCertificateRequest{Request: req, Input: input}
 }
 
-// CreateHsmConfiguration API operation for Amazon Redshift.
+const opCreateHsmConfiguration = "CreateHsmConfiguration"
+
+// CreateHsmConfigurationRequest is a API request type for the CreateHsmConfiguration API operation.
+type CreateHsmConfigurationRequest struct {
+	*aws.Request
+	Input *CreateHsmConfigurationInput
+}
+
+// Send marshals and sends the CreateHsmConfiguration API request.
+func (r CreateHsmConfigurationRequest) Send() (*CreateHsmConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHsmConfigurationOutput), nil
+}
+
+// CreateHsmConfigurationRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Creates an HSM configuration that contains the information required by an
 // Amazon Redshift cluster to store and use database encryption keys in a Hardware
@@ -1179,78 +599,67 @@ func (c *Redshift) CreateHsmConfigurationRequest(input *CreateHsmConfigurationIn
 // (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html) in
 // the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateHsmConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeHsmConfigurationAlreadyExistsFault "HsmConfigurationAlreadyExistsFault"
-//   There is already an existing Amazon Redshift HSM configuration with the specified
-//   identifier.
-//
-//   * ErrCodeHsmConfigurationQuotaExceededFault "HsmConfigurationQuotaExceededFault"
-//   The quota for HSM configurations has been reached. For information about
-//   increasing your quota, go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
+//    // Example sending a request using the CreateHsmConfigurationRequest method.
+//    req := client.CreateHsmConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfiguration
-func (c *Redshift) CreateHsmConfiguration(input *CreateHsmConfigurationInput) (*CreateHsmConfigurationOutput, error) {
-	req, out := c.CreateHsmConfigurationRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInput) CreateHsmConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opCreateHsmConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateHsmConfigurationWithContext is the same as CreateHsmConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHsmConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateHsmConfigurationWithContext(ctx aws.Context, input *CreateHsmConfigurationInput, opts ...aws.Option) (*CreateHsmConfigurationOutput, error) {
-	req, out := c.CreateHsmConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateHsmConfigurationInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateHsmConfigurationOutput{})
+	return CreateHsmConfigurationRequest{Request: req, Input: input}
 }
 
 const opCreateSnapshotCopyGrant = "CreateSnapshotCopyGrant"
 
-// CreateSnapshotCopyGrantRequest generates a "aws.Request" representing the
-// client's request for the CreateSnapshotCopyGrant operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSnapshotCopyGrantRequest is a API request type for the CreateSnapshotCopyGrant API operation.
+type CreateSnapshotCopyGrantRequest struct {
+	*aws.Request
+	Input *CreateSnapshotCopyGrantInput
+}
+
+// Send marshals and sends the CreateSnapshotCopyGrant API request.
+func (r CreateSnapshotCopyGrantRequest) Send() (*CreateSnapshotCopyGrantOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSnapshotCopyGrantOutput), nil
+}
+
+// CreateSnapshotCopyGrantRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a snapshot copy grant that permits Amazon Redshift to use a customer
+// master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied
+// snapshots in a destination region.
 //
-// See CreateSnapshotCopyGrant for more information on using the CreateSnapshotCopyGrant
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about managing snapshot copy grants, go to Amazon Redshift
+// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateSnapshotCopyGrantRequest method.
-//    req, resp := client.CreateSnapshotCopyGrantRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSnapshotCopyGrantRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrant
-func (c *Redshift) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantInput) (req *aws.Request, output *CreateSnapshotCopyGrantOutput) {
+func (c *Redshift) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantInput) CreateSnapshotCopyGrantRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshotCopyGrant,
 		HTTPMethod: "POST",
@@ -1261,99 +670,48 @@ func (c *Redshift) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrant
 		input = &CreateSnapshotCopyGrantInput{}
 	}
 
-	output = &CreateSnapshotCopyGrantOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSnapshotCopyGrant API operation for Amazon Redshift.
-//
-// Creates a snapshot copy grant that permits Amazon Redshift to use a customer
-// master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied
-// snapshots in a destination region.
-//
-// For more information about managing snapshot copy grants, go to Amazon Redshift
-// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateSnapshotCopyGrant for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSnapshotCopyGrantAlreadyExistsFault "SnapshotCopyGrantAlreadyExistsFault"
-//   The snapshot copy grant can't be created because a grant with the same name
-//   already exists.
-//
-//   * ErrCodeSnapshotCopyGrantQuotaExceededFault "SnapshotCopyGrantQuotaExceededFault"
-//   The AWS account has exceeded the maximum number of snapshot copy grants in
-//   this region.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   The encryption key has exceeded its grant limit in AWS KMS.
-//
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrant
-func (c *Redshift) CreateSnapshotCopyGrant(input *CreateSnapshotCopyGrantInput) (*CreateSnapshotCopyGrantOutput, error) {
-	req, out := c.CreateSnapshotCopyGrantRequest(input)
-	return out, req.Send()
-}
-
-// CreateSnapshotCopyGrantWithContext is the same as CreateSnapshotCopyGrant with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSnapshotCopyGrant for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateSnapshotCopyGrantWithContext(ctx aws.Context, input *CreateSnapshotCopyGrantInput, opts ...aws.Option) (*CreateSnapshotCopyGrantOutput, error) {
-	req, out := c.CreateSnapshotCopyGrantRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSnapshotCopyGrantOutput{})
+	return CreateSnapshotCopyGrantRequest{Request: req, Input: input}
 }
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws.Request" representing the
-// client's request for the CreateTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTagsRequest is a API request type for the CreateTags API operation.
+type CreateTagsRequest struct {
+	*aws.Request
+	Input *CreateTagsInput
+}
+
+// Send marshals and sends the CreateTags API request.
+func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTagsOutput), nil
+}
+
+// CreateTagsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds one or more tags to a specified resource.
 //
-// See CreateTags for more information on using the CreateTags
-// API call, and error handling.
+// A resource can have up to 10 tags. If you try to create more than 10 tags
+// for a resource, you will receive an error and the attempt will fail.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you specify a key that already exists for the resource, the value for
+// that key will be updated with the new value.
 //
 //    // Example sending a request using the CreateTagsRequest method.
-//    req, resp := client.CreateTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTags
-func (c *Redshift) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+func (c *Redshift) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
@@ -1364,105 +722,32 @@ func (c *Redshift) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, 
 		input = &CreateTagsInput{}
 	}
 
-	output = &CreateTagsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateTagsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// CreateTags API operation for Amazon Redshift.
-//
-// Adds one or more tags to a specified resource.
-//
-// A resource can have up to 10 tags. If you try to create more than 10 tags
-// for a resource, you will receive an error and the attempt will fail.
-//
-// If you specify a key that already exists for the resource, the value for
-// that key will be updated with the new value.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation CreateTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagLimitExceededFault "TagLimitExceededFault"
-//   The request exceeds the limit of 10 tags for the resource.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTags
-func (c *Redshift) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	return out, req.Send()
-}
-
-// CreateTagsWithContext is the same as CreateTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return CreateTagsRequest{Request: req, Input: input}
 }
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws.Request" representing the
-// client's request for the DeleteCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCluster for more information on using the DeleteCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteClusterRequest method.
-//    req, resp := client.DeleteClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster
-func (c *Redshift) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteCluster,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteClusterInput{}
-	}
-
-	output = &DeleteClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteClusterRequest is a API request type for the DeleteCluster API operation.
+type DeleteClusterRequest struct {
+	*aws.Request
+	Input *DeleteClusterInput
 }
 
-// DeleteCluster API operation for Amazon Redshift.
+// Send marshals and sends the DeleteCluster API request.
+func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterOutput), nil
+}
+
+// DeleteClusterRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Deletes a previously provisioned cluster. A successful response from the
 // web service indicates that the request was received correctly. Use DescribeClusters
@@ -1482,77 +767,63 @@ func (c *Redshift) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Req
 // (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeClusterSnapshotAlreadyExistsFault "ClusterSnapshotAlreadyExists"
-//   The value specified as a snapshot identifier is already used by an existing
-//   snapshot.
-//
-//   * ErrCodeClusterSnapshotQuotaExceededFault "ClusterSnapshotQuotaExceeded"
-//   The request would result in the user exceeding the allowed number of cluster
-//   snapshots.
+//    // Example sending a request using the DeleteClusterRequest method.
+//    req := client.DeleteClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster
-func (c *Redshift) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRequest {
+	op := &aws.Operation{
+		Name:       opDeleteCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteClusterWithContext is the same as DeleteCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteClusterInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	return DeleteClusterRequest{Request: req, Input: input}
 }
 
 const opDeleteClusterParameterGroup = "DeleteClusterParameterGroup"
 
-// DeleteClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteClusterParameterGroupRequest is a API request type for the DeleteClusterParameterGroup API operation.
+type DeleteClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *DeleteClusterParameterGroupInput
+}
+
+// Send marshals and sends the DeleteClusterParameterGroup API request.
+func (r DeleteClusterParameterGroupRequest) Send() (*DeleteClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterParameterGroupOutput), nil
+}
+
+// DeleteClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a specified Amazon Redshift parameter group.
 //
-// See DeleteClusterParameterGroup for more information on using the DeleteClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot delete a parameter group if it is associated with a cluster.
 //
 //    // Example sending a request using the DeleteClusterParameterGroupRequest method.
-//    req, resp := client.DeleteClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroup
-func (c *Redshift) DeleteClusterParameterGroupRequest(input *DeleteClusterParameterGroupInput) (req *aws.Request, output *DeleteClusterParameterGroupOutput) {
+func (c *Redshift) DeleteClusterParameterGroupRequest(input *DeleteClusterParameterGroupInput) DeleteClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -1563,102 +834,32 @@ func (c *Redshift) DeleteClusterParameterGroupRequest(input *DeleteClusterParame
 		input = &DeleteClusterParameterGroupInput{}
 	}
 
-	output = &DeleteClusterParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteClusterParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteClusterParameterGroup API operation for Amazon Redshift.
-//
-// Deletes a specified Amazon Redshift parameter group.
-//
-// You cannot delete a parameter group if it is associated with a cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterParameterGroupStateFault "InvalidClusterParameterGroupState"
-//   The cluster parameter group action can not be completed because another task
-//   is in progress that involves the parameter group. Wait a few moments and
-//   try the operation again.
-//
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroup
-func (c *Redshift) DeleteClusterParameterGroup(input *DeleteClusterParameterGroupInput) (*DeleteClusterParameterGroupOutput, error) {
-	req, out := c.DeleteClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteClusterParameterGroupWithContext is the same as DeleteClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteClusterParameterGroupWithContext(ctx aws.Context, input *DeleteClusterParameterGroupInput, opts ...aws.Option) (*DeleteClusterParameterGroupOutput, error) {
-	req, out := c.DeleteClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteClusterSecurityGroup = "DeleteClusterSecurityGroup"
 
-// DeleteClusterSecurityGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteClusterSecurityGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteClusterSecurityGroup for more information on using the DeleteClusterSecurityGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteClusterSecurityGroupRequest method.
-//    req, resp := client.DeleteClusterSecurityGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroup
-func (c *Redshift) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityGroupInput) (req *aws.Request, output *DeleteClusterSecurityGroupOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteClusterSecurityGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteClusterSecurityGroupInput{}
-	}
-
-	output = &DeleteClusterSecurityGroupOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteClusterSecurityGroupRequest is a API request type for the DeleteClusterSecurityGroup API operation.
+type DeleteClusterSecurityGroupRequest struct {
+	*aws.Request
+	Input *DeleteClusterSecurityGroupInput
 }
 
-// DeleteClusterSecurityGroup API operation for Amazon Redshift.
+// Send marshals and sends the DeleteClusterSecurityGroup API request.
+func (r DeleteClusterSecurityGroupRequest) Send() (*DeleteClusterSecurityGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterSecurityGroupOutput), nil
+}
+
+// DeleteClusterSecurityGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Deletes an Amazon Redshift security group.
 //
@@ -1669,86 +870,51 @@ func (c *Redshift) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurit
 // Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteClusterSecurityGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterSecurityGroupStateFault "InvalidClusterSecurityGroupState"
-//   The state of the cluster security group is not available.
-//
-//   * ErrCodeClusterSecurityGroupNotFoundFault "ClusterSecurityGroupNotFound"
-//   The cluster security group name does not refer to an existing cluster security
-//   group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroup
-func (c *Redshift) DeleteClusterSecurityGroup(input *DeleteClusterSecurityGroupInput) (*DeleteClusterSecurityGroupOutput, error) {
-	req, out := c.DeleteClusterSecurityGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteClusterSecurityGroupWithContext is the same as DeleteClusterSecurityGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteClusterSecurityGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteClusterSecurityGroupWithContext(ctx aws.Context, input *DeleteClusterSecurityGroupInput, opts ...aws.Option) (*DeleteClusterSecurityGroupOutput, error) {
-	req, out := c.DeleteClusterSecurityGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteClusterSnapshot = "DeleteClusterSnapshot"
-
-// DeleteClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the DeleteClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteClusterSnapshot for more information on using the DeleteClusterSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteClusterSnapshotRequest method.
-//    req, resp := client.DeleteClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteClusterSecurityGroupRequest method.
+//    req := client.DeleteClusterSecurityGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot
-func (c *Redshift) DeleteClusterSnapshotRequest(input *DeleteClusterSnapshotInput) (req *aws.Request, output *DeleteClusterSnapshotOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroup
+func (c *Redshift) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityGroupInput) DeleteClusterSecurityGroupRequest {
 	op := &aws.Operation{
-		Name:       opDeleteClusterSnapshot,
+		Name:       opDeleteClusterSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteClusterSnapshotInput{}
+		input = &DeleteClusterSecurityGroupInput{}
 	}
 
-	output = &DeleteClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteClusterSecurityGroupOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteClusterSecurityGroupRequest{Request: req, Input: input}
 }
 
-// DeleteClusterSnapshot API operation for Amazon Redshift.
+const opDeleteClusterSnapshot = "DeleteClusterSnapshot"
+
+// DeleteClusterSnapshotRequest is a API request type for the DeleteClusterSnapshot API operation.
+type DeleteClusterSnapshotRequest struct {
+	*aws.Request
+	Input *DeleteClusterSnapshotInput
+}
+
+// Send marshals and sends the DeleteClusterSnapshot API request.
+func (r DeleteClusterSnapshotRequest) Send() (*DeleteClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterSnapshotOutput), nil
+}
+
+// DeleteClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Deletes the specified manual snapshot. The snapshot must be in the available
 // state, with no other users authorized to access the snapshot.
@@ -1759,70 +925,61 @@ func (c *Redshift) DeleteClusterSnapshotRequest(input *DeleteClusterSnapshotInpu
 // accounts are authorized to access the snapshot, you must revoke all of the
 // authorizations before you can delete the snapshot.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterSnapshotStateFault "InvalidClusterSnapshotState"
-//   The specified cluster snapshot is not in the available state, or other accounts
-//   are authorized to access the snapshot.
-//
-//   * ErrCodeClusterSnapshotNotFoundFault "ClusterSnapshotNotFound"
-//   The snapshot identifier does not refer to an existing cluster snapshot.
+//    // Example sending a request using the DeleteClusterSnapshotRequest method.
+//    req := client.DeleteClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot
-func (c *Redshift) DeleteClusterSnapshot(input *DeleteClusterSnapshotInput) (*DeleteClusterSnapshotOutput, error) {
-	req, out := c.DeleteClusterSnapshotRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) DeleteClusterSnapshotRequest(input *DeleteClusterSnapshotInput) DeleteClusterSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opDeleteClusterSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteClusterSnapshotWithContext is the same as DeleteClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteClusterSnapshotWithContext(ctx aws.Context, input *DeleteClusterSnapshotInput, opts ...aws.Option) (*DeleteClusterSnapshotOutput, error) {
-	req, out := c.DeleteClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteClusterSnapshotInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteClusterSnapshotOutput{})
+	return DeleteClusterSnapshotRequest{Request: req, Input: input}
 }
 
 const opDeleteClusterSubnetGroup = "DeleteClusterSubnetGroup"
 
-// DeleteClusterSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteClusterSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteClusterSubnetGroupRequest is a API request type for the DeleteClusterSubnetGroup API operation.
+type DeleteClusterSubnetGroupRequest struct {
+	*aws.Request
+	Input *DeleteClusterSubnetGroupInput
+}
+
+// Send marshals and sends the DeleteClusterSubnetGroup API request.
+func (r DeleteClusterSubnetGroupRequest) Send() (*DeleteClusterSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterSubnetGroupOutput), nil
+}
+
+// DeleteClusterSubnetGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteClusterSubnetGroup for more information on using the DeleteClusterSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified cluster subnet group.
 //
 //    // Example sending a request using the DeleteClusterSubnetGroupRequest method.
-//    req, resp := client.DeleteClusterSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteClusterSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroup
-func (c *Redshift) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroupInput) (req *aws.Request, output *DeleteClusterSubnetGroupOutput) {
+func (c *Redshift) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroupInput) DeleteClusterSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClusterSubnetGroup,
 		HTTPMethod: "POST",
@@ -1833,84 +990,44 @@ func (c *Redshift) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGro
 		input = &DeleteClusterSubnetGroupInput{}
 	}
 
-	output = &DeleteClusterSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteClusterSubnetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteClusterSubnetGroup API operation for Amazon Redshift.
-//
-// Deletes the specified cluster subnet group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteClusterSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterSubnetGroupStateFault "InvalidClusterSubnetGroupStateFault"
-//   The cluster subnet group cannot be deleted because it is in use.
-//
-//   * ErrCodeInvalidClusterSubnetStateFault "InvalidClusterSubnetStateFault"
-//   The state of the subnet is invalid.
-//
-//   * ErrCodeClusterSubnetGroupNotFoundFault "ClusterSubnetGroupNotFoundFault"
-//   The cluster subnet group name does not refer to an existing cluster subnet
-//   group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroup
-func (c *Redshift) DeleteClusterSubnetGroup(input *DeleteClusterSubnetGroupInput) (*DeleteClusterSubnetGroupOutput, error) {
-	req, out := c.DeleteClusterSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteClusterSubnetGroupWithContext is the same as DeleteClusterSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteClusterSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteClusterSubnetGroupWithContext(ctx aws.Context, input *DeleteClusterSubnetGroupInput, opts ...aws.Option) (*DeleteClusterSubnetGroupOutput, error) {
-	req, out := c.DeleteClusterSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteClusterSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
 
-// DeleteEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the DeleteEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEventSubscriptionRequest is a API request type for the DeleteEventSubscription API operation.
+type DeleteEventSubscriptionRequest struct {
+	*aws.Request
+	Input *DeleteEventSubscriptionInput
+}
+
+// Send marshals and sends the DeleteEventSubscription API request.
+func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEventSubscriptionOutput), nil
+}
+
+// DeleteEventSubscriptionRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteEventSubscription for more information on using the DeleteEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an Amazon Redshift event notification subscription.
 //
 //    // Example sending a request using the DeleteEventSubscriptionRequest method.
-//    req, resp := client.DeleteEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscription
-func (c *Redshift) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *aws.Request, output *DeleteEventSubscriptionOutput) {
+func (c *Redshift) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) DeleteEventSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventSubscription,
 		HTTPMethod: "POST",
@@ -1921,82 +1038,44 @@ func (c *Redshift) DeleteEventSubscriptionRequest(input *DeleteEventSubscription
 		input = &DeleteEventSubscriptionInput{}
 	}
 
-	output = &DeleteEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteEventSubscriptionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteEventSubscription API operation for Amazon Redshift.
-//
-// Deletes an Amazon Redshift event notification subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   An Amazon Redshift event notification subscription with the specified name
-//   does not exist.
-//
-//   * ErrCodeInvalidSubscriptionStateFault "InvalidSubscriptionStateFault"
-//   The subscription request is invalid because it is a duplicate request. This
-//   subscription request is already in progress.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscription
-func (c *Redshift) DeleteEventSubscription(input *DeleteEventSubscriptionInput) (*DeleteEventSubscriptionOutput, error) {
-	req, out := c.DeleteEventSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEventSubscriptionWithContext is the same as DeleteEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...aws.Option) (*DeleteEventSubscriptionOutput, error) {
-	req, out := c.DeleteEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opDeleteHsmClientCertificate = "DeleteHsmClientCertificate"
 
-// DeleteHsmClientCertificateRequest generates a "aws.Request" representing the
-// client's request for the DeleteHsmClientCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteHsmClientCertificateRequest is a API request type for the DeleteHsmClientCertificate API operation.
+type DeleteHsmClientCertificateRequest struct {
+	*aws.Request
+	Input *DeleteHsmClientCertificateInput
+}
+
+// Send marshals and sends the DeleteHsmClientCertificate API request.
+func (r DeleteHsmClientCertificateRequest) Send() (*DeleteHsmClientCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHsmClientCertificateOutput), nil
+}
+
+// DeleteHsmClientCertificateRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHsmClientCertificate for more information on using the DeleteHsmClientCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified HSM client certificate.
 //
 //    // Example sending a request using the DeleteHsmClientCertificateRequest method.
-//    req, resp := client.DeleteHsmClientCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteHsmClientCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificate
-func (c *Redshift) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertificateInput) (req *aws.Request, output *DeleteHsmClientCertificateOutput) {
+func (c *Redshift) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertificateInput) DeleteHsmClientCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHsmClientCertificate,
 		HTTPMethod: "POST",
@@ -2007,81 +1086,44 @@ func (c *Redshift) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCerti
 		input = &DeleteHsmClientCertificateInput{}
 	}
 
-	output = &DeleteHsmClientCertificateOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteHsmClientCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteHsmClientCertificate API operation for Amazon Redshift.
-//
-// Deletes the specified HSM client certificate.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteHsmClientCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidHsmClientCertificateStateFault "InvalidHsmClientCertificateStateFault"
-//   The specified HSM client certificate is not in the available state, or it
-//   is still in use by one or more Amazon Redshift clusters.
-//
-//   * ErrCodeHsmClientCertificateNotFoundFault "HsmClientCertificateNotFoundFault"
-//   There is no Amazon Redshift HSM client certificate with the specified identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificate
-func (c *Redshift) DeleteHsmClientCertificate(input *DeleteHsmClientCertificateInput) (*DeleteHsmClientCertificateOutput, error) {
-	req, out := c.DeleteHsmClientCertificateRequest(input)
-	return out, req.Send()
-}
-
-// DeleteHsmClientCertificateWithContext is the same as DeleteHsmClientCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHsmClientCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteHsmClientCertificateWithContext(ctx aws.Context, input *DeleteHsmClientCertificateInput, opts ...aws.Option) (*DeleteHsmClientCertificateOutput, error) {
-	req, out := c.DeleteHsmClientCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteHsmClientCertificateRequest{Request: req, Input: input}
 }
 
 const opDeleteHsmConfiguration = "DeleteHsmConfiguration"
 
-// DeleteHsmConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteHsmConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteHsmConfigurationRequest is a API request type for the DeleteHsmConfiguration API operation.
+type DeleteHsmConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteHsmConfigurationInput
+}
+
+// Send marshals and sends the DeleteHsmConfiguration API request.
+func (r DeleteHsmConfigurationRequest) Send() (*DeleteHsmConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHsmConfigurationOutput), nil
+}
+
+// DeleteHsmConfigurationRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHsmConfiguration for more information on using the DeleteHsmConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified Amazon Redshift HSM configuration.
 //
 //    // Example sending a request using the DeleteHsmConfigurationRequest method.
-//    req, resp := client.DeleteHsmConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteHsmConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfiguration
-func (c *Redshift) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInput) (req *aws.Request, output *DeleteHsmConfigurationOutput) {
+func (c *Redshift) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInput) DeleteHsmConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHsmConfiguration,
 		HTTPMethod: "POST",
@@ -2092,81 +1134,44 @@ func (c *Redshift) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationIn
 		input = &DeleteHsmConfigurationInput{}
 	}
 
-	output = &DeleteHsmConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteHsmConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteHsmConfiguration API operation for Amazon Redshift.
-//
-// Deletes the specified Amazon Redshift HSM configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteHsmConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidHsmConfigurationStateFault "InvalidHsmConfigurationStateFault"
-//   The specified HSM configuration is not in the available state, or it is still
-//   in use by one or more Amazon Redshift clusters.
-//
-//   * ErrCodeHsmConfigurationNotFoundFault "HsmConfigurationNotFoundFault"
-//   There is no Amazon Redshift HSM configuration with the specified identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfiguration
-func (c *Redshift) DeleteHsmConfiguration(input *DeleteHsmConfigurationInput) (*DeleteHsmConfigurationOutput, error) {
-	req, out := c.DeleteHsmConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteHsmConfigurationWithContext is the same as DeleteHsmConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHsmConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteHsmConfigurationWithContext(ctx aws.Context, input *DeleteHsmConfigurationInput, opts ...aws.Option) (*DeleteHsmConfigurationOutput, error) {
-	req, out := c.DeleteHsmConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteHsmConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeleteSnapshotCopyGrant = "DeleteSnapshotCopyGrant"
 
-// DeleteSnapshotCopyGrantRequest generates a "aws.Request" representing the
-// client's request for the DeleteSnapshotCopyGrant operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSnapshotCopyGrantRequest is a API request type for the DeleteSnapshotCopyGrant API operation.
+type DeleteSnapshotCopyGrantRequest struct {
+	*aws.Request
+	Input *DeleteSnapshotCopyGrantInput
+}
+
+// Send marshals and sends the DeleteSnapshotCopyGrant API request.
+func (r DeleteSnapshotCopyGrantRequest) Send() (*DeleteSnapshotCopyGrantOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSnapshotCopyGrantOutput), nil
+}
+
+// DeleteSnapshotCopyGrantRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSnapshotCopyGrant for more information on using the DeleteSnapshotCopyGrant
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified snapshot copy grant.
 //
 //    // Example sending a request using the DeleteSnapshotCopyGrantRequest method.
-//    req, resp := client.DeleteSnapshotCopyGrantRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSnapshotCopyGrantRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotCopyGrant
-func (c *Redshift) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantInput) (req *aws.Request, output *DeleteSnapshotCopyGrantOutput) {
+func (c *Redshift) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantInput) DeleteSnapshotCopyGrantRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSnapshotCopyGrant,
 		HTTPMethod: "POST",
@@ -2177,82 +1182,45 @@ func (c *Redshift) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrant
 		input = &DeleteSnapshotCopyGrantInput{}
 	}
 
-	output = &DeleteSnapshotCopyGrantOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteSnapshotCopyGrantOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteSnapshotCopyGrant API operation for Amazon Redshift.
-//
-// Deletes the specified snapshot copy grant.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteSnapshotCopyGrant for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidSnapshotCopyGrantStateFault "InvalidSnapshotCopyGrantStateFault"
-//   The snapshot copy grant can't be deleted because it is used by one or more
-//   clusters.
-//
-//   * ErrCodeSnapshotCopyGrantNotFoundFault "SnapshotCopyGrantNotFoundFault"
-//   The specified snapshot copy grant can't be found. Make sure that the name
-//   is typed correctly and that the grant exists in the destination region.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotCopyGrant
-func (c *Redshift) DeleteSnapshotCopyGrant(input *DeleteSnapshotCopyGrantInput) (*DeleteSnapshotCopyGrantOutput, error) {
-	req, out := c.DeleteSnapshotCopyGrantRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSnapshotCopyGrantWithContext is the same as DeleteSnapshotCopyGrant with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSnapshotCopyGrant for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteSnapshotCopyGrantWithContext(ctx aws.Context, input *DeleteSnapshotCopyGrantInput, opts ...aws.Option) (*DeleteSnapshotCopyGrantOutput, error) {
-	req, out := c.DeleteSnapshotCopyGrantRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteSnapshotCopyGrantRequest{Request: req, Input: input}
 }
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws.Request" representing the
-// client's request for the DeleteTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTagsRequest is a API request type for the DeleteTags API operation.
+type DeleteTagsRequest struct {
+	*aws.Request
+	Input *DeleteTagsInput
+}
+
+// Send marshals and sends the DeleteTags API request.
+func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagsOutput), nil
+}
+
+// DeleteTagsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTags for more information on using the DeleteTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a tag or tags from a resource. You must provide the ARN of the resource
+// from which you want to delete the tag or tags.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTags
-func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
@@ -2263,103 +1231,32 @@ func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, 
 		input = &DeleteTagsInput{}
 	}
 
-	output = &DeleteTagsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteTagsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteTags API operation for Amazon Redshift.
-//
-// Deletes a tag or tags from a resource. You must provide the ARN of the resource
-// from which you want to delete the tag or tags.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DeleteTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTags
-func (c *Redshift) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTagsWithContext is the same as DeleteTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeClusterParameterGroups = "DescribeClusterParameterGroups"
 
-// DescribeClusterParameterGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusterParameterGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeClusterParameterGroups for more information on using the DescribeClusterParameterGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeClusterParameterGroupsRequest method.
-//    req, resp := client.DescribeClusterParameterGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameterGroups
-func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterParameterGroupsInput) (req *aws.Request, output *DescribeClusterParameterGroupsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeClusterParameterGroups,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"Marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "MaxRecords",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &DescribeClusterParameterGroupsInput{}
-	}
-
-	output = &DescribeClusterParameterGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeClusterParameterGroupsRequest is a API request type for the DescribeClusterParameterGroups API operation.
+type DescribeClusterParameterGroupsRequest struct {
+	*aws.Request
+	Input *DescribeClusterParameterGroupsInput
 }
 
-// DescribeClusterParameterGroups API operation for Amazon Redshift.
+// Send marshals and sends the DescribeClusterParameterGroups API request.
+func (r DescribeClusterParameterGroupsRequest) Send() (*DescribeClusterParameterGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterParameterGroupsOutput), nil
+}
+
+// DescribeClusterParameterGroupsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Returns a list of Amazon Redshift parameter groups, including parameter groups
 // you created and the default parameter group. For each parameter group, the
@@ -2381,40 +1278,33 @@ func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterP
 // are returned regardless of whether they have tag keys or values associated
 // with them.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeClusterParameterGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
+//    // Example sending a request using the DescribeClusterParameterGroupsRequest method.
+//    req := client.DescribeClusterParameterGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameterGroups
-func (c *Redshift) DescribeClusterParameterGroups(input *DescribeClusterParameterGroupsInput) (*DescribeClusterParameterGroupsOutput, error) {
-	req, out := c.DescribeClusterParameterGroupsRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterParameterGroupsInput) DescribeClusterParameterGroupsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeClusterParameterGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
 
-// DescribeClusterParameterGroupsWithContext is the same as DescribeClusterParameterGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusterParameterGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeClusterParameterGroupsWithContext(ctx aws.Context, input *DescribeClusterParameterGroupsInput, opts ...aws.Option) (*DescribeClusterParameterGroupsOutput, error) {
-	req, out := c.DescribeClusterParameterGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeClusterParameterGroupsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeClusterParameterGroupsOutput{})
+	return DescribeClusterParameterGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeClusterParameterGroupsPages iterates over the pages of a DescribeClusterParameterGroups operation,
@@ -2453,10 +1343,10 @@ func (c *Redshift) DescribeClusterParameterGroupsPagesWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterParameterGroupsRequest(inCpy)
+			req := c.DescribeClusterParameterGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2469,31 +1359,47 @@ func (c *Redshift) DescribeClusterParameterGroupsPagesWithContext(ctx aws.Contex
 
 const opDescribeClusterParameters = "DescribeClusterParameters"
 
-// DescribeClusterParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusterParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeClusterParametersRequest is a API request type for the DescribeClusterParameters API operation.
+type DescribeClusterParametersRequest struct {
+	*aws.Request
+	Input *DescribeClusterParametersInput
+}
+
+// Send marshals and sends the DescribeClusterParameters API request.
+func (r DescribeClusterParametersRequest) Send() (*DescribeClusterParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterParametersOutput), nil
+}
+
+// DescribeClusterParametersRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a detailed list of parameters contained within the specified Amazon
+// Redshift parameter group. For each parameter the response includes information
+// such as parameter name, description, data type, value, whether the parameter
+// value is modifiable, and so on.
 //
-// See DescribeClusterParameters for more information on using the DescribeClusterParameters
-// API call, and error handling.
+// You can specify source filter to retrieve parameters of only specific type.
+// For example, to retrieve parameters that were modified by a user action such
+// as from ModifyClusterParameterGroup, you can specify source equal to user.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about parameters and parameter groups, go to Amazon
+// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeClusterParametersRequest method.
-//    req, resp := client.DescribeClusterParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeClusterParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameters
-func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParametersInput) (req *aws.Request, output *DescribeClusterParametersOutput) {
+func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParametersInput) DescribeClusterParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterParameters,
 		HTTPMethod: "POST",
@@ -2510,57 +1416,8 @@ func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParame
 		input = &DescribeClusterParametersInput{}
 	}
 
-	output = &DescribeClusterParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeClusterParameters API operation for Amazon Redshift.
-//
-// Returns a detailed list of parameters contained within the specified Amazon
-// Redshift parameter group. For each parameter the response includes information
-// such as parameter name, description, data type, value, whether the parameter
-// value is modifiable, and so on.
-//
-// You can specify source filter to retrieve parameters of only specific type.
-// For example, to retrieve parameters that were modified by a user action such
-// as from ModifyClusterParameterGroup, you can specify source equal to user.
-//
-// For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeClusterParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameters
-func (c *Redshift) DescribeClusterParameters(input *DescribeClusterParametersInput) (*DescribeClusterParametersOutput, error) {
-	req, out := c.DescribeClusterParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeClusterParametersWithContext is the same as DescribeClusterParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusterParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeClusterParametersWithContext(ctx aws.Context, input *DescribeClusterParametersInput, opts ...aws.Option) (*DescribeClusterParametersOutput, error) {
-	req, out := c.DescribeClusterParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeClusterParametersOutput{})
+	return DescribeClusterParametersRequest{Request: req, Input: input}
 }
 
 // DescribeClusterParametersPages iterates over the pages of a DescribeClusterParameters operation,
@@ -2599,10 +1456,10 @@ func (c *Redshift) DescribeClusterParametersPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterParametersRequest(inCpy)
+			req := c.DescribeClusterParametersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2615,53 +1472,24 @@ func (c *Redshift) DescribeClusterParametersPagesWithContext(ctx aws.Context, in
 
 const opDescribeClusterSecurityGroups = "DescribeClusterSecurityGroups"
 
-// DescribeClusterSecurityGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusterSecurityGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeClusterSecurityGroups for more information on using the DescribeClusterSecurityGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeClusterSecurityGroupsRequest method.
-//    req, resp := client.DescribeClusterSecurityGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSecurityGroups
-func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecurityGroupsInput) (req *aws.Request, output *DescribeClusterSecurityGroupsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeClusterSecurityGroups,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"Marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "MaxRecords",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &DescribeClusterSecurityGroupsInput{}
-	}
-
-	output = &DescribeClusterSecurityGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeClusterSecurityGroupsRequest is a API request type for the DescribeClusterSecurityGroups API operation.
+type DescribeClusterSecurityGroupsRequest struct {
+	*aws.Request
+	Input *DescribeClusterSecurityGroupsInput
 }
 
-// DescribeClusterSecurityGroups API operation for Amazon Redshift.
+// Send marshals and sends the DescribeClusterSecurityGroups API request.
+func (r DescribeClusterSecurityGroupsRequest) Send() (*DescribeClusterSecurityGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterSecurityGroupsOutput), nil
+}
+
+// DescribeClusterSecurityGroupsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Returns information about Amazon Redshift security groups. If the name of
 // a security group is specified, the response will contain only information
@@ -2681,41 +1509,33 @@ func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSe
 // are returned regardless of whether they have tag keys or values associated
 // with them.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeClusterSecurityGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSecurityGroupNotFoundFault "ClusterSecurityGroupNotFound"
-//   The cluster security group name does not refer to an existing cluster security
-//   group.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
+//    // Example sending a request using the DescribeClusterSecurityGroupsRequest method.
+//    req := client.DescribeClusterSecurityGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSecurityGroups
-func (c *Redshift) DescribeClusterSecurityGroups(input *DescribeClusterSecurityGroupsInput) (*DescribeClusterSecurityGroupsOutput, error) {
-	req, out := c.DescribeClusterSecurityGroupsRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecurityGroupsInput) DescribeClusterSecurityGroupsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeClusterSecurityGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
 
-// DescribeClusterSecurityGroupsWithContext is the same as DescribeClusterSecurityGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusterSecurityGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeClusterSecurityGroupsWithContext(ctx aws.Context, input *DescribeClusterSecurityGroupsInput, opts ...aws.Option) (*DescribeClusterSecurityGroupsOutput, error) {
-	req, out := c.DescribeClusterSecurityGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeClusterSecurityGroupsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeClusterSecurityGroupsOutput{})
+	return DescribeClusterSecurityGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeClusterSecurityGroupsPages iterates over the pages of a DescribeClusterSecurityGroups operation,
@@ -2754,10 +1574,10 @@ func (c *Redshift) DescribeClusterSecurityGroupsPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterSecurityGroupsRequest(inCpy)
+			req := c.DescribeClusterSecurityGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2770,53 +1590,24 @@ func (c *Redshift) DescribeClusterSecurityGroupsPagesWithContext(ctx aws.Context
 
 const opDescribeClusterSnapshots = "DescribeClusterSnapshots"
 
-// DescribeClusterSnapshotsRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusterSnapshots operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeClusterSnapshots for more information on using the DescribeClusterSnapshots
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeClusterSnapshotsRequest method.
-//    req, resp := client.DescribeClusterSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots
-func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshotsInput) (req *aws.Request, output *DescribeClusterSnapshotsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeClusterSnapshots,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"Marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "MaxRecords",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &DescribeClusterSnapshotsInput{}
-	}
-
-	output = &DescribeClusterSnapshotsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeClusterSnapshotsRequest is a API request type for the DescribeClusterSnapshots API operation.
+type DescribeClusterSnapshotsRequest struct {
+	*aws.Request
+	Input *DescribeClusterSnapshotsInput
 }
 
-// DescribeClusterSnapshots API operation for Amazon Redshift.
+// Send marshals and sends the DescribeClusterSnapshots API request.
+func (r DescribeClusterSnapshotsRequest) Send() (*DescribeClusterSnapshotsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterSnapshotsOutput), nil
+}
+
+// DescribeClusterSnapshotsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Returns one or more snapshot objects, which contain metadata about your cluster
 // snapshots. By default, this operation returns information about all snapshots
@@ -2834,40 +1625,33 @@ func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapsho
 // If both tag keys and values are omitted from the request, snapshots are returned
 // regardless of whether they have tag keys or values associated with them.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeClusterSnapshots for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSnapshotNotFoundFault "ClusterSnapshotNotFound"
-//   The snapshot identifier does not refer to an existing cluster snapshot.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
+//    // Example sending a request using the DescribeClusterSnapshotsRequest method.
+//    req := client.DescribeClusterSnapshotsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots
-func (c *Redshift) DescribeClusterSnapshots(input *DescribeClusterSnapshotsInput) (*DescribeClusterSnapshotsOutput, error) {
-	req, out := c.DescribeClusterSnapshotsRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshotsInput) DescribeClusterSnapshotsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeClusterSnapshots,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
 
-// DescribeClusterSnapshotsWithContext is the same as DescribeClusterSnapshots with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusterSnapshots for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeClusterSnapshotsWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, opts ...aws.Option) (*DescribeClusterSnapshotsOutput, error) {
-	req, out := c.DescribeClusterSnapshotsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeClusterSnapshotsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeClusterSnapshotsOutput{})
+	return DescribeClusterSnapshotsRequest{Request: req, Input: input}
 }
 
 // DescribeClusterSnapshotsPages iterates over the pages of a DescribeClusterSnapshots operation,
@@ -2906,10 +1690,10 @@ func (c *Redshift) DescribeClusterSnapshotsPagesWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterSnapshotsRequest(inCpy)
+			req := c.DescribeClusterSnapshotsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2922,31 +1706,48 @@ func (c *Redshift) DescribeClusterSnapshotsPagesWithContext(ctx aws.Context, inp
 
 const opDescribeClusterSubnetGroups = "DescribeClusterSubnetGroups"
 
-// DescribeClusterSubnetGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusterSubnetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeClusterSubnetGroupsRequest is a API request type for the DescribeClusterSubnetGroups API operation.
+type DescribeClusterSubnetGroupsRequest struct {
+	*aws.Request
+	Input *DescribeClusterSubnetGroupsInput
+}
+
+// Send marshals and sends the DescribeClusterSubnetGroups API request.
+func (r DescribeClusterSubnetGroupsRequest) Send() (*DescribeClusterSubnetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterSubnetGroupsOutput), nil
+}
+
+// DescribeClusterSubnetGroupsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns one or more cluster subnet group objects, which contain metadata
+// about your cluster subnet groups. By default, this operation returns information
+// about all cluster subnet groups that are defined in you AWS account.
 //
-// See DescribeClusterSubnetGroups for more information on using the DescribeClusterSubnetGroups
-// API call, and error handling.
+// If you specify both tag keys and tag values in the same request, Amazon Redshift
+// returns all subnet groups that match any combination of the specified keys
+// and values. For example, if you have owner and environment for tag keys,
+// and admin and test for tag values, all subnet groups that have any combination
+// of those values are returned.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If both tag keys and values are omitted from the request, subnet groups are
+// returned regardless of whether they have tag keys or values associated with
+// them.
 //
 //    // Example sending a request using the DescribeClusterSubnetGroupsRequest method.
-//    req, resp := client.DescribeClusterSubnetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeClusterSubnetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroups
-func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnetGroupsInput) (req *aws.Request, output *DescribeClusterSubnetGroupsOutput) {
+func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnetGroupsInput) DescribeClusterSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterSubnetGroups,
 		HTTPMethod: "POST",
@@ -2963,62 +1764,8 @@ func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubn
 		input = &DescribeClusterSubnetGroupsInput{}
 	}
 
-	output = &DescribeClusterSubnetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeClusterSubnetGroups API operation for Amazon Redshift.
-//
-// Returns one or more cluster subnet group objects, which contain metadata
-// about your cluster subnet groups. By default, this operation returns information
-// about all cluster subnet groups that are defined in you AWS account.
-//
-// If you specify both tag keys and tag values in the same request, Amazon Redshift
-// returns all subnet groups that match any combination of the specified keys
-// and values. For example, if you have owner and environment for tag keys,
-// and admin and test for tag values, all subnet groups that have any combination
-// of those values are returned.
-//
-// If both tag keys and values are omitted from the request, subnet groups are
-// returned regardless of whether they have tag keys or values associated with
-// them.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeClusterSubnetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSubnetGroupNotFoundFault "ClusterSubnetGroupNotFoundFault"
-//   The cluster subnet group name does not refer to an existing cluster subnet
-//   group.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroups
-func (c *Redshift) DescribeClusterSubnetGroups(input *DescribeClusterSubnetGroupsInput) (*DescribeClusterSubnetGroupsOutput, error) {
-	req, out := c.DescribeClusterSubnetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeClusterSubnetGroupsWithContext is the same as DescribeClusterSubnetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusterSubnetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeClusterSubnetGroupsWithContext(ctx aws.Context, input *DescribeClusterSubnetGroupsInput, opts ...aws.Option) (*DescribeClusterSubnetGroupsOutput, error) {
-	req, out := c.DescribeClusterSubnetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeClusterSubnetGroupsOutput{})
+	return DescribeClusterSubnetGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeClusterSubnetGroupsPages iterates over the pages of a DescribeClusterSubnetGroups operation,
@@ -3057,10 +1804,10 @@ func (c *Redshift) DescribeClusterSubnetGroupsPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterSubnetGroupsRequest(inCpy)
+			req := c.DescribeClusterSubnetGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3073,31 +1820,40 @@ func (c *Redshift) DescribeClusterSubnetGroupsPagesWithContext(ctx aws.Context, 
 
 const opDescribeClusterVersions = "DescribeClusterVersions"
 
-// DescribeClusterVersionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusterVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeClusterVersionsRequest is a API request type for the DescribeClusterVersions API operation.
+type DescribeClusterVersionsRequest struct {
+	*aws.Request
+	Input *DescribeClusterVersionsInput
+}
+
+// Send marshals and sends the DescribeClusterVersions API request.
+func (r DescribeClusterVersionsRequest) Send() (*DescribeClusterVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterVersionsOutput), nil
+}
+
+// DescribeClusterVersionsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeClusterVersions for more information on using the DescribeClusterVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns descriptions of the available Amazon Redshift cluster versions. You
+// can call this operation even before creating any clusters to learn more about
+// the Amazon Redshift versions. For more information about managing clusters,
+// go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeClusterVersionsRequest method.
-//    req, resp := client.DescribeClusterVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeClusterVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersions
-func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersionsInput) (req *aws.Request, output *DescribeClusterVersionsOutput) {
+func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersionsInput) DescribeClusterVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterVersions,
 		HTTPMethod: "POST",
@@ -3114,45 +1870,8 @@ func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersions
 		input = &DescribeClusterVersionsInput{}
 	}
 
-	output = &DescribeClusterVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeClusterVersions API operation for Amazon Redshift.
-//
-// Returns descriptions of the available Amazon Redshift cluster versions. You
-// can call this operation even before creating any clusters to learn more about
-// the Amazon Redshift versions. For more information about managing clusters,
-// go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeClusterVersions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersions
-func (c *Redshift) DescribeClusterVersions(input *DescribeClusterVersionsInput) (*DescribeClusterVersionsOutput, error) {
-	req, out := c.DescribeClusterVersionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeClusterVersionsWithContext is the same as DescribeClusterVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusterVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeClusterVersionsWithContext(ctx aws.Context, input *DescribeClusterVersionsInput, opts ...aws.Option) (*DescribeClusterVersionsOutput, error) {
-	req, out := c.DescribeClusterVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeClusterVersionsOutput{})
+	return DescribeClusterVersionsRequest{Request: req, Input: input}
 }
 
 // DescribeClusterVersionsPages iterates over the pages of a DescribeClusterVersions operation,
@@ -3191,10 +1910,10 @@ func (c *Redshift) DescribeClusterVersionsPagesWithContext(ctx aws.Context, inpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClusterVersionsRequest(inCpy)
+			req := c.DescribeClusterVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3207,53 +1926,24 @@ func (c *Redshift) DescribeClusterVersionsPagesWithContext(ctx aws.Context, inpu
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeClusters for more information on using the DescribeClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeClustersRequest method.
-//    req, resp := client.DescribeClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters
-func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeClusters,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"Marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "MaxRecords",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &DescribeClustersInput{}
-	}
-
-	output = &DescribeClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeClustersRequest is a API request type for the DescribeClusters API operation.
+type DescribeClustersRequest struct {
+	*aws.Request
+	Input *DescribeClustersInput
 }
 
-// DescribeClusters API operation for Amazon Redshift.
+// Send marshals and sends the DescribeClusters API request.
+func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClustersOutput), nil
+}
+
+// DescribeClustersRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Returns properties of provisioned clusters including general cluster properties,
 // cluster database properties, maintenance and backup properties, and security
@@ -3270,40 +1960,33 @@ func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) (req *a
 // If both tag keys and values are omitted from the request, clusters are returned
 // regardless of whether they have tag keys or values associated with them.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
+//    // Example sending a request using the DescribeClustersRequest method.
+//    req := client.DescribeClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters
-func (c *Redshift) DescribeClusters(input *DescribeClustersInput) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) DescribeClustersRequest {
+	op := &aws.Operation{
+		Name:       opDescribeClusters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
 
-// DescribeClustersWithContext is the same as DescribeClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeClustersInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	return DescribeClustersRequest{Request: req, Input: input}
 }
 
 // DescribeClustersPages iterates over the pages of a DescribeClusters operation,
@@ -3342,10 +2025,10 @@ func (c *Redshift) DescribeClustersPagesWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClustersRequest(inCpy)
+			req := c.DescribeClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3358,31 +2041,40 @@ func (c *Redshift) DescribeClustersPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeDefaultClusterParameters = "DescribeDefaultClusterParameters"
 
-// DescribeDefaultClusterParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeDefaultClusterParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDefaultClusterParametersRequest is a API request type for the DescribeDefaultClusterParameters API operation.
+type DescribeDefaultClusterParametersRequest struct {
+	*aws.Request
+	Input *DescribeDefaultClusterParametersInput
+}
+
+// Send marshals and sends the DescribeDefaultClusterParameters API request.
+func (r DescribeDefaultClusterParametersRequest) Send() (*DescribeDefaultClusterParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDefaultClusterParametersOutput), nil
+}
+
+// DescribeDefaultClusterParametersRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of parameter settings for the specified parameter group family.
 //
-// See DescribeDefaultClusterParameters for more information on using the DescribeDefaultClusterParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about parameters and parameter groups, go to Amazon
+// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeDefaultClusterParametersRequest method.
-//    req, resp := client.DescribeDefaultClusterParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDefaultClusterParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParameters
-func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaultClusterParametersInput) (req *aws.Request, output *DescribeDefaultClusterParametersOutput) {
+func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaultClusterParametersInput) DescribeDefaultClusterParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDefaultClusterParameters,
 		HTTPMethod: "POST",
@@ -3399,45 +2091,8 @@ func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaul
 		input = &DescribeDefaultClusterParametersInput{}
 	}
 
-	output = &DescribeDefaultClusterParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDefaultClusterParameters API operation for Amazon Redshift.
-//
-// Returns a list of parameter settings for the specified parameter group family.
-//
-// For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeDefaultClusterParameters for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParameters
-func (c *Redshift) DescribeDefaultClusterParameters(input *DescribeDefaultClusterParametersInput) (*DescribeDefaultClusterParametersOutput, error) {
-	req, out := c.DescribeDefaultClusterParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDefaultClusterParametersWithContext is the same as DescribeDefaultClusterParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDefaultClusterParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeDefaultClusterParametersWithContext(ctx aws.Context, input *DescribeDefaultClusterParametersInput, opts ...aws.Option) (*DescribeDefaultClusterParametersOutput, error) {
-	req, out := c.DescribeDefaultClusterParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDefaultClusterParametersOutput{})
+	return DescribeDefaultClusterParametersRequest{Request: req, Input: input}
 }
 
 // DescribeDefaultClusterParametersPages iterates over the pages of a DescribeDefaultClusterParameters operation,
@@ -3476,10 +2131,10 @@ func (c *Redshift) DescribeDefaultClusterParametersPagesWithContext(ctx aws.Cont
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDefaultClusterParametersRequest(inCpy)
+			req := c.DescribeDefaultClusterParametersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3492,31 +2147,38 @@ func (c *Redshift) DescribeDefaultClusterParametersPagesWithContext(ctx aws.Cont
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
-// DescribeEventCategoriesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventCategories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventCategoriesRequest is a API request type for the DescribeEventCategories API operation.
+type DescribeEventCategoriesRequest struct {
+	*aws.Request
+	Input *DescribeEventCategoriesInput
+}
+
+// Send marshals and sends the DescribeEventCategories API request.
+func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventCategoriesOutput), nil
+}
+
+// DescribeEventCategoriesRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEventCategories for more information on using the DescribeEventCategories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Displays a list of event categories for all event source types, or for a
+// specified source type. For a list of the event categories and source types,
+// go to Amazon Redshift Event Notifications (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html).
 //
 //    // Example sending a request using the DescribeEventCategoriesRequest method.
-//    req, resp := client.DescribeEventCategoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventCategoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventCategories
-func (c *Redshift) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *aws.Request, output *DescribeEventCategoriesOutput) {
+func (c *Redshift) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) DescribeEventCategoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
@@ -3527,72 +2189,54 @@ func (c *Redshift) DescribeEventCategoriesRequest(input *DescribeEventCategories
 		input = &DescribeEventCategoriesInput{}
 	}
 
-	output = &DescribeEventCategoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventCategories API operation for Amazon Redshift.
-//
-// Displays a list of event categories for all event source types, or for a
-// specified source type. For a list of the event categories and source types,
-// go to Amazon Redshift Event Notifications (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeEventCategories for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventCategories
-func (c *Redshift) DescribeEventCategories(input *DescribeEventCategoriesInput) (*DescribeEventCategoriesOutput, error) {
-	req, out := c.DescribeEventCategoriesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventCategoriesWithContext is the same as DescribeEventCategories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventCategories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...aws.Option) (*DescribeEventCategoriesOutput, error) {
-	req, out := c.DescribeEventCategoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+	return DescribeEventCategoriesRequest{Request: req, Input: input}
 }
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 
-// DescribeEventSubscriptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventSubscriptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventSubscriptionsRequest is a API request type for the DescribeEventSubscriptions API operation.
+type DescribeEventSubscriptionsRequest struct {
+	*aws.Request
+	Input *DescribeEventSubscriptionsInput
+}
+
+// Send marshals and sends the DescribeEventSubscriptions API request.
+func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventSubscriptionsOutput), nil
+}
+
+// DescribeEventSubscriptionsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists descriptions of all the Amazon Redshift event notification subscriptions
+// for a customer account. If you specify a subscription name, lists the description
+// for that subscription.
 //
-// See DescribeEventSubscriptions for more information on using the DescribeEventSubscriptions
-// API call, and error handling.
+// If you specify both tag keys and tag values in the same request, Amazon Redshift
+// returns all event notification subscriptions that match any combination of
+// the specified keys and values. For example, if you have owner and environment
+// for tag keys, and admin and test for tag values, all subscriptions that have
+// any combination of those values are returned.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If both tag keys and values are omitted from the request, subscriptions are
+// returned regardless of whether they have tag keys or values associated with
+// them.
 //
 //    // Example sending a request using the DescribeEventSubscriptionsRequest method.
-//    req, resp := client.DescribeEventSubscriptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventSubscriptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventSubscriptions
-func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *aws.Request, output *DescribeEventSubscriptionsOutput) {
+func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventSubscriptions,
 		HTTPMethod: "POST",
@@ -3609,62 +2253,8 @@ func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscri
 		input = &DescribeEventSubscriptionsInput{}
 	}
 
-	output = &DescribeEventSubscriptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventSubscriptions API operation for Amazon Redshift.
-//
-// Lists descriptions of all the Amazon Redshift event notification subscriptions
-// for a customer account. If you specify a subscription name, lists the description
-// for that subscription.
-//
-// If you specify both tag keys and tag values in the same request, Amazon Redshift
-// returns all event notification subscriptions that match any combination of
-// the specified keys and values. For example, if you have owner and environment
-// for tag keys, and admin and test for tag values, all subscriptions that have
-// any combination of those values are returned.
-//
-// If both tag keys and values are omitted from the request, subscriptions are
-// returned regardless of whether they have tag keys or values associated with
-// them.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeEventSubscriptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   An Amazon Redshift event notification subscription with the specified name
-//   does not exist.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventSubscriptions
-func (c *Redshift) DescribeEventSubscriptions(input *DescribeEventSubscriptionsInput) (*DescribeEventSubscriptionsOutput, error) {
-	req, out := c.DescribeEventSubscriptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventSubscriptionsWithContext is the same as DescribeEventSubscriptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventSubscriptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...aws.Option) (*DescribeEventSubscriptionsOutput, error) {
-	req, out := c.DescribeEventSubscriptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventSubscriptionsOutput{})
+	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
 }
 
 // DescribeEventSubscriptionsPages iterates over the pages of a DescribeEventSubscriptions operation,
@@ -3703,10 +2293,10 @@ func (c *Redshift) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventSubscriptionsRequest(inCpy)
+			req := c.DescribeEventSubscriptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3719,31 +2309,39 @@ func (c *Redshift) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, i
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns events related to clusters, security groups, snapshots, and parameter
+// groups for the past 14 days. Events specific to a particular cluster, security
+// group, snapshot or parameter group can be obtained by providing the name
+// as a parameter. By default, the past hour of events are returned.
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEvents
-func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -3760,44 +2358,8 @@ func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.R
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for Amazon Redshift.
-//
-// Returns events related to clusters, security groups, snapshots, and parameter
-// groups for the past 14 days. Events specific to a particular cluster, security
-// group, snapshot or parameter group can be obtained by providing the name
-// as a parameter. By default, the past hour of events are returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeEvents for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEvents
-func (c *Redshift) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 // DescribeEventsPages iterates over the pages of a DescribeEvents operation,
@@ -3836,10 +2398,10 @@ func (c *Redshift) DescribeEventsPagesWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventsRequest(inCpy)
+			req := c.DescribeEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3852,31 +2414,48 @@ func (c *Redshift) DescribeEventsPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeHsmClientCertificates = "DescribeHsmClientCertificates"
 
-// DescribeHsmClientCertificatesRequest generates a "aws.Request" representing the
-// client's request for the DescribeHsmClientCertificates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeHsmClientCertificatesRequest is a API request type for the DescribeHsmClientCertificates API operation.
+type DescribeHsmClientCertificatesRequest struct {
+	*aws.Request
+	Input *DescribeHsmClientCertificatesInput
+}
+
+// Send marshals and sends the DescribeHsmClientCertificates API request.
+func (r DescribeHsmClientCertificatesRequest) Send() (*DescribeHsmClientCertificatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeHsmClientCertificatesOutput), nil
+}
+
+// DescribeHsmClientCertificatesRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the specified HSM client certificate. If no certificate
+// ID is specified, returns information about all the HSM certificates owned
+// by your AWS customer account.
 //
-// See DescribeHsmClientCertificates for more information on using the DescribeHsmClientCertificates
-// API call, and error handling.
+// If you specify both tag keys and tag values in the same request, Amazon Redshift
+// returns all HSM client certificates that match any combination of the specified
+// keys and values. For example, if you have owner and environment for tag keys,
+// and admin and test for tag values, all HSM client certificates that have
+// any combination of those values are returned.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If both tag keys and values are omitted from the request, HSM client certificates
+// are returned regardless of whether they have tag keys or values associated
+// with them.
 //
 //    // Example sending a request using the DescribeHsmClientCertificatesRequest method.
-//    req, resp := client.DescribeHsmClientCertificatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeHsmClientCertificatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmClientCertificates
-func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClientCertificatesInput) (req *aws.Request, output *DescribeHsmClientCertificatesOutput) {
+func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClientCertificatesInput) DescribeHsmClientCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHsmClientCertificates,
 		HTTPMethod: "POST",
@@ -3893,61 +2472,8 @@ func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClient
 		input = &DescribeHsmClientCertificatesInput{}
 	}
 
-	output = &DescribeHsmClientCertificatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeHsmClientCertificates API operation for Amazon Redshift.
-//
-// Returns information about the specified HSM client certificate. If no certificate
-// ID is specified, returns information about all the HSM certificates owned
-// by your AWS customer account.
-//
-// If you specify both tag keys and tag values in the same request, Amazon Redshift
-// returns all HSM client certificates that match any combination of the specified
-// keys and values. For example, if you have owner and environment for tag keys,
-// and admin and test for tag values, all HSM client certificates that have
-// any combination of those values are returned.
-//
-// If both tag keys and values are omitted from the request, HSM client certificates
-// are returned regardless of whether they have tag keys or values associated
-// with them.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeHsmClientCertificates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeHsmClientCertificateNotFoundFault "HsmClientCertificateNotFoundFault"
-//   There is no Amazon Redshift HSM client certificate with the specified identifier.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmClientCertificates
-func (c *Redshift) DescribeHsmClientCertificates(input *DescribeHsmClientCertificatesInput) (*DescribeHsmClientCertificatesOutput, error) {
-	req, out := c.DescribeHsmClientCertificatesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeHsmClientCertificatesWithContext is the same as DescribeHsmClientCertificates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeHsmClientCertificates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeHsmClientCertificatesWithContext(ctx aws.Context, input *DescribeHsmClientCertificatesInput, opts ...aws.Option) (*DescribeHsmClientCertificatesOutput, error) {
-	req, out := c.DescribeHsmClientCertificatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeHsmClientCertificatesOutput{})
+	return DescribeHsmClientCertificatesRequest{Request: req, Input: input}
 }
 
 // DescribeHsmClientCertificatesPages iterates over the pages of a DescribeHsmClientCertificates operation,
@@ -3986,10 +2512,10 @@ func (c *Redshift) DescribeHsmClientCertificatesPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeHsmClientCertificatesRequest(inCpy)
+			req := c.DescribeHsmClientCertificatesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4002,31 +2528,48 @@ func (c *Redshift) DescribeHsmClientCertificatesPagesWithContext(ctx aws.Context
 
 const opDescribeHsmConfigurations = "DescribeHsmConfigurations"
 
-// DescribeHsmConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeHsmConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeHsmConfigurationsRequest is a API request type for the DescribeHsmConfigurations API operation.
+type DescribeHsmConfigurationsRequest struct {
+	*aws.Request
+	Input *DescribeHsmConfigurationsInput
+}
+
+// Send marshals and sends the DescribeHsmConfigurations API request.
+func (r DescribeHsmConfigurationsRequest) Send() (*DescribeHsmConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeHsmConfigurationsOutput), nil
+}
+
+// DescribeHsmConfigurationsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the specified Amazon Redshift HSM configuration.
+// If no configuration ID is specified, returns information about all the HSM
+// configurations owned by your AWS customer account.
 //
-// See DescribeHsmConfigurations for more information on using the DescribeHsmConfigurations
-// API call, and error handling.
+// If you specify both tag keys and tag values in the same request, Amazon Redshift
+// returns all HSM connections that match any combination of the specified keys
+// and values. For example, if you have owner and environment for tag keys,
+// and admin and test for tag values, all HSM connections that have any combination
+// of those values are returned.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If both tag keys and values are omitted from the request, HSM connections
+// are returned regardless of whether they have tag keys or values associated
+// with them.
 //
 //    // Example sending a request using the DescribeHsmConfigurationsRequest method.
-//    req, resp := client.DescribeHsmConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeHsmConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurations
-func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurationsInput) (req *aws.Request, output *DescribeHsmConfigurationsOutput) {
+func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurationsInput) DescribeHsmConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHsmConfigurations,
 		HTTPMethod: "POST",
@@ -4043,61 +2586,8 @@ func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurat
 		input = &DescribeHsmConfigurationsInput{}
 	}
 
-	output = &DescribeHsmConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeHsmConfigurations API operation for Amazon Redshift.
-//
-// Returns information about the specified Amazon Redshift HSM configuration.
-// If no configuration ID is specified, returns information about all the HSM
-// configurations owned by your AWS customer account.
-//
-// If you specify both tag keys and tag values in the same request, Amazon Redshift
-// returns all HSM connections that match any combination of the specified keys
-// and values. For example, if you have owner and environment for tag keys,
-// and admin and test for tag values, all HSM connections that have any combination
-// of those values are returned.
-//
-// If both tag keys and values are omitted from the request, HSM connections
-// are returned regardless of whether they have tag keys or values associated
-// with them.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeHsmConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeHsmConfigurationNotFoundFault "HsmConfigurationNotFoundFault"
-//   There is no Amazon Redshift HSM configuration with the specified identifier.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurations
-func (c *Redshift) DescribeHsmConfigurations(input *DescribeHsmConfigurationsInput) (*DescribeHsmConfigurationsOutput, error) {
-	req, out := c.DescribeHsmConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeHsmConfigurationsWithContext is the same as DescribeHsmConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeHsmConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeHsmConfigurationsWithContext(ctx aws.Context, input *DescribeHsmConfigurationsInput, opts ...aws.Option) (*DescribeHsmConfigurationsOutput, error) {
-	req, out := c.DescribeHsmConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeHsmConfigurationsOutput{})
+	return DescribeHsmConfigurationsRequest{Request: req, Input: input}
 }
 
 // DescribeHsmConfigurationsPages iterates over the pages of a DescribeHsmConfigurations operation,
@@ -4136,10 +2626,10 @@ func (c *Redshift) DescribeHsmConfigurationsPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeHsmConfigurationsRequest(inCpy)
+			req := c.DescribeHsmConfigurationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4152,31 +2642,37 @@ func (c *Redshift) DescribeHsmConfigurationsPagesWithContext(ctx aws.Context, in
 
 const opDescribeLoggingStatus = "DescribeLoggingStatus"
 
-// DescribeLoggingStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoggingStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLoggingStatusRequest is a API request type for the DescribeLoggingStatus API operation.
+type DescribeLoggingStatusRequest struct {
+	*aws.Request
+	Input *DescribeLoggingStatusInput
+}
+
+// Send marshals and sends the DescribeLoggingStatus API request.
+func (r DescribeLoggingStatusRequest) Send() (*EnableLoggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableLoggingOutput), nil
+}
+
+// DescribeLoggingStatusRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoggingStatus for more information on using the DescribeLoggingStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes whether information, such as queries and connection attempts, is
+// being logged for the specified Amazon Redshift cluster.
 //
 //    // Example sending a request using the DescribeLoggingStatusRequest method.
-//    req, resp := client.DescribeLoggingStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLoggingStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus
-func (c *Redshift) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput) (req *aws.Request, output *LoggingStatus) {
+func (c *Redshift) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput) DescribeLoggingStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoggingStatus,
 		HTTPMethod: "POST",
@@ -4187,76 +2683,50 @@ func (c *Redshift) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInpu
 		input = &DescribeLoggingStatusInput{}
 	}
 
-	output = &LoggingStatus{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLoggingStatus API operation for Amazon Redshift.
-//
-// Describes whether information, such as queries and connection attempts, is
-// being logged for the specified Amazon Redshift cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeLoggingStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus
-func (c *Redshift) DescribeLoggingStatus(input *DescribeLoggingStatusInput) (*LoggingStatus, error) {
-	req, out := c.DescribeLoggingStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLoggingStatusWithContext is the same as DescribeLoggingStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoggingStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeLoggingStatusWithContext(ctx aws.Context, input *DescribeLoggingStatusInput, opts ...aws.Option) (*LoggingStatus, error) {
-	req, out := c.DescribeLoggingStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnableLoggingOutput{})
+	return DescribeLoggingStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeOrderableClusterOptions = "DescribeOrderableClusterOptions"
 
-// DescribeOrderableClusterOptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeOrderableClusterOptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeOrderableClusterOptionsRequest is a API request type for the DescribeOrderableClusterOptions API operation.
+type DescribeOrderableClusterOptionsRequest struct {
+	*aws.Request
+	Input *DescribeOrderableClusterOptionsInput
+}
+
+// Send marshals and sends the DescribeOrderableClusterOptions API request.
+func (r DescribeOrderableClusterOptionsRequest) Send() (*DescribeOrderableClusterOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeOrderableClusterOptionsOutput), nil
+}
+
+// DescribeOrderableClusterOptionsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeOrderableClusterOptions for more information on using the DescribeOrderableClusterOptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of orderable cluster options. Before you create a new cluster
+// you can use this operation to find what options are available, such as the
+// EC2 Availability Zones (AZ) in the specific AWS region that you can specify,
+// and the node types you can request. The node types differ by available storage,
+// memory, CPU and price. With the cost involved you might want to obtain a
+// list of cluster options in the specific region and specify values when creating
+// a cluster. For more information about managing clusters, go to Amazon Redshift
+// Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeOrderableClusterOptionsRequest method.
-//    req, resp := client.DescribeOrderableClusterOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeOrderableClusterOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptions
-func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderableClusterOptionsInput) (req *aws.Request, output *DescribeOrderableClusterOptionsOutput) {
+func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderableClusterOptionsInput) DescribeOrderableClusterOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrderableClusterOptions,
 		HTTPMethod: "POST",
@@ -4273,49 +2743,8 @@ func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderab
 		input = &DescribeOrderableClusterOptionsInput{}
 	}
 
-	output = &DescribeOrderableClusterOptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeOrderableClusterOptions API operation for Amazon Redshift.
-//
-// Returns a list of orderable cluster options. Before you create a new cluster
-// you can use this operation to find what options are available, such as the
-// EC2 Availability Zones (AZ) in the specific AWS region that you can specify,
-// and the node types you can request. The node types differ by available storage,
-// memory, CPU and price. With the cost involved you might want to obtain a
-// list of cluster options in the specific region and specify values when creating
-// a cluster. For more information about managing clusters, go to Amazon Redshift
-// Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeOrderableClusterOptions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptions
-func (c *Redshift) DescribeOrderableClusterOptions(input *DescribeOrderableClusterOptionsInput) (*DescribeOrderableClusterOptionsOutput, error) {
-	req, out := c.DescribeOrderableClusterOptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeOrderableClusterOptionsWithContext is the same as DescribeOrderableClusterOptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeOrderableClusterOptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeOrderableClusterOptionsWithContext(ctx aws.Context, input *DescribeOrderableClusterOptionsInput, opts ...aws.Option) (*DescribeOrderableClusterOptionsOutput, error) {
-	req, out := c.DescribeOrderableClusterOptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeOrderableClusterOptionsOutput{})
+	return DescribeOrderableClusterOptionsRequest{Request: req, Input: input}
 }
 
 // DescribeOrderableClusterOptionsPages iterates over the pages of a DescribeOrderableClusterOptions operation,
@@ -4354,10 +2783,10 @@ func (c *Redshift) DescribeOrderableClusterOptionsPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeOrderableClusterOptionsRequest(inCpy)
+			req := c.DescribeOrderableClusterOptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4370,31 +2799,45 @@ func (c *Redshift) DescribeOrderableClusterOptionsPagesWithContext(ctx aws.Conte
 
 const opDescribeReservedNodeOfferings = "DescribeReservedNodeOfferings"
 
-// DescribeReservedNodeOfferingsRequest generates a "aws.Request" representing the
-// client's request for the DescribeReservedNodeOfferings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReservedNodeOfferingsRequest is a API request type for the DescribeReservedNodeOfferings API operation.
+type DescribeReservedNodeOfferingsRequest struct {
+	*aws.Request
+	Input *DescribeReservedNodeOfferingsInput
+}
+
+// Send marshals and sends the DescribeReservedNodeOfferings API request.
+func (r DescribeReservedNodeOfferingsRequest) Send() (*DescribeReservedNodeOfferingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedNodeOfferingsOutput), nil
+}
+
+// DescribeReservedNodeOfferingsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of the available reserved node offerings by Amazon Redshift
+// with their descriptions including the node type, the fixed and recurring
+// costs of reserving the node and duration the node will be reserved for you.
+// These descriptions help you determine which reserve node offering you want
+// to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering
+// to reserve one or more nodes for your Amazon Redshift cluster.
 //
-// See DescribeReservedNodeOfferings for more information on using the DescribeReservedNodeOfferings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about reserved node offerings, go to Purchasing Reserved
+// Nodes (http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeReservedNodeOfferingsRequest method.
-//    req, resp := client.DescribeReservedNodeOfferingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReservedNodeOfferingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferings
-func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNodeOfferingsInput) (req *aws.Request, output *DescribeReservedNodeOfferingsOutput) {
+func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNodeOfferingsInput) DescribeReservedNodeOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedNodeOfferings,
 		HTTPMethod: "POST",
@@ -4411,62 +2854,8 @@ func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedN
 		input = &DescribeReservedNodeOfferingsInput{}
 	}
 
-	output = &DescribeReservedNodeOfferingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReservedNodeOfferings API operation for Amazon Redshift.
-//
-// Returns a list of the available reserved node offerings by Amazon Redshift
-// with their descriptions including the node type, the fixed and recurring
-// costs of reserving the node and duration the node will be reserved for you.
-// These descriptions help you determine which reserve node offering you want
-// to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering
-// to reserve one or more nodes for your Amazon Redshift cluster.
-//
-// For more information about reserved node offerings, go to Purchasing Reserved
-// Nodes (http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeReservedNodeOfferings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedNodeOfferingNotFoundFault "ReservedNodeOfferingNotFound"
-//   Specified offering does not exist.
-//
-//   * ErrCodeUnsupportedOperationFault "UnsupportedOperation"
-//   The requested operation isn't supported.
-//
-//   * ErrCodeDependentServiceUnavailableFault "DependentServiceUnavailableFault"
-//   Your request cannot be completed because a dependent internal service is
-//   temporarily unavailable. Wait 30 to 60 seconds and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferings
-func (c *Redshift) DescribeReservedNodeOfferings(input *DescribeReservedNodeOfferingsInput) (*DescribeReservedNodeOfferingsOutput, error) {
-	req, out := c.DescribeReservedNodeOfferingsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReservedNodeOfferingsWithContext is the same as DescribeReservedNodeOfferings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReservedNodeOfferings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeReservedNodeOfferingsWithContext(ctx aws.Context, input *DescribeReservedNodeOfferingsInput, opts ...aws.Option) (*DescribeReservedNodeOfferingsOutput, error) {
-	req, out := c.DescribeReservedNodeOfferingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReservedNodeOfferingsOutput{})
+	return DescribeReservedNodeOfferingsRequest{Request: req, Input: input}
 }
 
 // DescribeReservedNodeOfferingsPages iterates over the pages of a DescribeReservedNodeOfferings operation,
@@ -4505,10 +2894,10 @@ func (c *Redshift) DescribeReservedNodeOfferingsPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReservedNodeOfferingsRequest(inCpy)
+			req := c.DescribeReservedNodeOfferingsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4521,31 +2910,36 @@ func (c *Redshift) DescribeReservedNodeOfferingsPagesWithContext(ctx aws.Context
 
 const opDescribeReservedNodes = "DescribeReservedNodes"
 
-// DescribeReservedNodesRequest generates a "aws.Request" representing the
-// client's request for the DescribeReservedNodes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReservedNodesRequest is a API request type for the DescribeReservedNodes API operation.
+type DescribeReservedNodesRequest struct {
+	*aws.Request
+	Input *DescribeReservedNodesInput
+}
+
+// Send marshals and sends the DescribeReservedNodes API request.
+func (r DescribeReservedNodesRequest) Send() (*DescribeReservedNodesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedNodesOutput), nil
+}
+
+// DescribeReservedNodesRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReservedNodes for more information on using the DescribeReservedNodes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the descriptions of the reserved nodes.
 //
 //    // Example sending a request using the DescribeReservedNodesRequest method.
-//    req, resp := client.DescribeReservedNodesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReservedNodesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodes
-func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInput) (req *aws.Request, output *DescribeReservedNodesOutput) {
+func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInput) DescribeReservedNodesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedNodes,
 		HTTPMethod: "POST",
@@ -4562,50 +2956,8 @@ func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInpu
 		input = &DescribeReservedNodesInput{}
 	}
 
-	output = &DescribeReservedNodesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReservedNodes API operation for Amazon Redshift.
-//
-// Returns the descriptions of the reserved nodes.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeReservedNodes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedNodeNotFoundFault "ReservedNodeNotFound"
-//   The specified reserved compute node not found.
-//
-//   * ErrCodeDependentServiceUnavailableFault "DependentServiceUnavailableFault"
-//   Your request cannot be completed because a dependent internal service is
-//   temporarily unavailable. Wait 30 to 60 seconds and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodes
-func (c *Redshift) DescribeReservedNodes(input *DescribeReservedNodesInput) (*DescribeReservedNodesOutput, error) {
-	req, out := c.DescribeReservedNodesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReservedNodesWithContext is the same as DescribeReservedNodes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReservedNodes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeReservedNodesWithContext(ctx aws.Context, input *DescribeReservedNodesInput, opts ...aws.Option) (*DescribeReservedNodesOutput, error) {
-	req, out := c.DescribeReservedNodesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReservedNodesOutput{})
+	return DescribeReservedNodesRequest{Request: req, Input: input}
 }
 
 // DescribeReservedNodesPages iterates over the pages of a DescribeReservedNodes operation,
@@ -4644,10 +2996,10 @@ func (c *Redshift) DescribeReservedNodesPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReservedNodesRequest(inCpy)
+			req := c.DescribeReservedNodesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4660,31 +3012,42 @@ func (c *Redshift) DescribeReservedNodesPagesWithContext(ctx aws.Context, input 
 
 const opDescribeResize = "DescribeResize"
 
-// DescribeResizeRequest generates a "aws.Request" representing the
-// client's request for the DescribeResize operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeResizeRequest is a API request type for the DescribeResize API operation.
+type DescribeResizeRequest struct {
+	*aws.Request
+	Input *DescribeResizeInput
+}
+
+// Send marshals and sends the DescribeResize API request.
+func (r DescribeResizeRequest) Send() (*DescribeResizeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeResizeOutput), nil
+}
+
+// DescribeResizeRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the last resize operation for the specified cluster.
+// If no resize operation has ever been initiated for the specified cluster,
+// a HTTP 404 error is returned. If a resize operation was initiated and completed,
+// the status of the resize remains as SUCCEEDED until the next resize.
 //
-// See DescribeResize for more information on using the DescribeResize
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A resize operation can be requested using ModifyCluster and specifying a
+// different number or type of nodes for the cluster.
 //
 //    // Example sending a request using the DescribeResizeRequest method.
-//    req, resp := client.DescribeResizeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeResizeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize
-func (c *Redshift) DescribeResizeRequest(input *DescribeResizeInput) (req *aws.Request, output *DescribeResizeOutput) {
+func (c *Redshift) DescribeResizeRequest(input *DescribeResizeInput) DescribeResizeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResize,
 		HTTPMethod: "POST",
@@ -4695,84 +3058,47 @@ func (c *Redshift) DescribeResizeRequest(input *DescribeResizeInput) (req *aws.R
 		input = &DescribeResizeInput{}
 	}
 
-	output = &DescribeResizeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeResize API operation for Amazon Redshift.
-//
-// Returns information about the last resize operation for the specified cluster.
-// If no resize operation has ever been initiated for the specified cluster,
-// a HTTP 404 error is returned. If a resize operation was initiated and completed,
-// the status of the resize remains as SUCCEEDED until the next resize.
-//
-// A resize operation can be requested using ModifyCluster and specifying a
-// different number or type of nodes for the cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeResize for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeResizeNotFoundFault "ResizeNotFound"
-//   A resize operation for the specified cluster is not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize
-func (c *Redshift) DescribeResize(input *DescribeResizeInput) (*DescribeResizeOutput, error) {
-	req, out := c.DescribeResizeRequest(input)
-	return out, req.Send()
-}
-
-// DescribeResizeWithContext is the same as DescribeResize with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeResize for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeResizeWithContext(ctx aws.Context, input *DescribeResizeInput, opts ...aws.Option) (*DescribeResizeOutput, error) {
-	req, out := c.DescribeResizeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeResizeOutput{})
+	return DescribeResizeRequest{Request: req, Input: input}
 }
 
 const opDescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
 
-// DescribeSnapshotCopyGrantsRequest generates a "aws.Request" representing the
-// client's request for the DescribeSnapshotCopyGrants operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSnapshotCopyGrantsRequest is a API request type for the DescribeSnapshotCopyGrants API operation.
+type DescribeSnapshotCopyGrantsRequest struct {
+	*aws.Request
+	Input *DescribeSnapshotCopyGrantsInput
+}
+
+// Send marshals and sends the DescribeSnapshotCopyGrants API request.
+func (r DescribeSnapshotCopyGrantsRequest) Send() (*DescribeSnapshotCopyGrantsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSnapshotCopyGrantsOutput), nil
+}
+
+// DescribeSnapshotCopyGrantsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of snapshot copy grants owned by the AWS account in the destination
+// region.
 //
-// See DescribeSnapshotCopyGrants for more information on using the DescribeSnapshotCopyGrants
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about managing snapshot copy grants, go to Amazon Redshift
+// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeSnapshotCopyGrantsRequest method.
-//    req, resp := client.DescribeSnapshotCopyGrantsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSnapshotCopyGrantsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotCopyGrants
-func (c *Redshift) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGrantsInput) (req *aws.Request, output *DescribeSnapshotCopyGrantsOutput) {
+func (c *Redshift) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGrantsInput) DescribeSnapshotCopyGrantsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshotCopyGrants,
 		HTTPMethod: "POST",
@@ -4783,84 +3109,46 @@ func (c *Redshift) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopy
 		input = &DescribeSnapshotCopyGrantsInput{}
 	}
 
-	output = &DescribeSnapshotCopyGrantsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSnapshotCopyGrants API operation for Amazon Redshift.
-//
-// Returns a list of snapshot copy grants owned by the AWS account in the destination
-// region.
-//
-// For more information about managing snapshot copy grants, go to Amazon Redshift
-// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeSnapshotCopyGrants for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSnapshotCopyGrantNotFoundFault "SnapshotCopyGrantNotFoundFault"
-//   The specified snapshot copy grant can't be found. Make sure that the name
-//   is typed correctly and that the grant exists in the destination region.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotCopyGrants
-func (c *Redshift) DescribeSnapshotCopyGrants(input *DescribeSnapshotCopyGrantsInput) (*DescribeSnapshotCopyGrantsOutput, error) {
-	req, out := c.DescribeSnapshotCopyGrantsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSnapshotCopyGrantsWithContext is the same as DescribeSnapshotCopyGrants with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSnapshotCopyGrants for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeSnapshotCopyGrantsWithContext(ctx aws.Context, input *DescribeSnapshotCopyGrantsInput, opts ...aws.Option) (*DescribeSnapshotCopyGrantsOutput, error) {
-	req, out := c.DescribeSnapshotCopyGrantsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSnapshotCopyGrantsOutput{})
+	return DescribeSnapshotCopyGrantsRequest{Request: req, Input: input}
 }
 
 const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
 
-// DescribeTableRestoreStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeTableRestoreStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTableRestoreStatusRequest is a API request type for the DescribeTableRestoreStatus API operation.
+type DescribeTableRestoreStatusRequest struct {
+	*aws.Request
+	Input *DescribeTableRestoreStatusInput
+}
+
+// Send marshals and sends the DescribeTableRestoreStatus API request.
+func (r DescribeTableRestoreStatusRequest) Send() (*DescribeTableRestoreStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTableRestoreStatusOutput), nil
+}
+
+// DescribeTableRestoreStatusRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTableRestoreStatus for more information on using the DescribeTableRestoreStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the status of one or more table restore requests made using the RestoreTableFromClusterSnapshot
+// API action. If you don't specify a value for the TableRestoreRequestId parameter,
+// then DescribeTableRestoreStatus returns the status of all table restore requests
+// ordered by the date and time of the request in ascending order. Otherwise
+// DescribeTableRestoreStatus returns the status of the table specified by TableRestoreRequestId.
 //
 //    // Example sending a request using the DescribeTableRestoreStatusRequest method.
-//    req, resp := client.DescribeTableRestoreStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTableRestoreStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTableRestoreStatus
-func (c *Redshift) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreStatusInput) (req *aws.Request, output *DescribeTableRestoreStatusOutput) {
+func (c *Redshift) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreStatusInput) DescribeTableRestoreStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTableRestoreStatus,
 		HTTPMethod: "POST",
@@ -4871,98 +3159,30 @@ func (c *Redshift) DescribeTableRestoreStatusRequest(input *DescribeTableRestore
 		input = &DescribeTableRestoreStatusInput{}
 	}
 
-	output = &DescribeTableRestoreStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTableRestoreStatus API operation for Amazon Redshift.
-//
-// Lists the status of one or more table restore requests made using the RestoreTableFromClusterSnapshot
-// API action. If you don't specify a value for the TableRestoreRequestId parameter,
-// then DescribeTableRestoreStatus returns the status of all table restore requests
-// ordered by the date and time of the request in ascending order. Otherwise
-// DescribeTableRestoreStatus returns the status of the table specified by TableRestoreRequestId.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeTableRestoreStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTableRestoreNotFoundFault "TableRestoreNotFoundFault"
-//   The specified TableRestoreRequestId value was not found.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTableRestoreStatus
-func (c *Redshift) DescribeTableRestoreStatus(input *DescribeTableRestoreStatusInput) (*DescribeTableRestoreStatusOutput, error) {
-	req, out := c.DescribeTableRestoreStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTableRestoreStatusWithContext is the same as DescribeTableRestoreStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTableRestoreStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeTableRestoreStatusWithContext(ctx aws.Context, input *DescribeTableRestoreStatusInput, opts ...aws.Option) (*DescribeTableRestoreStatusOutput, error) {
-	req, out := c.DescribeTableRestoreStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTableRestoreStatusOutput{})
+	return DescribeTableRestoreStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTags
-func (c *Redshift) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeTags,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeTagsInput{}
-	}
-
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
 }
 
-// DescribeTags API operation for Amazon Redshift.
+// Send marshals and sends the DescribeTags API request.
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Returns a list of tags. You can return tags from a specific resource by specifying
 // an ARN, or you can return all tags for a given type of resource, such as
@@ -4988,69 +3208,62 @@ func (c *Redshift) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Reque
 // If both tag keys and values are omitted from the request, resources are returned
 // regardless of whether they have tag keys or values associated with them.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidTagFault "InvalidTagFault"
-//   The tag is invalid.
+//    // Example sending a request using the DescribeTagsRequest method.
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTags
-func (c *Redshift) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeTags,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeTagsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 const opDisableLogging = "DisableLogging"
 
-// DisableLoggingRequest generates a "aws.Request" representing the
-// client's request for the DisableLogging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableLoggingRequest is a API request type for the DisableLogging API operation.
+type DisableLoggingRequest struct {
+	*aws.Request
+	Input *DisableLoggingInput
+}
+
+// Send marshals and sends the DisableLogging API request.
+func (r DisableLoggingRequest) Send() (*EnableLoggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableLoggingOutput), nil
+}
+
+// DisableLoggingRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableLogging for more information on using the DisableLogging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops logging information, such as queries and connection attempts, for the
+// specified Amazon Redshift cluster.
 //
 //    // Example sending a request using the DisableLoggingRequest method.
-//    req, resp := client.DisableLoggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableLoggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging
-func (c *Redshift) DisableLoggingRequest(input *DisableLoggingInput) (req *aws.Request, output *LoggingStatus) {
+func (c *Redshift) DisableLoggingRequest(input *DisableLoggingInput) DisableLoggingRequest {
 	op := &aws.Operation{
 		Name:       opDisableLogging,
 		HTTPMethod: "POST",
@@ -5061,76 +3274,47 @@ func (c *Redshift) DisableLoggingRequest(input *DisableLoggingInput) (req *aws.R
 		input = &DisableLoggingInput{}
 	}
 
-	output = &LoggingStatus{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisableLogging API operation for Amazon Redshift.
-//
-// Stops logging information, such as queries and connection attempts, for the
-// specified Amazon Redshift cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DisableLogging for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging
-func (c *Redshift) DisableLogging(input *DisableLoggingInput) (*LoggingStatus, error) {
-	req, out := c.DisableLoggingRequest(input)
-	return out, req.Send()
-}
-
-// DisableLoggingWithContext is the same as DisableLogging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableLogging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DisableLoggingWithContext(ctx aws.Context, input *DisableLoggingInput, opts ...aws.Option) (*LoggingStatus, error) {
-	req, out := c.DisableLoggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnableLoggingOutput{})
+	return DisableLoggingRequest{Request: req, Input: input}
 }
 
 const opDisableSnapshotCopy = "DisableSnapshotCopy"
 
-// DisableSnapshotCopyRequest generates a "aws.Request" representing the
-// client's request for the DisableSnapshotCopy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableSnapshotCopyRequest is a API request type for the DisableSnapshotCopy API operation.
+type DisableSnapshotCopyRequest struct {
+	*aws.Request
+	Input *DisableSnapshotCopyInput
+}
+
+// Send marshals and sends the DisableSnapshotCopy API request.
+func (r DisableSnapshotCopyRequest) Send() (*DisableSnapshotCopyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableSnapshotCopyOutput), nil
+}
+
+// DisableSnapshotCopyRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Disables the automatic copying of snapshots from one region to another region
+// for a specified cluster.
 //
-// See DisableSnapshotCopy for more information on using the DisableSnapshotCopy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If your cluster and its snapshots are encrypted using a customer master key
+// (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete the grant that
+// grants Amazon Redshift permission to the CMK in the destination region.
 //
 //    // Example sending a request using the DisableSnapshotCopyRequest method.
-//    req, resp := client.DisableSnapshotCopyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableSnapshotCopyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy
-func (c *Redshift) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) (req *aws.Request, output *DisableSnapshotCopyOutput) {
+func (c *Redshift) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) DisableSnapshotCopyRequest {
 	op := &aws.Operation{
 		Name:       opDisableSnapshotCopy,
 		HTTPMethod: "POST",
@@ -5141,89 +3325,43 @@ func (c *Redshift) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) (
 		input = &DisableSnapshotCopyInput{}
 	}
 
-	output = &DisableSnapshotCopyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisableSnapshotCopy API operation for Amazon Redshift.
-//
-// Disables the automatic copying of snapshots from one region to another region
-// for a specified cluster.
-//
-// If your cluster and its snapshots are encrypted using a customer master key
-// (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete the grant that
-// grants Amazon Redshift permission to the CMK in the destination region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation DisableSnapshotCopy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeSnapshotCopyAlreadyDisabledFault "SnapshotCopyAlreadyDisabledFault"
-//   The cluster already has cross-region snapshot copy disabled.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy
-func (c *Redshift) DisableSnapshotCopy(input *DisableSnapshotCopyInput) (*DisableSnapshotCopyOutput, error) {
-	req, out := c.DisableSnapshotCopyRequest(input)
-	return out, req.Send()
-}
-
-// DisableSnapshotCopyWithContext is the same as DisableSnapshotCopy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableSnapshotCopy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) DisableSnapshotCopyWithContext(ctx aws.Context, input *DisableSnapshotCopyInput, opts ...aws.Option) (*DisableSnapshotCopyOutput, error) {
-	req, out := c.DisableSnapshotCopyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisableSnapshotCopyOutput{})
+	return DisableSnapshotCopyRequest{Request: req, Input: input}
 }
 
 const opEnableLogging = "EnableLogging"
 
-// EnableLoggingRequest generates a "aws.Request" representing the
-// client's request for the EnableLogging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableLoggingRequest is a API request type for the EnableLogging API operation.
+type EnableLoggingRequest struct {
+	*aws.Request
+	Input *EnableLoggingInput
+}
+
+// Send marshals and sends the EnableLogging API request.
+func (r EnableLoggingRequest) Send() (*EnableLoggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableLoggingOutput), nil
+}
+
+// EnableLoggingRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableLogging for more information on using the EnableLogging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts logging information, such as queries and connection attempts, for
+// the specified Amazon Redshift cluster.
 //
 //    // Example sending a request using the EnableLoggingRequest method.
-//    req, resp := client.EnableLoggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableLoggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging
-func (c *Redshift) EnableLoggingRequest(input *EnableLoggingInput) (req *aws.Request, output *LoggingStatus) {
+func (c *Redshift) EnableLoggingRequest(input *EnableLoggingInput) EnableLoggingRequest {
 	op := &aws.Operation{
 		Name:       opEnableLogging,
 		HTTPMethod: "POST",
@@ -5234,92 +3372,43 @@ func (c *Redshift) EnableLoggingRequest(input *EnableLoggingInput) (req *aws.Req
 		input = &EnableLoggingInput{}
 	}
 
-	output = &LoggingStatus{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// EnableLogging API operation for Amazon Redshift.
-//
-// Starts logging information, such as queries and connection attempts, for
-// the specified Amazon Redshift cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation EnableLogging for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeBucketNotFoundFault "BucketNotFoundFault"
-//   Could not find the specified S3 bucket.
-//
-//   * ErrCodeInsufficientS3BucketPolicyFault "InsufficientS3BucketPolicyFault"
-//   The cluster does not have read bucket or put object permissions on the S3
-//   bucket specified when enabling logging.
-//
-//   * ErrCodeInvalidS3KeyPrefixFault "InvalidS3KeyPrefixFault"
-//   The string specified for the logging S3 key prefix does not comply with the
-//   documented constraints.
-//
-//   * ErrCodeInvalidS3BucketNameFault "InvalidS3BucketNameFault"
-//   The S3 bucket name is invalid. For more information about naming rules, go
-//   to Bucket Restrictions and Limitations (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
-//   in the Amazon Simple Storage Service (S3) Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging
-func (c *Redshift) EnableLogging(input *EnableLoggingInput) (*LoggingStatus, error) {
-	req, out := c.EnableLoggingRequest(input)
-	return out, req.Send()
-}
-
-// EnableLoggingWithContext is the same as EnableLogging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableLogging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) EnableLoggingWithContext(ctx aws.Context, input *EnableLoggingInput, opts ...aws.Option) (*LoggingStatus, error) {
-	req, out := c.EnableLoggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnableLoggingOutput{})
+	return EnableLoggingRequest{Request: req, Input: input}
 }
 
 const opEnableSnapshotCopy = "EnableSnapshotCopy"
 
-// EnableSnapshotCopyRequest generates a "aws.Request" representing the
-// client's request for the EnableSnapshotCopy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableSnapshotCopyRequest is a API request type for the EnableSnapshotCopy API operation.
+type EnableSnapshotCopyRequest struct {
+	*aws.Request
+	Input *EnableSnapshotCopyInput
+}
+
+// Send marshals and sends the EnableSnapshotCopy API request.
+func (r EnableSnapshotCopyRequest) Send() (*EnableSnapshotCopyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableSnapshotCopyOutput), nil
+}
+
+// EnableSnapshotCopyRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableSnapshotCopy for more information on using the EnableSnapshotCopy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables the automatic copy of snapshots from one region to another region
+// for a specified cluster.
 //
 //    // Example sending a request using the EnableSnapshotCopyRequest method.
-//    req, resp := client.EnableSnapshotCopyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableSnapshotCopyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy
-func (c *Redshift) EnableSnapshotCopyRequest(input *EnableSnapshotCopyInput) (req *aws.Request, output *EnableSnapshotCopyOutput) {
+func (c *Redshift) EnableSnapshotCopyRequest(input *EnableSnapshotCopyInput) EnableSnapshotCopyRequest {
 	op := &aws.Operation{
 		Name:       opEnableSnapshotCopy,
 		HTTPMethod: "POST",
@@ -5330,121 +3419,30 @@ func (c *Redshift) EnableSnapshotCopyRequest(input *EnableSnapshotCopyInput) (re
 		input = &EnableSnapshotCopyInput{}
 	}
 
-	output = &EnableSnapshotCopyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// EnableSnapshotCopy API operation for Amazon Redshift.
-//
-// Enables the automatic copy of snapshots from one region to another region
-// for a specified cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation EnableSnapshotCopy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeIncompatibleOrderableOptions "IncompatibleOrderableOptions"
-//   The specified options are incompatible.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeCopyToRegionDisabledFault "CopyToRegionDisabledFault"
-//   Cross-region snapshot copy was temporarily disabled. Try your request again.
-//
-//   * ErrCodeSnapshotCopyAlreadyEnabledFault "SnapshotCopyAlreadyEnabledFault"
-//   The cluster already has cross-region snapshot copy enabled.
-//
-//   * ErrCodeUnknownSnapshotCopyRegionFault "UnknownSnapshotCopyRegionFault"
-//   The specified region is incorrect or does not exist.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-//   * ErrCodeSnapshotCopyGrantNotFoundFault "SnapshotCopyGrantNotFoundFault"
-//   The specified snapshot copy grant can't be found. Make sure that the name
-//   is typed correctly and that the grant exists in the destination region.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   The encryption key has exceeded its grant limit in AWS KMS.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy
-func (c *Redshift) EnableSnapshotCopy(input *EnableSnapshotCopyInput) (*EnableSnapshotCopyOutput, error) {
-	req, out := c.EnableSnapshotCopyRequest(input)
-	return out, req.Send()
-}
-
-// EnableSnapshotCopyWithContext is the same as EnableSnapshotCopy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableSnapshotCopy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) EnableSnapshotCopyWithContext(ctx aws.Context, input *EnableSnapshotCopyInput, opts ...aws.Option) (*EnableSnapshotCopyOutput, error) {
-	req, out := c.EnableSnapshotCopyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnableSnapshotCopyOutput{})
+	return EnableSnapshotCopyRequest{Request: req, Input: input}
 }
 
 const opGetClusterCredentials = "GetClusterCredentials"
 
-// GetClusterCredentialsRequest generates a "aws.Request" representing the
-// client's request for the GetClusterCredentials operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetClusterCredentials for more information on using the GetClusterCredentials
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetClusterCredentialsRequest method.
-//    req, resp := client.GetClusterCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentials
-func (c *Redshift) GetClusterCredentialsRequest(input *GetClusterCredentialsInput) (req *aws.Request, output *GetClusterCredentialsOutput) {
-	op := &aws.Operation{
-		Name:       opGetClusterCredentials,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetClusterCredentialsInput{}
-	}
-
-	output = &GetClusterCredentialsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetClusterCredentialsRequest is a API request type for the GetClusterCredentials API operation.
+type GetClusterCredentialsRequest struct {
+	*aws.Request
+	Input *GetClusterCredentialsInput
 }
 
-// GetClusterCredentials API operation for Amazon Redshift.
+// Send marshals and sends the GetClusterCredentials API request.
+func (r GetClusterCredentialsRequest) Send() (*GetClusterCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetClusterCredentialsOutput), nil
+}
+
+// GetClusterCredentialsRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Returns a database user name and temporary password with temporary authorization
 // to log on to an Amazon Redshift database. The action returns the database
@@ -5471,85 +3469,49 @@ func (c *Redshift) GetClusterCredentialsRequest(input *GetClusterCredentialsInpu
 // If the DbName parameter is specified, the IAM policy must allow access to
 // the resource dbname for the specified database name.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation GetClusterCredentials for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeUnsupportedOperationFault "UnsupportedOperation"
-//   The requested operation isn't supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentials
-func (c *Redshift) GetClusterCredentials(input *GetClusterCredentialsInput) (*GetClusterCredentialsOutput, error) {
-	req, out := c.GetClusterCredentialsRequest(input)
-	return out, req.Send()
-}
-
-// GetClusterCredentialsWithContext is the same as GetClusterCredentials with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetClusterCredentials for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) GetClusterCredentialsWithContext(ctx aws.Context, input *GetClusterCredentialsInput, opts ...aws.Option) (*GetClusterCredentialsOutput, error) {
-	req, out := c.GetClusterCredentialsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opModifyCluster = "ModifyCluster"
-
-// ModifyClusterRequest generates a "aws.Request" representing the
-// client's request for the ModifyCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyCluster for more information on using the ModifyCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyClusterRequest method.
-//    req, resp := client.ModifyClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetClusterCredentialsRequest method.
+//    req := client.GetClusterCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster
-func (c *Redshift) ModifyClusterRequest(input *ModifyClusterInput) (req *aws.Request, output *ModifyClusterOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentials
+func (c *Redshift) GetClusterCredentialsRequest(input *GetClusterCredentialsInput) GetClusterCredentialsRequest {
 	op := &aws.Operation{
-		Name:       opModifyCluster,
+		Name:       opGetClusterCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ModifyClusterInput{}
+		input = &GetClusterCredentialsInput{}
 	}
 
-	output = &ModifyClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetClusterCredentialsOutput{})
+	return GetClusterCredentialsRequest{Request: req, Input: input}
 }
 
-// ModifyCluster API operation for Amazon Redshift.
+const opModifyCluster = "ModifyCluster"
+
+// ModifyClusterRequest is a API request type for the ModifyCluster API operation.
+type ModifyClusterRequest struct {
+	*aws.Request
+	Input *ModifyClusterInput
+}
+
+// Send marshals and sends the ModifyCluster API request.
+func (r ModifyClusterRequest) Send() (*ModifyClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyClusterOutput), nil
+}
+
+// ModifyClusterRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Modifies the settings for a cluster. For example, you can add another security
 // or parameter group, update the preferred maintenance window, or change the
@@ -5563,116 +3525,64 @@ func (c *Redshift) ModifyClusterRequest(input *ModifyClusterInput) (req *aws.Req
 // the cluster. When resizing a cluster, you must specify both the number of
 // nodes and the node type even if one of the parameters does not change.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation ModifyCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeInvalidClusterSecurityGroupStateFault "InvalidClusterSecurityGroupState"
-//   The state of the cluster security group is not available.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeNumberOfNodesQuotaExceededFault "NumberOfNodesQuotaExceeded"
-//   The operation would exceed the number of nodes allotted to the account. For
-//   information about increasing your quota, go to Limits in Amazon Redshift
-//   (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeNumberOfNodesPerClusterLimitExceededFault "NumberOfNodesPerClusterLimitExceeded"
-//   The operation would exceed the number of nodes allowed for a cluster.
-//
-//   * ErrCodeClusterSecurityGroupNotFoundFault "ClusterSecurityGroupNotFound"
-//   The cluster security group name does not refer to an existing cluster security
-//   group.
-//
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-//   * ErrCodeInsufficientClusterCapacityFault "InsufficientClusterCapacity"
-//   The number of nodes specified exceeds the allotted capacity of the cluster.
-//
-//   * ErrCodeUnsupportedOptionFault "UnsupportedOptionFault"
-//   A request option was specified that is not supported.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-//   * ErrCodeHsmClientCertificateNotFoundFault "HsmClientCertificateNotFoundFault"
-//   There is no Amazon Redshift HSM client certificate with the specified identifier.
-//
-//   * ErrCodeHsmConfigurationNotFoundFault "HsmConfigurationNotFoundFault"
-//   There is no Amazon Redshift HSM configuration with the specified identifier.
-//
-//   * ErrCodeClusterAlreadyExistsFault "ClusterAlreadyExists"
-//   The account already has a cluster with the given identifier.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   The encryption key has exceeded its grant limit in AWS KMS.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-//   * ErrCodeInvalidElasticIpFault "InvalidElasticIpFault"
-//   The Elastic IP (EIP) is invalid or cannot be found.
+//    // Example sending a request using the ModifyClusterRequest method.
+//    req := client.ModifyClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster
-func (c *Redshift) ModifyCluster(input *ModifyClusterInput) (*ModifyClusterOutput, error) {
-	req, out := c.ModifyClusterRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) ModifyClusterRequest(input *ModifyClusterInput) ModifyClusterRequest {
+	op := &aws.Operation{
+		Name:       opModifyCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ModifyClusterWithContext is the same as ModifyCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) ModifyClusterWithContext(ctx aws.Context, input *ModifyClusterInput, opts ...aws.Option) (*ModifyClusterOutput, error) {
-	req, out := c.ModifyClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ModifyClusterInput{}
+	}
+
+	req := c.newRequest(op, input, &ModifyClusterOutput{})
+	return ModifyClusterRequest{Request: req, Input: input}
 }
 
 const opModifyClusterIamRoles = "ModifyClusterIamRoles"
 
-// ModifyClusterIamRolesRequest generates a "aws.Request" representing the
-// client's request for the ModifyClusterIamRoles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyClusterIamRolesRequest is a API request type for the ModifyClusterIamRoles API operation.
+type ModifyClusterIamRolesRequest struct {
+	*aws.Request
+	Input *ModifyClusterIamRolesInput
+}
+
+// Send marshals and sends the ModifyClusterIamRoles API request.
+func (r ModifyClusterIamRolesRequest) Send() (*ModifyClusterIamRolesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyClusterIamRolesOutput), nil
+}
+
+// ModifyClusterIamRolesRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies the list of AWS Identity and Access Management (IAM) roles that
+// can be used by the cluster to access other AWS services.
 //
-// See ModifyClusterIamRoles for more information on using the ModifyClusterIamRoles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A cluster can have up to 10 IAM roles associated at any time.
 //
 //    // Example sending a request using the ModifyClusterIamRolesRequest method.
-//    req, resp := client.ModifyClusterIamRolesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyClusterIamRolesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles
-func (c *Redshift) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput) (req *aws.Request, output *ModifyClusterIamRolesOutput) {
+func (c *Redshift) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput) ModifyClusterIamRolesRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterIamRoles,
 		HTTPMethod: "POST",
@@ -5683,81 +3593,46 @@ func (c *Redshift) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInpu
 		input = &ModifyClusterIamRolesInput{}
 	}
 
-	output = &ModifyClusterIamRolesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyClusterIamRoles API operation for Amazon Redshift.
-//
-// Modifies the list of AWS Identity and Access Management (IAM) roles that
-// can be used by the cluster to access other AWS services.
-//
-// A cluster can have up to 10 IAM roles associated at any time.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation ModifyClusterIamRoles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles
-func (c *Redshift) ModifyClusterIamRoles(input *ModifyClusterIamRolesInput) (*ModifyClusterIamRolesOutput, error) {
-	req, out := c.ModifyClusterIamRolesRequest(input)
-	return out, req.Send()
-}
-
-// ModifyClusterIamRolesWithContext is the same as ModifyClusterIamRoles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyClusterIamRoles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) ModifyClusterIamRolesWithContext(ctx aws.Context, input *ModifyClusterIamRolesInput, opts ...aws.Option) (*ModifyClusterIamRolesOutput, error) {
-	req, out := c.ModifyClusterIamRolesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyClusterIamRolesOutput{})
+	return ModifyClusterIamRolesRequest{Request: req, Input: input}
 }
 
 const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
 
-// ModifyClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyClusterParameterGroupRequest is a API request type for the ModifyClusterParameterGroup API operation.
+type ModifyClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *ModifyClusterParameterGroupInput
+}
+
+// Send marshals and sends the ModifyClusterParameterGroup API request.
+func (r ModifyClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetClusterParameterGroupOutput), nil
+}
+
+// ModifyClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies the parameters of a parameter group.
 //
-// See ModifyClusterParameterGroup for more information on using the ModifyClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about parameters and parameter groups, go to Amazon
+// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the ModifyClusterParameterGroupRequest method.
-//    req, resp := client.ModifyClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroup
-func (c *Redshift) ModifyClusterParameterGroupRequest(input *ModifyClusterParameterGroupInput) (req *aws.Request, output *ClusterParameterGroupNameMessage) {
+func (c *Redshift) ModifyClusterParameterGroupRequest(input *ModifyClusterParameterGroupInput) ModifyClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -5768,84 +3643,44 @@ func (c *Redshift) ModifyClusterParameterGroupRequest(input *ModifyClusterParame
 		input = &ModifyClusterParameterGroupInput{}
 	}
 
-	output = &ClusterParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyClusterParameterGroup API operation for Amazon Redshift.
-//
-// Modifies the parameters of a parameter group.
-//
-// For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation ModifyClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-//   * ErrCodeInvalidClusterParameterGroupStateFault "InvalidClusterParameterGroupState"
-//   The cluster parameter group action can not be completed because another task
-//   is in progress that involves the parameter group. Wait a few moments and
-//   try the operation again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroup
-func (c *Redshift) ModifyClusterParameterGroup(input *ModifyClusterParameterGroupInput) (*ClusterParameterGroupNameMessage, error) {
-	req, out := c.ModifyClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyClusterParameterGroupWithContext is the same as ModifyClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) ModifyClusterParameterGroupWithContext(ctx aws.Context, input *ModifyClusterParameterGroupInput, opts ...aws.Option) (*ClusterParameterGroupNameMessage, error) {
-	req, out := c.ModifyClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetClusterParameterGroupOutput{})
+	return ModifyClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
 
-// ModifyClusterSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyClusterSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyClusterSubnetGroupRequest is a API request type for the ModifyClusterSubnetGroup API operation.
+type ModifyClusterSubnetGroupRequest struct {
+	*aws.Request
+	Input *ModifyClusterSubnetGroupInput
+}
+
+// Send marshals and sends the ModifyClusterSubnetGroup API request.
+func (r ModifyClusterSubnetGroupRequest) Send() (*ModifyClusterSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyClusterSubnetGroupOutput), nil
+}
+
+// ModifyClusterSubnetGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyClusterSubnetGroup for more information on using the ModifyClusterSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies a cluster subnet group to include the specified list of VPC subnets.
+// The operation replaces the existing list of subnets with the new list of
+// subnets.
 //
 //    // Example sending a request using the ModifyClusterSubnetGroupRequest method.
-//    req, resp := client.ModifyClusterSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyClusterSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroup
-func (c *Redshift) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroupInput) (req *aws.Request, output *ModifyClusterSubnetGroupOutput) {
+func (c *Redshift) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroupInput) ModifyClusterSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterSubnetGroup,
 		HTTPMethod: "POST",
@@ -5856,98 +3691,42 @@ func (c *Redshift) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGro
 		input = &ModifyClusterSubnetGroupInput{}
 	}
 
-	output = &ModifyClusterSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyClusterSubnetGroup API operation for Amazon Redshift.
-//
-// Modifies a cluster subnet group to include the specified list of VPC subnets.
-// The operation replaces the existing list of subnets with the new list of
-// subnets.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation ModifyClusterSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSubnetGroupNotFoundFault "ClusterSubnetGroupNotFoundFault"
-//   The cluster subnet group name does not refer to an existing cluster subnet
-//   group.
-//
-//   * ErrCodeClusterSubnetQuotaExceededFault "ClusterSubnetQuotaExceededFault"
-//   The request would result in user exceeding the allowed number of subnets
-//   in a cluster subnet groups. For information about increasing your quota,
-//   go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeSubnetAlreadyInUse "SubnetAlreadyInUse"
-//   A specified subnet is already in use by another cluster.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or not all of the subnets are in the same
-//   VPC.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroup
-func (c *Redshift) ModifyClusterSubnetGroup(input *ModifyClusterSubnetGroupInput) (*ModifyClusterSubnetGroupOutput, error) {
-	req, out := c.ModifyClusterSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyClusterSubnetGroupWithContext is the same as ModifyClusterSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyClusterSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) ModifyClusterSubnetGroupWithContext(ctx aws.Context, input *ModifyClusterSubnetGroupInput, opts ...aws.Option) (*ModifyClusterSubnetGroupOutput, error) {
-	req, out := c.ModifyClusterSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyClusterSubnetGroupOutput{})
+	return ModifyClusterSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opModifyEventSubscription = "ModifyEventSubscription"
 
-// ModifyEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the ModifyEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyEventSubscriptionRequest is a API request type for the ModifyEventSubscription API operation.
+type ModifyEventSubscriptionRequest struct {
+	*aws.Request
+	Input *ModifyEventSubscriptionInput
+}
+
+// Send marshals and sends the ModifyEventSubscription API request.
+func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyEventSubscriptionOutput), nil
+}
+
+// ModifyEventSubscriptionRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyEventSubscription for more information on using the ModifyEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing Amazon Redshift event notification subscription.
 //
 //    // Example sending a request using the ModifyEventSubscriptionRequest method.
-//    req, resp := client.ModifyEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscription
-func (c *Redshift) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *aws.Request, output *ModifyEventSubscriptionOutput) {
+func (c *Redshift) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opModifyEventSubscription,
 		HTTPMethod: "POST",
@@ -5958,107 +3737,43 @@ func (c *Redshift) ModifyEventSubscriptionRequest(input *ModifyEventSubscription
 		input = &ModifyEventSubscriptionInput{}
 	}
 
-	output = &ModifyEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyEventSubscription API operation for Amazon Redshift.
-//
-// Modifies an existing Amazon Redshift event notification subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation ModifyEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   An Amazon Redshift event notification subscription with the specified name
-//   does not exist.
-//
-//   * ErrCodeSNSInvalidTopicFault "SNSInvalidTopic"
-//   Amazon SNS has responded that there is a problem with the specified Amazon
-//   SNS topic.
-//
-//   * ErrCodeSNSNoAuthorizationFault "SNSNoAuthorization"
-//   You do not have permission to publish to the specified Amazon SNS topic.
-//
-//   * ErrCodeSNSTopicArnNotFoundFault "SNSTopicArnNotFound"
-//   An Amazon SNS topic with the specified Amazon Resource Name (ARN) does not
-//   exist.
-//
-//   * ErrCodeSubscriptionEventIdNotFoundFault "SubscriptionEventIdNotFound"
-//   An Amazon Redshift event with the specified event ID does not exist.
-//
-//   * ErrCodeSubscriptionCategoryNotFoundFault "SubscriptionCategoryNotFound"
-//   The value specified for the event category was not one of the allowed values,
-//   or it specified a category that does not apply to the specified source type.
-//   The allowed values are Configuration, Management, Monitoring, and Security.
-//
-//   * ErrCodeSubscriptionSeverityNotFoundFault "SubscriptionSeverityNotFound"
-//   The value specified for the event severity was not one of the allowed values,
-//   or it specified a severity that does not apply to the specified source type.
-//   The allowed values are ERROR and INFO.
-//
-//   * ErrCodeSourceNotFoundFault "SourceNotFound"
-//   The specified Amazon Redshift event source could not be found.
-//
-//   * ErrCodeInvalidSubscriptionStateFault "InvalidSubscriptionStateFault"
-//   The subscription request is invalid because it is a duplicate request. This
-//   subscription request is already in progress.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscription
-func (c *Redshift) ModifyEventSubscription(input *ModifyEventSubscriptionInput) (*ModifyEventSubscriptionOutput, error) {
-	req, out := c.ModifyEventSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// ModifyEventSubscriptionWithContext is the same as ModifyEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...aws.Option) (*ModifyEventSubscriptionOutput, error) {
-	req, out := c.ModifyEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyEventSubscriptionOutput{})
+	return ModifyEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opModifySnapshotCopyRetentionPeriod = "ModifySnapshotCopyRetentionPeriod"
 
-// ModifySnapshotCopyRetentionPeriodRequest generates a "aws.Request" representing the
-// client's request for the ModifySnapshotCopyRetentionPeriod operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifySnapshotCopyRetentionPeriodRequest is a API request type for the ModifySnapshotCopyRetentionPeriod API operation.
+type ModifySnapshotCopyRetentionPeriodRequest struct {
+	*aws.Request
+	Input *ModifySnapshotCopyRetentionPeriodInput
+}
+
+// Send marshals and sends the ModifySnapshotCopyRetentionPeriod API request.
+func (r ModifySnapshotCopyRetentionPeriodRequest) Send() (*ModifySnapshotCopyRetentionPeriodOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifySnapshotCopyRetentionPeriodOutput), nil
+}
+
+// ModifySnapshotCopyRetentionPeriodRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifySnapshotCopyRetentionPeriod for more information on using the ModifySnapshotCopyRetentionPeriod
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the number of days to retain automated snapshots in the destination
+// region after they are copied from the source region.
 //
 //    // Example sending a request using the ModifySnapshotCopyRetentionPeriodRequest method.
-//    req, resp := client.ModifySnapshotCopyRetentionPeriodRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifySnapshotCopyRetentionPeriodRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod
-func (c *Redshift) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapshotCopyRetentionPeriodInput) (req *aws.Request, output *ModifySnapshotCopyRetentionPeriodOutput) {
+func (c *Redshift) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapshotCopyRetentionPeriodInput) ModifySnapshotCopyRetentionPeriodRequest {
 	op := &aws.Operation{
 		Name:       opModifySnapshotCopyRetentionPeriod,
 		HTTPMethod: "POST",
@@ -6069,101 +3784,30 @@ func (c *Redshift) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapsho
 		input = &ModifySnapshotCopyRetentionPeriodInput{}
 	}
 
-	output = &ModifySnapshotCopyRetentionPeriodOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifySnapshotCopyRetentionPeriod API operation for Amazon Redshift.
-//
-// Modifies the number of days to retain automated snapshots in the destination
-// region after they are copied from the source region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation ModifySnapshotCopyRetentionPeriod for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeSnapshotCopyDisabledFault "SnapshotCopyDisabledFault"
-//   Cross-region snapshot copy was temporarily disabled. Try your request again.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod
-func (c *Redshift) ModifySnapshotCopyRetentionPeriod(input *ModifySnapshotCopyRetentionPeriodInput) (*ModifySnapshotCopyRetentionPeriodOutput, error) {
-	req, out := c.ModifySnapshotCopyRetentionPeriodRequest(input)
-	return out, req.Send()
-}
-
-// ModifySnapshotCopyRetentionPeriodWithContext is the same as ModifySnapshotCopyRetentionPeriod with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifySnapshotCopyRetentionPeriod for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) ModifySnapshotCopyRetentionPeriodWithContext(ctx aws.Context, input *ModifySnapshotCopyRetentionPeriodInput, opts ...aws.Option) (*ModifySnapshotCopyRetentionPeriodOutput, error) {
-	req, out := c.ModifySnapshotCopyRetentionPeriodRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifySnapshotCopyRetentionPeriodOutput{})
+	return ModifySnapshotCopyRetentionPeriodRequest{Request: req, Input: input}
 }
 
 const opPurchaseReservedNodeOffering = "PurchaseReservedNodeOffering"
 
-// PurchaseReservedNodeOfferingRequest generates a "aws.Request" representing the
-// client's request for the PurchaseReservedNodeOffering operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PurchaseReservedNodeOffering for more information on using the PurchaseReservedNodeOffering
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PurchaseReservedNodeOfferingRequest method.
-//    req, resp := client.PurchaseReservedNodeOfferingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOffering
-func (c *Redshift) PurchaseReservedNodeOfferingRequest(input *PurchaseReservedNodeOfferingInput) (req *aws.Request, output *PurchaseReservedNodeOfferingOutput) {
-	op := &aws.Operation{
-		Name:       opPurchaseReservedNodeOffering,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PurchaseReservedNodeOfferingInput{}
-	}
-
-	output = &PurchaseReservedNodeOfferingOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PurchaseReservedNodeOfferingRequest is a API request type for the PurchaseReservedNodeOffering API operation.
+type PurchaseReservedNodeOfferingRequest struct {
+	*aws.Request
+	Input *PurchaseReservedNodeOfferingInput
 }
 
-// PurchaseReservedNodeOffering API operation for Amazon Redshift.
+// Send marshals and sends the PurchaseReservedNodeOffering API request.
+func (r PurchaseReservedNodeOfferingRequest) Send() (*PurchaseReservedNodeOfferingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PurchaseReservedNodeOfferingOutput), nil
+}
+
+// PurchaseReservedNodeOfferingRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Allows you to purchase reserved nodes. Amazon Redshift offers a predefined
 // set of reserved node offerings. You can purchase one or more of the offerings.
@@ -6175,77 +3819,67 @@ func (c *Redshift) PurchaseReservedNodeOfferingRequest(input *PurchaseReservedNo
 // Nodes (http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation PurchaseReservedNodeOffering for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedNodeOfferingNotFoundFault "ReservedNodeOfferingNotFound"
-//   Specified offering does not exist.
-//
-//   * ErrCodeReservedNodeAlreadyExistsFault "ReservedNodeAlreadyExists"
-//   User already has a reservation with the given identifier.
-//
-//   * ErrCodeReservedNodeQuotaExceededFault "ReservedNodeQuotaExceeded"
-//   Request would exceed the user's compute node quota. For information about
-//   increasing your quota, go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeUnsupportedOperationFault "UnsupportedOperation"
-//   The requested operation isn't supported.
+//    // Example sending a request using the PurchaseReservedNodeOfferingRequest method.
+//    req := client.PurchaseReservedNodeOfferingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOffering
-func (c *Redshift) PurchaseReservedNodeOffering(input *PurchaseReservedNodeOfferingInput) (*PurchaseReservedNodeOfferingOutput, error) {
-	req, out := c.PurchaseReservedNodeOfferingRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) PurchaseReservedNodeOfferingRequest(input *PurchaseReservedNodeOfferingInput) PurchaseReservedNodeOfferingRequest {
+	op := &aws.Operation{
+		Name:       opPurchaseReservedNodeOffering,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PurchaseReservedNodeOfferingWithContext is the same as PurchaseReservedNodeOffering with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PurchaseReservedNodeOffering for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) PurchaseReservedNodeOfferingWithContext(ctx aws.Context, input *PurchaseReservedNodeOfferingInput, opts ...aws.Option) (*PurchaseReservedNodeOfferingOutput, error) {
-	req, out := c.PurchaseReservedNodeOfferingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PurchaseReservedNodeOfferingInput{}
+	}
+
+	req := c.newRequest(op, input, &PurchaseReservedNodeOfferingOutput{})
+	return PurchaseReservedNodeOfferingRequest{Request: req, Input: input}
 }
 
 const opRebootCluster = "RebootCluster"
 
-// RebootClusterRequest generates a "aws.Request" representing the
-// client's request for the RebootCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RebootClusterRequest is a API request type for the RebootCluster API operation.
+type RebootClusterRequest struct {
+	*aws.Request
+	Input *RebootClusterInput
+}
+
+// Send marshals and sends the RebootCluster API request.
+func (r RebootClusterRequest) Send() (*RebootClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootClusterOutput), nil
+}
+
+// RebootClusterRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RebootCluster for more information on using the RebootCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Reboots a cluster. This action is taken as soon as possible. It results in
+// a momentary outage to the cluster, during which the cluster status is set
+// to rebooting. A cluster event is created when the reboot is completed. Any
+// pending cluster modifications (see ModifyCluster) are applied at this reboot.
+// For more information about managing clusters, go to Amazon Redshift Clusters
+// (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the RebootClusterRequest method.
-//    req, resp := client.RebootClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RebootClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster
-func (c *Redshift) RebootClusterRequest(input *RebootClusterInput) (req *aws.Request, output *RebootClusterOutput) {
+func (c *Redshift) RebootClusterRequest(input *RebootClusterInput) RebootClusterRequest {
 	op := &aws.Operation{
 		Name:       opRebootCluster,
 		HTTPMethod: "POST",
@@ -6256,84 +3890,45 @@ func (c *Redshift) RebootClusterRequest(input *RebootClusterInput) (req *aws.Req
 		input = &RebootClusterInput{}
 	}
 
-	output = &RebootClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RebootCluster API operation for Amazon Redshift.
-//
-// Reboots a cluster. This action is taken as soon as possible. It results in
-// a momentary outage to the cluster, during which the cluster status is set
-// to rebooting. A cluster event is created when the reboot is completed. Any
-// pending cluster modifications (see ModifyCluster) are applied at this reboot.
-// For more information about managing clusters, go to Amazon Redshift Clusters
-// (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation RebootCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster
-func (c *Redshift) RebootCluster(input *RebootClusterInput) (*RebootClusterOutput, error) {
-	req, out := c.RebootClusterRequest(input)
-	return out, req.Send()
-}
-
-// RebootClusterWithContext is the same as RebootCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebootCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) RebootClusterWithContext(ctx aws.Context, input *RebootClusterInput, opts ...aws.Option) (*RebootClusterOutput, error) {
-	req, out := c.RebootClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RebootClusterOutput{})
+	return RebootClusterRequest{Request: req, Input: input}
 }
 
 const opResetClusterParameterGroup = "ResetClusterParameterGroup"
 
-// ResetClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ResetClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResetClusterParameterGroupRequest is a API request type for the ResetClusterParameterGroup API operation.
+type ResetClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *ResetClusterParameterGroupInput
+}
+
+// Send marshals and sends the ResetClusterParameterGroup API request.
+func (r ResetClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetClusterParameterGroupOutput), nil
+}
+
+// ResetClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetClusterParameterGroup for more information on using the ResetClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets one or more parameters of the specified parameter group to their default
+// values and sets the source values of the parameters to "engine-default".
+// To reset the entire parameter group specify the ResetAllParameters parameter.
+// For parameter changes to take effect you must reboot any associated clusters.
 //
 //    // Example sending a request using the ResetClusterParameterGroupRequest method.
-//    req, resp := client.ResetClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResetClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResetClusterParameterGroup
-func (c *Redshift) ResetClusterParameterGroupRequest(input *ResetClusterParameterGroupInput) (req *aws.Request, output *ClusterParameterGroupNameMessage) {
+func (c *Redshift) ResetClusterParameterGroupRequest(input *ResetClusterParameterGroupInput) ResetClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opResetClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -6344,99 +3939,30 @@ func (c *Redshift) ResetClusterParameterGroupRequest(input *ResetClusterParamete
 		input = &ResetClusterParameterGroupInput{}
 	}
 
-	output = &ClusterParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResetClusterParameterGroup API operation for Amazon Redshift.
-//
-// Sets one or more parameters of the specified parameter group to their default
-// values and sets the source values of the parameters to "engine-default".
-// To reset the entire parameter group specify the ResetAllParameters parameter.
-// For parameter changes to take effect you must reboot any associated clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation ResetClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterParameterGroupStateFault "InvalidClusterParameterGroupState"
-//   The cluster parameter group action can not be completed because another task
-//   is in progress that involves the parameter group. Wait a few moments and
-//   try the operation again.
-//
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResetClusterParameterGroup
-func (c *Redshift) ResetClusterParameterGroup(input *ResetClusterParameterGroupInput) (*ClusterParameterGroupNameMessage, error) {
-	req, out := c.ResetClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// ResetClusterParameterGroupWithContext is the same as ResetClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) ResetClusterParameterGroupWithContext(ctx aws.Context, input *ResetClusterParameterGroupInput, opts ...aws.Option) (*ClusterParameterGroupNameMessage, error) {
-	req, out := c.ResetClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetClusterParameterGroupOutput{})
+	return ResetClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opRestoreFromClusterSnapshot = "RestoreFromClusterSnapshot"
 
-// RestoreFromClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the RestoreFromClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreFromClusterSnapshot for more information on using the RestoreFromClusterSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RestoreFromClusterSnapshotRequest method.
-//    req, resp := client.RestoreFromClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot
-func (c *Redshift) RestoreFromClusterSnapshotRequest(input *RestoreFromClusterSnapshotInput) (req *aws.Request, output *RestoreFromClusterSnapshotOutput) {
-	op := &aws.Operation{
-		Name:       opRestoreFromClusterSnapshot,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RestoreFromClusterSnapshotInput{}
-	}
-
-	output = &RestoreFromClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RestoreFromClusterSnapshotRequest is a API request type for the RestoreFromClusterSnapshot API operation.
+type RestoreFromClusterSnapshotRequest struct {
+	*aws.Request
+	Input *RestoreFromClusterSnapshotInput
 }
 
-// RestoreFromClusterSnapshot API operation for Amazon Redshift.
+// Send marshals and sends the RestoreFromClusterSnapshot API request.
+func (r RestoreFromClusterSnapshotRequest) Send() (*RestoreFromClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreFromClusterSnapshotOutput), nil
+}
+
+// RestoreFromClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Creates a new cluster from a snapshot. By default, Amazon Redshift creates
 // the resulting cluster with the same configuration as the original cluster
@@ -6454,154 +3980,49 @@ func (c *Redshift) RestoreFromClusterSnapshotRequest(input *RestoreFromClusterSn
 // Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation RestoreFromClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessToSnapshotDeniedFault "AccessToSnapshotDenied"
-//   The owner of the specified snapshot has not authorized your account to access
-//   the snapshot.
-//
-//   * ErrCodeClusterAlreadyExistsFault "ClusterAlreadyExists"
-//   The account already has a cluster with the given identifier.
-//
-//   * ErrCodeClusterSnapshotNotFoundFault "ClusterSnapshotNotFound"
-//   The snapshot identifier does not refer to an existing cluster snapshot.
-//
-//   * ErrCodeClusterQuotaExceededFault "ClusterQuotaExceeded"
-//   The request would exceed the allowed number of cluster instances for this
-//   account. For information about increasing your quota, go to Limits in Amazon
-//   Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeInsufficientClusterCapacityFault "InsufficientClusterCapacity"
-//   The number of nodes specified exceeds the allotted capacity of the cluster.
-//
-//   * ErrCodeInvalidClusterSnapshotStateFault "InvalidClusterSnapshotState"
-//   The specified cluster snapshot is not in the available state, or other accounts
-//   are authorized to access the snapshot.
-//
-//   * ErrCodeInvalidRestoreFault "InvalidRestore"
-//   The restore is invalid.
-//
-//   * ErrCodeNumberOfNodesQuotaExceededFault "NumberOfNodesQuotaExceeded"
-//   The operation would exceed the number of nodes allotted to the account. For
-//   information about increasing your quota, go to Limits in Amazon Redshift
-//   (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-//   in the Amazon Redshift Cluster Management Guide.
-//
-//   * ErrCodeNumberOfNodesPerClusterLimitExceededFault "NumberOfNodesPerClusterLimitExceeded"
-//   The operation would exceed the number of nodes allowed for a cluster.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The cluster subnet group does not cover all Availability Zones.
-//
-//   * ErrCodeInvalidClusterSubnetGroupStateFault "InvalidClusterSubnetGroupStateFault"
-//   The cluster subnet group cannot be deleted because it is in use.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or not all of the subnets are in the same
-//   VPC.
-//
-//   * ErrCodeClusterSubnetGroupNotFoundFault "ClusterSubnetGroupNotFoundFault"
-//   The cluster subnet group name does not refer to an existing cluster subnet
-//   group.
-//
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Your account is not authorized to perform the requested operation.
-//
-//   * ErrCodeHsmClientCertificateNotFoundFault "HsmClientCertificateNotFoundFault"
-//   There is no Amazon Redshift HSM client certificate with the specified identifier.
-//
-//   * ErrCodeHsmConfigurationNotFoundFault "HsmConfigurationNotFoundFault"
-//   There is no Amazon Redshift HSM configuration with the specified identifier.
-//
-//   * ErrCodeInvalidElasticIpFault "InvalidElasticIpFault"
-//   The Elastic IP (EIP) is invalid or cannot be found.
-//
-//   * ErrCodeClusterParameterGroupNotFoundFault "ClusterParameterGroupNotFound"
-//   The parameter group name does not refer to an existing parameter group.
-//
-//   * ErrCodeClusterSecurityGroupNotFoundFault "ClusterSecurityGroupNotFound"
-//   The cluster security group name does not refer to an existing cluster security
-//   group.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   The encryption key has exceeded its grant limit in AWS KMS.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot
-func (c *Redshift) RestoreFromClusterSnapshot(input *RestoreFromClusterSnapshotInput) (*RestoreFromClusterSnapshotOutput, error) {
-	req, out := c.RestoreFromClusterSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// RestoreFromClusterSnapshotWithContext is the same as RestoreFromClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreFromClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) RestoreFromClusterSnapshotWithContext(ctx aws.Context, input *RestoreFromClusterSnapshotInput, opts ...aws.Option) (*RestoreFromClusterSnapshotOutput, error) {
-	req, out := c.RestoreFromClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
-
-// RestoreTableFromClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the RestoreTableFromClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreTableFromClusterSnapshot for more information on using the RestoreTableFromClusterSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RestoreTableFromClusterSnapshotRequest method.
-//    req, resp := client.RestoreTableFromClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RestoreFromClusterSnapshotRequest method.
+//    req := client.RestoreFromClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshot
-func (c *Redshift) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromClusterSnapshotInput) (req *aws.Request, output *RestoreTableFromClusterSnapshotOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot
+func (c *Redshift) RestoreFromClusterSnapshotRequest(input *RestoreFromClusterSnapshotInput) RestoreFromClusterSnapshotRequest {
 	op := &aws.Operation{
-		Name:       opRestoreTableFromClusterSnapshot,
+		Name:       opRestoreFromClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RestoreTableFromClusterSnapshotInput{}
+		input = &RestoreFromClusterSnapshotInput{}
 	}
 
-	output = &RestoreTableFromClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RestoreFromClusterSnapshotOutput{})
+	return RestoreFromClusterSnapshotRequest{Request: req, Input: input}
 }
 
-// RestoreTableFromClusterSnapshot API operation for Amazon Redshift.
+const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
+
+// RestoreTableFromClusterSnapshotRequest is a API request type for the RestoreTableFromClusterSnapshot API operation.
+type RestoreTableFromClusterSnapshotRequest struct {
+	*aws.Request
+	Input *RestoreTableFromClusterSnapshotInput
+}
+
+// Send marshals and sends the RestoreTableFromClusterSnapshot API request.
+func (r RestoreTableFromClusterSnapshotRequest) Send() (*RestoreTableFromClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreTableFromClusterSnapshotOutput), nil
+}
+
+// RestoreTableFromClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
 // Creates a new table from a table in an Amazon Redshift cluster snapshot.
 // You must create the new table within the Amazon Redshift cluster that the
@@ -6617,87 +4038,65 @@ func (c *Redshift) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFro
 // This way, you can replace the original table with the table created from
 // the snapshot.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation RestoreTableFromClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSnapshotNotFoundFault "ClusterSnapshotNotFound"
-//   The snapshot identifier does not refer to an existing cluster snapshot.
-//
-//   * ErrCodeInProgressTableRestoreQuotaExceededFault "InProgressTableRestoreQuotaExceededFault"
-//   You have exceeded the allowed number of table restore requests. Wait for
-//   your current table restore requests to complete before making a new request.
-//
-//   * ErrCodeInvalidClusterSnapshotStateFault "InvalidClusterSnapshotState"
-//   The specified cluster snapshot is not in the available state, or other accounts
-//   are authorized to access the snapshot.
-//
-//   * ErrCodeInvalidTableRestoreArgumentFault "InvalidTableRestoreArgument"
-//   The value specified for the sourceDatabaseName, sourceSchemaName, or sourceTableName
-//   parameter, or a combination of these, doesn't exist in the snapshot.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeUnsupportedOperationFault "UnsupportedOperation"
-//   The requested operation isn't supported.
+//    // Example sending a request using the RestoreTableFromClusterSnapshotRequest method.
+//    req := client.RestoreTableFromClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshot
-func (c *Redshift) RestoreTableFromClusterSnapshot(input *RestoreTableFromClusterSnapshotInput) (*RestoreTableFromClusterSnapshotOutput, error) {
-	req, out := c.RestoreTableFromClusterSnapshotRequest(input)
-	return out, req.Send()
-}
+func (c *Redshift) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromClusterSnapshotInput) RestoreTableFromClusterSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opRestoreTableFromClusterSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RestoreTableFromClusterSnapshotWithContext is the same as RestoreTableFromClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreTableFromClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) RestoreTableFromClusterSnapshotWithContext(ctx aws.Context, input *RestoreTableFromClusterSnapshotInput, opts ...aws.Option) (*RestoreTableFromClusterSnapshotOutput, error) {
-	req, out := c.RestoreTableFromClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RestoreTableFromClusterSnapshotInput{}
+	}
+
+	req := c.newRequest(op, input, &RestoreTableFromClusterSnapshotOutput{})
+	return RestoreTableFromClusterSnapshotRequest{Request: req, Input: input}
 }
 
 const opRevokeClusterSecurityGroupIngress = "RevokeClusterSecurityGroupIngress"
 
-// RevokeClusterSecurityGroupIngressRequest generates a "aws.Request" representing the
-// client's request for the RevokeClusterSecurityGroupIngress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RevokeClusterSecurityGroupIngressRequest is a API request type for the RevokeClusterSecurityGroupIngress API operation.
+type RevokeClusterSecurityGroupIngressRequest struct {
+	*aws.Request
+	Input *RevokeClusterSecurityGroupIngressInput
+}
+
+// Send marshals and sends the RevokeClusterSecurityGroupIngress API request.
+func (r RevokeClusterSecurityGroupIngressRequest) Send() (*RevokeClusterSecurityGroupIngressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RevokeClusterSecurityGroupIngressOutput), nil
+}
+
+// RevokeClusterSecurityGroupIngressRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RevokeClusterSecurityGroupIngress for more information on using the RevokeClusterSecurityGroupIngress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Revokes an ingress rule in an Amazon Redshift security group for a previously
+// authorized IP range or Amazon EC2 security group. To add an ingress rule,
+// see AuthorizeClusterSecurityGroupIngress. For information about managing
+// security groups, go to Amazon Redshift Cluster Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the RevokeClusterSecurityGroupIngressRequest method.
-//    req, resp := client.RevokeClusterSecurityGroupIngressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RevokeClusterSecurityGroupIngressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngress
-func (c *Redshift) RevokeClusterSecurityGroupIngressRequest(input *RevokeClusterSecurityGroupIngressInput) (req *aws.Request, output *RevokeClusterSecurityGroupIngressOutput) {
+func (c *Redshift) RevokeClusterSecurityGroupIngressRequest(input *RevokeClusterSecurityGroupIngressInput) RevokeClusterSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opRevokeClusterSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -6708,87 +4107,48 @@ func (c *Redshift) RevokeClusterSecurityGroupIngressRequest(input *RevokeCluster
 		input = &RevokeClusterSecurityGroupIngressInput{}
 	}
 
-	output = &RevokeClusterSecurityGroupIngressOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RevokeClusterSecurityGroupIngress API operation for Amazon Redshift.
-//
-// Revokes an ingress rule in an Amazon Redshift security group for a previously
-// authorized IP range or Amazon EC2 security group. To add an ingress rule,
-// see AuthorizeClusterSecurityGroupIngress. For information about managing
-// security groups, go to Amazon Redshift Cluster Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation RevokeClusterSecurityGroupIngress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterSecurityGroupNotFoundFault "ClusterSecurityGroupNotFound"
-//   The cluster security group name does not refer to an existing cluster security
-//   group.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   The specified CIDR IP range or EC2 security group is not authorized for the
-//   specified cluster security group.
-//
-//   * ErrCodeInvalidClusterSecurityGroupStateFault "InvalidClusterSecurityGroupState"
-//   The state of the cluster security group is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngress
-func (c *Redshift) RevokeClusterSecurityGroupIngress(input *RevokeClusterSecurityGroupIngressInput) (*RevokeClusterSecurityGroupIngressOutput, error) {
-	req, out := c.RevokeClusterSecurityGroupIngressRequest(input)
-	return out, req.Send()
-}
-
-// RevokeClusterSecurityGroupIngressWithContext is the same as RevokeClusterSecurityGroupIngress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RevokeClusterSecurityGroupIngress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) RevokeClusterSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeClusterSecurityGroupIngressInput, opts ...aws.Option) (*RevokeClusterSecurityGroupIngressOutput, error) {
-	req, out := c.RevokeClusterSecurityGroupIngressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RevokeClusterSecurityGroupIngressOutput{})
+	return RevokeClusterSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
 const opRevokeSnapshotAccess = "RevokeSnapshotAccess"
 
-// RevokeSnapshotAccessRequest generates a "aws.Request" representing the
-// client's request for the RevokeSnapshotAccess operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RevokeSnapshotAccessRequest is a API request type for the RevokeSnapshotAccess API operation.
+type RevokeSnapshotAccessRequest struct {
+	*aws.Request
+	Input *RevokeSnapshotAccessInput
+}
+
+// Send marshals and sends the RevokeSnapshotAccess API request.
+func (r RevokeSnapshotAccessRequest) Send() (*RevokeSnapshotAccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RevokeSnapshotAccessOutput), nil
+}
+
+// RevokeSnapshotAccessRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the ability of the specified AWS customer account to restore the
+// specified snapshot. If the account is currently restoring the snapshot, the
+// restore will run to completion.
 //
-// See RevokeSnapshotAccess for more information on using the RevokeSnapshotAccess
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about working with snapshots, go to Amazon Redshift
+// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the RevokeSnapshotAccessRequest method.
-//    req, resp := client.RevokeSnapshotAccessRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RevokeSnapshotAccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess
-func (c *Redshift) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) (req *aws.Request, output *RevokeSnapshotAccessOutput) {
+func (c *Redshift) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) RevokeSnapshotAccessRequest {
 	op := &aws.Operation{
 		Name:       opRevokeSnapshotAccess,
 		HTTPMethod: "POST",
@@ -6799,89 +4159,42 @@ func (c *Redshift) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput)
 		input = &RevokeSnapshotAccessInput{}
 	}
 
-	output = &RevokeSnapshotAccessOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RevokeSnapshotAccess API operation for Amazon Redshift.
-//
-// Removes the ability of the specified AWS customer account to restore the
-// specified snapshot. If the account is currently restoring the snapshot, the
-// restore will run to completion.
-//
-// For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
-// in the Amazon Redshift Cluster Management Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation RevokeSnapshotAccess for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessToSnapshotDeniedFault "AccessToSnapshotDenied"
-//   The owner of the specified snapshot has not authorized your account to access
-//   the snapshot.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   The specified CIDR IP range or EC2 security group is not authorized for the
-//   specified cluster security group.
-//
-//   * ErrCodeClusterSnapshotNotFoundFault "ClusterSnapshotNotFound"
-//   The snapshot identifier does not refer to an existing cluster snapshot.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess
-func (c *Redshift) RevokeSnapshotAccess(input *RevokeSnapshotAccessInput) (*RevokeSnapshotAccessOutput, error) {
-	req, out := c.RevokeSnapshotAccessRequest(input)
-	return out, req.Send()
-}
-
-// RevokeSnapshotAccessWithContext is the same as RevokeSnapshotAccess with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RevokeSnapshotAccess for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) RevokeSnapshotAccessWithContext(ctx aws.Context, input *RevokeSnapshotAccessInput, opts ...aws.Option) (*RevokeSnapshotAccessOutput, error) {
-	req, out := c.RevokeSnapshotAccessRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RevokeSnapshotAccessOutput{})
+	return RevokeSnapshotAccessRequest{Request: req, Input: input}
 }
 
 const opRotateEncryptionKey = "RotateEncryptionKey"
 
-// RotateEncryptionKeyRequest generates a "aws.Request" representing the
-// client's request for the RotateEncryptionKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RotateEncryptionKeyRequest is a API request type for the RotateEncryptionKey API operation.
+type RotateEncryptionKeyRequest struct {
+	*aws.Request
+	Input *RotateEncryptionKeyInput
+}
+
+// Send marshals and sends the RotateEncryptionKey API request.
+func (r RotateEncryptionKeyRequest) Send() (*RotateEncryptionKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RotateEncryptionKeyOutput), nil
+}
+
+// RotateEncryptionKeyRequest returns a request value for making API operation for
+// Amazon Redshift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RotateEncryptionKey for more information on using the RotateEncryptionKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Rotates the encryption keys for a cluster.
 //
 //    // Example sending a request using the RotateEncryptionKeyRequest method.
-//    req, resp := client.RotateEncryptionKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RotateEncryptionKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey
-func (c *Redshift) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) (req *aws.Request, output *RotateEncryptionKeyOutput) {
+func (c *Redshift) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) RotateEncryptionKeyRequest {
 	op := &aws.Operation{
 		Name:       opRotateEncryptionKey,
 		HTTPMethod: "POST",
@@ -6892,53 +4205,8 @@ func (c *Redshift) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) (
 		input = &RotateEncryptionKeyInput{}
 	}
 
-	output = &RotateEncryptionKeyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RotateEncryptionKey API operation for Amazon Redshift.
-//
-// Rotates the encryption keys for a cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Redshift's
-// API operation RotateEncryptionKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFound"
-//   The ClusterIdentifier parameter does not refer to an existing cluster.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterState"
-//   The specified cluster is not in the available state.
-//
-//   * ErrCodeDependentServiceRequestThrottlingFault "DependentServiceRequestThrottlingFault"
-//   The request cannot be completed because a dependent service is throttling
-//   requests made by Amazon Redshift on your behalf. Wait and retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey
-func (c *Redshift) RotateEncryptionKey(input *RotateEncryptionKeyInput) (*RotateEncryptionKeyOutput, error) {
-	req, out := c.RotateEncryptionKeyRequest(input)
-	return out, req.Send()
-}
-
-// RotateEncryptionKeyWithContext is the same as RotateEncryptionKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RotateEncryptionKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Redshift) RotateEncryptionKeyWithContext(ctx aws.Context, input *RotateEncryptionKeyInput, opts ...aws.Option) (*RotateEncryptionKeyOutput, error) {
-	req, out := c.RotateEncryptionKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RotateEncryptionKeyOutput{})
+	return RotateEncryptionKeyRequest{Request: req, Input: input}
 }
 
 // Describes an AWS customer account authorized to restore a snapshot.
@@ -7706,41 +4974,6 @@ func (s *ClusterParameterGroup) SetParameterGroupName(v string) *ClusterParamete
 // SetTags sets the Tags field's value.
 func (s *ClusterParameterGroup) SetTags(v []*Tag) *ClusterParameterGroup {
 	s.Tags = v
-	return s
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupNameMessage
-type ClusterParameterGroupNameMessage struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cluster parameter group.
-	ParameterGroupName *string `type:"string"`
-
-	// The status of the parameter group. For example, if you made a change to a
-	// parameter group name-value pair, then the change could be pending a reboot
-	// of an associated cluster.
-	ParameterGroupStatus *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ClusterParameterGroupNameMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ClusterParameterGroupNameMessage) GoString() string {
-	return s.String()
-}
-
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *ClusterParameterGroupNameMessage) SetParameterGroupName(v string) *ClusterParameterGroupNameMessage {
-	s.ParameterGroupName = &v
-	return s
-}
-
-// SetParameterGroupStatus sets the ParameterGroupStatus field's value.
-func (s *ClusterParameterGroupNameMessage) SetParameterGroupStatus(v string) *ClusterParameterGroupNameMessage {
-	s.ParameterGroupStatus = &v
 	return s
 }
 
@@ -13192,6 +10425,76 @@ func (s *EnableLoggingInput) SetS3KeyPrefix(v string) *EnableLoggingInput {
 	return s
 }
 
+// Describes the status of logging for a cluster.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLoggingOutput
+type EnableLoggingOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the S3 bucket where the log files are stored.
+	BucketName *string `type:"string"`
+
+	// The message indicating that logs failed to be delivered.
+	LastFailureMessage *string `type:"string"`
+
+	// The last time when logs failed to be delivered.
+	LastFailureTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The last time that logs were delivered.
+	LastSuccessfulDeliveryTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// true if logging is on, false if logging is off.
+	LoggingEnabled *bool `type:"boolean"`
+
+	// The prefix applied to the log file names.
+	S3KeyPrefix *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EnableLoggingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableLoggingOutput) GoString() string {
+	return s.String()
+}
+
+// SetBucketName sets the BucketName field's value.
+func (s *EnableLoggingOutput) SetBucketName(v string) *EnableLoggingOutput {
+	s.BucketName = &v
+	return s
+}
+
+// SetLastFailureMessage sets the LastFailureMessage field's value.
+func (s *EnableLoggingOutput) SetLastFailureMessage(v string) *EnableLoggingOutput {
+	s.LastFailureMessage = &v
+	return s
+}
+
+// SetLastFailureTime sets the LastFailureTime field's value.
+func (s *EnableLoggingOutput) SetLastFailureTime(v time.Time) *EnableLoggingOutput {
+	s.LastFailureTime = &v
+	return s
+}
+
+// SetLastSuccessfulDeliveryTime sets the LastSuccessfulDeliveryTime field's value.
+func (s *EnableLoggingOutput) SetLastSuccessfulDeliveryTime(v time.Time) *EnableLoggingOutput {
+	s.LastSuccessfulDeliveryTime = &v
+	return s
+}
+
+// SetLoggingEnabled sets the LoggingEnabled field's value.
+func (s *EnableLoggingOutput) SetLoggingEnabled(v bool) *EnableLoggingOutput {
+	s.LoggingEnabled = &v
+	return s
+}
+
+// SetS3KeyPrefix sets the S3KeyPrefix field's value.
+func (s *EnableLoggingOutput) SetS3KeyPrefix(v string) *EnableLoggingOutput {
+	s.S3KeyPrefix = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopyMessage
 type EnableSnapshotCopyInput struct {
 	_ struct{} `type:"structure"`
@@ -14045,76 +11348,6 @@ func (s *IPRange) SetStatus(v string) *IPRange {
 // SetTags sets the Tags field's value.
 func (s *IPRange) SetTags(v []*Tag) *IPRange {
 	s.Tags = v
-	return s
-}
-
-// Describes the status of logging for a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LoggingStatus
-type LoggingStatus struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the S3 bucket where the log files are stored.
-	BucketName *string `type:"string"`
-
-	// The message indicating that logs failed to be delivered.
-	LastFailureMessage *string `type:"string"`
-
-	// The last time when logs failed to be delivered.
-	LastFailureTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	// The last time that logs were delivered.
-	LastSuccessfulDeliveryTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	// true if logging is on, false if logging is off.
-	LoggingEnabled *bool `type:"boolean"`
-
-	// The prefix applied to the log file names.
-	S3KeyPrefix *string `type:"string"`
-}
-
-// String returns the string representation
-func (s LoggingStatus) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s LoggingStatus) GoString() string {
-	return s.String()
-}
-
-// SetBucketName sets the BucketName field's value.
-func (s *LoggingStatus) SetBucketName(v string) *LoggingStatus {
-	s.BucketName = &v
-	return s
-}
-
-// SetLastFailureMessage sets the LastFailureMessage field's value.
-func (s *LoggingStatus) SetLastFailureMessage(v string) *LoggingStatus {
-	s.LastFailureMessage = &v
-	return s
-}
-
-// SetLastFailureTime sets the LastFailureTime field's value.
-func (s *LoggingStatus) SetLastFailureTime(v time.Time) *LoggingStatus {
-	s.LastFailureTime = &v
-	return s
-}
-
-// SetLastSuccessfulDeliveryTime sets the LastSuccessfulDeliveryTime field's value.
-func (s *LoggingStatus) SetLastSuccessfulDeliveryTime(v time.Time) *LoggingStatus {
-	s.LastSuccessfulDeliveryTime = &v
-	return s
-}
-
-// SetLoggingEnabled sets the LoggingEnabled field's value.
-func (s *LoggingStatus) SetLoggingEnabled(v bool) *LoggingStatus {
-	s.LoggingEnabled = &v
-	return s
-}
-
-// SetS3KeyPrefix sets the S3KeyPrefix field's value.
-func (s *LoggingStatus) SetS3KeyPrefix(v string) *LoggingStatus {
-	s.S3KeyPrefix = &v
 	return s
 }
 
@@ -15674,6 +12907,41 @@ func (s *ResetClusterParameterGroupInput) SetParameters(v []*Parameter) *ResetCl
 // SetResetAllParameters sets the ResetAllParameters field's value.
 func (s *ResetClusterParameterGroupInput) SetResetAllParameters(v bool) *ResetClusterParameterGroupInput {
 	s.ResetAllParameters = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroupOutput
+type ResetClusterParameterGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the cluster parameter group.
+	ParameterGroupName *string `type:"string"`
+
+	// The status of the parameter group. For example, if you made a change to a
+	// parameter group name-value pair, then the change could be pending a reboot
+	// of an associated cluster.
+	ParameterGroupStatus *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResetClusterParameterGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResetClusterParameterGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetParameterGroupName sets the ParameterGroupName field's value.
+func (s *ResetClusterParameterGroupOutput) SetParameterGroupName(v string) *ResetClusterParameterGroupOutput {
+	s.ParameterGroupName = &v
+	return s
+}
+
+// SetParameterGroupStatus sets the ParameterGroupStatus field's value.
+func (s *ResetClusterParameterGroupOutput) SetParameterGroupStatus(v string) *ResetClusterParameterGroupOutput {
+	s.ParameterGroupStatus = &v
 	return s
 }
 

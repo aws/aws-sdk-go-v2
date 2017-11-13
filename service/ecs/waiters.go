@@ -48,10 +48,10 @@ func (c *ECS) WaitUntilServicesInactiveWithContext(ctx aws.Context, input *Descr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeServicesRequest(inCpy)
+			req := c.DescribeServicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -109,10 +109,10 @@ func (c *ECS) WaitUntilServicesStableWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeServicesRequest(inCpy)
+			req := c.DescribeServicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -165,10 +165,10 @@ func (c *ECS) WaitUntilTasksRunningWithContext(ctx aws.Context, input *DescribeT
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTasksRequest(inCpy)
+			req := c.DescribeTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -211,10 +211,10 @@ func (c *ECS) WaitUntilTasksStoppedWithContext(ctx aws.Context, input *DescribeT
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTasksRequest(inCpy)
+			req := c.DescribeTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

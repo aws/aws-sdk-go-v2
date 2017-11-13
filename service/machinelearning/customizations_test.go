@@ -23,12 +23,12 @@ func TestPredictEndpoint(t *testing.T) {
 		}
 	})
 
-	req, _ := ml.PredictRequest(&machinelearning.PredictInput{
+	req := ml.PredictRequest(&machinelearning.PredictInput{
 		PredictEndpoint: aws.String("https://localhost/endpoint"),
 		MLModelId:       aws.String("id"),
 		Record:          map[string]*string{},
 	})
-	err := req.Send()
+	_, err := req.Send()
 
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)

@@ -14,47 +14,24 @@ import (
 
 const opAddPermission = "AddPermission"
 
-// AddPermissionRequest generates a "aws.Request" representing the
-// client's request for the AddPermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddPermission for more information on using the AddPermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddPermissionRequest method.
-//    req, resp := client.AddPermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission
-func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request, output *AddPermissionOutput) {
-	op := &aws.Operation{
-		Name:       opAddPermission,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy",
-	}
-
-	if input == nil {
-		input = &AddPermissionInput{}
-	}
-
-	output = &AddPermissionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddPermissionRequest is a API request type for the AddPermission API operation.
+type AddPermissionRequest struct {
+	*aws.Request
+	Input *AddPermissionInput
 }
 
-// AddPermission API operation for AWS Lambda.
+// Send marshals and sends the AddPermission API request.
+func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddPermissionOutput), nil
+}
+
+// AddPermissionRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Adds a permission to the resource policy associated with the specified AWS
 // Lambda function. You use resource policies to grant permissions to event
@@ -72,85 +49,65 @@ func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) (req *aws.Reque
 //
 // This operation requires permission for the lambda:AddPermission action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation AddPermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   The resource already exists.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodePolicyLengthExceededException "PolicyLengthExceededException"
-//   Lambda function access policy is limited to 20 KB.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
+//    // Example sending a request using the AddPermissionRequest method.
+//    req := client.AddPermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission
-func (c *Lambda) AddPermission(input *AddPermissionInput) (*AddPermissionOutput, error) {
-	req, out := c.AddPermissionRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) AddPermissionRequest {
+	op := &aws.Operation{
+		Name:       opAddPermission,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy",
+	}
 
-// AddPermissionWithContext is the same as AddPermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddPermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...aws.Option) (*AddPermissionOutput, error) {
-	req, out := c.AddPermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddPermissionInput{}
+	}
+
+	req := c.newRequest(op, input, &AddPermissionOutput{})
+	return AddPermissionRequest{Request: req, Input: input}
 }
 
 const opCreateAlias = "CreateAlias"
 
-// CreateAliasRequest generates a "aws.Request" representing the
-// client's request for the CreateAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateAliasRequest is a API request type for the CreateAlias API operation.
+type CreateAliasRequest struct {
+	*aws.Request
+	Input *CreateAliasInput
+}
+
+// Send marshals and sends the CreateAlias API request.
+func (r CreateAliasRequest) Send() (*UpdateAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAliasOutput), nil
+}
+
+// CreateAliasRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates an alias that points to the specified Lambda function version. For
+// more information, see Introduction to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
 //
-// See CreateAlias for more information on using the CreateAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Alias names are unique for a given function. This requires permission for
+// the lambda:CreateAlias action.
 //
 //    // Example sending a request using the CreateAliasRequest method.
-//    req, resp := client.CreateAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias
-func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, output *AliasConfiguration) {
+func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
 	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
@@ -161,111 +118,30 @@ func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, 
 		input = &CreateAliasInput{}
 	}
 
-	output = &AliasConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateAlias API operation for AWS Lambda.
-//
-// Creates an alias that points to the specified Lambda function version. For
-// more information, see Introduction to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
-//
-// Alias names are unique for a given function. This requires permission for
-// the lambda:CreateAlias action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation CreateAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   The resource already exists.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias
-func (c *Lambda) CreateAlias(input *CreateAliasInput) (*AliasConfiguration, error) {
-	req, out := c.CreateAliasRequest(input)
-	return out, req.Send()
-}
-
-// CreateAliasWithContext is the same as CreateAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...aws.Option) (*AliasConfiguration, error) {
-	req, out := c.CreateAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	return CreateAliasRequest{Request: req, Input: input}
 }
 
 const opCreateEventSourceMapping = "CreateEventSourceMapping"
 
-// CreateEventSourceMappingRequest generates a "aws.Request" representing the
-// client's request for the CreateEventSourceMapping operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateEventSourceMapping for more information on using the CreateEventSourceMapping
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateEventSourceMappingRequest method.
-//    req, resp := client.CreateEventSourceMappingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping
-func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
-	op := &aws.Operation{
-		Name:       opCreateEventSourceMapping,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2015-03-31/event-source-mappings/",
-	}
-
-	if input == nil {
-		input = &CreateEventSourceMappingInput{}
-	}
-
-	output = &EventSourceMappingConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateEventSourceMappingRequest is a API request type for the CreateEventSourceMapping API operation.
+type CreateEventSourceMappingRequest struct {
+	*aws.Request
+	Input *CreateEventSourceMappingInput
 }
 
-// CreateEventSourceMapping API operation for AWS Lambda.
+// Send marshals and sends the CreateEventSourceMapping API request.
+func (r CreateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEventSourceMappingOutput), nil
+}
+
+// CreateEventSourceMappingRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Identifies a stream as an event source for a Lambda function. It can be either
 // an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes
@@ -293,98 +169,49 @@ func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMapping
 // This operation requires permission for the lambda:CreateEventSourceMapping
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation CreateEventSourceMapping for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   The resource already exists.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
+//    // Example sending a request using the CreateEventSourceMappingRequest method.
+//    req := client.CreateEventSourceMappingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping
-func (c *Lambda) CreateEventSourceMapping(input *CreateEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
-	req, out := c.CreateEventSourceMappingRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMappingInput) CreateEventSourceMappingRequest {
+	op := &aws.Operation{
+		Name:       opCreateEventSourceMapping,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-03-31/event-source-mappings/",
+	}
 
-// CreateEventSourceMappingWithContext is the same as CreateEventSourceMapping with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateEventSourceMapping for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) CreateEventSourceMappingWithContext(ctx aws.Context, input *CreateEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
-	req, out := c.CreateEventSourceMappingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateEventSourceMappingInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	return CreateEventSourceMappingRequest{Request: req, Input: input}
 }
 
 const opCreateFunction = "CreateFunction"
 
-// CreateFunctionRequest generates a "aws.Request" representing the
-// client's request for the CreateFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateFunction for more information on using the CreateFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateFunctionRequest method.
-//    req, resp := client.CreateFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
-func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) (req *aws.Request, output *FunctionConfiguration) {
-	op := &aws.Operation{
-		Name:       opCreateFunction,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2015-03-31/functions",
-	}
-
-	if input == nil {
-		input = &CreateFunctionInput{}
-	}
-
-	output = &FunctionConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateFunctionRequest is a API request type for the CreateFunction API operation.
+type CreateFunctionRequest struct {
+	*aws.Request
+	Input *CreateFunctionInput
 }
 
-// CreateFunction API operation for AWS Lambda.
+// Send marshals and sends the CreateFunction API request.
+func (r CreateFunctionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFunctionConfigurationOutput), nil
+}
+
+// CreateFunctionRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Creates a new Lambda function. The function metadata is created from the
 // request parameters, and the code for the function is provided by a .zip file
@@ -397,85 +224,64 @@ func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) (req *aws.Req
 //
 // This operation requires permission for the lambda:CreateFunction action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation CreateFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   The resource already exists.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeCodeStorageExceededException "CodeStorageExceededException"
-//   You have exceeded your maximum total code size per account. Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html)
+//    // Example sending a request using the CreateFunctionRequest method.
+//    req := client.CreateFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
-func (c *Lambda) CreateFunction(input *CreateFunctionInput) (*FunctionConfiguration, error) {
-	req, out := c.CreateFunctionRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctionRequest {
+	op := &aws.Operation{
+		Name:       opCreateFunction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-03-31/functions",
+	}
 
-// CreateFunctionWithContext is the same as CreateFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) CreateFunctionWithContext(ctx aws.Context, input *CreateFunctionInput, opts ...aws.Option) (*FunctionConfiguration, error) {
-	req, out := c.CreateFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateFunctionInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	return CreateFunctionRequest{Request: req, Input: input}
 }
 
 const opDeleteAlias = "DeleteAlias"
 
-// DeleteAliasRequest generates a "aws.Request" representing the
-// client's request for the DeleteAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAliasRequest is a API request type for the DeleteAlias API operation.
+type DeleteAliasRequest struct {
+	*aws.Request
+	Input *DeleteAliasInput
+}
+
+// Send marshals and sends the DeleteAlias API request.
+func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAliasOutput), nil
+}
+
+// DeleteAliasRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified Lambda function alias. For more information, see Introduction
+// to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
 //
-// See DeleteAlias for more information on using the DeleteAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This requires permission for the lambda:DeleteAlias action.
 //
 //    // Example sending a request using the DeleteAliasRequest method.
-//    req, resp := client.DeleteAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias
-func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, output *DeleteAliasOutput) {
+func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAlias,
 		HTTPMethod: "DELETE",
@@ -486,89 +292,48 @@ func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, 
 		input = &DeleteAliasInput{}
 	}
 
-	output = &DeleteAliasOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAliasOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteAlias API operation for AWS Lambda.
-//
-// Deletes the specified Lambda function alias. For more information, see Introduction
-// to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
-//
-// This requires permission for the lambda:DeleteAlias action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation DeleteAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias
-func (c *Lambda) DeleteAlias(input *DeleteAliasInput) (*DeleteAliasOutput, error) {
-	req, out := c.DeleteAliasRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAliasWithContext is the same as DeleteAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...aws.Option) (*DeleteAliasOutput, error) {
-	req, out := c.DeleteAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteAliasRequest{Request: req, Input: input}
 }
 
 const opDeleteEventSourceMapping = "DeleteEventSourceMapping"
 
-// DeleteEventSourceMappingRequest generates a "aws.Request" representing the
-// client's request for the DeleteEventSourceMapping operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEventSourceMappingRequest is a API request type for the DeleteEventSourceMapping API operation.
+type DeleteEventSourceMappingRequest struct {
+	*aws.Request
+	Input *DeleteEventSourceMappingInput
+}
+
+// Send marshals and sends the DeleteEventSourceMapping API request.
+func (r DeleteEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEventSourceMappingOutput), nil
+}
+
+// DeleteEventSourceMappingRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes an event source mapping. This means AWS Lambda will no longer invoke
+// the function for events in the associated source.
 //
-// See DeleteEventSourceMapping for more information on using the DeleteEventSourceMapping
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the lambda:DeleteEventSourceMapping
+// action.
 //
 //    // Example sending a request using the DeleteEventSourceMappingRequest method.
-//    req, resp := client.DeleteEventSourceMappingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEventSourceMappingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping
-func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
+func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMappingInput) DeleteEventSourceMappingRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventSourceMapping,
 		HTTPMethod: "DELETE",
@@ -579,110 +344,30 @@ func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMapping
 		input = &DeleteEventSourceMappingInput{}
 	}
 
-	output = &EventSourceMappingConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEventSourceMapping API operation for AWS Lambda.
-//
-// Removes an event source mapping. This means AWS Lambda will no longer invoke
-// the function for events in the associated source.
-//
-// This operation requires permission for the lambda:DeleteEventSourceMapping
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation DeleteEventSourceMapping for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping
-func (c *Lambda) DeleteEventSourceMapping(input *DeleteEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
-	req, out := c.DeleteEventSourceMappingRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEventSourceMappingWithContext is the same as DeleteEventSourceMapping with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEventSourceMapping for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) DeleteEventSourceMappingWithContext(ctx aws.Context, input *DeleteEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
-	req, out := c.DeleteEventSourceMappingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	return DeleteEventSourceMappingRequest{Request: req, Input: input}
 }
 
 const opDeleteFunction = "DeleteFunction"
 
-// DeleteFunctionRequest generates a "aws.Request" representing the
-// client's request for the DeleteFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteFunction for more information on using the DeleteFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteFunctionRequest method.
-//    req, resp := client.DeleteFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction
-func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) (req *aws.Request, output *DeleteFunctionOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteFunction,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}",
-	}
-
-	if input == nil {
-		input = &DeleteFunctionInput{}
-	}
-
-	output = &DeleteFunctionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteFunctionRequest is a API request type for the DeleteFunction API operation.
+type DeleteFunctionRequest struct {
+	*aws.Request
+	Input *DeleteFunctionInput
 }
 
-// DeleteFunction API operation for AWS Lambda.
+// Send marshals and sends the DeleteFunction API request.
+func (r DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFunctionOutput), nil
+}
+
+// DeleteFunctionRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Deletes the specified Lambda function code and configuration.
 //
@@ -698,82 +383,69 @@ func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) (req *aws.Req
 //
 // This operation requires permission for the lambda:DeleteFunction action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation DeleteFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   The resource already exists.
+//    // Example sending a request using the DeleteFunctionRequest method.
+//    req := client.DeleteFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction
-func (c *Lambda) DeleteFunction(input *DeleteFunctionInput) (*DeleteFunctionOutput, error) {
-	req, out := c.DeleteFunctionRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctionRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFunction,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}",
+	}
 
-// DeleteFunctionWithContext is the same as DeleteFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) DeleteFunctionWithContext(ctx aws.Context, input *DeleteFunctionInput, opts ...aws.Option) (*DeleteFunctionOutput, error) {
-	req, out := c.DeleteFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteFunctionInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteFunctionOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteFunctionRequest{Request: req, Input: input}
 }
 
 const opGetAccountSettings = "GetAccountSettings"
 
-// GetAccountSettingsRequest generates a "aws.Request" representing the
-// client's request for the GetAccountSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAccountSettingsRequest is a API request type for the GetAccountSettings API operation.
+type GetAccountSettingsRequest struct {
+	*aws.Request
+	Input *GetAccountSettingsInput
+}
+
+// Send marshals and sends the GetAccountSettings API request.
+func (r GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAccountSettingsOutput), nil
+}
+
+// GetAccountSettingsRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a customer's account settings.
 //
-// See GetAccountSettings for more information on using the GetAccountSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can use this operation to retrieve Lambda limits information, such as
+// code size and concurrency limits. For more information about limits, see
+// AWS Lambda Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html).
+// You can also retrieve resource usage statistics, such as code storage usage
+// and function count.
 //
 //    // Example sending a request using the GetAccountSettingsRequest method.
-//    req, resp := client.GetAccountSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAccountSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
-func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req *aws.Request, output *GetAccountSettingsOutput) {
+func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAccountSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "GET",
@@ -784,83 +456,46 @@ func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req 
 		input = &GetAccountSettingsInput{}
 	}
 
-	output = &GetAccountSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAccountSettings API operation for AWS Lambda.
-//
-// Returns a customer's account settings.
-//
-// You can use this operation to retrieve Lambda limits information, such as
-// code size and concurrency limits. For more information about limits, see
-// AWS Lambda Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html).
-// You can also retrieve resource usage statistics, such as code storage usage
-// and function count.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation GetAccountSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
-func (c *Lambda) GetAccountSettings(input *GetAccountSettingsInput) (*GetAccountSettingsOutput, error) {
-	req, out := c.GetAccountSettingsRequest(input)
-	return out, req.Send()
-}
-
-// GetAccountSettingsWithContext is the same as GetAccountSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAccountSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) GetAccountSettingsWithContext(ctx aws.Context, input *GetAccountSettingsInput, opts ...aws.Option) (*GetAccountSettingsOutput, error) {
-	req, out := c.GetAccountSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+	return GetAccountSettingsRequest{Request: req, Input: input}
 }
 
 const opGetAlias = "GetAlias"
 
-// GetAliasRequest generates a "aws.Request" representing the
-// client's request for the GetAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAliasRequest is a API request type for the GetAlias API operation.
+type GetAliasRequest struct {
+	*aws.Request
+	Input *GetAliasInput
+}
+
+// Send marshals and sends the GetAlias API request.
+func (r GetAliasRequest) Send() (*UpdateAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAliasOutput), nil
+}
+
+// GetAliasRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the specified alias information such as the alias ARN, description,
+// and function version it is pointing to. For more information, see Introduction
+// to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
 //
-// See GetAlias for more information on using the GetAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This requires permission for the lambda:GetAlias action.
 //
 //    // Example sending a request using the GetAliasRequest method.
-//    req, resp := client.GetAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias
-func (c *Lambda) GetAliasRequest(input *GetAliasInput) (req *aws.Request, output *AliasConfiguration) {
+func (c *Lambda) GetAliasRequest(input *GetAliasInput) GetAliasRequest {
 	op := &aws.Operation{
 		Name:       opGetAlias,
 		HTTPMethod: "GET",
@@ -871,92 +506,45 @@ func (c *Lambda) GetAliasRequest(input *GetAliasInput) (req *aws.Request, output
 		input = &GetAliasInput{}
 	}
 
-	output = &AliasConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAlias API operation for AWS Lambda.
-//
-// Returns the specified alias information such as the alias ARN, description,
-// and function version it is pointing to. For more information, see Introduction
-// to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
-//
-// This requires permission for the lambda:GetAlias action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation GetAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias
-func (c *Lambda) GetAlias(input *GetAliasInput) (*AliasConfiguration, error) {
-	req, out := c.GetAliasRequest(input)
-	return out, req.Send()
-}
-
-// GetAliasWithContext is the same as GetAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) GetAliasWithContext(ctx aws.Context, input *GetAliasInput, opts ...aws.Option) (*AliasConfiguration, error) {
-	req, out := c.GetAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	return GetAliasRequest{Request: req, Input: input}
 }
 
 const opGetEventSourceMapping = "GetEventSourceMapping"
 
-// GetEventSourceMappingRequest generates a "aws.Request" representing the
-// client's request for the GetEventSourceMapping operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetEventSourceMappingRequest is a API request type for the GetEventSourceMapping API operation.
+type GetEventSourceMappingRequest struct {
+	*aws.Request
+	Input *GetEventSourceMappingInput
+}
+
+// Send marshals and sends the GetEventSourceMapping API request.
+func (r GetEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEventSourceMappingOutput), nil
+}
+
+// GetEventSourceMappingRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns configuration information for the specified event source mapping
+// (see CreateEventSourceMapping).
 //
-// See GetEventSourceMapping for more information on using the GetEventSourceMapping
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the lambda:GetEventSourceMapping action.
 //
 //    // Example sending a request using the GetEventSourceMappingRequest method.
-//    req, resp := client.GetEventSourceMappingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetEventSourceMappingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping
-func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
+func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput) GetEventSourceMappingRequest {
 	op := &aws.Operation{
 		Name:       opGetEventSourceMapping,
 		HTTPMethod: "GET",
@@ -967,107 +555,30 @@ func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput)
 		input = &GetEventSourceMappingInput{}
 	}
 
-	output = &EventSourceMappingConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetEventSourceMapping API operation for AWS Lambda.
-//
-// Returns configuration information for the specified event source mapping
-// (see CreateEventSourceMapping).
-//
-// This operation requires permission for the lambda:GetEventSourceMapping action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation GetEventSourceMapping for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping
-func (c *Lambda) GetEventSourceMapping(input *GetEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
-	req, out := c.GetEventSourceMappingRequest(input)
-	return out, req.Send()
-}
-
-// GetEventSourceMappingWithContext is the same as GetEventSourceMapping with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEventSourceMapping for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) GetEventSourceMappingWithContext(ctx aws.Context, input *GetEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
-	req, out := c.GetEventSourceMappingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	return GetEventSourceMappingRequest{Request: req, Input: input}
 }
 
 const opGetFunction = "GetFunction"
 
-// GetFunctionRequest generates a "aws.Request" representing the
-// client's request for the GetFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetFunction for more information on using the GetFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetFunctionRequest method.
-//    req, resp := client.GetFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction
-func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) (req *aws.Request, output *GetFunctionOutput) {
-	op := &aws.Operation{
-		Name:       opGetFunction,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}",
-	}
-
-	if input == nil {
-		input = &GetFunctionInput{}
-	}
-
-	output = &GetFunctionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetFunctionRequest is a API request type for the GetFunction API operation.
+type GetFunctionRequest struct {
+	*aws.Request
+	Input *GetFunctionInput
 }
 
-// GetFunction API operation for AWS Lambda.
+// Send marshals and sends the GetFunction API request.
+func (r GetFunctionRequest) Send() (*GetFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFunctionOutput), nil
+}
+
+// GetFunctionRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Returns the configuration information of the Lambda function and a presigned
 // URL link to the .zip file you uploaded with CreateFunction so you can download
@@ -1083,95 +594,49 @@ func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) (req *aws.Request, 
 //
 // This operation requires permission for the lambda:GetFunction action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation GetFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
+//    // Example sending a request using the GetFunctionRequest method.
+//    req := client.GetFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction
-func (c *Lambda) GetFunction(input *GetFunctionInput) (*GetFunctionOutput, error) {
-	req, out := c.GetFunctionRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest {
+	op := &aws.Operation{
+		Name:       opGetFunction,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}",
+	}
 
-// GetFunctionWithContext is the same as GetFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) GetFunctionWithContext(ctx aws.Context, input *GetFunctionInput, opts ...aws.Option) (*GetFunctionOutput, error) {
-	req, out := c.GetFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetFunctionInput{}
+	}
+
+	req := c.newRequest(op, input, &GetFunctionOutput{})
+	return GetFunctionRequest{Request: req, Input: input}
 }
 
 const opGetFunctionConfiguration = "GetFunctionConfiguration"
 
-// GetFunctionConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetFunctionConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetFunctionConfiguration for more information on using the GetFunctionConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetFunctionConfigurationRequest method.
-//    req, resp := client.GetFunctionConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration
-func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfigurationInput) (req *aws.Request, output *FunctionConfiguration) {
-	op := &aws.Operation{
-		Name:       opGetFunctionConfiguration,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}/configuration",
-	}
-
-	if input == nil {
-		input = &GetFunctionConfigurationInput{}
-	}
-
-	output = &FunctionConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
+// GetFunctionConfigurationRequest is a API request type for the GetFunctionConfiguration API operation.
+type GetFunctionConfigurationRequest struct {
+	*aws.Request
+	Input *GetFunctionConfigurationInput
 }
 
-// GetFunctionConfiguration API operation for AWS Lambda.
+// Send marshals and sends the GetFunctionConfiguration API request.
+func (r GetFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFunctionConfigurationOutput), nil
+}
+
+// GetFunctionConfigurationRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Returns the configuration information of the Lambda function. This the same
 // information you provided as parameters when uploading the function by using
@@ -1187,95 +652,49 @@ func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfiguration
 // This operation requires permission for the lambda:GetFunctionConfiguration
 // operation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation GetFunctionConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
+//    // Example sending a request using the GetFunctionConfigurationRequest method.
+//    req := client.GetFunctionConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration
-func (c *Lambda) GetFunctionConfiguration(input *GetFunctionConfigurationInput) (*FunctionConfiguration, error) {
-	req, out := c.GetFunctionConfigurationRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfigurationInput) GetFunctionConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opGetFunctionConfiguration,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}/configuration",
+	}
 
-// GetFunctionConfigurationWithContext is the same as GetFunctionConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetFunctionConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) GetFunctionConfigurationWithContext(ctx aws.Context, input *GetFunctionConfigurationInput, opts ...aws.Option) (*FunctionConfiguration, error) {
-	req, out := c.GetFunctionConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetFunctionConfigurationInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	return GetFunctionConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetPolicy = "GetPolicy"
 
-// GetPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPolicy for more information on using the GetPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetPolicyRequest method.
-//    req, resp := client.GetPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy
-func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) (req *aws.Request, output *GetPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opGetPolicy,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy",
-	}
-
-	if input == nil {
-		input = &GetPolicyInput{}
-	}
-
-	output = &GetPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetPolicyRequest is a API request type for the GetPolicy API operation.
+type GetPolicyRequest struct {
+	*aws.Request
+	Input *GetPolicyInput
 }
 
-// GetPolicy API operation for AWS Lambda.
+// Send marshals and sends the GetPolicy API request.
+func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPolicyOutput), nil
+}
+
+// GetPolicyRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Returns the resource policy associated with the specified Lambda function.
 //
@@ -1286,95 +705,49 @@ func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) (req *aws.Request, outp
 //
 // You need permission for the lambda:GetPolicy action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation GetPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
+//    // Example sending a request using the GetPolicyRequest method.
+//    req := client.GetPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy
-func (c *Lambda) GetPolicy(input *GetPolicyInput) (*GetPolicyOutput, error) {
-	req, out := c.GetPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetPolicy,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy",
+	}
 
-// GetPolicyWithContext is the same as GetPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, opts ...aws.Option) (*GetPolicyOutput, error) {
-	req, out := c.GetPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &GetPolicyOutput{})
+	return GetPolicyRequest{Request: req, Input: input}
 }
 
 const opInvoke = "Invoke"
 
-// InvokeRequest generates a "aws.Request" representing the
-// client's request for the Invoke operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Invoke for more information on using the Invoke
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the InvokeRequest method.
-//    req, resp := client.InvokeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke
-func (c *Lambda) InvokeRequest(input *InvokeInput) (req *aws.Request, output *InvokeOutput) {
-	op := &aws.Operation{
-		Name:       opInvoke,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}/invocations",
-	}
-
-	if input == nil {
-		input = &InvokeInput{}
-	}
-
-	output = &InvokeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// InvokeRequest is a API request type for the Invoke API operation.
+type InvokeRequest struct {
+	*aws.Request
+	Input *InvokeInput
 }
 
-// Invoke API operation for AWS Lambda.
+// Send marshals and sends the Invoke API request.
+func (r InvokeRequest) Send() (*InvokeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InvokeOutput), nil
+}
+
+// InvokeRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Invokes a specific Lambda function. For an example, see Create the Lambda
 // Function and Test It Manually (http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually).
@@ -1389,137 +762,67 @@ func (c *Lambda) InvokeRequest(input *InvokeInput) (req *aws.Request, output *In
 //
 // This operation requires permission for the lambda:InvokeFunction action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation Invoke for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidRequestContentException "InvalidRequestContentException"
-//   The request body could not be parsed as JSON.
-//
-//   * ErrCodeRequestTooLargeException "RequestTooLargeException"
-//   The request payload exceeded the Invoke request body JSON input limit. For
-//   more information, see Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html).
-//
-//   * ErrCodeUnsupportedMediaTypeException "UnsupportedMediaTypeException"
-//   The content type of the Invoke request body is not JSON.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeEC2UnexpectedException "EC2UnexpectedException"
-//   AWS Lambda received an unexpected EC2 client exception while setting up for
-//   the Lambda function.
-//
-//   * ErrCodeSubnetIPAddressLimitReachedException "SubnetIPAddressLimitReachedException"
-//   AWS Lambda was not able to set up VPC access for the Lambda function because
-//   one or more configured subnets has no available IP addresses.
-//
-//   * ErrCodeENILimitReachedException "ENILimitReachedException"
-//   AWS Lambda was not able to create an Elastic Network Interface (ENI) in the
-//   VPC, specified as part of Lambda function configuration, because the limit
-//   for network interfaces has been reached.
-//
-//   * ErrCodeEC2ThrottledException "EC2ThrottledException"
-//   AWS Lambda was throttled by Amazon EC2 during Lambda function initialization
-//   using the execution role provided for the Lambda function.
-//
-//   * ErrCodeEC2AccessDeniedException "EC2AccessDeniedException"
-//
-//   * ErrCodeInvalidSubnetIDException "InvalidSubnetIDException"
-//   The Subnet ID provided in the Lambda function VPC configuration is invalid.
-//
-//   * ErrCodeInvalidSecurityGroupIDException "InvalidSecurityGroupIDException"
-//   The Security Group ID provided in the Lambda function VPC configuration is
-//   invalid.
-//
-//   * ErrCodeInvalidZipFileException "InvalidZipFileException"
-//   AWS Lambda could not unzip the function zip file.
-//
-//   * ErrCodeKMSDisabledException "KMSDisabledException"
-//   Lambda was unable to decrypt the environment variables because the KMS key
-//   used is disabled. Check the Lambda function's KMS key settings.
-//
-//   * ErrCodeKMSInvalidStateException "KMSInvalidStateException"
-//   Lambda was unable to decrypt the environment variables because the KMS key
-//   used is in an invalid state for Decrypt. Check the function's KMS key settings.
-//
-//   * ErrCodeKMSAccessDeniedException "KMSAccessDeniedException"
-//   Lambda was unable to decrypt the environment variables because KMS access
-//   was denied. Check the Lambda function's KMS permissions.
-//
-//   * ErrCodeKMSNotFoundException "KMSNotFoundException"
-//   Lambda was unable to decrypt the environment variables because the KMS key
-//   was not found. Check the function's KMS key settings.
-//
-//   * ErrCodeInvalidRuntimeException "InvalidRuntimeException"
-//   The runtime or runtime version specified is not supported.
+//    // Example sending a request using the InvokeRequest method.
+//    req := client.InvokeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke
-func (c *Lambda) Invoke(input *InvokeInput) (*InvokeOutput, error) {
-	req, out := c.InvokeRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) InvokeRequest(input *InvokeInput) InvokeRequest {
+	op := &aws.Operation{
+		Name:       opInvoke,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}/invocations",
+	}
 
-// InvokeWithContext is the same as Invoke with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Invoke for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) InvokeWithContext(ctx aws.Context, input *InvokeInput, opts ...aws.Option) (*InvokeOutput, error) {
-	req, out := c.InvokeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &InvokeInput{}
+	}
+
+	req := c.newRequest(op, input, &InvokeOutput{})
+	return InvokeRequest{Request: req, Input: input}
 }
 
 const opInvokeAsync = "InvokeAsync"
 
-// InvokeAsyncRequest generates a "aws.Request" representing the
-// client's request for the InvokeAsync operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// InvokeAsyncRequest is a API request type for the InvokeAsync API operation.
+type InvokeAsyncRequest struct {
+	*aws.Request
+	Input *InvokeAsyncInput
+}
+
+// Send marshals and sends the InvokeAsync API request.
+func (r InvokeAsyncRequest) Send() (*InvokeAsyncOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InvokeAsyncOutput), nil
+}
+
+// InvokeAsyncRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// This API is deprecated. We recommend you use Invoke API (see Invoke).
 //
-// See InvokeAsync for more information on using the InvokeAsync
-// API call, and error handling.
+// Submits an invocation request to AWS Lambda. Upon receiving the request,
+// Lambda executes the specified function asynchronously. To see the logs generated
+// by the Lambda function execution, see the CloudWatch Logs console.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the lambda:InvokeFunction action.
 //
 //    // Example sending a request using the InvokeAsyncRequest method.
-//    req, resp := client.InvokeAsyncRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.InvokeAsyncRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
-func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) (req *aws.Request, output *InvokeAsyncOutput) {
+func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) InvokeAsyncRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, InvokeAsync, has been deprecated")
 	}
@@ -1533,91 +836,47 @@ func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) (req *aws.Request, 
 		input = &InvokeAsyncInput{}
 	}
 
-	output = &InvokeAsyncOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// InvokeAsync API operation for AWS Lambda.
-//
-// This API is deprecated. We recommend you use Invoke API (see Invoke).
-//
-// Submits an invocation request to AWS Lambda. Upon receiving the request,
-// Lambda executes the specified function asynchronously. To see the logs generated
-// by the Lambda function execution, see the CloudWatch Logs console.
-//
-// This operation requires permission for the lambda:InvokeFunction action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation InvokeAsync for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidRequestContentException "InvalidRequestContentException"
-//   The request body could not be parsed as JSON.
-//
-//   * ErrCodeInvalidRuntimeException "InvalidRuntimeException"
-//   The runtime or runtime version specified is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
-func (c *Lambda) InvokeAsync(input *InvokeAsyncInput) (*InvokeAsyncOutput, error) {
-	req, out := c.InvokeAsyncRequest(input)
-	return out, req.Send()
-}
-
-// InvokeAsyncWithContext is the same as InvokeAsync with the addition of
-// the ability to pass a context and additional request options.
-//
-// See InvokeAsync for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) InvokeAsyncWithContext(ctx aws.Context, input *InvokeAsyncInput, opts ...aws.Option) (*InvokeAsyncOutput, error) {
-	req, out := c.InvokeAsyncRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &InvokeAsyncOutput{})
+	return InvokeAsyncRequest{Request: req, Input: input}
 }
 
 const opListAliases = "ListAliases"
 
-// ListAliasesRequest generates a "aws.Request" representing the
-// client's request for the ListAliases operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAliasesRequest is a API request type for the ListAliases API operation.
+type ListAliasesRequest struct {
+	*aws.Request
+	Input *ListAliasesInput
+}
+
+// Send marshals and sends the ListAliases API request.
+func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAliasesOutput), nil
+}
+
+// ListAliasesRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns list of aliases created for a Lambda function. For each alias, the
+// response includes information such as the alias ARN, description, alias name,
+// and the function version to which it points. For more information, see Introduction
+// to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
 //
-// See ListAliases for more information on using the ListAliases
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This requires permission for the lambda:ListAliases action.
 //
 //    // Example sending a request using the ListAliasesRequest method.
-//    req, resp := client.ListAliasesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAliasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases
-func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, output *ListAliasesOutput) {
+func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
 	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "GET",
@@ -1628,93 +887,54 @@ func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, 
 		input = &ListAliasesInput{}
 	}
 
-	output = &ListAliasesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAliases API operation for AWS Lambda.
-//
-// Returns list of aliases created for a Lambda function. For each alias, the
-// response includes information such as the alias ARN, description, alias name,
-// and the function version to which it points. For more information, see Introduction
-// to AWS Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
-//
-// This requires permission for the lambda:ListAliases action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation ListAliases for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases
-func (c *Lambda) ListAliases(input *ListAliasesInput) (*ListAliasesOutput, error) {
-	req, out := c.ListAliasesRequest(input)
-	return out, req.Send()
-}
-
-// ListAliasesWithContext is the same as ListAliases with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAliases for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...aws.Option) (*ListAliasesOutput, error) {
-	req, out := c.ListAliasesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAliasesOutput{})
+	return ListAliasesRequest{Request: req, Input: input}
 }
 
 const opListEventSourceMappings = "ListEventSourceMappings"
 
-// ListEventSourceMappingsRequest generates a "aws.Request" representing the
-// client's request for the ListEventSourceMappings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListEventSourceMappingsRequest is a API request type for the ListEventSourceMappings API operation.
+type ListEventSourceMappingsRequest struct {
+	*aws.Request
+	Input *ListEventSourceMappingsInput
+}
+
+// Send marshals and sends the ListEventSourceMappings API request.
+func (r ListEventSourceMappingsRequest) Send() (*ListEventSourceMappingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListEventSourceMappingsOutput), nil
+}
+
+// ListEventSourceMappingsRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of event source mappings you created using the CreateEventSourceMapping
+// (see CreateEventSourceMapping).
 //
-// See ListEventSourceMappings for more information on using the ListEventSourceMappings
-// API call, and error handling.
+// For each mapping, the API returns configuration information. You can optionally
+// specify filters to retrieve specific event source mappings.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// If you are using the versioning feature, you can get list of event source
+// mappings for a specific Lambda function version or an alias as described
+// in the FunctionName parameter. For information about the versioning feature,
+// see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 //
+// This operation requires permission for the lambda:ListEventSourceMappings
+// action.
 //
 //    // Example sending a request using the ListEventSourceMappingsRequest method.
-//    req, resp := client.ListEventSourceMappingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListEventSourceMappingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
-func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsInput) (req *aws.Request, output *ListEventSourceMappingsOutput) {
+func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsInput) ListEventSourceMappingsRequest {
 	op := &aws.Operation{
 		Name:       opListEventSourceMappings,
 		HTTPMethod: "GET",
@@ -1731,71 +951,8 @@ func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 		input = &ListEventSourceMappingsInput{}
 	}
 
-	output = &ListEventSourceMappingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListEventSourceMappings API operation for AWS Lambda.
-//
-// Returns a list of event source mappings you created using the CreateEventSourceMapping
-// (see CreateEventSourceMapping).
-//
-// For each mapping, the API returns configuration information. You can optionally
-// specify filters to retrieve specific event source mappings.
-//
-// If you are using the versioning feature, you can get list of event source
-// mappings for a specific Lambda function version or an alias as described
-// in the FunctionName parameter. For information about the versioning feature,
-// see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
-//
-// This operation requires permission for the lambda:ListEventSourceMappings
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation ListEventSourceMappings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
-func (c *Lambda) ListEventSourceMappings(input *ListEventSourceMappingsInput) (*ListEventSourceMappingsOutput, error) {
-	req, out := c.ListEventSourceMappingsRequest(input)
-	return out, req.Send()
-}
-
-// ListEventSourceMappingsWithContext is the same as ListEventSourceMappings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListEventSourceMappings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) ListEventSourceMappingsWithContext(ctx aws.Context, input *ListEventSourceMappingsInput, opts ...aws.Option) (*ListEventSourceMappingsOutput, error) {
-	req, out := c.ListEventSourceMappingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListEventSourceMappingsOutput{})
+	return ListEventSourceMappingsRequest{Request: req, Input: input}
 }
 
 // ListEventSourceMappingsPages iterates over the pages of a ListEventSourceMappings operation,
@@ -1834,10 +991,10 @@ func (c *Lambda) ListEventSourceMappingsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListEventSourceMappingsRequest(inCpy)
+			req := c.ListEventSourceMappingsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1850,31 +1007,44 @@ func (c *Lambda) ListEventSourceMappingsPagesWithContext(ctx aws.Context, input 
 
 const opListFunctions = "ListFunctions"
 
-// ListFunctionsRequest generates a "aws.Request" representing the
-// client's request for the ListFunctions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListFunctionsRequest is a API request type for the ListFunctions API operation.
+type ListFunctionsRequest struct {
+	*aws.Request
+	Input *ListFunctionsInput
+}
+
+// Send marshals and sends the ListFunctions API request.
+func (r ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFunctionsOutput), nil
+}
+
+// ListFunctionsRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of your Lambda functions. For each function, the response
+// includes the function configuration information. You must use GetFunction
+// to retrieve the code for your function.
 //
-// See ListFunctions for more information on using the ListFunctions
-// API call, and error handling.
+// This operation requires permission for the lambda:ListFunctions action.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you are using the versioning feature, you can list all of your functions
+// or only $LATEST versions. For information about the versioning feature, see
+// AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 //
 //    // Example sending a request using the ListFunctionsRequest method.
-//    req, resp := client.ListFunctionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListFunctionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
-func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *aws.Request, output *ListFunctionsOutput) {
+func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRequest {
 	op := &aws.Operation{
 		Name:       opListFunctions,
 		HTTPMethod: "GET",
@@ -1891,63 +1061,8 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *aws.Reque
 		input = &ListFunctionsInput{}
 	}
 
-	output = &ListFunctionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListFunctions API operation for AWS Lambda.
-//
-// Returns a list of your Lambda functions. For each function, the response
-// includes the function configuration information. You must use GetFunction
-// to retrieve the code for your function.
-//
-// This operation requires permission for the lambda:ListFunctions action.
-//
-// If you are using the versioning feature, you can list all of your functions
-// or only $LATEST versions. For information about the versioning feature, see
-// AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation ListFunctions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
-func (c *Lambda) ListFunctions(input *ListFunctionsInput) (*ListFunctionsOutput, error) {
-	req, out := c.ListFunctionsRequest(input)
-	return out, req.Send()
-}
-
-// ListFunctionsWithContext is the same as ListFunctions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFunctions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) ListFunctionsWithContext(ctx aws.Context, input *ListFunctionsInput, opts ...aws.Option) (*ListFunctionsOutput, error) {
-	req, out := c.ListFunctionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListFunctionsOutput{})
+	return ListFunctionsRequest{Request: req, Input: input}
 }
 
 // ListFunctionsPages iterates over the pages of a ListFunctions operation,
@@ -1986,10 +1101,10 @@ func (c *Lambda) ListFunctionsPagesWithContext(ctx aws.Context, input *ListFunct
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListFunctionsRequest(inCpy)
+			req := c.ListFunctionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2002,31 +1117,37 @@ func (c *Lambda) ListFunctionsPagesWithContext(ctx aws.Context, input *ListFunct
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws.Request" representing the
-// client's request for the ListTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsRequest is a API request type for the ListTags API operation.
+type ListTagsRequest struct {
+	*aws.Request
+	Input *ListTagsInput
+}
+
+// Send marshals and sends the ListTags API request.
+func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOutput), nil
+}
+
+// ListTagsRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTags for more information on using the ListTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of tags assigned to a function when supplied the function
+// ARN (Amazon Resource Name).
 //
 //    // Example sending a request using the ListTagsRequest method.
-//    req, resp := client.ListTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTags
-func (c *Lambda) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+func (c *Lambda) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "GET",
@@ -2037,89 +1158,43 @@ func (c *Lambda) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output
 		input = &ListTagsInput{}
 	}
 
-	output = &ListTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTags API operation for AWS Lambda.
-//
-// Returns a list of tags assigned to a function when supplied the function
-// ARN (Amazon Resource Name).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation ListTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTags
-func (c *Lambda) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsWithContext is the same as ListTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsOutput{})
+	return ListTagsRequest{Request: req, Input: input}
 }
 
 const opListVersionsByFunction = "ListVersionsByFunction"
 
-// ListVersionsByFunctionRequest generates a "aws.Request" representing the
-// client's request for the ListVersionsByFunction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListVersionsByFunctionRequest is a API request type for the ListVersionsByFunction API operation.
+type ListVersionsByFunctionRequest struct {
+	*aws.Request
+	Input *ListVersionsByFunctionInput
+}
+
+// Send marshals and sends the ListVersionsByFunction API request.
+func (r ListVersionsByFunctionRequest) Send() (*ListVersionsByFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVersionsByFunctionOutput), nil
+}
+
+// ListVersionsByFunctionRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListVersionsByFunction for more information on using the ListVersionsByFunction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List all versions of a function. For information about the versioning feature,
+// see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 //
 //    // Example sending a request using the ListVersionsByFunctionRequest method.
-//    req, resp := client.ListVersionsByFunctionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListVersionsByFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction
-func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInput) (req *aws.Request, output *ListVersionsByFunctionOutput) {
+func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInput) ListVersionsByFunctionRequest {
 	op := &aws.Operation{
 		Name:       opListVersionsByFunction,
 		HTTPMethod: "GET",
@@ -2130,89 +1205,46 @@ func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInpu
 		input = &ListVersionsByFunctionInput{}
 	}
 
-	output = &ListVersionsByFunctionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListVersionsByFunction API operation for AWS Lambda.
-//
-// List all versions of a function. For information about the versioning feature,
-// see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation ListVersionsByFunction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction
-func (c *Lambda) ListVersionsByFunction(input *ListVersionsByFunctionInput) (*ListVersionsByFunctionOutput, error) {
-	req, out := c.ListVersionsByFunctionRequest(input)
-	return out, req.Send()
-}
-
-// ListVersionsByFunctionWithContext is the same as ListVersionsByFunction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListVersionsByFunction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) ListVersionsByFunctionWithContext(ctx aws.Context, input *ListVersionsByFunctionInput, opts ...aws.Option) (*ListVersionsByFunctionOutput, error) {
-	req, out := c.ListVersionsByFunctionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListVersionsByFunctionOutput{})
+	return ListVersionsByFunctionRequest{Request: req, Input: input}
 }
 
 const opPublishVersion = "PublishVersion"
 
-// PublishVersionRequest generates a "aws.Request" representing the
-// client's request for the PublishVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PublishVersionRequest is a API request type for the PublishVersion API operation.
+type PublishVersionRequest struct {
+	*aws.Request
+	Input *PublishVersionInput
+}
+
+// Send marshals and sends the PublishVersion API request.
+func (r PublishVersionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFunctionConfigurationOutput), nil
+}
+
+// PublishVersionRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PublishVersion for more information on using the PublishVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Publishes a version of your function from the current snapshot of $LATEST.
+// That is, AWS Lambda takes a snapshot of the function code and configuration
+// information from $LATEST and publishes a new version. The code and configuration
+// cannot be modified after publication. For information about the versioning
+// feature, see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 //
 //    // Example sending a request using the PublishVersionRequest method.
-//    req, resp := client.PublishVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PublishVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion
-func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) (req *aws.Request, output *FunctionConfiguration) {
+func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) PublishVersionRequest {
 	op := &aws.Operation{
 		Name:       opPublishVersion,
 		HTTPMethod: "POST",
@@ -2223,113 +1255,30 @@ func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) (req *aws.Req
 		input = &PublishVersionInput{}
 	}
 
-	output = &FunctionConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PublishVersion API operation for AWS Lambda.
-//
-// Publishes a version of your function from the current snapshot of $LATEST.
-// That is, AWS Lambda takes a snapshot of the function code and configuration
-// information from $LATEST and publishes a new version. The code and configuration
-// cannot be modified after publication. For information about the versioning
-// feature, see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation PublishVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeCodeStorageExceededException "CodeStorageExceededException"
-//   You have exceeded your maximum total code size per account. Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html)
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion
-func (c *Lambda) PublishVersion(input *PublishVersionInput) (*FunctionConfiguration, error) {
-	req, out := c.PublishVersionRequest(input)
-	return out, req.Send()
-}
-
-// PublishVersionWithContext is the same as PublishVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PublishVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) PublishVersionWithContext(ctx aws.Context, input *PublishVersionInput, opts ...aws.Option) (*FunctionConfiguration, error) {
-	req, out := c.PublishVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	return PublishVersionRequest{Request: req, Input: input}
 }
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws.Request" representing the
-// client's request for the RemovePermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemovePermission for more information on using the RemovePermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RemovePermissionRequest method.
-//    req, resp := client.RemovePermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission
-func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
-	op := &aws.Operation{
-		Name:       opRemovePermission,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
-	}
-
-	if input == nil {
-		input = &RemovePermissionInput{}
-	}
-
-	output = &RemovePermissionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// RemovePermissionRequest is a API request type for the RemovePermission API operation.
+type RemovePermissionRequest struct {
+	*aws.Request
+	Input *RemovePermissionInput
 }
 
-// RemovePermission API operation for AWS Lambda.
+// Send marshals and sends the RemovePermission API request.
+func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemovePermissionOutput), nil
+}
+
+// RemovePermissionRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // You can remove individual permissions from an resource policy associated
 // with a Lambda function by providing a statement ID that you provided when
@@ -2345,79 +1294,65 @@ func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) (req *aws
 //
 // You need permission for the lambda:RemovePermission action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation RemovePermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
+//    // Example sending a request using the RemovePermissionRequest method.
+//    req := client.RemovePermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission
-func (c *Lambda) RemovePermission(input *RemovePermissionInput) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) RemovePermissionRequest {
+	op := &aws.Operation{
+		Name:       opRemovePermission,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
+	}
 
-// RemovePermissionWithContext is the same as RemovePermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemovePermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RemovePermissionInput{}
+	}
+
+	req := c.newRequest(op, input, &RemovePermissionOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return RemovePermissionRequest{Request: req, Input: input}
 }
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a list of tags (key-value pairs) on the Lambda function. Requires
+// the Lambda function ARN (Amazon Resource Name). If a key is specified without
+// a value, Lambda creates a tag with the specified key and a value of null.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResource
-func (c *Lambda) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *Lambda) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -2428,92 +1363,45 @@ func (c *Lambda) TagResourceRequest(input *TagResourceInput) (req *aws.Request, 
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &TagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// TagResource API operation for AWS Lambda.
-//
-// Creates a list of tags (key-value pairs) on the Lambda function. Requires
-// the Lambda function ARN (Amazon Resource Name). If a key is specified without
-// a value, Lambda creates a tag with the specified key and a value of null.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResource
-func (c *Lambda) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes tags from a Lambda function. Requires the function ARN (Amazon Resource
+// Name).
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResource
-func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "DELETE",
@@ -2524,91 +1412,48 @@ func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) (req *aws.Reque
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UntagResource API operation for AWS Lambda.
-//
-// Removes tags from a Lambda function. Requires the function ARN (Amazon Resource
-// Name).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResource
-func (c *Lambda) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateAlias = "UpdateAlias"
 
-// UpdateAliasRequest generates a "aws.Request" representing the
-// client's request for the UpdateAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateAliasRequest is a API request type for the UpdateAlias API operation.
+type UpdateAliasRequest struct {
+	*aws.Request
+	Input *UpdateAliasInput
+}
+
+// Send marshals and sends the UpdateAlias API request.
+func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAliasOutput), nil
+}
+
+// UpdateAliasRequest returns a request value for making API operation for
+// AWS Lambda.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Using this API you can update the function version to which the alias points
+// and the alias description. For more information, see Introduction to AWS
+// Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
 //
-// See UpdateAlias for more information on using the UpdateAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This requires permission for the lambda:UpdateAlias action.
 //
 //    // Example sending a request using the UpdateAliasRequest method.
-//    req, resp := client.UpdateAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias
-func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, output *AliasConfiguration) {
+func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAlias,
 		HTTPMethod: "PUT",
@@ -2619,108 +1464,30 @@ func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, 
 		input = &UpdateAliasInput{}
 	}
 
-	output = &AliasConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateAlias API operation for AWS Lambda.
-//
-// Using this API you can update the function version to which the alias points
-// and the alias description. For more information, see Introduction to AWS
-// Lambda Aliases (http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
-//
-// This requires permission for the lambda:UpdateAlias action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation UpdateAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias
-func (c *Lambda) UpdateAlias(input *UpdateAliasInput) (*AliasConfiguration, error) {
-	req, out := c.UpdateAliasRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAliasWithContext is the same as UpdateAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...aws.Option) (*AliasConfiguration, error) {
-	req, out := c.UpdateAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	return UpdateAliasRequest{Request: req, Input: input}
 }
 
 const opUpdateEventSourceMapping = "UpdateEventSourceMapping"
 
-// UpdateEventSourceMappingRequest generates a "aws.Request" representing the
-// client's request for the UpdateEventSourceMapping operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateEventSourceMapping for more information on using the UpdateEventSourceMapping
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateEventSourceMappingRequest method.
-//    req, resp := client.UpdateEventSourceMappingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping
-func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
-	op := &aws.Operation{
-		Name:       opUpdateEventSourceMapping,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/2015-03-31/event-source-mappings/{UUID}",
-	}
-
-	if input == nil {
-		input = &UpdateEventSourceMappingInput{}
-	}
-
-	output = &EventSourceMappingConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateEventSourceMappingRequest is a API request type for the UpdateEventSourceMapping API operation.
+type UpdateEventSourceMappingRequest struct {
+	*aws.Request
+	Input *UpdateEventSourceMappingInput
 }
 
-// UpdateEventSourceMapping API operation for AWS Lambda.
+// Send marshals and sends the UpdateEventSourceMapping API request.
+func (r UpdateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEventSourceMappingOutput), nil
+}
+
+// UpdateEventSourceMappingRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // You can update an event source mapping. This is useful if you want to change
 // the parameters of the existing mapping without losing your position in the
@@ -2740,98 +1507,49 @@ func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMapping
 // This operation requires permission for the lambda:UpdateEventSourceMapping
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation UpdateEventSourceMapping for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   The resource already exists.
+//    // Example sending a request using the UpdateEventSourceMappingRequest method.
+//    req := client.UpdateEventSourceMappingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping
-func (c *Lambda) UpdateEventSourceMapping(input *UpdateEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
-	req, out := c.UpdateEventSourceMappingRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMappingInput) UpdateEventSourceMappingRequest {
+	op := &aws.Operation{
+		Name:       opUpdateEventSourceMapping,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2015-03-31/event-source-mappings/{UUID}",
+	}
 
-// UpdateEventSourceMappingWithContext is the same as UpdateEventSourceMapping with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateEventSourceMapping for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) UpdateEventSourceMappingWithContext(ctx aws.Context, input *UpdateEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
-	req, out := c.UpdateEventSourceMappingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateEventSourceMappingInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateEventSourceMappingOutput{})
+	return UpdateEventSourceMappingRequest{Request: req, Input: input}
 }
 
 const opUpdateFunctionCode = "UpdateFunctionCode"
 
-// UpdateFunctionCodeRequest generates a "aws.Request" representing the
-// client's request for the UpdateFunctionCode operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateFunctionCode for more information on using the UpdateFunctionCode
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateFunctionCodeRequest method.
-//    req, resp := client.UpdateFunctionCodeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode
-func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) (req *aws.Request, output *FunctionConfiguration) {
-	op := &aws.Operation{
-		Name:       opUpdateFunctionCode,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}/code",
-	}
-
-	if input == nil {
-		input = &UpdateFunctionCodeInput{}
-	}
-
-	output = &FunctionConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateFunctionCodeRequest is a API request type for the UpdateFunctionCode API operation.
+type UpdateFunctionCodeRequest struct {
+	*aws.Request
+	Input *UpdateFunctionCodeInput
 }
 
-// UpdateFunctionCode API operation for AWS Lambda.
+// Send marshals and sends the UpdateFunctionCode API request.
+func (r UpdateFunctionCodeRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFunctionConfigurationOutput), nil
+}
+
+// UpdateFunctionCodeRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Updates the code for the specified Lambda function. This operation must only
 // be used on an existing Lambda function and cannot be used to update the function
@@ -2843,98 +1561,49 @@ func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) (req 
 //
 // This operation requires permission for the lambda:UpdateFunctionCode action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation UpdateFunctionCode for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeCodeStorageExceededException "CodeStorageExceededException"
-//   You have exceeded your maximum total code size per account. Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html)
+//    // Example sending a request using the UpdateFunctionCodeRequest method.
+//    req := client.UpdateFunctionCodeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode
-func (c *Lambda) UpdateFunctionCode(input *UpdateFunctionCodeInput) (*FunctionConfiguration, error) {
-	req, out := c.UpdateFunctionCodeRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) UpdateFunctionCodeRequest {
+	op := &aws.Operation{
+		Name:       opUpdateFunctionCode,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}/code",
+	}
 
-// UpdateFunctionCodeWithContext is the same as UpdateFunctionCode with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFunctionCode for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) UpdateFunctionCodeWithContext(ctx aws.Context, input *UpdateFunctionCodeInput, opts ...aws.Option) (*FunctionConfiguration, error) {
-	req, out := c.UpdateFunctionCodeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateFunctionCodeInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	return UpdateFunctionCodeRequest{Request: req, Input: input}
 }
 
 const opUpdateFunctionConfiguration = "UpdateFunctionConfiguration"
 
-// UpdateFunctionConfigurationRequest generates a "aws.Request" representing the
-// client's request for the UpdateFunctionConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateFunctionConfiguration for more information on using the UpdateFunctionConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateFunctionConfigurationRequest method.
-//    req, resp := client.UpdateFunctionConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration
-func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigurationInput) (req *aws.Request, output *FunctionConfiguration) {
-	op := &aws.Operation{
-		Name:       opUpdateFunctionConfiguration,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/2015-03-31/functions/{FunctionName}/configuration",
-	}
-
-	if input == nil {
-		input = &UpdateFunctionConfigurationInput{}
-	}
-
-	output = &FunctionConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateFunctionConfigurationRequest is a API request type for the UpdateFunctionConfiguration API operation.
+type UpdateFunctionConfigurationRequest struct {
+	*aws.Request
+	Input *UpdateFunctionConfigurationInput
 }
 
-// UpdateFunctionConfiguration API operation for AWS Lambda.
+// Send marshals and sends the UpdateFunctionConfiguration API request.
+func (r UpdateFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFunctionConfigurationOutput), nil
+}
+
+// UpdateFunctionConfigurationRequest returns a request value for making API operation for
+// AWS Lambda.
 //
 // Updates the configuration parameters for the specified Lambda function by
 // using the values provided in the request. You provide only the parameters
@@ -2948,53 +1617,27 @@ func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigu
 // This operation requires permission for the lambda:UpdateFunctionConfiguration
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Lambda's
-// API operation UpdateFunctionConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   The AWS Lambda service encountered an internal error.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource (for example, a Lambda function or access policy statement)
-//   specified in the request does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One of the parameters in the request is invalid. For example, if you provided
-//   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
-//   API, that AWS Lambda is unable to assume you will get this exception. You
-//   will also get this exception if you have selected a deprecated runtime, such
-//   as Node v0.10.42.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   The resource already exists.
+//    // Example sending a request using the UpdateFunctionConfigurationRequest method.
+//    req := client.UpdateFunctionConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration
-func (c *Lambda) UpdateFunctionConfiguration(input *UpdateFunctionConfigurationInput) (*FunctionConfiguration, error) {
-	req, out := c.UpdateFunctionConfigurationRequest(input)
-	return out, req.Send()
-}
+func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigurationInput) UpdateFunctionConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opUpdateFunctionConfiguration,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2015-03-31/functions/{FunctionName}/configuration",
+	}
 
-// UpdateFunctionConfigurationWithContext is the same as UpdateFunctionConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFunctionConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) UpdateFunctionConfigurationWithContext(ctx aws.Context, input *UpdateFunctionConfigurationInput, opts ...aws.Option) (*FunctionConfiguration, error) {
-	req, out := c.UpdateFunctionConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateFunctionConfigurationInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateFunctionConfigurationOutput{})
+	return UpdateFunctionConfigurationRequest{Request: req, Input: input}
 }
 
 // Provides limits of code size and concurrency associated with the current
@@ -3290,60 +1933,6 @@ func (s AddPermissionOutput) GoString() string {
 // SetStatement sets the Statement field's value.
 func (s *AddPermissionOutput) SetStatement(v string) *AddPermissionOutput {
 	s.Statement = &v
-	return s
-}
-
-// Provides configuration information about a Lambda function version alias.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration
-type AliasConfiguration struct {
-	_ struct{} `type:"structure"`
-
-	// Lambda function ARN that is qualified using the alias name as the suffix.
-	// For example, if you create an alias called BETA that points to a helloworld
-	// function version, the ARN is arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA.
-	AliasArn *string `type:"string"`
-
-	// Alias description.
-	Description *string `type:"string"`
-
-	// Function version to which the alias points.
-	FunctionVersion *string `min:"1" type:"string"`
-
-	// Alias name.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AliasConfiguration) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s AliasConfiguration) GoString() string {
-	return s.String()
-}
-
-// SetAliasArn sets the AliasArn field's value.
-func (s *AliasConfiguration) SetAliasArn(v string) *AliasConfiguration {
-	s.AliasArn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *AliasConfiguration) SetDescription(v string) *AliasConfiguration {
-	s.Description = &v
-	return s
-}
-
-// SetFunctionVersion sets the FunctionVersion field's value.
-func (s *AliasConfiguration) SetFunctionVersion(v string) *AliasConfiguration {
-	s.FunctionVersion = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AliasConfiguration) SetName(v string) *AliasConfiguration {
-	s.Name = &v
 	return s
 }
 
@@ -4141,99 +2730,6 @@ func (s *EnvironmentResponse) SetVariables(v map[string]*string) *EnvironmentRes
 	return s
 }
 
-// Describes mapping between an Amazon Kinesis stream and a Lambda function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration
-type EventSourceMappingConfiguration struct {
-	_ struct{} `type:"structure"`
-
-	// The largest number of records that AWS Lambda will retrieve from your event
-	// source at the time of invoking your function. Your function receives an event
-	// with all the retrieved records.
-	BatchSize *int64 `min:"1" type:"integer"`
-
-	// The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the source
-	// of events.
-	EventSourceArn *string `type:"string"`
-
-	// The Lambda function to invoke when AWS Lambda detects an event on the stream.
-	FunctionArn *string `type:"string"`
-
-	// The UTC time string indicating the last time the event mapping was updated.
-	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
-
-	// The result of the last AWS Lambda invocation of your Lambda function.
-	LastProcessingResult *string `type:"string"`
-
-	// The state of the event source mapping. It can be Creating, Enabled, Disabled,
-	// Enabling, Disabling, Updating, or Deleting.
-	State *string `type:"string"`
-
-	// The reason the event source mapping is in its current state. It is either
-	// user-requested or an AWS Lambda-initiated state transition.
-	StateTransitionReason *string `type:"string"`
-
-	// The AWS Lambda assigned opaque identifier for the mapping.
-	UUID *string `type:"string"`
-}
-
-// String returns the string representation
-func (s EventSourceMappingConfiguration) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s EventSourceMappingConfiguration) GoString() string {
-	return s.String()
-}
-
-// SetBatchSize sets the BatchSize field's value.
-func (s *EventSourceMappingConfiguration) SetBatchSize(v int64) *EventSourceMappingConfiguration {
-	s.BatchSize = &v
-	return s
-}
-
-// SetEventSourceArn sets the EventSourceArn field's value.
-func (s *EventSourceMappingConfiguration) SetEventSourceArn(v string) *EventSourceMappingConfiguration {
-	s.EventSourceArn = &v
-	return s
-}
-
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *EventSourceMappingConfiguration) SetFunctionArn(v string) *EventSourceMappingConfiguration {
-	s.FunctionArn = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *EventSourceMappingConfiguration) SetLastModified(v time.Time) *EventSourceMappingConfiguration {
-	s.LastModified = &v
-	return s
-}
-
-// SetLastProcessingResult sets the LastProcessingResult field's value.
-func (s *EventSourceMappingConfiguration) SetLastProcessingResult(v string) *EventSourceMappingConfiguration {
-	s.LastProcessingResult = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *EventSourceMappingConfiguration) SetState(v string) *EventSourceMappingConfiguration {
-	s.State = &v
-	return s
-}
-
-// SetStateTransitionReason sets the StateTransitionReason field's value.
-func (s *EventSourceMappingConfiguration) SetStateTransitionReason(v string) *EventSourceMappingConfiguration {
-	s.StateTransitionReason = &v
-	return s
-}
-
-// SetUUID sets the UUID field's value.
-func (s *EventSourceMappingConfiguration) SetUUID(v string) *EventSourceMappingConfiguration {
-	s.UUID = &v
-	return s
-}
-
 // The code for the Lambda function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode
 type FunctionCode struct {
@@ -4346,196 +2842,6 @@ func (s *FunctionCodeLocation) SetLocation(v string) *FunctionCodeLocation {
 // SetRepositoryType sets the RepositoryType field's value.
 func (s *FunctionCodeLocation) SetRepositoryType(v string) *FunctionCodeLocation {
 	s.RepositoryType = &v
-	return s
-}
-
-// A complex type that describes function metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration
-type FunctionConfiguration struct {
-	_ struct{} `type:"structure"`
-
-	// It is the SHA256 hash of your function deployment package.
-	CodeSha256 *string `type:"string"`
-
-	// The size, in bytes, of the function .zip file you uploaded.
-	CodeSize *int64 `type:"long"`
-
-	// The parent object that contains the target ARN (Amazon Resource Name) of
-	// an Amazon SQS queue or Amazon SNS topic.
-	DeadLetterConfig *DeadLetterConfig `type:"structure"`
-
-	// The user-provided description.
-	Description *string `type:"string"`
-
-	// The parent object that contains your environment's configuration settings.
-	Environment *EnvironmentResponse `type:"structure"`
-
-	// The Amazon Resource Name (ARN) assigned to the function.
-	FunctionArn *string `type:"string"`
-
-	// The name of the function. Note that the length constraint applies only to
-	// the ARN. If you specify only the function name, it is limited to 64 characters
-	// in length.
-	FunctionName *string `min:"1" type:"string"`
-
-	// The function Lambda calls to begin executing your function.
-	Handler *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's
-	// environment variables. If empty, it means you are using the AWS Lambda default
-	// service key.
-	KMSKeyArn *string `type:"string"`
-
-	// The time stamp of the last time you updated the function. The time stamp
-	// is conveyed as a string complying with ISO-8601 in this way YYYY-MM-DDThh:mm:ssTZD
-	// (e.g., 1997-07-16T19:20:30+01:00). For more information, see Date and Time
-	// Formats (https://www.w3.org/TR/NOTE-datetime).
-	LastModified *string `type:"string"`
-
-	// Returns the ARN (Amazon Resource Name) of the master function.
-	MasterArn *string `type:"string"`
-
-	// The memory size, in MB, you configured for the function. Must be a multiple
-	// of 64 MB.
-	MemorySize *int64 `min:"128" type:"integer"`
-
-	// The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it
-	// executes your function to access any other Amazon Web Services (AWS) resources.
-	Role *string `type:"string"`
-
-	// The runtime environment for the Lambda function.
-	Runtime Runtime `type:"string"`
-
-	// The function execution time at which Lambda should terminate the function.
-	// Because the execution time has cost implications, we recommend you set this
-	// value based on your expected execution time. The default is 3 seconds.
-	Timeout *int64 `min:"1" type:"integer"`
-
-	// The parent object that contains your function's tracing settings.
-	TracingConfig *TracingConfigResponse `type:"structure"`
-
-	// The version of the Lambda function.
-	Version *string `min:"1" type:"string"`
-
-	// VPC configuration associated with your Lambda function.
-	VpcConfig *VpcConfigResponse `type:"structure"`
-}
-
-// String returns the string representation
-func (s FunctionConfiguration) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s FunctionConfiguration) GoString() string {
-	return s.String()
-}
-
-// SetCodeSha256 sets the CodeSha256 field's value.
-func (s *FunctionConfiguration) SetCodeSha256(v string) *FunctionConfiguration {
-	s.CodeSha256 = &v
-	return s
-}
-
-// SetCodeSize sets the CodeSize field's value.
-func (s *FunctionConfiguration) SetCodeSize(v int64) *FunctionConfiguration {
-	s.CodeSize = &v
-	return s
-}
-
-// SetDeadLetterConfig sets the DeadLetterConfig field's value.
-func (s *FunctionConfiguration) SetDeadLetterConfig(v *DeadLetterConfig) *FunctionConfiguration {
-	s.DeadLetterConfig = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *FunctionConfiguration) SetDescription(v string) *FunctionConfiguration {
-	s.Description = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *FunctionConfiguration) SetEnvironment(v *EnvironmentResponse) *FunctionConfiguration {
-	s.Environment = v
-	return s
-}
-
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *FunctionConfiguration) SetFunctionArn(v string) *FunctionConfiguration {
-	s.FunctionArn = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *FunctionConfiguration) SetFunctionName(v string) *FunctionConfiguration {
-	s.FunctionName = &v
-	return s
-}
-
-// SetHandler sets the Handler field's value.
-func (s *FunctionConfiguration) SetHandler(v string) *FunctionConfiguration {
-	s.Handler = &v
-	return s
-}
-
-// SetKMSKeyArn sets the KMSKeyArn field's value.
-func (s *FunctionConfiguration) SetKMSKeyArn(v string) *FunctionConfiguration {
-	s.KMSKeyArn = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *FunctionConfiguration) SetLastModified(v string) *FunctionConfiguration {
-	s.LastModified = &v
-	return s
-}
-
-// SetMasterArn sets the MasterArn field's value.
-func (s *FunctionConfiguration) SetMasterArn(v string) *FunctionConfiguration {
-	s.MasterArn = &v
-	return s
-}
-
-// SetMemorySize sets the MemorySize field's value.
-func (s *FunctionConfiguration) SetMemorySize(v int64) *FunctionConfiguration {
-	s.MemorySize = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *FunctionConfiguration) SetRole(v string) *FunctionConfiguration {
-	s.Role = &v
-	return s
-}
-
-// SetRuntime sets the Runtime field's value.
-func (s *FunctionConfiguration) SetRuntime(v Runtime) *FunctionConfiguration {
-	s.Runtime = v
-	return s
-}
-
-// SetTimeout sets the Timeout field's value.
-func (s *FunctionConfiguration) SetTimeout(v int64) *FunctionConfiguration {
-	s.Timeout = &v
-	return s
-}
-
-// SetTracingConfig sets the TracingConfig field's value.
-func (s *FunctionConfiguration) SetTracingConfig(v *TracingConfigResponse) *FunctionConfiguration {
-	s.TracingConfig = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *FunctionConfiguration) SetVersion(v string) *FunctionConfiguration {
-	s.Version = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *FunctionConfiguration) SetVpcConfig(v *VpcConfigResponse) *FunctionConfiguration {
-	s.VpcConfig = v
 	return s
 }
 
@@ -4839,7 +3145,7 @@ type GetFunctionOutput struct {
 	Code *FunctionCodeLocation `type:"structure"`
 
 	// A complex type that describes function metadata.
-	Configuration *FunctionConfiguration `type:"structure"`
+	Configuration *UpdateFunctionConfigurationOutput `type:"structure"`
 
 	// Returns the list of tags associated with the function.
 	Tags map[string]*string `type:"map"`
@@ -4862,7 +3168,7 @@ func (s *GetFunctionOutput) SetCode(v *FunctionCodeLocation) *GetFunctionOutput 
 }
 
 // SetConfiguration sets the Configuration field's value.
-func (s *GetFunctionOutput) SetConfiguration(v *FunctionConfiguration) *GetFunctionOutput {
+func (s *GetFunctionOutput) SetConfiguration(v *UpdateFunctionConfigurationOutput) *GetFunctionOutput {
 	s.Configuration = v
 	return s
 }
@@ -5324,7 +3630,7 @@ type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of aliases.
-	Aliases []*AliasConfiguration `type:"list"`
+	Aliases []*UpdateAliasOutput `type:"list"`
 
 	// A string, present if there are more aliases.
 	NextMarker *string `type:"string"`
@@ -5341,7 +3647,7 @@ func (s ListAliasesOutput) GoString() string {
 }
 
 // SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []*AliasConfiguration) *ListAliasesOutput {
+func (s *ListAliasesOutput) SetAliases(v []*UpdateAliasOutput) *ListAliasesOutput {
 	s.Aliases = v
 	return s
 }
@@ -5438,7 +3744,7 @@ type ListEventSourceMappingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of EventSourceMappingConfiguration objects.
-	EventSourceMappings []*EventSourceMappingConfiguration `type:"list"`
+	EventSourceMappings []*UpdateEventSourceMappingOutput `type:"list"`
 
 	// A string, present if there are more event source mappings.
 	NextMarker *string `type:"string"`
@@ -5455,7 +3761,7 @@ func (s ListEventSourceMappingsOutput) GoString() string {
 }
 
 // SetEventSourceMappings sets the EventSourceMappings field's value.
-func (s *ListEventSourceMappingsOutput) SetEventSourceMappings(v []*EventSourceMappingConfiguration) *ListEventSourceMappingsOutput {
+func (s *ListEventSourceMappingsOutput) SetEventSourceMappings(v []*UpdateEventSourceMappingOutput) *ListEventSourceMappingsOutput {
 	s.EventSourceMappings = v
 	return s
 }
@@ -5553,7 +3859,7 @@ type ListFunctionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of Lambda functions.
-	Functions []*FunctionConfiguration `type:"list"`
+	Functions []*UpdateFunctionConfigurationOutput `type:"list"`
 
 	// A string, present if there are more functions.
 	NextMarker *string `type:"string"`
@@ -5570,7 +3876,7 @@ func (s ListFunctionsOutput) GoString() string {
 }
 
 // SetFunctions sets the Functions field's value.
-func (s *ListFunctionsOutput) SetFunctions(v []*FunctionConfiguration) *ListFunctionsOutput {
+func (s *ListFunctionsOutput) SetFunctions(v []*UpdateFunctionConfigurationOutput) *ListFunctionsOutput {
 	s.Functions = v
 	return s
 }
@@ -5724,7 +4030,7 @@ type ListVersionsByFunctionOutput struct {
 	NextMarker *string `type:"string"`
 
 	// A list of Lambda function versions.
-	Versions []*FunctionConfiguration `type:"list"`
+	Versions []*UpdateFunctionConfigurationOutput `type:"list"`
 }
 
 // String returns the string representation
@@ -5744,7 +4050,7 @@ func (s *ListVersionsByFunctionOutput) SetNextMarker(v string) *ListVersionsByFu
 }
 
 // SetVersions sets the Versions field's value.
-func (s *ListVersionsByFunctionOutput) SetVersions(v []*FunctionConfiguration) *ListVersionsByFunctionOutput {
+func (s *ListVersionsByFunctionOutput) SetVersions(v []*UpdateFunctionConfigurationOutput) *ListVersionsByFunctionOutput {
 	s.Versions = v
 	return s
 }
@@ -6195,6 +4501,60 @@ func (s *UpdateAliasInput) SetName(v string) *UpdateAliasInput {
 	return s
 }
 
+// Provides configuration information about a Lambda function version alias.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasOutput
+type UpdateAliasOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Lambda function ARN that is qualified using the alias name as the suffix.
+	// For example, if you create an alias called BETA that points to a helloworld
+	// function version, the ARN is arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA.
+	AliasArn *string `type:"string"`
+
+	// Alias description.
+	Description *string `type:"string"`
+
+	// Function version to which the alias points.
+	FunctionVersion *string `min:"1" type:"string"`
+
+	// Alias name.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateAliasOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateAliasOutput) GoString() string {
+	return s.String()
+}
+
+// SetAliasArn sets the AliasArn field's value.
+func (s *UpdateAliasOutput) SetAliasArn(v string) *UpdateAliasOutput {
+	s.AliasArn = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateAliasOutput) SetDescription(v string) *UpdateAliasOutput {
+	s.Description = &v
+	return s
+}
+
+// SetFunctionVersion sets the FunctionVersion field's value.
+func (s *UpdateAliasOutput) SetFunctionVersion(v string) *UpdateAliasOutput {
+	s.FunctionVersion = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *UpdateAliasOutput) SetName(v string) *UpdateAliasOutput {
+	s.Name = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest
 type UpdateEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
@@ -6280,6 +4640,99 @@ func (s *UpdateEventSourceMappingInput) SetFunctionName(v string) *UpdateEventSo
 
 // SetUUID sets the UUID field's value.
 func (s *UpdateEventSourceMappingInput) SetUUID(v string) *UpdateEventSourceMappingInput {
+	s.UUID = &v
+	return s
+}
+
+// Describes mapping between an Amazon Kinesis stream and a Lambda function.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingOutput
+type UpdateEventSourceMappingOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The largest number of records that AWS Lambda will retrieve from your event
+	// source at the time of invoking your function. Your function receives an event
+	// with all the retrieved records.
+	BatchSize *int64 `min:"1" type:"integer"`
+
+	// The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the source
+	// of events.
+	EventSourceArn *string `type:"string"`
+
+	// The Lambda function to invoke when AWS Lambda detects an event on the stream.
+	FunctionArn *string `type:"string"`
+
+	// The UTC time string indicating the last time the event mapping was updated.
+	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The result of the last AWS Lambda invocation of your Lambda function.
+	LastProcessingResult *string `type:"string"`
+
+	// The state of the event source mapping. It can be Creating, Enabled, Disabled,
+	// Enabling, Disabling, Updating, or Deleting.
+	State *string `type:"string"`
+
+	// The reason the event source mapping is in its current state. It is either
+	// user-requested or an AWS Lambda-initiated state transition.
+	StateTransitionReason *string `type:"string"`
+
+	// The AWS Lambda assigned opaque identifier for the mapping.
+	UUID *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateEventSourceMappingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateEventSourceMappingOutput) GoString() string {
+	return s.String()
+}
+
+// SetBatchSize sets the BatchSize field's value.
+func (s *UpdateEventSourceMappingOutput) SetBatchSize(v int64) *UpdateEventSourceMappingOutput {
+	s.BatchSize = &v
+	return s
+}
+
+// SetEventSourceArn sets the EventSourceArn field's value.
+func (s *UpdateEventSourceMappingOutput) SetEventSourceArn(v string) *UpdateEventSourceMappingOutput {
+	s.EventSourceArn = &v
+	return s
+}
+
+// SetFunctionArn sets the FunctionArn field's value.
+func (s *UpdateEventSourceMappingOutput) SetFunctionArn(v string) *UpdateEventSourceMappingOutput {
+	s.FunctionArn = &v
+	return s
+}
+
+// SetLastModified sets the LastModified field's value.
+func (s *UpdateEventSourceMappingOutput) SetLastModified(v time.Time) *UpdateEventSourceMappingOutput {
+	s.LastModified = &v
+	return s
+}
+
+// SetLastProcessingResult sets the LastProcessingResult field's value.
+func (s *UpdateEventSourceMappingOutput) SetLastProcessingResult(v string) *UpdateEventSourceMappingOutput {
+	s.LastProcessingResult = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *UpdateEventSourceMappingOutput) SetState(v string) *UpdateEventSourceMappingOutput {
+	s.State = &v
+	return s
+}
+
+// SetStateTransitionReason sets the StateTransitionReason field's value.
+func (s *UpdateEventSourceMappingOutput) SetStateTransitionReason(v string) *UpdateEventSourceMappingOutput {
+	s.StateTransitionReason = &v
+	return s
+}
+
+// SetUUID sets the UUID field's value.
+func (s *UpdateEventSourceMappingOutput) SetUUID(v string) *UpdateEventSourceMappingOutput {
 	s.UUID = &v
 	return s
 }
@@ -6591,6 +5044,196 @@ func (s *UpdateFunctionConfigurationInput) SetTracingConfig(v *TracingConfig) *U
 
 // SetVpcConfig sets the VpcConfig field's value.
 func (s *UpdateFunctionConfigurationInput) SetVpcConfig(v *VpcConfig) *UpdateFunctionConfigurationInput {
+	s.VpcConfig = v
+	return s
+}
+
+// A complex type that describes function metadata.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeOutput
+type UpdateFunctionConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// It is the SHA256 hash of your function deployment package.
+	CodeSha256 *string `type:"string"`
+
+	// The size, in bytes, of the function .zip file you uploaded.
+	CodeSize *int64 `type:"long"`
+
+	// The parent object that contains the target ARN (Amazon Resource Name) of
+	// an Amazon SQS queue or Amazon SNS topic.
+	DeadLetterConfig *DeadLetterConfig `type:"structure"`
+
+	// The user-provided description.
+	Description *string `type:"string"`
+
+	// The parent object that contains your environment's configuration settings.
+	Environment *EnvironmentResponse `type:"structure"`
+
+	// The Amazon Resource Name (ARN) assigned to the function.
+	FunctionArn *string `type:"string"`
+
+	// The name of the function. Note that the length constraint applies only to
+	// the ARN. If you specify only the function name, it is limited to 64 characters
+	// in length.
+	FunctionName *string `min:"1" type:"string"`
+
+	// The function Lambda calls to begin executing your function.
+	Handler *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's
+	// environment variables. If empty, it means you are using the AWS Lambda default
+	// service key.
+	KMSKeyArn *string `type:"string"`
+
+	// The time stamp of the last time you updated the function. The time stamp
+	// is conveyed as a string complying with ISO-8601 in this way YYYY-MM-DDThh:mm:ssTZD
+	// (e.g., 1997-07-16T19:20:30+01:00). For more information, see Date and Time
+	// Formats (https://www.w3.org/TR/NOTE-datetime).
+	LastModified *string `type:"string"`
+
+	// Returns the ARN (Amazon Resource Name) of the master function.
+	MasterArn *string `type:"string"`
+
+	// The memory size, in MB, you configured for the function. Must be a multiple
+	// of 64 MB.
+	MemorySize *int64 `min:"128" type:"integer"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it
+	// executes your function to access any other Amazon Web Services (AWS) resources.
+	Role *string `type:"string"`
+
+	// The runtime environment for the Lambda function.
+	Runtime Runtime `type:"string"`
+
+	// The function execution time at which Lambda should terminate the function.
+	// Because the execution time has cost implications, we recommend you set this
+	// value based on your expected execution time. The default is 3 seconds.
+	Timeout *int64 `min:"1" type:"integer"`
+
+	// The parent object that contains your function's tracing settings.
+	TracingConfig *TracingConfigResponse `type:"structure"`
+
+	// The version of the Lambda function.
+	Version *string `min:"1" type:"string"`
+
+	// VPC configuration associated with your Lambda function.
+	VpcConfig *VpcConfigResponse `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateFunctionConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFunctionConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SetCodeSha256 sets the CodeSha256 field's value.
+func (s *UpdateFunctionConfigurationOutput) SetCodeSha256(v string) *UpdateFunctionConfigurationOutput {
+	s.CodeSha256 = &v
+	return s
+}
+
+// SetCodeSize sets the CodeSize field's value.
+func (s *UpdateFunctionConfigurationOutput) SetCodeSize(v int64) *UpdateFunctionConfigurationOutput {
+	s.CodeSize = &v
+	return s
+}
+
+// SetDeadLetterConfig sets the DeadLetterConfig field's value.
+func (s *UpdateFunctionConfigurationOutput) SetDeadLetterConfig(v *DeadLetterConfig) *UpdateFunctionConfigurationOutput {
+	s.DeadLetterConfig = v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateFunctionConfigurationOutput) SetDescription(v string) *UpdateFunctionConfigurationOutput {
+	s.Description = &v
+	return s
+}
+
+// SetEnvironment sets the Environment field's value.
+func (s *UpdateFunctionConfigurationOutput) SetEnvironment(v *EnvironmentResponse) *UpdateFunctionConfigurationOutput {
+	s.Environment = v
+	return s
+}
+
+// SetFunctionArn sets the FunctionArn field's value.
+func (s *UpdateFunctionConfigurationOutput) SetFunctionArn(v string) *UpdateFunctionConfigurationOutput {
+	s.FunctionArn = &v
+	return s
+}
+
+// SetFunctionName sets the FunctionName field's value.
+func (s *UpdateFunctionConfigurationOutput) SetFunctionName(v string) *UpdateFunctionConfigurationOutput {
+	s.FunctionName = &v
+	return s
+}
+
+// SetHandler sets the Handler field's value.
+func (s *UpdateFunctionConfigurationOutput) SetHandler(v string) *UpdateFunctionConfigurationOutput {
+	s.Handler = &v
+	return s
+}
+
+// SetKMSKeyArn sets the KMSKeyArn field's value.
+func (s *UpdateFunctionConfigurationOutput) SetKMSKeyArn(v string) *UpdateFunctionConfigurationOutput {
+	s.KMSKeyArn = &v
+	return s
+}
+
+// SetLastModified sets the LastModified field's value.
+func (s *UpdateFunctionConfigurationOutput) SetLastModified(v string) *UpdateFunctionConfigurationOutput {
+	s.LastModified = &v
+	return s
+}
+
+// SetMasterArn sets the MasterArn field's value.
+func (s *UpdateFunctionConfigurationOutput) SetMasterArn(v string) *UpdateFunctionConfigurationOutput {
+	s.MasterArn = &v
+	return s
+}
+
+// SetMemorySize sets the MemorySize field's value.
+func (s *UpdateFunctionConfigurationOutput) SetMemorySize(v int64) *UpdateFunctionConfigurationOutput {
+	s.MemorySize = &v
+	return s
+}
+
+// SetRole sets the Role field's value.
+func (s *UpdateFunctionConfigurationOutput) SetRole(v string) *UpdateFunctionConfigurationOutput {
+	s.Role = &v
+	return s
+}
+
+// SetRuntime sets the Runtime field's value.
+func (s *UpdateFunctionConfigurationOutput) SetRuntime(v Runtime) *UpdateFunctionConfigurationOutput {
+	s.Runtime = v
+	return s
+}
+
+// SetTimeout sets the Timeout field's value.
+func (s *UpdateFunctionConfigurationOutput) SetTimeout(v int64) *UpdateFunctionConfigurationOutput {
+	s.Timeout = &v
+	return s
+}
+
+// SetTracingConfig sets the TracingConfig field's value.
+func (s *UpdateFunctionConfigurationOutput) SetTracingConfig(v *TracingConfigResponse) *UpdateFunctionConfigurationOutput {
+	s.TracingConfig = v
+	return s
+}
+
+// SetVersion sets the Version field's value.
+func (s *UpdateFunctionConfigurationOutput) SetVersion(v string) *UpdateFunctionConfigurationOutput {
+	s.Version = &v
+	return s
+}
+
+// SetVpcConfig sets the VpcConfig field's value.
+func (s *UpdateFunctionConfigurationOutput) SetVpcConfig(v *VpcConfigResponse) *UpdateFunctionConfigurationOutput {
 	s.VpcConfig = v
 	return s
 }

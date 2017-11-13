@@ -171,7 +171,8 @@ func (b *Bucket) encryptedObjects() []Object {
 }
 
 func listBuckets(svc *s3.S3) ([]*Bucket, error) {
-	res, err := svc.ListBuckets(&s3.ListBucketsInput{})
+	listReq := svc.ListBucketsRequest(&s3.ListBucketsInput{})
+	res, err := listReq.Send()
 	if err != nil {
 		return nil, err
 	}
@@ -183,9 +184,10 @@ func listBuckets(svc *s3.S3) ([]*Bucket, error) {
 			CreationDate: *b.CreationDate,
 		}
 
-		locRes, err := svc.GetBucketLocation(&s3.GetBucketLocationInput{
+		getReq := svc.GetBucketLocationRequest(&s3.GetBucketLocationInput{
 			Bucket: b.Name,
 		})
+		locRes, err := getReq.Send()
 		if err != nil {
 			buckets[i].Error = err
 			continue
@@ -202,9 +204,10 @@ func listBuckets(svc *s3.S3) ([]*Bucket, error) {
 }
 
 func listBucketObjects(svc *s3.S3, bucket string) ([]Object, []ErrObject, error) {
-	listRes, err := svc.ListObjects(&s3.ListObjectsInput{
+	listReq := svc.ListObjectsRequest(&s3.ListObjectsInput{
 		Bucket: &bucket,
 	})
+	listRes, err := listReq.Send()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -212,11 +215,11 @@ func listBucketObjects(svc *s3.S3, bucket string) ([]Object, []ErrObject, error)
 	objs := make([]Object, 0, len(listRes.Contents))
 	errObjs := []ErrObject{}
 	for _, listObj := range listRes.Contents {
-		objData, err := svc.HeadObject(&s3.HeadObjectInput{
+		objReq := svc.HeadObjectRequest(&s3.HeadObjectInput{
 			Bucket: &bucket,
 			Key:    listObj.Key,
 		})
-
+		objData, err := objReq.Send()
 		if err != nil {
 			errObjs = append(errObjs, ErrObject{Bucket: bucket, Key: *listObj.Key, Error: err})
 			continue

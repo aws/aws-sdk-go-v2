@@ -61,7 +61,7 @@ func runTests(t *testing.T, svc *s3.S3, tests []s3BucketTest) {
 	t.Helper()
 
 	for i, test := range tests {
-		req, _ := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &test.bucket})
+		req := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &test.bucket})
 		req.Build()
 		if e, a := test.url, req.HTTPRequest.URL.String(); e != a {
 			t.Errorf("%d, expect url %s, got %s", i, e, a)
@@ -140,7 +140,7 @@ func TestHostStyleBucketGetBucketLocation(t *testing.T) {
 	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
 
 	s := s3.New(cfg)
-	req, _ := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{
+	req := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{
 		Bucket: aws.String("bucket"),
 	})
 

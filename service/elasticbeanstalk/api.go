@@ -14,31 +14,37 @@ import (
 
 const opAbortEnvironmentUpdate = "AbortEnvironmentUpdate"
 
-// AbortEnvironmentUpdateRequest generates a "aws.Request" representing the
-// client's request for the AbortEnvironmentUpdate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AbortEnvironmentUpdateRequest is a API request type for the AbortEnvironmentUpdate API operation.
+type AbortEnvironmentUpdateRequest struct {
+	*aws.Request
+	Input *AbortEnvironmentUpdateInput
+}
+
+// Send marshals and sends the AbortEnvironmentUpdate API request.
+func (r AbortEnvironmentUpdateRequest) Send() (*AbortEnvironmentUpdateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AbortEnvironmentUpdateOutput), nil
+}
+
+// AbortEnvironmentUpdateRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AbortEnvironmentUpdate for more information on using the AbortEnvironmentUpdate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cancels in-progress environment configuration update or application version
+// deployment.
 //
 //    // Example sending a request using the AbortEnvironmentUpdateRequest method.
-//    req, resp := client.AbortEnvironmentUpdateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AbortEnvironmentUpdateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdate
-func (c *ElasticBeanstalk) AbortEnvironmentUpdateRequest(input *AbortEnvironmentUpdateInput) (req *aws.Request, output *AbortEnvironmentUpdateOutput) {
+func (c *ElasticBeanstalk) AbortEnvironmentUpdateRequest(input *AbortEnvironmentUpdateInput) AbortEnvironmentUpdateRequest {
 	op := &aws.Operation{
 		Name:       opAbortEnvironmentUpdate,
 		HTTPMethod: "POST",
@@ -49,79 +55,46 @@ func (c *ElasticBeanstalk) AbortEnvironmentUpdateRequest(input *AbortEnvironment
 		input = &AbortEnvironmentUpdateInput{}
 	}
 
-	output = &AbortEnvironmentUpdateOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AbortEnvironmentUpdateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AbortEnvironmentUpdate API operation for AWS Elastic Beanstalk.
-//
-// Cancels in-progress environment configuration update or application version
-// deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation AbortEnvironmentUpdate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdate
-func (c *ElasticBeanstalk) AbortEnvironmentUpdate(input *AbortEnvironmentUpdateInput) (*AbortEnvironmentUpdateOutput, error) {
-	req, out := c.AbortEnvironmentUpdateRequest(input)
-	return out, req.Send()
-}
-
-// AbortEnvironmentUpdateWithContext is the same as AbortEnvironmentUpdate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AbortEnvironmentUpdate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) AbortEnvironmentUpdateWithContext(ctx aws.Context, input *AbortEnvironmentUpdateInput, opts ...aws.Option) (*AbortEnvironmentUpdateOutput, error) {
-	req, out := c.AbortEnvironmentUpdateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AbortEnvironmentUpdateRequest{Request: req, Input: input}
 }
 
 const opApplyEnvironmentManagedAction = "ApplyEnvironmentManagedAction"
 
-// ApplyEnvironmentManagedActionRequest generates a "aws.Request" representing the
-// client's request for the ApplyEnvironmentManagedAction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ApplyEnvironmentManagedActionRequest is a API request type for the ApplyEnvironmentManagedAction API operation.
+type ApplyEnvironmentManagedActionRequest struct {
+	*aws.Request
+	Input *ApplyEnvironmentManagedActionInput
+}
+
+// Send marshals and sends the ApplyEnvironmentManagedAction API request.
+func (r ApplyEnvironmentManagedActionRequest) Send() (*ApplyEnvironmentManagedActionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ApplyEnvironmentManagedActionOutput), nil
+}
+
+// ApplyEnvironmentManagedActionRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ApplyEnvironmentManagedAction for more information on using the ApplyEnvironmentManagedAction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Applies a scheduled managed action immediately. A managed action can be applied
+// only if its status is Scheduled. Get the status and action ID of a managed
+// action with DescribeEnvironmentManagedActions.
 //
 //    // Example sending a request using the ApplyEnvironmentManagedActionRequest method.
-//    req, resp := client.ApplyEnvironmentManagedActionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ApplyEnvironmentManagedActionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedAction
-func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentManagedActionInput) (req *aws.Request, output *ApplyEnvironmentManagedActionOutput) {
+func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentManagedActionInput) ApplyEnvironmentManagedActionRequest {
 	op := &aws.Operation{
 		Name:       opApplyEnvironmentManagedAction,
 		HTTPMethod: "POST",
@@ -132,80 +105,42 @@ func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionRequest(input *ApplyEnvi
 		input = &ApplyEnvironmentManagedActionInput{}
 	}
 
-	output = &ApplyEnvironmentManagedActionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ApplyEnvironmentManagedAction API operation for AWS Elastic Beanstalk.
-//
-// Applies a scheduled managed action immediately. A managed action can be applied
-// only if its status is Scheduled. Get the status and action ID of a managed
-// action with DescribeEnvironmentManagedActions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation ApplyEnvironmentManagedAction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-//   * ErrCodeManagedActionInvalidStateException "ManagedActionInvalidStateException"
-//   Cannot modify the managed action in its current state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedAction
-func (c *ElasticBeanstalk) ApplyEnvironmentManagedAction(input *ApplyEnvironmentManagedActionInput) (*ApplyEnvironmentManagedActionOutput, error) {
-	req, out := c.ApplyEnvironmentManagedActionRequest(input)
-	return out, req.Send()
-}
-
-// ApplyEnvironmentManagedActionWithContext is the same as ApplyEnvironmentManagedAction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ApplyEnvironmentManagedAction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionWithContext(ctx aws.Context, input *ApplyEnvironmentManagedActionInput, opts ...aws.Option) (*ApplyEnvironmentManagedActionOutput, error) {
-	req, out := c.ApplyEnvironmentManagedActionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ApplyEnvironmentManagedActionOutput{})
+	return ApplyEnvironmentManagedActionRequest{Request: req, Input: input}
 }
 
 const opCheckDNSAvailability = "CheckDNSAvailability"
 
-// CheckDNSAvailabilityRequest generates a "aws.Request" representing the
-// client's request for the CheckDNSAvailability operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CheckDNSAvailabilityRequest is a API request type for the CheckDNSAvailability API operation.
+type CheckDNSAvailabilityRequest struct {
+	*aws.Request
+	Input *CheckDNSAvailabilityInput
+}
+
+// Send marshals and sends the CheckDNSAvailability API request.
+func (r CheckDNSAvailabilityRequest) Send() (*CheckDNSAvailabilityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CheckDNSAvailabilityOutput), nil
+}
+
+// CheckDNSAvailabilityRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CheckDNSAvailability for more information on using the CheckDNSAvailability
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Checks if the specified CNAME is available.
 //
 //    // Example sending a request using the CheckDNSAvailabilityRequest method.
-//    req, resp := client.CheckDNSAvailabilityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CheckDNSAvailabilityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailability
-func (c *ElasticBeanstalk) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) (req *aws.Request, output *CheckDNSAvailabilityOutput) {
+func (c *ElasticBeanstalk) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) CheckDNSAvailabilityRequest {
 	op := &aws.Operation{
 		Name:       opCheckDNSAvailability,
 		HTTPMethod: "POST",
@@ -216,70 +151,48 @@ func (c *ElasticBeanstalk) CheckDNSAvailabilityRequest(input *CheckDNSAvailabili
 		input = &CheckDNSAvailabilityInput{}
 	}
 
-	output = &CheckDNSAvailabilityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CheckDNSAvailability API operation for AWS Elastic Beanstalk.
-//
-// Checks if the specified CNAME is available.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation CheckDNSAvailability for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailability
-func (c *ElasticBeanstalk) CheckDNSAvailability(input *CheckDNSAvailabilityInput) (*CheckDNSAvailabilityOutput, error) {
-	req, out := c.CheckDNSAvailabilityRequest(input)
-	return out, req.Send()
-}
-
-// CheckDNSAvailabilityWithContext is the same as CheckDNSAvailability with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CheckDNSAvailability for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) CheckDNSAvailabilityWithContext(ctx aws.Context, input *CheckDNSAvailabilityInput, opts ...aws.Option) (*CheckDNSAvailabilityOutput, error) {
-	req, out := c.CheckDNSAvailabilityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CheckDNSAvailabilityOutput{})
+	return CheckDNSAvailabilityRequest{Request: req, Input: input}
 }
 
 const opComposeEnvironments = "ComposeEnvironments"
 
-// ComposeEnvironmentsRequest generates a "aws.Request" representing the
-// client's request for the ComposeEnvironments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ComposeEnvironmentsRequest is a API request type for the ComposeEnvironments API operation.
+type ComposeEnvironmentsRequest struct {
+	*aws.Request
+	Input *ComposeEnvironmentsInput
+}
+
+// Send marshals and sends the ComposeEnvironments API request.
+func (r ComposeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEnvironmentsOutput), nil
+}
+
+// ComposeEnvironmentsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ComposeEnvironments for more information on using the ComposeEnvironments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create or update a group of environments that each run a separate component
+// of a single application. Takes a list of version labels that specify application
+// source bundles for each of the environments to create or update. The name
+// of each environment and other required information must be included in the
+// source bundles in an environment manifest named env.yaml. See Compose Environments
+// (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html)
+// for details.
 //
 //    // Example sending a request using the ComposeEnvironmentsRequest method.
-//    req, resp := client.ComposeEnvironmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ComposeEnvironmentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironments
-func (c *ElasticBeanstalk) ComposeEnvironmentsRequest(input *ComposeEnvironmentsInput) (req *aws.Request, output *EnvironmentDescriptionsMessage) {
+func (c *ElasticBeanstalk) ComposeEnvironmentsRequest(input *ComposeEnvironmentsInput) ComposeEnvironmentsRequest {
 	op := &aws.Operation{
 		Name:       opComposeEnvironments,
 		HTTPMethod: "POST",
@@ -290,85 +203,43 @@ func (c *ElasticBeanstalk) ComposeEnvironmentsRequest(input *ComposeEnvironments
 		input = &ComposeEnvironmentsInput{}
 	}
 
-	output = &EnvironmentDescriptionsMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ComposeEnvironments API operation for AWS Elastic Beanstalk.
-//
-// Create or update a group of environments that each run a separate component
-// of a single application. Takes a list of version labels that specify application
-// source bundles for each of the environments to create or update. The name
-// of each environment and other required information must be included in the
-// source bundles in an environment manifest named env.yaml. See Compose Environments
-// (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html)
-// for details.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation ComposeEnvironments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyEnvironmentsException "TooManyEnvironmentsException"
-//   The specified account has reached its limit of environments.
-//
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironments
-func (c *ElasticBeanstalk) ComposeEnvironments(input *ComposeEnvironmentsInput) (*EnvironmentDescriptionsMessage, error) {
-	req, out := c.ComposeEnvironmentsRequest(input)
-	return out, req.Send()
-}
-
-// ComposeEnvironmentsWithContext is the same as ComposeEnvironments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ComposeEnvironments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) ComposeEnvironmentsWithContext(ctx aws.Context, input *ComposeEnvironmentsInput, opts ...aws.Option) (*EnvironmentDescriptionsMessage, error) {
-	req, out := c.ComposeEnvironmentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEnvironmentsOutput{})
+	return ComposeEnvironmentsRequest{Request: req, Input: input}
 }
 
 const opCreateApplication = "CreateApplication"
 
-// CreateApplicationRequest generates a "aws.Request" representing the
-// client's request for the CreateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateApplicationRequest is a API request type for the CreateApplication API operation.
+type CreateApplicationRequest struct {
+	*aws.Request
+	Input *CreateApplicationInput
+}
+
+// Send marshals and sends the CreateApplication API request.
+func (r CreateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationOutput), nil
+}
+
+// CreateApplicationRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateApplication for more information on using the CreateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an application that has one configuration template named default
+// and no application versions.
 //
 //    // Example sending a request using the CreateApplicationRequest method.
-//    req, resp := client.CreateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplication
-func (c *ElasticBeanstalk) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *ApplicationDescriptionMessage) {
+func (c *ElasticBeanstalk) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
@@ -379,92 +250,30 @@ func (c *ElasticBeanstalk) CreateApplicationRequest(input *CreateApplicationInpu
 		input = &CreateApplicationInput{}
 	}
 
-	output = &ApplicationDescriptionMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateApplication API operation for AWS Elastic Beanstalk.
-//
-// Creates an application that has one configuration template named default
-// and no application versions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation CreateApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyApplicationsException "TooManyApplicationsException"
-//   The specified account has reached its limit of applications.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplication
-func (c *ElasticBeanstalk) CreateApplication(input *CreateApplicationInput) (*ApplicationDescriptionMessage, error) {
-	req, out := c.CreateApplicationRequest(input)
-	return out, req.Send()
-}
-
-// CreateApplicationWithContext is the same as CreateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*ApplicationDescriptionMessage, error) {
-	req, out := c.CreateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	return CreateApplicationRequest{Request: req, Input: input}
 }
 
 const opCreateApplicationVersion = "CreateApplicationVersion"
 
-// CreateApplicationVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateApplicationVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateApplicationVersion for more information on using the CreateApplicationVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateApplicationVersionRequest method.
-//    req, resp := client.CreateApplicationVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersion
-func (c *ElasticBeanstalk) CreateApplicationVersionRequest(input *CreateApplicationVersionInput) (req *aws.Request, output *ApplicationVersionDescriptionMessage) {
-	op := &aws.Operation{
-		Name:       opCreateApplicationVersion,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateApplicationVersionInput{}
-	}
-
-	output = &ApplicationVersionDescriptionMessage{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateApplicationVersionRequest is a API request type for the CreateApplicationVersion API operation.
+type CreateApplicationVersionRequest struct {
+	*aws.Request
+	Input *CreateApplicationVersionInput
 }
 
-// CreateApplicationVersion API operation for AWS Elastic Beanstalk.
+// Send marshals and sends the CreateApplicationVersion API request.
+func (r CreateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationVersionOutput), nil
+}
+
+// CreateApplicationVersionRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
 // Creates an application version for the specified application. You can create
 // an application version from a source bundle in Amazon S3, a commit in AWS
@@ -484,102 +293,49 @@ func (c *ElasticBeanstalk) CreateApplicationVersionRequest(input *CreateApplicat
 // the Amazon S3 location, you receive an exception when you attempt to launch
 // an environment from the application version.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation CreateApplicationVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyApplicationsException "TooManyApplicationsException"
-//   The specified account has reached its limit of applications.
-//
-//   * ErrCodeTooManyApplicationVersionsException "TooManyApplicationVersionsException"
-//   The specified account has reached its limit of application versions.
-//
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeS3LocationNotInServiceRegionException "S3LocationNotInServiceRegionException"
-//   The specified S3 bucket does not belong to the S3 region in which the service
-//   is running. The following regions are supported:
-//
-//      * IAD/us-east-1
-//
-//      * PDX/us-west-2
-//
-//      * DUB/eu-west-1
-//
-//   * ErrCodeCodeBuildNotInServiceRegionException "CodeBuildNotInServiceRegionException"
-//   AWS CodeBuild is not available in the specified region.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersion
-func (c *ElasticBeanstalk) CreateApplicationVersion(input *CreateApplicationVersionInput) (*ApplicationVersionDescriptionMessage, error) {
-	req, out := c.CreateApplicationVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreateApplicationVersionWithContext is the same as CreateApplicationVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateApplicationVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateApplicationVersionWithContext(ctx aws.Context, input *CreateApplicationVersionInput, opts ...aws.Option) (*ApplicationVersionDescriptionMessage, error) {
-	req, out := c.CreateApplicationVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateConfigurationTemplate = "CreateConfigurationTemplate"
-
-// CreateConfigurationTemplateRequest generates a "aws.Request" representing the
-// client's request for the CreateConfigurationTemplate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateConfigurationTemplate for more information on using the CreateConfigurationTemplate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateConfigurationTemplateRequest method.
-//    req, resp := client.CreateConfigurationTemplateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateApplicationVersionRequest method.
+//    req := client.CreateApplicationVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplate
-func (c *ElasticBeanstalk) CreateConfigurationTemplateRequest(input *CreateConfigurationTemplateInput) (req *aws.Request, output *ConfigurationSettingsDescription) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersion
+func (c *ElasticBeanstalk) CreateApplicationVersionRequest(input *CreateApplicationVersionInput) CreateApplicationVersionRequest {
 	op := &aws.Operation{
-		Name:       opCreateConfigurationTemplate,
+		Name:       opCreateApplicationVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateConfigurationTemplateInput{}
+		input = &CreateApplicationVersionInput{}
 	}
 
-	output = &ConfigurationSettingsDescription{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateApplicationVersionOutput{})
+	return CreateApplicationVersionRequest{Request: req, Input: input}
 }
 
-// CreateConfigurationTemplate API operation for AWS Elastic Beanstalk.
+const opCreateConfigurationTemplate = "CreateConfigurationTemplate"
+
+// CreateConfigurationTemplateRequest is a API request type for the CreateConfigurationTemplate API operation.
+type CreateConfigurationTemplateRequest struct {
+	*aws.Request
+	Input *CreateConfigurationTemplateInput
+}
+
+// Send marshals and sends the CreateConfigurationTemplate API request.
+func (r CreateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateConfigurationTemplateOutput), nil
+}
+
+// CreateConfigurationTemplateRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
 // Creates a configuration template. Templates are associated with a specific
 // application and are used to deploy different versions of the application
@@ -593,73 +349,62 @@ func (c *ElasticBeanstalk) CreateConfigurationTemplateRequest(input *CreateConfi
 //
 //    * ListAvailableSolutionStacks
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation CreateConfigurationTemplate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeTooManyBucketsException "TooManyBucketsException"
-//   The specified account has reached its limit of Amazon S3 buckets.
-//
-//   * ErrCodeTooManyConfigurationTemplatesException "TooManyConfigurationTemplatesException"
-//   The specified account has reached its limit of configuration templates.
+//    // Example sending a request using the CreateConfigurationTemplateRequest method.
+//    req := client.CreateConfigurationTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplate
-func (c *ElasticBeanstalk) CreateConfigurationTemplate(input *CreateConfigurationTemplateInput) (*ConfigurationSettingsDescription, error) {
-	req, out := c.CreateConfigurationTemplateRequest(input)
-	return out, req.Send()
-}
+func (c *ElasticBeanstalk) CreateConfigurationTemplateRequest(input *CreateConfigurationTemplateInput) CreateConfigurationTemplateRequest {
+	op := &aws.Operation{
+		Name:       opCreateConfigurationTemplate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateConfigurationTemplateWithContext is the same as CreateConfigurationTemplate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateConfigurationTemplate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateConfigurationTemplateWithContext(ctx aws.Context, input *CreateConfigurationTemplateInput, opts ...aws.Option) (*ConfigurationSettingsDescription, error) {
-	req, out := c.CreateConfigurationTemplateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateConfigurationTemplateInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateConfigurationTemplateOutput{})
+	return CreateConfigurationTemplateRequest{Request: req, Input: input}
 }
 
 const opCreateEnvironment = "CreateEnvironment"
 
-// CreateEnvironmentRequest generates a "aws.Request" representing the
-// client's request for the CreateEnvironment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateEnvironmentRequest is a API request type for the CreateEnvironment API operation.
+type CreateEnvironmentRequest struct {
+	*aws.Request
+	Input *CreateEnvironmentInput
+}
+
+// Send marshals and sends the CreateEnvironment API request.
+func (r CreateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEnvironmentOutput), nil
+}
+
+// CreateEnvironmentRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateEnvironment for more information on using the CreateEnvironment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Launches an environment for the specified application using the specified
+// configuration.
 //
 //    // Example sending a request using the CreateEnvironmentRequest method.
-//    req, resp := client.CreateEnvironmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateEnvironmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironment
-func (c *ElasticBeanstalk) CreateEnvironmentRequest(input *CreateEnvironmentInput) (req *aws.Request, output *EnvironmentDescription) {
+func (c *ElasticBeanstalk) CreateEnvironmentRequest(input *CreateEnvironmentInput) CreateEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opCreateEnvironment,
 		HTTPMethod: "POST",
@@ -670,80 +415,42 @@ func (c *ElasticBeanstalk) CreateEnvironmentRequest(input *CreateEnvironmentInpu
 		input = &CreateEnvironmentInput{}
 	}
 
-	output = &EnvironmentDescription{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateEnvironment API operation for AWS Elastic Beanstalk.
-//
-// Launches an environment for the specified application using the specified
-// configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation CreateEnvironment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyEnvironmentsException "TooManyEnvironmentsException"
-//   The specified account has reached its limit of environments.
-//
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironment
-func (c *ElasticBeanstalk) CreateEnvironment(input *CreateEnvironmentInput) (*EnvironmentDescription, error) {
-	req, out := c.CreateEnvironmentRequest(input)
-	return out, req.Send()
-}
-
-// CreateEnvironmentWithContext is the same as CreateEnvironment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateEnvironment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateEnvironmentWithContext(ctx aws.Context, input *CreateEnvironmentInput, opts ...aws.Option) (*EnvironmentDescription, error) {
-	req, out := c.CreateEnvironmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+	return CreateEnvironmentRequest{Request: req, Input: input}
 }
 
 const opCreatePlatformVersion = "CreatePlatformVersion"
 
-// CreatePlatformVersionRequest generates a "aws.Request" representing the
-// client's request for the CreatePlatformVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePlatformVersionRequest is a API request type for the CreatePlatformVersion API operation.
+type CreatePlatformVersionRequest struct {
+	*aws.Request
+	Input *CreatePlatformVersionInput
+}
+
+// Send marshals and sends the CreatePlatformVersion API request.
+func (r CreatePlatformVersionRequest) Send() (*CreatePlatformVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePlatformVersionOutput), nil
+}
+
+// CreatePlatformVersionRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePlatformVersion for more information on using the CreatePlatformVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new version of your custom platform.
 //
 //    // Example sending a request using the CreatePlatformVersionRequest method.
-//    req, resp := client.CreatePlatformVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePlatformVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersion
-func (c *ElasticBeanstalk) CreatePlatformVersionRequest(input *CreatePlatformVersionInput) (req *aws.Request, output *CreatePlatformVersionOutput) {
+func (c *ElasticBeanstalk) CreatePlatformVersionRequest(input *CreatePlatformVersionInput) CreatePlatformVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreatePlatformVersion,
 		HTTPMethod: "POST",
@@ -754,83 +461,44 @@ func (c *ElasticBeanstalk) CreatePlatformVersionRequest(input *CreatePlatformVer
 		input = &CreatePlatformVersionInput{}
 	}
 
-	output = &CreatePlatformVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePlatformVersion API operation for AWS Elastic Beanstalk.
-//
-// Create a new version of your custom platform.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation CreatePlatformVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-//   * ErrCodeTooManyPlatformsException "TooManyPlatformsException"
-//   You have exceeded the maximum number of allowed platforms associated with
-//   the account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersion
-func (c *ElasticBeanstalk) CreatePlatformVersion(input *CreatePlatformVersionInput) (*CreatePlatformVersionOutput, error) {
-	req, out := c.CreatePlatformVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreatePlatformVersionWithContext is the same as CreatePlatformVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePlatformVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) CreatePlatformVersionWithContext(ctx aws.Context, input *CreatePlatformVersionInput, opts ...aws.Option) (*CreatePlatformVersionOutput, error) {
-	req, out := c.CreatePlatformVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePlatformVersionOutput{})
+	return CreatePlatformVersionRequest{Request: req, Input: input}
 }
 
 const opCreateStorageLocation = "CreateStorageLocation"
 
-// CreateStorageLocationRequest generates a "aws.Request" representing the
-// client's request for the CreateStorageLocation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStorageLocationRequest is a API request type for the CreateStorageLocation API operation.
+type CreateStorageLocationRequest struct {
+	*aws.Request
+	Input *CreateStorageLocationInput
+}
+
+// Send marshals and sends the CreateStorageLocation API request.
+func (r CreateStorageLocationRequest) Send() (*CreateStorageLocationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStorageLocationOutput), nil
+}
+
+// CreateStorageLocationRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates the Amazon S3 storage location for the account.
 //
-// See CreateStorageLocation for more information on using the CreateStorageLocation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This location is used to store user log files.
 //
 //    // Example sending a request using the CreateStorageLocationRequest method.
-//    req, resp := client.CreateStorageLocationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStorageLocationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateStorageLocation
-func (c *ElasticBeanstalk) CreateStorageLocationRequest(input *CreateStorageLocationInput) (req *aws.Request, output *CreateStorageLocationOutput) {
+func (c *ElasticBeanstalk) CreateStorageLocationRequest(input *CreateStorageLocationInput) CreateStorageLocationRequest {
 	op := &aws.Operation{
 		Name:       opCreateStorageLocation,
 		HTTPMethod: "POST",
@@ -841,84 +509,46 @@ func (c *ElasticBeanstalk) CreateStorageLocationRequest(input *CreateStorageLoca
 		input = &CreateStorageLocationInput{}
 	}
 
-	output = &CreateStorageLocationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStorageLocation API operation for AWS Elastic Beanstalk.
-//
-// Creates the Amazon S3 storage location for the account.
-//
-// This location is used to store user log files.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation CreateStorageLocation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyBucketsException "TooManyBucketsException"
-//   The specified account has reached its limit of Amazon S3 buckets.
-//
-//   * ErrCodeS3SubscriptionRequiredException "S3SubscriptionRequiredException"
-//   The specified account does not have a subscription to Amazon S3.
-//
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateStorageLocation
-func (c *ElasticBeanstalk) CreateStorageLocation(input *CreateStorageLocationInput) (*CreateStorageLocationOutput, error) {
-	req, out := c.CreateStorageLocationRequest(input)
-	return out, req.Send()
-}
-
-// CreateStorageLocationWithContext is the same as CreateStorageLocation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStorageLocation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateStorageLocationWithContext(ctx aws.Context, input *CreateStorageLocationInput, opts ...aws.Option) (*CreateStorageLocationOutput, error) {
-	req, out := c.CreateStorageLocationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStorageLocationOutput{})
+	return CreateStorageLocationRequest{Request: req, Input: input}
 }
 
 const opDeleteApplication = "DeleteApplication"
 
-// DeleteApplicationRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationRequest is a API request type for the DeleteApplication API operation.
+type DeleteApplicationRequest struct {
+	*aws.Request
+	Input *DeleteApplicationInput
+}
+
+// Send marshals and sends the DeleteApplication API request.
+func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationOutput), nil
+}
+
+// DeleteApplicationRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified application along with all associated versions and
+// configurations. The application versions will not be deleted from your Amazon
+// S3 bucket.
 //
-// See DeleteApplication for more information on using the DeleteApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot delete an application that has a running environment.
 //
 //    // Example sending a request using the DeleteApplicationRequest method.
-//    req, resp := client.DeleteApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplication
-func (c *ElasticBeanstalk) DeleteApplicationRequest(input *DeleteApplicationInput) (req *aws.Request, output *DeleteApplicationOutput) {
+func (c *ElasticBeanstalk) DeleteApplicationRequest(input *DeleteApplicationInput) DeleteApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplication,
 		HTTPMethod: "POST",
@@ -929,82 +559,47 @@ func (c *ElasticBeanstalk) DeleteApplicationRequest(input *DeleteApplicationInpu
 		input = &DeleteApplicationInput{}
 	}
 
-	output = &DeleteApplicationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteApplication API operation for AWS Elastic Beanstalk.
-//
-// Deletes the specified application along with all associated versions and
-// configurations. The application versions will not be deleted from your Amazon
-// S3 bucket.
-//
-// You cannot delete an application that has a running environment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DeleteApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationInProgressException "OperationInProgressFailure"
-//   Unable to perform the specified operation because another operation that
-//   effects an element in this activity is already in progress.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplication
-func (c *ElasticBeanstalk) DeleteApplication(input *DeleteApplicationInput) (*DeleteApplicationOutput, error) {
-	req, out := c.DeleteApplicationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationWithContext is the same as DeleteApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...aws.Option) (*DeleteApplicationOutput, error) {
-	req, out := c.DeleteApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteApplicationRequest{Request: req, Input: input}
 }
 
 const opDeleteApplicationVersion = "DeleteApplicationVersion"
 
-// DeleteApplicationVersionRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplicationVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationVersionRequest is a API request type for the DeleteApplicationVersion API operation.
+type DeleteApplicationVersionRequest struct {
+	*aws.Request
+	Input *DeleteApplicationVersionInput
+}
+
+// Send marshals and sends the DeleteApplicationVersion API request.
+func (r DeleteApplicationVersionRequest) Send() (*DeleteApplicationVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationVersionOutput), nil
+}
+
+// DeleteApplicationVersionRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified version from the specified application.
 //
-// See DeleteApplicationVersion for more information on using the DeleteApplicationVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot delete an application version that is associated with a running
+// environment.
 //
 //    // Example sending a request using the DeleteApplicationVersionRequest method.
-//    req, resp := client.DeleteApplicationVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersion
-func (c *ElasticBeanstalk) DeleteApplicationVersionRequest(input *DeleteApplicationVersionInput) (req *aws.Request, output *DeleteApplicationVersionOutput) {
+func (c *ElasticBeanstalk) DeleteApplicationVersionRequest(input *DeleteApplicationVersionInput) DeleteApplicationVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationVersion,
 		HTTPMethod: "POST",
@@ -1015,99 +610,48 @@ func (c *ElasticBeanstalk) DeleteApplicationVersionRequest(input *DeleteApplicat
 		input = &DeleteApplicationVersionInput{}
 	}
 
-	output = &DeleteApplicationVersionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteApplicationVersionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteApplicationVersion API operation for AWS Elastic Beanstalk.
-//
-// Deletes the specified version from the specified application.
-//
-// You cannot delete an application version that is associated with a running
-// environment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DeleteApplicationVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSourceBundleDeletionException "SourceBundleDeletionFailure"
-//   Unable to delete the Amazon S3 source bundle associated with the application
-//   version. The application version was deleted successfully.
-//
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeOperationInProgressException "OperationInProgressFailure"
-//   Unable to perform the specified operation because another operation that
-//   effects an element in this activity is already in progress.
-//
-//   * ErrCodeS3LocationNotInServiceRegionException "S3LocationNotInServiceRegionException"
-//   The specified S3 bucket does not belong to the S3 region in which the service
-//   is running. The following regions are supported:
-//
-//      * IAD/us-east-1
-//
-//      * PDX/us-west-2
-//
-//      * DUB/eu-west-1
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersion
-func (c *ElasticBeanstalk) DeleteApplicationVersion(input *DeleteApplicationVersionInput) (*DeleteApplicationVersionOutput, error) {
-	req, out := c.DeleteApplicationVersionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationVersionWithContext is the same as DeleteApplicationVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplicationVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteApplicationVersionWithContext(ctx aws.Context, input *DeleteApplicationVersionInput, opts ...aws.Option) (*DeleteApplicationVersionOutput, error) {
-	req, out := c.DeleteApplicationVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteApplicationVersionRequest{Request: req, Input: input}
 }
 
 const opDeleteConfigurationTemplate = "DeleteConfigurationTemplate"
 
-// DeleteConfigurationTemplateRequest generates a "aws.Request" representing the
-// client's request for the DeleteConfigurationTemplate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteConfigurationTemplateRequest is a API request type for the DeleteConfigurationTemplate API operation.
+type DeleteConfigurationTemplateRequest struct {
+	*aws.Request
+	Input *DeleteConfigurationTemplateInput
+}
+
+// Send marshals and sends the DeleteConfigurationTemplate API request.
+func (r DeleteConfigurationTemplateRequest) Send() (*DeleteConfigurationTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteConfigurationTemplateOutput), nil
+}
+
+// DeleteConfigurationTemplateRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified configuration template.
 //
-// See DeleteConfigurationTemplate for more information on using the DeleteConfigurationTemplate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you launch an environment using a configuration template, the environment
+// gets a copy of the template. You can delete or modify the environment's copy
+// of the template without affecting the running environment.
 //
 //    // Example sending a request using the DeleteConfigurationTemplateRequest method.
-//    req, resp := client.DeleteConfigurationTemplateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteConfigurationTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplate
-func (c *ElasticBeanstalk) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTemplateInput) (req *aws.Request, output *DeleteConfigurationTemplateOutput) {
+func (c *ElasticBeanstalk) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTemplateInput) DeleteConfigurationTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationTemplate,
 		HTTPMethod: "POST",
@@ -1118,100 +662,32 @@ func (c *ElasticBeanstalk) DeleteConfigurationTemplateRequest(input *DeleteConfi
 		input = &DeleteConfigurationTemplateInput{}
 	}
 
-	output = &DeleteConfigurationTemplateOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteConfigurationTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteConfigurationTemplate API operation for AWS Elastic Beanstalk.
-//
-// Deletes the specified configuration template.
-//
-// When you launch an environment using a configuration template, the environment
-// gets a copy of the template. You can delete or modify the environment's copy
-// of the template without affecting the running environment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DeleteConfigurationTemplate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationInProgressException "OperationInProgressFailure"
-//   Unable to perform the specified operation because another operation that
-//   effects an element in this activity is already in progress.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplate
-func (c *ElasticBeanstalk) DeleteConfigurationTemplate(input *DeleteConfigurationTemplateInput) (*DeleteConfigurationTemplateOutput, error) {
-	req, out := c.DeleteConfigurationTemplateRequest(input)
-	return out, req.Send()
-}
-
-// DeleteConfigurationTemplateWithContext is the same as DeleteConfigurationTemplate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteConfigurationTemplate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteConfigurationTemplateWithContext(ctx aws.Context, input *DeleteConfigurationTemplateInput, opts ...aws.Option) (*DeleteConfigurationTemplateOutput, error) {
-	req, out := c.DeleteConfigurationTemplateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteConfigurationTemplateRequest{Request: req, Input: input}
 }
 
 const opDeleteEnvironmentConfiguration = "DeleteEnvironmentConfiguration"
 
-// DeleteEnvironmentConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteEnvironmentConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteEnvironmentConfiguration for more information on using the DeleteEnvironmentConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteEnvironmentConfigurationRequest method.
-//    req, resp := client.DeleteEnvironmentConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfiguration
-func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentConfigurationInput) (req *aws.Request, output *DeleteEnvironmentConfigurationOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteEnvironmentConfiguration,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteEnvironmentConfigurationInput{}
-	}
-
-	output = &DeleteEnvironmentConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteEnvironmentConfigurationRequest is a API request type for the DeleteEnvironmentConfiguration API operation.
+type DeleteEnvironmentConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteEnvironmentConfigurationInput
 }
 
-// DeleteEnvironmentConfiguration API operation for AWS Elastic Beanstalk.
+// Send marshals and sends the DeleteEnvironmentConfiguration API request.
+func (r DeleteEnvironmentConfigurationRequest) Send() (*DeleteEnvironmentConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEnvironmentConfigurationOutput), nil
+}
+
+// DeleteEnvironmentConfigurationRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
 // Deletes the draft configuration associated with the running environment.
 //
@@ -1222,61 +698,63 @@ func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationRequest(input *DeleteEn
 // or has failed. The draft configuration remains in existence until it is deleted
 // with this action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
+//    // Example sending a request using the DeleteEnvironmentConfigurationRequest method.
+//    req := client.DeleteEnvironmentConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DeleteEnvironmentConfiguration for usage and error information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfiguration
-func (c *ElasticBeanstalk) DeleteEnvironmentConfiguration(input *DeleteEnvironmentConfigurationInput) (*DeleteEnvironmentConfigurationOutput, error) {
-	req, out := c.DeleteEnvironmentConfigurationRequest(input)
-	return out, req.Send()
-}
+func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentConfigurationInput) DeleteEnvironmentConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteEnvironmentConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteEnvironmentConfigurationWithContext is the same as DeleteEnvironmentConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEnvironmentConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationWithContext(ctx aws.Context, input *DeleteEnvironmentConfigurationInput, opts ...aws.Option) (*DeleteEnvironmentConfigurationOutput, error) {
-	req, out := c.DeleteEnvironmentConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteEnvironmentConfigurationInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteEnvironmentConfigurationOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteEnvironmentConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeletePlatformVersion = "DeletePlatformVersion"
 
-// DeletePlatformVersionRequest generates a "aws.Request" representing the
-// client's request for the DeletePlatformVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePlatformVersionRequest is a API request type for the DeletePlatformVersion API operation.
+type DeletePlatformVersionRequest struct {
+	*aws.Request
+	Input *DeletePlatformVersionInput
+}
+
+// Send marshals and sends the DeletePlatformVersion API request.
+func (r DeletePlatformVersionRequest) Send() (*DeletePlatformVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePlatformVersionOutput), nil
+}
+
+// DeletePlatformVersionRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePlatformVersion for more information on using the DeletePlatformVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified version of a custom platform.
 //
 //    // Example sending a request using the DeletePlatformVersionRequest method.
-//    req, resp := client.DeletePlatformVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePlatformVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersion
-func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVersionInput) (req *aws.Request, output *DeletePlatformVersionOutput) {
+func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVersionInput) DeletePlatformVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeletePlatformVersion,
 		HTTPMethod: "POST",
@@ -1287,87 +765,42 @@ func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVer
 		input = &DeletePlatformVersionInput{}
 	}
 
-	output = &DeletePlatformVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeletePlatformVersion API operation for AWS Elastic Beanstalk.
-//
-// Deletes the specified version of a custom platform.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DeletePlatformVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationInProgressException "OperationInProgressFailure"
-//   Unable to perform the specified operation because another operation that
-//   effects an element in this activity is already in progress.
-//
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-//   * ErrCodePlatformVersionStillReferencedException "PlatformVersionStillReferencedException"
-//   You cannot delete the platform version because there are still environments
-//   running on it.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersion
-func (c *ElasticBeanstalk) DeletePlatformVersion(input *DeletePlatformVersionInput) (*DeletePlatformVersionOutput, error) {
-	req, out := c.DeletePlatformVersionRequest(input)
-	return out, req.Send()
-}
-
-// DeletePlatformVersionWithContext is the same as DeletePlatformVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePlatformVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DeletePlatformVersionWithContext(ctx aws.Context, input *DeletePlatformVersionInput, opts ...aws.Option) (*DeletePlatformVersionOutput, error) {
-	req, out := c.DeletePlatformVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeletePlatformVersionOutput{})
+	return DeletePlatformVersionRequest{Request: req, Input: input}
 }
 
 const opDescribeApplicationVersions = "DescribeApplicationVersions"
 
-// DescribeApplicationVersionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeApplicationVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeApplicationVersionsRequest is a API request type for the DescribeApplicationVersions API operation.
+type DescribeApplicationVersionsRequest struct {
+	*aws.Request
+	Input *DescribeApplicationVersionsInput
+}
+
+// Send marshals and sends the DescribeApplicationVersions API request.
+func (r DescribeApplicationVersionsRequest) Send() (*DescribeApplicationVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeApplicationVersionsOutput), nil
+}
+
+// DescribeApplicationVersionsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeApplicationVersions for more information on using the DescribeApplicationVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieve a list of application versions.
 //
 //    // Example sending a request using the DescribeApplicationVersionsRequest method.
-//    req, resp := client.DescribeApplicationVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeApplicationVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersions
-func (c *ElasticBeanstalk) DescribeApplicationVersionsRequest(input *DescribeApplicationVersionsInput) (req *aws.Request, output *DescribeApplicationVersionsOutput) {
+func (c *ElasticBeanstalk) DescribeApplicationVersionsRequest(input *DescribeApplicationVersionsInput) DescribeApplicationVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApplicationVersions,
 		HTTPMethod: "POST",
@@ -1378,70 +811,42 @@ func (c *ElasticBeanstalk) DescribeApplicationVersionsRequest(input *DescribeApp
 		input = &DescribeApplicationVersionsInput{}
 	}
 
-	output = &DescribeApplicationVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeApplicationVersions API operation for AWS Elastic Beanstalk.
-//
-// Retrieve a list of application versions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeApplicationVersions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersions
-func (c *ElasticBeanstalk) DescribeApplicationVersions(input *DescribeApplicationVersionsInput) (*DescribeApplicationVersionsOutput, error) {
-	req, out := c.DescribeApplicationVersionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeApplicationVersionsWithContext is the same as DescribeApplicationVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeApplicationVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeApplicationVersionsWithContext(ctx aws.Context, input *DescribeApplicationVersionsInput, opts ...aws.Option) (*DescribeApplicationVersionsOutput, error) {
-	req, out := c.DescribeApplicationVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeApplicationVersionsOutput{})
+	return DescribeApplicationVersionsRequest{Request: req, Input: input}
 }
 
 const opDescribeApplications = "DescribeApplications"
 
-// DescribeApplicationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeApplications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeApplicationsRequest is a API request type for the DescribeApplications API operation.
+type DescribeApplicationsRequest struct {
+	*aws.Request
+	Input *DescribeApplicationsInput
+}
+
+// Send marshals and sends the DescribeApplications API request.
+func (r DescribeApplicationsRequest) Send() (*DescribeApplicationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeApplicationsOutput), nil
+}
+
+// DescribeApplicationsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeApplications for more information on using the DescribeApplications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the descriptions of existing applications.
 //
 //    // Example sending a request using the DescribeApplicationsRequest method.
-//    req, resp := client.DescribeApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeApplicationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplications
-func (c *ElasticBeanstalk) DescribeApplicationsRequest(input *DescribeApplicationsInput) (req *aws.Request, output *DescribeApplicationsOutput) {
+func (c *ElasticBeanstalk) DescribeApplicationsRequest(input *DescribeApplicationsInput) DescribeApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApplications,
 		HTTPMethod: "POST",
@@ -1452,70 +857,46 @@ func (c *ElasticBeanstalk) DescribeApplicationsRequest(input *DescribeApplicatio
 		input = &DescribeApplicationsInput{}
 	}
 
-	output = &DescribeApplicationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeApplications API operation for AWS Elastic Beanstalk.
-//
-// Returns the descriptions of existing applications.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeApplications for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplications
-func (c *ElasticBeanstalk) DescribeApplications(input *DescribeApplicationsInput) (*DescribeApplicationsOutput, error) {
-	req, out := c.DescribeApplicationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeApplicationsWithContext is the same as DescribeApplications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeApplications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeApplicationsWithContext(ctx aws.Context, input *DescribeApplicationsInput, opts ...aws.Option) (*DescribeApplicationsOutput, error) {
-	req, out := c.DescribeApplicationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeApplicationsOutput{})
+	return DescribeApplicationsRequest{Request: req, Input: input}
 }
 
 const opDescribeConfigurationOptions = "DescribeConfigurationOptions"
 
-// DescribeConfigurationOptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeConfigurationOptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConfigurationOptionsRequest is a API request type for the DescribeConfigurationOptions API operation.
+type DescribeConfigurationOptionsRequest struct {
+	*aws.Request
+	Input *DescribeConfigurationOptionsInput
+}
+
+// Send marshals and sends the DescribeConfigurationOptions API request.
+func (r DescribeConfigurationOptionsRequest) Send() (*DescribeConfigurationOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConfigurationOptionsOutput), nil
+}
+
+// DescribeConfigurationOptionsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeConfigurationOptions for more information on using the DescribeConfigurationOptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the configuration options that are used in a particular configuration
+// template or environment, or that a specified solution stack defines. The
+// description includes the values the options, their default values, and an
+// indication of the required action on a running environment if an option value
+// is changed.
 //
 //    // Example sending a request using the DescribeConfigurationOptionsRequest method.
-//    req, resp := client.DescribeConfigurationOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConfigurationOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationOptions
-func (c *ElasticBeanstalk) DescribeConfigurationOptionsRequest(input *DescribeConfigurationOptionsInput) (req *aws.Request, output *DescribeConfigurationOptionsOutput) {
+func (c *ElasticBeanstalk) DescribeConfigurationOptionsRequest(input *DescribeConfigurationOptionsInput) DescribeConfigurationOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationOptions,
 		HTTPMethod: "POST",
@@ -1526,95 +907,30 @@ func (c *ElasticBeanstalk) DescribeConfigurationOptionsRequest(input *DescribeCo
 		input = &DescribeConfigurationOptionsInput{}
 	}
 
-	output = &DescribeConfigurationOptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConfigurationOptions API operation for AWS Elastic Beanstalk.
-//
-// Describes the configuration options that are used in a particular configuration
-// template or environment, or that a specified solution stack defines. The
-// description includes the values the options, their default values, and an
-// indication of the required action on a running environment if an option value
-// is changed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeConfigurationOptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyBucketsException "TooManyBucketsException"
-//   The specified account has reached its limit of Amazon S3 buckets.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationOptions
-func (c *ElasticBeanstalk) DescribeConfigurationOptions(input *DescribeConfigurationOptionsInput) (*DescribeConfigurationOptionsOutput, error) {
-	req, out := c.DescribeConfigurationOptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConfigurationOptionsWithContext is the same as DescribeConfigurationOptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConfigurationOptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeConfigurationOptionsWithContext(ctx aws.Context, input *DescribeConfigurationOptionsInput, opts ...aws.Option) (*DescribeConfigurationOptionsOutput, error) {
-	req, out := c.DescribeConfigurationOptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConfigurationOptionsOutput{})
+	return DescribeConfigurationOptionsRequest{Request: req, Input: input}
 }
 
 const opDescribeConfigurationSettings = "DescribeConfigurationSettings"
 
-// DescribeConfigurationSettingsRequest generates a "aws.Request" representing the
-// client's request for the DescribeConfigurationSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeConfigurationSettings for more information on using the DescribeConfigurationSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeConfigurationSettingsRequest method.
-//    req, resp := client.DescribeConfigurationSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettings
-func (c *ElasticBeanstalk) DescribeConfigurationSettingsRequest(input *DescribeConfigurationSettingsInput) (req *aws.Request, output *DescribeConfigurationSettingsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeConfigurationSettings,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeConfigurationSettingsInput{}
-	}
-
-	output = &DescribeConfigurationSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeConfigurationSettingsRequest is a API request type for the DescribeConfigurationSettings API operation.
+type DescribeConfigurationSettingsRequest struct {
+	*aws.Request
+	Input *DescribeConfigurationSettingsInput
 }
 
-// DescribeConfigurationSettings API operation for AWS Elastic Beanstalk.
+// Send marshals and sends the DescribeConfigurationSettings API request.
+func (r DescribeConfigurationSettingsRequest) Send() (*DescribeConfigurationSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConfigurationSettingsOutput), nil
+}
+
+// DescribeConfigurationSettingsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
 // Returns a description of the settings for the specified configuration set,
 // that is, either a configuration template or the configuration set associated
@@ -1630,66 +946,63 @@ func (c *ElasticBeanstalk) DescribeConfigurationSettingsRequest(input *DescribeC
 //
 //    * DeleteEnvironmentConfiguration
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeConfigurationSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyBucketsException "TooManyBucketsException"
-//   The specified account has reached its limit of Amazon S3 buckets.
+//    // Example sending a request using the DescribeConfigurationSettingsRequest method.
+//    req := client.DescribeConfigurationSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettings
-func (c *ElasticBeanstalk) DescribeConfigurationSettings(input *DescribeConfigurationSettingsInput) (*DescribeConfigurationSettingsOutput, error) {
-	req, out := c.DescribeConfigurationSettingsRequest(input)
-	return out, req.Send()
-}
+func (c *ElasticBeanstalk) DescribeConfigurationSettingsRequest(input *DescribeConfigurationSettingsInput) DescribeConfigurationSettingsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeConfigurationSettings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeConfigurationSettingsWithContext is the same as DescribeConfigurationSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConfigurationSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeConfigurationSettingsWithContext(ctx aws.Context, input *DescribeConfigurationSettingsInput, opts ...aws.Option) (*DescribeConfigurationSettingsOutput, error) {
-	req, out := c.DescribeConfigurationSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeConfigurationSettingsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeConfigurationSettingsOutput{})
+	return DescribeConfigurationSettingsRequest{Request: req, Input: input}
 }
 
 const opDescribeEnvironmentHealth = "DescribeEnvironmentHealth"
 
-// DescribeEnvironmentHealthRequest generates a "aws.Request" representing the
-// client's request for the DescribeEnvironmentHealth operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEnvironmentHealthRequest is a API request type for the DescribeEnvironmentHealth API operation.
+type DescribeEnvironmentHealthRequest struct {
+	*aws.Request
+	Input *DescribeEnvironmentHealthInput
+}
+
+// Send marshals and sends the DescribeEnvironmentHealth API request.
+func (r DescribeEnvironmentHealthRequest) Send() (*DescribeEnvironmentHealthOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEnvironmentHealthOutput), nil
+}
+
+// DescribeEnvironmentHealthRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEnvironmentHealth for more information on using the DescribeEnvironmentHealth
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the overall health of the specified environment.
+// The DescribeEnvironmentHealth operation is only available with AWS Elastic
+// Beanstalk Enhanced Health.
 //
 //    // Example sending a request using the DescribeEnvironmentHealthRequest method.
-//    req, resp := client.DescribeEnvironmentHealthRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEnvironmentHealthRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealth
-func (c *ElasticBeanstalk) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHealthInput) (req *aws.Request, output *DescribeEnvironmentHealthOutput) {
+func (c *ElasticBeanstalk) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHealthInput) DescribeEnvironmentHealthRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentHealth,
 		HTTPMethod: "POST",
@@ -1700,81 +1013,42 @@ func (c *ElasticBeanstalk) DescribeEnvironmentHealthRequest(input *DescribeEnvir
 		input = &DescribeEnvironmentHealthInput{}
 	}
 
-	output = &DescribeEnvironmentHealthOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEnvironmentHealth API operation for AWS Elastic Beanstalk.
-//
-// Returns information about the overall health of the specified environment.
-// The DescribeEnvironmentHealth operation is only available with AWS Elastic
-// Beanstalk Enhanced Health.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeEnvironmentHealth for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more input parameters is not valid. Please correct the input parameters
-//   and try the operation again.
-//
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealth
-func (c *ElasticBeanstalk) DescribeEnvironmentHealth(input *DescribeEnvironmentHealthInput) (*DescribeEnvironmentHealthOutput, error) {
-	req, out := c.DescribeEnvironmentHealthRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEnvironmentHealthWithContext is the same as DescribeEnvironmentHealth with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEnvironmentHealth for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentHealthWithContext(ctx aws.Context, input *DescribeEnvironmentHealthInput, opts ...aws.Option) (*DescribeEnvironmentHealthOutput, error) {
-	req, out := c.DescribeEnvironmentHealthRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEnvironmentHealthOutput{})
+	return DescribeEnvironmentHealthRequest{Request: req, Input: input}
 }
 
 const opDescribeEnvironmentManagedActionHistory = "DescribeEnvironmentManagedActionHistory"
 
-// DescribeEnvironmentManagedActionHistoryRequest generates a "aws.Request" representing the
-// client's request for the DescribeEnvironmentManagedActionHistory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEnvironmentManagedActionHistoryRequest is a API request type for the DescribeEnvironmentManagedActionHistory API operation.
+type DescribeEnvironmentManagedActionHistoryRequest struct {
+	*aws.Request
+	Input *DescribeEnvironmentManagedActionHistoryInput
+}
+
+// Send marshals and sends the DescribeEnvironmentManagedActionHistory API request.
+func (r DescribeEnvironmentManagedActionHistoryRequest) Send() (*DescribeEnvironmentManagedActionHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEnvironmentManagedActionHistoryOutput), nil
+}
+
+// DescribeEnvironmentManagedActionHistoryRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEnvironmentManagedActionHistory for more information on using the DescribeEnvironmentManagedActionHistory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists an environment's completed and failed managed actions.
 //
 //    // Example sending a request using the DescribeEnvironmentManagedActionHistoryRequest method.
-//    req, resp := client.DescribeEnvironmentManagedActionHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEnvironmentManagedActionHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistory
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeEnvironmentManagedActionHistoryInput) (req *aws.Request, output *DescribeEnvironmentManagedActionHistoryOutput) {
+func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeEnvironmentManagedActionHistoryInput) DescribeEnvironmentManagedActionHistoryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentManagedActionHistory,
 		HTTPMethod: "POST",
@@ -1785,75 +1059,42 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryRequest(input 
 		input = &DescribeEnvironmentManagedActionHistoryInput{}
 	}
 
-	output = &DescribeEnvironmentManagedActionHistoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEnvironmentManagedActionHistory API operation for AWS Elastic Beanstalk.
-//
-// Lists an environment's completed and failed managed actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeEnvironmentManagedActionHistory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistory
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistory(input *DescribeEnvironmentManagedActionHistoryInput) (*DescribeEnvironmentManagedActionHistoryOutput, error) {
-	req, out := c.DescribeEnvironmentManagedActionHistoryRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEnvironmentManagedActionHistoryWithContext is the same as DescribeEnvironmentManagedActionHistory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEnvironmentManagedActionHistory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryWithContext(ctx aws.Context, input *DescribeEnvironmentManagedActionHistoryInput, opts ...aws.Option) (*DescribeEnvironmentManagedActionHistoryOutput, error) {
-	req, out := c.DescribeEnvironmentManagedActionHistoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionHistoryOutput{})
+	return DescribeEnvironmentManagedActionHistoryRequest{Request: req, Input: input}
 }
 
 const opDescribeEnvironmentManagedActions = "DescribeEnvironmentManagedActions"
 
-// DescribeEnvironmentManagedActionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEnvironmentManagedActions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEnvironmentManagedActionsRequest is a API request type for the DescribeEnvironmentManagedActions API operation.
+type DescribeEnvironmentManagedActionsRequest struct {
+	*aws.Request
+	Input *DescribeEnvironmentManagedActionsInput
+}
+
+// Send marshals and sends the DescribeEnvironmentManagedActions API request.
+func (r DescribeEnvironmentManagedActionsRequest) Send() (*DescribeEnvironmentManagedActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEnvironmentManagedActionsOutput), nil
+}
+
+// DescribeEnvironmentManagedActionsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEnvironmentManagedActions for more information on using the DescribeEnvironmentManagedActions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists an environment's upcoming and in-progress managed actions.
 //
 //    // Example sending a request using the DescribeEnvironmentManagedActionsRequest method.
-//    req, resp := client.DescribeEnvironmentManagedActionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEnvironmentManagedActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActions
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsRequest(input *DescribeEnvironmentManagedActionsInput) (req *aws.Request, output *DescribeEnvironmentManagedActionsOutput) {
+func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsRequest(input *DescribeEnvironmentManagedActionsInput) DescribeEnvironmentManagedActionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentManagedActions,
 		HTTPMethod: "POST",
@@ -1864,75 +1105,42 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsRequest(input *Descr
 		input = &DescribeEnvironmentManagedActionsInput{}
 	}
 
-	output = &DescribeEnvironmentManagedActionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEnvironmentManagedActions API operation for AWS Elastic Beanstalk.
-//
-// Lists an environment's upcoming and in-progress managed actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeEnvironmentManagedActions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActions
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActions(input *DescribeEnvironmentManagedActionsInput) (*DescribeEnvironmentManagedActionsOutput, error) {
-	req, out := c.DescribeEnvironmentManagedActionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEnvironmentManagedActionsWithContext is the same as DescribeEnvironmentManagedActions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEnvironmentManagedActions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsWithContext(ctx aws.Context, input *DescribeEnvironmentManagedActionsInput, opts ...aws.Option) (*DescribeEnvironmentManagedActionsOutput, error) {
-	req, out := c.DescribeEnvironmentManagedActionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionsOutput{})
+	return DescribeEnvironmentManagedActionsRequest{Request: req, Input: input}
 }
 
 const opDescribeEnvironmentResources = "DescribeEnvironmentResources"
 
-// DescribeEnvironmentResourcesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEnvironmentResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEnvironmentResourcesRequest is a API request type for the DescribeEnvironmentResources API operation.
+type DescribeEnvironmentResourcesRequest struct {
+	*aws.Request
+	Input *DescribeEnvironmentResourcesInput
+}
+
+// Send marshals and sends the DescribeEnvironmentResources API request.
+func (r DescribeEnvironmentResourcesRequest) Send() (*DescribeEnvironmentResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEnvironmentResourcesOutput), nil
+}
+
+// DescribeEnvironmentResourcesRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEnvironmentResources for more information on using the DescribeEnvironmentResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns AWS resources for this environment.
 //
 //    // Example sending a request using the DescribeEnvironmentResourcesRequest method.
-//    req, resp := client.DescribeEnvironmentResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEnvironmentResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentResources
-func (c *ElasticBeanstalk) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentResourcesInput) (req *aws.Request, output *DescribeEnvironmentResourcesOutput) {
+func (c *ElasticBeanstalk) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentResourcesInput) DescribeEnvironmentResourcesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentResources,
 		HTTPMethod: "POST",
@@ -1943,76 +1151,42 @@ func (c *ElasticBeanstalk) DescribeEnvironmentResourcesRequest(input *DescribeEn
 		input = &DescribeEnvironmentResourcesInput{}
 	}
 
-	output = &DescribeEnvironmentResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEnvironmentResources API operation for AWS Elastic Beanstalk.
-//
-// Returns AWS resources for this environment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeEnvironmentResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentResources
-func (c *ElasticBeanstalk) DescribeEnvironmentResources(input *DescribeEnvironmentResourcesInput) (*DescribeEnvironmentResourcesOutput, error) {
-	req, out := c.DescribeEnvironmentResourcesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEnvironmentResourcesWithContext is the same as DescribeEnvironmentResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEnvironmentResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentResourcesWithContext(ctx aws.Context, input *DescribeEnvironmentResourcesInput, opts ...aws.Option) (*DescribeEnvironmentResourcesOutput, error) {
-	req, out := c.DescribeEnvironmentResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEnvironmentResourcesOutput{})
+	return DescribeEnvironmentResourcesRequest{Request: req, Input: input}
 }
 
 const opDescribeEnvironments = "DescribeEnvironments"
 
-// DescribeEnvironmentsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEnvironments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEnvironmentsRequest is a API request type for the DescribeEnvironments API operation.
+type DescribeEnvironmentsRequest struct {
+	*aws.Request
+	Input *DescribeEnvironmentsInput
+}
+
+// Send marshals and sends the DescribeEnvironments API request.
+func (r DescribeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEnvironmentsOutput), nil
+}
+
+// DescribeEnvironmentsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEnvironments for more information on using the DescribeEnvironments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns descriptions for existing environments.
 //
 //    // Example sending a request using the DescribeEnvironmentsRequest method.
-//    req, resp := client.DescribeEnvironmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEnvironmentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironments
-func (c *ElasticBeanstalk) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) (req *aws.Request, output *EnvironmentDescriptionsMessage) {
+func (c *ElasticBeanstalk) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) DescribeEnvironmentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironments,
 		HTTPMethod: "POST",
@@ -2023,70 +1197,44 @@ func (c *ElasticBeanstalk) DescribeEnvironmentsRequest(input *DescribeEnvironmen
 		input = &DescribeEnvironmentsInput{}
 	}
 
-	output = &EnvironmentDescriptionsMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEnvironments API operation for AWS Elastic Beanstalk.
-//
-// Returns descriptions for existing environments.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeEnvironments for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironments
-func (c *ElasticBeanstalk) DescribeEnvironments(input *DescribeEnvironmentsInput) (*EnvironmentDescriptionsMessage, error) {
-	req, out := c.DescribeEnvironmentsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEnvironmentsWithContext is the same as DescribeEnvironments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEnvironments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentsWithContext(ctx aws.Context, input *DescribeEnvironmentsInput, opts ...aws.Option) (*EnvironmentDescriptionsMessage, error) {
-	req, out := c.DescribeEnvironmentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEnvironmentsOutput{})
+	return DescribeEnvironmentsRequest{Request: req, Input: input}
 }
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns list of event descriptions matching criteria up to the last 6 weeks.
 //
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This action returns the most recent 1,000 events from the specified NextToken.
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEvents
-func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -2103,43 +1251,8 @@ func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) (re
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for AWS Elastic Beanstalk.
-//
-// Returns list of event descriptions matching criteria up to the last 6 weeks.
-//
-// This action returns the most recent 1,000 events from the specified NextToken.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeEvents for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEvents
-func (c *ElasticBeanstalk) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 // DescribeEventsPages iterates over the pages of a DescribeEvents operation,
@@ -2178,10 +1291,10 @@ func (c *ElasticBeanstalk) DescribeEventsPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventsRequest(inCpy)
+			req := c.DescribeEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2194,31 +1307,37 @@ func (c *ElasticBeanstalk) DescribeEventsPagesWithContext(ctx aws.Context, input
 
 const opDescribeInstancesHealth = "DescribeInstancesHealth"
 
-// DescribeInstancesHealthRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstancesHealth operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInstancesHealthRequest is a API request type for the DescribeInstancesHealth API operation.
+type DescribeInstancesHealthRequest struct {
+	*aws.Request
+	Input *DescribeInstancesHealthInput
+}
+
+// Send marshals and sends the DescribeInstancesHealth API request.
+func (r DescribeInstancesHealthRequest) Send() (*DescribeInstancesHealthOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstancesHealthOutput), nil
+}
+
+// DescribeInstancesHealthRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstancesHealth for more information on using the DescribeInstancesHealth
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrives detailed information about the health of instances in your AWS Elastic
+// Beanstalk. This operation requires enhanced health reporting (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html).
 //
 //    // Example sending a request using the DescribeInstancesHealthRequest method.
-//    req, resp := client.DescribeInstancesHealthRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInstancesHealthRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealth
-func (c *ElasticBeanstalk) DescribeInstancesHealthRequest(input *DescribeInstancesHealthInput) (req *aws.Request, output *DescribeInstancesHealthOutput) {
+func (c *ElasticBeanstalk) DescribeInstancesHealthRequest(input *DescribeInstancesHealthInput) DescribeInstancesHealthRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancesHealth,
 		HTTPMethod: "POST",
@@ -2229,80 +1348,42 @@ func (c *ElasticBeanstalk) DescribeInstancesHealthRequest(input *DescribeInstanc
 		input = &DescribeInstancesHealthInput{}
 	}
 
-	output = &DescribeInstancesHealthOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInstancesHealth API operation for AWS Elastic Beanstalk.
-//
-// Retrives detailed information about the health of instances in your AWS Elastic
-// Beanstalk. This operation requires enhanced health reporting (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribeInstancesHealth for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more input parameters is not valid. Please correct the input parameters
-//   and try the operation again.
-//
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealth
-func (c *ElasticBeanstalk) DescribeInstancesHealth(input *DescribeInstancesHealthInput) (*DescribeInstancesHealthOutput, error) {
-	req, out := c.DescribeInstancesHealthRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstancesHealthWithContext is the same as DescribeInstancesHealth with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstancesHealth for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeInstancesHealthWithContext(ctx aws.Context, input *DescribeInstancesHealthInput, opts ...aws.Option) (*DescribeInstancesHealthOutput, error) {
-	req, out := c.DescribeInstancesHealthRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInstancesHealthOutput{})
+	return DescribeInstancesHealthRequest{Request: req, Input: input}
 }
 
 const opDescribePlatformVersion = "DescribePlatformVersion"
 
-// DescribePlatformVersionRequest generates a "aws.Request" representing the
-// client's request for the DescribePlatformVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePlatformVersionRequest is a API request type for the DescribePlatformVersion API operation.
+type DescribePlatformVersionRequest struct {
+	*aws.Request
+	Input *DescribePlatformVersionInput
+}
+
+// Send marshals and sends the DescribePlatformVersion API request.
+func (r DescribePlatformVersionRequest) Send() (*DescribePlatformVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePlatformVersionOutput), nil
+}
+
+// DescribePlatformVersionRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePlatformVersion for more information on using the DescribePlatformVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the version of the platform.
 //
 //    // Example sending a request using the DescribePlatformVersionRequest method.
-//    req, resp := client.DescribePlatformVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePlatformVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersion
-func (c *ElasticBeanstalk) DescribePlatformVersionRequest(input *DescribePlatformVersionInput) (req *aws.Request, output *DescribePlatformVersionOutput) {
+func (c *ElasticBeanstalk) DescribePlatformVersionRequest(input *DescribePlatformVersionInput) DescribePlatformVersionRequest {
 	op := &aws.Operation{
 		Name:       opDescribePlatformVersion,
 		HTTPMethod: "POST",
@@ -2313,79 +1394,43 @@ func (c *ElasticBeanstalk) DescribePlatformVersionRequest(input *DescribePlatfor
 		input = &DescribePlatformVersionInput{}
 	}
 
-	output = &DescribePlatformVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePlatformVersion API operation for AWS Elastic Beanstalk.
-//
-// Describes the version of the platform.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation DescribePlatformVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersion
-func (c *ElasticBeanstalk) DescribePlatformVersion(input *DescribePlatformVersionInput) (*DescribePlatformVersionOutput, error) {
-	req, out := c.DescribePlatformVersionRequest(input)
-	return out, req.Send()
-}
-
-// DescribePlatformVersionWithContext is the same as DescribePlatformVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePlatformVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribePlatformVersionWithContext(ctx aws.Context, input *DescribePlatformVersionInput, opts ...aws.Option) (*DescribePlatformVersionOutput, error) {
-	req, out := c.DescribePlatformVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePlatformVersionOutput{})
+	return DescribePlatformVersionRequest{Request: req, Input: input}
 }
 
 const opListAvailableSolutionStacks = "ListAvailableSolutionStacks"
 
-// ListAvailableSolutionStacksRequest generates a "aws.Request" representing the
-// client's request for the ListAvailableSolutionStacks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAvailableSolutionStacksRequest is a API request type for the ListAvailableSolutionStacks API operation.
+type ListAvailableSolutionStacksRequest struct {
+	*aws.Request
+	Input *ListAvailableSolutionStacksInput
+}
+
+// Send marshals and sends the ListAvailableSolutionStacks API request.
+func (r ListAvailableSolutionStacksRequest) Send() (*ListAvailableSolutionStacksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAvailableSolutionStacksOutput), nil
+}
+
+// ListAvailableSolutionStacksRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAvailableSolutionStacks for more information on using the ListAvailableSolutionStacks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the available solution stack names, with the public version
+// first and then in reverse chronological order.
 //
 //    // Example sending a request using the ListAvailableSolutionStacksRequest method.
-//    req, resp := client.ListAvailableSolutionStacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAvailableSolutionStacksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListAvailableSolutionStacks
-func (c *ElasticBeanstalk) ListAvailableSolutionStacksRequest(input *ListAvailableSolutionStacksInput) (req *aws.Request, output *ListAvailableSolutionStacksOutput) {
+func (c *ElasticBeanstalk) ListAvailableSolutionStacksRequest(input *ListAvailableSolutionStacksInput) ListAvailableSolutionStacksRequest {
 	op := &aws.Operation{
 		Name:       opListAvailableSolutionStacks,
 		HTTPMethod: "POST",
@@ -2396,71 +1441,42 @@ func (c *ElasticBeanstalk) ListAvailableSolutionStacksRequest(input *ListAvailab
 		input = &ListAvailableSolutionStacksInput{}
 	}
 
-	output = &ListAvailableSolutionStacksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAvailableSolutionStacks API operation for AWS Elastic Beanstalk.
-//
-// Returns a list of the available solution stack names, with the public version
-// first and then in reverse chronological order.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation ListAvailableSolutionStacks for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListAvailableSolutionStacks
-func (c *ElasticBeanstalk) ListAvailableSolutionStacks(input *ListAvailableSolutionStacksInput) (*ListAvailableSolutionStacksOutput, error) {
-	req, out := c.ListAvailableSolutionStacksRequest(input)
-	return out, req.Send()
-}
-
-// ListAvailableSolutionStacksWithContext is the same as ListAvailableSolutionStacks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAvailableSolutionStacks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) ListAvailableSolutionStacksWithContext(ctx aws.Context, input *ListAvailableSolutionStacksInput, opts ...aws.Option) (*ListAvailableSolutionStacksOutput, error) {
-	req, out := c.ListAvailableSolutionStacksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAvailableSolutionStacksOutput{})
+	return ListAvailableSolutionStacksRequest{Request: req, Input: input}
 }
 
 const opListPlatformVersions = "ListPlatformVersions"
 
-// ListPlatformVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListPlatformVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPlatformVersionsRequest is a API request type for the ListPlatformVersions API operation.
+type ListPlatformVersionsRequest struct {
+	*aws.Request
+	Input *ListPlatformVersionsInput
+}
+
+// Send marshals and sends the ListPlatformVersions API request.
+func (r ListPlatformVersionsRequest) Send() (*ListPlatformVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPlatformVersionsOutput), nil
+}
+
+// ListPlatformVersionsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPlatformVersions for more information on using the ListPlatformVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the available platforms.
 //
 //    // Example sending a request using the ListPlatformVersionsRequest method.
-//    req, resp := client.ListPlatformVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPlatformVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersions
-func (c *ElasticBeanstalk) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) (req *aws.Request, output *ListPlatformVersionsOutput) {
+func (c *ElasticBeanstalk) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) ListPlatformVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListPlatformVersions,
 		HTTPMethod: "POST",
@@ -2471,79 +1487,43 @@ func (c *ElasticBeanstalk) ListPlatformVersionsRequest(input *ListPlatformVersio
 		input = &ListPlatformVersionsInput{}
 	}
 
-	output = &ListPlatformVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPlatformVersions API operation for AWS Elastic Beanstalk.
-//
-// Lists the available platforms.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation ListPlatformVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeServiceException "ServiceException"
-//   A generic service exception has occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersions
-func (c *ElasticBeanstalk) ListPlatformVersions(input *ListPlatformVersionsInput) (*ListPlatformVersionsOutput, error) {
-	req, out := c.ListPlatformVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListPlatformVersionsWithContext is the same as ListPlatformVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPlatformVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) ListPlatformVersionsWithContext(ctx aws.Context, input *ListPlatformVersionsInput, opts ...aws.Option) (*ListPlatformVersionsOutput, error) {
-	req, out := c.ListPlatformVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPlatformVersionsOutput{})
+	return ListPlatformVersionsRequest{Request: req, Input: input}
 }
 
 const opRebuildEnvironment = "RebuildEnvironment"
 
-// RebuildEnvironmentRequest generates a "aws.Request" representing the
-// client's request for the RebuildEnvironment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RebuildEnvironmentRequest is a API request type for the RebuildEnvironment API operation.
+type RebuildEnvironmentRequest struct {
+	*aws.Request
+	Input *RebuildEnvironmentInput
+}
+
+// Send marshals and sends the RebuildEnvironment API request.
+func (r RebuildEnvironmentRequest) Send() (*RebuildEnvironmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebuildEnvironmentOutput), nil
+}
+
+// RebuildEnvironmentRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RebuildEnvironment for more information on using the RebuildEnvironment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes and recreates all of the AWS resources (for example: the Auto Scaling
+// group, load balancer, etc.) for a specified environment and forces a restart.
 //
 //    // Example sending a request using the RebuildEnvironmentRequest method.
-//    req, resp := client.RebuildEnvironmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RebuildEnvironmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironment
-func (c *ElasticBeanstalk) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) (req *aws.Request, output *RebuildEnvironmentOutput) {
+func (c *ElasticBeanstalk) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) RebuildEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opRebuildEnvironment,
 		HTTPMethod: "POST",
@@ -2554,97 +1534,32 @@ func (c *ElasticBeanstalk) RebuildEnvironmentRequest(input *RebuildEnvironmentIn
 		input = &RebuildEnvironmentInput{}
 	}
 
-	output = &RebuildEnvironmentOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RebuildEnvironmentOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RebuildEnvironment API operation for AWS Elastic Beanstalk.
-//
-// Deletes and recreates all of the AWS resources (for example: the Auto Scaling
-// group, load balancer, etc.) for a specified environment and forces a restart.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation RebuildEnvironment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironment
-func (c *ElasticBeanstalk) RebuildEnvironment(input *RebuildEnvironmentInput) (*RebuildEnvironmentOutput, error) {
-	req, out := c.RebuildEnvironmentRequest(input)
-	return out, req.Send()
-}
-
-// RebuildEnvironmentWithContext is the same as RebuildEnvironment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebuildEnvironment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) RebuildEnvironmentWithContext(ctx aws.Context, input *RebuildEnvironmentInput, opts ...aws.Option) (*RebuildEnvironmentOutput, error) {
-	req, out := c.RebuildEnvironmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RebuildEnvironmentRequest{Request: req, Input: input}
 }
 
 const opRequestEnvironmentInfo = "RequestEnvironmentInfo"
 
-// RequestEnvironmentInfoRequest generates a "aws.Request" representing the
-// client's request for the RequestEnvironmentInfo operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RequestEnvironmentInfo for more information on using the RequestEnvironmentInfo
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RequestEnvironmentInfoRequest method.
-//    req, resp := client.RequestEnvironmentInfoRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfo
-func (c *ElasticBeanstalk) RequestEnvironmentInfoRequest(input *RequestEnvironmentInfoInput) (req *aws.Request, output *RequestEnvironmentInfoOutput) {
-	op := &aws.Operation{
-		Name:       opRequestEnvironmentInfo,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RequestEnvironmentInfoInput{}
-	}
-
-	output = &RequestEnvironmentInfoOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// RequestEnvironmentInfoRequest is a API request type for the RequestEnvironmentInfo API operation.
+type RequestEnvironmentInfoRequest struct {
+	*aws.Request
+	Input *RequestEnvironmentInfoInput
 }
 
-// RequestEnvironmentInfo API operation for AWS Elastic Beanstalk.
+// Send marshals and sends the RequestEnvironmentInfo API request.
+func (r RequestEnvironmentInfoRequest) Send() (*RequestEnvironmentInfoOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RequestEnvironmentInfoOutput), nil
+}
+
+// RequestEnvironmentInfoRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
 // Initiates a request to compile the specified type of information of the deployed
 // environment.
@@ -2662,61 +1577,64 @@ func (c *ElasticBeanstalk) RequestEnvironmentInfoRequest(input *RequestEnvironme
 //
 //    * RetrieveEnvironmentInfo
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
+//    // Example sending a request using the RequestEnvironmentInfoRequest method.
+//    req := client.RequestEnvironmentInfoRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation RequestEnvironmentInfo for usage and error information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfo
-func (c *ElasticBeanstalk) RequestEnvironmentInfo(input *RequestEnvironmentInfoInput) (*RequestEnvironmentInfoOutput, error) {
-	req, out := c.RequestEnvironmentInfoRequest(input)
-	return out, req.Send()
-}
+func (c *ElasticBeanstalk) RequestEnvironmentInfoRequest(input *RequestEnvironmentInfoInput) RequestEnvironmentInfoRequest {
+	op := &aws.Operation{
+		Name:       opRequestEnvironmentInfo,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RequestEnvironmentInfoWithContext is the same as RequestEnvironmentInfo with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RequestEnvironmentInfo for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) RequestEnvironmentInfoWithContext(ctx aws.Context, input *RequestEnvironmentInfoInput, opts ...aws.Option) (*RequestEnvironmentInfoOutput, error) {
-	req, out := c.RequestEnvironmentInfoRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RequestEnvironmentInfoInput{}
+	}
+
+	req := c.newRequest(op, input, &RequestEnvironmentInfoOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return RequestEnvironmentInfoRequest{Request: req, Input: input}
 }
 
 const opRestartAppServer = "RestartAppServer"
 
-// RestartAppServerRequest generates a "aws.Request" representing the
-// client's request for the RestartAppServer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RestartAppServerRequest is a API request type for the RestartAppServer API operation.
+type RestartAppServerRequest struct {
+	*aws.Request
+	Input *RestartAppServerInput
+}
+
+// Send marshals and sends the RestartAppServer API request.
+func (r RestartAppServerRequest) Send() (*RestartAppServerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestartAppServerOutput), nil
+}
+
+// RestartAppServerRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestartAppServer for more information on using the RestartAppServer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Causes the environment to restart the application container server running
+// on each Amazon EC2 instance.
 //
 //    // Example sending a request using the RestartAppServerRequest method.
-//    req, resp := client.RestartAppServerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RestartAppServerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServer
-func (c *ElasticBeanstalk) RestartAppServerRequest(input *RestartAppServerInput) (req *aws.Request, output *RestartAppServerOutput) {
+func (c *ElasticBeanstalk) RestartAppServerRequest(input *RestartAppServerInput) RestartAppServerRequest {
 	op := &aws.Operation{
 		Name:       opRestartAppServer,
 		HTTPMethod: "POST",
@@ -2727,73 +1645,48 @@ func (c *ElasticBeanstalk) RestartAppServerRequest(input *RestartAppServerInput)
 		input = &RestartAppServerInput{}
 	}
 
-	output = &RestartAppServerOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RestartAppServerOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RestartAppServer API operation for AWS Elastic Beanstalk.
-//
-// Causes the environment to restart the application container server running
-// on each Amazon EC2 instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation RestartAppServer for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServer
-func (c *ElasticBeanstalk) RestartAppServer(input *RestartAppServerInput) (*RestartAppServerOutput, error) {
-	req, out := c.RestartAppServerRequest(input)
-	return out, req.Send()
-}
-
-// RestartAppServerWithContext is the same as RestartAppServer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestartAppServer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) RestartAppServerWithContext(ctx aws.Context, input *RestartAppServerInput, opts ...aws.Option) (*RestartAppServerOutput, error) {
-	req, out := c.RestartAppServerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RestartAppServerRequest{Request: req, Input: input}
 }
 
 const opRetrieveEnvironmentInfo = "RetrieveEnvironmentInfo"
 
-// RetrieveEnvironmentInfoRequest generates a "aws.Request" representing the
-// client's request for the RetrieveEnvironmentInfo operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RetrieveEnvironmentInfoRequest is a API request type for the RetrieveEnvironmentInfo API operation.
+type RetrieveEnvironmentInfoRequest struct {
+	*aws.Request
+	Input *RetrieveEnvironmentInfoInput
+}
+
+// Send marshals and sends the RetrieveEnvironmentInfo API request.
+func (r RetrieveEnvironmentInfoRequest) Send() (*RetrieveEnvironmentInfoOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RetrieveEnvironmentInfoOutput), nil
+}
+
+// RetrieveEnvironmentInfoRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves the compiled information from a RequestEnvironmentInfo request.
 //
-// See RetrieveEnvironmentInfo for more information on using the RetrieveEnvironmentInfo
-// API call, and error handling.
+// Related Topics
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+//    * RequestEnvironmentInfo
 //
 //    // Example sending a request using the RetrieveEnvironmentInfoRequest method.
-//    req, resp := client.RetrieveEnvironmentInfoRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RetrieveEnvironmentInfoRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfo
-func (c *ElasticBeanstalk) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoInput) (req *aws.Request, output *RetrieveEnvironmentInfoOutput) {
+func (c *ElasticBeanstalk) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoInput) RetrieveEnvironmentInfoRequest {
 	op := &aws.Operation{
 		Name:       opRetrieveEnvironmentInfo,
 		HTTPMethod: "POST",
@@ -2804,74 +1697,42 @@ func (c *ElasticBeanstalk) RetrieveEnvironmentInfoRequest(input *RetrieveEnviron
 		input = &RetrieveEnvironmentInfoInput{}
 	}
 
-	output = &RetrieveEnvironmentInfoOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RetrieveEnvironmentInfo API operation for AWS Elastic Beanstalk.
-//
-// Retrieves the compiled information from a RequestEnvironmentInfo request.
-//
-// Related Topics
-//
-//    * RequestEnvironmentInfo
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation RetrieveEnvironmentInfo for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfo
-func (c *ElasticBeanstalk) RetrieveEnvironmentInfo(input *RetrieveEnvironmentInfoInput) (*RetrieveEnvironmentInfoOutput, error) {
-	req, out := c.RetrieveEnvironmentInfoRequest(input)
-	return out, req.Send()
-}
-
-// RetrieveEnvironmentInfoWithContext is the same as RetrieveEnvironmentInfo with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RetrieveEnvironmentInfo for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) RetrieveEnvironmentInfoWithContext(ctx aws.Context, input *RetrieveEnvironmentInfoInput, opts ...aws.Option) (*RetrieveEnvironmentInfoOutput, error) {
-	req, out := c.RetrieveEnvironmentInfoRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RetrieveEnvironmentInfoOutput{})
+	return RetrieveEnvironmentInfoRequest{Request: req, Input: input}
 }
 
 const opSwapEnvironmentCNAMEs = "SwapEnvironmentCNAMEs"
 
-// SwapEnvironmentCNAMEsRequest generates a "aws.Request" representing the
-// client's request for the SwapEnvironmentCNAMEs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SwapEnvironmentCNAMEsRequest is a API request type for the SwapEnvironmentCNAMEs API operation.
+type SwapEnvironmentCNAMEsRequest struct {
+	*aws.Request
+	Input *SwapEnvironmentCNAMEsInput
+}
+
+// Send marshals and sends the SwapEnvironmentCNAMEs API request.
+func (r SwapEnvironmentCNAMEsRequest) Send() (*SwapEnvironmentCNAMEsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SwapEnvironmentCNAMEsOutput), nil
+}
+
+// SwapEnvironmentCNAMEsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SwapEnvironmentCNAMEs for more information on using the SwapEnvironmentCNAMEs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Swaps the CNAMEs of two environments.
 //
 //    // Example sending a request using the SwapEnvironmentCNAMEsRequest method.
-//    req, resp := client.SwapEnvironmentCNAMEsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SwapEnvironmentCNAMEsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEs
-func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput) (req *aws.Request, output *SwapEnvironmentCNAMEsOutput) {
+func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput) SwapEnvironmentCNAMEsRequest {
 	op := &aws.Operation{
 		Name:       opSwapEnvironmentCNAMEs,
 		HTTPMethod: "POST",
@@ -2882,72 +1743,44 @@ func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCN
 		input = &SwapEnvironmentCNAMEsInput{}
 	}
 
-	output = &SwapEnvironmentCNAMEsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SwapEnvironmentCNAMEsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SwapEnvironmentCNAMEs API operation for AWS Elastic Beanstalk.
-//
-// Swaps the CNAMEs of two environments.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation SwapEnvironmentCNAMEs for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEs
-func (c *ElasticBeanstalk) SwapEnvironmentCNAMEs(input *SwapEnvironmentCNAMEsInput) (*SwapEnvironmentCNAMEsOutput, error) {
-	req, out := c.SwapEnvironmentCNAMEsRequest(input)
-	return out, req.Send()
-}
-
-// SwapEnvironmentCNAMEsWithContext is the same as SwapEnvironmentCNAMEs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SwapEnvironmentCNAMEs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsWithContext(ctx aws.Context, input *SwapEnvironmentCNAMEsInput, opts ...aws.Option) (*SwapEnvironmentCNAMEsOutput, error) {
-	req, out := c.SwapEnvironmentCNAMEsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SwapEnvironmentCNAMEsRequest{Request: req, Input: input}
 }
 
 const opTerminateEnvironment = "TerminateEnvironment"
 
-// TerminateEnvironmentRequest generates a "aws.Request" representing the
-// client's request for the TerminateEnvironment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TerminateEnvironmentRequest is a API request type for the TerminateEnvironment API operation.
+type TerminateEnvironmentRequest struct {
+	*aws.Request
+	Input *TerminateEnvironmentInput
+}
+
+// Send marshals and sends the TerminateEnvironment API request.
+func (r TerminateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEnvironmentOutput), nil
+}
+
+// TerminateEnvironmentRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TerminateEnvironment for more information on using the TerminateEnvironment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Terminates the specified environment.
 //
 //    // Example sending a request using the TerminateEnvironmentRequest method.
-//    req, resp := client.TerminateEnvironmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TerminateEnvironmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment
-func (c *ElasticBeanstalk) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) (req *aws.Request, output *EnvironmentDescription) {
+func (c *ElasticBeanstalk) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) TerminateEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opTerminateEnvironment,
 		HTTPMethod: "POST",
@@ -2958,76 +1791,45 @@ func (c *ElasticBeanstalk) TerminateEnvironmentRequest(input *TerminateEnvironme
 		input = &TerminateEnvironmentInput{}
 	}
 
-	output = &EnvironmentDescription{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TerminateEnvironment API operation for AWS Elastic Beanstalk.
-//
-// Terminates the specified environment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation TerminateEnvironment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment
-func (c *ElasticBeanstalk) TerminateEnvironment(input *TerminateEnvironmentInput) (*EnvironmentDescription, error) {
-	req, out := c.TerminateEnvironmentRequest(input)
-	return out, req.Send()
-}
-
-// TerminateEnvironmentWithContext is the same as TerminateEnvironment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TerminateEnvironment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) TerminateEnvironmentWithContext(ctx aws.Context, input *TerminateEnvironmentInput, opts ...aws.Option) (*EnvironmentDescription, error) {
-	req, out := c.TerminateEnvironmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+	return TerminateEnvironmentRequest{Request: req, Input: input}
 }
 
 const opUpdateApplication = "UpdateApplication"
 
-// UpdateApplicationRequest generates a "aws.Request" representing the
-// client's request for the UpdateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApplicationRequest is a API request type for the UpdateApplication API operation.
+type UpdateApplicationRequest struct {
+	*aws.Request
+	Input *UpdateApplicationInput
+}
+
+// Send marshals and sends the UpdateApplication API request.
+func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationOutput), nil
+}
+
+// UpdateApplicationRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the specified application to have the specified properties.
 //
-// See UpdateApplication for more information on using the UpdateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If a property (for example, description) is not provided, the value remains
+// unchanged. To clear these properties, specify an empty string.
 //
 //    // Example sending a request using the UpdateApplicationRequest method.
-//    req, resp := client.UpdateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplication
-func (c *ElasticBeanstalk) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *ApplicationDescriptionMessage) {
+func (c *ElasticBeanstalk) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
@@ -3038,73 +1840,42 @@ func (c *ElasticBeanstalk) UpdateApplicationRequest(input *UpdateApplicationInpu
 		input = &UpdateApplicationInput{}
 	}
 
-	output = &ApplicationDescriptionMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateApplication API operation for AWS Elastic Beanstalk.
-//
-// Updates the specified application to have the specified properties.
-//
-// If a property (for example, description) is not provided, the value remains
-// unchanged. To clear these properties, specify an empty string.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation UpdateApplication for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplication
-func (c *ElasticBeanstalk) UpdateApplication(input *UpdateApplicationInput) (*ApplicationDescriptionMessage, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApplicationWithContext is the same as UpdateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*ApplicationDescriptionMessage, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
 const opUpdateApplicationResourceLifecycle = "UpdateApplicationResourceLifecycle"
 
-// UpdateApplicationResourceLifecycleRequest generates a "aws.Request" representing the
-// client's request for the UpdateApplicationResourceLifecycle operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApplicationResourceLifecycleRequest is a API request type for the UpdateApplicationResourceLifecycle API operation.
+type UpdateApplicationResourceLifecycleRequest struct {
+	*aws.Request
+	Input *UpdateApplicationResourceLifecycleInput
+}
+
+// Send marshals and sends the UpdateApplicationResourceLifecycle API request.
+func (r UpdateApplicationResourceLifecycleRequest) Send() (*UpdateApplicationResourceLifecycleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationResourceLifecycleOutput), nil
+}
+
+// UpdateApplicationResourceLifecycleRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateApplicationResourceLifecycle for more information on using the UpdateApplicationResourceLifecycle
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies lifecycle settings for an application.
 //
 //    // Example sending a request using the UpdateApplicationResourceLifecycleRequest method.
-//    req, resp := client.UpdateApplicationResourceLifecycleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApplicationResourceLifecycleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycle
-func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicationResourceLifecycleInput) (req *aws.Request, output *UpdateApplicationResourceLifecycleOutput) {
+func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicationResourceLifecycleInput) UpdateApplicationResourceLifecycleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplicationResourceLifecycle,
 		HTTPMethod: "POST",
@@ -3115,76 +1886,45 @@ func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleRequest(input *Upda
 		input = &UpdateApplicationResourceLifecycleInput{}
 	}
 
-	output = &UpdateApplicationResourceLifecycleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateApplicationResourceLifecycle API operation for AWS Elastic Beanstalk.
-//
-// Modifies lifecycle settings for an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation UpdateApplicationResourceLifecycle for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycle
-func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycle(input *UpdateApplicationResourceLifecycleInput) (*UpdateApplicationResourceLifecycleOutput, error) {
-	req, out := c.UpdateApplicationResourceLifecycleRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApplicationResourceLifecycleWithContext is the same as UpdateApplicationResourceLifecycle with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApplicationResourceLifecycle for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleWithContext(ctx aws.Context, input *UpdateApplicationResourceLifecycleInput, opts ...aws.Option) (*UpdateApplicationResourceLifecycleOutput, error) {
-	req, out := c.UpdateApplicationResourceLifecycleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApplicationResourceLifecycleOutput{})
+	return UpdateApplicationResourceLifecycleRequest{Request: req, Input: input}
 }
 
 const opUpdateApplicationVersion = "UpdateApplicationVersion"
 
-// UpdateApplicationVersionRequest generates a "aws.Request" representing the
-// client's request for the UpdateApplicationVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApplicationVersionRequest is a API request type for the UpdateApplicationVersion API operation.
+type UpdateApplicationVersionRequest struct {
+	*aws.Request
+	Input *UpdateApplicationVersionInput
+}
+
+// Send marshals and sends the UpdateApplicationVersion API request.
+func (r UpdateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationVersionOutput), nil
+}
+
+// UpdateApplicationVersionRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the specified application version to have the specified properties.
 //
-// See UpdateApplicationVersion for more information on using the UpdateApplicationVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If a property (for example, description) is not provided, the value remains
+// unchanged. To clear properties, specify an empty string.
 //
 //    // Example sending a request using the UpdateApplicationVersionRequest method.
-//    req, resp := client.UpdateApplicationVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApplicationVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationVersion
-func (c *ElasticBeanstalk) UpdateApplicationVersionRequest(input *UpdateApplicationVersionInput) (req *aws.Request, output *ApplicationVersionDescriptionMessage) {
+func (c *ElasticBeanstalk) UpdateApplicationVersionRequest(input *UpdateApplicationVersionInput) UpdateApplicationVersionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplicationVersion,
 		HTTPMethod: "POST",
@@ -3195,89 +1935,30 @@ func (c *ElasticBeanstalk) UpdateApplicationVersionRequest(input *UpdateApplicat
 		input = &UpdateApplicationVersionInput{}
 	}
 
-	output = &ApplicationVersionDescriptionMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateApplicationVersion API operation for AWS Elastic Beanstalk.
-//
-// Updates the specified application version to have the specified properties.
-//
-// If a property (for example, description) is not provided, the value remains
-// unchanged. To clear properties, specify an empty string.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation UpdateApplicationVersion for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationVersion
-func (c *ElasticBeanstalk) UpdateApplicationVersion(input *UpdateApplicationVersionInput) (*ApplicationVersionDescriptionMessage, error) {
-	req, out := c.UpdateApplicationVersionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApplicationVersionWithContext is the same as UpdateApplicationVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApplicationVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateApplicationVersionWithContext(ctx aws.Context, input *UpdateApplicationVersionInput, opts ...aws.Option) (*ApplicationVersionDescriptionMessage, error) {
-	req, out := c.UpdateApplicationVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApplicationVersionOutput{})
+	return UpdateApplicationVersionRequest{Request: req, Input: input}
 }
 
 const opUpdateConfigurationTemplate = "UpdateConfigurationTemplate"
 
-// UpdateConfigurationTemplateRequest generates a "aws.Request" representing the
-// client's request for the UpdateConfigurationTemplate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateConfigurationTemplate for more information on using the UpdateConfigurationTemplate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateConfigurationTemplateRequest method.
-//    req, resp := client.UpdateConfigurationTemplateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplate
-func (c *ElasticBeanstalk) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTemplateInput) (req *aws.Request, output *ConfigurationSettingsDescription) {
-	op := &aws.Operation{
-		Name:       opUpdateConfigurationTemplate,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateConfigurationTemplateInput{}
-	}
-
-	output = &ConfigurationSettingsDescription{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateConfigurationTemplateRequest is a API request type for the UpdateConfigurationTemplate API operation.
+type UpdateConfigurationTemplateRequest struct {
+	*aws.Request
+	Input *UpdateConfigurationTemplateInput
 }
 
-// UpdateConfigurationTemplate API operation for AWS Elastic Beanstalk.
+// Send marshals and sends the UpdateConfigurationTemplate API request.
+func (r UpdateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateConfigurationTemplateOutput), nil
+}
+
+// UpdateConfigurationTemplateRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
 // Updates the specified configuration template to have the specified properties
 // or configuration option values.
@@ -3289,86 +1970,49 @@ func (c *ElasticBeanstalk) UpdateConfigurationTemplateRequest(input *UpdateConfi
 //
 //    * DescribeConfigurationOptions
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation UpdateConfigurationTemplate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeTooManyBucketsException "TooManyBucketsException"
-//   The specified account has reached its limit of Amazon S3 buckets.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplate
-func (c *ElasticBeanstalk) UpdateConfigurationTemplate(input *UpdateConfigurationTemplateInput) (*ConfigurationSettingsDescription, error) {
-	req, out := c.UpdateConfigurationTemplateRequest(input)
-	return out, req.Send()
-}
-
-// UpdateConfigurationTemplateWithContext is the same as UpdateConfigurationTemplate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateConfigurationTemplate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateConfigurationTemplateWithContext(ctx aws.Context, input *UpdateConfigurationTemplateInput, opts ...aws.Option) (*ConfigurationSettingsDescription, error) {
-	req, out := c.UpdateConfigurationTemplateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateEnvironment = "UpdateEnvironment"
-
-// UpdateEnvironmentRequest generates a "aws.Request" representing the
-// client's request for the UpdateEnvironment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateEnvironment for more information on using the UpdateEnvironment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateEnvironmentRequest method.
-//    req, resp := client.UpdateEnvironmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateConfigurationTemplateRequest method.
+//    req := client.UpdateConfigurationTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironment
-func (c *ElasticBeanstalk) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) (req *aws.Request, output *EnvironmentDescription) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplate
+func (c *ElasticBeanstalk) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTemplateInput) UpdateConfigurationTemplateRequest {
 	op := &aws.Operation{
-		Name:       opUpdateEnvironment,
+		Name:       opUpdateConfigurationTemplate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateEnvironmentInput{}
+		input = &UpdateConfigurationTemplateInput{}
 	}
 
-	output = &EnvironmentDescription{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateConfigurationTemplateOutput{})
+	return UpdateConfigurationTemplateRequest{Request: req, Input: input}
 }
 
-// UpdateEnvironment API operation for AWS Elastic Beanstalk.
+const opUpdateEnvironment = "UpdateEnvironment"
+
+// UpdateEnvironmentRequest is a API request type for the UpdateEnvironment API operation.
+type UpdateEnvironmentRequest struct {
+	*aws.Request
+	Input *UpdateEnvironmentInput
+}
+
+// Send marshals and sends the UpdateEnvironment API request.
+func (r UpdateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEnvironmentOutput), nil
+}
+
+// UpdateEnvironmentRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
 // Updates the environment description, deploys a new application version, updates
 // the configuration settings to an entirely new configuration template, or
@@ -3382,70 +2026,65 @@ func (c *ElasticBeanstalk) UpdateEnvironmentRequest(input *UpdateEnvironmentInpu
 // for this environment returns two setting descriptions with different DeploymentStatus
 // values.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation UpdateEnvironment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeTooManyBucketsException "TooManyBucketsException"
-//   The specified account has reached its limit of Amazon S3 buckets.
+//    // Example sending a request using the UpdateEnvironmentRequest method.
+//    req := client.UpdateEnvironmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironment
-func (c *ElasticBeanstalk) UpdateEnvironment(input *UpdateEnvironmentInput) (*EnvironmentDescription, error) {
-	req, out := c.UpdateEnvironmentRequest(input)
-	return out, req.Send()
-}
+func (c *ElasticBeanstalk) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) UpdateEnvironmentRequest {
+	op := &aws.Operation{
+		Name:       opUpdateEnvironment,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateEnvironmentWithContext is the same as UpdateEnvironment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateEnvironment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateEnvironmentWithContext(ctx aws.Context, input *UpdateEnvironmentInput, opts ...aws.Option) (*EnvironmentDescription, error) {
-	req, out := c.UpdateEnvironmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateEnvironmentInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+	return UpdateEnvironmentRequest{Request: req, Input: input}
 }
 
 const opValidateConfigurationSettings = "ValidateConfigurationSettings"
 
-// ValidateConfigurationSettingsRequest generates a "aws.Request" representing the
-// client's request for the ValidateConfigurationSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ValidateConfigurationSettingsRequest is a API request type for the ValidateConfigurationSettings API operation.
+type ValidateConfigurationSettingsRequest struct {
+	*aws.Request
+	Input *ValidateConfigurationSettingsInput
+}
+
+// Send marshals and sends the ValidateConfigurationSettings API request.
+func (r ValidateConfigurationSettingsRequest) Send() (*ValidateConfigurationSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ValidateConfigurationSettingsOutput), nil
+}
+
+// ValidateConfigurationSettingsRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Takes a set of configuration settings and either a configuration template
+// or environment, and determines whether those values are valid.
 //
-// See ValidateConfigurationSettings for more information on using the ValidateConfigurationSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This action returns a list of messages indicating any errors or warnings
+// associated with the selection of option values.
 //
 //    // Example sending a request using the ValidateConfigurationSettingsRequest method.
-//    req, resp := client.ValidateConfigurationSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ValidateConfigurationSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettings
-func (c *ElasticBeanstalk) ValidateConfigurationSettingsRequest(input *ValidateConfigurationSettingsInput) (req *aws.Request, output *ValidateConfigurationSettingsOutput) {
+func (c *ElasticBeanstalk) ValidateConfigurationSettingsRequest(input *ValidateConfigurationSettingsInput) ValidateConfigurationSettingsRequest {
 	op := &aws.Operation{
 		Name:       opValidateConfigurationSettings,
 		HTTPMethod: "POST",
@@ -3456,54 +2095,8 @@ func (c *ElasticBeanstalk) ValidateConfigurationSettingsRequest(input *ValidateC
 		input = &ValidateConfigurationSettingsInput{}
 	}
 
-	output = &ValidateConfigurationSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ValidateConfigurationSettings API operation for AWS Elastic Beanstalk.
-//
-// Takes a set of configuration settings and either a configuration template
-// or environment, and determines whether those values are valid.
-//
-// This action returns a list of messages indicating any errors or warnings
-// associated with the selection of option values.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Elastic Beanstalk's
-// API operation ValidateConfigurationSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientPrivilegesException "InsufficientPrivilegesException"
-//   The specified account does not have sufficient privileges for one of more
-//   AWS services.
-//
-//   * ErrCodeTooManyBucketsException "TooManyBucketsException"
-//   The specified account has reached its limit of Amazon S3 buckets.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettings
-func (c *ElasticBeanstalk) ValidateConfigurationSettings(input *ValidateConfigurationSettingsInput) (*ValidateConfigurationSettingsOutput, error) {
-	req, out := c.ValidateConfigurationSettingsRequest(input)
-	return out, req.Send()
-}
-
-// ValidateConfigurationSettingsWithContext is the same as ValidateConfigurationSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ValidateConfigurationSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticBeanstalk) ValidateConfigurationSettingsWithContext(ctx aws.Context, input *ValidateConfigurationSettingsInput, opts ...aws.Option) (*ValidateConfigurationSettingsOutput, error) {
-	req, out := c.ValidateConfigurationSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ValidateConfigurationSettingsOutput{})
+	return ValidateConfigurationSettingsRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdateMessage
@@ -3645,31 +2238,6 @@ func (s *ApplicationDescription) SetResourceLifecycleConfig(v *ApplicationResour
 // SetVersions sets the Versions field's value.
 func (s *ApplicationDescription) SetVersions(v []*string) *ApplicationDescription {
 	s.Versions = v
-	return s
-}
-
-// Result message containing a single description of an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescriptionMessage
-type ApplicationDescriptionMessage struct {
-	_ struct{} `type:"structure"`
-
-	// The ApplicationDescription of the application.
-	Application *ApplicationDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s ApplicationDescriptionMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ApplicationDescriptionMessage) GoString() string {
-	return s.String()
-}
-
-// SetApplication sets the Application field's value.
-func (s *ApplicationDescriptionMessage) SetApplication(v *ApplicationDescription) *ApplicationDescriptionMessage {
-	s.Application = v
 	return s
 }
 
@@ -3879,31 +2447,6 @@ func (s *ApplicationVersionDescription) SetStatus(v ApplicationVersionStatus) *A
 // SetVersionLabel sets the VersionLabel field's value.
 func (s *ApplicationVersionDescription) SetVersionLabel(v string) *ApplicationVersionDescription {
 	s.VersionLabel = &v
-	return s
-}
-
-// Result message wrapping a single description of an application version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescriptionMessage
-type ApplicationVersionDescriptionMessage struct {
-	_ struct{} `type:"structure"`
-
-	// The ApplicationVersionDescription of the application version.
-	ApplicationVersion *ApplicationVersionDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s ApplicationVersionDescriptionMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ApplicationVersionDescriptionMessage) GoString() string {
-	return s.String()
-}
-
-// SetApplicationVersion sets the ApplicationVersion field's value.
-func (s *ApplicationVersionDescriptionMessage) SetApplicationVersion(v *ApplicationVersionDescription) *ApplicationVersionDescriptionMessage {
-	s.ApplicationVersion = v
 	return s
 }
 
@@ -4681,125 +3224,6 @@ func (s *ConfigurationOptionSetting) SetResourceName(v string) *ConfigurationOpt
 // SetValue sets the Value field's value.
 func (s *ConfigurationOptionSetting) SetValue(v string) *ConfigurationOptionSetting {
 	s.Value = &v
-	return s
-}
-
-// Describes the settings for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsDescription
-type ConfigurationSettingsDescription struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application associated with this configuration set.
-	ApplicationName *string `min:"1" type:"string"`
-
-	// The date (in UTC time) when this configuration set was created.
-	DateCreated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	// The date (in UTC time) when this configuration set was last modified.
-	DateUpdated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	// If this configuration set is associated with an environment, the DeploymentStatus
-	// parameter indicates the deployment status of this configuration set:
-	//
-	//    * null: This configuration is not associated with a running environment.
-	//
-	//    * pending: This is a draft configuration that is not deployed to the associated
-	//    environment but is in the process of deploying.
-	//
-	//    * deployed: This is the configuration that is currently deployed to the
-	//    associated running environment.
-	//
-	//    * failed: This is a draft configuration that failed to successfully deploy.
-	DeploymentStatus ConfigurationDeploymentStatus `type:"string"`
-
-	// Describes this configuration set.
-	Description *string `type:"string"`
-
-	// If not null, the name of the environment for this configuration set.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// A list of the configuration options and their values in this configuration
-	// set.
-	OptionSettings []*ConfigurationOptionSetting `type:"list"`
-
-	// The ARN of the platform.
-	PlatformArn *string `type:"string"`
-
-	// The name of the solution stack this configuration set uses.
-	SolutionStackName *string `type:"string"`
-
-	// If not null, the name of the configuration template for this configuration
-	// set.
-	TemplateName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ConfigurationSettingsDescription) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ConfigurationSettingsDescription) GoString() string {
-	return s.String()
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *ConfigurationSettingsDescription) SetApplicationName(v string) *ConfigurationSettingsDescription {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetDateCreated sets the DateCreated field's value.
-func (s *ConfigurationSettingsDescription) SetDateCreated(v time.Time) *ConfigurationSettingsDescription {
-	s.DateCreated = &v
-	return s
-}
-
-// SetDateUpdated sets the DateUpdated field's value.
-func (s *ConfigurationSettingsDescription) SetDateUpdated(v time.Time) *ConfigurationSettingsDescription {
-	s.DateUpdated = &v
-	return s
-}
-
-// SetDeploymentStatus sets the DeploymentStatus field's value.
-func (s *ConfigurationSettingsDescription) SetDeploymentStatus(v ConfigurationDeploymentStatus) *ConfigurationSettingsDescription {
-	s.DeploymentStatus = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ConfigurationSettingsDescription) SetDescription(v string) *ConfigurationSettingsDescription {
-	s.Description = &v
-	return s
-}
-
-// SetEnvironmentName sets the EnvironmentName field's value.
-func (s *ConfigurationSettingsDescription) SetEnvironmentName(v string) *ConfigurationSettingsDescription {
-	s.EnvironmentName = &v
-	return s
-}
-
-// SetOptionSettings sets the OptionSettings field's value.
-func (s *ConfigurationSettingsDescription) SetOptionSettings(v []*ConfigurationOptionSetting) *ConfigurationSettingsDescription {
-	s.OptionSettings = v
-	return s
-}
-
-// SetPlatformArn sets the PlatformArn field's value.
-func (s *ConfigurationSettingsDescription) SetPlatformArn(v string) *ConfigurationSettingsDescription {
-	s.PlatformArn = &v
-	return s
-}
-
-// SetSolutionStackName sets the SolutionStackName field's value.
-func (s *ConfigurationSettingsDescription) SetSolutionStackName(v string) *ConfigurationSettingsDescription {
-	s.SolutionStackName = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *ConfigurationSettingsDescription) SetTemplateName(v string) *ConfigurationSettingsDescription {
-	s.TemplateName = &v
 	return s
 }
 
@@ -6427,7 +4851,7 @@ type DescribeConfigurationSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of ConfigurationSettingsDescription.
-	ConfigurationSettings []*ConfigurationSettingsDescription `type:"list"`
+	ConfigurationSettings []*UpdateConfigurationTemplateOutput `type:"list"`
 }
 
 // String returns the string representation
@@ -6441,7 +4865,7 @@ func (s DescribeConfigurationSettingsOutput) GoString() string {
 }
 
 // SetConfigurationSettings sets the ConfigurationSettings field's value.
-func (s *DescribeConfigurationSettingsOutput) SetConfigurationSettings(v []*ConfigurationSettingsDescription) *DescribeConfigurationSettingsOutput {
+func (s *DescribeConfigurationSettingsOutput) SetConfigurationSettings(v []*UpdateConfigurationTemplateOutput) *DescribeConfigurationSettingsOutput {
 	s.ConfigurationSettings = v
 	return s
 }
@@ -6972,6 +5396,41 @@ func (s *DescribeEnvironmentsInput) SetVersionLabel(v string) *DescribeEnvironme
 	return s
 }
 
+// Result message containing a list of environment descriptions.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironmentsOutput
+type DescribeEnvironmentsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Returns an EnvironmentDescription list.
+	Environments []*UpdateEnvironmentOutput `type:"list"`
+
+	// In a paginated request, the token that you can pass in a subsequent request
+	// to get the next response page.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeEnvironmentsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeEnvironmentsOutput) GoString() string {
+	return s.String()
+}
+
+// SetEnvironments sets the Environments field's value.
+func (s *DescribeEnvironmentsOutput) SetEnvironments(v []*UpdateEnvironmentOutput) *DescribeEnvironmentsOutput {
+	s.Environments = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeEnvironmentsOutput) SetNextToken(v string) *DescribeEnvironmentsOutput {
+	s.NextToken = &v
+	return s
+}
+
 // Request to retrieve a list of events for an environment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEventsMessage
 type DescribeEventsInput struct {
@@ -7324,272 +5783,6 @@ func (s DescribePlatformVersionOutput) GoString() string {
 // SetPlatformDescription sets the PlatformDescription field's value.
 func (s *DescribePlatformVersionOutput) SetPlatformDescription(v *PlatformDescription) *DescribePlatformVersionOutput {
 	s.PlatformDescription = v
-	return s
-}
-
-// Describes the properties of an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription
-type EnvironmentDescription struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates if there is an in-progress environment configuration update or
-	// application version deployment that you can cancel.
-	//
-	// true: There is an update in progress.
-	//
-	// false: There are no updates currently in progress.
-	AbortableOperationInProgress *bool `type:"boolean"`
-
-	// The name of the application associated with this environment.
-	ApplicationName *string `min:"1" type:"string"`
-
-	// The URL to the CNAME for this environment.
-	CNAME *string `min:"1" type:"string"`
-
-	// The creation date for this environment.
-	DateCreated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	// The last modified date for this environment.
-	DateUpdated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	// Describes this environment.
-	Description *string `type:"string"`
-
-	// For load-balanced, autoscaling environments, the URL to the LoadBalancer.
-	// For single-instance environments, the IP address of the instance.
-	EndpointURL *string `type:"string"`
-
-	// The environment's Amazon Resource Name (ARN), which can be used in other
-	// API reuqests that require an ARN.
-	EnvironmentArn *string `type:"string"`
-
-	// The ID of this environment.
-	EnvironmentId *string `type:"string"`
-
-	// A list of links to other environments in the same group.
-	EnvironmentLinks []*EnvironmentLink `type:"list"`
-
-	// The name of this environment.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
-	// the failure levels for a running environment:
-	//
-	//    * Red: Indicates the environment is not responsive. Occurs when three
-	//    or more consecutive failures occur for an environment.
-	//
-	//    * Yellow: Indicates that something is wrong. Occurs when two consecutive
-	//    failures occur for an environment.
-	//
-	//    * Green: Indicates the environment is healthy and fully functional.
-	//
-	//    * Grey: Default health for a new environment. The environment is not fully
-	//    launched and health checks have not started or health checks are suspended
-	//    during an UpdateEnvironment or RestartEnvironement request.
-	//
-	// Default: Grey
-	Health EnvironmentHealth `type:"string"`
-
-	// Returns the health status of the application running in your environment.
-	// For more information, see Health Colors and Statuses (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
-	HealthStatus EnvironmentHealthStatus `type:"string"`
-
-	// The ARN of the platform.
-	PlatformArn *string `type:"string"`
-
-	// The description of the AWS resources used by this environment.
-	Resources *EnvironmentResourcesDescription `type:"structure"`
-
-	// The name of the SolutionStack deployed with this environment.
-	SolutionStackName *string `type:"string"`
-
-	// The current operational status of the environment:
-	//
-	//    * Launching: Environment is in the process of initial deployment.
-	//
-	//    * Updating: Environment is in the process of updating its configuration
-	//    settings or application version.
-	//
-	//    * Ready: Environment is available to have an action performed on it, such
-	//    as update or terminate.
-	//
-	//    * Terminating: Environment is in the shut-down process.
-	//
-	//    * Terminated: Environment is not running.
-	Status EnvironmentStatus `type:"string"`
-
-	// The name of the configuration template used to originally launch this environment.
-	TemplateName *string `min:"1" type:"string"`
-
-	// Describes the current tier of this environment.
-	Tier *EnvironmentTier `type:"structure"`
-
-	// The application version deployed in this environment.
-	VersionLabel *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s EnvironmentDescription) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s EnvironmentDescription) GoString() string {
-	return s.String()
-}
-
-// SetAbortableOperationInProgress sets the AbortableOperationInProgress field's value.
-func (s *EnvironmentDescription) SetAbortableOperationInProgress(v bool) *EnvironmentDescription {
-	s.AbortableOperationInProgress = &v
-	return s
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *EnvironmentDescription) SetApplicationName(v string) *EnvironmentDescription {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetCNAME sets the CNAME field's value.
-func (s *EnvironmentDescription) SetCNAME(v string) *EnvironmentDescription {
-	s.CNAME = &v
-	return s
-}
-
-// SetDateCreated sets the DateCreated field's value.
-func (s *EnvironmentDescription) SetDateCreated(v time.Time) *EnvironmentDescription {
-	s.DateCreated = &v
-	return s
-}
-
-// SetDateUpdated sets the DateUpdated field's value.
-func (s *EnvironmentDescription) SetDateUpdated(v time.Time) *EnvironmentDescription {
-	s.DateUpdated = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *EnvironmentDescription) SetDescription(v string) *EnvironmentDescription {
-	s.Description = &v
-	return s
-}
-
-// SetEndpointURL sets the EndpointURL field's value.
-func (s *EnvironmentDescription) SetEndpointURL(v string) *EnvironmentDescription {
-	s.EndpointURL = &v
-	return s
-}
-
-// SetEnvironmentArn sets the EnvironmentArn field's value.
-func (s *EnvironmentDescription) SetEnvironmentArn(v string) *EnvironmentDescription {
-	s.EnvironmentArn = &v
-	return s
-}
-
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *EnvironmentDescription) SetEnvironmentId(v string) *EnvironmentDescription {
-	s.EnvironmentId = &v
-	return s
-}
-
-// SetEnvironmentLinks sets the EnvironmentLinks field's value.
-func (s *EnvironmentDescription) SetEnvironmentLinks(v []*EnvironmentLink) *EnvironmentDescription {
-	s.EnvironmentLinks = v
-	return s
-}
-
-// SetEnvironmentName sets the EnvironmentName field's value.
-func (s *EnvironmentDescription) SetEnvironmentName(v string) *EnvironmentDescription {
-	s.EnvironmentName = &v
-	return s
-}
-
-// SetHealth sets the Health field's value.
-func (s *EnvironmentDescription) SetHealth(v EnvironmentHealth) *EnvironmentDescription {
-	s.Health = v
-	return s
-}
-
-// SetHealthStatus sets the HealthStatus field's value.
-func (s *EnvironmentDescription) SetHealthStatus(v EnvironmentHealthStatus) *EnvironmentDescription {
-	s.HealthStatus = v
-	return s
-}
-
-// SetPlatformArn sets the PlatformArn field's value.
-func (s *EnvironmentDescription) SetPlatformArn(v string) *EnvironmentDescription {
-	s.PlatformArn = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *EnvironmentDescription) SetResources(v *EnvironmentResourcesDescription) *EnvironmentDescription {
-	s.Resources = v
-	return s
-}
-
-// SetSolutionStackName sets the SolutionStackName field's value.
-func (s *EnvironmentDescription) SetSolutionStackName(v string) *EnvironmentDescription {
-	s.SolutionStackName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *EnvironmentDescription) SetStatus(v EnvironmentStatus) *EnvironmentDescription {
-	s.Status = v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *EnvironmentDescription) SetTemplateName(v string) *EnvironmentDescription {
-	s.TemplateName = &v
-	return s
-}
-
-// SetTier sets the Tier field's value.
-func (s *EnvironmentDescription) SetTier(v *EnvironmentTier) *EnvironmentDescription {
-	s.Tier = v
-	return s
-}
-
-// SetVersionLabel sets the VersionLabel field's value.
-func (s *EnvironmentDescription) SetVersionLabel(v string) *EnvironmentDescription {
-	s.VersionLabel = &v
-	return s
-}
-
-// Result message containing a list of environment descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescriptionsMessage
-type EnvironmentDescriptionsMessage struct {
-	_ struct{} `type:"structure"`
-
-	// Returns an EnvironmentDescription list.
-	Environments []*EnvironmentDescription `type:"list"`
-
-	// In a paginated request, the token that you can pass in a subsequent request
-	// to get the next response page.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s EnvironmentDescriptionsMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s EnvironmentDescriptionsMessage) GoString() string {
-	return s.String()
-}
-
-// SetEnvironments sets the Environments field's value.
-func (s *EnvironmentDescriptionsMessage) SetEnvironments(v []*EnvironmentDescription) *EnvironmentDescriptionsMessage {
-	s.Environments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *EnvironmentDescriptionsMessage) SetNextToken(v string) *EnvironmentDescriptionsMessage {
-	s.NextToken = &v
 	return s
 }
 
@@ -10252,6 +8445,31 @@ func (s *UpdateApplicationInput) SetDescription(v string) *UpdateApplicationInpu
 	return s
 }
 
+// Result message containing a single description of an application.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationOutput
+type UpdateApplicationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ApplicationDescription of the application.
+	Application *ApplicationDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateApplicationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateApplicationOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplication sets the Application field's value.
+func (s *UpdateApplicationOutput) SetApplication(v *ApplicationDescription) *UpdateApplicationOutput {
+	s.Application = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycleMessage
 type UpdateApplicationResourceLifecycleInput struct {
 	_ struct{} `type:"structure"`
@@ -10424,6 +8642,31 @@ func (s *UpdateApplicationVersionInput) SetVersionLabel(v string) *UpdateApplica
 	return s
 }
 
+// Result message wrapping a single description of an application version.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionOutput
+type UpdateApplicationVersionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ApplicationVersionDescription of the application version.
+	ApplicationVersion *ApplicationVersionDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateApplicationVersionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateApplicationVersionOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationVersion sets the ApplicationVersion field's value.
+func (s *UpdateApplicationVersionOutput) SetApplicationVersion(v *ApplicationVersionDescription) *UpdateApplicationVersionOutput {
+	s.ApplicationVersion = v
+	return s
+}
+
 // The result message containing the options for the specified solution stack.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplateMessage
 type UpdateConfigurationTemplateInput struct {
@@ -10539,6 +8782,125 @@ func (s *UpdateConfigurationTemplateInput) SetOptionsToRemove(v []*OptionSpecifi
 
 // SetTemplateName sets the TemplateName field's value.
 func (s *UpdateConfigurationTemplateInput) SetTemplateName(v string) *UpdateConfigurationTemplateInput {
+	s.TemplateName = &v
+	return s
+}
+
+// Describes the settings for a configuration set.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplateOutput
+type UpdateConfigurationTemplateOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the application associated with this configuration set.
+	ApplicationName *string `min:"1" type:"string"`
+
+	// The date (in UTC time) when this configuration set was created.
+	DateCreated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The date (in UTC time) when this configuration set was last modified.
+	DateUpdated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// If this configuration set is associated with an environment, the DeploymentStatus
+	// parameter indicates the deployment status of this configuration set:
+	//
+	//    * null: This configuration is not associated with a running environment.
+	//
+	//    * pending: This is a draft configuration that is not deployed to the associated
+	//    environment but is in the process of deploying.
+	//
+	//    * deployed: This is the configuration that is currently deployed to the
+	//    associated running environment.
+	//
+	//    * failed: This is a draft configuration that failed to successfully deploy.
+	DeploymentStatus ConfigurationDeploymentStatus `type:"string"`
+
+	// Describes this configuration set.
+	Description *string `type:"string"`
+
+	// If not null, the name of the environment for this configuration set.
+	EnvironmentName *string `min:"4" type:"string"`
+
+	// A list of the configuration options and their values in this configuration
+	// set.
+	OptionSettings []*ConfigurationOptionSetting `type:"list"`
+
+	// The ARN of the platform.
+	PlatformArn *string `type:"string"`
+
+	// The name of the solution stack this configuration set uses.
+	SolutionStackName *string `type:"string"`
+
+	// If not null, the name of the configuration template for this configuration
+	// set.
+	TemplateName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateConfigurationTemplateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateConfigurationTemplateOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *UpdateConfigurationTemplateOutput) SetApplicationName(v string) *UpdateConfigurationTemplateOutput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetDateCreated sets the DateCreated field's value.
+func (s *UpdateConfigurationTemplateOutput) SetDateCreated(v time.Time) *UpdateConfigurationTemplateOutput {
+	s.DateCreated = &v
+	return s
+}
+
+// SetDateUpdated sets the DateUpdated field's value.
+func (s *UpdateConfigurationTemplateOutput) SetDateUpdated(v time.Time) *UpdateConfigurationTemplateOutput {
+	s.DateUpdated = &v
+	return s
+}
+
+// SetDeploymentStatus sets the DeploymentStatus field's value.
+func (s *UpdateConfigurationTemplateOutput) SetDeploymentStatus(v ConfigurationDeploymentStatus) *UpdateConfigurationTemplateOutput {
+	s.DeploymentStatus = v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateConfigurationTemplateOutput) SetDescription(v string) *UpdateConfigurationTemplateOutput {
+	s.Description = &v
+	return s
+}
+
+// SetEnvironmentName sets the EnvironmentName field's value.
+func (s *UpdateConfigurationTemplateOutput) SetEnvironmentName(v string) *UpdateConfigurationTemplateOutput {
+	s.EnvironmentName = &v
+	return s
+}
+
+// SetOptionSettings sets the OptionSettings field's value.
+func (s *UpdateConfigurationTemplateOutput) SetOptionSettings(v []*ConfigurationOptionSetting) *UpdateConfigurationTemplateOutput {
+	s.OptionSettings = v
+	return s
+}
+
+// SetPlatformArn sets the PlatformArn field's value.
+func (s *UpdateConfigurationTemplateOutput) SetPlatformArn(v string) *UpdateConfigurationTemplateOutput {
+	s.PlatformArn = &v
+	return s
+}
+
+// SetSolutionStackName sets the SolutionStackName field's value.
+func (s *UpdateConfigurationTemplateOutput) SetSolutionStackName(v string) *UpdateConfigurationTemplateOutput {
+	s.SolutionStackName = &v
+	return s
+}
+
+// SetTemplateName sets the TemplateName field's value.
+func (s *UpdateConfigurationTemplateOutput) SetTemplateName(v string) *UpdateConfigurationTemplateOutput {
 	s.TemplateName = &v
 	return s
 }
@@ -10736,6 +9098,237 @@ func (s *UpdateEnvironmentInput) SetTier(v *EnvironmentTier) *UpdateEnvironmentI
 
 // SetVersionLabel sets the VersionLabel field's value.
 func (s *UpdateEnvironmentInput) SetVersionLabel(v string) *UpdateEnvironmentInput {
+	s.VersionLabel = &v
+	return s
+}
+
+// Describes the properties of an environment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironmentOutput
+type UpdateEnvironmentOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates if there is an in-progress environment configuration update or
+	// application version deployment that you can cancel.
+	//
+	// true: There is an update in progress.
+	//
+	// false: There are no updates currently in progress.
+	AbortableOperationInProgress *bool `type:"boolean"`
+
+	// The name of the application associated with this environment.
+	ApplicationName *string `min:"1" type:"string"`
+
+	// The URL to the CNAME for this environment.
+	CNAME *string `min:"1" type:"string"`
+
+	// The creation date for this environment.
+	DateCreated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The last modified date for this environment.
+	DateUpdated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// Describes this environment.
+	Description *string `type:"string"`
+
+	// For load-balanced, autoscaling environments, the URL to the LoadBalancer.
+	// For single-instance environments, the IP address of the instance.
+	EndpointURL *string `type:"string"`
+
+	// The environment's Amazon Resource Name (ARN), which can be used in other
+	// API reuqests that require an ARN.
+	EnvironmentArn *string `type:"string"`
+
+	// The ID of this environment.
+	EnvironmentId *string `type:"string"`
+
+	// A list of links to other environments in the same group.
+	EnvironmentLinks []*EnvironmentLink `type:"list"`
+
+	// The name of this environment.
+	EnvironmentName *string `min:"4" type:"string"`
+
+	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
+	// the failure levels for a running environment:
+	//
+	//    * Red: Indicates the environment is not responsive. Occurs when three
+	//    or more consecutive failures occur for an environment.
+	//
+	//    * Yellow: Indicates that something is wrong. Occurs when two consecutive
+	//    failures occur for an environment.
+	//
+	//    * Green: Indicates the environment is healthy and fully functional.
+	//
+	//    * Grey: Default health for a new environment. The environment is not fully
+	//    launched and health checks have not started or health checks are suspended
+	//    during an UpdateEnvironment or RestartEnvironement request.
+	//
+	// Default: Grey
+	Health EnvironmentHealth `type:"string"`
+
+	// Returns the health status of the application running in your environment.
+	// For more information, see Health Colors and Statuses (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
+	HealthStatus EnvironmentHealthStatus `type:"string"`
+
+	// The ARN of the platform.
+	PlatformArn *string `type:"string"`
+
+	// The description of the AWS resources used by this environment.
+	Resources *EnvironmentResourcesDescription `type:"structure"`
+
+	// The name of the SolutionStack deployed with this environment.
+	SolutionStackName *string `type:"string"`
+
+	// The current operational status of the environment:
+	//
+	//    * Launching: Environment is in the process of initial deployment.
+	//
+	//    * Updating: Environment is in the process of updating its configuration
+	//    settings or application version.
+	//
+	//    * Ready: Environment is available to have an action performed on it, such
+	//    as update or terminate.
+	//
+	//    * Terminating: Environment is in the shut-down process.
+	//
+	//    * Terminated: Environment is not running.
+	Status EnvironmentStatus `type:"string"`
+
+	// The name of the configuration template used to originally launch this environment.
+	TemplateName *string `min:"1" type:"string"`
+
+	// Describes the current tier of this environment.
+	Tier *EnvironmentTier `type:"structure"`
+
+	// The application version deployed in this environment.
+	VersionLabel *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateEnvironmentOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateEnvironmentOutput) GoString() string {
+	return s.String()
+}
+
+// SetAbortableOperationInProgress sets the AbortableOperationInProgress field's value.
+func (s *UpdateEnvironmentOutput) SetAbortableOperationInProgress(v bool) *UpdateEnvironmentOutput {
+	s.AbortableOperationInProgress = &v
+	return s
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *UpdateEnvironmentOutput) SetApplicationName(v string) *UpdateEnvironmentOutput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetCNAME sets the CNAME field's value.
+func (s *UpdateEnvironmentOutput) SetCNAME(v string) *UpdateEnvironmentOutput {
+	s.CNAME = &v
+	return s
+}
+
+// SetDateCreated sets the DateCreated field's value.
+func (s *UpdateEnvironmentOutput) SetDateCreated(v time.Time) *UpdateEnvironmentOutput {
+	s.DateCreated = &v
+	return s
+}
+
+// SetDateUpdated sets the DateUpdated field's value.
+func (s *UpdateEnvironmentOutput) SetDateUpdated(v time.Time) *UpdateEnvironmentOutput {
+	s.DateUpdated = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateEnvironmentOutput) SetDescription(v string) *UpdateEnvironmentOutput {
+	s.Description = &v
+	return s
+}
+
+// SetEndpointURL sets the EndpointURL field's value.
+func (s *UpdateEnvironmentOutput) SetEndpointURL(v string) *UpdateEnvironmentOutput {
+	s.EndpointURL = &v
+	return s
+}
+
+// SetEnvironmentArn sets the EnvironmentArn field's value.
+func (s *UpdateEnvironmentOutput) SetEnvironmentArn(v string) *UpdateEnvironmentOutput {
+	s.EnvironmentArn = &v
+	return s
+}
+
+// SetEnvironmentId sets the EnvironmentId field's value.
+func (s *UpdateEnvironmentOutput) SetEnvironmentId(v string) *UpdateEnvironmentOutput {
+	s.EnvironmentId = &v
+	return s
+}
+
+// SetEnvironmentLinks sets the EnvironmentLinks field's value.
+func (s *UpdateEnvironmentOutput) SetEnvironmentLinks(v []*EnvironmentLink) *UpdateEnvironmentOutput {
+	s.EnvironmentLinks = v
+	return s
+}
+
+// SetEnvironmentName sets the EnvironmentName field's value.
+func (s *UpdateEnvironmentOutput) SetEnvironmentName(v string) *UpdateEnvironmentOutput {
+	s.EnvironmentName = &v
+	return s
+}
+
+// SetHealth sets the Health field's value.
+func (s *UpdateEnvironmentOutput) SetHealth(v EnvironmentHealth) *UpdateEnvironmentOutput {
+	s.Health = v
+	return s
+}
+
+// SetHealthStatus sets the HealthStatus field's value.
+func (s *UpdateEnvironmentOutput) SetHealthStatus(v EnvironmentHealthStatus) *UpdateEnvironmentOutput {
+	s.HealthStatus = v
+	return s
+}
+
+// SetPlatformArn sets the PlatformArn field's value.
+func (s *UpdateEnvironmentOutput) SetPlatformArn(v string) *UpdateEnvironmentOutput {
+	s.PlatformArn = &v
+	return s
+}
+
+// SetResources sets the Resources field's value.
+func (s *UpdateEnvironmentOutput) SetResources(v *EnvironmentResourcesDescription) *UpdateEnvironmentOutput {
+	s.Resources = v
+	return s
+}
+
+// SetSolutionStackName sets the SolutionStackName field's value.
+func (s *UpdateEnvironmentOutput) SetSolutionStackName(v string) *UpdateEnvironmentOutput {
+	s.SolutionStackName = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *UpdateEnvironmentOutput) SetStatus(v EnvironmentStatus) *UpdateEnvironmentOutput {
+	s.Status = v
+	return s
+}
+
+// SetTemplateName sets the TemplateName field's value.
+func (s *UpdateEnvironmentOutput) SetTemplateName(v string) *UpdateEnvironmentOutput {
+	s.TemplateName = &v
+	return s
+}
+
+// SetTier sets the Tier field's value.
+func (s *UpdateEnvironmentOutput) SetTier(v *EnvironmentTier) *UpdateEnvironmentOutput {
+	s.Tier = v
+	return s
+}
+
+// SetVersionLabel sets the VersionLabel field's value.
+func (s *UpdateEnvironmentOutput) SetVersionLabel(v string) *UpdateEnvironmentOutput {
 	s.VersionLabel = &v
 	return s
 }

@@ -69,28 +69,36 @@ func (o *Operation) GetSigner() string {
 var tplOperation = template.Must(template.New("operation").Funcs(template.FuncMap{
 	"GetCrosslinkURL": GetCrosslinkURL,
 }).Parse(`
+{{ $reqType := printf "%sRequest" .ExportedName -}}
 const op{{ .ExportedName }} = "{{ .Name }}"
 
-// {{ .ExportedName }}Request generates a "aws.Request" representing the
-// client's request for the {{ .ExportedName }} operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// {{ $reqType }} is a API request type for the {{ .ExportedName }} API operation.
+type {{ $reqType}} struct {
+	*aws.Request
+	Input {{ .InputRef.GoType }}
+}
+
+// Send marshals and sends the {{ .ExportedName }} API request. 
+func (r {{ $reqType }}) Send() ({{ .OutputRef.GoType }}, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.({{ .OutputRef.GoType }}), nil
+}
+
+// {{ $reqType }} returns a request value for making API operation for
+// {{ .API.Metadata.ServiceFullName }}.
+{{ if .Documentation -}}
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+{{ .Documentation }}
+{{ end -}}
 //
-// See {{ .ExportedName }} for more information on using the {{ .ExportedName }}
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the {{ .ExportedName }}Request method.
-//    req, resp := client.{{ .ExportedName }}Request(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the {{ $reqType }} method.
+//    req := client.{{ $reqType }}(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 {{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.ExportedName -}}
@@ -98,16 +106,19 @@ const op{{ .ExportedName }} = "{{ .Name }}"
 //
 // Please also see {{ $crosslinkURL }}
 {{ end -}}
-func (c *{{ .API.StructName }}) {{ .ExportedName }}Request(` +
-	`input {{ .InputRef.GoType }}) (req *aws.Request, output {{ .OutputRef.GoType }}) {
-	{{ if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) }}if c.Client.Config.Logger != nil {
+func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{ $reqType }}) {
+	{{- if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) }}
+	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, {{ .ExportedName }}, has been deprecated")
 	}
-	op := &aws.Operation{ {{ else }} op := &aws.Operation{ {{ end }}	
+	{{ end -}}
+
+	op := &aws.Operation{
 		Name:       op{{ .ExportedName }},
-		{{ if ne .HTTP.Method "" }}HTTPMethod: "{{ .HTTP.Method }}",
-		{{ end }}HTTPPath: {{ if ne .HTTP.RequestURI "" }}"{{ .HTTP.RequestURI }}"{{ else }}"/"{{ end }},
-		{{ if .Paginator }}Paginator: &aws.Paginator{
+		{{ if ne .HTTP.Method "" }}HTTPMethod: "{{ .HTTP.Method }}",{{ end }}
+		HTTPPath: {{ if ne .HTTP.RequestURI "" }}"{{ .HTTP.RequestURI }}"{{ else }}"/"{{ end }},
+		{{- if .Paginator }}
+		Paginator: &aws.Paginator{
 				InputTokens: {{ .Paginator.InputTokensString }},
 				OutputTokens: {{ .Paginator.OutputTokensString }},
 				LimitToken: "{{ .Paginator.LimitKey }}",
@@ -120,63 +131,15 @@ func (c *{{ .API.StructName }}) {{ .ExportedName }}Request(` +
 		input = &{{ .InputRef.GoTypeElem }}{}
 	}
 
-	output = &{{ .OutputRef.GoTypeElem }}{}
-	req = c.newRequest(op, input, output){{ if eq .OutputRef.Shape.Placeholder true }}
-	req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler){{ end }}
+	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeElem }}{})
+	{{ if eq .OutputRef.Shape.Placeholder true -}}
+		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
+		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	{{ end -}}
+
 	{{ if ne .AuthType "" }}{{ .GetSigner }}{{ end -}}
-	return
-}
 
-// {{ .ExportedName }} API operation for {{ .API.Metadata.ServiceFullName }}.
-{{ if .Documentation -}}
-//
-{{ .Documentation }}
-{{ end -}}
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for {{ .API.Metadata.ServiceFullName }}'s
-// API operation {{ .ExportedName }} for usage and error information.
-{{ if .ErrorRefs -}}
-//
-// Returned Error Codes:
-{{ range $_, $err := .ErrorRefs -}}
-//   * {{ $err.Shape.ErrorCodeName }} "{{ $err.Shape.ErrorName}}"
-{{ if $err.Docstring -}}
-{{ $err.IndentedDocstring }}
-{{ end -}}
-//
-{{ end -}}
-{{ end -}}
-{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.ExportedName -}}
-{{ if ne $crosslinkURL "" -}} 
-// Please also see {{ $crosslinkURL }}
-{{ end -}}
-func (c *{{ .API.StructName }}) {{ .ExportedName }}(` +
-	`input {{ .InputRef.GoType }}) ({{ .OutputRef.GoType }}, error) {
-	req, out := c.{{ .ExportedName }}Request(input)
-	return out, req.Send()
-}
-
-// {{ .ExportedName }}WithContext is the same as {{ .ExportedName }} with the addition of
-// the ability to pass a context and additional request options.
-//
-// See {{ .ExportedName }} for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *{{ .API.StructName }}) {{ .ExportedName }}WithContext(` +
-	`ctx aws.Context, input {{ .InputRef.GoType }}, opts ...aws.Option) ` +
-	`({{ .OutputRef.GoType }}, error) {
-	req, out := c.{{ .ExportedName }}Request(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return {{ $reqType}}{Request: req, Input: input}
 }
 
 {{ if .Paginator }}
@@ -221,10 +184,10 @@ func (c *{{ .API.StructName }}) {{ .ExportedName }}PagesWithContext(` +
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.{{ .ExportedName }}Request(inCpy)
+			req := c.{{ .ExportedName }}Request(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -250,9 +213,7 @@ func (o *Operation) GoCode() string {
 
 // tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
 var tplInfSig = template.Must(template.New("opsig").Parse(`
-{{ .ExportedName }}({{ .InputRef.GoTypeWithPkgName }}) ({{ .OutputRef.GoTypeWithPkgName }}, error)
-{{ .ExportedName }}WithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, ...aws.Option) ({{ .OutputRef.GoTypeWithPkgName }}, error)
-{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) (*aws.Request, {{ .OutputRef.GoTypeWithPkgName }})
+{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
 
 {{ if .Paginator -}}
 {{ .ExportedName }}Pages({{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool) error
@@ -283,7 +244,8 @@ func Example{{ .API.StructName }}_{{ .ExportedName }}() {
 	svc := {{ .API.PackageName }}.New(sess)
 
 	{{ .ExampleInput }}
-	resp, err := svc.{{ .ExportedName }}(params)
+	req := svc.{{ .ExportedName }}Request(params)
+	resp, err := req.Send()
 
 	if err != nil {
 		// Print the error, cast err to awserr.Error to get the Code and

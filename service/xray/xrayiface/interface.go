@@ -9,7 +9,6 @@
 package xrayiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/xray"
 )
 
@@ -63,29 +62,17 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type XRayAPI interface {
-	BatchGetTraces(*xray.BatchGetTracesInput) (*xray.BatchGetTracesOutput, error)
-	BatchGetTracesWithContext(aws.Context, *xray.BatchGetTracesInput, ...aws.Option) (*xray.BatchGetTracesOutput, error)
-	BatchGetTracesRequest(*xray.BatchGetTracesInput) (*aws.Request, *xray.BatchGetTracesOutput)
+	BatchGetTracesRequest(*xray.BatchGetTracesInput) xray.BatchGetTracesRequest
 
-	GetServiceGraph(*xray.GetServiceGraphInput) (*xray.GetServiceGraphOutput, error)
-	GetServiceGraphWithContext(aws.Context, *xray.GetServiceGraphInput, ...aws.Option) (*xray.GetServiceGraphOutput, error)
-	GetServiceGraphRequest(*xray.GetServiceGraphInput) (*aws.Request, *xray.GetServiceGraphOutput)
+	GetServiceGraphRequest(*xray.GetServiceGraphInput) xray.GetServiceGraphRequest
 
-	GetTraceGraph(*xray.GetTraceGraphInput) (*xray.GetTraceGraphOutput, error)
-	GetTraceGraphWithContext(aws.Context, *xray.GetTraceGraphInput, ...aws.Option) (*xray.GetTraceGraphOutput, error)
-	GetTraceGraphRequest(*xray.GetTraceGraphInput) (*aws.Request, *xray.GetTraceGraphOutput)
+	GetTraceGraphRequest(*xray.GetTraceGraphInput) xray.GetTraceGraphRequest
 
-	GetTraceSummaries(*xray.GetTraceSummariesInput) (*xray.GetTraceSummariesOutput, error)
-	GetTraceSummariesWithContext(aws.Context, *xray.GetTraceSummariesInput, ...aws.Option) (*xray.GetTraceSummariesOutput, error)
-	GetTraceSummariesRequest(*xray.GetTraceSummariesInput) (*aws.Request, *xray.GetTraceSummariesOutput)
+	GetTraceSummariesRequest(*xray.GetTraceSummariesInput) xray.GetTraceSummariesRequest
 
-	PutTelemetryRecords(*xray.PutTelemetryRecordsInput) (*xray.PutTelemetryRecordsOutput, error)
-	PutTelemetryRecordsWithContext(aws.Context, *xray.PutTelemetryRecordsInput, ...aws.Option) (*xray.PutTelemetryRecordsOutput, error)
-	PutTelemetryRecordsRequest(*xray.PutTelemetryRecordsInput) (*aws.Request, *xray.PutTelemetryRecordsOutput)
+	PutTelemetryRecordsRequest(*xray.PutTelemetryRecordsInput) xray.PutTelemetryRecordsRequest
 
-	PutTraceSegments(*xray.PutTraceSegmentsInput) (*xray.PutTraceSegmentsOutput, error)
-	PutTraceSegmentsWithContext(aws.Context, *xray.PutTraceSegmentsInput, ...aws.Option) (*xray.PutTraceSegmentsOutput, error)
-	PutTraceSegmentsRequest(*xray.PutTraceSegmentsInput) (*aws.Request, *xray.PutTraceSegmentsOutput)
+	PutTraceSegmentsRequest(*xray.PutTraceSegmentsInput) xray.PutTraceSegmentsRequest
 }
 
 var _ XRayAPI = (*xray.XRay)(nil)

@@ -11,31 +11,42 @@ import (
 
 const opBatchGetNamedQuery = "BatchGetNamedQuery"
 
-// BatchGetNamedQueryRequest generates a "aws.Request" representing the
-// client's request for the BatchGetNamedQuery operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetNamedQueryRequest is a API request type for the BatchGetNamedQuery API operation.
+type BatchGetNamedQueryRequest struct {
+	*aws.Request
+	Input *BatchGetNamedQueryInput
+}
+
+// Send marshals and sends the BatchGetNamedQuery API request.
+func (r BatchGetNamedQueryRequest) Send() (*BatchGetNamedQueryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetNamedQueryOutput), nil
+}
+
+// BatchGetNamedQueryRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetNamedQuery for more information on using the BatchGetNamedQuery
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the details of a single named query or a list of up to 50 queries,
+// which you provide as an array of query ID strings. Use ListNamedQueries to
+// get the list of named query IDs. If information could not be retrieved for
+// a submitted query ID, information about the query ID submitted is listed
+// under UnprocessedNamedQueryId. Named queries are different from executed
+// queries. Use BatchGetQueryExecution to get details about each unique query
+// execution, and ListQueryExecutions to get a list of query execution IDs.
 //
 //    // Example sending a request using the BatchGetNamedQueryRequest method.
-//    req, resp := client.BatchGetNamedQueryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetNamedQueryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetNamedQuery
-func (c *Athena) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) (req *aws.Request, output *BatchGetNamedQueryOutput) {
+func (c *Athena) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) BatchGetNamedQueryRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetNamedQuery,
 		HTTPMethod: "POST",
@@ -46,86 +57,46 @@ func (c *Athena) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) (req 
 		input = &BatchGetNamedQueryInput{}
 	}
 
-	output = &BatchGetNamedQueryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetNamedQuery API operation for Amazon Athena.
-//
-// Returns the details of a single named query or a list of up to 50 queries,
-// which you provide as an array of query ID strings. Use ListNamedQueries to
-// get the list of named query IDs. If information could not be retrieved for
-// a submitted query ID, information about the query ID submitted is listed
-// under UnprocessedNamedQueryId. Named queries are different from executed
-// queries. Use BatchGetQueryExecution to get details about each unique query
-// execution, and ListQueryExecutions to get a list of query execution IDs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation BatchGetNamedQuery for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetNamedQuery
-func (c *Athena) BatchGetNamedQuery(input *BatchGetNamedQueryInput) (*BatchGetNamedQueryOutput, error) {
-	req, out := c.BatchGetNamedQueryRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetNamedQueryWithContext is the same as BatchGetNamedQuery with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetNamedQuery for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) BatchGetNamedQueryWithContext(ctx aws.Context, input *BatchGetNamedQueryInput, opts ...aws.Option) (*BatchGetNamedQueryOutput, error) {
-	req, out := c.BatchGetNamedQueryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetNamedQueryOutput{})
+	return BatchGetNamedQueryRequest{Request: req, Input: input}
 }
 
 const opBatchGetQueryExecution = "BatchGetQueryExecution"
 
-// BatchGetQueryExecutionRequest generates a "aws.Request" representing the
-// client's request for the BatchGetQueryExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetQueryExecutionRequest is a API request type for the BatchGetQueryExecution API operation.
+type BatchGetQueryExecutionRequest struct {
+	*aws.Request
+	Input *BatchGetQueryExecutionInput
+}
+
+// Send marshals and sends the BatchGetQueryExecution API request.
+func (r BatchGetQueryExecutionRequest) Send() (*BatchGetQueryExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetQueryExecutionOutput), nil
+}
+
+// BatchGetQueryExecutionRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetQueryExecution for more information on using the BatchGetQueryExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the details of a single query execution or a list of up to 50 query
+// executions, which you provide as an array of query execution ID strings.
+// To get a list of query execution IDs, use ListQueryExecutions. Query executions
+// are different from named (saved) queries. Use BatchGetNamedQuery to get details
+// about named queries.
 //
 //    // Example sending a request using the BatchGetQueryExecutionRequest method.
-//    req, resp := client.BatchGetQueryExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetQueryExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetQueryExecution
-func (c *Athena) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInput) (req *aws.Request, output *BatchGetQueryExecutionOutput) {
+func (c *Athena) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInput) BatchGetQueryExecutionRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetQueryExecution,
 		HTTPMethod: "POST",
@@ -136,84 +107,46 @@ func (c *Athena) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInpu
 		input = &BatchGetQueryExecutionInput{}
 	}
 
-	output = &BatchGetQueryExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetQueryExecution API operation for Amazon Athena.
-//
-// Returns the details of a single query execution or a list of up to 50 query
-// executions, which you provide as an array of query execution ID strings.
-// To get a list of query execution IDs, use ListQueryExecutions. Query executions
-// are different from named (saved) queries. Use BatchGetNamedQuery to get details
-// about named queries.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation BatchGetQueryExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetQueryExecution
-func (c *Athena) BatchGetQueryExecution(input *BatchGetQueryExecutionInput) (*BatchGetQueryExecutionOutput, error) {
-	req, out := c.BatchGetQueryExecutionRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetQueryExecutionWithContext is the same as BatchGetQueryExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetQueryExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) BatchGetQueryExecutionWithContext(ctx aws.Context, input *BatchGetQueryExecutionInput, opts ...aws.Option) (*BatchGetQueryExecutionOutput, error) {
-	req, out := c.BatchGetQueryExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetQueryExecutionOutput{})
+	return BatchGetQueryExecutionRequest{Request: req, Input: input}
 }
 
 const opCreateNamedQuery = "CreateNamedQuery"
 
-// CreateNamedQueryRequest generates a "aws.Request" representing the
-// client's request for the CreateNamedQuery operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateNamedQueryRequest is a API request type for the CreateNamedQuery API operation.
+type CreateNamedQueryRequest struct {
+	*aws.Request
+	Input *CreateNamedQueryInput
+}
+
+// Send marshals and sends the CreateNamedQuery API request.
+func (r CreateNamedQueryRequest) Send() (*CreateNamedQueryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateNamedQueryOutput), nil
+}
+
+// CreateNamedQueryRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a named query.
 //
-// See CreateNamedQuery for more information on using the CreateNamedQuery
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For code samples using the AWS SDK for Java, see Examples and Code Samples
+// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
+// Athena User Guide.
 //
 //    // Example sending a request using the CreateNamedQueryRequest method.
-//    req, resp := client.CreateNamedQueryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateNamedQueryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNamedQuery
-func (c *Athena) CreateNamedQueryRequest(input *CreateNamedQueryInput) (req *aws.Request, output *CreateNamedQueryOutput) {
+func (c *Athena) CreateNamedQueryRequest(input *CreateNamedQueryInput) CreateNamedQueryRequest {
 	op := &aws.Operation{
 		Name:       opCreateNamedQuery,
 		HTTPMethod: "POST",
@@ -224,84 +157,46 @@ func (c *Athena) CreateNamedQueryRequest(input *CreateNamedQueryInput) (req *aws
 		input = &CreateNamedQueryInput{}
 	}
 
-	output = &CreateNamedQueryOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateNamedQueryOutput{})
+	return CreateNamedQueryRequest{Request: req, Input: input}
 }
 
-// CreateNamedQuery API operation for Amazon Athena.
+const opDeleteNamedQuery = "DeleteNamedQuery"
+
+// DeleteNamedQueryRequest is a API request type for the DeleteNamedQuery API operation.
+type DeleteNamedQueryRequest struct {
+	*aws.Request
+	Input *DeleteNamedQueryInput
+}
+
+// Send marshals and sends the DeleteNamedQuery API request.
+func (r DeleteNamedQueryRequest) Send() (*DeleteNamedQueryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteNamedQueryOutput), nil
+}
+
+// DeleteNamedQueryRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Creates a named query.
+// Deletes a named query.
 //
 // For code samples using the AWS SDK for Java, see Examples and Code Samples
 // (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
 // Athena User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation CreateNamedQuery for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNamedQuery
-func (c *Athena) CreateNamedQuery(input *CreateNamedQueryInput) (*CreateNamedQueryOutput, error) {
-	req, out := c.CreateNamedQueryRequest(input)
-	return out, req.Send()
-}
-
-// CreateNamedQueryWithContext is the same as CreateNamedQuery with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateNamedQuery for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) CreateNamedQueryWithContext(ctx aws.Context, input *CreateNamedQueryInput, opts ...aws.Option) (*CreateNamedQueryOutput, error) {
-	req, out := c.CreateNamedQueryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteNamedQuery = "DeleteNamedQuery"
-
-// DeleteNamedQueryRequest generates a "aws.Request" representing the
-// client's request for the DeleteNamedQuery operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteNamedQuery for more information on using the DeleteNamedQuery
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the DeleteNamedQueryRequest method.
-//    req, resp := client.DeleteNamedQueryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteNamedQueryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNamedQuery
-func (c *Athena) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) (req *aws.Request, output *DeleteNamedQueryOutput) {
+func (c *Athena) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) DeleteNamedQueryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNamedQuery,
 		HTTPMethod: "POST",
@@ -312,84 +207,42 @@ func (c *Athena) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) (req *aws
 		input = &DeleteNamedQueryInput{}
 	}
 
-	output = &DeleteNamedQueryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteNamedQuery API operation for Amazon Athena.
-//
-// Deletes a named query.
-//
-// For code samples using the AWS SDK for Java, see Examples and Code Samples
-// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
-// Athena User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation DeleteNamedQuery for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNamedQuery
-func (c *Athena) DeleteNamedQuery(input *DeleteNamedQueryInput) (*DeleteNamedQueryOutput, error) {
-	req, out := c.DeleteNamedQueryRequest(input)
-	return out, req.Send()
-}
-
-// DeleteNamedQueryWithContext is the same as DeleteNamedQuery with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteNamedQuery for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) DeleteNamedQueryWithContext(ctx aws.Context, input *DeleteNamedQueryInput, opts ...aws.Option) (*DeleteNamedQueryOutput, error) {
-	req, out := c.DeleteNamedQueryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteNamedQueryOutput{})
+	return DeleteNamedQueryRequest{Request: req, Input: input}
 }
 
 const opGetNamedQuery = "GetNamedQuery"
 
-// GetNamedQueryRequest generates a "aws.Request" representing the
-// client's request for the GetNamedQuery operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetNamedQueryRequest is a API request type for the GetNamedQuery API operation.
+type GetNamedQueryRequest struct {
+	*aws.Request
+	Input *GetNamedQueryInput
+}
+
+// Send marshals and sends the GetNamedQuery API request.
+func (r GetNamedQueryRequest) Send() (*GetNamedQueryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetNamedQueryOutput), nil
+}
+
+// GetNamedQueryRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetNamedQuery for more information on using the GetNamedQuery
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a single query.
 //
 //    // Example sending a request using the GetNamedQueryRequest method.
-//    req, resp := client.GetNamedQueryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetNamedQueryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNamedQuery
-func (c *Athena) GetNamedQueryRequest(input *GetNamedQueryInput) (req *aws.Request, output *GetNamedQueryOutput) {
+func (c *Athena) GetNamedQueryRequest(input *GetNamedQueryInput) GetNamedQueryRequest {
 	op := &aws.Operation{
 		Name:       opGetNamedQuery,
 		HTTPMethod: "POST",
@@ -400,80 +253,43 @@ func (c *Athena) GetNamedQueryRequest(input *GetNamedQueryInput) (req *aws.Reque
 		input = &GetNamedQueryInput{}
 	}
 
-	output = &GetNamedQueryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetNamedQuery API operation for Amazon Athena.
-//
-// Returns information about a single query.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation GetNamedQuery for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNamedQuery
-func (c *Athena) GetNamedQuery(input *GetNamedQueryInput) (*GetNamedQueryOutput, error) {
-	req, out := c.GetNamedQueryRequest(input)
-	return out, req.Send()
-}
-
-// GetNamedQueryWithContext is the same as GetNamedQuery with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetNamedQuery for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) GetNamedQueryWithContext(ctx aws.Context, input *GetNamedQueryInput, opts ...aws.Option) (*GetNamedQueryOutput, error) {
-	req, out := c.GetNamedQueryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetNamedQueryOutput{})
+	return GetNamedQueryRequest{Request: req, Input: input}
 }
 
 const opGetQueryExecution = "GetQueryExecution"
 
-// GetQueryExecutionRequest generates a "aws.Request" representing the
-// client's request for the GetQueryExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetQueryExecutionRequest is a API request type for the GetQueryExecution API operation.
+type GetQueryExecutionRequest struct {
+	*aws.Request
+	Input *GetQueryExecutionInput
+}
+
+// Send marshals and sends the GetQueryExecution API request.
+func (r GetQueryExecutionRequest) Send() (*GetQueryExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQueryExecutionOutput), nil
+}
+
+// GetQueryExecutionRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetQueryExecution for more information on using the GetQueryExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a single execution of a query. Each time a query
+// executes, information about the query execution is saved with a unique ID.
 //
 //    // Example sending a request using the GetQueryExecutionRequest method.
-//    req, resp := client.GetQueryExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetQueryExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution
-func (c *Athena) GetQueryExecutionRequest(input *GetQueryExecutionInput) (req *aws.Request, output *GetQueryExecutionOutput) {
+func (c *Athena) GetQueryExecutionRequest(input *GetQueryExecutionInput) GetQueryExecutionRequest {
 	op := &aws.Operation{
 		Name:       opGetQueryExecution,
 		HTTPMethod: "POST",
@@ -484,81 +300,44 @@ func (c *Athena) GetQueryExecutionRequest(input *GetQueryExecutionInput) (req *a
 		input = &GetQueryExecutionInput{}
 	}
 
-	output = &GetQueryExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetQueryExecution API operation for Amazon Athena.
-//
-// Returns information about a single execution of a query. Each time a query
-// executes, information about the query execution is saved with a unique ID.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation GetQueryExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution
-func (c *Athena) GetQueryExecution(input *GetQueryExecutionInput) (*GetQueryExecutionOutput, error) {
-	req, out := c.GetQueryExecutionRequest(input)
-	return out, req.Send()
-}
-
-// GetQueryExecutionWithContext is the same as GetQueryExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetQueryExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) GetQueryExecutionWithContext(ctx aws.Context, input *GetQueryExecutionInput, opts ...aws.Option) (*GetQueryExecutionOutput, error) {
-	req, out := c.GetQueryExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetQueryExecutionOutput{})
+	return GetQueryExecutionRequest{Request: req, Input: input}
 }
 
 const opGetQueryResults = "GetQueryResults"
 
-// GetQueryResultsRequest generates a "aws.Request" representing the
-// client's request for the GetQueryResults operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetQueryResultsRequest is a API request type for the GetQueryResults API operation.
+type GetQueryResultsRequest struct {
+	*aws.Request
+	Input *GetQueryResultsInput
+}
+
+// Send marshals and sends the GetQueryResults API request.
+func (r GetQueryResultsRequest) Send() (*GetQueryResultsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQueryResultsOutput), nil
+}
+
+// GetQueryResultsRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetQueryResults for more information on using the GetQueryResults
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the results of a single query execution specified by QueryExecutionId.
+// This request does not execute the query but returns results. Use StartQueryExecution
+// to run a query.
 //
 //    // Example sending a request using the GetQueryResultsRequest method.
-//    req, resp := client.GetQueryResultsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetQueryResultsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResults
-func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) (req *aws.Request, output *GetQueryResultsOutput) {
+func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryResultsRequest {
 	op := &aws.Operation{
 		Name:       opGetQueryResults,
 		HTTPMethod: "POST",
@@ -575,53 +354,8 @@ func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) (req *aws.R
 		input = &GetQueryResultsInput{}
 	}
 
-	output = &GetQueryResultsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetQueryResults API operation for Amazon Athena.
-//
-// Returns the results of a single query execution specified by QueryExecutionId.
-// This request does not execute the query but returns results. Use StartQueryExecution
-// to run a query.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation GetQueryResults for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResults
-func (c *Athena) GetQueryResults(input *GetQueryResultsInput) (*GetQueryResultsOutput, error) {
-	req, out := c.GetQueryResultsRequest(input)
-	return out, req.Send()
-}
-
-// GetQueryResultsWithContext is the same as GetQueryResults with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetQueryResults for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) GetQueryResultsWithContext(ctx aws.Context, input *GetQueryResultsInput, opts ...aws.Option) (*GetQueryResultsOutput, error) {
-	req, out := c.GetQueryResultsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetQueryResultsOutput{})
+	return GetQueryResultsRequest{Request: req, Input: input}
 }
 
 // GetQueryResultsPages iterates over the pages of a GetQueryResults operation,
@@ -660,10 +394,10 @@ func (c *Athena) GetQueryResultsPagesWithContext(ctx aws.Context, input *GetQuer
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetQueryResultsRequest(inCpy)
+			req := c.GetQueryResultsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -676,31 +410,40 @@ func (c *Athena) GetQueryResultsPagesWithContext(ctx aws.Context, input *GetQuer
 
 const opListNamedQueries = "ListNamedQueries"
 
-// ListNamedQueriesRequest generates a "aws.Request" representing the
-// client's request for the ListNamedQueries operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListNamedQueriesRequest is a API request type for the ListNamedQueries API operation.
+type ListNamedQueriesRequest struct {
+	*aws.Request
+	Input *ListNamedQueriesInput
+}
+
+// Send marshals and sends the ListNamedQueries API request.
+func (r ListNamedQueriesRequest) Send() (*ListNamedQueriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListNamedQueriesOutput), nil
+}
+
+// ListNamedQueriesRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Provides a list of all available query IDs.
 //
-// See ListNamedQueries for more information on using the ListNamedQueries
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For code samples using the AWS SDK for Java, see Examples and Code Samples
+// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
+// Athena User Guide.
 //
 //    // Example sending a request using the ListNamedQueriesRequest method.
-//    req, resp := client.ListNamedQueriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListNamedQueriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueries
-func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) (req *aws.Request, output *ListNamedQueriesOutput) {
+func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamedQueriesRequest {
 	op := &aws.Operation{
 		Name:       opListNamedQueries,
 		HTTPMethod: "POST",
@@ -717,55 +460,8 @@ func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) (req *aws
 		input = &ListNamedQueriesInput{}
 	}
 
-	output = &ListNamedQueriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListNamedQueries API operation for Amazon Athena.
-//
-// Provides a list of all available query IDs.
-//
-// For code samples using the AWS SDK for Java, see Examples and Code Samples
-// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
-// Athena User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation ListNamedQueries for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueries
-func (c *Athena) ListNamedQueries(input *ListNamedQueriesInput) (*ListNamedQueriesOutput, error) {
-	req, out := c.ListNamedQueriesRequest(input)
-	return out, req.Send()
-}
-
-// ListNamedQueriesWithContext is the same as ListNamedQueries with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListNamedQueries for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) ListNamedQueriesWithContext(ctx aws.Context, input *ListNamedQueriesInput, opts ...aws.Option) (*ListNamedQueriesOutput, error) {
-	req, out := c.ListNamedQueriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListNamedQueriesOutput{})
+	return ListNamedQueriesRequest{Request: req, Input: input}
 }
 
 // ListNamedQueriesPages iterates over the pages of a ListNamedQueries operation,
@@ -804,10 +500,10 @@ func (c *Athena) ListNamedQueriesPagesWithContext(ctx aws.Context, input *ListNa
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListNamedQueriesRequest(inCpy)
+			req := c.ListNamedQueriesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -820,31 +516,40 @@ func (c *Athena) ListNamedQueriesPagesWithContext(ctx aws.Context, input *ListNa
 
 const opListQueryExecutions = "ListQueryExecutions"
 
-// ListQueryExecutionsRequest generates a "aws.Request" representing the
-// client's request for the ListQueryExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListQueryExecutionsRequest is a API request type for the ListQueryExecutions API operation.
+type ListQueryExecutionsRequest struct {
+	*aws.Request
+	Input *ListQueryExecutionsInput
+}
+
+// Send marshals and sends the ListQueryExecutions API request.
+func (r ListQueryExecutionsRequest) Send() (*ListQueryExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListQueryExecutionsOutput), nil
+}
+
+// ListQueryExecutionsRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Provides a list of all available query execution IDs.
 //
-// See ListQueryExecutions for more information on using the ListQueryExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For code samples using the AWS SDK for Java, see Examples and Code Samples
+// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
+// Athena User Guide.
 //
 //    // Example sending a request using the ListQueryExecutionsRequest method.
-//    req, resp := client.ListQueryExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListQueryExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutions
-func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) (req *aws.Request, output *ListQueryExecutionsOutput) {
+func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) ListQueryExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListQueryExecutions,
 		HTTPMethod: "POST",
@@ -861,55 +566,8 @@ func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) (re
 		input = &ListQueryExecutionsInput{}
 	}
 
-	output = &ListQueryExecutionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListQueryExecutions API operation for Amazon Athena.
-//
-// Provides a list of all available query execution IDs.
-//
-// For code samples using the AWS SDK for Java, see Examples and Code Samples
-// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
-// Athena User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation ListQueryExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutions
-func (c *Athena) ListQueryExecutions(input *ListQueryExecutionsInput) (*ListQueryExecutionsOutput, error) {
-	req, out := c.ListQueryExecutionsRequest(input)
-	return out, req.Send()
-}
-
-// ListQueryExecutionsWithContext is the same as ListQueryExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListQueryExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) ListQueryExecutionsWithContext(ctx aws.Context, input *ListQueryExecutionsInput, opts ...aws.Option) (*ListQueryExecutionsOutput, error) {
-	req, out := c.ListQueryExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListQueryExecutionsOutput{})
+	return ListQueryExecutionsRequest{Request: req, Input: input}
 }
 
 // ListQueryExecutionsPages iterates over the pages of a ListQueryExecutions operation,
@@ -948,10 +606,10 @@ func (c *Athena) ListQueryExecutionsPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListQueryExecutionsRequest(inCpy)
+			req := c.ListQueryExecutionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -964,31 +622,40 @@ func (c *Athena) ListQueryExecutionsPagesWithContext(ctx aws.Context, input *Lis
 
 const opStartQueryExecution = "StartQueryExecution"
 
-// StartQueryExecutionRequest generates a "aws.Request" representing the
-// client's request for the StartQueryExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartQueryExecutionRequest is a API request type for the StartQueryExecution API operation.
+type StartQueryExecutionRequest struct {
+	*aws.Request
+	Input *StartQueryExecutionInput
+}
+
+// Send marshals and sends the StartQueryExecution API request.
+func (r StartQueryExecutionRequest) Send() (*StartQueryExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartQueryExecutionOutput), nil
+}
+
+// StartQueryExecutionRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Runs (executes) the SQL query statements contained in the Query string.
 //
-// See StartQueryExecution for more information on using the StartQueryExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For code samples using the AWS SDK for Java, see Examples and Code Samples
+// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
+// Athena User Guide.
 //
 //    // Example sending a request using the StartQueryExecutionRequest method.
-//    req, resp := client.StartQueryExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartQueryExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecution
-func (c *Athena) StartQueryExecutionRequest(input *StartQueryExecutionInput) (req *aws.Request, output *StartQueryExecutionOutput) {
+func (c *Athena) StartQueryExecutionRequest(input *StartQueryExecutionInput) StartQueryExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStartQueryExecution,
 		HTTPMethod: "POST",
@@ -999,87 +666,46 @@ func (c *Athena) StartQueryExecutionRequest(input *StartQueryExecutionInput) (re
 		input = &StartQueryExecutionInput{}
 	}
 
-	output = &StartQueryExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StartQueryExecutionOutput{})
+	return StartQueryExecutionRequest{Request: req, Input: input}
 }
 
-// StartQueryExecution API operation for Amazon Athena.
+const opStopQueryExecution = "StopQueryExecution"
+
+// StopQueryExecutionRequest is a API request type for the StopQueryExecution API operation.
+type StopQueryExecutionRequest struct {
+	*aws.Request
+	Input *StopQueryExecutionInput
+}
+
+// Send marshals and sends the StopQueryExecution API request.
+func (r StopQueryExecutionRequest) Send() (*StopQueryExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopQueryExecutionOutput), nil
+}
+
+// StopQueryExecutionRequest returns a request value for making API operation for
+// Amazon Athena.
 //
-// Runs (executes) the SQL query statements contained in the Query string.
+// Stops a query execution.
 //
 // For code samples using the AWS SDK for Java, see Examples and Code Samples
 // (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
 // Athena User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation StartQueryExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Indicates that the request was throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecution
-func (c *Athena) StartQueryExecution(input *StartQueryExecutionInput) (*StartQueryExecutionOutput, error) {
-	req, out := c.StartQueryExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StartQueryExecutionWithContext is the same as StartQueryExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartQueryExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) StartQueryExecutionWithContext(ctx aws.Context, input *StartQueryExecutionInput, opts ...aws.Option) (*StartQueryExecutionOutput, error) {
-	req, out := c.StartQueryExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStopQueryExecution = "StopQueryExecution"
-
-// StopQueryExecutionRequest generates a "aws.Request" representing the
-// client's request for the StopQueryExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopQueryExecution for more information on using the StopQueryExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the StopQueryExecutionRequest method.
-//    req, resp := client.StopQueryExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopQueryExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecution
-func (c *Athena) StopQueryExecutionRequest(input *StopQueryExecutionInput) (req *aws.Request, output *StopQueryExecutionOutput) {
+func (c *Athena) StopQueryExecutionRequest(input *StopQueryExecutionInput) StopQueryExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStopQueryExecution,
 		HTTPMethod: "POST",
@@ -1090,55 +716,8 @@ func (c *Athena) StopQueryExecutionRequest(input *StopQueryExecutionInput) (req 
 		input = &StopQueryExecutionInput{}
 	}
 
-	output = &StopQueryExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopQueryExecution API operation for Amazon Athena.
-//
-// Stops a query execution.
-//
-// For code samples using the AWS SDK for Java, see Examples and Code Samples
-// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
-// Athena User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Athena's
-// API operation StopQueryExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   Indicates a platform issue, which may be due to a transient condition or
-//   outage.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that something is wrong with the input to the request. For example,
-//   a required parameter may be missing or out of range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecution
-func (c *Athena) StopQueryExecution(input *StopQueryExecutionInput) (*StopQueryExecutionOutput, error) {
-	req, out := c.StopQueryExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StopQueryExecutionWithContext is the same as StopQueryExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopQueryExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) StopQueryExecutionWithContext(ctx aws.Context, input *StopQueryExecutionInput, opts ...aws.Option) (*StopQueryExecutionOutput, error) {
-	req, out := c.StopQueryExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopQueryExecutionOutput{})
+	return StopQueryExecutionRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetNamedQueryInput

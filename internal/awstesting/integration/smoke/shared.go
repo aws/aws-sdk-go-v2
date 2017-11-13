@@ -5,6 +5,7 @@ package smoke
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"regexp"
 	"strconv"
@@ -146,14 +147,14 @@ func init() {
 	})
 }
 
-// findMethod finds the op operation on the v structure using a case-insensitive
+// findMethod finds the method name on the v type using a case-insensitive
 // lookup. Returns nil if no method is found.
-func findMethod(v reflect.Value, op string) *reflect.Value {
+func findMethod(v reflect.Value, methodName string) *reflect.Value {
 	t := v.Type()
-	op = strings.ToLower(op)
+	methodName = strings.ToLower(methodName)
 	for i := 0; i < t.NumMethod(); i++ {
 		name := t.Method(i).Name
-		if strings.ToLower(name) == op {
+		if strings.ToLower(name) == methodName {
 			m := v.MethodByName(name)
 			return &m
 		}
@@ -165,23 +166,35 @@ func findMethod(v reflect.Value, op string) *reflect.Value {
 // table of arguments to set.
 func call(op string, args [][]string, allowError bool) {
 	v := reflect.ValueOf(gucumber.World["client"])
-	if m := findMethod(v, op); m != nil {
-		t := m.Type()
-		in := reflect.New(t.In(0).Elem())
-		fillArgs(in, args)
+	methodName := op + "Request"
+	fmt.Println("Looking to call:", methodName)
+	m := findMethod(v, methodName)
+	if m == nil {
+		gucumber.T.Errorf("failed to find operation " + op + "Request")
+	}
 
-		resps := m.Call([]reflect.Value{in})
-		gucumber.World["response"] = resps[0].Interface()
-		gucumber.World["error"] = resps[1].Interface()
+	t := m.Type()
+	in := reflect.New(t.In(0).Elem())
+	fillArgs(in, args)
 
-		if !allowError {
-			err, _ := gucumber.World["error"].(error)
-			if err != nil {
-				gucumber.T.Errorf("expect no error, got %v", err)
-			}
+	// req := svc.__Request(in)
+	results := m.Call([]reflect.Value{in})
+	m = findMethod(results[0], "Send")
+	if m == nil {
+		gucumber.T.Errorf("failed to find request's send method")
+		return
+	}
+
+	// resp, err := __Request.Send()
+	results = m.Call([]reflect.Value{})
+	gucumber.World["response"] = results[0].Interface()
+	gucumber.World["error"] = results[1].Interface()
+
+	if !allowError {
+		err, _ := gucumber.World["error"].(error)
+		if err != nil {
+			gucumber.T.Errorf("expect no error, got %v", err)
 		}
-	} else {
-		gucumber.T.Errorf("failed to find operation " + op)
 	}
 }
 

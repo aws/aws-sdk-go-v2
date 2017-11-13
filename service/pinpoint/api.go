@@ -9,31 +9,36 @@ import (
 
 const opCreateApp = "CreateApp"
 
-// CreateAppRequest generates a "aws.Request" representing the
-// client's request for the CreateApp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateAppRequest is a API request type for the CreateApp API operation.
+type CreateAppRequest struct {
+	*aws.Request
+	Input *CreateAppInput
+}
+
+// Send marshals and sends the CreateApp API request.
+func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAppOutput), nil
+}
+
+// CreateAppRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateApp for more information on using the CreateApp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates or updates an app.
 //
 //    // Example sending a request using the CreateAppRequest method.
-//    req, resp := client.CreateAppRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp
-func (c *Pinpoint) CreateAppRequest(input *CreateAppInput) (req *aws.Request, output *CreateAppOutput) {
+func (c *Pinpoint) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 	op := &aws.Operation{
 		Name:       opCreateApp,
 		HTTPMethod: "POST",
@@ -44,84 +49,42 @@ func (c *Pinpoint) CreateAppRequest(input *CreateAppInput) (req *aws.Request, ou
 		input = &CreateAppInput{}
 	}
 
-	output = &CreateAppOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateApp API operation for Amazon Pinpoint.
-//
-// Creates or updates an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation CreateApp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp
-func (c *Pinpoint) CreateApp(input *CreateAppInput) (*CreateAppOutput, error) {
-	req, out := c.CreateAppRequest(input)
-	return out, req.Send()
-}
-
-// CreateAppWithContext is the same as CreateApp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateApp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, opts ...aws.Option) (*CreateAppOutput, error) {
-	req, out := c.CreateAppRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateAppOutput{})
+	return CreateAppRequest{Request: req, Input: input}
 }
 
 const opCreateCampaign = "CreateCampaign"
 
-// CreateCampaignRequest generates a "aws.Request" representing the
-// client's request for the CreateCampaign operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCampaignRequest is a API request type for the CreateCampaign API operation.
+type CreateCampaignRequest struct {
+	*aws.Request
+	Input *CreateCampaignInput
+}
+
+// Send marshals and sends the CreateCampaign API request.
+func (r CreateCampaignRequest) Send() (*CreateCampaignOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCampaignOutput), nil
+}
+
+// CreateCampaignRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCampaign for more information on using the CreateCampaign
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates or updates a campaign.
 //
 //    // Example sending a request using the CreateCampaignRequest method.
-//    req, resp := client.CreateCampaignRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCampaignRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaign
-func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) (req *aws.Request, output *CreateCampaignOutput) {
+func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) CreateCampaignRequest {
 	op := &aws.Operation{
 		Name:       opCreateCampaign,
 		HTTPMethod: "POST",
@@ -132,84 +95,42 @@ func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) (req *aws.R
 		input = &CreateCampaignInput{}
 	}
 
-	output = &CreateCampaignOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCampaign API operation for Amazon Pinpoint.
-//
-// Creates or updates a campaign.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation CreateCampaign for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaign
-func (c *Pinpoint) CreateCampaign(input *CreateCampaignInput) (*CreateCampaignOutput, error) {
-	req, out := c.CreateCampaignRequest(input)
-	return out, req.Send()
-}
-
-// CreateCampaignWithContext is the same as CreateCampaign with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCampaign for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) CreateCampaignWithContext(ctx aws.Context, input *CreateCampaignInput, opts ...aws.Option) (*CreateCampaignOutput, error) {
-	req, out := c.CreateCampaignRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCampaignOutput{})
+	return CreateCampaignRequest{Request: req, Input: input}
 }
 
 const opCreateImportJob = "CreateImportJob"
 
-// CreateImportJobRequest generates a "aws.Request" representing the
-// client's request for the CreateImportJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateImportJobRequest is a API request type for the CreateImportJob API operation.
+type CreateImportJobRequest struct {
+	*aws.Request
+	Input *CreateImportJobInput
+}
+
+// Send marshals and sends the CreateImportJob API request.
+func (r CreateImportJobRequest) Send() (*CreateImportJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateImportJobOutput), nil
+}
+
+// CreateImportJobRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateImportJob for more information on using the CreateImportJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates or updates an import job.
 //
 //    // Example sending a request using the CreateImportJobRequest method.
-//    req, resp := client.CreateImportJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateImportJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJob
-func (c *Pinpoint) CreateImportJobRequest(input *CreateImportJobInput) (req *aws.Request, output *CreateImportJobOutput) {
+func (c *Pinpoint) CreateImportJobRequest(input *CreateImportJobInput) CreateImportJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateImportJob,
 		HTTPMethod: "POST",
@@ -220,84 +141,42 @@ func (c *Pinpoint) CreateImportJobRequest(input *CreateImportJobInput) (req *aws
 		input = &CreateImportJobInput{}
 	}
 
-	output = &CreateImportJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateImportJob API operation for Amazon Pinpoint.
-//
-// Creates or updates an import job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation CreateImportJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJob
-func (c *Pinpoint) CreateImportJob(input *CreateImportJobInput) (*CreateImportJobOutput, error) {
-	req, out := c.CreateImportJobRequest(input)
-	return out, req.Send()
-}
-
-// CreateImportJobWithContext is the same as CreateImportJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateImportJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) CreateImportJobWithContext(ctx aws.Context, input *CreateImportJobInput, opts ...aws.Option) (*CreateImportJobOutput, error) {
-	req, out := c.CreateImportJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateImportJobOutput{})
+	return CreateImportJobRequest{Request: req, Input: input}
 }
 
 const opCreateSegment = "CreateSegment"
 
-// CreateSegmentRequest generates a "aws.Request" representing the
-// client's request for the CreateSegment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSegmentRequest is a API request type for the CreateSegment API operation.
+type CreateSegmentRequest struct {
+	*aws.Request
+	Input *CreateSegmentInput
+}
+
+// Send marshals and sends the CreateSegment API request.
+func (r CreateSegmentRequest) Send() (*CreateSegmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSegmentOutput), nil
+}
+
+// CreateSegmentRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSegment for more information on using the CreateSegment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used to create or update a segment.
 //
 //    // Example sending a request using the CreateSegmentRequest method.
-//    req, resp := client.CreateSegmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSegmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegment
-func (c *Pinpoint) CreateSegmentRequest(input *CreateSegmentInput) (req *aws.Request, output *CreateSegmentOutput) {
+func (c *Pinpoint) CreateSegmentRequest(input *CreateSegmentInput) CreateSegmentRequest {
 	op := &aws.Operation{
 		Name:       opCreateSegment,
 		HTTPMethod: "POST",
@@ -308,84 +187,42 @@ func (c *Pinpoint) CreateSegmentRequest(input *CreateSegmentInput) (req *aws.Req
 		input = &CreateSegmentInput{}
 	}
 
-	output = &CreateSegmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSegment API operation for Amazon Pinpoint.
-//
-// Used to create or update a segment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation CreateSegment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegment
-func (c *Pinpoint) CreateSegment(input *CreateSegmentInput) (*CreateSegmentOutput, error) {
-	req, out := c.CreateSegmentRequest(input)
-	return out, req.Send()
-}
-
-// CreateSegmentWithContext is the same as CreateSegment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSegment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) CreateSegmentWithContext(ctx aws.Context, input *CreateSegmentInput, opts ...aws.Option) (*CreateSegmentOutput, error) {
-	req, out := c.CreateSegmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSegmentOutput{})
+	return CreateSegmentRequest{Request: req, Input: input}
 }
 
 const opDeleteAdmChannel = "DeleteAdmChannel"
 
-// DeleteAdmChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteAdmChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAdmChannelRequest is a API request type for the DeleteAdmChannel API operation.
+type DeleteAdmChannelRequest struct {
+	*aws.Request
+	Input *DeleteAdmChannelInput
+}
+
+// Send marshals and sends the DeleteAdmChannel API request.
+func (r DeleteAdmChannelRequest) Send() (*DeleteAdmChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAdmChannelOutput), nil
+}
+
+// DeleteAdmChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAdmChannel for more information on using the DeleteAdmChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete an ADM channel
 //
 //    // Example sending a request using the DeleteAdmChannelRequest method.
-//    req, resp := client.DeleteAdmChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAdmChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannel
-func (c *Pinpoint) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) (req *aws.Request, output *DeleteAdmChannelOutput) {
+func (c *Pinpoint) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) DeleteAdmChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAdmChannel,
 		HTTPMethod: "DELETE",
@@ -396,84 +233,42 @@ func (c *Pinpoint) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) (req *a
 		input = &DeleteAdmChannelInput{}
 	}
 
-	output = &DeleteAdmChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteAdmChannel API operation for Amazon Pinpoint.
-//
-// Delete an ADM channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteAdmChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannel
-func (c *Pinpoint) DeleteAdmChannel(input *DeleteAdmChannelInput) (*DeleteAdmChannelOutput, error) {
-	req, out := c.DeleteAdmChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAdmChannelWithContext is the same as DeleteAdmChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAdmChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteAdmChannelWithContext(ctx aws.Context, input *DeleteAdmChannelInput, opts ...aws.Option) (*DeleteAdmChannelOutput, error) {
-	req, out := c.DeleteAdmChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteAdmChannelOutput{})
+	return DeleteAdmChannelRequest{Request: req, Input: input}
 }
 
 const opDeleteApnsChannel = "DeleteApnsChannel"
 
-// DeleteApnsChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteApnsChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApnsChannelRequest is a API request type for the DeleteApnsChannel API operation.
+type DeleteApnsChannelRequest struct {
+	*aws.Request
+	Input *DeleteApnsChannelInput
+}
+
+// Send marshals and sends the DeleteApnsChannel API request.
+func (r DeleteApnsChannelRequest) Send() (*DeleteApnsChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApnsChannelOutput), nil
+}
+
+// DeleteApnsChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApnsChannel for more information on using the DeleteApnsChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the APNs channel for an app.
 //
 //    // Example sending a request using the DeleteApnsChannelRequest method.
-//    req, resp := client.DeleteApnsChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApnsChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannel
-func (c *Pinpoint) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) (req *aws.Request, output *DeleteApnsChannelOutput) {
+func (c *Pinpoint) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) DeleteApnsChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApnsChannel,
 		HTTPMethod: "DELETE",
@@ -484,84 +279,42 @@ func (c *Pinpoint) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) (req 
 		input = &DeleteApnsChannelInput{}
 	}
 
-	output = &DeleteApnsChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApnsChannel API operation for Amazon Pinpoint.
-//
-// Deletes the APNs channel for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteApnsChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannel
-func (c *Pinpoint) DeleteApnsChannel(input *DeleteApnsChannelInput) (*DeleteApnsChannelOutput, error) {
-	req, out := c.DeleteApnsChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApnsChannelWithContext is the same as DeleteApnsChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApnsChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteApnsChannelWithContext(ctx aws.Context, input *DeleteApnsChannelInput, opts ...aws.Option) (*DeleteApnsChannelOutput, error) {
-	req, out := c.DeleteApnsChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteApnsChannelOutput{})
+	return DeleteApnsChannelRequest{Request: req, Input: input}
 }
 
 const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
 
-// DeleteApnsSandboxChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteApnsSandboxChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApnsSandboxChannelRequest is a API request type for the DeleteApnsSandboxChannel API operation.
+type DeleteApnsSandboxChannelRequest struct {
+	*aws.Request
+	Input *DeleteApnsSandboxChannelInput
+}
+
+// Send marshals and sends the DeleteApnsSandboxChannel API request.
+func (r DeleteApnsSandboxChannelRequest) Send() (*DeleteApnsSandboxChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApnsSandboxChannelOutput), nil
+}
+
+// DeleteApnsSandboxChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApnsSandboxChannel for more information on using the DeleteApnsSandboxChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete an APNS sandbox channel
 //
 //    // Example sending a request using the DeleteApnsSandboxChannelRequest method.
-//    req, resp := client.DeleteApnsSandboxChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApnsSandboxChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannel
-func (c *Pinpoint) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannelInput) (req *aws.Request, output *DeleteApnsSandboxChannelOutput) {
+func (c *Pinpoint) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannelInput) DeleteApnsSandboxChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApnsSandboxChannel,
 		HTTPMethod: "DELETE",
@@ -572,84 +325,42 @@ func (c *Pinpoint) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChann
 		input = &DeleteApnsSandboxChannelInput{}
 	}
 
-	output = &DeleteApnsSandboxChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApnsSandboxChannel API operation for Amazon Pinpoint.
-//
-// Delete an APNS sandbox channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteApnsSandboxChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannel
-func (c *Pinpoint) DeleteApnsSandboxChannel(input *DeleteApnsSandboxChannelInput) (*DeleteApnsSandboxChannelOutput, error) {
-	req, out := c.DeleteApnsSandboxChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApnsSandboxChannelWithContext is the same as DeleteApnsSandboxChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApnsSandboxChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteApnsSandboxChannelWithContext(ctx aws.Context, input *DeleteApnsSandboxChannelInput, opts ...aws.Option) (*DeleteApnsSandboxChannelOutput, error) {
-	req, out := c.DeleteApnsSandboxChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteApnsSandboxChannelOutput{})
+	return DeleteApnsSandboxChannelRequest{Request: req, Input: input}
 }
 
 const opDeleteApp = "DeleteApp"
 
-// DeleteAppRequest generates a "aws.Request" representing the
-// client's request for the DeleteApp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAppRequest is a API request type for the DeleteApp API operation.
+type DeleteAppRequest struct {
+	*aws.Request
+	Input *DeleteAppInput
+}
+
+// Send marshals and sends the DeleteApp API request.
+func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAppOutput), nil
+}
+
+// DeleteAppRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApp for more information on using the DeleteApp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an app.
 //
 //    // Example sending a request using the DeleteAppRequest method.
-//    req, resp := client.DeleteAppRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApp
-func (c *Pinpoint) DeleteAppRequest(input *DeleteAppInput) (req *aws.Request, output *DeleteAppOutput) {
+func (c *Pinpoint) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApp,
 		HTTPMethod: "DELETE",
@@ -660,84 +371,42 @@ func (c *Pinpoint) DeleteAppRequest(input *DeleteAppInput) (req *aws.Request, ou
 		input = &DeleteAppInput{}
 	}
 
-	output = &DeleteAppOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApp API operation for Amazon Pinpoint.
-//
-// Deletes an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteApp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApp
-func (c *Pinpoint) DeleteApp(input *DeleteAppInput) (*DeleteAppOutput, error) {
-	req, out := c.DeleteAppRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAppWithContext is the same as DeleteApp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, opts ...aws.Option) (*DeleteAppOutput, error) {
-	req, out := c.DeleteAppRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteAppOutput{})
+	return DeleteAppRequest{Request: req, Input: input}
 }
 
 const opDeleteBaiduChannel = "DeleteBaiduChannel"
 
-// DeleteBaiduChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteBaiduChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBaiduChannelRequest is a API request type for the DeleteBaiduChannel API operation.
+type DeleteBaiduChannelRequest struct {
+	*aws.Request
+	Input *DeleteBaiduChannelInput
+}
+
+// Send marshals and sends the DeleteBaiduChannel API request.
+func (r DeleteBaiduChannelRequest) Send() (*DeleteBaiduChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBaiduChannelOutput), nil
+}
+
+// DeleteBaiduChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBaiduChannel for more information on using the DeleteBaiduChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a BAIDU GCM channel
 //
 //    // Example sending a request using the DeleteBaiduChannelRequest method.
-//    req, resp := client.DeleteBaiduChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBaiduChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannel
-func (c *Pinpoint) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) (req *aws.Request, output *DeleteBaiduChannelOutput) {
+func (c *Pinpoint) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) DeleteBaiduChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBaiduChannel,
 		HTTPMethod: "DELETE",
@@ -748,84 +417,42 @@ func (c *Pinpoint) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) (re
 		input = &DeleteBaiduChannelInput{}
 	}
 
-	output = &DeleteBaiduChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteBaiduChannel API operation for Amazon Pinpoint.
-//
-// Delete a BAIDU GCM channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteBaiduChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannel
-func (c *Pinpoint) DeleteBaiduChannel(input *DeleteBaiduChannelInput) (*DeleteBaiduChannelOutput, error) {
-	req, out := c.DeleteBaiduChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBaiduChannelWithContext is the same as DeleteBaiduChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBaiduChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteBaiduChannelWithContext(ctx aws.Context, input *DeleteBaiduChannelInput, opts ...aws.Option) (*DeleteBaiduChannelOutput, error) {
-	req, out := c.DeleteBaiduChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteBaiduChannelOutput{})
+	return DeleteBaiduChannelRequest{Request: req, Input: input}
 }
 
 const opDeleteCampaign = "DeleteCampaign"
 
-// DeleteCampaignRequest generates a "aws.Request" representing the
-// client's request for the DeleteCampaign operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCampaignRequest is a API request type for the DeleteCampaign API operation.
+type DeleteCampaignRequest struct {
+	*aws.Request
+	Input *DeleteCampaignInput
+}
+
+// Send marshals and sends the DeleteCampaign API request.
+func (r DeleteCampaignRequest) Send() (*DeleteCampaignOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCampaignOutput), nil
+}
+
+// DeleteCampaignRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCampaign for more information on using the DeleteCampaign
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a campaign.
 //
 //    // Example sending a request using the DeleteCampaignRequest method.
-//    req, resp := client.DeleteCampaignRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCampaignRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaign
-func (c *Pinpoint) DeleteCampaignRequest(input *DeleteCampaignInput) (req *aws.Request, output *DeleteCampaignOutput) {
+func (c *Pinpoint) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampaignRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCampaign,
 		HTTPMethod: "DELETE",
@@ -836,84 +463,42 @@ func (c *Pinpoint) DeleteCampaignRequest(input *DeleteCampaignInput) (req *aws.R
 		input = &DeleteCampaignInput{}
 	}
 
-	output = &DeleteCampaignOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCampaign API operation for Amazon Pinpoint.
-//
-// Deletes a campaign.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteCampaign for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaign
-func (c *Pinpoint) DeleteCampaign(input *DeleteCampaignInput) (*DeleteCampaignOutput, error) {
-	req, out := c.DeleteCampaignRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCampaignWithContext is the same as DeleteCampaign with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCampaign for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteCampaignWithContext(ctx aws.Context, input *DeleteCampaignInput, opts ...aws.Option) (*DeleteCampaignOutput, error) {
-	req, out := c.DeleteCampaignRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteCampaignOutput{})
+	return DeleteCampaignRequest{Request: req, Input: input}
 }
 
 const opDeleteEmailChannel = "DeleteEmailChannel"
 
-// DeleteEmailChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteEmailChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEmailChannelRequest is a API request type for the DeleteEmailChannel API operation.
+type DeleteEmailChannelRequest struct {
+	*aws.Request
+	Input *DeleteEmailChannelInput
+}
+
+// Send marshals and sends the DeleteEmailChannel API request.
+func (r DeleteEmailChannelRequest) Send() (*DeleteEmailChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEmailChannelOutput), nil
+}
+
+// DeleteEmailChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteEmailChannel for more information on using the DeleteEmailChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete an email channel
 //
 //    // Example sending a request using the DeleteEmailChannelRequest method.
-//    req, resp := client.DeleteEmailChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEmailChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannel
-func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) (req *aws.Request, output *DeleteEmailChannelOutput) {
+func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) DeleteEmailChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEmailChannel,
 		HTTPMethod: "DELETE",
@@ -924,84 +509,42 @@ func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) (re
 		input = &DeleteEmailChannelInput{}
 	}
 
-	output = &DeleteEmailChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEmailChannel API operation for Amazon Pinpoint.
-//
-// Delete an email channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteEmailChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannel
-func (c *Pinpoint) DeleteEmailChannel(input *DeleteEmailChannelInput) (*DeleteEmailChannelOutput, error) {
-	req, out := c.DeleteEmailChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEmailChannelWithContext is the same as DeleteEmailChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEmailChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteEmailChannelWithContext(ctx aws.Context, input *DeleteEmailChannelInput, opts ...aws.Option) (*DeleteEmailChannelOutput, error) {
-	req, out := c.DeleteEmailChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteEmailChannelOutput{})
+	return DeleteEmailChannelRequest{Request: req, Input: input}
 }
 
 const opDeleteEventStream = "DeleteEventStream"
 
-// DeleteEventStreamRequest generates a "aws.Request" representing the
-// client's request for the DeleteEventStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEventStreamRequest is a API request type for the DeleteEventStream API operation.
+type DeleteEventStreamRequest struct {
+	*aws.Request
+	Input *DeleteEventStreamInput
+}
+
+// Send marshals and sends the DeleteEventStream API request.
+func (r DeleteEventStreamRequest) Send() (*DeleteEventStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEventStreamOutput), nil
+}
+
+// DeleteEventStreamRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteEventStream for more information on using the DeleteEventStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the event stream for an app.
 //
 //    // Example sending a request using the DeleteEventStreamRequest method.
-//    req, resp := client.DeleteEventStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEventStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStream
-func (c *Pinpoint) DeleteEventStreamRequest(input *DeleteEventStreamInput) (req *aws.Request, output *DeleteEventStreamOutput) {
+func (c *Pinpoint) DeleteEventStreamRequest(input *DeleteEventStreamInput) DeleteEventStreamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventStream,
 		HTTPMethod: "DELETE",
@@ -1012,84 +555,42 @@ func (c *Pinpoint) DeleteEventStreamRequest(input *DeleteEventStreamInput) (req 
 		input = &DeleteEventStreamInput{}
 	}
 
-	output = &DeleteEventStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEventStream API operation for Amazon Pinpoint.
-//
-// Deletes the event stream for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteEventStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStream
-func (c *Pinpoint) DeleteEventStream(input *DeleteEventStreamInput) (*DeleteEventStreamOutput, error) {
-	req, out := c.DeleteEventStreamRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEventStreamWithContext is the same as DeleteEventStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEventStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteEventStreamWithContext(ctx aws.Context, input *DeleteEventStreamInput, opts ...aws.Option) (*DeleteEventStreamOutput, error) {
-	req, out := c.DeleteEventStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteEventStreamOutput{})
+	return DeleteEventStreamRequest{Request: req, Input: input}
 }
 
 const opDeleteGcmChannel = "DeleteGcmChannel"
 
-// DeleteGcmChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteGcmChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteGcmChannelRequest is a API request type for the DeleteGcmChannel API operation.
+type DeleteGcmChannelRequest struct {
+	*aws.Request
+	Input *DeleteGcmChannelInput
+}
+
+// Send marshals and sends the DeleteGcmChannel API request.
+func (r DeleteGcmChannelRequest) Send() (*DeleteGcmChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGcmChannelOutput), nil
+}
+
+// DeleteGcmChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteGcmChannel for more information on using the DeleteGcmChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the GCM channel for an app.
 //
 //    // Example sending a request using the DeleteGcmChannelRequest method.
-//    req, resp := client.DeleteGcmChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteGcmChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteGcmChannel
-func (c *Pinpoint) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) (req *aws.Request, output *DeleteGcmChannelOutput) {
+func (c *Pinpoint) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) DeleteGcmChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGcmChannel,
 		HTTPMethod: "DELETE",
@@ -1100,84 +601,42 @@ func (c *Pinpoint) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) (req *a
 		input = &DeleteGcmChannelInput{}
 	}
 
-	output = &DeleteGcmChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteGcmChannel API operation for Amazon Pinpoint.
-//
-// Deletes the GCM channel for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteGcmChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteGcmChannel
-func (c *Pinpoint) DeleteGcmChannel(input *DeleteGcmChannelInput) (*DeleteGcmChannelOutput, error) {
-	req, out := c.DeleteGcmChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteGcmChannelWithContext is the same as DeleteGcmChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteGcmChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteGcmChannelWithContext(ctx aws.Context, input *DeleteGcmChannelInput, opts ...aws.Option) (*DeleteGcmChannelOutput, error) {
-	req, out := c.DeleteGcmChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteGcmChannelOutput{})
+	return DeleteGcmChannelRequest{Request: req, Input: input}
 }
 
 const opDeleteSegment = "DeleteSegment"
 
-// DeleteSegmentRequest generates a "aws.Request" representing the
-// client's request for the DeleteSegment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSegmentRequest is a API request type for the DeleteSegment API operation.
+type DeleteSegmentRequest struct {
+	*aws.Request
+	Input *DeleteSegmentInput
+}
+
+// Send marshals and sends the DeleteSegment API request.
+func (r DeleteSegmentRequest) Send() (*DeleteSegmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSegmentOutput), nil
+}
+
+// DeleteSegmentRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSegment for more information on using the DeleteSegment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a segment.
 //
 //    // Example sending a request using the DeleteSegmentRequest method.
-//    req, resp := client.DeleteSegmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSegmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegment
-func (c *Pinpoint) DeleteSegmentRequest(input *DeleteSegmentInput) (req *aws.Request, output *DeleteSegmentOutput) {
+func (c *Pinpoint) DeleteSegmentRequest(input *DeleteSegmentInput) DeleteSegmentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSegment,
 		HTTPMethod: "DELETE",
@@ -1188,84 +647,42 @@ func (c *Pinpoint) DeleteSegmentRequest(input *DeleteSegmentInput) (req *aws.Req
 		input = &DeleteSegmentInput{}
 	}
 
-	output = &DeleteSegmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSegment API operation for Amazon Pinpoint.
-//
-// Deletes a segment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteSegment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegment
-func (c *Pinpoint) DeleteSegment(input *DeleteSegmentInput) (*DeleteSegmentOutput, error) {
-	req, out := c.DeleteSegmentRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSegmentWithContext is the same as DeleteSegment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSegment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteSegmentWithContext(ctx aws.Context, input *DeleteSegmentInput, opts ...aws.Option) (*DeleteSegmentOutput, error) {
-	req, out := c.DeleteSegmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSegmentOutput{})
+	return DeleteSegmentRequest{Request: req, Input: input}
 }
 
 const opDeleteSmsChannel = "DeleteSmsChannel"
 
-// DeleteSmsChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteSmsChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSmsChannelRequest is a API request type for the DeleteSmsChannel API operation.
+type DeleteSmsChannelRequest struct {
+	*aws.Request
+	Input *DeleteSmsChannelInput
+}
+
+// Send marshals and sends the DeleteSmsChannel API request.
+func (r DeleteSmsChannelRequest) Send() (*DeleteSmsChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSmsChannelOutput), nil
+}
+
+// DeleteSmsChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSmsChannel for more information on using the DeleteSmsChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete an SMS channel
 //
 //    // Example sending a request using the DeleteSmsChannelRequest method.
-//    req, resp := client.DeleteSmsChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSmsChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannel
-func (c *Pinpoint) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) (req *aws.Request, output *DeleteSmsChannelOutput) {
+func (c *Pinpoint) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) DeleteSmsChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSmsChannel,
 		HTTPMethod: "DELETE",
@@ -1276,84 +693,42 @@ func (c *Pinpoint) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) (req *a
 		input = &DeleteSmsChannelInput{}
 	}
 
-	output = &DeleteSmsChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSmsChannel API operation for Amazon Pinpoint.
-//
-// Delete an SMS channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation DeleteSmsChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannel
-func (c *Pinpoint) DeleteSmsChannel(input *DeleteSmsChannelInput) (*DeleteSmsChannelOutput, error) {
-	req, out := c.DeleteSmsChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSmsChannelWithContext is the same as DeleteSmsChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSmsChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) DeleteSmsChannelWithContext(ctx aws.Context, input *DeleteSmsChannelInput, opts ...aws.Option) (*DeleteSmsChannelOutput, error) {
-	req, out := c.DeleteSmsChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSmsChannelOutput{})
+	return DeleteSmsChannelRequest{Request: req, Input: input}
 }
 
 const opGetAdmChannel = "GetAdmChannel"
 
-// GetAdmChannelRequest generates a "aws.Request" representing the
-// client's request for the GetAdmChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAdmChannelRequest is a API request type for the GetAdmChannel API operation.
+type GetAdmChannelRequest struct {
+	*aws.Request
+	Input *GetAdmChannelInput
+}
+
+// Send marshals and sends the GetAdmChannel API request.
+func (r GetAdmChannelRequest) Send() (*GetAdmChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAdmChannelOutput), nil
+}
+
+// GetAdmChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAdmChannel for more information on using the GetAdmChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get an ADM channel
 //
 //    // Example sending a request using the GetAdmChannelRequest method.
-//    req, resp := client.GetAdmChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAdmChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannel
-func (c *Pinpoint) GetAdmChannelRequest(input *GetAdmChannelInput) (req *aws.Request, output *GetAdmChannelOutput) {
+func (c *Pinpoint) GetAdmChannelRequest(input *GetAdmChannelInput) GetAdmChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetAdmChannel,
 		HTTPMethod: "GET",
@@ -1364,84 +739,42 @@ func (c *Pinpoint) GetAdmChannelRequest(input *GetAdmChannelInput) (req *aws.Req
 		input = &GetAdmChannelInput{}
 	}
 
-	output = &GetAdmChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAdmChannel API operation for Amazon Pinpoint.
-//
-// Get an ADM channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetAdmChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannel
-func (c *Pinpoint) GetAdmChannel(input *GetAdmChannelInput) (*GetAdmChannelOutput, error) {
-	req, out := c.GetAdmChannelRequest(input)
-	return out, req.Send()
-}
-
-// GetAdmChannelWithContext is the same as GetAdmChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAdmChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetAdmChannelWithContext(ctx aws.Context, input *GetAdmChannelInput, opts ...aws.Option) (*GetAdmChannelOutput, error) {
-	req, out := c.GetAdmChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAdmChannelOutput{})
+	return GetAdmChannelRequest{Request: req, Input: input}
 }
 
 const opGetApnsChannel = "GetApnsChannel"
 
-// GetApnsChannelRequest generates a "aws.Request" representing the
-// client's request for the GetApnsChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetApnsChannelRequest is a API request type for the GetApnsChannel API operation.
+type GetApnsChannelRequest struct {
+	*aws.Request
+	Input *GetApnsChannelInput
+}
+
+// Send marshals and sends the GetApnsChannel API request.
+func (r GetApnsChannelRequest) Send() (*GetApnsChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetApnsChannelOutput), nil
+}
+
+// GetApnsChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetApnsChannel for more information on using the GetApnsChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the APNs channel for an app.
 //
 //    // Example sending a request using the GetApnsChannelRequest method.
-//    req, resp := client.GetApnsChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetApnsChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannel
-func (c *Pinpoint) GetApnsChannelRequest(input *GetApnsChannelInput) (req *aws.Request, output *GetApnsChannelOutput) {
+func (c *Pinpoint) GetApnsChannelRequest(input *GetApnsChannelInput) GetApnsChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetApnsChannel,
 		HTTPMethod: "GET",
@@ -1452,84 +785,42 @@ func (c *Pinpoint) GetApnsChannelRequest(input *GetApnsChannelInput) (req *aws.R
 		input = &GetApnsChannelInput{}
 	}
 
-	output = &GetApnsChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetApnsChannel API operation for Amazon Pinpoint.
-//
-// Returns information about the APNs channel for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetApnsChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannel
-func (c *Pinpoint) GetApnsChannel(input *GetApnsChannelInput) (*GetApnsChannelOutput, error) {
-	req, out := c.GetApnsChannelRequest(input)
-	return out, req.Send()
-}
-
-// GetApnsChannelWithContext is the same as GetApnsChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetApnsChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetApnsChannelWithContext(ctx aws.Context, input *GetApnsChannelInput, opts ...aws.Option) (*GetApnsChannelOutput, error) {
-	req, out := c.GetApnsChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetApnsChannelOutput{})
+	return GetApnsChannelRequest{Request: req, Input: input}
 }
 
 const opGetApnsSandboxChannel = "GetApnsSandboxChannel"
 
-// GetApnsSandboxChannelRequest generates a "aws.Request" representing the
-// client's request for the GetApnsSandboxChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetApnsSandboxChannelRequest is a API request type for the GetApnsSandboxChannel API operation.
+type GetApnsSandboxChannelRequest struct {
+	*aws.Request
+	Input *GetApnsSandboxChannelInput
+}
+
+// Send marshals and sends the GetApnsSandboxChannel API request.
+func (r GetApnsSandboxChannelRequest) Send() (*GetApnsSandboxChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetApnsSandboxChannelOutput), nil
+}
+
+// GetApnsSandboxChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetApnsSandboxChannel for more information on using the GetApnsSandboxChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get an APNS sandbox channel
 //
 //    // Example sending a request using the GetApnsSandboxChannelRequest method.
-//    req, resp := client.GetApnsSandboxChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetApnsSandboxChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsSandboxChannel
-func (c *Pinpoint) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInput) (req *aws.Request, output *GetApnsSandboxChannelOutput) {
+func (c *Pinpoint) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInput) GetApnsSandboxChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetApnsSandboxChannel,
 		HTTPMethod: "GET",
@@ -1540,84 +831,42 @@ func (c *Pinpoint) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInpu
 		input = &GetApnsSandboxChannelInput{}
 	}
 
-	output = &GetApnsSandboxChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetApnsSandboxChannel API operation for Amazon Pinpoint.
-//
-// Get an APNS sandbox channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetApnsSandboxChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsSandboxChannel
-func (c *Pinpoint) GetApnsSandboxChannel(input *GetApnsSandboxChannelInput) (*GetApnsSandboxChannelOutput, error) {
-	req, out := c.GetApnsSandboxChannelRequest(input)
-	return out, req.Send()
-}
-
-// GetApnsSandboxChannelWithContext is the same as GetApnsSandboxChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetApnsSandboxChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetApnsSandboxChannelWithContext(ctx aws.Context, input *GetApnsSandboxChannelInput, opts ...aws.Option) (*GetApnsSandboxChannelOutput, error) {
-	req, out := c.GetApnsSandboxChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetApnsSandboxChannelOutput{})
+	return GetApnsSandboxChannelRequest{Request: req, Input: input}
 }
 
 const opGetApp = "GetApp"
 
-// GetAppRequest generates a "aws.Request" representing the
-// client's request for the GetApp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAppRequest is a API request type for the GetApp API operation.
+type GetAppRequest struct {
+	*aws.Request
+	Input *GetAppInput
+}
+
+// Send marshals and sends the GetApp API request.
+func (r GetAppRequest) Send() (*GetAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAppOutput), nil
+}
+
+// GetAppRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetApp for more information on using the GetApp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about an app.
 //
 //    // Example sending a request using the GetAppRequest method.
-//    req, resp := client.GetAppRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp
-func (c *Pinpoint) GetAppRequest(input *GetAppInput) (req *aws.Request, output *GetAppOutput) {
+func (c *Pinpoint) GetAppRequest(input *GetAppInput) GetAppRequest {
 	op := &aws.Operation{
 		Name:       opGetApp,
 		HTTPMethod: "GET",
@@ -1628,84 +877,42 @@ func (c *Pinpoint) GetAppRequest(input *GetAppInput) (req *aws.Request, output *
 		input = &GetAppInput{}
 	}
 
-	output = &GetAppOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetApp API operation for Amazon Pinpoint.
-//
-// Returns information about an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetApp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp
-func (c *Pinpoint) GetApp(input *GetAppInput) (*GetAppOutput, error) {
-	req, out := c.GetAppRequest(input)
-	return out, req.Send()
-}
-
-// GetAppWithContext is the same as GetApp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetApp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetAppWithContext(ctx aws.Context, input *GetAppInput, opts ...aws.Option) (*GetAppOutput, error) {
-	req, out := c.GetAppRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAppOutput{})
+	return GetAppRequest{Request: req, Input: input}
 }
 
 const opGetApplicationSettings = "GetApplicationSettings"
 
-// GetApplicationSettingsRequest generates a "aws.Request" representing the
-// client's request for the GetApplicationSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetApplicationSettingsRequest is a API request type for the GetApplicationSettings API operation.
+type GetApplicationSettingsRequest struct {
+	*aws.Request
+	Input *GetApplicationSettingsInput
+}
+
+// Send marshals and sends the GetApplicationSettings API request.
+func (r GetApplicationSettingsRequest) Send() (*GetApplicationSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetApplicationSettingsOutput), nil
+}
+
+// GetApplicationSettingsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetApplicationSettings for more information on using the GetApplicationSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used to request the settings for an app.
 //
 //    // Example sending a request using the GetApplicationSettingsRequest method.
-//    req, resp := client.GetApplicationSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetApplicationSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettings
-func (c *Pinpoint) GetApplicationSettingsRequest(input *GetApplicationSettingsInput) (req *aws.Request, output *GetApplicationSettingsOutput) {
+func (c *Pinpoint) GetApplicationSettingsRequest(input *GetApplicationSettingsInput) GetApplicationSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetApplicationSettings,
 		HTTPMethod: "GET",
@@ -1716,84 +923,42 @@ func (c *Pinpoint) GetApplicationSettingsRequest(input *GetApplicationSettingsIn
 		input = &GetApplicationSettingsInput{}
 	}
 
-	output = &GetApplicationSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetApplicationSettings API operation for Amazon Pinpoint.
-//
-// Used to request the settings for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetApplicationSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettings
-func (c *Pinpoint) GetApplicationSettings(input *GetApplicationSettingsInput) (*GetApplicationSettingsOutput, error) {
-	req, out := c.GetApplicationSettingsRequest(input)
-	return out, req.Send()
-}
-
-// GetApplicationSettingsWithContext is the same as GetApplicationSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetApplicationSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetApplicationSettingsWithContext(ctx aws.Context, input *GetApplicationSettingsInput, opts ...aws.Option) (*GetApplicationSettingsOutput, error) {
-	req, out := c.GetApplicationSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetApplicationSettingsOutput{})
+	return GetApplicationSettingsRequest{Request: req, Input: input}
 }
 
 const opGetApps = "GetApps"
 
-// GetAppsRequest generates a "aws.Request" representing the
-// client's request for the GetApps operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAppsRequest is a API request type for the GetApps API operation.
+type GetAppsRequest struct {
+	*aws.Request
+	Input *GetAppsInput
+}
+
+// Send marshals and sends the GetApps API request.
+func (r GetAppsRequest) Send() (*GetAppsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAppsOutput), nil
+}
+
+// GetAppsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetApps for more information on using the GetApps
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about your apps.
 //
 //    // Example sending a request using the GetAppsRequest method.
-//    req, resp := client.GetAppsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAppsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApps
-func (c *Pinpoint) GetAppsRequest(input *GetAppsInput) (req *aws.Request, output *GetAppsOutput) {
+func (c *Pinpoint) GetAppsRequest(input *GetAppsInput) GetAppsRequest {
 	op := &aws.Operation{
 		Name:       opGetApps,
 		HTTPMethod: "GET",
@@ -1804,84 +969,42 @@ func (c *Pinpoint) GetAppsRequest(input *GetAppsInput) (req *aws.Request, output
 		input = &GetAppsInput{}
 	}
 
-	output = &GetAppsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetApps API operation for Amazon Pinpoint.
-//
-// Returns information about your apps.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetApps for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApps
-func (c *Pinpoint) GetApps(input *GetAppsInput) (*GetAppsOutput, error) {
-	req, out := c.GetAppsRequest(input)
-	return out, req.Send()
-}
-
-// GetAppsWithContext is the same as GetApps with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetApps for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetAppsWithContext(ctx aws.Context, input *GetAppsInput, opts ...aws.Option) (*GetAppsOutput, error) {
-	req, out := c.GetAppsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAppsOutput{})
+	return GetAppsRequest{Request: req, Input: input}
 }
 
 const opGetBaiduChannel = "GetBaiduChannel"
 
-// GetBaiduChannelRequest generates a "aws.Request" representing the
-// client's request for the GetBaiduChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBaiduChannelRequest is a API request type for the GetBaiduChannel API operation.
+type GetBaiduChannelRequest struct {
+	*aws.Request
+	Input *GetBaiduChannelInput
+}
+
+// Send marshals and sends the GetBaiduChannel API request.
+func (r GetBaiduChannelRequest) Send() (*GetBaiduChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBaiduChannelOutput), nil
+}
+
+// GetBaiduChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBaiduChannel for more information on using the GetBaiduChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get a BAIDU GCM channel
 //
 //    // Example sending a request using the GetBaiduChannelRequest method.
-//    req, resp := client.GetBaiduChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBaiduChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannel
-func (c *Pinpoint) GetBaiduChannelRequest(input *GetBaiduChannelInput) (req *aws.Request, output *GetBaiduChannelOutput) {
+func (c *Pinpoint) GetBaiduChannelRequest(input *GetBaiduChannelInput) GetBaiduChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetBaiduChannel,
 		HTTPMethod: "GET",
@@ -1892,84 +1015,42 @@ func (c *Pinpoint) GetBaiduChannelRequest(input *GetBaiduChannelInput) (req *aws
 		input = &GetBaiduChannelInput{}
 	}
 
-	output = &GetBaiduChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBaiduChannel API operation for Amazon Pinpoint.
-//
-// Get a BAIDU GCM channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetBaiduChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannel
-func (c *Pinpoint) GetBaiduChannel(input *GetBaiduChannelInput) (*GetBaiduChannelOutput, error) {
-	req, out := c.GetBaiduChannelRequest(input)
-	return out, req.Send()
-}
-
-// GetBaiduChannelWithContext is the same as GetBaiduChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBaiduChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetBaiduChannelWithContext(ctx aws.Context, input *GetBaiduChannelInput, opts ...aws.Option) (*GetBaiduChannelOutput, error) {
-	req, out := c.GetBaiduChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBaiduChannelOutput{})
+	return GetBaiduChannelRequest{Request: req, Input: input}
 }
 
 const opGetCampaign = "GetCampaign"
 
-// GetCampaignRequest generates a "aws.Request" representing the
-// client's request for the GetCampaign operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCampaignRequest is a API request type for the GetCampaign API operation.
+type GetCampaignRequest struct {
+	*aws.Request
+	Input *GetCampaignInput
+}
+
+// Send marshals and sends the GetCampaign API request.
+func (r GetCampaignRequest) Send() (*GetCampaignOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCampaignOutput), nil
+}
+
+// GetCampaignRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCampaign for more information on using the GetCampaign
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a campaign.
 //
 //    // Example sending a request using the GetCampaignRequest method.
-//    req, resp := client.GetCampaignRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCampaignRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaign
-func (c *Pinpoint) GetCampaignRequest(input *GetCampaignInput) (req *aws.Request, output *GetCampaignOutput) {
+func (c *Pinpoint) GetCampaignRequest(input *GetCampaignInput) GetCampaignRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaign,
 		HTTPMethod: "GET",
@@ -1980,84 +1061,42 @@ func (c *Pinpoint) GetCampaignRequest(input *GetCampaignInput) (req *aws.Request
 		input = &GetCampaignInput{}
 	}
 
-	output = &GetCampaignOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCampaign API operation for Amazon Pinpoint.
-//
-// Returns information about a campaign.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetCampaign for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaign
-func (c *Pinpoint) GetCampaign(input *GetCampaignInput) (*GetCampaignOutput, error) {
-	req, out := c.GetCampaignRequest(input)
-	return out, req.Send()
-}
-
-// GetCampaignWithContext is the same as GetCampaign with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCampaign for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetCampaignWithContext(ctx aws.Context, input *GetCampaignInput, opts ...aws.Option) (*GetCampaignOutput, error) {
-	req, out := c.GetCampaignRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCampaignOutput{})
+	return GetCampaignRequest{Request: req, Input: input}
 }
 
 const opGetCampaignActivities = "GetCampaignActivities"
 
-// GetCampaignActivitiesRequest generates a "aws.Request" representing the
-// client's request for the GetCampaignActivities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCampaignActivitiesRequest is a API request type for the GetCampaignActivities API operation.
+type GetCampaignActivitiesRequest struct {
+	*aws.Request
+	Input *GetCampaignActivitiesInput
+}
+
+// Send marshals and sends the GetCampaignActivities API request.
+func (r GetCampaignActivitiesRequest) Send() (*GetCampaignActivitiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCampaignActivitiesOutput), nil
+}
+
+// GetCampaignActivitiesRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCampaignActivities for more information on using the GetCampaignActivities
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the activity performed by a campaign.
 //
 //    // Example sending a request using the GetCampaignActivitiesRequest method.
-//    req, resp := client.GetCampaignActivitiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCampaignActivitiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivities
-func (c *Pinpoint) GetCampaignActivitiesRequest(input *GetCampaignActivitiesInput) (req *aws.Request, output *GetCampaignActivitiesOutput) {
+func (c *Pinpoint) GetCampaignActivitiesRequest(input *GetCampaignActivitiesInput) GetCampaignActivitiesRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaignActivities,
 		HTTPMethod: "GET",
@@ -2068,84 +1107,42 @@ func (c *Pinpoint) GetCampaignActivitiesRequest(input *GetCampaignActivitiesInpu
 		input = &GetCampaignActivitiesInput{}
 	}
 
-	output = &GetCampaignActivitiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCampaignActivities API operation for Amazon Pinpoint.
-//
-// Returns information about the activity performed by a campaign.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetCampaignActivities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivities
-func (c *Pinpoint) GetCampaignActivities(input *GetCampaignActivitiesInput) (*GetCampaignActivitiesOutput, error) {
-	req, out := c.GetCampaignActivitiesRequest(input)
-	return out, req.Send()
-}
-
-// GetCampaignActivitiesWithContext is the same as GetCampaignActivities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCampaignActivities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetCampaignActivitiesWithContext(ctx aws.Context, input *GetCampaignActivitiesInput, opts ...aws.Option) (*GetCampaignActivitiesOutput, error) {
-	req, out := c.GetCampaignActivitiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCampaignActivitiesOutput{})
+	return GetCampaignActivitiesRequest{Request: req, Input: input}
 }
 
 const opGetCampaignVersion = "GetCampaignVersion"
 
-// GetCampaignVersionRequest generates a "aws.Request" representing the
-// client's request for the GetCampaignVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCampaignVersionRequest is a API request type for the GetCampaignVersion API operation.
+type GetCampaignVersionRequest struct {
+	*aws.Request
+	Input *GetCampaignVersionInput
+}
+
+// Send marshals and sends the GetCampaignVersion API request.
+func (r GetCampaignVersionRequest) Send() (*GetCampaignVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCampaignVersionOutput), nil
+}
+
+// GetCampaignVersionRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCampaignVersion for more information on using the GetCampaignVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific version of a campaign.
 //
 //    // Example sending a request using the GetCampaignVersionRequest method.
-//    req, resp := client.GetCampaignVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCampaignVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersion
-func (c *Pinpoint) GetCampaignVersionRequest(input *GetCampaignVersionInput) (req *aws.Request, output *GetCampaignVersionOutput) {
+func (c *Pinpoint) GetCampaignVersionRequest(input *GetCampaignVersionInput) GetCampaignVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaignVersion,
 		HTTPMethod: "GET",
@@ -2156,84 +1153,42 @@ func (c *Pinpoint) GetCampaignVersionRequest(input *GetCampaignVersionInput) (re
 		input = &GetCampaignVersionInput{}
 	}
 
-	output = &GetCampaignVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCampaignVersion API operation for Amazon Pinpoint.
-//
-// Returns information about a specific version of a campaign.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetCampaignVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersion
-func (c *Pinpoint) GetCampaignVersion(input *GetCampaignVersionInput) (*GetCampaignVersionOutput, error) {
-	req, out := c.GetCampaignVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetCampaignVersionWithContext is the same as GetCampaignVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCampaignVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetCampaignVersionWithContext(ctx aws.Context, input *GetCampaignVersionInput, opts ...aws.Option) (*GetCampaignVersionOutput, error) {
-	req, out := c.GetCampaignVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCampaignVersionOutput{})
+	return GetCampaignVersionRequest{Request: req, Input: input}
 }
 
 const opGetCampaignVersions = "GetCampaignVersions"
 
-// GetCampaignVersionsRequest generates a "aws.Request" representing the
-// client's request for the GetCampaignVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCampaignVersionsRequest is a API request type for the GetCampaignVersions API operation.
+type GetCampaignVersionsRequest struct {
+	*aws.Request
+	Input *GetCampaignVersionsInput
+}
+
+// Send marshals and sends the GetCampaignVersions API request.
+func (r GetCampaignVersionsRequest) Send() (*GetCampaignVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCampaignVersionsOutput), nil
+}
+
+// GetCampaignVersionsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCampaignVersions for more information on using the GetCampaignVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about your campaign versions.
 //
 //    // Example sending a request using the GetCampaignVersionsRequest method.
-//    req, resp := client.GetCampaignVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCampaignVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersions
-func (c *Pinpoint) GetCampaignVersionsRequest(input *GetCampaignVersionsInput) (req *aws.Request, output *GetCampaignVersionsOutput) {
+func (c *Pinpoint) GetCampaignVersionsRequest(input *GetCampaignVersionsInput) GetCampaignVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaignVersions,
 		HTTPMethod: "GET",
@@ -2244,84 +1199,42 @@ func (c *Pinpoint) GetCampaignVersionsRequest(input *GetCampaignVersionsInput) (
 		input = &GetCampaignVersionsInput{}
 	}
 
-	output = &GetCampaignVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCampaignVersions API operation for Amazon Pinpoint.
-//
-// Returns information about your campaign versions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetCampaignVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersions
-func (c *Pinpoint) GetCampaignVersions(input *GetCampaignVersionsInput) (*GetCampaignVersionsOutput, error) {
-	req, out := c.GetCampaignVersionsRequest(input)
-	return out, req.Send()
-}
-
-// GetCampaignVersionsWithContext is the same as GetCampaignVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCampaignVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetCampaignVersionsWithContext(ctx aws.Context, input *GetCampaignVersionsInput, opts ...aws.Option) (*GetCampaignVersionsOutput, error) {
-	req, out := c.GetCampaignVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCampaignVersionsOutput{})
+	return GetCampaignVersionsRequest{Request: req, Input: input}
 }
 
 const opGetCampaigns = "GetCampaigns"
 
-// GetCampaignsRequest generates a "aws.Request" representing the
-// client's request for the GetCampaigns operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCampaignsRequest is a API request type for the GetCampaigns API operation.
+type GetCampaignsRequest struct {
+	*aws.Request
+	Input *GetCampaignsInput
+}
+
+// Send marshals and sends the GetCampaigns API request.
+func (r GetCampaignsRequest) Send() (*GetCampaignsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCampaignsOutput), nil
+}
+
+// GetCampaignsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCampaigns for more information on using the GetCampaigns
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about your campaigns.
 //
 //    // Example sending a request using the GetCampaignsRequest method.
-//    req, resp := client.GetCampaignsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCampaignsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaigns
-func (c *Pinpoint) GetCampaignsRequest(input *GetCampaignsInput) (req *aws.Request, output *GetCampaignsOutput) {
+func (c *Pinpoint) GetCampaignsRequest(input *GetCampaignsInput) GetCampaignsRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaigns,
 		HTTPMethod: "GET",
@@ -2332,84 +1245,42 @@ func (c *Pinpoint) GetCampaignsRequest(input *GetCampaignsInput) (req *aws.Reque
 		input = &GetCampaignsInput{}
 	}
 
-	output = &GetCampaignsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCampaigns API operation for Amazon Pinpoint.
-//
-// Returns information about your campaigns.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetCampaigns for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaigns
-func (c *Pinpoint) GetCampaigns(input *GetCampaignsInput) (*GetCampaignsOutput, error) {
-	req, out := c.GetCampaignsRequest(input)
-	return out, req.Send()
-}
-
-// GetCampaignsWithContext is the same as GetCampaigns with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCampaigns for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetCampaignsWithContext(ctx aws.Context, input *GetCampaignsInput, opts ...aws.Option) (*GetCampaignsOutput, error) {
-	req, out := c.GetCampaignsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCampaignsOutput{})
+	return GetCampaignsRequest{Request: req, Input: input}
 }
 
 const opGetEmailChannel = "GetEmailChannel"
 
-// GetEmailChannelRequest generates a "aws.Request" representing the
-// client's request for the GetEmailChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetEmailChannelRequest is a API request type for the GetEmailChannel API operation.
+type GetEmailChannelRequest struct {
+	*aws.Request
+	Input *GetEmailChannelInput
+}
+
+// Send marshals and sends the GetEmailChannel API request.
+func (r GetEmailChannelRequest) Send() (*GetEmailChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEmailChannelOutput), nil
+}
+
+// GetEmailChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetEmailChannel for more information on using the GetEmailChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get an email channel
 //
 //    // Example sending a request using the GetEmailChannelRequest method.
-//    req, resp := client.GetEmailChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetEmailChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannel
-func (c *Pinpoint) GetEmailChannelRequest(input *GetEmailChannelInput) (req *aws.Request, output *GetEmailChannelOutput) {
+func (c *Pinpoint) GetEmailChannelRequest(input *GetEmailChannelInput) GetEmailChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetEmailChannel,
 		HTTPMethod: "GET",
@@ -2420,84 +1291,42 @@ func (c *Pinpoint) GetEmailChannelRequest(input *GetEmailChannelInput) (req *aws
 		input = &GetEmailChannelInput{}
 	}
 
-	output = &GetEmailChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetEmailChannel API operation for Amazon Pinpoint.
-//
-// Get an email channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetEmailChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannel
-func (c *Pinpoint) GetEmailChannel(input *GetEmailChannelInput) (*GetEmailChannelOutput, error) {
-	req, out := c.GetEmailChannelRequest(input)
-	return out, req.Send()
-}
-
-// GetEmailChannelWithContext is the same as GetEmailChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEmailChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetEmailChannelWithContext(ctx aws.Context, input *GetEmailChannelInput, opts ...aws.Option) (*GetEmailChannelOutput, error) {
-	req, out := c.GetEmailChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetEmailChannelOutput{})
+	return GetEmailChannelRequest{Request: req, Input: input}
 }
 
 const opGetEndpoint = "GetEndpoint"
 
-// GetEndpointRequest generates a "aws.Request" representing the
-// client's request for the GetEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetEndpointRequest is a API request type for the GetEndpoint API operation.
+type GetEndpointRequest struct {
+	*aws.Request
+	Input *GetEndpointInput
+}
+
+// Send marshals and sends the GetEndpoint API request.
+func (r GetEndpointRequest) Send() (*GetEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEndpointOutput), nil
+}
+
+// GetEndpointRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetEndpoint for more information on using the GetEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about an endpoint.
 //
 //    // Example sending a request using the GetEndpointRequest method.
-//    req, resp := client.GetEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEndpoint
-func (c *Pinpoint) GetEndpointRequest(input *GetEndpointInput) (req *aws.Request, output *GetEndpointOutput) {
+func (c *Pinpoint) GetEndpointRequest(input *GetEndpointInput) GetEndpointRequest {
 	op := &aws.Operation{
 		Name:       opGetEndpoint,
 		HTTPMethod: "GET",
@@ -2508,84 +1337,42 @@ func (c *Pinpoint) GetEndpointRequest(input *GetEndpointInput) (req *aws.Request
 		input = &GetEndpointInput{}
 	}
 
-	output = &GetEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetEndpoint API operation for Amazon Pinpoint.
-//
-// Returns information about an endpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEndpoint
-func (c *Pinpoint) GetEndpoint(input *GetEndpointInput) (*GetEndpointOutput, error) {
-	req, out := c.GetEndpointRequest(input)
-	return out, req.Send()
-}
-
-// GetEndpointWithContext is the same as GetEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetEndpointWithContext(ctx aws.Context, input *GetEndpointInput, opts ...aws.Option) (*GetEndpointOutput, error) {
-	req, out := c.GetEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetEndpointOutput{})
+	return GetEndpointRequest{Request: req, Input: input}
 }
 
 const opGetEventStream = "GetEventStream"
 
-// GetEventStreamRequest generates a "aws.Request" representing the
-// client's request for the GetEventStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetEventStreamRequest is a API request type for the GetEventStream API operation.
+type GetEventStreamRequest struct {
+	*aws.Request
+	Input *GetEventStreamInput
+}
+
+// Send marshals and sends the GetEventStream API request.
+func (r GetEventStreamRequest) Send() (*GetEventStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEventStreamOutput), nil
+}
+
+// GetEventStreamRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetEventStream for more information on using the GetEventStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the event stream for an app.
 //
 //    // Example sending a request using the GetEventStreamRequest method.
-//    req, resp := client.GetEventStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetEventStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStream
-func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) (req *aws.Request, output *GetEventStreamOutput) {
+func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) GetEventStreamRequest {
 	op := &aws.Operation{
 		Name:       opGetEventStream,
 		HTTPMethod: "GET",
@@ -2596,84 +1383,42 @@ func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) (req *aws.R
 		input = &GetEventStreamInput{}
 	}
 
-	output = &GetEventStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetEventStream API operation for Amazon Pinpoint.
-//
-// Returns the event stream for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetEventStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStream
-func (c *Pinpoint) GetEventStream(input *GetEventStreamInput) (*GetEventStreamOutput, error) {
-	req, out := c.GetEventStreamRequest(input)
-	return out, req.Send()
-}
-
-// GetEventStreamWithContext is the same as GetEventStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEventStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetEventStreamWithContext(ctx aws.Context, input *GetEventStreamInput, opts ...aws.Option) (*GetEventStreamOutput, error) {
-	req, out := c.GetEventStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetEventStreamOutput{})
+	return GetEventStreamRequest{Request: req, Input: input}
 }
 
 const opGetGcmChannel = "GetGcmChannel"
 
-// GetGcmChannelRequest generates a "aws.Request" representing the
-// client's request for the GetGcmChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetGcmChannelRequest is a API request type for the GetGcmChannel API operation.
+type GetGcmChannelRequest struct {
+	*aws.Request
+	Input *GetGcmChannelInput
+}
+
+// Send marshals and sends the GetGcmChannel API request.
+func (r GetGcmChannelRequest) Send() (*GetGcmChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGcmChannelOutput), nil
+}
+
+// GetGcmChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGcmChannel for more information on using the GetGcmChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the GCM channel for an app.
 //
 //    // Example sending a request using the GetGcmChannelRequest method.
-//    req, resp := client.GetGcmChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetGcmChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannel
-func (c *Pinpoint) GetGcmChannelRequest(input *GetGcmChannelInput) (req *aws.Request, output *GetGcmChannelOutput) {
+func (c *Pinpoint) GetGcmChannelRequest(input *GetGcmChannelInput) GetGcmChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetGcmChannel,
 		HTTPMethod: "GET",
@@ -2684,84 +1429,42 @@ func (c *Pinpoint) GetGcmChannelRequest(input *GetGcmChannelInput) (req *aws.Req
 		input = &GetGcmChannelInput{}
 	}
 
-	output = &GetGcmChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetGcmChannel API operation for Amazon Pinpoint.
-//
-// Returns information about the GCM channel for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetGcmChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannel
-func (c *Pinpoint) GetGcmChannel(input *GetGcmChannelInput) (*GetGcmChannelOutput, error) {
-	req, out := c.GetGcmChannelRequest(input)
-	return out, req.Send()
-}
-
-// GetGcmChannelWithContext is the same as GetGcmChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGcmChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetGcmChannelWithContext(ctx aws.Context, input *GetGcmChannelInput, opts ...aws.Option) (*GetGcmChannelOutput, error) {
-	req, out := c.GetGcmChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetGcmChannelOutput{})
+	return GetGcmChannelRequest{Request: req, Input: input}
 }
 
 const opGetImportJob = "GetImportJob"
 
-// GetImportJobRequest generates a "aws.Request" representing the
-// client's request for the GetImportJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetImportJobRequest is a API request type for the GetImportJob API operation.
+type GetImportJobRequest struct {
+	*aws.Request
+	Input *GetImportJobInput
+}
+
+// Send marshals and sends the GetImportJob API request.
+func (r GetImportJobRequest) Send() (*GetImportJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetImportJobOutput), nil
+}
+
+// GetImportJobRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetImportJob for more information on using the GetImportJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about an import job.
 //
 //    // Example sending a request using the GetImportJobRequest method.
-//    req, resp := client.GetImportJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetImportJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJob
-func (c *Pinpoint) GetImportJobRequest(input *GetImportJobInput) (req *aws.Request, output *GetImportJobOutput) {
+func (c *Pinpoint) GetImportJobRequest(input *GetImportJobInput) GetImportJobRequest {
 	op := &aws.Operation{
 		Name:       opGetImportJob,
 		HTTPMethod: "GET",
@@ -2772,84 +1475,42 @@ func (c *Pinpoint) GetImportJobRequest(input *GetImportJobInput) (req *aws.Reque
 		input = &GetImportJobInput{}
 	}
 
-	output = &GetImportJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetImportJob API operation for Amazon Pinpoint.
-//
-// Returns information about an import job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetImportJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJob
-func (c *Pinpoint) GetImportJob(input *GetImportJobInput) (*GetImportJobOutput, error) {
-	req, out := c.GetImportJobRequest(input)
-	return out, req.Send()
-}
-
-// GetImportJobWithContext is the same as GetImportJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetImportJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetImportJobWithContext(ctx aws.Context, input *GetImportJobInput, opts ...aws.Option) (*GetImportJobOutput, error) {
-	req, out := c.GetImportJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetImportJobOutput{})
+	return GetImportJobRequest{Request: req, Input: input}
 }
 
 const opGetImportJobs = "GetImportJobs"
 
-// GetImportJobsRequest generates a "aws.Request" representing the
-// client's request for the GetImportJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetImportJobsRequest is a API request type for the GetImportJobs API operation.
+type GetImportJobsRequest struct {
+	*aws.Request
+	Input *GetImportJobsInput
+}
+
+// Send marshals and sends the GetImportJobs API request.
+func (r GetImportJobsRequest) Send() (*GetImportJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetImportJobsOutput), nil
+}
+
+// GetImportJobsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetImportJobs for more information on using the GetImportJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about your import jobs.
 //
 //    // Example sending a request using the GetImportJobsRequest method.
-//    req, resp := client.GetImportJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetImportJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobs
-func (c *Pinpoint) GetImportJobsRequest(input *GetImportJobsInput) (req *aws.Request, output *GetImportJobsOutput) {
+func (c *Pinpoint) GetImportJobsRequest(input *GetImportJobsInput) GetImportJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetImportJobs,
 		HTTPMethod: "GET",
@@ -2860,84 +1521,42 @@ func (c *Pinpoint) GetImportJobsRequest(input *GetImportJobsInput) (req *aws.Req
 		input = &GetImportJobsInput{}
 	}
 
-	output = &GetImportJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetImportJobs API operation for Amazon Pinpoint.
-//
-// Returns information about your import jobs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetImportJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobs
-func (c *Pinpoint) GetImportJobs(input *GetImportJobsInput) (*GetImportJobsOutput, error) {
-	req, out := c.GetImportJobsRequest(input)
-	return out, req.Send()
-}
-
-// GetImportJobsWithContext is the same as GetImportJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetImportJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetImportJobsWithContext(ctx aws.Context, input *GetImportJobsInput, opts ...aws.Option) (*GetImportJobsOutput, error) {
-	req, out := c.GetImportJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetImportJobsOutput{})
+	return GetImportJobsRequest{Request: req, Input: input}
 }
 
 const opGetSegment = "GetSegment"
 
-// GetSegmentRequest generates a "aws.Request" representing the
-// client's request for the GetSegment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSegmentRequest is a API request type for the GetSegment API operation.
+type GetSegmentRequest struct {
+	*aws.Request
+	Input *GetSegmentInput
+}
+
+// Send marshals and sends the GetSegment API request.
+func (r GetSegmentRequest) Send() (*GetSegmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSegmentOutput), nil
+}
+
+// GetSegmentRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSegment for more information on using the GetSegment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a segment.
 //
 //    // Example sending a request using the GetSegmentRequest method.
-//    req, resp := client.GetSegmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSegmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegment
-func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) (req *aws.Request, output *GetSegmentOutput) {
+func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) GetSegmentRequest {
 	op := &aws.Operation{
 		Name:       opGetSegment,
 		HTTPMethod: "GET",
@@ -2948,84 +1567,42 @@ func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) (req *aws.Request, 
 		input = &GetSegmentInput{}
 	}
 
-	output = &GetSegmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSegment API operation for Amazon Pinpoint.
-//
-// Returns information about a segment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetSegment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegment
-func (c *Pinpoint) GetSegment(input *GetSegmentInput) (*GetSegmentOutput, error) {
-	req, out := c.GetSegmentRequest(input)
-	return out, req.Send()
-}
-
-// GetSegmentWithContext is the same as GetSegment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSegment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetSegmentWithContext(ctx aws.Context, input *GetSegmentInput, opts ...aws.Option) (*GetSegmentOutput, error) {
-	req, out := c.GetSegmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSegmentOutput{})
+	return GetSegmentRequest{Request: req, Input: input}
 }
 
 const opGetSegmentImportJobs = "GetSegmentImportJobs"
 
-// GetSegmentImportJobsRequest generates a "aws.Request" representing the
-// client's request for the GetSegmentImportJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSegmentImportJobsRequest is a API request type for the GetSegmentImportJobs API operation.
+type GetSegmentImportJobsRequest struct {
+	*aws.Request
+	Input *GetSegmentImportJobsInput
+}
+
+// Send marshals and sends the GetSegmentImportJobs API request.
+func (r GetSegmentImportJobsRequest) Send() (*GetSegmentImportJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSegmentImportJobsOutput), nil
+}
+
+// GetSegmentImportJobsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSegmentImportJobs for more information on using the GetSegmentImportJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of import jobs for a specific segment.
 //
 //    // Example sending a request using the GetSegmentImportJobsRequest method.
-//    req, resp := client.GetSegmentImportJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSegmentImportJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobs
-func (c *Pinpoint) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) (req *aws.Request, output *GetSegmentImportJobsOutput) {
+func (c *Pinpoint) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) GetSegmentImportJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetSegmentImportJobs,
 		HTTPMethod: "GET",
@@ -3036,84 +1613,42 @@ func (c *Pinpoint) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput)
 		input = &GetSegmentImportJobsInput{}
 	}
 
-	output = &GetSegmentImportJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSegmentImportJobs API operation for Amazon Pinpoint.
-//
-// Returns a list of import jobs for a specific segment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetSegmentImportJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobs
-func (c *Pinpoint) GetSegmentImportJobs(input *GetSegmentImportJobsInput) (*GetSegmentImportJobsOutput, error) {
-	req, out := c.GetSegmentImportJobsRequest(input)
-	return out, req.Send()
-}
-
-// GetSegmentImportJobsWithContext is the same as GetSegmentImportJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSegmentImportJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetSegmentImportJobsWithContext(ctx aws.Context, input *GetSegmentImportJobsInput, opts ...aws.Option) (*GetSegmentImportJobsOutput, error) {
-	req, out := c.GetSegmentImportJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSegmentImportJobsOutput{})
+	return GetSegmentImportJobsRequest{Request: req, Input: input}
 }
 
 const opGetSegmentVersion = "GetSegmentVersion"
 
-// GetSegmentVersionRequest generates a "aws.Request" representing the
-// client's request for the GetSegmentVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSegmentVersionRequest is a API request type for the GetSegmentVersion API operation.
+type GetSegmentVersionRequest struct {
+	*aws.Request
+	Input *GetSegmentVersionInput
+}
+
+// Send marshals and sends the GetSegmentVersion API request.
+func (r GetSegmentVersionRequest) Send() (*GetSegmentVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSegmentVersionOutput), nil
+}
+
+// GetSegmentVersionRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSegmentVersion for more information on using the GetSegmentVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a segment version.
 //
 //    // Example sending a request using the GetSegmentVersionRequest method.
-//    req, resp := client.GetSegmentVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSegmentVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersion
-func (c *Pinpoint) GetSegmentVersionRequest(input *GetSegmentVersionInput) (req *aws.Request, output *GetSegmentVersionOutput) {
+func (c *Pinpoint) GetSegmentVersionRequest(input *GetSegmentVersionInput) GetSegmentVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetSegmentVersion,
 		HTTPMethod: "GET",
@@ -3124,84 +1659,42 @@ func (c *Pinpoint) GetSegmentVersionRequest(input *GetSegmentVersionInput) (req 
 		input = &GetSegmentVersionInput{}
 	}
 
-	output = &GetSegmentVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSegmentVersion API operation for Amazon Pinpoint.
-//
-// Returns information about a segment version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetSegmentVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersion
-func (c *Pinpoint) GetSegmentVersion(input *GetSegmentVersionInput) (*GetSegmentVersionOutput, error) {
-	req, out := c.GetSegmentVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetSegmentVersionWithContext is the same as GetSegmentVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSegmentVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetSegmentVersionWithContext(ctx aws.Context, input *GetSegmentVersionInput, opts ...aws.Option) (*GetSegmentVersionOutput, error) {
-	req, out := c.GetSegmentVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSegmentVersionOutput{})
+	return GetSegmentVersionRequest{Request: req, Input: input}
 }
 
 const opGetSegmentVersions = "GetSegmentVersions"
 
-// GetSegmentVersionsRequest generates a "aws.Request" representing the
-// client's request for the GetSegmentVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSegmentVersionsRequest is a API request type for the GetSegmentVersions API operation.
+type GetSegmentVersionsRequest struct {
+	*aws.Request
+	Input *GetSegmentVersionsInput
+}
+
+// Send marshals and sends the GetSegmentVersions API request.
+func (r GetSegmentVersionsRequest) Send() (*GetSegmentVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSegmentVersionsOutput), nil
+}
+
+// GetSegmentVersionsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSegmentVersions for more information on using the GetSegmentVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about your segment versions.
 //
 //    // Example sending a request using the GetSegmentVersionsRequest method.
-//    req, resp := client.GetSegmentVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSegmentVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersions
-func (c *Pinpoint) GetSegmentVersionsRequest(input *GetSegmentVersionsInput) (req *aws.Request, output *GetSegmentVersionsOutput) {
+func (c *Pinpoint) GetSegmentVersionsRequest(input *GetSegmentVersionsInput) GetSegmentVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetSegmentVersions,
 		HTTPMethod: "GET",
@@ -3212,84 +1705,42 @@ func (c *Pinpoint) GetSegmentVersionsRequest(input *GetSegmentVersionsInput) (re
 		input = &GetSegmentVersionsInput{}
 	}
 
-	output = &GetSegmentVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSegmentVersions API operation for Amazon Pinpoint.
-//
-// Returns information about your segment versions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetSegmentVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersions
-func (c *Pinpoint) GetSegmentVersions(input *GetSegmentVersionsInput) (*GetSegmentVersionsOutput, error) {
-	req, out := c.GetSegmentVersionsRequest(input)
-	return out, req.Send()
-}
-
-// GetSegmentVersionsWithContext is the same as GetSegmentVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSegmentVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetSegmentVersionsWithContext(ctx aws.Context, input *GetSegmentVersionsInput, opts ...aws.Option) (*GetSegmentVersionsOutput, error) {
-	req, out := c.GetSegmentVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSegmentVersionsOutput{})
+	return GetSegmentVersionsRequest{Request: req, Input: input}
 }
 
 const opGetSegments = "GetSegments"
 
-// GetSegmentsRequest generates a "aws.Request" representing the
-// client's request for the GetSegments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSegmentsRequest is a API request type for the GetSegments API operation.
+type GetSegmentsRequest struct {
+	*aws.Request
+	Input *GetSegmentsInput
+}
+
+// Send marshals and sends the GetSegments API request.
+func (r GetSegmentsRequest) Send() (*GetSegmentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSegmentsOutput), nil
+}
+
+// GetSegmentsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSegments for more information on using the GetSegments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used to get information about your segments.
 //
 //    // Example sending a request using the GetSegmentsRequest method.
-//    req, resp := client.GetSegmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSegmentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegments
-func (c *Pinpoint) GetSegmentsRequest(input *GetSegmentsInput) (req *aws.Request, output *GetSegmentsOutput) {
+func (c *Pinpoint) GetSegmentsRequest(input *GetSegmentsInput) GetSegmentsRequest {
 	op := &aws.Operation{
 		Name:       opGetSegments,
 		HTTPMethod: "GET",
@@ -3300,84 +1751,42 @@ func (c *Pinpoint) GetSegmentsRequest(input *GetSegmentsInput) (req *aws.Request
 		input = &GetSegmentsInput{}
 	}
 
-	output = &GetSegmentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSegments API operation for Amazon Pinpoint.
-//
-// Used to get information about your segments.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetSegments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegments
-func (c *Pinpoint) GetSegments(input *GetSegmentsInput) (*GetSegmentsOutput, error) {
-	req, out := c.GetSegmentsRequest(input)
-	return out, req.Send()
-}
-
-// GetSegmentsWithContext is the same as GetSegments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSegments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetSegmentsWithContext(ctx aws.Context, input *GetSegmentsInput, opts ...aws.Option) (*GetSegmentsOutput, error) {
-	req, out := c.GetSegmentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSegmentsOutput{})
+	return GetSegmentsRequest{Request: req, Input: input}
 }
 
 const opGetSmsChannel = "GetSmsChannel"
 
-// GetSmsChannelRequest generates a "aws.Request" representing the
-// client's request for the GetSmsChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSmsChannelRequest is a API request type for the GetSmsChannel API operation.
+type GetSmsChannelRequest struct {
+	*aws.Request
+	Input *GetSmsChannelInput
+}
+
+// Send marshals and sends the GetSmsChannel API request.
+func (r GetSmsChannelRequest) Send() (*GetSmsChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSmsChannelOutput), nil
+}
+
+// GetSmsChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSmsChannel for more information on using the GetSmsChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get an SMS channel
 //
 //    // Example sending a request using the GetSmsChannelRequest method.
-//    req, resp := client.GetSmsChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSmsChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannel
-func (c *Pinpoint) GetSmsChannelRequest(input *GetSmsChannelInput) (req *aws.Request, output *GetSmsChannelOutput) {
+func (c *Pinpoint) GetSmsChannelRequest(input *GetSmsChannelInput) GetSmsChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetSmsChannel,
 		HTTPMethod: "GET",
@@ -3388,84 +1797,42 @@ func (c *Pinpoint) GetSmsChannelRequest(input *GetSmsChannelInput) (req *aws.Req
 		input = &GetSmsChannelInput{}
 	}
 
-	output = &GetSmsChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSmsChannel API operation for Amazon Pinpoint.
-//
-// Get an SMS channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation GetSmsChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannel
-func (c *Pinpoint) GetSmsChannel(input *GetSmsChannelInput) (*GetSmsChannelOutput, error) {
-	req, out := c.GetSmsChannelRequest(input)
-	return out, req.Send()
-}
-
-// GetSmsChannelWithContext is the same as GetSmsChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSmsChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) GetSmsChannelWithContext(ctx aws.Context, input *GetSmsChannelInput, opts ...aws.Option) (*GetSmsChannelOutput, error) {
-	req, out := c.GetSmsChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSmsChannelOutput{})
+	return GetSmsChannelRequest{Request: req, Input: input}
 }
 
 const opPutEventStream = "PutEventStream"
 
-// PutEventStreamRequest generates a "aws.Request" representing the
-// client's request for the PutEventStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutEventStreamRequest is a API request type for the PutEventStream API operation.
+type PutEventStreamRequest struct {
+	*aws.Request
+	Input *PutEventStreamInput
+}
+
+// Send marshals and sends the PutEventStream API request.
+func (r PutEventStreamRequest) Send() (*PutEventStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutEventStreamOutput), nil
+}
+
+// PutEventStreamRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutEventStream for more information on using the PutEventStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use to create or update the event stream for an app.
 //
 //    // Example sending a request using the PutEventStreamRequest method.
-//    req, resp := client.PutEventStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutEventStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStream
-func (c *Pinpoint) PutEventStreamRequest(input *PutEventStreamInput) (req *aws.Request, output *PutEventStreamOutput) {
+func (c *Pinpoint) PutEventStreamRequest(input *PutEventStreamInput) PutEventStreamRequest {
 	op := &aws.Operation{
 		Name:       opPutEventStream,
 		HTTPMethod: "POST",
@@ -3476,84 +1843,42 @@ func (c *Pinpoint) PutEventStreamRequest(input *PutEventStreamInput) (req *aws.R
 		input = &PutEventStreamInput{}
 	}
 
-	output = &PutEventStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutEventStream API operation for Amazon Pinpoint.
-//
-// Use to create or update the event stream for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation PutEventStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStream
-func (c *Pinpoint) PutEventStream(input *PutEventStreamInput) (*PutEventStreamOutput, error) {
-	req, out := c.PutEventStreamRequest(input)
-	return out, req.Send()
-}
-
-// PutEventStreamWithContext is the same as PutEventStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutEventStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) PutEventStreamWithContext(ctx aws.Context, input *PutEventStreamInput, opts ...aws.Option) (*PutEventStreamOutput, error) {
-	req, out := c.PutEventStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutEventStreamOutput{})
+	return PutEventStreamRequest{Request: req, Input: input}
 }
 
 const opSendMessages = "SendMessages"
 
-// SendMessagesRequest generates a "aws.Request" representing the
-// client's request for the SendMessages operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SendMessagesRequest is a API request type for the SendMessages API operation.
+type SendMessagesRequest struct {
+	*aws.Request
+	Input *SendMessagesInput
+}
+
+// Send marshals and sends the SendMessages API request.
+func (r SendMessagesRequest) Send() (*SendMessagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendMessagesOutput), nil
+}
+
+// SendMessagesRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendMessages for more information on using the SendMessages
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Send a batch of messages
 //
 //    // Example sending a request using the SendMessagesRequest method.
-//    req, resp := client.SendMessagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SendMessagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessages
-func (c *Pinpoint) SendMessagesRequest(input *SendMessagesInput) (req *aws.Request, output *SendMessagesOutput) {
+func (c *Pinpoint) SendMessagesRequest(input *SendMessagesInput) SendMessagesRequest {
 	op := &aws.Operation{
 		Name:       opSendMessages,
 		HTTPMethod: "POST",
@@ -3564,84 +1889,42 @@ func (c *Pinpoint) SendMessagesRequest(input *SendMessagesInput) (req *aws.Reque
 		input = &SendMessagesInput{}
 	}
 
-	output = &SendMessagesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SendMessages API operation for Amazon Pinpoint.
-//
-// Send a batch of messages
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation SendMessages for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessages
-func (c *Pinpoint) SendMessages(input *SendMessagesInput) (*SendMessagesOutput, error) {
-	req, out := c.SendMessagesRequest(input)
-	return out, req.Send()
-}
-
-// SendMessagesWithContext is the same as SendMessages with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendMessages for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) SendMessagesWithContext(ctx aws.Context, input *SendMessagesInput, opts ...aws.Option) (*SendMessagesOutput, error) {
-	req, out := c.SendMessagesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SendMessagesOutput{})
+	return SendMessagesRequest{Request: req, Input: input}
 }
 
 const opSendUsersMessages = "SendUsersMessages"
 
-// SendUsersMessagesRequest generates a "aws.Request" representing the
-// client's request for the SendUsersMessages operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SendUsersMessagesRequest is a API request type for the SendUsersMessages API operation.
+type SendUsersMessagesRequest struct {
+	*aws.Request
+	Input *SendUsersMessagesInput
+}
+
+// Send marshals and sends the SendUsersMessages API request.
+func (r SendUsersMessagesRequest) Send() (*SendUsersMessagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendUsersMessagesOutput), nil
+}
+
+// SendUsersMessagesRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendUsersMessages for more information on using the SendUsersMessages
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Send a batch of messages to users
 //
 //    // Example sending a request using the SendUsersMessagesRequest method.
-//    req, resp := client.SendUsersMessagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SendUsersMessagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessages
-func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) (req *aws.Request, output *SendUsersMessagesOutput) {
+func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendUsersMessagesRequest {
 	op := &aws.Operation{
 		Name:       opSendUsersMessages,
 		HTTPMethod: "POST",
@@ -3652,84 +1935,42 @@ func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) (req 
 		input = &SendUsersMessagesInput{}
 	}
 
-	output = &SendUsersMessagesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SendUsersMessages API operation for Amazon Pinpoint.
-//
-// Send a batch of messages to users
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation SendUsersMessages for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessages
-func (c *Pinpoint) SendUsersMessages(input *SendUsersMessagesInput) (*SendUsersMessagesOutput, error) {
-	req, out := c.SendUsersMessagesRequest(input)
-	return out, req.Send()
-}
-
-// SendUsersMessagesWithContext is the same as SendUsersMessages with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendUsersMessages for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) SendUsersMessagesWithContext(ctx aws.Context, input *SendUsersMessagesInput, opts ...aws.Option) (*SendUsersMessagesOutput, error) {
-	req, out := c.SendUsersMessagesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SendUsersMessagesOutput{})
+	return SendUsersMessagesRequest{Request: req, Input: input}
 }
 
 const opUpdateAdmChannel = "UpdateAdmChannel"
 
-// UpdateAdmChannelRequest generates a "aws.Request" representing the
-// client's request for the UpdateAdmChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateAdmChannelRequest is a API request type for the UpdateAdmChannel API operation.
+type UpdateAdmChannelRequest struct {
+	*aws.Request
+	Input *UpdateAdmChannelInput
+}
+
+// Send marshals and sends the UpdateAdmChannel API request.
+func (r UpdateAdmChannelRequest) Send() (*UpdateAdmChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAdmChannelOutput), nil
+}
+
+// UpdateAdmChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAdmChannel for more information on using the UpdateAdmChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update an ADM channel
 //
 //    // Example sending a request using the UpdateAdmChannelRequest method.
-//    req, resp := client.UpdateAdmChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateAdmChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannel
-func (c *Pinpoint) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) (req *aws.Request, output *UpdateAdmChannelOutput) {
+func (c *Pinpoint) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) UpdateAdmChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAdmChannel,
 		HTTPMethod: "PUT",
@@ -3740,84 +1981,42 @@ func (c *Pinpoint) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) (req *a
 		input = &UpdateAdmChannelInput{}
 	}
 
-	output = &UpdateAdmChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateAdmChannel API operation for Amazon Pinpoint.
-//
-// Update an ADM channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateAdmChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannel
-func (c *Pinpoint) UpdateAdmChannel(input *UpdateAdmChannelInput) (*UpdateAdmChannelOutput, error) {
-	req, out := c.UpdateAdmChannelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAdmChannelWithContext is the same as UpdateAdmChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAdmChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateAdmChannelWithContext(ctx aws.Context, input *UpdateAdmChannelInput, opts ...aws.Option) (*UpdateAdmChannelOutput, error) {
-	req, out := c.UpdateAdmChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateAdmChannelOutput{})
+	return UpdateAdmChannelRequest{Request: req, Input: input}
 }
 
 const opUpdateApnsChannel = "UpdateApnsChannel"
 
-// UpdateApnsChannelRequest generates a "aws.Request" representing the
-// client's request for the UpdateApnsChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApnsChannelRequest is a API request type for the UpdateApnsChannel API operation.
+type UpdateApnsChannelRequest struct {
+	*aws.Request
+	Input *UpdateApnsChannelInput
+}
+
+// Send marshals and sends the UpdateApnsChannel API request.
+func (r UpdateApnsChannelRequest) Send() (*UpdateApnsChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApnsChannelOutput), nil
+}
+
+// UpdateApnsChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateApnsChannel for more information on using the UpdateApnsChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use to update the APNs channel for an app.
 //
 //    // Example sending a request using the UpdateApnsChannelRequest method.
-//    req, resp := client.UpdateApnsChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApnsChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannel
-func (c *Pinpoint) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) (req *aws.Request, output *UpdateApnsChannelOutput) {
+func (c *Pinpoint) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) UpdateApnsChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApnsChannel,
 		HTTPMethod: "PUT",
@@ -3828,84 +2027,42 @@ func (c *Pinpoint) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) (req 
 		input = &UpdateApnsChannelInput{}
 	}
 
-	output = &UpdateApnsChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateApnsChannel API operation for Amazon Pinpoint.
-//
-// Use to update the APNs channel for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateApnsChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannel
-func (c *Pinpoint) UpdateApnsChannel(input *UpdateApnsChannelInput) (*UpdateApnsChannelOutput, error) {
-	req, out := c.UpdateApnsChannelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApnsChannelWithContext is the same as UpdateApnsChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApnsChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateApnsChannelWithContext(ctx aws.Context, input *UpdateApnsChannelInput, opts ...aws.Option) (*UpdateApnsChannelOutput, error) {
-	req, out := c.UpdateApnsChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApnsChannelOutput{})
+	return UpdateApnsChannelRequest{Request: req, Input: input}
 }
 
 const opUpdateApnsSandboxChannel = "UpdateApnsSandboxChannel"
 
-// UpdateApnsSandboxChannelRequest generates a "aws.Request" representing the
-// client's request for the UpdateApnsSandboxChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApnsSandboxChannelRequest is a API request type for the UpdateApnsSandboxChannel API operation.
+type UpdateApnsSandboxChannelRequest struct {
+	*aws.Request
+	Input *UpdateApnsSandboxChannelInput
+}
+
+// Send marshals and sends the UpdateApnsSandboxChannel API request.
+func (r UpdateApnsSandboxChannelRequest) Send() (*UpdateApnsSandboxChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApnsSandboxChannelOutput), nil
+}
+
+// UpdateApnsSandboxChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateApnsSandboxChannel for more information on using the UpdateApnsSandboxChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update an APNS sandbox channel
 //
 //    // Example sending a request using the UpdateApnsSandboxChannelRequest method.
-//    req, resp := client.UpdateApnsSandboxChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApnsSandboxChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannel
-func (c *Pinpoint) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChannelInput) (req *aws.Request, output *UpdateApnsSandboxChannelOutput) {
+func (c *Pinpoint) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChannelInput) UpdateApnsSandboxChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApnsSandboxChannel,
 		HTTPMethod: "PUT",
@@ -3916,84 +2073,42 @@ func (c *Pinpoint) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChann
 		input = &UpdateApnsSandboxChannelInput{}
 	}
 
-	output = &UpdateApnsSandboxChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateApnsSandboxChannel API operation for Amazon Pinpoint.
-//
-// Update an APNS sandbox channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateApnsSandboxChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannel
-func (c *Pinpoint) UpdateApnsSandboxChannel(input *UpdateApnsSandboxChannelInput) (*UpdateApnsSandboxChannelOutput, error) {
-	req, out := c.UpdateApnsSandboxChannelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApnsSandboxChannelWithContext is the same as UpdateApnsSandboxChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApnsSandboxChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateApnsSandboxChannelWithContext(ctx aws.Context, input *UpdateApnsSandboxChannelInput, opts ...aws.Option) (*UpdateApnsSandboxChannelOutput, error) {
-	req, out := c.UpdateApnsSandboxChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApnsSandboxChannelOutput{})
+	return UpdateApnsSandboxChannelRequest{Request: req, Input: input}
 }
 
 const opUpdateApplicationSettings = "UpdateApplicationSettings"
 
-// UpdateApplicationSettingsRequest generates a "aws.Request" representing the
-// client's request for the UpdateApplicationSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApplicationSettingsRequest is a API request type for the UpdateApplicationSettings API operation.
+type UpdateApplicationSettingsRequest struct {
+	*aws.Request
+	Input *UpdateApplicationSettingsInput
+}
+
+// Send marshals and sends the UpdateApplicationSettings API request.
+func (r UpdateApplicationSettingsRequest) Send() (*UpdateApplicationSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationSettingsOutput), nil
+}
+
+// UpdateApplicationSettingsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateApplicationSettings for more information on using the UpdateApplicationSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used to update the settings for an app.
 //
 //    // Example sending a request using the UpdateApplicationSettingsRequest method.
-//    req, resp := client.UpdateApplicationSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApplicationSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettings
-func (c *Pinpoint) UpdateApplicationSettingsRequest(input *UpdateApplicationSettingsInput) (req *aws.Request, output *UpdateApplicationSettingsOutput) {
+func (c *Pinpoint) UpdateApplicationSettingsRequest(input *UpdateApplicationSettingsInput) UpdateApplicationSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplicationSettings,
 		HTTPMethod: "PUT",
@@ -4004,84 +2119,42 @@ func (c *Pinpoint) UpdateApplicationSettingsRequest(input *UpdateApplicationSett
 		input = &UpdateApplicationSettingsInput{}
 	}
 
-	output = &UpdateApplicationSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateApplicationSettings API operation for Amazon Pinpoint.
-//
-// Used to update the settings for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateApplicationSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettings
-func (c *Pinpoint) UpdateApplicationSettings(input *UpdateApplicationSettingsInput) (*UpdateApplicationSettingsOutput, error) {
-	req, out := c.UpdateApplicationSettingsRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApplicationSettingsWithContext is the same as UpdateApplicationSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApplicationSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateApplicationSettingsWithContext(ctx aws.Context, input *UpdateApplicationSettingsInput, opts ...aws.Option) (*UpdateApplicationSettingsOutput, error) {
-	req, out := c.UpdateApplicationSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApplicationSettingsOutput{})
+	return UpdateApplicationSettingsRequest{Request: req, Input: input}
 }
 
 const opUpdateBaiduChannel = "UpdateBaiduChannel"
 
-// UpdateBaiduChannelRequest generates a "aws.Request" representing the
-// client's request for the UpdateBaiduChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateBaiduChannelRequest is a API request type for the UpdateBaiduChannel API operation.
+type UpdateBaiduChannelRequest struct {
+	*aws.Request
+	Input *UpdateBaiduChannelInput
+}
+
+// Send marshals and sends the UpdateBaiduChannel API request.
+func (r UpdateBaiduChannelRequest) Send() (*UpdateBaiduChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateBaiduChannelOutput), nil
+}
+
+// UpdateBaiduChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateBaiduChannel for more information on using the UpdateBaiduChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update a BAIDU GCM channel
 //
 //    // Example sending a request using the UpdateBaiduChannelRequest method.
-//    req, resp := client.UpdateBaiduChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateBaiduChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateBaiduChannel
-func (c *Pinpoint) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) (req *aws.Request, output *UpdateBaiduChannelOutput) {
+func (c *Pinpoint) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) UpdateBaiduChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBaiduChannel,
 		HTTPMethod: "PUT",
@@ -4092,84 +2165,42 @@ func (c *Pinpoint) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) (re
 		input = &UpdateBaiduChannelInput{}
 	}
 
-	output = &UpdateBaiduChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateBaiduChannel API operation for Amazon Pinpoint.
-//
-// Update a BAIDU GCM channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateBaiduChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateBaiduChannel
-func (c *Pinpoint) UpdateBaiduChannel(input *UpdateBaiduChannelInput) (*UpdateBaiduChannelOutput, error) {
-	req, out := c.UpdateBaiduChannelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateBaiduChannelWithContext is the same as UpdateBaiduChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateBaiduChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateBaiduChannelWithContext(ctx aws.Context, input *UpdateBaiduChannelInput, opts ...aws.Option) (*UpdateBaiduChannelOutput, error) {
-	req, out := c.UpdateBaiduChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateBaiduChannelOutput{})
+	return UpdateBaiduChannelRequest{Request: req, Input: input}
 }
 
 const opUpdateCampaign = "UpdateCampaign"
 
-// UpdateCampaignRequest generates a "aws.Request" representing the
-// client's request for the UpdateCampaign operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateCampaignRequest is a API request type for the UpdateCampaign API operation.
+type UpdateCampaignRequest struct {
+	*aws.Request
+	Input *UpdateCampaignInput
+}
+
+// Send marshals and sends the UpdateCampaign API request.
+func (r UpdateCampaignRequest) Send() (*UpdateCampaignOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateCampaignOutput), nil
+}
+
+// UpdateCampaignRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateCampaign for more information on using the UpdateCampaign
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use to update a campaign.
 //
 //    // Example sending a request using the UpdateCampaignRequest method.
-//    req, resp := client.UpdateCampaignRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateCampaignRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaign
-func (c *Pinpoint) UpdateCampaignRequest(input *UpdateCampaignInput) (req *aws.Request, output *UpdateCampaignOutput) {
+func (c *Pinpoint) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaignRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCampaign,
 		HTTPMethod: "PUT",
@@ -4180,84 +2211,42 @@ func (c *Pinpoint) UpdateCampaignRequest(input *UpdateCampaignInput) (req *aws.R
 		input = &UpdateCampaignInput{}
 	}
 
-	output = &UpdateCampaignOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateCampaign API operation for Amazon Pinpoint.
-//
-// Use to update a campaign.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateCampaign for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaign
-func (c *Pinpoint) UpdateCampaign(input *UpdateCampaignInput) (*UpdateCampaignOutput, error) {
-	req, out := c.UpdateCampaignRequest(input)
-	return out, req.Send()
-}
-
-// UpdateCampaignWithContext is the same as UpdateCampaign with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateCampaign for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateCampaignWithContext(ctx aws.Context, input *UpdateCampaignInput, opts ...aws.Option) (*UpdateCampaignOutput, error) {
-	req, out := c.UpdateCampaignRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateCampaignOutput{})
+	return UpdateCampaignRequest{Request: req, Input: input}
 }
 
 const opUpdateEmailChannel = "UpdateEmailChannel"
 
-// UpdateEmailChannelRequest generates a "aws.Request" representing the
-// client's request for the UpdateEmailChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateEmailChannelRequest is a API request type for the UpdateEmailChannel API operation.
+type UpdateEmailChannelRequest struct {
+	*aws.Request
+	Input *UpdateEmailChannelInput
+}
+
+// Send marshals and sends the UpdateEmailChannel API request.
+func (r UpdateEmailChannelRequest) Send() (*UpdateEmailChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEmailChannelOutput), nil
+}
+
+// UpdateEmailChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateEmailChannel for more information on using the UpdateEmailChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update an email channel
 //
 //    // Example sending a request using the UpdateEmailChannelRequest method.
-//    req, resp := client.UpdateEmailChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateEmailChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannel
-func (c *Pinpoint) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) (req *aws.Request, output *UpdateEmailChannelOutput) {
+func (c *Pinpoint) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) UpdateEmailChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEmailChannel,
 		HTTPMethod: "PUT",
@@ -4268,84 +2257,42 @@ func (c *Pinpoint) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) (re
 		input = &UpdateEmailChannelInput{}
 	}
 
-	output = &UpdateEmailChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateEmailChannel API operation for Amazon Pinpoint.
-//
-// Update an email channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateEmailChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannel
-func (c *Pinpoint) UpdateEmailChannel(input *UpdateEmailChannelInput) (*UpdateEmailChannelOutput, error) {
-	req, out := c.UpdateEmailChannelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateEmailChannelWithContext is the same as UpdateEmailChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateEmailChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateEmailChannelWithContext(ctx aws.Context, input *UpdateEmailChannelInput, opts ...aws.Option) (*UpdateEmailChannelOutput, error) {
-	req, out := c.UpdateEmailChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEmailChannelOutput{})
+	return UpdateEmailChannelRequest{Request: req, Input: input}
 }
 
 const opUpdateEndpoint = "UpdateEndpoint"
 
-// UpdateEndpointRequest generates a "aws.Request" representing the
-// client's request for the UpdateEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateEndpointRequest is a API request type for the UpdateEndpoint API operation.
+type UpdateEndpointRequest struct {
+	*aws.Request
+	Input *UpdateEndpointInput
+}
+
+// Send marshals and sends the UpdateEndpoint API request.
+func (r UpdateEndpointRequest) Send() (*UpdateEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEndpointOutput), nil
+}
+
+// UpdateEndpointRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateEndpoint for more information on using the UpdateEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use to update an endpoint.
 //
 //    // Example sending a request using the UpdateEndpointRequest method.
-//    req, resp := client.UpdateEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpoint
-func (c *Pinpoint) UpdateEndpointRequest(input *UpdateEndpointInput) (req *aws.Request, output *UpdateEndpointOutput) {
+func (c *Pinpoint) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndpointRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEndpoint,
 		HTTPMethod: "PUT",
@@ -4356,84 +2303,42 @@ func (c *Pinpoint) UpdateEndpointRequest(input *UpdateEndpointInput) (req *aws.R
 		input = &UpdateEndpointInput{}
 	}
 
-	output = &UpdateEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateEndpoint API operation for Amazon Pinpoint.
-//
-// Use to update an endpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpoint
-func (c *Pinpoint) UpdateEndpoint(input *UpdateEndpointInput) (*UpdateEndpointOutput, error) {
-	req, out := c.UpdateEndpointRequest(input)
-	return out, req.Send()
-}
-
-// UpdateEndpointWithContext is the same as UpdateEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateEndpointWithContext(ctx aws.Context, input *UpdateEndpointInput, opts ...aws.Option) (*UpdateEndpointOutput, error) {
-	req, out := c.UpdateEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEndpointOutput{})
+	return UpdateEndpointRequest{Request: req, Input: input}
 }
 
 const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
 
-// UpdateEndpointsBatchRequest generates a "aws.Request" representing the
-// client's request for the UpdateEndpointsBatch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateEndpointsBatchRequest is a API request type for the UpdateEndpointsBatch API operation.
+type UpdateEndpointsBatchRequest struct {
+	*aws.Request
+	Input *UpdateEndpointsBatchInput
+}
+
+// Send marshals and sends the UpdateEndpointsBatch API request.
+func (r UpdateEndpointsBatchRequest) Send() (*UpdateEndpointsBatchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateEndpointsBatchOutput), nil
+}
+
+// UpdateEndpointsBatchRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateEndpointsBatch for more information on using the UpdateEndpointsBatch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use to update a batch of endpoints.
 //
 //    // Example sending a request using the UpdateEndpointsBatchRequest method.
-//    req, resp := client.UpdateEndpointsBatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateEndpointsBatchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatch
-func (c *Pinpoint) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) (req *aws.Request, output *UpdateEndpointsBatchOutput) {
+func (c *Pinpoint) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) UpdateEndpointsBatchRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEndpointsBatch,
 		HTTPMethod: "PUT",
@@ -4444,84 +2349,42 @@ func (c *Pinpoint) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput)
 		input = &UpdateEndpointsBatchInput{}
 	}
 
-	output = &UpdateEndpointsBatchOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateEndpointsBatch API operation for Amazon Pinpoint.
-//
-// Use to update a batch of endpoints.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateEndpointsBatch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatch
-func (c *Pinpoint) UpdateEndpointsBatch(input *UpdateEndpointsBatchInput) (*UpdateEndpointsBatchOutput, error) {
-	req, out := c.UpdateEndpointsBatchRequest(input)
-	return out, req.Send()
-}
-
-// UpdateEndpointsBatchWithContext is the same as UpdateEndpointsBatch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateEndpointsBatch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateEndpointsBatchWithContext(ctx aws.Context, input *UpdateEndpointsBatchInput, opts ...aws.Option) (*UpdateEndpointsBatchOutput, error) {
-	req, out := c.UpdateEndpointsBatchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateEndpointsBatchOutput{})
+	return UpdateEndpointsBatchRequest{Request: req, Input: input}
 }
 
 const opUpdateGcmChannel = "UpdateGcmChannel"
 
-// UpdateGcmChannelRequest generates a "aws.Request" representing the
-// client's request for the UpdateGcmChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateGcmChannelRequest is a API request type for the UpdateGcmChannel API operation.
+type UpdateGcmChannelRequest struct {
+	*aws.Request
+	Input *UpdateGcmChannelInput
+}
+
+// Send marshals and sends the UpdateGcmChannel API request.
+func (r UpdateGcmChannelRequest) Send() (*UpdateGcmChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGcmChannelOutput), nil
+}
+
+// UpdateGcmChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateGcmChannel for more information on using the UpdateGcmChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use to update the GCM channel for an app.
 //
 //    // Example sending a request using the UpdateGcmChannelRequest method.
-//    req, resp := client.UpdateGcmChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateGcmChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannel
-func (c *Pinpoint) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) (req *aws.Request, output *UpdateGcmChannelOutput) {
+func (c *Pinpoint) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) UpdateGcmChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGcmChannel,
 		HTTPMethod: "PUT",
@@ -4532,84 +2395,42 @@ func (c *Pinpoint) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) (req *a
 		input = &UpdateGcmChannelInput{}
 	}
 
-	output = &UpdateGcmChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateGcmChannel API operation for Amazon Pinpoint.
-//
-// Use to update the GCM channel for an app.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateGcmChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannel
-func (c *Pinpoint) UpdateGcmChannel(input *UpdateGcmChannelInput) (*UpdateGcmChannelOutput, error) {
-	req, out := c.UpdateGcmChannelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateGcmChannelWithContext is the same as UpdateGcmChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGcmChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateGcmChannelWithContext(ctx aws.Context, input *UpdateGcmChannelInput, opts ...aws.Option) (*UpdateGcmChannelOutput, error) {
-	req, out := c.UpdateGcmChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateGcmChannelOutput{})
+	return UpdateGcmChannelRequest{Request: req, Input: input}
 }
 
 const opUpdateSegment = "UpdateSegment"
 
-// UpdateSegmentRequest generates a "aws.Request" representing the
-// client's request for the UpdateSegment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateSegmentRequest is a API request type for the UpdateSegment API operation.
+type UpdateSegmentRequest struct {
+	*aws.Request
+	Input *UpdateSegmentInput
+}
+
+// Send marshals and sends the UpdateSegment API request.
+func (r UpdateSegmentRequest) Send() (*UpdateSegmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSegmentOutput), nil
+}
+
+// UpdateSegmentRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSegment for more information on using the UpdateSegment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use to update a segment.
 //
 //    // Example sending a request using the UpdateSegmentRequest method.
-//    req, resp := client.UpdateSegmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateSegmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegment
-func (c *Pinpoint) UpdateSegmentRequest(input *UpdateSegmentInput) (req *aws.Request, output *UpdateSegmentOutput) {
+func (c *Pinpoint) UpdateSegmentRequest(input *UpdateSegmentInput) UpdateSegmentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSegment,
 		HTTPMethod: "PUT",
@@ -4620,84 +2441,42 @@ func (c *Pinpoint) UpdateSegmentRequest(input *UpdateSegmentInput) (req *aws.Req
 		input = &UpdateSegmentInput{}
 	}
 
-	output = &UpdateSegmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateSegment API operation for Amazon Pinpoint.
-//
-// Use to update a segment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateSegment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegment
-func (c *Pinpoint) UpdateSegment(input *UpdateSegmentInput) (*UpdateSegmentOutput, error) {
-	req, out := c.UpdateSegmentRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSegmentWithContext is the same as UpdateSegment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSegment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateSegmentWithContext(ctx aws.Context, input *UpdateSegmentInput, opts ...aws.Option) (*UpdateSegmentOutput, error) {
-	req, out := c.UpdateSegmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateSegmentOutput{})
+	return UpdateSegmentRequest{Request: req, Input: input}
 }
 
 const opUpdateSmsChannel = "UpdateSmsChannel"
 
-// UpdateSmsChannelRequest generates a "aws.Request" representing the
-// client's request for the UpdateSmsChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateSmsChannelRequest is a API request type for the UpdateSmsChannel API operation.
+type UpdateSmsChannelRequest struct {
+	*aws.Request
+	Input *UpdateSmsChannelInput
+}
+
+// Send marshals and sends the UpdateSmsChannel API request.
+func (r UpdateSmsChannelRequest) Send() (*UpdateSmsChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSmsChannelOutput), nil
+}
+
+// UpdateSmsChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSmsChannel for more information on using the UpdateSmsChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update an SMS channel
 //
 //    // Example sending a request using the UpdateSmsChannelRequest method.
-//    req, resp := client.UpdateSmsChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateSmsChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannel
-func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) (req *aws.Request, output *UpdateSmsChannelOutput) {
+func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) UpdateSmsChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSmsChannel,
 		HTTPMethod: "PUT",
@@ -4708,55 +2487,8 @@ func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) (req *a
 		input = &UpdateSmsChannelInput{}
 	}
 
-	output = &UpdateSmsChannelOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateSmsChannel API operation for Amazon Pinpoint.
-//
-// Update an SMS channel
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Pinpoint's
-// API operation UpdateSmsChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//
-//   * ErrCodeForbiddenException "ForbiddenException"
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//
-//   * ErrCodeMethodNotAllowedException "MethodNotAllowedException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannel
-func (c *Pinpoint) UpdateSmsChannel(input *UpdateSmsChannelInput) (*UpdateSmsChannelOutput, error) {
-	req, out := c.UpdateSmsChannelRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSmsChannelWithContext is the same as UpdateSmsChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSmsChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pinpoint) UpdateSmsChannelWithContext(ctx aws.Context, input *UpdateSmsChannelInput, opts ...aws.Option) (*UpdateSmsChannelOutput, error) {
-	req, out := c.UpdateSmsChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateSmsChannelOutput{})
+	return UpdateSmsChannelRequest{Request: req, Input: input}
 }
 
 // Amazon Device Messaging channel definition.

@@ -9,7 +9,6 @@
 package iotdataplaneiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
 )
 
@@ -63,21 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type IoTDataPlaneAPI interface {
-	DeleteThingShadow(*iotdataplane.DeleteThingShadowInput) (*iotdataplane.DeleteThingShadowOutput, error)
-	DeleteThingShadowWithContext(aws.Context, *iotdataplane.DeleteThingShadowInput, ...aws.Option) (*iotdataplane.DeleteThingShadowOutput, error)
-	DeleteThingShadowRequest(*iotdataplane.DeleteThingShadowInput) (*aws.Request, *iotdataplane.DeleteThingShadowOutput)
+	DeleteThingShadowRequest(*iotdataplane.DeleteThingShadowInput) iotdataplane.DeleteThingShadowRequest
 
-	GetThingShadow(*iotdataplane.GetThingShadowInput) (*iotdataplane.GetThingShadowOutput, error)
-	GetThingShadowWithContext(aws.Context, *iotdataplane.GetThingShadowInput, ...aws.Option) (*iotdataplane.GetThingShadowOutput, error)
-	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) (*aws.Request, *iotdataplane.GetThingShadowOutput)
+	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) iotdataplane.GetThingShadowRequest
 
-	Publish(*iotdataplane.PublishInput) (*iotdataplane.PublishOutput, error)
-	PublishWithContext(aws.Context, *iotdataplane.PublishInput, ...aws.Option) (*iotdataplane.PublishOutput, error)
-	PublishRequest(*iotdataplane.PublishInput) (*aws.Request, *iotdataplane.PublishOutput)
+	PublishRequest(*iotdataplane.PublishInput) iotdataplane.PublishRequest
 
-	UpdateThingShadow(*iotdataplane.UpdateThingShadowInput) (*iotdataplane.UpdateThingShadowOutput, error)
-	UpdateThingShadowWithContext(aws.Context, *iotdataplane.UpdateThingShadowInput, ...aws.Option) (*iotdataplane.UpdateThingShadowOutput, error)
-	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) (*aws.Request, *iotdataplane.UpdateThingShadowOutput)
+	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) iotdataplane.UpdateThingShadowRequest
 }
 
 var _ IoTDataPlaneAPI = (*iotdataplane.IoTDataPlane)(nil)

@@ -13,31 +13,37 @@ import (
 
 const opAddPermission = "AddPermission"
 
-// AddPermissionRequest generates a "aws.Request" representing the
-// client's request for the AddPermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddPermissionRequest is a API request type for the AddPermission API operation.
+type AddPermissionRequest struct {
+	*aws.Request
+	Input *AddPermissionInput
+}
+
+// Send marshals and sends the AddPermission API request.
+func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddPermissionOutput), nil
+}
+
+// AddPermissionRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddPermission for more information on using the AddPermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds a statement to a topic's access control policy, granting access for
+// the specified AWS accounts to the specified actions.
 //
 //    // Example sending a request using the AddPermissionRequest method.
-//    req, resp := client.AddPermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddPermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermission
-func (c *SNS) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request, output *AddPermissionOutput) {
+func (c *SNS) AddPermissionRequest(input *AddPermissionInput) AddPermissionRequest {
 	op := &aws.Operation{
 		Name:       opAddPermission,
 		HTTPMethod: "POST",
@@ -48,87 +54,49 @@ func (c *SNS) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request,
 		input = &AddPermissionInput{}
 	}
 
-	output = &AddPermissionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddPermissionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddPermission API operation for Amazon Simple Notification Service.
-//
-// Adds a statement to a topic's access control policy, granting access for
-// the specified AWS accounts to the specified actions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation AddPermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermission
-func (c *SNS) AddPermission(input *AddPermissionInput) (*AddPermissionOutput, error) {
-	req, out := c.AddPermissionRequest(input)
-	return out, req.Send()
-}
-
-// AddPermissionWithContext is the same as AddPermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddPermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...aws.Option) (*AddPermissionOutput, error) {
-	req, out := c.AddPermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddPermissionRequest{Request: req, Input: input}
 }
 
 const opCheckIfPhoneNumberIsOptedOut = "CheckIfPhoneNumberIsOptedOut"
 
-// CheckIfPhoneNumberIsOptedOutRequest generates a "aws.Request" representing the
-// client's request for the CheckIfPhoneNumberIsOptedOut operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CheckIfPhoneNumberIsOptedOutRequest is a API request type for the CheckIfPhoneNumberIsOptedOut API operation.
+type CheckIfPhoneNumberIsOptedOutRequest struct {
+	*aws.Request
+	Input *CheckIfPhoneNumberIsOptedOutInput
+}
+
+// Send marshals and sends the CheckIfPhoneNumberIsOptedOut API request.
+func (r CheckIfPhoneNumberIsOptedOutRequest) Send() (*CheckIfPhoneNumberIsOptedOutOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CheckIfPhoneNumberIsOptedOutOutput), nil
+}
+
+// CheckIfPhoneNumberIsOptedOutRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Accepts a phone number and indicates whether the phone holder has opted out
+// of receiving SMS messages from your account. You cannot send SMS messages
+// to a number that is opted out.
 //
-// See CheckIfPhoneNumberIsOptedOut for more information on using the CheckIfPhoneNumberIsOptedOut
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To resume sending messages, you can opt in the number by using the OptInPhoneNumber
+// action.
 //
 //    // Example sending a request using the CheckIfPhoneNumberIsOptedOutRequest method.
-//    req, resp := client.CheckIfPhoneNumberIsOptedOutRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CheckIfPhoneNumberIsOptedOutRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOut
-func (c *SNS) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOptedOutInput) (req *aws.Request, output *CheckIfPhoneNumberIsOptedOutOutput) {
+func (c *SNS) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOptedOutInput) CheckIfPhoneNumberIsOptedOutRequest {
 	op := &aws.Operation{
 		Name:       opCheckIfPhoneNumberIsOptedOut,
 		HTTPMethod: "POST",
@@ -139,90 +107,46 @@ func (c *SNS) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOpt
 		input = &CheckIfPhoneNumberIsOptedOutInput{}
 	}
 
-	output = &CheckIfPhoneNumberIsOptedOutOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CheckIfPhoneNumberIsOptedOut API operation for Amazon Simple Notification Service.
-//
-// Accepts a phone number and indicates whether the phone holder has opted out
-// of receiving SMS messages from your account. You cannot send SMS messages
-// to a number that is opted out.
-//
-// To resume sending messages, you can opt in the number by using the OptInPhoneNumber
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation CheckIfPhoneNumberIsOptedOut for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeThrottledException "Throttled"
-//   Indicates that the rate at which requests have been submitted for this action
-//   exceeds the limit for your account.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOut
-func (c *SNS) CheckIfPhoneNumberIsOptedOut(input *CheckIfPhoneNumberIsOptedOutInput) (*CheckIfPhoneNumberIsOptedOutOutput, error) {
-	req, out := c.CheckIfPhoneNumberIsOptedOutRequest(input)
-	return out, req.Send()
-}
-
-// CheckIfPhoneNumberIsOptedOutWithContext is the same as CheckIfPhoneNumberIsOptedOut with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CheckIfPhoneNumberIsOptedOut for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) CheckIfPhoneNumberIsOptedOutWithContext(ctx aws.Context, input *CheckIfPhoneNumberIsOptedOutInput, opts ...aws.Option) (*CheckIfPhoneNumberIsOptedOutOutput, error) {
-	req, out := c.CheckIfPhoneNumberIsOptedOutRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CheckIfPhoneNumberIsOptedOutOutput{})
+	return CheckIfPhoneNumberIsOptedOutRequest{Request: req, Input: input}
 }
 
 const opConfirmSubscription = "ConfirmSubscription"
 
-// ConfirmSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the ConfirmSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ConfirmSubscriptionRequest is a API request type for the ConfirmSubscription API operation.
+type ConfirmSubscriptionRequest struct {
+	*aws.Request
+	Input *ConfirmSubscriptionInput
+}
+
+// Send marshals and sends the ConfirmSubscription API request.
+func (r ConfirmSubscriptionRequest) Send() (*ConfirmSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ConfirmSubscriptionOutput), nil
+}
+
+// ConfirmSubscriptionRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ConfirmSubscription for more information on using the ConfirmSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Verifies an endpoint owner's intent to receive messages by validating the
+// token sent to the endpoint by an earlier Subscribe action. If the token is
+// valid, the action creates a new subscription and returns its Amazon Resource
+// Name (ARN). This call requires an AWS signature only when the AuthenticateOnUnsubscribe
+// flag is set to "true".
 //
 //    // Example sending a request using the ConfirmSubscriptionRequest method.
-//    req, resp := client.ConfirmSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ConfirmSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscription
-func (c *SNS) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) (req *aws.Request, output *ConfirmSubscriptionOutput) {
+func (c *SNS) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) ConfirmSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opConfirmSubscription,
 		HTTPMethod: "POST",
@@ -233,107 +157,30 @@ func (c *SNS) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) (req *
 		input = &ConfirmSubscriptionInput{}
 	}
 
-	output = &ConfirmSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ConfirmSubscription API operation for Amazon Simple Notification Service.
-//
-// Verifies an endpoint owner's intent to receive messages by validating the
-// token sent to the endpoint by an earlier Subscribe action. If the token is
-// valid, the action creates a new subscription and returns its Amazon Resource
-// Name (ARN). This call requires an AWS signature only when the AuthenticateOnUnsubscribe
-// flag is set to "true".
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation ConfirmSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionLimitExceededException "SubscriptionLimitExceeded"
-//   Indicates that the customer already owns the maximum allowed number of subscriptions.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscription
-func (c *SNS) ConfirmSubscription(input *ConfirmSubscriptionInput) (*ConfirmSubscriptionOutput, error) {
-	req, out := c.ConfirmSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// ConfirmSubscriptionWithContext is the same as ConfirmSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ConfirmSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) ConfirmSubscriptionWithContext(ctx aws.Context, input *ConfirmSubscriptionInput, opts ...aws.Option) (*ConfirmSubscriptionOutput, error) {
-	req, out := c.ConfirmSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ConfirmSubscriptionOutput{})
+	return ConfirmSubscriptionRequest{Request: req, Input: input}
 }
 
 const opCreatePlatformApplication = "CreatePlatformApplication"
 
-// CreatePlatformApplicationRequest generates a "aws.Request" representing the
-// client's request for the CreatePlatformApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePlatformApplication for more information on using the CreatePlatformApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePlatformApplicationRequest method.
-//    req, resp := client.CreatePlatformApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplication
-func (c *SNS) CreatePlatformApplicationRequest(input *CreatePlatformApplicationInput) (req *aws.Request, output *CreatePlatformApplicationOutput) {
-	op := &aws.Operation{
-		Name:       opCreatePlatformApplication,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreatePlatformApplicationInput{}
-	}
-
-	output = &CreatePlatformApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreatePlatformApplicationRequest is a API request type for the CreatePlatformApplication API operation.
+type CreatePlatformApplicationRequest struct {
+	*aws.Request
+	Input *CreatePlatformApplicationInput
 }
 
-// CreatePlatformApplication API operation for Amazon Simple Notification Service.
+// Send marshals and sends the CreatePlatformApplication API request.
+func (r CreatePlatformApplicationRequest) Send() (*CreatePlatformApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePlatformApplicationOutput), nil
+}
+
+// CreatePlatformApplicationRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
 // Creates a platform application object for one of the supported push notification
 // services, such as APNS and GCM, to which devices and mobile apps may register.
@@ -362,88 +209,49 @@ func (c *SNS) CreatePlatformApplicationRequest(input *CreatePlatformApplicationI
 // Getting Started with MPNS (http://docs.aws.amazon.com/sns/latest/dg/mobile-push-mpns.html),
 // or Getting Started with WNS (http://docs.aws.amazon.com/sns/latest/dg/mobile-push-wns.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation CreatePlatformApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplication
-func (c *SNS) CreatePlatformApplication(input *CreatePlatformApplicationInput) (*CreatePlatformApplicationOutput, error) {
-	req, out := c.CreatePlatformApplicationRequest(input)
-	return out, req.Send()
-}
-
-// CreatePlatformApplicationWithContext is the same as CreatePlatformApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePlatformApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) CreatePlatformApplicationWithContext(ctx aws.Context, input *CreatePlatformApplicationInput, opts ...aws.Option) (*CreatePlatformApplicationOutput, error) {
-	req, out := c.CreatePlatformApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
-
-// CreatePlatformEndpointRequest generates a "aws.Request" representing the
-// client's request for the CreatePlatformEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePlatformEndpoint for more information on using the CreatePlatformEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePlatformEndpointRequest method.
-//    req, resp := client.CreatePlatformEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreatePlatformApplicationRequest method.
+//    req := client.CreatePlatformApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpoint
-func (c *SNS) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) (req *aws.Request, output *CreatePlatformEndpointOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplication
+func (c *SNS) CreatePlatformApplicationRequest(input *CreatePlatformApplicationInput) CreatePlatformApplicationRequest {
 	op := &aws.Operation{
-		Name:       opCreatePlatformEndpoint,
+		Name:       opCreatePlatformApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreatePlatformEndpointInput{}
+		input = &CreatePlatformApplicationInput{}
 	}
 
-	output = &CreatePlatformEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreatePlatformApplicationOutput{})
+	return CreatePlatformApplicationRequest{Request: req, Input: input}
 }
 
-// CreatePlatformEndpoint API operation for Amazon Simple Notification Service.
+const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
+
+// CreatePlatformEndpointRequest is a API request type for the CreatePlatformEndpoint API operation.
+type CreatePlatformEndpointRequest struct {
+	*aws.Request
+	Input *CreatePlatformEndpointInput
+}
+
+// Send marshals and sends the CreatePlatformEndpoint API request.
+func (r CreatePlatformEndpointRequest) Send() (*CreatePlatformEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePlatformEndpointOutput), nil
+}
+
+// CreatePlatformEndpointRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
 // Creates an endpoint for a device and mobile app on one of the supported push
 // notification services, such as GCM and APNS. CreatePlatformEndpoint requires
@@ -460,75 +268,65 @@ func (c *SNS) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) 
 // ChannelId and UserId. The token field must also contain the ChannelId. For
 // more information, see Creating an Amazon SNS Endpoint for Baidu (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation CreatePlatformEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
+//    // Example sending a request using the CreatePlatformEndpointRequest method.
+//    req := client.CreatePlatformEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpoint
-func (c *SNS) CreatePlatformEndpoint(input *CreatePlatformEndpointInput) (*CreatePlatformEndpointOutput, error) {
-	req, out := c.CreatePlatformEndpointRequest(input)
-	return out, req.Send()
-}
+func (c *SNS) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) CreatePlatformEndpointRequest {
+	op := &aws.Operation{
+		Name:       opCreatePlatformEndpoint,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreatePlatformEndpointWithContext is the same as CreatePlatformEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePlatformEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) CreatePlatformEndpointWithContext(ctx aws.Context, input *CreatePlatformEndpointInput, opts ...aws.Option) (*CreatePlatformEndpointOutput, error) {
-	req, out := c.CreatePlatformEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreatePlatformEndpointInput{}
+	}
+
+	req := c.newRequest(op, input, &CreatePlatformEndpointOutput{})
+	return CreatePlatformEndpointRequest{Request: req, Input: input}
 }
 
 const opCreateTopic = "CreateTopic"
 
-// CreateTopicRequest generates a "aws.Request" representing the
-// client's request for the CreateTopic operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTopicRequest is a API request type for the CreateTopic API operation.
+type CreateTopicRequest struct {
+	*aws.Request
+	Input *CreateTopicInput
+}
+
+// Send marshals and sends the CreateTopic API request.
+func (r CreateTopicRequest) Send() (*CreateTopicOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTopicOutput), nil
+}
+
+// CreateTopicRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTopic for more information on using the CreateTopic
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a topic to which notifications can be published. Users can create
+// at most 100,000 topics. For more information, see http://aws.amazon.com/sns
+// (http://aws.amazon.com/sns/). This action is idempotent, so if the requester
+// already owns a topic with the specified name, that topic's ARN is returned
+// without creating a new topic.
 //
 //    // Example sending a request using the CreateTopicRequest method.
-//    req, resp := client.CreateTopicRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTopicRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopic
-func (c *SNS) CreateTopicRequest(input *CreateTopicInput) (req *aws.Request, output *CreateTopicOutput) {
+func (c *SNS) CreateTopicRequest(input *CreateTopicInput) CreateTopicRequest {
 	op := &aws.Operation{
 		Name:       opCreateTopic,
 		HTTPMethod: "POST",
@@ -539,88 +337,47 @@ func (c *SNS) CreateTopicRequest(input *CreateTopicInput) (req *aws.Request, out
 		input = &CreateTopicInput{}
 	}
 
-	output = &CreateTopicOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTopic API operation for Amazon Simple Notification Service.
-//
-// Creates a topic to which notifications can be published. Users can create
-// at most 100,000 topics. For more information, see http://aws.amazon.com/sns
-// (http://aws.amazon.com/sns/). This action is idempotent, so if the requester
-// already owns a topic with the specified name, that topic's ARN is returned
-// without creating a new topic.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation CreateTopic for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeTopicLimitExceededException "TopicLimitExceeded"
-//   Indicates that the customer already owns the maximum allowed number of topics.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopic
-func (c *SNS) CreateTopic(input *CreateTopicInput) (*CreateTopicOutput, error) {
-	req, out := c.CreateTopicRequest(input)
-	return out, req.Send()
-}
-
-// CreateTopicWithContext is the same as CreateTopic with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTopic for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) CreateTopicWithContext(ctx aws.Context, input *CreateTopicInput, opts ...aws.Option) (*CreateTopicOutput, error) {
-	req, out := c.CreateTopicRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTopicOutput{})
+	return CreateTopicRequest{Request: req, Input: input}
 }
 
 const opDeleteEndpoint = "DeleteEndpoint"
 
-// DeleteEndpointRequest generates a "aws.Request" representing the
-// client's request for the DeleteEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEndpointRequest is a API request type for the DeleteEndpoint API operation.
+type DeleteEndpointRequest struct {
+	*aws.Request
+	Input *DeleteEndpointInput
+}
+
+// Send marshals and sends the DeleteEndpoint API request.
+func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEndpointOutput), nil
+}
+
+// DeleteEndpointRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the endpoint for a device and mobile app from Amazon SNS. This action
+// is idempotent. For more information, see Using Amazon SNS Mobile Push Notifications
+// (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
-// See DeleteEndpoint for more information on using the DeleteEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you delete an endpoint that is also subscribed to a topic, then you
+// must also unsubscribe the endpoint from the topic.
 //
 //    // Example sending a request using the DeleteEndpointRequest method.
-//    req, resp := client.DeleteEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpoint
-func (c *SNS) DeleteEndpointRequest(input *DeleteEndpointInput) (req *aws.Request, output *DeleteEndpointOutput) {
+func (c *SNS) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEndpoint,
 		HTTPMethod: "POST",
@@ -631,88 +388,46 @@ func (c *SNS) DeleteEndpointRequest(input *DeleteEndpointInput) (req *aws.Reques
 		input = &DeleteEndpointInput{}
 	}
 
-	output = &DeleteEndpointOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteEndpointOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteEndpoint API operation for Amazon Simple Notification Service.
-//
-// Deletes the endpoint for a device and mobile app from Amazon SNS. This action
-// is idempotent. For more information, see Using Amazon SNS Mobile Push Notifications
-// (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-//
-// When you delete an endpoint that is also subscribed to a topic, then you
-// must also unsubscribe the endpoint from the topic.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation DeleteEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpoint
-func (c *SNS) DeleteEndpoint(input *DeleteEndpointInput) (*DeleteEndpointOutput, error) {
-	req, out := c.DeleteEndpointRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEndpointWithContext is the same as DeleteEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) DeleteEndpointWithContext(ctx aws.Context, input *DeleteEndpointInput, opts ...aws.Option) (*DeleteEndpointOutput, error) {
-	req, out := c.DeleteEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteEndpointRequest{Request: req, Input: input}
 }
 
 const opDeletePlatformApplication = "DeletePlatformApplication"
 
-// DeletePlatformApplicationRequest generates a "aws.Request" representing the
-// client's request for the DeletePlatformApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePlatformApplicationRequest is a API request type for the DeletePlatformApplication API operation.
+type DeletePlatformApplicationRequest struct {
+	*aws.Request
+	Input *DeletePlatformApplicationInput
+}
+
+// Send marshals and sends the DeletePlatformApplication API request.
+func (r DeletePlatformApplicationRequest) Send() (*DeletePlatformApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePlatformApplicationOutput), nil
+}
+
+// DeletePlatformApplicationRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePlatformApplication for more information on using the DeletePlatformApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a platform application object for one of the supported push notification
+// services, such as APNS and GCM. For more information, see Using Amazon SNS
+// Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using the DeletePlatformApplicationRequest method.
-//    req, resp := client.DeletePlatformApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePlatformApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplication
-func (c *SNS) DeletePlatformApplicationRequest(input *DeletePlatformApplicationInput) (req *aws.Request, output *DeletePlatformApplicationOutput) {
+func (c *SNS) DeletePlatformApplicationRequest(input *DeletePlatformApplicationInput) DeletePlatformApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDeletePlatformApplication,
 		HTTPMethod: "POST",
@@ -723,85 +438,47 @@ func (c *SNS) DeletePlatformApplicationRequest(input *DeletePlatformApplicationI
 		input = &DeletePlatformApplicationInput{}
 	}
 
-	output = &DeletePlatformApplicationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeletePlatformApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeletePlatformApplication API operation for Amazon Simple Notification Service.
-//
-// Deletes a platform application object for one of the supported push notification
-// services, such as APNS and GCM. For more information, see Using Amazon SNS
-// Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation DeletePlatformApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplication
-func (c *SNS) DeletePlatformApplication(input *DeletePlatformApplicationInput) (*DeletePlatformApplicationOutput, error) {
-	req, out := c.DeletePlatformApplicationRequest(input)
-	return out, req.Send()
-}
-
-// DeletePlatformApplicationWithContext is the same as DeletePlatformApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePlatformApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) DeletePlatformApplicationWithContext(ctx aws.Context, input *DeletePlatformApplicationInput, opts ...aws.Option) (*DeletePlatformApplicationOutput, error) {
-	req, out := c.DeletePlatformApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeletePlatformApplicationRequest{Request: req, Input: input}
 }
 
 const opDeleteTopic = "DeleteTopic"
 
-// DeleteTopicRequest generates a "aws.Request" representing the
-// client's request for the DeleteTopic operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTopicRequest is a API request type for the DeleteTopic API operation.
+type DeleteTopicRequest struct {
+	*aws.Request
+	Input *DeleteTopicInput
+}
+
+// Send marshals and sends the DeleteTopic API request.
+func (r DeleteTopicRequest) Send() (*DeleteTopicOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTopicOutput), nil
+}
+
+// DeleteTopicRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTopic for more information on using the DeleteTopic
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a topic and all its subscriptions. Deleting a topic might prevent
+// some messages previously sent to the topic from being delivered to subscribers.
+// This action is idempotent, so deleting a topic that does not exist does not
+// result in an error.
 //
 //    // Example sending a request using the DeleteTopicRequest method.
-//    req, resp := client.DeleteTopicRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTopicRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopic
-func (c *SNS) DeleteTopicRequest(input *DeleteTopicInput) (req *aws.Request, output *DeleteTopicOutput) {
+func (c *SNS) DeleteTopicRequest(input *DeleteTopicInput) DeleteTopicRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTopic,
 		HTTPMethod: "POST",
@@ -812,89 +489,46 @@ func (c *SNS) DeleteTopicRequest(input *DeleteTopicInput) (req *aws.Request, out
 		input = &DeleteTopicInput{}
 	}
 
-	output = &DeleteTopicOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteTopicOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteTopic API operation for Amazon Simple Notification Service.
-//
-// Deletes a topic and all its subscriptions. Deleting a topic might prevent
-// some messages previously sent to the topic from being delivered to subscribers.
-// This action is idempotent, so deleting a topic that does not exist does not
-// result in an error.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation DeleteTopic for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopic
-func (c *SNS) DeleteTopic(input *DeleteTopicInput) (*DeleteTopicOutput, error) {
-	req, out := c.DeleteTopicRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTopicWithContext is the same as DeleteTopic with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTopic for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) DeleteTopicWithContext(ctx aws.Context, input *DeleteTopicInput, opts ...aws.Option) (*DeleteTopicOutput, error) {
-	req, out := c.DeleteTopicRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteTopicRequest{Request: req, Input: input}
 }
 
 const opGetEndpointAttributes = "GetEndpointAttributes"
 
-// GetEndpointAttributesRequest generates a "aws.Request" representing the
-// client's request for the GetEndpointAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetEndpointAttributesRequest is a API request type for the GetEndpointAttributes API operation.
+type GetEndpointAttributesRequest struct {
+	*aws.Request
+	Input *GetEndpointAttributesInput
+}
+
+// Send marshals and sends the GetEndpointAttributes API request.
+func (r GetEndpointAttributesRequest) Send() (*GetEndpointAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEndpointAttributesOutput), nil
+}
+
+// GetEndpointAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetEndpointAttributes for more information on using the GetEndpointAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the endpoint attributes for a device on one of the supported push
+// notification services, such as GCM and APNS. For more information, see Using
+// Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using the GetEndpointAttributesRequest method.
-//    req, resp := client.GetEndpointAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetEndpointAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributes
-func (c *SNS) GetEndpointAttributesRequest(input *GetEndpointAttributesInput) (req *aws.Request, output *GetEndpointAttributesOutput) {
+func (c *SNS) GetEndpointAttributesRequest(input *GetEndpointAttributesInput) GetEndpointAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetEndpointAttributes,
 		HTTPMethod: "POST",
@@ -905,86 +539,44 @@ func (c *SNS) GetEndpointAttributesRequest(input *GetEndpointAttributesInput) (r
 		input = &GetEndpointAttributesInput{}
 	}
 
-	output = &GetEndpointAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetEndpointAttributes API operation for Amazon Simple Notification Service.
-//
-// Retrieves the endpoint attributes for a device on one of the supported push
-// notification services, such as GCM and APNS. For more information, see Using
-// Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation GetEndpointAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributes
-func (c *SNS) GetEndpointAttributes(input *GetEndpointAttributesInput) (*GetEndpointAttributesOutput, error) {
-	req, out := c.GetEndpointAttributesRequest(input)
-	return out, req.Send()
-}
-
-// GetEndpointAttributesWithContext is the same as GetEndpointAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEndpointAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) GetEndpointAttributesWithContext(ctx aws.Context, input *GetEndpointAttributesInput, opts ...aws.Option) (*GetEndpointAttributesOutput, error) {
-	req, out := c.GetEndpointAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetEndpointAttributesOutput{})
+	return GetEndpointAttributesRequest{Request: req, Input: input}
 }
 
 const opGetPlatformApplicationAttributes = "GetPlatformApplicationAttributes"
 
-// GetPlatformApplicationAttributesRequest generates a "aws.Request" representing the
-// client's request for the GetPlatformApplicationAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPlatformApplicationAttributesRequest is a API request type for the GetPlatformApplicationAttributes API operation.
+type GetPlatformApplicationAttributesRequest struct {
+	*aws.Request
+	Input *GetPlatformApplicationAttributesInput
+}
+
+// Send marshals and sends the GetPlatformApplicationAttributes API request.
+func (r GetPlatformApplicationAttributesRequest) Send() (*GetPlatformApplicationAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPlatformApplicationAttributesOutput), nil
+}
+
+// GetPlatformApplicationAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPlatformApplicationAttributes for more information on using the GetPlatformApplicationAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the attributes of the platform application object for the supported
+// push notification services, such as APNS and GCM. For more information, see
+// Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using the GetPlatformApplicationAttributesRequest method.
-//    req, resp := client.GetPlatformApplicationAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPlatformApplicationAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributes
-func (c *SNS) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicationAttributesInput) (req *aws.Request, output *GetPlatformApplicationAttributesOutput) {
+func (c *SNS) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicationAttributesInput) GetPlatformApplicationAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetPlatformApplicationAttributes,
 		HTTPMethod: "POST",
@@ -995,86 +587,44 @@ func (c *SNS) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicat
 		input = &GetPlatformApplicationAttributesInput{}
 	}
 
-	output = &GetPlatformApplicationAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPlatformApplicationAttributes API operation for Amazon Simple Notification Service.
-//
-// Retrieves the attributes of the platform application object for the supported
-// push notification services, such as APNS and GCM. For more information, see
-// Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation GetPlatformApplicationAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributes
-func (c *SNS) GetPlatformApplicationAttributes(input *GetPlatformApplicationAttributesInput) (*GetPlatformApplicationAttributesOutput, error) {
-	req, out := c.GetPlatformApplicationAttributesRequest(input)
-	return out, req.Send()
-}
-
-// GetPlatformApplicationAttributesWithContext is the same as GetPlatformApplicationAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPlatformApplicationAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) GetPlatformApplicationAttributesWithContext(ctx aws.Context, input *GetPlatformApplicationAttributesInput, opts ...aws.Option) (*GetPlatformApplicationAttributesOutput, error) {
-	req, out := c.GetPlatformApplicationAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPlatformApplicationAttributesOutput{})
+	return GetPlatformApplicationAttributesRequest{Request: req, Input: input}
 }
 
 const opGetSMSAttributes = "GetSMSAttributes"
 
-// GetSMSAttributesRequest generates a "aws.Request" representing the
-// client's request for the GetSMSAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSMSAttributesRequest is a API request type for the GetSMSAttributes API operation.
+type GetSMSAttributesRequest struct {
+	*aws.Request
+	Input *GetSMSAttributesInput
+}
+
+// Send marshals and sends the GetSMSAttributes API request.
+func (r GetSMSAttributesRequest) Send() (*GetSMSAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSMSAttributesOutput), nil
+}
+
+// GetSMSAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the settings for sending SMS messages from your account.
 //
-// See GetSMSAttributes for more information on using the GetSMSAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// These settings are set with the SetSMSAttributes action.
 //
 //    // Example sending a request using the GetSMSAttributesRequest method.
-//    req, resp := client.GetSMSAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSMSAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributes
-func (c *SNS) GetSMSAttributesRequest(input *GetSMSAttributesInput) (req *aws.Request, output *GetSMSAttributesOutput) {
+func (c *SNS) GetSMSAttributesRequest(input *GetSMSAttributesInput) GetSMSAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetSMSAttributes,
 		HTTPMethod: "POST",
@@ -1085,87 +635,42 @@ func (c *SNS) GetSMSAttributesRequest(input *GetSMSAttributesInput) (req *aws.Re
 		input = &GetSMSAttributesInput{}
 	}
 
-	output = &GetSMSAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSMSAttributes API operation for Amazon Simple Notification Service.
-//
-// Returns the settings for sending SMS messages from your account.
-//
-// These settings are set with the SetSMSAttributes action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation GetSMSAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeThrottledException "Throttled"
-//   Indicates that the rate at which requests have been submitted for this action
-//   exceeds the limit for your account.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributes
-func (c *SNS) GetSMSAttributes(input *GetSMSAttributesInput) (*GetSMSAttributesOutput, error) {
-	req, out := c.GetSMSAttributesRequest(input)
-	return out, req.Send()
-}
-
-// GetSMSAttributesWithContext is the same as GetSMSAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSMSAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) GetSMSAttributesWithContext(ctx aws.Context, input *GetSMSAttributesInput, opts ...aws.Option) (*GetSMSAttributesOutput, error) {
-	req, out := c.GetSMSAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSMSAttributesOutput{})
+	return GetSMSAttributesRequest{Request: req, Input: input}
 }
 
 const opGetSubscriptionAttributes = "GetSubscriptionAttributes"
 
-// GetSubscriptionAttributesRequest generates a "aws.Request" representing the
-// client's request for the GetSubscriptionAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSubscriptionAttributesRequest is a API request type for the GetSubscriptionAttributes API operation.
+type GetSubscriptionAttributesRequest struct {
+	*aws.Request
+	Input *GetSubscriptionAttributesInput
+}
+
+// Send marshals and sends the GetSubscriptionAttributes API request.
+func (r GetSubscriptionAttributesRequest) Send() (*GetSubscriptionAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSubscriptionAttributesOutput), nil
+}
+
+// GetSubscriptionAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSubscriptionAttributes for more information on using the GetSubscriptionAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all of the properties of a subscription.
 //
 //    // Example sending a request using the GetSubscriptionAttributesRequest method.
-//    req, resp := client.GetSubscriptionAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSubscriptionAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributes
-func (c *SNS) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesInput) (req *aws.Request, output *GetSubscriptionAttributesOutput) {
+func (c *SNS) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesInput) GetSubscriptionAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetSubscriptionAttributes,
 		HTTPMethod: "POST",
@@ -1176,84 +681,43 @@ func (c *SNS) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesI
 		input = &GetSubscriptionAttributesInput{}
 	}
 
-	output = &GetSubscriptionAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSubscriptionAttributes API operation for Amazon Simple Notification Service.
-//
-// Returns all of the properties of a subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation GetSubscriptionAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributes
-func (c *SNS) GetSubscriptionAttributes(input *GetSubscriptionAttributesInput) (*GetSubscriptionAttributesOutput, error) {
-	req, out := c.GetSubscriptionAttributesRequest(input)
-	return out, req.Send()
-}
-
-// GetSubscriptionAttributesWithContext is the same as GetSubscriptionAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSubscriptionAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) GetSubscriptionAttributesWithContext(ctx aws.Context, input *GetSubscriptionAttributesInput, opts ...aws.Option) (*GetSubscriptionAttributesOutput, error) {
-	req, out := c.GetSubscriptionAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSubscriptionAttributesOutput{})
+	return GetSubscriptionAttributesRequest{Request: req, Input: input}
 }
 
 const opGetTopicAttributes = "GetTopicAttributes"
 
-// GetTopicAttributesRequest generates a "aws.Request" representing the
-// client's request for the GetTopicAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTopicAttributesRequest is a API request type for the GetTopicAttributes API operation.
+type GetTopicAttributesRequest struct {
+	*aws.Request
+	Input *GetTopicAttributesInput
+}
+
+// Send marshals and sends the GetTopicAttributes API request.
+func (r GetTopicAttributesRequest) Send() (*GetTopicAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTopicAttributesOutput), nil
+}
+
+// GetTopicAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTopicAttributes for more information on using the GetTopicAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all of the properties of a topic. Topic properties returned might
+// differ based on the authorization of the user.
 //
 //    // Example sending a request using the GetTopicAttributesRequest method.
-//    req, resp := client.GetTopicAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTopicAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributes
-func (c *SNS) GetTopicAttributesRequest(input *GetTopicAttributesInput) (req *aws.Request, output *GetTopicAttributesOutput) {
+func (c *SNS) GetTopicAttributesRequest(input *GetTopicAttributesInput) GetTopicAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetTopicAttributes,
 		HTTPMethod: "POST",
@@ -1264,85 +728,49 @@ func (c *SNS) GetTopicAttributesRequest(input *GetTopicAttributesInput) (req *aw
 		input = &GetTopicAttributesInput{}
 	}
 
-	output = &GetTopicAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTopicAttributes API operation for Amazon Simple Notification Service.
-//
-// Returns all of the properties of a topic. Topic properties returned might
-// differ based on the authorization of the user.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation GetTopicAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributes
-func (c *SNS) GetTopicAttributes(input *GetTopicAttributesInput) (*GetTopicAttributesOutput, error) {
-	req, out := c.GetTopicAttributesRequest(input)
-	return out, req.Send()
-}
-
-// GetTopicAttributesWithContext is the same as GetTopicAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTopicAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) GetTopicAttributesWithContext(ctx aws.Context, input *GetTopicAttributesInput, opts ...aws.Option) (*GetTopicAttributesOutput, error) {
-	req, out := c.GetTopicAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTopicAttributesOutput{})
+	return GetTopicAttributesRequest{Request: req, Input: input}
 }
 
 const opListEndpointsByPlatformApplication = "ListEndpointsByPlatformApplication"
 
-// ListEndpointsByPlatformApplicationRequest generates a "aws.Request" representing the
-// client's request for the ListEndpointsByPlatformApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListEndpointsByPlatformApplicationRequest is a API request type for the ListEndpointsByPlatformApplication API operation.
+type ListEndpointsByPlatformApplicationRequest struct {
+	*aws.Request
+	Input *ListEndpointsByPlatformApplicationInput
+}
+
+// Send marshals and sends the ListEndpointsByPlatformApplication API request.
+func (r ListEndpointsByPlatformApplicationRequest) Send() (*ListEndpointsByPlatformApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListEndpointsByPlatformApplicationOutput), nil
+}
+
+// ListEndpointsByPlatformApplicationRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListEndpointsByPlatformApplication for more information on using the ListEndpointsByPlatformApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the endpoints and endpoint attributes for devices in a supported push
+// notification service, such as GCM and APNS. The results for ListEndpointsByPlatformApplication
+// are paginated and return a limited list of endpoints, up to 100. If additional
+// records are available after the first page results, then a NextToken string
+// will be returned. To receive the next page, you call ListEndpointsByPlatformApplication
+// again using the NextToken string received from the previous call. When there
+// are no more records to return, NextToken will be null. For more information,
+// see Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using the ListEndpointsByPlatformApplicationRequest method.
-//    req, resp := client.ListEndpointsByPlatformApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListEndpointsByPlatformApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplication
-func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPlatformApplicationInput) (req *aws.Request, output *ListEndpointsByPlatformApplicationOutput) {
+func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPlatformApplicationInput) ListEndpointsByPlatformApplicationRequest {
 	op := &aws.Operation{
 		Name:       opListEndpointsByPlatformApplication,
 		HTTPMethod: "POST",
@@ -1359,62 +787,8 @@ func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPl
 		input = &ListEndpointsByPlatformApplicationInput{}
 	}
 
-	output = &ListEndpointsByPlatformApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListEndpointsByPlatformApplication API operation for Amazon Simple Notification Service.
-//
-// Lists the endpoints and endpoint attributes for devices in a supported push
-// notification service, such as GCM and APNS. The results for ListEndpointsByPlatformApplication
-// are paginated and return a limited list of endpoints, up to 100. If additional
-// records are available after the first page results, then a NextToken string
-// will be returned. To receive the next page, you call ListEndpointsByPlatformApplication
-// again using the NextToken string received from the previous call. When there
-// are no more records to return, NextToken will be null. For more information,
-// see Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation ListEndpointsByPlatformApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplication
-func (c *SNS) ListEndpointsByPlatformApplication(input *ListEndpointsByPlatformApplicationInput) (*ListEndpointsByPlatformApplicationOutput, error) {
-	req, out := c.ListEndpointsByPlatformApplicationRequest(input)
-	return out, req.Send()
-}
-
-// ListEndpointsByPlatformApplicationWithContext is the same as ListEndpointsByPlatformApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListEndpointsByPlatformApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) ListEndpointsByPlatformApplicationWithContext(ctx aws.Context, input *ListEndpointsByPlatformApplicationInput, opts ...aws.Option) (*ListEndpointsByPlatformApplicationOutput, error) {
-	req, out := c.ListEndpointsByPlatformApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListEndpointsByPlatformApplicationOutput{})
+	return ListEndpointsByPlatformApplicationRequest{Request: req, Input: input}
 }
 
 // ListEndpointsByPlatformApplicationPages iterates over the pages of a ListEndpointsByPlatformApplication operation,
@@ -1453,10 +827,10 @@ func (c *SNS) ListEndpointsByPlatformApplicationPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListEndpointsByPlatformApplicationRequest(inCpy)
+			req := c.ListEndpointsByPlatformApplicationRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1469,47 +843,24 @@ func (c *SNS) ListEndpointsByPlatformApplicationPagesWithContext(ctx aws.Context
 
 const opListPhoneNumbersOptedOut = "ListPhoneNumbersOptedOut"
 
-// ListPhoneNumbersOptedOutRequest generates a "aws.Request" representing the
-// client's request for the ListPhoneNumbersOptedOut operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPhoneNumbersOptedOut for more information on using the ListPhoneNumbersOptedOut
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListPhoneNumbersOptedOutRequest method.
-//    req, resp := client.ListPhoneNumbersOptedOutRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOut
-func (c *SNS) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInput) (req *aws.Request, output *ListPhoneNumbersOptedOutOutput) {
-	op := &aws.Operation{
-		Name:       opListPhoneNumbersOptedOut,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListPhoneNumbersOptedOutInput{}
-	}
-
-	output = &ListPhoneNumbersOptedOutOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListPhoneNumbersOptedOutRequest is a API request type for the ListPhoneNumbersOptedOut API operation.
+type ListPhoneNumbersOptedOutRequest struct {
+	*aws.Request
+	Input *ListPhoneNumbersOptedOutInput
 }
 
-// ListPhoneNumbersOptedOut API operation for Amazon Simple Notification Service.
+// Send marshals and sends the ListPhoneNumbersOptedOut API request.
+func (r ListPhoneNumbersOptedOutRequest) Send() (*ListPhoneNumbersOptedOutOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPhoneNumbersOptedOutOutput), nil
+}
+
+// ListPhoneNumbersOptedOutRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
 // Returns a list of phone numbers that are opted out, meaning you cannot send
 // SMS messages to them.
@@ -1521,76 +872,68 @@ func (c *SNS) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInp
 // string received from the previous call. When there are no more records to
 // return, NextToken will be null.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation ListPhoneNumbersOptedOut for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeThrottledException "Throttled"
-//   Indicates that the rate at which requests have been submitted for this action
-//   exceeds the limit for your account.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
+//    // Example sending a request using the ListPhoneNumbersOptedOutRequest method.
+//    req := client.ListPhoneNumbersOptedOutRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOut
-func (c *SNS) ListPhoneNumbersOptedOut(input *ListPhoneNumbersOptedOutInput) (*ListPhoneNumbersOptedOutOutput, error) {
-	req, out := c.ListPhoneNumbersOptedOutRequest(input)
-	return out, req.Send()
-}
+func (c *SNS) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInput) ListPhoneNumbersOptedOutRequest {
+	op := &aws.Operation{
+		Name:       opListPhoneNumbersOptedOut,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListPhoneNumbersOptedOutWithContext is the same as ListPhoneNumbersOptedOut with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPhoneNumbersOptedOut for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) ListPhoneNumbersOptedOutWithContext(ctx aws.Context, input *ListPhoneNumbersOptedOutInput, opts ...aws.Option) (*ListPhoneNumbersOptedOutOutput, error) {
-	req, out := c.ListPhoneNumbersOptedOutRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListPhoneNumbersOptedOutInput{}
+	}
+
+	req := c.newRequest(op, input, &ListPhoneNumbersOptedOutOutput{})
+	return ListPhoneNumbersOptedOutRequest{Request: req, Input: input}
 }
 
 const opListPlatformApplications = "ListPlatformApplications"
 
-// ListPlatformApplicationsRequest generates a "aws.Request" representing the
-// client's request for the ListPlatformApplications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPlatformApplicationsRequest is a API request type for the ListPlatformApplications API operation.
+type ListPlatformApplicationsRequest struct {
+	*aws.Request
+	Input *ListPlatformApplicationsInput
+}
+
+// Send marshals and sends the ListPlatformApplications API request.
+func (r ListPlatformApplicationsRequest) Send() (*ListPlatformApplicationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPlatformApplicationsOutput), nil
+}
+
+// ListPlatformApplicationsRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPlatformApplications for more information on using the ListPlatformApplications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the platform application objects for the supported push notification
+// services, such as APNS and GCM. The results for ListPlatformApplications
+// are paginated and return a limited list of applications, up to 100. If additional
+// records are available after the first page results, then a NextToken string
+// will be returned. To receive the next page, you call ListPlatformApplications
+// using the NextToken string received from the previous call. When there are
+// no more records to return, NextToken will be null. For more information,
+// see Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using the ListPlatformApplicationsRequest method.
-//    req, resp := client.ListPlatformApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPlatformApplicationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplications
-func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInput) (req *aws.Request, output *ListPlatformApplicationsOutput) {
+func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInput) ListPlatformApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListPlatformApplications,
 		HTTPMethod: "POST",
@@ -1607,59 +950,8 @@ func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInp
 		input = &ListPlatformApplicationsInput{}
 	}
 
-	output = &ListPlatformApplicationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPlatformApplications API operation for Amazon Simple Notification Service.
-//
-// Lists the platform application objects for the supported push notification
-// services, such as APNS and GCM. The results for ListPlatformApplications
-// are paginated and return a limited list of applications, up to 100. If additional
-// records are available after the first page results, then a NextToken string
-// will be returned. To receive the next page, you call ListPlatformApplications
-// using the NextToken string received from the previous call. When there are
-// no more records to return, NextToken will be null. For more information,
-// see Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation ListPlatformApplications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplications
-func (c *SNS) ListPlatformApplications(input *ListPlatformApplicationsInput) (*ListPlatformApplicationsOutput, error) {
-	req, out := c.ListPlatformApplicationsRequest(input)
-	return out, req.Send()
-}
-
-// ListPlatformApplicationsWithContext is the same as ListPlatformApplications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPlatformApplications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) ListPlatformApplicationsWithContext(ctx aws.Context, input *ListPlatformApplicationsInput, opts ...aws.Option) (*ListPlatformApplicationsOutput, error) {
-	req, out := c.ListPlatformApplicationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPlatformApplicationsOutput{})
+	return ListPlatformApplicationsRequest{Request: req, Input: input}
 }
 
 // ListPlatformApplicationsPages iterates over the pages of a ListPlatformApplications operation,
@@ -1698,10 +990,10 @@ func (c *SNS) ListPlatformApplicationsPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPlatformApplicationsRequest(inCpy)
+			req := c.ListPlatformApplicationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1714,31 +1006,39 @@ func (c *SNS) ListPlatformApplicationsPagesWithContext(ctx aws.Context, input *L
 
 const opListSubscriptions = "ListSubscriptions"
 
-// ListSubscriptionsRequest generates a "aws.Request" representing the
-// client's request for the ListSubscriptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSubscriptionsRequest is a API request type for the ListSubscriptions API operation.
+type ListSubscriptionsRequest struct {
+	*aws.Request
+	Input *ListSubscriptionsInput
+}
+
+// Send marshals and sends the ListSubscriptions API request.
+func (r ListSubscriptionsRequest) Send() (*ListSubscriptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSubscriptionsOutput), nil
+}
+
+// ListSubscriptionsRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSubscriptions for more information on using the ListSubscriptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the requester's subscriptions. Each call returns a limited
+// list of subscriptions, up to 100. If there are more subscriptions, a NextToken
+// is also returned. Use the NextToken parameter in a new ListSubscriptions
+// call to get further results.
 //
 //    // Example sending a request using the ListSubscriptionsRequest method.
-//    req, resp := client.ListSubscriptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSubscriptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptions
-func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) (req *aws.Request, output *ListSubscriptionsOutput) {
+func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptions,
 		HTTPMethod: "POST",
@@ -1755,55 +1055,8 @@ func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) (req *aws.
 		input = &ListSubscriptionsInput{}
 	}
 
-	output = &ListSubscriptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSubscriptions API operation for Amazon Simple Notification Service.
-//
-// Returns a list of the requester's subscriptions. Each call returns a limited
-// list of subscriptions, up to 100. If there are more subscriptions, a NextToken
-// is also returned. Use the NextToken parameter in a new ListSubscriptions
-// call to get further results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation ListSubscriptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptions
-func (c *SNS) ListSubscriptions(input *ListSubscriptionsInput) (*ListSubscriptionsOutput, error) {
-	req, out := c.ListSubscriptionsRequest(input)
-	return out, req.Send()
-}
-
-// ListSubscriptionsWithContext is the same as ListSubscriptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSubscriptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) ListSubscriptionsWithContext(ctx aws.Context, input *ListSubscriptionsInput, opts ...aws.Option) (*ListSubscriptionsOutput, error) {
-	req, out := c.ListSubscriptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSubscriptionsOutput{})
+	return ListSubscriptionsRequest{Request: req, Input: input}
 }
 
 // ListSubscriptionsPages iterates over the pages of a ListSubscriptions operation,
@@ -1842,10 +1095,10 @@ func (c *SNS) ListSubscriptionsPagesWithContext(ctx aws.Context, input *ListSubs
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListSubscriptionsRequest(inCpy)
+			req := c.ListSubscriptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1858,31 +1111,39 @@ func (c *SNS) ListSubscriptionsPagesWithContext(ctx aws.Context, input *ListSubs
 
 const opListSubscriptionsByTopic = "ListSubscriptionsByTopic"
 
-// ListSubscriptionsByTopicRequest generates a "aws.Request" representing the
-// client's request for the ListSubscriptionsByTopic operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSubscriptionsByTopicRequest is a API request type for the ListSubscriptionsByTopic API operation.
+type ListSubscriptionsByTopicRequest struct {
+	*aws.Request
+	Input *ListSubscriptionsByTopicInput
+}
+
+// Send marshals and sends the ListSubscriptionsByTopic API request.
+func (r ListSubscriptionsByTopicRequest) Send() (*ListSubscriptionsByTopicOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSubscriptionsByTopicOutput), nil
+}
+
+// ListSubscriptionsByTopicRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSubscriptionsByTopic for more information on using the ListSubscriptionsByTopic
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the subscriptions to a specific topic. Each call returns
+// a limited list of subscriptions, up to 100. If there are more subscriptions,
+// a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptionsByTopic
+// call to get further results.
 //
 //    // Example sending a request using the ListSubscriptionsByTopicRequest method.
-//    req, resp := client.ListSubscriptionsByTopicRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSubscriptionsByTopicRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopic
-func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInput) (req *aws.Request, output *ListSubscriptionsByTopicOutput) {
+func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInput) ListSubscriptionsByTopicRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptionsByTopic,
 		HTTPMethod: "POST",
@@ -1899,58 +1160,8 @@ func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInp
 		input = &ListSubscriptionsByTopicInput{}
 	}
 
-	output = &ListSubscriptionsByTopicOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSubscriptionsByTopic API operation for Amazon Simple Notification Service.
-//
-// Returns a list of the subscriptions to a specific topic. Each call returns
-// a limited list of subscriptions, up to 100. If there are more subscriptions,
-// a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptionsByTopic
-// call to get further results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation ListSubscriptionsByTopic for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopic
-func (c *SNS) ListSubscriptionsByTopic(input *ListSubscriptionsByTopicInput) (*ListSubscriptionsByTopicOutput, error) {
-	req, out := c.ListSubscriptionsByTopicRequest(input)
-	return out, req.Send()
-}
-
-// ListSubscriptionsByTopicWithContext is the same as ListSubscriptionsByTopic with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSubscriptionsByTopic for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) ListSubscriptionsByTopicWithContext(ctx aws.Context, input *ListSubscriptionsByTopicInput, opts ...aws.Option) (*ListSubscriptionsByTopicOutput, error) {
-	req, out := c.ListSubscriptionsByTopicRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSubscriptionsByTopicOutput{})
+	return ListSubscriptionsByTopicRequest{Request: req, Input: input}
 }
 
 // ListSubscriptionsByTopicPages iterates over the pages of a ListSubscriptionsByTopic operation,
@@ -1989,10 +1200,10 @@ func (c *SNS) ListSubscriptionsByTopicPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListSubscriptionsByTopicRequest(inCpy)
+			req := c.ListSubscriptionsByTopicRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2005,31 +1216,38 @@ func (c *SNS) ListSubscriptionsByTopicPagesWithContext(ctx aws.Context, input *L
 
 const opListTopics = "ListTopics"
 
-// ListTopicsRequest generates a "aws.Request" representing the
-// client's request for the ListTopics operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTopicsRequest is a API request type for the ListTopics API operation.
+type ListTopicsRequest struct {
+	*aws.Request
+	Input *ListTopicsInput
+}
+
+// Send marshals and sends the ListTopics API request.
+func (r ListTopicsRequest) Send() (*ListTopicsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTopicsOutput), nil
+}
+
+// ListTopicsRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTopics for more information on using the ListTopics
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the requester's topics. Each call returns a limited list
+// of topics, up to 100. If there are more topics, a NextToken is also returned.
+// Use the NextToken parameter in a new ListTopics call to get further results.
 //
 //    // Example sending a request using the ListTopicsRequest method.
-//    req, resp := client.ListTopicsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTopicsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopics
-func (c *SNS) ListTopicsRequest(input *ListTopicsInput) (req *aws.Request, output *ListTopicsOutput) {
+func (c *SNS) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
 	op := &aws.Operation{
 		Name:       opListTopics,
 		HTTPMethod: "POST",
@@ -2046,54 +1264,8 @@ func (c *SNS) ListTopicsRequest(input *ListTopicsInput) (req *aws.Request, outpu
 		input = &ListTopicsInput{}
 	}
 
-	output = &ListTopicsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTopics API operation for Amazon Simple Notification Service.
-//
-// Returns a list of the requester's topics. Each call returns a limited list
-// of topics, up to 100. If there are more topics, a NextToken is also returned.
-// Use the NextToken parameter in a new ListTopics call to get further results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation ListTopics for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopics
-func (c *SNS) ListTopics(input *ListTopicsInput) (*ListTopicsOutput, error) {
-	req, out := c.ListTopicsRequest(input)
-	return out, req.Send()
-}
-
-// ListTopicsWithContext is the same as ListTopics with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTopics for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) ListTopicsWithContext(ctx aws.Context, input *ListTopicsInput, opts ...aws.Option) (*ListTopicsOutput, error) {
-	req, out := c.ListTopicsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTopicsOutput{})
+	return ListTopicsRequest{Request: req, Input: input}
 }
 
 // ListTopicsPages iterates over the pages of a ListTopics operation,
@@ -2132,10 +1304,10 @@ func (c *SNS) ListTopicsPagesWithContext(ctx aws.Context, input *ListTopicsInput
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTopicsRequest(inCpy)
+			req := c.ListTopicsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2148,31 +1320,39 @@ func (c *SNS) ListTopicsPagesWithContext(ctx aws.Context, input *ListTopicsInput
 
 const opOptInPhoneNumber = "OptInPhoneNumber"
 
-// OptInPhoneNumberRequest generates a "aws.Request" representing the
-// client's request for the OptInPhoneNumber operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// OptInPhoneNumberRequest is a API request type for the OptInPhoneNumber API operation.
+type OptInPhoneNumberRequest struct {
+	*aws.Request
+	Input *OptInPhoneNumberInput
+}
+
+// Send marshals and sends the OptInPhoneNumber API request.
+func (r OptInPhoneNumberRequest) Send() (*OptInPhoneNumberOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*OptInPhoneNumberOutput), nil
+}
+
+// OptInPhoneNumberRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Use this request to opt in a phone number that is opted out, which enables
+// you to resume sending SMS messages to the number.
 //
-// See OptInPhoneNumber for more information on using the OptInPhoneNumber
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can opt in a phone number only once every 30 days.
 //
 //    // Example sending a request using the OptInPhoneNumberRequest method.
-//    req, resp := client.OptInPhoneNumberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.OptInPhoneNumberRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumber
-func (c *SNS) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) (req *aws.Request, output *OptInPhoneNumberOutput) {
+func (c *SNS) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) OptInPhoneNumberRequest {
 	op := &aws.Operation{
 		Name:       opOptInPhoneNumber,
 		HTTPMethod: "POST",
@@ -2183,104 +1363,30 @@ func (c *SNS) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) (req *aws.Re
 		input = &OptInPhoneNumberInput{}
 	}
 
-	output = &OptInPhoneNumberOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// OptInPhoneNumber API operation for Amazon Simple Notification Service.
-//
-// Use this request to opt in a phone number that is opted out, which enables
-// you to resume sending SMS messages to the number.
-//
-// You can opt in a phone number only once every 30 days.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation OptInPhoneNumber for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeThrottledException "Throttled"
-//   Indicates that the rate at which requests have been submitted for this action
-//   exceeds the limit for your account.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumber
-func (c *SNS) OptInPhoneNumber(input *OptInPhoneNumberInput) (*OptInPhoneNumberOutput, error) {
-	req, out := c.OptInPhoneNumberRequest(input)
-	return out, req.Send()
-}
-
-// OptInPhoneNumberWithContext is the same as OptInPhoneNumber with the addition of
-// the ability to pass a context and additional request options.
-//
-// See OptInPhoneNumber for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) OptInPhoneNumberWithContext(ctx aws.Context, input *OptInPhoneNumberInput, opts ...aws.Option) (*OptInPhoneNumberOutput, error) {
-	req, out := c.OptInPhoneNumberRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &OptInPhoneNumberOutput{})
+	return OptInPhoneNumberRequest{Request: req, Input: input}
 }
 
 const opPublish = "Publish"
 
-// PublishRequest generates a "aws.Request" representing the
-// client's request for the Publish operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Publish for more information on using the Publish
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PublishRequest method.
-//    req, resp := client.PublishRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Publish
-func (c *SNS) PublishRequest(input *PublishInput) (req *aws.Request, output *PublishOutput) {
-	op := &aws.Operation{
-		Name:       opPublish,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PublishInput{}
-	}
-
-	output = &PublishOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PublishRequest is a API request type for the Publish API operation.
+type PublishRequest struct {
+	*aws.Request
+	Input *PublishInput
 }
 
-// Publish API operation for Amazon Simple Notification Service.
+// Send marshals and sends the Publish API request.
+func (r PublishRequest) Send() (*PublishOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PublishOutput), nil
+}
+
+// PublishRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
 // Sends a message to all of a topic's subscribed endpoints. When a messageId
 // is returned, the message has been saved and Amazon SNS will attempt to deliver
@@ -2295,84 +1401,61 @@ func (c *SNS) PublishRequest(input *PublishInput) (req *aws.Request, output *Pub
 // For more information about formatting messages, see Send Custom Platform-Specific
 // Payloads in Messages to Mobile Devices (http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation Publish for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInvalidParameterValueException "ParameterValueInvalid"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeEndpointDisabledException "EndpointDisabled"
-//   Exception error indicating endpoint disabled.
-//
-//   * ErrCodePlatformApplicationDisabledException "PlatformApplicationDisabled"
-//   Exception error indicating platform application disabled.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
+//    // Example sending a request using the PublishRequest method.
+//    req := client.PublishRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Publish
-func (c *SNS) Publish(input *PublishInput) (*PublishOutput, error) {
-	req, out := c.PublishRequest(input)
-	return out, req.Send()
-}
+func (c *SNS) PublishRequest(input *PublishInput) PublishRequest {
+	op := &aws.Operation{
+		Name:       opPublish,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PublishWithContext is the same as Publish with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Publish for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) PublishWithContext(ctx aws.Context, input *PublishInput, opts ...aws.Option) (*PublishOutput, error) {
-	req, out := c.PublishRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PublishInput{}
+	}
+
+	req := c.newRequest(op, input, &PublishOutput{})
+	return PublishRequest{Request: req, Input: input}
 }
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws.Request" representing the
-// client's request for the RemovePermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemovePermissionRequest is a API request type for the RemovePermission API operation.
+type RemovePermissionRequest struct {
+	*aws.Request
+	Input *RemovePermissionInput
+}
+
+// Send marshals and sends the RemovePermission API request.
+func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemovePermissionOutput), nil
+}
+
+// RemovePermissionRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemovePermission for more information on using the RemovePermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a statement from a topic's access control policy.
 //
 //    // Example sending a request using the RemovePermissionRequest method.
-//    req, resp := client.RemovePermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemovePermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermission
-func (c *SNS) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
+func (c *SNS) RemovePermissionRequest(input *RemovePermissionInput) RemovePermissionRequest {
 	op := &aws.Operation{
 		Name:       opRemovePermission,
 		HTTPMethod: "POST",
@@ -2383,86 +1466,46 @@ func (c *SNS) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Re
 		input = &RemovePermissionInput{}
 	}
 
-	output = &RemovePermissionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemovePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemovePermission API operation for Amazon Simple Notification Service.
-//
-// Removes a statement from a topic's access control policy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation RemovePermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermission
-func (c *SNS) RemovePermission(input *RemovePermissionInput) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	return out, req.Send()
-}
-
-// RemovePermissionWithContext is the same as RemovePermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemovePermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemovePermissionRequest{Request: req, Input: input}
 }
 
 const opSetEndpointAttributes = "SetEndpointAttributes"
 
-// SetEndpointAttributesRequest generates a "aws.Request" representing the
-// client's request for the SetEndpointAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetEndpointAttributesRequest is a API request type for the SetEndpointAttributes API operation.
+type SetEndpointAttributesRequest struct {
+	*aws.Request
+	Input *SetEndpointAttributesInput
+}
+
+// Send marshals and sends the SetEndpointAttributes API request.
+func (r SetEndpointAttributesRequest) Send() (*SetEndpointAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetEndpointAttributesOutput), nil
+}
+
+// SetEndpointAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetEndpointAttributes for more information on using the SetEndpointAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the attributes for an endpoint for a device on one of the supported
+// push notification services, such as GCM and APNS. For more information, see
+// Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using the SetEndpointAttributesRequest method.
-//    req, resp := client.SetEndpointAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetEndpointAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributes
-func (c *SNS) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) (req *aws.Request, output *SetEndpointAttributesOutput) {
+func (c *SNS) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) SetEndpointAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetEndpointAttributes,
 		HTTPMethod: "POST",
@@ -2473,88 +1516,48 @@ func (c *SNS) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) (r
 		input = &SetEndpointAttributesInput{}
 	}
 
-	output = &SetEndpointAttributesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetEndpointAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetEndpointAttributes API operation for Amazon Simple Notification Service.
-//
-// Sets the attributes for an endpoint for a device on one of the supported
-// push notification services, such as GCM and APNS. For more information, see
-// Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation SetEndpointAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributes
-func (c *SNS) SetEndpointAttributes(input *SetEndpointAttributesInput) (*SetEndpointAttributesOutput, error) {
-	req, out := c.SetEndpointAttributesRequest(input)
-	return out, req.Send()
-}
-
-// SetEndpointAttributesWithContext is the same as SetEndpointAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetEndpointAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) SetEndpointAttributesWithContext(ctx aws.Context, input *SetEndpointAttributesInput, opts ...aws.Option) (*SetEndpointAttributesOutput, error) {
-	req, out := c.SetEndpointAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetEndpointAttributesRequest{Request: req, Input: input}
 }
 
 const opSetPlatformApplicationAttributes = "SetPlatformApplicationAttributes"
 
-// SetPlatformApplicationAttributesRequest generates a "aws.Request" representing the
-// client's request for the SetPlatformApplicationAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetPlatformApplicationAttributesRequest is a API request type for the SetPlatformApplicationAttributes API operation.
+type SetPlatformApplicationAttributesRequest struct {
+	*aws.Request
+	Input *SetPlatformApplicationAttributesInput
+}
+
+// Send marshals and sends the SetPlatformApplicationAttributes API request.
+func (r SetPlatformApplicationAttributesRequest) Send() (*SetPlatformApplicationAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetPlatformApplicationAttributesOutput), nil
+}
+
+// SetPlatformApplicationAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetPlatformApplicationAttributes for more information on using the SetPlatformApplicationAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the attributes of the platform application object for the supported
+// push notification services, such as APNS and GCM. For more information, see
+// Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// For information on configuring attributes for message delivery status, see
+// Using Amazon SNS Application Attributes for Message Delivery Status (http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
 //
 //    // Example sending a request using the SetPlatformApplicationAttributesRequest method.
-//    req, resp := client.SetPlatformApplicationAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetPlatformApplicationAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributes
-func (c *SNS) SetPlatformApplicationAttributesRequest(input *SetPlatformApplicationAttributesInput) (req *aws.Request, output *SetPlatformApplicationAttributesOutput) {
+func (c *SNS) SetPlatformApplicationAttributesRequest(input *SetPlatformApplicationAttributesInput) SetPlatformApplicationAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetPlatformApplicationAttributes,
 		HTTPMethod: "POST",
@@ -2565,90 +1568,50 @@ func (c *SNS) SetPlatformApplicationAttributesRequest(input *SetPlatformApplicat
 		input = &SetPlatformApplicationAttributesInput{}
 	}
 
-	output = &SetPlatformApplicationAttributesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetPlatformApplicationAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetPlatformApplicationAttributes API operation for Amazon Simple Notification Service.
-//
-// Sets the attributes of the platform application object for the supported
-// push notification services, such as APNS and GCM. For more information, see
-// Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-// For information on configuring attributes for message delivery status, see
-// Using Amazon SNS Application Attributes for Message Delivery Status (http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation SetPlatformApplicationAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributes
-func (c *SNS) SetPlatformApplicationAttributes(input *SetPlatformApplicationAttributesInput) (*SetPlatformApplicationAttributesOutput, error) {
-	req, out := c.SetPlatformApplicationAttributesRequest(input)
-	return out, req.Send()
-}
-
-// SetPlatformApplicationAttributesWithContext is the same as SetPlatformApplicationAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetPlatformApplicationAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) SetPlatformApplicationAttributesWithContext(ctx aws.Context, input *SetPlatformApplicationAttributesInput, opts ...aws.Option) (*SetPlatformApplicationAttributesOutput, error) {
-	req, out := c.SetPlatformApplicationAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetPlatformApplicationAttributesRequest{Request: req, Input: input}
 }
 
 const opSetSMSAttributes = "SetSMSAttributes"
 
-// SetSMSAttributesRequest generates a "aws.Request" representing the
-// client's request for the SetSMSAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetSMSAttributesRequest is a API request type for the SetSMSAttributes API operation.
+type SetSMSAttributesRequest struct {
+	*aws.Request
+	Input *SetSMSAttributesInput
+}
+
+// Send marshals and sends the SetSMSAttributes API request.
+func (r SetSMSAttributesRequest) Send() (*SetSMSAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetSMSAttributesOutput), nil
+}
+
+// SetSMSAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Use this request to set the default settings for sending SMS messages and
+// receiving daily SMS usage reports.
 //
-// See SetSMSAttributes for more information on using the SetSMSAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can override some of these settings for a single message when you use
+// the Publish action with the MessageAttributes.entry.N parameter. For more
+// information, see Sending an SMS Message (http://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
+// in the Amazon SNS Developer Guide.
 //
 //    // Example sending a request using the SetSMSAttributesRequest method.
-//    req, resp := client.SetSMSAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetSMSAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributes
-func (c *SNS) SetSMSAttributesRequest(input *SetSMSAttributesInput) (req *aws.Request, output *SetSMSAttributesOutput) {
+func (c *SNS) SetSMSAttributesRequest(input *SetSMSAttributesInput) SetSMSAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetSMSAttributes,
 		HTTPMethod: "POST",
@@ -2659,91 +1622,42 @@ func (c *SNS) SetSMSAttributesRequest(input *SetSMSAttributesInput) (req *aws.Re
 		input = &SetSMSAttributesInput{}
 	}
 
-	output = &SetSMSAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SetSMSAttributes API operation for Amazon Simple Notification Service.
-//
-// Use this request to set the default settings for sending SMS messages and
-// receiving daily SMS usage reports.
-//
-// You can override some of these settings for a single message when you use
-// the Publish action with the MessageAttributes.entry.N parameter. For more
-// information, see Sending an SMS Message (http://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
-// in the Amazon SNS Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation SetSMSAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeThrottledException "Throttled"
-//   Indicates that the rate at which requests have been submitted for this action
-//   exceeds the limit for your account.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributes
-func (c *SNS) SetSMSAttributes(input *SetSMSAttributesInput) (*SetSMSAttributesOutput, error) {
-	req, out := c.SetSMSAttributesRequest(input)
-	return out, req.Send()
-}
-
-// SetSMSAttributesWithContext is the same as SetSMSAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetSMSAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) SetSMSAttributesWithContext(ctx aws.Context, input *SetSMSAttributesInput, opts ...aws.Option) (*SetSMSAttributesOutput, error) {
-	req, out := c.SetSMSAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SetSMSAttributesOutput{})
+	return SetSMSAttributesRequest{Request: req, Input: input}
 }
 
 const opSetSubscriptionAttributes = "SetSubscriptionAttributes"
 
-// SetSubscriptionAttributesRequest generates a "aws.Request" representing the
-// client's request for the SetSubscriptionAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetSubscriptionAttributesRequest is a API request type for the SetSubscriptionAttributes API operation.
+type SetSubscriptionAttributesRequest struct {
+	*aws.Request
+	Input *SetSubscriptionAttributesInput
+}
+
+// Send marshals and sends the SetSubscriptionAttributes API request.
+func (r SetSubscriptionAttributesRequest) Send() (*SetSubscriptionAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetSubscriptionAttributesOutput), nil
+}
+
+// SetSubscriptionAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetSubscriptionAttributes for more information on using the SetSubscriptionAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Allows a subscription owner to set an attribute of the topic to a new value.
 //
 //    // Example sending a request using the SetSubscriptionAttributesRequest method.
-//    req, resp := client.SetSubscriptionAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetSubscriptionAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributes
-func (c *SNS) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesInput) (req *aws.Request, output *SetSubscriptionAttributesOutput) {
+func (c *SNS) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesInput) SetSubscriptionAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetSubscriptionAttributes,
 		HTTPMethod: "POST",
@@ -2754,86 +1668,44 @@ func (c *SNS) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesI
 		input = &SetSubscriptionAttributesInput{}
 	}
 
-	output = &SetSubscriptionAttributesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetSubscriptionAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetSubscriptionAttributes API operation for Amazon Simple Notification Service.
-//
-// Allows a subscription owner to set an attribute of the topic to a new value.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation SetSubscriptionAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributes
-func (c *SNS) SetSubscriptionAttributes(input *SetSubscriptionAttributesInput) (*SetSubscriptionAttributesOutput, error) {
-	req, out := c.SetSubscriptionAttributesRequest(input)
-	return out, req.Send()
-}
-
-// SetSubscriptionAttributesWithContext is the same as SetSubscriptionAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetSubscriptionAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) SetSubscriptionAttributesWithContext(ctx aws.Context, input *SetSubscriptionAttributesInput, opts ...aws.Option) (*SetSubscriptionAttributesOutput, error) {
-	req, out := c.SetSubscriptionAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetSubscriptionAttributesRequest{Request: req, Input: input}
 }
 
 const opSetTopicAttributes = "SetTopicAttributes"
 
-// SetTopicAttributesRequest generates a "aws.Request" representing the
-// client's request for the SetTopicAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetTopicAttributesRequest is a API request type for the SetTopicAttributes API operation.
+type SetTopicAttributesRequest struct {
+	*aws.Request
+	Input *SetTopicAttributesInput
+}
+
+// Send marshals and sends the SetTopicAttributes API request.
+func (r SetTopicAttributesRequest) Send() (*SetTopicAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetTopicAttributesOutput), nil
+}
+
+// SetTopicAttributesRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetTopicAttributes for more information on using the SetTopicAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Allows a topic owner to set an attribute of the topic to a new value.
 //
 //    // Example sending a request using the SetTopicAttributesRequest method.
-//    req, resp := client.SetTopicAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetTopicAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributes
-func (c *SNS) SetTopicAttributesRequest(input *SetTopicAttributesInput) (req *aws.Request, output *SetTopicAttributesOutput) {
+func (c *SNS) SetTopicAttributesRequest(input *SetTopicAttributesInput) SetTopicAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetTopicAttributes,
 		HTTPMethod: "POST",
@@ -2844,86 +1716,47 @@ func (c *SNS) SetTopicAttributesRequest(input *SetTopicAttributesInput) (req *aw
 		input = &SetTopicAttributesInput{}
 	}
 
-	output = &SetTopicAttributesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetTopicAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetTopicAttributes API operation for Amazon Simple Notification Service.
-//
-// Allows a topic owner to set an attribute of the topic to a new value.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation SetTopicAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributes
-func (c *SNS) SetTopicAttributes(input *SetTopicAttributesInput) (*SetTopicAttributesOutput, error) {
-	req, out := c.SetTopicAttributesRequest(input)
-	return out, req.Send()
-}
-
-// SetTopicAttributesWithContext is the same as SetTopicAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetTopicAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) SetTopicAttributesWithContext(ctx aws.Context, input *SetTopicAttributesInput, opts ...aws.Option) (*SetTopicAttributesOutput, error) {
-	req, out := c.SetTopicAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetTopicAttributesRequest{Request: req, Input: input}
 }
 
 const opSubscribe = "Subscribe"
 
-// SubscribeRequest generates a "aws.Request" representing the
-// client's request for the Subscribe operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SubscribeRequest is a API request type for the Subscribe API operation.
+type SubscribeRequest struct {
+	*aws.Request
+	Input *SubscribeInput
+}
+
+// Send marshals and sends the Subscribe API request.
+func (r SubscribeRequest) Send() (*SubscribeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SubscribeOutput), nil
+}
+
+// SubscribeRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Subscribe for more information on using the Subscribe
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Prepares to subscribe an endpoint by sending the endpoint a confirmation
+// message. To actually create a subscription, the endpoint owner must call
+// the ConfirmSubscription action with the token from the confirmation message.
+// Confirmation tokens are valid for three days.
 //
 //    // Example sending a request using the SubscribeRequest method.
-//    req, resp := client.SubscribeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SubscribeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Subscribe
-func (c *SNS) SubscribeRequest(input *SubscribeInput) (req *aws.Request, output *SubscribeOutput) {
+func (c *SNS) SubscribeRequest(input *SubscribeInput) SubscribeRequest {
 	op := &aws.Operation{
 		Name:       opSubscribe,
 		HTTPMethod: "POST",
@@ -2934,90 +1767,47 @@ func (c *SNS) SubscribeRequest(input *SubscribeInput) (req *aws.Request, output 
 		input = &SubscribeInput{}
 	}
 
-	output = &SubscribeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// Subscribe API operation for Amazon Simple Notification Service.
-//
-// Prepares to subscribe an endpoint by sending the endpoint a confirmation
-// message. To actually create a subscription, the endpoint owner must call
-// the ConfirmSubscription action with the token from the confirmation message.
-// Confirmation tokens are valid for three days.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation Subscribe for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionLimitExceededException "SubscriptionLimitExceeded"
-//   Indicates that the customer already owns the maximum allowed number of subscriptions.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Subscribe
-func (c *SNS) Subscribe(input *SubscribeInput) (*SubscribeOutput, error) {
-	req, out := c.SubscribeRequest(input)
-	return out, req.Send()
-}
-
-// SubscribeWithContext is the same as Subscribe with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Subscribe for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) SubscribeWithContext(ctx aws.Context, input *SubscribeInput, opts ...aws.Option) (*SubscribeOutput, error) {
-	req, out := c.SubscribeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SubscribeOutput{})
+	return SubscribeRequest{Request: req, Input: input}
 }
 
 const opUnsubscribe = "Unsubscribe"
 
-// UnsubscribeRequest generates a "aws.Request" representing the
-// client's request for the Unsubscribe operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UnsubscribeRequest is a API request type for the Unsubscribe API operation.
+type UnsubscribeRequest struct {
+	*aws.Request
+	Input *UnsubscribeInput
+}
+
+// Send marshals and sends the Unsubscribe API request.
+func (r UnsubscribeRequest) Send() (*UnsubscribeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UnsubscribeOutput), nil
+}
+
+// UnsubscribeRequest returns a request value for making API operation for
+// Amazon Simple Notification Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Unsubscribe for more information on using the Unsubscribe
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a subscription. If the subscription requires authentication for deletion,
+// only the owner of the subscription or the topic's owner can unsubscribe,
+// and an AWS signature is required. If the Unsubscribe call does not require
+// authentication and the requester is not the subscription owner, a final cancellation
+// message is delivered to the endpoint, so that the endpoint owner can easily
+// resubscribe to the topic if the Unsubscribe request was unintended.
 //
 //    // Example sending a request using the UnsubscribeRequest method.
-//    req, resp := client.UnsubscribeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UnsubscribeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Unsubscribe
-func (c *SNS) UnsubscribeRequest(input *UnsubscribeInput) (req *aws.Request, output *UnsubscribeOutput) {
+func (c *SNS) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest {
 	op := &aws.Operation{
 		Name:       opUnsubscribe,
 		HTTPMethod: "POST",
@@ -3028,62 +1818,10 @@ func (c *SNS) UnsubscribeRequest(input *UnsubscribeInput) (req *aws.Request, out
 		input = &UnsubscribeInput{}
 	}
 
-	output = &UnsubscribeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UnsubscribeOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// Unsubscribe API operation for Amazon Simple Notification Service.
-//
-// Deletes a subscription. If the subscription requires authentication for deletion,
-// only the owner of the subscription or the topic's owner can unsubscribe,
-// and an AWS signature is required. If the Unsubscribe call does not require
-// authentication and the requester is not the subscription owner, a final cancellation
-// message is delivered to the endpoint, so that the endpoint owner can easily
-// resubscribe to the topic if the Unsubscribe request was unintended.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Notification Service's
-// API operation Unsubscribe for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameter"
-//   Indicates that a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalError"
-//   Indicates an internal service error.
-//
-//   * ErrCodeAuthorizationErrorException "AuthorizationError"
-//   Indicates that the user has been denied access to the requested resource.
-//
-//   * ErrCodeNotFoundException "NotFound"
-//   Indicates that the requested resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Unsubscribe
-func (c *SNS) Unsubscribe(input *UnsubscribeInput) (*UnsubscribeOutput, error) {
-	req, out := c.UnsubscribeRequest(input)
-	return out, req.Send()
-}
-
-// UnsubscribeWithContext is the same as Unsubscribe with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Unsubscribe for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SNS) UnsubscribeWithContext(ctx aws.Context, input *UnsubscribeInput, opts ...aws.Option) (*UnsubscribeOutput, error) {
-	req, out := c.UnsubscribeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UnsubscribeRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionInput

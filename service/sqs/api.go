@@ -13,49 +13,24 @@ import (
 
 const opAddPermission = "AddPermission"
 
-// AddPermissionRequest generates a "aws.Request" representing the
-// client's request for the AddPermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddPermission for more information on using the AddPermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddPermissionRequest method.
-//    req, resp := client.AddPermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermission
-func (c *SQS) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request, output *AddPermissionOutput) {
-	op := &aws.Operation{
-		Name:       opAddPermission,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddPermissionInput{}
-	}
-
-	output = &AddPermissionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AddPermissionRequest is a API request type for the AddPermission API operation.
+type AddPermissionRequest struct {
+	*aws.Request
+	Input *AddPermissionInput
 }
 
-// AddPermission API operation for Amazon Simple Queue Service.
+// Send marshals and sends the AddPermission API request.
+func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddPermissionOutput), nil
+}
+
+// AddPermissionRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Adds a permission to a queue for a specific principal (http://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P).
 // This allows sharing access to the queue.
@@ -78,87 +53,51 @@ func (c *SQS) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request,
 //
 // &Attribute.2=that
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation AddPermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOverLimit "OverLimit"
-//   The action that you requested would violate a limit. For example, ReceiveMessage
-//   returns this error if the maximum number of inflight messages is reached.
-//   AddPermission returns this error if the maximum number of permissions for
-//   the queue is reached.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermission
-func (c *SQS) AddPermission(input *AddPermissionInput) (*AddPermissionOutput, error) {
-	req, out := c.AddPermissionRequest(input)
-	return out, req.Send()
-}
-
-// AddPermissionWithContext is the same as AddPermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddPermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...aws.Option) (*AddPermissionOutput, error) {
-	req, out := c.AddPermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opChangeMessageVisibility = "ChangeMessageVisibility"
-
-// ChangeMessageVisibilityRequest generates a "aws.Request" representing the
-// client's request for the ChangeMessageVisibility operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ChangeMessageVisibility for more information on using the ChangeMessageVisibility
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ChangeMessageVisibilityRequest method.
-//    req, resp := client.ChangeMessageVisibilityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AddPermissionRequest method.
+//    req := client.AddPermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibility
-func (c *SQS) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput) (req *aws.Request, output *ChangeMessageVisibilityOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermission
+func (c *SQS) AddPermissionRequest(input *AddPermissionInput) AddPermissionRequest {
 	op := &aws.Operation{
-		Name:       opChangeMessageVisibility,
+		Name:       opAddPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ChangeMessageVisibilityInput{}
+		input = &AddPermissionInput{}
 	}
 
-	output = &ChangeMessageVisibilityOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddPermissionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return AddPermissionRequest{Request: req, Input: input}
 }
 
-// ChangeMessageVisibility API operation for Amazon Simple Queue Service.
+const opChangeMessageVisibility = "ChangeMessageVisibility"
+
+// ChangeMessageVisibilityRequest is a API request type for the ChangeMessageVisibility API operation.
+type ChangeMessageVisibilityRequest struct {
+	*aws.Request
+	Input *ChangeMessageVisibilityInput
+}
+
+// Send marshals and sends the ChangeMessageVisibility API request.
+func (r ChangeMessageVisibilityRequest) Send() (*ChangeMessageVisibilityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ChangeMessageVisibilityOutput), nil
+}
+
+// ChangeMessageVisibilityRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Changes the visibility timeout of a specified message in a queue to a new
 // value. The maximum allowed timeout value is 12 hours. Thus, you can't extend
@@ -197,85 +136,51 @@ func (c *SQS) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput
 // (not to the value you set using the ChangeMessageVisibility action) the next
 // time the message is received.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation ChangeMessageVisibility for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMessageNotInflight "AWS.SimpleQueueService.MessageNotInflight"
-//   The message referred to isn't in flight.
-//
-//   * ErrCodeReceiptHandleIsInvalid "ReceiptHandleIsInvalid"
-//   The receipt handle provided isn't valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibility
-func (c *SQS) ChangeMessageVisibility(input *ChangeMessageVisibilityInput) (*ChangeMessageVisibilityOutput, error) {
-	req, out := c.ChangeMessageVisibilityRequest(input)
-	return out, req.Send()
-}
-
-// ChangeMessageVisibilityWithContext is the same as ChangeMessageVisibility with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ChangeMessageVisibility for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) ChangeMessageVisibilityWithContext(ctx aws.Context, input *ChangeMessageVisibilityInput, opts ...aws.Option) (*ChangeMessageVisibilityOutput, error) {
-	req, out := c.ChangeMessageVisibilityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opChangeMessageVisibilityBatch = "ChangeMessageVisibilityBatch"
-
-// ChangeMessageVisibilityBatchRequest generates a "aws.Request" representing the
-// client's request for the ChangeMessageVisibilityBatch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ChangeMessageVisibilityBatch for more information on using the ChangeMessageVisibilityBatch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ChangeMessageVisibilityBatchRequest method.
-//    req, resp := client.ChangeMessageVisibilityBatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ChangeMessageVisibilityRequest method.
+//    req := client.ChangeMessageVisibilityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatch
-func (c *SQS) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibilityBatchInput) (req *aws.Request, output *ChangeMessageVisibilityBatchOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibility
+func (c *SQS) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput) ChangeMessageVisibilityRequest {
 	op := &aws.Operation{
-		Name:       opChangeMessageVisibilityBatch,
+		Name:       opChangeMessageVisibility,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ChangeMessageVisibilityBatchInput{}
+		input = &ChangeMessageVisibilityInput{}
 	}
 
-	output = &ChangeMessageVisibilityBatchOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ChangeMessageVisibilityOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return ChangeMessageVisibilityRequest{Request: req, Input: input}
 }
 
-// ChangeMessageVisibilityBatch API operation for Amazon Simple Queue Service.
+const opChangeMessageVisibilityBatch = "ChangeMessageVisibilityBatch"
+
+// ChangeMessageVisibilityBatchRequest is a API request type for the ChangeMessageVisibilityBatch API operation.
+type ChangeMessageVisibilityBatchRequest struct {
+	*aws.Request
+	Input *ChangeMessageVisibilityBatchInput
+}
+
+// Send marshals and sends the ChangeMessageVisibilityBatch API request.
+func (r ChangeMessageVisibilityBatchRequest) Send() (*ChangeMessageVisibilityBatchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ChangeMessageVisibilityBatchOutput), nil
+}
+
+// ChangeMessageVisibilityBatchRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Changes the visibility timeout of multiple messages. This is a batch version
 // of ChangeMessageVisibility. The result of the action on each message is reported
@@ -294,91 +199,49 @@ func (c *SQS) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibility
 //
 // &Attribute.2=that
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation ChangeMessageVisibilityBatch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyEntriesInBatchRequest "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
-//   The batch request contains more entries than permissible.
-//
-//   * ErrCodeEmptyBatchRequest "AWS.SimpleQueueService.EmptyBatchRequest"
-//   The batch request doesn't contain any entries.
-//
-//   * ErrCodeBatchEntryIdsNotDistinct "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
-//   Two or more batch entries in the request have the same Id.
-//
-//   * ErrCodeInvalidBatchEntryId "AWS.SimpleQueueService.InvalidBatchEntryId"
-//   The Id of a batch entry in a batch request doesn't abide by the specification.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatch
-func (c *SQS) ChangeMessageVisibilityBatch(input *ChangeMessageVisibilityBatchInput) (*ChangeMessageVisibilityBatchOutput, error) {
-	req, out := c.ChangeMessageVisibilityBatchRequest(input)
-	return out, req.Send()
-}
-
-// ChangeMessageVisibilityBatchWithContext is the same as ChangeMessageVisibilityBatch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ChangeMessageVisibilityBatch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) ChangeMessageVisibilityBatchWithContext(ctx aws.Context, input *ChangeMessageVisibilityBatchInput, opts ...aws.Option) (*ChangeMessageVisibilityBatchOutput, error) {
-	req, out := c.ChangeMessageVisibilityBatchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateQueue = "CreateQueue"
-
-// CreateQueueRequest generates a "aws.Request" representing the
-// client's request for the CreateQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateQueue for more information on using the CreateQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateQueueRequest method.
-//    req, resp := client.CreateQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ChangeMessageVisibilityBatchRequest method.
+//    req := client.ChangeMessageVisibilityBatchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueue
-func (c *SQS) CreateQueueRequest(input *CreateQueueInput) (req *aws.Request, output *CreateQueueOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatch
+func (c *SQS) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibilityBatchInput) ChangeMessageVisibilityBatchRequest {
 	op := &aws.Operation{
-		Name:       opCreateQueue,
+		Name:       opChangeMessageVisibilityBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateQueueInput{}
+		input = &ChangeMessageVisibilityBatchInput{}
 	}
 
-	output = &CreateQueueOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ChangeMessageVisibilityBatchOutput{})
+	return ChangeMessageVisibilityBatchRequest{Request: req, Input: input}
 }
 
-// CreateQueue API operation for Amazon Simple Queue Service.
+const opCreateQueue = "CreateQueue"
+
+// CreateQueueRequest is a API request type for the CreateQueue API operation.
+type CreateQueueRequest struct {
+	*aws.Request
+	Input *CreateQueueInput
+}
+
+// Send marshals and sends the CreateQueue API request.
+func (r CreateQueueRequest) Send() (*CreateQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateQueueOutput), nil
+}
+
+// CreateQueueRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Creates a new standard or FIFO queue. You can pass one or more attributes
 // in the request. Keep the following caveats in mind:
@@ -421,90 +284,49 @@ func (c *SQS) CreateQueueRequest(input *CreateQueueInput) (req *aws.Request, out
 //
 // &Attribute.2=that
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation CreateQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeQueueDeletedRecently "AWS.SimpleQueueService.QueueDeletedRecently"
-//   You must wait 60 seconds after deleting a queue before you can create another
-//   one with the same name.
-//
-//   * ErrCodeQueueNameExists "QueueAlreadyExists"
-//   A queue already exists with this name. Amazon SQS returns this error only
-//   if the request includes attributes whose values differ from those of the
-//   existing queue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueue
-func (c *SQS) CreateQueue(input *CreateQueueInput) (*CreateQueueOutput, error) {
-	req, out := c.CreateQueueRequest(input)
-	return out, req.Send()
-}
-
-// CreateQueueWithContext is the same as CreateQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) CreateQueueWithContext(ctx aws.Context, input *CreateQueueInput, opts ...aws.Option) (*CreateQueueOutput, error) {
-	req, out := c.CreateQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteMessage = "DeleteMessage"
-
-// DeleteMessageRequest generates a "aws.Request" representing the
-// client's request for the DeleteMessage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteMessage for more information on using the DeleteMessage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteMessageRequest method.
-//    req, resp := client.DeleteMessageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateQueueRequest method.
+//    req := client.CreateQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessage
-func (c *SQS) DeleteMessageRequest(input *DeleteMessageInput) (req *aws.Request, output *DeleteMessageOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueue
+func (c *SQS) CreateQueueRequest(input *CreateQueueInput) CreateQueueRequest {
 	op := &aws.Operation{
-		Name:       opDeleteMessage,
+		Name:       opCreateQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteMessageInput{}
+		input = &CreateQueueInput{}
 	}
 
-	output = &DeleteMessageOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &CreateQueueOutput{})
+	return CreateQueueRequest{Request: req, Input: input}
 }
 
-// DeleteMessage API operation for Amazon Simple Queue Service.
+const opDeleteMessage = "DeleteMessage"
+
+// DeleteMessageRequest is a API request type for the DeleteMessage API operation.
+type DeleteMessageRequest struct {
+	*aws.Request
+	Input *DeleteMessageInput
+}
+
+// Send marshals and sends the DeleteMessage API request.
+func (r DeleteMessageRequest) Send() (*DeleteMessageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMessageOutput), nil
+}
+
+// DeleteMessageRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Deletes the specified message from the specified queue. You specify the message
 // by using the message's receipt handle and not the MessageId you receive when
@@ -527,85 +349,51 @@ func (c *SQS) DeleteMessageRequest(input *DeleteMessageInput) (req *aws.Request,
 // receive request. You should ensure that your application is idempotent, so
 // that receiving a message more than once does not cause issues.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation DeleteMessage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidIdFormat "InvalidIdFormat"
-//   The receipt handle isn't valid for the current version.
-//
-//   * ErrCodeReceiptHandleIsInvalid "ReceiptHandleIsInvalid"
-//   The receipt handle provided isn't valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessage
-func (c *SQS) DeleteMessage(input *DeleteMessageInput) (*DeleteMessageOutput, error) {
-	req, out := c.DeleteMessageRequest(input)
-	return out, req.Send()
-}
-
-// DeleteMessageWithContext is the same as DeleteMessage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteMessage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) DeleteMessageWithContext(ctx aws.Context, input *DeleteMessageInput, opts ...aws.Option) (*DeleteMessageOutput, error) {
-	req, out := c.DeleteMessageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteMessageBatch = "DeleteMessageBatch"
-
-// DeleteMessageBatchRequest generates a "aws.Request" representing the
-// client's request for the DeleteMessageBatch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteMessageBatch for more information on using the DeleteMessageBatch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteMessageBatchRequest method.
-//    req, resp := client.DeleteMessageBatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteMessageRequest method.
+//    req := client.DeleteMessageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatch
-func (c *SQS) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) (req *aws.Request, output *DeleteMessageBatchOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessage
+func (c *SQS) DeleteMessageRequest(input *DeleteMessageInput) DeleteMessageRequest {
 	op := &aws.Operation{
-		Name:       opDeleteMessageBatch,
+		Name:       opDeleteMessage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteMessageBatchInput{}
+		input = &DeleteMessageInput{}
 	}
 
-	output = &DeleteMessageBatchOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteMessageOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteMessageRequest{Request: req, Input: input}
 }
 
-// DeleteMessageBatch API operation for Amazon Simple Queue Service.
+const opDeleteMessageBatch = "DeleteMessageBatch"
+
+// DeleteMessageBatchRequest is a API request type for the DeleteMessageBatch API operation.
+type DeleteMessageBatchRequest struct {
+	*aws.Request
+	Input *DeleteMessageBatchInput
+}
+
+// Send marshals and sends the DeleteMessageBatch API request.
+func (r DeleteMessageBatchRequest) Send() (*DeleteMessageBatchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMessageBatchOutput), nil
+}
+
+// DeleteMessageBatchRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Deletes up to ten messages from the specified queue. This is a batch version
 // of DeleteMessage. The result of the action on each message is reported individually
@@ -623,93 +411,49 @@ func (c *SQS) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) (req *aw
 //
 // &Attribute.2=that
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation DeleteMessageBatch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyEntriesInBatchRequest "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
-//   The batch request contains more entries than permissible.
-//
-//   * ErrCodeEmptyBatchRequest "AWS.SimpleQueueService.EmptyBatchRequest"
-//   The batch request doesn't contain any entries.
-//
-//   * ErrCodeBatchEntryIdsNotDistinct "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
-//   Two or more batch entries in the request have the same Id.
-//
-//   * ErrCodeInvalidBatchEntryId "AWS.SimpleQueueService.InvalidBatchEntryId"
-//   The Id of a batch entry in a batch request doesn't abide by the specification.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatch
-func (c *SQS) DeleteMessageBatch(input *DeleteMessageBatchInput) (*DeleteMessageBatchOutput, error) {
-	req, out := c.DeleteMessageBatchRequest(input)
-	return out, req.Send()
-}
-
-// DeleteMessageBatchWithContext is the same as DeleteMessageBatch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteMessageBatch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) DeleteMessageBatchWithContext(ctx aws.Context, input *DeleteMessageBatchInput, opts ...aws.Option) (*DeleteMessageBatchOutput, error) {
-	req, out := c.DeleteMessageBatchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteQueue = "DeleteQueue"
-
-// DeleteQueueRequest generates a "aws.Request" representing the
-// client's request for the DeleteQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteQueue for more information on using the DeleteQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteQueueRequest method.
-//    req, resp := client.DeleteQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteMessageBatchRequest method.
+//    req := client.DeleteMessageBatchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueue
-func (c *SQS) DeleteQueueRequest(input *DeleteQueueInput) (req *aws.Request, output *DeleteQueueOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatch
+func (c *SQS) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) DeleteMessageBatchRequest {
 	op := &aws.Operation{
-		Name:       opDeleteQueue,
+		Name:       opDeleteMessageBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteQueueInput{}
+		input = &DeleteMessageBatchInput{}
 	}
 
-	output = &DeleteQueueOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &DeleteMessageBatchOutput{})
+	return DeleteMessageBatchRequest{Request: req, Input: input}
 }
 
-// DeleteQueue API operation for Amazon Simple Queue Service.
+const opDeleteQueue = "DeleteQueue"
+
+// DeleteQueueRequest is a API request type for the DeleteQueue API operation.
+type DeleteQueueRequest struct {
+	*aws.Request
+	Input *DeleteQueueInput
+}
+
+// Send marshals and sends the DeleteQueue API request.
+func (r DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteQueueOutput), nil
+}
+
+// DeleteQueueRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Deletes the queue specified by the QueueUrl, regardless of the queue's contents.
 // If the specified queue doesn't exist, Amazon SQS returns a successful response.
@@ -725,77 +469,51 @@ func (c *SQS) DeleteQueueRequest(input *DeleteQueueInput) (req *aws.Request, out
 // When you delete a queue, you must wait at least 60 seconds before creating
 // a queue with the same name.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation DeleteQueue for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueue
-func (c *SQS) DeleteQueue(input *DeleteQueueInput) (*DeleteQueueOutput, error) {
-	req, out := c.DeleteQueueRequest(input)
-	return out, req.Send()
-}
-
-// DeleteQueueWithContext is the same as DeleteQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) DeleteQueueWithContext(ctx aws.Context, input *DeleteQueueInput, opts ...aws.Option) (*DeleteQueueOutput, error) {
-	req, out := c.DeleteQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetQueueAttributes = "GetQueueAttributes"
-
-// GetQueueAttributesRequest generates a "aws.Request" representing the
-// client's request for the GetQueueAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetQueueAttributes for more information on using the GetQueueAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetQueueAttributesRequest method.
-//    req, resp := client.GetQueueAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteQueueRequest method.
+//    req := client.DeleteQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributes
-func (c *SQS) GetQueueAttributesRequest(input *GetQueueAttributesInput) (req *aws.Request, output *GetQueueAttributesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueue
+func (c *SQS) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRequest {
 	op := &aws.Operation{
-		Name:       opGetQueueAttributes,
+		Name:       opDeleteQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetQueueAttributesInput{}
+		input = &DeleteQueueInput{}
 	}
 
-	output = &GetQueueAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteQueueOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteQueueRequest{Request: req, Input: input}
 }
 
-// GetQueueAttributes API operation for Amazon Simple Queue Service.
+const opGetQueueAttributes = "GetQueueAttributes"
+
+// GetQueueAttributesRequest is a API request type for the GetQueueAttributes API operation.
+type GetQueueAttributesRequest struct {
+	*aws.Request
+	Input *GetQueueAttributesInput
+}
+
+// Send marshals and sends the GetQueueAttributes API request.
+func (r GetQueueAttributesRequest) Send() (*GetQueueAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQueueAttributesOutput), nil
+}
+
+// GetQueueAttributesRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Gets attributes for the specified queue.
 //
@@ -810,82 +528,49 @@ func (c *SQS) GetQueueAttributesRequest(input *GetQueueAttributesInput) (req *aw
 //
 // &Attribute.2=that
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation GetQueueAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidAttributeName "InvalidAttributeName"
-//   The attribute referred to doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributes
-func (c *SQS) GetQueueAttributes(input *GetQueueAttributesInput) (*GetQueueAttributesOutput, error) {
-	req, out := c.GetQueueAttributesRequest(input)
-	return out, req.Send()
-}
-
-// GetQueueAttributesWithContext is the same as GetQueueAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetQueueAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) GetQueueAttributesWithContext(ctx aws.Context, input *GetQueueAttributesInput, opts ...aws.Option) (*GetQueueAttributesOutput, error) {
-	req, out := c.GetQueueAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetQueueUrl = "GetQueueUrl"
-
-// GetQueueUrlRequest generates a "aws.Request" representing the
-// client's request for the GetQueueUrl operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetQueueUrl for more information on using the GetQueueUrl
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetQueueUrlRequest method.
-//    req, resp := client.GetQueueUrlRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetQueueAttributesRequest method.
+//    req := client.GetQueueAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrl
-func (c *SQS) GetQueueUrlRequest(input *GetQueueUrlInput) (req *aws.Request, output *GetQueueUrlOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributes
+func (c *SQS) GetQueueAttributesRequest(input *GetQueueAttributesInput) GetQueueAttributesRequest {
 	op := &aws.Operation{
-		Name:       opGetQueueUrl,
+		Name:       opGetQueueAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetQueueUrlInput{}
+		input = &GetQueueAttributesInput{}
 	}
 
-	output = &GetQueueUrlOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetQueueAttributesOutput{})
+	return GetQueueAttributesRequest{Request: req, Input: input}
 }
 
-// GetQueueUrl API operation for Amazon Simple Queue Service.
+const opGetQueueUrl = "GetQueueUrl"
+
+// GetQueueUrlRequest is a API request type for the GetQueueUrl API operation.
+type GetQueueUrlRequest struct {
+	*aws.Request
+	Input *GetQueueUrlInput
+}
+
+// Send marshals and sends the GetQueueUrl API request.
+func (r GetQueueUrlRequest) Send() (*GetQueueUrlOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQueueUrlOutput), nil
+}
+
+// GetQueueUrlRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Returns the URL of an existing queue. This action provides a simple way to
 // retrieve the URL of an Amazon SQS queue.
@@ -896,66 +581,66 @@ func (c *SQS) GetQueueUrlRequest(input *GetQueueUrlInput) (req *aws.Request, out
 // shared queue access, see AddPermission or see Shared Queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html)
 // in the Amazon SQS Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation GetQueueUrl for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeQueueDoesNotExist "AWS.SimpleQueueService.NonExistentQueue"
-//   The queue referred to doesn't exist.
+//    // Example sending a request using the GetQueueUrlRequest method.
+//    req := client.GetQueueUrlRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrl
-func (c *SQS) GetQueueUrl(input *GetQueueUrlInput) (*GetQueueUrlOutput, error) {
-	req, out := c.GetQueueUrlRequest(input)
-	return out, req.Send()
-}
+func (c *SQS) GetQueueUrlRequest(input *GetQueueUrlInput) GetQueueUrlRequest {
+	op := &aws.Operation{
+		Name:       opGetQueueUrl,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetQueueUrlWithContext is the same as GetQueueUrl with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetQueueUrl for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) GetQueueUrlWithContext(ctx aws.Context, input *GetQueueUrlInput, opts ...aws.Option) (*GetQueueUrlOutput, error) {
-	req, out := c.GetQueueUrlRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetQueueUrlInput{}
+	}
+
+	req := c.newRequest(op, input, &GetQueueUrlOutput{})
+	return GetQueueUrlRequest{Request: req, Input: input}
 }
 
 const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
 
-// ListDeadLetterSourceQueuesRequest generates a "aws.Request" representing the
-// client's request for the ListDeadLetterSourceQueues operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeadLetterSourceQueuesRequest is a API request type for the ListDeadLetterSourceQueues API operation.
+type ListDeadLetterSourceQueuesRequest struct {
+	*aws.Request
+	Input *ListDeadLetterSourceQueuesInput
+}
+
+// Send marshals and sends the ListDeadLetterSourceQueues API request.
+func (r ListDeadLetterSourceQueuesRequest) Send() (*ListDeadLetterSourceQueuesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeadLetterSourceQueuesOutput), nil
+}
+
+// ListDeadLetterSourceQueuesRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of your queues that have the RedrivePolicy queue attribute
+// configured with a dead-letter queue.
 //
-// See ListDeadLetterSourceQueues for more information on using the ListDeadLetterSourceQueues
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about using dead-letter queues, see Using Amazon SQS
+// Dead-Letter Queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
+// in the Amazon SQS Developer Guide.
 //
 //    // Example sending a request using the ListDeadLetterSourceQueuesRequest method.
-//    req, resp := client.ListDeadLetterSourceQueuesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeadLetterSourceQueuesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueues
-func (c *SQS) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueuesInput) (req *aws.Request, output *ListDeadLetterSourceQueuesOutput) {
+func (c *SQS) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueuesInput) ListDeadLetterSourceQueuesRequest {
 	op := &aws.Operation{
 		Name:       opListDeadLetterSourceQueues,
 		HTTPMethod: "POST",
@@ -966,80 +651,44 @@ func (c *SQS) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueue
 		input = &ListDeadLetterSourceQueuesInput{}
 	}
 
-	output = &ListDeadLetterSourceQueuesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeadLetterSourceQueues API operation for Amazon Simple Queue Service.
-//
-// Returns a list of your queues that have the RedrivePolicy queue attribute
-// configured with a dead-letter queue.
-//
-// For more information about using dead-letter queues, see Using Amazon SQS
-// Dead-Letter Queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
-// in the Amazon SQS Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation ListDeadLetterSourceQueues for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeQueueDoesNotExist "AWS.SimpleQueueService.NonExistentQueue"
-//   The queue referred to doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueues
-func (c *SQS) ListDeadLetterSourceQueues(input *ListDeadLetterSourceQueuesInput) (*ListDeadLetterSourceQueuesOutput, error) {
-	req, out := c.ListDeadLetterSourceQueuesRequest(input)
-	return out, req.Send()
-}
-
-// ListDeadLetterSourceQueuesWithContext is the same as ListDeadLetterSourceQueues with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeadLetterSourceQueues for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) ListDeadLetterSourceQueuesWithContext(ctx aws.Context, input *ListDeadLetterSourceQueuesInput, opts ...aws.Option) (*ListDeadLetterSourceQueuesOutput, error) {
-	req, out := c.ListDeadLetterSourceQueuesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeadLetterSourceQueuesOutput{})
+	return ListDeadLetterSourceQueuesRequest{Request: req, Input: input}
 }
 
 const opListQueues = "ListQueues"
 
-// ListQueuesRequest generates a "aws.Request" representing the
-// client's request for the ListQueues operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListQueuesRequest is a API request type for the ListQueues API operation.
+type ListQueuesRequest struct {
+	*aws.Request
+	Input *ListQueuesInput
+}
+
+// Send marshals and sends the ListQueues API request.
+func (r ListQueuesRequest) Send() (*ListQueuesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListQueuesOutput), nil
+}
+
+// ListQueuesRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListQueues for more information on using the ListQueues
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of your queues. The maximum number of queues that can be returned
+// is 1,000. If you specify a value for the optional QueueNamePrefix parameter,
+// only queues with a name that begins with the specified value are returned.
 //
 //    // Example sending a request using the ListQueuesRequest method.
-//    req, resp := client.ListQueuesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListQueuesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueues
-func (c *SQS) ListQueuesRequest(input *ListQueuesInput) (req *aws.Request, output *ListQueuesOutput) {
+func (c *SQS) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 	op := &aws.Operation{
 		Name:       opListQueues,
 		HTTPMethod: "POST",
@@ -1050,90 +699,30 @@ func (c *SQS) ListQueuesRequest(input *ListQueuesInput) (req *aws.Request, outpu
 		input = &ListQueuesInput{}
 	}
 
-	output = &ListQueuesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListQueues API operation for Amazon Simple Queue Service.
-//
-// Returns a list of your queues. The maximum number of queues that can be returned
-// is 1,000. If you specify a value for the optional QueueNamePrefix parameter,
-// only queues with a name that begins with the specified value are returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation ListQueues for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueues
-func (c *SQS) ListQueues(input *ListQueuesInput) (*ListQueuesOutput, error) {
-	req, out := c.ListQueuesRequest(input)
-	return out, req.Send()
-}
-
-// ListQueuesWithContext is the same as ListQueues with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListQueues for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) ListQueuesWithContext(ctx aws.Context, input *ListQueuesInput, opts ...aws.Option) (*ListQueuesOutput, error) {
-	req, out := c.ListQueuesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListQueuesOutput{})
+	return ListQueuesRequest{Request: req, Input: input}
 }
 
 const opPurgeQueue = "PurgeQueue"
 
-// PurgeQueueRequest generates a "aws.Request" representing the
-// client's request for the PurgeQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PurgeQueue for more information on using the PurgeQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PurgeQueueRequest method.
-//    req, resp := client.PurgeQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueue
-func (c *SQS) PurgeQueueRequest(input *PurgeQueueInput) (req *aws.Request, output *PurgeQueueOutput) {
-	op := &aws.Operation{
-		Name:       opPurgeQueue,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PurgeQueueInput{}
-	}
-
-	output = &PurgeQueueOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// PurgeQueueRequest is a API request type for the PurgeQueue API operation.
+type PurgeQueueRequest struct {
+	*aws.Request
+	Input *PurgeQueueInput
 }
 
-// PurgeQueue API operation for Amazon Simple Queue Service.
+// Send marshals and sends the PurgeQueue API request.
+func (r PurgeQueueRequest) Send() (*PurgeQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PurgeQueueOutput), nil
+}
+
+// PurgeQueueRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Deletes the messages in a queue specified by the QueueURL parameter.
 //
@@ -1146,87 +735,51 @@ func (c *SQS) PurgeQueueRequest(input *PurgeQueueInput) (req *aws.Request, outpu
 // the queue is being purged, messages sent to the queue before PurgeQueue is
 // called might be received, but are deleted within the next minute.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation PurgeQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeQueueDoesNotExist "AWS.SimpleQueueService.NonExistentQueue"
-//   The queue referred to doesn't exist.
-//
-//   * ErrCodePurgeQueueInProgress "AWS.SimpleQueueService.PurgeQueueInProgress"
-//   Indicates that the specified queue previously received a PurgeQueue request
-//   within the last 60 seconds (the time it can take to delete the messages in
-//   the queue).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueue
-func (c *SQS) PurgeQueue(input *PurgeQueueInput) (*PurgeQueueOutput, error) {
-	req, out := c.PurgeQueueRequest(input)
-	return out, req.Send()
-}
-
-// PurgeQueueWithContext is the same as PurgeQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PurgeQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) PurgeQueueWithContext(ctx aws.Context, input *PurgeQueueInput, opts ...aws.Option) (*PurgeQueueOutput, error) {
-	req, out := c.PurgeQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opReceiveMessage = "ReceiveMessage"
-
-// ReceiveMessageRequest generates a "aws.Request" representing the
-// client's request for the ReceiveMessage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReceiveMessage for more information on using the ReceiveMessage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ReceiveMessageRequest method.
-//    req, resp := client.ReceiveMessageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PurgeQueueRequest method.
+//    req := client.PurgeQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessage
-func (c *SQS) ReceiveMessageRequest(input *ReceiveMessageInput) (req *aws.Request, output *ReceiveMessageOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueue
+func (c *SQS) PurgeQueueRequest(input *PurgeQueueInput) PurgeQueueRequest {
 	op := &aws.Operation{
-		Name:       opReceiveMessage,
+		Name:       opPurgeQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ReceiveMessageInput{}
+		input = &PurgeQueueInput{}
 	}
 
-	output = &ReceiveMessageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PurgeQueueOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return PurgeQueueRequest{Request: req, Input: input}
 }
 
-// ReceiveMessage API operation for Amazon Simple Queue Service.
+const opReceiveMessage = "ReceiveMessage"
+
+// ReceiveMessageRequest is a API request type for the ReceiveMessage API operation.
+type ReceiveMessageRequest struct {
+	*aws.Request
+	Input *ReceiveMessageInput
+}
+
+// Send marshals and sends the ReceiveMessage API request.
+func (r ReceiveMessageRequest) Send() (*ReceiveMessageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReceiveMessageOutput), nil
+}
+
+// ReceiveMessageRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Retrieves one or more messages (up to 10), from the specified queue. Using
 // the WaitTimeSeconds parameter enables long-poll support. For more information,
@@ -1276,69 +829,62 @@ func (c *SQS) ReceiveMessageRequest(input *ReceiveMessageInput) (req *aws.Reques
 // this action, we recommend that you structure your code so that it can handle
 // new attributes gracefully.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation ReceiveMessage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOverLimit "OverLimit"
-//   The action that you requested would violate a limit. For example, ReceiveMessage
-//   returns this error if the maximum number of inflight messages is reached.
-//   AddPermission returns this error if the maximum number of permissions for
-//   the queue is reached.
+//    // Example sending a request using the ReceiveMessageRequest method.
+//    req := client.ReceiveMessageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessage
-func (c *SQS) ReceiveMessage(input *ReceiveMessageInput) (*ReceiveMessageOutput, error) {
-	req, out := c.ReceiveMessageRequest(input)
-	return out, req.Send()
-}
+func (c *SQS) ReceiveMessageRequest(input *ReceiveMessageInput) ReceiveMessageRequest {
+	op := &aws.Operation{
+		Name:       opReceiveMessage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ReceiveMessageWithContext is the same as ReceiveMessage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReceiveMessage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) ReceiveMessageWithContext(ctx aws.Context, input *ReceiveMessageInput, opts ...aws.Option) (*ReceiveMessageOutput, error) {
-	req, out := c.ReceiveMessageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ReceiveMessageInput{}
+	}
+
+	req := c.newRequest(op, input, &ReceiveMessageOutput{})
+	return ReceiveMessageRequest{Request: req, Input: input}
 }
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws.Request" representing the
-// client's request for the RemovePermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemovePermissionRequest is a API request type for the RemovePermission API operation.
+type RemovePermissionRequest struct {
+	*aws.Request
+	Input *RemovePermissionInput
+}
+
+// Send marshals and sends the RemovePermission API request.
+func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemovePermissionOutput), nil
+}
+
+// RemovePermissionRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemovePermission for more information on using the RemovePermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Revokes any permissions in the queue policy that matches the specified Label
+// parameter. Only the owner of the queue can remove permissions.
 //
 //    // Example sending a request using the RemovePermissionRequest method.
-//    req, resp := client.RemovePermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemovePermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermission
-func (c *SQS) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
+func (c *SQS) RemovePermissionRequest(input *RemovePermissionInput) RemovePermissionRequest {
 	op := &aws.Operation{
 		Name:       opRemovePermission,
 		HTTPMethod: "POST",
@@ -1349,89 +895,32 @@ func (c *SQS) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Re
 		input = &RemovePermissionInput{}
 	}
 
-	output = &RemovePermissionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemovePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemovePermission API operation for Amazon Simple Queue Service.
-//
-// Revokes any permissions in the queue policy that matches the specified Label
-// parameter. Only the owner of the queue can remove permissions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation RemovePermission for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermission
-func (c *SQS) RemovePermission(input *RemovePermissionInput) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	return out, req.Send()
-}
-
-// RemovePermissionWithContext is the same as RemovePermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemovePermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
-	req, out := c.RemovePermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemovePermissionRequest{Request: req, Input: input}
 }
 
 const opSendMessage = "SendMessage"
 
-// SendMessageRequest generates a "aws.Request" representing the
-// client's request for the SendMessage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendMessage for more information on using the SendMessage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SendMessageRequest method.
-//    req, resp := client.SendMessageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessage
-func (c *SQS) SendMessageRequest(input *SendMessageInput) (req *aws.Request, output *SendMessageOutput) {
-	op := &aws.Operation{
-		Name:       opSendMessage,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &SendMessageInput{}
-	}
-
-	output = &SendMessageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// SendMessageRequest is a API request type for the SendMessage API operation.
+type SendMessageRequest struct {
+	*aws.Request
+	Input *SendMessageInput
 }
 
-// SendMessage API operation for Amazon Simple Queue Service.
+// Send marshals and sends the SendMessage API request.
+func (r SendMessageRequest) Send() (*SendMessageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendMessageOutput), nil
+}
+
+// SendMessageRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Delivers a message to the specified queue.
 //
@@ -1443,85 +932,49 @@ func (c *SQS) SendMessageRequest(input *SendMessageInput) (req *aws.Request, out
 // Any characters not included in this list will be rejected. For more information,
 // see the W3C specification for characters (http://www.w3.org/TR/REC-xml/#charsets).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation SendMessage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidMessageContents "InvalidMessageContents"
-//   The message contains characters outside the allowed set.
-//
-//   * ErrCodeUnsupportedOperation "AWS.SimpleQueueService.UnsupportedOperation"
-//   Error code 400. Unsupported operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessage
-func (c *SQS) SendMessage(input *SendMessageInput) (*SendMessageOutput, error) {
-	req, out := c.SendMessageRequest(input)
-	return out, req.Send()
-}
-
-// SendMessageWithContext is the same as SendMessage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendMessage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) SendMessageWithContext(ctx aws.Context, input *SendMessageInput, opts ...aws.Option) (*SendMessageOutput, error) {
-	req, out := c.SendMessageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSendMessageBatch = "SendMessageBatch"
-
-// SendMessageBatchRequest generates a "aws.Request" representing the
-// client's request for the SendMessageBatch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendMessageBatch for more information on using the SendMessageBatch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SendMessageBatchRequest method.
-//    req, resp := client.SendMessageBatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the SendMessageRequest method.
+//    req := client.SendMessageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatch
-func (c *SQS) SendMessageBatchRequest(input *SendMessageBatchInput) (req *aws.Request, output *SendMessageBatchOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessage
+func (c *SQS) SendMessageRequest(input *SendMessageInput) SendMessageRequest {
 	op := &aws.Operation{
-		Name:       opSendMessageBatch,
+		Name:       opSendMessage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SendMessageBatchInput{}
+		input = &SendMessageInput{}
 	}
 
-	output = &SendMessageBatchOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &SendMessageOutput{})
+	return SendMessageRequest{Request: req, Input: input}
 }
 
-// SendMessageBatch API operation for Amazon Simple Queue Service.
+const opSendMessageBatch = "SendMessageBatch"
+
+// SendMessageBatchRequest is a API request type for the SendMessageBatch API operation.
+type SendMessageBatchRequest struct {
+	*aws.Request
+	Input *SendMessageBatchInput
+}
+
+// Send marshals and sends the SendMessageBatch API request.
+func (r SendMessageBatchRequest) Send() (*SendMessageBatchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendMessageBatchOutput), nil
+}
+
+// SendMessageBatchRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Delivers up to ten messages to the specified queue. This is a batch version
 // of SendMessage. For a FIFO queue, multiple messages within a single batch
@@ -1555,99 +1008,49 @@ func (c *SQS) SendMessageBatchRequest(input *SendMessageBatchInput) (req *aws.Re
 //
 // &Attribute.2=that
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation SendMessageBatch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyEntriesInBatchRequest "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
-//   The batch request contains more entries than permissible.
-//
-//   * ErrCodeEmptyBatchRequest "AWS.SimpleQueueService.EmptyBatchRequest"
-//   The batch request doesn't contain any entries.
-//
-//   * ErrCodeBatchEntryIdsNotDistinct "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
-//   Two or more batch entries in the request have the same Id.
-//
-//   * ErrCodeBatchRequestTooLong "AWS.SimpleQueueService.BatchRequestTooLong"
-//   The length of all the messages put together is more than the limit.
-//
-//   * ErrCodeInvalidBatchEntryId "AWS.SimpleQueueService.InvalidBatchEntryId"
-//   The Id of a batch entry in a batch request doesn't abide by the specification.
-//
-//   * ErrCodeUnsupportedOperation "AWS.SimpleQueueService.UnsupportedOperation"
-//   Error code 400. Unsupported operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatch
-func (c *SQS) SendMessageBatch(input *SendMessageBatchInput) (*SendMessageBatchOutput, error) {
-	req, out := c.SendMessageBatchRequest(input)
-	return out, req.Send()
-}
-
-// SendMessageBatchWithContext is the same as SendMessageBatch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendMessageBatch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) SendMessageBatchWithContext(ctx aws.Context, input *SendMessageBatchInput, opts ...aws.Option) (*SendMessageBatchOutput, error) {
-	req, out := c.SendMessageBatchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSetQueueAttributes = "SetQueueAttributes"
-
-// SetQueueAttributesRequest generates a "aws.Request" representing the
-// client's request for the SetQueueAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetQueueAttributes for more information on using the SetQueueAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetQueueAttributesRequest method.
-//    req, resp := client.SetQueueAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the SendMessageBatchRequest method.
+//    req := client.SendMessageBatchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributes
-func (c *SQS) SetQueueAttributesRequest(input *SetQueueAttributesInput) (req *aws.Request, output *SetQueueAttributesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatch
+func (c *SQS) SendMessageBatchRequest(input *SendMessageBatchInput) SendMessageBatchRequest {
 	op := &aws.Operation{
-		Name:       opSetQueueAttributes,
+		Name:       opSendMessageBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SetQueueAttributesInput{}
+		input = &SendMessageBatchInput{}
 	}
 
-	output = &SetQueueAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &SendMessageBatchOutput{})
+	return SendMessageBatchRequest{Request: req, Input: input}
 }
 
-// SetQueueAttributes API operation for Amazon Simple Queue Service.
+const opSetQueueAttributes = "SetQueueAttributes"
+
+// SetQueueAttributesRequest is a API request type for the SetQueueAttributes API operation.
+type SetQueueAttributesRequest struct {
+	*aws.Request
+	Input *SetQueueAttributesInput
+}
+
+// Send marshals and sends the SetQueueAttributes API request.
+func (r SetQueueAttributesRequest) Send() (*SetQueueAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetQueueAttributesOutput), nil
+}
+
+// SetQueueAttributesRequest returns a request value for making API operation for
+// Amazon Simple Queue Service.
 //
 // Sets the value of one or more queue attributes. When you change a queue's
 // attributes, the change can take up to 60 seconds for most of the attributes
@@ -1658,37 +1061,29 @@ func (c *SQS) SetQueueAttributesRequest(input *SetQueueAttributesInput) (req *aw
 // this action, we recommend that you structure your code so that it can handle
 // new attributes gracefully.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Queue Service's
-// API operation SetQueueAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidAttributeName "InvalidAttributeName"
-//   The attribute referred to doesn't exist.
+//    // Example sending a request using the SetQueueAttributesRequest method.
+//    req := client.SetQueueAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributes
-func (c *SQS) SetQueueAttributes(input *SetQueueAttributesInput) (*SetQueueAttributesOutput, error) {
-	req, out := c.SetQueueAttributesRequest(input)
-	return out, req.Send()
-}
+func (c *SQS) SetQueueAttributesRequest(input *SetQueueAttributesInput) SetQueueAttributesRequest {
+	op := &aws.Operation{
+		Name:       opSetQueueAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SetQueueAttributesWithContext is the same as SetQueueAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetQueueAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SQS) SetQueueAttributesWithContext(ctx aws.Context, input *SetQueueAttributesInput, opts ...aws.Option) (*SetQueueAttributesOutput, error) {
-	req, out := c.SetQueueAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetQueueAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &SetQueueAttributesOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SetQueueAttributesRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermissionRequest

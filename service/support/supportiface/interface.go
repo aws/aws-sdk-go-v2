@@ -63,67 +63,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SupportAPI interface {
-	AddAttachmentsToSet(*support.AddAttachmentsToSetInput) (*support.AddAttachmentsToSetOutput, error)
-	AddAttachmentsToSetWithContext(aws.Context, *support.AddAttachmentsToSetInput, ...aws.Option) (*support.AddAttachmentsToSetOutput, error)
-	AddAttachmentsToSetRequest(*support.AddAttachmentsToSetInput) (*aws.Request, *support.AddAttachmentsToSetOutput)
+	AddAttachmentsToSetRequest(*support.AddAttachmentsToSetInput) support.AddAttachmentsToSetRequest
 
-	AddCommunicationToCase(*support.AddCommunicationToCaseInput) (*support.AddCommunicationToCaseOutput, error)
-	AddCommunicationToCaseWithContext(aws.Context, *support.AddCommunicationToCaseInput, ...aws.Option) (*support.AddCommunicationToCaseOutput, error)
-	AddCommunicationToCaseRequest(*support.AddCommunicationToCaseInput) (*aws.Request, *support.AddCommunicationToCaseOutput)
+	AddCommunicationToCaseRequest(*support.AddCommunicationToCaseInput) support.AddCommunicationToCaseRequest
 
-	CreateCase(*support.CreateCaseInput) (*support.CreateCaseOutput, error)
-	CreateCaseWithContext(aws.Context, *support.CreateCaseInput, ...aws.Option) (*support.CreateCaseOutput, error)
-	CreateCaseRequest(*support.CreateCaseInput) (*aws.Request, *support.CreateCaseOutput)
+	CreateCaseRequest(*support.CreateCaseInput) support.CreateCaseRequest
 
-	DescribeAttachment(*support.DescribeAttachmentInput) (*support.DescribeAttachmentOutput, error)
-	DescribeAttachmentWithContext(aws.Context, *support.DescribeAttachmentInput, ...aws.Option) (*support.DescribeAttachmentOutput, error)
-	DescribeAttachmentRequest(*support.DescribeAttachmentInput) (*aws.Request, *support.DescribeAttachmentOutput)
+	DescribeAttachmentRequest(*support.DescribeAttachmentInput) support.DescribeAttachmentRequest
 
-	DescribeCases(*support.DescribeCasesInput) (*support.DescribeCasesOutput, error)
-	DescribeCasesWithContext(aws.Context, *support.DescribeCasesInput, ...aws.Option) (*support.DescribeCasesOutput, error)
-	DescribeCasesRequest(*support.DescribeCasesInput) (*aws.Request, *support.DescribeCasesOutput)
+	DescribeCasesRequest(*support.DescribeCasesInput) support.DescribeCasesRequest
 
 	DescribeCasesPages(*support.DescribeCasesInput, func(*support.DescribeCasesOutput, bool) bool) error
 	DescribeCasesPagesWithContext(aws.Context, *support.DescribeCasesInput, func(*support.DescribeCasesOutput, bool) bool, ...aws.Option) error
 
-	DescribeCommunications(*support.DescribeCommunicationsInput) (*support.DescribeCommunicationsOutput, error)
-	DescribeCommunicationsWithContext(aws.Context, *support.DescribeCommunicationsInput, ...aws.Option) (*support.DescribeCommunicationsOutput, error)
-	DescribeCommunicationsRequest(*support.DescribeCommunicationsInput) (*aws.Request, *support.DescribeCommunicationsOutput)
+	DescribeCommunicationsRequest(*support.DescribeCommunicationsInput) support.DescribeCommunicationsRequest
 
 	DescribeCommunicationsPages(*support.DescribeCommunicationsInput, func(*support.DescribeCommunicationsOutput, bool) bool) error
 	DescribeCommunicationsPagesWithContext(aws.Context, *support.DescribeCommunicationsInput, func(*support.DescribeCommunicationsOutput, bool) bool, ...aws.Option) error
 
-	DescribeServices(*support.DescribeServicesInput) (*support.DescribeServicesOutput, error)
-	DescribeServicesWithContext(aws.Context, *support.DescribeServicesInput, ...aws.Option) (*support.DescribeServicesOutput, error)
-	DescribeServicesRequest(*support.DescribeServicesInput) (*aws.Request, *support.DescribeServicesOutput)
+	DescribeServicesRequest(*support.DescribeServicesInput) support.DescribeServicesRequest
 
-	DescribeSeverityLevels(*support.DescribeSeverityLevelsInput) (*support.DescribeSeverityLevelsOutput, error)
-	DescribeSeverityLevelsWithContext(aws.Context, *support.DescribeSeverityLevelsInput, ...aws.Option) (*support.DescribeSeverityLevelsOutput, error)
-	DescribeSeverityLevelsRequest(*support.DescribeSeverityLevelsInput) (*aws.Request, *support.DescribeSeverityLevelsOutput)
+	DescribeSeverityLevelsRequest(*support.DescribeSeverityLevelsInput) support.DescribeSeverityLevelsRequest
 
-	DescribeTrustedAdvisorCheckRefreshStatuses(*support.DescribeTrustedAdvisorCheckRefreshStatusesInput) (*support.DescribeTrustedAdvisorCheckRefreshStatusesOutput, error)
-	DescribeTrustedAdvisorCheckRefreshStatusesWithContext(aws.Context, *support.DescribeTrustedAdvisorCheckRefreshStatusesInput, ...aws.Option) (*support.DescribeTrustedAdvisorCheckRefreshStatusesOutput, error)
-	DescribeTrustedAdvisorCheckRefreshStatusesRequest(*support.DescribeTrustedAdvisorCheckRefreshStatusesInput) (*aws.Request, *support.DescribeTrustedAdvisorCheckRefreshStatusesOutput)
+	DescribeTrustedAdvisorCheckRefreshStatusesRequest(*support.DescribeTrustedAdvisorCheckRefreshStatusesInput) support.DescribeTrustedAdvisorCheckRefreshStatusesRequest
 
-	DescribeTrustedAdvisorCheckResult(*support.DescribeTrustedAdvisorCheckResultInput) (*support.DescribeTrustedAdvisorCheckResultOutput, error)
-	DescribeTrustedAdvisorCheckResultWithContext(aws.Context, *support.DescribeTrustedAdvisorCheckResultInput, ...aws.Option) (*support.DescribeTrustedAdvisorCheckResultOutput, error)
-	DescribeTrustedAdvisorCheckResultRequest(*support.DescribeTrustedAdvisorCheckResultInput) (*aws.Request, *support.DescribeTrustedAdvisorCheckResultOutput)
+	DescribeTrustedAdvisorCheckResultRequest(*support.DescribeTrustedAdvisorCheckResultInput) support.DescribeTrustedAdvisorCheckResultRequest
 
-	DescribeTrustedAdvisorCheckSummaries(*support.DescribeTrustedAdvisorCheckSummariesInput) (*support.DescribeTrustedAdvisorCheckSummariesOutput, error)
-	DescribeTrustedAdvisorCheckSummariesWithContext(aws.Context, *support.DescribeTrustedAdvisorCheckSummariesInput, ...aws.Option) (*support.DescribeTrustedAdvisorCheckSummariesOutput, error)
-	DescribeTrustedAdvisorCheckSummariesRequest(*support.DescribeTrustedAdvisorCheckSummariesInput) (*aws.Request, *support.DescribeTrustedAdvisorCheckSummariesOutput)
+	DescribeTrustedAdvisorCheckSummariesRequest(*support.DescribeTrustedAdvisorCheckSummariesInput) support.DescribeTrustedAdvisorCheckSummariesRequest
 
-	DescribeTrustedAdvisorChecks(*support.DescribeTrustedAdvisorChecksInput) (*support.DescribeTrustedAdvisorChecksOutput, error)
-	DescribeTrustedAdvisorChecksWithContext(aws.Context, *support.DescribeTrustedAdvisorChecksInput, ...aws.Option) (*support.DescribeTrustedAdvisorChecksOutput, error)
-	DescribeTrustedAdvisorChecksRequest(*support.DescribeTrustedAdvisorChecksInput) (*aws.Request, *support.DescribeTrustedAdvisorChecksOutput)
+	DescribeTrustedAdvisorChecksRequest(*support.DescribeTrustedAdvisorChecksInput) support.DescribeTrustedAdvisorChecksRequest
 
-	RefreshTrustedAdvisorCheck(*support.RefreshTrustedAdvisorCheckInput) (*support.RefreshTrustedAdvisorCheckOutput, error)
-	RefreshTrustedAdvisorCheckWithContext(aws.Context, *support.RefreshTrustedAdvisorCheckInput, ...aws.Option) (*support.RefreshTrustedAdvisorCheckOutput, error)
-	RefreshTrustedAdvisorCheckRequest(*support.RefreshTrustedAdvisorCheckInput) (*aws.Request, *support.RefreshTrustedAdvisorCheckOutput)
+	RefreshTrustedAdvisorCheckRequest(*support.RefreshTrustedAdvisorCheckInput) support.RefreshTrustedAdvisorCheckRequest
 
-	ResolveCase(*support.ResolveCaseInput) (*support.ResolveCaseOutput, error)
-	ResolveCaseWithContext(aws.Context, *support.ResolveCaseInput, ...aws.Option) (*support.ResolveCaseOutput, error)
-	ResolveCaseRequest(*support.ResolveCaseInput) (*aws.Request, *support.ResolveCaseOutput)
+	ResolveCaseRequest(*support.ResolveCaseInput) support.ResolveCaseRequest
 }
 
 var _ SupportAPI = (*support.Support)(nil)

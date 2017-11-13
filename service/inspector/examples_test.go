@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // Assigns attributes (key and value pairs) to the findings that are specified by the
 // ARNs of the findings.
-func ExampleInspector_AddAttributesToFindings_shared00() {
+func ExampleInspector_AddAttributesToFindingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -48,7 +48,8 @@ func ExampleInspector_AddAttributesToFindings_shared00() {
 		},
 	}
 
-	result, err := svc.AddAttributesToFindings(input)
+	req := svc.AddAttributesToFindingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -79,7 +80,7 @@ func ExampleInspector_AddAttributesToFindings_shared00() {
 // Creates a new assessment target using the ARN of the resource group that is generated
 // by CreateResourceGroup. You can create up to 50 assessment targets per AWS account.
 // You can run up to 500 concurrent agents per AWS account.
-func ExampleInspector_CreateAssessmentTarget_shared00() {
+func ExampleInspector_CreateAssessmentTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -91,7 +92,8 @@ func ExampleInspector_CreateAssessmentTarget_shared00() {
 		ResourceGroupArn:     aws.String("arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv"),
 	}
 
-	result, err := svc.CreateAssessmentTarget(input)
+	req := svc.CreateAssessmentTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -123,7 +125,7 @@ func ExampleInspector_CreateAssessmentTarget_shared00() {
 //
 // Creates an assessment template for the assessment target that is specified by the
 // ARN of the assessment target.
-func ExampleInspector_CreateAssessmentTemplate_shared00() {
+func ExampleInspector_CreateAssessmentTemplateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -145,7 +147,8 @@ func ExampleInspector_CreateAssessmentTemplate_shared00() {
 		},
 	}
 
-	result, err := svc.CreateAssessmentTemplate(input)
+	req := svc.CreateAssessmentTemplateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -179,7 +182,7 @@ func ExampleInspector_CreateAssessmentTemplate_shared00() {
 // are used to select the EC2 instances to be included in an Amazon Inspector assessment
 // target. The created resource group is then used to create an Amazon Inspector assessment
 // target.
-func ExampleInspector_CreateResourceGroup_shared00() {
+func ExampleInspector_CreateResourceGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -195,7 +198,8 @@ func ExampleInspector_CreateResourceGroup_shared00() {
 		},
 	}
 
-	result, err := svc.CreateResourceGroup(input)
+	req := svc.CreateResourceGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -224,7 +228,7 @@ func ExampleInspector_CreateResourceGroup_shared00() {
 // Delete assessment run
 //
 // Deletes the assessment run that is specified by the ARN of the assessment run.
-func ExampleInspector_DeleteAssessmentRun_shared00() {
+func ExampleInspector_DeleteAssessmentRunRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -235,7 +239,8 @@ func ExampleInspector_DeleteAssessmentRun_shared00() {
 		AssessmentRunArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-11LMTAVe"),
 	}
 
-	result, err := svc.DeleteAssessmentRun(input)
+	req := svc.DeleteAssessmentRunRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -266,7 +271,7 @@ func ExampleInspector_DeleteAssessmentRun_shared00() {
 // Delete assessment target
 //
 // Deletes the assessment target that is specified by the ARN of the assessment target.
-func ExampleInspector_DeleteAssessmentTarget_shared00() {
+func ExampleInspector_DeleteAssessmentTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -277,7 +282,8 @@ func ExampleInspector_DeleteAssessmentTarget_shared00() {
 		AssessmentTargetArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq"),
 	}
 
-	result, err := svc.DeleteAssessmentTarget(input)
+	req := svc.DeleteAssessmentTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -308,7 +314,7 @@ func ExampleInspector_DeleteAssessmentTarget_shared00() {
 // Delete assessment template
 //
 // Deletes the assessment template that is specified by the ARN of the assessment template.
-func ExampleInspector_DeleteAssessmentTemplate_shared00() {
+func ExampleInspector_DeleteAssessmentTemplateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -319,7 +325,8 @@ func ExampleInspector_DeleteAssessmentTemplate_shared00() {
 		AssessmentTemplateArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T"),
 	}
 
-	result, err := svc.DeleteAssessmentTemplate(input)
+	req := svc.DeleteAssessmentTemplateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -350,7 +357,7 @@ func ExampleInspector_DeleteAssessmentTemplate_shared00() {
 // Describte assessment runs
 //
 // Describes the assessment runs that are specified by the ARNs of the assessment runs.
-func ExampleInspector_DescribeAssessmentRuns_shared00() {
+func ExampleInspector_DescribeAssessmentRunsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -363,7 +370,8 @@ func ExampleInspector_DescribeAssessmentRuns_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeAssessmentRuns(input)
+	req := svc.DescribeAssessmentRunsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -389,7 +397,7 @@ func ExampleInspector_DescribeAssessmentRuns_shared00() {
 //
 // Describes the assessment targets that are specified by the ARNs of the assessment
 // targets.
-func ExampleInspector_DescribeAssessmentTargets_shared00() {
+func ExampleInspector_DescribeAssessmentTargetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -402,7 +410,8 @@ func ExampleInspector_DescribeAssessmentTargets_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeAssessmentTargets(input)
+	req := svc.DescribeAssessmentTargetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -428,7 +437,7 @@ func ExampleInspector_DescribeAssessmentTargets_shared00() {
 //
 // Describes the assessment templates that are specified by the ARNs of the assessment
 // templates.
-func ExampleInspector_DescribeAssessmentTemplates_shared00() {
+func ExampleInspector_DescribeAssessmentTemplatesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -441,7 +450,8 @@ func ExampleInspector_DescribeAssessmentTemplates_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeAssessmentTemplates(input)
+	req := svc.DescribeAssessmentTemplatesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -466,7 +476,7 @@ func ExampleInspector_DescribeAssessmentTemplates_shared00() {
 // Describte cross account access role
 //
 // Describes the IAM role that enables Amazon Inspector to access your AWS account.
-func ExampleInspector_DescribeCrossAccountAccessRole_shared00() {
+func ExampleInspector_DescribeCrossAccountAccessRoleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -475,7 +485,8 @@ func ExampleInspector_DescribeCrossAccountAccessRole_shared00() {
 	svc := inspector.New(cfg)
 	input := &inspector.DescribeCrossAccountAccessRoleInput{}
 
-	result, err := svc.DescribeCrossAccountAccessRole(input)
+	req := svc.DescribeCrossAccountAccessRoleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -498,7 +509,7 @@ func ExampleInspector_DescribeCrossAccountAccessRole_shared00() {
 // Describe findings
 //
 // Describes the findings that are specified by the ARNs of the findings.
-func ExampleInspector_DescribeFindings_shared00() {
+func ExampleInspector_DescribeFindingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -511,7 +522,8 @@ func ExampleInspector_DescribeFindings_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeFindings(input)
+	req := svc.DescribeFindingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -536,7 +548,7 @@ func ExampleInspector_DescribeFindings_shared00() {
 // Describe resource groups
 //
 // Describes the resource groups that are specified by the ARNs of the resource groups.
-func ExampleInspector_DescribeResourceGroups_shared00() {
+func ExampleInspector_DescribeResourceGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -549,7 +561,8 @@ func ExampleInspector_DescribeResourceGroups_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeResourceGroups(input)
+	req := svc.DescribeResourceGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -574,7 +587,7 @@ func ExampleInspector_DescribeResourceGroups_shared00() {
 // Describe rules packages
 //
 // Describes the rules packages that are specified by the ARNs of the rules packages.
-func ExampleInspector_DescribeRulesPackages_shared00() {
+func ExampleInspector_DescribeRulesPackagesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -587,7 +600,8 @@ func ExampleInspector_DescribeRulesPackages_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeRulesPackages(input)
+	req := svc.DescribeRulesPackagesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -612,7 +626,7 @@ func ExampleInspector_DescribeRulesPackages_shared00() {
 // Get telemetry metadata
 //
 // Information about the data that is collected for the specified assessment run.
-func ExampleInspector_GetTelemetryMetadata_shared00() {
+func ExampleInspector_GetTelemetryMetadataRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -623,7 +637,8 @@ func ExampleInspector_GetTelemetryMetadata_shared00() {
 		AssessmentRunArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE"),
 	}
 
-	result, err := svc.GetTelemetryMetadata(input)
+	req := svc.GetTelemetryMetadataRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -653,7 +668,7 @@ func ExampleInspector_GetTelemetryMetadata_shared00() {
 //
 // Lists the agents of the assessment runs that are specified by the ARNs of the assessment
 // runs.
-func ExampleInspector_ListAssessmentRunAgents_shared00() {
+func ExampleInspector_ListAssessmentRunAgentsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -665,7 +680,8 @@ func ExampleInspector_ListAssessmentRunAgents_shared00() {
 		MaxResults:       aws.Int64(123),
 	}
 
-	result, err := svc.ListAssessmentRunAgents(input)
+	req := svc.ListAssessmentRunAgentsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -695,7 +711,7 @@ func ExampleInspector_ListAssessmentRunAgents_shared00() {
 //
 // Lists the assessment runs that correspond to the assessment templates that are specified
 // by the ARNs of the assessment templates.
-func ExampleInspector_ListAssessmentRuns_shared00() {
+func ExampleInspector_ListAssessmentRunsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -709,7 +725,8 @@ func ExampleInspector_ListAssessmentRuns_shared00() {
 		MaxResults: aws.Int64(123),
 	}
 
-	result, err := svc.ListAssessmentRuns(input)
+	req := svc.ListAssessmentRunsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -738,7 +755,7 @@ func ExampleInspector_ListAssessmentRuns_shared00() {
 // List assessment targets
 //
 // Lists the ARNs of the assessment targets within this AWS account.
-func ExampleInspector_ListAssessmentTargets_shared00() {
+func ExampleInspector_ListAssessmentTargetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -749,7 +766,8 @@ func ExampleInspector_ListAssessmentTargets_shared00() {
 		MaxResults: aws.Int64(123),
 	}
 
-	result, err := svc.ListAssessmentTargets(input)
+	req := svc.ListAssessmentTargetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -777,7 +795,7 @@ func ExampleInspector_ListAssessmentTargets_shared00() {
 //
 // Lists the assessment templates that correspond to the assessment targets that are
 // specified by the ARNs of the assessment targets.
-func ExampleInspector_ListAssessmentTemplates_shared00() {
+func ExampleInspector_ListAssessmentTemplatesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -791,7 +809,8 @@ func ExampleInspector_ListAssessmentTemplates_shared00() {
 		MaxResults: aws.Int64(123),
 	}
 
-	result, err := svc.ListAssessmentTemplates(input)
+	req := svc.ListAssessmentTemplatesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -821,7 +840,7 @@ func ExampleInspector_ListAssessmentTemplates_shared00() {
 //
 // Lists all the event subscriptions for the assessment template that is specified by
 // the ARN of the assessment template.
-func ExampleInspector_ListEventSubscriptions_shared00() {
+func ExampleInspector_ListEventSubscriptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -833,7 +852,8 @@ func ExampleInspector_ListEventSubscriptions_shared00() {
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0"),
 	}
 
-	result, err := svc.ListEventSubscriptions(input)
+	req := svc.ListEventSubscriptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -863,7 +883,7 @@ func ExampleInspector_ListEventSubscriptions_shared00() {
 //
 // Lists findings that are generated by the assessment runs that are specified by the
 // ARNs of the assessment runs.
-func ExampleInspector_ListFindings_shared00() {
+func ExampleInspector_ListFindingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -877,7 +897,8 @@ func ExampleInspector_ListFindings_shared00() {
 		MaxResults: aws.Int64(123),
 	}
 
-	result, err := svc.ListFindings(input)
+	req := svc.ListFindingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -906,7 +927,7 @@ func ExampleInspector_ListFindings_shared00() {
 // List rules packages
 //
 // Lists all available Amazon Inspector rules packages.
-func ExampleInspector_ListRulesPackages_shared00() {
+func ExampleInspector_ListRulesPackagesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -917,7 +938,8 @@ func ExampleInspector_ListRulesPackages_shared00() {
 		MaxResults: aws.Int64(123),
 	}
 
-	result, err := svc.ListRulesPackages(input)
+	req := svc.ListRulesPackagesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -944,7 +966,7 @@ func ExampleInspector_ListRulesPackages_shared00() {
 // List tags for resource
 //
 // Lists all tags associated with an assessment template.
-func ExampleInspector_ListTagsForResource_shared00() {
+func ExampleInspector_ListTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -955,7 +977,8 @@ func ExampleInspector_ListTagsForResource_shared00() {
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-gcwFliYu"),
 	}
 
-	result, err := svc.ListTagsForResource(input)
+	req := svc.ListTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -985,7 +1008,7 @@ func ExampleInspector_ListTagsForResource_shared00() {
 //
 // Previews the agents installed on the EC2 instances that are part of the specified
 // assessment target.
-func ExampleInspector_PreviewAgents_shared00() {
+func ExampleInspector_PreviewAgentsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -997,7 +1020,8 @@ func ExampleInspector_PreviewAgents_shared00() {
 		PreviewAgentsArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq"),
 	}
 
-	result, err := svc.PreviewAgents(input)
+	req := svc.PreviewAgentsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1029,7 +1053,7 @@ func ExampleInspector_PreviewAgents_shared00() {
 //
 // Registers the IAM role that Amazon Inspector uses to list your EC2 instances at the
 // start of the assessment run or when you call the PreviewAgents action.
-func ExampleInspector_RegisterCrossAccountAccessRole_shared00() {
+func ExampleInspector_RegisterCrossAccountAccessRoleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1040,7 +1064,8 @@ func ExampleInspector_RegisterCrossAccountAccessRole_shared00() {
 		RoleArn: aws.String("arn:aws:iam::123456789012:role/inspector"),
 	}
 
-	result, err := svc.RegisterCrossAccountAccessRole(input)
+	req := svc.RegisterCrossAccountAccessRoleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1070,7 +1095,7 @@ func ExampleInspector_RegisterCrossAccountAccessRole_shared00() {
 //
 // Removes entire attributes (key and value pairs) from the findings that are specified
 // by the ARNs of the findings where an attribute with the specified key exists.
-func ExampleInspector_RemoveAttributesFromFindings_shared00() {
+func ExampleInspector_RemoveAttributesFromFindingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1086,7 +1111,8 @@ func ExampleInspector_RemoveAttributesFromFindings_shared00() {
 		},
 	}
 
-	result, err := svc.RemoveAttributesFromFindings(input)
+	req := svc.RemoveAttributesFromFindingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1116,7 +1142,7 @@ func ExampleInspector_RemoveAttributesFromFindings_shared00() {
 //
 // Sets tags (key and value pairs) to the assessment template that is specified by the
 // ARN of the assessment template.
-func ExampleInspector_SetTagsForResource_shared00() {
+func ExampleInspector_SetTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1133,7 +1159,8 @@ func ExampleInspector_SetTagsForResource_shared00() {
 		},
 	}
 
-	result, err := svc.SetTagsForResource(input)
+	req := svc.SetTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1164,7 +1191,7 @@ func ExampleInspector_SetTagsForResource_shared00() {
 // Starts the assessment run specified by the ARN of the assessment template. For this
 // API to function properly, you must not exceed the limit of running up to 500 concurrent
 // agents per AWS account.
-func ExampleInspector_StartAssessmentRun_shared00() {
+func ExampleInspector_StartAssessmentRunRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1176,7 +1203,8 @@ func ExampleInspector_StartAssessmentRun_shared00() {
 		AssessmentTemplateArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T"),
 	}
 
-	result, err := svc.StartAssessmentRun(input)
+	req := svc.StartAssessmentRunRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1211,7 +1239,7 @@ func ExampleInspector_StartAssessmentRun_shared00() {
 // Stop assessment run
 //
 // Stops the assessment run that is specified by the ARN of the assessment run.
-func ExampleInspector_StopAssessmentRun_shared00() {
+func ExampleInspector_StopAssessmentRunRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1222,7 +1250,8 @@ func ExampleInspector_StopAssessmentRun_shared00() {
 		AssessmentRunArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-11LMTAVe"),
 	}
 
-	result, err := svc.StopAssessmentRun(input)
+	req := svc.StopAssessmentRunRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1252,7 +1281,7 @@ func ExampleInspector_StopAssessmentRun_shared00() {
 //
 // Enables the process of sending Amazon Simple Notification Service (SNS) notifications
 // about a specified event to a specified SNS topic.
-func ExampleInspector_SubscribeToEvent_shared00() {
+func ExampleInspector_SubscribeToEventRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1265,7 +1294,8 @@ func ExampleInspector_SubscribeToEvent_shared00() {
 		TopicArn:    aws.String("arn:aws:sns:us-west-2:123456789012:exampletopic"),
 	}
 
-	result, err := svc.SubscribeToEvent(input)
+	req := svc.SubscribeToEventRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1297,7 +1327,7 @@ func ExampleInspector_SubscribeToEvent_shared00() {
 //
 // Disables the process of sending Amazon Simple Notification Service (SNS) notifications
 // about a specified event to a specified SNS topic.
-func ExampleInspector_UnsubscribeFromEvent_shared00() {
+func ExampleInspector_UnsubscribeFromEventRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1310,7 +1340,8 @@ func ExampleInspector_UnsubscribeFromEvent_shared00() {
 		TopicArn:    aws.String("arn:aws:sns:us-west-2:123456789012:exampletopic"),
 	}
 
-	result, err := svc.UnsubscribeFromEvent(input)
+	req := svc.UnsubscribeFromEventRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1339,7 +1370,7 @@ func ExampleInspector_UnsubscribeFromEvent_shared00() {
 // Update assessment target
 //
 // Updates the assessment target that is specified by the ARN of the assessment target.
-func ExampleInspector_UpdateAssessmentTarget_shared00() {
+func ExampleInspector_UpdateAssessmentTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1352,7 +1383,8 @@ func ExampleInspector_UpdateAssessmentTarget_shared00() {
 		ResourceGroupArn:     aws.String("arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-yNbgL5Pt"),
 	}
 
-	result, err := svc.UpdateAssessmentTarget(input)
+	req := svc.UpdateAssessmentTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

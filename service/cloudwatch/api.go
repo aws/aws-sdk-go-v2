@@ -14,31 +14,36 @@ import (
 
 const opDeleteAlarms = "DeleteAlarms"
 
-// DeleteAlarmsRequest generates a "aws.Request" representing the
-// client's request for the DeleteAlarms operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAlarmsRequest is a API request type for the DeleteAlarms API operation.
+type DeleteAlarmsRequest struct {
+	*aws.Request
+	Input *DeleteAlarmsInput
+}
+
+// Send marshals and sends the DeleteAlarms API request.
+func (r DeleteAlarmsRequest) Send() (*DeleteAlarmsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAlarmsOutput), nil
+}
+
+// DeleteAlarmsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAlarms for more information on using the DeleteAlarms
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified alarms. In the event of an error, no alarms are deleted.
 //
 //    // Example sending a request using the DeleteAlarmsRequest method.
-//    req, resp := client.DeleteAlarmsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAlarmsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarms
-func (c *CloudWatch) DeleteAlarmsRequest(input *DeleteAlarmsInput) (req *aws.Request, output *DeleteAlarmsOutput) {
+func (c *CloudWatch) DeleteAlarmsRequest(input *DeleteAlarmsInput) DeleteAlarmsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAlarms,
 		HTTPMethod: "POST",
@@ -49,77 +54,45 @@ func (c *CloudWatch) DeleteAlarmsRequest(input *DeleteAlarmsInput) (req *aws.Req
 		input = &DeleteAlarmsInput{}
 	}
 
-	output = &DeleteAlarmsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAlarmsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteAlarms API operation for Amazon CloudWatch.
-//
-// Deletes the specified alarms. In the event of an error, no alarms are deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation DeleteAlarms for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFound "ResourceNotFound"
-//   The named resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarms
-func (c *CloudWatch) DeleteAlarms(input *DeleteAlarmsInput) (*DeleteAlarmsOutput, error) {
-	req, out := c.DeleteAlarmsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAlarmsWithContext is the same as DeleteAlarms with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAlarms for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DeleteAlarmsWithContext(ctx aws.Context, input *DeleteAlarmsInput, opts ...aws.Option) (*DeleteAlarmsOutput, error) {
-	req, out := c.DeleteAlarmsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteAlarmsRequest{Request: req, Input: input}
 }
 
 const opDeleteDashboards = "DeleteDashboards"
 
-// DeleteDashboardsRequest generates a "aws.Request" representing the
-// client's request for the DeleteDashboards operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDashboardsRequest is a API request type for the DeleteDashboards API operation.
+type DeleteDashboardsRequest struct {
+	*aws.Request
+	Input *DeleteDashboardsInput
+}
+
+// Send marshals and sends the DeleteDashboards API request.
+func (r DeleteDashboardsRequest) Send() (*DeleteDashboardsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDashboardsOutput), nil
+}
+
+// DeleteDashboardsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDashboards for more information on using the DeleteDashboards
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes all dashboards that you specify. You may specify up to 100 dashboards
+// to delete. If there is an error during this call, no dashboards are deleted.
 //
 //    // Example sending a request using the DeleteDashboardsRequest method.
-//    req, resp := client.DeleteDashboardsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDashboardsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboards
-func (c *CloudWatch) DeleteDashboardsRequest(input *DeleteDashboardsInput) (req *aws.Request, output *DeleteDashboardsOutput) {
+func (c *CloudWatch) DeleteDashboardsRequest(input *DeleteDashboardsInput) DeleteDashboardsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDashboards,
 		HTTPMethod: "POST",
@@ -130,82 +103,46 @@ func (c *CloudWatch) DeleteDashboardsRequest(input *DeleteDashboardsInput) (req 
 		input = &DeleteDashboardsInput{}
 	}
 
-	output = &DeleteDashboardsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDashboards API operation for Amazon CloudWatch.
-//
-// Deletes all dashboards that you specify. You may specify up to 100 dashboards
-// to delete. If there is an error during this call, no dashboards are deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation DeleteDashboards for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value of an input parameter is bad or out-of-range.
-//
-//   * ErrCodeDashboardNotFoundError "ResourceNotFound"
-//   The specified dashboard does not exist.
-//
-//   * ErrCodeInternalServiceFault "InternalServiceError"
-//   Request processing has failed due to some unknown error, exception, or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboards
-func (c *CloudWatch) DeleteDashboards(input *DeleteDashboardsInput) (*DeleteDashboardsOutput, error) {
-	req, out := c.DeleteDashboardsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDashboardsWithContext is the same as DeleteDashboards with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDashboards for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DeleteDashboardsWithContext(ctx aws.Context, input *DeleteDashboardsInput, opts ...aws.Option) (*DeleteDashboardsOutput, error) {
-	req, out := c.DeleteDashboardsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDashboardsOutput{})
+	return DeleteDashboardsRequest{Request: req, Input: input}
 }
 
 const opDescribeAlarmHistory = "DescribeAlarmHistory"
 
-// DescribeAlarmHistoryRequest generates a "aws.Request" representing the
-// client's request for the DescribeAlarmHistory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAlarmHistoryRequest is a API request type for the DescribeAlarmHistory API operation.
+type DescribeAlarmHistoryRequest struct {
+	*aws.Request
+	Input *DescribeAlarmHistoryInput
+}
+
+// Send marshals and sends the DescribeAlarmHistory API request.
+func (r DescribeAlarmHistoryRequest) Send() (*DescribeAlarmHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAlarmHistoryOutput), nil
+}
+
+// DescribeAlarmHistoryRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves the history for the specified alarm. You can filter the results
+// by date range or item type. If an alarm name is not specified, the histories
+// for all alarms are returned.
 //
-// See DescribeAlarmHistory for more information on using the DescribeAlarmHistory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// CloudWatch retains the history of an alarm even if you delete the alarm.
 //
 //    // Example sending a request using the DescribeAlarmHistoryRequest method.
-//    req, resp := client.DescribeAlarmHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAlarmHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistory
-func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) (req *aws.Request, output *DescribeAlarmHistoryOutput) {
+func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) DescribeAlarmHistoryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlarmHistory,
 		HTTPMethod: "POST",
@@ -222,50 +159,8 @@ func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInpu
 		input = &DescribeAlarmHistoryInput{}
 	}
 
-	output = &DescribeAlarmHistoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAlarmHistory API operation for Amazon CloudWatch.
-//
-// Retrieves the history for the specified alarm. You can filter the results
-// by date range or item type. If an alarm name is not specified, the histories
-// for all alarms are returned.
-//
-// CloudWatch retains the history of an alarm even if you delete the alarm.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation DescribeAlarmHistory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The next token specified is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistory
-func (c *CloudWatch) DescribeAlarmHistory(input *DescribeAlarmHistoryInput) (*DescribeAlarmHistoryOutput, error) {
-	req, out := c.DescribeAlarmHistoryRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAlarmHistoryWithContext is the same as DescribeAlarmHistory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAlarmHistory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmHistoryWithContext(ctx aws.Context, input *DescribeAlarmHistoryInput, opts ...aws.Option) (*DescribeAlarmHistoryOutput, error) {
-	req, out := c.DescribeAlarmHistoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAlarmHistoryOutput{})
+	return DescribeAlarmHistoryRequest{Request: req, Input: input}
 }
 
 // DescribeAlarmHistoryPages iterates over the pages of a DescribeAlarmHistory operation,
@@ -304,10 +199,10 @@ func (c *CloudWatch) DescribeAlarmHistoryPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeAlarmHistoryRequest(inCpy)
+			req := c.DescribeAlarmHistoryRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -320,31 +215,38 @@ func (c *CloudWatch) DescribeAlarmHistoryPagesWithContext(ctx aws.Context, input
 
 const opDescribeAlarms = "DescribeAlarms"
 
-// DescribeAlarmsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAlarms operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAlarmsRequest is a API request type for the DescribeAlarms API operation.
+type DescribeAlarmsRequest struct {
+	*aws.Request
+	Input *DescribeAlarmsInput
+}
+
+// Send marshals and sends the DescribeAlarms API request.
+func (r DescribeAlarmsRequest) Send() (*DescribeAlarmsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAlarmsOutput), nil
+}
+
+// DescribeAlarmsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAlarms for more information on using the DescribeAlarms
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the specified alarms. If no alarms are specified, all alarms are
+// returned. Alarms can be retrieved by using only a prefix for the alarm name,
+// the alarm state, or a prefix for any action.
 //
 //    // Example sending a request using the DescribeAlarmsRequest method.
-//    req, resp := client.DescribeAlarmsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAlarmsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms
-func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) (req *aws.Request, output *DescribeAlarmsOutput) {
+func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeAlarmsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlarms,
 		HTTPMethod: "POST",
@@ -361,48 +263,8 @@ func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) (req *aws
 		input = &DescribeAlarmsInput{}
 	}
 
-	output = &DescribeAlarmsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAlarms API operation for Amazon CloudWatch.
-//
-// Retrieves the specified alarms. If no alarms are specified, all alarms are
-// returned. Alarms can be retrieved by using only a prefix for the alarm name,
-// the alarm state, or a prefix for any action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation DescribeAlarms for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The next token specified is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms
-func (c *CloudWatch) DescribeAlarms(input *DescribeAlarmsInput) (*DescribeAlarmsOutput, error) {
-	req, out := c.DescribeAlarmsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAlarmsWithContext is the same as DescribeAlarms with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAlarms for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmsWithContext(ctx aws.Context, input *DescribeAlarmsInput, opts ...aws.Option) (*DescribeAlarmsOutput, error) {
-	req, out := c.DescribeAlarmsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAlarmsOutput{})
+	return DescribeAlarmsRequest{Request: req, Input: input}
 }
 
 // DescribeAlarmsPages iterates over the pages of a DescribeAlarms operation,
@@ -441,10 +303,10 @@ func (c *CloudWatch) DescribeAlarmsPagesWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeAlarmsRequest(inCpy)
+			req := c.DescribeAlarmsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -457,31 +319,37 @@ func (c *CloudWatch) DescribeAlarmsPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
 
-// DescribeAlarmsForMetricRequest generates a "aws.Request" representing the
-// client's request for the DescribeAlarmsForMetric operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAlarmsForMetricRequest is a API request type for the DescribeAlarmsForMetric API operation.
+type DescribeAlarmsForMetricRequest struct {
+	*aws.Request
+	Input *DescribeAlarmsForMetricInput
+}
+
+// Send marshals and sends the DescribeAlarmsForMetric API request.
+func (r DescribeAlarmsForMetricRequest) Send() (*DescribeAlarmsForMetricOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAlarmsForMetricOutput), nil
+}
+
+// DescribeAlarmsForMetricRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAlarmsForMetric for more information on using the DescribeAlarmsForMetric
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the alarms for the specified metric. To filter the results, specify
+// a statistic, period, or unit.
 //
 //    // Example sending a request using the DescribeAlarmsForMetricRequest method.
-//    req, resp := client.DescribeAlarmsForMetricRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAlarmsForMetricRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric
-func (c *CloudWatch) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricInput) (req *aws.Request, output *DescribeAlarmsForMetricOutput) {
+func (c *CloudWatch) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricInput) DescribeAlarmsForMetricRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlarmsForMetric,
 		HTTPMethod: "POST",
@@ -492,71 +360,43 @@ func (c *CloudWatch) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetr
 		input = &DescribeAlarmsForMetricInput{}
 	}
 
-	output = &DescribeAlarmsForMetricOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAlarmsForMetric API operation for Amazon CloudWatch.
-//
-// Retrieves the alarms for the specified metric. To filter the results, specify
-// a statistic, period, or unit.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation DescribeAlarmsForMetric for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric
-func (c *CloudWatch) DescribeAlarmsForMetric(input *DescribeAlarmsForMetricInput) (*DescribeAlarmsForMetricOutput, error) {
-	req, out := c.DescribeAlarmsForMetricRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAlarmsForMetricWithContext is the same as DescribeAlarmsForMetric with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAlarmsForMetric for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmsForMetricWithContext(ctx aws.Context, input *DescribeAlarmsForMetricInput, opts ...aws.Option) (*DescribeAlarmsForMetricOutput, error) {
-	req, out := c.DescribeAlarmsForMetricRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAlarmsForMetricOutput{})
+	return DescribeAlarmsForMetricRequest{Request: req, Input: input}
 }
 
 const opDisableAlarmActions = "DisableAlarmActions"
 
-// DisableAlarmActionsRequest generates a "aws.Request" representing the
-// client's request for the DisableAlarmActions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableAlarmActionsRequest is a API request type for the DisableAlarmActions API operation.
+type DisableAlarmActionsRequest struct {
+	*aws.Request
+	Input *DisableAlarmActionsInput
+}
+
+// Send marshals and sends the DisableAlarmActions API request.
+func (r DisableAlarmActionsRequest) Send() (*DisableAlarmActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableAlarmActionsOutput), nil
+}
+
+// DisableAlarmActionsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableAlarmActions for more information on using the DisableAlarmActions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disables the actions for the specified alarms. When an alarm's actions are
+// disabled, the alarm actions do not execute when the alarm state changes.
 //
 //    // Example sending a request using the DisableAlarmActionsRequest method.
-//    req, resp := client.DisableAlarmActionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableAlarmActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActions
-func (c *CloudWatch) DisableAlarmActionsRequest(input *DisableAlarmActionsInput) (req *aws.Request, output *DisableAlarmActionsOutput) {
+func (c *CloudWatch) DisableAlarmActionsRequest(input *DisableAlarmActionsInput) DisableAlarmActionsRequest {
 	op := &aws.Operation{
 		Name:       opDisableAlarmActions,
 		HTTPMethod: "POST",
@@ -567,73 +407,44 @@ func (c *CloudWatch) DisableAlarmActionsRequest(input *DisableAlarmActionsInput)
 		input = &DisableAlarmActionsInput{}
 	}
 
-	output = &DisableAlarmActionsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DisableAlarmActionsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DisableAlarmActions API operation for Amazon CloudWatch.
-//
-// Disables the actions for the specified alarms. When an alarm's actions are
-// disabled, the alarm actions do not execute when the alarm state changes.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation DisableAlarmActions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActions
-func (c *CloudWatch) DisableAlarmActions(input *DisableAlarmActionsInput) (*DisableAlarmActionsOutput, error) {
-	req, out := c.DisableAlarmActionsRequest(input)
-	return out, req.Send()
-}
-
-// DisableAlarmActionsWithContext is the same as DisableAlarmActions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableAlarmActions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DisableAlarmActionsWithContext(ctx aws.Context, input *DisableAlarmActionsInput, opts ...aws.Option) (*DisableAlarmActionsOutput, error) {
-	req, out := c.DisableAlarmActionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DisableAlarmActionsRequest{Request: req, Input: input}
 }
 
 const opEnableAlarmActions = "EnableAlarmActions"
 
-// EnableAlarmActionsRequest generates a "aws.Request" representing the
-// client's request for the EnableAlarmActions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableAlarmActionsRequest is a API request type for the EnableAlarmActions API operation.
+type EnableAlarmActionsRequest struct {
+	*aws.Request
+	Input *EnableAlarmActionsInput
+}
+
+// Send marshals and sends the EnableAlarmActions API request.
+func (r EnableAlarmActionsRequest) Send() (*EnableAlarmActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableAlarmActionsOutput), nil
+}
+
+// EnableAlarmActionsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableAlarmActions for more information on using the EnableAlarmActions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables the actions for the specified alarms.
 //
 //    // Example sending a request using the EnableAlarmActionsRequest method.
-//    req, resp := client.EnableAlarmActionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableAlarmActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActions
-func (c *CloudWatch) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) (req *aws.Request, output *EnableAlarmActionsOutput) {
+func (c *CloudWatch) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) EnableAlarmActionsRequest {
 	op := &aws.Operation{
 		Name:       opEnableAlarmActions,
 		HTTPMethod: "POST",
@@ -644,72 +455,48 @@ func (c *CloudWatch) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) (
 		input = &EnableAlarmActionsInput{}
 	}
 
-	output = &EnableAlarmActionsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &EnableAlarmActionsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// EnableAlarmActions API operation for Amazon CloudWatch.
-//
-// Enables the actions for the specified alarms.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation EnableAlarmActions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActions
-func (c *CloudWatch) EnableAlarmActions(input *EnableAlarmActionsInput) (*EnableAlarmActionsOutput, error) {
-	req, out := c.EnableAlarmActionsRequest(input)
-	return out, req.Send()
-}
-
-// EnableAlarmActionsWithContext is the same as EnableAlarmActions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableAlarmActions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) EnableAlarmActionsWithContext(ctx aws.Context, input *EnableAlarmActionsInput, opts ...aws.Option) (*EnableAlarmActionsOutput, error) {
-	req, out := c.EnableAlarmActionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return EnableAlarmActionsRequest{Request: req, Input: input}
 }
 
 const opGetDashboard = "GetDashboard"
 
-// GetDashboardRequest generates a "aws.Request" representing the
-// client's request for the GetDashboard operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDashboardRequest is a API request type for the GetDashboard API operation.
+type GetDashboardRequest struct {
+	*aws.Request
+	Input *GetDashboardInput
+}
+
+// Send marshals and sends the GetDashboard API request.
+func (r GetDashboardRequest) Send() (*GetDashboardOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDashboardOutput), nil
+}
+
+// GetDashboardRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Displays the details of the dashboard that you specify.
 //
-// See GetDashboard for more information on using the GetDashboard
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To copy an existing dashboard, use GetDashboard, and then use the data returned
+// within DashboardBody as the template for the new dashboard when you call
+// PutDashboard to create the copy.
 //
 //    // Example sending a request using the GetDashboardRequest method.
-//    req, resp := client.GetDashboardRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDashboardRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboard
-func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) (req *aws.Request, output *GetDashboardOutput) {
+func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) GetDashboardRequest {
 	op := &aws.Operation{
 		Name:       opGetDashboard,
 		HTTPMethod: "POST",
@@ -720,101 +507,30 @@ func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) (req *aws.Req
 		input = &GetDashboardInput{}
 	}
 
-	output = &GetDashboardOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDashboard API operation for Amazon CloudWatch.
-//
-// Displays the details of the dashboard that you specify.
-//
-// To copy an existing dashboard, use GetDashboard, and then use the data returned
-// within DashboardBody as the template for the new dashboard when you call
-// PutDashboard to create the copy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation GetDashboard for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value of an input parameter is bad or out-of-range.
-//
-//   * ErrCodeDashboardNotFoundError "ResourceNotFound"
-//   The specified dashboard does not exist.
-//
-//   * ErrCodeInternalServiceFault "InternalServiceError"
-//   Request processing has failed due to some unknown error, exception, or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboard
-func (c *CloudWatch) GetDashboard(input *GetDashboardInput) (*GetDashboardOutput, error) {
-	req, out := c.GetDashboardRequest(input)
-	return out, req.Send()
-}
-
-// GetDashboardWithContext is the same as GetDashboard with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDashboard for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) GetDashboardWithContext(ctx aws.Context, input *GetDashboardInput, opts ...aws.Option) (*GetDashboardOutput, error) {
-	req, out := c.GetDashboardRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDashboardOutput{})
+	return GetDashboardRequest{Request: req, Input: input}
 }
 
 const opGetMetricStatistics = "GetMetricStatistics"
 
-// GetMetricStatisticsRequest generates a "aws.Request" representing the
-// client's request for the GetMetricStatistics operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetMetricStatistics for more information on using the GetMetricStatistics
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetMetricStatisticsRequest method.
-//    req, resp := client.GetMetricStatisticsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatistics
-func (c *CloudWatch) GetMetricStatisticsRequest(input *GetMetricStatisticsInput) (req *aws.Request, output *GetMetricStatisticsOutput) {
-	op := &aws.Operation{
-		Name:       opGetMetricStatistics,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetMetricStatisticsInput{}
-	}
-
-	output = &GetMetricStatisticsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetMetricStatisticsRequest is a API request type for the GetMetricStatistics API operation.
+type GetMetricStatisticsRequest struct {
+	*aws.Request
+	Input *GetMetricStatisticsInput
 }
 
-// GetMetricStatistics API operation for Amazon CloudWatch.
+// Send marshals and sends the GetMetricStatistics API request.
+func (r GetMetricStatisticsRequest) Send() (*GetMetricStatisticsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMetricStatisticsOutput), nil
+}
+
+// GetMetricStatisticsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
 // Gets statistics for the specified metric.
 //
@@ -868,75 +584,63 @@ func (c *CloudWatch) GetMetricStatisticsRequest(input *GetMetricStatisticsInput)
 // the Amazon CloudWatch Metrics and Dimensions Reference (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html)
 // in the Amazon CloudWatch User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation GetMetricStatistics for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value of an input parameter is bad or out-of-range.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingParameter"
-//   An input parameter that is required is missing.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Parameters were used together that cannot be used together.
-//
-//   * ErrCodeInternalServiceFault "InternalServiceError"
-//   Request processing has failed due to some unknown error, exception, or failure.
+//    // Example sending a request using the GetMetricStatisticsRequest method.
+//    req := client.GetMetricStatisticsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatistics
-func (c *CloudWatch) GetMetricStatistics(input *GetMetricStatisticsInput) (*GetMetricStatisticsOutput, error) {
-	req, out := c.GetMetricStatisticsRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatch) GetMetricStatisticsRequest(input *GetMetricStatisticsInput) GetMetricStatisticsRequest {
+	op := &aws.Operation{
+		Name:       opGetMetricStatistics,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetMetricStatisticsWithContext is the same as GetMetricStatistics with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMetricStatistics for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) GetMetricStatisticsWithContext(ctx aws.Context, input *GetMetricStatisticsInput, opts ...aws.Option) (*GetMetricStatisticsOutput, error) {
-	req, out := c.GetMetricStatisticsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetMetricStatisticsInput{}
+	}
+
+	req := c.newRequest(op, input, &GetMetricStatisticsOutput{})
+	return GetMetricStatisticsRequest{Request: req, Input: input}
 }
 
 const opListDashboards = "ListDashboards"
 
-// ListDashboardsRequest generates a "aws.Request" representing the
-// client's request for the ListDashboards operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDashboardsRequest is a API request type for the ListDashboards API operation.
+type ListDashboardsRequest struct {
+	*aws.Request
+	Input *ListDashboardsInput
+}
+
+// Send marshals and sends the ListDashboards API request.
+func (r ListDashboardsRequest) Send() (*ListDashboardsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDashboardsOutput), nil
+}
+
+// ListDashboardsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDashboards for more information on using the ListDashboards
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the dashboards for your account. If you include DashboardNamePrefix,
+// only those dashboards with names starting with the prefix are listed. Otherwise,
+// all dashboards in your account are listed.
 //
 //    // Example sending a request using the ListDashboardsRequest method.
-//    req, resp := client.ListDashboardsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDashboardsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboards
-func (c *CloudWatch) ListDashboardsRequest(input *ListDashboardsInput) (req *aws.Request, output *ListDashboardsOutput) {
+func (c *CloudWatch) ListDashboardsRequest(input *ListDashboardsInput) ListDashboardsRequest {
 	op := &aws.Operation{
 		Name:       opListDashboards,
 		HTTPMethod: "POST",
@@ -947,80 +651,50 @@ func (c *CloudWatch) ListDashboardsRequest(input *ListDashboardsInput) (req *aws
 		input = &ListDashboardsInput{}
 	}
 
-	output = &ListDashboardsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDashboards API operation for Amazon CloudWatch.
-//
-// Returns a list of the dashboards for your account. If you include DashboardNamePrefix,
-// only those dashboards with names starting with the prefix are listed. Otherwise,
-// all dashboards in your account are listed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation ListDashboards for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value of an input parameter is bad or out-of-range.
-//
-//   * ErrCodeInternalServiceFault "InternalServiceError"
-//   Request processing has failed due to some unknown error, exception, or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboards
-func (c *CloudWatch) ListDashboards(input *ListDashboardsInput) (*ListDashboardsOutput, error) {
-	req, out := c.ListDashboardsRequest(input)
-	return out, req.Send()
-}
-
-// ListDashboardsWithContext is the same as ListDashboards with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDashboards for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) ListDashboardsWithContext(ctx aws.Context, input *ListDashboardsInput, opts ...aws.Option) (*ListDashboardsOutput, error) {
-	req, out := c.ListDashboardsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDashboardsOutput{})
+	return ListDashboardsRequest{Request: req, Input: input}
 }
 
 const opListMetrics = "ListMetrics"
 
-// ListMetricsRequest generates a "aws.Request" representing the
-// client's request for the ListMetrics operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListMetricsRequest is a API request type for the ListMetrics API operation.
+type ListMetricsRequest struct {
+	*aws.Request
+	Input *ListMetricsInput
+}
+
+// Send marshals and sends the ListMetrics API request.
+func (r ListMetricsRequest) Send() (*ListMetricsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListMetricsOutput), nil
+}
+
+// ListMetricsRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// List the specified metrics. You can use the returned metrics with GetMetricStatistics
+// to obtain statistical data.
 //
-// See ListMetrics for more information on using the ListMetrics
-// API call, and error handling.
+// Up to 500 results are returned for any one call. To retrieve additional results,
+// use the returned token with subsequent calls.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// After you create a metric, allow up to fifteen minutes before the metric
+// appears. Statistics about the metric, however, are available sooner using
+// GetMetricStatistics.
 //
 //    // Example sending a request using the ListMetricsRequest method.
-//    req, resp := client.ListMetricsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListMetricsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetrics
-func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) (req *aws.Request, output *ListMetricsOutput) {
+func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequest {
 	op := &aws.Operation{
 		Name:       opListMetrics,
 		HTTPMethod: "POST",
@@ -1037,57 +711,8 @@ func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) (req *aws.Reque
 		input = &ListMetricsInput{}
 	}
 
-	output = &ListMetricsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListMetrics API operation for Amazon CloudWatch.
-//
-// List the specified metrics. You can use the returned metrics with GetMetricStatistics
-// to obtain statistical data.
-//
-// Up to 500 results are returned for any one call. To retrieve additional results,
-// use the returned token with subsequent calls.
-//
-// After you create a metric, allow up to fifteen minutes before the metric
-// appears. Statistics about the metric, however, are available sooner using
-// GetMetricStatistics.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation ListMetrics for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceFault "InternalServiceError"
-//   Request processing has failed due to some unknown error, exception, or failure.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value of an input parameter is bad or out-of-range.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetrics
-func (c *CloudWatch) ListMetrics(input *ListMetricsInput) (*ListMetricsOutput, error) {
-	req, out := c.ListMetricsRequest(input)
-	return out, req.Send()
-}
-
-// ListMetricsWithContext is the same as ListMetrics with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListMetrics for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) ListMetricsWithContext(ctx aws.Context, input *ListMetricsInput, opts ...aws.Option) (*ListMetricsOutput, error) {
-	req, out := c.ListMetricsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListMetricsOutput{})
+	return ListMetricsRequest{Request: req, Input: input}
 }
 
 // ListMetricsPages iterates over the pages of a ListMetrics operation,
@@ -1126,10 +751,10 @@ func (c *CloudWatch) ListMetricsPagesWithContext(ctx aws.Context, input *ListMet
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListMetricsRequest(inCpy)
+			req := c.ListMetricsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1142,47 +767,24 @@ func (c *CloudWatch) ListMetricsPagesWithContext(ctx aws.Context, input *ListMet
 
 const opPutDashboard = "PutDashboard"
 
-// PutDashboardRequest generates a "aws.Request" representing the
-// client's request for the PutDashboard operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutDashboard for more information on using the PutDashboard
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutDashboardRequest method.
-//    req, resp := client.PutDashboardRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboard
-func (c *CloudWatch) PutDashboardRequest(input *PutDashboardInput) (req *aws.Request, output *PutDashboardOutput) {
-	op := &aws.Operation{
-		Name:       opPutDashboard,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutDashboardInput{}
-	}
-
-	output = &PutDashboardOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutDashboardRequest is a API request type for the PutDashboard API operation.
+type PutDashboardRequest struct {
+	*aws.Request
+	Input *PutDashboardInput
 }
 
-// PutDashboard API operation for Amazon CloudWatch.
+// Send marshals and sends the PutDashboard API request.
+func (r PutDashboardRequest) Send() (*PutDashboardOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutDashboardOutput), nil
+}
+
+// PutDashboardRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
 // Creates a dashboard if it does not already exist, or updates an existing
 // dashboard. If you update a dashboard, the entire contents are replaced with
@@ -1204,87 +806,49 @@ func (c *CloudWatch) PutDashboardRequest(input *PutDashboardInput) (req *aws.Req
 // could also point console users to the location of the DashboardBody script
 // or the CloudFormation template used to create the dashboard.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation PutDashboard for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDashboardInvalidInputError "InvalidParameterInput"
-//   Some part of the dashboard data is invalid.
-//
-//   * ErrCodeInternalServiceFault "InternalServiceError"
-//   Request processing has failed due to some unknown error, exception, or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboard
-func (c *CloudWatch) PutDashboard(input *PutDashboardInput) (*PutDashboardOutput, error) {
-	req, out := c.PutDashboardRequest(input)
-	return out, req.Send()
-}
-
-// PutDashboardWithContext is the same as PutDashboard with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutDashboard for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) PutDashboardWithContext(ctx aws.Context, input *PutDashboardInput, opts ...aws.Option) (*PutDashboardOutput, error) {
-	req, out := c.PutDashboardRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutMetricAlarm = "PutMetricAlarm"
-
-// PutMetricAlarmRequest generates a "aws.Request" representing the
-// client's request for the PutMetricAlarm operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutMetricAlarm for more information on using the PutMetricAlarm
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutMetricAlarmRequest method.
-//    req, resp := client.PutMetricAlarmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutDashboardRequest method.
+//    req := client.PutDashboardRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm
-func (c *CloudWatch) PutMetricAlarmRequest(input *PutMetricAlarmInput) (req *aws.Request, output *PutMetricAlarmOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboard
+func (c *CloudWatch) PutDashboardRequest(input *PutDashboardInput) PutDashboardRequest {
 	op := &aws.Operation{
-		Name:       opPutMetricAlarm,
+		Name:       opPutDashboard,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutMetricAlarmInput{}
+		input = &PutDashboardInput{}
 	}
 
-	output = &PutMetricAlarmOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &PutDashboardOutput{})
+	return PutDashboardRequest{Request: req, Input: input}
 }
 
-// PutMetricAlarm API operation for Amazon CloudWatch.
+const opPutMetricAlarm = "PutMetricAlarm"
+
+// PutMetricAlarmRequest is a API request type for the PutMetricAlarm API operation.
+type PutMetricAlarmRequest struct {
+	*aws.Request
+	Input *PutMetricAlarmInput
+}
+
+// Send marshals and sends the PutMetricAlarm API request.
+func (r PutMetricAlarmRequest) Send() (*PutMetricAlarmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutMetricAlarmOutput), nil
+}
+
+// PutMetricAlarmRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
 // Creates or updates an alarm and associates it with the specified metric.
 // Optionally, this operation can associate one or more Amazon SNS resources
@@ -1327,84 +891,51 @@ func (c *CloudWatch) PutMetricAlarmRequest(input *PutMetricAlarmInput) (req *aws
 // role. After this IAM role is created, you can create stop, terminate, or
 // reboot alarms using a command-line interface or API.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation PutMetricAlarm for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   The quota for alarms for this customer has already been reached.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm
-func (c *CloudWatch) PutMetricAlarm(input *PutMetricAlarmInput) (*PutMetricAlarmOutput, error) {
-	req, out := c.PutMetricAlarmRequest(input)
-	return out, req.Send()
-}
-
-// PutMetricAlarmWithContext is the same as PutMetricAlarm with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutMetricAlarm for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) PutMetricAlarmWithContext(ctx aws.Context, input *PutMetricAlarmInput, opts ...aws.Option) (*PutMetricAlarmOutput, error) {
-	req, out := c.PutMetricAlarmRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutMetricData = "PutMetricData"
-
-// PutMetricDataRequest generates a "aws.Request" representing the
-// client's request for the PutMetricData operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutMetricData for more information on using the PutMetricData
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutMetricDataRequest method.
-//    req, resp := client.PutMetricDataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutMetricAlarmRequest method.
+//    req := client.PutMetricAlarmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricData
-func (c *CloudWatch) PutMetricDataRequest(input *PutMetricDataInput) (req *aws.Request, output *PutMetricDataOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm
+func (c *CloudWatch) PutMetricAlarmRequest(input *PutMetricAlarmInput) PutMetricAlarmRequest {
 	op := &aws.Operation{
-		Name:       opPutMetricData,
+		Name:       opPutMetricAlarm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutMetricDataInput{}
+		input = &PutMetricAlarmInput{}
 	}
 
-	output = &PutMetricDataOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutMetricAlarmOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return PutMetricAlarmRequest{Request: req, Input: input}
 }
 
-// PutMetricData API operation for Amazon CloudWatch.
+const opPutMetricData = "PutMetricData"
+
+// PutMetricDataRequest is a API request type for the PutMetricData API operation.
+type PutMetricDataRequest struct {
+	*aws.Request
+	Input *PutMetricDataInput
+}
+
+// Send marshals and sends the PutMetricData API request.
+func (r PutMetricDataRequest) Send() (*PutMetricDataOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutMetricDataOutput), nil
+}
+
+// PutMetricDataRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
 // Publishes metric data points to Amazon CloudWatch. CloudWatch associates
 // the data points with the specified metric. If the specified metric does not
@@ -1436,93 +967,51 @@ func (c *CloudWatch) PutMetricDataRequest(input *PutMetricDataInput) (req *aws.R
 //
 //    * The Min and the Max values of the statistic set are equal
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation PutMetricData for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value of an input parameter is bad or out-of-range.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingParameter"
-//   An input parameter that is required is missing.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Parameters were used together that cannot be used together.
-//
-//   * ErrCodeInternalServiceFault "InternalServiceError"
-//   Request processing has failed due to some unknown error, exception, or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricData
-func (c *CloudWatch) PutMetricData(input *PutMetricDataInput) (*PutMetricDataOutput, error) {
-	req, out := c.PutMetricDataRequest(input)
-	return out, req.Send()
-}
-
-// PutMetricDataWithContext is the same as PutMetricData with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutMetricData for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) PutMetricDataWithContext(ctx aws.Context, input *PutMetricDataInput, opts ...aws.Option) (*PutMetricDataOutput, error) {
-	req, out := c.PutMetricDataRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSetAlarmState = "SetAlarmState"
-
-// SetAlarmStateRequest generates a "aws.Request" representing the
-// client's request for the SetAlarmState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetAlarmState for more information on using the SetAlarmState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetAlarmStateRequest method.
-//    req, resp := client.SetAlarmStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutMetricDataRequest method.
+//    req := client.PutMetricDataRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmState
-func (c *CloudWatch) SetAlarmStateRequest(input *SetAlarmStateInput) (req *aws.Request, output *SetAlarmStateOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricData
+func (c *CloudWatch) PutMetricDataRequest(input *PutMetricDataInput) PutMetricDataRequest {
 	op := &aws.Operation{
-		Name:       opSetAlarmState,
+		Name:       opPutMetricData,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SetAlarmStateInput{}
+		input = &PutMetricDataInput{}
 	}
 
-	output = &SetAlarmStateOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutMetricDataOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return PutMetricDataRequest{Request: req, Input: input}
 }
 
-// SetAlarmState API operation for Amazon CloudWatch.
+const opSetAlarmState = "SetAlarmState"
+
+// SetAlarmStateRequest is a API request type for the SetAlarmState API operation.
+type SetAlarmStateRequest struct {
+	*aws.Request
+	Input *SetAlarmStateInput
+}
+
+// Send marshals and sends the SetAlarmState API request.
+func (r SetAlarmStateRequest) Send() (*SetAlarmStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetAlarmStateOutput), nil
+}
+
+// SetAlarmStateRequest returns a request value for making API operation for
+// Amazon CloudWatch.
 //
 // Temporarily sets the state of an alarm for testing purposes. When the updated
 // state differs from the previous value, the action configured for the appropriate
@@ -1533,40 +1022,29 @@ func (c *CloudWatch) SetAlarmStateRequest(input *SetAlarmStateInput) (req *aws.R
 // only visible in the alarm's History tab in the Amazon CloudWatch console
 // or through DescribeAlarmHistory.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch's
-// API operation SetAlarmState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFound "ResourceNotFound"
-//   The named resource does not exist.
-//
-//   * ErrCodeInvalidFormatFault "InvalidFormat"
-//   Data was not syntactically valid JSON.
+//    // Example sending a request using the SetAlarmStateRequest method.
+//    req := client.SetAlarmStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmState
-func (c *CloudWatch) SetAlarmState(input *SetAlarmStateInput) (*SetAlarmStateOutput, error) {
-	req, out := c.SetAlarmStateRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatch) SetAlarmStateRequest(input *SetAlarmStateInput) SetAlarmStateRequest {
+	op := &aws.Operation{
+		Name:       opSetAlarmState,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SetAlarmStateWithContext is the same as SetAlarmState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetAlarmState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) SetAlarmStateWithContext(ctx aws.Context, input *SetAlarmStateInput, opts ...aws.Option) (*SetAlarmStateOutput, error) {
-	req, out := c.SetAlarmStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetAlarmStateInput{}
+	}
+
+	req := c.newRequest(op, input, &SetAlarmStateOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SetAlarmStateRequest{Request: req, Input: input}
 }
 
 // Represents the history of a specific alarm.

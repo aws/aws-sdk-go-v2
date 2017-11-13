@@ -14,7 +14,7 @@ func TestBuildCorrectURI(t *testing.T) {
 	svc := route53.New(unit.Config())
 	svc.Handlers.Validate.Clear()
 
-	req, _ := svc.GetHostedZoneRequest(&route53.GetHostedZoneInput{
+	req := svc.GetHostedZoneRequest(&route53.GetHostedZoneInput{
 		Id: aws.String("/hostedzone/ABCDEFG"),
 	})
 

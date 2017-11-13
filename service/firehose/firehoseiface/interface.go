@@ -9,7 +9,6 @@
 package firehoseiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
 )
 
@@ -63,37 +62,21 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type FirehoseAPI interface {
-	CreateDeliveryStream(*firehose.CreateDeliveryStreamInput) (*firehose.CreateDeliveryStreamOutput, error)
-	CreateDeliveryStreamWithContext(aws.Context, *firehose.CreateDeliveryStreamInput, ...aws.Option) (*firehose.CreateDeliveryStreamOutput, error)
-	CreateDeliveryStreamRequest(*firehose.CreateDeliveryStreamInput) (*aws.Request, *firehose.CreateDeliveryStreamOutput)
+	CreateDeliveryStreamRequest(*firehose.CreateDeliveryStreamInput) firehose.CreateDeliveryStreamRequest
 
-	DeleteDeliveryStream(*firehose.DeleteDeliveryStreamInput) (*firehose.DeleteDeliveryStreamOutput, error)
-	DeleteDeliveryStreamWithContext(aws.Context, *firehose.DeleteDeliveryStreamInput, ...aws.Option) (*firehose.DeleteDeliveryStreamOutput, error)
-	DeleteDeliveryStreamRequest(*firehose.DeleteDeliveryStreamInput) (*aws.Request, *firehose.DeleteDeliveryStreamOutput)
+	DeleteDeliveryStreamRequest(*firehose.DeleteDeliveryStreamInput) firehose.DeleteDeliveryStreamRequest
 
-	DescribeDeliveryStream(*firehose.DescribeDeliveryStreamInput) (*firehose.DescribeDeliveryStreamOutput, error)
-	DescribeDeliveryStreamWithContext(aws.Context, *firehose.DescribeDeliveryStreamInput, ...aws.Option) (*firehose.DescribeDeliveryStreamOutput, error)
-	DescribeDeliveryStreamRequest(*firehose.DescribeDeliveryStreamInput) (*aws.Request, *firehose.DescribeDeliveryStreamOutput)
+	DescribeDeliveryStreamRequest(*firehose.DescribeDeliveryStreamInput) firehose.DescribeDeliveryStreamRequest
 
-	GetKinesisStream(*firehose.GetKinesisStreamInput) (*firehose.GetKinesisStreamOutput, error)
-	GetKinesisStreamWithContext(aws.Context, *firehose.GetKinesisStreamInput, ...aws.Option) (*firehose.GetKinesisStreamOutput, error)
-	GetKinesisStreamRequest(*firehose.GetKinesisStreamInput) (*aws.Request, *firehose.GetKinesisStreamOutput)
+	GetKinesisStreamRequest(*firehose.GetKinesisStreamInput) firehose.GetKinesisStreamRequest
 
-	ListDeliveryStreams(*firehose.ListDeliveryStreamsInput) (*firehose.ListDeliveryStreamsOutput, error)
-	ListDeliveryStreamsWithContext(aws.Context, *firehose.ListDeliveryStreamsInput, ...aws.Option) (*firehose.ListDeliveryStreamsOutput, error)
-	ListDeliveryStreamsRequest(*firehose.ListDeliveryStreamsInput) (*aws.Request, *firehose.ListDeliveryStreamsOutput)
+	ListDeliveryStreamsRequest(*firehose.ListDeliveryStreamsInput) firehose.ListDeliveryStreamsRequest
 
-	PutRecord(*firehose.PutRecordInput) (*firehose.PutRecordOutput, error)
-	PutRecordWithContext(aws.Context, *firehose.PutRecordInput, ...aws.Option) (*firehose.PutRecordOutput, error)
-	PutRecordRequest(*firehose.PutRecordInput) (*aws.Request, *firehose.PutRecordOutput)
+	PutRecordRequest(*firehose.PutRecordInput) firehose.PutRecordRequest
 
-	PutRecordBatch(*firehose.PutRecordBatchInput) (*firehose.PutRecordBatchOutput, error)
-	PutRecordBatchWithContext(aws.Context, *firehose.PutRecordBatchInput, ...aws.Option) (*firehose.PutRecordBatchOutput, error)
-	PutRecordBatchRequest(*firehose.PutRecordBatchInput) (*aws.Request, *firehose.PutRecordBatchOutput)
+	PutRecordBatchRequest(*firehose.PutRecordBatchInput) firehose.PutRecordBatchRequest
 
-	UpdateDestination(*firehose.UpdateDestinationInput) (*firehose.UpdateDestinationOutput, error)
-	UpdateDestinationWithContext(aws.Context, *firehose.UpdateDestinationInput, ...aws.Option) (*firehose.UpdateDestinationOutput, error)
-	UpdateDestinationRequest(*firehose.UpdateDestinationInput) (*aws.Request, *firehose.UpdateDestinationOutput)
+	UpdateDestinationRequest(*firehose.UpdateDestinationInput) firehose.UpdateDestinationRequest
 }
 
 var _ FirehoseAPI = (*firehose.Firehose)(nil)

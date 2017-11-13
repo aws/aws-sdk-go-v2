@@ -12,50 +12,24 @@ import (
 
 const opPostContent = "PostContent"
 
-// PostContentRequest generates a "aws.Request" representing the
-// client's request for the PostContent operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PostContent for more information on using the PostContent
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PostContentRequest method.
-//    req, resp := client.PostContentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent
-func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *aws.Request, output *PostContentOutput) {
-	op := &aws.Operation{
-		Name:       opPostContent,
-		HTTPMethod: "POST",
-		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/content",
-	}
-
-	if input == nil {
-		input = &PostContentInput{}
-	}
-
-	output = &PostContentOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Sign.Remove(v4.SignRequestHandler)
-	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
-	req.Handlers.Sign.PushFrontNamed(handler)
-	return
+// PostContentRequest is a API request type for the PostContent API operation.
+type PostContentRequest struct {
+	*aws.Request
+	Input *PostContentInput
 }
 
-// PostContent API operation for Amazon Lex Runtime Service.
+// Send marshals and sends the PostContent API request.
+func (r PostContentRequest) Send() (*PostContentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PostContentOutput), nil
+}
+
+// PostContentRequest returns a request value for making API operation for
+// Amazon Lex Runtime Service.
 //
 // Sends user input (text or speech) to Amazon Lex. Clients use this API to
 // send text and audio requests to Amazon Lex at runtime. Amazon Lex interprets
@@ -113,124 +87,52 @@ func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *aw
 // In addition, Amazon Lex also returns your application-specific sessionAttributes.
 // For more information, see Managing Conversation Context (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Runtime Service's
-// API operation PostContent for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource (such as the Amazon Lex bot or an alias) that is referred to
-//   is not found.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Request validation failed, there is no usable message in the context, or
-//   the bot build failed, is still in progress, or contains unbuilt changes.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Exceeded a limit.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   Internal service error. Retry the call.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   Two clients are using the same AWS account, Amazon Lex bot, and user ID.
-//
-//   * ErrCodeUnsupportedMediaTypeException "UnsupportedMediaTypeException"
-//   The Content-Type header (PostContent API) has an invalid value.
-//
-//   * ErrCodeNotAcceptableException "NotAcceptableException"
-//   The accept header in the request does not have a valid value.
-//
-//   * ErrCodeRequestTimeoutException "RequestTimeoutException"
-//   The input speech is too long.
-//
-//   * ErrCodeDependencyFailedException "DependencyFailedException"
-//   One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
-//   For example,
-//
-//      * If Amazon Lex does not have sufficient permissions to call a Lambda
-//      function.
-//
-//      * If a Lambda function takes longer than 30 seconds to execute.
-//
-//      * If a fulfillment Lambda function returns a Delegate dialog action without
-//      removing any slot values.
-//
-//   * ErrCodeBadGatewayException "BadGatewayException"
-//   Either the Amazon Lex bot is still building, or one of the dependent services
-//   (Amazon Polly, AWS Lambda) failed with an internal service error.
-//
-//   * ErrCodeLoopDetectedException "LoopDetectedException"
-//   This exception is not used.
+//    // Example sending a request using the PostContentRequest method.
+//    req := client.PostContentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent
-func (c *LexRuntimeService) PostContent(input *PostContentInput) (*PostContentOutput, error) {
-	req, out := c.PostContentRequest(input)
-	return out, req.Send()
-}
+func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) PostContentRequest {
+	op := &aws.Operation{
+		Name:       opPostContent,
+		HTTPMethod: "POST",
+		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/content",
+	}
 
-// PostContentWithContext is the same as PostContent with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PostContent for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexRuntimeService) PostContentWithContext(ctx aws.Context, input *PostContentInput, opts ...aws.Option) (*PostContentOutput, error) {
-	req, out := c.PostContentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PostContentInput{}
+	}
+
+	req := c.newRequest(op, input, &PostContentOutput{})
+	req.Handlers.Sign.Remove(v4.SignRequestHandler)
+	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
+	req.Handlers.Sign.PushFrontNamed(handler)
+	return PostContentRequest{Request: req, Input: input}
 }
 
 const opPostText = "PostText"
 
-// PostTextRequest generates a "aws.Request" representing the
-// client's request for the PostText operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PostText for more information on using the PostText
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PostTextRequest method.
-//    req, resp := client.PostTextRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText
-func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *aws.Request, output *PostTextOutput) {
-	op := &aws.Operation{
-		Name:       opPostText,
-		HTTPMethod: "POST",
-		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/text",
-	}
-
-	if input == nil {
-		input = &PostTextInput{}
-	}
-
-	output = &PostTextOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PostTextRequest is a API request type for the PostText API operation.
+type PostTextRequest struct {
+	*aws.Request
+	Input *PostTextInput
 }
 
-// PostText API operation for Amazon Lex Runtime Service.
+// Send marshals and sends the PostText API request.
+func (r PostTextRequest) Send() (*PostTextOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PostTextOutput), nil
+}
+
+// PostTextRequest returns a request value for making API operation for
+// Amazon Lex Runtime Service.
 //
 // Sends user input (text-only) to Amazon Lex. Client applications can use this
 // API to send requests to Amazon Lex at runtime. Amazon Lex then interprets
@@ -282,70 +184,27 @@ func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *aws.Requ
 // In addition, Amazon Lex also returns your application-specific sessionAttributes.
 // For more information, see Managing Conversation Context (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lex Runtime Service's
-// API operation PostText for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource (such as the Amazon Lex bot or an alias) that is referred to
-//   is not found.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Request validation failed, there is no usable message in the context, or
-//   the bot build failed, is still in progress, or contains unbuilt changes.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Exceeded a limit.
-//
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   Internal service error. Retry the call.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   Two clients are using the same AWS account, Amazon Lex bot, and user ID.
-//
-//   * ErrCodeDependencyFailedException "DependencyFailedException"
-//   One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
-//   For example,
-//
-//      * If Amazon Lex does not have sufficient permissions to call a Lambda
-//      function.
-//
-//      * If a Lambda function takes longer than 30 seconds to execute.
-//
-//      * If a fulfillment Lambda function returns a Delegate dialog action without
-//      removing any slot values.
-//
-//   * ErrCodeBadGatewayException "BadGatewayException"
-//   Either the Amazon Lex bot is still building, or one of the dependent services
-//   (Amazon Polly, AWS Lambda) failed with an internal service error.
-//
-//   * ErrCodeLoopDetectedException "LoopDetectedException"
-//   This exception is not used.
+//    // Example sending a request using the PostTextRequest method.
+//    req := client.PostTextRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText
-func (c *LexRuntimeService) PostText(input *PostTextInput) (*PostTextOutput, error) {
-	req, out := c.PostTextRequest(input)
-	return out, req.Send()
-}
+func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) PostTextRequest {
+	op := &aws.Operation{
+		Name:       opPostText,
+		HTTPMethod: "POST",
+		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/text",
+	}
 
-// PostTextWithContext is the same as PostText with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PostText for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexRuntimeService) PostTextWithContext(ctx aws.Context, input *PostTextInput, opts ...aws.Option) (*PostTextOutput, error) {
-	req, out := c.PostTextRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PostTextInput{}
+	}
+
+	req := c.newRequest(op, input, &PostTextOutput{})
+	return PostTextRequest{Request: req, Input: input}
 }
 
 // Represents an option to be shown on the client platform (Facebook, Slack,

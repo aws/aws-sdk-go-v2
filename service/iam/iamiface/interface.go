@@ -63,571 +63,327 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type IAMAPI interface {
-	AddClientIDToOpenIDConnectProvider(*iam.AddClientIDToOpenIDConnectProviderInput) (*iam.AddClientIDToOpenIDConnectProviderOutput, error)
-	AddClientIDToOpenIDConnectProviderWithContext(aws.Context, *iam.AddClientIDToOpenIDConnectProviderInput, ...aws.Option) (*iam.AddClientIDToOpenIDConnectProviderOutput, error)
-	AddClientIDToOpenIDConnectProviderRequest(*iam.AddClientIDToOpenIDConnectProviderInput) (*aws.Request, *iam.AddClientIDToOpenIDConnectProviderOutput)
+	AddClientIDToOpenIDConnectProviderRequest(*iam.AddClientIDToOpenIDConnectProviderInput) iam.AddClientIDToOpenIDConnectProviderRequest
 
-	AddRoleToInstanceProfile(*iam.AddRoleToInstanceProfileInput) (*iam.AddRoleToInstanceProfileOutput, error)
-	AddRoleToInstanceProfileWithContext(aws.Context, *iam.AddRoleToInstanceProfileInput, ...aws.Option) (*iam.AddRoleToInstanceProfileOutput, error)
-	AddRoleToInstanceProfileRequest(*iam.AddRoleToInstanceProfileInput) (*aws.Request, *iam.AddRoleToInstanceProfileOutput)
+	AddRoleToInstanceProfileRequest(*iam.AddRoleToInstanceProfileInput) iam.AddRoleToInstanceProfileRequest
 
-	AddUserToGroup(*iam.AddUserToGroupInput) (*iam.AddUserToGroupOutput, error)
-	AddUserToGroupWithContext(aws.Context, *iam.AddUserToGroupInput, ...aws.Option) (*iam.AddUserToGroupOutput, error)
-	AddUserToGroupRequest(*iam.AddUserToGroupInput) (*aws.Request, *iam.AddUserToGroupOutput)
+	AddUserToGroupRequest(*iam.AddUserToGroupInput) iam.AddUserToGroupRequest
 
-	AttachGroupPolicy(*iam.AttachGroupPolicyInput) (*iam.AttachGroupPolicyOutput, error)
-	AttachGroupPolicyWithContext(aws.Context, *iam.AttachGroupPolicyInput, ...aws.Option) (*iam.AttachGroupPolicyOutput, error)
-	AttachGroupPolicyRequest(*iam.AttachGroupPolicyInput) (*aws.Request, *iam.AttachGroupPolicyOutput)
+	AttachGroupPolicyRequest(*iam.AttachGroupPolicyInput) iam.AttachGroupPolicyRequest
 
-	AttachRolePolicy(*iam.AttachRolePolicyInput) (*iam.AttachRolePolicyOutput, error)
-	AttachRolePolicyWithContext(aws.Context, *iam.AttachRolePolicyInput, ...aws.Option) (*iam.AttachRolePolicyOutput, error)
-	AttachRolePolicyRequest(*iam.AttachRolePolicyInput) (*aws.Request, *iam.AttachRolePolicyOutput)
+	AttachRolePolicyRequest(*iam.AttachRolePolicyInput) iam.AttachRolePolicyRequest
 
-	AttachUserPolicy(*iam.AttachUserPolicyInput) (*iam.AttachUserPolicyOutput, error)
-	AttachUserPolicyWithContext(aws.Context, *iam.AttachUserPolicyInput, ...aws.Option) (*iam.AttachUserPolicyOutput, error)
-	AttachUserPolicyRequest(*iam.AttachUserPolicyInput) (*aws.Request, *iam.AttachUserPolicyOutput)
+	AttachUserPolicyRequest(*iam.AttachUserPolicyInput) iam.AttachUserPolicyRequest
 
-	ChangePassword(*iam.ChangePasswordInput) (*iam.ChangePasswordOutput, error)
-	ChangePasswordWithContext(aws.Context, *iam.ChangePasswordInput, ...aws.Option) (*iam.ChangePasswordOutput, error)
-	ChangePasswordRequest(*iam.ChangePasswordInput) (*aws.Request, *iam.ChangePasswordOutput)
+	ChangePasswordRequest(*iam.ChangePasswordInput) iam.ChangePasswordRequest
 
-	CreateAccessKey(*iam.CreateAccessKeyInput) (*iam.CreateAccessKeyOutput, error)
-	CreateAccessKeyWithContext(aws.Context, *iam.CreateAccessKeyInput, ...aws.Option) (*iam.CreateAccessKeyOutput, error)
-	CreateAccessKeyRequest(*iam.CreateAccessKeyInput) (*aws.Request, *iam.CreateAccessKeyOutput)
+	CreateAccessKeyRequest(*iam.CreateAccessKeyInput) iam.CreateAccessKeyRequest
 
-	CreateAccountAlias(*iam.CreateAccountAliasInput) (*iam.CreateAccountAliasOutput, error)
-	CreateAccountAliasWithContext(aws.Context, *iam.CreateAccountAliasInput, ...aws.Option) (*iam.CreateAccountAliasOutput, error)
-	CreateAccountAliasRequest(*iam.CreateAccountAliasInput) (*aws.Request, *iam.CreateAccountAliasOutput)
+	CreateAccountAliasRequest(*iam.CreateAccountAliasInput) iam.CreateAccountAliasRequest
 
-	CreateGroup(*iam.CreateGroupInput) (*iam.CreateGroupOutput, error)
-	CreateGroupWithContext(aws.Context, *iam.CreateGroupInput, ...aws.Option) (*iam.CreateGroupOutput, error)
-	CreateGroupRequest(*iam.CreateGroupInput) (*aws.Request, *iam.CreateGroupOutput)
+	CreateGroupRequest(*iam.CreateGroupInput) iam.CreateGroupRequest
 
-	CreateInstanceProfile(*iam.CreateInstanceProfileInput) (*iam.CreateInstanceProfileOutput, error)
-	CreateInstanceProfileWithContext(aws.Context, *iam.CreateInstanceProfileInput, ...aws.Option) (*iam.CreateInstanceProfileOutput, error)
-	CreateInstanceProfileRequest(*iam.CreateInstanceProfileInput) (*aws.Request, *iam.CreateInstanceProfileOutput)
+	CreateInstanceProfileRequest(*iam.CreateInstanceProfileInput) iam.CreateInstanceProfileRequest
 
-	CreateLoginProfile(*iam.CreateLoginProfileInput) (*iam.CreateLoginProfileOutput, error)
-	CreateLoginProfileWithContext(aws.Context, *iam.CreateLoginProfileInput, ...aws.Option) (*iam.CreateLoginProfileOutput, error)
-	CreateLoginProfileRequest(*iam.CreateLoginProfileInput) (*aws.Request, *iam.CreateLoginProfileOutput)
+	CreateLoginProfileRequest(*iam.CreateLoginProfileInput) iam.CreateLoginProfileRequest
 
-	CreateOpenIDConnectProvider(*iam.CreateOpenIDConnectProviderInput) (*iam.CreateOpenIDConnectProviderOutput, error)
-	CreateOpenIDConnectProviderWithContext(aws.Context, *iam.CreateOpenIDConnectProviderInput, ...aws.Option) (*iam.CreateOpenIDConnectProviderOutput, error)
-	CreateOpenIDConnectProviderRequest(*iam.CreateOpenIDConnectProviderInput) (*aws.Request, *iam.CreateOpenIDConnectProviderOutput)
+	CreateOpenIDConnectProviderRequest(*iam.CreateOpenIDConnectProviderInput) iam.CreateOpenIDConnectProviderRequest
 
-	CreatePolicy(*iam.CreatePolicyInput) (*iam.CreatePolicyOutput, error)
-	CreatePolicyWithContext(aws.Context, *iam.CreatePolicyInput, ...aws.Option) (*iam.CreatePolicyOutput, error)
-	CreatePolicyRequest(*iam.CreatePolicyInput) (*aws.Request, *iam.CreatePolicyOutput)
+	CreatePolicyRequest(*iam.CreatePolicyInput) iam.CreatePolicyRequest
 
-	CreatePolicyVersion(*iam.CreatePolicyVersionInput) (*iam.CreatePolicyVersionOutput, error)
-	CreatePolicyVersionWithContext(aws.Context, *iam.CreatePolicyVersionInput, ...aws.Option) (*iam.CreatePolicyVersionOutput, error)
-	CreatePolicyVersionRequest(*iam.CreatePolicyVersionInput) (*aws.Request, *iam.CreatePolicyVersionOutput)
+	CreatePolicyVersionRequest(*iam.CreatePolicyVersionInput) iam.CreatePolicyVersionRequest
 
-	CreateRole(*iam.CreateRoleInput) (*iam.CreateRoleOutput, error)
-	CreateRoleWithContext(aws.Context, *iam.CreateRoleInput, ...aws.Option) (*iam.CreateRoleOutput, error)
-	CreateRoleRequest(*iam.CreateRoleInput) (*aws.Request, *iam.CreateRoleOutput)
+	CreateRoleRequest(*iam.CreateRoleInput) iam.CreateRoleRequest
 
-	CreateSAMLProvider(*iam.CreateSAMLProviderInput) (*iam.CreateSAMLProviderOutput, error)
-	CreateSAMLProviderWithContext(aws.Context, *iam.CreateSAMLProviderInput, ...aws.Option) (*iam.CreateSAMLProviderOutput, error)
-	CreateSAMLProviderRequest(*iam.CreateSAMLProviderInput) (*aws.Request, *iam.CreateSAMLProviderOutput)
+	CreateSAMLProviderRequest(*iam.CreateSAMLProviderInput) iam.CreateSAMLProviderRequest
 
-	CreateServiceLinkedRole(*iam.CreateServiceLinkedRoleInput) (*iam.CreateServiceLinkedRoleOutput, error)
-	CreateServiceLinkedRoleWithContext(aws.Context, *iam.CreateServiceLinkedRoleInput, ...aws.Option) (*iam.CreateServiceLinkedRoleOutput, error)
-	CreateServiceLinkedRoleRequest(*iam.CreateServiceLinkedRoleInput) (*aws.Request, *iam.CreateServiceLinkedRoleOutput)
+	CreateServiceLinkedRoleRequest(*iam.CreateServiceLinkedRoleInput) iam.CreateServiceLinkedRoleRequest
 
-	CreateServiceSpecificCredential(*iam.CreateServiceSpecificCredentialInput) (*iam.CreateServiceSpecificCredentialOutput, error)
-	CreateServiceSpecificCredentialWithContext(aws.Context, *iam.CreateServiceSpecificCredentialInput, ...aws.Option) (*iam.CreateServiceSpecificCredentialOutput, error)
-	CreateServiceSpecificCredentialRequest(*iam.CreateServiceSpecificCredentialInput) (*aws.Request, *iam.CreateServiceSpecificCredentialOutput)
+	CreateServiceSpecificCredentialRequest(*iam.CreateServiceSpecificCredentialInput) iam.CreateServiceSpecificCredentialRequest
 
-	CreateUser(*iam.CreateUserInput) (*iam.CreateUserOutput, error)
-	CreateUserWithContext(aws.Context, *iam.CreateUserInput, ...aws.Option) (*iam.CreateUserOutput, error)
-	CreateUserRequest(*iam.CreateUserInput) (*aws.Request, *iam.CreateUserOutput)
+	CreateUserRequest(*iam.CreateUserInput) iam.CreateUserRequest
 
-	CreateVirtualMFADevice(*iam.CreateVirtualMFADeviceInput) (*iam.CreateVirtualMFADeviceOutput, error)
-	CreateVirtualMFADeviceWithContext(aws.Context, *iam.CreateVirtualMFADeviceInput, ...aws.Option) (*iam.CreateVirtualMFADeviceOutput, error)
-	CreateVirtualMFADeviceRequest(*iam.CreateVirtualMFADeviceInput) (*aws.Request, *iam.CreateVirtualMFADeviceOutput)
+	CreateVirtualMFADeviceRequest(*iam.CreateVirtualMFADeviceInput) iam.CreateVirtualMFADeviceRequest
 
-	DeactivateMFADevice(*iam.DeactivateMFADeviceInput) (*iam.DeactivateMFADeviceOutput, error)
-	DeactivateMFADeviceWithContext(aws.Context, *iam.DeactivateMFADeviceInput, ...aws.Option) (*iam.DeactivateMFADeviceOutput, error)
-	DeactivateMFADeviceRequest(*iam.DeactivateMFADeviceInput) (*aws.Request, *iam.DeactivateMFADeviceOutput)
+	DeactivateMFADeviceRequest(*iam.DeactivateMFADeviceInput) iam.DeactivateMFADeviceRequest
 
-	DeleteAccessKey(*iam.DeleteAccessKeyInput) (*iam.DeleteAccessKeyOutput, error)
-	DeleteAccessKeyWithContext(aws.Context, *iam.DeleteAccessKeyInput, ...aws.Option) (*iam.DeleteAccessKeyOutput, error)
-	DeleteAccessKeyRequest(*iam.DeleteAccessKeyInput) (*aws.Request, *iam.DeleteAccessKeyOutput)
+	DeleteAccessKeyRequest(*iam.DeleteAccessKeyInput) iam.DeleteAccessKeyRequest
 
-	DeleteAccountAlias(*iam.DeleteAccountAliasInput) (*iam.DeleteAccountAliasOutput, error)
-	DeleteAccountAliasWithContext(aws.Context, *iam.DeleteAccountAliasInput, ...aws.Option) (*iam.DeleteAccountAliasOutput, error)
-	DeleteAccountAliasRequest(*iam.DeleteAccountAliasInput) (*aws.Request, *iam.DeleteAccountAliasOutput)
+	DeleteAccountAliasRequest(*iam.DeleteAccountAliasInput) iam.DeleteAccountAliasRequest
 
-	DeleteAccountPasswordPolicy(*iam.DeleteAccountPasswordPolicyInput) (*iam.DeleteAccountPasswordPolicyOutput, error)
-	DeleteAccountPasswordPolicyWithContext(aws.Context, *iam.DeleteAccountPasswordPolicyInput, ...aws.Option) (*iam.DeleteAccountPasswordPolicyOutput, error)
-	DeleteAccountPasswordPolicyRequest(*iam.DeleteAccountPasswordPolicyInput) (*aws.Request, *iam.DeleteAccountPasswordPolicyOutput)
+	DeleteAccountPasswordPolicyRequest(*iam.DeleteAccountPasswordPolicyInput) iam.DeleteAccountPasswordPolicyRequest
 
-	DeleteGroup(*iam.DeleteGroupInput) (*iam.DeleteGroupOutput, error)
-	DeleteGroupWithContext(aws.Context, *iam.DeleteGroupInput, ...aws.Option) (*iam.DeleteGroupOutput, error)
-	DeleteGroupRequest(*iam.DeleteGroupInput) (*aws.Request, *iam.DeleteGroupOutput)
+	DeleteGroupRequest(*iam.DeleteGroupInput) iam.DeleteGroupRequest
 
-	DeleteGroupPolicy(*iam.DeleteGroupPolicyInput) (*iam.DeleteGroupPolicyOutput, error)
-	DeleteGroupPolicyWithContext(aws.Context, *iam.DeleteGroupPolicyInput, ...aws.Option) (*iam.DeleteGroupPolicyOutput, error)
-	DeleteGroupPolicyRequest(*iam.DeleteGroupPolicyInput) (*aws.Request, *iam.DeleteGroupPolicyOutput)
+	DeleteGroupPolicyRequest(*iam.DeleteGroupPolicyInput) iam.DeleteGroupPolicyRequest
 
-	DeleteInstanceProfile(*iam.DeleteInstanceProfileInput) (*iam.DeleteInstanceProfileOutput, error)
-	DeleteInstanceProfileWithContext(aws.Context, *iam.DeleteInstanceProfileInput, ...aws.Option) (*iam.DeleteInstanceProfileOutput, error)
-	DeleteInstanceProfileRequest(*iam.DeleteInstanceProfileInput) (*aws.Request, *iam.DeleteInstanceProfileOutput)
+	DeleteInstanceProfileRequest(*iam.DeleteInstanceProfileInput) iam.DeleteInstanceProfileRequest
 
-	DeleteLoginProfile(*iam.DeleteLoginProfileInput) (*iam.DeleteLoginProfileOutput, error)
-	DeleteLoginProfileWithContext(aws.Context, *iam.DeleteLoginProfileInput, ...aws.Option) (*iam.DeleteLoginProfileOutput, error)
-	DeleteLoginProfileRequest(*iam.DeleteLoginProfileInput) (*aws.Request, *iam.DeleteLoginProfileOutput)
+	DeleteLoginProfileRequest(*iam.DeleteLoginProfileInput) iam.DeleteLoginProfileRequest
 
-	DeleteOpenIDConnectProvider(*iam.DeleteOpenIDConnectProviderInput) (*iam.DeleteOpenIDConnectProviderOutput, error)
-	DeleteOpenIDConnectProviderWithContext(aws.Context, *iam.DeleteOpenIDConnectProviderInput, ...aws.Option) (*iam.DeleteOpenIDConnectProviderOutput, error)
-	DeleteOpenIDConnectProviderRequest(*iam.DeleteOpenIDConnectProviderInput) (*aws.Request, *iam.DeleteOpenIDConnectProviderOutput)
+	DeleteOpenIDConnectProviderRequest(*iam.DeleteOpenIDConnectProviderInput) iam.DeleteOpenIDConnectProviderRequest
 
-	DeletePolicy(*iam.DeletePolicyInput) (*iam.DeletePolicyOutput, error)
-	DeletePolicyWithContext(aws.Context, *iam.DeletePolicyInput, ...aws.Option) (*iam.DeletePolicyOutput, error)
-	DeletePolicyRequest(*iam.DeletePolicyInput) (*aws.Request, *iam.DeletePolicyOutput)
+	DeletePolicyRequest(*iam.DeletePolicyInput) iam.DeletePolicyRequest
 
-	DeletePolicyVersion(*iam.DeletePolicyVersionInput) (*iam.DeletePolicyVersionOutput, error)
-	DeletePolicyVersionWithContext(aws.Context, *iam.DeletePolicyVersionInput, ...aws.Option) (*iam.DeletePolicyVersionOutput, error)
-	DeletePolicyVersionRequest(*iam.DeletePolicyVersionInput) (*aws.Request, *iam.DeletePolicyVersionOutput)
+	DeletePolicyVersionRequest(*iam.DeletePolicyVersionInput) iam.DeletePolicyVersionRequest
 
-	DeleteRole(*iam.DeleteRoleInput) (*iam.DeleteRoleOutput, error)
-	DeleteRoleWithContext(aws.Context, *iam.DeleteRoleInput, ...aws.Option) (*iam.DeleteRoleOutput, error)
-	DeleteRoleRequest(*iam.DeleteRoleInput) (*aws.Request, *iam.DeleteRoleOutput)
+	DeleteRoleRequest(*iam.DeleteRoleInput) iam.DeleteRoleRequest
 
-	DeleteRolePolicy(*iam.DeleteRolePolicyInput) (*iam.DeleteRolePolicyOutput, error)
-	DeleteRolePolicyWithContext(aws.Context, *iam.DeleteRolePolicyInput, ...aws.Option) (*iam.DeleteRolePolicyOutput, error)
-	DeleteRolePolicyRequest(*iam.DeleteRolePolicyInput) (*aws.Request, *iam.DeleteRolePolicyOutput)
+	DeleteRolePolicyRequest(*iam.DeleteRolePolicyInput) iam.DeleteRolePolicyRequest
 
-	DeleteSAMLProvider(*iam.DeleteSAMLProviderInput) (*iam.DeleteSAMLProviderOutput, error)
-	DeleteSAMLProviderWithContext(aws.Context, *iam.DeleteSAMLProviderInput, ...aws.Option) (*iam.DeleteSAMLProviderOutput, error)
-	DeleteSAMLProviderRequest(*iam.DeleteSAMLProviderInput) (*aws.Request, *iam.DeleteSAMLProviderOutput)
+	DeleteSAMLProviderRequest(*iam.DeleteSAMLProviderInput) iam.DeleteSAMLProviderRequest
 
-	DeleteSSHPublicKey(*iam.DeleteSSHPublicKeyInput) (*iam.DeleteSSHPublicKeyOutput, error)
-	DeleteSSHPublicKeyWithContext(aws.Context, *iam.DeleteSSHPublicKeyInput, ...aws.Option) (*iam.DeleteSSHPublicKeyOutput, error)
-	DeleteSSHPublicKeyRequest(*iam.DeleteSSHPublicKeyInput) (*aws.Request, *iam.DeleteSSHPublicKeyOutput)
+	DeleteSSHPublicKeyRequest(*iam.DeleteSSHPublicKeyInput) iam.DeleteSSHPublicKeyRequest
 
-	DeleteServerCertificate(*iam.DeleteServerCertificateInput) (*iam.DeleteServerCertificateOutput, error)
-	DeleteServerCertificateWithContext(aws.Context, *iam.DeleteServerCertificateInput, ...aws.Option) (*iam.DeleteServerCertificateOutput, error)
-	DeleteServerCertificateRequest(*iam.DeleteServerCertificateInput) (*aws.Request, *iam.DeleteServerCertificateOutput)
+	DeleteServerCertificateRequest(*iam.DeleteServerCertificateInput) iam.DeleteServerCertificateRequest
 
-	DeleteServiceLinkedRole(*iam.DeleteServiceLinkedRoleInput) (*iam.DeleteServiceLinkedRoleOutput, error)
-	DeleteServiceLinkedRoleWithContext(aws.Context, *iam.DeleteServiceLinkedRoleInput, ...aws.Option) (*iam.DeleteServiceLinkedRoleOutput, error)
-	DeleteServiceLinkedRoleRequest(*iam.DeleteServiceLinkedRoleInput) (*aws.Request, *iam.DeleteServiceLinkedRoleOutput)
+	DeleteServiceLinkedRoleRequest(*iam.DeleteServiceLinkedRoleInput) iam.DeleteServiceLinkedRoleRequest
 
-	DeleteServiceSpecificCredential(*iam.DeleteServiceSpecificCredentialInput) (*iam.DeleteServiceSpecificCredentialOutput, error)
-	DeleteServiceSpecificCredentialWithContext(aws.Context, *iam.DeleteServiceSpecificCredentialInput, ...aws.Option) (*iam.DeleteServiceSpecificCredentialOutput, error)
-	DeleteServiceSpecificCredentialRequest(*iam.DeleteServiceSpecificCredentialInput) (*aws.Request, *iam.DeleteServiceSpecificCredentialOutput)
+	DeleteServiceSpecificCredentialRequest(*iam.DeleteServiceSpecificCredentialInput) iam.DeleteServiceSpecificCredentialRequest
 
-	DeleteSigningCertificate(*iam.DeleteSigningCertificateInput) (*iam.DeleteSigningCertificateOutput, error)
-	DeleteSigningCertificateWithContext(aws.Context, *iam.DeleteSigningCertificateInput, ...aws.Option) (*iam.DeleteSigningCertificateOutput, error)
-	DeleteSigningCertificateRequest(*iam.DeleteSigningCertificateInput) (*aws.Request, *iam.DeleteSigningCertificateOutput)
+	DeleteSigningCertificateRequest(*iam.DeleteSigningCertificateInput) iam.DeleteSigningCertificateRequest
 
-	DeleteUser(*iam.DeleteUserInput) (*iam.DeleteUserOutput, error)
-	DeleteUserWithContext(aws.Context, *iam.DeleteUserInput, ...aws.Option) (*iam.DeleteUserOutput, error)
-	DeleteUserRequest(*iam.DeleteUserInput) (*aws.Request, *iam.DeleteUserOutput)
+	DeleteUserRequest(*iam.DeleteUserInput) iam.DeleteUserRequest
 
-	DeleteUserPolicy(*iam.DeleteUserPolicyInput) (*iam.DeleteUserPolicyOutput, error)
-	DeleteUserPolicyWithContext(aws.Context, *iam.DeleteUserPolicyInput, ...aws.Option) (*iam.DeleteUserPolicyOutput, error)
-	DeleteUserPolicyRequest(*iam.DeleteUserPolicyInput) (*aws.Request, *iam.DeleteUserPolicyOutput)
+	DeleteUserPolicyRequest(*iam.DeleteUserPolicyInput) iam.DeleteUserPolicyRequest
 
-	DeleteVirtualMFADevice(*iam.DeleteVirtualMFADeviceInput) (*iam.DeleteVirtualMFADeviceOutput, error)
-	DeleteVirtualMFADeviceWithContext(aws.Context, *iam.DeleteVirtualMFADeviceInput, ...aws.Option) (*iam.DeleteVirtualMFADeviceOutput, error)
-	DeleteVirtualMFADeviceRequest(*iam.DeleteVirtualMFADeviceInput) (*aws.Request, *iam.DeleteVirtualMFADeviceOutput)
+	DeleteVirtualMFADeviceRequest(*iam.DeleteVirtualMFADeviceInput) iam.DeleteVirtualMFADeviceRequest
 
-	DetachGroupPolicy(*iam.DetachGroupPolicyInput) (*iam.DetachGroupPolicyOutput, error)
-	DetachGroupPolicyWithContext(aws.Context, *iam.DetachGroupPolicyInput, ...aws.Option) (*iam.DetachGroupPolicyOutput, error)
-	DetachGroupPolicyRequest(*iam.DetachGroupPolicyInput) (*aws.Request, *iam.DetachGroupPolicyOutput)
+	DetachGroupPolicyRequest(*iam.DetachGroupPolicyInput) iam.DetachGroupPolicyRequest
 
-	DetachRolePolicy(*iam.DetachRolePolicyInput) (*iam.DetachRolePolicyOutput, error)
-	DetachRolePolicyWithContext(aws.Context, *iam.DetachRolePolicyInput, ...aws.Option) (*iam.DetachRolePolicyOutput, error)
-	DetachRolePolicyRequest(*iam.DetachRolePolicyInput) (*aws.Request, *iam.DetachRolePolicyOutput)
+	DetachRolePolicyRequest(*iam.DetachRolePolicyInput) iam.DetachRolePolicyRequest
 
-	DetachUserPolicy(*iam.DetachUserPolicyInput) (*iam.DetachUserPolicyOutput, error)
-	DetachUserPolicyWithContext(aws.Context, *iam.DetachUserPolicyInput, ...aws.Option) (*iam.DetachUserPolicyOutput, error)
-	DetachUserPolicyRequest(*iam.DetachUserPolicyInput) (*aws.Request, *iam.DetachUserPolicyOutput)
+	DetachUserPolicyRequest(*iam.DetachUserPolicyInput) iam.DetachUserPolicyRequest
 
-	EnableMFADevice(*iam.EnableMFADeviceInput) (*iam.EnableMFADeviceOutput, error)
-	EnableMFADeviceWithContext(aws.Context, *iam.EnableMFADeviceInput, ...aws.Option) (*iam.EnableMFADeviceOutput, error)
-	EnableMFADeviceRequest(*iam.EnableMFADeviceInput) (*aws.Request, *iam.EnableMFADeviceOutput)
+	EnableMFADeviceRequest(*iam.EnableMFADeviceInput) iam.EnableMFADeviceRequest
 
-	GenerateCredentialReport(*iam.GenerateCredentialReportInput) (*iam.GenerateCredentialReportOutput, error)
-	GenerateCredentialReportWithContext(aws.Context, *iam.GenerateCredentialReportInput, ...aws.Option) (*iam.GenerateCredentialReportOutput, error)
-	GenerateCredentialReportRequest(*iam.GenerateCredentialReportInput) (*aws.Request, *iam.GenerateCredentialReportOutput)
+	GenerateCredentialReportRequest(*iam.GenerateCredentialReportInput) iam.GenerateCredentialReportRequest
 
-	GetAccessKeyLastUsed(*iam.GetAccessKeyLastUsedInput) (*iam.GetAccessKeyLastUsedOutput, error)
-	GetAccessKeyLastUsedWithContext(aws.Context, *iam.GetAccessKeyLastUsedInput, ...aws.Option) (*iam.GetAccessKeyLastUsedOutput, error)
-	GetAccessKeyLastUsedRequest(*iam.GetAccessKeyLastUsedInput) (*aws.Request, *iam.GetAccessKeyLastUsedOutput)
+	GetAccessKeyLastUsedRequest(*iam.GetAccessKeyLastUsedInput) iam.GetAccessKeyLastUsedRequest
 
-	GetAccountAuthorizationDetails(*iam.GetAccountAuthorizationDetailsInput) (*iam.GetAccountAuthorizationDetailsOutput, error)
-	GetAccountAuthorizationDetailsWithContext(aws.Context, *iam.GetAccountAuthorizationDetailsInput, ...aws.Option) (*iam.GetAccountAuthorizationDetailsOutput, error)
-	GetAccountAuthorizationDetailsRequest(*iam.GetAccountAuthorizationDetailsInput) (*aws.Request, *iam.GetAccountAuthorizationDetailsOutput)
+	GetAccountAuthorizationDetailsRequest(*iam.GetAccountAuthorizationDetailsInput) iam.GetAccountAuthorizationDetailsRequest
 
 	GetAccountAuthorizationDetailsPages(*iam.GetAccountAuthorizationDetailsInput, func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool) error
 	GetAccountAuthorizationDetailsPagesWithContext(aws.Context, *iam.GetAccountAuthorizationDetailsInput, func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool, ...aws.Option) error
 
-	GetAccountPasswordPolicy(*iam.GetAccountPasswordPolicyInput) (*iam.GetAccountPasswordPolicyOutput, error)
-	GetAccountPasswordPolicyWithContext(aws.Context, *iam.GetAccountPasswordPolicyInput, ...aws.Option) (*iam.GetAccountPasswordPolicyOutput, error)
-	GetAccountPasswordPolicyRequest(*iam.GetAccountPasswordPolicyInput) (*aws.Request, *iam.GetAccountPasswordPolicyOutput)
+	GetAccountPasswordPolicyRequest(*iam.GetAccountPasswordPolicyInput) iam.GetAccountPasswordPolicyRequest
 
-	GetAccountSummary(*iam.GetAccountSummaryInput) (*iam.GetAccountSummaryOutput, error)
-	GetAccountSummaryWithContext(aws.Context, *iam.GetAccountSummaryInput, ...aws.Option) (*iam.GetAccountSummaryOutput, error)
-	GetAccountSummaryRequest(*iam.GetAccountSummaryInput) (*aws.Request, *iam.GetAccountSummaryOutput)
+	GetAccountSummaryRequest(*iam.GetAccountSummaryInput) iam.GetAccountSummaryRequest
 
-	GetContextKeysForCustomPolicy(*iam.GetContextKeysForCustomPolicyInput) (*iam.GetContextKeysForPolicyResponse, error)
-	GetContextKeysForCustomPolicyWithContext(aws.Context, *iam.GetContextKeysForCustomPolicyInput, ...aws.Option) (*iam.GetContextKeysForPolicyResponse, error)
-	GetContextKeysForCustomPolicyRequest(*iam.GetContextKeysForCustomPolicyInput) (*aws.Request, *iam.GetContextKeysForPolicyResponse)
+	GetContextKeysForCustomPolicyRequest(*iam.GetContextKeysForCustomPolicyInput) iam.GetContextKeysForCustomPolicyRequest
 
-	GetContextKeysForPrincipalPolicy(*iam.GetContextKeysForPrincipalPolicyInput) (*iam.GetContextKeysForPolicyResponse, error)
-	GetContextKeysForPrincipalPolicyWithContext(aws.Context, *iam.GetContextKeysForPrincipalPolicyInput, ...aws.Option) (*iam.GetContextKeysForPolicyResponse, error)
-	GetContextKeysForPrincipalPolicyRequest(*iam.GetContextKeysForPrincipalPolicyInput) (*aws.Request, *iam.GetContextKeysForPolicyResponse)
+	GetContextKeysForPrincipalPolicyRequest(*iam.GetContextKeysForPrincipalPolicyInput) iam.GetContextKeysForPrincipalPolicyRequest
 
-	GetCredentialReport(*iam.GetCredentialReportInput) (*iam.GetCredentialReportOutput, error)
-	GetCredentialReportWithContext(aws.Context, *iam.GetCredentialReportInput, ...aws.Option) (*iam.GetCredentialReportOutput, error)
-	GetCredentialReportRequest(*iam.GetCredentialReportInput) (*aws.Request, *iam.GetCredentialReportOutput)
+	GetCredentialReportRequest(*iam.GetCredentialReportInput) iam.GetCredentialReportRequest
 
-	GetGroup(*iam.GetGroupInput) (*iam.GetGroupOutput, error)
-	GetGroupWithContext(aws.Context, *iam.GetGroupInput, ...aws.Option) (*iam.GetGroupOutput, error)
-	GetGroupRequest(*iam.GetGroupInput) (*aws.Request, *iam.GetGroupOutput)
+	GetGroupRequest(*iam.GetGroupInput) iam.GetGroupRequest
 
 	GetGroupPages(*iam.GetGroupInput, func(*iam.GetGroupOutput, bool) bool) error
 	GetGroupPagesWithContext(aws.Context, *iam.GetGroupInput, func(*iam.GetGroupOutput, bool) bool, ...aws.Option) error
 
-	GetGroupPolicy(*iam.GetGroupPolicyInput) (*iam.GetGroupPolicyOutput, error)
-	GetGroupPolicyWithContext(aws.Context, *iam.GetGroupPolicyInput, ...aws.Option) (*iam.GetGroupPolicyOutput, error)
-	GetGroupPolicyRequest(*iam.GetGroupPolicyInput) (*aws.Request, *iam.GetGroupPolicyOutput)
+	GetGroupPolicyRequest(*iam.GetGroupPolicyInput) iam.GetGroupPolicyRequest
 
-	GetInstanceProfile(*iam.GetInstanceProfileInput) (*iam.GetInstanceProfileOutput, error)
-	GetInstanceProfileWithContext(aws.Context, *iam.GetInstanceProfileInput, ...aws.Option) (*iam.GetInstanceProfileOutput, error)
-	GetInstanceProfileRequest(*iam.GetInstanceProfileInput) (*aws.Request, *iam.GetInstanceProfileOutput)
+	GetInstanceProfileRequest(*iam.GetInstanceProfileInput) iam.GetInstanceProfileRequest
 
-	GetLoginProfile(*iam.GetLoginProfileInput) (*iam.GetLoginProfileOutput, error)
-	GetLoginProfileWithContext(aws.Context, *iam.GetLoginProfileInput, ...aws.Option) (*iam.GetLoginProfileOutput, error)
-	GetLoginProfileRequest(*iam.GetLoginProfileInput) (*aws.Request, *iam.GetLoginProfileOutput)
+	GetLoginProfileRequest(*iam.GetLoginProfileInput) iam.GetLoginProfileRequest
 
-	GetOpenIDConnectProvider(*iam.GetOpenIDConnectProviderInput) (*iam.GetOpenIDConnectProviderOutput, error)
-	GetOpenIDConnectProviderWithContext(aws.Context, *iam.GetOpenIDConnectProviderInput, ...aws.Option) (*iam.GetOpenIDConnectProviderOutput, error)
-	GetOpenIDConnectProviderRequest(*iam.GetOpenIDConnectProviderInput) (*aws.Request, *iam.GetOpenIDConnectProviderOutput)
+	GetOpenIDConnectProviderRequest(*iam.GetOpenIDConnectProviderInput) iam.GetOpenIDConnectProviderRequest
 
-	GetPolicy(*iam.GetPolicyInput) (*iam.GetPolicyOutput, error)
-	GetPolicyWithContext(aws.Context, *iam.GetPolicyInput, ...aws.Option) (*iam.GetPolicyOutput, error)
-	GetPolicyRequest(*iam.GetPolicyInput) (*aws.Request, *iam.GetPolicyOutput)
+	GetPolicyRequest(*iam.GetPolicyInput) iam.GetPolicyRequest
 
-	GetPolicyVersion(*iam.GetPolicyVersionInput) (*iam.GetPolicyVersionOutput, error)
-	GetPolicyVersionWithContext(aws.Context, *iam.GetPolicyVersionInput, ...aws.Option) (*iam.GetPolicyVersionOutput, error)
-	GetPolicyVersionRequest(*iam.GetPolicyVersionInput) (*aws.Request, *iam.GetPolicyVersionOutput)
+	GetPolicyVersionRequest(*iam.GetPolicyVersionInput) iam.GetPolicyVersionRequest
 
-	GetRole(*iam.GetRoleInput) (*iam.GetRoleOutput, error)
-	GetRoleWithContext(aws.Context, *iam.GetRoleInput, ...aws.Option) (*iam.GetRoleOutput, error)
-	GetRoleRequest(*iam.GetRoleInput) (*aws.Request, *iam.GetRoleOutput)
+	GetRoleRequest(*iam.GetRoleInput) iam.GetRoleRequest
 
-	GetRolePolicy(*iam.GetRolePolicyInput) (*iam.GetRolePolicyOutput, error)
-	GetRolePolicyWithContext(aws.Context, *iam.GetRolePolicyInput, ...aws.Option) (*iam.GetRolePolicyOutput, error)
-	GetRolePolicyRequest(*iam.GetRolePolicyInput) (*aws.Request, *iam.GetRolePolicyOutput)
+	GetRolePolicyRequest(*iam.GetRolePolicyInput) iam.GetRolePolicyRequest
 
-	GetSAMLProvider(*iam.GetSAMLProviderInput) (*iam.GetSAMLProviderOutput, error)
-	GetSAMLProviderWithContext(aws.Context, *iam.GetSAMLProviderInput, ...aws.Option) (*iam.GetSAMLProviderOutput, error)
-	GetSAMLProviderRequest(*iam.GetSAMLProviderInput) (*aws.Request, *iam.GetSAMLProviderOutput)
+	GetSAMLProviderRequest(*iam.GetSAMLProviderInput) iam.GetSAMLProviderRequest
 
-	GetSSHPublicKey(*iam.GetSSHPublicKeyInput) (*iam.GetSSHPublicKeyOutput, error)
-	GetSSHPublicKeyWithContext(aws.Context, *iam.GetSSHPublicKeyInput, ...aws.Option) (*iam.GetSSHPublicKeyOutput, error)
-	GetSSHPublicKeyRequest(*iam.GetSSHPublicKeyInput) (*aws.Request, *iam.GetSSHPublicKeyOutput)
+	GetSSHPublicKeyRequest(*iam.GetSSHPublicKeyInput) iam.GetSSHPublicKeyRequest
 
-	GetServerCertificate(*iam.GetServerCertificateInput) (*iam.GetServerCertificateOutput, error)
-	GetServerCertificateWithContext(aws.Context, *iam.GetServerCertificateInput, ...aws.Option) (*iam.GetServerCertificateOutput, error)
-	GetServerCertificateRequest(*iam.GetServerCertificateInput) (*aws.Request, *iam.GetServerCertificateOutput)
+	GetServerCertificateRequest(*iam.GetServerCertificateInput) iam.GetServerCertificateRequest
 
-	GetServiceLinkedRoleDeletionStatus(*iam.GetServiceLinkedRoleDeletionStatusInput) (*iam.GetServiceLinkedRoleDeletionStatusOutput, error)
-	GetServiceLinkedRoleDeletionStatusWithContext(aws.Context, *iam.GetServiceLinkedRoleDeletionStatusInput, ...aws.Option) (*iam.GetServiceLinkedRoleDeletionStatusOutput, error)
-	GetServiceLinkedRoleDeletionStatusRequest(*iam.GetServiceLinkedRoleDeletionStatusInput) (*aws.Request, *iam.GetServiceLinkedRoleDeletionStatusOutput)
+	GetServiceLinkedRoleDeletionStatusRequest(*iam.GetServiceLinkedRoleDeletionStatusInput) iam.GetServiceLinkedRoleDeletionStatusRequest
 
-	GetUser(*iam.GetUserInput) (*iam.GetUserOutput, error)
-	GetUserWithContext(aws.Context, *iam.GetUserInput, ...aws.Option) (*iam.GetUserOutput, error)
-	GetUserRequest(*iam.GetUserInput) (*aws.Request, *iam.GetUserOutput)
+	GetUserRequest(*iam.GetUserInput) iam.GetUserRequest
 
-	GetUserPolicy(*iam.GetUserPolicyInput) (*iam.GetUserPolicyOutput, error)
-	GetUserPolicyWithContext(aws.Context, *iam.GetUserPolicyInput, ...aws.Option) (*iam.GetUserPolicyOutput, error)
-	GetUserPolicyRequest(*iam.GetUserPolicyInput) (*aws.Request, *iam.GetUserPolicyOutput)
+	GetUserPolicyRequest(*iam.GetUserPolicyInput) iam.GetUserPolicyRequest
 
-	ListAccessKeys(*iam.ListAccessKeysInput) (*iam.ListAccessKeysOutput, error)
-	ListAccessKeysWithContext(aws.Context, *iam.ListAccessKeysInput, ...aws.Option) (*iam.ListAccessKeysOutput, error)
-	ListAccessKeysRequest(*iam.ListAccessKeysInput) (*aws.Request, *iam.ListAccessKeysOutput)
+	ListAccessKeysRequest(*iam.ListAccessKeysInput) iam.ListAccessKeysRequest
 
 	ListAccessKeysPages(*iam.ListAccessKeysInput, func(*iam.ListAccessKeysOutput, bool) bool) error
 	ListAccessKeysPagesWithContext(aws.Context, *iam.ListAccessKeysInput, func(*iam.ListAccessKeysOutput, bool) bool, ...aws.Option) error
 
-	ListAccountAliases(*iam.ListAccountAliasesInput) (*iam.ListAccountAliasesOutput, error)
-	ListAccountAliasesWithContext(aws.Context, *iam.ListAccountAliasesInput, ...aws.Option) (*iam.ListAccountAliasesOutput, error)
-	ListAccountAliasesRequest(*iam.ListAccountAliasesInput) (*aws.Request, *iam.ListAccountAliasesOutput)
+	ListAccountAliasesRequest(*iam.ListAccountAliasesInput) iam.ListAccountAliasesRequest
 
 	ListAccountAliasesPages(*iam.ListAccountAliasesInput, func(*iam.ListAccountAliasesOutput, bool) bool) error
 	ListAccountAliasesPagesWithContext(aws.Context, *iam.ListAccountAliasesInput, func(*iam.ListAccountAliasesOutput, bool) bool, ...aws.Option) error
 
-	ListAttachedGroupPolicies(*iam.ListAttachedGroupPoliciesInput) (*iam.ListAttachedGroupPoliciesOutput, error)
-	ListAttachedGroupPoliciesWithContext(aws.Context, *iam.ListAttachedGroupPoliciesInput, ...aws.Option) (*iam.ListAttachedGroupPoliciesOutput, error)
-	ListAttachedGroupPoliciesRequest(*iam.ListAttachedGroupPoliciesInput) (*aws.Request, *iam.ListAttachedGroupPoliciesOutput)
+	ListAttachedGroupPoliciesRequest(*iam.ListAttachedGroupPoliciesInput) iam.ListAttachedGroupPoliciesRequest
 
 	ListAttachedGroupPoliciesPages(*iam.ListAttachedGroupPoliciesInput, func(*iam.ListAttachedGroupPoliciesOutput, bool) bool) error
 	ListAttachedGroupPoliciesPagesWithContext(aws.Context, *iam.ListAttachedGroupPoliciesInput, func(*iam.ListAttachedGroupPoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListAttachedRolePolicies(*iam.ListAttachedRolePoliciesInput) (*iam.ListAttachedRolePoliciesOutput, error)
-	ListAttachedRolePoliciesWithContext(aws.Context, *iam.ListAttachedRolePoliciesInput, ...aws.Option) (*iam.ListAttachedRolePoliciesOutput, error)
-	ListAttachedRolePoliciesRequest(*iam.ListAttachedRolePoliciesInput) (*aws.Request, *iam.ListAttachedRolePoliciesOutput)
+	ListAttachedRolePoliciesRequest(*iam.ListAttachedRolePoliciesInput) iam.ListAttachedRolePoliciesRequest
 
 	ListAttachedRolePoliciesPages(*iam.ListAttachedRolePoliciesInput, func(*iam.ListAttachedRolePoliciesOutput, bool) bool) error
 	ListAttachedRolePoliciesPagesWithContext(aws.Context, *iam.ListAttachedRolePoliciesInput, func(*iam.ListAttachedRolePoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListAttachedUserPolicies(*iam.ListAttachedUserPoliciesInput) (*iam.ListAttachedUserPoliciesOutput, error)
-	ListAttachedUserPoliciesWithContext(aws.Context, *iam.ListAttachedUserPoliciesInput, ...aws.Option) (*iam.ListAttachedUserPoliciesOutput, error)
-	ListAttachedUserPoliciesRequest(*iam.ListAttachedUserPoliciesInput) (*aws.Request, *iam.ListAttachedUserPoliciesOutput)
+	ListAttachedUserPoliciesRequest(*iam.ListAttachedUserPoliciesInput) iam.ListAttachedUserPoliciesRequest
 
 	ListAttachedUserPoliciesPages(*iam.ListAttachedUserPoliciesInput, func(*iam.ListAttachedUserPoliciesOutput, bool) bool) error
 	ListAttachedUserPoliciesPagesWithContext(aws.Context, *iam.ListAttachedUserPoliciesInput, func(*iam.ListAttachedUserPoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListEntitiesForPolicy(*iam.ListEntitiesForPolicyInput) (*iam.ListEntitiesForPolicyOutput, error)
-	ListEntitiesForPolicyWithContext(aws.Context, *iam.ListEntitiesForPolicyInput, ...aws.Option) (*iam.ListEntitiesForPolicyOutput, error)
-	ListEntitiesForPolicyRequest(*iam.ListEntitiesForPolicyInput) (*aws.Request, *iam.ListEntitiesForPolicyOutput)
+	ListEntitiesForPolicyRequest(*iam.ListEntitiesForPolicyInput) iam.ListEntitiesForPolicyRequest
 
 	ListEntitiesForPolicyPages(*iam.ListEntitiesForPolicyInput, func(*iam.ListEntitiesForPolicyOutput, bool) bool) error
 	ListEntitiesForPolicyPagesWithContext(aws.Context, *iam.ListEntitiesForPolicyInput, func(*iam.ListEntitiesForPolicyOutput, bool) bool, ...aws.Option) error
 
-	ListGroupPolicies(*iam.ListGroupPoliciesInput) (*iam.ListGroupPoliciesOutput, error)
-	ListGroupPoliciesWithContext(aws.Context, *iam.ListGroupPoliciesInput, ...aws.Option) (*iam.ListGroupPoliciesOutput, error)
-	ListGroupPoliciesRequest(*iam.ListGroupPoliciesInput) (*aws.Request, *iam.ListGroupPoliciesOutput)
+	ListGroupPoliciesRequest(*iam.ListGroupPoliciesInput) iam.ListGroupPoliciesRequest
 
 	ListGroupPoliciesPages(*iam.ListGroupPoliciesInput, func(*iam.ListGroupPoliciesOutput, bool) bool) error
 	ListGroupPoliciesPagesWithContext(aws.Context, *iam.ListGroupPoliciesInput, func(*iam.ListGroupPoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListGroups(*iam.ListGroupsInput) (*iam.ListGroupsOutput, error)
-	ListGroupsWithContext(aws.Context, *iam.ListGroupsInput, ...aws.Option) (*iam.ListGroupsOutput, error)
-	ListGroupsRequest(*iam.ListGroupsInput) (*aws.Request, *iam.ListGroupsOutput)
+	ListGroupsRequest(*iam.ListGroupsInput) iam.ListGroupsRequest
 
 	ListGroupsPages(*iam.ListGroupsInput, func(*iam.ListGroupsOutput, bool) bool) error
 	ListGroupsPagesWithContext(aws.Context, *iam.ListGroupsInput, func(*iam.ListGroupsOutput, bool) bool, ...aws.Option) error
 
-	ListGroupsForUser(*iam.ListGroupsForUserInput) (*iam.ListGroupsForUserOutput, error)
-	ListGroupsForUserWithContext(aws.Context, *iam.ListGroupsForUserInput, ...aws.Option) (*iam.ListGroupsForUserOutput, error)
-	ListGroupsForUserRequest(*iam.ListGroupsForUserInput) (*aws.Request, *iam.ListGroupsForUserOutput)
+	ListGroupsForUserRequest(*iam.ListGroupsForUserInput) iam.ListGroupsForUserRequest
 
 	ListGroupsForUserPages(*iam.ListGroupsForUserInput, func(*iam.ListGroupsForUserOutput, bool) bool) error
 	ListGroupsForUserPagesWithContext(aws.Context, *iam.ListGroupsForUserInput, func(*iam.ListGroupsForUserOutput, bool) bool, ...aws.Option) error
 
-	ListInstanceProfiles(*iam.ListInstanceProfilesInput) (*iam.ListInstanceProfilesOutput, error)
-	ListInstanceProfilesWithContext(aws.Context, *iam.ListInstanceProfilesInput, ...aws.Option) (*iam.ListInstanceProfilesOutput, error)
-	ListInstanceProfilesRequest(*iam.ListInstanceProfilesInput) (*aws.Request, *iam.ListInstanceProfilesOutput)
+	ListInstanceProfilesRequest(*iam.ListInstanceProfilesInput) iam.ListInstanceProfilesRequest
 
 	ListInstanceProfilesPages(*iam.ListInstanceProfilesInput, func(*iam.ListInstanceProfilesOutput, bool) bool) error
 	ListInstanceProfilesPagesWithContext(aws.Context, *iam.ListInstanceProfilesInput, func(*iam.ListInstanceProfilesOutput, bool) bool, ...aws.Option) error
 
-	ListInstanceProfilesForRole(*iam.ListInstanceProfilesForRoleInput) (*iam.ListInstanceProfilesForRoleOutput, error)
-	ListInstanceProfilesForRoleWithContext(aws.Context, *iam.ListInstanceProfilesForRoleInput, ...aws.Option) (*iam.ListInstanceProfilesForRoleOutput, error)
-	ListInstanceProfilesForRoleRequest(*iam.ListInstanceProfilesForRoleInput) (*aws.Request, *iam.ListInstanceProfilesForRoleOutput)
+	ListInstanceProfilesForRoleRequest(*iam.ListInstanceProfilesForRoleInput) iam.ListInstanceProfilesForRoleRequest
 
 	ListInstanceProfilesForRolePages(*iam.ListInstanceProfilesForRoleInput, func(*iam.ListInstanceProfilesForRoleOutput, bool) bool) error
 	ListInstanceProfilesForRolePagesWithContext(aws.Context, *iam.ListInstanceProfilesForRoleInput, func(*iam.ListInstanceProfilesForRoleOutput, bool) bool, ...aws.Option) error
 
-	ListMFADevices(*iam.ListMFADevicesInput) (*iam.ListMFADevicesOutput, error)
-	ListMFADevicesWithContext(aws.Context, *iam.ListMFADevicesInput, ...aws.Option) (*iam.ListMFADevicesOutput, error)
-	ListMFADevicesRequest(*iam.ListMFADevicesInput) (*aws.Request, *iam.ListMFADevicesOutput)
+	ListMFADevicesRequest(*iam.ListMFADevicesInput) iam.ListMFADevicesRequest
 
 	ListMFADevicesPages(*iam.ListMFADevicesInput, func(*iam.ListMFADevicesOutput, bool) bool) error
 	ListMFADevicesPagesWithContext(aws.Context, *iam.ListMFADevicesInput, func(*iam.ListMFADevicesOutput, bool) bool, ...aws.Option) error
 
-	ListOpenIDConnectProviders(*iam.ListOpenIDConnectProvidersInput) (*iam.ListOpenIDConnectProvidersOutput, error)
-	ListOpenIDConnectProvidersWithContext(aws.Context, *iam.ListOpenIDConnectProvidersInput, ...aws.Option) (*iam.ListOpenIDConnectProvidersOutput, error)
-	ListOpenIDConnectProvidersRequest(*iam.ListOpenIDConnectProvidersInput) (*aws.Request, *iam.ListOpenIDConnectProvidersOutput)
+	ListOpenIDConnectProvidersRequest(*iam.ListOpenIDConnectProvidersInput) iam.ListOpenIDConnectProvidersRequest
 
-	ListPolicies(*iam.ListPoliciesInput) (*iam.ListPoliciesOutput, error)
-	ListPoliciesWithContext(aws.Context, *iam.ListPoliciesInput, ...aws.Option) (*iam.ListPoliciesOutput, error)
-	ListPoliciesRequest(*iam.ListPoliciesInput) (*aws.Request, *iam.ListPoliciesOutput)
+	ListPoliciesRequest(*iam.ListPoliciesInput) iam.ListPoliciesRequest
 
 	ListPoliciesPages(*iam.ListPoliciesInput, func(*iam.ListPoliciesOutput, bool) bool) error
 	ListPoliciesPagesWithContext(aws.Context, *iam.ListPoliciesInput, func(*iam.ListPoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListPolicyVersions(*iam.ListPolicyVersionsInput) (*iam.ListPolicyVersionsOutput, error)
-	ListPolicyVersionsWithContext(aws.Context, *iam.ListPolicyVersionsInput, ...aws.Option) (*iam.ListPolicyVersionsOutput, error)
-	ListPolicyVersionsRequest(*iam.ListPolicyVersionsInput) (*aws.Request, *iam.ListPolicyVersionsOutput)
+	ListPolicyVersionsRequest(*iam.ListPolicyVersionsInput) iam.ListPolicyVersionsRequest
 
 	ListPolicyVersionsPages(*iam.ListPolicyVersionsInput, func(*iam.ListPolicyVersionsOutput, bool) bool) error
 	ListPolicyVersionsPagesWithContext(aws.Context, *iam.ListPolicyVersionsInput, func(*iam.ListPolicyVersionsOutput, bool) bool, ...aws.Option) error
 
-	ListRolePolicies(*iam.ListRolePoliciesInput) (*iam.ListRolePoliciesOutput, error)
-	ListRolePoliciesWithContext(aws.Context, *iam.ListRolePoliciesInput, ...aws.Option) (*iam.ListRolePoliciesOutput, error)
-	ListRolePoliciesRequest(*iam.ListRolePoliciesInput) (*aws.Request, *iam.ListRolePoliciesOutput)
+	ListRolePoliciesRequest(*iam.ListRolePoliciesInput) iam.ListRolePoliciesRequest
 
 	ListRolePoliciesPages(*iam.ListRolePoliciesInput, func(*iam.ListRolePoliciesOutput, bool) bool) error
 	ListRolePoliciesPagesWithContext(aws.Context, *iam.ListRolePoliciesInput, func(*iam.ListRolePoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListRoles(*iam.ListRolesInput) (*iam.ListRolesOutput, error)
-	ListRolesWithContext(aws.Context, *iam.ListRolesInput, ...aws.Option) (*iam.ListRolesOutput, error)
-	ListRolesRequest(*iam.ListRolesInput) (*aws.Request, *iam.ListRolesOutput)
+	ListRolesRequest(*iam.ListRolesInput) iam.ListRolesRequest
 
 	ListRolesPages(*iam.ListRolesInput, func(*iam.ListRolesOutput, bool) bool) error
 	ListRolesPagesWithContext(aws.Context, *iam.ListRolesInput, func(*iam.ListRolesOutput, bool) bool, ...aws.Option) error
 
-	ListSAMLProviders(*iam.ListSAMLProvidersInput) (*iam.ListSAMLProvidersOutput, error)
-	ListSAMLProvidersWithContext(aws.Context, *iam.ListSAMLProvidersInput, ...aws.Option) (*iam.ListSAMLProvidersOutput, error)
-	ListSAMLProvidersRequest(*iam.ListSAMLProvidersInput) (*aws.Request, *iam.ListSAMLProvidersOutput)
+	ListSAMLProvidersRequest(*iam.ListSAMLProvidersInput) iam.ListSAMLProvidersRequest
 
-	ListSSHPublicKeys(*iam.ListSSHPublicKeysInput) (*iam.ListSSHPublicKeysOutput, error)
-	ListSSHPublicKeysWithContext(aws.Context, *iam.ListSSHPublicKeysInput, ...aws.Option) (*iam.ListSSHPublicKeysOutput, error)
-	ListSSHPublicKeysRequest(*iam.ListSSHPublicKeysInput) (*aws.Request, *iam.ListSSHPublicKeysOutput)
+	ListSSHPublicKeysRequest(*iam.ListSSHPublicKeysInput) iam.ListSSHPublicKeysRequest
 
 	ListSSHPublicKeysPages(*iam.ListSSHPublicKeysInput, func(*iam.ListSSHPublicKeysOutput, bool) bool) error
 	ListSSHPublicKeysPagesWithContext(aws.Context, *iam.ListSSHPublicKeysInput, func(*iam.ListSSHPublicKeysOutput, bool) bool, ...aws.Option) error
 
-	ListServerCertificates(*iam.ListServerCertificatesInput) (*iam.ListServerCertificatesOutput, error)
-	ListServerCertificatesWithContext(aws.Context, *iam.ListServerCertificatesInput, ...aws.Option) (*iam.ListServerCertificatesOutput, error)
-	ListServerCertificatesRequest(*iam.ListServerCertificatesInput) (*aws.Request, *iam.ListServerCertificatesOutput)
+	ListServerCertificatesRequest(*iam.ListServerCertificatesInput) iam.ListServerCertificatesRequest
 
 	ListServerCertificatesPages(*iam.ListServerCertificatesInput, func(*iam.ListServerCertificatesOutput, bool) bool) error
 	ListServerCertificatesPagesWithContext(aws.Context, *iam.ListServerCertificatesInput, func(*iam.ListServerCertificatesOutput, bool) bool, ...aws.Option) error
 
-	ListServiceSpecificCredentials(*iam.ListServiceSpecificCredentialsInput) (*iam.ListServiceSpecificCredentialsOutput, error)
-	ListServiceSpecificCredentialsWithContext(aws.Context, *iam.ListServiceSpecificCredentialsInput, ...aws.Option) (*iam.ListServiceSpecificCredentialsOutput, error)
-	ListServiceSpecificCredentialsRequest(*iam.ListServiceSpecificCredentialsInput) (*aws.Request, *iam.ListServiceSpecificCredentialsOutput)
+	ListServiceSpecificCredentialsRequest(*iam.ListServiceSpecificCredentialsInput) iam.ListServiceSpecificCredentialsRequest
 
-	ListSigningCertificates(*iam.ListSigningCertificatesInput) (*iam.ListSigningCertificatesOutput, error)
-	ListSigningCertificatesWithContext(aws.Context, *iam.ListSigningCertificatesInput, ...aws.Option) (*iam.ListSigningCertificatesOutput, error)
-	ListSigningCertificatesRequest(*iam.ListSigningCertificatesInput) (*aws.Request, *iam.ListSigningCertificatesOutput)
+	ListSigningCertificatesRequest(*iam.ListSigningCertificatesInput) iam.ListSigningCertificatesRequest
 
 	ListSigningCertificatesPages(*iam.ListSigningCertificatesInput, func(*iam.ListSigningCertificatesOutput, bool) bool) error
 	ListSigningCertificatesPagesWithContext(aws.Context, *iam.ListSigningCertificatesInput, func(*iam.ListSigningCertificatesOutput, bool) bool, ...aws.Option) error
 
-	ListUserPolicies(*iam.ListUserPoliciesInput) (*iam.ListUserPoliciesOutput, error)
-	ListUserPoliciesWithContext(aws.Context, *iam.ListUserPoliciesInput, ...aws.Option) (*iam.ListUserPoliciesOutput, error)
-	ListUserPoliciesRequest(*iam.ListUserPoliciesInput) (*aws.Request, *iam.ListUserPoliciesOutput)
+	ListUserPoliciesRequest(*iam.ListUserPoliciesInput) iam.ListUserPoliciesRequest
 
 	ListUserPoliciesPages(*iam.ListUserPoliciesInput, func(*iam.ListUserPoliciesOutput, bool) bool) error
 	ListUserPoliciesPagesWithContext(aws.Context, *iam.ListUserPoliciesInput, func(*iam.ListUserPoliciesOutput, bool) bool, ...aws.Option) error
 
-	ListUsers(*iam.ListUsersInput) (*iam.ListUsersOutput, error)
-	ListUsersWithContext(aws.Context, *iam.ListUsersInput, ...aws.Option) (*iam.ListUsersOutput, error)
-	ListUsersRequest(*iam.ListUsersInput) (*aws.Request, *iam.ListUsersOutput)
+	ListUsersRequest(*iam.ListUsersInput) iam.ListUsersRequest
 
 	ListUsersPages(*iam.ListUsersInput, func(*iam.ListUsersOutput, bool) bool) error
 	ListUsersPagesWithContext(aws.Context, *iam.ListUsersInput, func(*iam.ListUsersOutput, bool) bool, ...aws.Option) error
 
-	ListVirtualMFADevices(*iam.ListVirtualMFADevicesInput) (*iam.ListVirtualMFADevicesOutput, error)
-	ListVirtualMFADevicesWithContext(aws.Context, *iam.ListVirtualMFADevicesInput, ...aws.Option) (*iam.ListVirtualMFADevicesOutput, error)
-	ListVirtualMFADevicesRequest(*iam.ListVirtualMFADevicesInput) (*aws.Request, *iam.ListVirtualMFADevicesOutput)
+	ListVirtualMFADevicesRequest(*iam.ListVirtualMFADevicesInput) iam.ListVirtualMFADevicesRequest
 
 	ListVirtualMFADevicesPages(*iam.ListVirtualMFADevicesInput, func(*iam.ListVirtualMFADevicesOutput, bool) bool) error
 	ListVirtualMFADevicesPagesWithContext(aws.Context, *iam.ListVirtualMFADevicesInput, func(*iam.ListVirtualMFADevicesOutput, bool) bool, ...aws.Option) error
 
-	PutGroupPolicy(*iam.PutGroupPolicyInput) (*iam.PutGroupPolicyOutput, error)
-	PutGroupPolicyWithContext(aws.Context, *iam.PutGroupPolicyInput, ...aws.Option) (*iam.PutGroupPolicyOutput, error)
-	PutGroupPolicyRequest(*iam.PutGroupPolicyInput) (*aws.Request, *iam.PutGroupPolicyOutput)
+	PutGroupPolicyRequest(*iam.PutGroupPolicyInput) iam.PutGroupPolicyRequest
 
-	PutRolePolicy(*iam.PutRolePolicyInput) (*iam.PutRolePolicyOutput, error)
-	PutRolePolicyWithContext(aws.Context, *iam.PutRolePolicyInput, ...aws.Option) (*iam.PutRolePolicyOutput, error)
-	PutRolePolicyRequest(*iam.PutRolePolicyInput) (*aws.Request, *iam.PutRolePolicyOutput)
+	PutRolePolicyRequest(*iam.PutRolePolicyInput) iam.PutRolePolicyRequest
 
-	PutUserPolicy(*iam.PutUserPolicyInput) (*iam.PutUserPolicyOutput, error)
-	PutUserPolicyWithContext(aws.Context, *iam.PutUserPolicyInput, ...aws.Option) (*iam.PutUserPolicyOutput, error)
-	PutUserPolicyRequest(*iam.PutUserPolicyInput) (*aws.Request, *iam.PutUserPolicyOutput)
+	PutUserPolicyRequest(*iam.PutUserPolicyInput) iam.PutUserPolicyRequest
 
-	RemoveClientIDFromOpenIDConnectProvider(*iam.RemoveClientIDFromOpenIDConnectProviderInput) (*iam.RemoveClientIDFromOpenIDConnectProviderOutput, error)
-	RemoveClientIDFromOpenIDConnectProviderWithContext(aws.Context, *iam.RemoveClientIDFromOpenIDConnectProviderInput, ...aws.Option) (*iam.RemoveClientIDFromOpenIDConnectProviderOutput, error)
-	RemoveClientIDFromOpenIDConnectProviderRequest(*iam.RemoveClientIDFromOpenIDConnectProviderInput) (*aws.Request, *iam.RemoveClientIDFromOpenIDConnectProviderOutput)
+	RemoveClientIDFromOpenIDConnectProviderRequest(*iam.RemoveClientIDFromOpenIDConnectProviderInput) iam.RemoveClientIDFromOpenIDConnectProviderRequest
 
-	RemoveRoleFromInstanceProfile(*iam.RemoveRoleFromInstanceProfileInput) (*iam.RemoveRoleFromInstanceProfileOutput, error)
-	RemoveRoleFromInstanceProfileWithContext(aws.Context, *iam.RemoveRoleFromInstanceProfileInput, ...aws.Option) (*iam.RemoveRoleFromInstanceProfileOutput, error)
-	RemoveRoleFromInstanceProfileRequest(*iam.RemoveRoleFromInstanceProfileInput) (*aws.Request, *iam.RemoveRoleFromInstanceProfileOutput)
+	RemoveRoleFromInstanceProfileRequest(*iam.RemoveRoleFromInstanceProfileInput) iam.RemoveRoleFromInstanceProfileRequest
 
-	RemoveUserFromGroup(*iam.RemoveUserFromGroupInput) (*iam.RemoveUserFromGroupOutput, error)
-	RemoveUserFromGroupWithContext(aws.Context, *iam.RemoveUserFromGroupInput, ...aws.Option) (*iam.RemoveUserFromGroupOutput, error)
-	RemoveUserFromGroupRequest(*iam.RemoveUserFromGroupInput) (*aws.Request, *iam.RemoveUserFromGroupOutput)
+	RemoveUserFromGroupRequest(*iam.RemoveUserFromGroupInput) iam.RemoveUserFromGroupRequest
 
-	ResetServiceSpecificCredential(*iam.ResetServiceSpecificCredentialInput) (*iam.ResetServiceSpecificCredentialOutput, error)
-	ResetServiceSpecificCredentialWithContext(aws.Context, *iam.ResetServiceSpecificCredentialInput, ...aws.Option) (*iam.ResetServiceSpecificCredentialOutput, error)
-	ResetServiceSpecificCredentialRequest(*iam.ResetServiceSpecificCredentialInput) (*aws.Request, *iam.ResetServiceSpecificCredentialOutput)
+	ResetServiceSpecificCredentialRequest(*iam.ResetServiceSpecificCredentialInput) iam.ResetServiceSpecificCredentialRequest
 
-	ResyncMFADevice(*iam.ResyncMFADeviceInput) (*iam.ResyncMFADeviceOutput, error)
-	ResyncMFADeviceWithContext(aws.Context, *iam.ResyncMFADeviceInput, ...aws.Option) (*iam.ResyncMFADeviceOutput, error)
-	ResyncMFADeviceRequest(*iam.ResyncMFADeviceInput) (*aws.Request, *iam.ResyncMFADeviceOutput)
+	ResyncMFADeviceRequest(*iam.ResyncMFADeviceInput) iam.ResyncMFADeviceRequest
 
-	SetDefaultPolicyVersion(*iam.SetDefaultPolicyVersionInput) (*iam.SetDefaultPolicyVersionOutput, error)
-	SetDefaultPolicyVersionWithContext(aws.Context, *iam.SetDefaultPolicyVersionInput, ...aws.Option) (*iam.SetDefaultPolicyVersionOutput, error)
-	SetDefaultPolicyVersionRequest(*iam.SetDefaultPolicyVersionInput) (*aws.Request, *iam.SetDefaultPolicyVersionOutput)
+	SetDefaultPolicyVersionRequest(*iam.SetDefaultPolicyVersionInput) iam.SetDefaultPolicyVersionRequest
 
-	SimulateCustomPolicy(*iam.SimulateCustomPolicyInput) (*iam.SimulatePolicyResponse, error)
-	SimulateCustomPolicyWithContext(aws.Context, *iam.SimulateCustomPolicyInput, ...aws.Option) (*iam.SimulatePolicyResponse, error)
-	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) (*aws.Request, *iam.SimulatePolicyResponse)
+	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
 
-	SimulateCustomPolicyPages(*iam.SimulateCustomPolicyInput, func(*iam.SimulatePolicyResponse, bool) bool) error
-	SimulateCustomPolicyPagesWithContext(aws.Context, *iam.SimulateCustomPolicyInput, func(*iam.SimulatePolicyResponse, bool) bool, ...aws.Option) error
+	SimulateCustomPolicyPages(*iam.SimulateCustomPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool) error
+	SimulateCustomPolicyPagesWithContext(aws.Context, *iam.SimulateCustomPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool, ...aws.Option) error
 
-	SimulatePrincipalPolicy(*iam.SimulatePrincipalPolicyInput) (*iam.SimulatePolicyResponse, error)
-	SimulatePrincipalPolicyWithContext(aws.Context, *iam.SimulatePrincipalPolicyInput, ...aws.Option) (*iam.SimulatePolicyResponse, error)
-	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) (*aws.Request, *iam.SimulatePolicyResponse)
+	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
 
-	SimulatePrincipalPolicyPages(*iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePolicyResponse, bool) bool) error
-	SimulatePrincipalPolicyPagesWithContext(aws.Context, *iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePolicyResponse, bool) bool, ...aws.Option) error
+	SimulatePrincipalPolicyPages(*iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool) error
+	SimulatePrincipalPolicyPagesWithContext(aws.Context, *iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool, ...aws.Option) error
 
-	UpdateAccessKey(*iam.UpdateAccessKeyInput) (*iam.UpdateAccessKeyOutput, error)
-	UpdateAccessKeyWithContext(aws.Context, *iam.UpdateAccessKeyInput, ...aws.Option) (*iam.UpdateAccessKeyOutput, error)
-	UpdateAccessKeyRequest(*iam.UpdateAccessKeyInput) (*aws.Request, *iam.UpdateAccessKeyOutput)
+	UpdateAccessKeyRequest(*iam.UpdateAccessKeyInput) iam.UpdateAccessKeyRequest
 
-	UpdateAccountPasswordPolicy(*iam.UpdateAccountPasswordPolicyInput) (*iam.UpdateAccountPasswordPolicyOutput, error)
-	UpdateAccountPasswordPolicyWithContext(aws.Context, *iam.UpdateAccountPasswordPolicyInput, ...aws.Option) (*iam.UpdateAccountPasswordPolicyOutput, error)
-	UpdateAccountPasswordPolicyRequest(*iam.UpdateAccountPasswordPolicyInput) (*aws.Request, *iam.UpdateAccountPasswordPolicyOutput)
+	UpdateAccountPasswordPolicyRequest(*iam.UpdateAccountPasswordPolicyInput) iam.UpdateAccountPasswordPolicyRequest
 
-	UpdateAssumeRolePolicy(*iam.UpdateAssumeRolePolicyInput) (*iam.UpdateAssumeRolePolicyOutput, error)
-	UpdateAssumeRolePolicyWithContext(aws.Context, *iam.UpdateAssumeRolePolicyInput, ...aws.Option) (*iam.UpdateAssumeRolePolicyOutput, error)
-	UpdateAssumeRolePolicyRequest(*iam.UpdateAssumeRolePolicyInput) (*aws.Request, *iam.UpdateAssumeRolePolicyOutput)
+	UpdateAssumeRolePolicyRequest(*iam.UpdateAssumeRolePolicyInput) iam.UpdateAssumeRolePolicyRequest
 
-	UpdateGroup(*iam.UpdateGroupInput) (*iam.UpdateGroupOutput, error)
-	UpdateGroupWithContext(aws.Context, *iam.UpdateGroupInput, ...aws.Option) (*iam.UpdateGroupOutput, error)
-	UpdateGroupRequest(*iam.UpdateGroupInput) (*aws.Request, *iam.UpdateGroupOutput)
+	UpdateGroupRequest(*iam.UpdateGroupInput) iam.UpdateGroupRequest
 
-	UpdateLoginProfile(*iam.UpdateLoginProfileInput) (*iam.UpdateLoginProfileOutput, error)
-	UpdateLoginProfileWithContext(aws.Context, *iam.UpdateLoginProfileInput, ...aws.Option) (*iam.UpdateLoginProfileOutput, error)
-	UpdateLoginProfileRequest(*iam.UpdateLoginProfileInput) (*aws.Request, *iam.UpdateLoginProfileOutput)
+	UpdateLoginProfileRequest(*iam.UpdateLoginProfileInput) iam.UpdateLoginProfileRequest
 
-	UpdateOpenIDConnectProviderThumbprint(*iam.UpdateOpenIDConnectProviderThumbprintInput) (*iam.UpdateOpenIDConnectProviderThumbprintOutput, error)
-	UpdateOpenIDConnectProviderThumbprintWithContext(aws.Context, *iam.UpdateOpenIDConnectProviderThumbprintInput, ...aws.Option) (*iam.UpdateOpenIDConnectProviderThumbprintOutput, error)
-	UpdateOpenIDConnectProviderThumbprintRequest(*iam.UpdateOpenIDConnectProviderThumbprintInput) (*aws.Request, *iam.UpdateOpenIDConnectProviderThumbprintOutput)
+	UpdateOpenIDConnectProviderThumbprintRequest(*iam.UpdateOpenIDConnectProviderThumbprintInput) iam.UpdateOpenIDConnectProviderThumbprintRequest
 
-	UpdateRoleDescription(*iam.UpdateRoleDescriptionInput) (*iam.UpdateRoleDescriptionOutput, error)
-	UpdateRoleDescriptionWithContext(aws.Context, *iam.UpdateRoleDescriptionInput, ...aws.Option) (*iam.UpdateRoleDescriptionOutput, error)
-	UpdateRoleDescriptionRequest(*iam.UpdateRoleDescriptionInput) (*aws.Request, *iam.UpdateRoleDescriptionOutput)
+	UpdateRoleDescriptionRequest(*iam.UpdateRoleDescriptionInput) iam.UpdateRoleDescriptionRequest
 
-	UpdateSAMLProvider(*iam.UpdateSAMLProviderInput) (*iam.UpdateSAMLProviderOutput, error)
-	UpdateSAMLProviderWithContext(aws.Context, *iam.UpdateSAMLProviderInput, ...aws.Option) (*iam.UpdateSAMLProviderOutput, error)
-	UpdateSAMLProviderRequest(*iam.UpdateSAMLProviderInput) (*aws.Request, *iam.UpdateSAMLProviderOutput)
+	UpdateSAMLProviderRequest(*iam.UpdateSAMLProviderInput) iam.UpdateSAMLProviderRequest
 
-	UpdateSSHPublicKey(*iam.UpdateSSHPublicKeyInput) (*iam.UpdateSSHPublicKeyOutput, error)
-	UpdateSSHPublicKeyWithContext(aws.Context, *iam.UpdateSSHPublicKeyInput, ...aws.Option) (*iam.UpdateSSHPublicKeyOutput, error)
-	UpdateSSHPublicKeyRequest(*iam.UpdateSSHPublicKeyInput) (*aws.Request, *iam.UpdateSSHPublicKeyOutput)
+	UpdateSSHPublicKeyRequest(*iam.UpdateSSHPublicKeyInput) iam.UpdateSSHPublicKeyRequest
 
-	UpdateServerCertificate(*iam.UpdateServerCertificateInput) (*iam.UpdateServerCertificateOutput, error)
-	UpdateServerCertificateWithContext(aws.Context, *iam.UpdateServerCertificateInput, ...aws.Option) (*iam.UpdateServerCertificateOutput, error)
-	UpdateServerCertificateRequest(*iam.UpdateServerCertificateInput) (*aws.Request, *iam.UpdateServerCertificateOutput)
+	UpdateServerCertificateRequest(*iam.UpdateServerCertificateInput) iam.UpdateServerCertificateRequest
 
-	UpdateServiceSpecificCredential(*iam.UpdateServiceSpecificCredentialInput) (*iam.UpdateServiceSpecificCredentialOutput, error)
-	UpdateServiceSpecificCredentialWithContext(aws.Context, *iam.UpdateServiceSpecificCredentialInput, ...aws.Option) (*iam.UpdateServiceSpecificCredentialOutput, error)
-	UpdateServiceSpecificCredentialRequest(*iam.UpdateServiceSpecificCredentialInput) (*aws.Request, *iam.UpdateServiceSpecificCredentialOutput)
+	UpdateServiceSpecificCredentialRequest(*iam.UpdateServiceSpecificCredentialInput) iam.UpdateServiceSpecificCredentialRequest
 
-	UpdateSigningCertificate(*iam.UpdateSigningCertificateInput) (*iam.UpdateSigningCertificateOutput, error)
-	UpdateSigningCertificateWithContext(aws.Context, *iam.UpdateSigningCertificateInput, ...aws.Option) (*iam.UpdateSigningCertificateOutput, error)
-	UpdateSigningCertificateRequest(*iam.UpdateSigningCertificateInput) (*aws.Request, *iam.UpdateSigningCertificateOutput)
+	UpdateSigningCertificateRequest(*iam.UpdateSigningCertificateInput) iam.UpdateSigningCertificateRequest
 
-	UpdateUser(*iam.UpdateUserInput) (*iam.UpdateUserOutput, error)
-	UpdateUserWithContext(aws.Context, *iam.UpdateUserInput, ...aws.Option) (*iam.UpdateUserOutput, error)
-	UpdateUserRequest(*iam.UpdateUserInput) (*aws.Request, *iam.UpdateUserOutput)
+	UpdateUserRequest(*iam.UpdateUserInput) iam.UpdateUserRequest
 
-	UploadSSHPublicKey(*iam.UploadSSHPublicKeyInput) (*iam.UploadSSHPublicKeyOutput, error)
-	UploadSSHPublicKeyWithContext(aws.Context, *iam.UploadSSHPublicKeyInput, ...aws.Option) (*iam.UploadSSHPublicKeyOutput, error)
-	UploadSSHPublicKeyRequest(*iam.UploadSSHPublicKeyInput) (*aws.Request, *iam.UploadSSHPublicKeyOutput)
+	UploadSSHPublicKeyRequest(*iam.UploadSSHPublicKeyInput) iam.UploadSSHPublicKeyRequest
 
-	UploadServerCertificate(*iam.UploadServerCertificateInput) (*iam.UploadServerCertificateOutput, error)
-	UploadServerCertificateWithContext(aws.Context, *iam.UploadServerCertificateInput, ...aws.Option) (*iam.UploadServerCertificateOutput, error)
-	UploadServerCertificateRequest(*iam.UploadServerCertificateInput) (*aws.Request, *iam.UploadServerCertificateOutput)
+	UploadServerCertificateRequest(*iam.UploadServerCertificateInput) iam.UploadServerCertificateRequest
 
-	UploadSigningCertificate(*iam.UploadSigningCertificateInput) (*iam.UploadSigningCertificateOutput, error)
-	UploadSigningCertificateWithContext(aws.Context, *iam.UploadSigningCertificateInput, ...aws.Option) (*iam.UploadSigningCertificateOutput, error)
-	UploadSigningCertificateRequest(*iam.UploadSigningCertificateInput) (*aws.Request, *iam.UploadSigningCertificateOutput)
+	UploadSigningCertificateRequest(*iam.UploadSigningCertificateInput) iam.UploadSigningCertificateRequest
 
 	WaitUntilInstanceProfileExists(*iam.GetInstanceProfileInput) error
 	WaitUntilInstanceProfileExistsWithContext(aws.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error

@@ -9,7 +9,6 @@
 package pinpointiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 )
 
@@ -63,221 +62,113 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type PinpointAPI interface {
-	CreateApp(*pinpoint.CreateAppInput) (*pinpoint.CreateAppOutput, error)
-	CreateAppWithContext(aws.Context, *pinpoint.CreateAppInput, ...aws.Option) (*pinpoint.CreateAppOutput, error)
-	CreateAppRequest(*pinpoint.CreateAppInput) (*aws.Request, *pinpoint.CreateAppOutput)
+	CreateAppRequest(*pinpoint.CreateAppInput) pinpoint.CreateAppRequest
 
-	CreateCampaign(*pinpoint.CreateCampaignInput) (*pinpoint.CreateCampaignOutput, error)
-	CreateCampaignWithContext(aws.Context, *pinpoint.CreateCampaignInput, ...aws.Option) (*pinpoint.CreateCampaignOutput, error)
-	CreateCampaignRequest(*pinpoint.CreateCampaignInput) (*aws.Request, *pinpoint.CreateCampaignOutput)
+	CreateCampaignRequest(*pinpoint.CreateCampaignInput) pinpoint.CreateCampaignRequest
 
-	CreateImportJob(*pinpoint.CreateImportJobInput) (*pinpoint.CreateImportJobOutput, error)
-	CreateImportJobWithContext(aws.Context, *pinpoint.CreateImportJobInput, ...aws.Option) (*pinpoint.CreateImportJobOutput, error)
-	CreateImportJobRequest(*pinpoint.CreateImportJobInput) (*aws.Request, *pinpoint.CreateImportJobOutput)
+	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
 
-	CreateSegment(*pinpoint.CreateSegmentInput) (*pinpoint.CreateSegmentOutput, error)
-	CreateSegmentWithContext(aws.Context, *pinpoint.CreateSegmentInput, ...aws.Option) (*pinpoint.CreateSegmentOutput, error)
-	CreateSegmentRequest(*pinpoint.CreateSegmentInput) (*aws.Request, *pinpoint.CreateSegmentOutput)
+	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
 
-	DeleteAdmChannel(*pinpoint.DeleteAdmChannelInput) (*pinpoint.DeleteAdmChannelOutput, error)
-	DeleteAdmChannelWithContext(aws.Context, *pinpoint.DeleteAdmChannelInput, ...aws.Option) (*pinpoint.DeleteAdmChannelOutput, error)
-	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) (*aws.Request, *pinpoint.DeleteAdmChannelOutput)
+	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
 
-	DeleteApnsChannel(*pinpoint.DeleteApnsChannelInput) (*pinpoint.DeleteApnsChannelOutput, error)
-	DeleteApnsChannelWithContext(aws.Context, *pinpoint.DeleteApnsChannelInput, ...aws.Option) (*pinpoint.DeleteApnsChannelOutput, error)
-	DeleteApnsChannelRequest(*pinpoint.DeleteApnsChannelInput) (*aws.Request, *pinpoint.DeleteApnsChannelOutput)
+	DeleteApnsChannelRequest(*pinpoint.DeleteApnsChannelInput) pinpoint.DeleteApnsChannelRequest
 
-	DeleteApnsSandboxChannel(*pinpoint.DeleteApnsSandboxChannelInput) (*pinpoint.DeleteApnsSandboxChannelOutput, error)
-	DeleteApnsSandboxChannelWithContext(aws.Context, *pinpoint.DeleteApnsSandboxChannelInput, ...aws.Option) (*pinpoint.DeleteApnsSandboxChannelOutput, error)
-	DeleteApnsSandboxChannelRequest(*pinpoint.DeleteApnsSandboxChannelInput) (*aws.Request, *pinpoint.DeleteApnsSandboxChannelOutput)
+	DeleteApnsSandboxChannelRequest(*pinpoint.DeleteApnsSandboxChannelInput) pinpoint.DeleteApnsSandboxChannelRequest
 
-	DeleteApp(*pinpoint.DeleteAppInput) (*pinpoint.DeleteAppOutput, error)
-	DeleteAppWithContext(aws.Context, *pinpoint.DeleteAppInput, ...aws.Option) (*pinpoint.DeleteAppOutput, error)
-	DeleteAppRequest(*pinpoint.DeleteAppInput) (*aws.Request, *pinpoint.DeleteAppOutput)
+	DeleteAppRequest(*pinpoint.DeleteAppInput) pinpoint.DeleteAppRequest
 
-	DeleteBaiduChannel(*pinpoint.DeleteBaiduChannelInput) (*pinpoint.DeleteBaiduChannelOutput, error)
-	DeleteBaiduChannelWithContext(aws.Context, *pinpoint.DeleteBaiduChannelInput, ...aws.Option) (*pinpoint.DeleteBaiduChannelOutput, error)
-	DeleteBaiduChannelRequest(*pinpoint.DeleteBaiduChannelInput) (*aws.Request, *pinpoint.DeleteBaiduChannelOutput)
+	DeleteBaiduChannelRequest(*pinpoint.DeleteBaiduChannelInput) pinpoint.DeleteBaiduChannelRequest
 
-	DeleteCampaign(*pinpoint.DeleteCampaignInput) (*pinpoint.DeleteCampaignOutput, error)
-	DeleteCampaignWithContext(aws.Context, *pinpoint.DeleteCampaignInput, ...aws.Option) (*pinpoint.DeleteCampaignOutput, error)
-	DeleteCampaignRequest(*pinpoint.DeleteCampaignInput) (*aws.Request, *pinpoint.DeleteCampaignOutput)
+	DeleteCampaignRequest(*pinpoint.DeleteCampaignInput) pinpoint.DeleteCampaignRequest
 
-	DeleteEmailChannel(*pinpoint.DeleteEmailChannelInput) (*pinpoint.DeleteEmailChannelOutput, error)
-	DeleteEmailChannelWithContext(aws.Context, *pinpoint.DeleteEmailChannelInput, ...aws.Option) (*pinpoint.DeleteEmailChannelOutput, error)
-	DeleteEmailChannelRequest(*pinpoint.DeleteEmailChannelInput) (*aws.Request, *pinpoint.DeleteEmailChannelOutput)
+	DeleteEmailChannelRequest(*pinpoint.DeleteEmailChannelInput) pinpoint.DeleteEmailChannelRequest
 
-	DeleteEventStream(*pinpoint.DeleteEventStreamInput) (*pinpoint.DeleteEventStreamOutput, error)
-	DeleteEventStreamWithContext(aws.Context, *pinpoint.DeleteEventStreamInput, ...aws.Option) (*pinpoint.DeleteEventStreamOutput, error)
-	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) (*aws.Request, *pinpoint.DeleteEventStreamOutput)
+	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
 
-	DeleteGcmChannel(*pinpoint.DeleteGcmChannelInput) (*pinpoint.DeleteGcmChannelOutput, error)
-	DeleteGcmChannelWithContext(aws.Context, *pinpoint.DeleteGcmChannelInput, ...aws.Option) (*pinpoint.DeleteGcmChannelOutput, error)
-	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) (*aws.Request, *pinpoint.DeleteGcmChannelOutput)
+	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
 
-	DeleteSegment(*pinpoint.DeleteSegmentInput) (*pinpoint.DeleteSegmentOutput, error)
-	DeleteSegmentWithContext(aws.Context, *pinpoint.DeleteSegmentInput, ...aws.Option) (*pinpoint.DeleteSegmentOutput, error)
-	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) (*aws.Request, *pinpoint.DeleteSegmentOutput)
+	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
 
-	DeleteSmsChannel(*pinpoint.DeleteSmsChannelInput) (*pinpoint.DeleteSmsChannelOutput, error)
-	DeleteSmsChannelWithContext(aws.Context, *pinpoint.DeleteSmsChannelInput, ...aws.Option) (*pinpoint.DeleteSmsChannelOutput, error)
-	DeleteSmsChannelRequest(*pinpoint.DeleteSmsChannelInput) (*aws.Request, *pinpoint.DeleteSmsChannelOutput)
+	DeleteSmsChannelRequest(*pinpoint.DeleteSmsChannelInput) pinpoint.DeleteSmsChannelRequest
 
-	GetAdmChannel(*pinpoint.GetAdmChannelInput) (*pinpoint.GetAdmChannelOutput, error)
-	GetAdmChannelWithContext(aws.Context, *pinpoint.GetAdmChannelInput, ...aws.Option) (*pinpoint.GetAdmChannelOutput, error)
-	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) (*aws.Request, *pinpoint.GetAdmChannelOutput)
+	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
 
-	GetApnsChannel(*pinpoint.GetApnsChannelInput) (*pinpoint.GetApnsChannelOutput, error)
-	GetApnsChannelWithContext(aws.Context, *pinpoint.GetApnsChannelInput, ...aws.Option) (*pinpoint.GetApnsChannelOutput, error)
-	GetApnsChannelRequest(*pinpoint.GetApnsChannelInput) (*aws.Request, *pinpoint.GetApnsChannelOutput)
+	GetApnsChannelRequest(*pinpoint.GetApnsChannelInput) pinpoint.GetApnsChannelRequest
 
-	GetApnsSandboxChannel(*pinpoint.GetApnsSandboxChannelInput) (*pinpoint.GetApnsSandboxChannelOutput, error)
-	GetApnsSandboxChannelWithContext(aws.Context, *pinpoint.GetApnsSandboxChannelInput, ...aws.Option) (*pinpoint.GetApnsSandboxChannelOutput, error)
-	GetApnsSandboxChannelRequest(*pinpoint.GetApnsSandboxChannelInput) (*aws.Request, *pinpoint.GetApnsSandboxChannelOutput)
+	GetApnsSandboxChannelRequest(*pinpoint.GetApnsSandboxChannelInput) pinpoint.GetApnsSandboxChannelRequest
 
-	GetApp(*pinpoint.GetAppInput) (*pinpoint.GetAppOutput, error)
-	GetAppWithContext(aws.Context, *pinpoint.GetAppInput, ...aws.Option) (*pinpoint.GetAppOutput, error)
-	GetAppRequest(*pinpoint.GetAppInput) (*aws.Request, *pinpoint.GetAppOutput)
+	GetAppRequest(*pinpoint.GetAppInput) pinpoint.GetAppRequest
 
-	GetApplicationSettings(*pinpoint.GetApplicationSettingsInput) (*pinpoint.GetApplicationSettingsOutput, error)
-	GetApplicationSettingsWithContext(aws.Context, *pinpoint.GetApplicationSettingsInput, ...aws.Option) (*pinpoint.GetApplicationSettingsOutput, error)
-	GetApplicationSettingsRequest(*pinpoint.GetApplicationSettingsInput) (*aws.Request, *pinpoint.GetApplicationSettingsOutput)
+	GetApplicationSettingsRequest(*pinpoint.GetApplicationSettingsInput) pinpoint.GetApplicationSettingsRequest
 
-	GetApps(*pinpoint.GetAppsInput) (*pinpoint.GetAppsOutput, error)
-	GetAppsWithContext(aws.Context, *pinpoint.GetAppsInput, ...aws.Option) (*pinpoint.GetAppsOutput, error)
-	GetAppsRequest(*pinpoint.GetAppsInput) (*aws.Request, *pinpoint.GetAppsOutput)
+	GetAppsRequest(*pinpoint.GetAppsInput) pinpoint.GetAppsRequest
 
-	GetBaiduChannel(*pinpoint.GetBaiduChannelInput) (*pinpoint.GetBaiduChannelOutput, error)
-	GetBaiduChannelWithContext(aws.Context, *pinpoint.GetBaiduChannelInput, ...aws.Option) (*pinpoint.GetBaiduChannelOutput, error)
-	GetBaiduChannelRequest(*pinpoint.GetBaiduChannelInput) (*aws.Request, *pinpoint.GetBaiduChannelOutput)
+	GetBaiduChannelRequest(*pinpoint.GetBaiduChannelInput) pinpoint.GetBaiduChannelRequest
 
-	GetCampaign(*pinpoint.GetCampaignInput) (*pinpoint.GetCampaignOutput, error)
-	GetCampaignWithContext(aws.Context, *pinpoint.GetCampaignInput, ...aws.Option) (*pinpoint.GetCampaignOutput, error)
-	GetCampaignRequest(*pinpoint.GetCampaignInput) (*aws.Request, *pinpoint.GetCampaignOutput)
+	GetCampaignRequest(*pinpoint.GetCampaignInput) pinpoint.GetCampaignRequest
 
-	GetCampaignActivities(*pinpoint.GetCampaignActivitiesInput) (*pinpoint.GetCampaignActivitiesOutput, error)
-	GetCampaignActivitiesWithContext(aws.Context, *pinpoint.GetCampaignActivitiesInput, ...aws.Option) (*pinpoint.GetCampaignActivitiesOutput, error)
-	GetCampaignActivitiesRequest(*pinpoint.GetCampaignActivitiesInput) (*aws.Request, *pinpoint.GetCampaignActivitiesOutput)
+	GetCampaignActivitiesRequest(*pinpoint.GetCampaignActivitiesInput) pinpoint.GetCampaignActivitiesRequest
 
-	GetCampaignVersion(*pinpoint.GetCampaignVersionInput) (*pinpoint.GetCampaignVersionOutput, error)
-	GetCampaignVersionWithContext(aws.Context, *pinpoint.GetCampaignVersionInput, ...aws.Option) (*pinpoint.GetCampaignVersionOutput, error)
-	GetCampaignVersionRequest(*pinpoint.GetCampaignVersionInput) (*aws.Request, *pinpoint.GetCampaignVersionOutput)
+	GetCampaignVersionRequest(*pinpoint.GetCampaignVersionInput) pinpoint.GetCampaignVersionRequest
 
-	GetCampaignVersions(*pinpoint.GetCampaignVersionsInput) (*pinpoint.GetCampaignVersionsOutput, error)
-	GetCampaignVersionsWithContext(aws.Context, *pinpoint.GetCampaignVersionsInput, ...aws.Option) (*pinpoint.GetCampaignVersionsOutput, error)
-	GetCampaignVersionsRequest(*pinpoint.GetCampaignVersionsInput) (*aws.Request, *pinpoint.GetCampaignVersionsOutput)
+	GetCampaignVersionsRequest(*pinpoint.GetCampaignVersionsInput) pinpoint.GetCampaignVersionsRequest
 
-	GetCampaigns(*pinpoint.GetCampaignsInput) (*pinpoint.GetCampaignsOutput, error)
-	GetCampaignsWithContext(aws.Context, *pinpoint.GetCampaignsInput, ...aws.Option) (*pinpoint.GetCampaignsOutput, error)
-	GetCampaignsRequest(*pinpoint.GetCampaignsInput) (*aws.Request, *pinpoint.GetCampaignsOutput)
+	GetCampaignsRequest(*pinpoint.GetCampaignsInput) pinpoint.GetCampaignsRequest
 
-	GetEmailChannel(*pinpoint.GetEmailChannelInput) (*pinpoint.GetEmailChannelOutput, error)
-	GetEmailChannelWithContext(aws.Context, *pinpoint.GetEmailChannelInput, ...aws.Option) (*pinpoint.GetEmailChannelOutput, error)
-	GetEmailChannelRequest(*pinpoint.GetEmailChannelInput) (*aws.Request, *pinpoint.GetEmailChannelOutput)
+	GetEmailChannelRequest(*pinpoint.GetEmailChannelInput) pinpoint.GetEmailChannelRequest
 
-	GetEndpoint(*pinpoint.GetEndpointInput) (*pinpoint.GetEndpointOutput, error)
-	GetEndpointWithContext(aws.Context, *pinpoint.GetEndpointInput, ...aws.Option) (*pinpoint.GetEndpointOutput, error)
-	GetEndpointRequest(*pinpoint.GetEndpointInput) (*aws.Request, *pinpoint.GetEndpointOutput)
+	GetEndpointRequest(*pinpoint.GetEndpointInput) pinpoint.GetEndpointRequest
 
-	GetEventStream(*pinpoint.GetEventStreamInput) (*pinpoint.GetEventStreamOutput, error)
-	GetEventStreamWithContext(aws.Context, *pinpoint.GetEventStreamInput, ...aws.Option) (*pinpoint.GetEventStreamOutput, error)
-	GetEventStreamRequest(*pinpoint.GetEventStreamInput) (*aws.Request, *pinpoint.GetEventStreamOutput)
+	GetEventStreamRequest(*pinpoint.GetEventStreamInput) pinpoint.GetEventStreamRequest
 
-	GetGcmChannel(*pinpoint.GetGcmChannelInput) (*pinpoint.GetGcmChannelOutput, error)
-	GetGcmChannelWithContext(aws.Context, *pinpoint.GetGcmChannelInput, ...aws.Option) (*pinpoint.GetGcmChannelOutput, error)
-	GetGcmChannelRequest(*pinpoint.GetGcmChannelInput) (*aws.Request, *pinpoint.GetGcmChannelOutput)
+	GetGcmChannelRequest(*pinpoint.GetGcmChannelInput) pinpoint.GetGcmChannelRequest
 
-	GetImportJob(*pinpoint.GetImportJobInput) (*pinpoint.GetImportJobOutput, error)
-	GetImportJobWithContext(aws.Context, *pinpoint.GetImportJobInput, ...aws.Option) (*pinpoint.GetImportJobOutput, error)
-	GetImportJobRequest(*pinpoint.GetImportJobInput) (*aws.Request, *pinpoint.GetImportJobOutput)
+	GetImportJobRequest(*pinpoint.GetImportJobInput) pinpoint.GetImportJobRequest
 
-	GetImportJobs(*pinpoint.GetImportJobsInput) (*pinpoint.GetImportJobsOutput, error)
-	GetImportJobsWithContext(aws.Context, *pinpoint.GetImportJobsInput, ...aws.Option) (*pinpoint.GetImportJobsOutput, error)
-	GetImportJobsRequest(*pinpoint.GetImportJobsInput) (*aws.Request, *pinpoint.GetImportJobsOutput)
+	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
 
-	GetSegment(*pinpoint.GetSegmentInput) (*pinpoint.GetSegmentOutput, error)
-	GetSegmentWithContext(aws.Context, *pinpoint.GetSegmentInput, ...aws.Option) (*pinpoint.GetSegmentOutput, error)
-	GetSegmentRequest(*pinpoint.GetSegmentInput) (*aws.Request, *pinpoint.GetSegmentOutput)
+	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
 
-	GetSegmentImportJobs(*pinpoint.GetSegmentImportJobsInput) (*pinpoint.GetSegmentImportJobsOutput, error)
-	GetSegmentImportJobsWithContext(aws.Context, *pinpoint.GetSegmentImportJobsInput, ...aws.Option) (*pinpoint.GetSegmentImportJobsOutput, error)
-	GetSegmentImportJobsRequest(*pinpoint.GetSegmentImportJobsInput) (*aws.Request, *pinpoint.GetSegmentImportJobsOutput)
+	GetSegmentImportJobsRequest(*pinpoint.GetSegmentImportJobsInput) pinpoint.GetSegmentImportJobsRequest
 
-	GetSegmentVersion(*pinpoint.GetSegmentVersionInput) (*pinpoint.GetSegmentVersionOutput, error)
-	GetSegmentVersionWithContext(aws.Context, *pinpoint.GetSegmentVersionInput, ...aws.Option) (*pinpoint.GetSegmentVersionOutput, error)
-	GetSegmentVersionRequest(*pinpoint.GetSegmentVersionInput) (*aws.Request, *pinpoint.GetSegmentVersionOutput)
+	GetSegmentVersionRequest(*pinpoint.GetSegmentVersionInput) pinpoint.GetSegmentVersionRequest
 
-	GetSegmentVersions(*pinpoint.GetSegmentVersionsInput) (*pinpoint.GetSegmentVersionsOutput, error)
-	GetSegmentVersionsWithContext(aws.Context, *pinpoint.GetSegmentVersionsInput, ...aws.Option) (*pinpoint.GetSegmentVersionsOutput, error)
-	GetSegmentVersionsRequest(*pinpoint.GetSegmentVersionsInput) (*aws.Request, *pinpoint.GetSegmentVersionsOutput)
+	GetSegmentVersionsRequest(*pinpoint.GetSegmentVersionsInput) pinpoint.GetSegmentVersionsRequest
 
-	GetSegments(*pinpoint.GetSegmentsInput) (*pinpoint.GetSegmentsOutput, error)
-	GetSegmentsWithContext(aws.Context, *pinpoint.GetSegmentsInput, ...aws.Option) (*pinpoint.GetSegmentsOutput, error)
-	GetSegmentsRequest(*pinpoint.GetSegmentsInput) (*aws.Request, *pinpoint.GetSegmentsOutput)
+	GetSegmentsRequest(*pinpoint.GetSegmentsInput) pinpoint.GetSegmentsRequest
 
-	GetSmsChannel(*pinpoint.GetSmsChannelInput) (*pinpoint.GetSmsChannelOutput, error)
-	GetSmsChannelWithContext(aws.Context, *pinpoint.GetSmsChannelInput, ...aws.Option) (*pinpoint.GetSmsChannelOutput, error)
-	GetSmsChannelRequest(*pinpoint.GetSmsChannelInput) (*aws.Request, *pinpoint.GetSmsChannelOutput)
+	GetSmsChannelRequest(*pinpoint.GetSmsChannelInput) pinpoint.GetSmsChannelRequest
 
-	PutEventStream(*pinpoint.PutEventStreamInput) (*pinpoint.PutEventStreamOutput, error)
-	PutEventStreamWithContext(aws.Context, *pinpoint.PutEventStreamInput, ...aws.Option) (*pinpoint.PutEventStreamOutput, error)
-	PutEventStreamRequest(*pinpoint.PutEventStreamInput) (*aws.Request, *pinpoint.PutEventStreamOutput)
+	PutEventStreamRequest(*pinpoint.PutEventStreamInput) pinpoint.PutEventStreamRequest
 
-	SendMessages(*pinpoint.SendMessagesInput) (*pinpoint.SendMessagesOutput, error)
-	SendMessagesWithContext(aws.Context, *pinpoint.SendMessagesInput, ...aws.Option) (*pinpoint.SendMessagesOutput, error)
-	SendMessagesRequest(*pinpoint.SendMessagesInput) (*aws.Request, *pinpoint.SendMessagesOutput)
+	SendMessagesRequest(*pinpoint.SendMessagesInput) pinpoint.SendMessagesRequest
 
-	SendUsersMessages(*pinpoint.SendUsersMessagesInput) (*pinpoint.SendUsersMessagesOutput, error)
-	SendUsersMessagesWithContext(aws.Context, *pinpoint.SendUsersMessagesInput, ...aws.Option) (*pinpoint.SendUsersMessagesOutput, error)
-	SendUsersMessagesRequest(*pinpoint.SendUsersMessagesInput) (*aws.Request, *pinpoint.SendUsersMessagesOutput)
+	SendUsersMessagesRequest(*pinpoint.SendUsersMessagesInput) pinpoint.SendUsersMessagesRequest
 
-	UpdateAdmChannel(*pinpoint.UpdateAdmChannelInput) (*pinpoint.UpdateAdmChannelOutput, error)
-	UpdateAdmChannelWithContext(aws.Context, *pinpoint.UpdateAdmChannelInput, ...aws.Option) (*pinpoint.UpdateAdmChannelOutput, error)
-	UpdateAdmChannelRequest(*pinpoint.UpdateAdmChannelInput) (*aws.Request, *pinpoint.UpdateAdmChannelOutput)
+	UpdateAdmChannelRequest(*pinpoint.UpdateAdmChannelInput) pinpoint.UpdateAdmChannelRequest
 
-	UpdateApnsChannel(*pinpoint.UpdateApnsChannelInput) (*pinpoint.UpdateApnsChannelOutput, error)
-	UpdateApnsChannelWithContext(aws.Context, *pinpoint.UpdateApnsChannelInput, ...aws.Option) (*pinpoint.UpdateApnsChannelOutput, error)
-	UpdateApnsChannelRequest(*pinpoint.UpdateApnsChannelInput) (*aws.Request, *pinpoint.UpdateApnsChannelOutput)
+	UpdateApnsChannelRequest(*pinpoint.UpdateApnsChannelInput) pinpoint.UpdateApnsChannelRequest
 
-	UpdateApnsSandboxChannel(*pinpoint.UpdateApnsSandboxChannelInput) (*pinpoint.UpdateApnsSandboxChannelOutput, error)
-	UpdateApnsSandboxChannelWithContext(aws.Context, *pinpoint.UpdateApnsSandboxChannelInput, ...aws.Option) (*pinpoint.UpdateApnsSandboxChannelOutput, error)
-	UpdateApnsSandboxChannelRequest(*pinpoint.UpdateApnsSandboxChannelInput) (*aws.Request, *pinpoint.UpdateApnsSandboxChannelOutput)
+	UpdateApnsSandboxChannelRequest(*pinpoint.UpdateApnsSandboxChannelInput) pinpoint.UpdateApnsSandboxChannelRequest
 
-	UpdateApplicationSettings(*pinpoint.UpdateApplicationSettingsInput) (*pinpoint.UpdateApplicationSettingsOutput, error)
-	UpdateApplicationSettingsWithContext(aws.Context, *pinpoint.UpdateApplicationSettingsInput, ...aws.Option) (*pinpoint.UpdateApplicationSettingsOutput, error)
-	UpdateApplicationSettingsRequest(*pinpoint.UpdateApplicationSettingsInput) (*aws.Request, *pinpoint.UpdateApplicationSettingsOutput)
+	UpdateApplicationSettingsRequest(*pinpoint.UpdateApplicationSettingsInput) pinpoint.UpdateApplicationSettingsRequest
 
-	UpdateBaiduChannel(*pinpoint.UpdateBaiduChannelInput) (*pinpoint.UpdateBaiduChannelOutput, error)
-	UpdateBaiduChannelWithContext(aws.Context, *pinpoint.UpdateBaiduChannelInput, ...aws.Option) (*pinpoint.UpdateBaiduChannelOutput, error)
-	UpdateBaiduChannelRequest(*pinpoint.UpdateBaiduChannelInput) (*aws.Request, *pinpoint.UpdateBaiduChannelOutput)
+	UpdateBaiduChannelRequest(*pinpoint.UpdateBaiduChannelInput) pinpoint.UpdateBaiduChannelRequest
 
-	UpdateCampaign(*pinpoint.UpdateCampaignInput) (*pinpoint.UpdateCampaignOutput, error)
-	UpdateCampaignWithContext(aws.Context, *pinpoint.UpdateCampaignInput, ...aws.Option) (*pinpoint.UpdateCampaignOutput, error)
-	UpdateCampaignRequest(*pinpoint.UpdateCampaignInput) (*aws.Request, *pinpoint.UpdateCampaignOutput)
+	UpdateCampaignRequest(*pinpoint.UpdateCampaignInput) pinpoint.UpdateCampaignRequest
 
-	UpdateEmailChannel(*pinpoint.UpdateEmailChannelInput) (*pinpoint.UpdateEmailChannelOutput, error)
-	UpdateEmailChannelWithContext(aws.Context, *pinpoint.UpdateEmailChannelInput, ...aws.Option) (*pinpoint.UpdateEmailChannelOutput, error)
-	UpdateEmailChannelRequest(*pinpoint.UpdateEmailChannelInput) (*aws.Request, *pinpoint.UpdateEmailChannelOutput)
+	UpdateEmailChannelRequest(*pinpoint.UpdateEmailChannelInput) pinpoint.UpdateEmailChannelRequest
 
-	UpdateEndpoint(*pinpoint.UpdateEndpointInput) (*pinpoint.UpdateEndpointOutput, error)
-	UpdateEndpointWithContext(aws.Context, *pinpoint.UpdateEndpointInput, ...aws.Option) (*pinpoint.UpdateEndpointOutput, error)
-	UpdateEndpointRequest(*pinpoint.UpdateEndpointInput) (*aws.Request, *pinpoint.UpdateEndpointOutput)
+	UpdateEndpointRequest(*pinpoint.UpdateEndpointInput) pinpoint.UpdateEndpointRequest
 
-	UpdateEndpointsBatch(*pinpoint.UpdateEndpointsBatchInput) (*pinpoint.UpdateEndpointsBatchOutput, error)
-	UpdateEndpointsBatchWithContext(aws.Context, *pinpoint.UpdateEndpointsBatchInput, ...aws.Option) (*pinpoint.UpdateEndpointsBatchOutput, error)
-	UpdateEndpointsBatchRequest(*pinpoint.UpdateEndpointsBatchInput) (*aws.Request, *pinpoint.UpdateEndpointsBatchOutput)
+	UpdateEndpointsBatchRequest(*pinpoint.UpdateEndpointsBatchInput) pinpoint.UpdateEndpointsBatchRequest
 
-	UpdateGcmChannel(*pinpoint.UpdateGcmChannelInput) (*pinpoint.UpdateGcmChannelOutput, error)
-	UpdateGcmChannelWithContext(aws.Context, *pinpoint.UpdateGcmChannelInput, ...aws.Option) (*pinpoint.UpdateGcmChannelOutput, error)
-	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) (*aws.Request, *pinpoint.UpdateGcmChannelOutput)
+	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
 
-	UpdateSegment(*pinpoint.UpdateSegmentInput) (*pinpoint.UpdateSegmentOutput, error)
-	UpdateSegmentWithContext(aws.Context, *pinpoint.UpdateSegmentInput, ...aws.Option) (*pinpoint.UpdateSegmentOutput, error)
-	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) (*aws.Request, *pinpoint.UpdateSegmentOutput)
+	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
 
-	UpdateSmsChannel(*pinpoint.UpdateSmsChannelInput) (*pinpoint.UpdateSmsChannelOutput, error)
-	UpdateSmsChannelWithContext(aws.Context, *pinpoint.UpdateSmsChannelInput, ...aws.Option) (*pinpoint.UpdateSmsChannelOutput, error)
-	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) (*aws.Request, *pinpoint.UpdateSmsChannelOutput)
+	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
 }
 
 var _ PinpointAPI = (*pinpoint.Pinpoint)(nil)

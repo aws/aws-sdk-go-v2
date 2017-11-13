@@ -11,29 +11,36 @@ import (
 
 const opBuildSuggesters = "BuildSuggesters"
 
-// BuildSuggestersRequest generates a "aws.Request" representing the
-// client's request for the BuildSuggesters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BuildSuggestersRequest is a API request type for the BuildSuggesters API operation.
+type BuildSuggestersRequest struct {
+	*aws.Request
+	Input *BuildSuggestersInput
+}
+
+// Send marshals and sends the BuildSuggesters API request.
+func (r BuildSuggestersRequest) Send() (*BuildSuggestersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BuildSuggestersOutput), nil
+}
+
+// BuildSuggestersRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BuildSuggesters for more information on using the BuildSuggesters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Indexes the search suggestions. For more information, see Configuring Suggesters
+// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the BuildSuggestersRequest method.
-//    req, resp := client.BuildSuggestersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BuildSuggestersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) (req *aws.Request, output *BuildSuggestersOutput) {
+func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) BuildSuggestersRequest {
 	op := &aws.Operation{
 		Name:       opBuildSuggesters,
 		HTTPMethod: "POST",
@@ -44,82 +51,42 @@ func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) (req *
 		input = &BuildSuggestersInput{}
 	}
 
-	output = &BuildSuggestersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BuildSuggesters API operation for Amazon CloudSearch.
-//
-// Indexes the search suggestions. For more information, see Configuring Suggesters
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation BuildSuggesters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) BuildSuggesters(input *BuildSuggestersInput) (*BuildSuggestersOutput, error) {
-	req, out := c.BuildSuggestersRequest(input)
-	return out, req.Send()
-}
-
-// BuildSuggestersWithContext is the same as BuildSuggesters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BuildSuggesters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) BuildSuggestersWithContext(ctx aws.Context, input *BuildSuggestersInput, opts ...aws.Option) (*BuildSuggestersOutput, error) {
-	req, out := c.BuildSuggestersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BuildSuggestersOutput{})
+	return BuildSuggestersRequest{Request: req, Input: input}
 }
 
 const opCreateDomain = "CreateDomain"
 
-// CreateDomainRequest generates a "aws.Request" representing the
-// client's request for the CreateDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDomainRequest is a API request type for the CreateDomain API operation.
+type CreateDomainRequest struct {
+	*aws.Request
+	Input *CreateDomainInput
+}
+
+// Send marshals and sends the CreateDomain API request.
+func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDomainOutput), nil
+}
+
+// CreateDomainRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDomain for more information on using the CreateDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new search domain. For more information, see Creating a Search
+// Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the CreateDomainRequest method.
-//    req, resp := client.CreateDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) (req *aws.Request, output *CreateDomainOutput) {
+func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) CreateDomainRequest {
 	op := &aws.Operation{
 		Name:       opCreateDomain,
 		HTTPMethod: "POST",
@@ -130,81 +97,43 @@ func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) (req *aws.Re
 		input = &CreateDomainInput{}
 	}
 
-	output = &CreateDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDomain API operation for Amazon CloudSearch.
-//
-// Creates a new search domain. For more information, see Creating a Search
-// Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation CreateDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-func (c *CloudSearch) CreateDomain(input *CreateDomainInput) (*CreateDomainOutput, error) {
-	req, out := c.CreateDomainRequest(input)
-	return out, req.Send()
-}
-
-// CreateDomainWithContext is the same as CreateDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...aws.Option) (*CreateDomainOutput, error) {
-	req, out := c.CreateDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDomainOutput{})
+	return CreateDomainRequest{Request: req, Input: input}
 }
 
 const opDefineAnalysisScheme = "DefineAnalysisScheme"
 
-// DefineAnalysisSchemeRequest generates a "aws.Request" representing the
-// client's request for the DefineAnalysisScheme operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DefineAnalysisSchemeRequest is a API request type for the DefineAnalysisScheme API operation.
+type DefineAnalysisSchemeRequest struct {
+	*aws.Request
+	Input *DefineAnalysisSchemeInput
+}
+
+// Send marshals and sends the DefineAnalysisScheme API request.
+func (r DefineAnalysisSchemeRequest) Send() (*DefineAnalysisSchemeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DefineAnalysisSchemeOutput), nil
+}
+
+// DefineAnalysisSchemeRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DefineAnalysisScheme for more information on using the DefineAnalysisScheme
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Configures an analysis scheme that can be applied to a text or text-array
+// field to define language-specific text processing options. For more information,
+// see Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DefineAnalysisSchemeRequest method.
-//    req, resp := client.DefineAnalysisSchemeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DefineAnalysisSchemeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInput) (req *aws.Request, output *DefineAnalysisSchemeOutput) {
+func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInput) DefineAnalysisSchemeRequest {
 	op := &aws.Operation{
 		Name:       opDefineAnalysisScheme,
 		HTTPMethod: "POST",
@@ -215,89 +144,43 @@ func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInp
 		input = &DefineAnalysisSchemeInput{}
 	}
 
-	output = &DefineAnalysisSchemeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DefineAnalysisScheme API operation for Amazon CloudSearch.
-//
-// Configures an analysis scheme that can be applied to a text or text-array
-// field to define language-specific text processing options. For more information,
-// see Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DefineAnalysisScheme for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DefineAnalysisScheme(input *DefineAnalysisSchemeInput) (*DefineAnalysisSchemeOutput, error) {
-	req, out := c.DefineAnalysisSchemeRequest(input)
-	return out, req.Send()
-}
-
-// DefineAnalysisSchemeWithContext is the same as DefineAnalysisScheme with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DefineAnalysisScheme for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DefineAnalysisSchemeWithContext(ctx aws.Context, input *DefineAnalysisSchemeInput, opts ...aws.Option) (*DefineAnalysisSchemeOutput, error) {
-	req, out := c.DefineAnalysisSchemeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DefineAnalysisSchemeOutput{})
+	return DefineAnalysisSchemeRequest{Request: req, Input: input}
 }
 
 const opDefineExpression = "DefineExpression"
 
-// DefineExpressionRequest generates a "aws.Request" representing the
-// client's request for the DefineExpression operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DefineExpressionRequest is a API request type for the DefineExpression API operation.
+type DefineExpressionRequest struct {
+	*aws.Request
+	Input *DefineExpressionInput
+}
+
+// Send marshals and sends the DefineExpression API request.
+func (r DefineExpressionRequest) Send() (*DefineExpressionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DefineExpressionOutput), nil
+}
+
+// DefineExpressionRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DefineExpression for more information on using the DefineExpression
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Configures an Expression for the search domain. Used to create new expressions
+// and modify existing ones. If the expression exists, the new configuration
+// replaces the old one. For more information, see Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DefineExpressionRequest method.
-//    req, resp := client.DefineExpressionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DefineExpressionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) (req *aws.Request, output *DefineExpressionOutput) {
+func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) DefineExpressionRequest {
 	op := &aws.Operation{
 		Name:       opDefineExpression,
 		HTTPMethod: "POST",
@@ -308,105 +191,30 @@ func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) (req
 		input = &DefineExpressionInput{}
 	}
 
-	output = &DefineExpressionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DefineExpression API operation for Amazon CloudSearch.
-//
-// Configures an Expression for the search domain. Used to create new expressions
-// and modify existing ones. If the expression exists, the new configuration
-// replaces the old one. For more information, see Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DefineExpression for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DefineExpression(input *DefineExpressionInput) (*DefineExpressionOutput, error) {
-	req, out := c.DefineExpressionRequest(input)
-	return out, req.Send()
-}
-
-// DefineExpressionWithContext is the same as DefineExpression with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DefineExpression for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DefineExpressionWithContext(ctx aws.Context, input *DefineExpressionInput, opts ...aws.Option) (*DefineExpressionOutput, error) {
-	req, out := c.DefineExpressionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DefineExpressionOutput{})
+	return DefineExpressionRequest{Request: req, Input: input}
 }
 
 const opDefineIndexField = "DefineIndexField"
 
-// DefineIndexFieldRequest generates a "aws.Request" representing the
-// client's request for the DefineIndexField operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DefineIndexField for more information on using the DefineIndexField
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DefineIndexFieldRequest method.
-//    req, resp := client.DefineIndexFieldRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) (req *aws.Request, output *DefineIndexFieldOutput) {
-	op := &aws.Operation{
-		Name:       opDefineIndexField,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DefineIndexFieldInput{}
-	}
-
-	output = &DefineIndexFieldOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DefineIndexFieldRequest is a API request type for the DefineIndexField API operation.
+type DefineIndexFieldRequest struct {
+	*aws.Request
+	Input *DefineIndexFieldInput
 }
 
-// DefineIndexField API operation for Amazon CloudSearch.
+// Send marshals and sends the DefineIndexField API request.
+func (r DefineIndexFieldRequest) Send() (*DefineIndexFieldOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DefineIndexFieldOutput), nil
+}
+
+// DefineIndexFieldRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
 // Configures an IndexField for the search domain. Used to create new fields
 // and modify existing ones. You must specify the name of the domain you are
@@ -417,77 +225,62 @@ func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) (req
 // information, see Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
 // in the Amazon CloudSearch Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DefineIndexField for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DefineIndexField(input *DefineIndexFieldInput) (*DefineIndexFieldOutput, error) {
-	req, out := c.DefineIndexFieldRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DefineIndexFieldRequest method.
+//    req := client.DefineIndexFieldRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) DefineIndexFieldRequest {
+	op := &aws.Operation{
+		Name:       opDefineIndexField,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DefineIndexFieldWithContext is the same as DefineIndexField with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DefineIndexField for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DefineIndexFieldWithContext(ctx aws.Context, input *DefineIndexFieldInput, opts ...aws.Option) (*DefineIndexFieldOutput, error) {
-	req, out := c.DefineIndexFieldRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DefineIndexFieldInput{}
+	}
+
+	req := c.newRequest(op, input, &DefineIndexFieldOutput{})
+	return DefineIndexFieldRequest{Request: req, Input: input}
 }
 
 const opDefineSuggester = "DefineSuggester"
 
-// DefineSuggesterRequest generates a "aws.Request" representing the
-// client's request for the DefineSuggester operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DefineSuggesterRequest is a API request type for the DefineSuggester API operation.
+type DefineSuggesterRequest struct {
+	*aws.Request
+	Input *DefineSuggesterInput
+}
+
+// Send marshals and sends the DefineSuggester API request.
+func (r DefineSuggesterRequest) Send() (*DefineSuggesterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DefineSuggesterOutput), nil
+}
+
+// DefineSuggesterRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DefineSuggester for more information on using the DefineSuggester
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Configures a suggester for a domain. A suggester enables you to display possible
+// matches before users finish typing their queries. When you configure a suggester,
+// you must specify the name of the text field you want to search for possible
+// matches and a unique name for the suggester. For more information, see Getting
+// Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DefineSuggesterRequest method.
-//    req, resp := client.DefineSuggesterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DefineSuggesterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) (req *aws.Request, output *DefineSuggesterOutput) {
+func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) DefineSuggesterRequest {
 	op := &aws.Operation{
 		Name:       opDefineSuggester,
 		HTTPMethod: "POST",
@@ -498,91 +291,42 @@ func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) (req *
 		input = &DefineSuggesterInput{}
 	}
 
-	output = &DefineSuggesterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DefineSuggester API operation for Amazon CloudSearch.
-//
-// Configures a suggester for a domain. A suggester enables you to display possible
-// matches before users finish typing their queries. When you configure a suggester,
-// you must specify the name of the text field you want to search for possible
-// matches and a unique name for the suggester. For more information, see Getting
-// Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DefineSuggester for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DefineSuggester(input *DefineSuggesterInput) (*DefineSuggesterOutput, error) {
-	req, out := c.DefineSuggesterRequest(input)
-	return out, req.Send()
-}
-
-// DefineSuggesterWithContext is the same as DefineSuggester with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DefineSuggester for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DefineSuggesterWithContext(ctx aws.Context, input *DefineSuggesterInput, opts ...aws.Option) (*DefineSuggesterOutput, error) {
-	req, out := c.DefineSuggesterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DefineSuggesterOutput{})
+	return DefineSuggesterRequest{Request: req, Input: input}
 }
 
 const opDeleteAnalysisScheme = "DeleteAnalysisScheme"
 
-// DeleteAnalysisSchemeRequest generates a "aws.Request" representing the
-// client's request for the DeleteAnalysisScheme operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAnalysisSchemeRequest is a API request type for the DeleteAnalysisScheme API operation.
+type DeleteAnalysisSchemeRequest struct {
+	*aws.Request
+	Input *DeleteAnalysisSchemeInput
+}
+
+// Send marshals and sends the DeleteAnalysisScheme API request.
+func (r DeleteAnalysisSchemeRequest) Send() (*DeleteAnalysisSchemeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAnalysisSchemeOutput), nil
+}
+
+// DeleteAnalysisSchemeRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAnalysisScheme for more information on using the DeleteAnalysisScheme
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an analysis scheme. For more information, see Configuring Analysis
+// Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DeleteAnalysisSchemeRequest method.
-//    req, resp := client.DeleteAnalysisSchemeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAnalysisSchemeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInput) (req *aws.Request, output *DeleteAnalysisSchemeOutput) {
+func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInput) DeleteAnalysisSchemeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAnalysisScheme,
 		HTTPMethod: "POST",
@@ -593,85 +337,43 @@ func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInp
 		input = &DeleteAnalysisSchemeInput{}
 	}
 
-	output = &DeleteAnalysisSchemeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteAnalysisScheme API operation for Amazon CloudSearch.
-//
-// Deletes an analysis scheme. For more information, see Configuring Analysis
-// Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DeleteAnalysisScheme for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DeleteAnalysisScheme(input *DeleteAnalysisSchemeInput) (*DeleteAnalysisSchemeOutput, error) {
-	req, out := c.DeleteAnalysisSchemeRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAnalysisSchemeWithContext is the same as DeleteAnalysisScheme with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAnalysisScheme for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DeleteAnalysisSchemeWithContext(ctx aws.Context, input *DeleteAnalysisSchemeInput, opts ...aws.Option) (*DeleteAnalysisSchemeOutput, error) {
-	req, out := c.DeleteAnalysisSchemeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteAnalysisSchemeOutput{})
+	return DeleteAnalysisSchemeRequest{Request: req, Input: input}
 }
 
 const opDeleteDomain = "DeleteDomain"
 
-// DeleteDomainRequest generates a "aws.Request" representing the
-// client's request for the DeleteDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDomainRequest is a API request type for the DeleteDomain API operation.
+type DeleteDomainRequest struct {
+	*aws.Request
+	Input *DeleteDomainInput
+}
+
+// Send marshals and sends the DeleteDomain API request.
+func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDomainOutput), nil
+}
+
+// DeleteDomainRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDomain for more information on using the DeleteDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Permanently deletes a search domain and all of its data. Once a domain has
+// been deleted, it cannot be recovered. For more information, see Deleting
+// a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DeleteDomainRequest method.
-//    req, resp := client.DeleteDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Request, output *DeleteDomainOutput) {
+func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDomain,
 		HTTPMethod: "POST",
@@ -682,79 +384,42 @@ func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Re
 		input = &DeleteDomainInput{}
 	}
 
-	output = &DeleteDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDomain API operation for Amazon CloudSearch.
-//
-// Permanently deletes a search domain and all of its data. Once a domain has
-// been deleted, it cannot be recovered. For more information, see Deleting
-// a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DeleteDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-func (c *CloudSearch) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput, error) {
-	req, out := c.DeleteDomainRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDomainWithContext is the same as DeleteDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...aws.Option) (*DeleteDomainOutput, error) {
-	req, out := c.DeleteDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDomainOutput{})
+	return DeleteDomainRequest{Request: req, Input: input}
 }
 
 const opDeleteExpression = "DeleteExpression"
 
-// DeleteExpressionRequest generates a "aws.Request" representing the
-// client's request for the DeleteExpression operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteExpressionRequest is a API request type for the DeleteExpression API operation.
+type DeleteExpressionRequest struct {
+	*aws.Request
+	Input *DeleteExpressionInput
+}
+
+// Send marshals and sends the DeleteExpression API request.
+func (r DeleteExpressionRequest) Send() (*DeleteExpressionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteExpressionOutput), nil
+}
+
+// DeleteExpressionRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteExpression for more information on using the DeleteExpression
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes an Expression from the search domain. For more information, see Configuring
+// Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DeleteExpressionRequest method.
-//    req, resp := client.DeleteExpressionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteExpressionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) (req *aws.Request, output *DeleteExpressionOutput) {
+func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) DeleteExpressionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteExpression,
 		HTTPMethod: "POST",
@@ -765,85 +430,42 @@ func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) (req
 		input = &DeleteExpressionInput{}
 	}
 
-	output = &DeleteExpressionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteExpression API operation for Amazon CloudSearch.
-//
-// Removes an Expression from the search domain. For more information, see Configuring
-// Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DeleteExpression for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DeleteExpression(input *DeleteExpressionInput) (*DeleteExpressionOutput, error) {
-	req, out := c.DeleteExpressionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteExpressionWithContext is the same as DeleteExpression with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteExpression for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DeleteExpressionWithContext(ctx aws.Context, input *DeleteExpressionInput, opts ...aws.Option) (*DeleteExpressionOutput, error) {
-	req, out := c.DeleteExpressionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteExpressionOutput{})
+	return DeleteExpressionRequest{Request: req, Input: input}
 }
 
 const opDeleteIndexField = "DeleteIndexField"
 
-// DeleteIndexFieldRequest generates a "aws.Request" representing the
-// client's request for the DeleteIndexField operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteIndexFieldRequest is a API request type for the DeleteIndexField API operation.
+type DeleteIndexFieldRequest struct {
+	*aws.Request
+	Input *DeleteIndexFieldInput
+}
+
+// Send marshals and sends the DeleteIndexField API request.
+func (r DeleteIndexFieldRequest) Send() (*DeleteIndexFieldOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteIndexFieldOutput), nil
+}
+
+// DeleteIndexFieldRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteIndexField for more information on using the DeleteIndexField
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes an IndexField from the search domain. For more information, see Configuring
+// Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DeleteIndexFieldRequest method.
-//    req, resp := client.DeleteIndexFieldRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteIndexFieldRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) (req *aws.Request, output *DeleteIndexFieldOutput) {
+func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) DeleteIndexFieldRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIndexField,
 		HTTPMethod: "POST",
@@ -854,85 +476,42 @@ func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) (req
 		input = &DeleteIndexFieldInput{}
 	}
 
-	output = &DeleteIndexFieldOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteIndexField API operation for Amazon CloudSearch.
-//
-// Removes an IndexField from the search domain. For more information, see Configuring
-// Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DeleteIndexField for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DeleteIndexField(input *DeleteIndexFieldInput) (*DeleteIndexFieldOutput, error) {
-	req, out := c.DeleteIndexFieldRequest(input)
-	return out, req.Send()
-}
-
-// DeleteIndexFieldWithContext is the same as DeleteIndexField with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteIndexField for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DeleteIndexFieldWithContext(ctx aws.Context, input *DeleteIndexFieldInput, opts ...aws.Option) (*DeleteIndexFieldOutput, error) {
-	req, out := c.DeleteIndexFieldRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteIndexFieldOutput{})
+	return DeleteIndexFieldRequest{Request: req, Input: input}
 }
 
 const opDeleteSuggester = "DeleteSuggester"
 
-// DeleteSuggesterRequest generates a "aws.Request" representing the
-// client's request for the DeleteSuggester operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSuggesterRequest is a API request type for the DeleteSuggester API operation.
+type DeleteSuggesterRequest struct {
+	*aws.Request
+	Input *DeleteSuggesterInput
+}
+
+// Send marshals and sends the DeleteSuggester API request.
+func (r DeleteSuggesterRequest) Send() (*DeleteSuggesterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSuggesterOutput), nil
+}
+
+// DeleteSuggesterRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSuggester for more information on using the DeleteSuggester
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a suggester. For more information, see Getting Search Suggestions
+// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DeleteSuggesterRequest method.
-//    req, resp := client.DeleteSuggesterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSuggesterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) (req *aws.Request, output *DeleteSuggesterOutput) {
+func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) DeleteSuggesterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSuggester,
 		HTTPMethod: "POST",
@@ -943,85 +522,46 @@ func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) (req *
 		input = &DeleteSuggesterInput{}
 	}
 
-	output = &DeleteSuggesterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSuggester API operation for Amazon CloudSearch.
-//
-// Deletes a suggester. For more information, see Getting Search Suggestions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DeleteSuggester for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DeleteSuggester(input *DeleteSuggesterInput) (*DeleteSuggesterOutput, error) {
-	req, out := c.DeleteSuggesterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSuggesterWithContext is the same as DeleteSuggester with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSuggester for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DeleteSuggesterWithContext(ctx aws.Context, input *DeleteSuggesterInput, opts ...aws.Option) (*DeleteSuggesterOutput, error) {
-	req, out := c.DeleteSuggesterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSuggesterOutput{})
+	return DeleteSuggesterRequest{Request: req, Input: input}
 }
 
 const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
 
-// DescribeAnalysisSchemesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAnalysisSchemes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAnalysisSchemesRequest is a API request type for the DescribeAnalysisSchemes API operation.
+type DescribeAnalysisSchemesRequest struct {
+	*aws.Request
+	Input *DescribeAnalysisSchemesInput
+}
+
+// Send marshals and sends the DescribeAnalysisSchemes API request.
+func (r DescribeAnalysisSchemesRequest) Send() (*DescribeAnalysisSchemesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAnalysisSchemesOutput), nil
+}
+
+// DescribeAnalysisSchemesRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAnalysisSchemes for more information on using the DescribeAnalysisSchemes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the analysis schemes configured for a domain. An analysis scheme defines
+// language-specific text processing options for a text field. Can be limited
+// to specific analysis schemes by name. By default, shows all analysis schemes
+// and includes any pending changes to the configuration. Set the Deployed option
+// to true to show the active configuration and exclude pending changes. For
+// more information, see Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeAnalysisSchemesRequest method.
-//    req, resp := client.DescribeAnalysisSchemesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAnalysisSchemesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesInput) (req *aws.Request, output *DescribeAnalysisSchemesOutput) {
+func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesInput) DescribeAnalysisSchemesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAnalysisSchemes,
 		HTTPMethod: "POST",
@@ -1032,86 +572,44 @@ func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSche
 		input = &DescribeAnalysisSchemesInput{}
 	}
 
-	output = &DescribeAnalysisSchemesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAnalysisSchemes API operation for Amazon CloudSearch.
-//
-// Gets the analysis schemes configured for a domain. An analysis scheme defines
-// language-specific text processing options for a text field. Can be limited
-// to specific analysis schemes by name. By default, shows all analysis schemes
-// and includes any pending changes to the configuration. Set the Deployed option
-// to true to show the active configuration and exclude pending changes. For
-// more information, see Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeAnalysisSchemes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DescribeAnalysisSchemes(input *DescribeAnalysisSchemesInput) (*DescribeAnalysisSchemesOutput, error) {
-	req, out := c.DescribeAnalysisSchemesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAnalysisSchemesWithContext is the same as DescribeAnalysisSchemes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAnalysisSchemes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeAnalysisSchemesWithContext(ctx aws.Context, input *DescribeAnalysisSchemesInput, opts ...aws.Option) (*DescribeAnalysisSchemesOutput, error) {
-	req, out := c.DescribeAnalysisSchemesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAnalysisSchemesOutput{})
+	return DescribeAnalysisSchemesRequest{Request: req, Input: input}
 }
 
 const opDescribeAvailabilityOptions = "DescribeAvailabilityOptions"
 
-// DescribeAvailabilityOptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAvailabilityOptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAvailabilityOptionsRequest is a API request type for the DescribeAvailabilityOptions API operation.
+type DescribeAvailabilityOptionsRequest struct {
+	*aws.Request
+	Input *DescribeAvailabilityOptionsInput
+}
+
+// Send marshals and sends the DescribeAvailabilityOptions API request.
+func (r DescribeAvailabilityOptionsRequest) Send() (*DescribeAvailabilityOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAvailabilityOptionsOutput), nil
+}
+
+// DescribeAvailabilityOptionsRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAvailabilityOptions for more information on using the DescribeAvailabilityOptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the availability options configured for a domain. By default, shows
+// the configuration with any pending changes. Set the Deployed option to true
+// to show the active configuration and exclude pending changes. For more information,
+// see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeAvailabilityOptionsRequest method.
-//    req, resp := client.DescribeAvailabilityOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAvailabilityOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabilityOptionsInput) (req *aws.Request, output *DescribeAvailabilityOptionsOutput) {
+func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabilityOptionsInput) DescribeAvailabilityOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAvailabilityOptions,
 		HTTPMethod: "POST",
@@ -1122,93 +620,45 @@ func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabi
 		input = &DescribeAvailabilityOptionsInput{}
 	}
 
-	output = &DescribeAvailabilityOptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAvailabilityOptions API operation for Amazon CloudSearch.
-//
-// Gets the availability options configured for a domain. By default, shows
-// the configuration with any pending changes. Set the Deployed option to true
-// to show the active configuration and exclude pending changes. For more information,
-// see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeAvailabilityOptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-//   * ErrCodeDisabledOperationException "DisabledAction"
-//   The request was rejected because it attempted an operation which is not enabled.
-//
-func (c *CloudSearch) DescribeAvailabilityOptions(input *DescribeAvailabilityOptionsInput) (*DescribeAvailabilityOptionsOutput, error) {
-	req, out := c.DescribeAvailabilityOptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAvailabilityOptionsWithContext is the same as DescribeAvailabilityOptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAvailabilityOptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeAvailabilityOptionsWithContext(ctx aws.Context, input *DescribeAvailabilityOptionsInput, opts ...aws.Option) (*DescribeAvailabilityOptionsOutput, error) {
-	req, out := c.DescribeAvailabilityOptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAvailabilityOptionsOutput{})
+	return DescribeAvailabilityOptionsRequest{Request: req, Input: input}
 }
 
 const opDescribeDomains = "DescribeDomains"
 
-// DescribeDomainsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDomains operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDomainsRequest is a API request type for the DescribeDomains API operation.
+type DescribeDomainsRequest struct {
+	*aws.Request
+	Input *DescribeDomainsInput
+}
+
+// Send marshals and sends the DescribeDomains API request.
+func (r DescribeDomainsRequest) Send() (*DescribeDomainsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDomainsOutput), nil
+}
+
+// DescribeDomainsRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDomains for more information on using the DescribeDomains
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about the search domains owned by this account. Can be limited
+// to specific domains. Shows all domains by default. To get the number of searchable
+// documents in a domain, use the console or submit a matchall request to your
+// domain's search endpoint: q=matchall&q.parser=structured&size=0.
+// For more information, see Getting Information about a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeDomainsRequest method.
-//    req, resp := client.DescribeDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDomainsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) (req *aws.Request, output *DescribeDomainsOutput) {
+func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) DescribeDomainsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDomains,
 		HTTPMethod: "POST",
@@ -1219,81 +669,45 @@ func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) (req *
 		input = &DescribeDomainsInput{}
 	}
 
-	output = &DescribeDomainsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDomains API operation for Amazon CloudSearch.
-//
-// Gets information about the search domains owned by this account. Can be limited
-// to specific domains. Shows all domains by default. To get the number of searchable
-// documents in a domain, use the console or submit a matchall request to your
-// domain's search endpoint: q=matchall&q.parser=structured&size=0.
-// For more information, see Getting Information about a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeDomains for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-func (c *CloudSearch) DescribeDomains(input *DescribeDomainsInput) (*DescribeDomainsOutput, error) {
-	req, out := c.DescribeDomainsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDomainsWithContext is the same as DescribeDomains with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDomains for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeDomainsWithContext(ctx aws.Context, input *DescribeDomainsInput, opts ...aws.Option) (*DescribeDomainsOutput, error) {
-	req, out := c.DescribeDomainsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDomainsOutput{})
+	return DescribeDomainsRequest{Request: req, Input: input}
 }
 
 const opDescribeExpressions = "DescribeExpressions"
 
-// DescribeExpressionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeExpressions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeExpressionsRequest is a API request type for the DescribeExpressions API operation.
+type DescribeExpressionsRequest struct {
+	*aws.Request
+	Input *DescribeExpressionsInput
+}
+
+// Send marshals and sends the DescribeExpressions API request.
+func (r DescribeExpressionsRequest) Send() (*DescribeExpressionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeExpressionsOutput), nil
+}
+
+// DescribeExpressionsRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeExpressions for more information on using the DescribeExpressions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the expressions configured for the search domain. Can be limited to
+// specific expressions by name. By default, shows all expressions and includes
+// any pending changes to the configuration. Set the Deployed option to true
+// to show the active configuration and exclude pending changes. For more information,
+// see Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeExpressionsRequest method.
-//    req, resp := client.DescribeExpressionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeExpressionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput) (req *aws.Request, output *DescribeExpressionsOutput) {
+func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput) DescribeExpressionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExpressions,
 		HTTPMethod: "POST",
@@ -1304,85 +718,45 @@ func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput
 		input = &DescribeExpressionsInput{}
 	}
 
-	output = &DescribeExpressionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeExpressions API operation for Amazon CloudSearch.
-//
-// Gets the expressions configured for the search domain. Can be limited to
-// specific expressions by name. By default, shows all expressions and includes
-// any pending changes to the configuration. Set the Deployed option to true
-// to show the active configuration and exclude pending changes. For more information,
-// see Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeExpressions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DescribeExpressions(input *DescribeExpressionsInput) (*DescribeExpressionsOutput, error) {
-	req, out := c.DescribeExpressionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeExpressionsWithContext is the same as DescribeExpressions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeExpressions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeExpressionsWithContext(ctx aws.Context, input *DescribeExpressionsInput, opts ...aws.Option) (*DescribeExpressionsOutput, error) {
-	req, out := c.DescribeExpressionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeExpressionsOutput{})
+	return DescribeExpressionsRequest{Request: req, Input: input}
 }
 
 const opDescribeIndexFields = "DescribeIndexFields"
 
-// DescribeIndexFieldsRequest generates a "aws.Request" representing the
-// client's request for the DescribeIndexFields operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeIndexFieldsRequest is a API request type for the DescribeIndexFields API operation.
+type DescribeIndexFieldsRequest struct {
+	*aws.Request
+	Input *DescribeIndexFieldsInput
+}
+
+// Send marshals and sends the DescribeIndexFields API request.
+func (r DescribeIndexFieldsRequest) Send() (*DescribeIndexFieldsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeIndexFieldsOutput), nil
+}
+
+// DescribeIndexFieldsRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeIndexFields for more information on using the DescribeIndexFields
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about the index fields configured for the search domain.
+// Can be limited to specific fields by name. By default, shows all fields and
+// includes any pending changes to the configuration. Set the Deployed option
+// to true to show the active configuration and exclude pending changes. For
+// more information, see Getting Domain Information (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeIndexFieldsRequest method.
-//    req, resp := client.DescribeIndexFieldsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeIndexFieldsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) (req *aws.Request, output *DescribeIndexFieldsOutput) {
+func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) DescribeIndexFieldsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIndexFields,
 		HTTPMethod: "POST",
@@ -1393,85 +767,43 @@ func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput
 		input = &DescribeIndexFieldsInput{}
 	}
 
-	output = &DescribeIndexFieldsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeIndexFields API operation for Amazon CloudSearch.
-//
-// Gets information about the index fields configured for the search domain.
-// Can be limited to specific fields by name. By default, shows all fields and
-// includes any pending changes to the configuration. Set the Deployed option
-// to true to show the active configuration and exclude pending changes. For
-// more information, see Getting Domain Information (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeIndexFields for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DescribeIndexFields(input *DescribeIndexFieldsInput) (*DescribeIndexFieldsOutput, error) {
-	req, out := c.DescribeIndexFieldsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeIndexFieldsWithContext is the same as DescribeIndexFields with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeIndexFields for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeIndexFieldsWithContext(ctx aws.Context, input *DescribeIndexFieldsInput, opts ...aws.Option) (*DescribeIndexFieldsOutput, error) {
-	req, out := c.DescribeIndexFieldsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeIndexFieldsOutput{})
+	return DescribeIndexFieldsRequest{Request: req, Input: input}
 }
 
 const opDescribeScalingParameters = "DescribeScalingParameters"
 
-// DescribeScalingParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeScalingParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeScalingParametersRequest is a API request type for the DescribeScalingParameters API operation.
+type DescribeScalingParametersRequest struct {
+	*aws.Request
+	Input *DescribeScalingParametersInput
+}
+
+// Send marshals and sends the DescribeScalingParameters API request.
+func (r DescribeScalingParametersRequest) Send() (*DescribeScalingParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScalingParametersOutput), nil
+}
+
+// DescribeScalingParametersRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeScalingParameters for more information on using the DescribeScalingParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the scaling parameters configured for a domain. A domain's scaling parameters
+// specify the desired search instance type and replication count. For more
+// information, see Configuring Scaling Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeScalingParametersRequest method.
-//    req, resp := client.DescribeScalingParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeScalingParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingParametersInput) (req *aws.Request, output *DescribeScalingParametersOutput) {
+func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingParametersInput) DescribeScalingParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingParameters,
 		HTTPMethod: "POST",
@@ -1482,83 +814,45 @@ func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingPar
 		input = &DescribeScalingParametersInput{}
 	}
 
-	output = &DescribeScalingParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeScalingParameters API operation for Amazon CloudSearch.
-//
-// Gets the scaling parameters configured for a domain. A domain's scaling parameters
-// specify the desired search instance type and replication count. For more
-// information, see Configuring Scaling Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeScalingParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DescribeScalingParameters(input *DescribeScalingParametersInput) (*DescribeScalingParametersOutput, error) {
-	req, out := c.DescribeScalingParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScalingParametersWithContext is the same as DescribeScalingParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScalingParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeScalingParametersWithContext(ctx aws.Context, input *DescribeScalingParametersInput, opts ...aws.Option) (*DescribeScalingParametersOutput, error) {
-	req, out := c.DescribeScalingParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeScalingParametersOutput{})
+	return DescribeScalingParametersRequest{Request: req, Input: input}
 }
 
 const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
 
-// DescribeServiceAccessPoliciesRequest generates a "aws.Request" representing the
-// client's request for the DescribeServiceAccessPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeServiceAccessPoliciesRequest is a API request type for the DescribeServiceAccessPolicies API operation.
+type DescribeServiceAccessPoliciesRequest struct {
+	*aws.Request
+	Input *DescribeServiceAccessPoliciesInput
+}
+
+// Send marshals and sends the DescribeServiceAccessPolicies API request.
+func (r DescribeServiceAccessPoliciesRequest) Send() (*DescribeServiceAccessPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeServiceAccessPoliciesOutput), nil
+}
+
+// DescribeServiceAccessPoliciesRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeServiceAccessPolicies for more information on using the DescribeServiceAccessPolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about the access policies that control access to the domain's
+// document and search endpoints. By default, shows the configuration with any
+// pending changes. Set the Deployed option to true to show the active configuration
+// and exclude pending changes. For more information, see Configuring Access
+// for a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeServiceAccessPoliciesRequest method.
-//    req, resp := client.DescribeServiceAccessPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeServiceAccessPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAccessPoliciesInput) (req *aws.Request, output *DescribeServiceAccessPoliciesOutput) {
+func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAccessPoliciesInput) DescribeServiceAccessPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServiceAccessPolicies,
 		HTTPMethod: "POST",
@@ -1569,85 +863,46 @@ func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServic
 		input = &DescribeServiceAccessPoliciesInput{}
 	}
 
-	output = &DescribeServiceAccessPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeServiceAccessPolicies API operation for Amazon CloudSearch.
-//
-// Gets information about the access policies that control access to the domain's
-// document and search endpoints. By default, shows the configuration with any
-// pending changes. Set the Deployed option to true to show the active configuration
-// and exclude pending changes. For more information, see Configuring Access
-// for a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeServiceAccessPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DescribeServiceAccessPolicies(input *DescribeServiceAccessPoliciesInput) (*DescribeServiceAccessPoliciesOutput, error) {
-	req, out := c.DescribeServiceAccessPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeServiceAccessPoliciesWithContext is the same as DescribeServiceAccessPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeServiceAccessPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeServiceAccessPoliciesWithContext(ctx aws.Context, input *DescribeServiceAccessPoliciesInput, opts ...aws.Option) (*DescribeServiceAccessPoliciesOutput, error) {
-	req, out := c.DescribeServiceAccessPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeServiceAccessPoliciesOutput{})
+	return DescribeServiceAccessPoliciesRequest{Request: req, Input: input}
 }
 
 const opDescribeSuggesters = "DescribeSuggesters"
 
-// DescribeSuggestersRequest generates a "aws.Request" representing the
-// client's request for the DescribeSuggesters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSuggestersRequest is a API request type for the DescribeSuggesters API operation.
+type DescribeSuggestersRequest struct {
+	*aws.Request
+	Input *DescribeSuggestersInput
+}
+
+// Send marshals and sends the DescribeSuggesters API request.
+func (r DescribeSuggestersRequest) Send() (*DescribeSuggestersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSuggestersOutput), nil
+}
+
+// DescribeSuggestersRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSuggesters for more information on using the DescribeSuggesters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the suggesters configured for a domain. A suggester enables you to display
+// possible matches before users finish typing their queries. Can be limited
+// to specific suggesters by name. By default, shows all suggesters and includes
+// any pending changes to the configuration. Set the Deployed option to true
+// to show the active configuration and exclude pending changes. For more information,
+// see Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the DescribeSuggestersRequest method.
-//    req, resp := client.DescribeSuggestersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSuggestersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) (req *aws.Request, output *DescribeSuggestersOutput) {
+func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) DescribeSuggestersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSuggesters,
 		HTTPMethod: "POST",
@@ -1658,86 +913,42 @@ func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) 
 		input = &DescribeSuggestersInput{}
 	}
 
-	output = &DescribeSuggestersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSuggesters API operation for Amazon CloudSearch.
-//
-// Gets the suggesters configured for a domain. A suggester enables you to display
-// possible matches before users finish typing their queries. Can be limited
-// to specific suggesters by name. By default, shows all suggesters and includes
-// any pending changes to the configuration. Set the Deployed option to true
-// to show the active configuration and exclude pending changes. For more information,
-// see Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation DescribeSuggesters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) DescribeSuggesters(input *DescribeSuggestersInput) (*DescribeSuggestersOutput, error) {
-	req, out := c.DescribeSuggestersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSuggestersWithContext is the same as DescribeSuggesters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSuggesters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) DescribeSuggestersWithContext(ctx aws.Context, input *DescribeSuggestersInput, opts ...aws.Option) (*DescribeSuggestersOutput, error) {
-	req, out := c.DescribeSuggestersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSuggestersOutput{})
+	return DescribeSuggestersRequest{Request: req, Input: input}
 }
 
 const opIndexDocuments = "IndexDocuments"
 
-// IndexDocumentsRequest generates a "aws.Request" representing the
-// client's request for the IndexDocuments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// IndexDocumentsRequest is a API request type for the IndexDocuments API operation.
+type IndexDocumentsRequest struct {
+	*aws.Request
+	Input *IndexDocumentsInput
+}
+
+// Send marshals and sends the IndexDocuments API request.
+func (r IndexDocumentsRequest) Send() (*IndexDocumentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*IndexDocumentsOutput), nil
+}
+
+// IndexDocumentsRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See IndexDocuments for more information on using the IndexDocuments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Tells the search domain to start indexing its documents using the latest
+// indexing options. This operation must be invoked to activate options whose
+// OptionStatus is RequiresIndexDocuments.
 //
 //    // Example sending a request using the IndexDocumentsRequest method.
-//    req, resp := client.IndexDocumentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.IndexDocumentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) (req *aws.Request, output *IndexDocumentsOutput) {
+func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) IndexDocumentsRequest {
 	op := &aws.Operation{
 		Name:       opIndexDocuments,
 		HTTPMethod: "POST",
@@ -1748,82 +959,40 @@ func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) (req *aw
 		input = &IndexDocumentsInput{}
 	}
 
-	output = &IndexDocumentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// IndexDocuments API operation for Amazon CloudSearch.
-//
-// Tells the search domain to start indexing its documents using the latest
-// indexing options. This operation must be invoked to activate options whose
-// OptionStatus is RequiresIndexDocuments.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation IndexDocuments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-func (c *CloudSearch) IndexDocuments(input *IndexDocumentsInput) (*IndexDocumentsOutput, error) {
-	req, out := c.IndexDocumentsRequest(input)
-	return out, req.Send()
-}
-
-// IndexDocumentsWithContext is the same as IndexDocuments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See IndexDocuments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) IndexDocumentsWithContext(ctx aws.Context, input *IndexDocumentsInput, opts ...aws.Option) (*IndexDocumentsOutput, error) {
-	req, out := c.IndexDocumentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &IndexDocumentsOutput{})
+	return IndexDocumentsRequest{Request: req, Input: input}
 }
 
 const opListDomainNames = "ListDomainNames"
 
-// ListDomainNamesRequest generates a "aws.Request" representing the
-// client's request for the ListDomainNames operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDomainNamesRequest is a API request type for the ListDomainNames API operation.
+type ListDomainNamesRequest struct {
+	*aws.Request
+	Input *ListDomainNamesInput
+}
+
+// Send marshals and sends the ListDomainNames API request.
+func (r ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDomainNamesOutput), nil
+}
+
+// ListDomainNamesRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDomainNames for more information on using the ListDomainNames
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all search domains owned by an account.
 //
 //    // Example sending a request using the ListDomainNamesRequest method.
-//    req, resp := client.ListDomainNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDomainNamesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) (req *aws.Request, output *ListDomainNamesOutput) {
+func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) ListDomainNamesRequest {
 	op := &aws.Operation{
 		Name:       opListDomainNames,
 		HTTPMethod: "POST",
@@ -1834,72 +1003,45 @@ func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) (req *
 		input = &ListDomainNamesInput{}
 	}
 
-	output = &ListDomainNamesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDomainNames API operation for Amazon CloudSearch.
-//
-// Lists all search domains owned by an account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation ListDomainNames for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-func (c *CloudSearch) ListDomainNames(input *ListDomainNamesInput) (*ListDomainNamesOutput, error) {
-	req, out := c.ListDomainNamesRequest(input)
-	return out, req.Send()
-}
-
-// ListDomainNamesWithContext is the same as ListDomainNames with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDomainNames for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) ListDomainNamesWithContext(ctx aws.Context, input *ListDomainNamesInput, opts ...aws.Option) (*ListDomainNamesOutput, error) {
-	req, out := c.ListDomainNamesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDomainNamesOutput{})
+	return ListDomainNamesRequest{Request: req, Input: input}
 }
 
 const opUpdateAvailabilityOptions = "UpdateAvailabilityOptions"
 
-// UpdateAvailabilityOptionsRequest generates a "aws.Request" representing the
-// client's request for the UpdateAvailabilityOptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateAvailabilityOptionsRequest is a API request type for the UpdateAvailabilityOptions API operation.
+type UpdateAvailabilityOptionsRequest struct {
+	*aws.Request
+	Input *UpdateAvailabilityOptionsInput
+}
+
+// Send marshals and sends the UpdateAvailabilityOptions API request.
+func (r UpdateAvailabilityOptionsRequest) Send() (*UpdateAvailabilityOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAvailabilityOptionsOutput), nil
+}
+
+// UpdateAvailabilityOptionsRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAvailabilityOptions for more information on using the UpdateAvailabilityOptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Configures the availability options for a domain. Enabling the Multi-AZ option
+// expands an Amazon CloudSearch domain to an additional Availability Zone in
+// the same Region to increase fault tolerance in the event of a service disruption.
+// Changes to the Multi-AZ option can take about half an hour to become active.
+// For more information, see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
+// in the Amazon CloudSearch Developer Guide.
 //
 //    // Example sending a request using the UpdateAvailabilityOptionsRequest method.
-//    req, resp := client.UpdateAvailabilityOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateAvailabilityOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailabilityOptionsInput) (req *aws.Request, output *UpdateAvailabilityOptionsOutput) {
+func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailabilityOptionsInput) UpdateAvailabilityOptionsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAvailabilityOptions,
 		HTTPMethod: "POST",
@@ -1910,110 +1052,30 @@ func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailability
 		input = &UpdateAvailabilityOptionsInput{}
 	}
 
-	output = &UpdateAvailabilityOptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateAvailabilityOptions API operation for Amazon CloudSearch.
-//
-// Configures the availability options for a domain. Enabling the Multi-AZ option
-// expands an Amazon CloudSearch domain to an additional Availability Zone in
-// the same Region to increase fault tolerance in the event of a service disruption.
-// Changes to the Multi-AZ option can take about half an hour to become active.
-// For more information, see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
-// in the Amazon CloudSearch Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation UpdateAvailabilityOptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-//   * ErrCodeDisabledOperationException "DisabledAction"
-//   The request was rejected because it attempted an operation which is not enabled.
-//
-func (c *CloudSearch) UpdateAvailabilityOptions(input *UpdateAvailabilityOptionsInput) (*UpdateAvailabilityOptionsOutput, error) {
-	req, out := c.UpdateAvailabilityOptionsRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAvailabilityOptionsWithContext is the same as UpdateAvailabilityOptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAvailabilityOptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) UpdateAvailabilityOptionsWithContext(ctx aws.Context, input *UpdateAvailabilityOptionsInput, opts ...aws.Option) (*UpdateAvailabilityOptionsOutput, error) {
-	req, out := c.UpdateAvailabilityOptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateAvailabilityOptionsOutput{})
+	return UpdateAvailabilityOptionsRequest{Request: req, Input: input}
 }
 
 const opUpdateScalingParameters = "UpdateScalingParameters"
 
-// UpdateScalingParametersRequest generates a "aws.Request" representing the
-// client's request for the UpdateScalingParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateScalingParameters for more information on using the UpdateScalingParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateScalingParametersRequest method.
-//    req, resp := client.UpdateScalingParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParametersInput) (req *aws.Request, output *UpdateScalingParametersOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateScalingParameters,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateScalingParametersInput{}
-	}
-
-	output = &UpdateScalingParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateScalingParametersRequest is a API request type for the UpdateScalingParameters API operation.
+type UpdateScalingParametersRequest struct {
+	*aws.Request
+	Input *UpdateScalingParametersInput
 }
 
-// UpdateScalingParameters API operation for Amazon CloudSearch.
+// Send marshals and sends the UpdateScalingParameters API request.
+func (r UpdateScalingParametersRequest) Send() (*UpdateScalingParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateScalingParametersOutput), nil
+}
+
+// UpdateScalingParametersRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
 // Configures scaling parameters for a domain. A domain's scaling parameters
 // specify the desired search instance type and replication count. Amazon CloudSearch
@@ -2024,77 +1086,59 @@ func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParamet
 // (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
 // in the Amazon CloudSearch Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation UpdateScalingParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-func (c *CloudSearch) UpdateScalingParameters(input *UpdateScalingParametersInput) (*UpdateScalingParametersOutput, error) {
-	req, out := c.UpdateScalingParametersRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the UpdateScalingParametersRequest method.
+//    req := client.UpdateScalingParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParametersInput) UpdateScalingParametersRequest {
+	op := &aws.Operation{
+		Name:       opUpdateScalingParameters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateScalingParametersWithContext is the same as UpdateScalingParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateScalingParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) UpdateScalingParametersWithContext(ctx aws.Context, input *UpdateScalingParametersInput, opts ...aws.Option) (*UpdateScalingParametersOutput, error) {
-	req, out := c.UpdateScalingParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateScalingParametersInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateScalingParametersOutput{})
+	return UpdateScalingParametersRequest{Request: req, Input: input}
 }
 
 const opUpdateServiceAccessPolicies = "UpdateServiceAccessPolicies"
 
-// UpdateServiceAccessPoliciesRequest generates a "aws.Request" representing the
-// client's request for the UpdateServiceAccessPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateServiceAccessPoliciesRequest is a API request type for the UpdateServiceAccessPolicies API operation.
+type UpdateServiceAccessPoliciesRequest struct {
+	*aws.Request
+	Input *UpdateServiceAccessPoliciesInput
+}
+
+// Send marshals and sends the UpdateServiceAccessPolicies API request.
+func (r UpdateServiceAccessPoliciesRequest) Send() (*UpdateServiceAccessPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateServiceAccessPoliciesOutput), nil
+}
+
+// UpdateServiceAccessPoliciesRequest returns a request value for making API operation for
+// Amazon CloudSearch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateServiceAccessPolicies for more information on using the UpdateServiceAccessPolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Configures the access rules that control access to the domain's document
+// and search endpoints. For more information, see  Configuring Access for an
+// Amazon CloudSearch Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html).
 //
 //    // Example sending a request using the UpdateServiceAccessPoliciesRequest method.
-//    req, resp := client.UpdateServiceAccessPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateServiceAccessPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAccessPoliciesInput) (req *aws.Request, output *UpdateServiceAccessPoliciesOutput) {
+func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAccessPoliciesInput) UpdateServiceAccessPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServiceAccessPolicies,
 		HTTPMethod: "POST",
@@ -2105,61 +1149,8 @@ func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAcc
 		input = &UpdateServiceAccessPoliciesInput{}
 	}
 
-	output = &UpdateServiceAccessPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateServiceAccessPolicies API operation for Amazon CloudSearch.
-//
-// Configures the access rules that control access to the domain's document
-// and search endpoints. For more information, see  Configuring Access for an
-// Amazon CloudSearch Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudSearch's
-// API operation UpdateServiceAccessPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
-//
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
-//
-func (c *CloudSearch) UpdateServiceAccessPolicies(input *UpdateServiceAccessPoliciesInput) (*UpdateServiceAccessPoliciesOutput, error) {
-	req, out := c.UpdateServiceAccessPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// UpdateServiceAccessPoliciesWithContext is the same as UpdateServiceAccessPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateServiceAccessPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudSearch) UpdateServiceAccessPoliciesWithContext(ctx aws.Context, input *UpdateServiceAccessPoliciesInput, opts ...aws.Option) (*UpdateServiceAccessPoliciesOutput, error) {
-	req, out := c.UpdateServiceAccessPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateServiceAccessPoliciesOutput{})
+	return UpdateServiceAccessPoliciesRequest{Request: req, Input: input}
 }
 
 // The configured access rules for the domain's document and search endpoints,

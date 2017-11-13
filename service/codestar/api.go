@@ -11,31 +11,36 @@ import (
 
 const opAssociateTeamMember = "AssociateTeamMember"
 
-// AssociateTeamMemberRequest generates a "aws.Request" representing the
-// client's request for the AssociateTeamMember operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateTeamMemberRequest is a API request type for the AssociateTeamMember API operation.
+type AssociateTeamMemberRequest struct {
+	*aws.Request
+	Input *AssociateTeamMemberInput
+}
+
+// Send marshals and sends the AssociateTeamMember API request.
+func (r AssociateTeamMemberRequest) Send() (*AssociateTeamMemberOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateTeamMemberOutput), nil
+}
+
+// AssociateTeamMemberRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateTeamMember for more information on using the AssociateTeamMember
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds an IAM user to the team for an AWS CodeStar project.
 //
 //    // Example sending a request using the AssociateTeamMemberRequest method.
-//    req, resp := client.AssociateTeamMemberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateTeamMemberRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMember
-func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) (req *aws.Request, output *AssociateTeamMemberOutput) {
+func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) AssociateTeamMemberRequest {
 	op := &aws.Operation{
 		Name:       opAssociateTeamMember,
 		HTTPMethod: "POST",
@@ -46,94 +51,42 @@ func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) (
 		input = &AssociateTeamMemberInput{}
 	}
 
-	output = &AssociateTeamMemberOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateTeamMember API operation for AWS CodeStar.
-//
-// Adds an IAM user to the team for an AWS CodeStar project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation AssociateTeamMember for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
-//
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeTeamMemberAlreadyAssociatedException "TeamMemberAlreadyAssociatedException"
-//   The team member is already associated with a role in this project.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
-//
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMember
-func (c *CodeStar) AssociateTeamMember(input *AssociateTeamMemberInput) (*AssociateTeamMemberOutput, error) {
-	req, out := c.AssociateTeamMemberRequest(input)
-	return out, req.Send()
-}
-
-// AssociateTeamMemberWithContext is the same as AssociateTeamMember with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateTeamMember for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) AssociateTeamMemberWithContext(ctx aws.Context, input *AssociateTeamMemberInput, opts ...aws.Option) (*AssociateTeamMemberOutput, error) {
-	req, out := c.AssociateTeamMemberRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateTeamMemberOutput{})
+	return AssociateTeamMemberRequest{Request: req, Input: input}
 }
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws.Request" representing the
-// client's request for the CreateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProjectRequest is a API request type for the CreateProject API operation.
+type CreateProjectRequest struct {
+	*aws.Request
+	Input *CreateProjectInput
+}
+
+// Send marshals and sends the CreateProject API request.
+func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProjectOutput), nil
+}
+
+// CreateProjectRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProject for more information on using the CreateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Reserved for future use. To create a project, use the AWS CodeStar console.
 //
 //    // Example sending a request using the CreateProjectRequest method.
-//    req, resp := client.CreateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProject
-func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) CreateProjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
@@ -144,98 +97,46 @@ func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) (req *aws.Req
 		input = &CreateProjectInput{}
 	}
 
-	output = &CreateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProject API operation for AWS CodeStar.
-//
-// Reserved for future use. To create a project, use the AWS CodeStar console.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation CreateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectAlreadyExistsException "ProjectAlreadyExistsException"
-//   An AWS CodeStar project with the same ID already exists in this region for
-//   the AWS account. AWS CodeStar project IDs must be unique within a region
-//   for the AWS account.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeProjectCreationFailedException "ProjectCreationFailedException"
-//   The project creation request was valid, but a nonspecific exception or error
-//   occurred during project creation. The project could not be created in AWS
-//   CodeStar.
-//
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
-//
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProject
-func (c *CodeStar) CreateProject(input *CreateProjectInput) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	return out, req.Send()
-}
-
-// CreateProjectWithContext is the same as CreateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProjectOutput{})
+	return CreateProjectRequest{Request: req, Input: input}
 }
 
 const opCreateUserProfile = "CreateUserProfile"
 
-// CreateUserProfileRequest generates a "aws.Request" representing the
-// client's request for the CreateUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateUserProfileRequest is a API request type for the CreateUserProfile API operation.
+type CreateUserProfileRequest struct {
+	*aws.Request
+	Input *CreateUserProfileInput
+}
+
+// Send marshals and sends the CreateUserProfile API request.
+func (r CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateUserProfileOutput), nil
+}
+
+// CreateUserProfileRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateUserProfile for more information on using the CreateUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a profile for a user that includes user preferences, such as the
+// display name and email address assocciated with the user, in AWS CodeStar.
+// The user profile is not project-specific. Information in the user profile
+// is displayed wherever the user's information appears to other users in AWS
+// CodeStar.
 //
 //    // Example sending a request using the CreateUserProfileRequest method.
-//    req, resp := client.CreateUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfile
-func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) (req *aws.Request, output *CreateUserProfileOutput) {
+func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) CreateUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserProfile,
 		HTTPMethod: "POST",
@@ -246,84 +147,44 @@ func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) (req 
 		input = &CreateUserProfileInput{}
 	}
 
-	output = &CreateUserProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateUserProfile API operation for AWS CodeStar.
-//
-// Creates a profile for a user that includes user preferences, such as the
-// display name and email address assocciated with the user, in AWS CodeStar.
-// The user profile is not project-specific. Information in the user profile
-// is displayed wherever the user's information appears to other users in AWS
-// CodeStar.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation CreateUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUserProfileAlreadyExistsException "UserProfileAlreadyExistsException"
-//   A user profile with that name already exists in this region for the AWS account.
-//   AWS CodeStar user profile names must be unique within a region for the AWS
-//   account.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfile
-func (c *CodeStar) CreateUserProfile(input *CreateUserProfileInput) (*CreateUserProfileOutput, error) {
-	req, out := c.CreateUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// CreateUserProfileWithContext is the same as CreateUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) CreateUserProfileWithContext(ctx aws.Context, input *CreateUserProfileInput, opts ...aws.Option) (*CreateUserProfileOutput, error) {
-	req, out := c.CreateUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateUserProfileOutput{})
+	return CreateUserProfileRequest{Request: req, Input: input}
 }
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws.Request" representing the
-// client's request for the DeleteProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteProjectRequest is a API request type for the DeleteProject API operation.
+type DeleteProjectRequest struct {
+	*aws.Request
+	Input *DeleteProjectInput
+}
+
+// Send marshals and sends the DeleteProject API request.
+func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProjectOutput), nil
+}
+
+// DeleteProjectRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteProject for more information on using the DeleteProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a project, including project resources. Does not delete users associated
+// with the project, but does delete the IAM roles that allowed access to the
+// project.
 //
 //    // Example sending a request using the DeleteProjectRequest method.
-//    req, resp := client.DeleteProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProject
-func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "POST",
@@ -334,84 +195,45 @@ func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Req
 		input = &DeleteProjectInput{}
 	}
 
-	output = &DeleteProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteProject API operation for AWS CodeStar.
-//
-// Deletes a project, including project resources. Does not delete users associated
-// with the project, but does delete the IAM roles that allowed access to the
-// project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation DeleteProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProject
-func (c *CodeStar) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	return out, req.Send()
-}
-
-// DeleteProjectWithContext is the same as DeleteProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	return DeleteProjectRequest{Request: req, Input: input}
 }
 
 const opDeleteUserProfile = "DeleteUserProfile"
 
-// DeleteUserProfileRequest generates a "aws.Request" representing the
-// client's request for the DeleteUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteUserProfileRequest is a API request type for the DeleteUserProfile API operation.
+type DeleteUserProfileRequest struct {
+	*aws.Request
+	Input *DeleteUserProfileInput
+}
+
+// Send marshals and sends the DeleteUserProfile API request.
+func (r DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserProfileOutput), nil
+}
+
+// DeleteUserProfileRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteUserProfile for more information on using the DeleteUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a user profile in AWS CodeStar, including all personal preference
+// data associated with that profile, such as display name and email address.
+// It does not delete the history of that user, for example the history of commits
+// made by that user.
 //
 //    // Example sending a request using the DeleteUserProfileRequest method.
-//    req, resp := client.DeleteUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfile
-func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req *aws.Request, output *DeleteUserProfileOutput) {
+func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) DeleteUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserProfile,
 		HTTPMethod: "POST",
@@ -422,78 +244,42 @@ func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req 
 		input = &DeleteUserProfileInput{}
 	}
 
-	output = &DeleteUserProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteUserProfile API operation for AWS CodeStar.
-//
-// Deletes a user profile in AWS CodeStar, including all personal preference
-// data associated with that profile, such as display name and email address.
-// It does not delete the history of that user, for example the history of commits
-// made by that user.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation DeleteUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfile
-func (c *CodeStar) DeleteUserProfile(input *DeleteUserProfileInput) (*DeleteUserProfileOutput, error) {
-	req, out := c.DeleteUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// DeleteUserProfileWithContext is the same as DeleteUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUserProfileInput, opts ...aws.Option) (*DeleteUserProfileOutput, error) {
-	req, out := c.DeleteUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteUserProfileOutput{})
+	return DeleteUserProfileRequest{Request: req, Input: input}
 }
 
 const opDescribeProject = "DescribeProject"
 
-// DescribeProjectRequest generates a "aws.Request" representing the
-// client's request for the DescribeProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProjectRequest is a API request type for the DescribeProject API operation.
+type DescribeProjectRequest struct {
+	*aws.Request
+	Input *DescribeProjectInput
+}
+
+// Send marshals and sends the DescribeProject API request.
+func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProjectOutput), nil
+}
+
+// DescribeProjectRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeProject for more information on using the DescribeProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes a project and its resources.
 //
 //    // Example sending a request using the DescribeProjectRequest method.
-//    req, resp := client.DescribeProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProject
-func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) (req *aws.Request, output *DescribeProjectOutput) {
+func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) DescribeProjectRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProject,
 		HTTPMethod: "POST",
@@ -504,88 +290,42 @@ func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) (req *aws
 		input = &DescribeProjectInput{}
 	}
 
-	output = &DescribeProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProject API operation for AWS CodeStar.
-//
-// Describes a project and its resources.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation DescribeProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
-//
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProject
-func (c *CodeStar) DescribeProject(input *DescribeProjectInput) (*DescribeProjectOutput, error) {
-	req, out := c.DescribeProjectRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProjectWithContext is the same as DescribeProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) DescribeProjectWithContext(ctx aws.Context, input *DescribeProjectInput, opts ...aws.Option) (*DescribeProjectOutput, error) {
-	req, out := c.DescribeProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProjectOutput{})
+	return DescribeProjectRequest{Request: req, Input: input}
 }
 
 const opDescribeUserProfile = "DescribeUserProfile"
 
-// DescribeUserProfileRequest generates a "aws.Request" representing the
-// client's request for the DescribeUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeUserProfileRequest is a API request type for the DescribeUserProfile API operation.
+type DescribeUserProfileRequest struct {
+	*aws.Request
+	Input *DescribeUserProfileInput
+}
+
+// Send marshals and sends the DescribeUserProfile API request.
+func (r DescribeUserProfileRequest) Send() (*DescribeUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUserProfileOutput), nil
+}
+
+// DescribeUserProfileRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeUserProfile for more information on using the DescribeUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes a user in AWS CodeStar and the user attributes across all projects.
 //
 //    // Example sending a request using the DescribeUserProfileRequest method.
-//    req, resp := client.DescribeUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfile
-func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) (req *aws.Request, output *DescribeUserProfileOutput) {
+func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) DescribeUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUserProfile,
 		HTTPMethod: "POST",
@@ -596,78 +336,45 @@ func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) (
 		input = &DescribeUserProfileInput{}
 	}
 
-	output = &DescribeUserProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeUserProfile API operation for AWS CodeStar.
-//
-// Describes a user in AWS CodeStar and the user attributes across all projects.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation DescribeUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUserProfileNotFoundException "UserProfileNotFoundException"
-//   The user profile was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfile
-func (c *CodeStar) DescribeUserProfile(input *DescribeUserProfileInput) (*DescribeUserProfileOutput, error) {
-	req, out := c.DescribeUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// DescribeUserProfileWithContext is the same as DescribeUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) DescribeUserProfileWithContext(ctx aws.Context, input *DescribeUserProfileInput, opts ...aws.Option) (*DescribeUserProfileOutput, error) {
-	req, out := c.DescribeUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeUserProfileOutput{})
+	return DescribeUserProfileRequest{Request: req, Input: input}
 }
 
 const opDisassociateTeamMember = "DisassociateTeamMember"
 
-// DisassociateTeamMemberRequest generates a "aws.Request" representing the
-// client's request for the DisassociateTeamMember operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateTeamMemberRequest is a API request type for the DisassociateTeamMember API operation.
+type DisassociateTeamMemberRequest struct {
+	*aws.Request
+	Input *DisassociateTeamMemberInput
+}
+
+// Send marshals and sends the DisassociateTeamMember API request.
+func (r DisassociateTeamMemberRequest) Send() (*DisassociateTeamMemberOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateTeamMemberOutput), nil
+}
+
+// DisassociateTeamMemberRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateTeamMember for more information on using the DisassociateTeamMember
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a user from a project. Removing a user from a project also removes
+// the IAM policies from that user that allowed access to the project and its
+// resources. Disassociating a team member does not remove that user's profile
+// from AWS CodeStar. It does not remove the user from IAM.
 //
 //    // Example sending a request using the DisassociateTeamMemberRequest method.
-//    req, resp := client.DisassociateTeamMemberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateTeamMemberRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMember
-func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInput) (req *aws.Request, output *DisassociateTeamMemberOutput) {
+func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInput) DisassociateTeamMemberRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateTeamMember,
 		HTTPMethod: "POST",
@@ -678,88 +385,42 @@ func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberIn
 		input = &DisassociateTeamMemberInput{}
 	}
 
-	output = &DisassociateTeamMemberOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateTeamMember API operation for AWS CodeStar.
-//
-// Removes a user from a project. Removing a user from a project also removes
-// the IAM policies from that user that allowed access to the project and its
-// resources. Disassociating a team member does not remove that user's profile
-// from AWS CodeStar. It does not remove the user from IAM.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation DisassociateTeamMember for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMember
-func (c *CodeStar) DisassociateTeamMember(input *DisassociateTeamMemberInput) (*DisassociateTeamMemberOutput, error) {
-	req, out := c.DisassociateTeamMemberRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateTeamMemberWithContext is the same as DisassociateTeamMember with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateTeamMember for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) DisassociateTeamMemberWithContext(ctx aws.Context, input *DisassociateTeamMemberInput, opts ...aws.Option) (*DisassociateTeamMemberOutput, error) {
-	req, out := c.DisassociateTeamMemberRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateTeamMemberOutput{})
+	return DisassociateTeamMemberRequest{Request: req, Input: input}
 }
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws.Request" representing the
-// client's request for the ListProjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProjectsRequest is a API request type for the ListProjects API operation.
+type ListProjectsRequest struct {
+	*aws.Request
+	Input *ListProjectsInput
+}
+
+// Send marshals and sends the ListProjects API request.
+func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProjectsOutput), nil
+}
+
+// ListProjectsRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProjects for more information on using the ListProjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all projects in AWS CodeStar associated with your AWS account.
 //
 //    // Example sending a request using the ListProjectsRequest method.
-//    req, resp := client.ListProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjects
-func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) ListProjectsRequest {
 	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
@@ -770,78 +431,42 @@ func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) (req *aws.Reque
 		input = &ListProjectsInput{}
 	}
 
-	output = &ListProjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProjects API operation for AWS CodeStar.
-//
-// Lists all projects in AWS CodeStar associated with your AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation ListProjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjects
-func (c *CodeStar) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	return out, req.Send()
-}
-
-// ListProjectsWithContext is the same as ListProjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProjectsOutput{})
+	return ListProjectsRequest{Request: req, Input: input}
 }
 
 const opListResources = "ListResources"
 
-// ListResourcesRequest generates a "aws.Request" representing the
-// client's request for the ListResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListResourcesRequest is a API request type for the ListResources API operation.
+type ListResourcesRequest struct {
+	*aws.Request
+	Input *ListResourcesInput
+}
+
+// Send marshals and sends the ListResources API request.
+func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourcesOutput), nil
+}
+
+// ListResourcesRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListResources for more information on using the ListResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists resources associated with a project in AWS CodeStar.
 //
 //    // Example sending a request using the ListResourcesRequest method.
-//    req, resp := client.ListResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResources
-func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) (req *aws.Request, output *ListResourcesOutput) {
+func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) ListResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListResources,
 		HTTPMethod: "POST",
@@ -852,81 +477,42 @@ func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) (req *aws.Req
 		input = &ListResourcesInput{}
 	}
 
-	output = &ListResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListResources API operation for AWS CodeStar.
-//
-// Lists resources associated with a project in AWS CodeStar.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation ListResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResources
-func (c *CodeStar) ListResources(input *ListResourcesInput) (*ListResourcesOutput, error) {
-	req, out := c.ListResourcesRequest(input)
-	return out, req.Send()
-}
-
-// ListResourcesWithContext is the same as ListResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) ListResourcesWithContext(ctx aws.Context, input *ListResourcesInput, opts ...aws.Option) (*ListResourcesOutput, error) {
-	req, out := c.ListResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListResourcesOutput{})
+	return ListResourcesRequest{Request: req, Input: input}
 }
 
 const opListTagsForProject = "ListTagsForProject"
 
-// ListTagsForProjectRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForProjectRequest is a API request type for the ListTagsForProject API operation.
+type ListTagsForProjectRequest struct {
+	*aws.Request
+	Input *ListTagsForProjectInput
+}
+
+// Send marshals and sends the ListTagsForProject API request.
+func (r ListTagsForProjectRequest) Send() (*ListTagsForProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForProjectOutput), nil
+}
+
+// ListTagsForProjectRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForProject for more information on using the ListTagsForProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the tags for a project.
 //
 //    // Example sending a request using the ListTagsForProjectRequest method.
-//    req, resp := client.ListTagsForProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProject
-func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) (req *aws.Request, output *ListTagsForProjectOutput) {
+func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) ListTagsForProjectRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForProject,
 		HTTPMethod: "POST",
@@ -937,81 +523,42 @@ func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) (re
 		input = &ListTagsForProjectInput{}
 	}
 
-	output = &ListTagsForProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForProject API operation for AWS CodeStar.
-//
-// Gets the tags for a project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation ListTagsForProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProject
-func (c *CodeStar) ListTagsForProject(input *ListTagsForProjectInput) (*ListTagsForProjectOutput, error) {
-	req, out := c.ListTagsForProjectRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForProjectWithContext is the same as ListTagsForProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) ListTagsForProjectWithContext(ctx aws.Context, input *ListTagsForProjectInput, opts ...aws.Option) (*ListTagsForProjectOutput, error) {
-	req, out := c.ListTagsForProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForProjectOutput{})
+	return ListTagsForProjectRequest{Request: req, Input: input}
 }
 
 const opListTeamMembers = "ListTeamMembers"
 
-// ListTeamMembersRequest generates a "aws.Request" representing the
-// client's request for the ListTeamMembers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTeamMembersRequest is a API request type for the ListTeamMembers API operation.
+type ListTeamMembersRequest struct {
+	*aws.Request
+	Input *ListTeamMembersInput
+}
+
+// Send marshals and sends the ListTeamMembers API request.
+func (r ListTeamMembersRequest) Send() (*ListTeamMembersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTeamMembersOutput), nil
+}
+
+// ListTeamMembersRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTeamMembers for more information on using the ListTeamMembers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all team members associated with a project.
 //
 //    // Example sending a request using the ListTeamMembersRequest method.
-//    req, resp := client.ListTeamMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTeamMembersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembers
-func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) (req *aws.Request, output *ListTeamMembersOutput) {
+func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) ListTeamMembersRequest {
 	op := &aws.Operation{
 		Name:       opListTeamMembers,
 		HTTPMethod: "POST",
@@ -1022,81 +569,42 @@ func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) (req *aws
 		input = &ListTeamMembersInput{}
 	}
 
-	output = &ListTeamMembersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTeamMembers API operation for AWS CodeStar.
-//
-// Lists all team members associated with a project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation ListTeamMembers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembers
-func (c *CodeStar) ListTeamMembers(input *ListTeamMembersInput) (*ListTeamMembersOutput, error) {
-	req, out := c.ListTeamMembersRequest(input)
-	return out, req.Send()
-}
-
-// ListTeamMembersWithContext is the same as ListTeamMembers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTeamMembers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) ListTeamMembersWithContext(ctx aws.Context, input *ListTeamMembersInput, opts ...aws.Option) (*ListTeamMembersOutput, error) {
-	req, out := c.ListTeamMembersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTeamMembersOutput{})
+	return ListTeamMembersRequest{Request: req, Input: input}
 }
 
 const opListUserProfiles = "ListUserProfiles"
 
-// ListUserProfilesRequest generates a "aws.Request" representing the
-// client's request for the ListUserProfiles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListUserProfilesRequest is a API request type for the ListUserProfiles API operation.
+type ListUserProfilesRequest struct {
+	*aws.Request
+	Input *ListUserProfilesInput
+}
+
+// Send marshals and sends the ListUserProfiles API request.
+func (r ListUserProfilesRequest) Send() (*ListUserProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUserProfilesOutput), nil
+}
+
+// ListUserProfilesRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListUserProfiles for more information on using the ListUserProfiles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all the user profiles configured for your AWS account in AWS CodeStar.
 //
 //    // Example sending a request using the ListUserProfilesRequest method.
-//    req, resp := client.ListUserProfilesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListUserProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListUserProfiles
-func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) (req *aws.Request, output *ListUserProfilesOutput) {
+func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) ListUserProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListUserProfiles,
 		HTTPMethod: "POST",
@@ -1107,78 +615,42 @@ func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) (req *a
 		input = &ListUserProfilesInput{}
 	}
 
-	output = &ListUserProfilesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListUserProfiles API operation for AWS CodeStar.
-//
-// Lists all the user profiles configured for your AWS account in AWS CodeStar.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation ListUserProfiles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListUserProfiles
-func (c *CodeStar) ListUserProfiles(input *ListUserProfilesInput) (*ListUserProfilesOutput, error) {
-	req, out := c.ListUserProfilesRequest(input)
-	return out, req.Send()
-}
-
-// ListUserProfilesWithContext is the same as ListUserProfiles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListUserProfiles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) ListUserProfilesWithContext(ctx aws.Context, input *ListUserProfilesInput, opts ...aws.Option) (*ListUserProfilesOutput, error) {
-	req, out := c.ListUserProfilesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListUserProfilesOutput{})
+	return ListUserProfilesRequest{Request: req, Input: input}
 }
 
 const opTagProject = "TagProject"
 
-// TagProjectRequest generates a "aws.Request" representing the
-// client's request for the TagProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagProjectRequest is a API request type for the TagProject API operation.
+type TagProjectRequest struct {
+	*aws.Request
+	Input *TagProjectInput
+}
+
+// Send marshals and sends the TagProject API request.
+func (r TagProjectRequest) Send() (*TagProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagProjectOutput), nil
+}
+
+// TagProjectRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagProject for more information on using the TagProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds tags to a project.
 //
 //    // Example sending a request using the TagProjectRequest method.
-//    req, resp := client.TagProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProject
-func (c *CodeStar) TagProjectRequest(input *TagProjectInput) (req *aws.Request, output *TagProjectOutput) {
+func (c *CodeStar) TagProjectRequest(input *TagProjectInput) TagProjectRequest {
 	op := &aws.Operation{
 		Name:       opTagProject,
 		HTTPMethod: "POST",
@@ -1189,85 +661,42 @@ func (c *CodeStar) TagProjectRequest(input *TagProjectInput) (req *aws.Request, 
 		input = &TagProjectInput{}
 	}
 
-	output = &TagProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TagProject API operation for AWS CodeStar.
-//
-// Adds tags to a project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation TagProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProject
-func (c *CodeStar) TagProject(input *TagProjectInput) (*TagProjectOutput, error) {
-	req, out := c.TagProjectRequest(input)
-	return out, req.Send()
-}
-
-// TagProjectWithContext is the same as TagProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) TagProjectWithContext(ctx aws.Context, input *TagProjectInput, opts ...aws.Option) (*TagProjectOutput, error) {
-	req, out := c.TagProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TagProjectOutput{})
+	return TagProjectRequest{Request: req, Input: input}
 }
 
 const opUntagProject = "UntagProject"
 
-// UntagProjectRequest generates a "aws.Request" representing the
-// client's request for the UntagProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagProjectRequest is a API request type for the UntagProject API operation.
+type UntagProjectRequest struct {
+	*aws.Request
+	Input *UntagProjectInput
+}
+
+// Send marshals and sends the UntagProject API request.
+func (r UntagProjectRequest) Send() (*UntagProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagProjectOutput), nil
+}
+
+// UntagProjectRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagProject for more information on using the UntagProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes tags from a project.
 //
 //    // Example sending a request using the UntagProjectRequest method.
-//    req, resp := client.UntagProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProject
-func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) (req *aws.Request, output *UntagProjectOutput) {
+func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) UntagProjectRequest {
 	op := &aws.Operation{
 		Name:       opUntagProject,
 		HTTPMethod: "POST",
@@ -1278,85 +707,42 @@ func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) (req *aws.Reque
 		input = &UntagProjectInput{}
 	}
 
-	output = &UntagProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UntagProject API operation for AWS CodeStar.
-//
-// Removes tags from a project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation UntagProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProject
-func (c *CodeStar) UntagProject(input *UntagProjectInput) (*UntagProjectOutput, error) {
-	req, out := c.UntagProjectRequest(input)
-	return out, req.Send()
-}
-
-// UntagProjectWithContext is the same as UntagProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) UntagProjectWithContext(ctx aws.Context, input *UntagProjectInput, opts ...aws.Option) (*UntagProjectOutput, error) {
-	req, out := c.UntagProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UntagProjectOutput{})
+	return UntagProjectRequest{Request: req, Input: input}
 }
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws.Request" representing the
-// client's request for the UpdateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateProjectRequest is a API request type for the UpdateProject API operation.
+type UpdateProjectRequest struct {
+	*aws.Request
+	Input *UpdateProjectInput
+}
+
+// Send marshals and sends the UpdateProject API request.
+func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateProjectOutput), nil
+}
+
+// UpdateProjectRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateProject for more information on using the UpdateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a project in AWS CodeStar.
 //
 //    // Example sending a request using the UpdateProjectRequest method.
-//    req, resp := client.UpdateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProject
-func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
@@ -1367,78 +753,44 @@ func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Req
 		input = &UpdateProjectInput{}
 	}
 
-	output = &UpdateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateProject API operation for AWS CodeStar.
-//
-// Updates a project in AWS CodeStar.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation UpdateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProject
-func (c *CodeStar) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	return out, req.Send()
-}
-
-// UpdateProjectWithContext is the same as UpdateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	return UpdateProjectRequest{Request: req, Input: input}
 }
 
 const opUpdateTeamMember = "UpdateTeamMember"
 
-// UpdateTeamMemberRequest generates a "aws.Request" representing the
-// client's request for the UpdateTeamMember operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateTeamMemberRequest is a API request type for the UpdateTeamMember API operation.
+type UpdateTeamMemberRequest struct {
+	*aws.Request
+	Input *UpdateTeamMemberInput
+}
+
+// Send marshals and sends the UpdateTeamMember API request.
+func (r UpdateTeamMemberRequest) Send() (*UpdateTeamMemberOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTeamMemberOutput), nil
+}
+
+// UpdateTeamMemberRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTeamMember for more information on using the UpdateTeamMember
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a team member's attributes in an AWS CodeStar project. For example,
+// you can change a team member's role in the project, or change whether they
+// have remote access to project resources.
 //
 //    // Example sending a request using the UpdateTeamMemberRequest method.
-//    req, resp := client.UpdateTeamMemberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateTeamMemberRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateTeamMember
-func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) (req *aws.Request, output *UpdateTeamMemberOutput) {
+func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) UpdateTeamMemberRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTeamMember,
 		HTTPMethod: "POST",
@@ -1449,96 +801,44 @@ func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) (req *a
 		input = &UpdateTeamMemberInput{}
 	}
 
-	output = &UpdateTeamMemberOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateTeamMember API operation for AWS CodeStar.
-//
-// Updates a team member's attributes in an AWS CodeStar project. For example,
-// you can change a team member's role in the project, or change whether they
-// have remote access to project resources.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation UpdateTeamMember for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
-//
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
-//
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
-//
-//   * ErrCodeTeamMemberNotFoundException "TeamMemberNotFoundException"
-//   The specified team member was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateTeamMember
-func (c *CodeStar) UpdateTeamMember(input *UpdateTeamMemberInput) (*UpdateTeamMemberOutput, error) {
-	req, out := c.UpdateTeamMemberRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTeamMemberWithContext is the same as UpdateTeamMember with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTeamMember for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) UpdateTeamMemberWithContext(ctx aws.Context, input *UpdateTeamMemberInput, opts ...aws.Option) (*UpdateTeamMemberOutput, error) {
-	req, out := c.UpdateTeamMemberRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateTeamMemberOutput{})
+	return UpdateTeamMemberRequest{Request: req, Input: input}
 }
 
 const opUpdateUserProfile = "UpdateUserProfile"
 
-// UpdateUserProfileRequest generates a "aws.Request" representing the
-// client's request for the UpdateUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateUserProfileRequest is a API request type for the UpdateUserProfile API operation.
+type UpdateUserProfileRequest struct {
+	*aws.Request
+	Input *UpdateUserProfileInput
+}
+
+// Send marshals and sends the UpdateUserProfile API request.
+func (r UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserProfileOutput), nil
+}
+
+// UpdateUserProfileRequest returns a request value for making API operation for
+// AWS CodeStar.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateUserProfile for more information on using the UpdateUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a user's profile in AWS CodeStar. The user profile is not project-specific.
+// Information in the user profile is displayed wherever the user's information
+// appears to other users in AWS CodeStar.
 //
 //    // Example sending a request using the UpdateUserProfileRequest method.
-//    req, resp := client.UpdateUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateUserProfile
-func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req *aws.Request, output *UpdateUserProfileOutput) {
+func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) UpdateUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUserProfile,
 		HTTPMethod: "POST",
@@ -1549,51 +849,8 @@ func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req 
 		input = &UpdateUserProfileInput{}
 	}
 
-	output = &UpdateUserProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateUserProfile API operation for AWS CodeStar.
-//
-// Updates a user's profile in AWS CodeStar. The user profile is not project-specific.
-// Information in the user profile is displayed wherever the user's information
-// appears to other users in AWS CodeStar.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeStar's
-// API operation UpdateUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUserProfileNotFoundException "UserProfileNotFoundException"
-//   The user profile was not found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateUserProfile
-func (c *CodeStar) UpdateUserProfile(input *UpdateUserProfileInput) (*UpdateUserProfileOutput, error) {
-	req, out := c.UpdateUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// UpdateUserProfileWithContext is the same as UpdateUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeStar) UpdateUserProfileWithContext(ctx aws.Context, input *UpdateUserProfileInput, opts ...aws.Option) (*UpdateUserProfileOutput, error) {
-	req, out := c.UpdateUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateUserProfileOutput{})
+	return UpdateUserProfileRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMemberRequest

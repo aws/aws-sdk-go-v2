@@ -9,7 +9,6 @@
 package dynamodbstreamsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
 )
 
@@ -63,21 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type DynamoDBStreamsAPI interface {
-	DescribeStream(*dynamodbstreams.DescribeStreamInput) (*dynamodbstreams.DescribeStreamOutput, error)
-	DescribeStreamWithContext(aws.Context, *dynamodbstreams.DescribeStreamInput, ...aws.Option) (*dynamodbstreams.DescribeStreamOutput, error)
-	DescribeStreamRequest(*dynamodbstreams.DescribeStreamInput) (*aws.Request, *dynamodbstreams.DescribeStreamOutput)
+	DescribeStreamRequest(*dynamodbstreams.DescribeStreamInput) dynamodbstreams.DescribeStreamRequest
 
-	GetRecords(*dynamodbstreams.GetRecordsInput) (*dynamodbstreams.GetRecordsOutput, error)
-	GetRecordsWithContext(aws.Context, *dynamodbstreams.GetRecordsInput, ...aws.Option) (*dynamodbstreams.GetRecordsOutput, error)
-	GetRecordsRequest(*dynamodbstreams.GetRecordsInput) (*aws.Request, *dynamodbstreams.GetRecordsOutput)
+	GetRecordsRequest(*dynamodbstreams.GetRecordsInput) dynamodbstreams.GetRecordsRequest
 
-	GetShardIterator(*dynamodbstreams.GetShardIteratorInput) (*dynamodbstreams.GetShardIteratorOutput, error)
-	GetShardIteratorWithContext(aws.Context, *dynamodbstreams.GetShardIteratorInput, ...aws.Option) (*dynamodbstreams.GetShardIteratorOutput, error)
-	GetShardIteratorRequest(*dynamodbstreams.GetShardIteratorInput) (*aws.Request, *dynamodbstreams.GetShardIteratorOutput)
+	GetShardIteratorRequest(*dynamodbstreams.GetShardIteratorInput) dynamodbstreams.GetShardIteratorRequest
 
-	ListStreams(*dynamodbstreams.ListStreamsInput) (*dynamodbstreams.ListStreamsOutput, error)
-	ListStreamsWithContext(aws.Context, *dynamodbstreams.ListStreamsInput, ...aws.Option) (*dynamodbstreams.ListStreamsOutput, error)
-	ListStreamsRequest(*dynamodbstreams.ListStreamsInput) (*aws.Request, *dynamodbstreams.ListStreamsOutput)
+	ListStreamsRequest(*dynamodbstreams.ListStreamsInput) dynamodbstreams.ListStreamsRequest
 }
 
 var _ DynamoDBStreamsAPI = (*dynamodbstreams.DynamoDBStreams)(nil)

@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To add tags to a load balancer
 //
 // This example adds two tags to the specified load balancer.
-func ExampleELB_AddTags_shared00() {
+func ExampleELB_AddTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -51,7 +51,8 @@ func ExampleELB_AddTags_shared00() {
 		},
 	}
 
-	result, err := svc.AddTags(input)
+	req := svc.AddTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -78,7 +79,7 @@ func ExampleELB_AddTags_shared00() {
 // To associate a security group with a load balancer in a VPC
 //
 // This example associates a security group with the specified load balancer in a VPC.
-func ExampleELB_ApplySecurityGroupsToLoadBalancer_shared00() {
+func ExampleELB_ApplySecurityGroupsToLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -92,7 +93,8 @@ func ExampleELB_ApplySecurityGroupsToLoadBalancer_shared00() {
 		},
 	}
 
-	result, err := svc.ApplySecurityGroupsToLoadBalancer(input)
+	req := svc.ApplySecurityGroupsToLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -120,7 +122,7 @@ func ExampleELB_ApplySecurityGroupsToLoadBalancer_shared00() {
 //
 // This example adds the specified subnet to the set of configured subnets for the specified
 // load balancer.
-func ExampleELB_AttachLoadBalancerToSubnets_shared00() {
+func ExampleELB_AttachLoadBalancerToSubnetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -134,7 +136,8 @@ func ExampleELB_AttachLoadBalancerToSubnets_shared00() {
 		},
 	}
 
-	result, err := svc.AttachLoadBalancerToSubnets(input)
+	req := svc.AttachLoadBalancerToSubnetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -164,7 +167,7 @@ func ExampleELB_AttachLoadBalancerToSubnets_shared00() {
 //
 // This example specifies the health check settings used to evaluate the health of your
 // backend EC2 instances.
-func ExampleELB_ConfigureHealthCheck_shared00() {
+func ExampleELB_ConfigureHealthCheckRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -182,7 +185,8 @@ func ExampleELB_ConfigureHealthCheck_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.ConfigureHealthCheck(input)
+	req := svc.ConfigureHealthCheckRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -206,7 +210,7 @@ func ExampleELB_ConfigureHealthCheck_shared00() {
 //
 // This example generates a stickiness policy that follows the sticky session lifetimes
 // of the application-generated cookie.
-func ExampleELB_CreateAppCookieStickinessPolicy_shared00() {
+func ExampleELB_CreateAppCookieStickinessPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -219,7 +223,8 @@ func ExampleELB_CreateAppCookieStickinessPolicy_shared00() {
 		PolicyName:       aws.String("my-app-cookie-policy"),
 	}
 
-	result, err := svc.CreateAppCookieStickinessPolicy(input)
+	req := svc.CreateAppCookieStickinessPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -249,7 +254,7 @@ func ExampleELB_CreateAppCookieStickinessPolicy_shared00() {
 //
 // This example generates a stickiness policy with sticky session lifetimes controlled
 // by the specified expiration period.
-func ExampleELB_CreateLBCookieStickinessPolicy_shared00() {
+func ExampleELB_CreateLBCookieStickinessPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -262,7 +267,8 @@ func ExampleELB_CreateLBCookieStickinessPolicy_shared00() {
 		PolicyName:             aws.String("my-duration-cookie-policy"),
 	}
 
-	result, err := svc.CreateLBCookieStickinessPolicy(input)
+	req := svc.CreateLBCookieStickinessPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -291,7 +297,7 @@ func ExampleELB_CreateLBCookieStickinessPolicy_shared00() {
 // To create an HTTP load balancer in a VPC
 //
 // This example creates a load balancer with an HTTP listener in a VPC.
-func ExampleELB_CreateLoadBalancer_shared00() {
+func ExampleELB_CreateLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -316,7 +322,8 @@ func ExampleELB_CreateLoadBalancer_shared00() {
 		},
 	}
 
-	result, err := svc.CreateLoadBalancer(input)
+	req := svc.CreateLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -359,7 +366,7 @@ func ExampleELB_CreateLoadBalancer_shared00() {
 // To create an HTTP load balancer in EC2-Classic
 //
 // This example creates a load balancer with an HTTP listener in EC2-Classic.
-func ExampleELB_CreateLoadBalancer_shared01() {
+func ExampleELB_CreateLoadBalancerRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -381,7 +388,8 @@ func ExampleELB_CreateLoadBalancer_shared01() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.CreateLoadBalancer(input)
+	req := svc.CreateLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -424,7 +432,7 @@ func ExampleELB_CreateLoadBalancer_shared01() {
 // To create an HTTPS load balancer in a VPC
 //
 // This example creates a load balancer with an HTTPS listener in a VPC.
-func ExampleELB_CreateLoadBalancer_shared02() {
+func ExampleELB_CreateLoadBalancerRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -456,7 +464,8 @@ func ExampleELB_CreateLoadBalancer_shared02() {
 		},
 	}
 
-	result, err := svc.CreateLoadBalancer(input)
+	req := svc.CreateLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -499,7 +508,7 @@ func ExampleELB_CreateLoadBalancer_shared02() {
 // To create an HTTPS load balancer in EC2-Classic
 //
 // This example creates a load balancer with an HTTPS listener in EC2-Classic.
-func ExampleELB_CreateLoadBalancer_shared03() {
+func ExampleELB_CreateLoadBalancerRequest_shared03() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -528,7 +537,8 @@ func ExampleELB_CreateLoadBalancer_shared03() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.CreateLoadBalancer(input)
+	req := svc.CreateLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -571,7 +581,7 @@ func ExampleELB_CreateLoadBalancer_shared03() {
 // To create an internal load balancer
 //
 // This example creates an internal load balancer with an HTTP listener in a VPC.
-func ExampleELB_CreateLoadBalancer_shared04() {
+func ExampleELB_CreateLoadBalancerRequest_shared04() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -597,7 +607,8 @@ func ExampleELB_CreateLoadBalancer_shared04() {
 		},
 	}
 
-	result, err := svc.CreateLoadBalancer(input)
+	req := svc.CreateLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -641,7 +652,7 @@ func ExampleELB_CreateLoadBalancer_shared04() {
 //
 // This example creates a listener for your load balancer at port 80 using the HTTP
 // protocol.
-func ExampleELB_CreateLoadBalancerListeners_shared00() {
+func ExampleELB_CreateLoadBalancerListenersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -660,7 +671,8 @@ func ExampleELB_CreateLoadBalancerListeners_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.CreateLoadBalancerListeners(input)
+	req := svc.CreateLoadBalancerListenersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -692,7 +704,7 @@ func ExampleELB_CreateLoadBalancerListeners_shared00() {
 //
 // This example creates a listener for your load balancer at port 443 using the HTTPS
 // protocol.
-func ExampleELB_CreateLoadBalancerListeners_shared01() {
+func ExampleELB_CreateLoadBalancerListenersRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -712,7 +724,8 @@ func ExampleELB_CreateLoadBalancerListeners_shared01() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.CreateLoadBalancerListeners(input)
+	req := svc.CreateLoadBalancerListenersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -743,7 +756,7 @@ func ExampleELB_CreateLoadBalancerListeners_shared01() {
 // To create a policy that enables Proxy Protocol on a load balancer
 //
 // This example creates a policy that enables Proxy Protocol on the specified load balancer.
-func ExampleELB_CreateLoadBalancerPolicy_shared00() {
+func ExampleELB_CreateLoadBalancerPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -762,7 +775,8 @@ func ExampleELB_CreateLoadBalancerPolicy_shared00() {
 		PolicyTypeName: aws.String("ProxyProtocolPolicyType"),
 	}
 
-	result, err := svc.CreateLoadBalancerPolicy(input)
+	req := svc.CreateLoadBalancerPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -793,7 +807,7 @@ func ExampleELB_CreateLoadBalancerPolicy_shared00() {
 // To create a public key policy
 //
 // This example creates a public key policy.
-func ExampleELB_CreateLoadBalancerPolicy_shared01() {
+func ExampleELB_CreateLoadBalancerPolicyRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -812,7 +826,8 @@ func ExampleELB_CreateLoadBalancerPolicy_shared01() {
 		PolicyTypeName: aws.String("PublicKeyPolicyType"),
 	}
 
-	result, err := svc.CreateLoadBalancerPolicy(input)
+	req := svc.CreateLoadBalancerPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -844,7 +859,7 @@ func ExampleELB_CreateLoadBalancerPolicy_shared01() {
 //
 // This example creates a backend server authentication policy that enables authentication
 // on your backend instance using a public key policy.
-func ExampleELB_CreateLoadBalancerPolicy_shared02() {
+func ExampleELB_CreateLoadBalancerPolicyRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -863,7 +878,8 @@ func ExampleELB_CreateLoadBalancerPolicy_shared02() {
 		PolicyTypeName: aws.String("BackendServerAuthenticationPolicyType"),
 	}
 
-	result, err := svc.CreateLoadBalancerPolicy(input)
+	req := svc.CreateLoadBalancerPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -894,7 +910,7 @@ func ExampleELB_CreateLoadBalancerPolicy_shared02() {
 // To delete a load balancer
 //
 // This example deletes the specified load balancer.
-func ExampleELB_DeleteLoadBalancer_shared00() {
+func ExampleELB_DeleteLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -905,7 +921,8 @@ func ExampleELB_DeleteLoadBalancer_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.DeleteLoadBalancer(input)
+	req := svc.DeleteLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -927,7 +944,7 @@ func ExampleELB_DeleteLoadBalancer_shared00() {
 //
 // This example deletes the listener for the specified port from the specified load
 // balancer.
-func ExampleELB_DeleteLoadBalancerListeners_shared00() {
+func ExampleELB_DeleteLoadBalancerListenersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -941,7 +958,8 @@ func ExampleELB_DeleteLoadBalancerListeners_shared00() {
 		},
 	}
 
-	result, err := svc.DeleteLoadBalancerListeners(input)
+	req := svc.DeleteLoadBalancerListenersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -965,7 +983,7 @@ func ExampleELB_DeleteLoadBalancerListeners_shared00() {
 //
 // This example deletes the specified policy from the specified load balancer. The policy
 // must not be enabled on any listener.
-func ExampleELB_DeleteLoadBalancerPolicy_shared00() {
+func ExampleELB_DeleteLoadBalancerPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -977,7 +995,8 @@ func ExampleELB_DeleteLoadBalancerPolicy_shared00() {
 		PolicyName:       aws.String("my-duration-cookie-policy"),
 	}
 
-	result, err := svc.DeleteLoadBalancerPolicy(input)
+	req := svc.DeleteLoadBalancerPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1002,7 +1021,7 @@ func ExampleELB_DeleteLoadBalancerPolicy_shared00() {
 // To deregister instances from a load balancer
 //
 // This example deregisters the specified instance from the specified load balancer.
-func ExampleELB_DeregisterInstancesFromLoadBalancer_shared00() {
+func ExampleELB_DeregisterInstancesFromLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1018,7 +1037,8 @@ func ExampleELB_DeregisterInstancesFromLoadBalancer_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.DeregisterInstancesFromLoadBalancer(input)
+	req := svc.DeregisterInstancesFromLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1043,7 +1063,7 @@ func ExampleELB_DeregisterInstancesFromLoadBalancer_shared00() {
 // To describe the health of the instances for a load balancer
 //
 // This example describes the health of the instances for the specified load balancer.
-func ExampleELB_DescribeInstanceHealth_shared00() {
+func ExampleELB_DescribeInstanceHealthRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1054,7 +1074,8 @@ func ExampleELB_DescribeInstanceHealth_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.DescribeInstanceHealth(input)
+	req := svc.DescribeInstanceHealthRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1079,7 +1100,7 @@ func ExampleELB_DescribeInstanceHealth_shared00() {
 // To describe the attributes of a load balancer
 //
 // This example describes the attributes of the specified load balancer.
-func ExampleELB_DescribeLoadBalancerAttributes_shared00() {
+func ExampleELB_DescribeLoadBalancerAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1090,7 +1111,8 @@ func ExampleELB_DescribeLoadBalancerAttributes_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.DescribeLoadBalancerAttributes(input)
+	req := svc.DescribeLoadBalancerAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1115,7 +1137,7 @@ func ExampleELB_DescribeLoadBalancerAttributes_shared00() {
 // To describe a policy associated with a load balancer
 //
 // This example describes the specified policy associated with the specified load balancer.
-func ExampleELB_DescribeLoadBalancerPolicies_shared00() {
+func ExampleELB_DescribeLoadBalancerPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1129,7 +1151,8 @@ func ExampleELB_DescribeLoadBalancerPolicies_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeLoadBalancerPolicies(input)
+	req := svc.DescribeLoadBalancerPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1154,7 +1177,7 @@ func ExampleELB_DescribeLoadBalancerPolicies_shared00() {
 // To describe a load balancer policy type defined by Elastic Load Balancing
 //
 // This example describes the specified load balancer policy type.
-func ExampleELB_DescribeLoadBalancerPolicyTypes_shared00() {
+func ExampleELB_DescribeLoadBalancerPolicyTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1167,7 +1190,8 @@ func ExampleELB_DescribeLoadBalancerPolicyTypes_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeLoadBalancerPolicyTypes(input)
+	req := svc.DescribeLoadBalancerPolicyTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1190,7 +1214,7 @@ func ExampleELB_DescribeLoadBalancerPolicyTypes_shared00() {
 // To describe one of your load balancers
 //
 // This example describes the specified load balancer.
-func ExampleELB_DescribeLoadBalancers_shared00() {
+func ExampleELB_DescribeLoadBalancersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1203,7 +1227,8 @@ func ExampleELB_DescribeLoadBalancers_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeLoadBalancers(input)
+	req := svc.DescribeLoadBalancersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1228,7 +1253,7 @@ func ExampleELB_DescribeLoadBalancers_shared00() {
 // To describe the tags for a load balancer
 //
 // This example describes the tags for the specified load balancer.
-func ExampleELB_DescribeTags_shared00() {
+func ExampleELB_DescribeTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1241,7 +1266,8 @@ func ExampleELB_DescribeTags_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeTags(input)
+	req := svc.DescribeTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1264,7 +1290,7 @@ func ExampleELB_DescribeTags_shared00() {
 // To detach a load balancer from a subnet
 //
 // This example detaches the specified load balancer from the specified subnet.
-func ExampleELB_DetachLoadBalancerFromSubnets_shared00() {
+func ExampleELB_DetachLoadBalancerFromSubnetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1278,7 +1304,8 @@ func ExampleELB_DetachLoadBalancerFromSubnets_shared00() {
 		},
 	}
 
-	result, err := svc.DetachLoadBalancerFromSubnets(input)
+	req := svc.DetachLoadBalancerFromSubnetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1304,7 +1331,7 @@ func ExampleELB_DetachLoadBalancerFromSubnets_shared00() {
 //
 // This example removes the specified Availability Zone from the set of Availability
 // Zones for the specified load balancer.
-func ExampleELB_DisableAvailabilityZonesForLoadBalancer_shared00() {
+func ExampleELB_DisableAvailabilityZonesForLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1318,7 +1345,8 @@ func ExampleELB_DisableAvailabilityZonesForLoadBalancer_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.DisableAvailabilityZonesForLoadBalancer(input)
+	req := svc.DisableAvailabilityZonesForLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1343,7 +1371,7 @@ func ExampleELB_DisableAvailabilityZonesForLoadBalancer_shared00() {
 // To enable an Availability Zone for a load balancer
 //
 // This example adds the specified Availability Zone to the specified load balancer.
-func ExampleELB_EnableAvailabilityZonesForLoadBalancer_shared00() {
+func ExampleELB_EnableAvailabilityZonesForLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1357,7 +1385,8 @@ func ExampleELB_EnableAvailabilityZonesForLoadBalancer_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.EnableAvailabilityZonesForLoadBalancer(input)
+	req := svc.EnableAvailabilityZonesForLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1380,7 +1409,7 @@ func ExampleELB_EnableAvailabilityZonesForLoadBalancer_shared00() {
 // To enable cross-zone load balancing
 //
 // This example enables cross-zone load balancing for the specified load balancer.
-func ExampleELB_ModifyLoadBalancerAttributes_shared00() {
+func ExampleELB_ModifyLoadBalancerAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1396,7 +1425,8 @@ func ExampleELB_ModifyLoadBalancerAttributes_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.ModifyLoadBalancerAttributes(input)
+	req := svc.ModifyLoadBalancerAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1423,7 +1453,7 @@ func ExampleELB_ModifyLoadBalancerAttributes_shared00() {
 // To enable connection draining
 //
 // This example enables connection draining for the specified load balancer.
-func ExampleELB_ModifyLoadBalancerAttributes_shared01() {
+func ExampleELB_ModifyLoadBalancerAttributesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1440,7 +1470,8 @@ func ExampleELB_ModifyLoadBalancerAttributes_shared01() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.ModifyLoadBalancerAttributes(input)
+	req := svc.ModifyLoadBalancerAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1467,7 +1498,7 @@ func ExampleELB_ModifyLoadBalancerAttributes_shared01() {
 // To register instances with a load balancer
 //
 // This example registers the specified instance with the specified load balancer.
-func ExampleELB_RegisterInstancesWithLoadBalancer_shared00() {
+func ExampleELB_RegisterInstancesWithLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1483,7 +1514,8 @@ func ExampleELB_RegisterInstancesWithLoadBalancer_shared00() {
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
-	result, err := svc.RegisterInstancesWithLoadBalancer(input)
+	req := svc.RegisterInstancesWithLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1508,7 +1540,7 @@ func ExampleELB_RegisterInstancesWithLoadBalancer_shared00() {
 // To remove tags from a load balancer
 //
 // This example removes the specified tag from the specified load balancer.
-func ExampleELB_RemoveTags_shared00() {
+func ExampleELB_RemoveTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1526,7 +1558,8 @@ func ExampleELB_RemoveTags_shared00() {
 		},
 	}
 
-	result, err := svc.RemoveTags(input)
+	req := svc.RemoveTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1549,7 +1582,7 @@ func ExampleELB_RemoveTags_shared00() {
 // To update the SSL certificate for an HTTPS listener
 //
 // This example replaces the existing SSL certificate for the specified HTTPS listener.
-func ExampleELB_SetLoadBalancerListenerSSLCertificate_shared00() {
+func ExampleELB_SetLoadBalancerListenerSSLCertificateRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1562,7 +1595,8 @@ func ExampleELB_SetLoadBalancerListenerSSLCertificate_shared00() {
 		SSLCertificateId: aws.String("arn:aws:iam::123456789012:server-certificate/new-server-cert"),
 	}
 
-	result, err := svc.SetLoadBalancerListenerSSLCertificate(input)
+	req := svc.SetLoadBalancerListenerSSLCertificateRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1594,7 +1628,7 @@ func ExampleELB_SetLoadBalancerListenerSSLCertificate_shared00() {
 //
 // This example replaces the policies that are currently associated with the specified
 // port.
-func ExampleELB_SetLoadBalancerPoliciesForBackendServer_shared00() {
+func ExampleELB_SetLoadBalancerPoliciesForBackendServerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1609,7 +1643,8 @@ func ExampleELB_SetLoadBalancerPoliciesForBackendServer_shared00() {
 		},
 	}
 
-	result, err := svc.SetLoadBalancerPoliciesForBackendServer(input)
+	req := svc.SetLoadBalancerPoliciesForBackendServerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1637,7 +1672,7 @@ func ExampleELB_SetLoadBalancerPoliciesForBackendServer_shared00() {
 //
 // This example replaces the policies that are currently associated with the specified
 // listener.
-func ExampleELB_SetLoadBalancerPoliciesOfListener_shared00() {
+func ExampleELB_SetLoadBalancerPoliciesOfListenerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1652,7 +1687,8 @@ func ExampleELB_SetLoadBalancerPoliciesOfListener_shared00() {
 		},
 	}
 
-	result, err := svc.SetLoadBalancerPoliciesOfListener(input)
+	req := svc.SetLoadBalancerPoliciesOfListenerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

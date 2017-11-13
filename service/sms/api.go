@@ -11,31 +11,39 @@ import (
 
 const opCreateReplicationJob = "CreateReplicationJob"
 
-// CreateReplicationJobRequest generates a "aws.Request" representing the
-// client's request for the CreateReplicationJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateReplicationJobRequest is a API request type for the CreateReplicationJob API operation.
+type CreateReplicationJobRequest struct {
+	*aws.Request
+	Input *CreateReplicationJobInput
+}
+
+// Send marshals and sends the CreateReplicationJob API request.
+func (r CreateReplicationJobRequest) Send() (*CreateReplicationJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateReplicationJobOutput), nil
+}
+
+// CreateReplicationJobRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateReplicationJob for more information on using the CreateReplicationJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The CreateReplicationJob API is used to create a ReplicationJob to replicate
+// a server on AWS. Call this API to first create a ReplicationJob, which will
+// then schedule periodic ReplicationRuns to replicate your server to AWS. Each
+// ReplicationRun will result in the creation of an AWS AMI.
 //
 //    // Example sending a request using the CreateReplicationJobRequest method.
-//    req, resp := client.CreateReplicationJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateReplicationJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateReplicationJob
-func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) (req *aws.Request, output *CreateReplicationJobOutput) {
+func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) CreateReplicationJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateReplicationJob,
 		HTTPMethod: "POST",
@@ -46,104 +54,45 @@ func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) (req
 		input = &CreateReplicationJobInput{}
 	}
 
-	output = &CreateReplicationJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateReplicationJob API operation for AWS Server Migration Service.
-//
-// The CreateReplicationJob API is used to create a ReplicationJob to replicate
-// a server on AWS. Call this API to first create a ReplicationJob, which will
-// then schedule periodic ReplicationRuns to replicate your server to AWS. Each
-// ReplicationRun will result in the creation of an AWS AMI.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation CreateReplicationJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The specified operation is not allowed. This error can occur for a number
-//   of reasons; for example, you might be trying to start a Replication Run before
-//   seed Replication Run.
-//
-//   * ErrCodeServerCannotBeReplicatedException "ServerCannotBeReplicatedException"
-//   The provided server cannot be replicated.
-//
-//   * ErrCodeReplicationJobAlreadyExistsException "ReplicationJobAlreadyExistsException"
-//   An active Replication Job already exists for the specified server.
-//
-//   * ErrCodeNoConnectorsAvailableException "NoConnectorsAvailableException"
-//   No connectors are available to handle this request. Please associate connector(s)
-//   and verify any existing connectors are healthy and can respond to requests.
-//
-//   * ErrCodeInternalError "InternalError"
-//   An internal error has occured.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateReplicationJob
-func (c *SMS) CreateReplicationJob(input *CreateReplicationJobInput) (*CreateReplicationJobOutput, error) {
-	req, out := c.CreateReplicationJobRequest(input)
-	return out, req.Send()
-}
-
-// CreateReplicationJobWithContext is the same as CreateReplicationJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateReplicationJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) CreateReplicationJobWithContext(ctx aws.Context, input *CreateReplicationJobInput, opts ...aws.Option) (*CreateReplicationJobOutput, error) {
-	req, out := c.CreateReplicationJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateReplicationJobOutput{})
+	return CreateReplicationJobRequest{Request: req, Input: input}
 }
 
 const opDeleteReplicationJob = "DeleteReplicationJob"
 
-// DeleteReplicationJobRequest generates a "aws.Request" representing the
-// client's request for the DeleteReplicationJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteReplicationJobRequest is a API request type for the DeleteReplicationJob API operation.
+type DeleteReplicationJobRequest struct {
+	*aws.Request
+	Input *DeleteReplicationJobInput
+}
+
+// Send marshals and sends the DeleteReplicationJob API request.
+func (r DeleteReplicationJobRequest) Send() (*DeleteReplicationJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteReplicationJobOutput), nil
+}
+
+// DeleteReplicationJobRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteReplicationJob for more information on using the DeleteReplicationJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The DeleteReplicationJob API is used to delete a ReplicationJob, resulting
+// in no further ReplicationRuns. This will delete the contents of the S3 bucket
+// used to store SMS artifacts, but will not delete any AMIs created by the
+// SMS service.
 //
 //    // Example sending a request using the DeleteReplicationJobRequest method.
-//    req, resp := client.DeleteReplicationJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteReplicationJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJob
-func (c *SMS) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) (req *aws.Request, output *DeleteReplicationJobOutput) {
+func (c *SMS) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) DeleteReplicationJobRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReplicationJob,
 		HTTPMethod: "POST",
@@ -154,94 +103,44 @@ func (c *SMS) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) (req
 		input = &DeleteReplicationJobInput{}
 	}
 
-	output = &DeleteReplicationJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteReplicationJob API operation for AWS Server Migration Service.
-//
-// The DeleteReplicationJob API is used to delete a ReplicationJob, resulting
-// in no further ReplicationRuns. This will delete the contents of the S3 bucket
-// used to store SMS artifacts, but will not delete any AMIs created by the
-// SMS service.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation DeleteReplicationJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The specified operation is not allowed. This error can occur for a number
-//   of reasons; for example, you might be trying to start a Replication Run before
-//   seed Replication Run.
-//
-//   * ErrCodeReplicationJobNotFoundException "ReplicationJobNotFoundException"
-//   The specified Replication Job cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJob
-func (c *SMS) DeleteReplicationJob(input *DeleteReplicationJobInput) (*DeleteReplicationJobOutput, error) {
-	req, out := c.DeleteReplicationJobRequest(input)
-	return out, req.Send()
-}
-
-// DeleteReplicationJobWithContext is the same as DeleteReplicationJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteReplicationJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) DeleteReplicationJobWithContext(ctx aws.Context, input *DeleteReplicationJobInput, opts ...aws.Option) (*DeleteReplicationJobOutput, error) {
-	req, out := c.DeleteReplicationJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteReplicationJobOutput{})
+	return DeleteReplicationJobRequest{Request: req, Input: input}
 }
 
 const opDeleteServerCatalog = "DeleteServerCatalog"
 
-// DeleteServerCatalogRequest generates a "aws.Request" representing the
-// client's request for the DeleteServerCatalog operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteServerCatalogRequest is a API request type for the DeleteServerCatalog API operation.
+type DeleteServerCatalogRequest struct {
+	*aws.Request
+	Input *DeleteServerCatalogInput
+}
+
+// Send marshals and sends the DeleteServerCatalog API request.
+func (r DeleteServerCatalogRequest) Send() (*DeleteServerCatalogOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServerCatalogOutput), nil
+}
+
+// DeleteServerCatalogRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteServerCatalog for more information on using the DeleteServerCatalog
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The DeleteServerCatalog API clears all servers from your server catalog.
+// This means that these servers will no longer be accessible to the Server
+// Migration Service.
 //
 //    // Example sending a request using the DeleteServerCatalogRequest method.
-//    req, resp := client.DeleteServerCatalogRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteServerCatalogRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalog
-func (c *SMS) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) (req *aws.Request, output *DeleteServerCatalogOutput) {
+func (c *SMS) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) DeleteServerCatalogRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServerCatalog,
 		HTTPMethod: "POST",
@@ -252,90 +151,43 @@ func (c *SMS) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) (req *
 		input = &DeleteServerCatalogInput{}
 	}
 
-	output = &DeleteServerCatalogOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteServerCatalog API operation for AWS Server Migration Service.
-//
-// The DeleteServerCatalog API clears all servers from your server catalog.
-// This means that these servers will no longer be accessible to the Server
-// Migration Service.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation DeleteServerCatalog for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The specified operation is not allowed. This error can occur for a number
-//   of reasons; for example, you might be trying to start a Replication Run before
-//   seed Replication Run.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalog
-func (c *SMS) DeleteServerCatalog(input *DeleteServerCatalogInput) (*DeleteServerCatalogOutput, error) {
-	req, out := c.DeleteServerCatalogRequest(input)
-	return out, req.Send()
-}
-
-// DeleteServerCatalogWithContext is the same as DeleteServerCatalog with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteServerCatalog for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) DeleteServerCatalogWithContext(ctx aws.Context, input *DeleteServerCatalogInput, opts ...aws.Option) (*DeleteServerCatalogOutput, error) {
-	req, out := c.DeleteServerCatalogRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteServerCatalogOutput{})
+	return DeleteServerCatalogRequest{Request: req, Input: input}
 }
 
 const opDisassociateConnector = "DisassociateConnector"
 
-// DisassociateConnectorRequest generates a "aws.Request" representing the
-// client's request for the DisassociateConnector operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateConnectorRequest is a API request type for the DisassociateConnector API operation.
+type DisassociateConnectorRequest struct {
+	*aws.Request
+	Input *DisassociateConnectorInput
+}
+
+// Send marshals and sends the DisassociateConnector API request.
+func (r DisassociateConnectorRequest) Send() (*DisassociateConnectorOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectorOutput), nil
+}
+
+// DisassociateConnectorRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateConnector for more information on using the DisassociateConnector
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The DisassociateConnector API will disassociate a connector from the Server
+// Migration Service, rendering it unavailable to support replication jobs.
 //
 //    // Example sending a request using the DisassociateConnectorRequest method.
-//    req, resp := client.DisassociateConnectorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateConnectorRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnector
-func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) (req *aws.Request, output *DisassociateConnectorOutput) {
+func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) DisassociateConnectorRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateConnector,
 		HTTPMethod: "POST",
@@ -346,89 +198,43 @@ func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) (r
 		input = &DisassociateConnectorInput{}
 	}
 
-	output = &DisassociateConnectorOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateConnector API operation for AWS Server Migration Service.
-//
-// The DisassociateConnector API will disassociate a connector from the Server
-// Migration Service, rendering it unavailable to support replication jobs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation DisassociateConnector for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The specified operation is not allowed. This error can occur for a number
-//   of reasons; for example, you might be trying to start a Replication Run before
-//   seed Replication Run.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnector
-func (c *SMS) DisassociateConnector(input *DisassociateConnectorInput) (*DisassociateConnectorOutput, error) {
-	req, out := c.DisassociateConnectorRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateConnectorWithContext is the same as DisassociateConnector with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateConnector for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) DisassociateConnectorWithContext(ctx aws.Context, input *DisassociateConnectorInput, opts ...aws.Option) (*DisassociateConnectorOutput, error) {
-	req, out := c.DisassociateConnectorRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateConnectorOutput{})
+	return DisassociateConnectorRequest{Request: req, Input: input}
 }
 
 const opGetConnectors = "GetConnectors"
 
-// GetConnectorsRequest generates a "aws.Request" representing the
-// client's request for the GetConnectors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetConnectorsRequest is a API request type for the GetConnectors API operation.
+type GetConnectorsRequest struct {
+	*aws.Request
+	Input *GetConnectorsInput
+}
+
+// Send marshals and sends the GetConnectors API request.
+func (r GetConnectorsRequest) Send() (*GetConnectorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetConnectorsOutput), nil
+}
+
+// GetConnectorsRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetConnectors for more information on using the GetConnectors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetConnectors API returns a list of connectors that are registered with
+// the Server Migration Service.
 //
 //    // Example sending a request using the GetConnectorsRequest method.
-//    req, resp := client.GetConnectorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetConnectorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectors
-func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) (req *aws.Request, output *GetConnectorsOutput) {
+func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsRequest {
 	op := &aws.Operation{
 		Name:       opGetConnectors,
 		HTTPMethod: "POST",
@@ -445,47 +251,8 @@ func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) (req *aws.Request,
 		input = &GetConnectorsInput{}
 	}
 
-	output = &GetConnectorsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetConnectors API operation for AWS Server Migration Service.
-//
-// The GetConnectors API returns a list of connectors that are registered with
-// the Server Migration Service.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation GetConnectors for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectors
-func (c *SMS) GetConnectors(input *GetConnectorsInput) (*GetConnectorsOutput, error) {
-	req, out := c.GetConnectorsRequest(input)
-	return out, req.Send()
-}
-
-// GetConnectorsWithContext is the same as GetConnectors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetConnectors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetConnectorsWithContext(ctx aws.Context, input *GetConnectorsInput, opts ...aws.Option) (*GetConnectorsOutput, error) {
-	req, out := c.GetConnectorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetConnectorsOutput{})
+	return GetConnectorsRequest{Request: req, Input: input}
 }
 
 // GetConnectorsPages iterates over the pages of a GetConnectors operation,
@@ -524,10 +291,10 @@ func (c *SMS) GetConnectorsPagesWithContext(ctx aws.Context, input *GetConnector
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetConnectorsRequest(inCpy)
+			req := c.GetConnectorsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -540,31 +307,38 @@ func (c *SMS) GetConnectorsPagesWithContext(ctx aws.Context, input *GetConnector
 
 const opGetReplicationJobs = "GetReplicationJobs"
 
-// GetReplicationJobsRequest generates a "aws.Request" representing the
-// client's request for the GetReplicationJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetReplicationJobsRequest is a API request type for the GetReplicationJobs API operation.
+type GetReplicationJobsRequest struct {
+	*aws.Request
+	Input *GetReplicationJobsInput
+}
+
+// Send marshals and sends the GetReplicationJobs API request.
+func (r GetReplicationJobsRequest) Send() (*GetReplicationJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetReplicationJobsOutput), nil
+}
+
+// GetReplicationJobsRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetReplicationJobs for more information on using the GetReplicationJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetReplicationJobs API will return all of your ReplicationJobs and their
+// details. This API returns a paginated list, that may be consecutively called
+// with nextToken to retrieve all ReplicationJobs.
 //
 //    // Example sending a request using the GetReplicationJobsRequest method.
-//    req, resp := client.GetReplicationJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetReplicationJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationJobs
-func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) (req *aws.Request, output *GetReplicationJobsOutput) {
+func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetReplicationJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetReplicationJobs,
 		HTTPMethod: "POST",
@@ -581,56 +355,8 @@ func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) (req *aw
 		input = &GetReplicationJobsInput{}
 	}
 
-	output = &GetReplicationJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetReplicationJobs API operation for AWS Server Migration Service.
-//
-// The GetReplicationJobs API will return all of your ReplicationJobs and their
-// details. This API returns a paginated list, that may be consecutively called
-// with nextToken to retrieve all ReplicationJobs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation GetReplicationJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationJobs
-func (c *SMS) GetReplicationJobs(input *GetReplicationJobsInput) (*GetReplicationJobsOutput, error) {
-	req, out := c.GetReplicationJobsRequest(input)
-	return out, req.Send()
-}
-
-// GetReplicationJobsWithContext is the same as GetReplicationJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetReplicationJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetReplicationJobsWithContext(ctx aws.Context, input *GetReplicationJobsInput, opts ...aws.Option) (*GetReplicationJobsOutput, error) {
-	req, out := c.GetReplicationJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetReplicationJobsOutput{})
+	return GetReplicationJobsRequest{Request: req, Input: input}
 }
 
 // GetReplicationJobsPages iterates over the pages of a GetReplicationJobs operation,
@@ -669,10 +395,10 @@ func (c *SMS) GetReplicationJobsPagesWithContext(ctx aws.Context, input *GetRepl
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetReplicationJobsRequest(inCpy)
+			req := c.GetReplicationJobsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -685,31 +411,38 @@ func (c *SMS) GetReplicationJobsPagesWithContext(ctx aws.Context, input *GetRepl
 
 const opGetReplicationRuns = "GetReplicationRuns"
 
-// GetReplicationRunsRequest generates a "aws.Request" representing the
-// client's request for the GetReplicationRuns operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetReplicationRunsRequest is a API request type for the GetReplicationRuns API operation.
+type GetReplicationRunsRequest struct {
+	*aws.Request
+	Input *GetReplicationRunsInput
+}
+
+// Send marshals and sends the GetReplicationRuns API request.
+func (r GetReplicationRunsRequest) Send() (*GetReplicationRunsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetReplicationRunsOutput), nil
+}
+
+// GetReplicationRunsRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetReplicationRuns for more information on using the GetReplicationRuns
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetReplicationRuns API will return all ReplicationRuns for a given ReplicationJob.
+// This API returns a paginated list, that may be consecutively called with
+// nextToken to retrieve all ReplicationRuns for a ReplicationJob.
 //
 //    // Example sending a request using the GetReplicationRunsRequest method.
-//    req, resp := client.GetReplicationRunsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetReplicationRunsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationRuns
-func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) (req *aws.Request, output *GetReplicationRunsOutput) {
+func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetReplicationRunsRequest {
 	op := &aws.Operation{
 		Name:       opGetReplicationRuns,
 		HTTPMethod: "POST",
@@ -726,56 +459,8 @@ func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) (req *aw
 		input = &GetReplicationRunsInput{}
 	}
 
-	output = &GetReplicationRunsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetReplicationRuns API operation for AWS Server Migration Service.
-//
-// The GetReplicationRuns API will return all ReplicationRuns for a given ReplicationJob.
-// This API returns a paginated list, that may be consecutively called with
-// nextToken to retrieve all ReplicationRuns for a ReplicationJob.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation GetReplicationRuns for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationRuns
-func (c *SMS) GetReplicationRuns(input *GetReplicationRunsInput) (*GetReplicationRunsOutput, error) {
-	req, out := c.GetReplicationRunsRequest(input)
-	return out, req.Send()
-}
-
-// GetReplicationRunsWithContext is the same as GetReplicationRuns with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetReplicationRuns for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetReplicationRunsWithContext(ctx aws.Context, input *GetReplicationRunsInput, opts ...aws.Option) (*GetReplicationRunsOutput, error) {
-	req, out := c.GetReplicationRunsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetReplicationRunsOutput{})
+	return GetReplicationRunsRequest{Request: req, Input: input}
 }
 
 // GetReplicationRunsPages iterates over the pages of a GetReplicationRuns operation,
@@ -814,10 +499,10 @@ func (c *SMS) GetReplicationRunsPagesWithContext(ctx aws.Context, input *GetRepl
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetReplicationRunsRequest(inCpy)
+			req := c.GetReplicationRunsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -830,31 +515,37 @@ func (c *SMS) GetReplicationRunsPagesWithContext(ctx aws.Context, input *GetRepl
 
 const opGetServers = "GetServers"
 
-// GetServersRequest generates a "aws.Request" representing the
-// client's request for the GetServers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetServersRequest is a API request type for the GetServers API operation.
+type GetServersRequest struct {
+	*aws.Request
+	Input *GetServersInput
+}
+
+// Send marshals and sends the GetServers API request.
+func (r GetServersRequest) Send() (*GetServersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetServersOutput), nil
+}
+
+// GetServersRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetServers for more information on using the GetServers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetServers API returns a list of all servers in your server catalog.
+// For this call to succeed, you must previously have called ImportServerCatalog.
 //
 //    // Example sending a request using the GetServersRequest method.
-//    req, resp := client.GetServersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetServersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetServers
-func (c *SMS) GetServersRequest(input *GetServersInput) (req *aws.Request, output *GetServersOutput) {
+func (c *SMS) GetServersRequest(input *GetServersInput) GetServersRequest {
 	op := &aws.Operation{
 		Name:       opGetServers,
 		HTTPMethod: "POST",
@@ -871,47 +562,8 @@ func (c *SMS) GetServersRequest(input *GetServersInput) (req *aws.Request, outpu
 		input = &GetServersInput{}
 	}
 
-	output = &GetServersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetServers API operation for AWS Server Migration Service.
-//
-// The GetServers API returns a list of all servers in your server catalog.
-// For this call to succeed, you must previously have called ImportServerCatalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation GetServers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetServers
-func (c *SMS) GetServers(input *GetServersInput) (*GetServersOutput, error) {
-	req, out := c.GetServersRequest(input)
-	return out, req.Send()
-}
-
-// GetServersWithContext is the same as GetServers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetServers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetServersWithContext(ctx aws.Context, input *GetServersInput, opts ...aws.Option) (*GetServersOutput, error) {
-	req, out := c.GetServersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetServersOutput{})
+	return GetServersRequest{Request: req, Input: input}
 }
 
 // GetServersPages iterates over the pages of a GetServers operation,
@@ -950,10 +602,10 @@ func (c *SMS) GetServersPagesWithContext(ctx aws.Context, input *GetServersInput
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetServersRequest(inCpy)
+			req := c.GetServersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -966,31 +618,39 @@ func (c *SMS) GetServersPagesWithContext(ctx aws.Context, input *GetServersInput
 
 const opImportServerCatalog = "ImportServerCatalog"
 
-// ImportServerCatalogRequest generates a "aws.Request" representing the
-// client's request for the ImportServerCatalog operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ImportServerCatalogRequest is a API request type for the ImportServerCatalog API operation.
+type ImportServerCatalogRequest struct {
+	*aws.Request
+	Input *ImportServerCatalogInput
+}
+
+// Send marshals and sends the ImportServerCatalog API request.
+func (r ImportServerCatalogRequest) Send() (*ImportServerCatalogOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportServerCatalogOutput), nil
+}
+
+// ImportServerCatalogRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ImportServerCatalog for more information on using the ImportServerCatalog
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ImportServerCatalog API is used to gather the complete list of on-premises
+// servers on your premises. This API call requires connectors to be installed
+// and monitoring all servers you would like imported. This API call returns
+// immediately, but may take some time to retrieve all of the servers.
 //
 //    // Example sending a request using the ImportServerCatalogRequest method.
-//    req, resp := client.ImportServerCatalogRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ImportServerCatalogRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalog
-func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) (req *aws.Request, output *ImportServerCatalogOutput) {
+func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) ImportServerCatalogRequest {
 	op := &aws.Operation{
 		Name:       opImportServerCatalog,
 		HTTPMethod: "POST",
@@ -1001,95 +661,46 @@ func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) (req *
 		input = &ImportServerCatalogInput{}
 	}
 
-	output = &ImportServerCatalogOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ImportServerCatalog API operation for AWS Server Migration Service.
-//
-// The ImportServerCatalog API is used to gather the complete list of on-premises
-// servers on your premises. This API call requires connectors to be installed
-// and monitoring all servers you would like imported. This API call returns
-// immediately, but may take some time to retrieve all of the servers.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation ImportServerCatalog for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The specified operation is not allowed. This error can occur for a number
-//   of reasons; for example, you might be trying to start a Replication Run before
-//   seed Replication Run.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeNoConnectorsAvailableException "NoConnectorsAvailableException"
-//   No connectors are available to handle this request. Please associate connector(s)
-//   and verify any existing connectors are healthy and can respond to requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalog
-func (c *SMS) ImportServerCatalog(input *ImportServerCatalogInput) (*ImportServerCatalogOutput, error) {
-	req, out := c.ImportServerCatalogRequest(input)
-	return out, req.Send()
-}
-
-// ImportServerCatalogWithContext is the same as ImportServerCatalog with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ImportServerCatalog for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) ImportServerCatalogWithContext(ctx aws.Context, input *ImportServerCatalogInput, opts ...aws.Option) (*ImportServerCatalogOutput, error) {
-	req, out := c.ImportServerCatalogRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ImportServerCatalogOutput{})
+	return ImportServerCatalogRequest{Request: req, Input: input}
 }
 
 const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
 
-// StartOnDemandReplicationRunRequest generates a "aws.Request" representing the
-// client's request for the StartOnDemandReplicationRun operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartOnDemandReplicationRunRequest is a API request type for the StartOnDemandReplicationRun API operation.
+type StartOnDemandReplicationRunRequest struct {
+	*aws.Request
+	Input *StartOnDemandReplicationRunInput
+}
+
+// Send marshals and sends the StartOnDemandReplicationRun API request.
+func (r StartOnDemandReplicationRunRequest) Send() (*StartOnDemandReplicationRunOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartOnDemandReplicationRunOutput), nil
+}
+
+// StartOnDemandReplicationRunRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartOnDemandReplicationRun for more information on using the StartOnDemandReplicationRun
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The StartOnDemandReplicationRun API is used to start a ReplicationRun on
+// demand (in addition to those that are scheduled based on your frequency).
+// This ReplicationRun will start immediately. StartOnDemandReplicationRun is
+// subject to limits on how many on demand ReplicationRuns you may call per
+// 24-hour period.
 //
 //    // Example sending a request using the StartOnDemandReplicationRunRequest method.
-//    req, resp := client.StartOnDemandReplicationRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartOnDemandReplicationRunRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRun
-func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicationRunInput) (req *aws.Request, output *StartOnDemandReplicationRunOutput) {
+func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicationRunInput) StartOnDemandReplicationRunRequest {
 	op := &aws.Operation{
 		Name:       opStartOnDemandReplicationRun,
 		HTTPMethod: "POST",
@@ -1100,95 +711,44 @@ func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplication
 		input = &StartOnDemandReplicationRunInput{}
 	}
 
-	output = &StartOnDemandReplicationRunOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartOnDemandReplicationRun API operation for AWS Server Migration Service.
-//
-// The StartOnDemandReplicationRun API is used to start a ReplicationRun on
-// demand (in addition to those that are scheduled based on your frequency).
-// This ReplicationRun will start immediately. StartOnDemandReplicationRun is
-// subject to limits on how many on demand ReplicationRuns you may call per
-// 24-hour period.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation StartOnDemandReplicationRun for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The specified operation is not allowed. This error can occur for a number
-//   of reasons; for example, you might be trying to start a Replication Run before
-//   seed Replication Run.
-//
-//   * ErrCodeReplicationRunLimitExceededException "ReplicationRunLimitExceededException"
-//   This user has exceeded the maximum allowed Replication Run limit.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRun
-func (c *SMS) StartOnDemandReplicationRun(input *StartOnDemandReplicationRunInput) (*StartOnDemandReplicationRunOutput, error) {
-	req, out := c.StartOnDemandReplicationRunRequest(input)
-	return out, req.Send()
-}
-
-// StartOnDemandReplicationRunWithContext is the same as StartOnDemandReplicationRun with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartOnDemandReplicationRun for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) StartOnDemandReplicationRunWithContext(ctx aws.Context, input *StartOnDemandReplicationRunInput, opts ...aws.Option) (*StartOnDemandReplicationRunOutput, error) {
-	req, out := c.StartOnDemandReplicationRunRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartOnDemandReplicationRunOutput{})
+	return StartOnDemandReplicationRunRequest{Request: req, Input: input}
 }
 
 const opUpdateReplicationJob = "UpdateReplicationJob"
 
-// UpdateReplicationJobRequest generates a "aws.Request" representing the
-// client's request for the UpdateReplicationJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateReplicationJobRequest is a API request type for the UpdateReplicationJob API operation.
+type UpdateReplicationJobRequest struct {
+	*aws.Request
+	Input *UpdateReplicationJobInput
+}
+
+// Send marshals and sends the UpdateReplicationJob API request.
+func (r UpdateReplicationJobRequest) Send() (*UpdateReplicationJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateReplicationJobOutput), nil
+}
+
+// UpdateReplicationJobRequest returns a request value for making API operation for
+// AWS Server Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateReplicationJob for more information on using the UpdateReplicationJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The UpdateReplicationJob API is used to change the settings of your existing
+// ReplicationJob created using CreateReplicationJob. Calling this API will
+// affect the next scheduled ReplicationRun.
 //
 //    // Example sending a request using the UpdateReplicationJobRequest method.
-//    req, resp := client.UpdateReplicationJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateReplicationJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJob
-func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) (req *aws.Request, output *UpdateReplicationJobOutput) {
+func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) UpdateReplicationJobRequest {
 	op := &aws.Operation{
 		Name:       opUpdateReplicationJob,
 		HTTPMethod: "POST",
@@ -1199,70 +759,8 @@ func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) (req
 		input = &UpdateReplicationJobInput{}
 	}
 
-	output = &UpdateReplicationJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateReplicationJob API operation for AWS Server Migration Service.
-//
-// The UpdateReplicationJob API is used to change the settings of your existing
-// ReplicationJob created using CreateReplicationJob. Calling this API will
-// affect the next scheduled ReplicationRun.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Server Migration Service's
-// API operation UpdateReplicationJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter specified in the request is not valid, is unsupported, or cannot
-//   be used.
-//
-//   * ErrCodeMissingRequiredParameterException "MissingRequiredParameterException"
-//   The request is missing a required parameter. Ensure that you have supplied
-//   all the required parameters for the request.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The specified operation is not allowed. This error can occur for a number
-//   of reasons; for example, you might be trying to start a Replication Run before
-//   seed Replication Run.
-//
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   This user does not have permissions to perform this operation.
-//
-//   * ErrCodeServerCannotBeReplicatedException "ServerCannotBeReplicatedException"
-//   The provided server cannot be replicated.
-//
-//   * ErrCodeReplicationJobNotFoundException "ReplicationJobNotFoundException"
-//   The specified Replication Job cannot be found.
-//
-//   * ErrCodeInternalError "InternalError"
-//   An internal error has occured.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJob
-func (c *SMS) UpdateReplicationJob(input *UpdateReplicationJobInput) (*UpdateReplicationJobOutput, error) {
-	req, out := c.UpdateReplicationJobRequest(input)
-	return out, req.Send()
-}
-
-// UpdateReplicationJobWithContext is the same as UpdateReplicationJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateReplicationJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) UpdateReplicationJobWithContext(ctx aws.Context, input *UpdateReplicationJobInput, opts ...aws.Option) (*UpdateReplicationJobOutput, error) {
-	req, out := c.UpdateReplicationJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateReplicationJobOutput{})
+	return UpdateReplicationJobRequest{Request: req, Input: input}
 }
 
 // Object representing a Connector

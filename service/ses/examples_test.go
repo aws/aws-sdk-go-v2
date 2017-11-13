@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // CloneReceiptRuleSet
 //
 // The following example creates a receipt rule set by cloning an existing one:
-func ExampleSES_CloneReceiptRuleSet_shared00() {
+func ExampleSES_CloneReceiptRuleSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -40,7 +40,8 @@ func ExampleSES_CloneReceiptRuleSet_shared00() {
 		RuleSetName:         aws.String("RuleSetToCreate"),
 	}
 
-	result, err := svc.CloneReceiptRuleSet(input)
+	req := svc.CloneReceiptRuleSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -67,7 +68,7 @@ func ExampleSES_CloneReceiptRuleSet_shared00() {
 // CreateReceiptFilter
 //
 // The following example creates a new IP address filter:
-func ExampleSES_CreateReceiptFilter_shared00() {
+func ExampleSES_CreateReceiptFilterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -84,7 +85,8 @@ func ExampleSES_CreateReceiptFilter_shared00() {
 		},
 	}
 
-	result, err := svc.CreateReceiptFilter(input)
+	req := svc.CreateReceiptFilterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -109,7 +111,7 @@ func ExampleSES_CreateReceiptFilter_shared00() {
 // CreateReceiptRule
 //
 // The following example creates a new receipt rule:
-func ExampleSES_CreateReceiptRule_shared00() {
+func ExampleSES_CreateReceiptRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -130,7 +132,8 @@ func ExampleSES_CreateReceiptRule_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.CreateReceiptRule(input)
+	req := svc.CreateReceiptRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -165,7 +168,7 @@ func ExampleSES_CreateReceiptRule_shared00() {
 // CreateReceiptRuleSet
 //
 // The following example creates an empty receipt rule set:
-func ExampleSES_CreateReceiptRuleSet_shared00() {
+func ExampleSES_CreateReceiptRuleSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -176,7 +179,8 @@ func ExampleSES_CreateReceiptRuleSet_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.CreateReceiptRuleSet(input)
+	req := svc.CreateReceiptRuleSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -202,7 +206,7 @@ func ExampleSES_CreateReceiptRuleSet_shared00() {
 //
 // The following example deletes an identity from the list of identities that have been
 // submitted for verification with Amazon SES:
-func ExampleSES_DeleteIdentity_shared00() {
+func ExampleSES_DeleteIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -213,7 +217,8 @@ func ExampleSES_DeleteIdentity_shared00() {
 		Identity: aws.String("user@example.com"),
 	}
 
-	result, err := svc.DeleteIdentity(input)
+	req := svc.DeleteIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -234,7 +239,7 @@ func ExampleSES_DeleteIdentity_shared00() {
 // DeleteIdentityPolicy
 //
 // The following example deletes a sending authorization policy for an identity:
-func ExampleSES_DeleteIdentityPolicy_shared00() {
+func ExampleSES_DeleteIdentityPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -246,7 +251,8 @@ func ExampleSES_DeleteIdentityPolicy_shared00() {
 		PolicyName: aws.String("MyPolicy"),
 	}
 
-	result, err := svc.DeleteIdentityPolicy(input)
+	req := svc.DeleteIdentityPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -267,7 +273,7 @@ func ExampleSES_DeleteIdentityPolicy_shared00() {
 // DeleteReceiptFilter
 //
 // The following example deletes an IP address filter:
-func ExampleSES_DeleteReceiptFilter_shared00() {
+func ExampleSES_DeleteReceiptFilterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -278,7 +284,8 @@ func ExampleSES_DeleteReceiptFilter_shared00() {
 		FilterName: aws.String("MyFilter"),
 	}
 
-	result, err := svc.DeleteReceiptFilter(input)
+	req := svc.DeleteReceiptFilterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -299,7 +306,7 @@ func ExampleSES_DeleteReceiptFilter_shared00() {
 // DeleteReceiptRule
 //
 // The following example deletes a receipt rule:
-func ExampleSES_DeleteReceiptRule_shared00() {
+func ExampleSES_DeleteReceiptRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -311,7 +318,8 @@ func ExampleSES_DeleteReceiptRule_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.DeleteReceiptRule(input)
+	req := svc.DeleteReceiptRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -334,7 +342,7 @@ func ExampleSES_DeleteReceiptRule_shared00() {
 // DeleteReceiptRuleSet
 //
 // The following example deletes a receipt rule set:
-func ExampleSES_DeleteReceiptRuleSet_shared00() {
+func ExampleSES_DeleteReceiptRuleSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -345,7 +353,8 @@ func ExampleSES_DeleteReceiptRuleSet_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.DeleteReceiptRuleSet(input)
+	req := svc.DeleteReceiptRuleSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -369,7 +378,7 @@ func ExampleSES_DeleteReceiptRuleSet_shared00() {
 //
 // The following example deletes an email address from the list of identities that have
 // been submitted for verification with Amazon SES:
-func ExampleSES_DeleteVerifiedEmailAddress_shared00() {
+func ExampleSES_DeleteVerifiedEmailAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -380,7 +389,8 @@ func ExampleSES_DeleteVerifiedEmailAddress_shared00() {
 		EmailAddress: aws.String("user@example.com"),
 	}
 
-	result, err := svc.DeleteVerifiedEmailAddress(input)
+	req := svc.DeleteVerifiedEmailAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -402,7 +412,7 @@ func ExampleSES_DeleteVerifiedEmailAddress_shared00() {
 //
 // The following example returns the metadata and receipt rules for the receipt rule
 // set that is currently active:
-func ExampleSES_DescribeActiveReceiptRuleSet_shared00() {
+func ExampleSES_DescribeActiveReceiptRuleSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -411,7 +421,8 @@ func ExampleSES_DescribeActiveReceiptRuleSet_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.DescribeActiveReceiptRuleSetInput{}
 
-	result, err := svc.DescribeActiveReceiptRuleSet(input)
+	req := svc.DescribeActiveReceiptRuleSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -432,7 +443,7 @@ func ExampleSES_DescribeActiveReceiptRuleSet_shared00() {
 // DescribeReceiptRule
 //
 // The following example returns the details of a receipt rule:
-func ExampleSES_DescribeReceiptRule_shared00() {
+func ExampleSES_DescribeReceiptRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -444,7 +455,8 @@ func ExampleSES_DescribeReceiptRule_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.DescribeReceiptRule(input)
+	req := svc.DescribeReceiptRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -469,7 +481,7 @@ func ExampleSES_DescribeReceiptRule_shared00() {
 // DescribeReceiptRuleSet
 //
 // The following example returns the metadata and receipt rules of a receipt rule set:
-func ExampleSES_DescribeReceiptRuleSet_shared00() {
+func ExampleSES_DescribeReceiptRuleSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -480,7 +492,8 @@ func ExampleSES_DescribeReceiptRuleSet_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.DescribeReceiptRuleSet(input)
+	req := svc.DescribeReceiptRuleSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -504,7 +517,7 @@ func ExampleSES_DescribeReceiptRuleSet_shared00() {
 //
 // The following example retrieves the Amazon SES Easy DKIM attributes for a list of
 // identities:
-func ExampleSES_GetIdentityDkimAttributes_shared00() {
+func ExampleSES_GetIdentityDkimAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -518,7 +531,8 @@ func ExampleSES_GetIdentityDkimAttributes_shared00() {
 		},
 	}
 
-	result, err := svc.GetIdentityDkimAttributes(input)
+	req := svc.GetIdentityDkimAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -539,7 +553,7 @@ func ExampleSES_GetIdentityDkimAttributes_shared00() {
 // GetIdentityMailFromDomainAttributes
 //
 // The following example returns the custom MAIL FROM attributes for an identity:
-func ExampleSES_GetIdentityMailFromDomainAttributes_shared00() {
+func ExampleSES_GetIdentityMailFromDomainAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -552,7 +566,8 @@ func ExampleSES_GetIdentityMailFromDomainAttributes_shared00() {
 		},
 	}
 
-	result, err := svc.GetIdentityMailFromDomainAttributes(input)
+	req := svc.GetIdentityMailFromDomainAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -573,7 +588,7 @@ func ExampleSES_GetIdentityMailFromDomainAttributes_shared00() {
 // GetIdentityNotificationAttributes
 //
 // The following example returns the notification attributes for an identity:
-func ExampleSES_GetIdentityNotificationAttributes_shared00() {
+func ExampleSES_GetIdentityNotificationAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -586,7 +601,8 @@ func ExampleSES_GetIdentityNotificationAttributes_shared00() {
 		},
 	}
 
-	result, err := svc.GetIdentityNotificationAttributes(input)
+	req := svc.GetIdentityNotificationAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -607,7 +623,7 @@ func ExampleSES_GetIdentityNotificationAttributes_shared00() {
 // GetIdentityPolicies
 //
 // The following example returns a sending authorization policy for an identity:
-func ExampleSES_GetIdentityPolicies_shared00() {
+func ExampleSES_GetIdentityPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -621,7 +637,8 @@ func ExampleSES_GetIdentityPolicies_shared00() {
 		},
 	}
 
-	result, err := svc.GetIdentityPolicies(input)
+	req := svc.GetIdentityPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -643,7 +660,7 @@ func ExampleSES_GetIdentityPolicies_shared00() {
 //
 // The following example returns the verification status and the verification token
 // for a domain identity:
-func ExampleSES_GetIdentityVerificationAttributes_shared00() {
+func ExampleSES_GetIdentityVerificationAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -656,7 +673,8 @@ func ExampleSES_GetIdentityVerificationAttributes_shared00() {
 		},
 	}
 
-	result, err := svc.GetIdentityVerificationAttributes(input)
+	req := svc.GetIdentityVerificationAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -677,7 +695,7 @@ func ExampleSES_GetIdentityVerificationAttributes_shared00() {
 // GetSendQuota
 //
 // The following example returns the Amazon SES sending limits for an AWS account:
-func ExampleSES_GetSendQuota_shared00() {
+func ExampleSES_GetSendQuotaRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -686,7 +704,8 @@ func ExampleSES_GetSendQuota_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.GetSendQuotaInput{}
 
-	result, err := svc.GetSendQuota(input)
+	req := svc.GetSendQuotaRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -707,7 +726,7 @@ func ExampleSES_GetSendQuota_shared00() {
 // GetSendStatistics
 //
 // The following example returns Amazon SES sending statistics:
-func ExampleSES_GetSendStatistics_shared00() {
+func ExampleSES_GetSendStatisticsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -716,7 +735,8 @@ func ExampleSES_GetSendStatistics_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.GetSendStatisticsInput{}
 
-	result, err := svc.GetSendStatistics(input)
+	req := svc.GetSendStatisticsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -738,7 +758,7 @@ func ExampleSES_GetSendStatistics_shared00() {
 //
 // The following example lists the email address identities that have been submitted
 // for verification with Amazon SES:
-func ExampleSES_ListIdentities_shared00() {
+func ExampleSES_ListIdentitiesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -751,7 +771,8 @@ func ExampleSES_ListIdentities_shared00() {
 		NextToken:    aws.String(""),
 	}
 
-	result, err := svc.ListIdentities(input)
+	req := svc.ListIdentitiesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -773,7 +794,7 @@ func ExampleSES_ListIdentities_shared00() {
 //
 // The following example returns a list of sending authorization policies that are attached
 // to an identity:
-func ExampleSES_ListIdentityPolicies_shared00() {
+func ExampleSES_ListIdentityPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -784,7 +805,8 @@ func ExampleSES_ListIdentityPolicies_shared00() {
 		Identity: aws.String("example.com"),
 	}
 
-	result, err := svc.ListIdentityPolicies(input)
+	req := svc.ListIdentityPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -806,7 +828,7 @@ func ExampleSES_ListIdentityPolicies_shared00() {
 //
 // The following example lists the IP address filters that are associated with an AWS
 // account:
-func ExampleSES_ListReceiptFilters_shared00() {
+func ExampleSES_ListReceiptFiltersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -815,7 +837,8 @@ func ExampleSES_ListReceiptFilters_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.ListReceiptFiltersInput{}
 
-	result, err := svc.ListReceiptFilters(input)
+	req := svc.ListReceiptFiltersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -836,7 +859,7 @@ func ExampleSES_ListReceiptFilters_shared00() {
 // ListReceiptRuleSets
 //
 // The following example lists the receipt rule sets that exist under an AWS account:
-func ExampleSES_ListReceiptRuleSets_shared00() {
+func ExampleSES_ListReceiptRuleSetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -847,7 +870,8 @@ func ExampleSES_ListReceiptRuleSets_shared00() {
 		NextToken: aws.String(""),
 	}
 
-	result, err := svc.ListReceiptRuleSets(input)
+	req := svc.ListReceiptRuleSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -869,7 +893,7 @@ func ExampleSES_ListReceiptRuleSets_shared00() {
 //
 // The following example lists all email addresses that have been submitted for verification
 // with Amazon SES:
-func ExampleSES_ListVerifiedEmailAddresses_shared00() {
+func ExampleSES_ListVerifiedEmailAddressesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -878,7 +902,8 @@ func ExampleSES_ListVerifiedEmailAddresses_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.ListVerifiedEmailAddressesInput{}
 
-	result, err := svc.ListVerifiedEmailAddresses(input)
+	req := svc.ListVerifiedEmailAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -899,7 +924,7 @@ func ExampleSES_ListVerifiedEmailAddresses_shared00() {
 // PutIdentityPolicy
 //
 // The following example adds a sending authorization policy to an identity:
-func ExampleSES_PutIdentityPolicy_shared00() {
+func ExampleSES_PutIdentityPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -912,7 +937,8 @@ func ExampleSES_PutIdentityPolicy_shared00() {
 		PolicyName: aws.String("MyPolicy"),
 	}
 
-	result, err := svc.PutIdentityPolicy(input)
+	req := svc.PutIdentityPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -935,7 +961,7 @@ func ExampleSES_PutIdentityPolicy_shared00() {
 // ReorderReceiptRuleSet
 //
 // The following example reorders the receipt rules within a receipt rule set:
-func ExampleSES_ReorderReceiptRuleSet_shared00() {
+func ExampleSES_ReorderReceiptRuleSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -950,7 +976,8 @@ func ExampleSES_ReorderReceiptRuleSet_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.ReorderReceiptRuleSet(input)
+	req := svc.ReorderReceiptRuleSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -975,7 +1002,7 @@ func ExampleSES_ReorderReceiptRuleSet_shared00() {
 // SendEmail
 //
 // The following example sends a formatted email:
-func ExampleSES_SendEmail_shared00() {
+func ExampleSES_SendEmailRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1014,7 +1041,8 @@ func ExampleSES_SendEmail_shared00() {
 		SourceArn:     aws.String(""),
 	}
 
-	result, err := svc.SendEmail(input)
+	req := svc.SendEmailRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1041,7 +1069,7 @@ func ExampleSES_SendEmail_shared00() {
 // SendRawEmail
 //
 // The following example sends an email with an attachment:
-func ExampleSES_SendRawEmail_shared00() {
+func ExampleSES_SendRawEmailRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1058,7 +1086,8 @@ func ExampleSES_SendRawEmail_shared00() {
 		SourceArn:     aws.String(""),
 	}
 
-	result, err := svc.SendRawEmail(input)
+	req := svc.SendRawEmailRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1085,7 +1114,7 @@ func ExampleSES_SendRawEmail_shared00() {
 // SetActiveReceiptRuleSet
 //
 // The following example sets the active receipt rule set:
-func ExampleSES_SetActiveReceiptRuleSet_shared00() {
+func ExampleSES_SetActiveReceiptRuleSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1096,7 +1125,8 @@ func ExampleSES_SetActiveReceiptRuleSet_shared00() {
 		RuleSetName: aws.String("RuleSetToActivate"),
 	}
 
-	result, err := svc.SetActiveReceiptRuleSet(input)
+	req := svc.SetActiveReceiptRuleSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1120,7 +1150,7 @@ func ExampleSES_SetActiveReceiptRuleSet_shared00() {
 //
 // The following example configures Amazon SES to Easy DKIM-sign the email sent from
 // an identity:
-func ExampleSES_SetIdentityDkimEnabled_shared00() {
+func ExampleSES_SetIdentityDkimEnabledRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1132,7 +1162,8 @@ func ExampleSES_SetIdentityDkimEnabled_shared00() {
 		Identity:    aws.String("user@example.com"),
 	}
 
-	result, err := svc.SetIdentityDkimEnabled(input)
+	req := svc.SetIdentityDkimEnabledRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1154,7 +1185,7 @@ func ExampleSES_SetIdentityDkimEnabled_shared00() {
 //
 // The following example configures Amazon SES to forward an identity's bounces and
 // complaints via email:
-func ExampleSES_SetIdentityFeedbackForwardingEnabled_shared00() {
+func ExampleSES_SetIdentityFeedbackForwardingEnabledRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1166,7 +1197,8 @@ func ExampleSES_SetIdentityFeedbackForwardingEnabled_shared00() {
 		Identity:          aws.String("user@example.com"),
 	}
 
-	result, err := svc.SetIdentityFeedbackForwardingEnabled(input)
+	req := svc.SetIdentityFeedbackForwardingEnabledRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1188,7 +1220,7 @@ func ExampleSES_SetIdentityFeedbackForwardingEnabled_shared00() {
 //
 // The following example configures Amazon SES to include the original email headers
 // in the Amazon SNS bounce notifications for an identity:
-func ExampleSES_SetIdentityHeadersInNotificationsEnabled_shared00() {
+func ExampleSES_SetIdentityHeadersInNotificationsEnabledRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1201,7 +1233,8 @@ func ExampleSES_SetIdentityHeadersInNotificationsEnabled_shared00() {
 		NotificationType: ses.NotificationTypeBounce,
 	}
 
-	result, err := svc.SetIdentityHeadersInNotificationsEnabled(input)
+	req := svc.SetIdentityHeadersInNotificationsEnabledRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1223,7 +1256,7 @@ func ExampleSES_SetIdentityHeadersInNotificationsEnabled_shared00() {
 //
 // The following example configures Amazon SES to use a custom MAIL FROM domain for
 // an identity:
-func ExampleSES_SetIdentityMailFromDomain_shared00() {
+func ExampleSES_SetIdentityMailFromDomainRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1236,7 +1269,8 @@ func ExampleSES_SetIdentityMailFromDomain_shared00() {
 		MailFromDomain:      aws.String("bounces.example.com"),
 	}
 
-	result, err := svc.SetIdentityMailFromDomain(input)
+	req := svc.SetIdentityMailFromDomainRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1259,7 +1293,7 @@ func ExampleSES_SetIdentityMailFromDomain_shared00() {
 // The following example sets the Amazon SNS topic to which Amazon SES will publish
 // bounce, complaint, and/or delivery notifications for emails sent with the specified
 // identity as the Source:
-func ExampleSES_SetIdentityNotificationTopic_shared00() {
+func ExampleSES_SetIdentityNotificationTopicRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1272,7 +1306,8 @@ func ExampleSES_SetIdentityNotificationTopic_shared00() {
 		SnsTopic:         aws.String("arn:aws:sns:us-west-2:111122223333:MyTopic"),
 	}
 
-	result, err := svc.SetIdentityNotificationTopic(input)
+	req := svc.SetIdentityNotificationTopicRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1293,7 +1328,7 @@ func ExampleSES_SetIdentityNotificationTopic_shared00() {
 // SetReceiptRulePosition
 //
 // The following example sets the position of a receipt rule in a receipt rule set:
-func ExampleSES_SetReceiptRulePosition_shared00() {
+func ExampleSES_SetReceiptRulePositionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1306,7 +1341,8 @@ func ExampleSES_SetReceiptRulePosition_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.SetReceiptRulePosition(input)
+	req := svc.SetReceiptRulePositionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1331,7 +1367,7 @@ func ExampleSES_SetReceiptRulePosition_shared00() {
 // UpdateReceiptRule
 //
 // The following example updates a receipt rule to use an Amazon S3 action:
-func ExampleSES_UpdateReceiptRule_shared00() {
+func ExampleSES_UpdateReceiptRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1351,7 +1387,8 @@ func ExampleSES_UpdateReceiptRule_shared00() {
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
-	result, err := svc.UpdateReceiptRule(input)
+	req := svc.UpdateReceiptRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1385,7 +1422,7 @@ func ExampleSES_UpdateReceiptRule_shared00() {
 //
 // The following example generates DKIM tokens for a domain that has been verified with
 // Amazon SES:
-func ExampleSES_VerifyDomainDkim_shared00() {
+func ExampleSES_VerifyDomainDkimRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1396,7 +1433,8 @@ func ExampleSES_VerifyDomainDkim_shared00() {
 		Domain: aws.String("example.com"),
 	}
 
-	result, err := svc.VerifyDomainDkim(input)
+	req := svc.VerifyDomainDkimRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1417,7 +1455,7 @@ func ExampleSES_VerifyDomainDkim_shared00() {
 // VerifyDomainIdentity
 //
 // The following example starts the domain verification process with Amazon SES:
-func ExampleSES_VerifyDomainIdentity_shared00() {
+func ExampleSES_VerifyDomainIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1428,7 +1466,8 @@ func ExampleSES_VerifyDomainIdentity_shared00() {
 		Domain: aws.String("example.com"),
 	}
 
-	result, err := svc.VerifyDomainIdentity(input)
+	req := svc.VerifyDomainIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1449,7 +1488,7 @@ func ExampleSES_VerifyDomainIdentity_shared00() {
 // VerifyEmailAddress
 //
 // The following example starts the email address verification process with Amazon SES:
-func ExampleSES_VerifyEmailAddress_shared00() {
+func ExampleSES_VerifyEmailAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1460,7 +1499,8 @@ func ExampleSES_VerifyEmailAddress_shared00() {
 		EmailAddress: aws.String("user@example.com"),
 	}
 
-	result, err := svc.VerifyEmailAddress(input)
+	req := svc.VerifyEmailAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1481,7 +1521,7 @@ func ExampleSES_VerifyEmailAddress_shared00() {
 // VerifyEmailIdentity
 //
 // The following example starts the email address verification process with Amazon SES:
-func ExampleSES_VerifyEmailIdentity_shared00() {
+func ExampleSES_VerifyEmailIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1492,7 +1532,8 @@ func ExampleSES_VerifyEmailIdentity_shared00() {
 		EmailAddress: aws.String("user@example.com"),
 	}
 
-	result, err := svc.VerifyEmailIdentity(input)
+	req := svc.VerifyEmailIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

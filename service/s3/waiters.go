@@ -58,10 +58,10 @@ func (c *S3) WaitUntilBucketExistsWithContext(ctx aws.Context, input *HeadBucket
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.HeadBucketRequest(inCpy)
+			req := c.HeadBucketRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -104,10 +104,10 @@ func (c *S3) WaitUntilBucketNotExistsWithContext(ctx aws.Context, input *HeadBuc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.HeadBucketRequest(inCpy)
+			req := c.HeadBucketRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -155,10 +155,10 @@ func (c *S3) WaitUntilObjectExistsWithContext(ctx aws.Context, input *HeadObject
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.HeadObjectRequest(inCpy)
+			req := c.HeadObjectRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -201,10 +201,10 @@ func (c *S3) WaitUntilObjectNotExistsWithContext(ctx aws.Context, input *HeadObj
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.HeadObjectRequest(inCpy)
+			req := c.HeadObjectRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

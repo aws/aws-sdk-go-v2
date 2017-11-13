@@ -9,7 +9,6 @@
 package marketplaceentitlementserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice"
 )
 
@@ -63,9 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type MarketplaceEntitlementServiceAPI interface {
-	GetEntitlements(*marketplaceentitlementservice.GetEntitlementsInput) (*marketplaceentitlementservice.GetEntitlementsOutput, error)
-	GetEntitlementsWithContext(aws.Context, *marketplaceentitlementservice.GetEntitlementsInput, ...aws.Option) (*marketplaceentitlementservice.GetEntitlementsOutput, error)
-	GetEntitlementsRequest(*marketplaceentitlementservice.GetEntitlementsInput) (*aws.Request, *marketplaceentitlementservice.GetEntitlementsOutput)
+	GetEntitlementsRequest(*marketplaceentitlementservice.GetEntitlementsInput) marketplaceentitlementservice.GetEntitlementsRequest
 }
 
 var _ MarketplaceEntitlementServiceAPI = (*marketplaceentitlementservice.MarketplaceEntitlementService)(nil)

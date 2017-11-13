@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // This operation creates a new file system with the default generalpurpose performance
 // mode.
-func ExampleEFS_CreateFileSystem_shared00() {
+func ExampleEFS_CreateFileSystemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -41,7 +41,8 @@ func ExampleEFS_CreateFileSystem_shared00() {
 		PerformanceMode: efs.PerformanceModeGeneralPurpose,
 	}
 
-	result, err := svc.CreateFileSystem(input)
+	req := svc.CreateFileSystemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -70,7 +71,7 @@ func ExampleEFS_CreateFileSystem_shared00() {
 // To create a new mount target
 //
 // This operation creates a new mount target for an EFS file system.
-func ExampleEFS_CreateMountTarget_shared00() {
+func ExampleEFS_CreateMountTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -82,7 +83,8 @@ func ExampleEFS_CreateMountTarget_shared00() {
 		SubnetId:     aws.String("subnet-1234abcd"),
 	}
 
-	result, err := svc.CreateMountTarget(input)
+	req := svc.CreateMountTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -127,7 +129,7 @@ func ExampleEFS_CreateMountTarget_shared00() {
 // To create a new tag
 //
 // This operation creates a new tag for an EFS file system.
-func ExampleEFS_CreateTags_shared00() {
+func ExampleEFS_CreateTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -144,7 +146,8 @@ func ExampleEFS_CreateTags_shared00() {
 		},
 	}
 
-	result, err := svc.CreateTags(input)
+	req := svc.CreateTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -171,7 +174,7 @@ func ExampleEFS_CreateTags_shared00() {
 // To delete a file system
 //
 // This operation deletes an EFS file system.
-func ExampleEFS_DeleteFileSystem_shared00() {
+func ExampleEFS_DeleteFileSystemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -182,7 +185,8 @@ func ExampleEFS_DeleteFileSystem_shared00() {
 		FileSystemId: aws.String("fs-01234567"),
 	}
 
-	result, err := svc.DeleteFileSystem(input)
+	req := svc.DeleteFileSystemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -211,7 +215,7 @@ func ExampleEFS_DeleteFileSystem_shared00() {
 // To delete a mount target
 //
 // This operation deletes a mount target.
-func ExampleEFS_DeleteMountTarget_shared00() {
+func ExampleEFS_DeleteMountTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -222,7 +226,8 @@ func ExampleEFS_DeleteMountTarget_shared00() {
 		MountTargetId: aws.String("fsmt-12340abc"),
 	}
 
-	result, err := svc.DeleteMountTarget(input)
+	req := svc.DeleteMountTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -251,7 +256,7 @@ func ExampleEFS_DeleteMountTarget_shared00() {
 // To delete tags for an EFS file system
 //
 // This operation deletes tags for an EFS file system.
-func ExampleEFS_DeleteTags_shared00() {
+func ExampleEFS_DeleteTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -265,7 +270,8 @@ func ExampleEFS_DeleteTags_shared00() {
 		},
 	}
 
-	result, err := svc.DeleteTags(input)
+	req := svc.DeleteTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -292,7 +298,7 @@ func ExampleEFS_DeleteTags_shared00() {
 // To describe an EFS file system
 //
 // This operation describes all of the EFS file systems in an account.
-func ExampleEFS_DescribeFileSystems_shared00() {
+func ExampleEFS_DescribeFileSystemsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -301,7 +307,8 @@ func ExampleEFS_DescribeFileSystems_shared00() {
 	svc := efs.New(cfg)
 	input := &efs.DescribeFileSystemsInput{}
 
-	result, err := svc.DescribeFileSystems(input)
+	req := svc.DescribeFileSystemsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -328,7 +335,7 @@ func ExampleEFS_DescribeFileSystems_shared00() {
 // To describe the security groups for a mount target
 //
 // This operation describes all of the security groups for a file system's mount target.
-func ExampleEFS_DescribeMountTargetSecurityGroups_shared00() {
+func ExampleEFS_DescribeMountTargetSecurityGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -339,7 +346,8 @@ func ExampleEFS_DescribeMountTargetSecurityGroups_shared00() {
 		MountTargetId: aws.String("fsmt-12340abc"),
 	}
 
-	result, err := svc.DescribeMountTargetSecurityGroups(input)
+	req := svc.DescribeMountTargetSecurityGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -368,7 +376,7 @@ func ExampleEFS_DescribeMountTargetSecurityGroups_shared00() {
 // To describe the mount targets for a file system
 //
 // This operation describes all of a file system's mount targets.
-func ExampleEFS_DescribeMountTargets_shared00() {
+func ExampleEFS_DescribeMountTargetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -379,7 +387,8 @@ func ExampleEFS_DescribeMountTargets_shared00() {
 		FileSystemId: aws.String("fs-01234567"),
 	}
 
-	result, err := svc.DescribeMountTargets(input)
+	req := svc.DescribeMountTargetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -408,7 +417,7 @@ func ExampleEFS_DescribeMountTargets_shared00() {
 // To describe the tags for a file system
 //
 // This operation describes all of a file system's tags.
-func ExampleEFS_DescribeTags_shared00() {
+func ExampleEFS_DescribeTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -419,7 +428,8 @@ func ExampleEFS_DescribeTags_shared00() {
 		FileSystemId: aws.String("fs-01234567"),
 	}
 
-	result, err := svc.DescribeTags(input)
+	req := svc.DescribeTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -447,7 +457,7 @@ func ExampleEFS_DescribeTags_shared00() {
 //
 // This operation modifies the security groups associated with a mount target for a
 // file system.
-func ExampleEFS_ModifyMountTargetSecurityGroups_shared00() {
+func ExampleEFS_ModifyMountTargetSecurityGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -461,7 +471,8 @@ func ExampleEFS_ModifyMountTargetSecurityGroups_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyMountTargetSecurityGroups(input)
+	req := svc.ModifyMountTargetSecurityGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

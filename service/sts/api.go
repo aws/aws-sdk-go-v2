@@ -11,47 +11,24 @@ import (
 
 const opAssumeRole = "AssumeRole"
 
-// AssumeRoleRequest generates a "aws.Request" representing the
-// client's request for the AssumeRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssumeRole for more information on using the AssumeRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssumeRoleRequest method.
-//    req, resp := client.AssumeRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRole
-func (c *STS) AssumeRoleRequest(input *AssumeRoleInput) (req *aws.Request, output *AssumeRoleOutput) {
-	op := &aws.Operation{
-		Name:       opAssumeRole,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AssumeRoleInput{}
-	}
-
-	output = &AssumeRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AssumeRoleRequest is a API request type for the AssumeRole API operation.
+type AssumeRoleRequest struct {
+	*aws.Request
+	Input *AssumeRoleInput
 }
 
-// AssumeRole API operation for AWS Security Token Service.
+// Send marshals and sends the AssumeRole API request.
+func (r AssumeRoleRequest) Send() (*AssumeRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssumeRoleOutput), nil
+}
+
+// AssumeRoleRequest returns a request value for making API operation for
+// AWS Security Token Service.
 //
 // Returns a set of temporary security credentials (consisting of an access
 // key ID, a secret access key, and a security token) that you can use to access
@@ -143,95 +120,49 @@ func (c *STS) AssumeRoleRequest(input *AssumeRoleInput) (req *aws.Request, outpu
 // MFA device. The TokenCode is the time-based one-time password (TOTP) that
 // the MFA devices produces.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Security Token Service's
-// API operation AssumeRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodePackedPolicyTooLargeException "PackedPolicyTooLarge"
-//   The request was rejected because the policy document was too large. The error
-//   message describes how big the policy document is, in packed form, as a percentage
-//   of what the API allows.
-//
-//   * ErrCodeRegionDisabledException "RegionDisabledException"
-//   STS is not activated in the requested region for the account that is being
-//   asked to generate credentials. The account administrator must use the IAM
-//   console to activate STS in that region. For more information, see Activating
-//   and Deactivating AWS STS in an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-//   in the IAM User Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRole
-func (c *STS) AssumeRole(input *AssumeRoleInput) (*AssumeRoleOutput, error) {
-	req, out := c.AssumeRoleRequest(input)
-	return out, req.Send()
-}
-
-// AssumeRoleWithContext is the same as AssumeRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssumeRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *STS) AssumeRoleWithContext(ctx aws.Context, input *AssumeRoleInput, opts ...aws.Option) (*AssumeRoleOutput, error) {
-	req, out := c.AssumeRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAssumeRoleWithSAML = "AssumeRoleWithSAML"
-
-// AssumeRoleWithSAMLRequest generates a "aws.Request" representing the
-// client's request for the AssumeRoleWithSAML operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssumeRoleWithSAML for more information on using the AssumeRoleWithSAML
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssumeRoleWithSAMLRequest method.
-//    req, resp := client.AssumeRoleWithSAMLRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssumeRoleRequest method.
+//    req := client.AssumeRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAML
-func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) (req *aws.Request, output *AssumeRoleWithSAMLOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRole
+func (c *STS) AssumeRoleRequest(input *AssumeRoleInput) AssumeRoleRequest {
 	op := &aws.Operation{
-		Name:       opAssumeRoleWithSAML,
+		Name:       opAssumeRole,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssumeRoleWithSAMLInput{}
+		input = &AssumeRoleInput{}
 	}
 
-	output = &AssumeRoleWithSAMLOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AssumeRoleOutput{})
+	return AssumeRoleRequest{Request: req, Input: input}
 }
 
-// AssumeRoleWithSAML API operation for AWS Security Token Service.
+const opAssumeRoleWithSAML = "AssumeRoleWithSAML"
+
+// AssumeRoleWithSAMLRequest is a API request type for the AssumeRoleWithSAML API operation.
+type AssumeRoleWithSAMLRequest struct {
+	*aws.Request
+	Input *AssumeRoleWithSAMLInput
+}
+
+// Send marshals and sends the AssumeRoleWithSAML API request.
+func (r AssumeRoleWithSAMLRequest) Send() (*AssumeRoleWithSAMLOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssumeRoleWithSAMLOutput), nil
+}
+
+// AssumeRoleWithSAMLRequest returns a request value for making API operation for
+// AWS Security Token Service.
 //
 // Returns a set of temporary security credentials for users who have been authenticated
 // via a SAML authentication response. This operation provides a mechanism for
@@ -301,110 +232,49 @@ func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) (req *aw
 //    * Creating a Role for SAML 2.0 Federation (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html)
 //    in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Security Token Service's
-// API operation AssumeRoleWithSAML for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodePackedPolicyTooLargeException "PackedPolicyTooLarge"
-//   The request was rejected because the policy document was too large. The error
-//   message describes how big the policy document is, in packed form, as a percentage
-//   of what the API allows.
-//
-//   * ErrCodeIDPRejectedClaimException "IDPRejectedClaim"
-//   The identity provider (IdP) reported that authentication failed. This might
-//   be because the claim is invalid.
-//
-//   If this error is returned for the AssumeRoleWithWebIdentity operation, it
-//   can also mean that the claim has expired or has been explicitly revoked.
-//
-//   * ErrCodeInvalidIdentityTokenException "InvalidIdentityToken"
-//   The web identity token that was passed could not be validated by AWS. Get
-//   a new identity token from the identity provider and then retry the request.
-//
-//   * ErrCodeExpiredTokenException "ExpiredTokenException"
-//   The web identity token that was passed is expired or is not valid. Get a
-//   new identity token from the identity provider and then retry the request.
-//
-//   * ErrCodeRegionDisabledException "RegionDisabledException"
-//   STS is not activated in the requested region for the account that is being
-//   asked to generate credentials. The account administrator must use the IAM
-//   console to activate STS in that region. For more information, see Activating
-//   and Deactivating AWS STS in an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-//   in the IAM User Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAML
-func (c *STS) AssumeRoleWithSAML(input *AssumeRoleWithSAMLInput) (*AssumeRoleWithSAMLOutput, error) {
-	req, out := c.AssumeRoleWithSAMLRequest(input)
-	return out, req.Send()
-}
-
-// AssumeRoleWithSAMLWithContext is the same as AssumeRoleWithSAML with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssumeRoleWithSAML for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *STS) AssumeRoleWithSAMLWithContext(ctx aws.Context, input *AssumeRoleWithSAMLInput, opts ...aws.Option) (*AssumeRoleWithSAMLOutput, error) {
-	req, out := c.AssumeRoleWithSAMLRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
-
-// AssumeRoleWithWebIdentityRequest generates a "aws.Request" representing the
-// client's request for the AssumeRoleWithWebIdentity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssumeRoleWithWebIdentity for more information on using the AssumeRoleWithWebIdentity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssumeRoleWithWebIdentityRequest method.
-//    req, resp := client.AssumeRoleWithWebIdentityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssumeRoleWithSAMLRequest method.
+//    req := client.AssumeRoleWithSAMLRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity
-func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityInput) (req *aws.Request, output *AssumeRoleWithWebIdentityOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAML
+func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) AssumeRoleWithSAMLRequest {
 	op := &aws.Operation{
-		Name:       opAssumeRoleWithWebIdentity,
+		Name:       opAssumeRoleWithSAML,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssumeRoleWithWebIdentityInput{}
+		input = &AssumeRoleWithSAMLInput{}
 	}
 
-	output = &AssumeRoleWithWebIdentityOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AssumeRoleWithSAMLOutput{})
+	return AssumeRoleWithSAMLRequest{Request: req, Input: input}
 }
 
-// AssumeRoleWithWebIdentity API operation for AWS Security Token Service.
+const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
+
+// AssumeRoleWithWebIdentityRequest is a API request type for the AssumeRoleWithWebIdentity API operation.
+type AssumeRoleWithWebIdentityRequest struct {
+	*aws.Request
+	Input *AssumeRoleWithWebIdentityInput
+}
+
+// Send marshals and sends the AssumeRoleWithWebIdentity API request.
+func (r AssumeRoleWithWebIdentityRequest) Send() (*AssumeRoleWithWebIdentityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssumeRoleWithWebIdentityOutput), nil
+}
+
+// AssumeRoleWithWebIdentityRequest returns a request value for making API operation for
+// AWS Security Token Service.
 //
 // Returns a set of temporary security credentials for users who have been authenticated
 // in a mobile or web application with a web identity provider, such as Amazon
@@ -496,117 +366,49 @@ func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityI
 //    how to use web identity federation to get access to content in Amazon
 //    S3.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Security Token Service's
-// API operation AssumeRoleWithWebIdentity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodePackedPolicyTooLargeException "PackedPolicyTooLarge"
-//   The request was rejected because the policy document was too large. The error
-//   message describes how big the policy document is, in packed form, as a percentage
-//   of what the API allows.
-//
-//   * ErrCodeIDPRejectedClaimException "IDPRejectedClaim"
-//   The identity provider (IdP) reported that authentication failed. This might
-//   be because the claim is invalid.
-//
-//   If this error is returned for the AssumeRoleWithWebIdentity operation, it
-//   can also mean that the claim has expired or has been explicitly revoked.
-//
-//   * ErrCodeIDPCommunicationErrorException "IDPCommunicationError"
-//   The request could not be fulfilled because the non-AWS identity provider
-//   (IDP) that was asked to verify the incoming identity token could not be reached.
-//   This is often a transient error caused by network conditions. Retry the request
-//   a limited number of times so that you don't exceed the request rate. If the
-//   error persists, the non-AWS identity provider might be down or not responding.
-//
-//   * ErrCodeInvalidIdentityTokenException "InvalidIdentityToken"
-//   The web identity token that was passed could not be validated by AWS. Get
-//   a new identity token from the identity provider and then retry the request.
-//
-//   * ErrCodeExpiredTokenException "ExpiredTokenException"
-//   The web identity token that was passed is expired or is not valid. Get a
-//   new identity token from the identity provider and then retry the request.
-//
-//   * ErrCodeRegionDisabledException "RegionDisabledException"
-//   STS is not activated in the requested region for the account that is being
-//   asked to generate credentials. The account administrator must use the IAM
-//   console to activate STS in that region. For more information, see Activating
-//   and Deactivating AWS STS in an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-//   in the IAM User Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity
-func (c *STS) AssumeRoleWithWebIdentity(input *AssumeRoleWithWebIdentityInput) (*AssumeRoleWithWebIdentityOutput, error) {
-	req, out := c.AssumeRoleWithWebIdentityRequest(input)
-	return out, req.Send()
-}
-
-// AssumeRoleWithWebIdentityWithContext is the same as AssumeRoleWithWebIdentity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssumeRoleWithWebIdentity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *STS) AssumeRoleWithWebIdentityWithContext(ctx aws.Context, input *AssumeRoleWithWebIdentityInput, opts ...aws.Option) (*AssumeRoleWithWebIdentityOutput, error) {
-	req, out := c.AssumeRoleWithWebIdentityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
-
-// DecodeAuthorizationMessageRequest generates a "aws.Request" representing the
-// client's request for the DecodeAuthorizationMessage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DecodeAuthorizationMessage for more information on using the DecodeAuthorizationMessage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DecodeAuthorizationMessageRequest method.
-//    req, resp := client.DecodeAuthorizationMessageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssumeRoleWithWebIdentityRequest method.
+//    req := client.AssumeRoleWithWebIdentityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessage
-func (c *STS) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessageInput) (req *aws.Request, output *DecodeAuthorizationMessageOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity
+func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityInput) AssumeRoleWithWebIdentityRequest {
 	op := &aws.Operation{
-		Name:       opDecodeAuthorizationMessage,
+		Name:       opAssumeRoleWithWebIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DecodeAuthorizationMessageInput{}
+		input = &AssumeRoleWithWebIdentityInput{}
 	}
 
-	output = &DecodeAuthorizationMessageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AssumeRoleWithWebIdentityOutput{})
+	return AssumeRoleWithWebIdentityRequest{Request: req, Input: input}
 }
 
-// DecodeAuthorizationMessage API operation for AWS Security Token Service.
+const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
+
+// DecodeAuthorizationMessageRequest is a API request type for the DecodeAuthorizationMessage API operation.
+type DecodeAuthorizationMessageRequest struct {
+	*aws.Request
+	Input *DecodeAuthorizationMessageInput
+}
+
+// Send marshals and sends the DecodeAuthorizationMessage API request.
+func (r DecodeAuthorizationMessageRequest) Send() (*DecodeAuthorizationMessageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DecodeAuthorizationMessageOutput), nil
+}
+
+// DecodeAuthorizationMessageRequest returns a request value for making API operation for
+// AWS Security Token Service.
 //
 // Decodes additional information about the authorization status of a request
 // from an encoded message returned in response to an AWS request.
@@ -641,68 +443,62 @@ func (c *STS) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessag
 //
 //    * The values of condition keys in the context of the user's request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Security Token Service's
-// API operation DecodeAuthorizationMessage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidAuthorizationMessageException "InvalidAuthorizationMessageException"
-//   The error returned if the message passed to DecodeAuthorizationMessage was
-//   invalid. This can happen if the token contains invalid characters, such as
-//   linebreaks.
+//    // Example sending a request using the DecodeAuthorizationMessageRequest method.
+//    req := client.DecodeAuthorizationMessageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessage
-func (c *STS) DecodeAuthorizationMessage(input *DecodeAuthorizationMessageInput) (*DecodeAuthorizationMessageOutput, error) {
-	req, out := c.DecodeAuthorizationMessageRequest(input)
-	return out, req.Send()
-}
+func (c *STS) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessageInput) DecodeAuthorizationMessageRequest {
+	op := &aws.Operation{
+		Name:       opDecodeAuthorizationMessage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DecodeAuthorizationMessageWithContext is the same as DecodeAuthorizationMessage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DecodeAuthorizationMessage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *STS) DecodeAuthorizationMessageWithContext(ctx aws.Context, input *DecodeAuthorizationMessageInput, opts ...aws.Option) (*DecodeAuthorizationMessageOutput, error) {
-	req, out := c.DecodeAuthorizationMessageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DecodeAuthorizationMessageInput{}
+	}
+
+	req := c.newRequest(op, input, &DecodeAuthorizationMessageOutput{})
+	return DecodeAuthorizationMessageRequest{Request: req, Input: input}
 }
 
 const opGetCallerIdentity = "GetCallerIdentity"
 
-// GetCallerIdentityRequest generates a "aws.Request" representing the
-// client's request for the GetCallerIdentity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCallerIdentityRequest is a API request type for the GetCallerIdentity API operation.
+type GetCallerIdentityRequest struct {
+	*aws.Request
+	Input *GetCallerIdentityInput
+}
+
+// Send marshals and sends the GetCallerIdentity API request.
+func (r GetCallerIdentityRequest) Send() (*GetCallerIdentityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCallerIdentityOutput), nil
+}
+
+// GetCallerIdentityRequest returns a request value for making API operation for
+// AWS Security Token Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCallerIdentity for more information on using the GetCallerIdentity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns details about the IAM identity whose credentials are used to call
+// the API.
 //
 //    // Example sending a request using the GetCallerIdentityRequest method.
-//    req, resp := client.GetCallerIdentityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCallerIdentityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentity
-func (c *STS) GetCallerIdentityRequest(input *GetCallerIdentityInput) (req *aws.Request, output *GetCallerIdentityOutput) {
+func (c *STS) GetCallerIdentityRequest(input *GetCallerIdentityInput) GetCallerIdentityRequest {
 	op := &aws.Operation{
 		Name:       opGetCallerIdentity,
 		HTTPMethod: "POST",
@@ -713,87 +509,30 @@ func (c *STS) GetCallerIdentityRequest(input *GetCallerIdentityInput) (req *aws.
 		input = &GetCallerIdentityInput{}
 	}
 
-	output = &GetCallerIdentityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCallerIdentity API operation for AWS Security Token Service.
-//
-// Returns details about the IAM identity whose credentials are used to call
-// the API.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Security Token Service's
-// API operation GetCallerIdentity for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentity
-func (c *STS) GetCallerIdentity(input *GetCallerIdentityInput) (*GetCallerIdentityOutput, error) {
-	req, out := c.GetCallerIdentityRequest(input)
-	return out, req.Send()
-}
-
-// GetCallerIdentityWithContext is the same as GetCallerIdentity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCallerIdentity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *STS) GetCallerIdentityWithContext(ctx aws.Context, input *GetCallerIdentityInput, opts ...aws.Option) (*GetCallerIdentityOutput, error) {
-	req, out := c.GetCallerIdentityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCallerIdentityOutput{})
+	return GetCallerIdentityRequest{Request: req, Input: input}
 }
 
 const opGetFederationToken = "GetFederationToken"
 
-// GetFederationTokenRequest generates a "aws.Request" representing the
-// client's request for the GetFederationToken operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetFederationToken for more information on using the GetFederationToken
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetFederationTokenRequest method.
-//    req, resp := client.GetFederationTokenRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationToken
-func (c *STS) GetFederationTokenRequest(input *GetFederationTokenInput) (req *aws.Request, output *GetFederationTokenOutput) {
-	op := &aws.Operation{
-		Name:       opGetFederationToken,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetFederationTokenInput{}
-	}
-
-	output = &GetFederationTokenOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetFederationTokenRequest is a API request type for the GetFederationToken API operation.
+type GetFederationTokenRequest struct {
+	*aws.Request
+	Input *GetFederationTokenInput
 }
 
-// GetFederationToken API operation for AWS Security Token Service.
+// Send marshals and sends the GetFederationToken API request.
+func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFederationTokenOutput), nil
+}
+
+// GetFederationTokenRequest returns a request value for making API operation for
+// AWS Security Token Service.
 //
 // Returns a set of temporary security credentials (consisting of an access
 // key ID, a secret access key, and a security token) for a federated user.
@@ -874,95 +613,49 @@ func (c *STS) GetFederationTokenRequest(input *GetFederationTokenInput) (req *aw
 // credentials, see GetFederationToken—Federation Through a Custom Identity
 // Broker (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Security Token Service's
-// API operation GetFederationToken for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodePackedPolicyTooLargeException "PackedPolicyTooLarge"
-//   The request was rejected because the policy document was too large. The error
-//   message describes how big the policy document is, in packed form, as a percentage
-//   of what the API allows.
-//
-//   * ErrCodeRegionDisabledException "RegionDisabledException"
-//   STS is not activated in the requested region for the account that is being
-//   asked to generate credentials. The account administrator must use the IAM
-//   console to activate STS in that region. For more information, see Activating
-//   and Deactivating AWS STS in an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-//   in the IAM User Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationToken
-func (c *STS) GetFederationToken(input *GetFederationTokenInput) (*GetFederationTokenOutput, error) {
-	req, out := c.GetFederationTokenRequest(input)
-	return out, req.Send()
-}
-
-// GetFederationTokenWithContext is the same as GetFederationToken with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetFederationToken for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *STS) GetFederationTokenWithContext(ctx aws.Context, input *GetFederationTokenInput, opts ...aws.Option) (*GetFederationTokenOutput, error) {
-	req, out := c.GetFederationTokenRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetSessionToken = "GetSessionToken"
-
-// GetSessionTokenRequest generates a "aws.Request" representing the
-// client's request for the GetSessionToken operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSessionToken for more information on using the GetSessionToken
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetSessionTokenRequest method.
-//    req, resp := client.GetSessionTokenRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetFederationTokenRequest method.
+//    req := client.GetFederationTokenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionToken
-func (c *STS) GetSessionTokenRequest(input *GetSessionTokenInput) (req *aws.Request, output *GetSessionTokenOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationToken
+func (c *STS) GetFederationTokenRequest(input *GetFederationTokenInput) GetFederationTokenRequest {
 	op := &aws.Operation{
-		Name:       opGetSessionToken,
+		Name:       opGetFederationToken,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetSessionTokenInput{}
+		input = &GetFederationTokenInput{}
 	}
 
-	output = &GetSessionTokenOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetFederationTokenOutput{})
+	return GetFederationTokenRequest{Request: req, Input: input}
 }
 
-// GetSessionToken API operation for AWS Security Token Service.
+const opGetSessionToken = "GetSessionToken"
+
+// GetSessionTokenRequest is a API request type for the GetSessionToken API operation.
+type GetSessionTokenRequest struct {
+	*aws.Request
+	Input *GetSessionTokenInput
+}
+
+// Send marshals and sends the GetSessionToken API request.
+func (r GetSessionTokenRequest) Send() (*GetSessionTokenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSessionTokenOutput), nil
+}
+
+// GetSessionTokenRequest returns a request value for making API operation for
+// AWS Security Token Service.
 //
 // Returns a set of temporary credentials for an AWS account or IAM user. The
 // credentials consist of an access key ID, a secret access key, and a security
@@ -1011,41 +704,27 @@ func (c *STS) GetSessionTokenRequest(input *GetSessionTokenInput) (req *aws.Requ
 // go to Temporary Credentials for Users in Untrusted Environments (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getsessiontoken)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Security Token Service's
-// API operation GetSessionToken for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRegionDisabledException "RegionDisabledException"
-//   STS is not activated in the requested region for the account that is being
-//   asked to generate credentials. The account administrator must use the IAM
-//   console to activate STS in that region. For more information, see Activating
-//   and Deactivating AWS STS in an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-//   in the IAM User Guide.
+//    // Example sending a request using the GetSessionTokenRequest method.
+//    req := client.GetSessionTokenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionToken
-func (c *STS) GetSessionToken(input *GetSessionTokenInput) (*GetSessionTokenOutput, error) {
-	req, out := c.GetSessionTokenRequest(input)
-	return out, req.Send()
-}
+func (c *STS) GetSessionTokenRequest(input *GetSessionTokenInput) GetSessionTokenRequest {
+	op := &aws.Operation{
+		Name:       opGetSessionToken,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetSessionTokenWithContext is the same as GetSessionToken with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSessionToken for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *STS) GetSessionTokenWithContext(ctx aws.Context, input *GetSessionTokenInput, opts ...aws.Option) (*GetSessionTokenOutput, error) {
-	req, out := c.GetSessionTokenRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetSessionTokenInput{}
+	}
+
+	req := c.newRequest(op, input, &GetSessionTokenOutput{})
+	return GetSessionTokenRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleRequest

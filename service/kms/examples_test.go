@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To cancel deletion of a customer master key (CMK)
 //
 // The following example cancels deletion of the specified CMK.
-func ExampleKMS_CancelKeyDeletion_shared00() {
+func ExampleKMS_CancelKeyDeletionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -39,7 +39,8 @@ func ExampleKMS_CancelKeyDeletion_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.CancelKeyDeletion(input)
+	req := svc.CancelKeyDeletionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -70,7 +71,7 @@ func ExampleKMS_CancelKeyDeletion_shared00() {
 // To create an alias
 //
 // The following example creates an alias for the specified customer master key (CMK).
-func ExampleKMS_CreateAlias_shared00() {
+func ExampleKMS_CreateAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -82,7 +83,8 @@ func ExampleKMS_CreateAlias_shared00() {
 		TargetKeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.CreateAlias(input)
+	req := svc.CreateAliasRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -118,7 +120,7 @@ func ExampleKMS_CreateAlias_shared00() {
 //
 // The following example creates a grant that allows the specified IAM role to encrypt
 // data with the specified customer master key (CMK).
-func ExampleKMS_CreateGrant_shared00() {
+func ExampleKMS_CreateGrantRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -134,7 +136,8 @@ func ExampleKMS_CreateGrant_shared00() {
 		},
 	}
 
-	result, err := svc.CreateGrant(input)
+	req := svc.CreateGrantRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -171,7 +174,7 @@ func ExampleKMS_CreateGrant_shared00() {
 // To create a customer master key (CMK)
 //
 // The following example creates a CMK.
-func ExampleKMS_CreateKey_shared00() {
+func ExampleKMS_CreateKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -187,7 +190,8 @@ func ExampleKMS_CreateKey_shared00() {
 		},
 	}
 
-	result, err := svc.CreateKey(input)
+	req := svc.CreateKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -223,7 +227,7 @@ func ExampleKMS_CreateKey_shared00() {
 //
 // The following example decrypts data that was encrypted with a customer master key
 // (CMK) in AWS KMS.
-func ExampleKMS_Decrypt_shared00() {
+func ExampleKMS_DecryptRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -234,7 +238,8 @@ func ExampleKMS_Decrypt_shared00() {
 		CiphertextBlob: []byte("<binary data>"),
 	}
 
-	result, err := svc.Decrypt(input)
+	req := svc.DecryptRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -271,7 +276,7 @@ func ExampleKMS_Decrypt_shared00() {
 // To delete an alias
 //
 // The following example deletes the specified alias.
-func ExampleKMS_DeleteAlias_shared00() {
+func ExampleKMS_DeleteAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -282,7 +287,8 @@ func ExampleKMS_DeleteAlias_shared00() {
 		AliasName: aws.String("alias/ExampleAlias"),
 	}
 
-	result, err := svc.DeleteAlias(input)
+	req := svc.DeleteAliasRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -312,7 +318,7 @@ func ExampleKMS_DeleteAlias_shared00() {
 //
 // The following example deletes the imported key material from the specified customer
 // master key (CMK).
-func ExampleKMS_DeleteImportedKeyMaterial_shared00() {
+func ExampleKMS_DeleteImportedKeyMaterialRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -323,7 +329,8 @@ func ExampleKMS_DeleteImportedKeyMaterial_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.DeleteImportedKeyMaterial(input)
+	req := svc.DeleteImportedKeyMaterialRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -356,7 +363,7 @@ func ExampleKMS_DeleteImportedKeyMaterial_shared00() {
 // To obtain information about a customer master key (CMK)
 //
 // The following example returns information (metadata) about the specified CMK.
-func ExampleKMS_DescribeKey_shared00() {
+func ExampleKMS_DescribeKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -367,7 +374,8 @@ func ExampleKMS_DescribeKey_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.DescribeKey(input)
+	req := svc.DescribeKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -396,7 +404,7 @@ func ExampleKMS_DescribeKey_shared00() {
 // To disable a customer master key (CMK)
 //
 // The following example disables the specified CMK.
-func ExampleKMS_DisableKey_shared00() {
+func ExampleKMS_DisableKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -407,7 +415,8 @@ func ExampleKMS_DisableKey_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.DisableKey(input)
+	req := svc.DisableKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -439,7 +448,7 @@ func ExampleKMS_DisableKey_shared00() {
 //
 // The following example disables automatic annual rotation of the key material for
 // the specified CMK.
-func ExampleKMS_DisableKeyRotation_shared00() {
+func ExampleKMS_DisableKeyRotationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -450,7 +459,8 @@ func ExampleKMS_DisableKeyRotation_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.DisableKeyRotation(input)
+	req := svc.DisableKeyRotationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -485,7 +495,7 @@ func ExampleKMS_DisableKeyRotation_shared00() {
 // To enable a customer master key (CMK)
 //
 // The following example enables the specified CMK.
-func ExampleKMS_EnableKey_shared00() {
+func ExampleKMS_EnableKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -496,7 +506,8 @@ func ExampleKMS_EnableKey_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.EnableKey(input)
+	req := svc.EnableKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -530,7 +541,7 @@ func ExampleKMS_EnableKey_shared00() {
 //
 // The following example enables automatic annual rotation of the key material for the
 // specified CMK.
-func ExampleKMS_EnableKeyRotation_shared00() {
+func ExampleKMS_EnableKeyRotationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -541,7 +552,8 @@ func ExampleKMS_EnableKeyRotation_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.EnableKeyRotation(input)
+	req := svc.EnableKeyRotationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -576,7 +588,7 @@ func ExampleKMS_EnableKeyRotation_shared00() {
 // To encrypt data
 //
 // The following example encrypts data with the specified customer master key (CMK).
-func ExampleKMS_Encrypt_shared00() {
+func ExampleKMS_EncryptRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -588,7 +600,8 @@ func ExampleKMS_Encrypt_shared00() {
 		Plaintext: []byte("<binary data>"),
 	}
 
-	result, err := svc.Encrypt(input)
+	req := svc.EncryptRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -627,7 +640,7 @@ func ExampleKMS_Encrypt_shared00() {
 // The following example generates a 256-bit symmetric data encryption key (data key)
 // in two formats. One is the unencrypted (plainext) data key, and the other is the
 // data key encrypted with the specified customer master key (CMK).
-func ExampleKMS_GenerateDataKey_shared00() {
+func ExampleKMS_GenerateDataKeyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -639,7 +652,8 @@ func ExampleKMS_GenerateDataKey_shared00() {
 		KeySpec: kms.DataKeySpecAes256,
 	}
 
-	result, err := svc.GenerateDataKey(input)
+	req := svc.GenerateDataKeyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -678,7 +692,7 @@ func ExampleKMS_GenerateDataKey_shared00() {
 // The following example generates an encrypted copy of a 256-bit symmetric data encryption
 // key (data key). The data key is encrypted with the specified customer master key
 // (CMK).
-func ExampleKMS_GenerateDataKeyWithoutPlaintext_shared00() {
+func ExampleKMS_GenerateDataKeyWithoutPlaintextRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -690,7 +704,8 @@ func ExampleKMS_GenerateDataKeyWithoutPlaintext_shared00() {
 		KeySpec: kms.DataKeySpecAes256,
 	}
 
-	result, err := svc.GenerateDataKeyWithoutPlaintext(input)
+	req := svc.GenerateDataKeyWithoutPlaintextRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -727,7 +742,7 @@ func ExampleKMS_GenerateDataKeyWithoutPlaintext_shared00() {
 // To generate random data
 //
 // The following example uses AWS KMS to generate 32 bytes of random data.
-func ExampleKMS_GenerateRandom_shared00() {
+func ExampleKMS_GenerateRandomRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -738,7 +753,8 @@ func ExampleKMS_GenerateRandom_shared00() {
 		NumberOfBytes: aws.Int64(32),
 	}
 
-	result, err := svc.GenerateRandom(input)
+	req := svc.GenerateRandomRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -764,7 +780,7 @@ func ExampleKMS_GenerateRandom_shared00() {
 //
 // The following example retrieves the key policy for the specified customer master
 // key (CMK).
-func ExampleKMS_GetKeyPolicy_shared00() {
+func ExampleKMS_GetKeyPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -776,7 +792,8 @@ func ExampleKMS_GetKeyPolicy_shared00() {
 		PolicyName: aws.String("default"),
 	}
 
-	result, err := svc.GetKeyPolicy(input)
+	req := svc.GetKeyPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -808,7 +825,7 @@ func ExampleKMS_GetKeyPolicy_shared00() {
 //
 // The following example retrieves the status of automatic annual rotation of the key
 // material for the specified CMK.
-func ExampleKMS_GetKeyRotationStatus_shared00() {
+func ExampleKMS_GetKeyRotationStatusRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -819,7 +836,8 @@ func ExampleKMS_GetKeyRotationStatus_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.GetKeyRotationStatus(input)
+	req := svc.GetKeyRotationStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -853,7 +871,7 @@ func ExampleKMS_GetKeyRotationStatus_shared00() {
 //
 // The following example retrieves the public key and import token for the specified
 // CMK.
-func ExampleKMS_GetParametersForImport_shared00() {
+func ExampleKMS_GetParametersForImportRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -866,7 +884,8 @@ func ExampleKMS_GetParametersForImport_shared00() {
 		WrappingKeySpec:   kms.WrappingKeySpecRsa2048,
 	}
 
-	result, err := svc.GetParametersForImport(input)
+	req := svc.GetParametersForImportRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -899,7 +918,7 @@ func ExampleKMS_GetParametersForImport_shared00() {
 // To import key material into a customer master key (CMK)
 //
 // The following example imports key material into the specified CMK.
-func ExampleKMS_ImportKeyMaterial_shared00() {
+func ExampleKMS_ImportKeyMaterialRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -913,7 +932,8 @@ func ExampleKMS_ImportKeyMaterial_shared00() {
 		KeyId:                aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.ImportKeyMaterial(input)
+	req := svc.ImportKeyMaterialRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -954,7 +974,7 @@ func ExampleKMS_ImportKeyMaterial_shared00() {
 // To list aliases
 //
 // The following example lists aliases.
-func ExampleKMS_ListAliases_shared00() {
+func ExampleKMS_ListAliasesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -963,7 +983,8 @@ func ExampleKMS_ListAliases_shared00() {
 	svc := kms.New(cfg)
 	input := &kms.ListAliasesInput{}
 
-	result, err := svc.ListAliases(input)
+	req := svc.ListAliasesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -990,7 +1011,7 @@ func ExampleKMS_ListAliases_shared00() {
 // To list grants for a customer master key (CMK)
 //
 // The following example lists grants for the specified CMK.
-func ExampleKMS_ListGrants_shared00() {
+func ExampleKMS_ListGrantsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1001,7 +1022,8 @@ func ExampleKMS_ListGrants_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.ListGrants(input)
+	req := svc.ListGrantsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1034,7 +1056,7 @@ func ExampleKMS_ListGrants_shared00() {
 // To list key policies for a customer master key (CMK)
 //
 // The following example lists key policies for the specified CMK.
-func ExampleKMS_ListKeyPolicies_shared00() {
+func ExampleKMS_ListKeyPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1045,7 +1067,8 @@ func ExampleKMS_ListKeyPolicies_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.ListKeyPolicies(input)
+	req := svc.ListKeyPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1076,7 +1099,7 @@ func ExampleKMS_ListKeyPolicies_shared00() {
 // To list customer master keys (CMKs)
 //
 // The following example lists CMKs.
-func ExampleKMS_ListKeys_shared00() {
+func ExampleKMS_ListKeysRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1085,7 +1108,8 @@ func ExampleKMS_ListKeys_shared00() {
 	svc := kms.New(cfg)
 	input := &kms.ListKeysInput{}
 
-	result, err := svc.ListKeys(input)
+	req := svc.ListKeysRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1112,7 +1136,7 @@ func ExampleKMS_ListKeys_shared00() {
 // To list tags for a customer master key (CMK)
 //
 // The following example lists tags for a CMK.
-func ExampleKMS_ListResourceTags_shared00() {
+func ExampleKMS_ListResourceTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1123,7 +1147,8 @@ func ExampleKMS_ListResourceTags_shared00() {
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.ListResourceTags(input)
+	req := svc.ListResourceTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1153,7 +1178,7 @@ func ExampleKMS_ListResourceTags_shared00() {
 //
 // The following example lists the grants that the specified principal (identity) can
 // retire.
-func ExampleKMS_ListRetirableGrants_shared00() {
+func ExampleKMS_ListRetirableGrantsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1164,7 +1189,8 @@ func ExampleKMS_ListRetirableGrants_shared00() {
 		RetiringPrincipal: aws.String("arn:aws:iam::111122223333:role/ExampleRole"),
 	}
 
-	result, err := svc.ListRetirableGrants(input)
+	req := svc.ListRetirableGrantsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1195,7 +1221,7 @@ func ExampleKMS_ListRetirableGrants_shared00() {
 // To attach a key policy to a customer master key (CMK)
 //
 // The following example attaches a key policy to the specified CMK.
-func ExampleKMS_PutKeyPolicy_shared00() {
+func ExampleKMS_PutKeyPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1208,7 +1234,8 @@ func ExampleKMS_PutKeyPolicy_shared00() {
 		PolicyName: aws.String("default"),
 	}
 
-	result, err := svc.PutKeyPolicy(input)
+	req := svc.PutKeyPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1245,7 +1272,7 @@ func ExampleKMS_PutKeyPolicy_shared00() {
 // To reencrypt data
 //
 // The following example reencrypts data with the specified CMK.
-func ExampleKMS_ReEncrypt_shared00() {
+func ExampleKMS_ReEncryptRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1257,7 +1284,8 @@ func ExampleKMS_ReEncrypt_shared00() {
 		DestinationKeyId: aws.String("0987dcba-09fe-87dc-65ba-ab0987654321"),
 	}
 
-	result, err := svc.ReEncrypt(input)
+	req := svc.ReEncryptRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1296,7 +1324,7 @@ func ExampleKMS_ReEncrypt_shared00() {
 // To retire a grant
 //
 // The following example retires a grant.
-func ExampleKMS_RetireGrant_shared00() {
+func ExampleKMS_RetireGrantRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1308,7 +1336,8 @@ func ExampleKMS_RetireGrant_shared00() {
 		KeyId:   aws.String("arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.RetireGrant(input)
+	req := svc.RetireGrantRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1341,7 +1370,7 @@ func ExampleKMS_RetireGrant_shared00() {
 // To revoke a grant
 //
 // The following example revokes a grant.
-func ExampleKMS_RevokeGrant_shared00() {
+func ExampleKMS_RevokeGrantRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1353,7 +1382,8 @@ func ExampleKMS_RevokeGrant_shared00() {
 		KeyId:   aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.RevokeGrant(input)
+	req := svc.RevokeGrantRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1386,7 +1416,7 @@ func ExampleKMS_RevokeGrant_shared00() {
 // To schedule a customer master key (CMK) for deletion
 //
 // The following example schedules the specified CMK for deletion.
-func ExampleKMS_ScheduleKeyDeletion_shared00() {
+func ExampleKMS_ScheduleKeyDeletionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1398,7 +1428,8 @@ func ExampleKMS_ScheduleKeyDeletion_shared00() {
 		PendingWindowInDays: aws.Int64(7),
 	}
 
-	result, err := svc.ScheduleKeyDeletion(input)
+	req := svc.ScheduleKeyDeletionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1429,7 +1460,7 @@ func ExampleKMS_ScheduleKeyDeletion_shared00() {
 // To tag a customer master key (CMK)
 //
 // The following example tags a CMK.
-func ExampleKMS_TagResource_shared00() {
+func ExampleKMS_TagResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1446,7 +1477,8 @@ func ExampleKMS_TagResource_shared00() {
 		},
 	}
 
-	result, err := svc.TagResource(input)
+	req := svc.TagResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1479,7 +1511,7 @@ func ExampleKMS_TagResource_shared00() {
 // To remove tags from a customer master key (CMK)
 //
 // The following example removes tags from a CMK.
-func ExampleKMS_UntagResource_shared00() {
+func ExampleKMS_UntagResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1494,7 +1526,8 @@ func ExampleKMS_UntagResource_shared00() {
 		},
 	}
 
-	result, err := svc.UntagResource(input)
+	req := svc.UntagResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1526,7 +1559,7 @@ func ExampleKMS_UntagResource_shared00() {
 //
 // The following example updates the specified alias to refer to the specified customer
 // master key (CMK).
-func ExampleKMS_UpdateAlias_shared00() {
+func ExampleKMS_UpdateAliasRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1538,7 +1571,8 @@ func ExampleKMS_UpdateAlias_shared00() {
 		TargetKeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.UpdateAlias(input)
+	req := svc.UpdateAliasRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1567,7 +1601,7 @@ func ExampleKMS_UpdateAlias_shared00() {
 // To update the description of a customer master key (CMK)
 //
 // The following example updates the description of the specified CMK.
-func ExampleKMS_UpdateKeyDescription_shared00() {
+func ExampleKMS_UpdateKeyDescriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1579,7 +1613,8 @@ func ExampleKMS_UpdateKeyDescription_shared00() {
 		KeyId:       aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
-	result, err := svc.UpdateKeyDescription(input)
+	req := svc.UpdateKeyDescriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

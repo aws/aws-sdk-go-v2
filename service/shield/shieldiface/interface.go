@@ -9,7 +9,6 @@
 package shieldiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/shield"
 )
 
@@ -63,41 +62,23 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ShieldAPI interface {
-	CreateProtection(*shield.CreateProtectionInput) (*shield.CreateProtectionOutput, error)
-	CreateProtectionWithContext(aws.Context, *shield.CreateProtectionInput, ...aws.Option) (*shield.CreateProtectionOutput, error)
-	CreateProtectionRequest(*shield.CreateProtectionInput) (*aws.Request, *shield.CreateProtectionOutput)
+	CreateProtectionRequest(*shield.CreateProtectionInput) shield.CreateProtectionRequest
 
-	CreateSubscription(*shield.CreateSubscriptionInput) (*shield.CreateSubscriptionOutput, error)
-	CreateSubscriptionWithContext(aws.Context, *shield.CreateSubscriptionInput, ...aws.Option) (*shield.CreateSubscriptionOutput, error)
-	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) (*aws.Request, *shield.CreateSubscriptionOutput)
+	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) shield.CreateSubscriptionRequest
 
-	DeleteProtection(*shield.DeleteProtectionInput) (*shield.DeleteProtectionOutput, error)
-	DeleteProtectionWithContext(aws.Context, *shield.DeleteProtectionInput, ...aws.Option) (*shield.DeleteProtectionOutput, error)
-	DeleteProtectionRequest(*shield.DeleteProtectionInput) (*aws.Request, *shield.DeleteProtectionOutput)
+	DeleteProtectionRequest(*shield.DeleteProtectionInput) shield.DeleteProtectionRequest
 
-	DeleteSubscription(*shield.DeleteSubscriptionInput) (*shield.DeleteSubscriptionOutput, error)
-	DeleteSubscriptionWithContext(aws.Context, *shield.DeleteSubscriptionInput, ...aws.Option) (*shield.DeleteSubscriptionOutput, error)
-	DeleteSubscriptionRequest(*shield.DeleteSubscriptionInput) (*aws.Request, *shield.DeleteSubscriptionOutput)
+	DeleteSubscriptionRequest(*shield.DeleteSubscriptionInput) shield.DeleteSubscriptionRequest
 
-	DescribeAttack(*shield.DescribeAttackInput) (*shield.DescribeAttackOutput, error)
-	DescribeAttackWithContext(aws.Context, *shield.DescribeAttackInput, ...aws.Option) (*shield.DescribeAttackOutput, error)
-	DescribeAttackRequest(*shield.DescribeAttackInput) (*aws.Request, *shield.DescribeAttackOutput)
+	DescribeAttackRequest(*shield.DescribeAttackInput) shield.DescribeAttackRequest
 
-	DescribeProtection(*shield.DescribeProtectionInput) (*shield.DescribeProtectionOutput, error)
-	DescribeProtectionWithContext(aws.Context, *shield.DescribeProtectionInput, ...aws.Option) (*shield.DescribeProtectionOutput, error)
-	DescribeProtectionRequest(*shield.DescribeProtectionInput) (*aws.Request, *shield.DescribeProtectionOutput)
+	DescribeProtectionRequest(*shield.DescribeProtectionInput) shield.DescribeProtectionRequest
 
-	DescribeSubscription(*shield.DescribeSubscriptionInput) (*shield.DescribeSubscriptionOutput, error)
-	DescribeSubscriptionWithContext(aws.Context, *shield.DescribeSubscriptionInput, ...aws.Option) (*shield.DescribeSubscriptionOutput, error)
-	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) (*aws.Request, *shield.DescribeSubscriptionOutput)
+	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
 
-	ListAttacks(*shield.ListAttacksInput) (*shield.ListAttacksOutput, error)
-	ListAttacksWithContext(aws.Context, *shield.ListAttacksInput, ...aws.Option) (*shield.ListAttacksOutput, error)
-	ListAttacksRequest(*shield.ListAttacksInput) (*aws.Request, *shield.ListAttacksOutput)
+	ListAttacksRequest(*shield.ListAttacksInput) shield.ListAttacksRequest
 
-	ListProtections(*shield.ListProtectionsInput) (*shield.ListProtectionsOutput, error)
-	ListProtectionsWithContext(aws.Context, *shield.ListProtectionsInput, ...aws.Option) (*shield.ListProtectionsOutput, error)
-	ListProtectionsRequest(*shield.ListProtectionsInput) (*aws.Request, *shield.ListProtectionsOutput)
+	ListProtectionsRequest(*shield.ListProtectionsInput) shield.ListProtectionsRequest
 }
 
 var _ ShieldAPI = (*shield.Shield)(nil)

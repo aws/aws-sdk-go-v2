@@ -19,7 +19,7 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
-	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:         aws.String("bucket"),
 		CopySource:     aws.String("bucket/source"),
 		Key:            aws.String("dest"),
@@ -46,7 +46,7 @@ func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
-	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:     aws.String("bucket"),
 		CopySource: aws.String("bucket/source"),
 		Key:        aws.String("dest"),
@@ -67,7 +67,7 @@ func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 
 func TestComputeSSEKeys(t *testing.T) {
 	s := s3.New(unit.Config())
-	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:                   aws.String("bucket"),
 		CopySource:               aws.String("bucket/source"),
 		Key:                      aws.String("dest"),
@@ -95,7 +95,7 @@ func TestComputeSSEKeys(t *testing.T) {
 
 func TestComputeSSEKeysShortcircuit(t *testing.T) {
 	s := s3.New(unit.Config())
-	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
+	req := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:                      aws.String("bucket"),
 		CopySource:                  aws.String("bucket/source"),
 		Key:                         aws.String("dest"),

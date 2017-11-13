@@ -12,47 +12,24 @@ import (
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTagsToResource for more information on using the AddTagsToResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResource
-func (c *SSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
-	op := &aws.Operation{
-		Name:       opAddTagsToResource,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddTagsToResourceInput{}
-	}
-
-	output = &AddTagsToResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddTagsToResourceRequest is a API request type for the AddTagsToResource API operation.
+type AddTagsToResourceRequest struct {
+	*aws.Request
+	Input *AddTagsToResourceInput
 }
 
-// AddTagsToResource API operation for Amazon Simple Systems Manager (SSM).
+// Send marshals and sends the AddTagsToResource API request.
+func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToResourceOutput), nil
+}
+
+// AddTagsToResourceRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
 // Adds or overwrites one or more tags for the specified resource. Tags are
 // metadata that you can assign to your documents, managed instances, Maintenance
@@ -75,78 +52,62 @@ func (c *SSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.
 // For more information about tags, see Tagging Your Amazon EC2 Resources (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
 // in the Amazon EC2 User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation AddTagsToResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceType "InvalidResourceType"
-//   The resource type is not valid. For example, if you are attempting to tag
-//   an instance, the instance must be a registered, managed instance.
-//
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeTooManyTagsError "TooManyTagsError"
-//   The Targets parameter includes too many tags. Remove one or more tags and
-//   try the command again.
+//    // Example sending a request using the AddTagsToResourceRequest method.
+//    req := client.AddTagsToResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResource
-func (c *SSM) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	return out, req.Send()
-}
+func (c *SSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
+	op := &aws.Operation{
+		Name:       opAddTagsToResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddTagsToResourceWithContext is the same as AddTagsToResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddTagsToResourceInput{}
+	}
+
+	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
 const opCancelCommand = "CancelCommand"
 
-// CancelCommandRequest generates a "aws.Request" representing the
-// client's request for the CancelCommand operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelCommandRequest is a API request type for the CancelCommand API operation.
+type CancelCommandRequest struct {
+	*aws.Request
+	Input *CancelCommandInput
+}
+
+// Send marshals and sends the CancelCommand API request.
+func (r CancelCommandRequest) Send() (*CancelCommandOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelCommandOutput), nil
+}
+
+// CancelCommandRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CancelCommand for more information on using the CancelCommand
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attempts to cancel the command specified by the Command ID. There is no guarantee
+// that the command will be terminated and the underlying process stopped.
 //
 //    // Example sending a request using the CancelCommandRequest method.
-//    req, resp := client.CancelCommandRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelCommandRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommand
-func (c *SSM) CancelCommandRequest(input *CancelCommandInput) (req *aws.Request, output *CancelCommandOutput) {
+func (c *SSM) CancelCommandRequest(input *CancelCommandInput) CancelCommandRequest {
 	op := &aws.Operation{
 		Name:       opCancelCommand,
 		HTTPMethod: "POST",
@@ -157,96 +118,46 @@ func (c *SSM) CancelCommandRequest(input *CancelCommandInput) (req *aws.Request,
 		input = &CancelCommandInput{}
 	}
 
-	output = &CancelCommandOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelCommand API operation for Amazon Simple Systems Manager (SSM).
-//
-// Attempts to cancel the command specified by the Command ID. There is no guarantee
-// that the command will be terminated and the underlying process stopped.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CancelCommand for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidCommandId "InvalidCommandId"
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeDuplicateInstanceId "DuplicateInstanceId"
-//   You cannot specify an instance ID in more than one association.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommand
-func (c *SSM) CancelCommand(input *CancelCommandInput) (*CancelCommandOutput, error) {
-	req, out := c.CancelCommandRequest(input)
-	return out, req.Send()
-}
-
-// CancelCommandWithContext is the same as CancelCommand with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelCommand for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CancelCommandWithContext(ctx aws.Context, input *CancelCommandInput, opts ...aws.Option) (*CancelCommandOutput, error) {
-	req, out := c.CancelCommandRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelCommandOutput{})
+	return CancelCommandRequest{Request: req, Input: input}
 }
 
 const opCreateActivation = "CreateActivation"
 
-// CreateActivationRequest generates a "aws.Request" representing the
-// client's request for the CreateActivation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateActivationRequest is a API request type for the CreateActivation API operation.
+type CreateActivationRequest struct {
+	*aws.Request
+	Input *CreateActivationInput
+}
+
+// Send marshals and sends the CreateActivation API request.
+func (r CreateActivationRequest) Send() (*CreateActivationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateActivationOutput), nil
+}
+
+// CreateActivationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateActivation for more information on using the CreateActivation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Registers your on-premises server or virtual machine with Amazon EC2 so that
+// you can manage these resources using Run Command. An on-premises server or
+// virtual machine that has been registered with EC2 is called a managed instance.
+// For more information about activations, see Setting Up Systems Manager in
+// Hybrid Environments (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html).
 //
 //    // Example sending a request using the CreateActivationRequest method.
-//    req, resp := client.CreateActivationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateActivationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivation
-func (c *SSM) CreateActivationRequest(input *CreateActivationInput) (req *aws.Request, output *CreateActivationOutput) {
+func (c *SSM) CreateActivationRequest(input *CreateActivationInput) CreateActivationRequest {
 	op := &aws.Operation{
 		Name:       opCreateActivation,
 		HTTPMethod: "POST",
@@ -257,79 +168,50 @@ func (c *SSM) CreateActivationRequest(input *CreateActivationInput) (req *aws.Re
 		input = &CreateActivationInput{}
 	}
 
-	output = &CreateActivationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateActivation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Registers your on-premises server or virtual machine with Amazon EC2 so that
-// you can manage these resources using Run Command. An on-premises server or
-// virtual machine that has been registered with EC2 is called a managed instance.
-// For more information about activations, see Setting Up Systems Manager in
-// Hybrid Environments (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CreateActivation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivation
-func (c *SSM) CreateActivation(input *CreateActivationInput) (*CreateActivationOutput, error) {
-	req, out := c.CreateActivationRequest(input)
-	return out, req.Send()
-}
-
-// CreateActivationWithContext is the same as CreateActivation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateActivation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CreateActivationWithContext(ctx aws.Context, input *CreateActivationInput, opts ...aws.Option) (*CreateActivationOutput, error) {
-	req, out := c.CreateActivationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateActivationOutput{})
+	return CreateActivationRequest{Request: req, Input: input}
 }
 
 const opCreateAssociation = "CreateAssociation"
 
-// CreateAssociationRequest generates a "aws.Request" representing the
-// client's request for the CreateAssociation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateAssociationRequest is a API request type for the CreateAssociation API operation.
+type CreateAssociationRequest struct {
+	*aws.Request
+	Input *CreateAssociationInput
+}
+
+// Send marshals and sends the CreateAssociation API request.
+func (r CreateAssociationRequest) Send() (*CreateAssociationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAssociationOutput), nil
+}
+
+// CreateAssociationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Associates the specified Systems Manager document with the specified instances
+// or targets.
 //
-// See CreateAssociation for more information on using the CreateAssociation
-// API call, and error handling.
+// When you associate a document with one or more instances using instance IDs
+// or tags, the SSM Agent running on the instance processes the document and
+// configures the instance as specified.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you associate a document with an instance that already has an associated
+// document, the system throws the AssociationAlreadyExists exception.
 //
 //    // Example sending a request using the CreateAssociationRequest method.
-//    req, resp := client.CreateAssociationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateAssociationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation
-func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) (req *aws.Request, output *CreateAssociationOutput) {
+func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) CreateAssociationRequest {
 	op := &aws.Operation{
 		Name:       opCreateAssociation,
 		HTTPMethod: "POST",
@@ -340,12 +222,30 @@ func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) (req *aws.
 		input = &CreateAssociationInput{}
 	}
 
-	output = &CreateAssociationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateAssociationOutput{})
+	return CreateAssociationRequest{Request: req, Input: input}
 }
 
-// CreateAssociation API operation for Amazon Simple Systems Manager (SSM).
+const opCreateAssociationBatch = "CreateAssociationBatch"
+
+// CreateAssociationBatchRequest is a API request type for the CreateAssociationBatch API operation.
+type CreateAssociationBatchRequest struct {
+	*aws.Request
+	Input *CreateAssociationBatchInput
+}
+
+// Send marshals and sends the CreateAssociationBatch API request.
+func (r CreateAssociationBatchRequest) Send() (*CreateAssociationBatchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAssociationBatchOutput), nil
+}
+
+// CreateAssociationBatchRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
 // Associates the specified Systems Manager document with the specified instances
 // or targets.
@@ -357,112 +257,15 @@ func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) (req *aws.
 // If you associate a document with an instance that already has an associated
 // document, the system throws the AssociationAlreadyExists exception.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CreateAssociation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAssociationAlreadyExists "AssociationAlreadyExists"
-//   The specified association already exists.
-//
-//   * ErrCodeAssociationLimitExceeded "AssociationLimitExceeded"
-//   You can have at most 2,000 active associations.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidDocumentVersion "InvalidDocumentVersion"
-//   The document version is not valid or does not exist.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeUnsupportedPlatformType "UnsupportedPlatformType"
-//   The document does not support the platform type of the given instance ID(s).
-//   For example, you sent an document for a Windows instance to a Linux instance.
-//
-//   * ErrCodeInvalidOutputLocation "InvalidOutputLocation"
-//   The output location is not valid or does not exist.
-//
-//   * ErrCodeInvalidParameters "InvalidParameters"
-//   You must specify values for all required parameters in the Systems Manager
-//   document. You can only supply values to parameters defined in the Systems
-//   Manager document.
-//
-//   * ErrCodeInvalidTarget "InvalidTarget"
-//   The target is not valid or does not exist. It might not be configured for
-//   EC2 Systems Manager or you might not have permission to perform the operation.
-//
-//   * ErrCodeInvalidSchedule "InvalidSchedule"
-//   The schedule is invalid. Verify your cron or rate expression and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation
-func (c *SSM) CreateAssociation(input *CreateAssociationInput) (*CreateAssociationOutput, error) {
-	req, out := c.CreateAssociationRequest(input)
-	return out, req.Send()
-}
-
-// CreateAssociationWithContext is the same as CreateAssociation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAssociation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CreateAssociationWithContext(ctx aws.Context, input *CreateAssociationInput, opts ...aws.Option) (*CreateAssociationOutput, error) {
-	req, out := c.CreateAssociationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateAssociationBatch = "CreateAssociationBatch"
-
-// CreateAssociationBatchRequest generates a "aws.Request" representing the
-// client's request for the CreateAssociationBatch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAssociationBatch for more information on using the CreateAssociationBatch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the CreateAssociationBatchRequest method.
-//    req, resp := client.CreateAssociationBatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateAssociationBatchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatch
-func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) (req *aws.Request, output *CreateAssociationBatchOutput) {
+func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) CreateAssociationBatchRequest {
 	op := &aws.Operation{
 		Name:       opCreateAssociationBatch,
 		HTTPMethod: "POST",
@@ -473,129 +276,45 @@ func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) 
 		input = &CreateAssociationBatchInput{}
 	}
 
-	output = &CreateAssociationBatchOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateAssociationBatch API operation for Amazon Simple Systems Manager (SSM).
-//
-// Associates the specified Systems Manager document with the specified instances
-// or targets.
-//
-// When you associate a document with one or more instances using instance IDs
-// or tags, the SSM Agent running on the instance processes the document and
-// configures the instance as specified.
-//
-// If you associate a document with an instance that already has an associated
-// document, the system throws the AssociationAlreadyExists exception.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CreateAssociationBatch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidDocumentVersion "InvalidDocumentVersion"
-//   The document version is not valid or does not exist.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidParameters "InvalidParameters"
-//   You must specify values for all required parameters in the Systems Manager
-//   document. You can only supply values to parameters defined in the Systems
-//   Manager document.
-//
-//   * ErrCodeDuplicateInstanceId "DuplicateInstanceId"
-//   You cannot specify an instance ID in more than one association.
-//
-//   * ErrCodeAssociationLimitExceeded "AssociationLimitExceeded"
-//   You can have at most 2,000 active associations.
-//
-//   * ErrCodeUnsupportedPlatformType "UnsupportedPlatformType"
-//   The document does not support the platform type of the given instance ID(s).
-//   For example, you sent an document for a Windows instance to a Linux instance.
-//
-//   * ErrCodeInvalidOutputLocation "InvalidOutputLocation"
-//   The output location is not valid or does not exist.
-//
-//   * ErrCodeInvalidTarget "InvalidTarget"
-//   The target is not valid or does not exist. It might not be configured for
-//   EC2 Systems Manager or you might not have permission to perform the operation.
-//
-//   * ErrCodeInvalidSchedule "InvalidSchedule"
-//   The schedule is invalid. Verify your cron or rate expression and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatch
-func (c *SSM) CreateAssociationBatch(input *CreateAssociationBatchInput) (*CreateAssociationBatchOutput, error) {
-	req, out := c.CreateAssociationBatchRequest(input)
-	return out, req.Send()
-}
-
-// CreateAssociationBatchWithContext is the same as CreateAssociationBatch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAssociationBatch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CreateAssociationBatchWithContext(ctx aws.Context, input *CreateAssociationBatchInput, opts ...aws.Option) (*CreateAssociationBatchOutput, error) {
-	req, out := c.CreateAssociationBatchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateAssociationBatchOutput{})
+	return CreateAssociationBatchRequest{Request: req, Input: input}
 }
 
 const opCreateDocument = "CreateDocument"
 
-// CreateDocumentRequest generates a "aws.Request" representing the
-// client's request for the CreateDocument operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDocumentRequest is a API request type for the CreateDocument API operation.
+type CreateDocumentRequest struct {
+	*aws.Request
+	Input *CreateDocumentInput
+}
+
+// Send marshals and sends the CreateDocument API request.
+func (r CreateDocumentRequest) Send() (*CreateDocumentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDocumentOutput), nil
+}
+
+// CreateDocumentRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a Systems Manager document.
 //
-// See CreateDocument for more information on using the CreateDocument
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// After you create a document, you can use CreateAssociation to associate it
+// with one or more running instances.
 //
 //    // Example sending a request using the CreateDocumentRequest method.
-//    req, resp := client.CreateDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDocumentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument
-func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) (req *aws.Request, output *CreateDocumentOutput) {
+func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) CreateDocumentRequest {
 	op := &aws.Operation{
 		Name:       opCreateDocument,
 		HTTPMethod: "POST",
@@ -606,93 +325,42 @@ func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) (req *aws.Reques
 		input = &CreateDocumentInput{}
 	}
 
-	output = &CreateDocumentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDocument API operation for Amazon Simple Systems Manager (SSM).
-//
-// Creates a Systems Manager document.
-//
-// After you create a document, you can use CreateAssociation to associate it
-// with one or more running instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CreateDocument for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDocumentAlreadyExists "DocumentAlreadyExists"
-//   The specified document already exists.
-//
-//   * ErrCodeMaxDocumentSizeExceeded "MaxDocumentSizeExceeded"
-//   The size limit of a document is 64 KB.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocumentContent "InvalidDocumentContent"
-//   The content for the document is not valid.
-//
-//   * ErrCodeDocumentLimitExceeded "DocumentLimitExceeded"
-//   You can have at most 200 active Systems Manager documents.
-//
-//   * ErrCodeInvalidDocumentSchemaVersion "InvalidDocumentSchemaVersion"
-//   The version of the document schema is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument
-func (c *SSM) CreateDocument(input *CreateDocumentInput) (*CreateDocumentOutput, error) {
-	req, out := c.CreateDocumentRequest(input)
-	return out, req.Send()
-}
-
-// CreateDocumentWithContext is the same as CreateDocument with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDocument for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CreateDocumentWithContext(ctx aws.Context, input *CreateDocumentInput, opts ...aws.Option) (*CreateDocumentOutput, error) {
-	req, out := c.CreateDocumentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDocumentOutput{})
+	return CreateDocumentRequest{Request: req, Input: input}
 }
 
 const opCreateMaintenanceWindow = "CreateMaintenanceWindow"
 
-// CreateMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the CreateMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateMaintenanceWindowRequest is a API request type for the CreateMaintenanceWindow API operation.
+type CreateMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *CreateMaintenanceWindowInput
+}
+
+// Send marshals and sends the CreateMaintenanceWindow API request.
+func (r CreateMaintenanceWindowRequest) Send() (*CreateMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateMaintenanceWindowOutput), nil
+}
+
+// CreateMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateMaintenanceWindow for more information on using the CreateMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new Maintenance Window.
 //
 //    // Example sending a request using the CreateMaintenanceWindowRequest method.
-//    req, resp := client.CreateMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindow
-func (c *SSM) CreateMaintenanceWindowRequest(input *CreateMaintenanceWindowInput) (req *aws.Request, output *CreateMaintenanceWindowOutput) {
+func (c *SSM) CreateMaintenanceWindowRequest(input *CreateMaintenanceWindowInput) CreateMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opCreateMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -703,83 +371,42 @@ func (c *SSM) CreateMaintenanceWindowRequest(input *CreateMaintenanceWindowInput
 		input = &CreateMaintenanceWindowInput{}
 	}
 
-	output = &CreateMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Creates a new Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CreateMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeIdempotentParameterMismatch "IdempotentParameterMismatch"
-//   Error returned when an idempotent operation is retried and the parameters
-//   don't match the original call to the API with the same idempotency token.
-//
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Error returned when the caller has exceeded the default resource limits (e.g.
-//   too many Maintenance Windows have been created).
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindow
-func (c *SSM) CreateMaintenanceWindow(input *CreateMaintenanceWindowInput) (*CreateMaintenanceWindowOutput, error) {
-	req, out := c.CreateMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// CreateMaintenanceWindowWithContext is the same as CreateMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CreateMaintenanceWindowWithContext(ctx aws.Context, input *CreateMaintenanceWindowInput, opts ...aws.Option) (*CreateMaintenanceWindowOutput, error) {
-	req, out := c.CreateMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateMaintenanceWindowOutput{})
+	return CreateMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opCreatePatchBaseline = "CreatePatchBaseline"
 
-// CreatePatchBaselineRequest generates a "aws.Request" representing the
-// client's request for the CreatePatchBaseline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePatchBaselineRequest is a API request type for the CreatePatchBaseline API operation.
+type CreatePatchBaselineRequest struct {
+	*aws.Request
+	Input *CreatePatchBaselineInput
+}
+
+// Send marshals and sends the CreatePatchBaseline API request.
+func (r CreatePatchBaselineRequest) Send() (*CreatePatchBaselineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePatchBaselineOutput), nil
+}
+
+// CreatePatchBaselineRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePatchBaseline for more information on using the CreatePatchBaseline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a patch baseline.
 //
 //    // Example sending a request using the CreatePatchBaselineRequest method.
-//    req, resp := client.CreatePatchBaselineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePatchBaselineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaseline
-func (c *SSM) CreatePatchBaselineRequest(input *CreatePatchBaselineInput) (req *aws.Request, output *CreatePatchBaselineOutput) {
+func (c *SSM) CreatePatchBaselineRequest(input *CreatePatchBaselineInput) CreatePatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opCreatePatchBaseline,
 		HTTPMethod: "POST",
@@ -790,99 +417,30 @@ func (c *SSM) CreatePatchBaselineRequest(input *CreatePatchBaselineInput) (req *
 		input = &CreatePatchBaselineInput{}
 	}
 
-	output = &CreatePatchBaselineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePatchBaseline API operation for Amazon Simple Systems Manager (SSM).
-//
-// Creates a patch baseline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CreatePatchBaseline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeIdempotentParameterMismatch "IdempotentParameterMismatch"
-//   Error returned when an idempotent operation is retried and the parameters
-//   don't match the original call to the API with the same idempotency token.
-//
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Error returned when the caller has exceeded the default resource limits (e.g.
-//   too many Maintenance Windows have been created).
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaseline
-func (c *SSM) CreatePatchBaseline(input *CreatePatchBaselineInput) (*CreatePatchBaselineOutput, error) {
-	req, out := c.CreatePatchBaselineRequest(input)
-	return out, req.Send()
-}
-
-// CreatePatchBaselineWithContext is the same as CreatePatchBaseline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePatchBaseline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CreatePatchBaselineWithContext(ctx aws.Context, input *CreatePatchBaselineInput, opts ...aws.Option) (*CreatePatchBaselineOutput, error) {
-	req, out := c.CreatePatchBaselineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePatchBaselineOutput{})
+	return CreatePatchBaselineRequest{Request: req, Input: input}
 }
 
 const opCreateResourceDataSync = "CreateResourceDataSync"
 
-// CreateResourceDataSyncRequest generates a "aws.Request" representing the
-// client's request for the CreateResourceDataSync operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateResourceDataSync for more information on using the CreateResourceDataSync
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateResourceDataSyncRequest method.
-//    req, resp := client.CreateResourceDataSyncRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSync
-func (c *SSM) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInput) (req *aws.Request, output *CreateResourceDataSyncOutput) {
-	op := &aws.Operation{
-		Name:       opCreateResourceDataSync,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateResourceDataSyncInput{}
-	}
-
-	output = &CreateResourceDataSyncOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateResourceDataSyncRequest is a API request type for the CreateResourceDataSync API operation.
+type CreateResourceDataSyncRequest struct {
+	*aws.Request
+	Input *CreateResourceDataSyncInput
 }
 
-// CreateResourceDataSync API operation for Amazon Simple Systems Manager (SSM).
+// Send marshals and sends the CreateResourceDataSync API request.
+func (r CreateResourceDataSyncRequest) Send() (*CreateResourceDataSyncOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateResourceDataSyncOutput), nil
+}
+
+// CreateResourceDataSyncRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
 // Creates a resource data sync configuration to a single bucket in Amazon S3.
 // This is an asynchronous operation that returns immediately. After a successful
@@ -897,75 +455,64 @@ func (c *SSM) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInput) 
 // for Resource Data Sync, see Configuring Resource Data Sync for Inventory
 // (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation CreateResourceDataSync for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeResourceDataSyncCountExceededException "ResourceDataSyncCountExceededException"
-//   You have exceeded the allowed maximum sync configurations.
-//
-//   * ErrCodeResourceDataSyncAlreadyExistsException "ResourceDataSyncAlreadyExistsException"
-//   A sync configuration with the same name already exists.
-//
-//   * ErrCodeResourceDataSyncInvalidConfigurationException "ResourceDataSyncInvalidConfigurationException"
-//   The specified sync configuration is invalid.
+//    // Example sending a request using the CreateResourceDataSyncRequest method.
+//    req := client.CreateResourceDataSyncRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSync
-func (c *SSM) CreateResourceDataSync(input *CreateResourceDataSyncInput) (*CreateResourceDataSyncOutput, error) {
-	req, out := c.CreateResourceDataSyncRequest(input)
-	return out, req.Send()
-}
+func (c *SSM) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInput) CreateResourceDataSyncRequest {
+	op := &aws.Operation{
+		Name:       opCreateResourceDataSync,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateResourceDataSyncWithContext is the same as CreateResourceDataSync with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateResourceDataSync for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) CreateResourceDataSyncWithContext(ctx aws.Context, input *CreateResourceDataSyncInput, opts ...aws.Option) (*CreateResourceDataSyncOutput, error) {
-	req, out := c.CreateResourceDataSyncRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateResourceDataSyncInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateResourceDataSyncOutput{})
+	return CreateResourceDataSyncRequest{Request: req, Input: input}
 }
 
 const opDeleteActivation = "DeleteActivation"
 
-// DeleteActivationRequest generates a "aws.Request" representing the
-// client's request for the DeleteActivation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteActivationRequest is a API request type for the DeleteActivation API operation.
+type DeleteActivationRequest struct {
+	*aws.Request
+	Input *DeleteActivationInput
+}
+
+// Send marshals and sends the DeleteActivation API request.
+func (r DeleteActivationRequest) Send() (*DeleteActivationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteActivationOutput), nil
+}
+
+// DeleteActivationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteActivation for more information on using the DeleteActivation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an activation. You are not required to delete an activation. If you
+// delete an activation, you can no longer use it to register additional managed
+// instances. Deleting an activation does not de-register managed instances.
+// You must manually de-register managed instances.
 //
 //    // Example sending a request using the DeleteActivationRequest method.
-//    req, resp := client.DeleteActivationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteActivationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivation
-func (c *SSM) DeleteActivationRequest(input *DeleteActivationInput) (req *aws.Request, output *DeleteActivationOutput) {
+func (c *SSM) DeleteActivationRequest(input *DeleteActivationInput) DeleteActivationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteActivation,
 		HTTPMethod: "POST",
@@ -976,86 +523,47 @@ func (c *SSM) DeleteActivationRequest(input *DeleteActivationInput) (req *aws.Re
 		input = &DeleteActivationInput{}
 	}
 
-	output = &DeleteActivationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteActivation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Deletes an activation. You are not required to delete an activation. If you
-// delete an activation, you can no longer use it to register additional managed
-// instances. Deleting an activation does not de-register managed instances.
-// You must manually de-register managed instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeleteActivation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidActivationId "InvalidActivationId"
-//   The activation ID is not valid. Verify the you entered the correct ActivationId
-//   or ActivationCode and try again.
-//
-//   * ErrCodeInvalidActivation "InvalidActivation"
-//   The activation is not valid. The activation might have been deleted, or the
-//   ActivationId and the ActivationCode do not match.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivation
-func (c *SSM) DeleteActivation(input *DeleteActivationInput) (*DeleteActivationOutput, error) {
-	req, out := c.DeleteActivationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteActivationWithContext is the same as DeleteActivation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteActivation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeleteActivationWithContext(ctx aws.Context, input *DeleteActivationInput, opts ...aws.Option) (*DeleteActivationOutput, error) {
-	req, out := c.DeleteActivationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteActivationOutput{})
+	return DeleteActivationRequest{Request: req, Input: input}
 }
 
 const opDeleteAssociation = "DeleteAssociation"
 
-// DeleteAssociationRequest generates a "aws.Request" representing the
-// client's request for the DeleteAssociation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAssociationRequest is a API request type for the DeleteAssociation API operation.
+type DeleteAssociationRequest struct {
+	*aws.Request
+	Input *DeleteAssociationInput
+}
+
+// Send marshals and sends the DeleteAssociation API request.
+func (r DeleteAssociationRequest) Send() (*DeleteAssociationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAssociationOutput), nil
+}
+
+// DeleteAssociationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Disassociates the specified Systems Manager document from the specified instance.
 //
-// See DeleteAssociation for more information on using the DeleteAssociation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you disassociate a document from an instance, it does not change the
+// configuration of the instance. To change the configuration state of an instance
+// after you disassociate a document, you must create a new document with the
+// desired configuration and associate it with the instance.
 //
 //    // Example sending a request using the DeleteAssociationRequest method.
-//    req, resp := client.DeleteAssociationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAssociationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociation
-func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) (req *aws.Request, output *DeleteAssociationOutput) {
+func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) DeleteAssociationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAssociation,
 		HTTPMethod: "POST",
@@ -1066,105 +574,46 @@ func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) (req *aws.
 		input = &DeleteAssociationInput{}
 	}
 
-	output = &DeleteAssociationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteAssociation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Disassociates the specified Systems Manager document from the specified instance.
-//
-// When you disassociate a document from an instance, it does not change the
-// configuration of the instance. To change the configuration state of an instance
-// after you disassociate a document, you must create a new document with the
-// desired configuration and associate it with the instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeleteAssociation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAssociationDoesNotExist "AssociationDoesNotExist"
-//   The specified association does not exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeTooManyUpdates "TooManyUpdates"
-//   There are concurrent updates for a resource that supports one update at a
-//   time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociation
-func (c *SSM) DeleteAssociation(input *DeleteAssociationInput) (*DeleteAssociationOutput, error) {
-	req, out := c.DeleteAssociationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAssociationWithContext is the same as DeleteAssociation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAssociation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeleteAssociationWithContext(ctx aws.Context, input *DeleteAssociationInput, opts ...aws.Option) (*DeleteAssociationOutput, error) {
-	req, out := c.DeleteAssociationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteAssociationOutput{})
+	return DeleteAssociationRequest{Request: req, Input: input}
 }
 
 const opDeleteDocument = "DeleteDocument"
 
-// DeleteDocumentRequest generates a "aws.Request" representing the
-// client's request for the DeleteDocument operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDocumentRequest is a API request type for the DeleteDocument API operation.
+type DeleteDocumentRequest struct {
+	*aws.Request
+	Input *DeleteDocumentInput
+}
+
+// Send marshals and sends the DeleteDocument API request.
+func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDocumentOutput), nil
+}
+
+// DeleteDocumentRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the Systems Manager document and all instance associations to the
+// document.
 //
-// See DeleteDocument for more information on using the DeleteDocument
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Before you delete the document, we recommend that you use DeleteAssociation
+// to disassociate all instances that are associated with the document.
 //
 //    // Example sending a request using the DeleteDocumentRequest method.
-//    req, resp := client.DeleteDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDocumentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument
-func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) (req *aws.Request, output *DeleteDocumentOutput) {
+func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDocument,
 		HTTPMethod: "POST",
@@ -1175,90 +624,42 @@ func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) (req *aws.Reques
 		input = &DeleteDocumentInput{}
 	}
 
-	output = &DeleteDocumentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDocument API operation for Amazon Simple Systems Manager (SSM).
-//
-// Deletes the Systems Manager document and all instance associations to the
-// document.
-//
-// Before you delete the document, we recommend that you use DeleteAssociation
-// to disassociate all instances that are associated with the document.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeleteDocument for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidDocumentOperation "InvalidDocumentOperation"
-//   You attempted to delete a document while it is still shared. You must stop
-//   sharing the document before you can delete it.
-//
-//   * ErrCodeAssociatedInstances "AssociatedInstances"
-//   You must disassociate a document from all instances before you can delete
-//   it.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument
-func (c *SSM) DeleteDocument(input *DeleteDocumentInput) (*DeleteDocumentOutput, error) {
-	req, out := c.DeleteDocumentRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDocumentWithContext is the same as DeleteDocument with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDocument for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocumentInput, opts ...aws.Option) (*DeleteDocumentOutput, error) {
-	req, out := c.DeleteDocumentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDocumentOutput{})
+	return DeleteDocumentRequest{Request: req, Input: input}
 }
 
 const opDeleteMaintenanceWindow = "DeleteMaintenanceWindow"
 
-// DeleteMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the DeleteMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteMaintenanceWindowRequest is a API request type for the DeleteMaintenanceWindow API operation.
+type DeleteMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *DeleteMaintenanceWindowInput
+}
+
+// Send marshals and sends the DeleteMaintenanceWindow API request.
+func (r DeleteMaintenanceWindowRequest) Send() (*DeleteMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMaintenanceWindowOutput), nil
+}
+
+// DeleteMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteMaintenanceWindow for more information on using the DeleteMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a Maintenance Window.
 //
 //    // Example sending a request using the DeleteMaintenanceWindowRequest method.
-//    req, resp := client.DeleteMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindow
-func (c *SSM) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowInput) (req *aws.Request, output *DeleteMaintenanceWindowOutput) {
+func (c *SSM) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowInput) DeleteMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -1269,75 +670,42 @@ func (c *SSM) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowInput
 		input = &DeleteMaintenanceWindowInput{}
 	}
 
-	output = &DeleteMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Deletes a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeleteMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindow
-func (c *SSM) DeleteMaintenanceWindow(input *DeleteMaintenanceWindowInput) (*DeleteMaintenanceWindowOutput, error) {
-	req, out := c.DeleteMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// DeleteMaintenanceWindowWithContext is the same as DeleteMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeleteMaintenanceWindowWithContext(ctx aws.Context, input *DeleteMaintenanceWindowInput, opts ...aws.Option) (*DeleteMaintenanceWindowOutput, error) {
-	req, out := c.DeleteMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteMaintenanceWindowOutput{})
+	return DeleteMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opDeleteParameter = "DeleteParameter"
 
-// DeleteParameterRequest generates a "aws.Request" representing the
-// client's request for the DeleteParameter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteParameterRequest is a API request type for the DeleteParameter API operation.
+type DeleteParameterRequest struct {
+	*aws.Request
+	Input *DeleteParameterInput
+}
+
+// Send marshals and sends the DeleteParameter API request.
+func (r DeleteParameterRequest) Send() (*DeleteParameterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteParameterOutput), nil
+}
+
+// DeleteParameterRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteParameter for more information on using the DeleteParameter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a parameter from the system.
 //
 //    // Example sending a request using the DeleteParameterRequest method.
-//    req, resp := client.DeleteParameterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteParameterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameter
-func (c *SSM) DeleteParameterRequest(input *DeleteParameterInput) (req *aws.Request, output *DeleteParameterOutput) {
+func (c *SSM) DeleteParameterRequest(input *DeleteParameterInput) DeleteParameterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteParameter,
 		HTTPMethod: "POST",
@@ -1348,78 +716,43 @@ func (c *SSM) DeleteParameterRequest(input *DeleteParameterInput) (req *aws.Requ
 		input = &DeleteParameterInput{}
 	}
 
-	output = &DeleteParameterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteParameter API operation for Amazon Simple Systems Manager (SSM).
-//
-// Delete a parameter from the system.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeleteParameter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeParameterNotFound "ParameterNotFound"
-//   The parameter could not be found. Verify the name and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameter
-func (c *SSM) DeleteParameter(input *DeleteParameterInput) (*DeleteParameterOutput, error) {
-	req, out := c.DeleteParameterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteParameterWithContext is the same as DeleteParameter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteParameter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeleteParameterWithContext(ctx aws.Context, input *DeleteParameterInput, opts ...aws.Option) (*DeleteParameterOutput, error) {
-	req, out := c.DeleteParameterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteParameterOutput{})
+	return DeleteParameterRequest{Request: req, Input: input}
 }
 
 const opDeleteParameters = "DeleteParameters"
 
-// DeleteParametersRequest generates a "aws.Request" representing the
-// client's request for the DeleteParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteParametersRequest is a API request type for the DeleteParameters API operation.
+type DeleteParametersRequest struct {
+	*aws.Request
+	Input *DeleteParametersInput
+}
+
+// Send marshals and sends the DeleteParameters API request.
+func (r DeleteParametersRequest) Send() (*DeleteParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteParametersOutput), nil
+}
+
+// DeleteParametersRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteParameters for more information on using the DeleteParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a list of parameters. This API is used to delete parameters by using
+// the Amazon EC2 console.
 //
 //    // Example sending a request using the DeleteParametersRequest method.
-//    req, resp := client.DeleteParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameters
-func (c *SSM) DeleteParametersRequest(input *DeleteParametersInput) (req *aws.Request, output *DeleteParametersOutput) {
+func (c *SSM) DeleteParametersRequest(input *DeleteParametersInput) DeleteParametersRequest {
 	op := &aws.Operation{
 		Name:       opDeleteParameters,
 		HTTPMethod: "POST",
@@ -1430,76 +763,42 @@ func (c *SSM) DeleteParametersRequest(input *DeleteParametersInput) (req *aws.Re
 		input = &DeleteParametersInput{}
 	}
 
-	output = &DeleteParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteParameters API operation for Amazon Simple Systems Manager (SSM).
-//
-// Delete a list of parameters. This API is used to delete parameters by using
-// the Amazon EC2 console.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeleteParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameters
-func (c *SSM) DeleteParameters(input *DeleteParametersInput) (*DeleteParametersOutput, error) {
-	req, out := c.DeleteParametersRequest(input)
-	return out, req.Send()
-}
-
-// DeleteParametersWithContext is the same as DeleteParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeleteParametersWithContext(ctx aws.Context, input *DeleteParametersInput, opts ...aws.Option) (*DeleteParametersOutput, error) {
-	req, out := c.DeleteParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteParametersOutput{})
+	return DeleteParametersRequest{Request: req, Input: input}
 }
 
 const opDeletePatchBaseline = "DeletePatchBaseline"
 
-// DeletePatchBaselineRequest generates a "aws.Request" representing the
-// client's request for the DeletePatchBaseline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePatchBaselineRequest is a API request type for the DeletePatchBaseline API operation.
+type DeletePatchBaselineRequest struct {
+	*aws.Request
+	Input *DeletePatchBaselineInput
+}
+
+// Send marshals and sends the DeletePatchBaseline API request.
+func (r DeletePatchBaselineRequest) Send() (*DeletePatchBaselineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePatchBaselineOutput), nil
+}
+
+// DeletePatchBaselineRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePatchBaseline for more information on using the DeletePatchBaseline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a patch baseline.
 //
 //    // Example sending a request using the DeletePatchBaselineRequest method.
-//    req, resp := client.DeletePatchBaselineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePatchBaselineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeletePatchBaseline
-func (c *SSM) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) (req *aws.Request, output *DeletePatchBaselineOutput) {
+func (c *SSM) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) DeletePatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opDeletePatchBaseline,
 		HTTPMethod: "POST",
@@ -1510,79 +809,45 @@ func (c *SSM) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) (req *
 		input = &DeletePatchBaselineInput{}
 	}
 
-	output = &DeletePatchBaselineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeletePatchBaseline API operation for Amazon Simple Systems Manager (SSM).
-//
-// Deletes a patch baseline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeletePatchBaseline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   Error returned if an attempt is made to delete a patch baseline that is registered
-//   for a patch group.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeletePatchBaseline
-func (c *SSM) DeletePatchBaseline(input *DeletePatchBaselineInput) (*DeletePatchBaselineOutput, error) {
-	req, out := c.DeletePatchBaselineRequest(input)
-	return out, req.Send()
-}
-
-// DeletePatchBaselineWithContext is the same as DeletePatchBaseline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePatchBaseline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeletePatchBaselineWithContext(ctx aws.Context, input *DeletePatchBaselineInput, opts ...aws.Option) (*DeletePatchBaselineOutput, error) {
-	req, out := c.DeletePatchBaselineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeletePatchBaselineOutput{})
+	return DeletePatchBaselineRequest{Request: req, Input: input}
 }
 
 const opDeleteResourceDataSync = "DeleteResourceDataSync"
 
-// DeleteResourceDataSyncRequest generates a "aws.Request" representing the
-// client's request for the DeleteResourceDataSync operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteResourceDataSyncRequest is a API request type for the DeleteResourceDataSync API operation.
+type DeleteResourceDataSyncRequest struct {
+	*aws.Request
+	Input *DeleteResourceDataSyncInput
+}
+
+// Send marshals and sends the DeleteResourceDataSync API request.
+func (r DeleteResourceDataSyncRequest) Send() (*DeleteResourceDataSyncOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteResourceDataSyncOutput), nil
+}
+
+// DeleteResourceDataSyncRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteResourceDataSync for more information on using the DeleteResourceDataSync
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a Resource Data Sync configuration. After the configuration is deleted,
+// changes to inventory data on managed instances are no longer synced with
+// the target Amazon S3 bucket. Deleting a sync configuration does not delete
+// data in the target Amazon S3 bucket.
 //
 //    // Example sending a request using the DeleteResourceDataSyncRequest method.
-//    req, resp := client.DeleteResourceDataSyncRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteResourceDataSyncRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSync
-func (c *SSM) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) (req *aws.Request, output *DeleteResourceDataSyncOutput) {
+func (c *SSM) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) DeleteResourceDataSyncRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourceDataSync,
 		HTTPMethod: "POST",
@@ -1593,81 +858,44 @@ func (c *SSM) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) 
 		input = &DeleteResourceDataSyncInput{}
 	}
 
-	output = &DeleteResourceDataSyncOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteResourceDataSync API operation for Amazon Simple Systems Manager (SSM).
-//
-// Deletes a Resource Data Sync configuration. After the configuration is deleted,
-// changes to inventory data on managed instances are no longer synced with
-// the target Amazon S3 bucket. Deleting a sync configuration does not delete
-// data in the target Amazon S3 bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeleteResourceDataSync for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeResourceDataSyncNotFoundException "ResourceDataSyncNotFoundException"
-//   The specified sync name was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSync
-func (c *SSM) DeleteResourceDataSync(input *DeleteResourceDataSyncInput) (*DeleteResourceDataSyncOutput, error) {
-	req, out := c.DeleteResourceDataSyncRequest(input)
-	return out, req.Send()
-}
-
-// DeleteResourceDataSyncWithContext is the same as DeleteResourceDataSync with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteResourceDataSync for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeleteResourceDataSyncWithContext(ctx aws.Context, input *DeleteResourceDataSyncInput, opts ...aws.Option) (*DeleteResourceDataSyncOutput, error) {
-	req, out := c.DeleteResourceDataSyncRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteResourceDataSyncOutput{})
+	return DeleteResourceDataSyncRequest{Request: req, Input: input}
 }
 
 const opDeregisterManagedInstance = "DeregisterManagedInstance"
 
-// DeregisterManagedInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeregisterManagedInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterManagedInstanceRequest is a API request type for the DeregisterManagedInstance API operation.
+type DeregisterManagedInstanceRequest struct {
+	*aws.Request
+	Input *DeregisterManagedInstanceInput
+}
+
+// Send marshals and sends the DeregisterManagedInstance API request.
+func (r DeregisterManagedInstanceRequest) Send() (*DeregisterManagedInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterManagedInstanceOutput), nil
+}
+
+// DeregisterManagedInstanceRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterManagedInstance for more information on using the DeregisterManagedInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the server or virtual machine from the list of registered servers.
+// You can reregister the instance again at any time. If you don't plan to use
+// Run Command on the server, we suggest uninstalling the SSM Agent first.
 //
 //    // Example sending a request using the DeregisterManagedInstanceRequest method.
-//    req, resp := client.DeregisterManagedInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterManagedInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstance
-func (c *SSM) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceInput) (req *aws.Request, output *DeregisterManagedInstanceOutput) {
+func (c *SSM) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceInput) DeregisterManagedInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterManagedInstance,
 		HTTPMethod: "POST",
@@ -1678,92 +906,42 @@ func (c *SSM) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceI
 		input = &DeregisterManagedInstanceInput{}
 	}
 
-	output = &DeregisterManagedInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeregisterManagedInstance API operation for Amazon Simple Systems Manager (SSM).
-//
-// Removes the server or virtual machine from the list of registered servers.
-// You can reregister the instance again at any time. If you don't plan to use
-// Run Command on the server, we suggest uninstalling the SSM Agent first.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeregisterManagedInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstance
-func (c *SSM) DeregisterManagedInstance(input *DeregisterManagedInstanceInput) (*DeregisterManagedInstanceOutput, error) {
-	req, out := c.DeregisterManagedInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterManagedInstanceWithContext is the same as DeregisterManagedInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterManagedInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeregisterManagedInstanceWithContext(ctx aws.Context, input *DeregisterManagedInstanceInput, opts ...aws.Option) (*DeregisterManagedInstanceOutput, error) {
-	req, out := c.DeregisterManagedInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeregisterManagedInstanceOutput{})
+	return DeregisterManagedInstanceRequest{Request: req, Input: input}
 }
 
 const opDeregisterPatchBaselineForPatchGroup = "DeregisterPatchBaselineForPatchGroup"
 
-// DeregisterPatchBaselineForPatchGroupRequest generates a "aws.Request" representing the
-// client's request for the DeregisterPatchBaselineForPatchGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterPatchBaselineForPatchGroupRequest is a API request type for the DeregisterPatchBaselineForPatchGroup API operation.
+type DeregisterPatchBaselineForPatchGroupRequest struct {
+	*aws.Request
+	Input *DeregisterPatchBaselineForPatchGroupInput
+}
+
+// Send marshals and sends the DeregisterPatchBaselineForPatchGroup API request.
+func (r DeregisterPatchBaselineForPatchGroupRequest) Send() (*DeregisterPatchBaselineForPatchGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterPatchBaselineForPatchGroupOutput), nil
+}
+
+// DeregisterPatchBaselineForPatchGroupRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterPatchBaselineForPatchGroup for more information on using the DeregisterPatchBaselineForPatchGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a patch group from a patch baseline.
 //
 //    // Example sending a request using the DeregisterPatchBaselineForPatchGroupRequest method.
-//    req, resp := client.DeregisterPatchBaselineForPatchGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterPatchBaselineForPatchGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroup
-func (c *SSM) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatchBaselineForPatchGroupInput) (req *aws.Request, output *DeregisterPatchBaselineForPatchGroupOutput) {
+func (c *SSM) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatchBaselineForPatchGroupInput) DeregisterPatchBaselineForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
@@ -1774,79 +952,42 @@ func (c *SSM) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatch
 		input = &DeregisterPatchBaselineForPatchGroupInput{}
 	}
 
-	output = &DeregisterPatchBaselineForPatchGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeregisterPatchBaselineForPatchGroup API operation for Amazon Simple Systems Manager (SSM).
-//
-// Removes a patch group from a patch baseline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeregisterPatchBaselineForPatchGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroup
-func (c *SSM) DeregisterPatchBaselineForPatchGroup(input *DeregisterPatchBaselineForPatchGroupInput) (*DeregisterPatchBaselineForPatchGroupOutput, error) {
-	req, out := c.DeregisterPatchBaselineForPatchGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterPatchBaselineForPatchGroupWithContext is the same as DeregisterPatchBaselineForPatchGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterPatchBaselineForPatchGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeregisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *DeregisterPatchBaselineForPatchGroupInput, opts ...aws.Option) (*DeregisterPatchBaselineForPatchGroupOutput, error) {
-	req, out := c.DeregisterPatchBaselineForPatchGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeregisterPatchBaselineForPatchGroupOutput{})
+	return DeregisterPatchBaselineForPatchGroupRequest{Request: req, Input: input}
 }
 
 const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenanceWindow"
 
-// DeregisterTargetFromMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the DeregisterTargetFromMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterTargetFromMaintenanceWindowRequest is a API request type for the DeregisterTargetFromMaintenanceWindow API operation.
+type DeregisterTargetFromMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *DeregisterTargetFromMaintenanceWindowInput
+}
+
+// Send marshals and sends the DeregisterTargetFromMaintenanceWindow API request.
+func (r DeregisterTargetFromMaintenanceWindowRequest) Send() (*DeregisterTargetFromMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterTargetFromMaintenanceWindowOutput), nil
+}
+
+// DeregisterTargetFromMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterTargetFromMaintenanceWindow for more information on using the DeregisterTargetFromMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a target from a Maintenance Window.
 //
 //    // Example sending a request using the DeregisterTargetFromMaintenanceWindowRequest method.
-//    req, resp := client.DeregisterTargetFromMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterTargetFromMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindow
-func (c *SSM) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTargetFromMaintenanceWindowInput) (req *aws.Request, output *DeregisterTargetFromMaintenanceWindowOutput) {
+func (c *SSM) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTargetFromMaintenanceWindowInput) DeregisterTargetFromMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterTargetFromMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -1857,83 +998,42 @@ func (c *SSM) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTarg
 		input = &DeregisterTargetFromMaintenanceWindowInput{}
 	}
 
-	output = &DeregisterTargetFromMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeregisterTargetFromMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Removes a target from a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeregisterTargetFromMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeTargetInUseException "TargetInUseException"
-//   You specified the Safe option for the DeregisterTargetFromMaintenanceWindow
-//   operation, but the target is still referenced in a task.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindow
-func (c *SSM) DeregisterTargetFromMaintenanceWindow(input *DeregisterTargetFromMaintenanceWindowInput) (*DeregisterTargetFromMaintenanceWindowOutput, error) {
-	req, out := c.DeregisterTargetFromMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterTargetFromMaintenanceWindowWithContext is the same as DeregisterTargetFromMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterTargetFromMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeregisterTargetFromMaintenanceWindowWithContext(ctx aws.Context, input *DeregisterTargetFromMaintenanceWindowInput, opts ...aws.Option) (*DeregisterTargetFromMaintenanceWindowOutput, error) {
-	req, out := c.DeregisterTargetFromMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeregisterTargetFromMaintenanceWindowOutput{})
+	return DeregisterTargetFromMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opDeregisterTaskFromMaintenanceWindow = "DeregisterTaskFromMaintenanceWindow"
 
-// DeregisterTaskFromMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the DeregisterTaskFromMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterTaskFromMaintenanceWindowRequest is a API request type for the DeregisterTaskFromMaintenanceWindow API operation.
+type DeregisterTaskFromMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *DeregisterTaskFromMaintenanceWindowInput
+}
+
+// Send marshals and sends the DeregisterTaskFromMaintenanceWindow API request.
+func (r DeregisterTaskFromMaintenanceWindowRequest) Send() (*DeregisterTaskFromMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterTaskFromMaintenanceWindowOutput), nil
+}
+
+// DeregisterTaskFromMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterTaskFromMaintenanceWindow for more information on using the DeregisterTaskFromMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a task from a Maintenance Window.
 //
 //    // Example sending a request using the DeregisterTaskFromMaintenanceWindowRequest method.
-//    req, resp := client.DeregisterTaskFromMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterTaskFromMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindow
-func (c *SSM) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTaskFromMaintenanceWindowInput) (req *aws.Request, output *DeregisterTaskFromMaintenanceWindowOutput) {
+func (c *SSM) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTaskFromMaintenanceWindowInput) DeregisterTaskFromMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterTaskFromMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -1944,79 +1044,44 @@ func (c *SSM) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTaskFr
 		input = &DeregisterTaskFromMaintenanceWindowInput{}
 	}
 
-	output = &DeregisterTaskFromMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeregisterTaskFromMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Removes a task from a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DeregisterTaskFromMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindow
-func (c *SSM) DeregisterTaskFromMaintenanceWindow(input *DeregisterTaskFromMaintenanceWindowInput) (*DeregisterTaskFromMaintenanceWindowOutput, error) {
-	req, out := c.DeregisterTaskFromMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterTaskFromMaintenanceWindowWithContext is the same as DeregisterTaskFromMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterTaskFromMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DeregisterTaskFromMaintenanceWindowWithContext(ctx aws.Context, input *DeregisterTaskFromMaintenanceWindowInput, opts ...aws.Option) (*DeregisterTaskFromMaintenanceWindowOutput, error) {
-	req, out := c.DeregisterTaskFromMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeregisterTaskFromMaintenanceWindowOutput{})
+	return DeregisterTaskFromMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opDescribeActivations = "DescribeActivations"
 
-// DescribeActivationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeActivations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeActivationsRequest is a API request type for the DescribeActivations API operation.
+type DescribeActivationsRequest struct {
+	*aws.Request
+	Input *DescribeActivationsInput
+}
+
+// Send marshals and sends the DescribeActivations API request.
+func (r DescribeActivationsRequest) Send() (*DescribeActivationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeActivationsOutput), nil
+}
+
+// DescribeActivationsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeActivations for more information on using the DescribeActivations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Details about the activation, including: the date and time the activation
+// was created, the expiration date, the IAM role assigned to the instances
+// in the activation, and the number of instances activated by this registration.
 //
 //    // Example sending a request using the DescribeActivationsRequest method.
-//    req, resp := client.DescribeActivationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeActivationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivations
-func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) (req *aws.Request, output *DescribeActivationsOutput) {
+func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) DescribeActivationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActivations,
 		HTTPMethod: "POST",
@@ -2033,55 +1098,8 @@ func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) (req *
 		input = &DescribeActivationsInput{}
 	}
 
-	output = &DescribeActivationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeActivations API operation for Amazon Simple Systems Manager (SSM).
-//
-// Details about the activation, including: the date and time the activation
-// was created, the expiration date, the IAM role assigned to the instances
-// in the activation, and the number of instances activated by this registration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeActivations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivations
-func (c *SSM) DescribeActivations(input *DescribeActivationsInput) (*DescribeActivationsOutput, error) {
-	req, out := c.DescribeActivationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeActivationsWithContext is the same as DescribeActivations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeActivations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeActivationsWithContext(ctx aws.Context, input *DescribeActivationsInput, opts ...aws.Option) (*DescribeActivationsOutput, error) {
-	req, out := c.DescribeActivationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeActivationsOutput{})
+	return DescribeActivationsRequest{Request: req, Input: input}
 }
 
 // DescribeActivationsPages iterates over the pages of a DescribeActivations operation,
@@ -2120,10 +1138,10 @@ func (c *SSM) DescribeActivationsPagesWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeActivationsRequest(inCpy)
+			req := c.DescribeActivationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2136,31 +1154,37 @@ func (c *SSM) DescribeActivationsPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeAssociation = "DescribeAssociation"
 
-// DescribeAssociationRequest generates a "aws.Request" representing the
-// client's request for the DescribeAssociation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAssociationRequest is a API request type for the DescribeAssociation API operation.
+type DescribeAssociationRequest struct {
+	*aws.Request
+	Input *DescribeAssociationInput
+}
+
+// Send marshals and sends the DescribeAssociation API request.
+func (r DescribeAssociationRequest) Send() (*DescribeAssociationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAssociationOutput), nil
+}
+
+// DescribeAssociationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAssociation for more information on using the DescribeAssociation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the associations for the specified Systems Manager document or
+// instance.
 //
 //    // Example sending a request using the DescribeAssociationRequest method.
-//    req, resp := client.DescribeAssociationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAssociationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation
-func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) (req *aws.Request, output *DescribeAssociationOutput) {
+func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) DescribeAssociationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAssociation,
 		HTTPMethod: "POST",
@@ -2171,102 +1195,42 @@ func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) (req *
 		input = &DescribeAssociationInput{}
 	}
 
-	output = &DescribeAssociationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAssociation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Describes the associations for the specified Systems Manager document or
-// instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeAssociation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAssociationDoesNotExist "AssociationDoesNotExist"
-//   The specified association does not exist.
-//
-//   * ErrCodeInvalidAssociationVersion "InvalidAssociationVersion"
-//   The version you specified is not valid. Use ListAssociationVersions to view
-//   all versions of an association according to the association ID. Or, use the
-//   $LATEST parameter to view the latest version of the association.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation
-func (c *SSM) DescribeAssociation(input *DescribeAssociationInput) (*DescribeAssociationOutput, error) {
-	req, out := c.DescribeAssociationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAssociationWithContext is the same as DescribeAssociation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAssociation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeAssociationWithContext(ctx aws.Context, input *DescribeAssociationInput, opts ...aws.Option) (*DescribeAssociationOutput, error) {
-	req, out := c.DescribeAssociationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAssociationOutput{})
+	return DescribeAssociationRequest{Request: req, Input: input}
 }
 
 const opDescribeAutomationExecutions = "DescribeAutomationExecutions"
 
-// DescribeAutomationExecutionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAutomationExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAutomationExecutionsRequest is a API request type for the DescribeAutomationExecutions API operation.
+type DescribeAutomationExecutionsRequest struct {
+	*aws.Request
+	Input *DescribeAutomationExecutionsInput
+}
+
+// Send marshals and sends the DescribeAutomationExecutions API request.
+func (r DescribeAutomationExecutionsRequest) Send() (*DescribeAutomationExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAutomationExecutionsOutput), nil
+}
+
+// DescribeAutomationExecutionsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAutomationExecutions for more information on using the DescribeAutomationExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides details about all active and terminated Automation executions.
 //
 //    // Example sending a request using the DescribeAutomationExecutionsRequest method.
-//    req, resp := client.DescribeAutomationExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAutomationExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutions
-func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecutionsInput) (req *aws.Request, output *DescribeAutomationExecutionsOutput) {
+func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecutionsInput) DescribeAutomationExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutomationExecutions,
 		HTTPMethod: "POST",
@@ -2277,78 +1241,42 @@ func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecu
 		input = &DescribeAutomationExecutionsInput{}
 	}
 
-	output = &DescribeAutomationExecutionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAutomationExecutions API operation for Amazon Simple Systems Manager (SSM).
-//
-// Provides details about all active and terminated Automation executions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeAutomationExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutions
-func (c *SSM) DescribeAutomationExecutions(input *DescribeAutomationExecutionsInput) (*DescribeAutomationExecutionsOutput, error) {
-	req, out := c.DescribeAutomationExecutionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAutomationExecutionsWithContext is the same as DescribeAutomationExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAutomationExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeAutomationExecutionsWithContext(ctx aws.Context, input *DescribeAutomationExecutionsInput, opts ...aws.Option) (*DescribeAutomationExecutionsOutput, error) {
-	req, out := c.DescribeAutomationExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAutomationExecutionsOutput{})
+	return DescribeAutomationExecutionsRequest{Request: req, Input: input}
 }
 
 const opDescribeAvailablePatches = "DescribeAvailablePatches"
 
-// DescribeAvailablePatchesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAvailablePatches operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAvailablePatchesRequest is a API request type for the DescribeAvailablePatches API operation.
+type DescribeAvailablePatchesRequest struct {
+	*aws.Request
+	Input *DescribeAvailablePatchesInput
+}
+
+// Send marshals and sends the DescribeAvailablePatches API request.
+func (r DescribeAvailablePatchesRequest) Send() (*DescribeAvailablePatchesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAvailablePatchesOutput), nil
+}
+
+// DescribeAvailablePatchesRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAvailablePatches for more information on using the DescribeAvailablePatches
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all patches that could possibly be included in a patch baseline.
 //
 //    // Example sending a request using the DescribeAvailablePatchesRequest method.
-//    req, resp := client.DescribeAvailablePatchesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAvailablePatchesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatches
-func (c *SSM) DescribeAvailablePatchesRequest(input *DescribeAvailablePatchesInput) (req *aws.Request, output *DescribeAvailablePatchesOutput) {
+func (c *SSM) DescribeAvailablePatchesRequest(input *DescribeAvailablePatchesInput) DescribeAvailablePatchesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAvailablePatches,
 		HTTPMethod: "POST",
@@ -2359,75 +1287,42 @@ func (c *SSM) DescribeAvailablePatchesRequest(input *DescribeAvailablePatchesInp
 		input = &DescribeAvailablePatchesInput{}
 	}
 
-	output = &DescribeAvailablePatchesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAvailablePatches API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists all patches that could possibly be included in a patch baseline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeAvailablePatches for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatches
-func (c *SSM) DescribeAvailablePatches(input *DescribeAvailablePatchesInput) (*DescribeAvailablePatchesOutput, error) {
-	req, out := c.DescribeAvailablePatchesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAvailablePatchesWithContext is the same as DescribeAvailablePatches with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAvailablePatches for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeAvailablePatchesWithContext(ctx aws.Context, input *DescribeAvailablePatchesInput, opts ...aws.Option) (*DescribeAvailablePatchesOutput, error) {
-	req, out := c.DescribeAvailablePatchesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAvailablePatchesOutput{})
+	return DescribeAvailablePatchesRequest{Request: req, Input: input}
 }
 
 const opDescribeDocument = "DescribeDocument"
 
-// DescribeDocumentRequest generates a "aws.Request" representing the
-// client's request for the DescribeDocument operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDocumentRequest is a API request type for the DescribeDocument API operation.
+type DescribeDocumentRequest struct {
+	*aws.Request
+	Input *DescribeDocumentInput
+}
+
+// Send marshals and sends the DescribeDocument API request.
+func (r DescribeDocumentRequest) Send() (*DescribeDocumentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDocumentOutput), nil
+}
+
+// DescribeDocumentRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDocument for more information on using the DescribeDocument
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified Systems Manager document.
 //
 //    // Example sending a request using the DescribeDocumentRequest method.
-//    req, resp := client.DescribeDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDocumentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument
-func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) (req *aws.Request, output *DescribeDocumentOutput) {
+func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) DescribeDocumentRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDocument,
 		HTTPMethod: "POST",
@@ -2438,81 +1333,44 @@ func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) (req *aws.Re
 		input = &DescribeDocumentInput{}
 	}
 
-	output = &DescribeDocumentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDocument API operation for Amazon Simple Systems Manager (SSM).
-//
-// Describes the specified Systems Manager document.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeDocument for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidDocumentVersion "InvalidDocumentVersion"
-//   The document version is not valid or does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument
-func (c *SSM) DescribeDocument(input *DescribeDocumentInput) (*DescribeDocumentOutput, error) {
-	req, out := c.DescribeDocumentRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDocumentWithContext is the same as DescribeDocument with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDocument for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeDocumentWithContext(ctx aws.Context, input *DescribeDocumentInput, opts ...aws.Option) (*DescribeDocumentOutput, error) {
-	req, out := c.DescribeDocumentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDocumentOutput{})
+	return DescribeDocumentRequest{Request: req, Input: input}
 }
 
 const opDescribeDocumentPermission = "DescribeDocumentPermission"
 
-// DescribeDocumentPermissionRequest generates a "aws.Request" representing the
-// client's request for the DescribeDocumentPermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDocumentPermissionRequest is a API request type for the DescribeDocumentPermission API operation.
+type DescribeDocumentPermissionRequest struct {
+	*aws.Request
+	Input *DescribeDocumentPermissionInput
+}
+
+// Send marshals and sends the DescribeDocumentPermission API request.
+func (r DescribeDocumentPermissionRequest) Send() (*DescribeDocumentPermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDocumentPermissionOutput), nil
+}
+
+// DescribeDocumentPermissionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDocumentPermission for more information on using the DescribeDocumentPermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the permissions for a Systems Manager document. If you created
+// the document, you are the owner. If a document is shared, it can either be
+// shared privately (by specifying a user's AWS account ID) or publicly (All).
 //
 //    // Example sending a request using the DescribeDocumentPermissionRequest method.
-//    req, resp := client.DescribeDocumentPermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDocumentPermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermission
-func (c *SSM) DescribeDocumentPermissionRequest(input *DescribeDocumentPermissionInput) (req *aws.Request, output *DescribeDocumentPermissionOutput) {
+func (c *SSM) DescribeDocumentPermissionRequest(input *DescribeDocumentPermissionInput) DescribeDocumentPermissionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDocumentPermission,
 		HTTPMethod: "POST",
@@ -2523,84 +1381,42 @@ func (c *SSM) DescribeDocumentPermissionRequest(input *DescribeDocumentPermissio
 		input = &DescribeDocumentPermissionInput{}
 	}
 
-	output = &DescribeDocumentPermissionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDocumentPermission API operation for Amazon Simple Systems Manager (SSM).
-//
-// Describes the permissions for a Systems Manager document. If you created
-// the document, you are the owner. If a document is shared, it can either be
-// shared privately (by specifying a user's AWS account ID) or publicly (All).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeDocumentPermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidPermissionType "InvalidPermissionType"
-//   The permission type is not supported. Share is the only supported permission
-//   type.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermission
-func (c *SSM) DescribeDocumentPermission(input *DescribeDocumentPermissionInput) (*DescribeDocumentPermissionOutput, error) {
-	req, out := c.DescribeDocumentPermissionRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDocumentPermissionWithContext is the same as DescribeDocumentPermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDocumentPermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeDocumentPermissionWithContext(ctx aws.Context, input *DescribeDocumentPermissionInput, opts ...aws.Option) (*DescribeDocumentPermissionOutput, error) {
-	req, out := c.DescribeDocumentPermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDocumentPermissionOutput{})
+	return DescribeDocumentPermissionRequest{Request: req, Input: input}
 }
 
 const opDescribeEffectiveInstanceAssociations = "DescribeEffectiveInstanceAssociations"
 
-// DescribeEffectiveInstanceAssociationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEffectiveInstanceAssociations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEffectiveInstanceAssociationsRequest is a API request type for the DescribeEffectiveInstanceAssociations API operation.
+type DescribeEffectiveInstanceAssociationsRequest struct {
+	*aws.Request
+	Input *DescribeEffectiveInstanceAssociationsInput
+}
+
+// Send marshals and sends the DescribeEffectiveInstanceAssociations API request.
+func (r DescribeEffectiveInstanceAssociationsRequest) Send() (*DescribeEffectiveInstanceAssociationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEffectiveInstanceAssociationsOutput), nil
+}
+
+// DescribeEffectiveInstanceAssociationsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEffectiveInstanceAssociations for more information on using the DescribeEffectiveInstanceAssociations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// All associations for the instance(s).
 //
 //    // Example sending a request using the DescribeEffectiveInstanceAssociationsRequest method.
-//    req, resp := client.DescribeEffectiveInstanceAssociationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEffectiveInstanceAssociationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectiveInstanceAssociations
-func (c *SSM) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEffectiveInstanceAssociationsInput) (req *aws.Request, output *DescribeEffectiveInstanceAssociationsOutput) {
+func (c *SSM) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEffectiveInstanceAssociationsInput) DescribeEffectiveInstanceAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEffectiveInstanceAssociations,
 		HTTPMethod: "POST",
@@ -2611,93 +1427,44 @@ func (c *SSM) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEffect
 		input = &DescribeEffectiveInstanceAssociationsInput{}
 	}
 
-	output = &DescribeEffectiveInstanceAssociationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEffectiveInstanceAssociations API operation for Amazon Simple Systems Manager (SSM).
-//
-// All associations for the instance(s).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeEffectiveInstanceAssociations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectiveInstanceAssociations
-func (c *SSM) DescribeEffectiveInstanceAssociations(input *DescribeEffectiveInstanceAssociationsInput) (*DescribeEffectiveInstanceAssociationsOutput, error) {
-	req, out := c.DescribeEffectiveInstanceAssociationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEffectiveInstanceAssociationsWithContext is the same as DescribeEffectiveInstanceAssociations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEffectiveInstanceAssociations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeEffectiveInstanceAssociationsWithContext(ctx aws.Context, input *DescribeEffectiveInstanceAssociationsInput, opts ...aws.Option) (*DescribeEffectiveInstanceAssociationsOutput, error) {
-	req, out := c.DescribeEffectiveInstanceAssociationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEffectiveInstanceAssociationsOutput{})
+	return DescribeEffectiveInstanceAssociationsRequest{Request: req, Input: input}
 }
 
 const opDescribeEffectivePatchesForPatchBaseline = "DescribeEffectivePatchesForPatchBaseline"
 
-// DescribeEffectivePatchesForPatchBaselineRequest generates a "aws.Request" representing the
-// client's request for the DescribeEffectivePatchesForPatchBaseline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEffectivePatchesForPatchBaselineRequest is a API request type for the DescribeEffectivePatchesForPatchBaseline API operation.
+type DescribeEffectivePatchesForPatchBaselineRequest struct {
+	*aws.Request
+	Input *DescribeEffectivePatchesForPatchBaselineInput
+}
+
+// Send marshals and sends the DescribeEffectivePatchesForPatchBaseline API request.
+func (r DescribeEffectivePatchesForPatchBaselineRequest) Send() (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEffectivePatchesForPatchBaselineOutput), nil
+}
+
+// DescribeEffectivePatchesForPatchBaselineRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEffectivePatchesForPatchBaseline for more information on using the DescribeEffectivePatchesForPatchBaseline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the current effective patches (the patch and the approval state)
+// for the specified patch baseline. Note that this API applies only to Windows
+// patch baselines.
 //
 //    // Example sending a request using the DescribeEffectivePatchesForPatchBaselineRequest method.
-//    req, resp := client.DescribeEffectivePatchesForPatchBaselineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEffectivePatchesForPatchBaselineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectivePatchesForPatchBaseline
-func (c *SSM) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEffectivePatchesForPatchBaselineInput) (req *aws.Request, output *DescribeEffectivePatchesForPatchBaselineOutput) {
+func (c *SSM) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEffectivePatchesForPatchBaselineInput) DescribeEffectivePatchesForPatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEffectivePatchesForPatchBaseline,
 		HTTPMethod: "POST",
@@ -2708,90 +1475,42 @@ func (c *SSM) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEff
 		input = &DescribeEffectivePatchesForPatchBaselineInput{}
 	}
 
-	output = &DescribeEffectivePatchesForPatchBaselineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEffectivePatchesForPatchBaseline API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the current effective patches (the patch and the approval state)
-// for the specified patch baseline. Note that this API applies only to Windows
-// patch baselines.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeEffectivePatchesForPatchBaseline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeUnsupportedOperatingSystem "UnsupportedOperatingSystem"
-//   The operating systems you specified is not supported, or the operation is
-//   not supported for the operating system. Valid operating systems include:
-//   Windows, AmazonLinux, RedhatEnterpriseLinux, and Ubuntu.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectivePatchesForPatchBaseline
-func (c *SSM) DescribeEffectivePatchesForPatchBaseline(input *DescribeEffectivePatchesForPatchBaselineInput) (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
-	req, out := c.DescribeEffectivePatchesForPatchBaselineRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEffectivePatchesForPatchBaselineWithContext is the same as DescribeEffectivePatchesForPatchBaseline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEffectivePatchesForPatchBaseline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeEffectivePatchesForPatchBaselineWithContext(ctx aws.Context, input *DescribeEffectivePatchesForPatchBaselineInput, opts ...aws.Option) (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
-	req, out := c.DescribeEffectivePatchesForPatchBaselineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEffectivePatchesForPatchBaselineOutput{})
+	return DescribeEffectivePatchesForPatchBaselineRequest{Request: req, Input: input}
 }
 
 const opDescribeInstanceAssociationsStatus = "DescribeInstanceAssociationsStatus"
 
-// DescribeInstanceAssociationsStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstanceAssociationsStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInstanceAssociationsStatusRequest is a API request type for the DescribeInstanceAssociationsStatus API operation.
+type DescribeInstanceAssociationsStatusRequest struct {
+	*aws.Request
+	Input *DescribeInstanceAssociationsStatusInput
+}
+
+// Send marshals and sends the DescribeInstanceAssociationsStatus API request.
+func (r DescribeInstanceAssociationsStatusRequest) Send() (*DescribeInstanceAssociationsStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstanceAssociationsStatusOutput), nil
+}
+
+// DescribeInstanceAssociationsStatusRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstanceAssociationsStatus for more information on using the DescribeInstanceAssociationsStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The status of the associations for the instance(s).
 //
 //    // Example sending a request using the DescribeInstanceAssociationsStatusRequest method.
-//    req, resp := client.DescribeInstanceAssociationsStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInstanceAssociationsStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatus
-func (c *SSM) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceAssociationsStatusInput) (req *aws.Request, output *DescribeInstanceAssociationsStatusOutput) {
+func (c *SSM) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceAssociationsStatusInput) DescribeInstanceAssociationsStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceAssociationsStatus,
 		HTTPMethod: "POST",
@@ -2802,93 +1521,47 @@ func (c *SSM) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceA
 		input = &DescribeInstanceAssociationsStatusInput{}
 	}
 
-	output = &DescribeInstanceAssociationsStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInstanceAssociationsStatus API operation for Amazon Simple Systems Manager (SSM).
-//
-// The status of the associations for the instance(s).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeInstanceAssociationsStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatus
-func (c *SSM) DescribeInstanceAssociationsStatus(input *DescribeInstanceAssociationsStatusInput) (*DescribeInstanceAssociationsStatusOutput, error) {
-	req, out := c.DescribeInstanceAssociationsStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstanceAssociationsStatusWithContext is the same as DescribeInstanceAssociationsStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstanceAssociationsStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeInstanceAssociationsStatusWithContext(ctx aws.Context, input *DescribeInstanceAssociationsStatusInput, opts ...aws.Option) (*DescribeInstanceAssociationsStatusOutput, error) {
-	req, out := c.DescribeInstanceAssociationsStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInstanceAssociationsStatusOutput{})
+	return DescribeInstanceAssociationsStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeInstanceInformation = "DescribeInstanceInformation"
 
-// DescribeInstanceInformationRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstanceInformation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInstanceInformationRequest is a API request type for the DescribeInstanceInformation API operation.
+type DescribeInstanceInformationRequest struct {
+	*aws.Request
+	Input *DescribeInstanceInformationInput
+}
+
+// Send marshals and sends the DescribeInstanceInformation API request.
+func (r DescribeInstanceInformationRequest) Send() (*DescribeInstanceInformationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstanceInformationOutput), nil
+}
+
+// DescribeInstanceInformationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstanceInformation for more information on using the DescribeInstanceInformation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more of your instances. You can use this to get information
+// about instances like the operating system platform, the SSM Agent version
+// (Linux), status etc. If you specify one or more instance IDs, it returns
+// information for those instances. If you do not specify instance IDs, it returns
+// information for all your instances. If you specify an instance ID that is
+// not valid or an instance that you do not own, you receive an error.
 //
 //    // Example sending a request using the DescribeInstanceInformationRequest method.
-//    req, resp := client.DescribeInstanceInformationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInstanceInformationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformation
-func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformationInput) (req *aws.Request, output *DescribeInstanceInformationOutput) {
+func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformationInput) DescribeInstanceInformationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceInformation,
 		HTTPMethod: "POST",
@@ -2905,75 +1578,8 @@ func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformat
 		input = &DescribeInstanceInformationInput{}
 	}
 
-	output = &DescribeInstanceInformationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInstanceInformation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Describes one or more of your instances. You can use this to get information
-// about instances like the operating system platform, the SSM Agent version
-// (Linux), status etc. If you specify one or more instance IDs, it returns
-// information for those instances. If you do not specify instance IDs, it returns
-// information for all your instances. If you specify an instance ID that is
-// not valid or an instance that you do not own, you receive an error.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeInstanceInformation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInvalidInstanceInformationFilterValue "InvalidInstanceInformationFilterValue"
-//   The specified filter value is not valid.
-//
-//   * ErrCodeInvalidFilterKey "InvalidFilterKey"
-//   The specified key is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformation
-func (c *SSM) DescribeInstanceInformation(input *DescribeInstanceInformationInput) (*DescribeInstanceInformationOutput, error) {
-	req, out := c.DescribeInstanceInformationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstanceInformationWithContext is the same as DescribeInstanceInformation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstanceInformation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeInstanceInformationWithContext(ctx aws.Context, input *DescribeInstanceInformationInput, opts ...aws.Option) (*DescribeInstanceInformationOutput, error) {
-	req, out := c.DescribeInstanceInformationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInstanceInformationOutput{})
+	return DescribeInstanceInformationRequest{Request: req, Input: input}
 }
 
 // DescribeInstanceInformationPages iterates over the pages of a DescribeInstanceInformation operation,
@@ -3012,10 +1618,10 @@ func (c *SSM) DescribeInstanceInformationPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstanceInformationRequest(inCpy)
+			req := c.DescribeInstanceInformationRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3028,31 +1634,36 @@ func (c *SSM) DescribeInstanceInformationPagesWithContext(ctx aws.Context, input
 
 const opDescribeInstancePatchStates = "DescribeInstancePatchStates"
 
-// DescribeInstancePatchStatesRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstancePatchStates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInstancePatchStatesRequest is a API request type for the DescribeInstancePatchStates API operation.
+type DescribeInstancePatchStatesRequest struct {
+	*aws.Request
+	Input *DescribeInstancePatchStatesInput
+}
+
+// Send marshals and sends the DescribeInstancePatchStates API request.
+func (r DescribeInstancePatchStatesRequest) Send() (*DescribeInstancePatchStatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstancePatchStatesOutput), nil
+}
+
+// DescribeInstancePatchStatesRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstancePatchStates for more information on using the DescribeInstancePatchStates
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the high-level patch state of one or more instances.
 //
 //    // Example sending a request using the DescribeInstancePatchStatesRequest method.
-//    req, resp := client.DescribeInstancePatchStatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInstancePatchStatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStates
-func (c *SSM) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchStatesInput) (req *aws.Request, output *DescribeInstancePatchStatesOutput) {
+func (c *SSM) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchStatesInput) DescribeInstancePatchStatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancePatchStates,
 		HTTPMethod: "POST",
@@ -3063,78 +1674,43 @@ func (c *SSM) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchSta
 		input = &DescribeInstancePatchStatesInput{}
 	}
 
-	output = &DescribeInstancePatchStatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInstancePatchStates API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the high-level patch state of one or more instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeInstancePatchStates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStates
-func (c *SSM) DescribeInstancePatchStates(input *DescribeInstancePatchStatesInput) (*DescribeInstancePatchStatesOutput, error) {
-	req, out := c.DescribeInstancePatchStatesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstancePatchStatesWithContext is the same as DescribeInstancePatchStates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstancePatchStates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeInstancePatchStatesWithContext(ctx aws.Context, input *DescribeInstancePatchStatesInput, opts ...aws.Option) (*DescribeInstancePatchStatesOutput, error) {
-	req, out := c.DescribeInstancePatchStatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInstancePatchStatesOutput{})
+	return DescribeInstancePatchStatesRequest{Request: req, Input: input}
 }
 
 const opDescribeInstancePatchStatesForPatchGroup = "DescribeInstancePatchStatesForPatchGroup"
 
-// DescribeInstancePatchStatesForPatchGroupRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstancePatchStatesForPatchGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInstancePatchStatesForPatchGroupRequest is a API request type for the DescribeInstancePatchStatesForPatchGroup API operation.
+type DescribeInstancePatchStatesForPatchGroupRequest struct {
+	*aws.Request
+	Input *DescribeInstancePatchStatesForPatchGroupInput
+}
+
+// Send marshals and sends the DescribeInstancePatchStatesForPatchGroup API request.
+func (r DescribeInstancePatchStatesForPatchGroupRequest) Send() (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstancePatchStatesForPatchGroupOutput), nil
+}
+
+// DescribeInstancePatchStatesForPatchGroupRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstancePatchStatesForPatchGroup for more information on using the DescribeInstancePatchStatesForPatchGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the high-level patch state for the instances in the specified patch
+// group.
 //
 //    // Example sending a request using the DescribeInstancePatchStatesForPatchGroupRequest method.
-//    req, resp := client.DescribeInstancePatchStatesForPatchGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInstancePatchStatesForPatchGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroup
-func (c *SSM) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeInstancePatchStatesForPatchGroupInput) (req *aws.Request, output *DescribeInstancePatchStatesForPatchGroupOutput) {
+func (c *SSM) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeInstancePatchStatesForPatchGroupInput) DescribeInstancePatchStatesForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancePatchStatesForPatchGroup,
 		HTTPMethod: "POST",
@@ -3145,83 +1721,43 @@ func (c *SSM) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeIns
 		input = &DescribeInstancePatchStatesForPatchGroupInput{}
 	}
 
-	output = &DescribeInstancePatchStatesForPatchGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInstancePatchStatesForPatchGroup API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the high-level patch state for the instances in the specified patch
-// group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeInstancePatchStatesForPatchGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroup
-func (c *SSM) DescribeInstancePatchStatesForPatchGroup(input *DescribeInstancePatchStatesForPatchGroupInput) (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
-	req, out := c.DescribeInstancePatchStatesForPatchGroupRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstancePatchStatesForPatchGroupWithContext is the same as DescribeInstancePatchStatesForPatchGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstancePatchStatesForPatchGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeInstancePatchStatesForPatchGroupWithContext(ctx aws.Context, input *DescribeInstancePatchStatesForPatchGroupInput, opts ...aws.Option) (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
-	req, out := c.DescribeInstancePatchStatesForPatchGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInstancePatchStatesForPatchGroupOutput{})
+	return DescribeInstancePatchStatesForPatchGroupRequest{Request: req, Input: input}
 }
 
 const opDescribeInstancePatches = "DescribeInstancePatches"
 
-// DescribeInstancePatchesRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstancePatches operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInstancePatchesRequest is a API request type for the DescribeInstancePatches API operation.
+type DescribeInstancePatchesRequest struct {
+	*aws.Request
+	Input *DescribeInstancePatchesInput
+}
+
+// Send marshals and sends the DescribeInstancePatches API request.
+func (r DescribeInstancePatchesRequest) Send() (*DescribeInstancePatchesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstancePatchesOutput), nil
+}
+
+// DescribeInstancePatchesRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstancePatches for more information on using the DescribeInstancePatches
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about the patches on the specified instance and their
+// state relative to the patch baseline being used for the instance.
 //
 //    // Example sending a request using the DescribeInstancePatchesRequest method.
-//    req, resp := client.DescribeInstancePatchesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInstancePatchesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatches
-func (c *SSM) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput) (req *aws.Request, output *DescribeInstancePatchesOutput) {
+func (c *SSM) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput) DescribeInstancePatchesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancePatches,
 		HTTPMethod: "POST",
@@ -3232,98 +1768,43 @@ func (c *SSM) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput
 		input = &DescribeInstancePatchesInput{}
 	}
 
-	output = &DescribeInstancePatchesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInstancePatches API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves information about the patches on the specified instance and their
-// state relative to the patch baseline being used for the instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeInstancePatches for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatches
-func (c *SSM) DescribeInstancePatches(input *DescribeInstancePatchesInput) (*DescribeInstancePatchesOutput, error) {
-	req, out := c.DescribeInstancePatchesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstancePatchesWithContext is the same as DescribeInstancePatches with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstancePatches for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeInstancePatchesWithContext(ctx aws.Context, input *DescribeInstancePatchesInput, opts ...aws.Option) (*DescribeInstancePatchesOutput, error) {
-	req, out := c.DescribeInstancePatchesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInstancePatchesOutput{})
+	return DescribeInstancePatchesRequest{Request: req, Input: input}
 }
 
 const opDescribeMaintenanceWindowExecutionTaskInvocations = "DescribeMaintenanceWindowExecutionTaskInvocations"
 
-// DescribeMaintenanceWindowExecutionTaskInvocationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMaintenanceWindowExecutionTaskInvocations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMaintenanceWindowExecutionTaskInvocationsRequest is a API request type for the DescribeMaintenanceWindowExecutionTaskInvocations API operation.
+type DescribeMaintenanceWindowExecutionTaskInvocationsRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowExecutionTaskInvocationsInput
+}
+
+// Send marshals and sends the DescribeMaintenanceWindowExecutionTaskInvocations API request.
+func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send() (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowExecutionTaskInvocationsOutput), nil
+}
+
+// DescribeMaintenanceWindowExecutionTaskInvocationsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMaintenanceWindowExecutionTaskInvocations for more information on using the DescribeMaintenanceWindowExecutionTaskInvocations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the individual task executions (one per target) for a particular
+// task executed as part of a Maintenance Window execution.
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionTaskInvocationsRequest method.
-//    req, resp := client.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTaskInvocations
-func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input *DescribeMaintenanceWindowExecutionTaskInvocationsInput) (req *aws.Request, output *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) {
+func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input *DescribeMaintenanceWindowExecutionTaskInvocationsInput) DescribeMaintenanceWindowExecutionTaskInvocationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowExecutionTaskInvocations,
 		HTTPMethod: "POST",
@@ -3334,80 +1815,42 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input *De
 		input = &DescribeMaintenanceWindowExecutionTaskInvocationsInput{}
 	}
 
-	output = &DescribeMaintenanceWindowExecutionTaskInvocationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMaintenanceWindowExecutionTaskInvocations API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the individual task executions (one per target) for a particular
-// task executed as part of a Maintenance Window execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeMaintenanceWindowExecutionTaskInvocations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTaskInvocations
-func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocations(input *DescribeMaintenanceWindowExecutionTaskInvocationsInput) (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMaintenanceWindowExecutionTaskInvocationsWithContext is the same as DescribeMaintenanceWindowExecutionTaskInvocations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMaintenanceWindowExecutionTaskInvocations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionTaskInvocationsInput, opts ...aws.Option) (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMaintenanceWindowExecutionTaskInvocationsOutput{})
+	return DescribeMaintenanceWindowExecutionTaskInvocationsRequest{Request: req, Input: input}
 }
 
 const opDescribeMaintenanceWindowExecutionTasks = "DescribeMaintenanceWindowExecutionTasks"
 
-// DescribeMaintenanceWindowExecutionTasksRequest generates a "aws.Request" representing the
-// client's request for the DescribeMaintenanceWindowExecutionTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMaintenanceWindowExecutionTasksRequest is a API request type for the DescribeMaintenanceWindowExecutionTasks API operation.
+type DescribeMaintenanceWindowExecutionTasksRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowExecutionTasksInput
+}
+
+// Send marshals and sends the DescribeMaintenanceWindowExecutionTasks API request.
+func (r DescribeMaintenanceWindowExecutionTasksRequest) Send() (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowExecutionTasksOutput), nil
+}
+
+// DescribeMaintenanceWindowExecutionTasksRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMaintenanceWindowExecutionTasks for more information on using the DescribeMaintenanceWindowExecutionTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For a given Maintenance Window execution, lists the tasks that were executed.
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionTasksRequest method.
-//    req, resp := client.DescribeMaintenanceWindowExecutionTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMaintenanceWindowExecutionTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasks
-func (c *SSM) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMaintenanceWindowExecutionTasksInput) (req *aws.Request, output *DescribeMaintenanceWindowExecutionTasksOutput) {
+func (c *SSM) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMaintenanceWindowExecutionTasksInput) DescribeMaintenanceWindowExecutionTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowExecutionTasks,
 		HTTPMethod: "POST",
@@ -3418,79 +1861,44 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMain
 		input = &DescribeMaintenanceWindowExecutionTasksInput{}
 	}
 
-	output = &DescribeMaintenanceWindowExecutionTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMaintenanceWindowExecutionTasks API operation for Amazon Simple Systems Manager (SSM).
-//
-// For a given Maintenance Window execution, lists the tasks that were executed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeMaintenanceWindowExecutionTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasks
-func (c *SSM) DescribeMaintenanceWindowExecutionTasks(input *DescribeMaintenanceWindowExecutionTasksInput) (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
-	req, out := c.DescribeMaintenanceWindowExecutionTasksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMaintenanceWindowExecutionTasksWithContext is the same as DescribeMaintenanceWindowExecutionTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMaintenanceWindowExecutionTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowExecutionTasksWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionTasksInput, opts ...aws.Option) (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
-	req, out := c.DescribeMaintenanceWindowExecutionTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMaintenanceWindowExecutionTasksOutput{})
+	return DescribeMaintenanceWindowExecutionTasksRequest{Request: req, Input: input}
 }
 
 const opDescribeMaintenanceWindowExecutions = "DescribeMaintenanceWindowExecutions"
 
-// DescribeMaintenanceWindowExecutionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMaintenanceWindowExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMaintenanceWindowExecutionsRequest is a API request type for the DescribeMaintenanceWindowExecutions API operation.
+type DescribeMaintenanceWindowExecutionsRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowExecutionsInput
+}
+
+// Send marshals and sends the DescribeMaintenanceWindowExecutions API request.
+func (r DescribeMaintenanceWindowExecutionsRequest) Send() (*DescribeMaintenanceWindowExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowExecutionsOutput), nil
+}
+
+// DescribeMaintenanceWindowExecutionsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMaintenanceWindowExecutions for more information on using the DescribeMaintenanceWindowExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the executions of a Maintenance Window. This includes information about
+// when the Maintenance Window was scheduled to be active, and information about
+// tasks registered and run with the Maintenance Window.
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionsRequest method.
-//    req, resp := client.DescribeMaintenanceWindowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMaintenanceWindowExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutions
-func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintenanceWindowExecutionsInput) (req *aws.Request, output *DescribeMaintenanceWindowExecutionsOutput) {
+func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintenanceWindowExecutionsInput) DescribeMaintenanceWindowExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowExecutions,
 		HTTPMethod: "POST",
@@ -3501,77 +1909,42 @@ func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintena
 		input = &DescribeMaintenanceWindowExecutionsInput{}
 	}
 
-	output = &DescribeMaintenanceWindowExecutionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMaintenanceWindowExecutions API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists the executions of a Maintenance Window. This includes information about
-// when the Maintenance Window was scheduled to be active, and information about
-// tasks registered and run with the Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeMaintenanceWindowExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutions
-func (c *SSM) DescribeMaintenanceWindowExecutions(input *DescribeMaintenanceWindowExecutionsInput) (*DescribeMaintenanceWindowExecutionsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowExecutionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMaintenanceWindowExecutionsWithContext is the same as DescribeMaintenanceWindowExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMaintenanceWindowExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowExecutionsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionsInput, opts ...aws.Option) (*DescribeMaintenanceWindowExecutionsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMaintenanceWindowExecutionsOutput{})
+	return DescribeMaintenanceWindowExecutionsRequest{Request: req, Input: input}
 }
 
 const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 
-// DescribeMaintenanceWindowTargetsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMaintenanceWindowTargets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMaintenanceWindowTargetsRequest is a API request type for the DescribeMaintenanceWindowTargets API operation.
+type DescribeMaintenanceWindowTargetsRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowTargetsInput
+}
+
+// Send marshals and sends the DescribeMaintenanceWindowTargets API request.
+func (r DescribeMaintenanceWindowTargetsRequest) Send() (*DescribeMaintenanceWindowTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowTargetsOutput), nil
+}
+
+// DescribeMaintenanceWindowTargetsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMaintenanceWindowTargets for more information on using the DescribeMaintenanceWindowTargets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the targets registered with the Maintenance Window.
 //
 //    // Example sending a request using the DescribeMaintenanceWindowTargetsRequest method.
-//    req, resp := client.DescribeMaintenanceWindowTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMaintenanceWindowTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargets
-func (c *SSM) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenanceWindowTargetsInput) (req *aws.Request, output *DescribeMaintenanceWindowTargetsOutput) {
+func (c *SSM) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenanceWindowTargetsInput) DescribeMaintenanceWindowTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowTargets,
 		HTTPMethod: "POST",
@@ -3582,79 +1955,42 @@ func (c *SSM) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenance
 		input = &DescribeMaintenanceWindowTargetsInput{}
 	}
 
-	output = &DescribeMaintenanceWindowTargetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMaintenanceWindowTargets API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists the targets registered with the Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeMaintenanceWindowTargets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargets
-func (c *SSM) DescribeMaintenanceWindowTargets(input *DescribeMaintenanceWindowTargetsInput) (*DescribeMaintenanceWindowTargetsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowTargetsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMaintenanceWindowTargetsWithContext is the same as DescribeMaintenanceWindowTargets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMaintenanceWindowTargets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowTargetsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowTargetsInput, opts ...aws.Option) (*DescribeMaintenanceWindowTargetsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowTargetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMaintenanceWindowTargetsOutput{})
+	return DescribeMaintenanceWindowTargetsRequest{Request: req, Input: input}
 }
 
 const opDescribeMaintenanceWindowTasks = "DescribeMaintenanceWindowTasks"
 
-// DescribeMaintenanceWindowTasksRequest generates a "aws.Request" representing the
-// client's request for the DescribeMaintenanceWindowTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMaintenanceWindowTasksRequest is a API request type for the DescribeMaintenanceWindowTasks API operation.
+type DescribeMaintenanceWindowTasksRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowTasksInput
+}
+
+// Send marshals and sends the DescribeMaintenanceWindowTasks API request.
+func (r DescribeMaintenanceWindowTasksRequest) Send() (*DescribeMaintenanceWindowTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowTasksOutput), nil
+}
+
+// DescribeMaintenanceWindowTasksRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMaintenanceWindowTasks for more information on using the DescribeMaintenanceWindowTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the tasks in a Maintenance Window.
 //
 //    // Example sending a request using the DescribeMaintenanceWindowTasksRequest method.
-//    req, resp := client.DescribeMaintenanceWindowTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMaintenanceWindowTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasks
-func (c *SSM) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanceWindowTasksInput) (req *aws.Request, output *DescribeMaintenanceWindowTasksOutput) {
+func (c *SSM) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanceWindowTasksInput) DescribeMaintenanceWindowTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowTasks,
 		HTTPMethod: "POST",
@@ -3665,79 +2001,42 @@ func (c *SSM) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanceWi
 		input = &DescribeMaintenanceWindowTasksInput{}
 	}
 
-	output = &DescribeMaintenanceWindowTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMaintenanceWindowTasks API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists the tasks in a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeMaintenanceWindowTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasks
-func (c *SSM) DescribeMaintenanceWindowTasks(input *DescribeMaintenanceWindowTasksInput) (*DescribeMaintenanceWindowTasksOutput, error) {
-	req, out := c.DescribeMaintenanceWindowTasksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMaintenanceWindowTasksWithContext is the same as DescribeMaintenanceWindowTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMaintenanceWindowTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowTasksWithContext(ctx aws.Context, input *DescribeMaintenanceWindowTasksInput, opts ...aws.Option) (*DescribeMaintenanceWindowTasksOutput, error) {
-	req, out := c.DescribeMaintenanceWindowTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMaintenanceWindowTasksOutput{})
+	return DescribeMaintenanceWindowTasksRequest{Request: req, Input: input}
 }
 
 const opDescribeMaintenanceWindows = "DescribeMaintenanceWindows"
 
-// DescribeMaintenanceWindowsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMaintenanceWindows operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMaintenanceWindowsRequest is a API request type for the DescribeMaintenanceWindows API operation.
+type DescribeMaintenanceWindowsRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowsInput
+}
+
+// Send marshals and sends the DescribeMaintenanceWindows API request.
+func (r DescribeMaintenanceWindowsRequest) Send() (*DescribeMaintenanceWindowsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowsOutput), nil
+}
+
+// DescribeMaintenanceWindowsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMaintenanceWindows for more information on using the DescribeMaintenanceWindows
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the Maintenance Windows in an AWS account.
 //
 //    // Example sending a request using the DescribeMaintenanceWindowsRequest method.
-//    req, resp := client.DescribeMaintenanceWindowsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMaintenanceWindowsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindows
-func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindowsInput) (req *aws.Request, output *DescribeMaintenanceWindowsOutput) {
+func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindowsInput) DescribeMaintenanceWindowsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindows,
 		HTTPMethod: "POST",
@@ -3748,75 +2047,50 @@ func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindow
 		input = &DescribeMaintenanceWindowsInput{}
 	}
 
-	output = &DescribeMaintenanceWindowsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMaintenanceWindows API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the Maintenance Windows in an AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeMaintenanceWindows for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindows
-func (c *SSM) DescribeMaintenanceWindows(input *DescribeMaintenanceWindowsInput) (*DescribeMaintenanceWindowsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMaintenanceWindowsWithContext is the same as DescribeMaintenanceWindows with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMaintenanceWindows for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowsInput, opts ...aws.Option) (*DescribeMaintenanceWindowsOutput, error) {
-	req, out := c.DescribeMaintenanceWindowsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMaintenanceWindowsOutput{})
+	return DescribeMaintenanceWindowsRequest{Request: req, Input: input}
 }
 
 const opDescribeParameters = "DescribeParameters"
 
-// DescribeParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeParametersRequest is a API request type for the DescribeParameters API operation.
+type DescribeParametersRequest struct {
+	*aws.Request
+	Input *DescribeParametersInput
+}
+
+// Send marshals and sends the DescribeParameters API request.
+func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeParametersOutput), nil
+}
+
+// DescribeParametersRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Get information about a parameter.
 //
-// See DescribeParameters for more information on using the DescribeParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Request results are returned on a best-effort basis. If you specify MaxResults
+// in the request, the response includes information up to the limit specified.
+// The number of items returned, however, can be between zero and the value
+// of MaxResults. If the service reaches an internal limit while processing
+// the results, it stops the operation and returns the matching values up to
+// that point and a NextToken. You can specify the NextToken in a subsequent
+// call to get the next set of results.
 //
 //    // Example sending a request using the DescribeParametersRequest method.
-//    req, resp := client.DescribeParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters
-func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) (req *aws.Request, output *DescribeParametersOutput) {
+func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) DescribeParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeParameters,
 		HTTPMethod: "POST",
@@ -3833,67 +2107,8 @@ func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) (req *aw
 		input = &DescribeParametersInput{}
 	}
 
-	output = &DescribeParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeParameters API operation for Amazon Simple Systems Manager (SSM).
-//
-// Get information about a parameter.
-//
-// Request results are returned on a best-effort basis. If you specify MaxResults
-// in the request, the response includes information up to the limit specified.
-// The number of items returned, however, can be between zero and the value
-// of MaxResults. If the service reaches an internal limit while processing
-// the results, it stops the operation and returns the matching values up to
-// that point and a NextToken. You can specify the NextToken in a subsequent
-// call to get the next set of results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribeParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidFilterKey "InvalidFilterKey"
-//   The specified key is not valid.
-//
-//   * ErrCodeInvalidFilterOption "InvalidFilterOption"
-//   The specified filter option is not valid. Valid options are Equals and BeginsWith.
-//   For Path filter, valid options are Recursive and OneLevel.
-//
-//   * ErrCodeInvalidFilterValue "InvalidFilterValue"
-//   The filter value is not valid. Verify the value and try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters
-func (c *SSM) DescribeParameters(input *DescribeParametersInput) (*DescribeParametersOutput, error) {
-	req, out := c.DescribeParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeParametersWithContext is the same as DescribeParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeParametersWithContext(ctx aws.Context, input *DescribeParametersInput, opts ...aws.Option) (*DescribeParametersOutput, error) {
-	req, out := c.DescribeParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeParametersOutput{})
+	return DescribeParametersRequest{Request: req, Input: input}
 }
 
 // DescribeParametersPages iterates over the pages of a DescribeParameters operation,
@@ -3932,10 +2147,10 @@ func (c *SSM) DescribeParametersPagesWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeParametersRequest(inCpy)
+			req := c.DescribeParametersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3948,31 +2163,36 @@ func (c *SSM) DescribeParametersPagesWithContext(ctx aws.Context, input *Describ
 
 const opDescribePatchBaselines = "DescribePatchBaselines"
 
-// DescribePatchBaselinesRequest generates a "aws.Request" representing the
-// client's request for the DescribePatchBaselines operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePatchBaselinesRequest is a API request type for the DescribePatchBaselines API operation.
+type DescribePatchBaselinesRequest struct {
+	*aws.Request
+	Input *DescribePatchBaselinesInput
+}
+
+// Send marshals and sends the DescribePatchBaselines API request.
+func (r DescribePatchBaselinesRequest) Send() (*DescribePatchBaselinesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePatchBaselinesOutput), nil
+}
+
+// DescribePatchBaselinesRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePatchBaselines for more information on using the DescribePatchBaselines
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the patch baselines in your AWS account.
 //
 //    // Example sending a request using the DescribePatchBaselinesRequest method.
-//    req, resp := client.DescribePatchBaselinesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePatchBaselinesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchBaselines
-func (c *SSM) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) (req *aws.Request, output *DescribePatchBaselinesOutput) {
+func (c *SSM) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) DescribePatchBaselinesRequest {
 	op := &aws.Operation{
 		Name:       opDescribePatchBaselines,
 		HTTPMethod: "POST",
@@ -3983,75 +2203,42 @@ func (c *SSM) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) 
 		input = &DescribePatchBaselinesInput{}
 	}
 
-	output = &DescribePatchBaselinesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePatchBaselines API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists the patch baselines in your AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribePatchBaselines for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchBaselines
-func (c *SSM) DescribePatchBaselines(input *DescribePatchBaselinesInput) (*DescribePatchBaselinesOutput, error) {
-	req, out := c.DescribePatchBaselinesRequest(input)
-	return out, req.Send()
-}
-
-// DescribePatchBaselinesWithContext is the same as DescribePatchBaselines with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePatchBaselines for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribePatchBaselinesWithContext(ctx aws.Context, input *DescribePatchBaselinesInput, opts ...aws.Option) (*DescribePatchBaselinesOutput, error) {
-	req, out := c.DescribePatchBaselinesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePatchBaselinesOutput{})
+	return DescribePatchBaselinesRequest{Request: req, Input: input}
 }
 
 const opDescribePatchGroupState = "DescribePatchGroupState"
 
-// DescribePatchGroupStateRequest generates a "aws.Request" representing the
-// client's request for the DescribePatchGroupState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePatchGroupStateRequest is a API request type for the DescribePatchGroupState API operation.
+type DescribePatchGroupStateRequest struct {
+	*aws.Request
+	Input *DescribePatchGroupStateInput
+}
+
+// Send marshals and sends the DescribePatchGroupState API request.
+func (r DescribePatchGroupStateRequest) Send() (*DescribePatchGroupStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePatchGroupStateOutput), nil
+}
+
+// DescribePatchGroupStateRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePatchGroupState for more information on using the DescribePatchGroupState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns high-level aggregated patch compliance state for a patch group.
 //
 //    // Example sending a request using the DescribePatchGroupStateRequest method.
-//    req, resp := client.DescribePatchGroupStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePatchGroupStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState
-func (c *SSM) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput) (req *aws.Request, output *DescribePatchGroupStateOutput) {
+func (c *SSM) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput) DescribePatchGroupStateRequest {
 	op := &aws.Operation{
 		Name:       opDescribePatchGroupState,
 		HTTPMethod: "POST",
@@ -4062,78 +2249,42 @@ func (c *SSM) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput
 		input = &DescribePatchGroupStateInput{}
 	}
 
-	output = &DescribePatchGroupStateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePatchGroupState API operation for Amazon Simple Systems Manager (SSM).
-//
-// Returns high-level aggregated patch compliance state for a patch group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribePatchGroupState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState
-func (c *SSM) DescribePatchGroupState(input *DescribePatchGroupStateInput) (*DescribePatchGroupStateOutput, error) {
-	req, out := c.DescribePatchGroupStateRequest(input)
-	return out, req.Send()
-}
-
-// DescribePatchGroupStateWithContext is the same as DescribePatchGroupState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePatchGroupState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribePatchGroupStateWithContext(ctx aws.Context, input *DescribePatchGroupStateInput, opts ...aws.Option) (*DescribePatchGroupStateOutput, error) {
-	req, out := c.DescribePatchGroupStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePatchGroupStateOutput{})
+	return DescribePatchGroupStateRequest{Request: req, Input: input}
 }
 
 const opDescribePatchGroups = "DescribePatchGroups"
 
-// DescribePatchGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribePatchGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePatchGroupsRequest is a API request type for the DescribePatchGroups API operation.
+type DescribePatchGroupsRequest struct {
+	*aws.Request
+	Input *DescribePatchGroupsInput
+}
+
+// Send marshals and sends the DescribePatchGroups API request.
+func (r DescribePatchGroupsRequest) Send() (*DescribePatchGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePatchGroupsOutput), nil
+}
+
+// DescribePatchGroupsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePatchGroups for more information on using the DescribePatchGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all patch groups that have been registered with patch baselines.
 //
 //    // Example sending a request using the DescribePatchGroupsRequest method.
-//    req, resp := client.DescribePatchGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePatchGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroups
-func (c *SSM) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) (req *aws.Request, output *DescribePatchGroupsOutput) {
+func (c *SSM) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) DescribePatchGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePatchGroups,
 		HTTPMethod: "POST",
@@ -4144,75 +2295,42 @@ func (c *SSM) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) (req *
 		input = &DescribePatchGroupsInput{}
 	}
 
-	output = &DescribePatchGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePatchGroups API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists all patch groups that have been registered with patch baselines.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation DescribePatchGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroups
-func (c *SSM) DescribePatchGroups(input *DescribePatchGroupsInput) (*DescribePatchGroupsOutput, error) {
-	req, out := c.DescribePatchGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribePatchGroupsWithContext is the same as DescribePatchGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePatchGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribePatchGroupsWithContext(ctx aws.Context, input *DescribePatchGroupsInput, opts ...aws.Option) (*DescribePatchGroupsOutput, error) {
-	req, out := c.DescribePatchGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePatchGroupsOutput{})
+	return DescribePatchGroupsRequest{Request: req, Input: input}
 }
 
 const opGetAutomationExecution = "GetAutomationExecution"
 
-// GetAutomationExecutionRequest generates a "aws.Request" representing the
-// client's request for the GetAutomationExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAutomationExecutionRequest is a API request type for the GetAutomationExecution API operation.
+type GetAutomationExecutionRequest struct {
+	*aws.Request
+	Input *GetAutomationExecutionInput
+}
+
+// Send marshals and sends the GetAutomationExecution API request.
+func (r GetAutomationExecutionRequest) Send() (*GetAutomationExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAutomationExecutionOutput), nil
+}
+
+// GetAutomationExecutionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAutomationExecution for more information on using the GetAutomationExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get detailed information about a particular Automation execution.
 //
 //    // Example sending a request using the GetAutomationExecutionRequest method.
-//    req, resp := client.GetAutomationExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAutomationExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution
-func (c *SSM) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) (req *aws.Request, output *GetAutomationExecutionOutput) {
+func (c *SSM) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) GetAutomationExecutionRequest {
 	op := &aws.Operation{
 		Name:       opGetAutomationExecution,
 		HTTPMethod: "POST",
@@ -4223,79 +2341,43 @@ func (c *SSM) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) 
 		input = &GetAutomationExecutionInput{}
 	}
 
-	output = &GetAutomationExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAutomationExecution API operation for Amazon Simple Systems Manager (SSM).
-//
-// Get detailed information about a particular Automation execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetAutomationExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAutomationExecutionNotFoundException "AutomationExecutionNotFoundException"
-//   There is no automation execution information for the requested automation
-//   execution ID.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution
-func (c *SSM) GetAutomationExecution(input *GetAutomationExecutionInput) (*GetAutomationExecutionOutput, error) {
-	req, out := c.GetAutomationExecutionRequest(input)
-	return out, req.Send()
-}
-
-// GetAutomationExecutionWithContext is the same as GetAutomationExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAutomationExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetAutomationExecutionWithContext(ctx aws.Context, input *GetAutomationExecutionInput, opts ...aws.Option) (*GetAutomationExecutionOutput, error) {
-	req, out := c.GetAutomationExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAutomationExecutionOutput{})
+	return GetAutomationExecutionRequest{Request: req, Input: input}
 }
 
 const opGetCommandInvocation = "GetCommandInvocation"
 
-// GetCommandInvocationRequest generates a "aws.Request" representing the
-// client's request for the GetCommandInvocation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCommandInvocationRequest is a API request type for the GetCommandInvocation API operation.
+type GetCommandInvocationRequest struct {
+	*aws.Request
+	Input *GetCommandInvocationInput
+}
+
+// Send marshals and sends the GetCommandInvocation API request.
+func (r GetCommandInvocationRequest) Send() (*GetCommandInvocationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCommandInvocationOutput), nil
+}
+
+// GetCommandInvocationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCommandInvocation for more information on using the GetCommandInvocation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns detailed information about command execution for an invocation or
+// plugin.
 //
 //    // Example sending a request using the GetCommandInvocationRequest method.
-//    req, resp := client.GetCommandInvocationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCommandInvocationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocation
-func (c *SSM) GetCommandInvocationRequest(input *GetCommandInvocationInput) (req *aws.Request, output *GetCommandInvocationOutput) {
+func (c *SSM) GetCommandInvocationRequest(input *GetCommandInvocationInput) GetCommandInvocationRequest {
 	op := &aws.Operation{
 		Name:       opGetCommandInvocation,
 		HTTPMethod: "POST",
@@ -4306,100 +2388,44 @@ func (c *SSM) GetCommandInvocationRequest(input *GetCommandInvocationInput) (req
 		input = &GetCommandInvocationInput{}
 	}
 
-	output = &GetCommandInvocationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCommandInvocation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Returns detailed information about command execution for an invocation or
-// plugin.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetCommandInvocation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidCommandId "InvalidCommandId"
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidPluginName "InvalidPluginName"
-//   The plugin name is not valid.
-//
-//   * ErrCodeInvocationDoesNotExist "InvocationDoesNotExist"
-//   The command ID and instance ID you specified did not match any invocations.
-//   Verify the command ID adn the instance ID and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocation
-func (c *SSM) GetCommandInvocation(input *GetCommandInvocationInput) (*GetCommandInvocationOutput, error) {
-	req, out := c.GetCommandInvocationRequest(input)
-	return out, req.Send()
-}
-
-// GetCommandInvocationWithContext is the same as GetCommandInvocation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCommandInvocation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetCommandInvocationWithContext(ctx aws.Context, input *GetCommandInvocationInput, opts ...aws.Option) (*GetCommandInvocationOutput, error) {
-	req, out := c.GetCommandInvocationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCommandInvocationOutput{})
+	return GetCommandInvocationRequest{Request: req, Input: input}
 }
 
 const opGetDefaultPatchBaseline = "GetDefaultPatchBaseline"
 
-// GetDefaultPatchBaselineRequest generates a "aws.Request" representing the
-// client's request for the GetDefaultPatchBaseline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDefaultPatchBaselineRequest is a API request type for the GetDefaultPatchBaseline API operation.
+type GetDefaultPatchBaselineRequest struct {
+	*aws.Request
+	Input *GetDefaultPatchBaselineInput
+}
+
+// Send marshals and sends the GetDefaultPatchBaseline API request.
+func (r GetDefaultPatchBaselineRequest) Send() (*GetDefaultPatchBaselineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDefaultPatchBaselineOutput), nil
+}
+
+// GetDefaultPatchBaselineRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDefaultPatchBaseline for more information on using the GetDefaultPatchBaseline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the default patch baseline. Note that Systems Manager supports
+// creating multiple default patch baselines. For example, you can create a
+// default patch baseline for each operating system.
 //
 //    // Example sending a request using the GetDefaultPatchBaselineRequest method.
-//    req, resp := client.GetDefaultPatchBaselineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDefaultPatchBaselineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline
-func (c *SSM) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput) (req *aws.Request, output *GetDefaultPatchBaselineOutput) {
+func (c *SSM) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput) GetDefaultPatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opGetDefaultPatchBaseline,
 		HTTPMethod: "POST",
@@ -4410,77 +2436,43 @@ func (c *SSM) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput
 		input = &GetDefaultPatchBaselineInput{}
 	}
 
-	output = &GetDefaultPatchBaselineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDefaultPatchBaseline API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the default patch baseline. Note that Systems Manager supports
-// creating multiple default patch baselines. For example, you can create a
-// default patch baseline for each operating system.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetDefaultPatchBaseline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline
-func (c *SSM) GetDefaultPatchBaseline(input *GetDefaultPatchBaselineInput) (*GetDefaultPatchBaselineOutput, error) {
-	req, out := c.GetDefaultPatchBaselineRequest(input)
-	return out, req.Send()
-}
-
-// GetDefaultPatchBaselineWithContext is the same as GetDefaultPatchBaseline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDefaultPatchBaseline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetDefaultPatchBaselineWithContext(ctx aws.Context, input *GetDefaultPatchBaselineInput, opts ...aws.Option) (*GetDefaultPatchBaselineOutput, error) {
-	req, out := c.GetDefaultPatchBaselineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDefaultPatchBaselineOutput{})
+	return GetDefaultPatchBaselineRequest{Request: req, Input: input}
 }
 
 const opGetDeployablePatchSnapshotForInstance = "GetDeployablePatchSnapshotForInstance"
 
-// GetDeployablePatchSnapshotForInstanceRequest generates a "aws.Request" representing the
-// client's request for the GetDeployablePatchSnapshotForInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeployablePatchSnapshotForInstanceRequest is a API request type for the GetDeployablePatchSnapshotForInstance API operation.
+type GetDeployablePatchSnapshotForInstanceRequest struct {
+	*aws.Request
+	Input *GetDeployablePatchSnapshotForInstanceInput
+}
+
+// Send marshals and sends the GetDeployablePatchSnapshotForInstance API request.
+func (r GetDeployablePatchSnapshotForInstanceRequest) Send() (*GetDeployablePatchSnapshotForInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeployablePatchSnapshotForInstanceOutput), nil
+}
+
+// GetDeployablePatchSnapshotForInstanceRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeployablePatchSnapshotForInstance for more information on using the GetDeployablePatchSnapshotForInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the current snapshot for the patch baseline the instance uses.
+// This API is primarily used by the AWS-RunPatchBaseline Systems Manager document.
 //
 //    // Example sending a request using the GetDeployablePatchSnapshotForInstanceRequest method.
-//    req, resp := client.GetDeployablePatchSnapshotForInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeployablePatchSnapshotForInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstance
-func (c *SSM) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployablePatchSnapshotForInstanceInput) (req *aws.Request, output *GetDeployablePatchSnapshotForInstanceOutput) {
+func (c *SSM) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployablePatchSnapshotForInstanceInput) GetDeployablePatchSnapshotForInstanceRequest {
 	op := &aws.Operation{
 		Name:       opGetDeployablePatchSnapshotForInstance,
 		HTTPMethod: "POST",
@@ -4491,81 +2483,42 @@ func (c *SSM) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployableP
 		input = &GetDeployablePatchSnapshotForInstanceInput{}
 	}
 
-	output = &GetDeployablePatchSnapshotForInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeployablePatchSnapshotForInstance API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the current snapshot for the patch baseline the instance uses.
-// This API is primarily used by the AWS-RunPatchBaseline Systems Manager document.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetDeployablePatchSnapshotForInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeUnsupportedOperatingSystem "UnsupportedOperatingSystem"
-//   The operating systems you specified is not supported, or the operation is
-//   not supported for the operating system. Valid operating systems include:
-//   Windows, AmazonLinux, RedhatEnterpriseLinux, and Ubuntu.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstance
-func (c *SSM) GetDeployablePatchSnapshotForInstance(input *GetDeployablePatchSnapshotForInstanceInput) (*GetDeployablePatchSnapshotForInstanceOutput, error) {
-	req, out := c.GetDeployablePatchSnapshotForInstanceRequest(input)
-	return out, req.Send()
-}
-
-// GetDeployablePatchSnapshotForInstanceWithContext is the same as GetDeployablePatchSnapshotForInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeployablePatchSnapshotForInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetDeployablePatchSnapshotForInstanceWithContext(ctx aws.Context, input *GetDeployablePatchSnapshotForInstanceInput, opts ...aws.Option) (*GetDeployablePatchSnapshotForInstanceOutput, error) {
-	req, out := c.GetDeployablePatchSnapshotForInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeployablePatchSnapshotForInstanceOutput{})
+	return GetDeployablePatchSnapshotForInstanceRequest{Request: req, Input: input}
 }
 
 const opGetDocument = "GetDocument"
 
-// GetDocumentRequest generates a "aws.Request" representing the
-// client's request for the GetDocument operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDocumentRequest is a API request type for the GetDocument API operation.
+type GetDocumentRequest struct {
+	*aws.Request
+	Input *GetDocumentInput
+}
+
+// Send marshals and sends the GetDocument API request.
+func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDocumentOutput), nil
+}
+
+// GetDocumentRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDocument for more information on using the GetDocument
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the contents of the specified Systems Manager document.
 //
 //    // Example sending a request using the GetDocumentRequest method.
-//    req, resp := client.GetDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDocumentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument
-func (c *SSM) GetDocumentRequest(input *GetDocumentInput) (req *aws.Request, output *GetDocumentOutput) {
+func (c *SSM) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest {
 	op := &aws.Operation{
 		Name:       opGetDocument,
 		HTTPMethod: "POST",
@@ -4576,81 +2529,42 @@ func (c *SSM) GetDocumentRequest(input *GetDocumentInput) (req *aws.Request, out
 		input = &GetDocumentInput{}
 	}
 
-	output = &GetDocumentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDocument API operation for Amazon Simple Systems Manager (SSM).
-//
-// Gets the contents of the specified Systems Manager document.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetDocument for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidDocumentVersion "InvalidDocumentVersion"
-//   The document version is not valid or does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument
-func (c *SSM) GetDocument(input *GetDocumentInput) (*GetDocumentOutput, error) {
-	req, out := c.GetDocumentRequest(input)
-	return out, req.Send()
-}
-
-// GetDocumentWithContext is the same as GetDocument with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDocument for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetDocumentWithContext(ctx aws.Context, input *GetDocumentInput, opts ...aws.Option) (*GetDocumentOutput, error) {
-	req, out := c.GetDocumentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDocumentOutput{})
+	return GetDocumentRequest{Request: req, Input: input}
 }
 
 const opGetInventory = "GetInventory"
 
-// GetInventoryRequest generates a "aws.Request" representing the
-// client's request for the GetInventory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInventoryRequest is a API request type for the GetInventory API operation.
+type GetInventoryRequest struct {
+	*aws.Request
+	Input *GetInventoryInput
+}
+
+// Send marshals and sends the GetInventory API request.
+func (r GetInventoryRequest) Send() (*GetInventoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInventoryOutput), nil
+}
+
+// GetInventoryRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInventory for more information on using the GetInventory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Query inventory information.
 //
 //    // Example sending a request using the GetInventoryRequest method.
-//    req, resp := client.GetInventoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInventoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventory
-func (c *SSM) GetInventoryRequest(input *GetInventoryInput) (req *aws.Request, output *GetInventoryOutput) {
+func (c *SSM) GetInventoryRequest(input *GetInventoryInput) GetInventoryRequest {
 	op := &aws.Operation{
 		Name:       opGetInventory,
 		HTTPMethod: "POST",
@@ -4661,88 +2575,43 @@ func (c *SSM) GetInventoryRequest(input *GetInventoryInput) (req *aws.Request, o
 		input = &GetInventoryInput{}
 	}
 
-	output = &GetInventoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInventory API operation for Amazon Simple Systems Manager (SSM).
-//
-// Query inventory information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetInventory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInvalidTypeNameException "InvalidTypeNameException"
-//   The parameter type name is not valid.
-//
-//   * ErrCodeInvalidResultAttributeException "InvalidResultAttributeException"
-//   The specified inventory item result attribute is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventory
-func (c *SSM) GetInventory(input *GetInventoryInput) (*GetInventoryOutput, error) {
-	req, out := c.GetInventoryRequest(input)
-	return out, req.Send()
-}
-
-// GetInventoryWithContext is the same as GetInventory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInventory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetInventoryWithContext(ctx aws.Context, input *GetInventoryInput, opts ...aws.Option) (*GetInventoryOutput, error) {
-	req, out := c.GetInventoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInventoryOutput{})
+	return GetInventoryRequest{Request: req, Input: input}
 }
 
 const opGetInventorySchema = "GetInventorySchema"
 
-// GetInventorySchemaRequest generates a "aws.Request" representing the
-// client's request for the GetInventorySchema operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInventorySchemaRequest is a API request type for the GetInventorySchema API operation.
+type GetInventorySchemaRequest struct {
+	*aws.Request
+	Input *GetInventorySchemaInput
+}
+
+// Send marshals and sends the GetInventorySchema API request.
+func (r GetInventorySchemaRequest) Send() (*GetInventorySchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInventorySchemaOutput), nil
+}
+
+// GetInventorySchemaRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInventorySchema for more information on using the GetInventorySchema
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Return a list of inventory type names for the account, or return a list of
+// attribute names for a specific Inventory item type.
 //
 //    // Example sending a request using the GetInventorySchemaRequest method.
-//    req, resp := client.GetInventorySchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInventorySchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchema
-func (c *SSM) GetInventorySchemaRequest(input *GetInventorySchemaInput) (req *aws.Request, output *GetInventorySchemaOutput) {
+func (c *SSM) GetInventorySchemaRequest(input *GetInventorySchemaInput) GetInventorySchemaRequest {
 	op := &aws.Operation{
 		Name:       opGetInventorySchema,
 		HTTPMethod: "POST",
@@ -4753,82 +2622,42 @@ func (c *SSM) GetInventorySchemaRequest(input *GetInventorySchemaInput) (req *aw
 		input = &GetInventorySchemaInput{}
 	}
 
-	output = &GetInventorySchemaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInventorySchema API operation for Amazon Simple Systems Manager (SSM).
-//
-// Return a list of inventory type names for the account, or return a list of
-// attribute names for a specific Inventory item type.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetInventorySchema for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidTypeNameException "InvalidTypeNameException"
-//   The parameter type name is not valid.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchema
-func (c *SSM) GetInventorySchema(input *GetInventorySchemaInput) (*GetInventorySchemaOutput, error) {
-	req, out := c.GetInventorySchemaRequest(input)
-	return out, req.Send()
-}
-
-// GetInventorySchemaWithContext is the same as GetInventorySchema with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInventorySchema for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetInventorySchemaWithContext(ctx aws.Context, input *GetInventorySchemaInput, opts ...aws.Option) (*GetInventorySchemaOutput, error) {
-	req, out := c.GetInventorySchemaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInventorySchemaOutput{})
+	return GetInventorySchemaRequest{Request: req, Input: input}
 }
 
 const opGetMaintenanceWindow = "GetMaintenanceWindow"
 
-// GetMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the GetMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetMaintenanceWindowRequest is a API request type for the GetMaintenanceWindow API operation.
+type GetMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *GetMaintenanceWindowInput
+}
+
+// Send marshals and sends the GetMaintenanceWindow API request.
+func (r GetMaintenanceWindowRequest) Send() (*GetMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMaintenanceWindowOutput), nil
+}
+
+// GetMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetMaintenanceWindow for more information on using the GetMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a Maintenance Window.
 //
 //    // Example sending a request using the GetMaintenanceWindowRequest method.
-//    req, resp := client.GetMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindow
-func (c *SSM) GetMaintenanceWindowRequest(input *GetMaintenanceWindowInput) (req *aws.Request, output *GetMaintenanceWindowOutput) {
+func (c *SSM) GetMaintenanceWindowRequest(input *GetMaintenanceWindowInput) GetMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opGetMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -4839,79 +2668,43 @@ func (c *SSM) GetMaintenanceWindowRequest(input *GetMaintenanceWindowInput) (req
 		input = &GetMaintenanceWindowInput{}
 	}
 
-	output = &GetMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindow
-func (c *SSM) GetMaintenanceWindow(input *GetMaintenanceWindowInput) (*GetMaintenanceWindowOutput, error) {
-	req, out := c.GetMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// GetMaintenanceWindowWithContext is the same as GetMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowWithContext(ctx aws.Context, input *GetMaintenanceWindowInput, opts ...aws.Option) (*GetMaintenanceWindowOutput, error) {
-	req, out := c.GetMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetMaintenanceWindowOutput{})
+	return GetMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opGetMaintenanceWindowExecution = "GetMaintenanceWindowExecution"
 
-// GetMaintenanceWindowExecutionRequest generates a "aws.Request" representing the
-// client's request for the GetMaintenanceWindowExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetMaintenanceWindowExecutionRequest is a API request type for the GetMaintenanceWindowExecution API operation.
+type GetMaintenanceWindowExecutionRequest struct {
+	*aws.Request
+	Input *GetMaintenanceWindowExecutionInput
+}
+
+// Send marshals and sends the GetMaintenanceWindowExecution API request.
+func (r GetMaintenanceWindowExecutionRequest) Send() (*GetMaintenanceWindowExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMaintenanceWindowExecutionOutput), nil
+}
+
+// GetMaintenanceWindowExecutionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetMaintenanceWindowExecution for more information on using the GetMaintenanceWindowExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves details about a specific task executed as part of a Maintenance
+// Window execution.
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionRequest method.
-//    req, resp := client.GetMaintenanceWindowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetMaintenanceWindowExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecution
-func (c *SSM) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindowExecutionInput) (req *aws.Request, output *GetMaintenanceWindowExecutionOutput) {
+func (c *SSM) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindowExecutionInput) GetMaintenanceWindowExecutionRequest {
 	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowExecution,
 		HTTPMethod: "POST",
@@ -4922,80 +2715,43 @@ func (c *SSM) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindowEx
 		input = &GetMaintenanceWindowExecutionInput{}
 	}
 
-	output = &GetMaintenanceWindowExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetMaintenanceWindowExecution API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves details about a specific task executed as part of a Maintenance
-// Window execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetMaintenanceWindowExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecution
-func (c *SSM) GetMaintenanceWindowExecution(input *GetMaintenanceWindowExecutionInput) (*GetMaintenanceWindowExecutionOutput, error) {
-	req, out := c.GetMaintenanceWindowExecutionRequest(input)
-	return out, req.Send()
-}
-
-// GetMaintenanceWindowExecutionWithContext is the same as GetMaintenanceWindowExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMaintenanceWindowExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowExecutionWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionInput, opts ...aws.Option) (*GetMaintenanceWindowExecutionOutput, error) {
-	req, out := c.GetMaintenanceWindowExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionOutput{})
+	return GetMaintenanceWindowExecutionRequest{Request: req, Input: input}
 }
 
 const opGetMaintenanceWindowExecutionTask = "GetMaintenanceWindowExecutionTask"
 
-// GetMaintenanceWindowExecutionTaskRequest generates a "aws.Request" representing the
-// client's request for the GetMaintenanceWindowExecutionTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetMaintenanceWindowExecutionTaskRequest is a API request type for the GetMaintenanceWindowExecutionTask API operation.
+type GetMaintenanceWindowExecutionTaskRequest struct {
+	*aws.Request
+	Input *GetMaintenanceWindowExecutionTaskInput
+}
+
+// Send marshals and sends the GetMaintenanceWindowExecutionTask API request.
+func (r GetMaintenanceWindowExecutionTaskRequest) Send() (*GetMaintenanceWindowExecutionTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMaintenanceWindowExecutionTaskOutput), nil
+}
+
+// GetMaintenanceWindowExecutionTaskRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetMaintenanceWindowExecutionTask for more information on using the GetMaintenanceWindowExecutionTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the details about a specific task executed as part of a Maintenance
+// Window execution.
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionTaskRequest method.
-//    req, resp := client.GetMaintenanceWindowExecutionTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetMaintenanceWindowExecutionTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTask
-func (c *SSM) GetMaintenanceWindowExecutionTaskRequest(input *GetMaintenanceWindowExecutionTaskInput) (req *aws.Request, output *GetMaintenanceWindowExecutionTaskOutput) {
+func (c *SSM) GetMaintenanceWindowExecutionTaskRequest(input *GetMaintenanceWindowExecutionTaskInput) GetMaintenanceWindowExecutionTaskRequest {
 	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowExecutionTask,
 		HTTPMethod: "POST",
@@ -5006,80 +2762,43 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskRequest(input *GetMaintenanceWind
 		input = &GetMaintenanceWindowExecutionTaskInput{}
 	}
 
-	output = &GetMaintenanceWindowExecutionTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetMaintenanceWindowExecutionTask API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the details about a specific task executed as part of a Maintenance
-// Window execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetMaintenanceWindowExecutionTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTask
-func (c *SSM) GetMaintenanceWindowExecutionTask(input *GetMaintenanceWindowExecutionTaskInput) (*GetMaintenanceWindowExecutionTaskOutput, error) {
-	req, out := c.GetMaintenanceWindowExecutionTaskRequest(input)
-	return out, req.Send()
-}
-
-// GetMaintenanceWindowExecutionTaskWithContext is the same as GetMaintenanceWindowExecutionTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMaintenanceWindowExecutionTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowExecutionTaskWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionTaskInput, opts ...aws.Option) (*GetMaintenanceWindowExecutionTaskOutput, error) {
-	req, out := c.GetMaintenanceWindowExecutionTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionTaskOutput{})
+	return GetMaintenanceWindowExecutionTaskRequest{Request: req, Input: input}
 }
 
 const opGetMaintenanceWindowExecutionTaskInvocation = "GetMaintenanceWindowExecutionTaskInvocation"
 
-// GetMaintenanceWindowExecutionTaskInvocationRequest generates a "aws.Request" representing the
-// client's request for the GetMaintenanceWindowExecutionTaskInvocation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetMaintenanceWindowExecutionTaskInvocationRequest is a API request type for the GetMaintenanceWindowExecutionTaskInvocation API operation.
+type GetMaintenanceWindowExecutionTaskInvocationRequest struct {
+	*aws.Request
+	Input *GetMaintenanceWindowExecutionTaskInvocationInput
+}
+
+// Send marshals and sends the GetMaintenanceWindowExecutionTaskInvocation API request.
+func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send() (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMaintenanceWindowExecutionTaskInvocationOutput), nil
+}
+
+// GetMaintenanceWindowExecutionTaskInvocationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetMaintenanceWindowExecutionTaskInvocation for more information on using the GetMaintenanceWindowExecutionTaskInvocation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a task invocation. A task invocation is a specific task executing
+// on a specific target. Maintenance Windows report status for all invocations.
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionTaskInvocationRequest method.
-//    req, resp := client.GetMaintenanceWindowExecutionTaskInvocationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetMaintenanceWindowExecutionTaskInvocationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocation
-func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMaintenanceWindowExecutionTaskInvocationInput) (req *aws.Request, output *GetMaintenanceWindowExecutionTaskInvocationOutput) {
+func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMaintenanceWindowExecutionTaskInvocationInput) GetMaintenanceWindowExecutionTaskInvocationRequest {
 	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowExecutionTaskInvocation,
 		HTTPMethod: "POST",
@@ -5090,80 +2809,42 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMaint
 		input = &GetMaintenanceWindowExecutionTaskInvocationInput{}
 	}
 
-	output = &GetMaintenanceWindowExecutionTaskInvocationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetMaintenanceWindowExecutionTaskInvocation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves a task invocation. A task invocation is a specific task executing
-// on a specific target. Maintenance Windows report status for all invocations.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetMaintenanceWindowExecutionTaskInvocation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocation
-func (c *SSM) GetMaintenanceWindowExecutionTaskInvocation(input *GetMaintenanceWindowExecutionTaskInvocationInput) (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
-	req, out := c.GetMaintenanceWindowExecutionTaskInvocationRequest(input)
-	return out, req.Send()
-}
-
-// GetMaintenanceWindowExecutionTaskInvocationWithContext is the same as GetMaintenanceWindowExecutionTaskInvocation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMaintenanceWindowExecutionTaskInvocation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionTaskInvocationInput, opts ...aws.Option) (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
-	req, out := c.GetMaintenanceWindowExecutionTaskInvocationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetMaintenanceWindowExecutionTaskInvocationOutput{})
+	return GetMaintenanceWindowExecutionTaskInvocationRequest{Request: req, Input: input}
 }
 
 const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
 
-// GetMaintenanceWindowTaskRequest generates a "aws.Request" representing the
-// client's request for the GetMaintenanceWindowTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetMaintenanceWindowTaskRequest is a API request type for the GetMaintenanceWindowTask API operation.
+type GetMaintenanceWindowTaskRequest struct {
+	*aws.Request
+	Input *GetMaintenanceWindowTaskInput
+}
+
+// Send marshals and sends the GetMaintenanceWindowTask API request.
+func (r GetMaintenanceWindowTaskRequest) Send() (*GetMaintenanceWindowTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMaintenanceWindowTaskOutput), nil
+}
+
+// GetMaintenanceWindowTaskRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetMaintenanceWindowTask for more information on using the GetMaintenanceWindowTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the tasks in a Maintenance Window.
 //
 //    // Example sending a request using the GetMaintenanceWindowTaskRequest method.
-//    req, resp := client.GetMaintenanceWindowTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetMaintenanceWindowTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTask
-func (c *SSM) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInput) (req *aws.Request, output *GetMaintenanceWindowTaskOutput) {
+func (c *SSM) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInput) GetMaintenanceWindowTaskRequest {
 	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowTask,
 		HTTPMethod: "POST",
@@ -5174,79 +2855,42 @@ func (c *SSM) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInp
 		input = &GetMaintenanceWindowTaskInput{}
 	}
 
-	output = &GetMaintenanceWindowTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetMaintenanceWindowTask API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists the tasks in a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetMaintenanceWindowTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTask
-func (c *SSM) GetMaintenanceWindowTask(input *GetMaintenanceWindowTaskInput) (*GetMaintenanceWindowTaskOutput, error) {
-	req, out := c.GetMaintenanceWindowTaskRequest(input)
-	return out, req.Send()
-}
-
-// GetMaintenanceWindowTaskWithContext is the same as GetMaintenanceWindowTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetMaintenanceWindowTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowTaskWithContext(ctx aws.Context, input *GetMaintenanceWindowTaskInput, opts ...aws.Option) (*GetMaintenanceWindowTaskOutput, error) {
-	req, out := c.GetMaintenanceWindowTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetMaintenanceWindowTaskOutput{})
+	return GetMaintenanceWindowTaskRequest{Request: req, Input: input}
 }
 
 const opGetParameter = "GetParameter"
 
-// GetParameterRequest generates a "aws.Request" representing the
-// client's request for the GetParameter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetParameterRequest is a API request type for the GetParameter API operation.
+type GetParameterRequest struct {
+	*aws.Request
+	Input *GetParameterInput
+}
+
+// Send marshals and sends the GetParameter API request.
+func (r GetParameterRequest) Send() (*GetParameterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetParameterOutput), nil
+}
+
+// GetParameterRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetParameter for more information on using the GetParameter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get information about a parameter by using the parameter name.
 //
 //    // Example sending a request using the GetParameterRequest method.
-//    req, resp := client.GetParameterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetParameterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter
-func (c *SSM) GetParameterRequest(input *GetParameterInput) (req *aws.Request, output *GetParameterOutput) {
+func (c *SSM) GetParameterRequest(input *GetParameterInput) GetParameterRequest {
 	op := &aws.Operation{
 		Name:       opGetParameter,
 		HTTPMethod: "POST",
@@ -5257,81 +2901,42 @@ func (c *SSM) GetParameterRequest(input *GetParameterInput) (req *aws.Request, o
 		input = &GetParameterInput{}
 	}
 
-	output = &GetParameterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetParameter API operation for Amazon Simple Systems Manager (SSM).
-//
-// Get information about a parameter by using the parameter name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetParameter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidKeyId "InvalidKeyId"
-//   The query key ID is not valid.
-//
-//   * ErrCodeParameterNotFound "ParameterNotFound"
-//   The parameter could not be found. Verify the name and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter
-func (c *SSM) GetParameter(input *GetParameterInput) (*GetParameterOutput, error) {
-	req, out := c.GetParameterRequest(input)
-	return out, req.Send()
-}
-
-// GetParameterWithContext is the same as GetParameter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetParameter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetParameterWithContext(ctx aws.Context, input *GetParameterInput, opts ...aws.Option) (*GetParameterOutput, error) {
-	req, out := c.GetParameterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetParameterOutput{})
+	return GetParameterRequest{Request: req, Input: input}
 }
 
 const opGetParameterHistory = "GetParameterHistory"
 
-// GetParameterHistoryRequest generates a "aws.Request" representing the
-// client's request for the GetParameterHistory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetParameterHistoryRequest is a API request type for the GetParameterHistory API operation.
+type GetParameterHistoryRequest struct {
+	*aws.Request
+	Input *GetParameterHistoryInput
+}
+
+// Send marshals and sends the GetParameterHistory API request.
+func (r GetParameterHistoryRequest) Send() (*GetParameterHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetParameterHistoryOutput), nil
+}
+
+// GetParameterHistoryRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetParameterHistory for more information on using the GetParameterHistory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Query a list of all parameters used by the AWS account.
 //
 //    // Example sending a request using the GetParameterHistoryRequest method.
-//    req, resp := client.GetParameterHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetParameterHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory
-func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) (req *aws.Request, output *GetParameterHistoryOutput) {
+func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) GetParameterHistoryRequest {
 	op := &aws.Operation{
 		Name:       opGetParameterHistory,
 		HTTPMethod: "POST",
@@ -5348,55 +2953,8 @@ func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) (req *
 		input = &GetParameterHistoryInput{}
 	}
 
-	output = &GetParameterHistoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetParameterHistory API operation for Amazon Simple Systems Manager (SSM).
-//
-// Query a list of all parameters used by the AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetParameterHistory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeParameterNotFound "ParameterNotFound"
-//   The parameter could not be found. Verify the name and try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInvalidKeyId "InvalidKeyId"
-//   The query key ID is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory
-func (c *SSM) GetParameterHistory(input *GetParameterHistoryInput) (*GetParameterHistoryOutput, error) {
-	req, out := c.GetParameterHistoryRequest(input)
-	return out, req.Send()
-}
-
-// GetParameterHistoryWithContext is the same as GetParameterHistory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetParameterHistory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetParameterHistoryWithContext(ctx aws.Context, input *GetParameterHistoryInput, opts ...aws.Option) (*GetParameterHistoryOutput, error) {
-	req, out := c.GetParameterHistoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetParameterHistoryOutput{})
+	return GetParameterHistoryRequest{Request: req, Input: input}
 }
 
 // GetParameterHistoryPages iterates over the pages of a GetParameterHistory operation,
@@ -5435,10 +2993,10 @@ func (c *SSM) GetParameterHistoryPagesWithContext(ctx aws.Context, input *GetPar
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetParameterHistoryRequest(inCpy)
+			req := c.GetParameterHistoryRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5451,31 +3009,36 @@ func (c *SSM) GetParameterHistoryPagesWithContext(ctx aws.Context, input *GetPar
 
 const opGetParameters = "GetParameters"
 
-// GetParametersRequest generates a "aws.Request" representing the
-// client's request for the GetParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetParametersRequest is a API request type for the GetParameters API operation.
+type GetParametersRequest struct {
+	*aws.Request
+	Input *GetParametersInput
+}
+
+// Send marshals and sends the GetParameters API request.
+func (r GetParametersRequest) Send() (*GetParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetParametersOutput), nil
+}
+
+// GetParametersRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetParameters for more information on using the GetParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get details of a parameter.
 //
 //    // Example sending a request using the GetParametersRequest method.
-//    req, resp := client.GetParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameters
-func (c *SSM) GetParametersRequest(input *GetParametersInput) (req *aws.Request, output *GetParametersOutput) {
+func (c *SSM) GetParametersRequest(input *GetParametersInput) GetParametersRequest {
 	op := &aws.Operation{
 		Name:       opGetParameters,
 		HTTPMethod: "POST",
@@ -5486,78 +3049,51 @@ func (c *SSM) GetParametersRequest(input *GetParametersInput) (req *aws.Request,
 		input = &GetParametersInput{}
 	}
 
-	output = &GetParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetParameters API operation for Amazon Simple Systems Manager (SSM).
-//
-// Get details of a parameter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidKeyId "InvalidKeyId"
-//   The query key ID is not valid.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameters
-func (c *SSM) GetParameters(input *GetParametersInput) (*GetParametersOutput, error) {
-	req, out := c.GetParametersRequest(input)
-	return out, req.Send()
-}
-
-// GetParametersWithContext is the same as GetParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetParametersWithContext(ctx aws.Context, input *GetParametersInput, opts ...aws.Option) (*GetParametersOutput, error) {
-	req, out := c.GetParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetParametersOutput{})
+	return GetParametersRequest{Request: req, Input: input}
 }
 
 const opGetParametersByPath = "GetParametersByPath"
 
-// GetParametersByPathRequest generates a "aws.Request" representing the
-// client's request for the GetParametersByPath operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetParametersByPathRequest is a API request type for the GetParametersByPath API operation.
+type GetParametersByPathRequest struct {
+	*aws.Request
+	Input *GetParametersByPathInput
+}
+
+// Send marshals and sends the GetParametersByPath API request.
+func (r GetParametersByPathRequest) Send() (*GetParametersByPathOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetParametersByPathOutput), nil
+}
+
+// GetParametersByPathRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieve parameters in a specific hierarchy. For more information, see Working
+// with Systems Manager Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html).
 //
-// See GetParametersByPath for more information on using the GetParametersByPath
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Request results are returned on a best-effort basis. If you specify MaxResults
+// in the request, the response includes information up to the limit specified.
+// The number of items returned, however, can be between zero and the value
+// of MaxResults. If the service reaches an internal limit while processing
+// the results, it stops the operation and returns the matching values up to
+// that point and a NextToken. You can specify the NextToken in a subsequent
+// call to get the next set of results.
 //
 //    // Example sending a request using the GetParametersByPathRequest method.
-//    req, resp := client.GetParametersByPathRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetParametersByPathRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath
-func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) (req *aws.Request, output *GetParametersByPathOutput) {
+func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) GetParametersByPathRequest {
 	op := &aws.Operation{
 		Name:       opGetParametersByPath,
 		HTTPMethod: "POST",
@@ -5574,71 +3110,8 @@ func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) (req *
 		input = &GetParametersByPathInput{}
 	}
 
-	output = &GetParametersByPathOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetParametersByPath API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieve parameters in a specific hierarchy. For more information, see Working
-// with Systems Manager Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html).
-//
-// Request results are returned on a best-effort basis. If you specify MaxResults
-// in the request, the response includes information up to the limit specified.
-// The number of items returned, however, can be between zero and the value
-// of MaxResults. If the service reaches an internal limit while processing
-// the results, it stops the operation and returns the matching values up to
-// that point and a NextToken. You can specify the NextToken in a subsequent
-// call to get the next set of results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetParametersByPath for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidFilterKey "InvalidFilterKey"
-//   The specified key is not valid.
-//
-//   * ErrCodeInvalidFilterOption "InvalidFilterOption"
-//   The specified filter option is not valid. Valid options are Equals and BeginsWith.
-//   For Path filter, valid options are Recursive and OneLevel.
-//
-//   * ErrCodeInvalidFilterValue "InvalidFilterValue"
-//   The filter value is not valid. Verify the value and try again.
-//
-//   * ErrCodeInvalidKeyId "InvalidKeyId"
-//   The query key ID is not valid.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath
-func (c *SSM) GetParametersByPath(input *GetParametersByPathInput) (*GetParametersByPathOutput, error) {
-	req, out := c.GetParametersByPathRequest(input)
-	return out, req.Send()
-}
-
-// GetParametersByPathWithContext is the same as GetParametersByPath with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetParametersByPath for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetParametersByPathWithContext(ctx aws.Context, input *GetParametersByPathInput, opts ...aws.Option) (*GetParametersByPathOutput, error) {
-	req, out := c.GetParametersByPathRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetParametersByPathOutput{})
+	return GetParametersByPathRequest{Request: req, Input: input}
 }
 
 // GetParametersByPathPages iterates over the pages of a GetParametersByPath operation,
@@ -5677,10 +3150,10 @@ func (c *SSM) GetParametersByPathPagesWithContext(ctx aws.Context, input *GetPar
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetParametersByPathRequest(inCpy)
+			req := c.GetParametersByPathRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5693,31 +3166,36 @@ func (c *SSM) GetParametersByPathPagesWithContext(ctx aws.Context, input *GetPar
 
 const opGetPatchBaseline = "GetPatchBaseline"
 
-// GetPatchBaselineRequest generates a "aws.Request" representing the
-// client's request for the GetPatchBaseline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPatchBaselineRequest is a API request type for the GetPatchBaseline API operation.
+type GetPatchBaselineRequest struct {
+	*aws.Request
+	Input *GetPatchBaselineInput
+}
+
+// Send marshals and sends the GetPatchBaseline API request.
+func (r GetPatchBaselineRequest) Send() (*GetPatchBaselineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPatchBaselineOutput), nil
+}
+
+// GetPatchBaselineRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPatchBaseline for more information on using the GetPatchBaseline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a patch baseline.
 //
 //    // Example sending a request using the GetPatchBaselineRequest method.
-//    req, resp := client.GetPatchBaselineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPatchBaselineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaseline
-func (c *SSM) GetPatchBaselineRequest(input *GetPatchBaselineInput) (req *aws.Request, output *GetPatchBaselineOutput) {
+func (c *SSM) GetPatchBaselineRequest(input *GetPatchBaselineInput) GetPatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opGetPatchBaseline,
 		HTTPMethod: "POST",
@@ -5728,83 +3206,43 @@ func (c *SSM) GetPatchBaselineRequest(input *GetPatchBaselineInput) (req *aws.Re
 		input = &GetPatchBaselineInput{}
 	}
 
-	output = &GetPatchBaselineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPatchBaseline API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves information about a patch baseline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetPatchBaseline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaseline
-func (c *SSM) GetPatchBaseline(input *GetPatchBaselineInput) (*GetPatchBaselineOutput, error) {
-	req, out := c.GetPatchBaselineRequest(input)
-	return out, req.Send()
-}
-
-// GetPatchBaselineWithContext is the same as GetPatchBaseline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPatchBaseline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetPatchBaselineWithContext(ctx aws.Context, input *GetPatchBaselineInput, opts ...aws.Option) (*GetPatchBaselineOutput, error) {
-	req, out := c.GetPatchBaselineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPatchBaselineOutput{})
+	return GetPatchBaselineRequest{Request: req, Input: input}
 }
 
 const opGetPatchBaselineForPatchGroup = "GetPatchBaselineForPatchGroup"
 
-// GetPatchBaselineForPatchGroupRequest generates a "aws.Request" representing the
-// client's request for the GetPatchBaselineForPatchGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPatchBaselineForPatchGroupRequest is a API request type for the GetPatchBaselineForPatchGroup API operation.
+type GetPatchBaselineForPatchGroupRequest struct {
+	*aws.Request
+	Input *GetPatchBaselineForPatchGroupInput
+}
+
+// Send marshals and sends the GetPatchBaselineForPatchGroup API request.
+func (r GetPatchBaselineForPatchGroupRequest) Send() (*GetPatchBaselineForPatchGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPatchBaselineForPatchGroupOutput), nil
+}
+
+// GetPatchBaselineForPatchGroupRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPatchBaselineForPatchGroup for more information on using the GetPatchBaselineForPatchGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the patch baseline that should be used for the specified patch
+// group.
 //
 //    // Example sending a request using the GetPatchBaselineForPatchGroupRequest method.
-//    req, resp := client.GetPatchBaselineForPatchGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPatchBaselineForPatchGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup
-func (c *SSM) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPatchGroupInput) (req *aws.Request, output *GetPatchBaselineForPatchGroupOutput) {
+func (c *SSM) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPatchGroupInput) GetPatchBaselineForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
@@ -5815,76 +3253,42 @@ func (c *SSM) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPat
 		input = &GetPatchBaselineForPatchGroupInput{}
 	}
 
-	output = &GetPatchBaselineForPatchGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPatchBaselineForPatchGroup API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves the patch baseline that should be used for the specified patch
-// group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation GetPatchBaselineForPatchGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup
-func (c *SSM) GetPatchBaselineForPatchGroup(input *GetPatchBaselineForPatchGroupInput) (*GetPatchBaselineForPatchGroupOutput, error) {
-	req, out := c.GetPatchBaselineForPatchGroupRequest(input)
-	return out, req.Send()
-}
-
-// GetPatchBaselineForPatchGroupWithContext is the same as GetPatchBaselineForPatchGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPatchBaselineForPatchGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *GetPatchBaselineForPatchGroupInput, opts ...aws.Option) (*GetPatchBaselineForPatchGroupOutput, error) {
-	req, out := c.GetPatchBaselineForPatchGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPatchBaselineForPatchGroupOutput{})
+	return GetPatchBaselineForPatchGroupRequest{Request: req, Input: input}
 }
 
 const opListAssociationVersions = "ListAssociationVersions"
 
-// ListAssociationVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListAssociationVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAssociationVersionsRequest is a API request type for the ListAssociationVersions API operation.
+type ListAssociationVersionsRequest struct {
+	*aws.Request
+	Input *ListAssociationVersionsInput
+}
+
+// Send marshals and sends the ListAssociationVersions API request.
+func (r ListAssociationVersionsRequest) Send() (*ListAssociationVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAssociationVersionsOutput), nil
+}
+
+// ListAssociationVersionsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAssociationVersions for more information on using the ListAssociationVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves all versions of an association for a specific association ID.
 //
 //    // Example sending a request using the ListAssociationVersionsRequest method.
-//    req, resp := client.ListAssociationVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAssociationVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions
-func (c *SSM) ListAssociationVersionsRequest(input *ListAssociationVersionsInput) (req *aws.Request, output *ListAssociationVersionsOutput) {
+func (c *SSM) ListAssociationVersionsRequest(input *ListAssociationVersionsInput) ListAssociationVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListAssociationVersions,
 		HTTPMethod: "POST",
@@ -5895,81 +3299,42 @@ func (c *SSM) ListAssociationVersionsRequest(input *ListAssociationVersionsInput
 		input = &ListAssociationVersionsInput{}
 	}
 
-	output = &ListAssociationVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAssociationVersions API operation for Amazon Simple Systems Manager (SSM).
-//
-// Retrieves all versions of an association for a specific association ID.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListAssociationVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeAssociationDoesNotExist "AssociationDoesNotExist"
-//   The specified association does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions
-func (c *SSM) ListAssociationVersions(input *ListAssociationVersionsInput) (*ListAssociationVersionsOutput, error) {
-	req, out := c.ListAssociationVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListAssociationVersionsWithContext is the same as ListAssociationVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAssociationVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListAssociationVersionsWithContext(ctx aws.Context, input *ListAssociationVersionsInput, opts ...aws.Option) (*ListAssociationVersionsOutput, error) {
-	req, out := c.ListAssociationVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAssociationVersionsOutput{})
+	return ListAssociationVersionsRequest{Request: req, Input: input}
 }
 
 const opListAssociations = "ListAssociations"
 
-// ListAssociationsRequest generates a "aws.Request" representing the
-// client's request for the ListAssociations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAssociationsRequest is a API request type for the ListAssociations API operation.
+type ListAssociationsRequest struct {
+	*aws.Request
+	Input *ListAssociationsInput
+}
+
+// Send marshals and sends the ListAssociations API request.
+func (r ListAssociationsRequest) Send() (*ListAssociationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAssociationsOutput), nil
+}
+
+// ListAssociationsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAssociations for more information on using the ListAssociations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the associations for the specified Systems Manager document or instance.
 //
 //    // Example sending a request using the ListAssociationsRequest method.
-//    req, resp := client.ListAssociationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAssociationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations
-func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) (req *aws.Request, output *ListAssociationsOutput) {
+func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) ListAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opListAssociations,
 		HTTPMethod: "POST",
@@ -5986,49 +3351,8 @@ func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) (req *aws.Re
 		input = &ListAssociationsInput{}
 	}
 
-	output = &ListAssociationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAssociations API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists the associations for the specified Systems Manager document or instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListAssociations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations
-func (c *SSM) ListAssociations(input *ListAssociationsInput) (*ListAssociationsOutput, error) {
-	req, out := c.ListAssociationsRequest(input)
-	return out, req.Send()
-}
-
-// ListAssociationsWithContext is the same as ListAssociations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAssociations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListAssociationsWithContext(ctx aws.Context, input *ListAssociationsInput, opts ...aws.Option) (*ListAssociationsOutput, error) {
-	req, out := c.ListAssociationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAssociationsOutput{})
+	return ListAssociationsRequest{Request: req, Input: input}
 }
 
 // ListAssociationsPages iterates over the pages of a ListAssociations operation,
@@ -6067,10 +3391,10 @@ func (c *SSM) ListAssociationsPagesWithContext(ctx aws.Context, input *ListAssoc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAssociationsRequest(inCpy)
+			req := c.ListAssociationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6083,31 +3407,40 @@ func (c *SSM) ListAssociationsPagesWithContext(ctx aws.Context, input *ListAssoc
 
 const opListCommandInvocations = "ListCommandInvocations"
 
-// ListCommandInvocationsRequest generates a "aws.Request" representing the
-// client's request for the ListCommandInvocations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCommandInvocationsRequest is a API request type for the ListCommandInvocations API operation.
+type ListCommandInvocationsRequest struct {
+	*aws.Request
+	Input *ListCommandInvocationsInput
+}
+
+// Send marshals and sends the ListCommandInvocations API request.
+func (r ListCommandInvocationsRequest) Send() (*ListCommandInvocationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCommandInvocationsOutput), nil
+}
+
+// ListCommandInvocationsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCommandInvocations for more information on using the ListCommandInvocations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// An invocation is copy of a command sent to a specific instance. A command
+// can apply to one or more instances. A command invocation applies to one instance.
+// For example, if a user executes SendCommand against three instances, then
+// a command invocation is created for each requested instance ID. ListCommandInvocations
+// provide status about command execution.
 //
 //    // Example sending a request using the ListCommandInvocationsRequest method.
-//    req, resp := client.ListCommandInvocationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCommandInvocationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocations
-func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) (req *aws.Request, output *ListCommandInvocationsOutput) {
+func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) ListCommandInvocationsRequest {
 	op := &aws.Operation{
 		Name:       opListCommandInvocations,
 		HTTPMethod: "POST",
@@ -6124,73 +3457,8 @@ func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) 
 		input = &ListCommandInvocationsInput{}
 	}
 
-	output = &ListCommandInvocationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCommandInvocations API operation for Amazon Simple Systems Manager (SSM).
-//
-// An invocation is copy of a command sent to a specific instance. A command
-// can apply to one or more instances. A command invocation applies to one instance.
-// For example, if a user executes SendCommand against three instances, then
-// a command invocation is created for each requested instance ID. ListCommandInvocations
-// provide status about command execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListCommandInvocations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidCommandId "InvalidCommandId"
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidFilterKey "InvalidFilterKey"
-//   The specified key is not valid.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocations
-func (c *SSM) ListCommandInvocations(input *ListCommandInvocationsInput) (*ListCommandInvocationsOutput, error) {
-	req, out := c.ListCommandInvocationsRequest(input)
-	return out, req.Send()
-}
-
-// ListCommandInvocationsWithContext is the same as ListCommandInvocations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCommandInvocations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListCommandInvocationsWithContext(ctx aws.Context, input *ListCommandInvocationsInput, opts ...aws.Option) (*ListCommandInvocationsOutput, error) {
-	req, out := c.ListCommandInvocationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCommandInvocationsOutput{})
+	return ListCommandInvocationsRequest{Request: req, Input: input}
 }
 
 // ListCommandInvocationsPages iterates over the pages of a ListCommandInvocations operation,
@@ -6229,10 +3497,10 @@ func (c *SSM) ListCommandInvocationsPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListCommandInvocationsRequest(inCpy)
+			req := c.ListCommandInvocationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6245,31 +3513,36 @@ func (c *SSM) ListCommandInvocationsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListCommands = "ListCommands"
 
-// ListCommandsRequest generates a "aws.Request" representing the
-// client's request for the ListCommands operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCommandsRequest is a API request type for the ListCommands API operation.
+type ListCommandsRequest struct {
+	*aws.Request
+	Input *ListCommandsInput
+}
+
+// Send marshals and sends the ListCommands API request.
+func (r ListCommandsRequest) Send() (*ListCommandsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCommandsOutput), nil
+}
+
+// ListCommandsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCommands for more information on using the ListCommands
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the commands requested by users of the AWS account.
 //
 //    // Example sending a request using the ListCommandsRequest method.
-//    req, resp := client.ListCommandsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCommandsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands
-func (c *SSM) ListCommandsRequest(input *ListCommandsInput) (req *aws.Request, output *ListCommandsOutput) {
+func (c *SSM) ListCommandsRequest(input *ListCommandsInput) ListCommandsRequest {
 	op := &aws.Operation{
 		Name:       opListCommands,
 		HTTPMethod: "POST",
@@ -6286,69 +3559,8 @@ func (c *SSM) ListCommandsRequest(input *ListCommandsInput) (req *aws.Request, o
 		input = &ListCommandsInput{}
 	}
 
-	output = &ListCommandsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCommands API operation for Amazon Simple Systems Manager (SSM).
-//
-// Lists the commands requested by users of the AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListCommands for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidCommandId "InvalidCommandId"
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidFilterKey "InvalidFilterKey"
-//   The specified key is not valid.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands
-func (c *SSM) ListCommands(input *ListCommandsInput) (*ListCommandsOutput, error) {
-	req, out := c.ListCommandsRequest(input)
-	return out, req.Send()
-}
-
-// ListCommandsWithContext is the same as ListCommands with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCommands for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListCommandsWithContext(ctx aws.Context, input *ListCommandsInput, opts ...aws.Option) (*ListCommandsOutput, error) {
-	req, out := c.ListCommandsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCommandsOutput{})
+	return ListCommandsRequest{Request: req, Input: input}
 }
 
 // ListCommandsPages iterates over the pages of a ListCommands operation,
@@ -6387,10 +3599,10 @@ func (c *SSM) ListCommandsPagesWithContext(ctx aws.Context, input *ListCommandsI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListCommandsRequest(inCpy)
+			req := c.ListCommandsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6403,31 +3615,39 @@ func (c *SSM) ListCommandsPagesWithContext(ctx aws.Context, input *ListCommandsI
 
 const opListComplianceItems = "ListComplianceItems"
 
-// ListComplianceItemsRequest generates a "aws.Request" representing the
-// client's request for the ListComplianceItems operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListComplianceItemsRequest is a API request type for the ListComplianceItems API operation.
+type ListComplianceItemsRequest struct {
+	*aws.Request
+	Input *ListComplianceItemsInput
+}
+
+// Send marshals and sends the ListComplianceItems API request.
+func (r ListComplianceItemsRequest) Send() (*ListComplianceItemsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListComplianceItemsOutput), nil
+}
+
+// ListComplianceItemsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListComplianceItems for more information on using the ListComplianceItems
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For a specified resource ID, this API action returns a list of compliance
+// statuses for different resource types. Currently, you can only specify one
+// resource ID per call. List results depend on the criteria specified in the
+// filter.
 //
 //    // Example sending a request using the ListComplianceItemsRequest method.
-//    req, resp := client.ListComplianceItemsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListComplianceItemsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceItems
-func (c *SSM) ListComplianceItemsRequest(input *ListComplianceItemsInput) (req *aws.Request, output *ListComplianceItemsOutput) {
+func (c *SSM) ListComplianceItemsRequest(input *ListComplianceItemsInput) ListComplianceItemsRequest {
 	op := &aws.Operation{
 		Name:       opListComplianceItems,
 		HTTPMethod: "POST",
@@ -6438,93 +3658,44 @@ func (c *SSM) ListComplianceItemsRequest(input *ListComplianceItemsInput) (req *
 		input = &ListComplianceItemsInput{}
 	}
 
-	output = &ListComplianceItemsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListComplianceItems API operation for Amazon Simple Systems Manager (SSM).
-//
-// For a specified resource ID, this API action returns a list of compliance
-// statuses for different resource types. Currently, you can only specify one
-// resource ID per call. List results depend on the criteria specified in the
-// filter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListComplianceItems for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceType "InvalidResourceType"
-//   The resource type is not valid. For example, if you are attempting to tag
-//   an instance, the instance must be a registered, managed instance.
-//
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceItems
-func (c *SSM) ListComplianceItems(input *ListComplianceItemsInput) (*ListComplianceItemsOutput, error) {
-	req, out := c.ListComplianceItemsRequest(input)
-	return out, req.Send()
-}
-
-// ListComplianceItemsWithContext is the same as ListComplianceItems with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListComplianceItems for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListComplianceItemsWithContext(ctx aws.Context, input *ListComplianceItemsInput, opts ...aws.Option) (*ListComplianceItemsOutput, error) {
-	req, out := c.ListComplianceItemsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListComplianceItemsOutput{})
+	return ListComplianceItemsRequest{Request: req, Input: input}
 }
 
 const opListComplianceSummaries = "ListComplianceSummaries"
 
-// ListComplianceSummariesRequest generates a "aws.Request" representing the
-// client's request for the ListComplianceSummaries operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListComplianceSummariesRequest is a API request type for the ListComplianceSummaries API operation.
+type ListComplianceSummariesRequest struct {
+	*aws.Request
+	Input *ListComplianceSummariesInput
+}
+
+// Send marshals and sends the ListComplianceSummaries API request.
+func (r ListComplianceSummariesRequest) Send() (*ListComplianceSummariesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListComplianceSummariesOutput), nil
+}
+
+// ListComplianceSummariesRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListComplianceSummaries for more information on using the ListComplianceSummaries
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a summary count of compliant and non-compliant resources for a compliance
+// type. For example, this call can return State Manager associations, patches,
+// or custom compliance types according to the filter criteria that you specify.
 //
 //    // Example sending a request using the ListComplianceSummariesRequest method.
-//    req, resp := client.ListComplianceSummariesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListComplianceSummariesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceSummaries
-func (c *SSM) ListComplianceSummariesRequest(input *ListComplianceSummariesInput) (req *aws.Request, output *ListComplianceSummariesOutput) {
+func (c *SSM) ListComplianceSummariesRequest(input *ListComplianceSummariesInput) ListComplianceSummariesRequest {
 	op := &aws.Operation{
 		Name:       opListComplianceSummaries,
 		HTTPMethod: "POST",
@@ -6535,84 +3706,42 @@ func (c *SSM) ListComplianceSummariesRequest(input *ListComplianceSummariesInput
 		input = &ListComplianceSummariesInput{}
 	}
 
-	output = &ListComplianceSummariesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListComplianceSummaries API operation for Amazon Simple Systems Manager (SSM).
-//
-// Returns a summary count of compliant and non-compliant resources for a compliance
-// type. For example, this call can return State Manager associations, patches,
-// or custom compliance types according to the filter criteria that you specify.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListComplianceSummaries for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceSummaries
-func (c *SSM) ListComplianceSummaries(input *ListComplianceSummariesInput) (*ListComplianceSummariesOutput, error) {
-	req, out := c.ListComplianceSummariesRequest(input)
-	return out, req.Send()
-}
-
-// ListComplianceSummariesWithContext is the same as ListComplianceSummaries with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListComplianceSummaries for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListComplianceSummariesWithContext(ctx aws.Context, input *ListComplianceSummariesInput, opts ...aws.Option) (*ListComplianceSummariesOutput, error) {
-	req, out := c.ListComplianceSummariesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListComplianceSummariesOutput{})
+	return ListComplianceSummariesRequest{Request: req, Input: input}
 }
 
 const opListDocumentVersions = "ListDocumentVersions"
 
-// ListDocumentVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListDocumentVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDocumentVersionsRequest is a API request type for the ListDocumentVersions API operation.
+type ListDocumentVersionsRequest struct {
+	*aws.Request
+	Input *ListDocumentVersionsInput
+}
+
+// Send marshals and sends the ListDocumentVersions API request.
+func (r ListDocumentVersionsRequest) Send() (*ListDocumentVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDocumentVersionsOutput), nil
+}
+
+// ListDocumentVersionsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDocumentVersions for more information on using the ListDocumentVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List all versions for a document.
 //
 //    // Example sending a request using the ListDocumentVersionsRequest method.
-//    req, resp := client.ListDocumentVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDocumentVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions
-func (c *SSM) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) (req *aws.Request, output *ListDocumentVersionsOutput) {
+func (c *SSM) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) ListDocumentVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListDocumentVersions,
 		HTTPMethod: "POST",
@@ -6623,81 +3752,42 @@ func (c *SSM) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) (req
 		input = &ListDocumentVersionsInput{}
 	}
 
-	output = &ListDocumentVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDocumentVersions API operation for Amazon Simple Systems Manager (SSM).
-//
-// List all versions for a document.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListDocumentVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions
-func (c *SSM) ListDocumentVersions(input *ListDocumentVersionsInput) (*ListDocumentVersionsOutput, error) {
-	req, out := c.ListDocumentVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListDocumentVersionsWithContext is the same as ListDocumentVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDocumentVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListDocumentVersionsWithContext(ctx aws.Context, input *ListDocumentVersionsInput, opts ...aws.Option) (*ListDocumentVersionsOutput, error) {
-	req, out := c.ListDocumentVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDocumentVersionsOutput{})
+	return ListDocumentVersionsRequest{Request: req, Input: input}
 }
 
 const opListDocuments = "ListDocuments"
 
-// ListDocumentsRequest generates a "aws.Request" representing the
-// client's request for the ListDocuments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDocumentsRequest is a API request type for the ListDocuments API operation.
+type ListDocumentsRequest struct {
+	*aws.Request
+	Input *ListDocumentsInput
+}
+
+// Send marshals and sends the ListDocuments API request.
+func (r ListDocumentsRequest) Send() (*ListDocumentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDocumentsOutput), nil
+}
+
+// ListDocumentsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDocuments for more information on using the ListDocuments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more of your Systems Manager documents.
 //
 //    // Example sending a request using the ListDocumentsRequest method.
-//    req, resp := client.ListDocumentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDocumentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments
-func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) (req *aws.Request, output *ListDocumentsOutput) {
+func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsRequest {
 	op := &aws.Operation{
 		Name:       opListDocuments,
 		HTTPMethod: "POST",
@@ -6714,52 +3804,8 @@ func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) (req *aws.Request,
 		input = &ListDocumentsInput{}
 	}
 
-	output = &ListDocumentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDocuments API operation for Amazon Simple Systems Manager (SSM).
-//
-// Describes one or more of your Systems Manager documents.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListDocuments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInvalidFilterKey "InvalidFilterKey"
-//   The specified key is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments
-func (c *SSM) ListDocuments(input *ListDocumentsInput) (*ListDocumentsOutput, error) {
-	req, out := c.ListDocumentsRequest(input)
-	return out, req.Send()
-}
-
-// ListDocumentsWithContext is the same as ListDocuments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDocuments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListDocumentsWithContext(ctx aws.Context, input *ListDocumentsInput, opts ...aws.Option) (*ListDocumentsOutput, error) {
-	req, out := c.ListDocumentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDocumentsOutput{})
+	return ListDocumentsRequest{Request: req, Input: input}
 }
 
 // ListDocumentsPages iterates over the pages of a ListDocuments operation,
@@ -6798,10 +3844,10 @@ func (c *SSM) ListDocumentsPagesWithContext(ctx aws.Context, input *ListDocument
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDocumentsRequest(inCpy)
+			req := c.ListDocumentsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6814,31 +3860,36 @@ func (c *SSM) ListDocumentsPagesWithContext(ctx aws.Context, input *ListDocument
 
 const opListInventoryEntries = "ListInventoryEntries"
 
-// ListInventoryEntriesRequest generates a "aws.Request" representing the
-// client's request for the ListInventoryEntries operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListInventoryEntriesRequest is a API request type for the ListInventoryEntries API operation.
+type ListInventoryEntriesRequest struct {
+	*aws.Request
+	Input *ListInventoryEntriesInput
+}
+
+// Send marshals and sends the ListInventoryEntries API request.
+func (r ListInventoryEntriesRequest) Send() (*ListInventoryEntriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInventoryEntriesOutput), nil
+}
+
+// ListInventoryEntriesRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListInventoryEntries for more information on using the ListInventoryEntries
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A list of inventory items returned by the request.
 //
 //    // Example sending a request using the ListInventoryEntriesRequest method.
-//    req, resp := client.ListInventoryEntriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListInventoryEntriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntries
-func (c *SSM) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) (req *aws.Request, output *ListInventoryEntriesOutput) {
+func (c *SSM) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) ListInventoryEntriesRequest {
 	op := &aws.Operation{
 		Name:       opListInventoryEntries,
 		HTTPMethod: "POST",
@@ -6849,100 +3900,44 @@ func (c *SSM) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) (req
 		input = &ListInventoryEntriesInput{}
 	}
 
-	output = &ListInventoryEntriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListInventoryEntries API operation for Amazon Simple Systems Manager (SSM).
-//
-// A list of inventory items returned by the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListInventoryEntries for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidTypeNameException "InvalidTypeNameException"
-//   The parameter type name is not valid.
-//
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntries
-func (c *SSM) ListInventoryEntries(input *ListInventoryEntriesInput) (*ListInventoryEntriesOutput, error) {
-	req, out := c.ListInventoryEntriesRequest(input)
-	return out, req.Send()
-}
-
-// ListInventoryEntriesWithContext is the same as ListInventoryEntries with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListInventoryEntries for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListInventoryEntriesWithContext(ctx aws.Context, input *ListInventoryEntriesInput, opts ...aws.Option) (*ListInventoryEntriesOutput, error) {
-	req, out := c.ListInventoryEntriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListInventoryEntriesOutput{})
+	return ListInventoryEntriesRequest{Request: req, Input: input}
 }
 
 const opListResourceComplianceSummaries = "ListResourceComplianceSummaries"
 
-// ListResourceComplianceSummariesRequest generates a "aws.Request" representing the
-// client's request for the ListResourceComplianceSummaries operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListResourceComplianceSummariesRequest is a API request type for the ListResourceComplianceSummaries API operation.
+type ListResourceComplianceSummariesRequest struct {
+	*aws.Request
+	Input *ListResourceComplianceSummariesInput
+}
+
+// Send marshals and sends the ListResourceComplianceSummaries API request.
+func (r ListResourceComplianceSummariesRequest) Send() (*ListResourceComplianceSummariesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourceComplianceSummariesOutput), nil
+}
+
+// ListResourceComplianceSummariesRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListResourceComplianceSummaries for more information on using the ListResourceComplianceSummaries
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a resource-level summary count. The summary includes information
+// about compliant and non-compliant statuses and detailed compliance-item severity
+// counts, according to the filter criteria you specify.
 //
 //    // Example sending a request using the ListResourceComplianceSummariesRequest method.
-//    req, resp := client.ListResourceComplianceSummariesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListResourceComplianceSummariesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceComplianceSummaries
-func (c *SSM) ListResourceComplianceSummariesRequest(input *ListResourceComplianceSummariesInput) (req *aws.Request, output *ListResourceComplianceSummariesOutput) {
+func (c *SSM) ListResourceComplianceSummariesRequest(input *ListResourceComplianceSummariesInput) ListResourceComplianceSummariesRequest {
 	op := &aws.Operation{
 		Name:       opListResourceComplianceSummaries,
 		HTTPMethod: "POST",
@@ -6953,100 +3948,30 @@ func (c *SSM) ListResourceComplianceSummariesRequest(input *ListResourceComplian
 		input = &ListResourceComplianceSummariesInput{}
 	}
 
-	output = &ListResourceComplianceSummariesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListResourceComplianceSummaries API operation for Amazon Simple Systems Manager (SSM).
-//
-// Returns a resource-level summary count. The summary includes information
-// about compliant and non-compliant statuses and detailed compliance-item severity
-// counts, according to the filter criteria you specify.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListResourceComplianceSummaries for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidFilter "InvalidFilter"
-//   The filter name is not valid. Verify the you entered the correct name and
-//   try again.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceComplianceSummaries
-func (c *SSM) ListResourceComplianceSummaries(input *ListResourceComplianceSummariesInput) (*ListResourceComplianceSummariesOutput, error) {
-	req, out := c.ListResourceComplianceSummariesRequest(input)
-	return out, req.Send()
-}
-
-// ListResourceComplianceSummariesWithContext is the same as ListResourceComplianceSummaries with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListResourceComplianceSummaries for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListResourceComplianceSummariesWithContext(ctx aws.Context, input *ListResourceComplianceSummariesInput, opts ...aws.Option) (*ListResourceComplianceSummariesOutput, error) {
-	req, out := c.ListResourceComplianceSummariesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListResourceComplianceSummariesOutput{})
+	return ListResourceComplianceSummariesRequest{Request: req, Input: input}
 }
 
 const opListResourceDataSync = "ListResourceDataSync"
 
-// ListResourceDataSyncRequest generates a "aws.Request" representing the
-// client's request for the ListResourceDataSync operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListResourceDataSync for more information on using the ListResourceDataSync
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListResourceDataSyncRequest method.
-//    req, resp := client.ListResourceDataSyncRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSync
-func (c *SSM) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) (req *aws.Request, output *ListResourceDataSyncOutput) {
-	op := &aws.Operation{
-		Name:       opListResourceDataSync,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListResourceDataSyncInput{}
-	}
-
-	output = &ListResourceDataSyncOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListResourceDataSyncRequest is a API request type for the ListResourceDataSync API operation.
+type ListResourceDataSyncRequest struct {
+	*aws.Request
+	Input *ListResourceDataSyncInput
 }
 
-// ListResourceDataSync API operation for Amazon Simple Systems Manager (SSM).
+// Send marshals and sends the ListResourceDataSync API request.
+func (r ListResourceDataSyncRequest) Send() (*ListResourceDataSyncOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourceDataSyncOutput), nil
+}
+
+// ListResourceDataSyncRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
 // Lists your resource data sync configurations. Includes information about
 // the last time a sync attempted to start, the last sync status, and the last
@@ -7059,69 +3984,61 @@ func (c *SSM) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) (req
 // If there are more sync configurations to list, you can request them by specifying
 // the NextToken returned in the call to the parameter of a subsequent call.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListResourceDataSync for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified token is not valid.
+//    // Example sending a request using the ListResourceDataSyncRequest method.
+//    req := client.ListResourceDataSyncRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSync
-func (c *SSM) ListResourceDataSync(input *ListResourceDataSyncInput) (*ListResourceDataSyncOutput, error) {
-	req, out := c.ListResourceDataSyncRequest(input)
-	return out, req.Send()
-}
+func (c *SSM) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) ListResourceDataSyncRequest {
+	op := &aws.Operation{
+		Name:       opListResourceDataSync,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListResourceDataSyncWithContext is the same as ListResourceDataSync with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListResourceDataSync for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListResourceDataSyncWithContext(ctx aws.Context, input *ListResourceDataSyncInput, opts ...aws.Option) (*ListResourceDataSyncOutput, error) {
-	req, out := c.ListResourceDataSyncRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListResourceDataSyncInput{}
+	}
+
+	req := c.newRequest(op, input, &ListResourceDataSyncOutput{})
+	return ListResourceDataSyncRequest{Request: req, Input: input}
 }
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the tags assigned to the specified resource.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListTagsForResource
-func (c *SSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *SSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -7132,83 +4049,45 @@ func (c *SSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResource API operation for Amazon Simple Systems Manager (SSM).
-//
-// Returns a list of the tags assigned to the specified resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceType "InvalidResourceType"
-//   The resource type is not valid. For example, if you are attempting to tag
-//   an instance, the instance must be a registered, managed instance.
-//
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListTagsForResource
-func (c *SSM) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opModifyDocumentPermission = "ModifyDocumentPermission"
 
-// ModifyDocumentPermissionRequest generates a "aws.Request" representing the
-// client's request for the ModifyDocumentPermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyDocumentPermissionRequest is a API request type for the ModifyDocumentPermission API operation.
+type ModifyDocumentPermissionRequest struct {
+	*aws.Request
+	Input *ModifyDocumentPermissionInput
+}
+
+// Send marshals and sends the ModifyDocumentPermission API request.
+func (r ModifyDocumentPermissionRequest) Send() (*ModifyDocumentPermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyDocumentPermissionOutput), nil
+}
+
+// ModifyDocumentPermissionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDocumentPermission for more information on using the ModifyDocumentPermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Shares a Systems Manager document publicly or privately. If you share a document
+// privately, you must specify the AWS user account IDs for those people who
+// can use the document. If you share a document publicly, you must specify
+// All as the account ID.
 //
 //    // Example sending a request using the ModifyDocumentPermissionRequest method.
-//    req, resp := client.ModifyDocumentPermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyDocumentPermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermission
-func (c *SSM) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInput) (req *aws.Request, output *ModifyDocumentPermissionOutput) {
+func (c *SSM) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInput) ModifyDocumentPermissionRequest {
 	op := &aws.Operation{
 		Name:       opModifyDocumentPermission,
 		HTTPMethod: "POST",
@@ -7219,93 +4098,46 @@ func (c *SSM) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInp
 		input = &ModifyDocumentPermissionInput{}
 	}
 
-	output = &ModifyDocumentPermissionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyDocumentPermission API operation for Amazon Simple Systems Manager (SSM).
-//
-// Shares a Systems Manager document publicly or privately. If you share a document
-// privately, you must specify the AWS user account IDs for those people who
-// can use the document. If you share a document publicly, you must specify
-// All as the account ID.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation ModifyDocumentPermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidPermissionType "InvalidPermissionType"
-//   The permission type is not supported. Share is the only supported permission
-//   type.
-//
-//   * ErrCodeDocumentPermissionLimit "DocumentPermissionLimit"
-//   The document cannot be shared with more AWS user accounts. You can share
-//   a document with a maximum of 20 accounts. You can publicly share up to five
-//   documents. If you need to increase this limit, contact AWS Support.
-//
-//   * ErrCodeDocumentLimitExceeded "DocumentLimitExceeded"
-//   You can have at most 200 active Systems Manager documents.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermission
-func (c *SSM) ModifyDocumentPermission(input *ModifyDocumentPermissionInput) (*ModifyDocumentPermissionOutput, error) {
-	req, out := c.ModifyDocumentPermissionRequest(input)
-	return out, req.Send()
-}
-
-// ModifyDocumentPermissionWithContext is the same as ModifyDocumentPermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDocumentPermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ModifyDocumentPermissionWithContext(ctx aws.Context, input *ModifyDocumentPermissionInput, opts ...aws.Option) (*ModifyDocumentPermissionOutput, error) {
-	req, out := c.ModifyDocumentPermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyDocumentPermissionOutput{})
+	return ModifyDocumentPermissionRequest{Request: req, Input: input}
 }
 
 const opPutComplianceItems = "PutComplianceItems"
 
-// PutComplianceItemsRequest generates a "aws.Request" representing the
-// client's request for the PutComplianceItems operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutComplianceItemsRequest is a API request type for the PutComplianceItems API operation.
+type PutComplianceItemsRequest struct {
+	*aws.Request
+	Input *PutComplianceItemsInput
+}
+
+// Send marshals and sends the PutComplianceItems API request.
+func (r PutComplianceItemsRequest) Send() (*PutComplianceItemsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutComplianceItemsOutput), nil
+}
+
+// PutComplianceItemsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutComplianceItems for more information on using the PutComplianceItems
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Registers a compliance type and other compliance details on a designated
+// resource. This action lets you register custom compliance details with a
+// resource. This call overwrites existing compliance information on the resource,
+// so you must provide a full list of compliance items each time that you send
+// the request.
 //
 //    // Example sending a request using the PutComplianceItemsRequest method.
-//    req, resp := client.PutComplianceItemsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutComplianceItemsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItems
-func (c *SSM) PutComplianceItemsRequest(input *PutComplianceItemsInput) (req *aws.Request, output *PutComplianceItemsOutput) {
+func (c *SSM) PutComplianceItemsRequest(input *PutComplianceItemsInput) PutComplianceItemsRequest {
 	op := &aws.Operation{
 		Name:       opPutComplianceItems,
 		HTTPMethod: "POST",
@@ -7316,100 +4148,44 @@ func (c *SSM) PutComplianceItemsRequest(input *PutComplianceItemsInput) (req *aw
 		input = &PutComplianceItemsInput{}
 	}
 
-	output = &PutComplianceItemsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutComplianceItems API operation for Amazon Simple Systems Manager (SSM).
-//
-// Registers a compliance type and other compliance details on a designated
-// resource. This action lets you register custom compliance details with a
-// resource. This call overwrites existing compliance information on the resource,
-// so you must provide a full list of compliance items each time that you send
-// the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation PutComplianceItems for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidItemContentException "InvalidItemContentException"
-//   One or more content items is not valid.
-//
-//   * ErrCodeTotalSizeLimitExceededException "TotalSizeLimitExceededException"
-//   The size of inventory data has exceeded the total size limit for the resource.
-//
-//   * ErrCodeItemSizeLimitExceededException "ItemSizeLimitExceededException"
-//   The inventory item size has exceeded the size limit.
-//
-//   * ErrCodeComplianceTypeCountLimitExceededException "ComplianceTypeCountLimitExceededException"
-//   You specified too many custom compliance types. You can specify a maximum
-//   of 10 different types.
-//
-//   * ErrCodeInvalidResourceType "InvalidResourceType"
-//   The resource type is not valid. For example, if you are attempting to tag
-//   an instance, the instance must be a registered, managed instance.
-//
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItems
-func (c *SSM) PutComplianceItems(input *PutComplianceItemsInput) (*PutComplianceItemsOutput, error) {
-	req, out := c.PutComplianceItemsRequest(input)
-	return out, req.Send()
-}
-
-// PutComplianceItemsWithContext is the same as PutComplianceItems with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutComplianceItems for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) PutComplianceItemsWithContext(ctx aws.Context, input *PutComplianceItemsInput, opts ...aws.Option) (*PutComplianceItemsOutput, error) {
-	req, out := c.PutComplianceItemsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutComplianceItemsOutput{})
+	return PutComplianceItemsRequest{Request: req, Input: input}
 }
 
 const opPutInventory = "PutInventory"
 
-// PutInventoryRequest generates a "aws.Request" representing the
-// client's request for the PutInventory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutInventoryRequest is a API request type for the PutInventory API operation.
+type PutInventoryRequest struct {
+	*aws.Request
+	Input *PutInventoryInput
+}
+
+// Send marshals and sends the PutInventory API request.
+func (r PutInventoryRequest) Send() (*PutInventoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutInventoryOutput), nil
+}
+
+// PutInventoryRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutInventory for more information on using the PutInventory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Bulk update custom inventory items on one more instance. The request adds
+// an inventory item, if it doesn't already exist, or updates an inventory item,
+// if it does exist.
 //
 //    // Example sending a request using the PutInventoryRequest method.
-//    req, resp := client.PutInventoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutInventoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory
-func (c *SSM) PutInventoryRequest(input *PutInventoryInput) (req *aws.Request, output *PutInventoryOutput) {
+func (c *SSM) PutInventoryRequest(input *PutInventoryInput) PutInventoryRequest {
 	op := &aws.Operation{
 		Name:       opPutInventory,
 		HTTPMethod: "POST",
@@ -7420,128 +4196,42 @@ func (c *SSM) PutInventoryRequest(input *PutInventoryInput) (req *aws.Request, o
 		input = &PutInventoryInput{}
 	}
 
-	output = &PutInventoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutInventory API operation for Amazon Simple Systems Manager (SSM).
-//
-// Bulk update custom inventory items on one more instance. The request adds
-// an inventory item, if it doesn't already exist, or updates an inventory item,
-// if it does exist.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation PutInventory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidTypeNameException "InvalidTypeNameException"
-//   The parameter type name is not valid.
-//
-//   * ErrCodeInvalidItemContentException "InvalidItemContentException"
-//   One or more content items is not valid.
-//
-//   * ErrCodeTotalSizeLimitExceededException "TotalSizeLimitExceededException"
-//   The size of inventory data has exceeded the total size limit for the resource.
-//
-//   * ErrCodeItemSizeLimitExceededException "ItemSizeLimitExceededException"
-//   The inventory item size has exceeded the size limit.
-//
-//   * ErrCodeItemContentMismatchException "ItemContentMismatchException"
-//   The inventory item has invalid content.
-//
-//   * ErrCodeCustomSchemaCountLimitExceededException "CustomSchemaCountLimitExceededException"
-//   You have exceeded the limit for custom schemas. Delete one or more custom
-//   schemas and try again.
-//
-//   * ErrCodeUnsupportedInventorySchemaVersionException "UnsupportedInventorySchemaVersionException"
-//   Inventory item type schema version has to match supported versions in the
-//   service. Check output of GetInventorySchema to see the available schema version
-//   for each type.
-//
-//   * ErrCodeUnsupportedInventoryItemContextException "UnsupportedInventoryItemContextException"
-//   The Context attribute that you specified for the InventoryItem is not allowed
-//   for this inventory type. You can only use the Context attribute with inventory
-//   types like AWS:ComplianceItem.
-//
-//   * ErrCodeInvalidInventoryItemContextException "InvalidInventoryItemContextException"
-//   You specified invalid keys or values in the Context attribute for InventoryItem.
-//   Verify the keys and values, and try again.
-//
-//   * ErrCodeSubTypeCountLimitExceededException "SubTypeCountLimitExceededException"
-//   The sub-type count exceeded the limit for the inventory type.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory
-func (c *SSM) PutInventory(input *PutInventoryInput) (*PutInventoryOutput, error) {
-	req, out := c.PutInventoryRequest(input)
-	return out, req.Send()
-}
-
-// PutInventoryWithContext is the same as PutInventory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutInventory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) PutInventoryWithContext(ctx aws.Context, input *PutInventoryInput, opts ...aws.Option) (*PutInventoryOutput, error) {
-	req, out := c.PutInventoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutInventoryOutput{})
+	return PutInventoryRequest{Request: req, Input: input}
 }
 
 const opPutParameter = "PutParameter"
 
-// PutParameterRequest generates a "aws.Request" representing the
-// client's request for the PutParameter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutParameterRequest is a API request type for the PutParameter API operation.
+type PutParameterRequest struct {
+	*aws.Request
+	Input *PutParameterInput
+}
+
+// Send marshals and sends the PutParameter API request.
+func (r PutParameterRequest) Send() (*PutParameterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutParameterOutput), nil
+}
+
+// PutParameterRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutParameter for more information on using the PutParameter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Add one or more parameters to the system.
 //
 //    // Example sending a request using the PutParameterRequest method.
-//    req, resp := client.PutParameterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutParameterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter
-func (c *SSM) PutParameterRequest(input *PutParameterInput) (req *aws.Request, output *PutParameterOutput) {
+func (c *SSM) PutParameterRequest(input *PutParameterInput) PutParameterRequest {
 	op := &aws.Operation{
 		Name:       opPutParameter,
 		HTTPMethod: "POST",
@@ -7552,110 +4242,42 @@ func (c *SSM) PutParameterRequest(input *PutParameterInput) (req *aws.Request, o
 		input = &PutParameterInput{}
 	}
 
-	output = &PutParameterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutParameter API operation for Amazon Simple Systems Manager (SSM).
-//
-// Add one or more parameters to the system.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation PutParameter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidKeyId "InvalidKeyId"
-//   The query key ID is not valid.
-//
-//   * ErrCodeParameterLimitExceeded "ParameterLimitExceeded"
-//   You have exceeded the number of parameters for this AWS account. Delete one
-//   or more parameters and try again.
-//
-//   * ErrCodeTooManyUpdates "TooManyUpdates"
-//   There are concurrent updates for a resource that supports one update at a
-//   time.
-//
-//   * ErrCodeParameterAlreadyExists "ParameterAlreadyExists"
-//   The parameter already exists. You can't create duplicate parameters.
-//
-//   * ErrCodeHierarchyLevelLimitExceededException "HierarchyLevelLimitExceededException"
-//   A hierarchy can have a maximum of five levels. For example:
-//
-//   /Finance/Prod/IAD/OS/WinServ2016/license15
-//
-//   For more information, see Working with Systems Manager Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html).
-//
-//   * ErrCodeHierarchyTypeMismatchException "HierarchyTypeMismatchException"
-//   Parameter Store does not support changing a parameter type in a hierarchy.
-//   For example, you can't change a parameter from a String type to a SecureString
-//   type. You must create a new, unique parameter.
-//
-//   * ErrCodeInvalidAllowedPatternException "InvalidAllowedPatternException"
-//   The request does not meet the regular expression requirement.
-//
-//   * ErrCodeParameterPatternMismatchException "ParameterPatternMismatchException"
-//   The parameter name is not valid.
-//
-//   * ErrCodeUnsupportedParameterType "UnsupportedParameterType"
-//   The parameter type is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter
-func (c *SSM) PutParameter(input *PutParameterInput) (*PutParameterOutput, error) {
-	req, out := c.PutParameterRequest(input)
-	return out, req.Send()
-}
-
-// PutParameterWithContext is the same as PutParameter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutParameter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) PutParameterWithContext(ctx aws.Context, input *PutParameterInput, opts ...aws.Option) (*PutParameterOutput, error) {
-	req, out := c.PutParameterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutParameterOutput{})
+	return PutParameterRequest{Request: req, Input: input}
 }
 
 const opRegisterDefaultPatchBaseline = "RegisterDefaultPatchBaseline"
 
-// RegisterDefaultPatchBaselineRequest generates a "aws.Request" representing the
-// client's request for the RegisterDefaultPatchBaseline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterDefaultPatchBaselineRequest is a API request type for the RegisterDefaultPatchBaseline API operation.
+type RegisterDefaultPatchBaselineRequest struct {
+	*aws.Request
+	Input *RegisterDefaultPatchBaselineInput
+}
+
+// Send marshals and sends the RegisterDefaultPatchBaseline API request.
+func (r RegisterDefaultPatchBaselineRequest) Send() (*RegisterDefaultPatchBaselineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterDefaultPatchBaselineOutput), nil
+}
+
+// RegisterDefaultPatchBaselineRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterDefaultPatchBaseline for more information on using the RegisterDefaultPatchBaseline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Defines the default patch baseline.
 //
 //    // Example sending a request using the RegisterDefaultPatchBaselineRequest method.
-//    req, resp := client.RegisterDefaultPatchBaselineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterDefaultPatchBaselineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaseline
-func (c *SSM) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBaselineInput) (req *aws.Request, output *RegisterDefaultPatchBaselineOutput) {
+func (c *SSM) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBaselineInput) RegisterDefaultPatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opRegisterDefaultPatchBaseline,
 		HTTPMethod: "POST",
@@ -7666,83 +4288,42 @@ func (c *SSM) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBas
 		input = &RegisterDefaultPatchBaselineInput{}
 	}
 
-	output = &RegisterDefaultPatchBaselineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RegisterDefaultPatchBaseline API operation for Amazon Simple Systems Manager (SSM).
-//
-// Defines the default patch baseline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation RegisterDefaultPatchBaseline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaseline
-func (c *SSM) RegisterDefaultPatchBaseline(input *RegisterDefaultPatchBaselineInput) (*RegisterDefaultPatchBaselineOutput, error) {
-	req, out := c.RegisterDefaultPatchBaselineRequest(input)
-	return out, req.Send()
-}
-
-// RegisterDefaultPatchBaselineWithContext is the same as RegisterDefaultPatchBaseline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterDefaultPatchBaseline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) RegisterDefaultPatchBaselineWithContext(ctx aws.Context, input *RegisterDefaultPatchBaselineInput, opts ...aws.Option) (*RegisterDefaultPatchBaselineOutput, error) {
-	req, out := c.RegisterDefaultPatchBaselineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RegisterDefaultPatchBaselineOutput{})
+	return RegisterDefaultPatchBaselineRequest{Request: req, Input: input}
 }
 
 const opRegisterPatchBaselineForPatchGroup = "RegisterPatchBaselineForPatchGroup"
 
-// RegisterPatchBaselineForPatchGroupRequest generates a "aws.Request" representing the
-// client's request for the RegisterPatchBaselineForPatchGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterPatchBaselineForPatchGroupRequest is a API request type for the RegisterPatchBaselineForPatchGroup API operation.
+type RegisterPatchBaselineForPatchGroupRequest struct {
+	*aws.Request
+	Input *RegisterPatchBaselineForPatchGroupInput
+}
+
+// Send marshals and sends the RegisterPatchBaselineForPatchGroup API request.
+func (r RegisterPatchBaselineForPatchGroupRequest) Send() (*RegisterPatchBaselineForPatchGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterPatchBaselineForPatchGroupOutput), nil
+}
+
+// RegisterPatchBaselineForPatchGroupRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterPatchBaselineForPatchGroup for more information on using the RegisterPatchBaselineForPatchGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Registers a patch baseline for a patch group.
 //
 //    // Example sending a request using the RegisterPatchBaselineForPatchGroupRequest method.
-//    req, resp := client.RegisterPatchBaselineForPatchGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterPatchBaselineForPatchGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterPatchBaselineForPatchGroup
-func (c *SSM) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBaselineForPatchGroupInput) (req *aws.Request, output *RegisterPatchBaselineForPatchGroupOutput) {
+func (c *SSM) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBaselineForPatchGroupInput) RegisterPatchBaselineForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opRegisterPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
@@ -7753,91 +4334,42 @@ func (c *SSM) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBase
 		input = &RegisterPatchBaselineForPatchGroupInput{}
 	}
 
-	output = &RegisterPatchBaselineForPatchGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RegisterPatchBaselineForPatchGroup API operation for Amazon Simple Systems Manager (SSM).
-//
-// Registers a patch baseline for a patch group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation RegisterPatchBaselineForPatchGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   Error returned if an attempt is made to register a patch group with a patch
-//   baseline that is already registered with a different patch baseline.
-//
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Error returned when the caller has exceeded the default resource limits (e.g.
-//   too many Maintenance Windows have been created).
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterPatchBaselineForPatchGroup
-func (c *SSM) RegisterPatchBaselineForPatchGroup(input *RegisterPatchBaselineForPatchGroupInput) (*RegisterPatchBaselineForPatchGroupOutput, error) {
-	req, out := c.RegisterPatchBaselineForPatchGroupRequest(input)
-	return out, req.Send()
-}
-
-// RegisterPatchBaselineForPatchGroupWithContext is the same as RegisterPatchBaselineForPatchGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterPatchBaselineForPatchGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) RegisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *RegisterPatchBaselineForPatchGroupInput, opts ...aws.Option) (*RegisterPatchBaselineForPatchGroupOutput, error) {
-	req, out := c.RegisterPatchBaselineForPatchGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RegisterPatchBaselineForPatchGroupOutput{})
+	return RegisterPatchBaselineForPatchGroupRequest{Request: req, Input: input}
 }
 
 const opRegisterTargetWithMaintenanceWindow = "RegisterTargetWithMaintenanceWindow"
 
-// RegisterTargetWithMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the RegisterTargetWithMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterTargetWithMaintenanceWindowRequest is a API request type for the RegisterTargetWithMaintenanceWindow API operation.
+type RegisterTargetWithMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *RegisterTargetWithMaintenanceWindowInput
+}
+
+// Send marshals and sends the RegisterTargetWithMaintenanceWindow API request.
+func (r RegisterTargetWithMaintenanceWindowRequest) Send() (*RegisterTargetWithMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterTargetWithMaintenanceWindowOutput), nil
+}
+
+// RegisterTargetWithMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterTargetWithMaintenanceWindow for more information on using the RegisterTargetWithMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Registers a target with a Maintenance Window.
 //
 //    // Example sending a request using the RegisterTargetWithMaintenanceWindowRequest method.
-//    req, resp := client.RegisterTargetWithMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterTargetWithMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindow
-func (c *SSM) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTargetWithMaintenanceWindowInput) (req *aws.Request, output *RegisterTargetWithMaintenanceWindowOutput) {
+func (c *SSM) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTargetWithMaintenanceWindowInput) RegisterTargetWithMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opRegisterTargetWithMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -7848,87 +4380,42 @@ func (c *SSM) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTargetWi
 		input = &RegisterTargetWithMaintenanceWindowInput{}
 	}
 
-	output = &RegisterTargetWithMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RegisterTargetWithMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Registers a target with a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation RegisterTargetWithMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeIdempotentParameterMismatch "IdempotentParameterMismatch"
-//   Error returned when an idempotent operation is retried and the parameters
-//   don't match the original call to the API with the same idempotency token.
-//
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Error returned when the caller has exceeded the default resource limits (e.g.
-//   too many Maintenance Windows have been created).
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindow
-func (c *SSM) RegisterTargetWithMaintenanceWindow(input *RegisterTargetWithMaintenanceWindowInput) (*RegisterTargetWithMaintenanceWindowOutput, error) {
-	req, out := c.RegisterTargetWithMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// RegisterTargetWithMaintenanceWindowWithContext is the same as RegisterTargetWithMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterTargetWithMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) RegisterTargetWithMaintenanceWindowWithContext(ctx aws.Context, input *RegisterTargetWithMaintenanceWindowInput, opts ...aws.Option) (*RegisterTargetWithMaintenanceWindowOutput, error) {
-	req, out := c.RegisterTargetWithMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RegisterTargetWithMaintenanceWindowOutput{})
+	return RegisterTargetWithMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opRegisterTaskWithMaintenanceWindow = "RegisterTaskWithMaintenanceWindow"
 
-// RegisterTaskWithMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the RegisterTaskWithMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterTaskWithMaintenanceWindowRequest is a API request type for the RegisterTaskWithMaintenanceWindow API operation.
+type RegisterTaskWithMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *RegisterTaskWithMaintenanceWindowInput
+}
+
+// Send marshals and sends the RegisterTaskWithMaintenanceWindow API request.
+func (r RegisterTaskWithMaintenanceWindowRequest) Send() (*RegisterTaskWithMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterTaskWithMaintenanceWindowOutput), nil
+}
+
+// RegisterTaskWithMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterTaskWithMaintenanceWindow for more information on using the RegisterTaskWithMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds a new task to a Maintenance Window.
 //
 //    // Example sending a request using the RegisterTaskWithMaintenanceWindowRequest method.
-//    req, resp := client.RegisterTaskWithMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterTaskWithMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindow
-func (c *SSM) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWithMaintenanceWindowInput) (req *aws.Request, output *RegisterTaskWithMaintenanceWindowOutput) {
+func (c *SSM) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWithMaintenanceWindowInput) RegisterTaskWithMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opRegisterTaskWithMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -7939,91 +4426,42 @@ func (c *SSM) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWithMa
 		input = &RegisterTaskWithMaintenanceWindowInput{}
 	}
 
-	output = &RegisterTaskWithMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RegisterTaskWithMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Adds a new task to a Maintenance Window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation RegisterTaskWithMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeIdempotentParameterMismatch "IdempotentParameterMismatch"
-//   Error returned when an idempotent operation is retried and the parameters
-//   don't match the original call to the API with the same idempotency token.
-//
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Error returned when the caller has exceeded the default resource limits (e.g.
-//   too many Maintenance Windows have been created).
-//
-//   * ErrCodeFeatureNotAvailableException "FeatureNotAvailableException"
-//   You attempted to register a LAMBDA or STEP_FUNCTION task in a region where
-//   the corresponding service is not available.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindow
-func (c *SSM) RegisterTaskWithMaintenanceWindow(input *RegisterTaskWithMaintenanceWindowInput) (*RegisterTaskWithMaintenanceWindowOutput, error) {
-	req, out := c.RegisterTaskWithMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// RegisterTaskWithMaintenanceWindowWithContext is the same as RegisterTaskWithMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterTaskWithMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) RegisterTaskWithMaintenanceWindowWithContext(ctx aws.Context, input *RegisterTaskWithMaintenanceWindowInput, opts ...aws.Option) (*RegisterTaskWithMaintenanceWindowOutput, error) {
-	req, out := c.RegisterTaskWithMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RegisterTaskWithMaintenanceWindowOutput{})
+	return RegisterTaskWithMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromResourceRequest is a API request type for the RemoveTagsFromResource API operation.
+type RemoveTagsFromResourceRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromResourceInput
+}
+
+// Send marshals and sends the RemoveTagsFromResource API request.
+func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// RemoveTagsFromResourceRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTagsFromResource for more information on using the RemoveTagsFromResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes all tags from the specified resource.
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResource
-func (c *SSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+func (c *SSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -8034,83 +4472,43 @@ func (c *SSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) 
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	output = &RemoveTagsFromResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTagsFromResource API operation for Amazon Simple Systems Manager (SSM).
-//
-// Removes all tags from the specified resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation RemoveTagsFromResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceType "InvalidResourceType"
-//   The resource type is not valid. For example, if you are attempting to tag
-//   an instance, the instance must be a registered, managed instance.
-//
-//   * ErrCodeInvalidResourceId "InvalidResourceId"
-//   The resource ID is not valid. Verify that you entered the correct ID and
-//   try again.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResource
-func (c *SSM) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromResourceWithContext is the same as RemoveTagsFromResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
 const opSendAutomationSignal = "SendAutomationSignal"
 
-// SendAutomationSignalRequest generates a "aws.Request" representing the
-// client's request for the SendAutomationSignal operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SendAutomationSignalRequest is a API request type for the SendAutomationSignal API operation.
+type SendAutomationSignalRequest struct {
+	*aws.Request
+	Input *SendAutomationSignalInput
+}
+
+// Send marshals and sends the SendAutomationSignal API request.
+func (r SendAutomationSignalRequest) Send() (*SendAutomationSignalOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendAutomationSignalOutput), nil
+}
+
+// SendAutomationSignalRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendAutomationSignal for more information on using the SendAutomationSignal
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sends a signal to an Automation execution to change the current behavior
+// or status of the execution.
 //
 //    // Example sending a request using the SendAutomationSignalRequest method.
-//    req, resp := client.SendAutomationSignalRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SendAutomationSignalRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignal
-func (c *SSM) SendAutomationSignalRequest(input *SendAutomationSignalInput) (req *aws.Request, output *SendAutomationSignalOutput) {
+func (c *SSM) SendAutomationSignalRequest(input *SendAutomationSignalInput) SendAutomationSignalRequest {
 	op := &aws.Operation{
 		Name:       opSendAutomationSignal,
 		HTTPMethod: "POST",
@@ -8121,83 +4519,42 @@ func (c *SSM) SendAutomationSignalRequest(input *SendAutomationSignalInput) (req
 		input = &SendAutomationSignalInput{}
 	}
 
-	output = &SendAutomationSignalOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SendAutomationSignal API operation for Amazon Simple Systems Manager (SSM).
-//
-// Sends a signal to an Automation execution to change the current behavior
-// or status of the execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation SendAutomationSignal for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAutomationExecutionNotFoundException "AutomationExecutionNotFoundException"
-//   There is no automation execution information for the requested automation
-//   execution ID.
-//
-//   * ErrCodeInvalidAutomationSignalException "InvalidAutomationSignalException"
-//   The signal is not valid for the current Automation execution.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignal
-func (c *SSM) SendAutomationSignal(input *SendAutomationSignalInput) (*SendAutomationSignalOutput, error) {
-	req, out := c.SendAutomationSignalRequest(input)
-	return out, req.Send()
-}
-
-// SendAutomationSignalWithContext is the same as SendAutomationSignal with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendAutomationSignal for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) SendAutomationSignalWithContext(ctx aws.Context, input *SendAutomationSignalInput, opts ...aws.Option) (*SendAutomationSignalOutput, error) {
-	req, out := c.SendAutomationSignalRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SendAutomationSignalOutput{})
+	return SendAutomationSignalRequest{Request: req, Input: input}
 }
 
 const opSendCommand = "SendCommand"
 
-// SendCommandRequest generates a "aws.Request" representing the
-// client's request for the SendCommand operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SendCommandRequest is a API request type for the SendCommand API operation.
+type SendCommandRequest struct {
+	*aws.Request
+	Input *SendCommandInput
+}
+
+// Send marshals and sends the SendCommand API request.
+func (r SendCommandRequest) Send() (*SendCommandOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendCommandOutput), nil
+}
+
+// SendCommandRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendCommand for more information on using the SendCommand
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Executes commands on one or more managed instances.
 //
 //    // Example sending a request using the SendCommandRequest method.
-//    req, resp := client.SendCommandRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SendCommandRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand
-func (c *SSM) SendCommandRequest(input *SendCommandInput) (req *aws.Request, output *SendCommandOutput) {
+func (c *SSM) SendCommandRequest(input *SendCommandInput) SendCommandRequest {
 	op := &aws.Operation{
 		Name:       opSendCommand,
 		HTTPMethod: "POST",
@@ -8208,122 +4565,42 @@ func (c *SSM) SendCommandRequest(input *SendCommandInput) (req *aws.Request, out
 		input = &SendCommandInput{}
 	}
 
-	output = &SendCommandOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SendCommand API operation for Amazon Simple Systems Manager (SSM).
-//
-// Executes commands on one or more managed instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation SendCommand for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDuplicateInstanceId "DuplicateInstanceId"
-//   You cannot specify an instance ID in more than one association.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidOutputFolder "InvalidOutputFolder"
-//   The S3 bucket does not exist.
-//
-//   * ErrCodeInvalidParameters "InvalidParameters"
-//   You must specify values for all required parameters in the Systems Manager
-//   document. You can only supply values to parameters defined in the Systems
-//   Manager document.
-//
-//   * ErrCodeUnsupportedPlatformType "UnsupportedPlatformType"
-//   The document does not support the platform type of the given instance ID(s).
-//   For example, you sent an document for a Windows instance to a Linux instance.
-//
-//   * ErrCodeMaxDocumentSizeExceeded "MaxDocumentSizeExceeded"
-//   The size limit of a document is 64 KB.
-//
-//   * ErrCodeInvalidRole "InvalidRole"
-//   The role name can't contain invalid characters. Also verify that you specified
-//   an IAM role for notifications that includes the required trust policy. For
-//   information about configuring the IAM role for Run Command notifications,
-//   see Configuring Amazon SNS Notifications for Run Command (http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html)
-//   in the Amazon EC2 Systems Manager User Guide.
-//
-//   * ErrCodeInvalidNotificationConfig "InvalidNotificationConfig"
-//   One or more configuration items is not valid. Verify that a valid Amazon
-//   Resource Name (ARN) was provided for an Amazon SNS topic.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand
-func (c *SSM) SendCommand(input *SendCommandInput) (*SendCommandOutput, error) {
-	req, out := c.SendCommandRequest(input)
-	return out, req.Send()
-}
-
-// SendCommandWithContext is the same as SendCommand with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendCommand for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) SendCommandWithContext(ctx aws.Context, input *SendCommandInput, opts ...aws.Option) (*SendCommandOutput, error) {
-	req, out := c.SendCommandRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SendCommandOutput{})
+	return SendCommandRequest{Request: req, Input: input}
 }
 
 const opStartAutomationExecution = "StartAutomationExecution"
 
-// StartAutomationExecutionRequest generates a "aws.Request" representing the
-// client's request for the StartAutomationExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartAutomationExecutionRequest is a API request type for the StartAutomationExecution API operation.
+type StartAutomationExecutionRequest struct {
+	*aws.Request
+	Input *StartAutomationExecutionInput
+}
+
+// Send marshals and sends the StartAutomationExecution API request.
+func (r StartAutomationExecutionRequest) Send() (*StartAutomationExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartAutomationExecutionOutput), nil
+}
+
+// StartAutomationExecutionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartAutomationExecution for more information on using the StartAutomationExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Initiates execution of an Automation document.
 //
 //    // Example sending a request using the StartAutomationExecutionRequest method.
-//    req, resp := client.StartAutomationExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartAutomationExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecution
-func (c *SSM) StartAutomationExecutionRequest(input *StartAutomationExecutionInput) (req *aws.Request, output *StartAutomationExecutionOutput) {
+func (c *SSM) StartAutomationExecutionRequest(input *StartAutomationExecutionInput) StartAutomationExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStartAutomationExecution,
 		HTTPMethod: "POST",
@@ -8334,94 +4611,42 @@ func (c *SSM) StartAutomationExecutionRequest(input *StartAutomationExecutionInp
 		input = &StartAutomationExecutionInput{}
 	}
 
-	output = &StartAutomationExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartAutomationExecution API operation for Amazon Simple Systems Manager (SSM).
-//
-// Initiates execution of an Automation document.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation StartAutomationExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAutomationDefinitionNotFoundException "AutomationDefinitionNotFoundException"
-//   An Automation document with the specified name could not be found.
-//
-//   * ErrCodeInvalidAutomationExecutionParametersException "InvalidAutomationExecutionParametersException"
-//   The supplied parameters for invoking the specified Automation document are
-//   incorrect. For example, they may not match the set of parameters permitted
-//   for the specified Automation document.
-//
-//   * ErrCodeAutomationExecutionLimitExceededException "AutomationExecutionLimitExceededException"
-//   The number of simultaneously running Automation executions exceeded the allowable
-//   limit.
-//
-//   * ErrCodeAutomationDefinitionVersionNotFoundException "AutomationDefinitionVersionNotFoundException"
-//   An Automation document with the specified name and version could not be found.
-//
-//   * ErrCodeIdempotentParameterMismatch "IdempotentParameterMismatch"
-//   Error returned when an idempotent operation is retried and the parameters
-//   don't match the original call to the API with the same idempotency token.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecution
-func (c *SSM) StartAutomationExecution(input *StartAutomationExecutionInput) (*StartAutomationExecutionOutput, error) {
-	req, out := c.StartAutomationExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StartAutomationExecutionWithContext is the same as StartAutomationExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartAutomationExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) StartAutomationExecutionWithContext(ctx aws.Context, input *StartAutomationExecutionInput, opts ...aws.Option) (*StartAutomationExecutionOutput, error) {
-	req, out := c.StartAutomationExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartAutomationExecutionOutput{})
+	return StartAutomationExecutionRequest{Request: req, Input: input}
 }
 
 const opStopAutomationExecution = "StopAutomationExecution"
 
-// StopAutomationExecutionRequest generates a "aws.Request" representing the
-// client's request for the StopAutomationExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopAutomationExecutionRequest is a API request type for the StopAutomationExecution API operation.
+type StopAutomationExecutionRequest struct {
+	*aws.Request
+	Input *StopAutomationExecutionInput
+}
+
+// Send marshals and sends the StopAutomationExecution API request.
+func (r StopAutomationExecutionRequest) Send() (*StopAutomationExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopAutomationExecutionOutput), nil
+}
+
+// StopAutomationExecutionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopAutomationExecution for more information on using the StopAutomationExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stop an Automation that is currently executing.
 //
 //    // Example sending a request using the StopAutomationExecutionRequest method.
-//    req, resp := client.StopAutomationExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopAutomationExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecution
-func (c *SSM) StopAutomationExecutionRequest(input *StopAutomationExecutionInput) (req *aws.Request, output *StopAutomationExecutionOutput) {
+func (c *SSM) StopAutomationExecutionRequest(input *StopAutomationExecutionInput) StopAutomationExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStopAutomationExecution,
 		HTTPMethod: "POST",
@@ -8432,79 +4657,43 @@ func (c *SSM) StopAutomationExecutionRequest(input *StopAutomationExecutionInput
 		input = &StopAutomationExecutionInput{}
 	}
 
-	output = &StopAutomationExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopAutomationExecution API operation for Amazon Simple Systems Manager (SSM).
-//
-// Stop an Automation that is currently executing.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation StopAutomationExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAutomationExecutionNotFoundException "AutomationExecutionNotFoundException"
-//   There is no automation execution information for the requested automation
-//   execution ID.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecution
-func (c *SSM) StopAutomationExecution(input *StopAutomationExecutionInput) (*StopAutomationExecutionOutput, error) {
-	req, out := c.StopAutomationExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StopAutomationExecutionWithContext is the same as StopAutomationExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopAutomationExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) StopAutomationExecutionWithContext(ctx aws.Context, input *StopAutomationExecutionInput, opts ...aws.Option) (*StopAutomationExecutionOutput, error) {
-	req, out := c.StopAutomationExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopAutomationExecutionOutput{})
+	return StopAutomationExecutionRequest{Request: req, Input: input}
 }
 
 const opUpdateAssociation = "UpdateAssociation"
 
-// UpdateAssociationRequest generates a "aws.Request" representing the
-// client's request for the UpdateAssociation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateAssociationRequest is a API request type for the UpdateAssociation API operation.
+type UpdateAssociationRequest struct {
+	*aws.Request
+	Input *UpdateAssociationInput
+}
+
+// Send marshals and sends the UpdateAssociation API request.
+func (r UpdateAssociationRequest) Send() (*UpdateAssociationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAssociationOutput), nil
+}
+
+// UpdateAssociationRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAssociation for more information on using the UpdateAssociation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an association. You can update the association name and version,
+// the document version, schedule, parameters, and Amazon S3 output.
 //
 //    // Example sending a request using the UpdateAssociationRequest method.
-//    req, resp := client.UpdateAssociationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateAssociationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation
-func (c *SSM) UpdateAssociationRequest(input *UpdateAssociationInput) (req *aws.Request, output *UpdateAssociationOutput) {
+func (c *SSM) UpdateAssociationRequest(input *UpdateAssociationInput) UpdateAssociationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAssociation,
 		HTTPMethod: "POST",
@@ -8515,116 +4704,43 @@ func (c *SSM) UpdateAssociationRequest(input *UpdateAssociationInput) (req *aws.
 		input = &UpdateAssociationInput{}
 	}
 
-	output = &UpdateAssociationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateAssociation API operation for Amazon Simple Systems Manager (SSM).
-//
-// Updates an association. You can update the association name and version,
-// the document version, schedule, parameters, and Amazon S3 output.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateAssociation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidSchedule "InvalidSchedule"
-//   The schedule is invalid. Verify your cron or rate expression and try again.
-//
-//   * ErrCodeInvalidParameters "InvalidParameters"
-//   You must specify values for all required parameters in the Systems Manager
-//   document. You can only supply values to parameters defined in the Systems
-//   Manager document.
-//
-//   * ErrCodeInvalidOutputLocation "InvalidOutputLocation"
-//   The output location is not valid or does not exist.
-//
-//   * ErrCodeInvalidDocumentVersion "InvalidDocumentVersion"
-//   The document version is not valid or does not exist.
-//
-//   * ErrCodeAssociationDoesNotExist "AssociationDoesNotExist"
-//   The specified association does not exist.
-//
-//   * ErrCodeInvalidUpdate "InvalidUpdate"
-//   The update is not valid.
-//
-//   * ErrCodeTooManyUpdates "TooManyUpdates"
-//   There are concurrent updates for a resource that supports one update at a
-//   time.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidTarget "InvalidTarget"
-//   The target is not valid or does not exist. It might not be configured for
-//   EC2 Systems Manager or you might not have permission to perform the operation.
-//
-//   * ErrCodeInvalidAssociationVersion "InvalidAssociationVersion"
-//   The version you specified is not valid. Use ListAssociationVersions to view
-//   all versions of an association according to the association ID. Or, use the
-//   $LATEST parameter to view the latest version of the association.
-//
-//   * ErrCodeAssociationVersionLimitExceeded "AssociationVersionLimitExceeded"
-//   You have reached the maximum number versions allowed for an association.
-//   Each association has a limit of 1,000 versions.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation
-func (c *SSM) UpdateAssociation(input *UpdateAssociationInput) (*UpdateAssociationOutput, error) {
-	req, out := c.UpdateAssociationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAssociationWithContext is the same as UpdateAssociation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAssociation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateAssociationWithContext(ctx aws.Context, input *UpdateAssociationInput, opts ...aws.Option) (*UpdateAssociationOutput, error) {
-	req, out := c.UpdateAssociationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateAssociationOutput{})
+	return UpdateAssociationRequest{Request: req, Input: input}
 }
 
 const opUpdateAssociationStatus = "UpdateAssociationStatus"
 
-// UpdateAssociationStatusRequest generates a "aws.Request" representing the
-// client's request for the UpdateAssociationStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateAssociationStatusRequest is a API request type for the UpdateAssociationStatus API operation.
+type UpdateAssociationStatusRequest struct {
+	*aws.Request
+	Input *UpdateAssociationStatusInput
+}
+
+// Send marshals and sends the UpdateAssociationStatus API request.
+func (r UpdateAssociationStatusRequest) Send() (*UpdateAssociationStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAssociationStatusOutput), nil
+}
+
+// UpdateAssociationStatusRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAssociationStatus for more information on using the UpdateAssociationStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the status of the Systems Manager document associated with the specified
+// instance.
 //
 //    // Example sending a request using the UpdateAssociationStatusRequest method.
-//    req, resp := client.UpdateAssociationStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateAssociationStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus
-func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput) (req *aws.Request, output *UpdateAssociationStatusOutput) {
+func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput) UpdateAssociationStatusRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAssociationStatus,
 		HTTPMethod: "POST",
@@ -8635,104 +4751,42 @@ func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput
 		input = &UpdateAssociationStatusInput{}
 	}
 
-	output = &UpdateAssociationStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateAssociationStatus API operation for Amazon Simple Systems Manager (SSM).
-//
-// Updates the status of the Systems Manager document associated with the specified
-// instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateAssociationStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeAssociationDoesNotExist "AssociationDoesNotExist"
-//   The specified association does not exist.
-//
-//   * ErrCodeStatusUnchanged "StatusUnchanged"
-//   The updated status is the same as the current status.
-//
-//   * ErrCodeTooManyUpdates "TooManyUpdates"
-//   There are concurrent updates for a resource that supports one update at a
-//   time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus
-func (c *SSM) UpdateAssociationStatus(input *UpdateAssociationStatusInput) (*UpdateAssociationStatusOutput, error) {
-	req, out := c.UpdateAssociationStatusRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAssociationStatusWithContext is the same as UpdateAssociationStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAssociationStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateAssociationStatusWithContext(ctx aws.Context, input *UpdateAssociationStatusInput, opts ...aws.Option) (*UpdateAssociationStatusOutput, error) {
-	req, out := c.UpdateAssociationStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateAssociationStatusOutput{})
+	return UpdateAssociationStatusRequest{Request: req, Input: input}
 }
 
 const opUpdateDocument = "UpdateDocument"
 
-// UpdateDocumentRequest generates a "aws.Request" representing the
-// client's request for the UpdateDocument operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDocumentRequest is a API request type for the UpdateDocument API operation.
+type UpdateDocumentRequest struct {
+	*aws.Request
+	Input *UpdateDocumentInput
+}
+
+// Send marshals and sends the UpdateDocument API request.
+func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDocumentOutput), nil
+}
+
+// UpdateDocumentRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDocument for more information on using the UpdateDocument
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The document you want to update.
 //
 //    // Example sending a request using the UpdateDocumentRequest method.
-//    req, resp := client.UpdateDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDocumentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument
-func (c *SSM) UpdateDocumentRequest(input *UpdateDocumentInput) (req *aws.Request, output *UpdateDocumentOutput) {
+func (c *SSM) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDocument,
 		HTTPMethod: "POST",
@@ -8743,98 +4797,42 @@ func (c *SSM) UpdateDocumentRequest(input *UpdateDocumentInput) (req *aws.Reques
 		input = &UpdateDocumentInput{}
 	}
 
-	output = &UpdateDocumentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDocument API operation for Amazon Simple Systems Manager (SSM).
-//
-// The document you want to update.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateDocument for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMaxDocumentSizeExceeded "MaxDocumentSizeExceeded"
-//   The size limit of a document is 64 KB.
-//
-//   * ErrCodeDocumentVersionLimitExceeded "DocumentVersionLimitExceeded"
-//   The document has too many versions. Delete one or more document versions
-//   and try again.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeDuplicateDocumentContent "DuplicateDocumentContent"
-//   The content of the association document matches another document. Change
-//   the content of the document and try again.
-//
-//   * ErrCodeInvalidDocumentContent "InvalidDocumentContent"
-//   The content for the document is not valid.
-//
-//   * ErrCodeInvalidDocumentVersion "InvalidDocumentVersion"
-//   The document version is not valid or does not exist.
-//
-//   * ErrCodeInvalidDocumentSchemaVersion "InvalidDocumentSchemaVersion"
-//   The version of the document schema is not supported.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument
-func (c *SSM) UpdateDocument(input *UpdateDocumentInput) (*UpdateDocumentOutput, error) {
-	req, out := c.UpdateDocumentRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDocumentWithContext is the same as UpdateDocument with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDocument for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateDocumentWithContext(ctx aws.Context, input *UpdateDocumentInput, opts ...aws.Option) (*UpdateDocumentOutput, error) {
-	req, out := c.UpdateDocumentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDocumentOutput{})
+	return UpdateDocumentRequest{Request: req, Input: input}
 }
 
 const opUpdateDocumentDefaultVersion = "UpdateDocumentDefaultVersion"
 
-// UpdateDocumentDefaultVersionRequest generates a "aws.Request" representing the
-// client's request for the UpdateDocumentDefaultVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDocumentDefaultVersionRequest is a API request type for the UpdateDocumentDefaultVersion API operation.
+type UpdateDocumentDefaultVersionRequest struct {
+	*aws.Request
+	Input *UpdateDocumentDefaultVersionInput
+}
+
+// Send marshals and sends the UpdateDocumentDefaultVersion API request.
+func (r UpdateDocumentDefaultVersionRequest) Send() (*UpdateDocumentDefaultVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDocumentDefaultVersionOutput), nil
+}
+
+// UpdateDocumentDefaultVersionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDocumentDefaultVersion for more information on using the UpdateDocumentDefaultVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Set the default version of a document.
 //
 //    // Example sending a request using the UpdateDocumentDefaultVersionRequest method.
-//    req, resp := client.UpdateDocumentDefaultVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDocumentDefaultVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersion
-func (c *SSM) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVersionInput) (req *aws.Request, output *UpdateDocumentDefaultVersionOutput) {
+func (c *SSM) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVersionInput) UpdateDocumentDefaultVersionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDocumentDefaultVersion,
 		HTTPMethod: "POST",
@@ -8845,84 +4843,42 @@ func (c *SSM) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVe
 		input = &UpdateDocumentDefaultVersionInput{}
 	}
 
-	output = &UpdateDocumentDefaultVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDocumentDefaultVersion API operation for Amazon Simple Systems Manager (SSM).
-//
-// Set the default version of a document.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateDocumentDefaultVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeInvalidDocument "InvalidDocument"
-//   The specified document does not exist.
-//
-//   * ErrCodeInvalidDocumentVersion "InvalidDocumentVersion"
-//   The document version is not valid or does not exist.
-//
-//   * ErrCodeInvalidDocumentSchemaVersion "InvalidDocumentSchemaVersion"
-//   The version of the document schema is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersion
-func (c *SSM) UpdateDocumentDefaultVersion(input *UpdateDocumentDefaultVersionInput) (*UpdateDocumentDefaultVersionOutput, error) {
-	req, out := c.UpdateDocumentDefaultVersionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDocumentDefaultVersionWithContext is the same as UpdateDocumentDefaultVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDocumentDefaultVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateDocumentDefaultVersionWithContext(ctx aws.Context, input *UpdateDocumentDefaultVersionInput, opts ...aws.Option) (*UpdateDocumentDefaultVersionOutput, error) {
-	req, out := c.UpdateDocumentDefaultVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDocumentDefaultVersionOutput{})
+	return UpdateDocumentDefaultVersionRequest{Request: req, Input: input}
 }
 
 const opUpdateMaintenanceWindow = "UpdateMaintenanceWindow"
 
-// UpdateMaintenanceWindowRequest generates a "aws.Request" representing the
-// client's request for the UpdateMaintenanceWindow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateMaintenanceWindowRequest is a API request type for the UpdateMaintenanceWindow API operation.
+type UpdateMaintenanceWindowRequest struct {
+	*aws.Request
+	Input *UpdateMaintenanceWindowInput
+}
+
+// Send marshals and sends the UpdateMaintenanceWindow API request.
+func (r UpdateMaintenanceWindowRequest) Send() (*UpdateMaintenanceWindowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMaintenanceWindowOutput), nil
+}
+
+// UpdateMaintenanceWindowRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateMaintenanceWindow for more information on using the UpdateMaintenanceWindow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing Maintenance Window. Only specified parameters are modified.
 //
 //    // Example sending a request using the UpdateMaintenanceWindowRequest method.
-//    req, resp := client.UpdateMaintenanceWindowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateMaintenanceWindowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindow
-func (c *SSM) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowInput) (req *aws.Request, output *UpdateMaintenanceWindowOutput) {
+func (c *SSM) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowInput) UpdateMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -8933,95 +4889,30 @@ func (c *SSM) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowInput
 		input = &UpdateMaintenanceWindowInput{}
 	}
 
-	output = &UpdateMaintenanceWindowOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateMaintenanceWindow API operation for Amazon Simple Systems Manager (SSM).
-//
-// Updates an existing Maintenance Window. Only specified parameters are modified.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateMaintenanceWindow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindow
-func (c *SSM) UpdateMaintenanceWindow(input *UpdateMaintenanceWindowInput) (*UpdateMaintenanceWindowOutput, error) {
-	req, out := c.UpdateMaintenanceWindowRequest(input)
-	return out, req.Send()
-}
-
-// UpdateMaintenanceWindowWithContext is the same as UpdateMaintenanceWindow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateMaintenanceWindow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateMaintenanceWindowWithContext(ctx aws.Context, input *UpdateMaintenanceWindowInput, opts ...aws.Option) (*UpdateMaintenanceWindowOutput, error) {
-	req, out := c.UpdateMaintenanceWindowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateMaintenanceWindowOutput{})
+	return UpdateMaintenanceWindowRequest{Request: req, Input: input}
 }
 
 const opUpdateMaintenanceWindowTarget = "UpdateMaintenanceWindowTarget"
 
-// UpdateMaintenanceWindowTargetRequest generates a "aws.Request" representing the
-// client's request for the UpdateMaintenanceWindowTarget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateMaintenanceWindowTarget for more information on using the UpdateMaintenanceWindowTarget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateMaintenanceWindowTargetRequest method.
-//    req, resp := client.UpdateMaintenanceWindowTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTarget
-func (c *SSM) UpdateMaintenanceWindowTargetRequest(input *UpdateMaintenanceWindowTargetInput) (req *aws.Request, output *UpdateMaintenanceWindowTargetOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateMaintenanceWindowTarget,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateMaintenanceWindowTargetInput{}
-	}
-
-	output = &UpdateMaintenanceWindowTargetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateMaintenanceWindowTargetRequest is a API request type for the UpdateMaintenanceWindowTarget API operation.
+type UpdateMaintenanceWindowTargetRequest struct {
+	*aws.Request
+	Input *UpdateMaintenanceWindowTargetInput
 }
 
-// UpdateMaintenanceWindowTarget API operation for Amazon Simple Systems Manager (SSM).
+// Send marshals and sends the UpdateMaintenanceWindowTarget API request.
+func (r UpdateMaintenanceWindowTargetRequest) Send() (*UpdateMaintenanceWindowTargetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMaintenanceWindowTargetOutput), nil
+}
+
+// UpdateMaintenanceWindowTargetRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
 // Modifies the target of an existing Maintenance Window. You can't change the
 // target type, but you can change the following:
@@ -9041,86 +4932,49 @@ func (c *SSM) UpdateMaintenanceWindowTargetRequest(input *UpdateMaintenanceWindo
 //
 // If a parameter is null, then the corresponding field is not modified.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateMaintenanceWindowTarget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTarget
-func (c *SSM) UpdateMaintenanceWindowTarget(input *UpdateMaintenanceWindowTargetInput) (*UpdateMaintenanceWindowTargetOutput, error) {
-	req, out := c.UpdateMaintenanceWindowTargetRequest(input)
-	return out, req.Send()
-}
-
-// UpdateMaintenanceWindowTargetWithContext is the same as UpdateMaintenanceWindowTarget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateMaintenanceWindowTarget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateMaintenanceWindowTargetWithContext(ctx aws.Context, input *UpdateMaintenanceWindowTargetInput, opts ...aws.Option) (*UpdateMaintenanceWindowTargetOutput, error) {
-	req, out := c.UpdateMaintenanceWindowTargetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateMaintenanceWindowTask = "UpdateMaintenanceWindowTask"
-
-// UpdateMaintenanceWindowTaskRequest generates a "aws.Request" representing the
-// client's request for the UpdateMaintenanceWindowTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateMaintenanceWindowTask for more information on using the UpdateMaintenanceWindowTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateMaintenanceWindowTaskRequest method.
-//    req, resp := client.UpdateMaintenanceWindowTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateMaintenanceWindowTargetRequest method.
+//    req := client.UpdateMaintenanceWindowTargetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTask
-func (c *SSM) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWindowTaskInput) (req *aws.Request, output *UpdateMaintenanceWindowTaskOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTarget
+func (c *SSM) UpdateMaintenanceWindowTargetRequest(input *UpdateMaintenanceWindowTargetInput) UpdateMaintenanceWindowTargetRequest {
 	op := &aws.Operation{
-		Name:       opUpdateMaintenanceWindowTask,
+		Name:       opUpdateMaintenanceWindowTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateMaintenanceWindowTaskInput{}
+		input = &UpdateMaintenanceWindowTargetInput{}
 	}
 
-	output = &UpdateMaintenanceWindowTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateMaintenanceWindowTargetOutput{})
+	return UpdateMaintenanceWindowTargetRequest{Request: req, Input: input}
 }
 
-// UpdateMaintenanceWindowTask API operation for Amazon Simple Systems Manager (SSM).
+const opUpdateMaintenanceWindowTask = "UpdateMaintenanceWindowTask"
+
+// UpdateMaintenanceWindowTaskRequest is a API request type for the UpdateMaintenanceWindowTask API operation.
+type UpdateMaintenanceWindowTaskRequest struct {
+	*aws.Request
+	Input *UpdateMaintenanceWindowTaskInput
+}
+
+// Send marshals and sends the UpdateMaintenanceWindowTask API request.
+func (r UpdateMaintenanceWindowTaskRequest) Send() (*UpdateMaintenanceWindowTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMaintenanceWindowTaskOutput), nil
+}
+
+// UpdateMaintenanceWindowTaskRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
 // Modifies a task assigned to a Maintenance Window. You can't change the task
 // type, but you can change the following values:
@@ -9143,70 +4997,62 @@ func (c *SSM) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWindowT
 // action are required for this request. Optional fields that aren't specified
 // are set to null.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateMaintenanceWindowTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the UpdateMaintenanceWindowTaskRequest method.
+//    req := client.UpdateMaintenanceWindowTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTask
-func (c *SSM) UpdateMaintenanceWindowTask(input *UpdateMaintenanceWindowTaskInput) (*UpdateMaintenanceWindowTaskOutput, error) {
-	req, out := c.UpdateMaintenanceWindowTaskRequest(input)
-	return out, req.Send()
-}
+func (c *SSM) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWindowTaskInput) UpdateMaintenanceWindowTaskRequest {
+	op := &aws.Operation{
+		Name:       opUpdateMaintenanceWindowTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateMaintenanceWindowTaskWithContext is the same as UpdateMaintenanceWindowTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateMaintenanceWindowTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateMaintenanceWindowTaskWithContext(ctx aws.Context, input *UpdateMaintenanceWindowTaskInput, opts ...aws.Option) (*UpdateMaintenanceWindowTaskOutput, error) {
-	req, out := c.UpdateMaintenanceWindowTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateMaintenanceWindowTaskInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateMaintenanceWindowTaskOutput{})
+	return UpdateMaintenanceWindowTaskRequest{Request: req, Input: input}
 }
 
 const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 
-// UpdateManagedInstanceRoleRequest generates a "aws.Request" representing the
-// client's request for the UpdateManagedInstanceRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateManagedInstanceRoleRequest is a API request type for the UpdateManagedInstanceRole API operation.
+type UpdateManagedInstanceRoleRequest struct {
+	*aws.Request
+	Input *UpdateManagedInstanceRoleInput
+}
+
+// Send marshals and sends the UpdateManagedInstanceRole API request.
+func (r UpdateManagedInstanceRoleRequest) Send() (*UpdateManagedInstanceRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateManagedInstanceRoleOutput), nil
+}
+
+// UpdateManagedInstanceRoleRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateManagedInstanceRole for more information on using the UpdateManagedInstanceRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Assigns or changes an Amazon Identity and Access Management (IAM) role to
+// the managed instance.
 //
 //    // Example sending a request using the UpdateManagedInstanceRoleRequest method.
-//    req, resp := client.UpdateManagedInstanceRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateManagedInstanceRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRole
-func (c *SSM) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleInput) (req *aws.Request, output *UpdateManagedInstanceRoleOutput) {
+func (c *SSM) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleInput) UpdateManagedInstanceRoleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateManagedInstanceRole,
 		HTTPMethod: "POST",
@@ -9217,91 +5063,43 @@ func (c *SSM) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleI
 		input = &UpdateManagedInstanceRoleInput{}
 	}
 
-	output = &UpdateManagedInstanceRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateManagedInstanceRole API operation for Amazon Simple Systems Manager (SSM).
-//
-// Assigns or changes an Amazon Identity and Access Management (IAM) role to
-// the managed instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdateManagedInstanceRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInstanceId "InvalidInstanceId"
-//   The following problems can cause this exception:
-//
-//   You do not have permission to access the instance.
-//
-//   The SSM Agent is not running. On managed instances and Linux instances, verify
-//   that the SSM Agent is running. On EC2 Windows instances, verify that the
-//   EC2Config service is running.
-//
-//   The SSM Agent or EC2Config service is not registered to the SSM endpoint.
-//   Try reinstalling the SSM Agent or EC2Config service.
-//
-//   The instance is not in valid state. Valid states are: Running, Pending, Stopped,
-//   Stopping. Invalid states are: Shutting-down and Terminated.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRole
-func (c *SSM) UpdateManagedInstanceRole(input *UpdateManagedInstanceRoleInput) (*UpdateManagedInstanceRoleOutput, error) {
-	req, out := c.UpdateManagedInstanceRoleRequest(input)
-	return out, req.Send()
-}
-
-// UpdateManagedInstanceRoleWithContext is the same as UpdateManagedInstanceRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateManagedInstanceRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdateManagedInstanceRoleWithContext(ctx aws.Context, input *UpdateManagedInstanceRoleInput, opts ...aws.Option) (*UpdateManagedInstanceRoleOutput, error) {
-	req, out := c.UpdateManagedInstanceRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateManagedInstanceRoleOutput{})
+	return UpdateManagedInstanceRoleRequest{Request: req, Input: input}
 }
 
 const opUpdatePatchBaseline = "UpdatePatchBaseline"
 
-// UpdatePatchBaselineRequest generates a "aws.Request" representing the
-// client's request for the UpdatePatchBaseline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdatePatchBaselineRequest is a API request type for the UpdatePatchBaseline API operation.
+type UpdatePatchBaselineRequest struct {
+	*aws.Request
+	Input *UpdatePatchBaselineInput
+}
+
+// Send marshals and sends the UpdatePatchBaseline API request.
+func (r UpdatePatchBaselineRequest) Send() (*UpdatePatchBaselineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePatchBaselineOutput), nil
+}
+
+// UpdatePatchBaselineRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdatePatchBaseline for more information on using the UpdatePatchBaseline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing patch baseline. Fields not specified in the request
+// are left unchanged.
 //
 //    // Example sending a request using the UpdatePatchBaselineRequest method.
-//    req, resp := client.UpdatePatchBaselineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdatePatchBaselineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaseline
-func (c *SSM) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) (req *aws.Request, output *UpdatePatchBaselineOutput) {
+func (c *SSM) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) UpdatePatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePatchBaseline,
 		HTTPMethod: "POST",
@@ -9312,51 +5110,8 @@ func (c *SSM) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) (req *
 		input = &UpdatePatchBaselineInput{}
 	}
 
-	output = &UpdatePatchBaselineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdatePatchBaseline API operation for Amazon Simple Systems Manager (SSM).
-//
-// Modifies an existing patch baseline. Fields not specified in the request
-// are left unchanged.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Systems Manager (SSM)'s
-// API operation UpdatePatchBaseline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDoesNotExistException "DoesNotExistException"
-//   Error returned when the ID specified for a resource (e.g. a Maintenance Window)
-//   doesn't exist.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaseline
-func (c *SSM) UpdatePatchBaseline(input *UpdatePatchBaselineInput) (*UpdatePatchBaselineOutput, error) {
-	req, out := c.UpdatePatchBaselineRequest(input)
-	return out, req.Send()
-}
-
-// UpdatePatchBaselineWithContext is the same as UpdatePatchBaseline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdatePatchBaseline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) UpdatePatchBaselineWithContext(ctx aws.Context, input *UpdatePatchBaselineInput, opts ...aws.Option) (*UpdatePatchBaselineOutput, error) {
-	req, out := c.UpdatePatchBaselineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdatePatchBaselineOutput{})
+	return UpdatePatchBaselineRequest{Request: req, Input: input}
 }
 
 // An activation registers one or more on-premises servers or virtual machines

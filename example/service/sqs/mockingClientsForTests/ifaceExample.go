@@ -66,7 +66,8 @@ func (q *Queue) GetMessages(waitTimeout int64) ([]Message, error) {
 	if waitTimeout > 0 {
 		params.WaitTimeSeconds = aws.Int64(waitTimeout)
 	}
-	resp, err := q.Client.ReceiveMessage(&params)
+	req := q.Client.ReceiveMessageRequest(&params)
+	resp, err := req.Send()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get messages, %v", err)
 	}

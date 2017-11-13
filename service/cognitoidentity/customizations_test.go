@@ -11,7 +11,7 @@ import (
 var svc = cognitoidentity.New(unit.Config())
 
 func TestUnsignedRequest_GetID(t *testing.T) {
-	req, _ := svc.GetIdRequest(&cognitoidentity.GetIdInput{
+	req := svc.GetIdRequest(&cognitoidentity.GetIdInput{
 		IdentityPoolId: aws.String("IdentityPoolId"),
 	})
 
@@ -26,7 +26,7 @@ func TestUnsignedRequest_GetID(t *testing.T) {
 }
 
 func TestUnsignedRequest_GetOpenIDToken(t *testing.T) {
-	req, _ := svc.GetOpenIdTokenRequest(&cognitoidentity.GetOpenIdTokenInput{
+	req := svc.GetOpenIdTokenRequest(&cognitoidentity.GetOpenIdTokenInput{
 		IdentityId: aws.String("IdentityId"),
 	})
 
@@ -41,7 +41,7 @@ func TestUnsignedRequest_GetOpenIDToken(t *testing.T) {
 }
 
 func TestUnsignedRequest_GetCredentialsForIdentity(t *testing.T) {
-	req, _ := svc.GetCredentialsForIdentityRequest(&cognitoidentity.GetCredentialsForIdentityInput{
+	req := svc.GetCredentialsForIdentityRequest(&cognitoidentity.GetCredentialsForIdentityInput{
 		IdentityId: aws.String("IdentityId"),
 	})
 

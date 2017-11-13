@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To attach an instance to an Auto Scaling group
 //
 // This example attaches the specified instance to the specified Auto Scaling group.
-func ExampleAutoScaling_AttachInstances_shared00() {
+func ExampleAutoScaling_AttachInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -42,7 +42,8 @@ func ExampleAutoScaling_AttachInstances_shared00() {
 		},
 	}
 
-	result, err := svc.AttachInstances(input)
+	req := svc.AttachInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -65,7 +66,7 @@ func ExampleAutoScaling_AttachInstances_shared00() {
 // To attach a target group to an Auto Scaling group
 //
 // This example attaches the specified target group to the specified Auto Scaling group.
-func ExampleAutoScaling_AttachLoadBalancerTargetGroups_shared00() {
+func ExampleAutoScaling_AttachLoadBalancerTargetGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -79,7 +80,8 @@ func ExampleAutoScaling_AttachLoadBalancerTargetGroups_shared00() {
 		},
 	}
 
-	result, err := svc.AttachLoadBalancerTargetGroups(input)
+	req := svc.AttachLoadBalancerTargetGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -102,7 +104,7 @@ func ExampleAutoScaling_AttachLoadBalancerTargetGroups_shared00() {
 // To attach a load balancer to an Auto Scaling group
 //
 // This example attaches the specified load balancer to the specified Auto Scaling group.
-func ExampleAutoScaling_AttachLoadBalancers_shared00() {
+func ExampleAutoScaling_AttachLoadBalancersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -116,7 +118,8 @@ func ExampleAutoScaling_AttachLoadBalancers_shared00() {
 		},
 	}
 
-	result, err := svc.AttachLoadBalancers(input)
+	req := svc.AttachLoadBalancersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -140,7 +143,7 @@ func ExampleAutoScaling_AttachLoadBalancers_shared00() {
 //
 // This example notifies Auto Scaling that the specified lifecycle action is complete
 // so that it can finish launching or terminating the instance.
-func ExampleAutoScaling_CompleteLifecycleAction_shared00() {
+func ExampleAutoScaling_CompleteLifecycleActionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -154,7 +157,8 @@ func ExampleAutoScaling_CompleteLifecycleAction_shared00() {
 		LifecycleHookName:     aws.String("my-lifecycle-hook"),
 	}
 
-	result, err := svc.CompleteLifecycleAction(input)
+	req := svc.CompleteLifecycleActionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -177,7 +181,7 @@ func ExampleAutoScaling_CompleteLifecycleAction_shared00() {
 // To create an Auto Scaling group
 //
 // This example creates an Auto Scaling group.
-func ExampleAutoScaling_CreateAutoScalingGroup_shared00() {
+func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -192,7 +196,8 @@ func ExampleAutoScaling_CreateAutoScalingGroup_shared00() {
 		VPCZoneIdentifier:       aws.String("subnet-4176792c"),
 	}
 
-	result, err := svc.CreateAutoScalingGroup(input)
+	req := svc.CreateAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -220,7 +225,7 @@ func ExampleAutoScaling_CreateAutoScalingGroup_shared00() {
 //
 // This example creates an Auto Scaling group and attaches the specified Classic Load
 // Balancer.
-func ExampleAutoScaling_CreateAutoScalingGroup_shared01() {
+func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -242,7 +247,8 @@ func ExampleAutoScaling_CreateAutoScalingGroup_shared01() {
 		MinSize: aws.Int64(1),
 	}
 
-	result, err := svc.CreateAutoScalingGroup(input)
+	req := svc.CreateAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -269,7 +275,7 @@ func ExampleAutoScaling_CreateAutoScalingGroup_shared01() {
 // To create an Auto Scaling group with an attached target group
 //
 // This example creates an Auto Scaling group and attaches the specified target group.
-func ExampleAutoScaling_CreateAutoScalingGroup_shared02() {
+func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -289,7 +295,8 @@ func ExampleAutoScaling_CreateAutoScalingGroup_shared02() {
 		VPCZoneIdentifier: aws.String("subnet-4176792c, subnet-65ea5f08"),
 	}
 
-	result, err := svc.CreateAutoScalingGroup(input)
+	req := svc.CreateAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -316,7 +323,7 @@ func ExampleAutoScaling_CreateAutoScalingGroup_shared02() {
 // To create a launch configuration
 //
 // This example creates a launch configuration.
-func ExampleAutoScaling_CreateLaunchConfiguration_shared00() {
+func ExampleAutoScaling_CreateLaunchConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -333,7 +340,8 @@ func ExampleAutoScaling_CreateLaunchConfiguration_shared00() {
 		},
 	}
 
-	result, err := svc.CreateLaunchConfiguration(input)
+	req := svc.CreateLaunchConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -360,7 +368,7 @@ func ExampleAutoScaling_CreateLaunchConfiguration_shared00() {
 // To create or update tags for an Auto Scaling group
 //
 // This example adds two tags to the specified Auto Scaling group.
-func ExampleAutoScaling_CreateOrUpdateTags_shared00() {
+func ExampleAutoScaling_CreateOrUpdateTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -386,7 +394,8 @@ func ExampleAutoScaling_CreateOrUpdateTags_shared00() {
 		},
 	}
 
-	result, err := svc.CreateOrUpdateTags(input)
+	req := svc.CreateOrUpdateTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -415,7 +424,7 @@ func ExampleAutoScaling_CreateOrUpdateTags_shared00() {
 // To delete an Auto Scaling group
 //
 // This example deletes the specified Auto Scaling group.
-func ExampleAutoScaling_DeleteAutoScalingGroup_shared00() {
+func ExampleAutoScaling_DeleteAutoScalingGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -426,7 +435,8 @@ func ExampleAutoScaling_DeleteAutoScalingGroup_shared00() {
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 	}
 
-	result, err := svc.DeleteAutoScalingGroup(input)
+	req := svc.DeleteAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -453,7 +463,7 @@ func ExampleAutoScaling_DeleteAutoScalingGroup_shared00() {
 // To delete an Auto Scaling group and all its instances
 //
 // This example deletes the specified Auto Scaling group and all its instances.
-func ExampleAutoScaling_DeleteAutoScalingGroup_shared01() {
+func ExampleAutoScaling_DeleteAutoScalingGroupRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -465,7 +475,8 @@ func ExampleAutoScaling_DeleteAutoScalingGroup_shared01() {
 		ForceDelete:          aws.Bool(true),
 	}
 
-	result, err := svc.DeleteAutoScalingGroup(input)
+	req := svc.DeleteAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -492,7 +503,7 @@ func ExampleAutoScaling_DeleteAutoScalingGroup_shared01() {
 // To delete a launch configuration
 //
 // This example deletes the specified launch configuration.
-func ExampleAutoScaling_DeleteLaunchConfiguration_shared00() {
+func ExampleAutoScaling_DeleteLaunchConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -503,7 +514,8 @@ func ExampleAutoScaling_DeleteLaunchConfiguration_shared00() {
 		LaunchConfigurationName: aws.String("my-launch-config"),
 	}
 
-	result, err := svc.DeleteLaunchConfiguration(input)
+	req := svc.DeleteLaunchConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -528,7 +540,7 @@ func ExampleAutoScaling_DeleteLaunchConfiguration_shared00() {
 // To delete a lifecycle hook
 //
 // This example deletes the specified lifecycle hook.
-func ExampleAutoScaling_DeleteLifecycleHook_shared00() {
+func ExampleAutoScaling_DeleteLifecycleHookRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -540,7 +552,8 @@ func ExampleAutoScaling_DeleteLifecycleHook_shared00() {
 		LifecycleHookName:    aws.String("my-lifecycle-hook"),
 	}
 
-	result, err := svc.DeleteLifecycleHook(input)
+	req := svc.DeleteLifecycleHookRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -563,7 +576,7 @@ func ExampleAutoScaling_DeleteLifecycleHook_shared00() {
 // To delete an Auto Scaling notification
 //
 // This example deletes the specified notification from the specified Auto Scaling group.
-func ExampleAutoScaling_DeleteNotificationConfiguration_shared00() {
+func ExampleAutoScaling_DeleteNotificationConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -575,7 +588,8 @@ func ExampleAutoScaling_DeleteNotificationConfiguration_shared00() {
 		TopicARN:             aws.String("arn:aws:sns:us-west-2:123456789012:my-sns-topic"),
 	}
 
-	result, err := svc.DeleteNotificationConfiguration(input)
+	req := svc.DeleteNotificationConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -598,7 +612,7 @@ func ExampleAutoScaling_DeleteNotificationConfiguration_shared00() {
 // To delete an Auto Scaling policy
 //
 // This example deletes the specified Auto Scaling policy.
-func ExampleAutoScaling_DeletePolicy_shared00() {
+func ExampleAutoScaling_DeletePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -610,7 +624,8 @@ func ExampleAutoScaling_DeletePolicy_shared00() {
 		PolicyName:           aws.String("ScaleIn"),
 	}
 
-	result, err := svc.DeletePolicy(input)
+	req := svc.DeletePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -634,7 +649,7 @@ func ExampleAutoScaling_DeletePolicy_shared00() {
 //
 // This example deletes the specified scheduled action from the specified Auto Scaling
 // group.
-func ExampleAutoScaling_DeleteScheduledAction_shared00() {
+func ExampleAutoScaling_DeleteScheduledActionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -646,7 +661,8 @@ func ExampleAutoScaling_DeleteScheduledAction_shared00() {
 		ScheduledActionName:  aws.String("my-scheduled-action"),
 	}
 
-	result, err := svc.DeleteScheduledAction(input)
+	req := svc.DeleteScheduledActionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -669,7 +685,7 @@ func ExampleAutoScaling_DeleteScheduledAction_shared00() {
 // To delete a tag from an Auto Scaling group
 //
 // This example deletes the specified tag from the specified Auto Scaling group.
-func ExampleAutoScaling_DeleteTags_shared00() {
+func ExampleAutoScaling_DeleteTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -687,7 +703,8 @@ func ExampleAutoScaling_DeleteTags_shared00() {
 		},
 	}
 
-	result, err := svc.DeleteTags(input)
+	req := svc.DeleteTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -712,7 +729,7 @@ func ExampleAutoScaling_DeleteTags_shared00() {
 // To describe your Auto Scaling account limits
 //
 // This example describes the Auto Scaling limits for your AWS account.
-func ExampleAutoScaling_DescribeAccountLimits_shared00() {
+func ExampleAutoScaling_DescribeAccountLimitsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -721,7 +738,8 @@ func ExampleAutoScaling_DescribeAccountLimits_shared00() {
 	svc := autoscaling.New(cfg)
 	input := &autoscaling.DescribeAccountLimitsInput{}
 
-	result, err := svc.DescribeAccountLimits(input)
+	req := svc.DescribeAccountLimitsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -744,7 +762,7 @@ func ExampleAutoScaling_DescribeAccountLimits_shared00() {
 // To describe the Auto Scaling adjustment types
 //
 // This example describes the available adjustment types.
-func ExampleAutoScaling_DescribeAdjustmentTypes_shared00() {
+func ExampleAutoScaling_DescribeAdjustmentTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -753,7 +771,8 @@ func ExampleAutoScaling_DescribeAdjustmentTypes_shared00() {
 	svc := autoscaling.New(cfg)
 	input := &autoscaling.DescribeAdjustmentTypesInput{}
 
-	result, err := svc.DescribeAdjustmentTypes(input)
+	req := svc.DescribeAdjustmentTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -776,7 +795,7 @@ func ExampleAutoScaling_DescribeAdjustmentTypes_shared00() {
 // To describe an Auto Scaling group
 //
 // This example describes the specified Auto Scaling group.
-func ExampleAutoScaling_DescribeAutoScalingGroups_shared00() {
+func ExampleAutoScaling_DescribeAutoScalingGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -789,7 +808,8 @@ func ExampleAutoScaling_DescribeAutoScalingGroups_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeAutoScalingGroups(input)
+	req := svc.DescribeAutoScalingGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -814,7 +834,7 @@ func ExampleAutoScaling_DescribeAutoScalingGroups_shared00() {
 // To describe one or more Auto Scaling instances
 //
 // This example describes the specified Auto Scaling instance.
-func ExampleAutoScaling_DescribeAutoScalingInstances_shared00() {
+func ExampleAutoScaling_DescribeAutoScalingInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -827,7 +847,8 @@ func ExampleAutoScaling_DescribeAutoScalingInstances_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeAutoScalingInstances(input)
+	req := svc.DescribeAutoScalingInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -852,7 +873,7 @@ func ExampleAutoScaling_DescribeAutoScalingInstances_shared00() {
 // To describe the Auto Scaling notification types
 //
 // This example describes the available notification types.
-func ExampleAutoScaling_DescribeAutoScalingNotificationTypes_shared00() {
+func ExampleAutoScaling_DescribeAutoScalingNotificationTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -861,7 +882,8 @@ func ExampleAutoScaling_DescribeAutoScalingNotificationTypes_shared00() {
 	svc := autoscaling.New(cfg)
 	input := &autoscaling.DescribeAutoScalingNotificationTypesInput{}
 
-	result, err := svc.DescribeAutoScalingNotificationTypes(input)
+	req := svc.DescribeAutoScalingNotificationTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -884,7 +906,7 @@ func ExampleAutoScaling_DescribeAutoScalingNotificationTypes_shared00() {
 // To describe Auto Scaling launch configurations
 //
 // This example describes the specified launch configuration.
-func ExampleAutoScaling_DescribeLaunchConfigurations_shared00() {
+func ExampleAutoScaling_DescribeLaunchConfigurationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -897,7 +919,8 @@ func ExampleAutoScaling_DescribeLaunchConfigurations_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeLaunchConfigurations(input)
+	req := svc.DescribeLaunchConfigurationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -922,7 +945,7 @@ func ExampleAutoScaling_DescribeLaunchConfigurations_shared00() {
 // To describe the available types of lifecycle hooks
 //
 // This example describes the available lifecycle hook types.
-func ExampleAutoScaling_DescribeLifecycleHookTypes_shared00() {
+func ExampleAutoScaling_DescribeLifecycleHookTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -931,7 +954,8 @@ func ExampleAutoScaling_DescribeLifecycleHookTypes_shared00() {
 	svc := autoscaling.New(cfg)
 	input := &autoscaling.DescribeLifecycleHookTypesInput{}
 
-	result, err := svc.DescribeLifecycleHookTypes(input)
+	req := svc.DescribeLifecycleHookTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -954,7 +978,7 @@ func ExampleAutoScaling_DescribeLifecycleHookTypes_shared00() {
 // To describe your lifecycle hooks
 //
 // This example describes the lifecycle hooks for the specified Auto Scaling group.
-func ExampleAutoScaling_DescribeLifecycleHooks_shared00() {
+func ExampleAutoScaling_DescribeLifecycleHooksRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -965,7 +989,8 @@ func ExampleAutoScaling_DescribeLifecycleHooks_shared00() {
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 	}
 
-	result, err := svc.DescribeLifecycleHooks(input)
+	req := svc.DescribeLifecycleHooksRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -988,7 +1013,7 @@ func ExampleAutoScaling_DescribeLifecycleHooks_shared00() {
 // To describe the target groups for an Auto Scaling group
 //
 // This example describes the target groups attached to the specified Auto Scaling group.
-func ExampleAutoScaling_DescribeLoadBalancerTargetGroups_shared00() {
+func ExampleAutoScaling_DescribeLoadBalancerTargetGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -999,7 +1024,8 @@ func ExampleAutoScaling_DescribeLoadBalancerTargetGroups_shared00() {
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 	}
 
-	result, err := svc.DescribeLoadBalancerTargetGroups(input)
+	req := svc.DescribeLoadBalancerTargetGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1023,7 +1049,7 @@ func ExampleAutoScaling_DescribeLoadBalancerTargetGroups_shared00() {
 //
 // This example describes the load balancers attached to the specified Auto Scaling
 // group.
-func ExampleAutoScaling_DescribeLoadBalancers_shared00() {
+func ExampleAutoScaling_DescribeLoadBalancersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1034,7 +1060,8 @@ func ExampleAutoScaling_DescribeLoadBalancers_shared00() {
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 	}
 
-	result, err := svc.DescribeLoadBalancers(input)
+	req := svc.DescribeLoadBalancersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1057,7 +1084,7 @@ func ExampleAutoScaling_DescribeLoadBalancers_shared00() {
 // To describe the Auto Scaling metric collection types
 //
 // This example describes the available metric collection types.
-func ExampleAutoScaling_DescribeMetricCollectionTypes_shared00() {
+func ExampleAutoScaling_DescribeMetricCollectionTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1066,7 +1093,8 @@ func ExampleAutoScaling_DescribeMetricCollectionTypes_shared00() {
 	svc := autoscaling.New(cfg)
 	input := &autoscaling.DescribeMetricCollectionTypesInput{}
 
-	result, err := svc.DescribeMetricCollectionTypes(input)
+	req := svc.DescribeMetricCollectionTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1090,7 +1118,7 @@ func ExampleAutoScaling_DescribeMetricCollectionTypes_shared00() {
 //
 // This example describes the notification configurations for the specified Auto Scaling
 // group.
-func ExampleAutoScaling_DescribeNotificationConfigurations_shared00() {
+func ExampleAutoScaling_DescribeNotificationConfigurationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1103,7 +1131,8 @@ func ExampleAutoScaling_DescribeNotificationConfigurations_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeNotificationConfigurations(input)
+	req := svc.DescribeNotificationConfigurationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1128,7 +1157,7 @@ func ExampleAutoScaling_DescribeNotificationConfigurations_shared00() {
 // To describe Auto Scaling policies
 //
 // This example describes the policies for the specified Auto Scaling group.
-func ExampleAutoScaling_DescribePolicies_shared00() {
+func ExampleAutoScaling_DescribePoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1139,7 +1168,8 @@ func ExampleAutoScaling_DescribePolicies_shared00() {
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 	}
 
-	result, err := svc.DescribePolicies(input)
+	req := svc.DescribePoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1164,7 +1194,7 @@ func ExampleAutoScaling_DescribePolicies_shared00() {
 // To describe the scaling activities for an Auto Scaling group
 //
 // This example describes the scaling activities for the specified Auto Scaling group.
-func ExampleAutoScaling_DescribeScalingActivities_shared00() {
+func ExampleAutoScaling_DescribeScalingActivitiesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1175,7 +1205,8 @@ func ExampleAutoScaling_DescribeScalingActivities_shared00() {
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 	}
 
-	result, err := svc.DescribeScalingActivities(input)
+	req := svc.DescribeScalingActivitiesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1200,7 +1231,7 @@ func ExampleAutoScaling_DescribeScalingActivities_shared00() {
 // To describe the Auto Scaling process types
 //
 // This example describes the Auto Scaling process types.
-func ExampleAutoScaling_DescribeScalingProcessTypes_shared00() {
+func ExampleAutoScaling_DescribeScalingProcessTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1209,7 +1240,8 @@ func ExampleAutoScaling_DescribeScalingProcessTypes_shared00() {
 	svc := autoscaling.New(cfg)
 	input := &autoscaling.DescribeScalingProcessTypesInput{}
 
-	result, err := svc.DescribeScalingProcessTypes(input)
+	req := svc.DescribeScalingProcessTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1232,7 +1264,7 @@ func ExampleAutoScaling_DescribeScalingProcessTypes_shared00() {
 // To describe scheduled actions
 //
 // This example describes the scheduled actions for the specified Auto Scaling group.
-func ExampleAutoScaling_DescribeScheduledActions_shared00() {
+func ExampleAutoScaling_DescribeScheduledActionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1243,7 +1275,8 @@ func ExampleAutoScaling_DescribeScheduledActions_shared00() {
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 	}
 
-	result, err := svc.DescribeScheduledActions(input)
+	req := svc.DescribeScheduledActionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1268,7 +1301,7 @@ func ExampleAutoScaling_DescribeScheduledActions_shared00() {
 // To describe tags
 //
 // This example describes the tags for the specified Auto Scaling group.
-func ExampleAutoScaling_DescribeTags_shared00() {
+func ExampleAutoScaling_DescribeTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1286,7 +1319,8 @@ func ExampleAutoScaling_DescribeTags_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeTags(input)
+	req := svc.DescribeTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1311,7 +1345,7 @@ func ExampleAutoScaling_DescribeTags_shared00() {
 // To describe termination policy types
 //
 // This example describes the available termination policy types.
-func ExampleAutoScaling_DescribeTerminationPolicyTypes_shared00() {
+func ExampleAutoScaling_DescribeTerminationPolicyTypesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1320,7 +1354,8 @@ func ExampleAutoScaling_DescribeTerminationPolicyTypes_shared00() {
 	svc := autoscaling.New(cfg)
 	input := &autoscaling.DescribeTerminationPolicyTypesInput{}
 
-	result, err := svc.DescribeTerminationPolicyTypes(input)
+	req := svc.DescribeTerminationPolicyTypesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1343,7 +1378,7 @@ func ExampleAutoScaling_DescribeTerminationPolicyTypes_shared00() {
 // To detach an instance from an Auto Scaling group
 //
 // This example detaches the specified instance from the specified Auto Scaling group.
-func ExampleAutoScaling_DetachInstances_shared00() {
+func ExampleAutoScaling_DetachInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1358,7 +1393,8 @@ func ExampleAutoScaling_DetachInstances_shared00() {
 		ShouldDecrementDesiredCapacity: aws.Bool(true),
 	}
 
-	result, err := svc.DetachInstances(input)
+	req := svc.DetachInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1382,7 +1418,7 @@ func ExampleAutoScaling_DetachInstances_shared00() {
 //
 // This example detaches the specified target group from the specified Auto Scaling
 // group
-func ExampleAutoScaling_DetachLoadBalancerTargetGroups_shared00() {
+func ExampleAutoScaling_DetachLoadBalancerTargetGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1396,7 +1432,8 @@ func ExampleAutoScaling_DetachLoadBalancerTargetGroups_shared00() {
 		},
 	}
 
-	result, err := svc.DetachLoadBalancerTargetGroups(input)
+	req := svc.DetachLoadBalancerTargetGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1420,7 +1457,7 @@ func ExampleAutoScaling_DetachLoadBalancerTargetGroups_shared00() {
 //
 // This example detaches the specified load balancer from the specified Auto Scaling
 // group.
-func ExampleAutoScaling_DetachLoadBalancers_shared00() {
+func ExampleAutoScaling_DetachLoadBalancersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1434,7 +1471,8 @@ func ExampleAutoScaling_DetachLoadBalancers_shared00() {
 		},
 	}
 
-	result, err := svc.DetachLoadBalancers(input)
+	req := svc.DetachLoadBalancersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1458,7 +1496,7 @@ func ExampleAutoScaling_DetachLoadBalancers_shared00() {
 //
 // This example disables collecting data for the GroupDesiredCapacity metric for the
 // specified Auto Scaling group.
-func ExampleAutoScaling_DisableMetricsCollection_shared00() {
+func ExampleAutoScaling_DisableMetricsCollectionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1472,7 +1510,8 @@ func ExampleAutoScaling_DisableMetricsCollection_shared00() {
 		},
 	}
 
-	result, err := svc.DisableMetricsCollection(input)
+	req := svc.DisableMetricsCollectionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1495,7 +1534,7 @@ func ExampleAutoScaling_DisableMetricsCollection_shared00() {
 // To enable metrics collection for an Auto Scaling group
 //
 // This example enables data collection for the specified Auto Scaling group.
-func ExampleAutoScaling_EnableMetricsCollection_shared00() {
+func ExampleAutoScaling_EnableMetricsCollectionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1507,7 +1546,8 @@ func ExampleAutoScaling_EnableMetricsCollection_shared00() {
 		Granularity:          aws.String("1Minute"),
 	}
 
-	result, err := svc.EnableMetricsCollection(input)
+	req := svc.EnableMetricsCollectionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1530,7 +1570,7 @@ func ExampleAutoScaling_EnableMetricsCollection_shared00() {
 // To move instances into standby mode
 //
 // This example puts the specified instance into standby mode.
-func ExampleAutoScaling_EnterStandby_shared00() {
+func ExampleAutoScaling_EnterStandbyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1545,7 +1585,8 @@ func ExampleAutoScaling_EnterStandby_shared00() {
 		ShouldDecrementDesiredCapacity: aws.Bool(true),
 	}
 
-	result, err := svc.EnterStandby(input)
+	req := svc.EnterStandbyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1569,7 +1610,7 @@ func ExampleAutoScaling_EnterStandby_shared00() {
 //
 // This example executes the specified Auto Scaling policy for the specified Auto Scaling
 // group.
-func ExampleAutoScaling_ExecutePolicy_shared00() {
+func ExampleAutoScaling_ExecutePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1582,7 +1623,8 @@ func ExampleAutoScaling_ExecutePolicy_shared00() {
 		PolicyName:           aws.String("ScaleIn"),
 	}
 
-	result, err := svc.ExecutePolicy(input)
+	req := svc.ExecutePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1607,7 +1649,7 @@ func ExampleAutoScaling_ExecutePolicy_shared00() {
 // To move instances out of standby mode
 //
 // This example moves the specified instance out of standby mode.
-func ExampleAutoScaling_ExitStandby_shared00() {
+func ExampleAutoScaling_ExitStandbyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1621,7 +1663,8 @@ func ExampleAutoScaling_ExitStandby_shared00() {
 		},
 	}
 
-	result, err := svc.ExitStandby(input)
+	req := svc.ExitStandbyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1644,7 +1687,7 @@ func ExampleAutoScaling_ExitStandby_shared00() {
 // To create a lifecycle hook
 //
 // This example creates a lifecycle hook.
-func ExampleAutoScaling_PutLifecycleHook_shared00() {
+func ExampleAutoScaling_PutLifecycleHookRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1659,7 +1702,8 @@ func ExampleAutoScaling_PutLifecycleHook_shared00() {
 		RoleARN:               aws.String("arn:aws:iam::123456789012:role/my-auto-scaling-role"),
 	}
 
-	result, err := svc.PutLifecycleHook(input)
+	req := svc.PutLifecycleHookRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1684,7 +1728,7 @@ func ExampleAutoScaling_PutLifecycleHook_shared00() {
 // To add an Auto Scaling notification
 //
 // This example adds the specified notification to the specified Auto Scaling group.
-func ExampleAutoScaling_PutNotificationConfiguration_shared00() {
+func ExampleAutoScaling_PutNotificationConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1699,7 +1743,8 @@ func ExampleAutoScaling_PutNotificationConfiguration_shared00() {
 		TopicARN: aws.String("arn:aws:sns:us-west-2:123456789012:my-sns-topic"),
 	}
 
-	result, err := svc.PutNotificationConfiguration(input)
+	req := svc.PutNotificationConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1724,7 +1769,7 @@ func ExampleAutoScaling_PutNotificationConfiguration_shared00() {
 // To add a scaling policy to an Auto Scaling group
 //
 // This example adds the specified policy to the specified Auto Scaling group.
-func ExampleAutoScaling_PutScalingPolicy_shared00() {
+func ExampleAutoScaling_PutScalingPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1738,7 +1783,8 @@ func ExampleAutoScaling_PutScalingPolicy_shared00() {
 		ScalingAdjustment:    aws.Int64(-1),
 	}
 
-	result, err := svc.PutScalingPolicy(input)
+	req := svc.PutScalingPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1763,7 +1809,7 @@ func ExampleAutoScaling_PutScalingPolicy_shared00() {
 // To add a scheduled action to an Auto Scaling group
 //
 // This example adds the specified scheduled action to the specified Auto Scaling group.
-func ExampleAutoScaling_PutScheduledUpdateGroupAction_shared00() {
+func ExampleAutoScaling_PutScheduledUpdateGroupActionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1780,7 +1826,8 @@ func ExampleAutoScaling_PutScheduledUpdateGroupAction_shared00() {
 		StartTime:            parseTime("2006-01-02T15:04:05Z", "2014-05-12T08:00:00Z"),
 	}
 
-	result, err := svc.PutScheduledUpdateGroupAction(input)
+	req := svc.PutScheduledUpdateGroupActionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1808,7 +1855,7 @@ func ExampleAutoScaling_PutScheduledUpdateGroupAction_shared00() {
 //
 // This example records a lifecycle action heartbeat to keep the instance in a pending
 // state.
-func ExampleAutoScaling_RecordLifecycleActionHeartbeat_shared00() {
+func ExampleAutoScaling_RecordLifecycleActionHeartbeatRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1821,7 +1868,8 @@ func ExampleAutoScaling_RecordLifecycleActionHeartbeat_shared00() {
 		LifecycleHookName:    aws.String("my-lifecycle-hook"),
 	}
 
-	result, err := svc.RecordLifecycleActionHeartbeat(input)
+	req := svc.RecordLifecycleActionHeartbeatRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1845,21 +1893,22 @@ func ExampleAutoScaling_RecordLifecycleActionHeartbeat_shared00() {
 //
 // This example resumes the specified suspended scaling process for the specified Auto
 // Scaling group.
-func ExampleAutoScaling_ResumeProcesses_shared00() {
+func ExampleAutoScaling_ResumeProcessesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
 	}
 
 	svc := autoscaling.New(cfg)
-	input := &autoscaling.ScalingProcessQuery{
+	input := &autoscaling.SuspendProcessesInput{
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 		ScalingProcesses: []*string{
 			aws.String("AlarmNotification"),
 		},
 	}
 
-	result, err := svc.ResumeProcesses(input)
+	req := svc.ResumeProcessesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1884,7 +1933,7 @@ func ExampleAutoScaling_ResumeProcesses_shared00() {
 // To set the desired capacity for an Auto Scaling group
 //
 // This example sets the desired capacity for the specified Auto Scaling group.
-func ExampleAutoScaling_SetDesiredCapacity_shared00() {
+func ExampleAutoScaling_SetDesiredCapacityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1897,7 +1946,8 @@ func ExampleAutoScaling_SetDesiredCapacity_shared00() {
 		HonorCooldown:        aws.Bool(true),
 	}
 
-	result, err := svc.SetDesiredCapacity(input)
+	req := svc.SetDesiredCapacityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1922,7 +1972,7 @@ func ExampleAutoScaling_SetDesiredCapacity_shared00() {
 // To set the health status of an instance
 //
 // This example sets the health status of the specified instance to Unhealthy.
-func ExampleAutoScaling_SetInstanceHealth_shared00() {
+func ExampleAutoScaling_SetInstanceHealthRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1934,7 +1984,8 @@ func ExampleAutoScaling_SetInstanceHealth_shared00() {
 		InstanceId:   aws.String("i-93633f9b"),
 	}
 
-	result, err := svc.SetInstanceHealth(input)
+	req := svc.SetInstanceHealthRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1957,7 +2008,7 @@ func ExampleAutoScaling_SetInstanceHealth_shared00() {
 // To enable instance protection for an instance
 //
 // This example enables instance protection for the specified instance.
-func ExampleAutoScaling_SetInstanceProtection_shared00() {
+func ExampleAutoScaling_SetInstanceProtectionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1972,7 +2023,8 @@ func ExampleAutoScaling_SetInstanceProtection_shared00() {
 		ProtectedFromScaleIn: aws.Bool(true),
 	}
 
-	result, err := svc.SetInstanceProtection(input)
+	req := svc.SetInstanceProtectionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1997,7 +2049,7 @@ func ExampleAutoScaling_SetInstanceProtection_shared00() {
 // To disable instance protection for an instance
 //
 // This example disables instance protection for the specified instance.
-func ExampleAutoScaling_SetInstanceProtection_shared01() {
+func ExampleAutoScaling_SetInstanceProtectionRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2012,7 +2064,8 @@ func ExampleAutoScaling_SetInstanceProtection_shared01() {
 		ProtectedFromScaleIn: aws.Bool(false),
 	}
 
-	result, err := svc.SetInstanceProtection(input)
+	req := svc.SetInstanceProtectionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2038,21 +2091,22 @@ func ExampleAutoScaling_SetInstanceProtection_shared01() {
 //
 // This example suspends the specified scaling process for the specified Auto Scaling
 // group.
-func ExampleAutoScaling_SuspendProcesses_shared00() {
+func ExampleAutoScaling_SuspendProcessesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
 	}
 
 	svc := autoscaling.New(cfg)
-	input := &autoscaling.ScalingProcessQuery{
+	input := &autoscaling.SuspendProcessesInput{
 		AutoScalingGroupName: aws.String("my-auto-scaling-group"),
 		ScalingProcesses: []*string{
 			aws.String("AlarmNotification"),
 		},
 	}
 
-	result, err := svc.SuspendProcesses(input)
+	req := svc.SuspendProcessesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2079,7 +2133,7 @@ func ExampleAutoScaling_SuspendProcesses_shared00() {
 // This example terminates the specified instance from the specified Auto Scaling group
 // without updating the size of the group. Auto Scaling launches a replacement instance
 // after the specified instance terminates.
-func ExampleAutoScaling_TerminateInstanceInAutoScalingGroup_shared00() {
+func ExampleAutoScaling_TerminateInstanceInAutoScalingGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2091,7 +2145,8 @@ func ExampleAutoScaling_TerminateInstanceInAutoScalingGroup_shared00() {
 		ShouldDecrementDesiredCapacity: aws.Bool(false),
 	}
 
-	result, err := svc.TerminateInstanceInAutoScalingGroup(input)
+	req := svc.TerminateInstanceInAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2116,7 +2171,7 @@ func ExampleAutoScaling_TerminateInstanceInAutoScalingGroup_shared00() {
 // To update the launch configuration
 //
 // This example updates the launch configuration of the specified Auto Scaling group.
-func ExampleAutoScaling_UpdateAutoScalingGroup_shared00() {
+func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2128,7 +2183,8 @@ func ExampleAutoScaling_UpdateAutoScalingGroup_shared00() {
 		LaunchConfigurationName: aws.String("new-launch-config"),
 	}
 
-	result, err := svc.UpdateAutoScalingGroup(input)
+	req := svc.UpdateAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2154,7 +2210,7 @@ func ExampleAutoScaling_UpdateAutoScalingGroup_shared00() {
 //
 // This example updates the minimum size and maximum size of the specified Auto Scaling
 // group.
-func ExampleAutoScaling_UpdateAutoScalingGroup_shared01() {
+func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2167,7 +2223,8 @@ func ExampleAutoScaling_UpdateAutoScalingGroup_shared01() {
 		MinSize:              aws.Int64(1),
 	}
 
-	result, err := svc.UpdateAutoScalingGroup(input)
+	req := svc.UpdateAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2192,7 +2249,7 @@ func ExampleAutoScaling_UpdateAutoScalingGroup_shared01() {
 // To enable instance protection
 //
 // This example enables instance protection for the specified Auto Scaling group.
-func ExampleAutoScaling_UpdateAutoScalingGroup_shared02() {
+func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2204,7 +2261,8 @@ func ExampleAutoScaling_UpdateAutoScalingGroup_shared02() {
 		NewInstancesProtectedFromScaleIn: aws.Bool(true),
 	}
 
-	result, err := svc.UpdateAutoScalingGroup(input)
+	req := svc.UpdateAutoScalingGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

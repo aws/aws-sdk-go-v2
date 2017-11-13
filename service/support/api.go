@@ -9,47 +9,24 @@ import (
 
 const opAddAttachmentsToSet = "AddAttachmentsToSet"
 
-// AddAttachmentsToSetRequest generates a "aws.Request" representing the
-// client's request for the AddAttachmentsToSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddAttachmentsToSet for more information on using the AddAttachmentsToSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddAttachmentsToSetRequest method.
-//    req, resp := client.AddAttachmentsToSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSet
-func (c *Support) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) (req *aws.Request, output *AddAttachmentsToSetOutput) {
-	op := &aws.Operation{
-		Name:       opAddAttachmentsToSet,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddAttachmentsToSetInput{}
-	}
-
-	output = &AddAttachmentsToSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddAttachmentsToSetRequest is a API request type for the AddAttachmentsToSet API operation.
+type AddAttachmentsToSetRequest struct {
+	*aws.Request
+	Input *AddAttachmentsToSetInput
 }
 
-// AddAttachmentsToSet API operation for AWS Support.
+// Send marshals and sends the AddAttachmentsToSet API request.
+func (r AddAttachmentsToSetRequest) Send() (*AddAttachmentsToSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddAttachmentsToSetOutput), nil
+}
+
+// AddAttachmentsToSetRequest returns a request value for making API operation for
+// AWS Support.
 //
 // Adds one or more attachments to an attachment set. If an attachmentSetId
 // is not specified, a new attachment set is created, and the ID of the set
@@ -62,97 +39,49 @@ func (c *Support) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) (r
 // the set expires. The maximum number of attachments in a set is 3, and the
 // maximum size of any attachment in the set is 5 MB.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation AddAttachmentsToSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-//   * ErrCodeAttachmentSetIdNotFound "AttachmentSetIdNotFound"
-//   An attachment set with the specified ID could not be found.
-//
-//   * ErrCodeAttachmentSetExpired "AttachmentSetExpired"
-//   The expiration time of the attachment set has passed. The set expires 1 hour
-//   after it is created.
-//
-//   * ErrCodeAttachmentSetSizeLimitExceeded "AttachmentSetSizeLimitExceeded"
-//   A limit for the size of an attachment set has been exceeded. The limits are
-//   3 attachments and 5 MB per attachment.
-//
-//   * ErrCodeAttachmentLimitExceeded "AttachmentLimitExceeded"
-//   The limit for the number of attachment sets created in a short period of
-//   time has been exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSet
-func (c *Support) AddAttachmentsToSet(input *AddAttachmentsToSetInput) (*AddAttachmentsToSetOutput, error) {
-	req, out := c.AddAttachmentsToSetRequest(input)
-	return out, req.Send()
-}
-
-// AddAttachmentsToSetWithContext is the same as AddAttachmentsToSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddAttachmentsToSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) AddAttachmentsToSetWithContext(ctx aws.Context, input *AddAttachmentsToSetInput, opts ...aws.Option) (*AddAttachmentsToSetOutput, error) {
-	req, out := c.AddAttachmentsToSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAddCommunicationToCase = "AddCommunicationToCase"
-
-// AddCommunicationToCaseRequest generates a "aws.Request" representing the
-// client's request for the AddCommunicationToCase operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddCommunicationToCase for more information on using the AddCommunicationToCase
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddCommunicationToCaseRequest method.
-//    req, resp := client.AddCommunicationToCaseRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AddAttachmentsToSetRequest method.
+//    req := client.AddAttachmentsToSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCase
-func (c *Support) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInput) (req *aws.Request, output *AddCommunicationToCaseOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSet
+func (c *Support) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) AddAttachmentsToSetRequest {
 	op := &aws.Operation{
-		Name:       opAddCommunicationToCase,
+		Name:       opAddAttachmentsToSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AddCommunicationToCaseInput{}
+		input = &AddAttachmentsToSetInput{}
 	}
 
-	output = &AddCommunicationToCaseOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AddAttachmentsToSetOutput{})
+	return AddAttachmentsToSetRequest{Request: req, Input: input}
 }
 
-// AddCommunicationToCase API operation for AWS Support.
+const opAddCommunicationToCase = "AddCommunicationToCase"
+
+// AddCommunicationToCaseRequest is a API request type for the AddCommunicationToCase API operation.
+type AddCommunicationToCaseRequest struct {
+	*aws.Request
+	Input *AddCommunicationToCaseInput
+}
+
+// Send marshals and sends the AddCommunicationToCase API request.
+func (r AddCommunicationToCaseRequest) Send() (*AddCommunicationToCaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddCommunicationToCaseOutput), nil
+}
+
+// AddCommunicationToCaseRequest returns a request value for making API operation for
+// AWS Support.
 //
 // Adds additional customer communication to an AWS Support case. You use the
 // caseId value to identify the case to add communication to. You can list a
@@ -163,92 +92,49 @@ func (c *Support) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInp
 //
 // This operation implements a subset of the features of the AWS Support Center.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation AddCommunicationToCase for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-//   * ErrCodeCaseIdNotFound "CaseIdNotFound"
-//   The requested caseId could not be located.
-//
-//   * ErrCodeAttachmentSetIdNotFound "AttachmentSetIdNotFound"
-//   An attachment set with the specified ID could not be found.
-//
-//   * ErrCodeAttachmentSetExpired "AttachmentSetExpired"
-//   The expiration time of the attachment set has passed. The set expires 1 hour
-//   after it is created.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCase
-func (c *Support) AddCommunicationToCase(input *AddCommunicationToCaseInput) (*AddCommunicationToCaseOutput, error) {
-	req, out := c.AddCommunicationToCaseRequest(input)
-	return out, req.Send()
-}
-
-// AddCommunicationToCaseWithContext is the same as AddCommunicationToCase with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddCommunicationToCase for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) AddCommunicationToCaseWithContext(ctx aws.Context, input *AddCommunicationToCaseInput, opts ...aws.Option) (*AddCommunicationToCaseOutput, error) {
-	req, out := c.AddCommunicationToCaseRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateCase = "CreateCase"
-
-// CreateCaseRequest generates a "aws.Request" representing the
-// client's request for the CreateCase operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCase for more information on using the CreateCase
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateCaseRequest method.
-//    req, resp := client.CreateCaseRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AddCommunicationToCaseRequest method.
+//    req := client.AddCommunicationToCaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCase
-func (c *Support) CreateCaseRequest(input *CreateCaseInput) (req *aws.Request, output *CreateCaseOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCase
+func (c *Support) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInput) AddCommunicationToCaseRequest {
 	op := &aws.Operation{
-		Name:       opCreateCase,
+		Name:       opAddCommunicationToCase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateCaseInput{}
+		input = &AddCommunicationToCaseInput{}
 	}
 
-	output = &CreateCaseOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AddCommunicationToCaseOutput{})
+	return AddCommunicationToCaseRequest{Request: req, Input: input}
 }
 
-// CreateCase API operation for AWS Support.
+const opCreateCase = "CreateCase"
+
+// CreateCaseRequest is a API request type for the CreateCase API operation.
+type CreateCaseRequest struct {
+	*aws.Request
+	Input *CreateCaseInput
+}
+
+// Send marshals and sends the CreateCase API request.
+func (r CreateCaseRequest) Send() (*CreateCaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCaseOutput), nil
+}
+
+// CreateCaseRequest returns a request value for making API operation for
+// AWS Support.
 //
 // Creates a new case in the AWS Support Center. This operation is modeled on
 // the behavior of the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
@@ -295,76 +181,64 @@ func (c *Support) CreateCaseRequest(input *CreateCaseInput) (req *aws.Request, o
 // numbers are used by the DescribeCases operation to retrieve existing AWS
 // Support cases.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation CreateCase for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-//   * ErrCodeCaseCreationLimitExceeded "CaseCreationLimitExceeded"
-//   The case creation limit for the account has been exceeded.
-//
-//   * ErrCodeAttachmentSetIdNotFound "AttachmentSetIdNotFound"
-//   An attachment set with the specified ID could not be found.
-//
-//   * ErrCodeAttachmentSetExpired "AttachmentSetExpired"
-//   The expiration time of the attachment set has passed. The set expires 1 hour
-//   after it is created.
+//    // Example sending a request using the CreateCaseRequest method.
+//    req := client.CreateCaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCase
-func (c *Support) CreateCase(input *CreateCaseInput) (*CreateCaseOutput, error) {
-	req, out := c.CreateCaseRequest(input)
-	return out, req.Send()
-}
+func (c *Support) CreateCaseRequest(input *CreateCaseInput) CreateCaseRequest {
+	op := &aws.Operation{
+		Name:       opCreateCase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateCaseWithContext is the same as CreateCase with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCase for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) CreateCaseWithContext(ctx aws.Context, input *CreateCaseInput, opts ...aws.Option) (*CreateCaseOutput, error) {
-	req, out := c.CreateCaseRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateCaseInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateCaseOutput{})
+	return CreateCaseRequest{Request: req, Input: input}
 }
 
 const opDescribeAttachment = "DescribeAttachment"
 
-// DescribeAttachmentRequest generates a "aws.Request" representing the
-// client's request for the DescribeAttachment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAttachmentRequest is a API request type for the DescribeAttachment API operation.
+type DescribeAttachmentRequest struct {
+	*aws.Request
+	Input *DescribeAttachmentInput
+}
+
+// Send marshals and sends the DescribeAttachment API request.
+func (r DescribeAttachmentRequest) Send() (*DescribeAttachmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAttachmentOutput), nil
+}
+
+// DescribeAttachmentRequest returns a request value for making API operation for
+// AWS Support.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAttachment for more information on using the DescribeAttachment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the attachment that has the specified ID. Attachment IDs are generated
+// by the case management system when you add an attachment to a case or case
+// communication. Attachment IDs are returned in the AttachmentDetails objects
+// that are returned by the DescribeCommunications operation.
 //
 //    // Example sending a request using the DescribeAttachmentRequest method.
-//    req, resp := client.DescribeAttachmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAttachmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachment
-func (c *Support) DescribeAttachmentRequest(input *DescribeAttachmentInput) (req *aws.Request, output *DescribeAttachmentOutput) {
+func (c *Support) DescribeAttachmentRequest(input *DescribeAttachmentInput) DescribeAttachmentRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAttachment,
 		HTTPMethod: "POST",
@@ -375,107 +249,30 @@ func (c *Support) DescribeAttachmentRequest(input *DescribeAttachmentInput) (req
 		input = &DescribeAttachmentInput{}
 	}
 
-	output = &DescribeAttachmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAttachment API operation for AWS Support.
-//
-// Returns the attachment that has the specified ID. Attachment IDs are generated
-// by the case management system when you add an attachment to a case or case
-// communication. Attachment IDs are returned in the AttachmentDetails objects
-// that are returned by the DescribeCommunications operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeAttachment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-//   * ErrCodeDescribeAttachmentLimitExceeded "DescribeAttachmentLimitExceeded"
-//   The limit for the number of DescribeAttachment requests in a short period
-//   of time has been exceeded.
-//
-//   * ErrCodeAttachmentIdNotFound "AttachmentIdNotFound"
-//   An attachment with the specified ID could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachment
-func (c *Support) DescribeAttachment(input *DescribeAttachmentInput) (*DescribeAttachmentOutput, error) {
-	req, out := c.DescribeAttachmentRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAttachmentWithContext is the same as DescribeAttachment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAttachment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeAttachmentWithContext(ctx aws.Context, input *DescribeAttachmentInput, opts ...aws.Option) (*DescribeAttachmentOutput, error) {
-	req, out := c.DescribeAttachmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAttachmentOutput{})
+	return DescribeAttachmentRequest{Request: req, Input: input}
 }
 
 const opDescribeCases = "DescribeCases"
 
-// DescribeCasesRequest generates a "aws.Request" representing the
-// client's request for the DescribeCases operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCases for more information on using the DescribeCases
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeCasesRequest method.
-//    req, resp := client.DescribeCasesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCases
-func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) (req *aws.Request, output *DescribeCasesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeCases,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextToken"},
-			OutputTokens:    []string{"nextToken"},
-			LimitToken:      "maxResults",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &DescribeCasesInput{}
-	}
-
-	output = &DescribeCasesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeCasesRequest is a API request type for the DescribeCases API operation.
+type DescribeCasesRequest struct {
+	*aws.Request
+	Input *DescribeCasesInput
 }
 
-// DescribeCases API operation for AWS Support.
+// Send marshals and sends the DescribeCases API request.
+func (r DescribeCasesRequest) Send() (*DescribeCasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCasesOutput), nil
+}
+
+// DescribeCasesRequest returns a request value for making API operation for
+// AWS Support.
 //
 // Returns a list of cases that you specify by passing one or more case IDs.
 // In addition, you can filter the cases by date by setting values for the afterTime
@@ -493,40 +290,33 @@ func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) (req *aws.Requ
 //    * One or more nextToken values, which specify where to paginate the returned
 //    records represented by the CaseDetails objects.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeCases for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-//   * ErrCodeCaseIdNotFound "CaseIdNotFound"
-//   The requested caseId could not be located.
+//    // Example sending a request using the DescribeCasesRequest method.
+//    req := client.DescribeCasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCases
-func (c *Support) DescribeCases(input *DescribeCasesInput) (*DescribeCasesOutput, error) {
-	req, out := c.DescribeCasesRequest(input)
-	return out, req.Send()
-}
+func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeCases,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
 
-// DescribeCasesWithContext is the same as DescribeCases with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCases for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeCasesWithContext(ctx aws.Context, input *DescribeCasesInput, opts ...aws.Option) (*DescribeCasesOutput, error) {
-	req, out := c.DescribeCasesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeCasesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeCasesOutput{})
+	return DescribeCasesRequest{Request: req, Input: input}
 }
 
 // DescribeCasesPages iterates over the pages of a DescribeCases operation,
@@ -565,10 +355,10 @@ func (c *Support) DescribeCasesPagesWithContext(ctx aws.Context, input *Describe
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCasesRequest(inCpy)
+			req := c.DescribeCasesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -581,31 +371,45 @@ func (c *Support) DescribeCasesPagesWithContext(ctx aws.Context, input *Describe
 
 const opDescribeCommunications = "DescribeCommunications"
 
-// DescribeCommunicationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeCommunications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCommunicationsRequest is a API request type for the DescribeCommunications API operation.
+type DescribeCommunicationsRequest struct {
+	*aws.Request
+	Input *DescribeCommunicationsInput
+}
+
+// Send marshals and sends the DescribeCommunications API request.
+func (r DescribeCommunicationsRequest) Send() (*DescribeCommunicationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCommunicationsOutput), nil
+}
+
+// DescribeCommunicationsRequest returns a request value for making API operation for
+// AWS Support.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns communications (and attachments) for one or more support cases. You
+// can use the afterTime and beforeTime parameters to filter by date. You can
+// use the caseId parameter to restrict the results to a particular case.
 //
-// See DescribeCommunications for more information on using the DescribeCommunications
-// API call, and error handling.
+// Case data is available for 12 months after creation. If a case was created
+// more than 12 months ago, a request for data might cause an error.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can use the maxResults and nextToken parameters to control the pagination
+// of the result set. Set maxResults to the number of cases you want displayed
+// on each page, and use nextToken to specify the resumption of pagination.
 //
 //    // Example sending a request using the DescribeCommunicationsRequest method.
-//    req, resp := client.DescribeCommunicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCommunicationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunications
-func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInput) (req *aws.Request, output *DescribeCommunicationsOutput) {
+func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInput) DescribeCommunicationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCommunications,
 		HTTPMethod: "POST",
@@ -622,58 +426,8 @@ func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInp
 		input = &DescribeCommunicationsInput{}
 	}
 
-	output = &DescribeCommunicationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCommunications API operation for AWS Support.
-//
-// Returns communications (and attachments) for one or more support cases. You
-// can use the afterTime and beforeTime parameters to filter by date. You can
-// use the caseId parameter to restrict the results to a particular case.
-//
-// Case data is available for 12 months after creation. If a case was created
-// more than 12 months ago, a request for data might cause an error.
-//
-// You can use the maxResults and nextToken parameters to control the pagination
-// of the result set. Set maxResults to the number of cases you want displayed
-// on each page, and use nextToken to specify the resumption of pagination.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeCommunications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-//   * ErrCodeCaseIdNotFound "CaseIdNotFound"
-//   The requested caseId could not be located.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunications
-func (c *Support) DescribeCommunications(input *DescribeCommunicationsInput) (*DescribeCommunicationsOutput, error) {
-	req, out := c.DescribeCommunicationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCommunicationsWithContext is the same as DescribeCommunications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCommunications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeCommunicationsWithContext(ctx aws.Context, input *DescribeCommunicationsInput, opts ...aws.Option) (*DescribeCommunicationsOutput, error) {
-	req, out := c.DescribeCommunicationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCommunicationsOutput{})
+	return DescribeCommunicationsRequest{Request: req, Input: input}
 }
 
 // DescribeCommunicationsPages iterates over the pages of a DescribeCommunications operation,
@@ -712,10 +466,10 @@ func (c *Support) DescribeCommunicationsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCommunicationsRequest(inCpy)
+			req := c.DescribeCommunicationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -728,47 +482,24 @@ func (c *Support) DescribeCommunicationsPagesWithContext(ctx aws.Context, input 
 
 const opDescribeServices = "DescribeServices"
 
-// DescribeServicesRequest generates a "aws.Request" representing the
-// client's request for the DescribeServices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeServices for more information on using the DescribeServices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeServicesRequest method.
-//    req, resp := client.DescribeServicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServices
-func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) (req *aws.Request, output *DescribeServicesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeServices,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeServicesInput{}
-	}
-
-	output = &DescribeServicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeServicesRequest is a API request type for the DescribeServices API operation.
+type DescribeServicesRequest struct {
+	*aws.Request
+	Input *DescribeServicesInput
 }
 
-// DescribeServices API operation for AWS Support.
+// Send marshals and sends the DescribeServices API request.
+func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeServicesOutput), nil
+}
+
+// DescribeServicesRequest returns a request value for making API operation for
+// AWS Support.
 //
 // Returns the current list of AWS services and a list of service categories
 // that applies to each one. You then use service names and categories in your
@@ -782,66 +513,63 @@ func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) (req *aw
 // codes and categories obtained programmatically. This practice ensures that
 // you always have the most recent set of service and category codes.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeServices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
+//    // Example sending a request using the DescribeServicesRequest method.
+//    req := client.DescribeServicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServices
-func (c *Support) DescribeServices(input *DescribeServicesInput) (*DescribeServicesOutput, error) {
-	req, out := c.DescribeServicesRequest(input)
-	return out, req.Send()
-}
+func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) DescribeServicesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeServices,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeServicesWithContext is the same as DescribeServices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeServices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeServicesWithContext(ctx aws.Context, input *DescribeServicesInput, opts ...aws.Option) (*DescribeServicesOutput, error) {
-	req, out := c.DescribeServicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeServicesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeServicesOutput{})
+	return DescribeServicesRequest{Request: req, Input: input}
 }
 
 const opDescribeSeverityLevels = "DescribeSeverityLevels"
 
-// DescribeSeverityLevelsRequest generates a "aws.Request" representing the
-// client's request for the DescribeSeverityLevels operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSeverityLevelsRequest is a API request type for the DescribeSeverityLevels API operation.
+type DescribeSeverityLevelsRequest struct {
+	*aws.Request
+	Input *DescribeSeverityLevelsInput
+}
+
+// Send marshals and sends the DescribeSeverityLevels API request.
+func (r DescribeSeverityLevelsRequest) Send() (*DescribeSeverityLevelsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSeverityLevelsOutput), nil
+}
+
+// DescribeSeverityLevelsRequest returns a request value for making API operation for
+// AWS Support.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSeverityLevels for more information on using the DescribeSeverityLevels
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the list of severity levels that you can assign to an AWS Support
+// case. The severity level for a case is also a field in the CaseDetails data
+// type included in any CreateCase request.
 //
 //    // Example sending a request using the DescribeSeverityLevelsRequest method.
-//    req, resp := client.DescribeSeverityLevelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSeverityLevelsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevels
-func (c *Support) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInput) (req *aws.Request, output *DescribeSeverityLevelsOutput) {
+func (c *Support) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInput) DescribeSeverityLevelsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSeverityLevels,
 		HTTPMethod: "POST",
@@ -852,77 +580,47 @@ func (c *Support) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInp
 		input = &DescribeSeverityLevelsInput{}
 	}
 
-	output = &DescribeSeverityLevelsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSeverityLevels API operation for AWS Support.
-//
-// Returns the list of severity levels that you can assign to an AWS Support
-// case. The severity level for a case is also a field in the CaseDetails data
-// type included in any CreateCase request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeSeverityLevels for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevels
-func (c *Support) DescribeSeverityLevels(input *DescribeSeverityLevelsInput) (*DescribeSeverityLevelsOutput, error) {
-	req, out := c.DescribeSeverityLevelsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSeverityLevelsWithContext is the same as DescribeSeverityLevels with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSeverityLevels for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeSeverityLevelsWithContext(ctx aws.Context, input *DescribeSeverityLevelsInput, opts ...aws.Option) (*DescribeSeverityLevelsOutput, error) {
-	req, out := c.DescribeSeverityLevelsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSeverityLevelsOutput{})
+	return DescribeSeverityLevelsRequest{Request: req, Input: input}
 }
 
 const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorCheckRefreshStatuses"
 
-// DescribeTrustedAdvisorCheckRefreshStatusesRequest generates a "aws.Request" representing the
-// client's request for the DescribeTrustedAdvisorCheckRefreshStatuses operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTrustedAdvisorCheckRefreshStatusesRequest is a API request type for the DescribeTrustedAdvisorCheckRefreshStatuses API operation.
+type DescribeTrustedAdvisorCheckRefreshStatusesRequest struct {
+	*aws.Request
+	Input *DescribeTrustedAdvisorCheckRefreshStatusesInput
+}
+
+// Send marshals and sends the DescribeTrustedAdvisorCheckRefreshStatuses API request.
+func (r DescribeTrustedAdvisorCheckRefreshStatusesRequest) Send() (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTrustedAdvisorCheckRefreshStatusesOutput), nil
+}
+
+// DescribeTrustedAdvisorCheckRefreshStatusesRequest returns a request value for making API operation for
+// AWS Support.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the refresh status of the Trusted Advisor checks that have the specified
+// check IDs. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
 //
-// See DescribeTrustedAdvisorCheckRefreshStatuses for more information on using the DescribeTrustedAdvisorCheckRefreshStatuses
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Some checks are refreshed automatically, and their refresh statuses cannot
+// be retrieved by using this operation. Use of the DescribeTrustedAdvisorCheckRefreshStatuses
+// operation for these checks causes an InvalidParameterValue error.
 //
 //    // Example sending a request using the DescribeTrustedAdvisorCheckRefreshStatusesRequest method.
-//    req, resp := client.DescribeTrustedAdvisorCheckRefreshStatusesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTrustedAdvisorCheckRefreshStatusesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatuses
-func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) (req *aws.Request, output *DescribeTrustedAdvisorCheckRefreshStatusesOutput) {
+func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) DescribeTrustedAdvisorCheckRefreshStatusesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckRefreshStatuses,
 		HTTPMethod: "POST",
@@ -933,96 +631,30 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *Descr
 		input = &DescribeTrustedAdvisorCheckRefreshStatusesInput{}
 	}
 
-	output = &DescribeTrustedAdvisorCheckRefreshStatusesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTrustedAdvisorCheckRefreshStatuses API operation for AWS Support.
-//
-// Returns the refresh status of the Trusted Advisor checks that have the specified
-// check IDs. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
-//
-// Some checks are refreshed automatically, and their refresh statuses cannot
-// be retrieved by using this operation. Use of the DescribeTrustedAdvisorCheckRefreshStatuses
-// operation for these checks causes an InvalidParameterValue error.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeTrustedAdvisorCheckRefreshStatuses for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatuses
-func (c *Support) DescribeTrustedAdvisorCheckRefreshStatuses(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
-	req, out := c.DescribeTrustedAdvisorCheckRefreshStatusesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTrustedAdvisorCheckRefreshStatusesWithContext is the same as DescribeTrustedAdvisorCheckRefreshStatuses with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTrustedAdvisorCheckRefreshStatuses for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckRefreshStatusesInput, opts ...aws.Option) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
-	req, out := c.DescribeTrustedAdvisorCheckRefreshStatusesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckRefreshStatusesOutput{})
+	return DescribeTrustedAdvisorCheckRefreshStatusesRequest{Request: req, Input: input}
 }
 
 const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 
-// DescribeTrustedAdvisorCheckResultRequest generates a "aws.Request" representing the
-// client's request for the DescribeTrustedAdvisorCheckResult operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTrustedAdvisorCheckResult for more information on using the DescribeTrustedAdvisorCheckResult
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeTrustedAdvisorCheckResultRequest method.
-//    req, resp := client.DescribeTrustedAdvisorCheckResultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResult
-func (c *Support) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTrustedAdvisorCheckResultInput) (req *aws.Request, output *DescribeTrustedAdvisorCheckResultOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeTrustedAdvisorCheckResult,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeTrustedAdvisorCheckResultInput{}
-	}
-
-	output = &DescribeTrustedAdvisorCheckResultOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeTrustedAdvisorCheckResultRequest is a API request type for the DescribeTrustedAdvisorCheckResult API operation.
+type DescribeTrustedAdvisorCheckResultRequest struct {
+	*aws.Request
+	Input *DescribeTrustedAdvisorCheckResultInput
 }
 
-// DescribeTrustedAdvisorCheckResult API operation for AWS Support.
+// Send marshals and sends the DescribeTrustedAdvisorCheckResult API request.
+func (r DescribeTrustedAdvisorCheckResultRequest) Send() (*DescribeTrustedAdvisorCheckResultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTrustedAdvisorCheckResultOutput), nil
+}
+
+// DescribeTrustedAdvisorCheckResultRequest returns a request value for making API operation for
+// AWS Support.
 //
 // Returns the results of the Trusted Advisor check that has the specified check
 // ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
@@ -1045,66 +677,64 @@ func (c *Support) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTruste
 //
 //    * checkId. The unique identifier for the check.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeTrustedAdvisorCheckResult for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
+//    // Example sending a request using the DescribeTrustedAdvisorCheckResultRequest method.
+//    req := client.DescribeTrustedAdvisorCheckResultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResult
-func (c *Support) DescribeTrustedAdvisorCheckResult(input *DescribeTrustedAdvisorCheckResultInput) (*DescribeTrustedAdvisorCheckResultOutput, error) {
-	req, out := c.DescribeTrustedAdvisorCheckResultRequest(input)
-	return out, req.Send()
-}
+func (c *Support) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTrustedAdvisorCheckResultInput) DescribeTrustedAdvisorCheckResultRequest {
+	op := &aws.Operation{
+		Name:       opDescribeTrustedAdvisorCheckResult,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeTrustedAdvisorCheckResultWithContext is the same as DescribeTrustedAdvisorCheckResult with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTrustedAdvisorCheckResult for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorCheckResultWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckResultInput, opts ...aws.Option) (*DescribeTrustedAdvisorCheckResultOutput, error) {
-	req, out := c.DescribeTrustedAdvisorCheckResultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeTrustedAdvisorCheckResultInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckResultOutput{})
+	return DescribeTrustedAdvisorCheckResultRequest{Request: req, Input: input}
 }
 
 const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSummaries"
 
-// DescribeTrustedAdvisorCheckSummariesRequest generates a "aws.Request" representing the
-// client's request for the DescribeTrustedAdvisorCheckSummaries operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTrustedAdvisorCheckSummariesRequest is a API request type for the DescribeTrustedAdvisorCheckSummaries API operation.
+type DescribeTrustedAdvisorCheckSummariesRequest struct {
+	*aws.Request
+	Input *DescribeTrustedAdvisorCheckSummariesInput
+}
+
+// Send marshals and sends the DescribeTrustedAdvisorCheckSummaries API request.
+func (r DescribeTrustedAdvisorCheckSummariesRequest) Send() (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTrustedAdvisorCheckSummariesOutput), nil
+}
+
+// DescribeTrustedAdvisorCheckSummariesRequest returns a request value for making API operation for
+// AWS Support.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the summaries of the results of the Trusted Advisor checks that have
+// the specified check IDs. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
 //
-// See DescribeTrustedAdvisorCheckSummaries for more information on using the DescribeTrustedAdvisorCheckSummaries
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The response contains an array of TrustedAdvisorCheckSummary objects.
 //
 //    // Example sending a request using the DescribeTrustedAdvisorCheckSummariesRequest method.
-//    req, resp := client.DescribeTrustedAdvisorCheckSummariesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTrustedAdvisorCheckSummariesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummaries
-func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTrustedAdvisorCheckSummariesInput) (req *aws.Request, output *DescribeTrustedAdvisorCheckSummariesOutput) {
+func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTrustedAdvisorCheckSummariesInput) DescribeTrustedAdvisorCheckSummariesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckSummaries,
 		HTTPMethod: "POST",
@@ -1115,78 +745,45 @@ func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTru
 		input = &DescribeTrustedAdvisorCheckSummariesInput{}
 	}
 
-	output = &DescribeTrustedAdvisorCheckSummariesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTrustedAdvisorCheckSummaries API operation for AWS Support.
-//
-// Returns the summaries of the results of the Trusted Advisor checks that have
-// the specified check IDs. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
-//
-// The response contains an array of TrustedAdvisorCheckSummary objects.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeTrustedAdvisorCheckSummaries for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummaries
-func (c *Support) DescribeTrustedAdvisorCheckSummaries(input *DescribeTrustedAdvisorCheckSummariesInput) (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
-	req, out := c.DescribeTrustedAdvisorCheckSummariesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTrustedAdvisorCheckSummariesWithContext is the same as DescribeTrustedAdvisorCheckSummaries with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTrustedAdvisorCheckSummaries for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorCheckSummariesWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckSummariesInput, opts ...aws.Option) (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
-	req, out := c.DescribeTrustedAdvisorCheckSummariesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckSummariesOutput{})
+	return DescribeTrustedAdvisorCheckSummariesRequest{Request: req, Input: input}
 }
 
 const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 
-// DescribeTrustedAdvisorChecksRequest generates a "aws.Request" representing the
-// client's request for the DescribeTrustedAdvisorChecks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTrustedAdvisorChecksRequest is a API request type for the DescribeTrustedAdvisorChecks API operation.
+type DescribeTrustedAdvisorChecksRequest struct {
+	*aws.Request
+	Input *DescribeTrustedAdvisorChecksInput
+}
+
+// Send marshals and sends the DescribeTrustedAdvisorChecks API request.
+func (r DescribeTrustedAdvisorChecksRequest) Send() (*DescribeTrustedAdvisorChecksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTrustedAdvisorChecksOutput), nil
+}
+
+// DescribeTrustedAdvisorChecksRequest returns a request value for making API operation for
+// AWS Support.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTrustedAdvisorChecks for more information on using the DescribeTrustedAdvisorChecks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about all available Trusted Advisor checks, including
+// name, ID, category, description, and metadata. You must specify a language
+// code; English ("en") and Japanese ("ja") are currently supported. The response
+// contains a TrustedAdvisorCheckDescription for each check.
 //
 //    // Example sending a request using the DescribeTrustedAdvisorChecksRequest method.
-//    req, resp := client.DescribeTrustedAdvisorChecksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTrustedAdvisorChecksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecks
-func (c *Support) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvisorChecksInput) (req *aws.Request, output *DescribeTrustedAdvisorChecksOutput) {
+func (c *Support) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvisorChecksInput) DescribeTrustedAdvisorChecksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorChecks,
 		HTTPMethod: "POST",
@@ -1197,94 +794,30 @@ func (c *Support) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvi
 		input = &DescribeTrustedAdvisorChecksInput{}
 	}
 
-	output = &DescribeTrustedAdvisorChecksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTrustedAdvisorChecks API operation for AWS Support.
-//
-// Returns information about all available Trusted Advisor checks, including
-// name, ID, category, description, and metadata. You must specify a language
-// code; English ("en") and Japanese ("ja") are currently supported. The response
-// contains a TrustedAdvisorCheckDescription for each check.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation DescribeTrustedAdvisorChecks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecks
-func (c *Support) DescribeTrustedAdvisorChecks(input *DescribeTrustedAdvisorChecksInput) (*DescribeTrustedAdvisorChecksOutput, error) {
-	req, out := c.DescribeTrustedAdvisorChecksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTrustedAdvisorChecksWithContext is the same as DescribeTrustedAdvisorChecks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTrustedAdvisorChecks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorChecksWithContext(ctx aws.Context, input *DescribeTrustedAdvisorChecksInput, opts ...aws.Option) (*DescribeTrustedAdvisorChecksOutput, error) {
-	req, out := c.DescribeTrustedAdvisorChecksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTrustedAdvisorChecksOutput{})
+	return DescribeTrustedAdvisorChecksRequest{Request: req, Input: input}
 }
 
 const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 
-// RefreshTrustedAdvisorCheckRequest generates a "aws.Request" representing the
-// client's request for the RefreshTrustedAdvisorCheck operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RefreshTrustedAdvisorCheck for more information on using the RefreshTrustedAdvisorCheck
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RefreshTrustedAdvisorCheckRequest method.
-//    req, resp := client.RefreshTrustedAdvisorCheckRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheck
-func (c *Support) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorCheckInput) (req *aws.Request, output *RefreshTrustedAdvisorCheckOutput) {
-	op := &aws.Operation{
-		Name:       opRefreshTrustedAdvisorCheck,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RefreshTrustedAdvisorCheckInput{}
-	}
-
-	output = &RefreshTrustedAdvisorCheckOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RefreshTrustedAdvisorCheckRequest is a API request type for the RefreshTrustedAdvisorCheck API operation.
+type RefreshTrustedAdvisorCheckRequest struct {
+	*aws.Request
+	Input *RefreshTrustedAdvisorCheckInput
 }
 
-// RefreshTrustedAdvisorCheck API operation for AWS Support.
+// Send marshals and sends the RefreshTrustedAdvisorCheck API request.
+func (r RefreshTrustedAdvisorCheckRequest) Send() (*RefreshTrustedAdvisorCheckOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RefreshTrustedAdvisorCheckOutput), nil
+}
+
+// RefreshTrustedAdvisorCheckRequest returns a request value for making API operation for
+// AWS Support.
 //
 // Requests a refresh of the Trusted Advisor check that has the specified check
 // ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
@@ -1304,66 +837,62 @@ func (c *Support) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisor
 //
 //    * checkId. The unique identifier for the check.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation RefreshTrustedAdvisorCheck for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
+//    // Example sending a request using the RefreshTrustedAdvisorCheckRequest method.
+//    req := client.RefreshTrustedAdvisorCheckRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheck
-func (c *Support) RefreshTrustedAdvisorCheck(input *RefreshTrustedAdvisorCheckInput) (*RefreshTrustedAdvisorCheckOutput, error) {
-	req, out := c.RefreshTrustedAdvisorCheckRequest(input)
-	return out, req.Send()
-}
+func (c *Support) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorCheckInput) RefreshTrustedAdvisorCheckRequest {
+	op := &aws.Operation{
+		Name:       opRefreshTrustedAdvisorCheck,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RefreshTrustedAdvisorCheckWithContext is the same as RefreshTrustedAdvisorCheck with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RefreshTrustedAdvisorCheck for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) RefreshTrustedAdvisorCheckWithContext(ctx aws.Context, input *RefreshTrustedAdvisorCheckInput, opts ...aws.Option) (*RefreshTrustedAdvisorCheckOutput, error) {
-	req, out := c.RefreshTrustedAdvisorCheckRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RefreshTrustedAdvisorCheckInput{}
+	}
+
+	req := c.newRequest(op, input, &RefreshTrustedAdvisorCheckOutput{})
+	return RefreshTrustedAdvisorCheckRequest{Request: req, Input: input}
 }
 
 const opResolveCase = "ResolveCase"
 
-// ResolveCaseRequest generates a "aws.Request" representing the
-// client's request for the ResolveCase operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResolveCaseRequest is a API request type for the ResolveCase API operation.
+type ResolveCaseRequest struct {
+	*aws.Request
+	Input *ResolveCaseInput
+}
+
+// Send marshals and sends the ResolveCase API request.
+func (r ResolveCaseRequest) Send() (*ResolveCaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResolveCaseOutput), nil
+}
+
+// ResolveCaseRequest returns a request value for making API operation for
+// AWS Support.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResolveCase for more information on using the ResolveCase
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Takes a caseId and returns the initial state of the case along with the state
+// of the case after the call to ResolveCase completed.
 //
 //    // Example sending a request using the ResolveCaseRequest method.
-//    req, resp := client.ResolveCaseRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResolveCaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCase
-func (c *Support) ResolveCaseRequest(input *ResolveCaseInput) (req *aws.Request, output *ResolveCaseOutput) {
+func (c *Support) ResolveCaseRequest(input *ResolveCaseInput) ResolveCaseRequest {
 	op := &aws.Operation{
 		Name:       opResolveCase,
 		HTTPMethod: "POST",
@@ -1374,50 +903,8 @@ func (c *Support) ResolveCaseRequest(input *ResolveCaseInput) (req *aws.Request,
 		input = &ResolveCaseInput{}
 	}
 
-	output = &ResolveCaseOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResolveCase API operation for AWS Support.
-//
-// Takes a caseId and returns the initial state of the case along with the state
-// of the case after the call to ResolveCase completed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Support's
-// API operation ResolveCase for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error occurred.
-//
-//   * ErrCodeCaseIdNotFound "CaseIdNotFound"
-//   The requested caseId could not be located.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCase
-func (c *Support) ResolveCase(input *ResolveCaseInput) (*ResolveCaseOutput, error) {
-	req, out := c.ResolveCaseRequest(input)
-	return out, req.Send()
-}
-
-// ResolveCaseWithContext is the same as ResolveCase with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResolveCase for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) ResolveCaseWithContext(ctx aws.Context, input *ResolveCaseInput, opts ...aws.Option) (*ResolveCaseOutput, error) {
-	req, out := c.ResolveCaseRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResolveCaseOutput{})
+	return ResolveCaseRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSetRequest

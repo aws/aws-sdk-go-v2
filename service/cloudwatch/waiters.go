@@ -43,10 +43,10 @@ func (c *CloudWatch) WaitUntilAlarmExistsWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeAlarmsRequest(inCpy)
+			req := c.DescribeAlarmsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

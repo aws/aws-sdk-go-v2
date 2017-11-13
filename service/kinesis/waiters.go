@@ -43,10 +43,10 @@ func (c *Kinesis) WaitUntilStreamExistsWithContext(ctx aws.Context, input *Descr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStreamRequest(inCpy)
+			req := c.DescribeStreamRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -89,10 +89,10 @@ func (c *Kinesis) WaitUntilStreamNotExistsWithContext(ctx aws.Context, input *De
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStreamRequest(inCpy)
+			req := c.DescribeStreamRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

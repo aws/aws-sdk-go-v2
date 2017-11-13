@@ -32,7 +32,8 @@ func (ig *ItemGetter) Get(id string) (value string) {
 			aws.String("value"),
 		},
 	}
-	if output, err := ig.DynamoDB.GetItem(input); err == nil {
+	req := ig.DynamoDB.GetItemRequest(input)
+	if output, err := req.Send(); err == nil {
 		if _, ok := output.Item["value"]; ok {
 			dynamodbattribute.Unmarshal(output.Item["value"], &value)
 		}

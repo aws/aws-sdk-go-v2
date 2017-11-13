@@ -43,7 +43,8 @@ func (strat S3SaveStrategy) Save(env Envelope, req *request.Request) error {
 		instInput.Key = aws.String(*input.Key + strat.InstructionFileSuffix)
 	}
 
-	_, err = strat.Client.PutObject(&instInput)
+	putReq := strat.Client.PutObjectRequest(&instInput)
+	_, err = putReq.Send()
 	return err
 }
 
@@ -88,15 +89,16 @@ func (load S3LoadStrategy) Load(req *request.Request) (Envelope, error) {
 	}
 
 	input := req.Params.(*s3.GetObjectInput)
-	out, err := load.Client.GetObject(&s3.GetObjectInput{
+	getReq := load.Client.GetObjectRequest(&s3.GetObjectInput{
 		Key:    aws.String(strings.Join([]string{*input.Key, load.InstructionFileSuffix}, "")),
 		Bucket: input.Bucket,
 	})
+	resp, err := getReq.Send()
 	if err != nil {
 		return env, err
 	}
 
-	b, err := ioutil.ReadAll(out.Body)
+	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return env, err
 	}

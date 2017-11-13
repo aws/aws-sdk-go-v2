@@ -12,31 +12,36 @@ import (
 
 const opAssociateConfigurationItemsToApplication = "AssociateConfigurationItemsToApplication"
 
-// AssociateConfigurationItemsToApplicationRequest generates a "aws.Request" representing the
-// client's request for the AssociateConfigurationItemsToApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateConfigurationItemsToApplicationRequest is a API request type for the AssociateConfigurationItemsToApplication API operation.
+type AssociateConfigurationItemsToApplicationRequest struct {
+	*aws.Request
+	Input *AssociateConfigurationItemsToApplicationInput
+}
+
+// Send marshals and sends the AssociateConfigurationItemsToApplication API request.
+func (r AssociateConfigurationItemsToApplicationRequest) Send() (*AssociateConfigurationItemsToApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateConfigurationItemsToApplicationOutput), nil
+}
+
+// AssociateConfigurationItemsToApplicationRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateConfigurationItemsToApplication for more information on using the AssociateConfigurationItemsToApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates one or more configuration items with an application.
 //
 //    // Example sending a request using the AssociateConfigurationItemsToApplicationRequest method.
-//    req, resp := client.AssociateConfigurationItemsToApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateConfigurationItemsToApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AssociateConfigurationItemsToApplication
-func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRequest(input *AssociateConfigurationItemsToApplicationInput) (req *aws.Request, output *AssociateConfigurationItemsToApplicationOutput) {
+func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRequest(input *AssociateConfigurationItemsToApplicationInput) AssociateConfigurationItemsToApplicationRequest {
 	op := &aws.Operation{
 		Name:       opAssociateConfigurationItemsToApplication,
 		HTTPMethod: "POST",
@@ -47,86 +52,42 @@ func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRe
 		input = &AssociateConfigurationItemsToApplicationInput{}
 	}
 
-	output = &AssociateConfigurationItemsToApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateConfigurationItemsToApplication API operation for AWS Application Discovery Service.
-//
-// Associates one or more configuration items with an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation AssociateConfigurationItemsToApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AssociateConfigurationItemsToApplication
-func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplication(input *AssociateConfigurationItemsToApplicationInput) (*AssociateConfigurationItemsToApplicationOutput, error) {
-	req, out := c.AssociateConfigurationItemsToApplicationRequest(input)
-	return out, req.Send()
-}
-
-// AssociateConfigurationItemsToApplicationWithContext is the same as AssociateConfigurationItemsToApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateConfigurationItemsToApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationWithContext(ctx aws.Context, input *AssociateConfigurationItemsToApplicationInput, opts ...aws.Option) (*AssociateConfigurationItemsToApplicationOutput, error) {
-	req, out := c.AssociateConfigurationItemsToApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateConfigurationItemsToApplicationOutput{})
+	return AssociateConfigurationItemsToApplicationRequest{Request: req, Input: input}
 }
 
 const opCreateApplication = "CreateApplication"
 
-// CreateApplicationRequest generates a "aws.Request" representing the
-// client's request for the CreateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateApplicationRequest is a API request type for the CreateApplication API operation.
+type CreateApplicationRequest struct {
+	*aws.Request
+	Input *CreateApplicationInput
+}
+
+// Send marshals and sends the CreateApplication API request.
+func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateApplicationOutput), nil
+}
+
+// CreateApplicationRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateApplication for more information on using the CreateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an application with the given name and description.
 //
 //    // Example sending a request using the CreateApplicationRequest method.
-//    req, resp := client.CreateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateApplication
-func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *CreateApplicationOutput) {
+func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
@@ -137,86 +98,44 @@ func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateAppl
 		input = &CreateApplicationInput{}
 	}
 
-	output = &CreateApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateApplication API operation for AWS Application Discovery Service.
-//
-// Creates an application with the given name and description.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation CreateApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateApplication
-func (c *ApplicationDiscoveryService) CreateApplication(input *CreateApplicationInput) (*CreateApplicationOutput, error) {
-	req, out := c.CreateApplicationRequest(input)
-	return out, req.Send()
-}
-
-// CreateApplicationWithContext is the same as CreateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*CreateApplicationOutput, error) {
-	req, out := c.CreateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	return CreateApplicationRequest{Request: req, Input: input}
 }
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws.Request" representing the
-// client's request for the CreateTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTagsRequest is a API request type for the CreateTags API operation.
+type CreateTagsRequest struct {
+	*aws.Request
+	Input *CreateTagsInput
+}
+
+// Send marshals and sends the CreateTags API request.
+func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTagsOutput), nil
+}
+
+// CreateTagsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTags for more information on using the CreateTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates one or more tags for configuration items. Tags are metadata that
+// help you categorize IT assets. This API accepts a list of multiple configuration
+// items.
 //
 //    // Example sending a request using the CreateTagsRequest method.
-//    req, resp := client.CreateTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateTags
-func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
@@ -227,92 +146,43 @@ func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) 
 		input = &CreateTagsInput{}
 	}
 
-	output = &CreateTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTags API operation for AWS Application Discovery Service.
-//
-// Creates one or more tags for configuration items. Tags are metadata that
-// help you categorize IT assets. This API accepts a list of multiple configuration
-// items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation CreateTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateTags
-func (c *ApplicationDiscoveryService) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	return out, req.Send()
-}
-
-// CreateTagsWithContext is the same as CreateTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTagsOutput{})
+	return CreateTagsRequest{Request: req, Input: input}
 }
 
 const opDeleteApplications = "DeleteApplications"
 
-// DeleteApplicationsRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationsRequest is a API request type for the DeleteApplications API operation.
+type DeleteApplicationsRequest struct {
+	*aws.Request
+	Input *DeleteApplicationsInput
+}
+
+// Send marshals and sends the DeleteApplications API request.
+func (r DeleteApplicationsRequest) Send() (*DeleteApplicationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationsOutput), nil
+}
+
+// DeleteApplicationsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApplications for more information on using the DeleteApplications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a list of applications and their associations with configuration
+// items.
 //
 //    // Example sending a request using the DeleteApplicationsRequest method.
-//    req, resp := client.DeleteApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteApplications
-func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApplicationsInput) (req *aws.Request, output *DeleteApplicationsOutput) {
+func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApplicationsInput) DeleteApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplications,
 		HTTPMethod: "POST",
@@ -323,87 +193,43 @@ func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApp
 		input = &DeleteApplicationsInput{}
 	}
 
-	output = &DeleteApplicationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteApplications API operation for AWS Application Discovery Service.
-//
-// Deletes a list of applications and their associations with configuration
-// items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DeleteApplications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteApplications
-func (c *ApplicationDiscoveryService) DeleteApplications(input *DeleteApplicationsInput) (*DeleteApplicationsOutput, error) {
-	req, out := c.DeleteApplicationsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationsWithContext is the same as DeleteApplications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DeleteApplicationsWithContext(ctx aws.Context, input *DeleteApplicationsInput, opts ...aws.Option) (*DeleteApplicationsOutput, error) {
-	req, out := c.DeleteApplicationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteApplicationsOutput{})
+	return DeleteApplicationsRequest{Request: req, Input: input}
 }
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws.Request" representing the
-// client's request for the DeleteTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTagsRequest is a API request type for the DeleteTags API operation.
+type DeleteTagsRequest struct {
+	*aws.Request
+	Input *DeleteTagsInput
+}
+
+// Send marshals and sends the DeleteTags API request.
+func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagsOutput), nil
+}
+
+// DeleteTagsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTags for more information on using the DeleteTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the association between configuration items and one or more tags.
+// This API accepts a list of multiple configuration items.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteTags
-func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
@@ -414,91 +240,43 @@ func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) 
 		input = &DeleteTagsInput{}
 	}
 
-	output = &DeleteTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTags API operation for AWS Application Discovery Service.
-//
-// Deletes the association between configuration items and one or more tags.
-// This API accepts a list of multiple configuration items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DeleteTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteTags
-func (c *ApplicationDiscoveryService) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTagsWithContext is the same as DeleteTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	return DeleteTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeAgents = "DescribeAgents"
 
-// DescribeAgentsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAgents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAgentsRequest is a API request type for the DescribeAgents API operation.
+type DescribeAgentsRequest struct {
+	*aws.Request
+	Input *DescribeAgentsInput
+}
+
+// Send marshals and sends the DescribeAgents API request.
+func (r DescribeAgentsRequest) Send() (*DescribeAgentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAgentsOutput), nil
+}
+
+// DescribeAgentsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAgents for more information on using the DescribeAgents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists agents or the Connector by ID or lists all agents/Connectors associated
+// with your user account if you did not specify an ID.
 //
 //    // Example sending a request using the DescribeAgentsRequest method.
-//    req, resp := client.DescribeAgentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAgentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeAgents
-func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgentsInput) (req *aws.Request, output *DescribeAgentsOutput) {
+func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgentsInput) DescribeAgentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAgents,
 		HTTPMethod: "POST",
@@ -509,103 +287,30 @@ func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgent
 		input = &DescribeAgentsInput{}
 	}
 
-	output = &DescribeAgentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAgents API operation for AWS Application Discovery Service.
-//
-// Lists agents or the Connector by ID or lists all agents/Connectors associated
-// with your user account if you did not specify an ID.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DescribeAgents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeAgents
-func (c *ApplicationDiscoveryService) DescribeAgents(input *DescribeAgentsInput) (*DescribeAgentsOutput, error) {
-	req, out := c.DescribeAgentsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAgentsWithContext is the same as DescribeAgents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAgents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeAgentsWithContext(ctx aws.Context, input *DescribeAgentsInput, opts ...aws.Option) (*DescribeAgentsOutput, error) {
-	req, out := c.DescribeAgentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAgentsOutput{})
+	return DescribeAgentsRequest{Request: req, Input: input}
 }
 
 const opDescribeConfigurations = "DescribeConfigurations"
 
-// DescribeConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeConfigurations for more information on using the DescribeConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeConfigurationsRequest method.
-//    req, resp := client.DescribeConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeConfigurations
-func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *DescribeConfigurationsInput) (req *aws.Request, output *DescribeConfigurationsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeConfigurations,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeConfigurationsInput{}
-	}
-
-	output = &DescribeConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeConfigurationsRequest is a API request type for the DescribeConfigurations API operation.
+type DescribeConfigurationsRequest struct {
+	*aws.Request
+	Input *DescribeConfigurationsInput
 }
 
-// DescribeConfigurations API operation for AWS Application Discovery Service.
+// Send marshals and sends the DescribeConfigurations API request.
+func (r DescribeConfigurationsRequest) Send() (*DescribeConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConfigurationsOutput), nil
+}
+
+// DescribeConfigurationsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
 // Retrieves attributes for a list of configuration item IDs. All of the supplied
 // IDs must be for the same asset type (server, application, process, or connection).
@@ -616,77 +321,64 @@ func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *Descr
 // For a complete list of outputs for each asset type, see Using the DescribeConfigurations
 // Action (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DescribeConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//    // Example sending a request using the DescribeConfigurationsRequest method.
+//    req := client.DescribeConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeConfigurations
-func (c *ApplicationDiscoveryService) DescribeConfigurations(input *DescribeConfigurationsInput) (*DescribeConfigurationsOutput, error) {
-	req, out := c.DescribeConfigurationsRequest(input)
-	return out, req.Send()
-}
+func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *DescribeConfigurationsInput) DescribeConfigurationsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeConfigurations,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeConfigurationsWithContext is the same as DescribeConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeConfigurationsWithContext(ctx aws.Context, input *DescribeConfigurationsInput, opts ...aws.Option) (*DescribeConfigurationsOutput, error) {
-	req, out := c.DescribeConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeConfigurationsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeConfigurationsOutput{})
+	return DescribeConfigurationsRequest{Request: req, Input: input}
 }
 
 const opDescribeExportConfigurations = "DescribeExportConfigurations"
 
-// DescribeExportConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeExportConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeExportConfigurationsRequest is a API request type for the DescribeExportConfigurations API operation.
+type DescribeExportConfigurationsRequest struct {
+	*aws.Request
+	Input *DescribeExportConfigurationsInput
+}
+
+// Send marshals and sends the DescribeExportConfigurations API request.
+func (r DescribeExportConfigurationsRequest) Send() (*DescribeExportConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeExportConfigurationsOutput), nil
+}
+
+// DescribeExportConfigurationsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deprecated. Use DescribeExportTasks instead.
 //
-// See DescribeExportConfigurations for more information on using the DescribeExportConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the status of a given export process. You can retrieve status from
+// a maximum of 100 processes.
 //
 //    // Example sending a request using the DescribeExportConfigurationsRequest method.
-//    req, resp := client.DescribeExportConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeExportConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportConfigurations
-func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input *DescribeExportConfigurationsInput) (req *aws.Request, output *DescribeExportConfigurationsOutput) {
+func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input *DescribeExportConfigurationsInput) DescribeExportConfigurationsRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeExportConfigurations, has been deprecated")
 	}
@@ -700,93 +392,43 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input 
 		input = &DescribeExportConfigurationsInput{}
 	}
 
-	output = &DescribeExportConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeExportConfigurations API operation for AWS Application Discovery Service.
-//
-// Deprecated. Use DescribeExportTasks instead.
-//
-// Retrieves the status of a given export process. You can retrieve status from
-// a maximum of 100 processes.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DescribeExportConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportConfigurations
-func (c *ApplicationDiscoveryService) DescribeExportConfigurations(input *DescribeExportConfigurationsInput) (*DescribeExportConfigurationsOutput, error) {
-	req, out := c.DescribeExportConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeExportConfigurationsWithContext is the same as DescribeExportConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeExportConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeExportConfigurationsWithContext(ctx aws.Context, input *DescribeExportConfigurationsInput, opts ...aws.Option) (*DescribeExportConfigurationsOutput, error) {
-	req, out := c.DescribeExportConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeExportConfigurationsOutput{})
+	return DescribeExportConfigurationsRequest{Request: req, Input: input}
 }
 
 const opDescribeExportTasks = "DescribeExportTasks"
 
-// DescribeExportTasksRequest generates a "aws.Request" representing the
-// client's request for the DescribeExportTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeExportTasksRequest is a API request type for the DescribeExportTasks API operation.
+type DescribeExportTasksRequest struct {
+	*aws.Request
+	Input *DescribeExportTasksInput
+}
+
+// Send marshals and sends the DescribeExportTasks API request.
+func (r DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeExportTasksOutput), nil
+}
+
+// DescribeExportTasksRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeExportTasks for more information on using the DescribeExportTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieve status of one or more export tasks. You can retrieve the status
+// of up to 100 export tasks.
 //
 //    // Example sending a request using the DescribeExportTasksRequest method.
-//    req, resp := client.DescribeExportTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeExportTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportTasks
-func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *aws.Request, output *DescribeExportTasksOutput) {
+func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *DescribeExportTasksInput) DescribeExportTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
@@ -797,87 +439,43 @@ func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *Describe
 		input = &DescribeExportTasksInput{}
 	}
 
-	output = &DescribeExportTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeExportTasks API operation for AWS Application Discovery Service.
-//
-// Retrieve status of one or more export tasks. You can retrieve the status
-// of up to 100 export tasks.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DescribeExportTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportTasks
-func (c *ApplicationDiscoveryService) DescribeExportTasks(input *DescribeExportTasksInput) (*DescribeExportTasksOutput, error) {
-	req, out := c.DescribeExportTasksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeExportTasksWithContext is the same as DescribeExportTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeExportTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeExportTasksWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.Option) (*DescribeExportTasksOutput, error) {
-	req, out := c.DescribeExportTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+	return DescribeExportTasksRequest{Request: req, Input: input}
 }
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
+}
+
+// Send marshals and sends the DescribeTags API request.
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of configuration items that are tagged with a specific tag.
+// Or retrieves a list of all tags assigned to a specific configuration item.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeTags
-func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -888,91 +486,42 @@ func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInp
 		input = &DescribeTagsInput{}
 	}
 
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTags API operation for AWS Application Discovery Service.
-//
-// Retrieves a list of configuration items that are tagged with a specific tag.
-// Or retrieves a list of all tags assigned to a specific configuration item.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeTags
-func (c *ApplicationDiscoveryService) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurationItemsFromApplication"
 
-// DisassociateConfigurationItemsFromApplicationRequest generates a "aws.Request" representing the
-// client's request for the DisassociateConfigurationItemsFromApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateConfigurationItemsFromApplicationRequest is a API request type for the DisassociateConfigurationItemsFromApplication API operation.
+type DisassociateConfigurationItemsFromApplicationRequest struct {
+	*aws.Request
+	Input *DisassociateConfigurationItemsFromApplicationInput
+}
+
+// Send marshals and sends the DisassociateConfigurationItemsFromApplication API request.
+func (r DisassociateConfigurationItemsFromApplicationRequest) Send() (*DisassociateConfigurationItemsFromApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConfigurationItemsFromApplicationOutput), nil
+}
+
+// DisassociateConfigurationItemsFromApplicationRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateConfigurationItemsFromApplication for more information on using the DisassociateConfigurationItemsFromApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates one or more configuration items from an application.
 //
 //    // Example sending a request using the DisassociateConfigurationItemsFromApplicationRequest method.
-//    req, resp := client.DisassociateConfigurationItemsFromApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateConfigurationItemsFromApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DisassociateConfigurationItemsFromApplication
-func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationRequest(input *DisassociateConfigurationItemsFromApplicationInput) (req *aws.Request, output *DisassociateConfigurationItemsFromApplicationOutput) {
+func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationRequest(input *DisassociateConfigurationItemsFromApplicationInput) DisassociateConfigurationItemsFromApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateConfigurationItemsFromApplication,
 		HTTPMethod: "POST",
@@ -983,86 +532,48 @@ func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicat
 		input = &DisassociateConfigurationItemsFromApplicationInput{}
 	}
 
-	output = &DisassociateConfigurationItemsFromApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateConfigurationItemsFromApplication API operation for AWS Application Discovery Service.
-//
-// Disassociates one or more configuration items from an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation DisassociateConfigurationItemsFromApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DisassociateConfigurationItemsFromApplication
-func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplication(input *DisassociateConfigurationItemsFromApplicationInput) (*DisassociateConfigurationItemsFromApplicationOutput, error) {
-	req, out := c.DisassociateConfigurationItemsFromApplicationRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateConfigurationItemsFromApplicationWithContext is the same as DisassociateConfigurationItemsFromApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateConfigurationItemsFromApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationWithContext(ctx aws.Context, input *DisassociateConfigurationItemsFromApplicationInput, opts ...aws.Option) (*DisassociateConfigurationItemsFromApplicationOutput, error) {
-	req, out := c.DisassociateConfigurationItemsFromApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateConfigurationItemsFromApplicationOutput{})
+	return DisassociateConfigurationItemsFromApplicationRequest{Request: req, Input: input}
 }
 
 const opExportConfigurations = "ExportConfigurations"
 
-// ExportConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the ExportConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ExportConfigurationsRequest is a API request type for the ExportConfigurations API operation.
+type ExportConfigurationsRequest struct {
+	*aws.Request
+	Input *ExportConfigurationsInput
+}
+
+// Send marshals and sends the ExportConfigurations API request.
+func (r ExportConfigurationsRequest) Send() (*ExportConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExportConfigurationsOutput), nil
+}
+
+// ExportConfigurationsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deprecated. Use StartExportTask instead.
 //
-// See ExportConfigurations for more information on using the ExportConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Exports all discovered configuration data to an Amazon S3 bucket or an application
+// that enables you to view and evaluate the data. Data includes tags and tag
+// associations, processes, connections, servers, and system performance. This
+// API returns an export ID that you can query using the DescribeExportConfigurations
+// API. The system imposes a limit of two configuration exports in six hours.
 //
 //    // Example sending a request using the ExportConfigurationsRequest method.
-//    req, resp := client.ExportConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ExportConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportConfigurations
-func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportConfigurationsInput) (req *aws.Request, output *ExportConfigurationsOutput) {
+func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportConfigurationsInput) ExportConfigurationsRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, ExportConfigurations, has been deprecated")
 	}
@@ -1076,95 +587,42 @@ func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportC
 		input = &ExportConfigurationsInput{}
 	}
 
-	output = &ExportConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ExportConfigurations API operation for AWS Application Discovery Service.
-//
-// Deprecated. Use StartExportTask instead.
-//
-// Exports all discovered configuration data to an Amazon S3 bucket or an application
-// that enables you to view and evaluate the data. Data includes tags and tag
-// associations, processes, connections, servers, and system performance. This
-// API returns an export ID that you can query using the DescribeExportConfigurations
-// API. The system imposes a limit of two configuration exports in six hours.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation ExportConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportConfigurations
-func (c *ApplicationDiscoveryService) ExportConfigurations(input *ExportConfigurationsInput) (*ExportConfigurationsOutput, error) {
-	req, out := c.ExportConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// ExportConfigurationsWithContext is the same as ExportConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ExportConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) ExportConfigurationsWithContext(ctx aws.Context, input *ExportConfigurationsInput, opts ...aws.Option) (*ExportConfigurationsOutput, error) {
-	req, out := c.ExportConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ExportConfigurationsOutput{})
+	return ExportConfigurationsRequest{Request: req, Input: input}
 }
 
 const opGetDiscoverySummary = "GetDiscoverySummary"
 
-// GetDiscoverySummaryRequest generates a "aws.Request" representing the
-// client's request for the GetDiscoverySummary operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDiscoverySummaryRequest is a API request type for the GetDiscoverySummary API operation.
+type GetDiscoverySummaryRequest struct {
+	*aws.Request
+	Input *GetDiscoverySummaryInput
+}
+
+// Send marshals and sends the GetDiscoverySummary API request.
+func (r GetDiscoverySummaryRequest) Send() (*GetDiscoverySummaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDiscoverySummaryOutput), nil
+}
+
+// GetDiscoverySummaryRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDiscoverySummary for more information on using the GetDiscoverySummary
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a short summary of discovered assets.
 //
 //    // Example sending a request using the GetDiscoverySummaryRequest method.
-//    req, resp := client.GetDiscoverySummaryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDiscoverySummaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/GetDiscoverySummary
-func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) (req *aws.Request, output *GetDiscoverySummaryOutput) {
+func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) GetDiscoverySummaryRequest {
 	op := &aws.Operation{
 		Name:       opGetDiscoverySummary,
 		HTTPMethod: "POST",
@@ -1175,86 +633,43 @@ func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDisco
 		input = &GetDiscoverySummaryInput{}
 	}
 
-	output = &GetDiscoverySummaryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDiscoverySummary API operation for AWS Application Discovery Service.
-//
-// Retrieves a short summary of discovered assets.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation GetDiscoverySummary for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/GetDiscoverySummary
-func (c *ApplicationDiscoveryService) GetDiscoverySummary(input *GetDiscoverySummaryInput) (*GetDiscoverySummaryOutput, error) {
-	req, out := c.GetDiscoverySummaryRequest(input)
-	return out, req.Send()
-}
-
-// GetDiscoverySummaryWithContext is the same as GetDiscoverySummary with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDiscoverySummary for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) GetDiscoverySummaryWithContext(ctx aws.Context, input *GetDiscoverySummaryInput, opts ...aws.Option) (*GetDiscoverySummaryOutput, error) {
-	req, out := c.GetDiscoverySummaryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDiscoverySummaryOutput{})
+	return GetDiscoverySummaryRequest{Request: req, Input: input}
 }
 
 const opListConfigurations = "ListConfigurations"
 
-// ListConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the ListConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListConfigurationsRequest is a API request type for the ListConfigurations API operation.
+type ListConfigurationsRequest struct {
+	*aws.Request
+	Input *ListConfigurationsInput
+}
+
+// Send marshals and sends the ListConfigurations API request.
+func (r ListConfigurationsRequest) Send() (*ListConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListConfigurationsOutput), nil
+}
+
+// ListConfigurationsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListConfigurations for more information on using the ListConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of configuration items according to criteria that you specify
+// in a filter. The filter criteria identifies the relationship requirements.
 //
 //    // Example sending a request using the ListConfigurationsRequest method.
-//    req, resp := client.ListConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListConfigurations
-func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfigurationsInput) (req *aws.Request, output *ListConfigurationsOutput) {
+func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfigurationsInput) ListConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListConfigurations,
 		HTTPMethod: "POST",
@@ -1265,91 +680,43 @@ func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfi
 		input = &ListConfigurationsInput{}
 	}
 
-	output = &ListConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListConfigurations API operation for AWS Application Discovery Service.
-//
-// Retrieves a list of configuration items according to criteria that you specify
-// in a filter. The filter criteria identifies the relationship requirements.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation ListConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListConfigurations
-func (c *ApplicationDiscoveryService) ListConfigurations(input *ListConfigurationsInput) (*ListConfigurationsOutput, error) {
-	req, out := c.ListConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// ListConfigurationsWithContext is the same as ListConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) ListConfigurationsWithContext(ctx aws.Context, input *ListConfigurationsInput, opts ...aws.Option) (*ListConfigurationsOutput, error) {
-	req, out := c.ListConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListConfigurationsOutput{})
+	return ListConfigurationsRequest{Request: req, Input: input}
 }
 
 const opListServerNeighbors = "ListServerNeighbors"
 
-// ListServerNeighborsRequest generates a "aws.Request" representing the
-// client's request for the ListServerNeighbors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListServerNeighborsRequest is a API request type for the ListServerNeighbors API operation.
+type ListServerNeighborsRequest struct {
+	*aws.Request
+	Input *ListServerNeighborsInput
+}
+
+// Send marshals and sends the ListServerNeighbors API request.
+func (r ListServerNeighborsRequest) Send() (*ListServerNeighborsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListServerNeighborsOutput), nil
+}
+
+// ListServerNeighborsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListServerNeighbors for more information on using the ListServerNeighbors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of servers that are one network hop away from a specified
+// server.
 //
 //    // Example sending a request using the ListServerNeighborsRequest method.
-//    req, resp := client.ListServerNeighborsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListServerNeighborsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListServerNeighbors
-func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServerNeighborsInput) (req *aws.Request, output *ListServerNeighborsOutput) {
+func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServerNeighborsInput) ListServerNeighborsRequest {
 	op := &aws.Operation{
 		Name:       opListServerNeighbors,
 		HTTPMethod: "POST",
@@ -1360,87 +727,42 @@ func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServ
 		input = &ListServerNeighborsInput{}
 	}
 
-	output = &ListServerNeighborsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListServerNeighbors API operation for AWS Application Discovery Service.
-//
-// Retrieves a list of servers that are one network hop away from a specified
-// server.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation ListServerNeighbors for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListServerNeighbors
-func (c *ApplicationDiscoveryService) ListServerNeighbors(input *ListServerNeighborsInput) (*ListServerNeighborsOutput, error) {
-	req, out := c.ListServerNeighborsRequest(input)
-	return out, req.Send()
-}
-
-// ListServerNeighborsWithContext is the same as ListServerNeighbors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListServerNeighbors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) ListServerNeighborsWithContext(ctx aws.Context, input *ListServerNeighborsInput, opts ...aws.Option) (*ListServerNeighborsOutput, error) {
-	req, out := c.ListServerNeighborsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListServerNeighborsOutput{})
+	return ListServerNeighborsRequest{Request: req, Input: input}
 }
 
 const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
 
-// StartDataCollectionByAgentIdsRequest generates a "aws.Request" representing the
-// client's request for the StartDataCollectionByAgentIds operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartDataCollectionByAgentIdsRequest is a API request type for the StartDataCollectionByAgentIds API operation.
+type StartDataCollectionByAgentIdsRequest struct {
+	*aws.Request
+	Input *StartDataCollectionByAgentIdsInput
+}
+
+// Send marshals and sends the StartDataCollectionByAgentIds API request.
+func (r StartDataCollectionByAgentIdsRequest) Send() (*StartDataCollectionByAgentIdsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartDataCollectionByAgentIdsOutput), nil
+}
+
+// StartDataCollectionByAgentIdsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartDataCollectionByAgentIds for more information on using the StartDataCollectionByAgentIds
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Instructs the specified agents or connectors to start collecting data.
 //
 //    // Example sending a request using the StartDataCollectionByAgentIdsRequest method.
-//    req, resp := client.StartDataCollectionByAgentIdsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartDataCollectionByAgentIdsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartDataCollectionByAgentIds
-func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input *StartDataCollectionByAgentIdsInput) (req *aws.Request, output *StartDataCollectionByAgentIdsOutput) {
+func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input *StartDataCollectionByAgentIdsInput) StartDataCollectionByAgentIdsRequest {
 	op := &aws.Operation{
 		Name:       opStartDataCollectionByAgentIds,
 		HTTPMethod: "POST",
@@ -1451,102 +773,30 @@ func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input
 		input = &StartDataCollectionByAgentIdsInput{}
 	}
 
-	output = &StartDataCollectionByAgentIdsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartDataCollectionByAgentIds API operation for AWS Application Discovery Service.
-//
-// Instructs the specified agents or connectors to start collecting data.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation StartDataCollectionByAgentIds for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartDataCollectionByAgentIds
-func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIds(input *StartDataCollectionByAgentIdsInput) (*StartDataCollectionByAgentIdsOutput, error) {
-	req, out := c.StartDataCollectionByAgentIdsRequest(input)
-	return out, req.Send()
-}
-
-// StartDataCollectionByAgentIdsWithContext is the same as StartDataCollectionByAgentIds with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartDataCollectionByAgentIds for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsWithContext(ctx aws.Context, input *StartDataCollectionByAgentIdsInput, opts ...aws.Option) (*StartDataCollectionByAgentIdsOutput, error) {
-	req, out := c.StartDataCollectionByAgentIdsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartDataCollectionByAgentIdsOutput{})
+	return StartDataCollectionByAgentIdsRequest{Request: req, Input: input}
 }
 
 const opStartExportTask = "StartExportTask"
 
-// StartExportTaskRequest generates a "aws.Request" representing the
-// client's request for the StartExportTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartExportTask for more information on using the StartExportTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartExportTaskRequest method.
-//    req, resp := client.StartExportTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartExportTask
-func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportTaskInput) (req *aws.Request, output *StartExportTaskOutput) {
-	op := &aws.Operation{
-		Name:       opStartExportTask,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &StartExportTaskInput{}
-	}
-
-	output = &StartExportTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// StartExportTaskRequest is a API request type for the StartExportTask API operation.
+type StartExportTaskRequest struct {
+	*aws.Request
+	Input *StartExportTaskInput
 }
 
-// StartExportTask API operation for AWS Application Discovery Service.
+// Send marshals and sends the StartExportTask API request.
+func (r StartExportTaskRequest) Send() (*StartExportTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartExportTaskOutput), nil
+}
+
+// StartExportTaskRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
 // Begins the export of discovered data to an S3 bucket.
 //
@@ -1560,80 +810,61 @@ func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportT
 // both AWS Agentless Discovery Connector data and summary data from AWS Discovery
 // Agents. Export of summary data is limited to two exports per day.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation StartExportTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This operation is not permitted.
+//    // Example sending a request using the StartExportTaskRequest method.
+//    req := client.StartExportTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartExportTask
-func (c *ApplicationDiscoveryService) StartExportTask(input *StartExportTaskInput) (*StartExportTaskOutput, error) {
-	req, out := c.StartExportTaskRequest(input)
-	return out, req.Send()
-}
+func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportTaskInput) StartExportTaskRequest {
+	op := &aws.Operation{
+		Name:       opStartExportTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// StartExportTaskWithContext is the same as StartExportTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartExportTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) StartExportTaskWithContext(ctx aws.Context, input *StartExportTaskInput, opts ...aws.Option) (*StartExportTaskOutput, error) {
-	req, out := c.StartExportTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &StartExportTaskInput{}
+	}
+
+	req := c.newRequest(op, input, &StartExportTaskOutput{})
+	return StartExportTaskRequest{Request: req, Input: input}
 }
 
 const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
 
-// StopDataCollectionByAgentIdsRequest generates a "aws.Request" representing the
-// client's request for the StopDataCollectionByAgentIds operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopDataCollectionByAgentIdsRequest is a API request type for the StopDataCollectionByAgentIds API operation.
+type StopDataCollectionByAgentIdsRequest struct {
+	*aws.Request
+	Input *StopDataCollectionByAgentIdsInput
+}
+
+// Send marshals and sends the StopDataCollectionByAgentIds API request.
+func (r StopDataCollectionByAgentIdsRequest) Send() (*StopDataCollectionByAgentIdsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopDataCollectionByAgentIdsOutput), nil
+}
+
+// StopDataCollectionByAgentIdsRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopDataCollectionByAgentIds for more information on using the StopDataCollectionByAgentIds
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Instructs the specified agents or connectors to stop collecting data.
 //
 //    // Example sending a request using the StopDataCollectionByAgentIdsRequest method.
-//    req, resp := client.StopDataCollectionByAgentIdsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopDataCollectionByAgentIdsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopDataCollectionByAgentIds
-func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionByAgentIdsInput) (req *aws.Request, output *StopDataCollectionByAgentIdsOutput) {
+func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionByAgentIdsInput) StopDataCollectionByAgentIdsRequest {
 	op := &aws.Operation{
 		Name:       opStopDataCollectionByAgentIds,
 		HTTPMethod: "POST",
@@ -1644,86 +875,42 @@ func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input 
 		input = &StopDataCollectionByAgentIdsInput{}
 	}
 
-	output = &StopDataCollectionByAgentIdsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopDataCollectionByAgentIds API operation for AWS Application Discovery Service.
-//
-// Instructs the specified agents or connectors to stop collecting data.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation StopDataCollectionByAgentIds for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopDataCollectionByAgentIds
-func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIds(input *StopDataCollectionByAgentIdsInput) (*StopDataCollectionByAgentIdsOutput, error) {
-	req, out := c.StopDataCollectionByAgentIdsRequest(input)
-	return out, req.Send()
-}
-
-// StopDataCollectionByAgentIdsWithContext is the same as StopDataCollectionByAgentIds with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopDataCollectionByAgentIds for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsWithContext(ctx aws.Context, input *StopDataCollectionByAgentIdsInput, opts ...aws.Option) (*StopDataCollectionByAgentIdsOutput, error) {
-	req, out := c.StopDataCollectionByAgentIdsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopDataCollectionByAgentIdsOutput{})
+	return StopDataCollectionByAgentIdsRequest{Request: req, Input: input}
 }
 
 const opUpdateApplication = "UpdateApplication"
 
-// UpdateApplicationRequest generates a "aws.Request" representing the
-// client's request for the UpdateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApplicationRequest is a API request type for the UpdateApplication API operation.
+type UpdateApplicationRequest struct {
+	*aws.Request
+	Input *UpdateApplicationInput
+}
+
+// Send marshals and sends the UpdateApplication API request.
+func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationOutput), nil
+}
+
+// UpdateApplicationRequest returns a request value for making API operation for
+// AWS Application Discovery Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateApplication for more information on using the UpdateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates metadata about an application.
 //
 //    // Example sending a request using the UpdateApplicationRequest method.
-//    req, resp := client.UpdateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/UpdateApplication
-func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *UpdateApplicationOutput) {
+func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
@@ -1734,57 +921,8 @@ func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateAppl
 		input = &UpdateApplicationInput{}
 	}
 
-	output = &UpdateApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateApplication API operation for AWS Application Discovery Service.
-//
-// Updates metadata about an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Application Discovery Service's
-// API operation UpdateApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
-//
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/UpdateApplication
-func (c *ApplicationDiscoveryService) UpdateApplication(input *UpdateApplicationInput) (*UpdateApplicationOutput, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApplicationWithContext is the same as UpdateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationDiscoveryService) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*UpdateApplicationOutput, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
 // Information about agents or connectors that were instructed to start collecting

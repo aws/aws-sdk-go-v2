@@ -9,7 +9,6 @@
 package greengrassiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass"
 )
 
@@ -63,265 +62,135 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type GreengrassAPI interface {
-	AssociateRoleToGroup(*greengrass.AssociateRoleToGroupInput) (*greengrass.AssociateRoleToGroupOutput, error)
-	AssociateRoleToGroupWithContext(aws.Context, *greengrass.AssociateRoleToGroupInput, ...aws.Option) (*greengrass.AssociateRoleToGroupOutput, error)
-	AssociateRoleToGroupRequest(*greengrass.AssociateRoleToGroupInput) (*aws.Request, *greengrass.AssociateRoleToGroupOutput)
-
-	AssociateServiceRoleToAccount(*greengrass.AssociateServiceRoleToAccountInput) (*greengrass.AssociateServiceRoleToAccountOutput, error)
-	AssociateServiceRoleToAccountWithContext(aws.Context, *greengrass.AssociateServiceRoleToAccountInput, ...aws.Option) (*greengrass.AssociateServiceRoleToAccountOutput, error)
-	AssociateServiceRoleToAccountRequest(*greengrass.AssociateServiceRoleToAccountInput) (*aws.Request, *greengrass.AssociateServiceRoleToAccountOutput)
-
-	CreateCoreDefinition(*greengrass.CreateCoreDefinitionInput) (*greengrass.CreateCoreDefinitionOutput, error)
-	CreateCoreDefinitionWithContext(aws.Context, *greengrass.CreateCoreDefinitionInput, ...aws.Option) (*greengrass.CreateCoreDefinitionOutput, error)
-	CreateCoreDefinitionRequest(*greengrass.CreateCoreDefinitionInput) (*aws.Request, *greengrass.CreateCoreDefinitionOutput)
-
-	CreateCoreDefinitionVersion(*greengrass.CreateCoreDefinitionVersionInput) (*greengrass.CreateCoreDefinitionVersionOutput, error)
-	CreateCoreDefinitionVersionWithContext(aws.Context, *greengrass.CreateCoreDefinitionVersionInput, ...aws.Option) (*greengrass.CreateCoreDefinitionVersionOutput, error)
-	CreateCoreDefinitionVersionRequest(*greengrass.CreateCoreDefinitionVersionInput) (*aws.Request, *greengrass.CreateCoreDefinitionVersionOutput)
-
-	CreateDeployment(*greengrass.CreateDeploymentInput) (*greengrass.CreateDeploymentOutput, error)
-	CreateDeploymentWithContext(aws.Context, *greengrass.CreateDeploymentInput, ...aws.Option) (*greengrass.CreateDeploymentOutput, error)
-	CreateDeploymentRequest(*greengrass.CreateDeploymentInput) (*aws.Request, *greengrass.CreateDeploymentOutput)
-
-	CreateDeviceDefinition(*greengrass.CreateDeviceDefinitionInput) (*greengrass.CreateDeviceDefinitionOutput, error)
-	CreateDeviceDefinitionWithContext(aws.Context, *greengrass.CreateDeviceDefinitionInput, ...aws.Option) (*greengrass.CreateDeviceDefinitionOutput, error)
-	CreateDeviceDefinitionRequest(*greengrass.CreateDeviceDefinitionInput) (*aws.Request, *greengrass.CreateDeviceDefinitionOutput)
-
-	CreateDeviceDefinitionVersion(*greengrass.CreateDeviceDefinitionVersionInput) (*greengrass.CreateDeviceDefinitionVersionOutput, error)
-	CreateDeviceDefinitionVersionWithContext(aws.Context, *greengrass.CreateDeviceDefinitionVersionInput, ...aws.Option) (*greengrass.CreateDeviceDefinitionVersionOutput, error)
-	CreateDeviceDefinitionVersionRequest(*greengrass.CreateDeviceDefinitionVersionInput) (*aws.Request, *greengrass.CreateDeviceDefinitionVersionOutput)
-
-	CreateFunctionDefinition(*greengrass.CreateFunctionDefinitionInput) (*greengrass.CreateFunctionDefinitionOutput, error)
-	CreateFunctionDefinitionWithContext(aws.Context, *greengrass.CreateFunctionDefinitionInput, ...aws.Option) (*greengrass.CreateFunctionDefinitionOutput, error)
-	CreateFunctionDefinitionRequest(*greengrass.CreateFunctionDefinitionInput) (*aws.Request, *greengrass.CreateFunctionDefinitionOutput)
-
-	CreateFunctionDefinitionVersion(*greengrass.CreateFunctionDefinitionVersionInput) (*greengrass.CreateFunctionDefinitionVersionOutput, error)
-	CreateFunctionDefinitionVersionWithContext(aws.Context, *greengrass.CreateFunctionDefinitionVersionInput, ...aws.Option) (*greengrass.CreateFunctionDefinitionVersionOutput, error)
-	CreateFunctionDefinitionVersionRequest(*greengrass.CreateFunctionDefinitionVersionInput) (*aws.Request, *greengrass.CreateFunctionDefinitionVersionOutput)
-
-	CreateGroup(*greengrass.CreateGroupInput) (*greengrass.CreateGroupOutput, error)
-	CreateGroupWithContext(aws.Context, *greengrass.CreateGroupInput, ...aws.Option) (*greengrass.CreateGroupOutput, error)
-	CreateGroupRequest(*greengrass.CreateGroupInput) (*aws.Request, *greengrass.CreateGroupOutput)
-
-	CreateGroupCertificateAuthority(*greengrass.CreateGroupCertificateAuthorityInput) (*greengrass.CreateGroupCertificateAuthorityOutput, error)
-	CreateGroupCertificateAuthorityWithContext(aws.Context, *greengrass.CreateGroupCertificateAuthorityInput, ...aws.Option) (*greengrass.CreateGroupCertificateAuthorityOutput, error)
-	CreateGroupCertificateAuthorityRequest(*greengrass.CreateGroupCertificateAuthorityInput) (*aws.Request, *greengrass.CreateGroupCertificateAuthorityOutput)
-
-	CreateGroupVersion(*greengrass.CreateGroupVersionInput) (*greengrass.CreateGroupVersionOutput, error)
-	CreateGroupVersionWithContext(aws.Context, *greengrass.CreateGroupVersionInput, ...aws.Option) (*greengrass.CreateGroupVersionOutput, error)
-	CreateGroupVersionRequest(*greengrass.CreateGroupVersionInput) (*aws.Request, *greengrass.CreateGroupVersionOutput)
-
-	CreateLoggerDefinition(*greengrass.CreateLoggerDefinitionInput) (*greengrass.CreateLoggerDefinitionOutput, error)
-	CreateLoggerDefinitionWithContext(aws.Context, *greengrass.CreateLoggerDefinitionInput, ...aws.Option) (*greengrass.CreateLoggerDefinitionOutput, error)
-	CreateLoggerDefinitionRequest(*greengrass.CreateLoggerDefinitionInput) (*aws.Request, *greengrass.CreateLoggerDefinitionOutput)
-
-	CreateLoggerDefinitionVersion(*greengrass.CreateLoggerDefinitionVersionInput) (*greengrass.CreateLoggerDefinitionVersionOutput, error)
-	CreateLoggerDefinitionVersionWithContext(aws.Context, *greengrass.CreateLoggerDefinitionVersionInput, ...aws.Option) (*greengrass.CreateLoggerDefinitionVersionOutput, error)
-	CreateLoggerDefinitionVersionRequest(*greengrass.CreateLoggerDefinitionVersionInput) (*aws.Request, *greengrass.CreateLoggerDefinitionVersionOutput)
-
-	CreateSubscriptionDefinition(*greengrass.CreateSubscriptionDefinitionInput) (*greengrass.CreateSubscriptionDefinitionOutput, error)
-	CreateSubscriptionDefinitionWithContext(aws.Context, *greengrass.CreateSubscriptionDefinitionInput, ...aws.Option) (*greengrass.CreateSubscriptionDefinitionOutput, error)
-	CreateSubscriptionDefinitionRequest(*greengrass.CreateSubscriptionDefinitionInput) (*aws.Request, *greengrass.CreateSubscriptionDefinitionOutput)
-
-	CreateSubscriptionDefinitionVersion(*greengrass.CreateSubscriptionDefinitionVersionInput) (*greengrass.CreateSubscriptionDefinitionVersionOutput, error)
-	CreateSubscriptionDefinitionVersionWithContext(aws.Context, *greengrass.CreateSubscriptionDefinitionVersionInput, ...aws.Option) (*greengrass.CreateSubscriptionDefinitionVersionOutput, error)
-	CreateSubscriptionDefinitionVersionRequest(*greengrass.CreateSubscriptionDefinitionVersionInput) (*aws.Request, *greengrass.CreateSubscriptionDefinitionVersionOutput)
-
-	DeleteCoreDefinition(*greengrass.DeleteCoreDefinitionInput) (*greengrass.DeleteCoreDefinitionOutput, error)
-	DeleteCoreDefinitionWithContext(aws.Context, *greengrass.DeleteCoreDefinitionInput, ...aws.Option) (*greengrass.DeleteCoreDefinitionOutput, error)
-	DeleteCoreDefinitionRequest(*greengrass.DeleteCoreDefinitionInput) (*aws.Request, *greengrass.DeleteCoreDefinitionOutput)
-
-	DeleteDeviceDefinition(*greengrass.DeleteDeviceDefinitionInput) (*greengrass.DeleteDeviceDefinitionOutput, error)
-	DeleteDeviceDefinitionWithContext(aws.Context, *greengrass.DeleteDeviceDefinitionInput, ...aws.Option) (*greengrass.DeleteDeviceDefinitionOutput, error)
-	DeleteDeviceDefinitionRequest(*greengrass.DeleteDeviceDefinitionInput) (*aws.Request, *greengrass.DeleteDeviceDefinitionOutput)
-
-	DeleteFunctionDefinition(*greengrass.DeleteFunctionDefinitionInput) (*greengrass.DeleteFunctionDefinitionOutput, error)
-	DeleteFunctionDefinitionWithContext(aws.Context, *greengrass.DeleteFunctionDefinitionInput, ...aws.Option) (*greengrass.DeleteFunctionDefinitionOutput, error)
-	DeleteFunctionDefinitionRequest(*greengrass.DeleteFunctionDefinitionInput) (*aws.Request, *greengrass.DeleteFunctionDefinitionOutput)
-
-	DeleteGroup(*greengrass.DeleteGroupInput) (*greengrass.DeleteGroupOutput, error)
-	DeleteGroupWithContext(aws.Context, *greengrass.DeleteGroupInput, ...aws.Option) (*greengrass.DeleteGroupOutput, error)
-	DeleteGroupRequest(*greengrass.DeleteGroupInput) (*aws.Request, *greengrass.DeleteGroupOutput)
-
-	DeleteLoggerDefinition(*greengrass.DeleteLoggerDefinitionInput) (*greengrass.DeleteLoggerDefinitionOutput, error)
-	DeleteLoggerDefinitionWithContext(aws.Context, *greengrass.DeleteLoggerDefinitionInput, ...aws.Option) (*greengrass.DeleteLoggerDefinitionOutput, error)
-	DeleteLoggerDefinitionRequest(*greengrass.DeleteLoggerDefinitionInput) (*aws.Request, *greengrass.DeleteLoggerDefinitionOutput)
-
-	DeleteSubscriptionDefinition(*greengrass.DeleteSubscriptionDefinitionInput) (*greengrass.DeleteSubscriptionDefinitionOutput, error)
-	DeleteSubscriptionDefinitionWithContext(aws.Context, *greengrass.DeleteSubscriptionDefinitionInput, ...aws.Option) (*greengrass.DeleteSubscriptionDefinitionOutput, error)
-	DeleteSubscriptionDefinitionRequest(*greengrass.DeleteSubscriptionDefinitionInput) (*aws.Request, *greengrass.DeleteSubscriptionDefinitionOutput)
-
-	DisassociateRoleFromGroup(*greengrass.DisassociateRoleFromGroupInput) (*greengrass.DisassociateRoleFromGroupOutput, error)
-	DisassociateRoleFromGroupWithContext(aws.Context, *greengrass.DisassociateRoleFromGroupInput, ...aws.Option) (*greengrass.DisassociateRoleFromGroupOutput, error)
-	DisassociateRoleFromGroupRequest(*greengrass.DisassociateRoleFromGroupInput) (*aws.Request, *greengrass.DisassociateRoleFromGroupOutput)
-
-	DisassociateServiceRoleFromAccount(*greengrass.DisassociateServiceRoleFromAccountInput) (*greengrass.DisassociateServiceRoleFromAccountOutput, error)
-	DisassociateServiceRoleFromAccountWithContext(aws.Context, *greengrass.DisassociateServiceRoleFromAccountInput, ...aws.Option) (*greengrass.DisassociateServiceRoleFromAccountOutput, error)
-	DisassociateServiceRoleFromAccountRequest(*greengrass.DisassociateServiceRoleFromAccountInput) (*aws.Request, *greengrass.DisassociateServiceRoleFromAccountOutput)
-
-	GetAssociatedRole(*greengrass.GetAssociatedRoleInput) (*greengrass.GetAssociatedRoleOutput, error)
-	GetAssociatedRoleWithContext(aws.Context, *greengrass.GetAssociatedRoleInput, ...aws.Option) (*greengrass.GetAssociatedRoleOutput, error)
-	GetAssociatedRoleRequest(*greengrass.GetAssociatedRoleInput) (*aws.Request, *greengrass.GetAssociatedRoleOutput)
-
-	GetConnectivityInfo(*greengrass.GetConnectivityInfoInput) (*greengrass.GetConnectivityInfoOutput, error)
-	GetConnectivityInfoWithContext(aws.Context, *greengrass.GetConnectivityInfoInput, ...aws.Option) (*greengrass.GetConnectivityInfoOutput, error)
-	GetConnectivityInfoRequest(*greengrass.GetConnectivityInfoInput) (*aws.Request, *greengrass.GetConnectivityInfoOutput)
-
-	GetCoreDefinition(*greengrass.GetCoreDefinitionInput) (*greengrass.GetCoreDefinitionOutput, error)
-	GetCoreDefinitionWithContext(aws.Context, *greengrass.GetCoreDefinitionInput, ...aws.Option) (*greengrass.GetCoreDefinitionOutput, error)
-	GetCoreDefinitionRequest(*greengrass.GetCoreDefinitionInput) (*aws.Request, *greengrass.GetCoreDefinitionOutput)
-
-	GetCoreDefinitionVersion(*greengrass.GetCoreDefinitionVersionInput) (*greengrass.GetCoreDefinitionVersionOutput, error)
-	GetCoreDefinitionVersionWithContext(aws.Context, *greengrass.GetCoreDefinitionVersionInput, ...aws.Option) (*greengrass.GetCoreDefinitionVersionOutput, error)
-	GetCoreDefinitionVersionRequest(*greengrass.GetCoreDefinitionVersionInput) (*aws.Request, *greengrass.GetCoreDefinitionVersionOutput)
-
-	GetDeploymentStatus(*greengrass.GetDeploymentStatusInput) (*greengrass.GetDeploymentStatusOutput, error)
-	GetDeploymentStatusWithContext(aws.Context, *greengrass.GetDeploymentStatusInput, ...aws.Option) (*greengrass.GetDeploymentStatusOutput, error)
-	GetDeploymentStatusRequest(*greengrass.GetDeploymentStatusInput) (*aws.Request, *greengrass.GetDeploymentStatusOutput)
-
-	GetDeviceDefinition(*greengrass.GetDeviceDefinitionInput) (*greengrass.GetDeviceDefinitionOutput, error)
-	GetDeviceDefinitionWithContext(aws.Context, *greengrass.GetDeviceDefinitionInput, ...aws.Option) (*greengrass.GetDeviceDefinitionOutput, error)
-	GetDeviceDefinitionRequest(*greengrass.GetDeviceDefinitionInput) (*aws.Request, *greengrass.GetDeviceDefinitionOutput)
-
-	GetDeviceDefinitionVersion(*greengrass.GetDeviceDefinitionVersionInput) (*greengrass.GetDeviceDefinitionVersionOutput, error)
-	GetDeviceDefinitionVersionWithContext(aws.Context, *greengrass.GetDeviceDefinitionVersionInput, ...aws.Option) (*greengrass.GetDeviceDefinitionVersionOutput, error)
-	GetDeviceDefinitionVersionRequest(*greengrass.GetDeviceDefinitionVersionInput) (*aws.Request, *greengrass.GetDeviceDefinitionVersionOutput)
-
-	GetFunctionDefinition(*greengrass.GetFunctionDefinitionInput) (*greengrass.GetFunctionDefinitionOutput, error)
-	GetFunctionDefinitionWithContext(aws.Context, *greengrass.GetFunctionDefinitionInput, ...aws.Option) (*greengrass.GetFunctionDefinitionOutput, error)
-	GetFunctionDefinitionRequest(*greengrass.GetFunctionDefinitionInput) (*aws.Request, *greengrass.GetFunctionDefinitionOutput)
-
-	GetFunctionDefinitionVersion(*greengrass.GetFunctionDefinitionVersionInput) (*greengrass.GetFunctionDefinitionVersionOutput, error)
-	GetFunctionDefinitionVersionWithContext(aws.Context, *greengrass.GetFunctionDefinitionVersionInput, ...aws.Option) (*greengrass.GetFunctionDefinitionVersionOutput, error)
-	GetFunctionDefinitionVersionRequest(*greengrass.GetFunctionDefinitionVersionInput) (*aws.Request, *greengrass.GetFunctionDefinitionVersionOutput)
-
-	GetGroup(*greengrass.GetGroupInput) (*greengrass.GetGroupOutput, error)
-	GetGroupWithContext(aws.Context, *greengrass.GetGroupInput, ...aws.Option) (*greengrass.GetGroupOutput, error)
-	GetGroupRequest(*greengrass.GetGroupInput) (*aws.Request, *greengrass.GetGroupOutput)
-
-	GetGroupCertificateAuthority(*greengrass.GetGroupCertificateAuthorityInput) (*greengrass.GetGroupCertificateAuthorityOutput, error)
-	GetGroupCertificateAuthorityWithContext(aws.Context, *greengrass.GetGroupCertificateAuthorityInput, ...aws.Option) (*greengrass.GetGroupCertificateAuthorityOutput, error)
-	GetGroupCertificateAuthorityRequest(*greengrass.GetGroupCertificateAuthorityInput) (*aws.Request, *greengrass.GetGroupCertificateAuthorityOutput)
-
-	GetGroupCertificateConfiguration(*greengrass.GetGroupCertificateConfigurationInput) (*greengrass.GetGroupCertificateConfigurationOutput, error)
-	GetGroupCertificateConfigurationWithContext(aws.Context, *greengrass.GetGroupCertificateConfigurationInput, ...aws.Option) (*greengrass.GetGroupCertificateConfigurationOutput, error)
-	GetGroupCertificateConfigurationRequest(*greengrass.GetGroupCertificateConfigurationInput) (*aws.Request, *greengrass.GetGroupCertificateConfigurationOutput)
-
-	GetGroupVersion(*greengrass.GetGroupVersionInput) (*greengrass.GetGroupVersionOutput, error)
-	GetGroupVersionWithContext(aws.Context, *greengrass.GetGroupVersionInput, ...aws.Option) (*greengrass.GetGroupVersionOutput, error)
-	GetGroupVersionRequest(*greengrass.GetGroupVersionInput) (*aws.Request, *greengrass.GetGroupVersionOutput)
-
-	GetLoggerDefinition(*greengrass.GetLoggerDefinitionInput) (*greengrass.GetLoggerDefinitionOutput, error)
-	GetLoggerDefinitionWithContext(aws.Context, *greengrass.GetLoggerDefinitionInput, ...aws.Option) (*greengrass.GetLoggerDefinitionOutput, error)
-	GetLoggerDefinitionRequest(*greengrass.GetLoggerDefinitionInput) (*aws.Request, *greengrass.GetLoggerDefinitionOutput)
-
-	GetLoggerDefinitionVersion(*greengrass.GetLoggerDefinitionVersionInput) (*greengrass.GetLoggerDefinitionVersionOutput, error)
-	GetLoggerDefinitionVersionWithContext(aws.Context, *greengrass.GetLoggerDefinitionVersionInput, ...aws.Option) (*greengrass.GetLoggerDefinitionVersionOutput, error)
-	GetLoggerDefinitionVersionRequest(*greengrass.GetLoggerDefinitionVersionInput) (*aws.Request, *greengrass.GetLoggerDefinitionVersionOutput)
-
-	GetServiceRoleForAccount(*greengrass.GetServiceRoleForAccountInput) (*greengrass.GetServiceRoleForAccountOutput, error)
-	GetServiceRoleForAccountWithContext(aws.Context, *greengrass.GetServiceRoleForAccountInput, ...aws.Option) (*greengrass.GetServiceRoleForAccountOutput, error)
-	GetServiceRoleForAccountRequest(*greengrass.GetServiceRoleForAccountInput) (*aws.Request, *greengrass.GetServiceRoleForAccountOutput)
-
-	GetSubscriptionDefinition(*greengrass.GetSubscriptionDefinitionInput) (*greengrass.GetSubscriptionDefinitionOutput, error)
-	GetSubscriptionDefinitionWithContext(aws.Context, *greengrass.GetSubscriptionDefinitionInput, ...aws.Option) (*greengrass.GetSubscriptionDefinitionOutput, error)
-	GetSubscriptionDefinitionRequest(*greengrass.GetSubscriptionDefinitionInput) (*aws.Request, *greengrass.GetSubscriptionDefinitionOutput)
-
-	GetSubscriptionDefinitionVersion(*greengrass.GetSubscriptionDefinitionVersionInput) (*greengrass.GetSubscriptionDefinitionVersionOutput, error)
-	GetSubscriptionDefinitionVersionWithContext(aws.Context, *greengrass.GetSubscriptionDefinitionVersionInput, ...aws.Option) (*greengrass.GetSubscriptionDefinitionVersionOutput, error)
-	GetSubscriptionDefinitionVersionRequest(*greengrass.GetSubscriptionDefinitionVersionInput) (*aws.Request, *greengrass.GetSubscriptionDefinitionVersionOutput)
-
-	ListCoreDefinitionVersions(*greengrass.ListCoreDefinitionVersionsInput) (*greengrass.ListCoreDefinitionVersionsOutput, error)
-	ListCoreDefinitionVersionsWithContext(aws.Context, *greengrass.ListCoreDefinitionVersionsInput, ...aws.Option) (*greengrass.ListCoreDefinitionVersionsOutput, error)
-	ListCoreDefinitionVersionsRequest(*greengrass.ListCoreDefinitionVersionsInput) (*aws.Request, *greengrass.ListCoreDefinitionVersionsOutput)
-
-	ListCoreDefinitions(*greengrass.ListCoreDefinitionsInput) (*greengrass.ListCoreDefinitionsOutput, error)
-	ListCoreDefinitionsWithContext(aws.Context, *greengrass.ListCoreDefinitionsInput, ...aws.Option) (*greengrass.ListCoreDefinitionsOutput, error)
-	ListCoreDefinitionsRequest(*greengrass.ListCoreDefinitionsInput) (*aws.Request, *greengrass.ListCoreDefinitionsOutput)
-
-	ListDeployments(*greengrass.ListDeploymentsInput) (*greengrass.ListDeploymentsOutput, error)
-	ListDeploymentsWithContext(aws.Context, *greengrass.ListDeploymentsInput, ...aws.Option) (*greengrass.ListDeploymentsOutput, error)
-	ListDeploymentsRequest(*greengrass.ListDeploymentsInput) (*aws.Request, *greengrass.ListDeploymentsOutput)
-
-	ListDeviceDefinitionVersions(*greengrass.ListDeviceDefinitionVersionsInput) (*greengrass.ListDeviceDefinitionVersionsOutput, error)
-	ListDeviceDefinitionVersionsWithContext(aws.Context, *greengrass.ListDeviceDefinitionVersionsInput, ...aws.Option) (*greengrass.ListDeviceDefinitionVersionsOutput, error)
-	ListDeviceDefinitionVersionsRequest(*greengrass.ListDeviceDefinitionVersionsInput) (*aws.Request, *greengrass.ListDeviceDefinitionVersionsOutput)
-
-	ListDeviceDefinitions(*greengrass.ListDeviceDefinitionsInput) (*greengrass.ListDeviceDefinitionsOutput, error)
-	ListDeviceDefinitionsWithContext(aws.Context, *greengrass.ListDeviceDefinitionsInput, ...aws.Option) (*greengrass.ListDeviceDefinitionsOutput, error)
-	ListDeviceDefinitionsRequest(*greengrass.ListDeviceDefinitionsInput) (*aws.Request, *greengrass.ListDeviceDefinitionsOutput)
-
-	ListFunctionDefinitionVersions(*greengrass.ListFunctionDefinitionVersionsInput) (*greengrass.ListFunctionDefinitionVersionsOutput, error)
-	ListFunctionDefinitionVersionsWithContext(aws.Context, *greengrass.ListFunctionDefinitionVersionsInput, ...aws.Option) (*greengrass.ListFunctionDefinitionVersionsOutput, error)
-	ListFunctionDefinitionVersionsRequest(*greengrass.ListFunctionDefinitionVersionsInput) (*aws.Request, *greengrass.ListFunctionDefinitionVersionsOutput)
-
-	ListFunctionDefinitions(*greengrass.ListFunctionDefinitionsInput) (*greengrass.ListFunctionDefinitionsOutput, error)
-	ListFunctionDefinitionsWithContext(aws.Context, *greengrass.ListFunctionDefinitionsInput, ...aws.Option) (*greengrass.ListFunctionDefinitionsOutput, error)
-	ListFunctionDefinitionsRequest(*greengrass.ListFunctionDefinitionsInput) (*aws.Request, *greengrass.ListFunctionDefinitionsOutput)
-
-	ListGroupCertificateAuthorities(*greengrass.ListGroupCertificateAuthoritiesInput) (*greengrass.ListGroupCertificateAuthoritiesOutput, error)
-	ListGroupCertificateAuthoritiesWithContext(aws.Context, *greengrass.ListGroupCertificateAuthoritiesInput, ...aws.Option) (*greengrass.ListGroupCertificateAuthoritiesOutput, error)
-	ListGroupCertificateAuthoritiesRequest(*greengrass.ListGroupCertificateAuthoritiesInput) (*aws.Request, *greengrass.ListGroupCertificateAuthoritiesOutput)
-
-	ListGroupVersions(*greengrass.ListGroupVersionsInput) (*greengrass.ListGroupVersionsOutput, error)
-	ListGroupVersionsWithContext(aws.Context, *greengrass.ListGroupVersionsInput, ...aws.Option) (*greengrass.ListGroupVersionsOutput, error)
-	ListGroupVersionsRequest(*greengrass.ListGroupVersionsInput) (*aws.Request, *greengrass.ListGroupVersionsOutput)
-
-	ListGroups(*greengrass.ListGroupsInput) (*greengrass.ListGroupsOutput, error)
-	ListGroupsWithContext(aws.Context, *greengrass.ListGroupsInput, ...aws.Option) (*greengrass.ListGroupsOutput, error)
-	ListGroupsRequest(*greengrass.ListGroupsInput) (*aws.Request, *greengrass.ListGroupsOutput)
-
-	ListLoggerDefinitionVersions(*greengrass.ListLoggerDefinitionVersionsInput) (*greengrass.ListLoggerDefinitionVersionsOutput, error)
-	ListLoggerDefinitionVersionsWithContext(aws.Context, *greengrass.ListLoggerDefinitionVersionsInput, ...aws.Option) (*greengrass.ListLoggerDefinitionVersionsOutput, error)
-	ListLoggerDefinitionVersionsRequest(*greengrass.ListLoggerDefinitionVersionsInput) (*aws.Request, *greengrass.ListLoggerDefinitionVersionsOutput)
-
-	ListLoggerDefinitions(*greengrass.ListLoggerDefinitionsInput) (*greengrass.ListLoggerDefinitionsOutput, error)
-	ListLoggerDefinitionsWithContext(aws.Context, *greengrass.ListLoggerDefinitionsInput, ...aws.Option) (*greengrass.ListLoggerDefinitionsOutput, error)
-	ListLoggerDefinitionsRequest(*greengrass.ListLoggerDefinitionsInput) (*aws.Request, *greengrass.ListLoggerDefinitionsOutput)
-
-	ListSubscriptionDefinitionVersions(*greengrass.ListSubscriptionDefinitionVersionsInput) (*greengrass.ListSubscriptionDefinitionVersionsOutput, error)
-	ListSubscriptionDefinitionVersionsWithContext(aws.Context, *greengrass.ListSubscriptionDefinitionVersionsInput, ...aws.Option) (*greengrass.ListSubscriptionDefinitionVersionsOutput, error)
-	ListSubscriptionDefinitionVersionsRequest(*greengrass.ListSubscriptionDefinitionVersionsInput) (*aws.Request, *greengrass.ListSubscriptionDefinitionVersionsOutput)
-
-	ListSubscriptionDefinitions(*greengrass.ListSubscriptionDefinitionsInput) (*greengrass.ListSubscriptionDefinitionsOutput, error)
-	ListSubscriptionDefinitionsWithContext(aws.Context, *greengrass.ListSubscriptionDefinitionsInput, ...aws.Option) (*greengrass.ListSubscriptionDefinitionsOutput, error)
-	ListSubscriptionDefinitionsRequest(*greengrass.ListSubscriptionDefinitionsInput) (*aws.Request, *greengrass.ListSubscriptionDefinitionsOutput)
-
-	ResetDeployments(*greengrass.ResetDeploymentsInput) (*greengrass.ResetDeploymentsOutput, error)
-	ResetDeploymentsWithContext(aws.Context, *greengrass.ResetDeploymentsInput, ...aws.Option) (*greengrass.ResetDeploymentsOutput, error)
-	ResetDeploymentsRequest(*greengrass.ResetDeploymentsInput) (*aws.Request, *greengrass.ResetDeploymentsOutput)
-
-	UpdateConnectivityInfo(*greengrass.UpdateConnectivityInfoInput) (*greengrass.UpdateConnectivityInfoOutput, error)
-	UpdateConnectivityInfoWithContext(aws.Context, *greengrass.UpdateConnectivityInfoInput, ...aws.Option) (*greengrass.UpdateConnectivityInfoOutput, error)
-	UpdateConnectivityInfoRequest(*greengrass.UpdateConnectivityInfoInput) (*aws.Request, *greengrass.UpdateConnectivityInfoOutput)
-
-	UpdateCoreDefinition(*greengrass.UpdateCoreDefinitionInput) (*greengrass.UpdateCoreDefinitionOutput, error)
-	UpdateCoreDefinitionWithContext(aws.Context, *greengrass.UpdateCoreDefinitionInput, ...aws.Option) (*greengrass.UpdateCoreDefinitionOutput, error)
-	UpdateCoreDefinitionRequest(*greengrass.UpdateCoreDefinitionInput) (*aws.Request, *greengrass.UpdateCoreDefinitionOutput)
-
-	UpdateDeviceDefinition(*greengrass.UpdateDeviceDefinitionInput) (*greengrass.UpdateDeviceDefinitionOutput, error)
-	UpdateDeviceDefinitionWithContext(aws.Context, *greengrass.UpdateDeviceDefinitionInput, ...aws.Option) (*greengrass.UpdateDeviceDefinitionOutput, error)
-	UpdateDeviceDefinitionRequest(*greengrass.UpdateDeviceDefinitionInput) (*aws.Request, *greengrass.UpdateDeviceDefinitionOutput)
-
-	UpdateFunctionDefinition(*greengrass.UpdateFunctionDefinitionInput) (*greengrass.UpdateFunctionDefinitionOutput, error)
-	UpdateFunctionDefinitionWithContext(aws.Context, *greengrass.UpdateFunctionDefinitionInput, ...aws.Option) (*greengrass.UpdateFunctionDefinitionOutput, error)
-	UpdateFunctionDefinitionRequest(*greengrass.UpdateFunctionDefinitionInput) (*aws.Request, *greengrass.UpdateFunctionDefinitionOutput)
-
-	UpdateGroup(*greengrass.UpdateGroupInput) (*greengrass.UpdateGroupOutput, error)
-	UpdateGroupWithContext(aws.Context, *greengrass.UpdateGroupInput, ...aws.Option) (*greengrass.UpdateGroupOutput, error)
-	UpdateGroupRequest(*greengrass.UpdateGroupInput) (*aws.Request, *greengrass.UpdateGroupOutput)
-
-	UpdateGroupCertificateConfiguration(*greengrass.UpdateGroupCertificateConfigurationInput) (*greengrass.UpdateGroupCertificateConfigurationOutput, error)
-	UpdateGroupCertificateConfigurationWithContext(aws.Context, *greengrass.UpdateGroupCertificateConfigurationInput, ...aws.Option) (*greengrass.UpdateGroupCertificateConfigurationOutput, error)
-	UpdateGroupCertificateConfigurationRequest(*greengrass.UpdateGroupCertificateConfigurationInput) (*aws.Request, *greengrass.UpdateGroupCertificateConfigurationOutput)
-
-	UpdateLoggerDefinition(*greengrass.UpdateLoggerDefinitionInput) (*greengrass.UpdateLoggerDefinitionOutput, error)
-	UpdateLoggerDefinitionWithContext(aws.Context, *greengrass.UpdateLoggerDefinitionInput, ...aws.Option) (*greengrass.UpdateLoggerDefinitionOutput, error)
-	UpdateLoggerDefinitionRequest(*greengrass.UpdateLoggerDefinitionInput) (*aws.Request, *greengrass.UpdateLoggerDefinitionOutput)
-
-	UpdateSubscriptionDefinition(*greengrass.UpdateSubscriptionDefinitionInput) (*greengrass.UpdateSubscriptionDefinitionOutput, error)
-	UpdateSubscriptionDefinitionWithContext(aws.Context, *greengrass.UpdateSubscriptionDefinitionInput, ...aws.Option) (*greengrass.UpdateSubscriptionDefinitionOutput, error)
-	UpdateSubscriptionDefinitionRequest(*greengrass.UpdateSubscriptionDefinitionInput) (*aws.Request, *greengrass.UpdateSubscriptionDefinitionOutput)
+	AssociateRoleToGroupRequest(*greengrass.AssociateRoleToGroupInput) greengrass.AssociateRoleToGroupRequest
+
+	AssociateServiceRoleToAccountRequest(*greengrass.AssociateServiceRoleToAccountInput) greengrass.AssociateServiceRoleToAccountRequest
+
+	CreateCoreDefinitionRequest(*greengrass.CreateCoreDefinitionInput) greengrass.CreateCoreDefinitionRequest
+
+	CreateCoreDefinitionVersionRequest(*greengrass.CreateCoreDefinitionVersionInput) greengrass.CreateCoreDefinitionVersionRequest
+
+	CreateDeploymentRequest(*greengrass.CreateDeploymentInput) greengrass.CreateDeploymentRequest
+
+	CreateDeviceDefinitionRequest(*greengrass.CreateDeviceDefinitionInput) greengrass.CreateDeviceDefinitionRequest
+
+	CreateDeviceDefinitionVersionRequest(*greengrass.CreateDeviceDefinitionVersionInput) greengrass.CreateDeviceDefinitionVersionRequest
+
+	CreateFunctionDefinitionRequest(*greengrass.CreateFunctionDefinitionInput) greengrass.CreateFunctionDefinitionRequest
+
+	CreateFunctionDefinitionVersionRequest(*greengrass.CreateFunctionDefinitionVersionInput) greengrass.CreateFunctionDefinitionVersionRequest
+
+	CreateGroupRequest(*greengrass.CreateGroupInput) greengrass.CreateGroupRequest
+
+	CreateGroupCertificateAuthorityRequest(*greengrass.CreateGroupCertificateAuthorityInput) greengrass.CreateGroupCertificateAuthorityRequest
+
+	CreateGroupVersionRequest(*greengrass.CreateGroupVersionInput) greengrass.CreateGroupVersionRequest
+
+	CreateLoggerDefinitionRequest(*greengrass.CreateLoggerDefinitionInput) greengrass.CreateLoggerDefinitionRequest
+
+	CreateLoggerDefinitionVersionRequest(*greengrass.CreateLoggerDefinitionVersionInput) greengrass.CreateLoggerDefinitionVersionRequest
+
+	CreateSubscriptionDefinitionRequest(*greengrass.CreateSubscriptionDefinitionInput) greengrass.CreateSubscriptionDefinitionRequest
+
+	CreateSubscriptionDefinitionVersionRequest(*greengrass.CreateSubscriptionDefinitionVersionInput) greengrass.CreateSubscriptionDefinitionVersionRequest
+
+	DeleteCoreDefinitionRequest(*greengrass.DeleteCoreDefinitionInput) greengrass.DeleteCoreDefinitionRequest
+
+	DeleteDeviceDefinitionRequest(*greengrass.DeleteDeviceDefinitionInput) greengrass.DeleteDeviceDefinitionRequest
+
+	DeleteFunctionDefinitionRequest(*greengrass.DeleteFunctionDefinitionInput) greengrass.DeleteFunctionDefinitionRequest
+
+	DeleteGroupRequest(*greengrass.DeleteGroupInput) greengrass.DeleteGroupRequest
+
+	DeleteLoggerDefinitionRequest(*greengrass.DeleteLoggerDefinitionInput) greengrass.DeleteLoggerDefinitionRequest
+
+	DeleteSubscriptionDefinitionRequest(*greengrass.DeleteSubscriptionDefinitionInput) greengrass.DeleteSubscriptionDefinitionRequest
+
+	DisassociateRoleFromGroupRequest(*greengrass.DisassociateRoleFromGroupInput) greengrass.DisassociateRoleFromGroupRequest
+
+	DisassociateServiceRoleFromAccountRequest(*greengrass.DisassociateServiceRoleFromAccountInput) greengrass.DisassociateServiceRoleFromAccountRequest
+
+	GetAssociatedRoleRequest(*greengrass.GetAssociatedRoleInput) greengrass.GetAssociatedRoleRequest
+
+	GetConnectivityInfoRequest(*greengrass.GetConnectivityInfoInput) greengrass.GetConnectivityInfoRequest
+
+	GetCoreDefinitionRequest(*greengrass.GetCoreDefinitionInput) greengrass.GetCoreDefinitionRequest
+
+	GetCoreDefinitionVersionRequest(*greengrass.GetCoreDefinitionVersionInput) greengrass.GetCoreDefinitionVersionRequest
+
+	GetDeploymentStatusRequest(*greengrass.GetDeploymentStatusInput) greengrass.GetDeploymentStatusRequest
+
+	GetDeviceDefinitionRequest(*greengrass.GetDeviceDefinitionInput) greengrass.GetDeviceDefinitionRequest
+
+	GetDeviceDefinitionVersionRequest(*greengrass.GetDeviceDefinitionVersionInput) greengrass.GetDeviceDefinitionVersionRequest
+
+	GetFunctionDefinitionRequest(*greengrass.GetFunctionDefinitionInput) greengrass.GetFunctionDefinitionRequest
+
+	GetFunctionDefinitionVersionRequest(*greengrass.GetFunctionDefinitionVersionInput) greengrass.GetFunctionDefinitionVersionRequest
+
+	GetGroupRequest(*greengrass.GetGroupInput) greengrass.GetGroupRequest
+
+	GetGroupCertificateAuthorityRequest(*greengrass.GetGroupCertificateAuthorityInput) greengrass.GetGroupCertificateAuthorityRequest
+
+	GetGroupCertificateConfigurationRequest(*greengrass.GetGroupCertificateConfigurationInput) greengrass.GetGroupCertificateConfigurationRequest
+
+	GetGroupVersionRequest(*greengrass.GetGroupVersionInput) greengrass.GetGroupVersionRequest
+
+	GetLoggerDefinitionRequest(*greengrass.GetLoggerDefinitionInput) greengrass.GetLoggerDefinitionRequest
+
+	GetLoggerDefinitionVersionRequest(*greengrass.GetLoggerDefinitionVersionInput) greengrass.GetLoggerDefinitionVersionRequest
+
+	GetServiceRoleForAccountRequest(*greengrass.GetServiceRoleForAccountInput) greengrass.GetServiceRoleForAccountRequest
+
+	GetSubscriptionDefinitionRequest(*greengrass.GetSubscriptionDefinitionInput) greengrass.GetSubscriptionDefinitionRequest
+
+	GetSubscriptionDefinitionVersionRequest(*greengrass.GetSubscriptionDefinitionVersionInput) greengrass.GetSubscriptionDefinitionVersionRequest
+
+	ListCoreDefinitionVersionsRequest(*greengrass.ListCoreDefinitionVersionsInput) greengrass.ListCoreDefinitionVersionsRequest
+
+	ListCoreDefinitionsRequest(*greengrass.ListCoreDefinitionsInput) greengrass.ListCoreDefinitionsRequest
+
+	ListDeploymentsRequest(*greengrass.ListDeploymentsInput) greengrass.ListDeploymentsRequest
+
+	ListDeviceDefinitionVersionsRequest(*greengrass.ListDeviceDefinitionVersionsInput) greengrass.ListDeviceDefinitionVersionsRequest
+
+	ListDeviceDefinitionsRequest(*greengrass.ListDeviceDefinitionsInput) greengrass.ListDeviceDefinitionsRequest
+
+	ListFunctionDefinitionVersionsRequest(*greengrass.ListFunctionDefinitionVersionsInput) greengrass.ListFunctionDefinitionVersionsRequest
+
+	ListFunctionDefinitionsRequest(*greengrass.ListFunctionDefinitionsInput) greengrass.ListFunctionDefinitionsRequest
+
+	ListGroupCertificateAuthoritiesRequest(*greengrass.ListGroupCertificateAuthoritiesInput) greengrass.ListGroupCertificateAuthoritiesRequest
+
+	ListGroupVersionsRequest(*greengrass.ListGroupVersionsInput) greengrass.ListGroupVersionsRequest
+
+	ListGroupsRequest(*greengrass.ListGroupsInput) greengrass.ListGroupsRequest
+
+	ListLoggerDefinitionVersionsRequest(*greengrass.ListLoggerDefinitionVersionsInput) greengrass.ListLoggerDefinitionVersionsRequest
+
+	ListLoggerDefinitionsRequest(*greengrass.ListLoggerDefinitionsInput) greengrass.ListLoggerDefinitionsRequest
+
+	ListSubscriptionDefinitionVersionsRequest(*greengrass.ListSubscriptionDefinitionVersionsInput) greengrass.ListSubscriptionDefinitionVersionsRequest
+
+	ListSubscriptionDefinitionsRequest(*greengrass.ListSubscriptionDefinitionsInput) greengrass.ListSubscriptionDefinitionsRequest
+
+	ResetDeploymentsRequest(*greengrass.ResetDeploymentsInput) greengrass.ResetDeploymentsRequest
+
+	UpdateConnectivityInfoRequest(*greengrass.UpdateConnectivityInfoInput) greengrass.UpdateConnectivityInfoRequest
+
+	UpdateCoreDefinitionRequest(*greengrass.UpdateCoreDefinitionInput) greengrass.UpdateCoreDefinitionRequest
+
+	UpdateDeviceDefinitionRequest(*greengrass.UpdateDeviceDefinitionInput) greengrass.UpdateDeviceDefinitionRequest
+
+	UpdateFunctionDefinitionRequest(*greengrass.UpdateFunctionDefinitionInput) greengrass.UpdateFunctionDefinitionRequest
+
+	UpdateGroupRequest(*greengrass.UpdateGroupInput) greengrass.UpdateGroupRequest
+
+	UpdateGroupCertificateConfigurationRequest(*greengrass.UpdateGroupCertificateConfigurationInput) greengrass.UpdateGroupCertificateConfigurationRequest
+
+	UpdateLoggerDefinitionRequest(*greengrass.UpdateLoggerDefinitionInput) greengrass.UpdateLoggerDefinitionRequest
+
+	UpdateSubscriptionDefinitionRequest(*greengrass.UpdateSubscriptionDefinitionInput) greengrass.UpdateSubscriptionDefinitionRequest
 }
 
 var _ GreengrassAPI = (*greengrass.Greengrass)(nil)

@@ -38,11 +38,11 @@ func main() {
 	}
 
 	svc := s3.New(cfg)
-	resp, err := svc.GetObject(&s3.GetObjectInput{
+	req := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String(os.Args[1]),
 		Key:    aws.String(os.Args[2]),
 	})
-
+	resp, err := req.Send()
 	if err != nil {
 		// Casting to the awserr.Error type will allow you to inspect the error
 		// code returned by the service in code. The error code can be used

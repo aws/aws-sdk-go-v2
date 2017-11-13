@@ -63,131 +63,77 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type EMRAPI interface {
-	AddInstanceFleet(*emr.AddInstanceFleetInput) (*emr.AddInstanceFleetOutput, error)
-	AddInstanceFleetWithContext(aws.Context, *emr.AddInstanceFleetInput, ...aws.Option) (*emr.AddInstanceFleetOutput, error)
-	AddInstanceFleetRequest(*emr.AddInstanceFleetInput) (*aws.Request, *emr.AddInstanceFleetOutput)
+	AddInstanceFleetRequest(*emr.AddInstanceFleetInput) emr.AddInstanceFleetRequest
 
-	AddInstanceGroups(*emr.AddInstanceGroupsInput) (*emr.AddInstanceGroupsOutput, error)
-	AddInstanceGroupsWithContext(aws.Context, *emr.AddInstanceGroupsInput, ...aws.Option) (*emr.AddInstanceGroupsOutput, error)
-	AddInstanceGroupsRequest(*emr.AddInstanceGroupsInput) (*aws.Request, *emr.AddInstanceGroupsOutput)
+	AddInstanceGroupsRequest(*emr.AddInstanceGroupsInput) emr.AddInstanceGroupsRequest
 
-	AddJobFlowSteps(*emr.AddJobFlowStepsInput) (*emr.AddJobFlowStepsOutput, error)
-	AddJobFlowStepsWithContext(aws.Context, *emr.AddJobFlowStepsInput, ...aws.Option) (*emr.AddJobFlowStepsOutput, error)
-	AddJobFlowStepsRequest(*emr.AddJobFlowStepsInput) (*aws.Request, *emr.AddJobFlowStepsOutput)
+	AddJobFlowStepsRequest(*emr.AddJobFlowStepsInput) emr.AddJobFlowStepsRequest
 
-	AddTags(*emr.AddTagsInput) (*emr.AddTagsOutput, error)
-	AddTagsWithContext(aws.Context, *emr.AddTagsInput, ...aws.Option) (*emr.AddTagsOutput, error)
-	AddTagsRequest(*emr.AddTagsInput) (*aws.Request, *emr.AddTagsOutput)
+	AddTagsRequest(*emr.AddTagsInput) emr.AddTagsRequest
 
-	CancelSteps(*emr.CancelStepsInput) (*emr.CancelStepsOutput, error)
-	CancelStepsWithContext(aws.Context, *emr.CancelStepsInput, ...aws.Option) (*emr.CancelStepsOutput, error)
-	CancelStepsRequest(*emr.CancelStepsInput) (*aws.Request, *emr.CancelStepsOutput)
+	CancelStepsRequest(*emr.CancelStepsInput) emr.CancelStepsRequest
 
-	CreateSecurityConfiguration(*emr.CreateSecurityConfigurationInput) (*emr.CreateSecurityConfigurationOutput, error)
-	CreateSecurityConfigurationWithContext(aws.Context, *emr.CreateSecurityConfigurationInput, ...aws.Option) (*emr.CreateSecurityConfigurationOutput, error)
-	CreateSecurityConfigurationRequest(*emr.CreateSecurityConfigurationInput) (*aws.Request, *emr.CreateSecurityConfigurationOutput)
+	CreateSecurityConfigurationRequest(*emr.CreateSecurityConfigurationInput) emr.CreateSecurityConfigurationRequest
 
-	DeleteSecurityConfiguration(*emr.DeleteSecurityConfigurationInput) (*emr.DeleteSecurityConfigurationOutput, error)
-	DeleteSecurityConfigurationWithContext(aws.Context, *emr.DeleteSecurityConfigurationInput, ...aws.Option) (*emr.DeleteSecurityConfigurationOutput, error)
-	DeleteSecurityConfigurationRequest(*emr.DeleteSecurityConfigurationInput) (*aws.Request, *emr.DeleteSecurityConfigurationOutput)
+	DeleteSecurityConfigurationRequest(*emr.DeleteSecurityConfigurationInput) emr.DeleteSecurityConfigurationRequest
 
-	DescribeCluster(*emr.DescribeClusterInput) (*emr.DescribeClusterOutput, error)
-	DescribeClusterWithContext(aws.Context, *emr.DescribeClusterInput, ...aws.Option) (*emr.DescribeClusterOutput, error)
-	DescribeClusterRequest(*emr.DescribeClusterInput) (*aws.Request, *emr.DescribeClusterOutput)
+	DescribeClusterRequest(*emr.DescribeClusterInput) emr.DescribeClusterRequest
 
-	DescribeJobFlows(*emr.DescribeJobFlowsInput) (*emr.DescribeJobFlowsOutput, error)
-	DescribeJobFlowsWithContext(aws.Context, *emr.DescribeJobFlowsInput, ...aws.Option) (*emr.DescribeJobFlowsOutput, error)
-	DescribeJobFlowsRequest(*emr.DescribeJobFlowsInput) (*aws.Request, *emr.DescribeJobFlowsOutput)
+	DescribeJobFlowsRequest(*emr.DescribeJobFlowsInput) emr.DescribeJobFlowsRequest
 
-	DescribeSecurityConfiguration(*emr.DescribeSecurityConfigurationInput) (*emr.DescribeSecurityConfigurationOutput, error)
-	DescribeSecurityConfigurationWithContext(aws.Context, *emr.DescribeSecurityConfigurationInput, ...aws.Option) (*emr.DescribeSecurityConfigurationOutput, error)
-	DescribeSecurityConfigurationRequest(*emr.DescribeSecurityConfigurationInput) (*aws.Request, *emr.DescribeSecurityConfigurationOutput)
+	DescribeSecurityConfigurationRequest(*emr.DescribeSecurityConfigurationInput) emr.DescribeSecurityConfigurationRequest
 
-	DescribeStep(*emr.DescribeStepInput) (*emr.DescribeStepOutput, error)
-	DescribeStepWithContext(aws.Context, *emr.DescribeStepInput, ...aws.Option) (*emr.DescribeStepOutput, error)
-	DescribeStepRequest(*emr.DescribeStepInput) (*aws.Request, *emr.DescribeStepOutput)
+	DescribeStepRequest(*emr.DescribeStepInput) emr.DescribeStepRequest
 
-	ListBootstrapActions(*emr.ListBootstrapActionsInput) (*emr.ListBootstrapActionsOutput, error)
-	ListBootstrapActionsWithContext(aws.Context, *emr.ListBootstrapActionsInput, ...aws.Option) (*emr.ListBootstrapActionsOutput, error)
-	ListBootstrapActionsRequest(*emr.ListBootstrapActionsInput) (*aws.Request, *emr.ListBootstrapActionsOutput)
+	ListBootstrapActionsRequest(*emr.ListBootstrapActionsInput) emr.ListBootstrapActionsRequest
 
 	ListBootstrapActionsPages(*emr.ListBootstrapActionsInput, func(*emr.ListBootstrapActionsOutput, bool) bool) error
 	ListBootstrapActionsPagesWithContext(aws.Context, *emr.ListBootstrapActionsInput, func(*emr.ListBootstrapActionsOutput, bool) bool, ...aws.Option) error
 
-	ListClusters(*emr.ListClustersInput) (*emr.ListClustersOutput, error)
-	ListClustersWithContext(aws.Context, *emr.ListClustersInput, ...aws.Option) (*emr.ListClustersOutput, error)
-	ListClustersRequest(*emr.ListClustersInput) (*aws.Request, *emr.ListClustersOutput)
+	ListClustersRequest(*emr.ListClustersInput) emr.ListClustersRequest
 
 	ListClustersPages(*emr.ListClustersInput, func(*emr.ListClustersOutput, bool) bool) error
 	ListClustersPagesWithContext(aws.Context, *emr.ListClustersInput, func(*emr.ListClustersOutput, bool) bool, ...aws.Option) error
 
-	ListInstanceFleets(*emr.ListInstanceFleetsInput) (*emr.ListInstanceFleetsOutput, error)
-	ListInstanceFleetsWithContext(aws.Context, *emr.ListInstanceFleetsInput, ...aws.Option) (*emr.ListInstanceFleetsOutput, error)
-	ListInstanceFleetsRequest(*emr.ListInstanceFleetsInput) (*aws.Request, *emr.ListInstanceFleetsOutput)
+	ListInstanceFleetsRequest(*emr.ListInstanceFleetsInput) emr.ListInstanceFleetsRequest
 
 	ListInstanceFleetsPages(*emr.ListInstanceFleetsInput, func(*emr.ListInstanceFleetsOutput, bool) bool) error
 	ListInstanceFleetsPagesWithContext(aws.Context, *emr.ListInstanceFleetsInput, func(*emr.ListInstanceFleetsOutput, bool) bool, ...aws.Option) error
 
-	ListInstanceGroups(*emr.ListInstanceGroupsInput) (*emr.ListInstanceGroupsOutput, error)
-	ListInstanceGroupsWithContext(aws.Context, *emr.ListInstanceGroupsInput, ...aws.Option) (*emr.ListInstanceGroupsOutput, error)
-	ListInstanceGroupsRequest(*emr.ListInstanceGroupsInput) (*aws.Request, *emr.ListInstanceGroupsOutput)
+	ListInstanceGroupsRequest(*emr.ListInstanceGroupsInput) emr.ListInstanceGroupsRequest
 
 	ListInstanceGroupsPages(*emr.ListInstanceGroupsInput, func(*emr.ListInstanceGroupsOutput, bool) bool) error
 	ListInstanceGroupsPagesWithContext(aws.Context, *emr.ListInstanceGroupsInput, func(*emr.ListInstanceGroupsOutput, bool) bool, ...aws.Option) error
 
-	ListInstances(*emr.ListInstancesInput) (*emr.ListInstancesOutput, error)
-	ListInstancesWithContext(aws.Context, *emr.ListInstancesInput, ...aws.Option) (*emr.ListInstancesOutput, error)
-	ListInstancesRequest(*emr.ListInstancesInput) (*aws.Request, *emr.ListInstancesOutput)
+	ListInstancesRequest(*emr.ListInstancesInput) emr.ListInstancesRequest
 
 	ListInstancesPages(*emr.ListInstancesInput, func(*emr.ListInstancesOutput, bool) bool) error
 	ListInstancesPagesWithContext(aws.Context, *emr.ListInstancesInput, func(*emr.ListInstancesOutput, bool) bool, ...aws.Option) error
 
-	ListSecurityConfigurations(*emr.ListSecurityConfigurationsInput) (*emr.ListSecurityConfigurationsOutput, error)
-	ListSecurityConfigurationsWithContext(aws.Context, *emr.ListSecurityConfigurationsInput, ...aws.Option) (*emr.ListSecurityConfigurationsOutput, error)
-	ListSecurityConfigurationsRequest(*emr.ListSecurityConfigurationsInput) (*aws.Request, *emr.ListSecurityConfigurationsOutput)
+	ListSecurityConfigurationsRequest(*emr.ListSecurityConfigurationsInput) emr.ListSecurityConfigurationsRequest
 
-	ListSteps(*emr.ListStepsInput) (*emr.ListStepsOutput, error)
-	ListStepsWithContext(aws.Context, *emr.ListStepsInput, ...aws.Option) (*emr.ListStepsOutput, error)
-	ListStepsRequest(*emr.ListStepsInput) (*aws.Request, *emr.ListStepsOutput)
+	ListStepsRequest(*emr.ListStepsInput) emr.ListStepsRequest
 
 	ListStepsPages(*emr.ListStepsInput, func(*emr.ListStepsOutput, bool) bool) error
 	ListStepsPagesWithContext(aws.Context, *emr.ListStepsInput, func(*emr.ListStepsOutput, bool) bool, ...aws.Option) error
 
-	ModifyInstanceFleet(*emr.ModifyInstanceFleetInput) (*emr.ModifyInstanceFleetOutput, error)
-	ModifyInstanceFleetWithContext(aws.Context, *emr.ModifyInstanceFleetInput, ...aws.Option) (*emr.ModifyInstanceFleetOutput, error)
-	ModifyInstanceFleetRequest(*emr.ModifyInstanceFleetInput) (*aws.Request, *emr.ModifyInstanceFleetOutput)
+	ModifyInstanceFleetRequest(*emr.ModifyInstanceFleetInput) emr.ModifyInstanceFleetRequest
 
-	ModifyInstanceGroups(*emr.ModifyInstanceGroupsInput) (*emr.ModifyInstanceGroupsOutput, error)
-	ModifyInstanceGroupsWithContext(aws.Context, *emr.ModifyInstanceGroupsInput, ...aws.Option) (*emr.ModifyInstanceGroupsOutput, error)
-	ModifyInstanceGroupsRequest(*emr.ModifyInstanceGroupsInput) (*aws.Request, *emr.ModifyInstanceGroupsOutput)
+	ModifyInstanceGroupsRequest(*emr.ModifyInstanceGroupsInput) emr.ModifyInstanceGroupsRequest
 
-	PutAutoScalingPolicy(*emr.PutAutoScalingPolicyInput) (*emr.PutAutoScalingPolicyOutput, error)
-	PutAutoScalingPolicyWithContext(aws.Context, *emr.PutAutoScalingPolicyInput, ...aws.Option) (*emr.PutAutoScalingPolicyOutput, error)
-	PutAutoScalingPolicyRequest(*emr.PutAutoScalingPolicyInput) (*aws.Request, *emr.PutAutoScalingPolicyOutput)
+	PutAutoScalingPolicyRequest(*emr.PutAutoScalingPolicyInput) emr.PutAutoScalingPolicyRequest
 
-	RemoveAutoScalingPolicy(*emr.RemoveAutoScalingPolicyInput) (*emr.RemoveAutoScalingPolicyOutput, error)
-	RemoveAutoScalingPolicyWithContext(aws.Context, *emr.RemoveAutoScalingPolicyInput, ...aws.Option) (*emr.RemoveAutoScalingPolicyOutput, error)
-	RemoveAutoScalingPolicyRequest(*emr.RemoveAutoScalingPolicyInput) (*aws.Request, *emr.RemoveAutoScalingPolicyOutput)
+	RemoveAutoScalingPolicyRequest(*emr.RemoveAutoScalingPolicyInput) emr.RemoveAutoScalingPolicyRequest
 
-	RemoveTags(*emr.RemoveTagsInput) (*emr.RemoveTagsOutput, error)
-	RemoveTagsWithContext(aws.Context, *emr.RemoveTagsInput, ...aws.Option) (*emr.RemoveTagsOutput, error)
-	RemoveTagsRequest(*emr.RemoveTagsInput) (*aws.Request, *emr.RemoveTagsOutput)
+	RemoveTagsRequest(*emr.RemoveTagsInput) emr.RemoveTagsRequest
 
-	RunJobFlow(*emr.RunJobFlowInput) (*emr.RunJobFlowOutput, error)
-	RunJobFlowWithContext(aws.Context, *emr.RunJobFlowInput, ...aws.Option) (*emr.RunJobFlowOutput, error)
-	RunJobFlowRequest(*emr.RunJobFlowInput) (*aws.Request, *emr.RunJobFlowOutput)
+	RunJobFlowRequest(*emr.RunJobFlowInput) emr.RunJobFlowRequest
 
-	SetTerminationProtection(*emr.SetTerminationProtectionInput) (*emr.SetTerminationProtectionOutput, error)
-	SetTerminationProtectionWithContext(aws.Context, *emr.SetTerminationProtectionInput, ...aws.Option) (*emr.SetTerminationProtectionOutput, error)
-	SetTerminationProtectionRequest(*emr.SetTerminationProtectionInput) (*aws.Request, *emr.SetTerminationProtectionOutput)
+	SetTerminationProtectionRequest(*emr.SetTerminationProtectionInput) emr.SetTerminationProtectionRequest
 
-	SetVisibleToAllUsers(*emr.SetVisibleToAllUsersInput) (*emr.SetVisibleToAllUsersOutput, error)
-	SetVisibleToAllUsersWithContext(aws.Context, *emr.SetVisibleToAllUsersInput, ...aws.Option) (*emr.SetVisibleToAllUsersOutput, error)
-	SetVisibleToAllUsersRequest(*emr.SetVisibleToAllUsersInput) (*aws.Request, *emr.SetVisibleToAllUsersOutput)
+	SetVisibleToAllUsersRequest(*emr.SetVisibleToAllUsersInput) emr.SetVisibleToAllUsersRequest
 
-	TerminateJobFlows(*emr.TerminateJobFlowsInput) (*emr.TerminateJobFlowsOutput, error)
-	TerminateJobFlowsWithContext(aws.Context, *emr.TerminateJobFlowsInput, ...aws.Option) (*emr.TerminateJobFlowsOutput, error)
-	TerminateJobFlowsRequest(*emr.TerminateJobFlowsInput) (*aws.Request, *emr.TerminateJobFlowsOutput)
+	TerminateJobFlowsRequest(*emr.TerminateJobFlowsInput) emr.TerminateJobFlowsRequest
 
 	WaitUntilClusterRunning(*emr.DescribeClusterInput) error
 	WaitUntilClusterRunningWithContext(aws.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error

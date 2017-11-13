@@ -14,31 +14,39 @@ import (
 
 const opAddInstanceFleet = "AddInstanceFleet"
 
-// AddInstanceFleetRequest generates a "aws.Request" representing the
-// client's request for the AddInstanceFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddInstanceFleetRequest is a API request type for the AddInstanceFleet API operation.
+type AddInstanceFleetRequest struct {
+	*aws.Request
+	Input *AddInstanceFleetInput
+}
+
+// Send marshals and sends the AddInstanceFleet API request.
+func (r AddInstanceFleetRequest) Send() (*AddInstanceFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddInstanceFleetOutput), nil
+}
+
+// AddInstanceFleetRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds an instance fleet to a running cluster.
 //
-// See AddInstanceFleet for more information on using the AddInstanceFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The instance fleet configuration is available only in Amazon EMR versions
+// 4.8.0 and later, excluding 5.0.x.
 //
 //    // Example sending a request using the AddInstanceFleetRequest method.
-//    req, resp := client.AddInstanceFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddInstanceFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleet
-func (c *EMR) AddInstanceFleetRequest(input *AddInstanceFleetInput) (req *aws.Request, output *AddInstanceFleetOutput) {
+func (c *EMR) AddInstanceFleetRequest(input *AddInstanceFleetInput) AddInstanceFleetRequest {
 	op := &aws.Operation{
 		Name:       opAddInstanceFleet,
 		HTTPMethod: "POST",
@@ -49,81 +57,42 @@ func (c *EMR) AddInstanceFleetRequest(input *AddInstanceFleetInput) (req *aws.Re
 		input = &AddInstanceFleetInput{}
 	}
 
-	output = &AddInstanceFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddInstanceFleet API operation for Amazon Elastic MapReduce.
-//
-// Adds an instance fleet to a running cluster.
-//
-// The instance fleet configuration is available only in Amazon EMR versions
-// 4.8.0 and later, excluding 5.0.x.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation AddInstanceFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleet
-func (c *EMR) AddInstanceFleet(input *AddInstanceFleetInput) (*AddInstanceFleetOutput, error) {
-	req, out := c.AddInstanceFleetRequest(input)
-	return out, req.Send()
-}
-
-// AddInstanceFleetWithContext is the same as AddInstanceFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddInstanceFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) AddInstanceFleetWithContext(ctx aws.Context, input *AddInstanceFleetInput, opts ...aws.Option) (*AddInstanceFleetOutput, error) {
-	req, out := c.AddInstanceFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddInstanceFleetOutput{})
+	return AddInstanceFleetRequest{Request: req, Input: input}
 }
 
 const opAddInstanceGroups = "AddInstanceGroups"
 
-// AddInstanceGroupsRequest generates a "aws.Request" representing the
-// client's request for the AddInstanceGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddInstanceGroupsRequest is a API request type for the AddInstanceGroups API operation.
+type AddInstanceGroupsRequest struct {
+	*aws.Request
+	Input *AddInstanceGroupsInput
+}
+
+// Send marshals and sends the AddInstanceGroups API request.
+func (r AddInstanceGroupsRequest) Send() (*AddInstanceGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddInstanceGroupsOutput), nil
+}
+
+// AddInstanceGroupsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddInstanceGroups for more information on using the AddInstanceGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds one or more instance groups to a running cluster.
 //
 //    // Example sending a request using the AddInstanceGroupsRequest method.
-//    req, resp := client.AddInstanceGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddInstanceGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroups
-func (c *EMR) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) (req *aws.Request, output *AddInstanceGroupsOutput) {
+func (c *EMR) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) AddInstanceGroupsRequest {
 	op := &aws.Operation{
 		Name:       opAddInstanceGroups,
 		HTTPMethod: "POST",
@@ -134,92 +103,30 @@ func (c *EMR) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) (req *aws.
 		input = &AddInstanceGroupsInput{}
 	}
 
-	output = &AddInstanceGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddInstanceGroups API operation for Amazon Elastic MapReduce.
-//
-// Adds one or more instance groups to a running cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation AddInstanceGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroups
-func (c *EMR) AddInstanceGroups(input *AddInstanceGroupsInput) (*AddInstanceGroupsOutput, error) {
-	req, out := c.AddInstanceGroupsRequest(input)
-	return out, req.Send()
-}
-
-// AddInstanceGroupsWithContext is the same as AddInstanceGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddInstanceGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) AddInstanceGroupsWithContext(ctx aws.Context, input *AddInstanceGroupsInput, opts ...aws.Option) (*AddInstanceGroupsOutput, error) {
-	req, out := c.AddInstanceGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddInstanceGroupsOutput{})
+	return AddInstanceGroupsRequest{Request: req, Input: input}
 }
 
 const opAddJobFlowSteps = "AddJobFlowSteps"
 
-// AddJobFlowStepsRequest generates a "aws.Request" representing the
-// client's request for the AddJobFlowSteps operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddJobFlowSteps for more information on using the AddJobFlowSteps
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddJobFlowStepsRequest method.
-//    req, resp := client.AddJobFlowStepsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowSteps
-func (c *EMR) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) (req *aws.Request, output *AddJobFlowStepsOutput) {
-	op := &aws.Operation{
-		Name:       opAddJobFlowSteps,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddJobFlowStepsInput{}
-	}
-
-	output = &AddJobFlowStepsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddJobFlowStepsRequest is a API request type for the AddJobFlowSteps API operation.
+type AddJobFlowStepsRequest struct {
+	*aws.Request
+	Input *AddJobFlowStepsInput
 }
 
-// AddJobFlowSteps API operation for Amazon Elastic MapReduce.
+// Send marshals and sends the AddJobFlowSteps API request.
+func (r AddJobFlowStepsRequest) Send() (*AddJobFlowStepsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddJobFlowStepsOutput), nil
+}
+
+// AddJobFlowStepsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
 // AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps
 // are allowed in each job flow.
@@ -245,67 +152,64 @@ func (c *EMR) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) (req *aws.Requ
 // You can only add steps to a cluster that is in one of the following states:
 // STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation AddJobFlowSteps for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
+//    // Example sending a request using the AddJobFlowStepsRequest method.
+//    req := client.AddJobFlowStepsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowSteps
-func (c *EMR) AddJobFlowSteps(input *AddJobFlowStepsInput) (*AddJobFlowStepsOutput, error) {
-	req, out := c.AddJobFlowStepsRequest(input)
-	return out, req.Send()
-}
+func (c *EMR) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) AddJobFlowStepsRequest {
+	op := &aws.Operation{
+		Name:       opAddJobFlowSteps,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddJobFlowStepsWithContext is the same as AddJobFlowSteps with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddJobFlowSteps for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) AddJobFlowStepsWithContext(ctx aws.Context, input *AddJobFlowStepsInput, opts ...aws.Option) (*AddJobFlowStepsOutput, error) {
-	req, out := c.AddJobFlowStepsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddJobFlowStepsInput{}
+	}
+
+	req := c.newRequest(op, input, &AddJobFlowStepsOutput{})
+	return AddJobFlowStepsRequest{Request: req, Input: input}
 }
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws.Request" representing the
-// client's request for the AddTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsRequest is a API request type for the AddTags API operation.
+type AddTagsRequest struct {
+	*aws.Request
+	Input *AddTagsInput
+}
+
+// Send marshals and sends the AddTags API request.
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsOutput), nil
+}
+
+// AddTagsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTags for more information on using the AddTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters
+// in various ways, such as grouping clusters to track your Amazon EMR resource
+// allocation costs. For more information, see Tagging Amazon EMR Resources
+// (http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html).
 //
 //    // Example sending a request using the AddTagsRequest method.
-//    req, resp := client.AddTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTags
-func (c *EMR) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+func (c *EMR) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -316,81 +220,46 @@ func (c *EMR) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *Add
 		input = &AddTagsInput{}
 	}
 
-	output = &AddTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddTags API operation for Amazon Elastic MapReduce.
-//
-// Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters
-// in various ways, such as grouping clusters to track your Amazon EMR resource
-// allocation costs. For more information, see Tagging Amazon EMR Resources
-// (http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation AddTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTags
-func (c *EMR) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsWithContext is the same as AddTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddTagsOutput{})
+	return AddTagsRequest{Request: req, Input: input}
 }
 
 const opCancelSteps = "CancelSteps"
 
-// CancelStepsRequest generates a "aws.Request" representing the
-// client's request for the CancelSteps operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelStepsRequest is a API request type for the CancelSteps API operation.
+type CancelStepsRequest struct {
+	*aws.Request
+	Input *CancelStepsInput
+}
+
+// Send marshals and sends the CancelSteps API request.
+func (r CancelStepsRequest) Send() (*CancelStepsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelStepsOutput), nil
+}
+
+// CancelStepsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CancelSteps for more information on using the CancelSteps
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cancels a pending step or steps in a running cluster. Available only in Amazon
+// EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps
+// are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous;
+// it does not guarantee a step will be canceled, even if the request is successfully
+// submitted. You can only cancel steps that are in a PENDING state.
 //
 //    // Example sending a request using the CancelStepsRequest method.
-//    req, resp := client.CancelStepsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelStepsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelSteps
-func (c *EMR) CancelStepsRequest(input *CancelStepsInput) (req *aws.Request, output *CancelStepsOutput) {
+func (c *EMR) CancelStepsRequest(input *CancelStepsInput) CancelStepsRequest {
 	op := &aws.Operation{
 		Name:       opCancelSteps,
 		HTTPMethod: "POST",
@@ -401,83 +270,43 @@ func (c *EMR) CancelStepsRequest(input *CancelStepsInput) (req *aws.Request, out
 		input = &CancelStepsInput{}
 	}
 
-	output = &CancelStepsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelSteps API operation for Amazon Elastic MapReduce.
-//
-// Cancels a pending step or steps in a running cluster. Available only in Amazon
-// EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps
-// are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous;
-// it does not guarantee a step will be canceled, even if the request is successfully
-// submitted. You can only cancel steps that are in a PENDING state.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation CancelSteps for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelSteps
-func (c *EMR) CancelSteps(input *CancelStepsInput) (*CancelStepsOutput, error) {
-	req, out := c.CancelStepsRequest(input)
-	return out, req.Send()
-}
-
-// CancelStepsWithContext is the same as CancelSteps with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelSteps for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) CancelStepsWithContext(ctx aws.Context, input *CancelStepsInput, opts ...aws.Option) (*CancelStepsOutput, error) {
-	req, out := c.CancelStepsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelStepsOutput{})
+	return CancelStepsRequest{Request: req, Input: input}
 }
 
 const opCreateSecurityConfiguration = "CreateSecurityConfiguration"
 
-// CreateSecurityConfigurationRequest generates a "aws.Request" representing the
-// client's request for the CreateSecurityConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSecurityConfigurationRequest is a API request type for the CreateSecurityConfiguration API operation.
+type CreateSecurityConfigurationRequest struct {
+	*aws.Request
+	Input *CreateSecurityConfigurationInput
+}
+
+// Send marshals and sends the CreateSecurityConfiguration API request.
+func (r CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSecurityConfigurationOutput), nil
+}
+
+// CreateSecurityConfigurationRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSecurityConfiguration for more information on using the CreateSecurityConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a security configuration, which is stored in the service and can
+// be specified when a cluster is created.
 //
 //    // Example sending a request using the CreateSecurityConfigurationRequest method.
-//    req, resp := client.CreateSecurityConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSecurityConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfiguration
-func (c *EMR) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurationInput) (req *aws.Request, output *CreateSecurityConfigurationOutput) {
+func (c *EMR) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateSecurityConfiguration,
 		HTTPMethod: "POST",
@@ -488,79 +317,42 @@ func (c *EMR) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurat
 		input = &CreateSecurityConfigurationInput{}
 	}
 
-	output = &CreateSecurityConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSecurityConfiguration API operation for Amazon Elastic MapReduce.
-//
-// Creates a security configuration, which is stored in the service and can
-// be specified when a cluster is created.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation CreateSecurityConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfiguration
-func (c *EMR) CreateSecurityConfiguration(input *CreateSecurityConfigurationInput) (*CreateSecurityConfigurationOutput, error) {
-	req, out := c.CreateSecurityConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// CreateSecurityConfigurationWithContext is the same as CreateSecurityConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSecurityConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) CreateSecurityConfigurationWithContext(ctx aws.Context, input *CreateSecurityConfigurationInput, opts ...aws.Option) (*CreateSecurityConfigurationOutput, error) {
-	req, out := c.CreateSecurityConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSecurityConfigurationOutput{})
+	return CreateSecurityConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeleteSecurityConfiguration = "DeleteSecurityConfiguration"
 
-// DeleteSecurityConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteSecurityConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSecurityConfigurationRequest is a API request type for the DeleteSecurityConfiguration API operation.
+type DeleteSecurityConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteSecurityConfigurationInput
+}
+
+// Send marshals and sends the DeleteSecurityConfiguration API request.
+func (r DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSecurityConfigurationOutput), nil
+}
+
+// DeleteSecurityConfigurationRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSecurityConfiguration for more information on using the DeleteSecurityConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a security configuration.
 //
 //    // Example sending a request using the DeleteSecurityConfigurationRequest method.
-//    req, resp := client.DeleteSecurityConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSecurityConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfiguration
-func (c *EMR) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigurationInput) (req *aws.Request, output *DeleteSecurityConfigurationOutput) {
+func (c *EMR) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigurationInput) DeleteSecurityConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSecurityConfiguration,
 		HTTPMethod: "POST",
@@ -571,78 +363,43 @@ func (c *EMR) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigurat
 		input = &DeleteSecurityConfigurationInput{}
 	}
 
-	output = &DeleteSecurityConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSecurityConfiguration API operation for Amazon Elastic MapReduce.
-//
-// Deletes a security configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation DeleteSecurityConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfiguration
-func (c *EMR) DeleteSecurityConfiguration(input *DeleteSecurityConfigurationInput) (*DeleteSecurityConfigurationOutput, error) {
-	req, out := c.DeleteSecurityConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSecurityConfigurationWithContext is the same as DeleteSecurityConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSecurityConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) DeleteSecurityConfigurationWithContext(ctx aws.Context, input *DeleteSecurityConfigurationInput, opts ...aws.Option) (*DeleteSecurityConfigurationOutput, error) {
-	req, out := c.DeleteSecurityConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSecurityConfigurationOutput{})
+	return DeleteSecurityConfigurationRequest{Request: req, Input: input}
 }
 
 const opDescribeCluster = "DescribeCluster"
 
-// DescribeClusterRequest generates a "aws.Request" representing the
-// client's request for the DescribeCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeClusterRequest is a API request type for the DescribeCluster API operation.
+type DescribeClusterRequest struct {
+	*aws.Request
+	Input *DescribeClusterInput
+}
+
+// Send marshals and sends the DescribeCluster API request.
+func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterOutput), nil
+}
+
+// DescribeClusterRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCluster for more information on using the DescribeCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides cluster-level details including status, hardware and software configuration,
+// VPC settings, and so on. For information about the cluster steps, see ListSteps.
 //
 //    // Example sending a request using the DescribeClusterRequest method.
-//    req, resp := client.DescribeClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster
-func (c *EMR) DescribeClusterRequest(input *DescribeClusterInput) (req *aws.Request, output *DescribeClusterOutput) {
+func (c *EMR) DescribeClusterRequest(input *DescribeClusterInput) DescribeClusterRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCluster,
 		HTTPMethod: "POST",
@@ -653,98 +410,30 @@ func (c *EMR) DescribeClusterRequest(input *DescribeClusterInput) (req *aws.Requ
 		input = &DescribeClusterInput{}
 	}
 
-	output = &DescribeClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCluster API operation for Amazon Elastic MapReduce.
-//
-// Provides cluster-level details including status, hardware and software configuration,
-// VPC settings, and so on. For information about the cluster steps, see ListSteps.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation DescribeCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster
-func (c *EMR) DescribeCluster(input *DescribeClusterInput) (*DescribeClusterOutput, error) {
-	req, out := c.DescribeClusterRequest(input)
-	return out, req.Send()
-}
-
-// DescribeClusterWithContext is the same as DescribeCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) DescribeClusterWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.Option) (*DescribeClusterOutput, error) {
-	req, out := c.DescribeClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeClusterOutput{})
+	return DescribeClusterRequest{Request: req, Input: input}
 }
 
 const opDescribeJobFlows = "DescribeJobFlows"
 
-// DescribeJobFlowsRequest generates a "aws.Request" representing the
-// client's request for the DescribeJobFlows operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeJobFlows for more information on using the DescribeJobFlows
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeJobFlowsRequest method.
-//    req, resp := client.DescribeJobFlowsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlows
-func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) (req *aws.Request, output *DescribeJobFlowsOutput) {
-	if c.Client.Config.Logger != nil {
-		c.Client.Config.Logger.Log("This operation, DescribeJobFlows, has been deprecated")
-	}
-	op := &aws.Operation{
-		Name:       opDescribeJobFlows,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeJobFlowsInput{}
-	}
-
-	output = &DescribeJobFlowsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeJobFlowsRequest is a API request type for the DescribeJobFlows API operation.
+type DescribeJobFlowsRequest struct {
+	*aws.Request
+	Input *DescribeJobFlowsInput
 }
 
-// DescribeJobFlows API operation for Amazon Elastic MapReduce.
+// Send marshals and sends the DescribeJobFlows API request.
+func (r DescribeJobFlowsRequest) Send() (*DescribeJobFlowsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeJobFlowsOutput), nil
+}
+
+// DescribeJobFlowsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
 // This API is deprecated and will eventually be removed. We recommend you use
 // ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and ListBootstrapActions
@@ -767,67 +456,65 @@ func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) (req *aws.Re
 //
 // Amazon EMR can return a maximum of 512 job flow descriptions.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation DescribeJobFlows for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
+//    // Example sending a request using the DescribeJobFlowsRequest method.
+//    req := client.DescribeJobFlowsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlows
-func (c *EMR) DescribeJobFlows(input *DescribeJobFlowsInput) (*DescribeJobFlowsOutput, error) {
-	req, out := c.DescribeJobFlowsRequest(input)
-	return out, req.Send()
-}
+func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) DescribeJobFlowsRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DescribeJobFlows, has been deprecated")
+	}
+	op := &aws.Operation{
+		Name:       opDescribeJobFlows,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeJobFlowsWithContext is the same as DescribeJobFlows with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeJobFlows for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) DescribeJobFlowsWithContext(ctx aws.Context, input *DescribeJobFlowsInput, opts ...aws.Option) (*DescribeJobFlowsOutput, error) {
-	req, out := c.DescribeJobFlowsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeJobFlowsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeJobFlowsOutput{})
+	return DescribeJobFlowsRequest{Request: req, Input: input}
 }
 
 const opDescribeSecurityConfiguration = "DescribeSecurityConfiguration"
 
-// DescribeSecurityConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DescribeSecurityConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSecurityConfigurationRequest is a API request type for the DescribeSecurityConfiguration API operation.
+type DescribeSecurityConfigurationRequest struct {
+	*aws.Request
+	Input *DescribeSecurityConfigurationInput
+}
+
+// Send marshals and sends the DescribeSecurityConfiguration API request.
+func (r DescribeSecurityConfigurationRequest) Send() (*DescribeSecurityConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSecurityConfigurationOutput), nil
+}
+
+// DescribeSecurityConfigurationRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSecurityConfiguration for more information on using the DescribeSecurityConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides the details of a security configuration by returning the configuration
+// JSON.
 //
 //    // Example sending a request using the DescribeSecurityConfigurationRequest method.
-//    req, resp := client.DescribeSecurityConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSecurityConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfiguration
-func (c *EMR) DescribeSecurityConfigurationRequest(input *DescribeSecurityConfigurationInput) (req *aws.Request, output *DescribeSecurityConfigurationOutput) {
+func (c *EMR) DescribeSecurityConfigurationRequest(input *DescribeSecurityConfigurationInput) DescribeSecurityConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSecurityConfiguration,
 		HTTPMethod: "POST",
@@ -838,79 +525,42 @@ func (c *EMR) DescribeSecurityConfigurationRequest(input *DescribeSecurityConfig
 		input = &DescribeSecurityConfigurationInput{}
 	}
 
-	output = &DescribeSecurityConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSecurityConfiguration API operation for Amazon Elastic MapReduce.
-//
-// Provides the details of a security configuration by returning the configuration
-// JSON.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation DescribeSecurityConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfiguration
-func (c *EMR) DescribeSecurityConfiguration(input *DescribeSecurityConfigurationInput) (*DescribeSecurityConfigurationOutput, error) {
-	req, out := c.DescribeSecurityConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSecurityConfigurationWithContext is the same as DescribeSecurityConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSecurityConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) DescribeSecurityConfigurationWithContext(ctx aws.Context, input *DescribeSecurityConfigurationInput, opts ...aws.Option) (*DescribeSecurityConfigurationOutput, error) {
-	req, out := c.DescribeSecurityConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSecurityConfigurationOutput{})
+	return DescribeSecurityConfigurationRequest{Request: req, Input: input}
 }
 
 const opDescribeStep = "DescribeStep"
 
-// DescribeStepRequest generates a "aws.Request" representing the
-// client's request for the DescribeStep operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStepRequest is a API request type for the DescribeStep API operation.
+type DescribeStepRequest struct {
+	*aws.Request
+	Input *DescribeStepInput
+}
+
+// Send marshals and sends the DescribeStep API request.
+func (r DescribeStepRequest) Send() (*DescribeStepOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStepOutput), nil
+}
+
+// DescribeStepRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStep for more information on using the DescribeStep
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides more detail about the cluster step.
 //
 //    // Example sending a request using the DescribeStepRequest method.
-//    req, resp := client.DescribeStepRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStepRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep
-func (c *EMR) DescribeStepRequest(input *DescribeStepInput) (req *aws.Request, output *DescribeStepOutput) {
+func (c *EMR) DescribeStepRequest(input *DescribeStepInput) DescribeStepRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStep,
 		HTTPMethod: "POST",
@@ -921,78 +571,42 @@ func (c *EMR) DescribeStepRequest(input *DescribeStepInput) (req *aws.Request, o
 		input = &DescribeStepInput{}
 	}
 
-	output = &DescribeStepOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStep API operation for Amazon Elastic MapReduce.
-//
-// Provides more detail about the cluster step.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation DescribeStep for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep
-func (c *EMR) DescribeStep(input *DescribeStepInput) (*DescribeStepOutput, error) {
-	req, out := c.DescribeStepRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStepWithContext is the same as DescribeStep with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStep for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) DescribeStepWithContext(ctx aws.Context, input *DescribeStepInput, opts ...aws.Option) (*DescribeStepOutput, error) {
-	req, out := c.DescribeStepRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStepOutput{})
+	return DescribeStepRequest{Request: req, Input: input}
 }
 
 const opListBootstrapActions = "ListBootstrapActions"
 
-// ListBootstrapActionsRequest generates a "aws.Request" representing the
-// client's request for the ListBootstrapActions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBootstrapActionsRequest is a API request type for the ListBootstrapActions API operation.
+type ListBootstrapActionsRequest struct {
+	*aws.Request
+	Input *ListBootstrapActionsInput
+}
+
+// Send marshals and sends the ListBootstrapActions API request.
+func (r ListBootstrapActionsRequest) Send() (*ListBootstrapActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBootstrapActionsOutput), nil
+}
+
+// ListBootstrapActionsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBootstrapActions for more information on using the ListBootstrapActions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides information about the bootstrap actions associated with a cluster.
 //
 //    // Example sending a request using the ListBootstrapActionsRequest method.
-//    req, resp := client.ListBootstrapActionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBootstrapActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListBootstrapActions
-func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) (req *aws.Request, output *ListBootstrapActionsOutput) {
+func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) ListBootstrapActionsRequest {
 	op := &aws.Operation{
 		Name:       opListBootstrapActions,
 		HTTPMethod: "POST",
@@ -1009,49 +623,8 @@ func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) (req
 		input = &ListBootstrapActionsInput{}
 	}
 
-	output = &ListBootstrapActionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBootstrapActions API operation for Amazon Elastic MapReduce.
-//
-// Provides information about the bootstrap actions associated with a cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ListBootstrapActions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListBootstrapActions
-func (c *EMR) ListBootstrapActions(input *ListBootstrapActionsInput) (*ListBootstrapActionsOutput, error) {
-	req, out := c.ListBootstrapActionsRequest(input)
-	return out, req.Send()
-}
-
-// ListBootstrapActionsWithContext is the same as ListBootstrapActions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBootstrapActions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ListBootstrapActionsWithContext(ctx aws.Context, input *ListBootstrapActionsInput, opts ...aws.Option) (*ListBootstrapActionsOutput, error) {
-	req, out := c.ListBootstrapActionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBootstrapActionsOutput{})
+	return ListBootstrapActionsRequest{Request: req, Input: input}
 }
 
 // ListBootstrapActionsPages iterates over the pages of a ListBootstrapActions operation,
@@ -1090,10 +663,10 @@ func (c *EMR) ListBootstrapActionsPagesWithContext(ctx aws.Context, input *ListB
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListBootstrapActionsRequest(inCpy)
+			req := c.ListBootstrapActionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1106,31 +679,40 @@ func (c *EMR) ListBootstrapActionsPagesWithContext(ctx aws.Context, input *ListB
 
 const opListClusters = "ListClusters"
 
-// ListClustersRequest generates a "aws.Request" representing the
-// client's request for the ListClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListClustersRequest is a API request type for the ListClusters API operation.
+type ListClustersRequest struct {
+	*aws.Request
+	Input *ListClustersInput
+}
+
+// Send marshals and sends the ListClusters API request.
+func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListClustersOutput), nil
+}
+
+// ListClustersRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListClusters for more information on using the ListClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides the status of all clusters visible to this AWS account. Allows you
+// to filter the list of clusters based on certain criteria; for example, filtering
+// by cluster creation date and time or by status. This call returns a maximum
+// of 50 clusters per call, but returns a marker to track the paging of the
+// cluster list across multiple ListClusters calls.
 //
 //    // Example sending a request using the ListClustersRequest method.
-//    req, resp := client.ListClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClusters
-func (c *EMR) ListClustersRequest(input *ListClustersInput) (req *aws.Request, output *ListClustersOutput) {
+func (c *EMR) ListClustersRequest(input *ListClustersInput) ListClustersRequest {
 	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
@@ -1147,53 +729,8 @@ func (c *EMR) ListClustersRequest(input *ListClustersInput) (req *aws.Request, o
 		input = &ListClustersInput{}
 	}
 
-	output = &ListClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListClusters API operation for Amazon Elastic MapReduce.
-//
-// Provides the status of all clusters visible to this AWS account. Allows you
-// to filter the list of clusters based on certain criteria; for example, filtering
-// by cluster creation date and time or by status. This call returns a maximum
-// of 50 clusters per call, but returns a marker to track the paging of the
-// cluster list across multiple ListClusters calls.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ListClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClusters
-func (c *EMR) ListClusters(input *ListClustersInput) (*ListClustersOutput, error) {
-	req, out := c.ListClustersRequest(input)
-	return out, req.Send()
-}
-
-// ListClustersWithContext is the same as ListClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...aws.Option) (*ListClustersOutput, error) {
-	req, out := c.ListClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListClustersOutput{})
+	return ListClustersRequest{Request: req, Input: input}
 }
 
 // ListClustersPages iterates over the pages of a ListClusters operation,
@@ -1232,10 +769,10 @@ func (c *EMR) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListClustersRequest(inCpy)
+			req := c.ListClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1248,31 +785,39 @@ func (c *EMR) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersI
 
 const opListInstanceFleets = "ListInstanceFleets"
 
-// ListInstanceFleetsRequest generates a "aws.Request" representing the
-// client's request for the ListInstanceFleets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListInstanceFleetsRequest is a API request type for the ListInstanceFleets API operation.
+type ListInstanceFleetsRequest struct {
+	*aws.Request
+	Input *ListInstanceFleetsInput
+}
+
+// Send marshals and sends the ListInstanceFleets API request.
+func (r ListInstanceFleetsRequest) Send() (*ListInstanceFleetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInstanceFleetsOutput), nil
+}
+
+// ListInstanceFleetsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all available details about the instance fleets in a cluster.
 //
-// See ListInstanceFleets for more information on using the ListInstanceFleets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The instance fleet configuration is available only in Amazon EMR versions
+// 4.8.0 and later, excluding 5.0.x versions.
 //
 //    // Example sending a request using the ListInstanceFleetsRequest method.
-//    req, resp := client.ListInstanceFleetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListInstanceFleetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets
-func (c *EMR) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) (req *aws.Request, output *ListInstanceFleetsOutput) {
+func (c *EMR) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) ListInstanceFleetsRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceFleets,
 		HTTPMethod: "POST",
@@ -1289,52 +834,8 @@ func (c *EMR) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) (req *aw
 		input = &ListInstanceFleetsInput{}
 	}
 
-	output = &ListInstanceFleetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListInstanceFleets API operation for Amazon Elastic MapReduce.
-//
-// Lists all available details about the instance fleets in a cluster.
-//
-// The instance fleet configuration is available only in Amazon EMR versions
-// 4.8.0 and later, excluding 5.0.x versions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ListInstanceFleets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets
-func (c *EMR) ListInstanceFleets(input *ListInstanceFleetsInput) (*ListInstanceFleetsOutput, error) {
-	req, out := c.ListInstanceFleetsRequest(input)
-	return out, req.Send()
-}
-
-// ListInstanceFleetsWithContext is the same as ListInstanceFleets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListInstanceFleets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ListInstanceFleetsWithContext(ctx aws.Context, input *ListInstanceFleetsInput, opts ...aws.Option) (*ListInstanceFleetsOutput, error) {
-	req, out := c.ListInstanceFleetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListInstanceFleetsOutput{})
+	return ListInstanceFleetsRequest{Request: req, Input: input}
 }
 
 // ListInstanceFleetsPages iterates over the pages of a ListInstanceFleets operation,
@@ -1373,10 +874,10 @@ func (c *EMR) ListInstanceFleetsPagesWithContext(ctx aws.Context, input *ListIns
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListInstanceFleetsRequest(inCpy)
+			req := c.ListInstanceFleetsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1389,31 +890,36 @@ func (c *EMR) ListInstanceFleetsPagesWithContext(ctx aws.Context, input *ListIns
 
 const opListInstanceGroups = "ListInstanceGroups"
 
-// ListInstanceGroupsRequest generates a "aws.Request" representing the
-// client's request for the ListInstanceGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListInstanceGroupsRequest is a API request type for the ListInstanceGroups API operation.
+type ListInstanceGroupsRequest struct {
+	*aws.Request
+	Input *ListInstanceGroupsInput
+}
+
+// Send marshals and sends the ListInstanceGroups API request.
+func (r ListInstanceGroupsRequest) Send() (*ListInstanceGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInstanceGroupsOutput), nil
+}
+
+// ListInstanceGroupsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListInstanceGroups for more information on using the ListInstanceGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides all available details about the instance groups in a cluster.
 //
 //    // Example sending a request using the ListInstanceGroupsRequest method.
-//    req, resp := client.ListInstanceGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListInstanceGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroups
-func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) (req *aws.Request, output *ListInstanceGroupsOutput) {
+func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) ListInstanceGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceGroups,
 		HTTPMethod: "POST",
@@ -1430,49 +936,8 @@ func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) (req *aw
 		input = &ListInstanceGroupsInput{}
 	}
 
-	output = &ListInstanceGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListInstanceGroups API operation for Amazon Elastic MapReduce.
-//
-// Provides all available details about the instance groups in a cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ListInstanceGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroups
-func (c *EMR) ListInstanceGroups(input *ListInstanceGroupsInput) (*ListInstanceGroupsOutput, error) {
-	req, out := c.ListInstanceGroupsRequest(input)
-	return out, req.Send()
-}
-
-// ListInstanceGroupsWithContext is the same as ListInstanceGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListInstanceGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ListInstanceGroupsWithContext(ctx aws.Context, input *ListInstanceGroupsInput, opts ...aws.Option) (*ListInstanceGroupsOutput, error) {
-	req, out := c.ListInstanceGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListInstanceGroupsOutput{})
+	return ListInstanceGroupsRequest{Request: req, Input: input}
 }
 
 // ListInstanceGroupsPages iterates over the pages of a ListInstanceGroups operation,
@@ -1511,10 +976,10 @@ func (c *EMR) ListInstanceGroupsPagesWithContext(ctx aws.Context, input *ListIns
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListInstanceGroupsRequest(inCpy)
+			req := c.ListInstanceGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1527,31 +992,39 @@ func (c *EMR) ListInstanceGroupsPagesWithContext(ctx aws.Context, input *ListIns
 
 const opListInstances = "ListInstances"
 
-// ListInstancesRequest generates a "aws.Request" representing the
-// client's request for the ListInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListInstancesRequest is a API request type for the ListInstances API operation.
+type ListInstancesRequest struct {
+	*aws.Request
+	Input *ListInstancesInput
+}
+
+// Send marshals and sends the ListInstances API request.
+func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInstancesOutput), nil
+}
+
+// ListInstancesRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListInstances for more information on using the ListInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides information for all active EC2 instances and EC2 instances terminated
+// in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the
+// following states are considered active: AWAITING_FULFILLMENT, PROVISIONING,
+// BOOTSTRAPPING, RUNNING.
 //
 //    // Example sending a request using the ListInstancesRequest method.
-//    req, resp := client.ListInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstances
-func (c *EMR) ListInstancesRequest(input *ListInstancesInput) (req *aws.Request, output *ListInstancesOutput) {
+func (c *EMR) ListInstancesRequest(input *ListInstancesInput) ListInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListInstances,
 		HTTPMethod: "POST",
@@ -1568,52 +1041,8 @@ func (c *EMR) ListInstancesRequest(input *ListInstancesInput) (req *aws.Request,
 		input = &ListInstancesInput{}
 	}
 
-	output = &ListInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListInstances API operation for Amazon Elastic MapReduce.
-//
-// Provides information for all active EC2 instances and EC2 instances terminated
-// in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the
-// following states are considered active: AWAITING_FULFILLMENT, PROVISIONING,
-// BOOTSTRAPPING, RUNNING.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ListInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstances
-func (c *EMR) ListInstances(input *ListInstancesInput) (*ListInstancesOutput, error) {
-	req, out := c.ListInstancesRequest(input)
-	return out, req.Send()
-}
-
-// ListInstancesWithContext is the same as ListInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ListInstancesWithContext(ctx aws.Context, input *ListInstancesInput, opts ...aws.Option) (*ListInstancesOutput, error) {
-	req, out := c.ListInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListInstancesOutput{})
+	return ListInstancesRequest{Request: req, Input: input}
 }
 
 // ListInstancesPages iterates over the pages of a ListInstances operation,
@@ -1652,10 +1081,10 @@ func (c *EMR) ListInstancesPagesWithContext(ctx aws.Context, input *ListInstance
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListInstancesRequest(inCpy)
+			req := c.ListInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1668,31 +1097,39 @@ func (c *EMR) ListInstancesPagesWithContext(ctx aws.Context, input *ListInstance
 
 const opListSecurityConfigurations = "ListSecurityConfigurations"
 
-// ListSecurityConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the ListSecurityConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSecurityConfigurationsRequest is a API request type for the ListSecurityConfigurations API operation.
+type ListSecurityConfigurationsRequest struct {
+	*aws.Request
+	Input *ListSecurityConfigurationsInput
+}
+
+// Send marshals and sends the ListSecurityConfigurations API request.
+func (r ListSecurityConfigurationsRequest) Send() (*ListSecurityConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSecurityConfigurationsOutput), nil
+}
+
+// ListSecurityConfigurationsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSecurityConfigurations for more information on using the ListSecurityConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all the security configurations visible to this account, providing
+// their creation dates and times, and their names. This call returns a maximum
+// of 50 clusters per call, but returns a marker to track the paging of the
+// cluster list across multiple ListSecurityConfigurations calls.
 //
 //    // Example sending a request using the ListSecurityConfigurationsRequest method.
-//    req, resp := client.ListSecurityConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSecurityConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSecurityConfigurations
-func (c *EMR) ListSecurityConfigurationsRequest(input *ListSecurityConfigurationsInput) (req *aws.Request, output *ListSecurityConfigurationsOutput) {
+func (c *EMR) ListSecurityConfigurationsRequest(input *ListSecurityConfigurationsInput) ListSecurityConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListSecurityConfigurations,
 		HTTPMethod: "POST",
@@ -1703,81 +1140,43 @@ func (c *EMR) ListSecurityConfigurationsRequest(input *ListSecurityConfiguration
 		input = &ListSecurityConfigurationsInput{}
 	}
 
-	output = &ListSecurityConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSecurityConfigurations API operation for Amazon Elastic MapReduce.
-//
-// Lists all the security configurations visible to this account, providing
-// their creation dates and times, and their names. This call returns a maximum
-// of 50 clusters per call, but returns a marker to track the paging of the
-// cluster list across multiple ListSecurityConfigurations calls.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ListSecurityConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSecurityConfigurations
-func (c *EMR) ListSecurityConfigurations(input *ListSecurityConfigurationsInput) (*ListSecurityConfigurationsOutput, error) {
-	req, out := c.ListSecurityConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// ListSecurityConfigurationsWithContext is the same as ListSecurityConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSecurityConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ListSecurityConfigurationsWithContext(ctx aws.Context, input *ListSecurityConfigurationsInput, opts ...aws.Option) (*ListSecurityConfigurationsOutput, error) {
-	req, out := c.ListSecurityConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSecurityConfigurationsOutput{})
+	return ListSecurityConfigurationsRequest{Request: req, Input: input}
 }
 
 const opListSteps = "ListSteps"
 
-// ListStepsRequest generates a "aws.Request" representing the
-// client's request for the ListSteps operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStepsRequest is a API request type for the ListSteps API operation.
+type ListStepsRequest struct {
+	*aws.Request
+	Input *ListStepsInput
+}
+
+// Send marshals and sends the ListSteps API request.
+func (r ListStepsRequest) Send() (*ListStepsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStepsOutput), nil
+}
+
+// ListStepsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSteps for more information on using the ListSteps
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides a list of steps for the cluster in reverse order unless you specify
+// stepIds with the request.
 //
 //    // Example sending a request using the ListStepsRequest method.
-//    req, resp := client.ListStepsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStepsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSteps
-func (c *EMR) ListStepsRequest(input *ListStepsInput) (req *aws.Request, output *ListStepsOutput) {
+func (c *EMR) ListStepsRequest(input *ListStepsInput) ListStepsRequest {
 	op := &aws.Operation{
 		Name:       opListSteps,
 		HTTPMethod: "POST",
@@ -1794,50 +1193,8 @@ func (c *EMR) ListStepsRequest(input *ListStepsInput) (req *aws.Request, output 
 		input = &ListStepsInput{}
 	}
 
-	output = &ListStepsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSteps API operation for Amazon Elastic MapReduce.
-//
-// Provides a list of steps for the cluster in reverse order unless you specify
-// stepIds with the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ListSteps for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSteps
-func (c *EMR) ListSteps(input *ListStepsInput) (*ListStepsOutput, error) {
-	req, out := c.ListStepsRequest(input)
-	return out, req.Send()
-}
-
-// ListStepsWithContext is the same as ListSteps with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSteps for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ListStepsWithContext(ctx aws.Context, input *ListStepsInput, opts ...aws.Option) (*ListStepsOutput, error) {
-	req, out := c.ListStepsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStepsOutput{})
+	return ListStepsRequest{Request: req, Input: input}
 }
 
 // ListStepsPages iterates over the pages of a ListSteps operation,
@@ -1876,10 +1233,10 @@ func (c *EMR) ListStepsPagesWithContext(ctx aws.Context, input *ListStepsInput, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListStepsRequest(inCpy)
+			req := c.ListStepsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1892,31 +1249,41 @@ func (c *EMR) ListStepsPagesWithContext(ctx aws.Context, input *ListStepsInput, 
 
 const opModifyInstanceFleet = "ModifyInstanceFleet"
 
-// ModifyInstanceFleetRequest generates a "aws.Request" representing the
-// client's request for the ModifyInstanceFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyInstanceFleetRequest is a API request type for the ModifyInstanceFleet API operation.
+type ModifyInstanceFleetRequest struct {
+	*aws.Request
+	Input *ModifyInstanceFleetInput
+}
+
+// Send marshals and sends the ModifyInstanceFleet API request.
+func (r ModifyInstanceFleetRequest) Send() (*ModifyInstanceFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyInstanceFleetOutput), nil
+}
+
+// ModifyInstanceFleetRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies the target On-Demand and target Spot capacities for the instance
+// fleet with the specified InstanceFleetID within the cluster specified using
+// ClusterID. The call either succeeds or fails atomically.
 //
-// See ModifyInstanceFleet for more information on using the ModifyInstanceFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The instance fleet configuration is available only in Amazon EMR versions
+// 4.8.0 and later, excluding 5.0.x versions.
 //
 //    // Example sending a request using the ModifyInstanceFleetRequest method.
-//    req, resp := client.ModifyInstanceFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyInstanceFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleet
-func (c *EMR) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) (req *aws.Request, output *ModifyInstanceFleetOutput) {
+func (c *EMR) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) ModifyInstanceFleetRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstanceFleet,
 		HTTPMethod: "POST",
@@ -1927,85 +1294,47 @@ func (c *EMR) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) (req *
 		input = &ModifyInstanceFleetInput{}
 	}
 
-	output = &ModifyInstanceFleetOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &ModifyInstanceFleetOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// ModifyInstanceFleet API operation for Amazon Elastic MapReduce.
-//
-// Modifies the target On-Demand and target Spot capacities for the instance
-// fleet with the specified InstanceFleetID within the cluster specified using
-// ClusterID. The call either succeeds or fails atomically.
-//
-// The instance fleet configuration is available only in Amazon EMR versions
-// 4.8.0 and later, excluding 5.0.x versions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ModifyInstanceFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleet
-func (c *EMR) ModifyInstanceFleet(input *ModifyInstanceFleetInput) (*ModifyInstanceFleetOutput, error) {
-	req, out := c.ModifyInstanceFleetRequest(input)
-	return out, req.Send()
-}
-
-// ModifyInstanceFleetWithContext is the same as ModifyInstanceFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyInstanceFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ModifyInstanceFleetWithContext(ctx aws.Context, input *ModifyInstanceFleetInput, opts ...aws.Option) (*ModifyInstanceFleetOutput, error) {
-	req, out := c.ModifyInstanceFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return ModifyInstanceFleetRequest{Request: req, Input: input}
 }
 
 const opModifyInstanceGroups = "ModifyInstanceGroups"
 
-// ModifyInstanceGroupsRequest generates a "aws.Request" representing the
-// client's request for the ModifyInstanceGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyInstanceGroupsRequest is a API request type for the ModifyInstanceGroups API operation.
+type ModifyInstanceGroupsRequest struct {
+	*aws.Request
+	Input *ModifyInstanceGroupsInput
+}
+
+// Send marshals and sends the ModifyInstanceGroups API request.
+func (r ModifyInstanceGroupsRequest) Send() (*ModifyInstanceGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyInstanceGroupsOutput), nil
+}
+
+// ModifyInstanceGroupsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyInstanceGroups for more information on using the ModifyInstanceGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// ModifyInstanceGroups modifies the number of nodes and configuration settings
+// of an instance group. The input parameters include the new target instance
+// count for the group and the instance group ID. The call will either succeed
+// or fail atomically.
 //
 //    // Example sending a request using the ModifyInstanceGroupsRequest method.
-//    req, resp := client.ModifyInstanceGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyInstanceGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceGroups
-func (c *EMR) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) (req *aws.Request, output *ModifyInstanceGroupsOutput) {
+func (c *EMR) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) ModifyInstanceGroupsRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstanceGroups,
 		HTTPMethod: "POST",
@@ -2016,81 +1345,47 @@ func (c *EMR) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) (req
 		input = &ModifyInstanceGroupsInput{}
 	}
 
-	output = &ModifyInstanceGroupsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &ModifyInstanceGroupsOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// ModifyInstanceGroups API operation for Amazon Elastic MapReduce.
-//
-// ModifyInstanceGroups modifies the number of nodes and configuration settings
-// of an instance group. The input parameters include the new target instance
-// count for the group and the instance group ID. The call will either succeed
-// or fail atomically.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation ModifyInstanceGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceGroups
-func (c *EMR) ModifyInstanceGroups(input *ModifyInstanceGroupsInput) (*ModifyInstanceGroupsOutput, error) {
-	req, out := c.ModifyInstanceGroupsRequest(input)
-	return out, req.Send()
-}
-
-// ModifyInstanceGroupsWithContext is the same as ModifyInstanceGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyInstanceGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) ModifyInstanceGroupsWithContext(ctx aws.Context, input *ModifyInstanceGroupsInput, opts ...aws.Option) (*ModifyInstanceGroupsOutput, error) {
-	req, out := c.ModifyInstanceGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return ModifyInstanceGroupsRequest{Request: req, Input: input}
 }
 
 const opPutAutoScalingPolicy = "PutAutoScalingPolicy"
 
-// PutAutoScalingPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutAutoScalingPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutAutoScalingPolicyRequest is a API request type for the PutAutoScalingPolicy API operation.
+type PutAutoScalingPolicyRequest struct {
+	*aws.Request
+	Input *PutAutoScalingPolicyInput
+}
+
+// Send marshals and sends the PutAutoScalingPolicy API request.
+func (r PutAutoScalingPolicyRequest) Send() (*PutAutoScalingPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutAutoScalingPolicyOutput), nil
+}
+
+// PutAutoScalingPolicyRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutAutoScalingPolicy for more information on using the PutAutoScalingPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates or updates an automatic scaling policy for a core instance group
+// or task instance group in an Amazon EMR cluster. The automatic scaling policy
+// defines how an instance group dynamically adds and terminates EC2 instances
+// in response to the value of a CloudWatch metric.
 //
 //    // Example sending a request using the PutAutoScalingPolicyRequest method.
-//    req, resp := client.PutAutoScalingPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutAutoScalingPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicy
-func (c *EMR) PutAutoScalingPolicyRequest(input *PutAutoScalingPolicyInput) (req *aws.Request, output *PutAutoScalingPolicyOutput) {
+func (c *EMR) PutAutoScalingPolicyRequest(input *PutAutoScalingPolicyInput) PutAutoScalingPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutAutoScalingPolicy,
 		HTTPMethod: "POST",
@@ -2101,73 +1396,43 @@ func (c *EMR) PutAutoScalingPolicyRequest(input *PutAutoScalingPolicyInput) (req
 		input = &PutAutoScalingPolicyInput{}
 	}
 
-	output = &PutAutoScalingPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutAutoScalingPolicy API operation for Amazon Elastic MapReduce.
-//
-// Creates or updates an automatic scaling policy for a core instance group
-// or task instance group in an Amazon EMR cluster. The automatic scaling policy
-// defines how an instance group dynamically adds and terminates EC2 instances
-// in response to the value of a CloudWatch metric.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation PutAutoScalingPolicy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicy
-func (c *EMR) PutAutoScalingPolicy(input *PutAutoScalingPolicyInput) (*PutAutoScalingPolicyOutput, error) {
-	req, out := c.PutAutoScalingPolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutAutoScalingPolicyWithContext is the same as PutAutoScalingPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutAutoScalingPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) PutAutoScalingPolicyWithContext(ctx aws.Context, input *PutAutoScalingPolicyInput, opts ...aws.Option) (*PutAutoScalingPolicyOutput, error) {
-	req, out := c.PutAutoScalingPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutAutoScalingPolicyOutput{})
+	return PutAutoScalingPolicyRequest{Request: req, Input: input}
 }
 
 const opRemoveAutoScalingPolicy = "RemoveAutoScalingPolicy"
 
-// RemoveAutoScalingPolicyRequest generates a "aws.Request" representing the
-// client's request for the RemoveAutoScalingPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveAutoScalingPolicyRequest is a API request type for the RemoveAutoScalingPolicy API operation.
+type RemoveAutoScalingPolicyRequest struct {
+	*aws.Request
+	Input *RemoveAutoScalingPolicyInput
+}
+
+// Send marshals and sends the RemoveAutoScalingPolicy API request.
+func (r RemoveAutoScalingPolicyRequest) Send() (*RemoveAutoScalingPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveAutoScalingPolicyOutput), nil
+}
+
+// RemoveAutoScalingPolicyRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveAutoScalingPolicy for more information on using the RemoveAutoScalingPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes an automatic scaling policy from a specified instance group within
+// an EMR cluster.
 //
 //    // Example sending a request using the RemoveAutoScalingPolicyRequest method.
-//    req, resp := client.RemoveAutoScalingPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveAutoScalingPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicy
-func (c *EMR) RemoveAutoScalingPolicyRequest(input *RemoveAutoScalingPolicyInput) (req *aws.Request, output *RemoveAutoScalingPolicyOutput) {
+func (c *EMR) RemoveAutoScalingPolicyRequest(input *RemoveAutoScalingPolicyInput) RemoveAutoScalingPolicyRequest {
 	op := &aws.Operation{
 		Name:       opRemoveAutoScalingPolicy,
 		HTTPMethod: "POST",
@@ -2178,71 +1443,47 @@ func (c *EMR) RemoveAutoScalingPolicyRequest(input *RemoveAutoScalingPolicyInput
 		input = &RemoveAutoScalingPolicyInput{}
 	}
 
-	output = &RemoveAutoScalingPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveAutoScalingPolicy API operation for Amazon Elastic MapReduce.
-//
-// Removes an automatic scaling policy from a specified instance group within
-// an EMR cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation RemoveAutoScalingPolicy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicy
-func (c *EMR) RemoveAutoScalingPolicy(input *RemoveAutoScalingPolicyInput) (*RemoveAutoScalingPolicyOutput, error) {
-	req, out := c.RemoveAutoScalingPolicyRequest(input)
-	return out, req.Send()
-}
-
-// RemoveAutoScalingPolicyWithContext is the same as RemoveAutoScalingPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveAutoScalingPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) RemoveAutoScalingPolicyWithContext(ctx aws.Context, input *RemoveAutoScalingPolicyInput, opts ...aws.Option) (*RemoveAutoScalingPolicyOutput, error) {
-	req, out := c.RemoveAutoScalingPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveAutoScalingPolicyOutput{})
+	return RemoveAutoScalingPolicyRequest{Request: req, Input: input}
 }
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws.Request" representing the
-// client's request for the RemoveTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsRequest is a API request type for the RemoveTags API operation.
+type RemoveTagsRequest struct {
+	*aws.Request
+	Input *RemoveTagsInput
+}
+
+// Send marshals and sends the RemoveTags API request.
+func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsOutput), nil
+}
+
+// RemoveTagsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes tags from an Amazon EMR resource. Tags make it easier to associate
+// clusters in various ways, such as grouping clusters to track your Amazon
+// EMR resource allocation costs. For more information, see Tagging Amazon EMR
+// Resources (http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html).
 //
-// See RemoveTags for more information on using the RemoveTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The following example removes the stack tag with value Prod from a cluster:
 //
 //    // Example sending a request using the RemoveTagsRequest method.
-//    req, resp := client.RemoveTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTags
-func (c *EMR) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+func (c *EMR) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -2253,99 +1494,30 @@ func (c *EMR) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, outpu
 		input = &RemoveTagsInput{}
 	}
 
-	output = &RemoveTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTags API operation for Amazon Elastic MapReduce.
-//
-// Removes tags from an Amazon EMR resource. Tags make it easier to associate
-// clusters in various ways, such as grouping clusters to track your Amazon
-// EMR resource allocation costs. For more information, see Tagging Amazon EMR
-// Resources (http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html).
-//
-// The following example removes the stack tag with value Prod from a cluster:
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation RemoveTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerException "InternalServerException"
-//   This exception occurs when there is an internal failure in the EMR service.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   This exception occurs when there is something wrong with user input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTags
-func (c *EMR) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsWithContext is the same as RemoveTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	return RemoveTagsRequest{Request: req, Input: input}
 }
 
 const opRunJobFlow = "RunJobFlow"
 
-// RunJobFlowRequest generates a "aws.Request" representing the
-// client's request for the RunJobFlow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RunJobFlow for more information on using the RunJobFlow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RunJobFlowRequest method.
-//    req, resp := client.RunJobFlowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlow
-func (c *EMR) RunJobFlowRequest(input *RunJobFlowInput) (req *aws.Request, output *RunJobFlowOutput) {
-	op := &aws.Operation{
-		Name:       opRunJobFlow,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RunJobFlowInput{}
-	}
-
-	output = &RunJobFlowOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RunJobFlowRequest is a API request type for the RunJobFlow API operation.
+type RunJobFlowRequest struct {
+	*aws.Request
+	Input *RunJobFlowInput
 }
 
-// RunJobFlow API operation for Amazon Elastic MapReduce.
+// Send marshals and sends the RunJobFlow API request.
+func (r RunJobFlowRequest) Send() (*RunJobFlowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RunJobFlowOutput), nil
+}
+
+// RunJobFlowRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
 // RunJobFlow creates and starts running a new cluster (job flow). The cluster
 // runs the steps specified. After the steps complete, the cluster stops and
@@ -2375,85 +1547,49 @@ func (c *EMR) RunJobFlowRequest(input *RunJobFlowInput) (req *aws.Request, outpu
 // 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain
 // InstanceFleets parameters or InstanceGroups parameters, but not both.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation RunJobFlow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlow
-func (c *EMR) RunJobFlow(input *RunJobFlowInput) (*RunJobFlowOutput, error) {
-	req, out := c.RunJobFlowRequest(input)
-	return out, req.Send()
-}
-
-// RunJobFlowWithContext is the same as RunJobFlow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RunJobFlow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) RunJobFlowWithContext(ctx aws.Context, input *RunJobFlowInput, opts ...aws.Option) (*RunJobFlowOutput, error) {
-	req, out := c.RunJobFlowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSetTerminationProtection = "SetTerminationProtection"
-
-// SetTerminationProtectionRequest generates a "aws.Request" representing the
-// client's request for the SetTerminationProtection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetTerminationProtection for more information on using the SetTerminationProtection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetTerminationProtectionRequest method.
-//    req, resp := client.SetTerminationProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RunJobFlowRequest method.
+//    req := client.RunJobFlowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtection
-func (c *EMR) SetTerminationProtectionRequest(input *SetTerminationProtectionInput) (req *aws.Request, output *SetTerminationProtectionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlow
+func (c *EMR) RunJobFlowRequest(input *RunJobFlowInput) RunJobFlowRequest {
 	op := &aws.Operation{
-		Name:       opSetTerminationProtection,
+		Name:       opRunJobFlow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SetTerminationProtectionInput{}
+		input = &RunJobFlowInput{}
 	}
 
-	output = &SetTerminationProtectionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &RunJobFlowOutput{})
+	return RunJobFlowRequest{Request: req, Input: input}
 }
 
-// SetTerminationProtection API operation for Amazon Elastic MapReduce.
+const opSetTerminationProtection = "SetTerminationProtection"
+
+// SetTerminationProtectionRequest is a API request type for the SetTerminationProtection API operation.
+type SetTerminationProtectionRequest struct {
+	*aws.Request
+	Input *SetTerminationProtectionInput
+}
+
+// Send marshals and sends the SetTerminationProtection API request.
+func (r SetTerminationProtectionRequest) Send() (*SetTerminationProtectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetTerminationProtectionOutput), nil
+}
+
+// SetTerminationProtectionRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
 // SetTerminationProtection locks a cluster (job flow) so the EC2 instances
 // in the cluster cannot be terminated by user intervention, an API call, or
@@ -2473,67 +1609,68 @@ func (c *EMR) SetTerminationProtectionRequest(input *SetTerminationProtectionInp
 // For more information, seeManaging Cluster Termination (http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html)
 // in the Amazon EMR Management Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation SetTerminationProtection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
+//    // Example sending a request using the SetTerminationProtectionRequest method.
+//    req := client.SetTerminationProtectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtection
-func (c *EMR) SetTerminationProtection(input *SetTerminationProtectionInput) (*SetTerminationProtectionOutput, error) {
-	req, out := c.SetTerminationProtectionRequest(input)
-	return out, req.Send()
-}
+func (c *EMR) SetTerminationProtectionRequest(input *SetTerminationProtectionInput) SetTerminationProtectionRequest {
+	op := &aws.Operation{
+		Name:       opSetTerminationProtection,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SetTerminationProtectionWithContext is the same as SetTerminationProtection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetTerminationProtection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) SetTerminationProtectionWithContext(ctx aws.Context, input *SetTerminationProtectionInput, opts ...aws.Option) (*SetTerminationProtectionOutput, error) {
-	req, out := c.SetTerminationProtectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetTerminationProtectionInput{}
+	}
+
+	req := c.newRequest(op, input, &SetTerminationProtectionOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SetTerminationProtectionRequest{Request: req, Input: input}
 }
 
 const opSetVisibleToAllUsers = "SetVisibleToAllUsers"
 
-// SetVisibleToAllUsersRequest generates a "aws.Request" representing the
-// client's request for the SetVisibleToAllUsers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetVisibleToAllUsersRequest is a API request type for the SetVisibleToAllUsers API operation.
+type SetVisibleToAllUsersRequest struct {
+	*aws.Request
+	Input *SetVisibleToAllUsersInput
+}
+
+// Send marshals and sends the SetVisibleToAllUsers API request.
+func (r SetVisibleToAllUsersRequest) Send() (*SetVisibleToAllUsersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetVisibleToAllUsersOutput), nil
+}
+
+// SetVisibleToAllUsersRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetVisibleToAllUsers for more information on using the SetVisibleToAllUsers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets whether all AWS Identity and Access Management (IAM) users under your
+// account can access the specified clusters (job flows). This action works
+// on running clusters. You can also set the visibility of a cluster when you
+// launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers
+// action can be called only by an IAM user who created the cluster or the AWS
+// account that owns the cluster.
 //
 //    // Example sending a request using the SetVisibleToAllUsersRequest method.
-//    req, resp := client.SetVisibleToAllUsersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetVisibleToAllUsersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsers
-func (c *EMR) SetVisibleToAllUsersRequest(input *SetVisibleToAllUsersInput) (req *aws.Request, output *SetVisibleToAllUsersOutput) {
+func (c *EMR) SetVisibleToAllUsersRequest(input *SetVisibleToAllUsersInput) SetVisibleToAllUsersRequest {
 	op := &aws.Operation{
 		Name:       opSetVisibleToAllUsers,
 		HTTPMethod: "POST",
@@ -2544,101 +1681,32 @@ func (c *EMR) SetVisibleToAllUsersRequest(input *SetVisibleToAllUsersInput) (req
 		input = &SetVisibleToAllUsersInput{}
 	}
 
-	output = &SetVisibleToAllUsersOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetVisibleToAllUsersOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetVisibleToAllUsers API operation for Amazon Elastic MapReduce.
-//
-// Sets whether all AWS Identity and Access Management (IAM) users under your
-// account can access the specified clusters (job flows). This action works
-// on running clusters. You can also set the visibility of a cluster when you
-// launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers
-// action can be called only by an IAM user who created the cluster or the AWS
-// account that owns the cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation SetVisibleToAllUsers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsers
-func (c *EMR) SetVisibleToAllUsers(input *SetVisibleToAllUsersInput) (*SetVisibleToAllUsersOutput, error) {
-	req, out := c.SetVisibleToAllUsersRequest(input)
-	return out, req.Send()
-}
-
-// SetVisibleToAllUsersWithContext is the same as SetVisibleToAllUsers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetVisibleToAllUsers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) SetVisibleToAllUsersWithContext(ctx aws.Context, input *SetVisibleToAllUsersInput, opts ...aws.Option) (*SetVisibleToAllUsersOutput, error) {
-	req, out := c.SetVisibleToAllUsersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetVisibleToAllUsersRequest{Request: req, Input: input}
 }
 
 const opTerminateJobFlows = "TerminateJobFlows"
 
-// TerminateJobFlowsRequest generates a "aws.Request" representing the
-// client's request for the TerminateJobFlows operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TerminateJobFlows for more information on using the TerminateJobFlows
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TerminateJobFlowsRequest method.
-//    req, resp := client.TerminateJobFlowsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlows
-func (c *EMR) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) (req *aws.Request, output *TerminateJobFlowsOutput) {
-	op := &aws.Operation{
-		Name:       opTerminateJobFlows,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &TerminateJobFlowsInput{}
-	}
-
-	output = &TerminateJobFlowsOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// TerminateJobFlowsRequest is a API request type for the TerminateJobFlows API operation.
+type TerminateJobFlowsRequest struct {
+	*aws.Request
+	Input *TerminateJobFlowsInput
 }
 
-// TerminateJobFlows API operation for Amazon Elastic MapReduce.
+// Send marshals and sends the TerminateJobFlows API request.
+func (r TerminateJobFlowsRequest) Send() (*TerminateJobFlowsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TerminateJobFlowsOutput), nil
+}
+
+// TerminateJobFlowsRequest returns a request value for making API operation for
+// Amazon Elastic MapReduce.
 //
 // TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow
 // is shut down, any step not yet completed is canceled and the EC2 instances
@@ -2651,38 +1719,29 @@ func (c *EMR) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) (req *aws.
 // up to 1-5 minutes for the cluster to completely terminate and release allocated
 // resources, such as Amazon EC2 instances.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic MapReduce's
-// API operation TerminateJobFlows for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Indicates that an error occurred while processing the request and that the
-//   request was not completed.
+//    // Example sending a request using the TerminateJobFlowsRequest method.
+//    req := client.TerminateJobFlowsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlows
-func (c *EMR) TerminateJobFlows(input *TerminateJobFlowsInput) (*TerminateJobFlowsOutput, error) {
-	req, out := c.TerminateJobFlowsRequest(input)
-	return out, req.Send()
-}
+func (c *EMR) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) TerminateJobFlowsRequest {
+	op := &aws.Operation{
+		Name:       opTerminateJobFlows,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// TerminateJobFlowsWithContext is the same as TerminateJobFlows with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TerminateJobFlows for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EMR) TerminateJobFlowsWithContext(ctx aws.Context, input *TerminateJobFlowsInput, opts ...aws.Option) (*TerminateJobFlowsOutput, error) {
-	req, out := c.TerminateJobFlowsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &TerminateJobFlowsInput{}
+	}
+
+	req := c.newRequest(op, input, &TerminateJobFlowsOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return TerminateJobFlowsRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleetInput

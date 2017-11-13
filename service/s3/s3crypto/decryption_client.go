@@ -83,8 +83,10 @@ func NewDecryptionClient(cfg aws.Config, options ...func(*DecryptionClient)) *De
 //	  Bucket: aws.String("testBucket"),
 //	})
 //	err := req.Send()
-func (c *DecryptionClient) GetObjectRequest(input *s3.GetObjectInput) (*request.Request, *s3.GetObjectOutput) {
-	req, out := c.S3Client.GetObjectRequest(input)
+func (c *DecryptionClient) GetObjectRequest(input *s3.GetObjectInput) s3.GetObjectRequest {
+	req := c.S3Client.GetObjectRequest(input)
+	out := req.Data.(*s3.GetObjectOutput)
+
 	req.Handlers.Unmarshal.PushBack(func(r *request.Request) {
 		env, err := c.LoadStrategy.Load(r)
 		if err != nil {
@@ -110,13 +112,13 @@ func (c *DecryptionClient) GetObjectRequest(input *s3.GetObjectInput) (*request.
 		}
 		out.Body = reader
 	})
-	return req, out
+	return req
 }
 
 // GetObject is a wrapper for GetObjectRequest
 func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
-	req, out := c.GetObjectRequest(input)
-	return out, req.Send()
+	req := c.GetObjectRequest(input)
+	return req.Send()
 }
 
 // GetObjectWithContext is a wrapper for GetObjectRequest with the additional
@@ -127,8 +129,8 @@ func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOut
 // cause a panic. Use the Context to add deadlining, timeouts, ect. In the future
 // this may create sub-contexts for individual underlying requests.
 func (c *DecryptionClient) GetObjectWithContext(ctx aws.Context, input *s3.GetObjectInput, opts ...request.Option) (*s3.GetObjectOutput, error) {
-	req, out := c.GetObjectRequest(input)
+	req := c.GetObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return req.Send()
 }

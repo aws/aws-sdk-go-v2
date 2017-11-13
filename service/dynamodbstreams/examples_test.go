@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To describe a stream with a given stream ARN
 //
 // The following example describes a stream with a given stream ARN.
-func ExampleDynamoDBStreams_DescribeStream_shared00() {
+func ExampleDynamoDBStreams_DescribeStreamRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -39,7 +39,8 @@ func ExampleDynamoDBStreams_DescribeStream_shared00() {
 		StreamArn: aws.String("arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252"),
 	}
 
-	result, err := svc.DescribeStream(input)
+	req := svc.DescribeStreamRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -64,7 +65,7 @@ func ExampleDynamoDBStreams_DescribeStream_shared00() {
 // To retrieve all the stream records from a shard
 //
 // The following example retrieves all the stream records from a shard.
-func ExampleDynamoDBStreams_GetRecords_shared00() {
+func ExampleDynamoDBStreams_GetRecordsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -75,7 +76,8 @@ func ExampleDynamoDBStreams_GetRecords_shared00() {
 		ShardIterator: aws.String("arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ..."),
 	}
 
-	result, err := svc.GetRecords(input)
+	req := svc.GetRecordsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -107,7 +109,7 @@ func ExampleDynamoDBStreams_GetRecords_shared00() {
 //
 // The following example returns a shard iterator for the provided stream ARN and shard
 // ID.
-func ExampleDynamoDBStreams_GetShardIterator_shared00() {
+func ExampleDynamoDBStreams_GetShardIteratorRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -120,7 +122,8 @@ func ExampleDynamoDBStreams_GetShardIterator_shared00() {
 		StreamArn:         aws.String("arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252"),
 	}
 
-	result, err := svc.GetShardIterator(input)
+	req := svc.GetShardIteratorRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -147,7 +150,7 @@ func ExampleDynamoDBStreams_GetShardIterator_shared00() {
 // To list all of the stream ARNs
 //
 // The following example lists all of the stream ARNs.
-func ExampleDynamoDBStreams_ListStreams_shared00() {
+func ExampleDynamoDBStreams_ListStreamsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -156,7 +159,8 @@ func ExampleDynamoDBStreams_ListStreams_shared00() {
 	svc := dynamodbstreams.New(cfg)
 	input := &dynamodbstreams.ListStreamsInput{}
 
-	result, err := svc.ListStreams(input)
+	req := svc.ListStreamsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

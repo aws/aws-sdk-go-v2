@@ -11,31 +11,36 @@ import (
 
 const opCreateActivity = "CreateActivity"
 
-// CreateActivityRequest generates a "aws.Request" representing the
-// client's request for the CreateActivity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateActivityRequest is a API request type for the CreateActivity API operation.
+type CreateActivityRequest struct {
+	*aws.Request
+	Input *CreateActivityInput
+}
+
+// Send marshals and sends the CreateActivity API request.
+func (r CreateActivityRequest) Send() (*CreateActivityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateActivityOutput), nil
+}
+
+// CreateActivityRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateActivity for more information on using the CreateActivity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an activity.
 //
 //    // Example sending a request using the CreateActivityRequest method.
-//    req, resp := client.CreateActivityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateActivityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivity
-func (c *SFN) CreateActivityRequest(input *CreateActivityInput) (req *aws.Request, output *CreateActivityOutput) {
+func (c *SFN) CreateActivityRequest(input *CreateActivityInput) CreateActivityRequest {
 	op := &aws.Operation{
 		Name:       opCreateActivity,
 		HTTPMethod: "POST",
@@ -46,79 +51,42 @@ func (c *SFN) CreateActivityRequest(input *CreateActivityInput) (req *aws.Reques
 		input = &CreateActivityInput{}
 	}
 
-	output = &CreateActivityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateActivity API operation for AWS Step Functions.
-//
-// Creates an activity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation CreateActivity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeActivityLimitExceeded "ActivityLimitExceeded"
-//   The maximum number of activities has been reached. Existing activities must
-//   be deleted before a new activity can be created.
-//
-//   * ErrCodeInvalidName "InvalidName"
-//   The provided name is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivity
-func (c *SFN) CreateActivity(input *CreateActivityInput) (*CreateActivityOutput, error) {
-	req, out := c.CreateActivityRequest(input)
-	return out, req.Send()
-}
-
-// CreateActivityWithContext is the same as CreateActivity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateActivity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) CreateActivityWithContext(ctx aws.Context, input *CreateActivityInput, opts ...aws.Option) (*CreateActivityOutput, error) {
-	req, out := c.CreateActivityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateActivityOutput{})
+	return CreateActivityRequest{Request: req, Input: input}
 }
 
 const opCreateStateMachine = "CreateStateMachine"
 
-// CreateStateMachineRequest generates a "aws.Request" representing the
-// client's request for the CreateStateMachine operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStateMachineRequest is a API request type for the CreateStateMachine API operation.
+type CreateStateMachineRequest struct {
+	*aws.Request
+	Input *CreateStateMachineInput
+}
+
+// Send marshals and sends the CreateStateMachine API request.
+func (r CreateStateMachineRequest) Send() (*CreateStateMachineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStateMachineOutput), nil
+}
+
+// CreateStateMachineRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStateMachine for more information on using the CreateStateMachine
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a state machine.
 //
 //    // Example sending a request using the CreateStateMachineRequest method.
-//    req, resp := client.CreateStateMachineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStateMachineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachine
-func (c *SFN) CreateStateMachineRequest(input *CreateStateMachineInput) (req *aws.Request, output *CreateStateMachineOutput) {
+func (c *SFN) CreateStateMachineRequest(input *CreateStateMachineInput) CreateStateMachineRequest {
 	op := &aws.Operation{
 		Name:       opCreateStateMachine,
 		HTTPMethod: "POST",
@@ -129,92 +97,42 @@ func (c *SFN) CreateStateMachineRequest(input *CreateStateMachineInput) (req *aw
 		input = &CreateStateMachineInput{}
 	}
 
-	output = &CreateStateMachineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStateMachine API operation for AWS Step Functions.
-//
-// Creates a state machine.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation CreateStateMachine for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-//   * ErrCodeInvalidDefinition "InvalidDefinition"
-//   The provided Amazon States Language definition is invalid.
-//
-//   * ErrCodeInvalidName "InvalidName"
-//   The provided name is invalid.
-//
-//   * ErrCodeStateMachineAlreadyExists "StateMachineAlreadyExists"
-//   A state machine with the same name but a different definition or role ARN
-//   already exists.
-//
-//   * ErrCodeStateMachineDeleting "StateMachineDeleting"
-//   The specified state machine is being deleted.
-//
-//   * ErrCodeStateMachineLimitExceeded "StateMachineLimitExceeded"
-//   The maximum number of state machines has been reached. Existing state machines
-//   must be deleted before a new state machine can be created.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachine
-func (c *SFN) CreateStateMachine(input *CreateStateMachineInput) (*CreateStateMachineOutput, error) {
-	req, out := c.CreateStateMachineRequest(input)
-	return out, req.Send()
-}
-
-// CreateStateMachineWithContext is the same as CreateStateMachine with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStateMachine for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) CreateStateMachineWithContext(ctx aws.Context, input *CreateStateMachineInput, opts ...aws.Option) (*CreateStateMachineOutput, error) {
-	req, out := c.CreateStateMachineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStateMachineOutput{})
+	return CreateStateMachineRequest{Request: req, Input: input}
 }
 
 const opDeleteActivity = "DeleteActivity"
 
-// DeleteActivityRequest generates a "aws.Request" representing the
-// client's request for the DeleteActivity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteActivityRequest is a API request type for the DeleteActivity API operation.
+type DeleteActivityRequest struct {
+	*aws.Request
+	Input *DeleteActivityInput
+}
+
+// Send marshals and sends the DeleteActivity API request.
+func (r DeleteActivityRequest) Send() (*DeleteActivityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteActivityOutput), nil
+}
+
+// DeleteActivityRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteActivity for more information on using the DeleteActivity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an activity.
 //
 //    // Example sending a request using the DeleteActivityRequest method.
-//    req, resp := client.DeleteActivityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteActivityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivity
-func (c *SFN) DeleteActivityRequest(input *DeleteActivityInput) (req *aws.Request, output *DeleteActivityOutput) {
+func (c *SFN) DeleteActivityRequest(input *DeleteActivityInput) DeleteActivityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteActivity,
 		HTTPMethod: "POST",
@@ -225,75 +143,43 @@ func (c *SFN) DeleteActivityRequest(input *DeleteActivityInput) (req *aws.Reques
 		input = &DeleteActivityInput{}
 	}
 
-	output = &DeleteActivityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteActivity API operation for AWS Step Functions.
-//
-// Deletes an activity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation DeleteActivity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivity
-func (c *SFN) DeleteActivity(input *DeleteActivityInput) (*DeleteActivityOutput, error) {
-	req, out := c.DeleteActivityRequest(input)
-	return out, req.Send()
-}
-
-// DeleteActivityWithContext is the same as DeleteActivity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteActivity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) DeleteActivityWithContext(ctx aws.Context, input *DeleteActivityInput, opts ...aws.Option) (*DeleteActivityOutput, error) {
-	req, out := c.DeleteActivityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteActivityOutput{})
+	return DeleteActivityRequest{Request: req, Input: input}
 }
 
 const opDeleteStateMachine = "DeleteStateMachine"
 
-// DeleteStateMachineRequest generates a "aws.Request" representing the
-// client's request for the DeleteStateMachine operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteStateMachineRequest is a API request type for the DeleteStateMachine API operation.
+type DeleteStateMachineRequest struct {
+	*aws.Request
+	Input *DeleteStateMachineInput
+}
+
+// Send marshals and sends the DeleteStateMachine API request.
+func (r DeleteStateMachineRequest) Send() (*DeleteStateMachineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStateMachineOutput), nil
+}
+
+// DeleteStateMachineRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStateMachine for more information on using the DeleteStateMachine
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a state machine. This is an asynchronous operation-- it sets the
+// state machine's status to "DELETING" and begins the delete process.
 //
 //    // Example sending a request using the DeleteStateMachineRequest method.
-//    req, resp := client.DeleteStateMachineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteStateMachineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachine
-func (c *SFN) DeleteStateMachineRequest(input *DeleteStateMachineInput) (req *aws.Request, output *DeleteStateMachineOutput) {
+func (c *SFN) DeleteStateMachineRequest(input *DeleteStateMachineInput) DeleteStateMachineRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStateMachine,
 		HTTPMethod: "POST",
@@ -304,76 +190,42 @@ func (c *SFN) DeleteStateMachineRequest(input *DeleteStateMachineInput) (req *aw
 		input = &DeleteStateMachineInput{}
 	}
 
-	output = &DeleteStateMachineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteStateMachine API operation for AWS Step Functions.
-//
-// Deletes a state machine. This is an asynchronous operation-- it sets the
-// state machine's status to "DELETING" and begins the delete process.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation DeleteStateMachine for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachine
-func (c *SFN) DeleteStateMachine(input *DeleteStateMachineInput) (*DeleteStateMachineOutput, error) {
-	req, out := c.DeleteStateMachineRequest(input)
-	return out, req.Send()
-}
-
-// DeleteStateMachineWithContext is the same as DeleteStateMachine with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStateMachine for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) DeleteStateMachineWithContext(ctx aws.Context, input *DeleteStateMachineInput, opts ...aws.Option) (*DeleteStateMachineOutput, error) {
-	req, out := c.DeleteStateMachineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteStateMachineOutput{})
+	return DeleteStateMachineRequest{Request: req, Input: input}
 }
 
 const opDescribeActivity = "DescribeActivity"
 
-// DescribeActivityRequest generates a "aws.Request" representing the
-// client's request for the DescribeActivity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeActivityRequest is a API request type for the DescribeActivity API operation.
+type DescribeActivityRequest struct {
+	*aws.Request
+	Input *DescribeActivityInput
+}
+
+// Send marshals and sends the DescribeActivity API request.
+func (r DescribeActivityRequest) Send() (*DescribeActivityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeActivityOutput), nil
+}
+
+// DescribeActivityRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeActivity for more information on using the DescribeActivity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes an activity.
 //
 //    // Example sending a request using the DescribeActivityRequest method.
-//    req, resp := client.DescribeActivityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeActivityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivity
-func (c *SFN) DescribeActivityRequest(input *DescribeActivityInput) (req *aws.Request, output *DescribeActivityOutput) {
+func (c *SFN) DescribeActivityRequest(input *DescribeActivityInput) DescribeActivityRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActivity,
 		HTTPMethod: "POST",
@@ -384,78 +236,42 @@ func (c *SFN) DescribeActivityRequest(input *DescribeActivityInput) (req *aws.Re
 		input = &DescribeActivityInput{}
 	}
 
-	output = &DescribeActivityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeActivity API operation for AWS Step Functions.
-//
-// Describes an activity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation DescribeActivity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeActivityDoesNotExist "ActivityDoesNotExist"
-//   The specified activity does not exist.
-//
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivity
-func (c *SFN) DescribeActivity(input *DescribeActivityInput) (*DescribeActivityOutput, error) {
-	req, out := c.DescribeActivityRequest(input)
-	return out, req.Send()
-}
-
-// DescribeActivityWithContext is the same as DescribeActivity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeActivity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) DescribeActivityWithContext(ctx aws.Context, input *DescribeActivityInput, opts ...aws.Option) (*DescribeActivityOutput, error) {
-	req, out := c.DescribeActivityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeActivityOutput{})
+	return DescribeActivityRequest{Request: req, Input: input}
 }
 
 const opDescribeExecution = "DescribeExecution"
 
-// DescribeExecutionRequest generates a "aws.Request" representing the
-// client's request for the DescribeExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeExecutionRequest is a API request type for the DescribeExecution API operation.
+type DescribeExecutionRequest struct {
+	*aws.Request
+	Input *DescribeExecutionInput
+}
+
+// Send marshals and sends the DescribeExecution API request.
+func (r DescribeExecutionRequest) Send() (*DescribeExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeExecutionOutput), nil
+}
+
+// DescribeExecutionRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeExecution for more information on using the DescribeExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes an execution.
 //
 //    // Example sending a request using the DescribeExecutionRequest method.
-//    req, resp := client.DescribeExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution
-func (c *SFN) DescribeExecutionRequest(input *DescribeExecutionInput) (req *aws.Request, output *DescribeExecutionOutput) {
+func (c *SFN) DescribeExecutionRequest(input *DescribeExecutionInput) DescribeExecutionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExecution,
 		HTTPMethod: "POST",
@@ -466,78 +282,42 @@ func (c *SFN) DescribeExecutionRequest(input *DescribeExecutionInput) (req *aws.
 		input = &DescribeExecutionInput{}
 	}
 
-	output = &DescribeExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeExecution API operation for AWS Step Functions.
-//
-// Describes an execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation DescribeExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeExecutionDoesNotExist "ExecutionDoesNotExist"
-//   The specified execution does not exist.
-//
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution
-func (c *SFN) DescribeExecution(input *DescribeExecutionInput) (*DescribeExecutionOutput, error) {
-	req, out := c.DescribeExecutionRequest(input)
-	return out, req.Send()
-}
-
-// DescribeExecutionWithContext is the same as DescribeExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) DescribeExecutionWithContext(ctx aws.Context, input *DescribeExecutionInput, opts ...aws.Option) (*DescribeExecutionOutput, error) {
-	req, out := c.DescribeExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeExecutionOutput{})
+	return DescribeExecutionRequest{Request: req, Input: input}
 }
 
 const opDescribeStateMachine = "DescribeStateMachine"
 
-// DescribeStateMachineRequest generates a "aws.Request" representing the
-// client's request for the DescribeStateMachine operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStateMachineRequest is a API request type for the DescribeStateMachine API operation.
+type DescribeStateMachineRequest struct {
+	*aws.Request
+	Input *DescribeStateMachineInput
+}
+
+// Send marshals and sends the DescribeStateMachine API request.
+func (r DescribeStateMachineRequest) Send() (*DescribeStateMachineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStateMachineOutput), nil
+}
+
+// DescribeStateMachineRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStateMachine for more information on using the DescribeStateMachine
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes a state machine.
 //
 //    // Example sending a request using the DescribeStateMachineRequest method.
-//    req, resp := client.DescribeStateMachineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStateMachineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine
-func (c *SFN) DescribeStateMachineRequest(input *DescribeStateMachineInput) (req *aws.Request, output *DescribeStateMachineOutput) {
+func (c *SFN) DescribeStateMachineRequest(input *DescribeStateMachineInput) DescribeStateMachineRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStateMachine,
 		HTTPMethod: "POST",
@@ -548,94 +328,30 @@ func (c *SFN) DescribeStateMachineRequest(input *DescribeStateMachineInput) (req
 		input = &DescribeStateMachineInput{}
 	}
 
-	output = &DescribeStateMachineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStateMachine API operation for AWS Step Functions.
-//
-// Describes a state machine.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation DescribeStateMachine for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-//   * ErrCodeStateMachineDoesNotExist "StateMachineDoesNotExist"
-//   The specified state machine does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine
-func (c *SFN) DescribeStateMachine(input *DescribeStateMachineInput) (*DescribeStateMachineOutput, error) {
-	req, out := c.DescribeStateMachineRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStateMachineWithContext is the same as DescribeStateMachine with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStateMachine for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) DescribeStateMachineWithContext(ctx aws.Context, input *DescribeStateMachineInput, opts ...aws.Option) (*DescribeStateMachineOutput, error) {
-	req, out := c.DescribeStateMachineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStateMachineOutput{})
+	return DescribeStateMachineRequest{Request: req, Input: input}
 }
 
 const opGetActivityTask = "GetActivityTask"
 
-// GetActivityTaskRequest generates a "aws.Request" representing the
-// client's request for the GetActivityTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetActivityTask for more information on using the GetActivityTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetActivityTaskRequest method.
-//    req, resp := client.GetActivityTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTask
-func (c *SFN) GetActivityTaskRequest(input *GetActivityTaskInput) (req *aws.Request, output *GetActivityTaskOutput) {
-	op := &aws.Operation{
-		Name:       opGetActivityTask,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetActivityTaskInput{}
-	}
-
-	output = &GetActivityTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetActivityTaskRequest is a API request type for the GetActivityTask API operation.
+type GetActivityTaskRequest struct {
+	*aws.Request
+	Input *GetActivityTaskInput
 }
 
-// GetActivityTask API operation for AWS Step Functions.
+// Send marshals and sends the GetActivityTask API request.
+func (r GetActivityTaskRequest) Send() (*GetActivityTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetActivityTaskOutput), nil
+}
+
+// GetActivityTaskRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
 // Used by workers to retrieve a task (with the specified activity ARN) scheduled
 // for execution by a running state machine. This initiates a long poll, where
@@ -648,73 +364,65 @@ func (c *SFN) GetActivityTaskRequest(input *GetActivityTaskInput) (req *aws.Requ
 // Workers should set their client side socket timeout to at least 65 seconds
 // (5 seconds higher than the maximum time the service may hold the poll request).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation GetActivityTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeActivityDoesNotExist "ActivityDoesNotExist"
-//   The specified activity does not exist.
-//
-//   * ErrCodeActivityWorkerLimitExceeded "ActivityWorkerLimitExceeded"
-//   The maximum number of workers concurrently polling for activity tasks has
-//   been reached.
-//
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
+//    // Example sending a request using the GetActivityTaskRequest method.
+//    req := client.GetActivityTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTask
-func (c *SFN) GetActivityTask(input *GetActivityTaskInput) (*GetActivityTaskOutput, error) {
-	req, out := c.GetActivityTaskRequest(input)
-	return out, req.Send()
-}
+func (c *SFN) GetActivityTaskRequest(input *GetActivityTaskInput) GetActivityTaskRequest {
+	op := &aws.Operation{
+		Name:       opGetActivityTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetActivityTaskWithContext is the same as GetActivityTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetActivityTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) GetActivityTaskWithContext(ctx aws.Context, input *GetActivityTaskInput, opts ...aws.Option) (*GetActivityTaskOutput, error) {
-	req, out := c.GetActivityTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetActivityTaskInput{}
+	}
+
+	req := c.newRequest(op, input, &GetActivityTaskOutput{})
+	return GetActivityTaskRequest{Request: req, Input: input}
 }
 
 const opGetExecutionHistory = "GetExecutionHistory"
 
-// GetExecutionHistoryRequest generates a "aws.Request" representing the
-// client's request for the GetExecutionHistory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetExecutionHistoryRequest is a API request type for the GetExecutionHistory API operation.
+type GetExecutionHistoryRequest struct {
+	*aws.Request
+	Input *GetExecutionHistoryInput
+}
+
+// Send marshals and sends the GetExecutionHistory API request.
+func (r GetExecutionHistoryRequest) Send() (*GetExecutionHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetExecutionHistoryOutput), nil
+}
+
+// GetExecutionHistoryRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetExecutionHistory for more information on using the GetExecutionHistory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the history of the specified execution as a list of events. By default,
+// the results are returned in ascending order of the timeStamp of the events.
+// Use the reverseOrder parameter to get the latest events first. The results
+// may be split into multiple pages. To retrieve subsequent pages, make the
+// call again using the nextToken returned by the previous call.
 //
 //    // Example sending a request using the GetExecutionHistoryRequest method.
-//    req, resp := client.GetExecutionHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetExecutionHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory
-func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) (req *aws.Request, output *GetExecutionHistoryOutput) {
+func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) GetExecutionHistoryRequest {
 	op := &aws.Operation{
 		Name:       opGetExecutionHistory,
 		HTTPMethod: "POST",
@@ -731,56 +439,8 @@ func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) (req *
 		input = &GetExecutionHistoryInput{}
 	}
 
-	output = &GetExecutionHistoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetExecutionHistory API operation for AWS Step Functions.
-//
-// Returns the history of the specified execution as a list of events. By default,
-// the results are returned in ascending order of the timeStamp of the events.
-// Use the reverseOrder parameter to get the latest events first. The results
-// may be split into multiple pages. To retrieve subsequent pages, make the
-// call again using the nextToken returned by the previous call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation GetExecutionHistory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeExecutionDoesNotExist "ExecutionDoesNotExist"
-//   The specified execution does not exist.
-//
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-//   * ErrCodeInvalidToken "InvalidToken"
-//   The provided token is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory
-func (c *SFN) GetExecutionHistory(input *GetExecutionHistoryInput) (*GetExecutionHistoryOutput, error) {
-	req, out := c.GetExecutionHistoryRequest(input)
-	return out, req.Send()
-}
-
-// GetExecutionHistoryWithContext is the same as GetExecutionHistory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetExecutionHistory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) GetExecutionHistoryWithContext(ctx aws.Context, input *GetExecutionHistoryInput, opts ...aws.Option) (*GetExecutionHistoryOutput, error) {
-	req, out := c.GetExecutionHistoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetExecutionHistoryOutput{})
+	return GetExecutionHistoryRequest{Request: req, Input: input}
 }
 
 // GetExecutionHistoryPages iterates over the pages of a GetExecutionHistory operation,
@@ -819,10 +479,10 @@ func (c *SFN) GetExecutionHistoryPagesWithContext(ctx aws.Context, input *GetExe
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetExecutionHistoryRequest(inCpy)
+			req := c.GetExecutionHistoryRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -835,31 +495,38 @@ func (c *SFN) GetExecutionHistoryPagesWithContext(ctx aws.Context, input *GetExe
 
 const opListActivities = "ListActivities"
 
-// ListActivitiesRequest generates a "aws.Request" representing the
-// client's request for the ListActivities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListActivitiesRequest is a API request type for the ListActivities API operation.
+type ListActivitiesRequest struct {
+	*aws.Request
+	Input *ListActivitiesInput
+}
+
+// Send marshals and sends the ListActivities API request.
+func (r ListActivitiesRequest) Send() (*ListActivitiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListActivitiesOutput), nil
+}
+
+// ListActivitiesRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListActivities for more information on using the ListActivities
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the existing activities. The results may be split into multiple pages.
+// To retrieve subsequent pages, make the call again using the nextToken returned
+// by the previous call.
 //
 //    // Example sending a request using the ListActivitiesRequest method.
-//    req, resp := client.ListActivitiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListActivitiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivities
-func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) (req *aws.Request, output *ListActivitiesOutput) {
+func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) ListActivitiesRequest {
 	op := &aws.Operation{
 		Name:       opListActivities,
 		HTTPMethod: "POST",
@@ -876,48 +543,8 @@ func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) (req *aws.Reques
 		input = &ListActivitiesInput{}
 	}
 
-	output = &ListActivitiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListActivities API operation for AWS Step Functions.
-//
-// Lists the existing activities. The results may be split into multiple pages.
-// To retrieve subsequent pages, make the call again using the nextToken returned
-// by the previous call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation ListActivities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidToken "InvalidToken"
-//   The provided token is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivities
-func (c *SFN) ListActivities(input *ListActivitiesInput) (*ListActivitiesOutput, error) {
-	req, out := c.ListActivitiesRequest(input)
-	return out, req.Send()
-}
-
-// ListActivitiesWithContext is the same as ListActivities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListActivities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) ListActivitiesWithContext(ctx aws.Context, input *ListActivitiesInput, opts ...aws.Option) (*ListActivitiesOutput, error) {
-	req, out := c.ListActivitiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListActivitiesOutput{})
+	return ListActivitiesRequest{Request: req, Input: input}
 }
 
 // ListActivitiesPages iterates over the pages of a ListActivities operation,
@@ -956,10 +583,10 @@ func (c *SFN) ListActivitiesPagesWithContext(ctx aws.Context, input *ListActivit
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListActivitiesRequest(inCpy)
+			req := c.ListActivitiesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -972,31 +599,38 @@ func (c *SFN) ListActivitiesPagesWithContext(ctx aws.Context, input *ListActivit
 
 const opListExecutions = "ListExecutions"
 
-// ListExecutionsRequest generates a "aws.Request" representing the
-// client's request for the ListExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListExecutionsRequest is a API request type for the ListExecutions API operation.
+type ListExecutionsRequest struct {
+	*aws.Request
+	Input *ListExecutionsInput
+}
+
+// Send marshals and sends the ListExecutions API request.
+func (r ListExecutionsRequest) Send() (*ListExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListExecutionsOutput), nil
+}
+
+// ListExecutionsRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListExecutions for more information on using the ListExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the executions of a state machine that meet the filtering criteria.
+// The results may be split into multiple pages. To retrieve subsequent pages,
+// make the call again using the nextToken returned by the previous call.
 //
 //    // Example sending a request using the ListExecutionsRequest method.
-//    req, resp := client.ListExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutions
-func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) (req *aws.Request, output *ListExecutionsOutput) {
+func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) ListExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListExecutions,
 		HTTPMethod: "POST",
@@ -1013,54 +647,8 @@ func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) (req *aws.Reques
 		input = &ListExecutionsInput{}
 	}
 
-	output = &ListExecutionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListExecutions API operation for AWS Step Functions.
-//
-// Lists the executions of a state machine that meet the filtering criteria.
-// The results may be split into multiple pages. To retrieve subsequent pages,
-// make the call again using the nextToken returned by the previous call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation ListExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-//   * ErrCodeInvalidToken "InvalidToken"
-//   The provided token is invalid.
-//
-//   * ErrCodeStateMachineDoesNotExist "StateMachineDoesNotExist"
-//   The specified state machine does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutions
-func (c *SFN) ListExecutions(input *ListExecutionsInput) (*ListExecutionsOutput, error) {
-	req, out := c.ListExecutionsRequest(input)
-	return out, req.Send()
-}
-
-// ListExecutionsWithContext is the same as ListExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) ListExecutionsWithContext(ctx aws.Context, input *ListExecutionsInput, opts ...aws.Option) (*ListExecutionsOutput, error) {
-	req, out := c.ListExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListExecutionsOutput{})
+	return ListExecutionsRequest{Request: req, Input: input}
 }
 
 // ListExecutionsPages iterates over the pages of a ListExecutions operation,
@@ -1099,10 +687,10 @@ func (c *SFN) ListExecutionsPagesWithContext(ctx aws.Context, input *ListExecuti
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListExecutionsRequest(inCpy)
+			req := c.ListExecutionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1115,31 +703,38 @@ func (c *SFN) ListExecutionsPagesWithContext(ctx aws.Context, input *ListExecuti
 
 const opListStateMachines = "ListStateMachines"
 
-// ListStateMachinesRequest generates a "aws.Request" representing the
-// client's request for the ListStateMachines operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStateMachinesRequest is a API request type for the ListStateMachines API operation.
+type ListStateMachinesRequest struct {
+	*aws.Request
+	Input *ListStateMachinesInput
+}
+
+// Send marshals and sends the ListStateMachines API request.
+func (r ListStateMachinesRequest) Send() (*ListStateMachinesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStateMachinesOutput), nil
+}
+
+// ListStateMachinesRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStateMachines for more information on using the ListStateMachines
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the existing state machines. The results may be split into multiple
+// pages. To retrieve subsequent pages, make the call again using the nextToken
+// returned by the previous call.
 //
 //    // Example sending a request using the ListStateMachinesRequest method.
-//    req, resp := client.ListStateMachinesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStateMachinesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachines
-func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) (req *aws.Request, output *ListStateMachinesOutput) {
+func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) ListStateMachinesRequest {
 	op := &aws.Operation{
 		Name:       opListStateMachines,
 		HTTPMethod: "POST",
@@ -1156,48 +751,8 @@ func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) (req *aws.
 		input = &ListStateMachinesInput{}
 	}
 
-	output = &ListStateMachinesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStateMachines API operation for AWS Step Functions.
-//
-// Lists the existing state machines. The results may be split into multiple
-// pages. To retrieve subsequent pages, make the call again using the nextToken
-// returned by the previous call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation ListStateMachines for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidToken "InvalidToken"
-//   The provided token is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachines
-func (c *SFN) ListStateMachines(input *ListStateMachinesInput) (*ListStateMachinesOutput, error) {
-	req, out := c.ListStateMachinesRequest(input)
-	return out, req.Send()
-}
-
-// ListStateMachinesWithContext is the same as ListStateMachines with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStateMachines for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) ListStateMachinesWithContext(ctx aws.Context, input *ListStateMachinesInput, opts ...aws.Option) (*ListStateMachinesOutput, error) {
-	req, out := c.ListStateMachinesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStateMachinesOutput{})
+	return ListStateMachinesRequest{Request: req, Input: input}
 }
 
 // ListStateMachinesPages iterates over the pages of a ListStateMachines operation,
@@ -1236,10 +791,10 @@ func (c *SFN) ListStateMachinesPagesWithContext(ctx aws.Context, input *ListStat
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListStateMachinesRequest(inCpy)
+			req := c.ListStateMachinesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1252,31 +807,36 @@ func (c *SFN) ListStateMachinesPagesWithContext(ctx aws.Context, input *ListStat
 
 const opSendTaskFailure = "SendTaskFailure"
 
-// SendTaskFailureRequest generates a "aws.Request" representing the
-// client's request for the SendTaskFailure operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SendTaskFailureRequest is a API request type for the SendTaskFailure API operation.
+type SendTaskFailureRequest struct {
+	*aws.Request
+	Input *SendTaskFailureInput
+}
+
+// Send marshals and sends the SendTaskFailure API request.
+func (r SendTaskFailureRequest) Send() (*SendTaskFailureOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendTaskFailureOutput), nil
+}
+
+// SendTaskFailureRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendTaskFailure for more information on using the SendTaskFailure
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used by workers to report that the task identified by the taskToken failed.
 //
 //    // Example sending a request using the SendTaskFailureRequest method.
-//    req, resp := client.SendTaskFailureRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SendTaskFailureRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailure
-func (c *SFN) SendTaskFailureRequest(input *SendTaskFailureInput) (req *aws.Request, output *SendTaskFailureOutput) {
+func (c *SFN) SendTaskFailureRequest(input *SendTaskFailureInput) SendTaskFailureRequest {
 	op := &aws.Operation{
 		Name:       opSendTaskFailure,
 		HTTPMethod: "POST",
@@ -1287,95 +847,30 @@ func (c *SFN) SendTaskFailureRequest(input *SendTaskFailureInput) (req *aws.Requ
 		input = &SendTaskFailureInput{}
 	}
 
-	output = &SendTaskFailureOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SendTaskFailure API operation for AWS Step Functions.
-//
-// Used by workers to report that the task identified by the taskToken failed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation SendTaskFailure for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTaskDoesNotExist "TaskDoesNotExist"
-//
-//   * ErrCodeInvalidToken "InvalidToken"
-//   The provided token is invalid.
-//
-//   * ErrCodeTaskTimedOut "TaskTimedOut"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailure
-func (c *SFN) SendTaskFailure(input *SendTaskFailureInput) (*SendTaskFailureOutput, error) {
-	req, out := c.SendTaskFailureRequest(input)
-	return out, req.Send()
-}
-
-// SendTaskFailureWithContext is the same as SendTaskFailure with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendTaskFailure for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) SendTaskFailureWithContext(ctx aws.Context, input *SendTaskFailureInput, opts ...aws.Option) (*SendTaskFailureOutput, error) {
-	req, out := c.SendTaskFailureRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SendTaskFailureOutput{})
+	return SendTaskFailureRequest{Request: req, Input: input}
 }
 
 const opSendTaskHeartbeat = "SendTaskHeartbeat"
 
-// SendTaskHeartbeatRequest generates a "aws.Request" representing the
-// client's request for the SendTaskHeartbeat operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendTaskHeartbeat for more information on using the SendTaskHeartbeat
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SendTaskHeartbeatRequest method.
-//    req, resp := client.SendTaskHeartbeatRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeat
-func (c *SFN) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) (req *aws.Request, output *SendTaskHeartbeatOutput) {
-	op := &aws.Operation{
-		Name:       opSendTaskHeartbeat,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &SendTaskHeartbeatInput{}
-	}
-
-	output = &SendTaskHeartbeatOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// SendTaskHeartbeatRequest is a API request type for the SendTaskHeartbeat API operation.
+type SendTaskHeartbeatRequest struct {
+	*aws.Request
+	Input *SendTaskHeartbeatInput
 }
 
-// SendTaskHeartbeat API operation for AWS Step Functions.
+// Send marshals and sends the SendTaskHeartbeat API request.
+func (r SendTaskHeartbeatRequest) Send() (*SendTaskHeartbeatOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendTaskHeartbeatOutput), nil
+}
+
+// SendTaskHeartbeatRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
 // Used by workers to report to the service that the task represented by the
 // specified taskToken is still making progress. This action resets the Heartbeat
@@ -1391,70 +886,62 @@ func (c *SFN) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) (req *aws.
 // This operation is only useful for long-lived tasks to report the liveliness
 // of the task.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation SendTaskHeartbeat for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTaskDoesNotExist "TaskDoesNotExist"
-//
-//   * ErrCodeInvalidToken "InvalidToken"
-//   The provided token is invalid.
-//
-//   * ErrCodeTaskTimedOut "TaskTimedOut"
+//    // Example sending a request using the SendTaskHeartbeatRequest method.
+//    req := client.SendTaskHeartbeatRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeat
-func (c *SFN) SendTaskHeartbeat(input *SendTaskHeartbeatInput) (*SendTaskHeartbeatOutput, error) {
-	req, out := c.SendTaskHeartbeatRequest(input)
-	return out, req.Send()
-}
+func (c *SFN) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) SendTaskHeartbeatRequest {
+	op := &aws.Operation{
+		Name:       opSendTaskHeartbeat,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SendTaskHeartbeatWithContext is the same as SendTaskHeartbeat with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendTaskHeartbeat for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) SendTaskHeartbeatWithContext(ctx aws.Context, input *SendTaskHeartbeatInput, opts ...aws.Option) (*SendTaskHeartbeatOutput, error) {
-	req, out := c.SendTaskHeartbeatRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SendTaskHeartbeatInput{}
+	}
+
+	req := c.newRequest(op, input, &SendTaskHeartbeatOutput{})
+	return SendTaskHeartbeatRequest{Request: req, Input: input}
 }
 
 const opSendTaskSuccess = "SendTaskSuccess"
 
-// SendTaskSuccessRequest generates a "aws.Request" representing the
-// client's request for the SendTaskSuccess operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SendTaskSuccessRequest is a API request type for the SendTaskSuccess API operation.
+type SendTaskSuccessRequest struct {
+	*aws.Request
+	Input *SendTaskSuccessInput
+}
+
+// Send marshals and sends the SendTaskSuccess API request.
+func (r SendTaskSuccessRequest) Send() (*SendTaskSuccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendTaskSuccessOutput), nil
+}
+
+// SendTaskSuccessRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendTaskSuccess for more information on using the SendTaskSuccess
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used by workers to report that the task identified by the taskToken completed
+// successfully.
 //
 //    // Example sending a request using the SendTaskSuccessRequest method.
-//    req, resp := client.SendTaskSuccessRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SendTaskSuccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccess
-func (c *SFN) SendTaskSuccessRequest(input *SendTaskSuccessInput) (req *aws.Request, output *SendTaskSuccessOutput) {
+func (c *SFN) SendTaskSuccessRequest(input *SendTaskSuccessInput) SendTaskSuccessRequest {
 	op := &aws.Operation{
 		Name:       opSendTaskSuccess,
 		HTTPMethod: "POST",
@@ -1465,83 +952,42 @@ func (c *SFN) SendTaskSuccessRequest(input *SendTaskSuccessInput) (req *aws.Requ
 		input = &SendTaskSuccessInput{}
 	}
 
-	output = &SendTaskSuccessOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SendTaskSuccess API operation for AWS Step Functions.
-//
-// Used by workers to report that the task identified by the taskToken completed
-// successfully.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation SendTaskSuccess for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTaskDoesNotExist "TaskDoesNotExist"
-//
-//   * ErrCodeInvalidOutput "InvalidOutput"
-//   The provided JSON output data is invalid.
-//
-//   * ErrCodeInvalidToken "InvalidToken"
-//   The provided token is invalid.
-//
-//   * ErrCodeTaskTimedOut "TaskTimedOut"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccess
-func (c *SFN) SendTaskSuccess(input *SendTaskSuccessInput) (*SendTaskSuccessOutput, error) {
-	req, out := c.SendTaskSuccessRequest(input)
-	return out, req.Send()
-}
-
-// SendTaskSuccessWithContext is the same as SendTaskSuccess with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendTaskSuccess for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) SendTaskSuccessWithContext(ctx aws.Context, input *SendTaskSuccessInput, opts ...aws.Option) (*SendTaskSuccessOutput, error) {
-	req, out := c.SendTaskSuccessRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SendTaskSuccessOutput{})
+	return SendTaskSuccessRequest{Request: req, Input: input}
 }
 
 const opStartExecution = "StartExecution"
 
-// StartExecutionRequest generates a "aws.Request" representing the
-// client's request for the StartExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartExecutionRequest is a API request type for the StartExecution API operation.
+type StartExecutionRequest struct {
+	*aws.Request
+	Input *StartExecutionInput
+}
+
+// Send marshals and sends the StartExecution API request.
+func (r StartExecutionRequest) Send() (*StartExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartExecutionOutput), nil
+}
+
+// StartExecutionRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartExecution for more information on using the StartExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts a state machine execution.
 //
 //    // Example sending a request using the StartExecutionRequest method.
-//    req, resp := client.StartExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecution
-func (c *SFN) StartExecutionRequest(input *StartExecutionInput) (req *aws.Request, output *StartExecutionOutput) {
+func (c *SFN) StartExecutionRequest(input *StartExecutionInput) StartExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStartExecution,
 		HTTPMethod: "POST",
@@ -1552,94 +998,42 @@ func (c *SFN) StartExecutionRequest(input *StartExecutionInput) (req *aws.Reques
 		input = &StartExecutionInput{}
 	}
 
-	output = &StartExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartExecution API operation for AWS Step Functions.
-//
-// Starts a state machine execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation StartExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeExecutionLimitExceeded "ExecutionLimitExceeded"
-//   The maximum number of running executions has been reached. Running executions
-//   must end or be stopped before a new execution can be started.
-//
-//   * ErrCodeExecutionAlreadyExists "ExecutionAlreadyExists"
-//   An execution with the same name already exists.
-//
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-//   * ErrCodeInvalidExecutionInput "InvalidExecutionInput"
-//   The provided JSON input data is invalid.
-//
-//   * ErrCodeInvalidName "InvalidName"
-//   The provided name is invalid.
-//
-//   * ErrCodeStateMachineDoesNotExist "StateMachineDoesNotExist"
-//   The specified state machine does not exist.
-//
-//   * ErrCodeStateMachineDeleting "StateMachineDeleting"
-//   The specified state machine is being deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecution
-func (c *SFN) StartExecution(input *StartExecutionInput) (*StartExecutionOutput, error) {
-	req, out := c.StartExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StartExecutionWithContext is the same as StartExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) StartExecutionWithContext(ctx aws.Context, input *StartExecutionInput, opts ...aws.Option) (*StartExecutionOutput, error) {
-	req, out := c.StartExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartExecutionOutput{})
+	return StartExecutionRequest{Request: req, Input: input}
 }
 
 const opStopExecution = "StopExecution"
 
-// StopExecutionRequest generates a "aws.Request" representing the
-// client's request for the StopExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopExecutionRequest is a API request type for the StopExecution API operation.
+type StopExecutionRequest struct {
+	*aws.Request
+	Input *StopExecutionInput
+}
+
+// Send marshals and sends the StopExecution API request.
+func (r StopExecutionRequest) Send() (*StopExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopExecutionOutput), nil
+}
+
+// StopExecutionRequest returns a request value for making API operation for
+// AWS Step Functions.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopExecution for more information on using the StopExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops an execution.
 //
 //    // Example sending a request using the StopExecutionRequest method.
-//    req, resp := client.StopExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecution
-func (c *SFN) StopExecutionRequest(input *StopExecutionInput) (req *aws.Request, output *StopExecutionOutput) {
+func (c *SFN) StopExecutionRequest(input *StopExecutionInput) StopExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStopExecution,
 		HTTPMethod: "POST",
@@ -1650,49 +1044,8 @@ func (c *SFN) StopExecutionRequest(input *StopExecutionInput) (req *aws.Request,
 		input = &StopExecutionInput{}
 	}
 
-	output = &StopExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopExecution API operation for AWS Step Functions.
-//
-// Stops an execution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Step Functions's
-// API operation StopExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeExecutionDoesNotExist "ExecutionDoesNotExist"
-//   The specified execution does not exist.
-//
-//   * ErrCodeInvalidArn "InvalidArn"
-//   The provided Amazon Resource Name (ARN) is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecution
-func (c *SFN) StopExecution(input *StopExecutionInput) (*StopExecutionOutput, error) {
-	req, out := c.StopExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StopExecutionWithContext is the same as StopExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) StopExecutionWithContext(ctx aws.Context, input *StopExecutionInput, opts ...aws.Option) (*StopExecutionOutput, error) {
-	req, out := c.StopExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopExecutionOutput{})
+	return StopExecutionRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityFailedEventDetails

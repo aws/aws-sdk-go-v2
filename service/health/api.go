@@ -11,31 +11,44 @@ import (
 
 const opDescribeAffectedEntities = "DescribeAffectedEntities"
 
-// DescribeAffectedEntitiesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAffectedEntities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAffectedEntitiesRequest is a API request type for the DescribeAffectedEntities API operation.
+type DescribeAffectedEntitiesRequest struct {
+	*aws.Request
+	Input *DescribeAffectedEntitiesInput
+}
+
+// Send marshals and sends the DescribeAffectedEntities API request.
+func (r DescribeAffectedEntitiesRequest) Send() (*DescribeAffectedEntitiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAffectedEntitiesOutput), nil
+}
+
+// DescribeAffectedEntitiesRequest returns a request value for making API operation for
+// AWS Health APIs and Notifications.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of entities that have been affected by the specified events,
+// based on the specified filter criteria. Entities can refer to individual
+// customer resources, groups of customer resources, or any other construct,
+// depending on the AWS service. Events that have impact beyond that of the
+// affected entities, or where the extent of impact is unknown, include at least
+// one entity indicating this.
 //
-// See DescribeAffectedEntities for more information on using the DescribeAffectedEntities
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// At least one event ARN is required. Results are sorted by the lastUpdatedTime
+// of the entity, starting with the most recent.
 //
 //    // Example sending a request using the DescribeAffectedEntitiesRequest method.
-//    req, resp := client.DescribeAffectedEntitiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAffectedEntitiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntities
-func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntitiesInput) (req *aws.Request, output *DescribeAffectedEntitiesOutput) {
+func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntitiesInput) DescribeAffectedEntitiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAffectedEntities,
 		HTTPMethod: "POST",
@@ -52,57 +65,8 @@ func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 		input = &DescribeAffectedEntitiesInput{}
 	}
 
-	output = &DescribeAffectedEntitiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAffectedEntities API operation for AWS Health APIs and Notifications.
-//
-// Returns a list of entities that have been affected by the specified events,
-// based on the specified filter criteria. Entities can refer to individual
-// customer resources, groups of customer resources, or any other construct,
-// depending on the AWS service. Events that have impact beyond that of the
-// affected entities, or where the extent of impact is unknown, include at least
-// one entity indicating this.
-//
-// At least one event ARN is required. Results are sorted by the lastUpdatedTime
-// of the entity, starting with the most recent.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Health APIs and Notifications's
-// API operation DescribeAffectedEntities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidPaginationToken "InvalidPaginationToken"
-//   The specified pagination token (nextToken) is not valid.
-//
-//   * ErrCodeUnsupportedLocale "UnsupportedLocale"
-//   The specified locale is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntities
-func (c *Health) DescribeAffectedEntities(input *DescribeAffectedEntitiesInput) (*DescribeAffectedEntitiesOutput, error) {
-	req, out := c.DescribeAffectedEntitiesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAffectedEntitiesWithContext is the same as DescribeAffectedEntities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAffectedEntities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeAffectedEntitiesWithContext(ctx aws.Context, input *DescribeAffectedEntitiesInput, opts ...aws.Option) (*DescribeAffectedEntitiesOutput, error) {
-	req, out := c.DescribeAffectedEntitiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAffectedEntitiesOutput{})
+	return DescribeAffectedEntitiesRequest{Request: req, Input: input}
 }
 
 // DescribeAffectedEntitiesPages iterates over the pages of a DescribeAffectedEntities operation,
@@ -141,10 +105,10 @@ func (c *Health) DescribeAffectedEntitiesPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeAffectedEntitiesRequest(inCpy)
+			req := c.DescribeAffectedEntitiesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -157,31 +121,38 @@ func (c *Health) DescribeAffectedEntitiesPagesWithContext(ctx aws.Context, input
 
 const opDescribeEntityAggregates = "DescribeEntityAggregates"
 
-// DescribeEntityAggregatesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEntityAggregates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEntityAggregatesRequest is a API request type for the DescribeEntityAggregates API operation.
+type DescribeEntityAggregatesRequest struct {
+	*aws.Request
+	Input *DescribeEntityAggregatesInput
+}
+
+// Send marshals and sends the DescribeEntityAggregates API request.
+func (r DescribeEntityAggregatesRequest) Send() (*DescribeEntityAggregatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEntityAggregatesOutput), nil
+}
+
+// DescribeEntityAggregatesRequest returns a request value for making API operation for
+// AWS Health APIs and Notifications.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEntityAggregates for more information on using the DescribeEntityAggregates
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the number of entities that are affected by each of the specified
+// events. If no events are specified, the counts of all affected entities are
+// returned.
 //
 //    // Example sending a request using the DescribeEntityAggregatesRequest method.
-//    req, resp := client.DescribeEntityAggregatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEntityAggregatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregates
-func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregatesInput) (req *aws.Request, output *DescribeEntityAggregatesOutput) {
+func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregatesInput) DescribeEntityAggregatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEntityAggregates,
 		HTTPMethod: "POST",
@@ -192,72 +163,44 @@ func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregates
 		input = &DescribeEntityAggregatesInput{}
 	}
 
-	output = &DescribeEntityAggregatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEntityAggregates API operation for AWS Health APIs and Notifications.
-//
-// Returns the number of entities that are affected by each of the specified
-// events. If no events are specified, the counts of all affected entities are
-// returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Health APIs and Notifications's
-// API operation DescribeEntityAggregates for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregates
-func (c *Health) DescribeEntityAggregates(input *DescribeEntityAggregatesInput) (*DescribeEntityAggregatesOutput, error) {
-	req, out := c.DescribeEntityAggregatesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEntityAggregatesWithContext is the same as DescribeEntityAggregates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEntityAggregates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEntityAggregatesWithContext(ctx aws.Context, input *DescribeEntityAggregatesInput, opts ...aws.Option) (*DescribeEntityAggregatesOutput, error) {
-	req, out := c.DescribeEntityAggregatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEntityAggregatesOutput{})
+	return DescribeEntityAggregatesRequest{Request: req, Input: input}
 }
 
 const opDescribeEventAggregates = "DescribeEventAggregates"
 
-// DescribeEventAggregatesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventAggregates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventAggregatesRequest is a API request type for the DescribeEventAggregates API operation.
+type DescribeEventAggregatesRequest struct {
+	*aws.Request
+	Input *DescribeEventAggregatesInput
+}
+
+// Send marshals and sends the DescribeEventAggregates API request.
+func (r DescribeEventAggregatesRequest) Send() (*DescribeEventAggregatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventAggregatesOutput), nil
+}
+
+// DescribeEventAggregatesRequest returns a request value for making API operation for
+// AWS Health APIs and Notifications.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEventAggregates for more information on using the DescribeEventAggregates
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the number of events of each event type (issue, scheduled change,
+// and account notification). If no filter is specified, the counts of all events
+// in each category are returned.
 //
 //    // Example sending a request using the DescribeEventAggregatesRequest method.
-//    req, resp := client.DescribeEventAggregatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventAggregatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregates
-func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesInput) (req *aws.Request, output *DescribeEventAggregatesOutput) {
+func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesInput) DescribeEventAggregatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventAggregates,
 		HTTPMethod: "POST",
@@ -274,48 +217,8 @@ func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 		input = &DescribeEventAggregatesInput{}
 	}
 
-	output = &DescribeEventAggregatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventAggregates API operation for AWS Health APIs and Notifications.
-//
-// Returns the number of events of each event type (issue, scheduled change,
-// and account notification). If no filter is specified, the counts of all events
-// in each category are returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Health APIs and Notifications's
-// API operation DescribeEventAggregates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidPaginationToken "InvalidPaginationToken"
-//   The specified pagination token (nextToken) is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregates
-func (c *Health) DescribeEventAggregates(input *DescribeEventAggregatesInput) (*DescribeEventAggregatesOutput, error) {
-	req, out := c.DescribeEventAggregatesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventAggregatesWithContext is the same as DescribeEventAggregates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventAggregates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventAggregatesWithContext(ctx aws.Context, input *DescribeEventAggregatesInput, opts ...aws.Option) (*DescribeEventAggregatesOutput, error) {
-	req, out := c.DescribeEventAggregatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventAggregatesOutput{})
+	return DescribeEventAggregatesRequest{Request: req, Input: input}
 }
 
 // DescribeEventAggregatesPages iterates over the pages of a DescribeEventAggregates operation,
@@ -354,10 +257,10 @@ func (c *Health) DescribeEventAggregatesPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventAggregatesRequest(inCpy)
+			req := c.DescribeEventAggregatesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -370,47 +273,24 @@ func (c *Health) DescribeEventAggregatesPagesWithContext(ctx aws.Context, input 
 
 const opDescribeEventDetails = "DescribeEventDetails"
 
-// DescribeEventDetailsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventDetails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEventDetails for more information on using the DescribeEventDetails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeEventDetailsRequest method.
-//    req, resp := client.DescribeEventDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetails
-func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) (req *aws.Request, output *DescribeEventDetailsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeEventDetails,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeEventDetailsInput{}
-	}
-
-	output = &DescribeEventDetailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeEventDetailsRequest is a API request type for the DescribeEventDetails API operation.
+type DescribeEventDetailsRequest struct {
+	*aws.Request
+	Input *DescribeEventDetailsInput
 }
 
-// DescribeEventDetails API operation for AWS Health APIs and Notifications.
+// Send marshals and sends the DescribeEventDetails API request.
+func (r DescribeEventDetailsRequest) Send() (*DescribeEventDetailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventDetailsOutput), nil
+}
+
+// DescribeEventDetailsRequest returns a request value for making API operation for
+// AWS Health APIs and Notifications.
 //
 // Returns detailed information about one or more specified events. Information
 // includes standard event data (region, service, etc., as returned by DescribeEvents),
@@ -421,66 +301,62 @@ func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) (
 // If a specified event cannot be retrieved, an error message is returned for
 // that event.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Health APIs and Notifications's
-// API operation DescribeEventDetails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnsupportedLocale "UnsupportedLocale"
-//   The specified locale is not supported.
+//    // Example sending a request using the DescribeEventDetailsRequest method.
+//    req := client.DescribeEventDetailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetails
-func (c *Health) DescribeEventDetails(input *DescribeEventDetailsInput) (*DescribeEventDetailsOutput, error) {
-	req, out := c.DescribeEventDetailsRequest(input)
-	return out, req.Send()
-}
+func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) DescribeEventDetailsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeEventDetails,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeEventDetailsWithContext is the same as DescribeEventDetails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventDetails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventDetailsWithContext(ctx aws.Context, input *DescribeEventDetailsInput, opts ...aws.Option) (*DescribeEventDetailsOutput, error) {
-	req, out := c.DescribeEventDetailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeEventDetailsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeEventDetailsOutput{})
+	return DescribeEventDetailsRequest{Request: req, Input: input}
 }
 
 const opDescribeEventTypes = "DescribeEventTypes"
 
-// DescribeEventTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventTypesRequest is a API request type for the DescribeEventTypes API operation.
+type DescribeEventTypesRequest struct {
+	*aws.Request
+	Input *DescribeEventTypesInput
+}
+
+// Send marshals and sends the DescribeEventTypes API request.
+func (r DescribeEventTypesRequest) Send() (*DescribeEventTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventTypesOutput), nil
+}
+
+// DescribeEventTypesRequest returns a request value for making API operation for
+// AWS Health APIs and Notifications.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEventTypes for more information on using the DescribeEventTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the event types that meet the specified filter criteria. If no filter
+// criteria are specified, all event types are returned, in no particular order.
 //
 //    // Example sending a request using the DescribeEventTypesRequest method.
-//    req, resp := client.DescribeEventTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes
-func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) (req *aws.Request, output *DescribeEventTypesOutput) {
+func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) DescribeEventTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventTypes,
 		HTTPMethod: "POST",
@@ -497,50 +373,8 @@ func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) (req 
 		input = &DescribeEventTypesInput{}
 	}
 
-	output = &DescribeEventTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventTypes API operation for AWS Health APIs and Notifications.
-//
-// Returns the event types that meet the specified filter criteria. If no filter
-// criteria are specified, all event types are returned, in no particular order.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Health APIs and Notifications's
-// API operation DescribeEventTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidPaginationToken "InvalidPaginationToken"
-//   The specified pagination token (nextToken) is not valid.
-//
-//   * ErrCodeUnsupportedLocale "UnsupportedLocale"
-//   The specified locale is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes
-func (c *Health) DescribeEventTypes(input *DescribeEventTypesInput) (*DescribeEventTypesOutput, error) {
-	req, out := c.DescribeEventTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventTypesWithContext is the same as DescribeEventTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventTypesWithContext(ctx aws.Context, input *DescribeEventTypesInput, opts ...aws.Option) (*DescribeEventTypesOutput, error) {
-	req, out := c.DescribeEventTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventTypesOutput{})
+	return DescribeEventTypesRequest{Request: req, Input: input}
 }
 
 // DescribeEventTypesPages iterates over the pages of a DescribeEventTypes operation,
@@ -579,10 +413,10 @@ func (c *Health) DescribeEventTypesPagesWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventTypesRequest(inCpy)
+			req := c.DescribeEventTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -595,31 +429,43 @@ func (c *Health) DescribeEventTypesPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// AWS Health APIs and Notifications.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about events that meet the specified filter criteria.
+// Events are returned in a summary form and do not include the detailed description,
+// any additional metadata that depends on the event type, or any affected resources.
+// To retrieve that information, use the DescribeEventDetails and DescribeAffectedEntities
+// operations.
 //
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If no filter criteria are specified, all events are returned. Results are
+// sorted by lastModifiedTime, starting with the most recent.
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEvents
-func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -636,56 +482,8 @@ func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Req
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for AWS Health APIs and Notifications.
-//
-// Returns information about events that meet the specified filter criteria.
-// Events are returned in a summary form and do not include the detailed description,
-// any additional metadata that depends on the event type, or any affected resources.
-// To retrieve that information, use the DescribeEventDetails and DescribeAffectedEntities
-// operations.
-//
-// If no filter criteria are specified, all events are returned. Results are
-// sorted by lastModifiedTime, starting with the most recent.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Health APIs and Notifications's
-// API operation DescribeEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidPaginationToken "InvalidPaginationToken"
-//   The specified pagination token (nextToken) is not valid.
-//
-//   * ErrCodeUnsupportedLocale "UnsupportedLocale"
-//   The specified locale is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEvents
-func (c *Health) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 // DescribeEventsPages iterates over the pages of a DescribeEvents operation,
@@ -724,10 +522,10 @@ func (c *Health) DescribeEventsPagesWithContext(ctx aws.Context, input *Describe
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventsRequest(inCpy)
+			req := c.DescribeEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 

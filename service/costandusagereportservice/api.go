@@ -9,31 +9,36 @@ import (
 
 const opDeleteReportDefinition = "DeleteReportDefinition"
 
-// DeleteReportDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeleteReportDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteReportDefinitionRequest is a API request type for the DeleteReportDefinition API operation.
+type DeleteReportDefinitionRequest struct {
+	*aws.Request
+	Input *DeleteReportDefinitionInput
+}
+
+// Send marshals and sends the DeleteReportDefinition API request.
+func (r DeleteReportDefinitionRequest) Send() (*DeleteReportDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteReportDefinitionOutput), nil
+}
+
+// DeleteReportDefinitionRequest returns a request value for making API operation for
+// AWS Cost and Usage Report Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteReportDefinition for more information on using the DeleteReportDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a specified report definition
 //
 //    // Example sending a request using the DeleteReportDefinitionRequest method.
-//    req, resp := client.DeleteReportDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteReportDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinition
-func (c *CostandUsageReportService) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInput) (req *aws.Request, output *DeleteReportDefinitionOutput) {
+func (c *CostandUsageReportService) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInput) DeleteReportDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReportDefinition,
 		HTTPMethod: "POST",
@@ -44,80 +49,42 @@ func (c *CostandUsageReportService) DeleteReportDefinitionRequest(input *DeleteR
 		input = &DeleteReportDefinitionInput{}
 	}
 
-	output = &DeleteReportDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteReportDefinition API operation for AWS Cost and Usage Report Service.
-//
-// Delete a specified report definition
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Cost and Usage Report Service's
-// API operation DeleteReportDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on a known dependency failure.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   This exception is thrown when providing an invalid input. eg. Put a report
-//   preference with an invalid report name, or Delete a report preference with
-//   an empty report name.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinition
-func (c *CostandUsageReportService) DeleteReportDefinition(input *DeleteReportDefinitionInput) (*DeleteReportDefinitionOutput, error) {
-	req, out := c.DeleteReportDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteReportDefinitionWithContext is the same as DeleteReportDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteReportDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CostandUsageReportService) DeleteReportDefinitionWithContext(ctx aws.Context, input *DeleteReportDefinitionInput, opts ...aws.Option) (*DeleteReportDefinitionOutput, error) {
-	req, out := c.DeleteReportDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteReportDefinitionOutput{})
+	return DeleteReportDefinitionRequest{Request: req, Input: input}
 }
 
 const opDescribeReportDefinitions = "DescribeReportDefinitions"
 
-// DescribeReportDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeReportDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReportDefinitionsRequest is a API request type for the DescribeReportDefinitions API operation.
+type DescribeReportDefinitionsRequest struct {
+	*aws.Request
+	Input *DescribeReportDefinitionsInput
+}
+
+// Send marshals and sends the DescribeReportDefinitions API request.
+func (r DescribeReportDefinitionsRequest) Send() (*DescribeReportDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReportDefinitionsOutput), nil
+}
+
+// DescribeReportDefinitionsRequest returns a request value for making API operation for
+// AWS Cost and Usage Report Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReportDefinitions for more information on using the DescribeReportDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describe a list of report definitions owned by the account
 //
 //    // Example sending a request using the DescribeReportDefinitionsRequest method.
-//    req, resp := client.DescribeReportDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReportDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions
-func (c *CostandUsageReportService) DescribeReportDefinitionsRequest(input *DescribeReportDefinitionsInput) (req *aws.Request, output *DescribeReportDefinitionsOutput) {
+func (c *CostandUsageReportService) DescribeReportDefinitionsRequest(input *DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReportDefinitions,
 		HTTPMethod: "POST",
@@ -134,46 +101,8 @@ func (c *CostandUsageReportService) DescribeReportDefinitionsRequest(input *Desc
 		input = &DescribeReportDefinitionsInput{}
 	}
 
-	output = &DescribeReportDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReportDefinitions API operation for AWS Cost and Usage Report Service.
-//
-// Describe a list of report definitions owned by the account
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Cost and Usage Report Service's
-// API operation DescribeReportDefinitions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on a known dependency failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions
-func (c *CostandUsageReportService) DescribeReportDefinitions(input *DescribeReportDefinitionsInput) (*DescribeReportDefinitionsOutput, error) {
-	req, out := c.DescribeReportDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReportDefinitionsWithContext is the same as DescribeReportDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReportDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CostandUsageReportService) DescribeReportDefinitionsWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, opts ...aws.Option) (*DescribeReportDefinitionsOutput, error) {
-	req, out := c.DescribeReportDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReportDefinitionsOutput{})
+	return DescribeReportDefinitionsRequest{Request: req, Input: input}
 }
 
 // DescribeReportDefinitionsPages iterates over the pages of a DescribeReportDefinitions operation,
@@ -212,10 +141,10 @@ func (c *CostandUsageReportService) DescribeReportDefinitionsPagesWithContext(ct
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReportDefinitionsRequest(inCpy)
+			req := c.DescribeReportDefinitionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -228,31 +157,36 @@ func (c *CostandUsageReportService) DescribeReportDefinitionsPagesWithContext(ct
 
 const opPutReportDefinition = "PutReportDefinition"
 
-// PutReportDefinitionRequest generates a "aws.Request" representing the
-// client's request for the PutReportDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutReportDefinitionRequest is a API request type for the PutReportDefinition API operation.
+type PutReportDefinitionRequest struct {
+	*aws.Request
+	Input *PutReportDefinitionInput
+}
+
+// Send marshals and sends the PutReportDefinition API request.
+func (r PutReportDefinitionRequest) Send() (*PutReportDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutReportDefinitionOutput), nil
+}
+
+// PutReportDefinitionRequest returns a request value for making API operation for
+// AWS Cost and Usage Report Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutReportDefinition for more information on using the PutReportDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new report definition
 //
 //    // Example sending a request using the PutReportDefinitionRequest method.
-//    req, resp := client.PutReportDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutReportDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinition
-func (c *CostandUsageReportService) PutReportDefinitionRequest(input *PutReportDefinitionInput) (req *aws.Request, output *PutReportDefinitionOutput) {
+func (c *CostandUsageReportService) PutReportDefinitionRequest(input *PutReportDefinitionInput) PutReportDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opPutReportDefinition,
 		HTTPMethod: "POST",
@@ -263,59 +197,8 @@ func (c *CostandUsageReportService) PutReportDefinitionRequest(input *PutReportD
 		input = &PutReportDefinitionInput{}
 	}
 
-	output = &PutReportDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutReportDefinition API operation for AWS Cost and Usage Report Service.
-//
-// Create a new report definition
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Cost and Usage Report Service's
-// API operation PutReportDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDuplicateReportNameException "DuplicateReportNameException"
-//   This exception is thrown when putting a report preference with a name that
-//   already exists.
-//
-//   * ErrCodeReportLimitReachedException "ReportLimitReachedException"
-//   This exception is thrown when the number of report preference reaches max
-//   limit. The max number is 5.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   This exception is thrown on a known dependency failure.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   This exception is thrown when providing an invalid input. eg. Put a report
-//   preference with an invalid report name, or Delete a report preference with
-//   an empty report name.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinition
-func (c *CostandUsageReportService) PutReportDefinition(input *PutReportDefinitionInput) (*PutReportDefinitionOutput, error) {
-	req, out := c.PutReportDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// PutReportDefinitionWithContext is the same as PutReportDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutReportDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CostandUsageReportService) PutReportDefinitionWithContext(ctx aws.Context, input *PutReportDefinitionInput, opts ...aws.Option) (*PutReportDefinitionOutput, error) {
-	req, out := c.PutReportDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutReportDefinitionOutput{})
+	return PutReportDefinitionRequest{Request: req, Input: input}
 }
 
 // Request of DeleteReportDefinition

@@ -9,7 +9,6 @@
 package marketplacemeteringiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
 )
 
@@ -63,17 +62,11 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type MarketplaceMeteringAPI interface {
-	BatchMeterUsage(*marketplacemetering.BatchMeterUsageInput) (*marketplacemetering.BatchMeterUsageOutput, error)
-	BatchMeterUsageWithContext(aws.Context, *marketplacemetering.BatchMeterUsageInput, ...aws.Option) (*marketplacemetering.BatchMeterUsageOutput, error)
-	BatchMeterUsageRequest(*marketplacemetering.BatchMeterUsageInput) (*aws.Request, *marketplacemetering.BatchMeterUsageOutput)
+	BatchMeterUsageRequest(*marketplacemetering.BatchMeterUsageInput) marketplacemetering.BatchMeterUsageRequest
 
-	MeterUsage(*marketplacemetering.MeterUsageInput) (*marketplacemetering.MeterUsageOutput, error)
-	MeterUsageWithContext(aws.Context, *marketplacemetering.MeterUsageInput, ...aws.Option) (*marketplacemetering.MeterUsageOutput, error)
-	MeterUsageRequest(*marketplacemetering.MeterUsageInput) (*aws.Request, *marketplacemetering.MeterUsageOutput)
+	MeterUsageRequest(*marketplacemetering.MeterUsageInput) marketplacemetering.MeterUsageRequest
 
-	ResolveCustomer(*marketplacemetering.ResolveCustomerInput) (*marketplacemetering.ResolveCustomerOutput, error)
-	ResolveCustomerWithContext(aws.Context, *marketplacemetering.ResolveCustomerInput, ...aws.Option) (*marketplacemetering.ResolveCustomerOutput, error)
-	ResolveCustomerRequest(*marketplacemetering.ResolveCustomerInput) (*aws.Request, *marketplacemetering.ResolveCustomerOutput)
+	ResolveCustomerRequest(*marketplacemetering.ResolveCustomerInput) marketplacemetering.ResolveCustomerRequest
 }
 
 var _ MarketplaceMeteringAPI = (*marketplacemetering.MarketplaceMetering)(nil)

@@ -12,31 +12,38 @@ import (
 
 const opCancelCluster = "CancelCluster"
 
-// CancelClusterRequest generates a "aws.Request" representing the
-// client's request for the CancelCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelClusterRequest is a API request type for the CancelCluster API operation.
+type CancelClusterRequest struct {
+	*aws.Request
+	Input *CancelClusterInput
+}
+
+// Send marshals and sends the CancelCluster API request.
+func (r CancelClusterRequest) Send() (*CancelClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelClusterOutput), nil
+}
+
+// CancelClusterRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CancelCluster for more information on using the CancelCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cancels a cluster job. You can only cancel a cluster job while it's in the
+// AwaitingQuorum status. You'll have at least an hour after creating a cluster
+// job to cancel it.
 //
 //    // Example sending a request using the CancelClusterRequest method.
-//    req, resp := client.CancelClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelCluster
-func (c *Snowball) CancelClusterRequest(input *CancelClusterInput) (req *aws.Request, output *CancelClusterOutput) {
+func (c *Snowball) CancelClusterRequest(input *CancelClusterInput) CancelClusterRequest {
 	op := &aws.Operation{
 		Name:       opCancelCluster,
 		HTTPMethod: "POST",
@@ -47,86 +54,45 @@ func (c *Snowball) CancelClusterRequest(input *CancelClusterInput) (req *aws.Req
 		input = &CancelClusterInput{}
 	}
 
-	output = &CancelClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelCluster API operation for Amazon Import/Export Snowball.
-//
-// Cancels a cluster job. You can only cancel a cluster job while it's in the
-// AwaitingQuorum status. You'll have at least an hour after creating a cluster
-// job to cancel it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation CancelCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeKMSRequestFailedException "KMSRequestFailedException"
-//   The provided AWS Key Management Service key lacks the permissions to perform
-//   the specified CreateJob or UpdateJob action.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The action can't be performed because the job's current state doesn't allow
-//   that action to be performed.
-//
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelCluster
-func (c *Snowball) CancelCluster(input *CancelClusterInput) (*CancelClusterOutput, error) {
-	req, out := c.CancelClusterRequest(input)
-	return out, req.Send()
-}
-
-// CancelClusterWithContext is the same as CancelCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) CancelClusterWithContext(ctx aws.Context, input *CancelClusterInput, opts ...aws.Option) (*CancelClusterOutput, error) {
-	req, out := c.CancelClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelClusterOutput{})
+	return CancelClusterRequest{Request: req, Input: input}
 }
 
 const opCancelJob = "CancelJob"
 
-// CancelJobRequest generates a "aws.Request" representing the
-// client's request for the CancelJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelJobRequest is a API request type for the CancelJob API operation.
+type CancelJobRequest struct {
+	*aws.Request
+	Input *CancelJobInput
+}
+
+// Send marshals and sends the CancelJob API request.
+func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelJobOutput), nil
+}
+
+// CancelJobRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CancelJob for more information on using the CancelJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cancels the specified job. You can only cancel a job before its JobState
+// value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob
+// action will return a job's JobState as part of the response element data
+// returned.
 //
 //    // Example sending a request using the CancelJobRequest method.
-//    req, resp := client.CancelJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJob
-func (c *Snowball) CancelJobRequest(input *CancelJobInput) (req *aws.Request, output *CancelJobOutput) {
+func (c *Snowball) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "POST",
@@ -137,87 +103,45 @@ func (c *Snowball) CancelJobRequest(input *CancelJobInput) (req *aws.Request, ou
 		input = &CancelJobInput{}
 	}
 
-	output = &CancelJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelJob API operation for Amazon Import/Export Snowball.
-//
-// Cancels the specified job. You can only cancel a job before its JobState
-// value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob
-// action will return a job's JobState as part of the response element data
-// returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation CancelJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The action can't be performed because the job's current state doesn't allow
-//   that action to be performed.
-//
-//   * ErrCodeKMSRequestFailedException "KMSRequestFailedException"
-//   The provided AWS Key Management Service key lacks the permissions to perform
-//   the specified CreateJob or UpdateJob action.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJob
-func (c *Snowball) CancelJob(input *CancelJobInput) (*CancelJobOutput, error) {
-	req, out := c.CancelJobRequest(input)
-	return out, req.Send()
-}
-
-// CancelJobWithContext is the same as CancelJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...aws.Option) (*CancelJobOutput, error) {
-	req, out := c.CancelJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelJobOutput{})
+	return CancelJobRequest{Request: req, Input: input}
 }
 
 const opCreateAddress = "CreateAddress"
 
-// CreateAddressRequest generates a "aws.Request" representing the
-// client's request for the CreateAddress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateAddressRequest is a API request type for the CreateAddress API operation.
+type CreateAddressRequest struct {
+	*aws.Request
+	Input *CreateAddressInput
+}
+
+// Send marshals and sends the CreateAddress API request.
+func (r CreateAddressRequest) Send() (*CreateAddressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAddressOutput), nil
+}
+
+// CreateAddressRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAddress for more information on using the CreateAddress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an address for a Snowball to be shipped to. In most regions, addresses
+// are validated at the time of creation. The address you provide must be located
+// within the serviceable area of your region. If the address is invalid or
+// unsupported, then an exception is thrown.
 //
 //    // Example sending a request using the CreateAddressRequest method.
-//    req, resp := client.CreateAddressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateAddressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddress
-func (c *Snowball) CreateAddressRequest(input *CreateAddressInput) (req *aws.Request, output *CreateAddressOutput) {
+func (c *Snowball) CreateAddressRequest(input *CreateAddressInput) CreateAddressRequest {
 	op := &aws.Operation{
 		Name:       opCreateAddress,
 		HTTPMethod: "POST",
@@ -228,84 +152,44 @@ func (c *Snowball) CreateAddressRequest(input *CreateAddressInput) (req *aws.Req
 		input = &CreateAddressInput{}
 	}
 
-	output = &CreateAddressOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateAddress API operation for Amazon Import/Export Snowball.
-//
-// Creates an address for a Snowball to be shipped to. In most regions, addresses
-// are validated at the time of creation. The address you provide must be located
-// within the serviceable area of your region. If the address is invalid or
-// unsupported, then an exception is thrown.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation CreateAddress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidAddressException "InvalidAddressException"
-//   The address provided was invalid. Check the address with your region's carrier,
-//   and try again.
-//
-//   * ErrCodeUnsupportedAddressException "UnsupportedAddressException"
-//   The address is either outside the serviceable area for your region, or an
-//   error occurred. Check the address with your region's carrier and try again.
-//   If the issue persists, contact AWS Support.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddress
-func (c *Snowball) CreateAddress(input *CreateAddressInput) (*CreateAddressOutput, error) {
-	req, out := c.CreateAddressRequest(input)
-	return out, req.Send()
-}
-
-// CreateAddressWithContext is the same as CreateAddress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAddress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) CreateAddressWithContext(ctx aws.Context, input *CreateAddressInput, opts ...aws.Option) (*CreateAddressOutput, error) {
-	req, out := c.CreateAddressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateAddressOutput{})
+	return CreateAddressRequest{Request: req, Input: input}
 }
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws.Request" representing the
-// client's request for the CreateCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterRequest is a API request type for the CreateCluster API operation.
+type CreateClusterRequest struct {
+	*aws.Request
+	Input *CreateClusterInput
+}
+
+// Send marshals and sends the CreateCluster API request.
+func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterOutput), nil
+}
+
+// CreateClusterRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCluster for more information on using the CreateCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob
+// action separately to create the jobs for each of these nodes. The cluster
+// does not ship until these five node jobs have been created.
 //
 //    // Example sending a request using the CreateClusterRequest method.
-//    req, resp := client.CreateClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateCluster
-func (c *Snowball) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+func (c *Snowball) CreateClusterRequest(input *CreateClusterInput) CreateClusterRequest {
 	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
@@ -316,87 +200,46 @@ func (c *Snowball) CreateClusterRequest(input *CreateClusterInput) (req *aws.Req
 		input = &CreateClusterInput{}
 	}
 
-	output = &CreateClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCluster API operation for Amazon Import/Export Snowball.
-//
-// Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob
-// action separately to create the jobs for each of these nodes. The cluster
-// does not ship until these five node jobs have been created.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation CreateCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeKMSRequestFailedException "KMSRequestFailedException"
-//   The provided AWS Key Management Service key lacks the permissions to perform
-//   the specified CreateJob or UpdateJob action.
-//
-//   * ErrCodeInvalidInputCombinationException "InvalidInputCombinationException"
-//   Job or cluster creation failed. One ore more inputs were invalid. Confirm
-//   that the CreateClusterRequest$SnowballType value supports your CreateJobRequest$JobType,
-//   and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateCluster
-func (c *Snowball) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterWithContext is the same as CreateCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterOutput{})
+	return CreateClusterRequest{Request: req, Input: input}
 }
 
 const opCreateJob = "CreateJob"
 
-// CreateJobRequest generates a "aws.Request" representing the
-// client's request for the CreateJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateJobRequest is a API request type for the CreateJob API operation.
+type CreateJobRequest struct {
+	*aws.Request
+	Input *CreateJobInput
+}
+
+// Send marshals and sends the CreateJob API request.
+func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateJobOutput), nil
+}
+
+// CreateJobRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateJob for more information on using the CreateJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a job to import or export data between Amazon S3 and your on-premises
+// data center. Your AWS account must have the right trust policies and permissions
+// in place to create a job for Snowball. If you're creating a job for a node
+// in a cluster, you only need to provide the clusterId value; the other job
+// attributes are inherited from the cluster.
 //
 //    // Example sending a request using the CreateJobRequest method.
-//    req, resp := client.CreateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJob
-func (c *Snowball) CreateJobRequest(input *CreateJobInput) (req *aws.Request, output *CreateJobOutput) {
+func (c *Snowball) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
@@ -407,95 +250,43 @@ func (c *Snowball) CreateJobRequest(input *CreateJobInput) (req *aws.Request, ou
 		input = &CreateJobInput{}
 	}
 
-	output = &CreateJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateJob API operation for Amazon Import/Export Snowball.
-//
-// Creates a job to import or export data between Amazon S3 and your on-premises
-// data center. Your AWS account must have the right trust policies and permissions
-// in place to create a job for Snowball. If you're creating a job for a node
-// in a cluster, you only need to provide the clusterId value; the other job
-// attributes are inherited from the cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation CreateJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeKMSRequestFailedException "KMSRequestFailedException"
-//   The provided AWS Key Management Service key lacks the permissions to perform
-//   the specified CreateJob or UpdateJob action.
-//
-//   * ErrCodeInvalidInputCombinationException "InvalidInputCombinationException"
-//   Job or cluster creation failed. One ore more inputs were invalid. Confirm
-//   that the CreateClusterRequest$SnowballType value supports your CreateJobRequest$JobType,
-//   and try again.
-//
-//   * ErrCodeClusterLimitExceededException "ClusterLimitExceededException"
-//   Job creation failed. Currently, clusters support five nodes. If you have
-//   less than five nodes for your cluster and you have more nodes to create for
-//   this cluster, try again and create jobs until your cluster has exactly five
-//   notes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJob
-func (c *Snowball) CreateJob(input *CreateJobInput) (*CreateJobOutput, error) {
-	req, out := c.CreateJobRequest(input)
-	return out, req.Send()
-}
-
-// CreateJobWithContext is the same as CreateJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...aws.Option) (*CreateJobOutput, error) {
-	req, out := c.CreateJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateJobOutput{})
+	return CreateJobRequest{Request: req, Input: input}
 }
 
 const opDescribeAddress = "DescribeAddress"
 
-// DescribeAddressRequest generates a "aws.Request" representing the
-// client's request for the DescribeAddress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAddressRequest is a API request type for the DescribeAddress API operation.
+type DescribeAddressRequest struct {
+	*aws.Request
+	Input *DescribeAddressInput
+}
+
+// Send marshals and sends the DescribeAddress API request.
+func (r DescribeAddressRequest) Send() (*DescribeAddressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAddressOutput), nil
+}
+
+// DescribeAddressRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAddress for more information on using the DescribeAddress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Takes an AddressId and returns specific details about that address in the
+// form of an Address object.
 //
 //    // Example sending a request using the DescribeAddressRequest method.
-//    req, resp := client.DescribeAddressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAddressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddress
-func (c *Snowball) DescribeAddressRequest(input *DescribeAddressInput) (req *aws.Request, output *DescribeAddressOutput) {
+func (c *Snowball) DescribeAddressRequest(input *DescribeAddressInput) DescribeAddressRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAddress,
 		HTTPMethod: "POST",
@@ -506,77 +297,44 @@ func (c *Snowball) DescribeAddressRequest(input *DescribeAddressInput) (req *aws
 		input = &DescribeAddressInput{}
 	}
 
-	output = &DescribeAddressOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAddress API operation for Amazon Import/Export Snowball.
-//
-// Takes an AddressId and returns specific details about that address in the
-// form of an Address object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation DescribeAddress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddress
-func (c *Snowball) DescribeAddress(input *DescribeAddressInput) (*DescribeAddressOutput, error) {
-	req, out := c.DescribeAddressRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAddressWithContext is the same as DescribeAddress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAddress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) DescribeAddressWithContext(ctx aws.Context, input *DescribeAddressInput, opts ...aws.Option) (*DescribeAddressOutput, error) {
-	req, out := c.DescribeAddressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAddressOutput{})
+	return DescribeAddressRequest{Request: req, Input: input}
 }
 
 const opDescribeAddresses = "DescribeAddresses"
 
-// DescribeAddressesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAddresses operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAddressesRequest is a API request type for the DescribeAddresses API operation.
+type DescribeAddressesRequest struct {
+	*aws.Request
+	Input *DescribeAddressesInput
+}
+
+// Send marshals and sends the DescribeAddresses API request.
+func (r DescribeAddressesRequest) Send() (*DescribeAddressesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAddressesOutput), nil
+}
+
+// DescribeAddressesRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAddresses for more information on using the DescribeAddresses
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a specified number of ADDRESS objects. Calling this API in one of
+// the US regions will return addresses from the list of all addresses associated
+// with this account in all US regions.
 //
 //    // Example sending a request using the DescribeAddressesRequest method.
-//    req, resp := client.DescribeAddressesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAddressesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddresses
-func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) (req *aws.Request, output *DescribeAddressesOutput) {
+func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) DescribeAddressesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAddresses,
 		HTTPMethod: "POST",
@@ -593,53 +351,8 @@ func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) (req 
 		input = &DescribeAddressesInput{}
 	}
 
-	output = &DescribeAddressesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAddresses API operation for Amazon Import/Export Snowball.
-//
-// Returns a specified number of ADDRESS objects. Calling this API in one of
-// the US regions will return addresses from the list of all addresses associated
-// with this account in all US regions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation DescribeAddresses for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken string was altered unexpectedly, and the operation has stopped.
-//   Run the operation without changing the NextToken string, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddresses
-func (c *Snowball) DescribeAddresses(input *DescribeAddressesInput) (*DescribeAddressesOutput, error) {
-	req, out := c.DescribeAddressesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAddressesWithContext is the same as DescribeAddresses with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAddresses for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) DescribeAddressesWithContext(ctx aws.Context, input *DescribeAddressesInput, opts ...aws.Option) (*DescribeAddressesOutput, error) {
-	req, out := c.DescribeAddressesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAddressesOutput{})
+	return DescribeAddressesRequest{Request: req, Input: input}
 }
 
 // DescribeAddressesPages iterates over the pages of a DescribeAddresses operation,
@@ -678,10 +391,10 @@ func (c *Snowball) DescribeAddressesPagesWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeAddressesRequest(inCpy)
+			req := c.DescribeAddressesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -694,31 +407,37 @@ func (c *Snowball) DescribeAddressesPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeCluster = "DescribeCluster"
 
-// DescribeClusterRequest generates a "aws.Request" representing the
-// client's request for the DescribeCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeClusterRequest is a API request type for the DescribeCluster API operation.
+type DescribeClusterRequest struct {
+	*aws.Request
+	Input *DescribeClusterInput
+}
+
+// Send marshals and sends the DescribeCluster API request.
+func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterOutput), nil
+}
+
+// DescribeClusterRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCluster for more information on using the DescribeCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific cluster including shipping information,
+// cluster status, and other important metadata.
 //
 //    // Example sending a request using the DescribeClusterRequest method.
-//    req, resp := client.DescribeClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster
-func (c *Snowball) DescribeClusterRequest(input *DescribeClusterInput) (req *aws.Request, output *DescribeClusterOutput) {
+func (c *Snowball) DescribeClusterRequest(input *DescribeClusterInput) DescribeClusterRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCluster,
 		HTTPMethod: "POST",
@@ -729,77 +448,43 @@ func (c *Snowball) DescribeClusterRequest(input *DescribeClusterInput) (req *aws
 		input = &DescribeClusterInput{}
 	}
 
-	output = &DescribeClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCluster API operation for Amazon Import/Export Snowball.
-//
-// Returns information about a specific cluster including shipping information,
-// cluster status, and other important metadata.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation DescribeCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster
-func (c *Snowball) DescribeCluster(input *DescribeClusterInput) (*DescribeClusterOutput, error) {
-	req, out := c.DescribeClusterRequest(input)
-	return out, req.Send()
-}
-
-// DescribeClusterWithContext is the same as DescribeCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) DescribeClusterWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.Option) (*DescribeClusterOutput, error) {
-	req, out := c.DescribeClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeClusterOutput{})
+	return DescribeClusterRequest{Request: req, Input: input}
 }
 
 const opDescribeJob = "DescribeJob"
 
-// DescribeJobRequest generates a "aws.Request" representing the
-// client's request for the DescribeJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeJobRequest is a API request type for the DescribeJob API operation.
+type DescribeJobRequest struct {
+	*aws.Request
+	Input *DescribeJobInput
+}
+
+// Send marshals and sends the DescribeJob API request.
+func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeJobOutput), nil
+}
+
+// DescribeJobRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeJob for more information on using the DescribeJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific job including shipping information,
+// job status, and other important metadata.
 //
 //    // Example sending a request using the DescribeJobRequest method.
-//    req, resp := client.DescribeJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob
-func (c *Snowball) DescribeJobRequest(input *DescribeJobInput) (req *aws.Request, output *DescribeJobOutput) {
+func (c *Snowball) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJob,
 		HTTPMethod: "POST",
@@ -810,93 +495,30 @@ func (c *Snowball) DescribeJobRequest(input *DescribeJobInput) (req *aws.Request
 		input = &DescribeJobInput{}
 	}
 
-	output = &DescribeJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeJob API operation for Amazon Import/Export Snowball.
-//
-// Returns information about a specific job including shipping information,
-// job status, and other important metadata.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation DescribeJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob
-func (c *Snowball) DescribeJob(input *DescribeJobInput) (*DescribeJobOutput, error) {
-	req, out := c.DescribeJobRequest(input)
-	return out, req.Send()
-}
-
-// DescribeJobWithContext is the same as DescribeJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInput, opts ...aws.Option) (*DescribeJobOutput, error) {
-	req, out := c.DescribeJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeJobOutput{})
+	return DescribeJobRequest{Request: req, Input: input}
 }
 
 const opGetJobManifest = "GetJobManifest"
 
-// GetJobManifestRequest generates a "aws.Request" representing the
-// client's request for the GetJobManifest operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJobManifest for more information on using the GetJobManifest
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetJobManifestRequest method.
-//    req, resp := client.GetJobManifestRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifest
-func (c *Snowball) GetJobManifestRequest(input *GetJobManifestInput) (req *aws.Request, output *GetJobManifestOutput) {
-	op := &aws.Operation{
-		Name:       opGetJobManifest,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetJobManifestInput{}
-	}
-
-	output = &GetJobManifestOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetJobManifestRequest is a API request type for the GetJobManifest API operation.
+type GetJobManifestRequest struct {
+	*aws.Request
+	Input *GetJobManifestInput
 }
 
-// GetJobManifest API operation for Amazon Import/Export Snowball.
+// Send marshals and sends the GetJobManifest API request.
+func (r GetJobManifestRequest) Send() (*GetJobManifestOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobManifestOutput), nil
+}
+
+// GetJobManifestRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
 // Returns a link to an Amazon S3 presigned URL for the manifest file associated
 // with the specified JobId value. You can access the manifest file for up to
@@ -917,87 +539,49 @@ func (c *Snowball) GetJobManifestRequest(input *GetJobManifestInput) (req *aws.R
 // The credentials of a given job, including its manifest file and unlock code,
 // expire 90 days after the job is created.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation GetJobManifest for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The action can't be performed because the job's current state doesn't allow
-//   that action to be performed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifest
-func (c *Snowball) GetJobManifest(input *GetJobManifestInput) (*GetJobManifestOutput, error) {
-	req, out := c.GetJobManifestRequest(input)
-	return out, req.Send()
-}
-
-// GetJobManifestWithContext is the same as GetJobManifest with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJobManifest for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) GetJobManifestWithContext(ctx aws.Context, input *GetJobManifestInput, opts ...aws.Option) (*GetJobManifestOutput, error) {
-	req, out := c.GetJobManifestRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetJobUnlockCode = "GetJobUnlockCode"
-
-// GetJobUnlockCodeRequest generates a "aws.Request" representing the
-// client's request for the GetJobUnlockCode operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJobUnlockCode for more information on using the GetJobUnlockCode
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetJobUnlockCodeRequest method.
-//    req, resp := client.GetJobUnlockCodeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetJobManifestRequest method.
+//    req := client.GetJobManifestRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCode
-func (c *Snowball) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) (req *aws.Request, output *GetJobUnlockCodeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifest
+func (c *Snowball) GetJobManifestRequest(input *GetJobManifestInput) GetJobManifestRequest {
 	op := &aws.Operation{
-		Name:       opGetJobUnlockCode,
+		Name:       opGetJobManifest,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetJobUnlockCodeInput{}
+		input = &GetJobManifestInput{}
 	}
 
-	output = &GetJobUnlockCodeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetJobManifestOutput{})
+	return GetJobManifestRequest{Request: req, Input: input}
 }
 
-// GetJobUnlockCode API operation for Amazon Import/Export Snowball.
+const opGetJobUnlockCode = "GetJobUnlockCode"
+
+// GetJobUnlockCodeRequest is a API request type for the GetJobUnlockCode API operation.
+type GetJobUnlockCodeRequest struct {
+	*aws.Request
+	Input *GetJobUnlockCodeInput
+}
+
+// Send marshals and sends the GetJobUnlockCode API request.
+func (r GetJobUnlockCodeRequest) Send() (*GetJobUnlockCodeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobUnlockCodeOutput), nil
+}
+
+// GetJobUnlockCodeRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
 // Returns the UnlockCode code value for the specified job. A particular UnlockCode
 // value can be accessed for up to 90 days after the associated job has been
@@ -1013,71 +597,65 @@ func (c *Snowball) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) (req *a
 // helps prevent unauthorized parties from gaining access to the Snowball associated
 // with that job.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation GetJobUnlockCode for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The action can't be performed because the job's current state doesn't allow
-//   that action to be performed.
+//    // Example sending a request using the GetJobUnlockCodeRequest method.
+//    req := client.GetJobUnlockCodeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCode
-func (c *Snowball) GetJobUnlockCode(input *GetJobUnlockCodeInput) (*GetJobUnlockCodeOutput, error) {
-	req, out := c.GetJobUnlockCodeRequest(input)
-	return out, req.Send()
-}
+func (c *Snowball) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) GetJobUnlockCodeRequest {
+	op := &aws.Operation{
+		Name:       opGetJobUnlockCode,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetJobUnlockCodeWithContext is the same as GetJobUnlockCode with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJobUnlockCode for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) GetJobUnlockCodeWithContext(ctx aws.Context, input *GetJobUnlockCodeInput, opts ...aws.Option) (*GetJobUnlockCodeOutput, error) {
-	req, out := c.GetJobUnlockCodeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetJobUnlockCodeInput{}
+	}
+
+	req := c.newRequest(op, input, &GetJobUnlockCodeOutput{})
+	return GetJobUnlockCodeRequest{Request: req, Input: input}
 }
 
 const opGetSnowballUsage = "GetSnowballUsage"
 
-// GetSnowballUsageRequest generates a "aws.Request" representing the
-// client's request for the GetSnowballUsage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSnowballUsageRequest is a API request type for the GetSnowballUsage API operation.
+type GetSnowballUsageRequest struct {
+	*aws.Request
+	Input *GetSnowballUsageInput
+}
+
+// Send marshals and sends the GetSnowballUsage API request.
+func (r GetSnowballUsageRequest) Send() (*GetSnowballUsageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSnowballUsageOutput), nil
+}
+
+// GetSnowballUsageRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the Snowball service limit for your account, and
+// also the number of Snowballs your account has in use.
 //
-// See GetSnowballUsage for more information on using the GetSnowballUsage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The default service limit for the number of Snowballs that you can have at
+// one time is 1. If you want to increase your service limit, contact AWS Support.
 //
 //    // Example sending a request using the GetSnowballUsageRequest method.
-//    req, resp := client.GetSnowballUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSnowballUsageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsage
-func (c *Snowball) GetSnowballUsageRequest(input *GetSnowballUsageInput) (req *aws.Request, output *GetSnowballUsageOutput) {
+func (c *Snowball) GetSnowballUsageRequest(input *GetSnowballUsageInput) GetSnowballUsageRequest {
 	op := &aws.Operation{
 		Name:       opGetSnowballUsage,
 		HTTPMethod: "POST",
@@ -1088,74 +666,44 @@ func (c *Snowball) GetSnowballUsageRequest(input *GetSnowballUsageInput) (req *a
 		input = &GetSnowballUsageInput{}
 	}
 
-	output = &GetSnowballUsageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSnowballUsage API operation for Amazon Import/Export Snowball.
-//
-// Returns information about the Snowball service limit for your account, and
-// also the number of Snowballs your account has in use.
-//
-// The default service limit for the number of Snowballs that you can have at
-// one time is 1. If you want to increase your service limit, contact AWS Support.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation GetSnowballUsage for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsage
-func (c *Snowball) GetSnowballUsage(input *GetSnowballUsageInput) (*GetSnowballUsageOutput, error) {
-	req, out := c.GetSnowballUsageRequest(input)
-	return out, req.Send()
-}
-
-// GetSnowballUsageWithContext is the same as GetSnowballUsage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSnowballUsage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) GetSnowballUsageWithContext(ctx aws.Context, input *GetSnowballUsageInput, opts ...aws.Option) (*GetSnowballUsageOutput, error) {
-	req, out := c.GetSnowballUsageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSnowballUsageOutput{})
+	return GetSnowballUsageRequest{Request: req, Input: input}
 }
 
 const opListClusterJobs = "ListClusterJobs"
 
-// ListClusterJobsRequest generates a "aws.Request" representing the
-// client's request for the ListClusterJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListClusterJobsRequest is a API request type for the ListClusterJobs API operation.
+type ListClusterJobsRequest struct {
+	*aws.Request
+	Input *ListClusterJobsInput
+}
+
+// Send marshals and sends the ListClusterJobs API request.
+func (r ListClusterJobsRequest) Send() (*ListClusterJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListClusterJobsOutput), nil
+}
+
+// ListClusterJobsRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListClusterJobs for more information on using the ListClusterJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an array of JobListEntry objects of the specified length. Each JobListEntry
+// object is for a job in the specified cluster and contains a job's state,
+// a job's ID, and other information.
 //
 //    // Example sending a request using the ListClusterJobsRequest method.
-//    req, resp := client.ListClusterJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListClusterJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobs
-func (c *Snowball) ListClusterJobsRequest(input *ListClusterJobsInput) (req *aws.Request, output *ListClusterJobsOutput) {
+func (c *Snowball) ListClusterJobsRequest(input *ListClusterJobsInput) ListClusterJobsRequest {
 	op := &aws.Operation{
 		Name:       opListClusterJobs,
 		HTTPMethod: "POST",
@@ -1166,82 +714,44 @@ func (c *Snowball) ListClusterJobsRequest(input *ListClusterJobsInput) (req *aws
 		input = &ListClusterJobsInput{}
 	}
 
-	output = &ListClusterJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListClusterJobs API operation for Amazon Import/Export Snowball.
-//
-// Returns an array of JobListEntry objects of the specified length. Each JobListEntry
-// object is for a job in the specified cluster and contains a job's state,
-// a job's ID, and other information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation ListClusterJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken string was altered unexpectedly, and the operation has stopped.
-//   Run the operation without changing the NextToken string, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobs
-func (c *Snowball) ListClusterJobs(input *ListClusterJobsInput) (*ListClusterJobsOutput, error) {
-	req, out := c.ListClusterJobsRequest(input)
-	return out, req.Send()
-}
-
-// ListClusterJobsWithContext is the same as ListClusterJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListClusterJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) ListClusterJobsWithContext(ctx aws.Context, input *ListClusterJobsInput, opts ...aws.Option) (*ListClusterJobsOutput, error) {
-	req, out := c.ListClusterJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListClusterJobsOutput{})
+	return ListClusterJobsRequest{Request: req, Input: input}
 }
 
 const opListClusters = "ListClusters"
 
-// ListClustersRequest generates a "aws.Request" representing the
-// client's request for the ListClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListClustersRequest is a API request type for the ListClusters API operation.
+type ListClustersRequest struct {
+	*aws.Request
+	Input *ListClustersInput
+}
+
+// Send marshals and sends the ListClusters API request.
+func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListClustersOutput), nil
+}
+
+// ListClustersRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListClusters for more information on using the ListClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an array of ClusterListEntry objects of the specified length. Each
+// ClusterListEntry object contains a cluster's state, a cluster's ID, and other
+// important status information.
 //
 //    // Example sending a request using the ListClustersRequest method.
-//    req, resp := client.ListClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusters
-func (c *Snowball) ListClustersRequest(input *ListClustersInput) (req *aws.Request, output *ListClustersOutput) {
+func (c *Snowball) ListClustersRequest(input *ListClustersInput) ListClustersRequest {
 	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
@@ -1252,78 +762,46 @@ func (c *Snowball) ListClustersRequest(input *ListClustersInput) (req *aws.Reque
 		input = &ListClustersInput{}
 	}
 
-	output = &ListClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListClusters API operation for Amazon Import/Export Snowball.
-//
-// Returns an array of ClusterListEntry objects of the specified length. Each
-// ClusterListEntry object contains a cluster's state, a cluster's ID, and other
-// important status information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation ListClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken string was altered unexpectedly, and the operation has stopped.
-//   Run the operation without changing the NextToken string, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusters
-func (c *Snowball) ListClusters(input *ListClustersInput) (*ListClustersOutput, error) {
-	req, out := c.ListClustersRequest(input)
-	return out, req.Send()
-}
-
-// ListClustersWithContext is the same as ListClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...aws.Option) (*ListClustersOutput, error) {
-	req, out := c.ListClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListClustersOutput{})
+	return ListClustersRequest{Request: req, Input: input}
 }
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws.Request" representing the
-// client's request for the ListJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListJobsRequest is a API request type for the ListJobs API operation.
+type ListJobsRequest struct {
+	*aws.Request
+	Input *ListJobsInput
+}
+
+// Send marshals and sends the ListJobs API request.
+func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListJobsOutput), nil
+}
+
+// ListJobsRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListJobs for more information on using the ListJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an array of JobListEntry objects of the specified length. Each JobListEntry
+// object contains a job's state, a job's ID, and a value that indicates whether
+// the job is a job part, in the case of export jobs. Calling this API action
+// in one of the US regions will return jobs from the list of all jobs associated
+// with this account in all US regions.
 //
 //    // Example sending a request using the ListJobsRequest method.
-//    req, resp := client.ListJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobs
-func (c *Snowball) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
+func (c *Snowball) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
@@ -1340,51 +818,8 @@ func (c *Snowball) ListJobsRequest(input *ListJobsInput) (req *aws.Request, outp
 		input = &ListJobsInput{}
 	}
 
-	output = &ListJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListJobs API operation for Amazon Import/Export Snowball.
-//
-// Returns an array of JobListEntry objects of the specified length. Each JobListEntry
-// object contains a job's state, a job's ID, and a value that indicates whether
-// the job is a job part, in the case of export jobs. Calling this API action
-// in one of the US regions will return jobs from the list of all jobs associated
-// with this account in all US regions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation ListJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken string was altered unexpectedly, and the operation has stopped.
-//   Run the operation without changing the NextToken string, and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobs
-func (c *Snowball) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	return out, req.Send()
-}
-
-// ListJobsWithContext is the same as ListJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListJobsOutput{})
+	return ListJobsRequest{Request: req, Input: input}
 }
 
 // ListJobsPages iterates over the pages of a ListJobs operation,
@@ -1423,10 +858,10 @@ func (c *Snowball) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListJobsRequest(inCpy)
+			req := c.ListJobsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1439,31 +874,39 @@ func (c *Snowball) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInpu
 
 const opUpdateCluster = "UpdateCluster"
 
-// UpdateClusterRequest generates a "aws.Request" representing the
-// client's request for the UpdateCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateClusterRequest is a API request type for the UpdateCluster API operation.
+type UpdateClusterRequest struct {
+	*aws.Request
+	Input *UpdateClusterInput
+}
+
+// Send marshals and sends the UpdateCluster API request.
+func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateClusterOutput), nil
+}
+
+// UpdateClusterRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateCluster for more information on using the UpdateCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// While a cluster's ClusterState value is in the AwaitingQuorum state, you
+// can update some of the information associated with a cluster. Once the cluster
+// changes to a different job state, usually 60 minutes after the cluster being
+// created, this action is no longer available.
 //
 //    // Example sending a request using the UpdateClusterRequest method.
-//    req, resp := client.UpdateClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateCluster
-func (c *Snowball) UpdateClusterRequest(input *UpdateClusterInput) (req *aws.Request, output *UpdateClusterOutput) {
+func (c *Snowball) UpdateClusterRequest(input *UpdateClusterInput) UpdateClusterRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCluster,
 		HTTPMethod: "POST",
@@ -1474,92 +917,44 @@ func (c *Snowball) UpdateClusterRequest(input *UpdateClusterInput) (req *aws.Req
 		input = &UpdateClusterInput{}
 	}
 
-	output = &UpdateClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateCluster API operation for Amazon Import/Export Snowball.
-//
-// While a cluster's ClusterState value is in the AwaitingQuorum state, you
-// can update some of the information associated with a cluster. Once the cluster
-// changes to a different job state, usually 60 minutes after the cluster being
-// created, this action is no longer available.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation UpdateCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The action can't be performed because the job's current state doesn't allow
-//   that action to be performed.
-//
-//   * ErrCodeKMSRequestFailedException "KMSRequestFailedException"
-//   The provided AWS Key Management Service key lacks the permissions to perform
-//   the specified CreateJob or UpdateJob action.
-//
-//   * ErrCodeInvalidInputCombinationException "InvalidInputCombinationException"
-//   Job or cluster creation failed. One ore more inputs were invalid. Confirm
-//   that the CreateClusterRequest$SnowballType value supports your CreateJobRequest$JobType,
-//   and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateCluster
-func (c *Snowball) UpdateCluster(input *UpdateClusterInput) (*UpdateClusterOutput, error) {
-	req, out := c.UpdateClusterRequest(input)
-	return out, req.Send()
-}
-
-// UpdateClusterWithContext is the same as UpdateCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) UpdateClusterWithContext(ctx aws.Context, input *UpdateClusterInput, opts ...aws.Option) (*UpdateClusterOutput, error) {
-	req, out := c.UpdateClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateClusterOutput{})
+	return UpdateClusterRequest{Request: req, Input: input}
 }
 
 const opUpdateJob = "UpdateJob"
 
-// UpdateJobRequest generates a "aws.Request" representing the
-// client's request for the UpdateJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateJobRequest is a API request type for the UpdateJob API operation.
+type UpdateJobRequest struct {
+	*aws.Request
+	Input *UpdateJobInput
+}
+
+// Send marshals and sends the UpdateJob API request.
+func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateJobOutput), nil
+}
+
+// UpdateJobRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateJob for more information on using the UpdateJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// While a job's JobState value is New, you can update some of the information
+// associated with a job. Once the job changes to a different job state, usually
+// within 60 minutes of the job being created, this action is no longer available.
 //
 //    // Example sending a request using the UpdateJobRequest method.
-//    req, resp := client.UpdateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJob
-func (c *Snowball) UpdateJobRequest(input *UpdateJobInput) (req *aws.Request, output *UpdateJobOutput) {
+func (c *Snowball) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJob,
 		HTTPMethod: "POST",
@@ -1570,68 +965,8 @@ func (c *Snowball) UpdateJobRequest(input *UpdateJobInput) (req *aws.Request, ou
 		input = &UpdateJobInput{}
 	}
 
-	output = &UpdateJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateJob API operation for Amazon Import/Export Snowball.
-//
-// While a job's JobState value is New, you can update some of the information
-// associated with a job. Once the job changes to a different job state, usually
-// within 60 minutes of the job being created, this action is no longer available.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Import/Export Snowball's
-// API operation UpdateJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   The specified resource can't be found. Check the information you provided
-//   in your last request, and try again.
-//
-//   * ErrCodeInvalidJobStateException "InvalidJobStateException"
-//   The action can't be performed because the job's current state doesn't allow
-//   that action to be performed.
-//
-//   * ErrCodeKMSRequestFailedException "KMSRequestFailedException"
-//   The provided AWS Key Management Service key lacks the permissions to perform
-//   the specified CreateJob or UpdateJob action.
-//
-//   * ErrCodeInvalidInputCombinationException "InvalidInputCombinationException"
-//   Job or cluster creation failed. One ore more inputs were invalid. Confirm
-//   that the CreateClusterRequest$SnowballType value supports your CreateJobRequest$JobType,
-//   and try again.
-//
-//   * ErrCodeClusterLimitExceededException "ClusterLimitExceededException"
-//   Job creation failed. Currently, clusters support five nodes. If you have
-//   less than five nodes for your cluster and you have more nodes to create for
-//   this cluster, try again and create jobs until your cluster has exactly five
-//   notes.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJob
-func (c *Snowball) UpdateJob(input *UpdateJobInput) (*UpdateJobOutput, error) {
-	req, out := c.UpdateJobRequest(input)
-	return out, req.Send()
-}
-
-// UpdateJobWithContext is the same as UpdateJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) UpdateJobWithContext(ctx aws.Context, input *UpdateJobInput, opts ...aws.Option) (*UpdateJobOutput, error) {
-	req, out := c.UpdateJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateJobOutput{})
+	return UpdateJobRequest{Request: req, Input: input}
 }
 
 // The address that you want the Snowball or Snowballs associated with a specific

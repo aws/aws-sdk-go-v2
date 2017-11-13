@@ -13,49 +13,24 @@ import (
 
 const opAssociateKmsKey = "AssociateKmsKey"
 
-// AssociateKmsKeyRequest generates a "aws.Request" representing the
-// client's request for the AssociateKmsKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateKmsKey for more information on using the AssociateKmsKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateKmsKeyRequest method.
-//    req, resp := client.AssociateKmsKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKey
-func (c *CloudWatchLogs) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) (req *aws.Request, output *AssociateKmsKeyOutput) {
-	op := &aws.Operation{
-		Name:       opAssociateKmsKey,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AssociateKmsKeyInput{}
-	}
-
-	output = &AssociateKmsKeyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AssociateKmsKeyRequest is a API request type for the AssociateKmsKey API operation.
+type AssociateKmsKeyRequest struct {
+	*aws.Request
+	Input *AssociateKmsKeyInput
 }
 
-// AssociateKmsKey API operation for Amazon CloudWatch Logs.
+// Send marshals and sends the AssociateKmsKey API request.
+func (r AssociateKmsKeyRequest) Send() (*AssociateKmsKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateKmsKeyOutput), nil
+}
+
+// AssociateKmsKeyRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Associates the specified AWS Key Management Service (AWS KMS) customer master
 // key (CMK) with the specified log group.
@@ -72,75 +47,65 @@ func (c *CloudWatchLogs) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) (re
 // If you attempt to associate a CMK with a log group but the CMK does not exist
 // or the CMK is disabled, you will receive an InvalidParameterException error.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation AssociateKmsKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
+//    // Example sending a request using the AssociateKmsKeyRequest method.
+//    req := client.AssociateKmsKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKey
-func (c *CloudWatchLogs) AssociateKmsKey(input *AssociateKmsKeyInput) (*AssociateKmsKeyOutput, error) {
-	req, out := c.AssociateKmsKeyRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchLogs) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) AssociateKmsKeyRequest {
+	op := &aws.Operation{
+		Name:       opAssociateKmsKey,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AssociateKmsKeyWithContext is the same as AssociateKmsKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateKmsKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) AssociateKmsKeyWithContext(ctx aws.Context, input *AssociateKmsKeyInput, opts ...aws.Option) (*AssociateKmsKeyOutput, error) {
-	req, out := c.AssociateKmsKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AssociateKmsKeyInput{}
+	}
+
+	req := c.newRequest(op, input, &AssociateKmsKeyOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return AssociateKmsKeyRequest{Request: req, Input: input}
 }
 
 const opCancelExportTask = "CancelExportTask"
 
-// CancelExportTaskRequest generates a "aws.Request" representing the
-// client's request for the CancelExportTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelExportTaskRequest is a API request type for the CancelExportTask API operation.
+type CancelExportTaskRequest struct {
+	*aws.Request
+	Input *CancelExportTaskInput
+}
+
+// Send marshals and sends the CancelExportTask API request.
+func (r CancelExportTaskRequest) Send() (*CancelExportTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelExportTaskOutput), nil
+}
+
+// CancelExportTaskRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Cancels the specified export task.
 //
-// See CancelExportTask for more information on using the CancelExportTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The task must be in the PENDING or RUNNING state.
 //
 //    // Example sending a request using the CancelExportTaskRequest method.
-//    req, resp := client.CancelExportTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelExportTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelExportTask
-func (c *CloudWatchLogs) CancelExportTaskRequest(input *CancelExportTaskInput) (req *aws.Request, output *CancelExportTaskOutput) {
+func (c *CloudWatchLogs) CancelExportTaskRequest(input *CancelExportTaskInput) CancelExportTaskRequest {
 	op := &aws.Operation{
 		Name:       opCancelExportTask,
 		HTTPMethod: "POST",
@@ -151,104 +116,32 @@ func (c *CloudWatchLogs) CancelExportTaskRequest(input *CancelExportTaskInput) (
 		input = &CancelExportTaskInput{}
 	}
 
-	output = &CancelExportTaskOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CancelExportTaskOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// CancelExportTask API operation for Amazon CloudWatch Logs.
-//
-// Cancels the specified export task.
-//
-// The task must be in the PENDING or RUNNING state.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation CancelExportTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   The operation is not valid on the specified resource.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelExportTask
-func (c *CloudWatchLogs) CancelExportTask(input *CancelExportTaskInput) (*CancelExportTaskOutput, error) {
-	req, out := c.CancelExportTaskRequest(input)
-	return out, req.Send()
-}
-
-// CancelExportTaskWithContext is the same as CancelExportTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelExportTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) CancelExportTaskWithContext(ctx aws.Context, input *CancelExportTaskInput, opts ...aws.Option) (*CancelExportTaskOutput, error) {
-	req, out := c.CancelExportTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return CancelExportTaskRequest{Request: req, Input: input}
 }
 
 const opCreateExportTask = "CreateExportTask"
 
-// CreateExportTaskRequest generates a "aws.Request" representing the
-// client's request for the CreateExportTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateExportTask for more information on using the CreateExportTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateExportTaskRequest method.
-//    req, resp := client.CreateExportTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTask
-func (c *CloudWatchLogs) CreateExportTaskRequest(input *CreateExportTaskInput) (req *aws.Request, output *CreateExportTaskOutput) {
-	op := &aws.Operation{
-		Name:       opCreateExportTask,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateExportTaskInput{}
-	}
-
-	output = &CreateExportTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateExportTaskRequest is a API request type for the CreateExportTask API operation.
+type CreateExportTaskRequest struct {
+	*aws.Request
+	Input *CreateExportTaskInput
 }
 
-// CreateExportTask API operation for Amazon CloudWatch Logs.
+// Send marshals and sends the CreateExportTask API request.
+func (r CreateExportTaskRequest) Send() (*CreateExportTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateExportTaskOutput), nil
+}
+
+// CreateExportTaskRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Creates an export task, which allows you to efficiently export data from
 // a log group to an Amazon S3 bucket.
@@ -263,99 +156,49 @@ func (c *CloudWatchLogs) CreateExportTaskRequest(input *CreateExportTaskInput) (
 // same S3 bucket. To separate out log data for each export task, you can specify
 // a prefix to be used as the Amazon S3 key prefix for all exported objects.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation CreateExportTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have reached the maximum number of resources that can be created.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTask
-func (c *CloudWatchLogs) CreateExportTask(input *CreateExportTaskInput) (*CreateExportTaskOutput, error) {
-	req, out := c.CreateExportTaskRequest(input)
-	return out, req.Send()
-}
-
-// CreateExportTaskWithContext is the same as CreateExportTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateExportTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) CreateExportTaskWithContext(ctx aws.Context, input *CreateExportTaskInput, opts ...aws.Option) (*CreateExportTaskOutput, error) {
-	req, out := c.CreateExportTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateLogGroup = "CreateLogGroup"
-
-// CreateLogGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateLogGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLogGroup for more information on using the CreateLogGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateLogGroupRequest method.
-//    req, resp := client.CreateLogGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateExportTaskRequest method.
+//    req := client.CreateExportTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup
-func (c *CloudWatchLogs) CreateLogGroupRequest(input *CreateLogGroupInput) (req *aws.Request, output *CreateLogGroupOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTask
+func (c *CloudWatchLogs) CreateExportTaskRequest(input *CreateExportTaskInput) CreateExportTaskRequest {
 	op := &aws.Operation{
-		Name:       opCreateLogGroup,
+		Name:       opCreateExportTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateLogGroupInput{}
+		input = &CreateExportTaskInput{}
 	}
 
-	output = &CreateLogGroupOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &CreateExportTaskOutput{})
+	return CreateExportTaskRequest{Request: req, Input: input}
 }
 
-// CreateLogGroup API operation for Amazon CloudWatch Logs.
+const opCreateLogGroup = "CreateLogGroup"
+
+// CreateLogGroupRequest is a API request type for the CreateLogGroup API operation.
+type CreateLogGroupRequest struct {
+	*aws.Request
+	Input *CreateLogGroupInput
+}
+
+// Send marshals and sends the CreateLogGroup API request.
+func (r CreateLogGroupRequest) Send() (*CreateLogGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLogGroupOutput), nil
+}
+
+// CreateLogGroupRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Creates a log group with the specified name.
 //
@@ -380,96 +223,51 @@ func (c *CloudWatchLogs) CreateLogGroupRequest(input *CreateLogGroupInput) (req 
 // exist or the CMK is disabled, you will receive an InvalidParameterException
 // error.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation CreateLogGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have reached the maximum number of resources that can be created.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup
-func (c *CloudWatchLogs) CreateLogGroup(input *CreateLogGroupInput) (*CreateLogGroupOutput, error) {
-	req, out := c.CreateLogGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateLogGroupWithContext is the same as CreateLogGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLogGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) CreateLogGroupWithContext(ctx aws.Context, input *CreateLogGroupInput, opts ...aws.Option) (*CreateLogGroupOutput, error) {
-	req, out := c.CreateLogGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateLogStream = "CreateLogStream"
-
-// CreateLogStreamRequest generates a "aws.Request" representing the
-// client's request for the CreateLogStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLogStream for more information on using the CreateLogStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateLogStreamRequest method.
-//    req, resp := client.CreateLogStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateLogGroupRequest method.
+//    req := client.CreateLogGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStream
-func (c *CloudWatchLogs) CreateLogStreamRequest(input *CreateLogStreamInput) (req *aws.Request, output *CreateLogStreamOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup
+func (c *CloudWatchLogs) CreateLogGroupRequest(input *CreateLogGroupInput) CreateLogGroupRequest {
 	op := &aws.Operation{
-		Name:       opCreateLogStream,
+		Name:       opCreateLogGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateLogStreamInput{}
+		input = &CreateLogGroupInput{}
 	}
 
-	output = &CreateLogStreamOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return CreateLogGroupRequest{Request: req, Input: input}
 }
 
-// CreateLogStream API operation for Amazon CloudWatch Logs.
+const opCreateLogStream = "CreateLogStream"
+
+// CreateLogStreamRequest is a API request type for the CreateLogStream API operation.
+type CreateLogStreamRequest struct {
+	*aws.Request
+	Input *CreateLogStreamInput
+}
+
+// Send marshals and sends the CreateLogStream API request.
+func (r CreateLogStreamRequest) Send() (*CreateLogStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLogStreamOutput), nil
+}
+
+// CreateLogStreamRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Creates a log stream for the specified log group.
 //
@@ -484,75 +282,65 @@ func (c *CloudWatchLogs) CreateLogStreamRequest(input *CreateLogStreamInput) (re
 //
 //    * The ':' (colon) and '*' (asterisk) characters are not allowed.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation CreateLogStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
+//    // Example sending a request using the CreateLogStreamRequest method.
+//    req := client.CreateLogStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStream
-func (c *CloudWatchLogs) CreateLogStream(input *CreateLogStreamInput) (*CreateLogStreamOutput, error) {
-	req, out := c.CreateLogStreamRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchLogs) CreateLogStreamRequest(input *CreateLogStreamInput) CreateLogStreamRequest {
+	op := &aws.Operation{
+		Name:       opCreateLogStream,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateLogStreamWithContext is the same as CreateLogStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLogStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) CreateLogStreamWithContext(ctx aws.Context, input *CreateLogStreamInput, opts ...aws.Option) (*CreateLogStreamOutput, error) {
-	req, out := c.CreateLogStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateLogStreamInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateLogStreamOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return CreateLogStreamRequest{Request: req, Input: input}
 }
 
 const opDeleteDestination = "DeleteDestination"
 
-// DeleteDestinationRequest generates a "aws.Request" representing the
-// client's request for the DeleteDestination operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDestinationRequest is a API request type for the DeleteDestination API operation.
+type DeleteDestinationRequest struct {
+	*aws.Request
+	Input *DeleteDestinationInput
+}
+
+// Send marshals and sends the DeleteDestination API request.
+func (r DeleteDestinationRequest) Send() (*DeleteDestinationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDestinationOutput), nil
+}
+
+// DeleteDestinationRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDestination for more information on using the DeleteDestination
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified destination, and eventually disables all the subscription
+// filters that publish to it. This operation does not delete the physical resource
+// encapsulated by the destination.
 //
 //    // Example sending a request using the DeleteDestinationRequest method.
-//    req, resp := client.DeleteDestinationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDestinationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestination
-func (c *CloudWatchLogs) DeleteDestinationRequest(input *DeleteDestinationInput) (req *aws.Request, output *DeleteDestinationOutput) {
+func (c *CloudWatchLogs) DeleteDestinationRequest(input *DeleteDestinationInput) DeleteDestinationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDestination,
 		HTTPMethod: "POST",
@@ -563,88 +351,45 @@ func (c *CloudWatchLogs) DeleteDestinationRequest(input *DeleteDestinationInput)
 		input = &DeleteDestinationInput{}
 	}
 
-	output = &DeleteDestinationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDestinationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDestination API operation for Amazon CloudWatch Logs.
-//
-// Deletes the specified destination, and eventually disables all the subscription
-// filters that publish to it. This operation does not delete the physical resource
-// encapsulated by the destination.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DeleteDestination for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestination
-func (c *CloudWatchLogs) DeleteDestination(input *DeleteDestinationInput) (*DeleteDestinationOutput, error) {
-	req, out := c.DeleteDestinationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDestinationWithContext is the same as DeleteDestination with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDestination for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteDestinationWithContext(ctx aws.Context, input *DeleteDestinationInput, opts ...aws.Option) (*DeleteDestinationOutput, error) {
-	req, out := c.DeleteDestinationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDestinationRequest{Request: req, Input: input}
 }
 
 const opDeleteLogGroup = "DeleteLogGroup"
 
-// DeleteLogGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteLogGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLogGroupRequest is a API request type for the DeleteLogGroup API operation.
+type DeleteLogGroupRequest struct {
+	*aws.Request
+	Input *DeleteLogGroupInput
+}
+
+// Send marshals and sends the DeleteLogGroup API request.
+func (r DeleteLogGroupRequest) Send() (*DeleteLogGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLogGroupOutput), nil
+}
+
+// DeleteLogGroupRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLogGroup for more information on using the DeleteLogGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified log group and permanently deletes all the archived
+// log events associated with the log group.
 //
 //    // Example sending a request using the DeleteLogGroupRequest method.
-//    req, resp := client.DeleteLogGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLogGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroup
-func (c *CloudWatchLogs) DeleteLogGroupRequest(input *DeleteLogGroupInput) (req *aws.Request, output *DeleteLogGroupOutput) {
+func (c *CloudWatchLogs) DeleteLogGroupRequest(input *DeleteLogGroupInput) DeleteLogGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLogGroup,
 		HTTPMethod: "POST",
@@ -655,87 +400,45 @@ func (c *CloudWatchLogs) DeleteLogGroupRequest(input *DeleteLogGroupInput) (req 
 		input = &DeleteLogGroupInput{}
 	}
 
-	output = &DeleteLogGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteLogGroup API operation for Amazon CloudWatch Logs.
-//
-// Deletes the specified log group and permanently deletes all the archived
-// log events associated with the log group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DeleteLogGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroup
-func (c *CloudWatchLogs) DeleteLogGroup(input *DeleteLogGroupInput) (*DeleteLogGroupOutput, error) {
-	req, out := c.DeleteLogGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLogGroupWithContext is the same as DeleteLogGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLogGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteLogGroupWithContext(ctx aws.Context, input *DeleteLogGroupInput, opts ...aws.Option) (*DeleteLogGroupOutput, error) {
-	req, out := c.DeleteLogGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteLogGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteLogStream = "DeleteLogStream"
 
-// DeleteLogStreamRequest generates a "aws.Request" representing the
-// client's request for the DeleteLogStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLogStreamRequest is a API request type for the DeleteLogStream API operation.
+type DeleteLogStreamRequest struct {
+	*aws.Request
+	Input *DeleteLogStreamInput
+}
+
+// Send marshals and sends the DeleteLogStream API request.
+func (r DeleteLogStreamRequest) Send() (*DeleteLogStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLogStreamOutput), nil
+}
+
+// DeleteLogStreamRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLogStream for more information on using the DeleteLogStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified log stream and permanently deletes all the archived
+// log events associated with the log stream.
 //
 //    // Example sending a request using the DeleteLogStreamRequest method.
-//    req, resp := client.DeleteLogStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLogStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStream
-func (c *CloudWatchLogs) DeleteLogStreamRequest(input *DeleteLogStreamInput) (req *aws.Request, output *DeleteLogStreamOutput) {
+func (c *CloudWatchLogs) DeleteLogStreamRequest(input *DeleteLogStreamInput) DeleteLogStreamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLogStream,
 		HTTPMethod: "POST",
@@ -746,87 +449,44 @@ func (c *CloudWatchLogs) DeleteLogStreamRequest(input *DeleteLogStreamInput) (re
 		input = &DeleteLogStreamInput{}
 	}
 
-	output = &DeleteLogStreamOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteLogStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteLogStream API operation for Amazon CloudWatch Logs.
-//
-// Deletes the specified log stream and permanently deletes all the archived
-// log events associated with the log stream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DeleteLogStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStream
-func (c *CloudWatchLogs) DeleteLogStream(input *DeleteLogStreamInput) (*DeleteLogStreamOutput, error) {
-	req, out := c.DeleteLogStreamRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLogStreamWithContext is the same as DeleteLogStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLogStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteLogStreamWithContext(ctx aws.Context, input *DeleteLogStreamInput, opts ...aws.Option) (*DeleteLogStreamOutput, error) {
-	req, out := c.DeleteLogStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteLogStreamRequest{Request: req, Input: input}
 }
 
 const opDeleteMetricFilter = "DeleteMetricFilter"
 
-// DeleteMetricFilterRequest generates a "aws.Request" representing the
-// client's request for the DeleteMetricFilter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteMetricFilterRequest is a API request type for the DeleteMetricFilter API operation.
+type DeleteMetricFilterRequest struct {
+	*aws.Request
+	Input *DeleteMetricFilterInput
+}
+
+// Send marshals and sends the DeleteMetricFilter API request.
+func (r DeleteMetricFilterRequest) Send() (*DeleteMetricFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMetricFilterOutput), nil
+}
+
+// DeleteMetricFilterRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteMetricFilter for more information on using the DeleteMetricFilter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified metric filter.
 //
 //    // Example sending a request using the DeleteMetricFilterRequest method.
-//    req, resp := client.DeleteMetricFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteMetricFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilter
-func (c *CloudWatchLogs) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) (req *aws.Request, output *DeleteMetricFilterOutput) {
+func (c *CloudWatchLogs) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) DeleteMetricFilterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMetricFilter,
 		HTTPMethod: "POST",
@@ -837,86 +497,45 @@ func (c *CloudWatchLogs) DeleteMetricFilterRequest(input *DeleteMetricFilterInpu
 		input = &DeleteMetricFilterInput{}
 	}
 
-	output = &DeleteMetricFilterOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteMetricFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteMetricFilter API operation for Amazon CloudWatch Logs.
-//
-// Deletes the specified metric filter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DeleteMetricFilter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilter
-func (c *CloudWatchLogs) DeleteMetricFilter(input *DeleteMetricFilterInput) (*DeleteMetricFilterOutput, error) {
-	req, out := c.DeleteMetricFilterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteMetricFilterWithContext is the same as DeleteMetricFilter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteMetricFilter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteMetricFilterWithContext(ctx aws.Context, input *DeleteMetricFilterInput, opts ...aws.Option) (*DeleteMetricFilterOutput, error) {
-	req, out := c.DeleteMetricFilterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteMetricFilterRequest{Request: req, Input: input}
 }
 
 const opDeleteResourcePolicy = "DeleteResourcePolicy"
 
-// DeleteResourcePolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteResourcePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteResourcePolicyRequest is a API request type for the DeleteResourcePolicy API operation.
+type DeleteResourcePolicyRequest struct {
+	*aws.Request
+	Input *DeleteResourcePolicyInput
+}
+
+// Send marshals and sends the DeleteResourcePolicy API request.
+func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteResourcePolicyOutput), nil
+}
+
+// DeleteResourcePolicyRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteResourcePolicy for more information on using the DeleteResourcePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a resource policy from this account. This revokes the access of the
+// identities in that policy to put log events to this account.
 //
 //    // Example sending a request using the DeleteResourcePolicyRequest method.
-//    req, resp := client.DeleteResourcePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteResourcePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicy
-func (c *CloudWatchLogs) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) (req *aws.Request, output *DeleteResourcePolicyOutput) {
+func (c *CloudWatchLogs) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) DeleteResourcePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourcePolicy,
 		HTTPMethod: "POST",
@@ -927,84 +546,47 @@ func (c *CloudWatchLogs) DeleteResourcePolicyRequest(input *DeleteResourcePolicy
 		input = &DeleteResourcePolicyInput{}
 	}
 
-	output = &DeleteResourcePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteResourcePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteResourcePolicy API operation for Amazon CloudWatch Logs.
-//
-// Deletes a resource policy from this account. This revokes the access of the
-// identities in that policy to put log events to this account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DeleteResourcePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicy
-func (c *CloudWatchLogs) DeleteResourcePolicy(input *DeleteResourcePolicyInput) (*DeleteResourcePolicyOutput, error) {
-	req, out := c.DeleteResourcePolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteResourcePolicyWithContext is the same as DeleteResourcePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteResourcePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteResourcePolicyWithContext(ctx aws.Context, input *DeleteResourcePolicyInput, opts ...aws.Option) (*DeleteResourcePolicyOutput, error) {
-	req, out := c.DeleteResourcePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteResourcePolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteRetentionPolicy = "DeleteRetentionPolicy"
 
-// DeleteRetentionPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteRetentionPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRetentionPolicyRequest is a API request type for the DeleteRetentionPolicy API operation.
+type DeleteRetentionPolicyRequest struct {
+	*aws.Request
+	Input *DeleteRetentionPolicyInput
+}
+
+// Send marshals and sends the DeleteRetentionPolicy API request.
+func (r DeleteRetentionPolicyRequest) Send() (*DeleteRetentionPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRetentionPolicyOutput), nil
+}
+
+// DeleteRetentionPolicyRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified retention policy.
 //
-// See DeleteRetentionPolicy for more information on using the DeleteRetentionPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Log events do not expire if they belong to log groups without a retention
+// policy.
 //
 //    // Example sending a request using the DeleteRetentionPolicyRequest method.
-//    req, resp := client.DeleteRetentionPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRetentionPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteRetentionPolicy
-func (c *CloudWatchLogs) DeleteRetentionPolicyRequest(input *DeleteRetentionPolicyInput) (req *aws.Request, output *DeleteRetentionPolicyOutput) {
+func (c *CloudWatchLogs) DeleteRetentionPolicyRequest(input *DeleteRetentionPolicyInput) DeleteRetentionPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRetentionPolicy,
 		HTTPMethod: "POST",
@@ -1015,89 +597,44 @@ func (c *CloudWatchLogs) DeleteRetentionPolicyRequest(input *DeleteRetentionPoli
 		input = &DeleteRetentionPolicyInput{}
 	}
 
-	output = &DeleteRetentionPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteRetentionPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteRetentionPolicy API operation for Amazon CloudWatch Logs.
-//
-// Deletes the specified retention policy.
-//
-// Log events do not expire if they belong to log groups without a retention
-// policy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DeleteRetentionPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteRetentionPolicy
-func (c *CloudWatchLogs) DeleteRetentionPolicy(input *DeleteRetentionPolicyInput) (*DeleteRetentionPolicyOutput, error) {
-	req, out := c.DeleteRetentionPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRetentionPolicyWithContext is the same as DeleteRetentionPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRetentionPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteRetentionPolicyWithContext(ctx aws.Context, input *DeleteRetentionPolicyInput, opts ...aws.Option) (*DeleteRetentionPolicyOutput, error) {
-	req, out := c.DeleteRetentionPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteRetentionPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteSubscriptionFilter = "DeleteSubscriptionFilter"
 
-// DeleteSubscriptionFilterRequest generates a "aws.Request" representing the
-// client's request for the DeleteSubscriptionFilter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSubscriptionFilterRequest is a API request type for the DeleteSubscriptionFilter API operation.
+type DeleteSubscriptionFilterRequest struct {
+	*aws.Request
+	Input *DeleteSubscriptionFilterInput
+}
+
+// Send marshals and sends the DeleteSubscriptionFilter API request.
+func (r DeleteSubscriptionFilterRequest) Send() (*DeleteSubscriptionFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSubscriptionFilterOutput), nil
+}
+
+// DeleteSubscriptionFilterRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSubscriptionFilter for more information on using the DeleteSubscriptionFilter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified subscription filter.
 //
 //    // Example sending a request using the DeleteSubscriptionFilterRequest method.
-//    req, resp := client.DeleteSubscriptionFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSubscriptionFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilter
-func (c *CloudWatchLogs) DeleteSubscriptionFilterRequest(input *DeleteSubscriptionFilterInput) (req *aws.Request, output *DeleteSubscriptionFilterOutput) {
+func (c *CloudWatchLogs) DeleteSubscriptionFilterRequest(input *DeleteSubscriptionFilterInput) DeleteSubscriptionFilterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubscriptionFilter,
 		HTTPMethod: "POST",
@@ -1108,86 +645,45 @@ func (c *CloudWatchLogs) DeleteSubscriptionFilterRequest(input *DeleteSubscripti
 		input = &DeleteSubscriptionFilterInput{}
 	}
 
-	output = &DeleteSubscriptionFilterOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteSubscriptionFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteSubscriptionFilter API operation for Amazon CloudWatch Logs.
-//
-// Deletes the specified subscription filter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DeleteSubscriptionFilter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilter
-func (c *CloudWatchLogs) DeleteSubscriptionFilter(input *DeleteSubscriptionFilterInput) (*DeleteSubscriptionFilterOutput, error) {
-	req, out := c.DeleteSubscriptionFilterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSubscriptionFilterWithContext is the same as DeleteSubscriptionFilter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSubscriptionFilter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteSubscriptionFilterWithContext(ctx aws.Context, input *DeleteSubscriptionFilterInput, opts ...aws.Option) (*DeleteSubscriptionFilterOutput, error) {
-	req, out := c.DeleteSubscriptionFilterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteSubscriptionFilterRequest{Request: req, Input: input}
 }
 
 const opDescribeDestinations = "DescribeDestinations"
 
-// DescribeDestinationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDestinations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDestinationsRequest is a API request type for the DescribeDestinations API operation.
+type DescribeDestinationsRequest struct {
+	*aws.Request
+	Input *DescribeDestinationsInput
+}
+
+// Send marshals and sends the DescribeDestinations API request.
+func (r DescribeDestinationsRequest) Send() (*DescribeDestinationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDestinationsOutput), nil
+}
+
+// DescribeDestinationsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDestinations for more information on using the DescribeDestinations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all your destinations. The results are ASCII-sorted by destination
+// name.
 //
 //    // Example sending a request using the DescribeDestinationsRequest method.
-//    req, resp := client.DescribeDestinationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDestinationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinations
-func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinationsInput) (req *aws.Request, output *DescribeDestinationsOutput) {
+func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinationsInput) DescribeDestinationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDestinations,
 		HTTPMethod: "POST",
@@ -1204,50 +700,8 @@ func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinations
 		input = &DescribeDestinationsInput{}
 	}
 
-	output = &DescribeDestinationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDestinations API operation for Amazon CloudWatch Logs.
-//
-// Lists all your destinations. The results are ASCII-sorted by destination
-// name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DescribeDestinations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinations
-func (c *CloudWatchLogs) DescribeDestinations(input *DescribeDestinationsInput) (*DescribeDestinationsOutput, error) {
-	req, out := c.DescribeDestinationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDestinationsWithContext is the same as DescribeDestinations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDestinations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeDestinationsWithContext(ctx aws.Context, input *DescribeDestinationsInput, opts ...aws.Option) (*DescribeDestinationsOutput, error) {
-	req, out := c.DescribeDestinationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDestinationsOutput{})
+	return DescribeDestinationsRequest{Request: req, Input: input}
 }
 
 // DescribeDestinationsPages iterates over the pages of a DescribeDestinations operation,
@@ -1286,10 +740,10 @@ func (c *CloudWatchLogs) DescribeDestinationsPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDestinationsRequest(inCpy)
+			req := c.DescribeDestinationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1302,31 +756,37 @@ func (c *CloudWatchLogs) DescribeDestinationsPagesWithContext(ctx aws.Context, i
 
 const opDescribeExportTasks = "DescribeExportTasks"
 
-// DescribeExportTasksRequest generates a "aws.Request" representing the
-// client's request for the DescribeExportTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeExportTasksRequest is a API request type for the DescribeExportTasks API operation.
+type DescribeExportTasksRequest struct {
+	*aws.Request
+	Input *DescribeExportTasksInput
+}
+
+// Send marshals and sends the DescribeExportTasks API request.
+func (r DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeExportTasksOutput), nil
+}
+
+// DescribeExportTasksRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeExportTasks for more information on using the DescribeExportTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the specified export tasks. You can list all your export tasks or filter
+// the results based on task ID or task status.
 //
 //    // Example sending a request using the DescribeExportTasksRequest method.
-//    req, resp := client.DescribeExportTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeExportTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasks
-func (c *CloudWatchLogs) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *aws.Request, output *DescribeExportTasksOutput) {
+func (c *CloudWatchLogs) DescribeExportTasksRequest(input *DescribeExportTasksInput) DescribeExportTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
@@ -1337,79 +797,43 @@ func (c *CloudWatchLogs) DescribeExportTasksRequest(input *DescribeExportTasksIn
 		input = &DescribeExportTasksInput{}
 	}
 
-	output = &DescribeExportTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeExportTasks API operation for Amazon CloudWatch Logs.
-//
-// Lists the specified export tasks. You can list all your export tasks or filter
-// the results based on task ID or task status.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DescribeExportTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasks
-func (c *CloudWatchLogs) DescribeExportTasks(input *DescribeExportTasksInput) (*DescribeExportTasksOutput, error) {
-	req, out := c.DescribeExportTasksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeExportTasksWithContext is the same as DescribeExportTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeExportTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeExportTasksWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.Option) (*DescribeExportTasksOutput, error) {
-	req, out := c.DescribeExportTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+	return DescribeExportTasksRequest{Request: req, Input: input}
 }
 
 const opDescribeLogGroups = "DescribeLogGroups"
 
-// DescribeLogGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLogGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLogGroupsRequest is a API request type for the DescribeLogGroups API operation.
+type DescribeLogGroupsRequest struct {
+	*aws.Request
+	Input *DescribeLogGroupsInput
+}
+
+// Send marshals and sends the DescribeLogGroups API request.
+func (r DescribeLogGroupsRequest) Send() (*DescribeLogGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLogGroupsOutput), nil
+}
+
+// DescribeLogGroupsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLogGroups for more information on using the DescribeLogGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the specified log groups. You can list all your log groups or filter
+// the results by prefix. The results are ASCII-sorted by log group name.
 //
 //    // Example sending a request using the DescribeLogGroupsRequest method.
-//    req, resp := client.DescribeLogGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLogGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups
-func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) (req *aws.Request, output *DescribeLogGroupsOutput) {
+func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) DescribeLogGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLogGroups,
 		HTTPMethod: "POST",
@@ -1426,50 +850,8 @@ func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput)
 		input = &DescribeLogGroupsInput{}
 	}
 
-	output = &DescribeLogGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLogGroups API operation for Amazon CloudWatch Logs.
-//
-// Lists the specified log groups. You can list all your log groups or filter
-// the results by prefix. The results are ASCII-sorted by log group name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DescribeLogGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups
-func (c *CloudWatchLogs) DescribeLogGroups(input *DescribeLogGroupsInput) (*DescribeLogGroupsOutput, error) {
-	req, out := c.DescribeLogGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLogGroupsWithContext is the same as DescribeLogGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLogGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogGroupsWithContext(ctx aws.Context, input *DescribeLogGroupsInput, opts ...aws.Option) (*DescribeLogGroupsOutput, error) {
-	req, out := c.DescribeLogGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLogGroupsOutput{})
+	return DescribeLogGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeLogGroupsPages iterates over the pages of a DescribeLogGroups operation,
@@ -1508,10 +890,10 @@ func (c *CloudWatchLogs) DescribeLogGroupsPagesWithContext(ctx aws.Context, inpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeLogGroupsRequest(inCpy)
+			req := c.DescribeLogGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1524,31 +906,41 @@ func (c *CloudWatchLogs) DescribeLogGroupsPagesWithContext(ctx aws.Context, inpu
 
 const opDescribeLogStreams = "DescribeLogStreams"
 
-// DescribeLogStreamsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLogStreams operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLogStreamsRequest is a API request type for the DescribeLogStreams API operation.
+type DescribeLogStreamsRequest struct {
+	*aws.Request
+	Input *DescribeLogStreamsInput
+}
+
+// Send marshals and sends the DescribeLogStreams API request.
+func (r DescribeLogStreamsRequest) Send() (*DescribeLogStreamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLogStreamsOutput), nil
+}
+
+// DescribeLogStreamsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the log streams for the specified log group. You can list all the log
+// streams or filter the results by prefix. You can also control how the results
+// are ordered.
 //
-// See DescribeLogStreams for more information on using the DescribeLogStreams
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation has a limit of five transactions per second, after which transactions
+// are throttled.
 //
 //    // Example sending a request using the DescribeLogStreamsRequest method.
-//    req, resp := client.DescribeLogStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLogStreamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogStreams
-func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) (req *aws.Request, output *DescribeLogStreamsOutput) {
+func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) DescribeLogStreamsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLogStreams,
 		HTTPMethod: "POST",
@@ -1565,57 +957,8 @@ func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInpu
 		input = &DescribeLogStreamsInput{}
 	}
 
-	output = &DescribeLogStreamsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLogStreams API operation for Amazon CloudWatch Logs.
-//
-// Lists the log streams for the specified log group. You can list all the log
-// streams or filter the results by prefix. You can also control how the results
-// are ordered.
-//
-// This operation has a limit of five transactions per second, after which transactions
-// are throttled.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DescribeLogStreams for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogStreams
-func (c *CloudWatchLogs) DescribeLogStreams(input *DescribeLogStreamsInput) (*DescribeLogStreamsOutput, error) {
-	req, out := c.DescribeLogStreamsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLogStreamsWithContext is the same as DescribeLogStreams with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLogStreams for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogStreamsWithContext(ctx aws.Context, input *DescribeLogStreamsInput, opts ...aws.Option) (*DescribeLogStreamsOutput, error) {
-	req, out := c.DescribeLogStreamsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLogStreamsOutput{})
+	return DescribeLogStreamsRequest{Request: req, Input: input}
 }
 
 // DescribeLogStreamsPages iterates over the pages of a DescribeLogStreams operation,
@@ -1654,10 +997,10 @@ func (c *CloudWatchLogs) DescribeLogStreamsPagesWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeLogStreamsRequest(inCpy)
+			req := c.DescribeLogStreamsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1670,31 +1013,38 @@ func (c *CloudWatchLogs) DescribeLogStreamsPagesWithContext(ctx aws.Context, inp
 
 const opDescribeMetricFilters = "DescribeMetricFilters"
 
-// DescribeMetricFiltersRequest generates a "aws.Request" representing the
-// client's request for the DescribeMetricFilters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMetricFiltersRequest is a API request type for the DescribeMetricFilters API operation.
+type DescribeMetricFiltersRequest struct {
+	*aws.Request
+	Input *DescribeMetricFiltersInput
+}
+
+// Send marshals and sends the DescribeMetricFilters API request.
+func (r DescribeMetricFiltersRequest) Send() (*DescribeMetricFiltersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMetricFiltersOutput), nil
+}
+
+// DescribeMetricFiltersRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMetricFilters for more information on using the DescribeMetricFilters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the specified metric filters. You can list all the metric filters or
+// filter the results by log name, prefix, metric name, or metric namespace.
+// The results are ASCII-sorted by filter name.
 //
 //    // Example sending a request using the DescribeMetricFiltersRequest method.
-//    req, resp := client.DescribeMetricFiltersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMetricFiltersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFilters
-func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFiltersInput) (req *aws.Request, output *DescribeMetricFiltersOutput) {
+func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFiltersInput) DescribeMetricFiltersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMetricFilters,
 		HTTPMethod: "POST",
@@ -1711,54 +1061,8 @@ func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFilte
 		input = &DescribeMetricFiltersInput{}
 	}
 
-	output = &DescribeMetricFiltersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMetricFilters API operation for Amazon CloudWatch Logs.
-//
-// Lists the specified metric filters. You can list all the metric filters or
-// filter the results by log name, prefix, metric name, or metric namespace.
-// The results are ASCII-sorted by filter name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DescribeMetricFilters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFilters
-func (c *CloudWatchLogs) DescribeMetricFilters(input *DescribeMetricFiltersInput) (*DescribeMetricFiltersOutput, error) {
-	req, out := c.DescribeMetricFiltersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMetricFiltersWithContext is the same as DescribeMetricFilters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMetricFilters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeMetricFiltersWithContext(ctx aws.Context, input *DescribeMetricFiltersInput, opts ...aws.Option) (*DescribeMetricFiltersOutput, error) {
-	req, out := c.DescribeMetricFiltersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMetricFiltersOutput{})
+	return DescribeMetricFiltersRequest{Request: req, Input: input}
 }
 
 // DescribeMetricFiltersPages iterates over the pages of a DescribeMetricFilters operation,
@@ -1797,10 +1101,10 @@ func (c *CloudWatchLogs) DescribeMetricFiltersPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeMetricFiltersRequest(inCpy)
+			req := c.DescribeMetricFiltersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1813,31 +1117,36 @@ func (c *CloudWatchLogs) DescribeMetricFiltersPagesWithContext(ctx aws.Context, 
 
 const opDescribeResourcePolicies = "DescribeResourcePolicies"
 
-// DescribeResourcePoliciesRequest generates a "aws.Request" representing the
-// client's request for the DescribeResourcePolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeResourcePoliciesRequest is a API request type for the DescribeResourcePolicies API operation.
+type DescribeResourcePoliciesRequest struct {
+	*aws.Request
+	Input *DescribeResourcePoliciesInput
+}
+
+// Send marshals and sends the DescribeResourcePolicies API request.
+func (r DescribeResourcePoliciesRequest) Send() (*DescribeResourcePoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeResourcePoliciesOutput), nil
+}
+
+// DescribeResourcePoliciesRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeResourcePolicies for more information on using the DescribeResourcePolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the resource policies in this account.
 //
 //    // Example sending a request using the DescribeResourcePoliciesRequest method.
-//    req, resp := client.DescribeResourcePoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeResourcePoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePolicies
-func (c *CloudWatchLogs) DescribeResourcePoliciesRequest(input *DescribeResourcePoliciesInput) (req *aws.Request, output *DescribeResourcePoliciesOutput) {
+func (c *CloudWatchLogs) DescribeResourcePoliciesRequest(input *DescribeResourcePoliciesInput) DescribeResourcePoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResourcePolicies,
 		HTTPMethod: "POST",
@@ -1848,78 +1157,44 @@ func (c *CloudWatchLogs) DescribeResourcePoliciesRequest(input *DescribeResource
 		input = &DescribeResourcePoliciesInput{}
 	}
 
-	output = &DescribeResourcePoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeResourcePolicies API operation for Amazon CloudWatch Logs.
-//
-// Lists the resource policies in this account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DescribeResourcePolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePolicies
-func (c *CloudWatchLogs) DescribeResourcePolicies(input *DescribeResourcePoliciesInput) (*DescribeResourcePoliciesOutput, error) {
-	req, out := c.DescribeResourcePoliciesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeResourcePoliciesWithContext is the same as DescribeResourcePolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeResourcePolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeResourcePoliciesWithContext(ctx aws.Context, input *DescribeResourcePoliciesInput, opts ...aws.Option) (*DescribeResourcePoliciesOutput, error) {
-	req, out := c.DescribeResourcePoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeResourcePoliciesOutput{})
+	return DescribeResourcePoliciesRequest{Request: req, Input: input}
 }
 
 const opDescribeSubscriptionFilters = "DescribeSubscriptionFilters"
 
-// DescribeSubscriptionFiltersRequest generates a "aws.Request" representing the
-// client's request for the DescribeSubscriptionFilters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSubscriptionFiltersRequest is a API request type for the DescribeSubscriptionFilters API operation.
+type DescribeSubscriptionFiltersRequest struct {
+	*aws.Request
+	Input *DescribeSubscriptionFiltersInput
+}
+
+// Send marshals and sends the DescribeSubscriptionFilters API request.
+func (r DescribeSubscriptionFiltersRequest) Send() (*DescribeSubscriptionFiltersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSubscriptionFiltersOutput), nil
+}
+
+// DescribeSubscriptionFiltersRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSubscriptionFilters for more information on using the DescribeSubscriptionFilters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the subscription filters for the specified log group. You can list
+// all the subscription filters or filter the results by prefix. The results
+// are ASCII-sorted by filter name.
 //
 //    // Example sending a request using the DescribeSubscriptionFiltersRequest method.
-//    req, resp := client.DescribeSubscriptionFiltersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSubscriptionFiltersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFilters
-func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionFiltersInput) (req *aws.Request, output *DescribeSubscriptionFiltersOutput) {
+func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionFiltersInput) DescribeSubscriptionFiltersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubscriptionFilters,
 		HTTPMethod: "POST",
@@ -1936,54 +1211,8 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubsc
 		input = &DescribeSubscriptionFiltersInput{}
 	}
 
-	output = &DescribeSubscriptionFiltersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSubscriptionFilters API operation for Amazon CloudWatch Logs.
-//
-// Lists the subscription filters for the specified log group. You can list
-// all the subscription filters or filter the results by prefix. The results
-// are ASCII-sorted by filter name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DescribeSubscriptionFilters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFilters
-func (c *CloudWatchLogs) DescribeSubscriptionFilters(input *DescribeSubscriptionFiltersInput) (*DescribeSubscriptionFiltersOutput, error) {
-	req, out := c.DescribeSubscriptionFiltersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSubscriptionFiltersWithContext is the same as DescribeSubscriptionFilters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSubscriptionFilters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeSubscriptionFiltersWithContext(ctx aws.Context, input *DescribeSubscriptionFiltersInput, opts ...aws.Option) (*DescribeSubscriptionFiltersOutput, error) {
-	req, out := c.DescribeSubscriptionFiltersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSubscriptionFiltersOutput{})
+	return DescribeSubscriptionFiltersRequest{Request: req, Input: input}
 }
 
 // DescribeSubscriptionFiltersPages iterates over the pages of a DescribeSubscriptionFilters operation,
@@ -2022,10 +1251,10 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersPagesWithContext(ctx aws.Con
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeSubscriptionFiltersRequest(inCpy)
+			req := c.DescribeSubscriptionFiltersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2038,49 +1267,24 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersPagesWithContext(ctx aws.Con
 
 const opDisassociateKmsKey = "DisassociateKmsKey"
 
-// DisassociateKmsKeyRequest generates a "aws.Request" representing the
-// client's request for the DisassociateKmsKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateKmsKey for more information on using the DisassociateKmsKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DisassociateKmsKeyRequest method.
-//    req, resp := client.DisassociateKmsKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKey
-func (c *CloudWatchLogs) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) (req *aws.Request, output *DisassociateKmsKeyOutput) {
-	op := &aws.Operation{
-		Name:       opDisassociateKmsKey,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DisassociateKmsKeyInput{}
-	}
-
-	output = &DisassociateKmsKeyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DisassociateKmsKeyRequest is a API request type for the DisassociateKmsKey API operation.
+type DisassociateKmsKeyRequest struct {
+	*aws.Request
+	Input *DisassociateKmsKeyInput
 }
 
-// DisassociateKmsKey API operation for Amazon CloudWatch Logs.
+// Send marshals and sends the DisassociateKmsKey API request.
+func (r DisassociateKmsKeyRequest) Send() (*DisassociateKmsKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateKmsKeyOutput), nil
+}
+
+// DisassociateKmsKeyRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Disassociates the associated AWS Key Management Service (AWS KMS) customer
 // master key (CMK) from the specified log group.
@@ -2092,75 +1296,71 @@ func (c *CloudWatchLogs) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInpu
 //
 // Note that it can take up to 5 minutes for this operation to take effect.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation DisassociateKmsKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
+//    // Example sending a request using the DisassociateKmsKeyRequest method.
+//    req := client.DisassociateKmsKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKey
-func (c *CloudWatchLogs) DisassociateKmsKey(input *DisassociateKmsKeyInput) (*DisassociateKmsKeyOutput, error) {
-	req, out := c.DisassociateKmsKeyRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchLogs) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) DisassociateKmsKeyRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateKmsKey,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DisassociateKmsKeyWithContext is the same as DisassociateKmsKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateKmsKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DisassociateKmsKeyWithContext(ctx aws.Context, input *DisassociateKmsKeyInput, opts ...aws.Option) (*DisassociateKmsKeyOutput, error) {
-	req, out := c.DisassociateKmsKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DisassociateKmsKeyInput{}
+	}
+
+	req := c.newRequest(op, input, &DisassociateKmsKeyOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DisassociateKmsKeyRequest{Request: req, Input: input}
 }
 
 const opFilterLogEvents = "FilterLogEvents"
 
-// FilterLogEventsRequest generates a "aws.Request" representing the
-// client's request for the FilterLogEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// FilterLogEventsRequest is a API request type for the FilterLogEvents API operation.
+type FilterLogEventsRequest struct {
+	*aws.Request
+	Input *FilterLogEventsInput
+}
+
+// Send marshals and sends the FilterLogEvents API request.
+func (r FilterLogEventsRequest) Send() (*FilterLogEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*FilterLogEventsOutput), nil
+}
+
+// FilterLogEventsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists log events from the specified log group. You can list all the log events
+// or filter the results using a filter pattern, a time range, and the name
+// of the log stream.
 //
-// See FilterLogEvents for more information on using the FilterLogEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// By default, this operation returns as many log events as can fit in 1 MB
+// (up to 10,000 log events), or all the events found within the time range
+// that you specify. If the results include a token, then there are more log
+// events available, and you can get additional results by specifying the token
+// in a subsequent call.
 //
 //    // Example sending a request using the FilterLogEventsRequest method.
-//    req, resp := client.FilterLogEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.FilterLogEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEvents
-func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) (req *aws.Request, output *FilterLogEventsOutput) {
+func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) FilterLogEventsRequest {
 	op := &aws.Operation{
 		Name:       opFilterLogEvents,
 		HTTPMethod: "POST",
@@ -2177,60 +1377,8 @@ func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) (re
 		input = &FilterLogEventsInput{}
 	}
 
-	output = &FilterLogEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// FilterLogEvents API operation for Amazon CloudWatch Logs.
-//
-// Lists log events from the specified log group. You can list all the log events
-// or filter the results using a filter pattern, a time range, and the name
-// of the log stream.
-//
-// By default, this operation returns as many log events as can fit in 1 MB
-// (up to 10,000 log events), or all the events found within the time range
-// that you specify. If the results include a token, then there are more log
-// events available, and you can get additional results by specifying the token
-// in a subsequent call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation FilterLogEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEvents
-func (c *CloudWatchLogs) FilterLogEvents(input *FilterLogEventsInput) (*FilterLogEventsOutput, error) {
-	req, out := c.FilterLogEventsRequest(input)
-	return out, req.Send()
-}
-
-// FilterLogEventsWithContext is the same as FilterLogEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See FilterLogEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) FilterLogEventsWithContext(ctx aws.Context, input *FilterLogEventsInput, opts ...aws.Option) (*FilterLogEventsOutput, error) {
-	req, out := c.FilterLogEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &FilterLogEventsOutput{})
+	return FilterLogEventsRequest{Request: req, Input: input}
 }
 
 // FilterLogEventsPages iterates over the pages of a FilterLogEvents operation,
@@ -2269,10 +1417,10 @@ func (c *CloudWatchLogs) FilterLogEventsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.FilterLogEventsRequest(inCpy)
+			req := c.FilterLogEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2285,31 +1433,41 @@ func (c *CloudWatchLogs) FilterLogEventsPagesWithContext(ctx aws.Context, input 
 
 const opGetLogEvents = "GetLogEvents"
 
-// GetLogEventsRequest generates a "aws.Request" representing the
-// client's request for the GetLogEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetLogEventsRequest is a API request type for the GetLogEvents API operation.
+type GetLogEventsRequest struct {
+	*aws.Request
+	Input *GetLogEventsInput
+}
+
+// Send marshals and sends the GetLogEvents API request.
+func (r GetLogEventsRequest) Send() (*GetLogEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLogEventsOutput), nil
+}
+
+// GetLogEventsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists log events from the specified log stream. You can list all the log
+// events or filter using a time range.
 //
-// See GetLogEvents for more information on using the GetLogEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// By default, this operation returns as many log events as can fit in a response
+// size of 1MB (up to 10,000 log events). You can get additional log events
+// by specifying one of the tokens in a subsequent call.
 //
 //    // Example sending a request using the GetLogEventsRequest method.
-//    req, resp := client.GetLogEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetLogEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEvents
-func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) (req *aws.Request, output *GetLogEventsOutput) {
+func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) GetLogEventsRequest {
 	op := &aws.Operation{
 		Name:       opGetLogEvents,
 		HTTPMethod: "POST",
@@ -2326,57 +1484,8 @@ func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) (req *aws
 		input = &GetLogEventsInput{}
 	}
 
-	output = &GetLogEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetLogEvents API operation for Amazon CloudWatch Logs.
-//
-// Lists log events from the specified log stream. You can list all the log
-// events or filter using a time range.
-//
-// By default, this operation returns as many log events as can fit in a response
-// size of 1MB (up to 10,000 log events). You can get additional log events
-// by specifying one of the tokens in a subsequent call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation GetLogEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEvents
-func (c *CloudWatchLogs) GetLogEvents(input *GetLogEventsInput) (*GetLogEventsOutput, error) {
-	req, out := c.GetLogEventsRequest(input)
-	return out, req.Send()
-}
-
-// GetLogEventsWithContext is the same as GetLogEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetLogEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) GetLogEventsWithContext(ctx aws.Context, input *GetLogEventsInput, opts ...aws.Option) (*GetLogEventsOutput, error) {
-	req, out := c.GetLogEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetLogEventsOutput{})
+	return GetLogEventsRequest{Request: req, Input: input}
 }
 
 // GetLogEventsPages iterates over the pages of a GetLogEvents operation,
@@ -2415,10 +1524,10 @@ func (c *CloudWatchLogs) GetLogEventsPagesWithContext(ctx aws.Context, input *Ge
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetLogEventsRequest(inCpy)
+			req := c.GetLogEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2431,31 +1540,36 @@ func (c *CloudWatchLogs) GetLogEventsPagesWithContext(ctx aws.Context, input *Ge
 
 const opListTagsLogGroup = "ListTagsLogGroup"
 
-// ListTagsLogGroupRequest generates a "aws.Request" representing the
-// client's request for the ListTagsLogGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsLogGroupRequest is a API request type for the ListTagsLogGroup API operation.
+type ListTagsLogGroupRequest struct {
+	*aws.Request
+	Input *ListTagsLogGroupInput
+}
+
+// Send marshals and sends the ListTagsLogGroup API request.
+func (r ListTagsLogGroupRequest) Send() (*ListTagsLogGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsLogGroupOutput), nil
+}
+
+// ListTagsLogGroupRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsLogGroup for more information on using the ListTagsLogGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the tags for the specified log group.
 //
 //    // Example sending a request using the ListTagsLogGroupRequest method.
-//    req, resp := client.ListTagsLogGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsLogGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroup
-func (c *CloudWatchLogs) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) (req *aws.Request, output *ListTagsLogGroupOutput) {
+func (c *CloudWatchLogs) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) ListTagsLogGroupRequest {
 	op := &aws.Operation{
 		Name:       opListTagsLogGroup,
 		HTTPMethod: "POST",
@@ -2466,94 +1580,30 @@ func (c *CloudWatchLogs) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) (
 		input = &ListTagsLogGroupInput{}
 	}
 
-	output = &ListTagsLogGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsLogGroup API operation for Amazon CloudWatch Logs.
-//
-// Lists the tags for the specified log group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation ListTagsLogGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroup
-func (c *CloudWatchLogs) ListTagsLogGroup(input *ListTagsLogGroupInput) (*ListTagsLogGroupOutput, error) {
-	req, out := c.ListTagsLogGroupRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsLogGroupWithContext is the same as ListTagsLogGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsLogGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) ListTagsLogGroupWithContext(ctx aws.Context, input *ListTagsLogGroupInput, opts ...aws.Option) (*ListTagsLogGroupOutput, error) {
-	req, out := c.ListTagsLogGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsLogGroupOutput{})
+	return ListTagsLogGroupRequest{Request: req, Input: input}
 }
 
 const opPutDestination = "PutDestination"
 
-// PutDestinationRequest generates a "aws.Request" representing the
-// client's request for the PutDestination operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutDestination for more information on using the PutDestination
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutDestinationRequest method.
-//    req, resp := client.PutDestinationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestination
-func (c *CloudWatchLogs) PutDestinationRequest(input *PutDestinationInput) (req *aws.Request, output *PutDestinationOutput) {
-	op := &aws.Operation{
-		Name:       opPutDestination,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutDestinationInput{}
-	}
-
-	output = &PutDestinationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutDestinationRequest is a API request type for the PutDestination API operation.
+type PutDestinationRequest struct {
+	*aws.Request
+	Input *PutDestinationInput
 }
 
-// PutDestination API operation for Amazon CloudWatch Logs.
+// Send marshals and sends the PutDestination API request.
+func (r PutDestinationRequest) Send() (*PutDestinationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutDestinationOutput), nil
+}
+
+// PutDestinationRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Creates or updates a destination. A destination encapsulates a physical resource
 // (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time
@@ -2567,72 +1617,64 @@ func (c *CloudWatchLogs) PutDestinationRequest(input *PutDestinationInput) (req 
 // against this destination. To enable this, the destination owner must call
 // PutDestinationPolicy after PutDestination.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation PutDestination for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
+//    // Example sending a request using the PutDestinationRequest method.
+//    req := client.PutDestinationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestination
-func (c *CloudWatchLogs) PutDestination(input *PutDestinationInput) (*PutDestinationOutput, error) {
-	req, out := c.PutDestinationRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchLogs) PutDestinationRequest(input *PutDestinationInput) PutDestinationRequest {
+	op := &aws.Operation{
+		Name:       opPutDestination,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutDestinationWithContext is the same as PutDestination with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutDestination for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) PutDestinationWithContext(ctx aws.Context, input *PutDestinationInput, opts ...aws.Option) (*PutDestinationOutput, error) {
-	req, out := c.PutDestinationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutDestinationInput{}
+	}
+
+	req := c.newRequest(op, input, &PutDestinationOutput{})
+	return PutDestinationRequest{Request: req, Input: input}
 }
 
 const opPutDestinationPolicy = "PutDestinationPolicy"
 
-// PutDestinationPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutDestinationPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutDestinationPolicyRequest is a API request type for the PutDestinationPolicy API operation.
+type PutDestinationPolicyRequest struct {
+	*aws.Request
+	Input *PutDestinationPolicyInput
+}
+
+// Send marshals and sends the PutDestinationPolicy API request.
+func (r PutDestinationPolicyRequest) Send() (*PutDestinationPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutDestinationPolicyOutput), nil
+}
+
+// PutDestinationPolicyRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutDestinationPolicy for more information on using the PutDestinationPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates or updates an access policy associated with an existing destination.
+// An access policy is an IAM policy document (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html)
+// that is used to authorize claims to register a subscription filter against
+// a given destination.
 //
 //    // Example sending a request using the PutDestinationPolicyRequest method.
-//    req, resp := client.PutDestinationPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutDestinationPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicy
-func (c *CloudWatchLogs) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) (req *aws.Request, output *PutDestinationPolicyOutput) {
+func (c *CloudWatchLogs) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) PutDestinationPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutDestinationPolicy,
 		HTTPMethod: "POST",
@@ -2643,102 +1685,32 @@ func (c *CloudWatchLogs) PutDestinationPolicyRequest(input *PutDestinationPolicy
 		input = &PutDestinationPolicyInput{}
 	}
 
-	output = &PutDestinationPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutDestinationPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutDestinationPolicy API operation for Amazon CloudWatch Logs.
-//
-// Creates or updates an access policy associated with an existing destination.
-// An access policy is an IAM policy document (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html)
-// that is used to authorize claims to register a subscription filter against
-// a given destination.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation PutDestinationPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicy
-func (c *CloudWatchLogs) PutDestinationPolicy(input *PutDestinationPolicyInput) (*PutDestinationPolicyOutput, error) {
-	req, out := c.PutDestinationPolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutDestinationPolicyWithContext is the same as PutDestinationPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutDestinationPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) PutDestinationPolicyWithContext(ctx aws.Context, input *PutDestinationPolicyInput, opts ...aws.Option) (*PutDestinationPolicyOutput, error) {
-	req, out := c.PutDestinationPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutDestinationPolicyRequest{Request: req, Input: input}
 }
 
 const opPutLogEvents = "PutLogEvents"
 
-// PutLogEventsRequest generates a "aws.Request" representing the
-// client's request for the PutLogEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutLogEvents for more information on using the PutLogEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutLogEventsRequest method.
-//    req, resp := client.PutLogEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents
-func (c *CloudWatchLogs) PutLogEventsRequest(input *PutLogEventsInput) (req *aws.Request, output *PutLogEventsOutput) {
-	op := &aws.Operation{
-		Name:       opPutLogEvents,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutLogEventsInput{}
-	}
-
-	output = &PutLogEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutLogEventsRequest is a API request type for the PutLogEvents API operation.
+type PutLogEventsRequest struct {
+	*aws.Request
+	Input *PutLogEventsInput
 }
 
-// PutLogEvents API operation for Amazon CloudWatch Logs.
+// Send marshals and sends the PutLogEvents API request.
+func (r PutLogEventsRequest) Send() (*PutLogEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutLogEventsOutput), nil
+}
+
+// PutLogEventsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Uploads a batch of log events to the specified log stream.
 //
@@ -2769,78 +1741,66 @@ func (c *CloudWatchLogs) PutLogEventsRequest(input *PutLogEventsInput) (req *aws
 //    * A batch of log events in a single request cannot span more than 24 hours.
 //    Otherwise, the operation fails.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation PutLogEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeInvalidSequenceTokenException "InvalidSequenceTokenException"
-//   The sequence token is not valid.
-//
-//   * ErrCodeDataAlreadyAcceptedException "DataAlreadyAcceptedException"
-//   The event was already logged.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
+//    // Example sending a request using the PutLogEventsRequest method.
+//    req := client.PutLogEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents
-func (c *CloudWatchLogs) PutLogEvents(input *PutLogEventsInput) (*PutLogEventsOutput, error) {
-	req, out := c.PutLogEventsRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchLogs) PutLogEventsRequest(input *PutLogEventsInput) PutLogEventsRequest {
+	op := &aws.Operation{
+		Name:       opPutLogEvents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutLogEventsWithContext is the same as PutLogEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutLogEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) PutLogEventsWithContext(ctx aws.Context, input *PutLogEventsInput, opts ...aws.Option) (*PutLogEventsOutput, error) {
-	req, out := c.PutLogEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutLogEventsInput{}
+	}
+
+	req := c.newRequest(op, input, &PutLogEventsOutput{})
+	return PutLogEventsRequest{Request: req, Input: input}
 }
 
 const opPutMetricFilter = "PutMetricFilter"
 
-// PutMetricFilterRequest generates a "aws.Request" representing the
-// client's request for the PutMetricFilter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutMetricFilterRequest is a API request type for the PutMetricFilter API operation.
+type PutMetricFilterRequest struct {
+	*aws.Request
+	Input *PutMetricFilterInput
+}
+
+// Send marshals and sends the PutMetricFilter API request.
+func (r PutMetricFilterRequest) Send() (*PutMetricFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutMetricFilterOutput), nil
+}
+
+// PutMetricFilterRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates or updates a metric filter and associates it with the specified log
+// group. Metric filters allow you to configure rules to extract metric data
+// from log events ingested through PutLogEvents.
 //
-// See PutMetricFilter for more information on using the PutMetricFilter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The maximum number of metric filters that can be associated with a log group
+// is 100.
 //
 //    // Example sending a request using the PutMetricFilterRequest method.
-//    req, resp := client.PutMetricFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutMetricFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilter
-func (c *CloudWatchLogs) PutMetricFilterRequest(input *PutMetricFilterInput) (req *aws.Request, output *PutMetricFilterOutput) {
+func (c *CloudWatchLogs) PutMetricFilterRequest(input *PutMetricFilterInput) PutMetricFilterRequest {
 	op := &aws.Operation{
 		Name:       opPutMetricFilter,
 		HTTPMethod: "POST",
@@ -2851,94 +1811,46 @@ func (c *CloudWatchLogs) PutMetricFilterRequest(input *PutMetricFilterInput) (re
 		input = &PutMetricFilterInput{}
 	}
 
-	output = &PutMetricFilterOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutMetricFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutMetricFilter API operation for Amazon CloudWatch Logs.
-//
-// Creates or updates a metric filter and associates it with the specified log
-// group. Metric filters allow you to configure rules to extract metric data
-// from log events ingested through PutLogEvents.
-//
-// The maximum number of metric filters that can be associated with a log group
-// is 100.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation PutMetricFilter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have reached the maximum number of resources that can be created.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilter
-func (c *CloudWatchLogs) PutMetricFilter(input *PutMetricFilterInput) (*PutMetricFilterOutput, error) {
-	req, out := c.PutMetricFilterRequest(input)
-	return out, req.Send()
-}
-
-// PutMetricFilterWithContext is the same as PutMetricFilter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutMetricFilter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) PutMetricFilterWithContext(ctx aws.Context, input *PutMetricFilterInput, opts ...aws.Option) (*PutMetricFilterOutput, error) {
-	req, out := c.PutMetricFilterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutMetricFilterRequest{Request: req, Input: input}
 }
 
 const opPutResourcePolicy = "PutResourcePolicy"
 
-// PutResourcePolicyRequest generates a "aws.Request" representing the
-// client's request for the PutResourcePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutResourcePolicyRequest is a API request type for the PutResourcePolicy API operation.
+type PutResourcePolicyRequest struct {
+	*aws.Request
+	Input *PutResourcePolicyInput
+}
+
+// Send marshals and sends the PutResourcePolicy API request.
+func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutResourcePolicyOutput), nil
+}
+
+// PutResourcePolicyRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutResourcePolicy for more information on using the PutResourcePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates or updates a resource policy allowing other AWS services to put log
+// events to this account, such as Amazon Route 53. An account can have up to
+// 50 resource policies per region.
 //
 //    // Example sending a request using the PutResourcePolicyRequest method.
-//    req, resp := client.PutResourcePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutResourcePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicy
-func (c *CloudWatchLogs) PutResourcePolicyRequest(input *PutResourcePolicyInput) (req *aws.Request, output *PutResourcePolicyOutput) {
+func (c *CloudWatchLogs) PutResourcePolicyRequest(input *PutResourcePolicyInput) PutResourcePolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutResourcePolicy,
 		HTTPMethod: "POST",
@@ -2949,83 +1861,44 @@ func (c *CloudWatchLogs) PutResourcePolicyRequest(input *PutResourcePolicyInput)
 		input = &PutResourcePolicyInput{}
 	}
 
-	output = &PutResourcePolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutResourcePolicy API operation for Amazon CloudWatch Logs.
-//
-// Creates or updates a resource policy allowing other AWS services to put log
-// events to this account, such as Amazon Route 53. An account can have up to
-// 50 resource policies per region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation PutResourcePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have reached the maximum number of resources that can be created.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicy
-func (c *CloudWatchLogs) PutResourcePolicy(input *PutResourcePolicyInput) (*PutResourcePolicyOutput, error) {
-	req, out := c.PutResourcePolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutResourcePolicyWithContext is the same as PutResourcePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutResourcePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) PutResourcePolicyWithContext(ctx aws.Context, input *PutResourcePolicyInput, opts ...aws.Option) (*PutResourcePolicyOutput, error) {
-	req, out := c.PutResourcePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutResourcePolicyOutput{})
+	return PutResourcePolicyRequest{Request: req, Input: input}
 }
 
 const opPutRetentionPolicy = "PutRetentionPolicy"
 
-// PutRetentionPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutRetentionPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutRetentionPolicyRequest is a API request type for the PutRetentionPolicy API operation.
+type PutRetentionPolicyRequest struct {
+	*aws.Request
+	Input *PutRetentionPolicyInput
+}
+
+// Send marshals and sends the PutRetentionPolicy API request.
+func (r PutRetentionPolicyRequest) Send() (*PutRetentionPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRetentionPolicyOutput), nil
+}
+
+// PutRetentionPolicyRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRetentionPolicy for more information on using the PutRetentionPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the retention of the specified log group. A retention policy allows
+// you to configure the number of days for which to retain log events in the
+// specified log group.
 //
 //    // Example sending a request using the PutRetentionPolicyRequest method.
-//    req, resp := client.PutRetentionPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutRetentionPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicy
-func (c *CloudWatchLogs) PutRetentionPolicyRequest(input *PutRetentionPolicyInput) (req *aws.Request, output *PutRetentionPolicyOutput) {
+func (c *CloudWatchLogs) PutRetentionPolicyRequest(input *PutRetentionPolicyInput) PutRetentionPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutRetentionPolicy,
 		HTTPMethod: "POST",
@@ -3036,106 +1909,32 @@ func (c *CloudWatchLogs) PutRetentionPolicyRequest(input *PutRetentionPolicyInpu
 		input = &PutRetentionPolicyInput{}
 	}
 
-	output = &PutRetentionPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutRetentionPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutRetentionPolicy API operation for Amazon CloudWatch Logs.
-//
-// Sets the retention of the specified log group. A retention policy allows
-// you to configure the number of days for which to retain log events in the
-// specified log group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation PutRetentionPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicy
-func (c *CloudWatchLogs) PutRetentionPolicy(input *PutRetentionPolicyInput) (*PutRetentionPolicyOutput, error) {
-	req, out := c.PutRetentionPolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutRetentionPolicyWithContext is the same as PutRetentionPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRetentionPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) PutRetentionPolicyWithContext(ctx aws.Context, input *PutRetentionPolicyInput, opts ...aws.Option) (*PutRetentionPolicyOutput, error) {
-	req, out := c.PutRetentionPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutRetentionPolicyRequest{Request: req, Input: input}
 }
 
 const opPutSubscriptionFilter = "PutSubscriptionFilter"
 
-// PutSubscriptionFilterRequest generates a "aws.Request" representing the
-// client's request for the PutSubscriptionFilter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutSubscriptionFilter for more information on using the PutSubscriptionFilter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutSubscriptionFilterRequest method.
-//    req, resp := client.PutSubscriptionFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilter
-func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput) (req *aws.Request, output *PutSubscriptionFilterOutput) {
-	op := &aws.Operation{
-		Name:       opPutSubscriptionFilter,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutSubscriptionFilterInput{}
-	}
-
-	output = &PutSubscriptionFilterOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// PutSubscriptionFilterRequest is a API request type for the PutSubscriptionFilter API operation.
+type PutSubscriptionFilterRequest struct {
+	*aws.Request
+	Input *PutSubscriptionFilterInput
 }
 
-// PutSubscriptionFilter API operation for Amazon CloudWatch Logs.
+// Send marshals and sends the PutSubscriptionFilter API request.
+func (r PutSubscriptionFilterRequest) Send() (*PutSubscriptionFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutSubscriptionFilterOutput), nil
+}
+
+// PutSubscriptionFilterRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Creates or updates a subscription filter and associates it with the specified
 // log group. Subscription filters allow you to subscribe to a real-time stream
@@ -3159,96 +1958,51 @@ func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilt
 // filterName. Otherwise, the call fails because you cannot associate a second
 // filter with a log group.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation PutSubscriptionFilter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeOperationAbortedException "OperationAbortedException"
-//   Multiple requests to update the same resource were in conflict.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have reached the maximum number of resources that can be created.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilter
-func (c *CloudWatchLogs) PutSubscriptionFilter(input *PutSubscriptionFilterInput) (*PutSubscriptionFilterOutput, error) {
-	req, out := c.PutSubscriptionFilterRequest(input)
-	return out, req.Send()
-}
-
-// PutSubscriptionFilterWithContext is the same as PutSubscriptionFilter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutSubscriptionFilter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) PutSubscriptionFilterWithContext(ctx aws.Context, input *PutSubscriptionFilterInput, opts ...aws.Option) (*PutSubscriptionFilterOutput, error) {
-	req, out := c.PutSubscriptionFilterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opTagLogGroup = "TagLogGroup"
-
-// TagLogGroupRequest generates a "aws.Request" representing the
-// client's request for the TagLogGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagLogGroup for more information on using the TagLogGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TagLogGroupRequest method.
-//    req, resp := client.TagLogGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutSubscriptionFilterRequest method.
+//    req := client.PutSubscriptionFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagLogGroup
-func (c *CloudWatchLogs) TagLogGroupRequest(input *TagLogGroupInput) (req *aws.Request, output *TagLogGroupOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilter
+func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput) PutSubscriptionFilterRequest {
 	op := &aws.Operation{
-		Name:       opTagLogGroup,
+		Name:       opPutSubscriptionFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &TagLogGroupInput{}
+		input = &PutSubscriptionFilterInput{}
 	}
 
-	output = &TagLogGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutSubscriptionFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return PutSubscriptionFilterRequest{Request: req, Input: input}
 }
 
-// TagLogGroup API operation for Amazon CloudWatch Logs.
+const opTagLogGroup = "TagLogGroup"
+
+// TagLogGroupRequest is a API request type for the TagLogGroup API operation.
+type TagLogGroupRequest struct {
+	*aws.Request
+	Input *TagLogGroupInput
+}
+
+// Send marshals and sends the TagLogGroup API request.
+func (r TagLogGroupRequest) Send() (*TagLogGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagLogGroupOutput), nil
+}
+
+// TagLogGroupRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
 // Adds or updates the specified tags for the specified log group.
 //
@@ -3259,69 +2013,65 @@ func (c *CloudWatchLogs) TagLogGroupRequest(input *TagLogGroupInput) (req *aws.R
 // Logs (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html)
 // in the Amazon CloudWatch Logs User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation TagLogGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
+//    // Example sending a request using the TagLogGroupRequest method.
+//    req := client.TagLogGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagLogGroup
-func (c *CloudWatchLogs) TagLogGroup(input *TagLogGroupInput) (*TagLogGroupOutput, error) {
-	req, out := c.TagLogGroupRequest(input)
-	return out, req.Send()
-}
+func (c *CloudWatchLogs) TagLogGroupRequest(input *TagLogGroupInput) TagLogGroupRequest {
+	op := &aws.Operation{
+		Name:       opTagLogGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// TagLogGroupWithContext is the same as TagLogGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagLogGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) TagLogGroupWithContext(ctx aws.Context, input *TagLogGroupInput, opts ...aws.Option) (*TagLogGroupOutput, error) {
-	req, out := c.TagLogGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &TagLogGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &TagLogGroupOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return TagLogGroupRequest{Request: req, Input: input}
 }
 
 const opTestMetricFilter = "TestMetricFilter"
 
-// TestMetricFilterRequest generates a "aws.Request" representing the
-// client's request for the TestMetricFilter operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TestMetricFilterRequest is a API request type for the TestMetricFilter API operation.
+type TestMetricFilterRequest struct {
+	*aws.Request
+	Input *TestMetricFilterInput
+}
+
+// Send marshals and sends the TestMetricFilter API request.
+func (r TestMetricFilterRequest) Send() (*TestMetricFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TestMetricFilterOutput), nil
+}
+
+// TestMetricFilterRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TestMetricFilter for more information on using the TestMetricFilter
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Tests the filter pattern of a metric filter against a sample of log event
+// messages. You can use this operation to validate the correctness of a metric
+// filter pattern.
 //
 //    // Example sending a request using the TestMetricFilterRequest method.
-//    req, resp := client.TestMetricFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TestMetricFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilter
-func (c *CloudWatchLogs) TestMetricFilterRequest(input *TestMetricFilterInput) (req *aws.Request, output *TestMetricFilterOutput) {
+func (c *CloudWatchLogs) TestMetricFilterRequest(input *TestMetricFilterInput) TestMetricFilterRequest {
 	op := &aws.Operation{
 		Name:       opTestMetricFilter,
 		HTTPMethod: "POST",
@@ -3332,80 +2082,45 @@ func (c *CloudWatchLogs) TestMetricFilterRequest(input *TestMetricFilterInput) (
 		input = &TestMetricFilterInput{}
 	}
 
-	output = &TestMetricFilterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TestMetricFilter API operation for Amazon CloudWatch Logs.
-//
-// Tests the filter pattern of a metric filter against a sample of log event
-// messages. You can use this operation to validate the correctness of a metric
-// filter pattern.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation TestMetricFilter for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is specified incorrectly.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilter
-func (c *CloudWatchLogs) TestMetricFilter(input *TestMetricFilterInput) (*TestMetricFilterOutput, error) {
-	req, out := c.TestMetricFilterRequest(input)
-	return out, req.Send()
-}
-
-// TestMetricFilterWithContext is the same as TestMetricFilter with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TestMetricFilter for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) TestMetricFilterWithContext(ctx aws.Context, input *TestMetricFilterInput, opts ...aws.Option) (*TestMetricFilterOutput, error) {
-	req, out := c.TestMetricFilterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TestMetricFilterOutput{})
+	return TestMetricFilterRequest{Request: req, Input: input}
 }
 
 const opUntagLogGroup = "UntagLogGroup"
 
-// UntagLogGroupRequest generates a "aws.Request" representing the
-// client's request for the UntagLogGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagLogGroupRequest is a API request type for the UntagLogGroup API operation.
+type UntagLogGroupRequest struct {
+	*aws.Request
+	Input *UntagLogGroupInput
+}
+
+// Send marshals and sends the UntagLogGroup API request.
+func (r UntagLogGroupRequest) Send() (*UntagLogGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagLogGroupOutput), nil
+}
+
+// UntagLogGroupRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the specified tags from the specified log group.
 //
-// See UntagLogGroup for more information on using the UntagLogGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To list the tags for a log group, use ListTagsLogGroup. To add tags, use
+// UntagLogGroup.
 //
 //    // Example sending a request using the UntagLogGroupRequest method.
-//    req, resp := client.UntagLogGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagLogGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagLogGroup
-func (c *CloudWatchLogs) UntagLogGroupRequest(input *UntagLogGroupInput) (req *aws.Request, output *UntagLogGroupOutput) {
+func (c *CloudWatchLogs) UntagLogGroupRequest(input *UntagLogGroupInput) UntagLogGroupRequest {
 	op := &aws.Operation{
 		Name:       opUntagLogGroup,
 		HTTPMethod: "POST",
@@ -3416,51 +2131,10 @@ func (c *CloudWatchLogs) UntagLogGroupRequest(input *UntagLogGroupInput) (req *a
 		input = &UntagLogGroupInput{}
 	}
 
-	output = &UntagLogGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UntagLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UntagLogGroup API operation for Amazon CloudWatch Logs.
-//
-// Removes the specified tags from the specified log group.
-//
-// To list the tags for a log group, use ListTagsLogGroup. To add tags, use
-// UntagLogGroup.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudWatch Logs's
-// API operation UntagLogGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagLogGroup
-func (c *CloudWatchLogs) UntagLogGroup(input *UntagLogGroupInput) (*UntagLogGroupOutput, error) {
-	req, out := c.UntagLogGroupRequest(input)
-	return out, req.Send()
-}
-
-// UntagLogGroupWithContext is the same as UntagLogGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagLogGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) UntagLogGroupWithContext(ctx aws.Context, input *UntagLogGroupInput, opts ...aws.Option) (*UntagLogGroupOutput, error) {
-	req, out := c.UntagLogGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UntagLogGroupRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest

@@ -11,31 +11,37 @@ import (
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws.Request" representing the
-// client's request for the CreateCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterRequest is a API request type for the CreateCluster API operation.
+type CreateClusterRequest struct {
+	*aws.Request
+	Input *CreateClusterInput
+}
+
+// Send marshals and sends the CreateCluster API request.
+func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterOutput), nil
+}
+
+// CreateClusterRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCluster for more information on using the CreateCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a DAX cluster. All nodes in the cluster run the same DAX caching
+// software.
 //
 //    // Example sending a request using the CreateClusterRequest method.
-//    req, resp := client.CreateClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateCluster
-func (c *DAX) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+func (c *DAX) CreateClusterRequest(input *CreateClusterInput) CreateClusterRequest {
 	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
@@ -46,114 +52,43 @@ func (c *DAX) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request,
 		input = &CreateClusterInput{}
 	}
 
-	output = &CreateClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCluster API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Creates a DAX cluster. All nodes in the cluster run the same DAX caching
-// software.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation CreateCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterAlreadyExistsFault "ClusterAlreadyExistsFault"
-//   You already have a DAX cluster with the given identifier.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInsufficientClusterCapacityFault "InsufficientClusterCapacityFault"
-//   There are not enough system resources to create the cluster you requested
-//   (or to resize an already-existing cluster).
-//
-//   * ErrCodeSubnetGroupNotFoundFault "SubnetGroupNotFoundFault"
-//   The requested subnet group name does not refer to an existing subnet group.
-//
-//   * ErrCodeInvalidParameterGroupStateFault "InvalidParameterGroupStateFault"
-//   One or more parameters in a parameter group are in an invalid state.
-//
-//   * ErrCodeParameterGroupNotFoundFault "ParameterGroupNotFoundFault"
-//   The specified parameter group does not exist.
-//
-//   * ErrCodeClusterQuotaForCustomerExceededFault "ClusterQuotaForCustomerExceededFault"
-//   You have attempted to exceed the maximum number of DAX clusters for your
-//   AWS account.
-//
-//   * ErrCodeNodeQuotaForClusterExceededFault "NodeQuotaForClusterExceededFault"
-//   You have attempted to exceed the maximum number of nodes for a DAX cluster.
-//
-//   * ErrCodeNodeQuotaForCustomerExceededFault "NodeQuotaForCustomerExceededFault"
-//   You have attempted to exceed the maximum number of nodes for your AWS account.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The VPC network is in an invalid state.
-//
-//   * ErrCodeTagQuotaPerResourceExceeded "TagQuotaPerResourceExceeded"
-//   You have exceeded the maximum number of tags for this DAX cluster.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateCluster
-func (c *DAX) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterWithContext is the same as CreateCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterOutput{})
+	return CreateClusterRequest{Request: req, Input: input}
 }
 
 const opCreateParameterGroup = "CreateParameterGroup"
 
-// CreateParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateParameterGroupRequest is a API request type for the CreateParameterGroup API operation.
+type CreateParameterGroupRequest struct {
+	*aws.Request
+	Input *CreateParameterGroupInput
+}
+
+// Send marshals and sends the CreateParameterGroup API request.
+func (r CreateParameterGroupRequest) Send() (*CreateParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateParameterGroupOutput), nil
+}
+
+// CreateParameterGroupRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateParameterGroup for more information on using the CreateParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new parameter group. A parameter group is a collection of parameters
+// that you apply to all of the nodes in a DAX cluster.
 //
 //    // Example sending a request using the CreateParameterGroupRequest method.
-//    req, resp := client.CreateParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateParameterGroup
-func (c *DAX) CreateParameterGroupRequest(input *CreateParameterGroupInput) (req *aws.Request, output *CreateParameterGroupOutput) {
+func (c *DAX) CreateParameterGroupRequest(input *CreateParameterGroupInput) CreateParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateParameterGroup,
 		HTTPMethod: "POST",
@@ -164,88 +99,42 @@ func (c *DAX) CreateParameterGroupRequest(input *CreateParameterGroupInput) (req
 		input = &CreateParameterGroupInput{}
 	}
 
-	output = &CreateParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateParameterGroup API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Creates a new parameter group. A parameter group is a collection of parameters
-// that you apply to all of the nodes in a DAX cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation CreateParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeParameterGroupQuotaExceededFault "ParameterGroupQuotaExceededFault"
-//   You have attempted to exceed the maximum number of parameter groups.
-//
-//   * ErrCodeParameterGroupAlreadyExistsFault "ParameterGroupAlreadyExistsFault"
-//   The specified parameter group already exists.
-//
-//   * ErrCodeInvalidParameterGroupStateFault "InvalidParameterGroupStateFault"
-//   One or more parameters in a parameter group are in an invalid state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateParameterGroup
-func (c *DAX) CreateParameterGroup(input *CreateParameterGroupInput) (*CreateParameterGroupOutput, error) {
-	req, out := c.CreateParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateParameterGroupWithContext is the same as CreateParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) CreateParameterGroupWithContext(ctx aws.Context, input *CreateParameterGroupInput, opts ...aws.Option) (*CreateParameterGroupOutput, error) {
-	req, out := c.CreateParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateParameterGroupOutput{})
+	return CreateParameterGroupRequest{Request: req, Input: input}
 }
 
 const opCreateSubnetGroup = "CreateSubnetGroup"
 
-// CreateSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSubnetGroupRequest is a API request type for the CreateSubnetGroup API operation.
+type CreateSubnetGroupRequest struct {
+	*aws.Request
+	Input *CreateSubnetGroupInput
+}
+
+// Send marshals and sends the CreateSubnetGroup API request.
+func (r CreateSubnetGroupRequest) Send() (*CreateSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSubnetGroupOutput), nil
+}
+
+// CreateSubnetGroupRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSubnetGroup for more information on using the CreateSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new subnet group.
 //
 //    // Example sending a request using the CreateSubnetGroupRequest method.
-//    req, resp := client.CreateSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateSubnetGroup
-func (c *DAX) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) (req *aws.Request, output *CreateSubnetGroupOutput) {
+func (c *DAX) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) CreateSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubnetGroup,
 		HTTPMethod: "POST",
@@ -256,86 +145,45 @@ func (c *DAX) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) (req *aws.
 		input = &CreateSubnetGroupInput{}
 	}
 
-	output = &CreateSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSubnetGroup API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Creates a new subnet group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation CreateSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubnetGroupAlreadyExistsFault "SubnetGroupAlreadyExistsFault"
-//   The specified subnet group already exists.
-//
-//   * ErrCodeSubnetGroupQuotaExceededFault "SubnetGroupQuotaExceededFault"
-//   The request cannot be processed because it would exceed the allowed number
-//   of subnets in a subnet group.
-//
-//   * ErrCodeSubnetQuotaExceededFault "SubnetQuotaExceededFault"
-//   The request cannot be processed because it would exceed the allowed number
-//   of subnets in a subnet group.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   An invalid subnet identifier was specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateSubnetGroup
-func (c *DAX) CreateSubnetGroup(input *CreateSubnetGroupInput) (*CreateSubnetGroupOutput, error) {
-	req, out := c.CreateSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateSubnetGroupWithContext is the same as CreateSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) CreateSubnetGroupWithContext(ctx aws.Context, input *CreateSubnetGroupInput, opts ...aws.Option) (*CreateSubnetGroupOutput, error) {
-	req, out := c.CreateSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSubnetGroupOutput{})
+	return CreateSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opDecreaseReplicationFactor = "DecreaseReplicationFactor"
 
-// DecreaseReplicationFactorRequest generates a "aws.Request" representing the
-// client's request for the DecreaseReplicationFactor operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DecreaseReplicationFactorRequest is a API request type for the DecreaseReplicationFactor API operation.
+type DecreaseReplicationFactorRequest struct {
+	*aws.Request
+	Input *DecreaseReplicationFactorInput
+}
+
+// Send marshals and sends the DecreaseReplicationFactor API request.
+func (r DecreaseReplicationFactorRequest) Send() (*DecreaseReplicationFactorOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DecreaseReplicationFactorOutput), nil
+}
+
+// DecreaseReplicationFactorRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes one or more nodes from a DAX cluster.
 //
-// See DecreaseReplicationFactor for more information on using the DecreaseReplicationFactor
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot use DecreaseReplicationFactor to remove the last node in a DAX
+// cluster. If you need to do this, use DeleteCluster instead.
 //
 //    // Example sending a request using the DecreaseReplicationFactorRequest method.
-//    req, resp := client.DecreaseReplicationFactorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DecreaseReplicationFactorRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactor
-func (c *DAX) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorInput) (req *aws.Request, output *DecreaseReplicationFactorOutput) {
+func (c *DAX) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorInput) DecreaseReplicationFactorRequest {
 	op := &aws.Operation{
 		Name:       opDecreaseReplicationFactor,
 		HTTPMethod: "POST",
@@ -346,90 +194,45 @@ func (c *DAX) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorI
 		input = &DecreaseReplicationFactorInput{}
 	}
 
-	output = &DecreaseReplicationFactorOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DecreaseReplicationFactor API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Removes one or more nodes from a DAX cluster.
-//
-// You cannot use DecreaseReplicationFactor to remove the last node in a DAX
-// cluster. If you need to do this, use DeleteCluster instead.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DecreaseReplicationFactor for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeNodeNotFoundFault "NodeNotFoundFault"
-//   None of the nodes in the cluster have the given node ID.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactor
-func (c *DAX) DecreaseReplicationFactor(input *DecreaseReplicationFactorInput) (*DecreaseReplicationFactorOutput, error) {
-	req, out := c.DecreaseReplicationFactorRequest(input)
-	return out, req.Send()
-}
-
-// DecreaseReplicationFactorWithContext is the same as DecreaseReplicationFactor with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DecreaseReplicationFactor for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DecreaseReplicationFactorWithContext(ctx aws.Context, input *DecreaseReplicationFactorInput, opts ...aws.Option) (*DecreaseReplicationFactorOutput, error) {
-	req, out := c.DecreaseReplicationFactorRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DecreaseReplicationFactorOutput{})
+	return DecreaseReplicationFactorRequest{Request: req, Input: input}
 }
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws.Request" representing the
-// client's request for the DeleteCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteClusterRequest is a API request type for the DeleteCluster API operation.
+type DeleteClusterRequest struct {
+	*aws.Request
+	Input *DeleteClusterInput
+}
+
+// Send marshals and sends the DeleteCluster API request.
+func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterOutput), nil
+}
+
+// DeleteClusterRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCluster for more information on using the DeleteCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a previously provisioned DAX cluster. DeleteCluster deletes all associated
+// nodes, node endpoints and the DAX cluster itself. When you receive a successful
+// response from this action, DAX immediately begins deleting the cluster; you
+// cannot cancel or revert this action.
 //
 //    // Example sending a request using the DeleteClusterRequest method.
-//    req, resp := client.DeleteClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteCluster
-func (c *DAX) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
+func (c *DAX) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
@@ -440,87 +243,43 @@ func (c *DAX) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request,
 		input = &DeleteClusterInput{}
 	}
 
-	output = &DeleteClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCluster API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Deletes a previously provisioned DAX cluster. DeleteCluster deletes all associated
-// nodes, node endpoints and the DAX cluster itself. When you receive a successful
-// response from this action, DAX immediately begins deleting the cluster; you
-// cannot cancel or revert this action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DeleteCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteCluster
-func (c *DAX) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteClusterWithContext is the same as DeleteCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	return DeleteClusterRequest{Request: req, Input: input}
 }
 
 const opDeleteParameterGroup = "DeleteParameterGroup"
 
-// DeleteParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteParameterGroupRequest is a API request type for the DeleteParameterGroup API operation.
+type DeleteParameterGroupRequest struct {
+	*aws.Request
+	Input *DeleteParameterGroupInput
+}
+
+// Send marshals and sends the DeleteParameterGroup API request.
+func (r DeleteParameterGroupRequest) Send() (*DeleteParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteParameterGroupOutput), nil
+}
+
+// DeleteParameterGroupRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteParameterGroup for more information on using the DeleteParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified parameter group. You cannot delete a parameter group
+// if it is associated with any DAX clusters.
 //
 //    // Example sending a request using the DeleteParameterGroupRequest method.
-//    req, resp := client.DeleteParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteParameterGroup
-func (c *DAX) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) (req *aws.Request, output *DeleteParameterGroupOutput) {
+func (c *DAX) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) DeleteParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteParameterGroup,
 		HTTPMethod: "POST",
@@ -531,85 +290,44 @@ func (c *DAX) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) (req
 		input = &DeleteParameterGroupInput{}
 	}
 
-	output = &DeleteParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteParameterGroup API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Deletes the specified parameter group. You cannot delete a parameter group
-// if it is associated with any DAX clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DeleteParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterGroupStateFault "InvalidParameterGroupStateFault"
-//   One or more parameters in a parameter group are in an invalid state.
-//
-//   * ErrCodeParameterGroupNotFoundFault "ParameterGroupNotFoundFault"
-//   The specified parameter group does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteParameterGroup
-func (c *DAX) DeleteParameterGroup(input *DeleteParameterGroupInput) (*DeleteParameterGroupOutput, error) {
-	req, out := c.DeleteParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteParameterGroupWithContext is the same as DeleteParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DeleteParameterGroupWithContext(ctx aws.Context, input *DeleteParameterGroupInput, opts ...aws.Option) (*DeleteParameterGroupOutput, error) {
-	req, out := c.DeleteParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteParameterGroupOutput{})
+	return DeleteParameterGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteSubnetGroup = "DeleteSubnetGroup"
 
-// DeleteSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSubnetGroupRequest is a API request type for the DeleteSubnetGroup API operation.
+type DeleteSubnetGroupRequest struct {
+	*aws.Request
+	Input *DeleteSubnetGroupInput
+}
+
+// Send marshals and sends the DeleteSubnetGroup API request.
+func (r DeleteSubnetGroupRequest) Send() (*DeleteSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSubnetGroupOutput), nil
+}
+
+// DeleteSubnetGroupRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a subnet group.
 //
-// See DeleteSubnetGroup for more information on using the DeleteSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot delete a subnet group if it is associated with any DAX clusters.
 //
 //    // Example sending a request using the DeleteSubnetGroupRequest method.
-//    req, resp := client.DeleteSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteSubnetGroup
-func (c *DAX) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) (req *aws.Request, output *DeleteSubnetGroupOutput) {
+func (c *DAX) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) DeleteSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubnetGroup,
 		HTTPMethod: "POST",
@@ -620,96 +338,30 @@ func (c *DAX) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) (req *aws.
 		input = &DeleteSubnetGroupInput{}
 	}
 
-	output = &DeleteSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSubnetGroup API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Deletes a subnet group.
-//
-// You cannot delete a subnet group if it is associated with any DAX clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DeleteSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubnetGroupInUseFault "SubnetGroupInUseFault"
-//   The specified subnet group is currently in use.
-//
-//   * ErrCodeSubnetGroupNotFoundFault "SubnetGroupNotFoundFault"
-//   The requested subnet group name does not refer to an existing subnet group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteSubnetGroup
-func (c *DAX) DeleteSubnetGroup(input *DeleteSubnetGroupInput) (*DeleteSubnetGroupOutput, error) {
-	req, out := c.DeleteSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSubnetGroupWithContext is the same as DeleteSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DeleteSubnetGroupWithContext(ctx aws.Context, input *DeleteSubnetGroupInput, opts ...aws.Option) (*DeleteSubnetGroupOutput, error) {
-	req, out := c.DeleteSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSubnetGroupOutput{})
+	return DeleteSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeClusters for more information on using the DescribeClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeClustersRequest method.
-//    req, resp := client.DescribeClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClusters
-func (c *DAX) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeClusters,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeClustersInput{}
-	}
-
-	output = &DescribeClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeClustersRequest is a API request type for the DescribeClusters API operation.
+type DescribeClustersRequest struct {
+	*aws.Request
+	Input *DescribeClustersInput
 }
 
-// DescribeClusters API operation for Amazon DynamoDB Accelerator (DAX).
+// Send marshals and sends the DescribeClusters API request.
+func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClustersOutput), nil
+}
+
+// DescribeClustersRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
 // Returns information about all provisioned DAX clusters if no cluster identifier
 // is specified, or about a specific DAX cluster if a cluster identifier is
@@ -729,72 +381,61 @@ func (c *DAX) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Re
 // If nodes are currently being removed from the DAX cluster, no endpoint information
 // for the removed nodes is displayed.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DescribeClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the DescribeClustersRequest method.
+//    req := client.DescribeClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClusters
-func (c *DAX) DescribeClusters(input *DescribeClustersInput) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	return out, req.Send()
-}
+func (c *DAX) DescribeClustersRequest(input *DescribeClustersInput) DescribeClustersRequest {
+	op := &aws.Operation{
+		Name:       opDescribeClusters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeClustersWithContext is the same as DescribeClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeClustersInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	return DescribeClustersRequest{Request: req, Input: input}
 }
 
 const opDescribeDefaultParameters = "DescribeDefaultParameters"
 
-// DescribeDefaultParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeDefaultParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDefaultParametersRequest is a API request type for the DescribeDefaultParameters API operation.
+type DescribeDefaultParametersRequest struct {
+	*aws.Request
+	Input *DescribeDefaultParametersInput
+}
+
+// Send marshals and sends the DescribeDefaultParameters API request.
+func (r DescribeDefaultParametersRequest) Send() (*DescribeDefaultParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDefaultParametersOutput), nil
+}
+
+// DescribeDefaultParametersRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDefaultParameters for more information on using the DescribeDefaultParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the default system parameter information for the DAX caching software.
 //
 //    // Example sending a request using the DescribeDefaultParametersRequest method.
-//    req, resp := client.DescribeDefaultParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDefaultParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeDefaultParameters
-func (c *DAX) DescribeDefaultParametersRequest(input *DescribeDefaultParametersInput) (req *aws.Request, output *DescribeDefaultParametersOutput) {
+func (c *DAX) DescribeDefaultParametersRequest(input *DescribeDefaultParametersInput) DescribeDefaultParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDefaultParameters,
 		HTTPMethod: "POST",
@@ -805,78 +446,47 @@ func (c *DAX) DescribeDefaultParametersRequest(input *DescribeDefaultParametersI
 		input = &DescribeDefaultParametersInput{}
 	}
 
-	output = &DescribeDefaultParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDefaultParameters API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Returns the default system parameter information for the DAX caching software.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DescribeDefaultParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeDefaultParameters
-func (c *DAX) DescribeDefaultParameters(input *DescribeDefaultParametersInput) (*DescribeDefaultParametersOutput, error) {
-	req, out := c.DescribeDefaultParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDefaultParametersWithContext is the same as DescribeDefaultParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDefaultParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DescribeDefaultParametersWithContext(ctx aws.Context, input *DescribeDefaultParametersInput, opts ...aws.Option) (*DescribeDefaultParametersOutput, error) {
-	req, out := c.DescribeDefaultParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDefaultParametersOutput{})
+	return DescribeDefaultParametersRequest{Request: req, Input: input}
 }
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns events related to DAX clusters and parameter groups. You can obtain
+// events specific to a particular DAX cluster or parameter group by providing
+// the name as a parameter.
 //
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// By default, only the events occurring within the last hour are returned;
+// however, you can retrieve up to 14 days' worth of events if necessary.
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeEvents
-func (c *DAX) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *DAX) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -887,83 +497,43 @@ func (c *DAX) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Reques
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Returns events related to DAX clusters and parameter groups. You can obtain
-// events specific to a particular DAX cluster or parameter group by providing
-// the name as a parameter.
-//
-// By default, only the events occurring within the last hour are returned;
-// however, you can retrieve up to 14 days' worth of events if necessary.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DescribeEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeEvents
-func (c *DAX) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 const opDescribeParameterGroups = "DescribeParameterGroups"
 
-// DescribeParameterGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeParameterGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeParameterGroupsRequest is a API request type for the DescribeParameterGroups API operation.
+type DescribeParameterGroupsRequest struct {
+	*aws.Request
+	Input *DescribeParameterGroupsInput
+}
+
+// Send marshals and sends the DescribeParameterGroups API request.
+func (r DescribeParameterGroupsRequest) Send() (*DescribeParameterGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeParameterGroupsOutput), nil
+}
+
+// DescribeParameterGroupsRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeParameterGroups for more information on using the DescribeParameterGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of parameter group descriptions. If a parameter group name
+// is specified, the list will contain only the descriptions for that group.
 //
 //    // Example sending a request using the DescribeParameterGroupsRequest method.
-//    req, resp := client.DescribeParameterGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeParameterGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroups
-func (c *DAX) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput) (req *aws.Request, output *DescribeParameterGroupsOutput) {
+func (c *DAX) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput) DescribeParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeParameterGroups,
 		HTTPMethod: "POST",
@@ -974,82 +544,42 @@ func (c *DAX) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput
 		input = &DescribeParameterGroupsInput{}
 	}
 
-	output = &DescribeParameterGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeParameterGroups API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Returns a list of parameter group descriptions. If a parameter group name
-// is specified, the list will contain only the descriptions for that group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DescribeParameterGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeParameterGroupNotFoundFault "ParameterGroupNotFoundFault"
-//   The specified parameter group does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroups
-func (c *DAX) DescribeParameterGroups(input *DescribeParameterGroupsInput) (*DescribeParameterGroupsOutput, error) {
-	req, out := c.DescribeParameterGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeParameterGroupsWithContext is the same as DescribeParameterGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeParameterGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DescribeParameterGroupsWithContext(ctx aws.Context, input *DescribeParameterGroupsInput, opts ...aws.Option) (*DescribeParameterGroupsOutput, error) {
-	req, out := c.DescribeParameterGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeParameterGroupsOutput{})
+	return DescribeParameterGroupsRequest{Request: req, Input: input}
 }
 
 const opDescribeParameters = "DescribeParameters"
 
-// DescribeParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeParametersRequest is a API request type for the DescribeParameters API operation.
+type DescribeParametersRequest struct {
+	*aws.Request
+	Input *DescribeParametersInput
+}
+
+// Send marshals and sends the DescribeParameters API request.
+func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeParametersOutput), nil
+}
+
+// DescribeParametersRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeParameters for more information on using the DescribeParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the detailed parameter list for a particular parameter group.
 //
 //    // Example sending a request using the DescribeParametersRequest method.
-//    req, resp := client.DescribeParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameters
-func (c *DAX) DescribeParametersRequest(input *DescribeParametersInput) (req *aws.Request, output *DescribeParametersOutput) {
+func (c *DAX) DescribeParametersRequest(input *DescribeParametersInput) DescribeParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeParameters,
 		HTTPMethod: "POST",
@@ -1060,81 +590,43 @@ func (c *DAX) DescribeParametersRequest(input *DescribeParametersInput) (req *aw
 		input = &DescribeParametersInput{}
 	}
 
-	output = &DescribeParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeParameters API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Returns the detailed parameter list for a particular parameter group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DescribeParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeParameterGroupNotFoundFault "ParameterGroupNotFoundFault"
-//   The specified parameter group does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameters
-func (c *DAX) DescribeParameters(input *DescribeParametersInput) (*DescribeParametersOutput, error) {
-	req, out := c.DescribeParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeParametersWithContext is the same as DescribeParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DescribeParametersWithContext(ctx aws.Context, input *DescribeParametersInput, opts ...aws.Option) (*DescribeParametersOutput, error) {
-	req, out := c.DescribeParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeParametersOutput{})
+	return DescribeParametersRequest{Request: req, Input: input}
 }
 
 const opDescribeSubnetGroups = "DescribeSubnetGroups"
 
-// DescribeSubnetGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeSubnetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSubnetGroupsRequest is a API request type for the DescribeSubnetGroups API operation.
+type DescribeSubnetGroupsRequest struct {
+	*aws.Request
+	Input *DescribeSubnetGroupsInput
+}
+
+// Send marshals and sends the DescribeSubnetGroups API request.
+func (r DescribeSubnetGroupsRequest) Send() (*DescribeSubnetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSubnetGroupsOutput), nil
+}
+
+// DescribeSubnetGroupsRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSubnetGroups for more information on using the DescribeSubnetGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of subnet group descriptions. If a subnet group name is specified,
+// the list will contain only the description of that group.
 //
 //    // Example sending a request using the DescribeSubnetGroupsRequest method.
-//    req, resp := client.DescribeSubnetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSubnetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeSubnetGroups
-func (c *DAX) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) (req *aws.Request, output *DescribeSubnetGroupsOutput) {
+func (c *DAX) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) DescribeSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubnetGroups,
 		HTTPMethod: "POST",
@@ -1145,76 +637,42 @@ func (c *DAX) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) (req
 		input = &DescribeSubnetGroupsInput{}
 	}
 
-	output = &DescribeSubnetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSubnetGroups API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Returns a list of subnet group descriptions. If a subnet group name is specified,
-// the list will contain only the description of that group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation DescribeSubnetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubnetGroupNotFoundFault "SubnetGroupNotFoundFault"
-//   The requested subnet group name does not refer to an existing subnet group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeSubnetGroups
-func (c *DAX) DescribeSubnetGroups(input *DescribeSubnetGroupsInput) (*DescribeSubnetGroupsOutput, error) {
-	req, out := c.DescribeSubnetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSubnetGroupsWithContext is the same as DescribeSubnetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSubnetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) DescribeSubnetGroupsWithContext(ctx aws.Context, input *DescribeSubnetGroupsInput, opts ...aws.Option) (*DescribeSubnetGroupsOutput, error) {
-	req, out := c.DescribeSubnetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSubnetGroupsOutput{})
+	return DescribeSubnetGroupsRequest{Request: req, Input: input}
 }
 
 const opIncreaseReplicationFactor = "IncreaseReplicationFactor"
 
-// IncreaseReplicationFactorRequest generates a "aws.Request" representing the
-// client's request for the IncreaseReplicationFactor operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// IncreaseReplicationFactorRequest is a API request type for the IncreaseReplicationFactor API operation.
+type IncreaseReplicationFactorRequest struct {
+	*aws.Request
+	Input *IncreaseReplicationFactorInput
+}
+
+// Send marshals and sends the IncreaseReplicationFactor API request.
+func (r IncreaseReplicationFactorRequest) Send() (*IncreaseReplicationFactorOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*IncreaseReplicationFactorOutput), nil
+}
+
+// IncreaseReplicationFactorRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See IncreaseReplicationFactor for more information on using the IncreaseReplicationFactor
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds one or more nodes to a DAX cluster.
 //
 //    // Example sending a request using the IncreaseReplicationFactorRequest method.
-//    req, resp := client.IncreaseReplicationFactorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.IncreaseReplicationFactorRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactor
-func (c *DAX) IncreaseReplicationFactorRequest(input *IncreaseReplicationFactorInput) (req *aws.Request, output *IncreaseReplicationFactorOutput) {
+func (c *DAX) IncreaseReplicationFactorRequest(input *IncreaseReplicationFactorInput) IncreaseReplicationFactorRequest {
 	op := &aws.Operation{
 		Name:       opIncreaseReplicationFactor,
 		HTTPMethod: "POST",
@@ -1225,97 +683,43 @@ func (c *DAX) IncreaseReplicationFactorRequest(input *IncreaseReplicationFactorI
 		input = &IncreaseReplicationFactorInput{}
 	}
 
-	output = &IncreaseReplicationFactorOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// IncreaseReplicationFactor API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Adds one or more nodes to a DAX cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation IncreaseReplicationFactor for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInsufficientClusterCapacityFault "InsufficientClusterCapacityFault"
-//   There are not enough system resources to create the cluster you requested
-//   (or to resize an already-existing cluster).
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The VPC network is in an invalid state.
-//
-//   * ErrCodeNodeQuotaForClusterExceededFault "NodeQuotaForClusterExceededFault"
-//   You have attempted to exceed the maximum number of nodes for a DAX cluster.
-//
-//   * ErrCodeNodeQuotaForCustomerExceededFault "NodeQuotaForCustomerExceededFault"
-//   You have attempted to exceed the maximum number of nodes for your AWS account.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactor
-func (c *DAX) IncreaseReplicationFactor(input *IncreaseReplicationFactorInput) (*IncreaseReplicationFactorOutput, error) {
-	req, out := c.IncreaseReplicationFactorRequest(input)
-	return out, req.Send()
-}
-
-// IncreaseReplicationFactorWithContext is the same as IncreaseReplicationFactor with the addition of
-// the ability to pass a context and additional request options.
-//
-// See IncreaseReplicationFactor for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) IncreaseReplicationFactorWithContext(ctx aws.Context, input *IncreaseReplicationFactorInput, opts ...aws.Option) (*IncreaseReplicationFactorOutput, error) {
-	req, out := c.IncreaseReplicationFactorRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &IncreaseReplicationFactorOutput{})
+	return IncreaseReplicationFactorRequest{Request: req, Input: input}
 }
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws.Request" representing the
-// client's request for the ListTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsRequest is a API request type for the ListTags API operation.
+type ListTagsRequest struct {
+	*aws.Request
+	Input *ListTagsInput
+}
+
+// Send marshals and sends the ListTags API request.
+func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOutput), nil
+}
+
+// ListTagsRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTags for more information on using the ListTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List all of the tags for a DAX cluster. You can call ListTags up to 10 times
+// per second, per account.
 //
 //    // Example sending a request using the ListTagsRequest method.
-//    req, resp := client.ListTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ListTags
-func (c *DAX) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+func (c *DAX) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -1326,88 +730,43 @@ func (c *DAX) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *L
 		input = &ListTagsInput{}
 	}
 
-	output = &ListTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTags API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// List all of the tags for a DAX cluster. You can call ListTags up to 10 times
-// per second, per account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation ListTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeInvalidARNFault "InvalidARNFault"
-//   The Amazon Resource Name (ARN) supplied in the request is not valid.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ListTags
-func (c *DAX) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsWithContext is the same as ListTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsOutput{})
+	return ListTagsRequest{Request: req, Input: input}
 }
 
 const opRebootNode = "RebootNode"
 
-// RebootNodeRequest generates a "aws.Request" representing the
-// client's request for the RebootNode operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RebootNodeRequest is a API request type for the RebootNode API operation.
+type RebootNodeRequest struct {
+	*aws.Request
+	Input *RebootNodeInput
+}
+
+// Send marshals and sends the RebootNode API request.
+func (r RebootNodeRequest) Send() (*RebootNodeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootNodeOutput), nil
+}
+
+// RebootNodeRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RebootNode for more information on using the RebootNode
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Reboots a single node of a DAX cluster. The reboot action takes place as
+// soon as possible. During the reboot, the node status is set to REBOOTING.
 //
 //    // Example sending a request using the RebootNodeRequest method.
-//    req, resp := client.RebootNodeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RebootNodeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNode
-func (c *DAX) RebootNodeRequest(input *RebootNodeInput) (req *aws.Request, output *RebootNodeOutput) {
+func (c *DAX) RebootNodeRequest(input *RebootNodeInput) RebootNodeRequest {
 	op := &aws.Operation{
 		Name:       opRebootNode,
 		HTTPMethod: "POST",
@@ -1418,88 +777,43 @@ func (c *DAX) RebootNodeRequest(input *RebootNodeInput) (req *aws.Request, outpu
 		input = &RebootNodeInput{}
 	}
 
-	output = &RebootNodeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RebootNode API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Reboots a single node of a DAX cluster. The reboot action takes place as
-// soon as possible. During the reboot, the node status is set to REBOOTING.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation RebootNode for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeNodeNotFoundFault "NodeNotFoundFault"
-//   None of the nodes in the cluster have the given node ID.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNode
-func (c *DAX) RebootNode(input *RebootNodeInput) (*RebootNodeOutput, error) {
-	req, out := c.RebootNodeRequest(input)
-	return out, req.Send()
-}
-
-// RebootNodeWithContext is the same as RebootNode with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebootNode for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) RebootNodeWithContext(ctx aws.Context, input *RebootNodeInput, opts ...aws.Option) (*RebootNodeOutput, error) {
-	req, out := c.RebootNodeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RebootNodeOutput{})
+	return RebootNodeRequest{Request: req, Input: input}
 }
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates a set of tags with a DAX resource. You can call TagResource up
+// to 5 times per second, per account.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagResource
-func (c *DAX) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *DAX) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -1510,91 +824,43 @@ func (c *DAX) TagResourceRequest(input *TagResourceInput) (req *aws.Request, out
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TagResource API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Associates a set of tags with a DAX resource. You can call TagResource up
-// to 5 times per second, per account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeTagQuotaPerResourceExceeded "TagQuotaPerResourceExceeded"
-//   You have exceeded the maximum number of tags for this DAX cluster.
-//
-//   * ErrCodeInvalidARNFault "InvalidARNFault"
-//   The Amazon Resource Name (ARN) supplied in the request is not valid.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagResource
-func (c *DAX) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TagResourceOutput{})
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the association of tags from a DAX resource. You can call UntagResource
+// up to 5 times per second, per account.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UntagResource
-func (c *DAX) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *DAX) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -1605,91 +871,44 @@ func (c *DAX) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request,
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UntagResource API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Removes the association of tags from a DAX resource. You can call UntagResource
-// up to 5 times per second, per account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeInvalidARNFault "InvalidARNFault"
-//   The Amazon Resource Name (ARN) supplied in the request is not valid.
-//
-//   * ErrCodeTagNotFoundFault "TagNotFoundFault"
-//   The tag does not exist.
-//
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UntagResource
-func (c *DAX) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UntagResourceOutput{})
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateCluster = "UpdateCluster"
 
-// UpdateClusterRequest generates a "aws.Request" representing the
-// client's request for the UpdateCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateClusterRequest is a API request type for the UpdateCluster API operation.
+type UpdateClusterRequest struct {
+	*aws.Request
+	Input *UpdateClusterInput
+}
+
+// Send marshals and sends the UpdateCluster API request.
+func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateClusterOutput), nil
+}
+
+// UpdateClusterRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateCluster for more information on using the UpdateCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the settings for a DAX cluster. You can use this action to change
+// one or more cluster configuration parameters by specifying the parameters
+// and the new values.
 //
 //    // Example sending a request using the UpdateClusterRequest method.
-//    req, resp := client.UpdateClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateCluster
-func (c *DAX) UpdateClusterRequest(input *UpdateClusterInput) (req *aws.Request, output *UpdateClusterOutput) {
+func (c *DAX) UpdateClusterRequest(input *UpdateClusterInput) UpdateClusterRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCluster,
 		HTTPMethod: "POST",
@@ -1700,92 +919,43 @@ func (c *DAX) UpdateClusterRequest(input *UpdateClusterInput) (req *aws.Request,
 		input = &UpdateClusterInput{}
 	}
 
-	output = &UpdateClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateCluster API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Modifies the settings for a DAX cluster. You can use this action to change
-// one or more cluster configuration parameters by specifying the parameters
-// and the new values.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation UpdateCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidClusterStateFault "InvalidClusterStateFault"
-//   The requested DAX cluster is not in the available state.
-//
-//   * ErrCodeClusterNotFoundFault "ClusterNotFoundFault"
-//   The requested cluster ID does not refer to an existing DAX cluster.
-//
-//   * ErrCodeInvalidParameterGroupStateFault "InvalidParameterGroupStateFault"
-//   One or more parameters in a parameter group are in an invalid state.
-//
-//   * ErrCodeParameterGroupNotFoundFault "ParameterGroupNotFoundFault"
-//   The specified parameter group does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateCluster
-func (c *DAX) UpdateCluster(input *UpdateClusterInput) (*UpdateClusterOutput, error) {
-	req, out := c.UpdateClusterRequest(input)
-	return out, req.Send()
-}
-
-// UpdateClusterWithContext is the same as UpdateCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) UpdateClusterWithContext(ctx aws.Context, input *UpdateClusterInput, opts ...aws.Option) (*UpdateClusterOutput, error) {
-	req, out := c.UpdateClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateClusterOutput{})
+	return UpdateClusterRequest{Request: req, Input: input}
 }
 
 const opUpdateParameterGroup = "UpdateParameterGroup"
 
-// UpdateParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the UpdateParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateParameterGroupRequest is a API request type for the UpdateParameterGroup API operation.
+type UpdateParameterGroupRequest struct {
+	*aws.Request
+	Input *UpdateParameterGroupInput
+}
+
+// Send marshals and sends the UpdateParameterGroup API request.
+func (r UpdateParameterGroupRequest) Send() (*UpdateParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateParameterGroupOutput), nil
+}
+
+// UpdateParameterGroupRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateParameterGroup for more information on using the UpdateParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the parameters of a parameter group. You can modify up to 20 parameters
+// in a single request by submitting a list parameter name and value pairs.
 //
 //    // Example sending a request using the UpdateParameterGroupRequest method.
-//    req, resp := client.UpdateParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateParameterGroup
-func (c *DAX) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) (req *aws.Request, output *UpdateParameterGroupOutput) {
+func (c *DAX) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) UpdateParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateParameterGroup,
 		HTTPMethod: "POST",
@@ -1796,85 +966,42 @@ func (c *DAX) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) (req
 		input = &UpdateParameterGroupInput{}
 	}
 
-	output = &UpdateParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateParameterGroup API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Modifies the parameters of a parameter group. You can modify up to 20 parameters
-// in a single request by submitting a list parameter name and value pairs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation UpdateParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterGroupStateFault "InvalidParameterGroupStateFault"
-//   One or more parameters in a parameter group are in an invalid state.
-//
-//   * ErrCodeParameterGroupNotFoundFault "ParameterGroupNotFoundFault"
-//   The specified parameter group does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateParameterGroup
-func (c *DAX) UpdateParameterGroup(input *UpdateParameterGroupInput) (*UpdateParameterGroupOutput, error) {
-	req, out := c.UpdateParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// UpdateParameterGroupWithContext is the same as UpdateParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) UpdateParameterGroupWithContext(ctx aws.Context, input *UpdateParameterGroupInput, opts ...aws.Option) (*UpdateParameterGroupOutput, error) {
-	req, out := c.UpdateParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateParameterGroupOutput{})
+	return UpdateParameterGroupRequest{Request: req, Input: input}
 }
 
 const opUpdateSubnetGroup = "UpdateSubnetGroup"
 
-// UpdateSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the UpdateSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateSubnetGroupRequest is a API request type for the UpdateSubnetGroup API operation.
+type UpdateSubnetGroupRequest struct {
+	*aws.Request
+	Input *UpdateSubnetGroupInput
+}
+
+// Send marshals and sends the UpdateSubnetGroup API request.
+func (r UpdateSubnetGroupRequest) Send() (*UpdateSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSubnetGroupOutput), nil
+}
+
+// UpdateSubnetGroupRequest returns a request value for making API operation for
+// Amazon DynamoDB Accelerator (DAX).
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSubnetGroup for more information on using the UpdateSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing subnet group.
 //
 //    // Example sending a request using the UpdateSubnetGroupRequest method.
-//    req, resp := client.UpdateSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateSubnetGroup
-func (c *DAX) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) (req *aws.Request, output *UpdateSubnetGroupOutput) {
+func (c *DAX) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) UpdateSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSubnetGroup,
 		HTTPMethod: "POST",
@@ -1885,56 +1012,8 @@ func (c *DAX) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) (req *aws.
 		input = &UpdateSubnetGroupInput{}
 	}
 
-	output = &UpdateSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateSubnetGroup API operation for Amazon DynamoDB Accelerator (DAX).
-//
-// Modifies an existing subnet group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Accelerator (DAX)'s
-// API operation UpdateSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubnetGroupNotFoundFault "SubnetGroupNotFoundFault"
-//   The requested subnet group name does not refer to an existing subnet group.
-//
-//   * ErrCodeSubnetQuotaExceededFault "SubnetQuotaExceededFault"
-//   The request cannot be processed because it would exceed the allowed number
-//   of subnets in a subnet group.
-//
-//   * ErrCodeSubnetInUse "SubnetInUse"
-//   The requested subnet is being used by another subnet group.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   An invalid subnet identifier was specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateSubnetGroup
-func (c *DAX) UpdateSubnetGroup(input *UpdateSubnetGroupInput) (*UpdateSubnetGroupOutput, error) {
-	req, out := c.UpdateSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSubnetGroupWithContext is the same as UpdateSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DAX) UpdateSubnetGroupWithContext(ctx aws.Context, input *UpdateSubnetGroupInput, opts ...aws.Option) (*UpdateSubnetGroupOutput, error) {
-	req, out := c.UpdateSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateSubnetGroupOutput{})
+	return UpdateSubnetGroupRequest{Request: req, Input: input}
 }
 
 // Contains all of the attributes of a specific DAX cluster.

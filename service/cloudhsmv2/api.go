@@ -12,31 +12,36 @@ import (
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws.Request" representing the
-// client's request for the CreateCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterRequest is a API request type for the CreateCluster API operation.
+type CreateClusterRequest struct {
+	*aws.Request
+	Input *CreateClusterInput
+}
+
+// Send marshals and sends the CreateCluster API request.
+func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterOutput), nil
+}
+
+// CreateClusterRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCluster for more information on using the CreateCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new AWS CloudHSM cluster.
 //
 //    // Example sending a request using the CreateClusterRequest method.
-//    req, resp := client.CreateClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateCluster
-func (c *CloudHSMV2) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+func (c *CloudHSMV2) CreateClusterRequest(input *CreateClusterInput) CreateClusterRequest {
 	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
@@ -47,89 +52,43 @@ func (c *CloudHSMV2) CreateClusterRequest(input *CreateClusterInput) (req *aws.R
 		input = &CreateClusterInput{}
 	}
 
-	output = &CreateClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCluster API operation for AWS CloudHSM V2.
-//
-// Creates a new AWS CloudHSM cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation CreateCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateCluster
-func (c *CloudHSMV2) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterWithContext is the same as CreateCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterOutput{})
+	return CreateClusterRequest{Request: req, Input: input}
 }
 
 const opCreateHsm = "CreateHsm"
 
-// CreateHsmRequest generates a "aws.Request" representing the
-// client's request for the CreateHsm operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateHsmRequest is a API request type for the CreateHsm API operation.
+type CreateHsmRequest struct {
+	*aws.Request
+	Input *CreateHsmInput
+}
+
+// Send marshals and sends the CreateHsm API request.
+func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHsmOutput), nil
+}
+
+// CreateHsmRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHsm for more information on using the CreateHsm
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new hardware security module (HSM) in the specified AWS CloudHSM
+// cluster.
 //
 //    // Example sending a request using the CreateHsmRequest method.
-//    req, resp := client.CreateHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateHsmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateHsm
-func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) (req *aws.Request, output *CreateHsmOutput) {
+func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
 	op := &aws.Operation{
 		Name:       opCreateHsm,
 		HTTPMethod: "POST",
@@ -140,90 +99,44 @@ func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) (req *aws.Request, 
 		input = &CreateHsmInput{}
 	}
 
-	output = &CreateHsmOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateHsm API operation for AWS CloudHSM V2.
-//
-// Creates a new hardware security module (HSM) in the specified AWS CloudHSM
-// cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation CreateHsm for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateHsm
-func (c *CloudHSMV2) CreateHsm(input *CreateHsmInput) (*CreateHsmOutput, error) {
-	req, out := c.CreateHsmRequest(input)
-	return out, req.Send()
-}
-
-// CreateHsmWithContext is the same as CreateHsm with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHsm for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, opts ...aws.Option) (*CreateHsmOutput, error) {
-	req, out := c.CreateHsmRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateHsmOutput{})
+	return CreateHsmRequest{Request: req, Input: input}
 }
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws.Request" representing the
-// client's request for the DeleteCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteClusterRequest is a API request type for the DeleteCluster API operation.
+type DeleteClusterRequest struct {
+	*aws.Request
+	Input *DeleteClusterInput
+}
+
+// Send marshals and sends the DeleteCluster API request.
+func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterOutput), nil
+}
+
+// DeleteClusterRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCluster for more information on using the DeleteCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster,
+// you must delete all HSMs in the cluster. To see if the cluster contains any
+// HSMs, use DescribeClusters. To delete an HSM, use DeleteHsm.
 //
 //    // Example sending a request using the DeleteClusterRequest method.
-//    req, resp := client.DeleteClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteCluster
-func (c *CloudHSMV2) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
+func (c *CloudHSMV2) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
@@ -234,91 +147,45 @@ func (c *CloudHSMV2) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.R
 		input = &DeleteClusterInput{}
 	}
 
-	output = &DeleteClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCluster API operation for AWS CloudHSM V2.
-//
-// Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster,
-// you must delete all HSMs in the cluster. To see if the cluster contains any
-// HSMs, use DescribeClusters. To delete an HSM, use DeleteHsm.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation DeleteCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteCluster
-func (c *CloudHSMV2) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteClusterWithContext is the same as DeleteCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	return DeleteClusterRequest{Request: req, Input: input}
 }
 
 const opDeleteHsm = "DeleteHsm"
 
-// DeleteHsmRequest generates a "aws.Request" representing the
-// client's request for the DeleteHsm operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteHsmRequest is a API request type for the DeleteHsm API operation.
+type DeleteHsmRequest struct {
+	*aws.Request
+	Input *DeleteHsmInput
+}
+
+// Send marshals and sends the DeleteHsm API request.
+func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHsmOutput), nil
+}
+
+// DeleteHsmRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHsm for more information on using the DeleteHsm
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified HSM. To specify an HSM, you can use its identifier
+// (ID), the IP address of the HSM's elastic network interface (ENI), or the
+// ID of the HSM's ENI. You need to specify only one of these values. To find
+// these values, use DescribeClusters.
 //
 //    // Example sending a request using the DeleteHsmRequest method.
-//    req, resp := client.DeleteHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteHsmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteHsm
-func (c *CloudHSMV2) DeleteHsmRequest(input *DeleteHsmInput) (req *aws.Request, output *DeleteHsmOutput) {
+func (c *CloudHSMV2) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHsm,
 		HTTPMethod: "POST",
@@ -329,92 +196,49 @@ func (c *CloudHSMV2) DeleteHsmRequest(input *DeleteHsmInput) (req *aws.Request, 
 		input = &DeleteHsmInput{}
 	}
 
-	output = &DeleteHsmOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteHsm API operation for AWS CloudHSM V2.
-//
-// Deletes the specified HSM. To specify an HSM, you can use its identifier
-// (ID), the IP address of the HSM's elastic network interface (ENI), or the
-// ID of the HSM's ENI. You need to specify only one of these values. To find
-// these values, use DescribeClusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation DeleteHsm for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteHsm
-func (c *CloudHSMV2) DeleteHsm(input *DeleteHsmInput) (*DeleteHsmOutput, error) {
-	req, out := c.DeleteHsmRequest(input)
-	return out, req.Send()
-}
-
-// DeleteHsmWithContext is the same as DeleteHsm with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHsm for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, opts ...aws.Option) (*DeleteHsmOutput, error) {
-	req, out := c.DeleteHsmRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteHsmOutput{})
+	return DeleteHsmRequest{Request: req, Input: input}
 }
 
 const opDescribeBackups = "DescribeBackups"
 
-// DescribeBackupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeBackups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeBackupsRequest is a API request type for the DescribeBackups API operation.
+type DescribeBackupsRequest struct {
+	*aws.Request
+	Input *DescribeBackupsInput
+}
+
+// Send marshals and sends the DescribeBackups API request.
+func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBackupsOutput), nil
+}
+
+// DescribeBackupsRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets information about backups of AWS CloudHSM clusters.
 //
-// See DescribeBackups for more information on using the DescribeBackups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the backups. When the response contains only a subset
+// of backups, it includes a NextToken value. Use this value in a subsequent
+// DescribeBackups request to get more backups. When you receive a response
+// with no NextToken (or an empty or null value), that means there are no more
+// backups to get.
 //
 //    // Example sending a request using the DescribeBackupsRequest method.
-//    req, resp := client.DescribeBackupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeBackupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackups
-func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) (req *aws.Request, output *DescribeBackupsOutput) {
+func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBackupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBackups,
 		HTTPMethod: "POST",
@@ -431,67 +255,8 @@ func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) (req *a
 		input = &DescribeBackupsInput{}
 	}
 
-	output = &DescribeBackupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeBackups API operation for AWS CloudHSM V2.
-//
-// Gets information about backups of AWS CloudHSM clusters.
-//
-// This is a paginated operation, which means that each response might contain
-// only a subset of all the backups. When the response contains only a subset
-// of backups, it includes a NextToken value. Use this value in a subsequent
-// DescribeBackups request to get more backups. When you receive a response
-// with no NextToken (or an empty or null value), that means there are no more
-// backups to get.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation DescribeBackups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackups
-func (c *CloudHSMV2) DescribeBackups(input *DescribeBackupsInput) (*DescribeBackupsOutput, error) {
-	req, out := c.DescribeBackupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBackupsWithContext is the same as DescribeBackups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBackups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DescribeBackupsWithContext(ctx aws.Context, input *DescribeBackupsInput, opts ...aws.Option) (*DescribeBackupsOutput, error) {
-	req, out := c.DescribeBackupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeBackupsOutput{})
+	return DescribeBackupsRequest{Request: req, Input: input}
 }
 
 // DescribeBackupsPages iterates over the pages of a DescribeBackups operation,
@@ -530,10 +295,10 @@ func (c *CloudHSMV2) DescribeBackupsPagesWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeBackupsRequest(inCpy)
+			req := c.DescribeBackupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -546,31 +311,43 @@ func (c *CloudHSMV2) DescribeBackupsPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeClustersRequest is a API request type for the DescribeClusters API operation.
+type DescribeClustersRequest struct {
+	*aws.Request
+	Input *DescribeClustersInput
+}
+
+// Send marshals and sends the DescribeClusters API request.
+func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClustersOutput), nil
+}
+
+// DescribeClustersRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets information about AWS CloudHSM clusters.
 //
-// See DescribeClusters for more information on using the DescribeClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the clusters. When the response contains only a subset
+// of clusters, it includes a NextToken value. Use this value in a subsequent
+// DescribeClusters request to get more clusters. When you receive a response
+// with no NextToken (or an empty or null value), that means there are no more
+// clusters to get.
 //
 //    // Example sending a request using the DescribeClustersRequest method.
-//    req, resp := client.DescribeClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClusters
-func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
+func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) DescribeClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
@@ -587,64 +364,8 @@ func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) (req 
 		input = &DescribeClustersInput{}
 	}
 
-	output = &DescribeClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeClusters API operation for AWS CloudHSM V2.
-//
-// Gets information about AWS CloudHSM clusters.
-//
-// This is a paginated operation, which means that each response might contain
-// only a subset of all the clusters. When the response contains only a subset
-// of clusters, it includes a NextToken value. Use this value in a subsequent
-// DescribeClusters request to get more clusters. When you receive a response
-// with no NextToken (or an empty or null value), that means there are no more
-// clusters to get.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation DescribeClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClusters
-func (c *CloudHSMV2) DescribeClusters(input *DescribeClustersInput) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeClustersWithContext is the same as DescribeClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	return DescribeClustersRequest{Request: req, Input: input}
 }
 
 // DescribeClustersPages iterates over the pages of a DescribeClusters operation,
@@ -683,10 +404,10 @@ func (c *CloudHSMV2) DescribeClustersPagesWithContext(ctx aws.Context, input *De
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeClustersRequest(inCpy)
+			req := c.DescribeClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -699,31 +420,39 @@ func (c *CloudHSMV2) DescribeClustersPagesWithContext(ctx aws.Context, input *De
 
 const opInitializeCluster = "InitializeCluster"
 
-// InitializeClusterRequest generates a "aws.Request" representing the
-// client's request for the InitializeCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// InitializeClusterRequest is a API request type for the InitializeCluster API operation.
+type InitializeClusterRequest struct {
+	*aws.Request
+	Input *InitializeClusterInput
+}
+
+// Send marshals and sends the InitializeCluster API request.
+func (r InitializeClusterRequest) Send() (*InitializeClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InitializeClusterOutput), nil
+}
+
+// InitializeClusterRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See InitializeCluster for more information on using the InitializeCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Claims an AWS CloudHSM cluster by submitting the cluster certificate issued
+// by your issuing certificate authority (CA) and the CA's root certificate.
+// Before you can claim a cluster, you must sign the cluster's certificate signing
+// request (CSR) with your issuing CA. To get the cluster's CSR, use DescribeClusters.
 //
 //    // Example sending a request using the InitializeClusterRequest method.
-//    req, resp := client.InitializeClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.InitializeClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeCluster
-func (c *CloudHSMV2) InitializeClusterRequest(input *InitializeClusterInput) (req *aws.Request, output *InitializeClusterOutput) {
+func (c *CloudHSMV2) InitializeClusterRequest(input *InitializeClusterInput) InitializeClusterRequest {
 	op := &aws.Operation{
 		Name:       opInitializeCluster,
 		HTTPMethod: "POST",
@@ -734,92 +463,48 @@ func (c *CloudHSMV2) InitializeClusterRequest(input *InitializeClusterInput) (re
 		input = &InitializeClusterInput{}
 	}
 
-	output = &InitializeClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// InitializeCluster API operation for AWS CloudHSM V2.
-//
-// Claims an AWS CloudHSM cluster by submitting the cluster certificate issued
-// by your issuing certificate authority (CA) and the CA's root certificate.
-// Before you can claim a cluster, you must sign the cluster's certificate signing
-// request (CSR) with your issuing CA. To get the cluster's CSR, use DescribeClusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation InitializeCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeCluster
-func (c *CloudHSMV2) InitializeCluster(input *InitializeClusterInput) (*InitializeClusterOutput, error) {
-	req, out := c.InitializeClusterRequest(input)
-	return out, req.Send()
-}
-
-// InitializeClusterWithContext is the same as InitializeCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See InitializeCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) InitializeClusterWithContext(ctx aws.Context, input *InitializeClusterInput, opts ...aws.Option) (*InitializeClusterOutput, error) {
-	req, out := c.InitializeClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &InitializeClusterOutput{})
+	return InitializeClusterRequest{Request: req, Input: input}
 }
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws.Request" representing the
-// client's request for the ListTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsRequest is a API request type for the ListTags API operation.
+type ListTagsRequest struct {
+	*aws.Request
+	Input *ListTagsInput
+}
+
+// Send marshals and sends the ListTags API request.
+func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOutput), nil
+}
+
+// ListTagsRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets a list of tags for the specified AWS CloudHSM cluster.
 //
-// See ListTags for more information on using the ListTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the tags. When the response contains only a subset of
+// tags, it includes a NextToken value. Use this value in a subsequent ListTags
+// request to get more tags. When you receive a response with no NextToken (or
+// an empty or null value), that means there are no more tags to get.
 //
 //    // Example sending a request using the ListTagsRequest method.
-//    req, resp := client.ListTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ListTags
-func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -836,66 +521,8 @@ func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) (req *aws.Request, ou
 		input = &ListTagsInput{}
 	}
 
-	output = &ListTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTags API operation for AWS CloudHSM V2.
-//
-// Gets a list of tags for the specified AWS CloudHSM cluster.
-//
-// This is a paginated operation, which means that each response might contain
-// only a subset of all the tags. When the response contains only a subset of
-// tags, it includes a NextToken value. Use this value in a subsequent ListTags
-// request to get more tags. When you receive a response with no NextToken (or
-// an empty or null value), that means there are no more tags to get.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation ListTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ListTags
-func (c *CloudHSMV2) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsWithContext is the same as ListTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsOutput{})
+	return ListTagsRequest{Request: req, Input: input}
 }
 
 // ListTagsPages iterates over the pages of a ListTags operation,
@@ -934,10 +561,10 @@ func (c *CloudHSMV2) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsIn
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTagsRequest(inCpy)
+			req := c.ListTagsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -950,31 +577,36 @@ func (c *CloudHSMV2) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsIn
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/TagResource
-func (c *CloudHSMV2) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *CloudHSMV2) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -985,89 +617,42 @@ func (c *CloudHSMV2) TagResourceRequest(input *TagResourceInput) (req *aws.Reque
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TagResource API operation for AWS CloudHSM V2.
-//
-// Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/TagResource
-func (c *CloudHSMV2) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TagResourceOutput{})
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the specified tag or tags from the specified AWS CloudHSM cluster.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/UntagResource
-func (c *CloudHSMV2) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *CloudHSMV2) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -1078,60 +663,8 @@ func (c *CloudHSMV2) UntagResourceRequest(input *UntagResourceInput) (req *aws.R
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UntagResource API operation for AWS CloudHSM V2.
-//
-// Removes the specified tag or tags from the specified AWS CloudHSM cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudHSM V2's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCloudHsmInternalFailureException "CloudHsmInternalFailureException"
-//   The request was rejected because of an AWS CloudHSM internal failure. The
-//   request can be retried.
-//
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   The request was rejected because an error occurred.
-//
-//   * ErrCodeCloudHsmResourceNotFoundException "CloudHsmResourceNotFoundException"
-//   The request was rejected because it refers to a resource that cannot be found.
-//
-//   * ErrCodeCloudHsmInvalidRequestException "CloudHsmInvalidRequestException"
-//   The request was rejected because it is not a valid request.
-//
-//   * ErrCodeCloudHsmAccessDeniedException "CloudHsmAccessDeniedException"
-//   The request was rejected because the requester does not have permission to
-//   perform the requested operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/UntagResource
-func (c *CloudHSMV2) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UntagResourceOutput{})
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 // Contains information about a backup of an AWS CloudHSM cluster.

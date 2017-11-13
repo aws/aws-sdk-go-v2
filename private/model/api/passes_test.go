@@ -7,21 +7,6 @@ import (
 )
 
 func TestUniqueInputAndOutputs(t *testing.T) {
-	shamelist["FooService"] = map[string]struct {
-		input  bool
-		output bool
-	}{}
-	v := shamelist["FooService"]["OpOutputNoRename"]
-	v.output = true
-	shamelist["FooService"]["OpOutputNoRename"] = v
-	v = shamelist["FooService"]["InputNoRename"]
-	v.input = true
-	shamelist["FooService"]["OpInputNoRename"] = v
-	v = shamelist["FooService"]["BothNoRename"]
-	v.input = true
-	v.output = true
-	shamelist["FooService"]["OpBothNoRename"] = v
-
 	testCases := [][]struct {
 		expectedInput  string
 		expectedOutput string
@@ -49,66 +34,6 @@ func TestUniqueInputAndOutputs(t *testing.T) {
 				inputRef:       "FooInputShapeRef",
 				output:         "FooOutputShape",
 				outputRef:      "FooOutputShapeRef",
-			},
-		},
-		{
-			{
-				expectedInput:  "FooOperationInput",
-				expectedOutput: "FooOperationOutput",
-				operation:      "FooOperation",
-				input:          "FooInputShape",
-				inputRef:       "FooInputShapeRef",
-				output:         "FooOutputShape",
-				outputRef:      "FooOutputShapeRef",
-			},
-			{
-				expectedInput:  "OpOutputNoRenameInput",
-				expectedOutput: "OpOutputNoRenameOutputShape",
-				operation:      "OpOutputNoRename",
-				input:          "OpOutputNoRenameInputShape",
-				inputRef:       "OpOutputNoRenameInputRef",
-				output:         "OpOutputNoRenameOutputShape",
-				outputRef:      "OpOutputNoRenameOutputRef",
-			},
-		},
-		{
-			{
-				expectedInput:  "FooOperationInput",
-				expectedOutput: "FooOperationOutput",
-				operation:      "FooOperation",
-				input:          "FooInputShape",
-				inputRef:       "FooInputShapeRef",
-				output:         "FooOutputShape",
-				outputRef:      "FooOutputShapeRef",
-			},
-			{
-				expectedInput:  "OpInputNoRenameInputShape",
-				expectedOutput: "OpInputNoRenameOutput",
-				operation:      "OpInputNoRename",
-				input:          "OpInputNoRenameInputShape",
-				inputRef:       "OpInputNoRenameInputRef",
-				output:         "OpInputNoRenameOutputShape",
-				outputRef:      "OpInputNoRenameOutputRef",
-			},
-		},
-		{
-			{
-				expectedInput:  "FooOperationInput",
-				expectedOutput: "FooOperationOutput",
-				operation:      "FooOperation",
-				input:          "FooInputShape",
-				inputRef:       "FooInputShapeRef",
-				output:         "FooOutputShape",
-				outputRef:      "FooOutputShapeRef",
-			},
-			{
-				expectedInput:  "OpInputNoRenameInputShape",
-				expectedOutput: "OpInputNoRenameOutputShape",
-				operation:      "OpBothNoRename",
-				input:          "OpInputNoRenameInputShape",
-				inputRef:       "OpInputNoRenameInputRef",
-				output:         "OpInputNoRenameOutputShape",
-				outputRef:      "OpInputNoRenameOutputRef",
 			},
 		},
 	}
@@ -158,10 +83,10 @@ func TestUniqueInputAndOutputs(t *testing.T) {
 		a.renameToplevelShapes()
 		for k, v := range expected {
 			if a.Operations[k].InputRef.Shape.ShapeName != v[0] {
-				t.Errorf("Error %d case: Expected %q, but received %q", k, v[0], a.Operations[k].InputRef.Shape.ShapeName)
+				t.Errorf("Error %s case: Expected %q, but received %q", k, v[0], a.Operations[k].InputRef.Shape.ShapeName)
 			}
 			if a.Operations[k].OutputRef.Shape.ShapeName != v[1] {
-				t.Errorf("Error %d case: Expected %q, but received %q", k, v[1], a.Operations[k].OutputRef.Shape.ShapeName)
+				t.Errorf("Error %s case: Expected %q, but received %q", k, v[1], a.Operations[k].OutputRef.Shape.ShapeName)
 			}
 		}
 

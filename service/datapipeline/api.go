@@ -14,47 +14,24 @@ import (
 
 const opActivatePipeline = "ActivatePipeline"
 
-// ActivatePipelineRequest generates a "aws.Request" representing the
-// client's request for the ActivatePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ActivatePipeline for more information on using the ActivatePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ActivatePipelineRequest method.
-//    req, resp := client.ActivatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipeline
-func (c *DataPipeline) ActivatePipelineRequest(input *ActivatePipelineInput) (req *aws.Request, output *ActivatePipelineOutput) {
-	op := &aws.Operation{
-		Name:       opActivatePipeline,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ActivatePipelineInput{}
-	}
-
-	output = &ActivatePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ActivatePipelineRequest is a API request type for the ActivatePipeline API operation.
+type ActivatePipelineRequest struct {
+	*aws.Request
+	Input *ActivatePipelineInput
 }
 
-// ActivatePipeline API operation for AWS Data Pipeline.
+// Send marshals and sends the ActivatePipeline API request.
+func (r ActivatePipelineRequest) Send() (*ActivatePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ActivatePipelineOutput), nil
+}
+
+// ActivatePipelineRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
 // Validates the specified pipeline and starts processing pipeline tasks. If
 // the pipeline does not pass validation, activation fails.
@@ -65,78 +42,61 @@ func (c *DataPipeline) ActivatePipelineRequest(input *ActivatePipelineInput) (re
 // To activate a finished pipeline, modify the end date for the pipeline and
 // then activate it.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation ActivatePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
+//    // Example sending a request using the ActivatePipelineRequest method.
+//    req := client.ActivatePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipeline
-func (c *DataPipeline) ActivatePipeline(input *ActivatePipelineInput) (*ActivatePipelineOutput, error) {
-	req, out := c.ActivatePipelineRequest(input)
-	return out, req.Send()
-}
+func (c *DataPipeline) ActivatePipelineRequest(input *ActivatePipelineInput) ActivatePipelineRequest {
+	op := &aws.Operation{
+		Name:       opActivatePipeline,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ActivatePipelineWithContext is the same as ActivatePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ActivatePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) ActivatePipelineWithContext(ctx aws.Context, input *ActivatePipelineInput, opts ...aws.Option) (*ActivatePipelineOutput, error) {
-	req, out := c.ActivatePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ActivatePipelineInput{}
+	}
+
+	req := c.newRequest(op, input, &ActivatePipelineOutput{})
+	return ActivatePipelineRequest{Request: req, Input: input}
 }
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws.Request" representing the
-// client's request for the AddTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsRequest is a API request type for the AddTags API operation.
+type AddTagsRequest struct {
+	*aws.Request
+	Input *AddTagsInput
+}
+
+// Send marshals and sends the AddTags API request.
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsOutput), nil
+}
+
+// AddTagsRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTags for more information on using the AddTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds or modifies tags for the specified pipeline.
 //
 //    // Example sending a request using the AddTagsRequest method.
-//    req, resp := client.AddTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTags
-func (c *DataPipeline) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+func (c *DataPipeline) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -147,87 +107,43 @@ func (c *DataPipeline) AddTagsRequest(input *AddTagsInput) (req *aws.Request, ou
 		input = &AddTagsInput{}
 	}
 
-	output = &AddTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddTags API operation for AWS Data Pipeline.
-//
-// Adds or modifies tags for the specified pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation AddTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTags
-func (c *DataPipeline) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsWithContext is the same as AddTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddTagsOutput{})
+	return AddTagsRequest{Request: req, Input: input}
 }
 
 const opCreatePipeline = "CreatePipeline"
 
-// CreatePipelineRequest generates a "aws.Request" representing the
-// client's request for the CreatePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePipelineRequest is a API request type for the CreatePipeline API operation.
+type CreatePipelineRequest struct {
+	*aws.Request
+	Input *CreatePipelineInput
+}
+
+// Send marshals and sends the CreatePipeline API request.
+func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePipelineOutput), nil
+}
+
+// CreatePipelineRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePipeline for more information on using the CreatePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new, empty pipeline. Use PutPipelineDefinition to populate the
+// pipeline.
 //
 //    // Example sending a request using the CreatePipelineRequest method.
-//    req, resp := client.CreatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipeline
-func (c *DataPipeline) CreatePipelineRequest(input *CreatePipelineInput) (req *aws.Request, output *CreatePipelineOutput) {
+func (c *DataPipeline) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opCreatePipeline,
 		HTTPMethod: "POST",
@@ -238,81 +154,47 @@ func (c *DataPipeline) CreatePipelineRequest(input *CreatePipelineInput) (req *a
 		input = &CreatePipelineInput{}
 	}
 
-	output = &CreatePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePipeline API operation for AWS Data Pipeline.
-//
-// Creates a new, empty pipeline. Use PutPipelineDefinition to populate the
-// pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation CreatePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipeline
-func (c *DataPipeline) CreatePipeline(input *CreatePipelineInput) (*CreatePipelineOutput, error) {
-	req, out := c.CreatePipelineRequest(input)
-	return out, req.Send()
-}
-
-// CreatePipelineWithContext is the same as CreatePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) CreatePipelineWithContext(ctx aws.Context, input *CreatePipelineInput, opts ...aws.Option) (*CreatePipelineOutput, error) {
-	req, out := c.CreatePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	return CreatePipelineRequest{Request: req, Input: input}
 }
 
 const opDeactivatePipeline = "DeactivatePipeline"
 
-// DeactivatePipelineRequest generates a "aws.Request" representing the
-// client's request for the DeactivatePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeactivatePipelineRequest is a API request type for the DeactivatePipeline API operation.
+type DeactivatePipelineRequest struct {
+	*aws.Request
+	Input *DeactivatePipelineInput
+}
+
+// Send marshals and sends the DeactivatePipeline API request.
+func (r DeactivatePipelineRequest) Send() (*DeactivatePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeactivatePipelineOutput), nil
+}
+
+// DeactivatePipelineRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deactivates the specified running pipeline. The pipeline is set to the DEACTIVATING
+// state until the deactivation process completes.
 //
-// See DeactivatePipeline for more information on using the DeactivatePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To resume a deactivated pipeline, use ActivatePipeline. By default, the pipeline
+// resumes from the last completed execution. Optionally, you can specify the
+// date and time to resume the pipeline.
 //
 //    // Example sending a request using the DeactivatePipelineRequest method.
-//    req, resp := client.DeactivatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeactivatePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipeline
-func (c *DataPipeline) DeactivatePipelineRequest(input *DeactivatePipelineInput) (req *aws.Request, output *DeactivatePipelineOutput) {
+func (c *DataPipeline) DeactivatePipelineRequest(input *DeactivatePipelineInput) DeactivatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opDeactivatePipeline,
 		HTTPMethod: "POST",
@@ -323,110 +205,30 @@ func (c *DataPipeline) DeactivatePipelineRequest(input *DeactivatePipelineInput)
 		input = &DeactivatePipelineInput{}
 	}
 
-	output = &DeactivatePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeactivatePipeline API operation for AWS Data Pipeline.
-//
-// Deactivates the specified running pipeline. The pipeline is set to the DEACTIVATING
-// state until the deactivation process completes.
-//
-// To resume a deactivated pipeline, use ActivatePipeline. By default, the pipeline
-// resumes from the last completed execution. Optionally, you can specify the
-// date and time to resume the pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation DeactivatePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipeline
-func (c *DataPipeline) DeactivatePipeline(input *DeactivatePipelineInput) (*DeactivatePipelineOutput, error) {
-	req, out := c.DeactivatePipelineRequest(input)
-	return out, req.Send()
-}
-
-// DeactivatePipelineWithContext is the same as DeactivatePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeactivatePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) DeactivatePipelineWithContext(ctx aws.Context, input *DeactivatePipelineInput, opts ...aws.Option) (*DeactivatePipelineOutput, error) {
-	req, out := c.DeactivatePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeactivatePipelineOutput{})
+	return DeactivatePipelineRequest{Request: req, Input: input}
 }
 
 const opDeletePipeline = "DeletePipeline"
 
-// DeletePipelineRequest generates a "aws.Request" representing the
-// client's request for the DeletePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePipeline for more information on using the DeletePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeletePipelineRequest method.
-//    req, resp := client.DeletePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeletePipeline
-func (c *DataPipeline) DeletePipelineRequest(input *DeletePipelineInput) (req *aws.Request, output *DeletePipelineOutput) {
-	op := &aws.Operation{
-		Name:       opDeletePipeline,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeletePipelineInput{}
-	}
-
-	output = &DeletePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeletePipelineRequest is a API request type for the DeletePipeline API operation.
+type DeletePipelineRequest struct {
+	*aws.Request
+	Input *DeletePipelineInput
 }
 
-// DeletePipeline API operation for AWS Data Pipeline.
+// Send marshals and sends the DeletePipeline API request.
+func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePipelineOutput), nil
+}
+
+// DeletePipelineRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
 // Deletes a pipeline, its pipeline definition, and its run history. AWS Data
 // Pipeline attempts to cancel instances associated with the pipeline that are
@@ -437,75 +239,65 @@ func (c *DataPipeline) DeletePipelineRequest(input *DeletePipelineInput) (req *a
 // with the status set to PAUSE on individual components. Components that are
 // paused by SetStatus can be resumed.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation DeletePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
+//    // Example sending a request using the DeletePipelineRequest method.
+//    req := client.DeletePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeletePipeline
-func (c *DataPipeline) DeletePipeline(input *DeletePipelineInput) (*DeletePipelineOutput, error) {
-	req, out := c.DeletePipelineRequest(input)
-	return out, req.Send()
-}
+func (c *DataPipeline) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelineRequest {
+	op := &aws.Operation{
+		Name:       opDeletePipeline,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeletePipelineWithContext is the same as DeletePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) DeletePipelineWithContext(ctx aws.Context, input *DeletePipelineInput, opts ...aws.Option) (*DeletePipelineOutput, error) {
-	req, out := c.DeletePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeletePipelineInput{}
+	}
+
+	req := c.newRequest(op, input, &DeletePipelineOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeletePipelineRequest{Request: req, Input: input}
 }
 
 const opDescribeObjects = "DescribeObjects"
 
-// DescribeObjectsRequest generates a "aws.Request" representing the
-// client's request for the DescribeObjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeObjectsRequest is a API request type for the DescribeObjects API operation.
+type DescribeObjectsRequest struct {
+	*aws.Request
+	Input *DescribeObjectsInput
+}
+
+// Send marshals and sends the DescribeObjects API request.
+func (r DescribeObjectsRequest) Send() (*DescribeObjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeObjectsOutput), nil
+}
+
+// DescribeObjectsRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeObjects for more information on using the DescribeObjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the object definitions for a set of objects associated with the pipeline.
+// Object definitions are composed of a set of fields that define the properties
+// of the object.
 //
 //    // Example sending a request using the DescribeObjectsRequest method.
-//    req, resp := client.DescribeObjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeObjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjects
-func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) (req *aws.Request, output *DescribeObjectsOutput) {
+func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) DescribeObjectsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeObjects,
 		HTTPMethod: "POST",
@@ -522,60 +314,8 @@ func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) (req 
 		input = &DescribeObjectsInput{}
 	}
 
-	output = &DescribeObjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeObjects API operation for AWS Data Pipeline.
-//
-// Gets the object definitions for a set of objects associated with the pipeline.
-// Object definitions are composed of a set of fields that define the properties
-// of the object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation DescribeObjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjects
-func (c *DataPipeline) DescribeObjects(input *DescribeObjectsInput) (*DescribeObjectsOutput, error) {
-	req, out := c.DescribeObjectsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeObjectsWithContext is the same as DescribeObjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeObjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) DescribeObjectsWithContext(ctx aws.Context, input *DescribeObjectsInput, opts ...aws.Option) (*DescribeObjectsOutput, error) {
-	req, out := c.DescribeObjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeObjectsOutput{})
+	return DescribeObjectsRequest{Request: req, Input: input}
 }
 
 // DescribeObjectsPages iterates over the pages of a DescribeObjects operation,
@@ -614,10 +354,10 @@ func (c *DataPipeline) DescribeObjectsPagesWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeObjectsRequest(inCpy)
+			req := c.DescribeObjectsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -630,47 +370,24 @@ func (c *DataPipeline) DescribeObjectsPagesWithContext(ctx aws.Context, input *D
 
 const opDescribePipelines = "DescribePipelines"
 
-// DescribePipelinesRequest generates a "aws.Request" representing the
-// client's request for the DescribePipelines operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePipelines for more information on using the DescribePipelines
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribePipelinesRequest method.
-//    req, resp := client.DescribePipelinesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelines
-func (c *DataPipeline) DescribePipelinesRequest(input *DescribePipelinesInput) (req *aws.Request, output *DescribePipelinesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribePipelines,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribePipelinesInput{}
-	}
-
-	output = &DescribePipelinesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribePipelinesRequest is a API request type for the DescribePipelines API operation.
+type DescribePipelinesRequest struct {
+	*aws.Request
+	Input *DescribePipelinesInput
 }
 
-// DescribePipelines API operation for AWS Data Pipeline.
+// Send marshals and sends the DescribePipelines API request.
+func (r DescribePipelinesRequest) Send() (*DescribePipelinesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePipelinesOutput), nil
+}
+
+// DescribePipelinesRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
 // Retrieves metadata about one or more pipelines. The information retrieved
 // includes the name of the pipeline, the pipeline identifier, its current state,
@@ -682,78 +399,63 @@ func (c *DataPipeline) DescribePipelinesRequest(input *DescribePipelinesInput) (
 // To retrieve the full pipeline definition instead of metadata about the pipeline,
 // call GetPipelineDefinition.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation DescribePipelines for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
+//    // Example sending a request using the DescribePipelinesRequest method.
+//    req := client.DescribePipelinesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelines
-func (c *DataPipeline) DescribePipelines(input *DescribePipelinesInput) (*DescribePipelinesOutput, error) {
-	req, out := c.DescribePipelinesRequest(input)
-	return out, req.Send()
-}
+func (c *DataPipeline) DescribePipelinesRequest(input *DescribePipelinesInput) DescribePipelinesRequest {
+	op := &aws.Operation{
+		Name:       opDescribePipelines,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribePipelinesWithContext is the same as DescribePipelines with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePipelines for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) DescribePipelinesWithContext(ctx aws.Context, input *DescribePipelinesInput, opts ...aws.Option) (*DescribePipelinesOutput, error) {
-	req, out := c.DescribePipelinesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribePipelinesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribePipelinesOutput{})
+	return DescribePipelinesRequest{Request: req, Input: input}
 }
 
 const opEvaluateExpression = "EvaluateExpression"
 
-// EvaluateExpressionRequest generates a "aws.Request" representing the
-// client's request for the EvaluateExpression operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EvaluateExpressionRequest is a API request type for the EvaluateExpression API operation.
+type EvaluateExpressionRequest struct {
+	*aws.Request
+	Input *EvaluateExpressionInput
+}
+
+// Send marshals and sends the EvaluateExpression API request.
+func (r EvaluateExpressionRequest) Send() (*EvaluateExpressionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EvaluateExpressionOutput), nil
+}
+
+// EvaluateExpressionRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EvaluateExpression for more information on using the EvaluateExpression
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Task runners call EvaluateExpression to evaluate a string in the context
+// of the specified object. For example, a task runner can evaluate SQL queries
+// stored in Amazon S3.
 //
 //    // Example sending a request using the EvaluateExpressionRequest method.
-//    req, resp := client.EvaluateExpressionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EvaluateExpressionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpression
-func (c *DataPipeline) EvaluateExpressionRequest(input *EvaluateExpressionInput) (req *aws.Request, output *EvaluateExpressionOutput) {
+func (c *DataPipeline) EvaluateExpressionRequest(input *EvaluateExpressionInput) EvaluateExpressionRequest {
 	op := &aws.Operation{
 		Name:       opEvaluateExpression,
 		HTTPMethod: "POST",
@@ -764,92 +466,43 @@ func (c *DataPipeline) EvaluateExpressionRequest(input *EvaluateExpressionInput)
 		input = &EvaluateExpressionInput{}
 	}
 
-	output = &EvaluateExpressionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// EvaluateExpression API operation for AWS Data Pipeline.
-//
-// Task runners call EvaluateExpression to evaluate a string in the context
-// of the specified object. For example, a task runner can evaluate SQL queries
-// stored in Amazon S3.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation EvaluateExpression for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeTaskNotFoundException "TaskNotFoundException"
-//   The specified task was not found.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpression
-func (c *DataPipeline) EvaluateExpression(input *EvaluateExpressionInput) (*EvaluateExpressionOutput, error) {
-	req, out := c.EvaluateExpressionRequest(input)
-	return out, req.Send()
-}
-
-// EvaluateExpressionWithContext is the same as EvaluateExpression with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EvaluateExpression for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) EvaluateExpressionWithContext(ctx aws.Context, input *EvaluateExpressionInput, opts ...aws.Option) (*EvaluateExpressionOutput, error) {
-	req, out := c.EvaluateExpressionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EvaluateExpressionOutput{})
+	return EvaluateExpressionRequest{Request: req, Input: input}
 }
 
 const opGetPipelineDefinition = "GetPipelineDefinition"
 
-// GetPipelineDefinitionRequest generates a "aws.Request" representing the
-// client's request for the GetPipelineDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetPipelineDefinitionRequest is a API request type for the GetPipelineDefinition API operation.
+type GetPipelineDefinitionRequest struct {
+	*aws.Request
+	Input *GetPipelineDefinitionInput
+}
+
+// Send marshals and sends the GetPipelineDefinition API request.
+func (r GetPipelineDefinitionRequest) Send() (*GetPipelineDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPipelineDefinitionOutput), nil
+}
+
+// GetPipelineDefinitionRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPipelineDefinition for more information on using the GetPipelineDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the definition of the specified pipeline. You can call GetPipelineDefinition
+// to retrieve the pipeline definition that you provided using PutPipelineDefinition.
 //
 //    // Example sending a request using the GetPipelineDefinitionRequest method.
-//    req, resp := client.GetPipelineDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetPipelineDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinition
-func (c *DataPipeline) GetPipelineDefinitionRequest(input *GetPipelineDefinitionInput) (req *aws.Request, output *GetPipelineDefinitionOutput) {
+func (c *DataPipeline) GetPipelineDefinitionRequest(input *GetPipelineDefinitionInput) GetPipelineDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetPipelineDefinition,
 		HTTPMethod: "POST",
@@ -860,88 +513,43 @@ func (c *DataPipeline) GetPipelineDefinitionRequest(input *GetPipelineDefinition
 		input = &GetPipelineDefinitionInput{}
 	}
 
-	output = &GetPipelineDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetPipelineDefinition API operation for AWS Data Pipeline.
-//
-// Gets the definition of the specified pipeline. You can call GetPipelineDefinition
-// to retrieve the pipeline definition that you provided using PutPipelineDefinition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation GetPipelineDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinition
-func (c *DataPipeline) GetPipelineDefinition(input *GetPipelineDefinitionInput) (*GetPipelineDefinitionOutput, error) {
-	req, out := c.GetPipelineDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// GetPipelineDefinitionWithContext is the same as GetPipelineDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPipelineDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) GetPipelineDefinitionWithContext(ctx aws.Context, input *GetPipelineDefinitionInput, opts ...aws.Option) (*GetPipelineDefinitionOutput, error) {
-	req, out := c.GetPipelineDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetPipelineDefinitionOutput{})
+	return GetPipelineDefinitionRequest{Request: req, Input: input}
 }
 
 const opListPipelines = "ListPipelines"
 
-// ListPipelinesRequest generates a "aws.Request" representing the
-// client's request for the ListPipelines operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPipelinesRequest is a API request type for the ListPipelines API operation.
+type ListPipelinesRequest struct {
+	*aws.Request
+	Input *ListPipelinesInput
+}
+
+// Send marshals and sends the ListPipelines API request.
+func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPipelinesOutput), nil
+}
+
+// ListPipelinesRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPipelines for more information on using the ListPipelines
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the pipeline identifiers for all active pipelines that you have permission
+// to access.
 //
 //    // Example sending a request using the ListPipelinesRequest method.
-//    req, resp := client.ListPipelinesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPipelinesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelines
-func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) (req *aws.Request, output *ListPipelinesOutput) {
+func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRequest {
 	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "POST",
@@ -958,52 +566,8 @@ func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) (req *aws
 		input = &ListPipelinesInput{}
 	}
 
-	output = &ListPipelinesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPipelines API operation for AWS Data Pipeline.
-//
-// Lists the pipeline identifiers for all active pipelines that you have permission
-// to access.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation ListPipelines for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelines
-func (c *DataPipeline) ListPipelines(input *ListPipelinesInput) (*ListPipelinesOutput, error) {
-	req, out := c.ListPipelinesRequest(input)
-	return out, req.Send()
-}
-
-// ListPipelinesWithContext is the same as ListPipelines with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPipelines for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) ListPipelinesWithContext(ctx aws.Context, input *ListPipelinesInput, opts ...aws.Option) (*ListPipelinesOutput, error) {
-	req, out := c.ListPipelinesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	return ListPipelinesRequest{Request: req, Input: input}
 }
 
 // ListPipelinesPages iterates over the pages of a ListPipelines operation,
@@ -1042,10 +606,10 @@ func (c *DataPipeline) ListPipelinesPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPipelinesRequest(inCpy)
+			req := c.ListPipelinesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1058,47 +622,24 @@ func (c *DataPipeline) ListPipelinesPagesWithContext(ctx aws.Context, input *Lis
 
 const opPollForTask = "PollForTask"
 
-// PollForTaskRequest generates a "aws.Request" representing the
-// client's request for the PollForTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PollForTask for more information on using the PollForTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PollForTaskRequest method.
-//    req, resp := client.PollForTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTask
-func (c *DataPipeline) PollForTaskRequest(input *PollForTaskInput) (req *aws.Request, output *PollForTaskOutput) {
-	op := &aws.Operation{
-		Name:       opPollForTask,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PollForTaskInput{}
-	}
-
-	output = &PollForTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PollForTaskRequest is a API request type for the PollForTask API operation.
+type PollForTaskRequest struct {
+	*aws.Request
+	Input *PollForTaskInput
 }
 
-// PollForTask API operation for AWS Data Pipeline.
+// Send marshals and sends the PollForTask API request.
+func (r PollForTaskRequest) Send() (*PollForTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PollForTaskOutput), nil
+}
+
+// PollForTaskRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
 // Task runners call PollForTask to receive a task to perform from AWS Data
 // Pipeline. The task runner specifies which tasks it can perform by setting
@@ -1115,90 +656,49 @@ func (c *DataPipeline) PollForTaskRequest(input *PollForTaskInput) (req *aws.Req
 // should not call PollForTask again on the same workerGroup until it receives
 // a response, and this can take up to 90 seconds.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation PollForTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodeTaskNotFoundException "TaskNotFoundException"
-//   The specified task was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTask
-func (c *DataPipeline) PollForTask(input *PollForTaskInput) (*PollForTaskOutput, error) {
-	req, out := c.PollForTaskRequest(input)
-	return out, req.Send()
-}
-
-// PollForTaskWithContext is the same as PollForTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PollForTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) PollForTaskWithContext(ctx aws.Context, input *PollForTaskInput, opts ...aws.Option) (*PollForTaskOutput, error) {
-	req, out := c.PollForTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutPipelineDefinition = "PutPipelineDefinition"
-
-// PutPipelineDefinitionRequest generates a "aws.Request" representing the
-// client's request for the PutPipelineDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutPipelineDefinition for more information on using the PutPipelineDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutPipelineDefinitionRequest method.
-//    req, resp := client.PutPipelineDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PollForTaskRequest method.
+//    req := client.PollForTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinition
-func (c *DataPipeline) PutPipelineDefinitionRequest(input *PutPipelineDefinitionInput) (req *aws.Request, output *PutPipelineDefinitionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTask
+func (c *DataPipeline) PollForTaskRequest(input *PollForTaskInput) PollForTaskRequest {
 	op := &aws.Operation{
-		Name:       opPutPipelineDefinition,
+		Name:       opPollForTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutPipelineDefinitionInput{}
+		input = &PollForTaskInput{}
 	}
 
-	output = &PutPipelineDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PollForTaskOutput{})
+	return PollForTaskRequest{Request: req, Input: input}
 }
 
-// PutPipelineDefinition API operation for AWS Data Pipeline.
+const opPutPipelineDefinition = "PutPipelineDefinition"
+
+// PutPipelineDefinitionRequest is a API request type for the PutPipelineDefinition API operation.
+type PutPipelineDefinitionRequest struct {
+	*aws.Request
+	Input *PutPipelineDefinitionInput
+}
+
+// Send marshals and sends the PutPipelineDefinition API request.
+func (r PutPipelineDefinitionRequest) Send() (*PutPipelineDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutPipelineDefinitionOutput), nil
+}
+
+// PutPipelineDefinitionRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
 // Adds tasks, schedules, and preconditions to the specified pipeline. You can
 // use PutPipelineDefinition to populate a new pipeline.
@@ -1215,78 +715,62 @@ func (c *DataPipeline) PutPipelineDefinitionRequest(input *PutPipelineDefinition
 // Pipeline object definitions are passed to the PutPipelineDefinition action
 // and returned by the GetPipelineDefinition action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation PutPipelineDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
+//    // Example sending a request using the PutPipelineDefinitionRequest method.
+//    req := client.PutPipelineDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinition
-func (c *DataPipeline) PutPipelineDefinition(input *PutPipelineDefinitionInput) (*PutPipelineDefinitionOutput, error) {
-	req, out := c.PutPipelineDefinitionRequest(input)
-	return out, req.Send()
-}
+func (c *DataPipeline) PutPipelineDefinitionRequest(input *PutPipelineDefinitionInput) PutPipelineDefinitionRequest {
+	op := &aws.Operation{
+		Name:       opPutPipelineDefinition,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutPipelineDefinitionWithContext is the same as PutPipelineDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutPipelineDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) PutPipelineDefinitionWithContext(ctx aws.Context, input *PutPipelineDefinitionInput, opts ...aws.Option) (*PutPipelineDefinitionOutput, error) {
-	req, out := c.PutPipelineDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutPipelineDefinitionInput{}
+	}
+
+	req := c.newRequest(op, input, &PutPipelineDefinitionOutput{})
+	return PutPipelineDefinitionRequest{Request: req, Input: input}
 }
 
 const opQueryObjects = "QueryObjects"
 
-// QueryObjectsRequest generates a "aws.Request" representing the
-// client's request for the QueryObjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// QueryObjectsRequest is a API request type for the QueryObjects API operation.
+type QueryObjectsRequest struct {
+	*aws.Request
+	Input *QueryObjectsInput
+}
+
+// Send marshals and sends the QueryObjects API request.
+func (r QueryObjectsRequest) Send() (*QueryObjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*QueryObjectsOutput), nil
+}
+
+// QueryObjectsRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See QueryObjects for more information on using the QueryObjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Queries the specified pipeline for the names of objects that match the specified
+// set of conditions.
 //
 //    // Example sending a request using the QueryObjectsRequest method.
-//    req, resp := client.QueryObjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.QueryObjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjects
-func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) (req *aws.Request, output *QueryObjectsOutput) {
+func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) QueryObjectsRequest {
 	op := &aws.Operation{
 		Name:       opQueryObjects,
 		HTTPMethod: "POST",
@@ -1303,59 +787,8 @@ func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) (req *aws.R
 		input = &QueryObjectsInput{}
 	}
 
-	output = &QueryObjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// QueryObjects API operation for AWS Data Pipeline.
-//
-// Queries the specified pipeline for the names of objects that match the specified
-// set of conditions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation QueryObjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjects
-func (c *DataPipeline) QueryObjects(input *QueryObjectsInput) (*QueryObjectsOutput, error) {
-	req, out := c.QueryObjectsRequest(input)
-	return out, req.Send()
-}
-
-// QueryObjectsWithContext is the same as QueryObjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See QueryObjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) QueryObjectsWithContext(ctx aws.Context, input *QueryObjectsInput, opts ...aws.Option) (*QueryObjectsOutput, error) {
-	req, out := c.QueryObjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &QueryObjectsOutput{})
+	return QueryObjectsRequest{Request: req, Input: input}
 }
 
 // QueryObjectsPages iterates over the pages of a QueryObjects operation,
@@ -1394,10 +827,10 @@ func (c *DataPipeline) QueryObjectsPagesWithContext(ctx aws.Context, input *Quer
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.QueryObjectsRequest(inCpy)
+			req := c.QueryObjectsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1410,31 +843,36 @@ func (c *DataPipeline) QueryObjectsPagesWithContext(ctx aws.Context, input *Quer
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws.Request" representing the
-// client's request for the RemoveTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsRequest is a API request type for the RemoveTags API operation.
+type RemoveTagsRequest struct {
+	*aws.Request
+	Input *RemoveTagsInput
+}
+
+// Send marshals and sends the RemoveTags API request.
+func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsOutput), nil
+}
+
+// RemoveTagsRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTags for more information on using the RemoveTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes existing tags from the specified pipeline.
 //
 //    // Example sending a request using the RemoveTagsRequest method.
-//    req, resp := client.RemoveTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/RemoveTags
-func (c *DataPipeline) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+func (c *DataPipeline) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -1445,103 +883,30 @@ func (c *DataPipeline) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Reque
 		input = &RemoveTagsInput{}
 	}
 
-	output = &RemoveTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTags API operation for AWS Data Pipeline.
-//
-// Removes existing tags from the specified pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation RemoveTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/RemoveTags
-func (c *DataPipeline) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsWithContext is the same as RemoveTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	return RemoveTagsRequest{Request: req, Input: input}
 }
 
 const opReportTaskProgress = "ReportTaskProgress"
 
-// ReportTaskProgressRequest generates a "aws.Request" representing the
-// client's request for the ReportTaskProgress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReportTaskProgress for more information on using the ReportTaskProgress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ReportTaskProgressRequest method.
-//    req, resp := client.ReportTaskProgressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgress
-func (c *DataPipeline) ReportTaskProgressRequest(input *ReportTaskProgressInput) (req *aws.Request, output *ReportTaskProgressOutput) {
-	op := &aws.Operation{
-		Name:       opReportTaskProgress,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ReportTaskProgressInput{}
-	}
-
-	output = &ReportTaskProgressOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ReportTaskProgressRequest is a API request type for the ReportTaskProgress API operation.
+type ReportTaskProgressRequest struct {
+	*aws.Request
+	Input *ReportTaskProgressInput
 }
 
-// ReportTaskProgress API operation for AWS Data Pipeline.
+// Send marshals and sends the ReportTaskProgress API request.
+func (r ReportTaskProgressRequest) Send() (*ReportTaskProgressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReportTaskProgressOutput), nil
+}
+
+// ReportTaskProgressRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
 // Task runners call ReportTaskProgress when assigned a task to acknowledge
 // that it has the task. If the web service does not receive this acknowledgement
@@ -1556,81 +921,65 @@ func (c *DataPipeline) ReportTaskProgressRequest(input *ReportTaskProgressInput)
 // the task in a subsequent response to PollForTask. Task runners should call
 // ReportTaskProgress every 60 seconds.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation ReportTaskProgress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodeTaskNotFoundException "TaskNotFoundException"
-//   The specified task was not found.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
+//    // Example sending a request using the ReportTaskProgressRequest method.
+//    req := client.ReportTaskProgressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgress
-func (c *DataPipeline) ReportTaskProgress(input *ReportTaskProgressInput) (*ReportTaskProgressOutput, error) {
-	req, out := c.ReportTaskProgressRequest(input)
-	return out, req.Send()
-}
+func (c *DataPipeline) ReportTaskProgressRequest(input *ReportTaskProgressInput) ReportTaskProgressRequest {
+	op := &aws.Operation{
+		Name:       opReportTaskProgress,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ReportTaskProgressWithContext is the same as ReportTaskProgress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReportTaskProgress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) ReportTaskProgressWithContext(ctx aws.Context, input *ReportTaskProgressInput, opts ...aws.Option) (*ReportTaskProgressOutput, error) {
-	req, out := c.ReportTaskProgressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ReportTaskProgressInput{}
+	}
+
+	req := c.newRequest(op, input, &ReportTaskProgressOutput{})
+	return ReportTaskProgressRequest{Request: req, Input: input}
 }
 
 const opReportTaskRunnerHeartbeat = "ReportTaskRunnerHeartbeat"
 
-// ReportTaskRunnerHeartbeatRequest generates a "aws.Request" representing the
-// client's request for the ReportTaskRunnerHeartbeat operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ReportTaskRunnerHeartbeatRequest is a API request type for the ReportTaskRunnerHeartbeat API operation.
+type ReportTaskRunnerHeartbeatRequest struct {
+	*aws.Request
+	Input *ReportTaskRunnerHeartbeatInput
+}
+
+// Send marshals and sends the ReportTaskRunnerHeartbeat API request.
+func (r ReportTaskRunnerHeartbeatRequest) Send() (*ReportTaskRunnerHeartbeatOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReportTaskRunnerHeartbeatOutput), nil
+}
+
+// ReportTaskRunnerHeartbeatRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReportTaskRunnerHeartbeat for more information on using the ReportTaskRunnerHeartbeat
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Task runners call ReportTaskRunnerHeartbeat every 15 minutes to indicate
+// that they are operational. If the AWS Data Pipeline Task Runner is launched
+// on a resource managed by AWS Data Pipeline, the web service can use this
+// call to detect when the task runner application has failed and restart a
+// new instance.
 //
 //    // Example sending a request using the ReportTaskRunnerHeartbeatRequest method.
-//    req, resp := client.ReportTaskRunnerHeartbeatRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ReportTaskRunnerHeartbeatRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeat
-func (c *DataPipeline) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbeatInput) (req *aws.Request, output *ReportTaskRunnerHeartbeatOutput) {
+func (c *DataPipeline) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbeatInput) ReportTaskRunnerHeartbeatRequest {
 	op := &aws.Operation{
 		Name:       opReportTaskRunnerHeartbeat,
 		HTTPMethod: "POST",
@@ -1641,84 +990,46 @@ func (c *DataPipeline) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerH
 		input = &ReportTaskRunnerHeartbeatInput{}
 	}
 
-	output = &ReportTaskRunnerHeartbeatOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ReportTaskRunnerHeartbeat API operation for AWS Data Pipeline.
-//
-// Task runners call ReportTaskRunnerHeartbeat every 15 minutes to indicate
-// that they are operational. If the AWS Data Pipeline Task Runner is launched
-// on a resource managed by AWS Data Pipeline, the web service can use this
-// call to detect when the task runner application has failed and restart a
-// new instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation ReportTaskRunnerHeartbeat for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeat
-func (c *DataPipeline) ReportTaskRunnerHeartbeat(input *ReportTaskRunnerHeartbeatInput) (*ReportTaskRunnerHeartbeatOutput, error) {
-	req, out := c.ReportTaskRunnerHeartbeatRequest(input)
-	return out, req.Send()
-}
-
-// ReportTaskRunnerHeartbeatWithContext is the same as ReportTaskRunnerHeartbeat with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReportTaskRunnerHeartbeat for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) ReportTaskRunnerHeartbeatWithContext(ctx aws.Context, input *ReportTaskRunnerHeartbeatInput, opts ...aws.Option) (*ReportTaskRunnerHeartbeatOutput, error) {
-	req, out := c.ReportTaskRunnerHeartbeatRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ReportTaskRunnerHeartbeatOutput{})
+	return ReportTaskRunnerHeartbeatRequest{Request: req, Input: input}
 }
 
 const opSetStatus = "SetStatus"
 
-// SetStatusRequest generates a "aws.Request" representing the
-// client's request for the SetStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetStatusRequest is a API request type for the SetStatus API operation.
+type SetStatusRequest struct {
+	*aws.Request
+	Input *SetStatusInput
+}
+
+// Send marshals and sends the SetStatus API request.
+func (r SetStatusRequest) Send() (*SetStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetStatusOutput), nil
+}
+
+// SetStatusRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetStatus for more information on using the SetStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Requests that the status of the specified physical or logical pipeline objects
+// be updated in the specified pipeline. This update might not occur immediately,
+// but is eventually consistent. The status that can be set depends on the type
+// of object (for example, DataNode or Activity). You cannot perform this operation
+// on FINISHED pipelines and attempting to do so returns InvalidRequestException.
 //
 //    // Example sending a request using the SetStatusRequest method.
-//    req, resp := client.SetStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatus
-func (c *DataPipeline) SetStatusRequest(input *SetStatusInput) (req *aws.Request, output *SetStatusOutput) {
+func (c *DataPipeline) SetStatusRequest(input *SetStatusInput) SetStatusRequest {
 	op := &aws.Operation{
 		Name:       opSetStatus,
 		HTTPMethod: "POST",
@@ -1729,93 +1040,48 @@ func (c *DataPipeline) SetStatusRequest(input *SetStatusInput) (req *aws.Request
 		input = &SetStatusInput{}
 	}
 
-	output = &SetStatusOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetStatusOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetStatus API operation for AWS Data Pipeline.
-//
-// Requests that the status of the specified physical or logical pipeline objects
-// be updated in the specified pipeline. This update might not occur immediately,
-// but is eventually consistent. The status that can be set depends on the type
-// of object (for example, DataNode or Activity). You cannot perform this operation
-// on FINISHED pipelines and attempting to do so returns InvalidRequestException.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation SetStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatus
-func (c *DataPipeline) SetStatus(input *SetStatusInput) (*SetStatusOutput, error) {
-	req, out := c.SetStatusRequest(input)
-	return out, req.Send()
-}
-
-// SetStatusWithContext is the same as SetStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) SetStatusWithContext(ctx aws.Context, input *SetStatusInput, opts ...aws.Option) (*SetStatusOutput, error) {
-	req, out := c.SetStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetStatusRequest{Request: req, Input: input}
 }
 
 const opSetTaskStatus = "SetTaskStatus"
 
-// SetTaskStatusRequest generates a "aws.Request" representing the
-// client's request for the SetTaskStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetTaskStatusRequest is a API request type for the SetTaskStatus API operation.
+type SetTaskStatusRequest struct {
+	*aws.Request
+	Input *SetTaskStatusInput
+}
+
+// Send marshals and sends the SetTaskStatus API request.
+func (r SetTaskStatusRequest) Send() (*SetTaskStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetTaskStatusOutput), nil
+}
+
+// SetTaskStatusRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetTaskStatus for more information on using the SetTaskStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Task runners call SetTaskStatus to notify AWS Data Pipeline that a task is
+// completed and provide information about the final status. A task runner makes
+// this call regardless of whether the task was sucessful. A task runner does
+// not need to call SetTaskStatus for tasks that are canceled by the web service
+// during a call to ReportTaskProgress.
 //
 //    // Example sending a request using the SetTaskStatusRequest method.
-//    req, resp := client.SetTaskStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetTaskStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatus
-func (c *DataPipeline) SetTaskStatusRequest(input *SetTaskStatusInput) (req *aws.Request, output *SetTaskStatusOutput) {
+func (c *DataPipeline) SetTaskStatusRequest(input *SetTaskStatusInput) SetTaskStatusRequest {
 	op := &aws.Operation{
 		Name:       opSetTaskStatus,
 		HTTPMethod: "POST",
@@ -1826,94 +1092,43 @@ func (c *DataPipeline) SetTaskStatusRequest(input *SetTaskStatusInput) (req *aws
 		input = &SetTaskStatusInput{}
 	}
 
-	output = &SetTaskStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SetTaskStatus API operation for AWS Data Pipeline.
-//
-// Task runners call SetTaskStatus to notify AWS Data Pipeline that a task is
-// completed and provide information about the final status. A task runner makes
-// this call regardless of whether the task was sucessful. A task runner does
-// not need to call SetTaskStatus for tasks that are canceled by the web service
-// during a call to ReportTaskProgress.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation SetTaskStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeTaskNotFoundException "TaskNotFoundException"
-//   The specified task was not found.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatus
-func (c *DataPipeline) SetTaskStatus(input *SetTaskStatusInput) (*SetTaskStatusOutput, error) {
-	req, out := c.SetTaskStatusRequest(input)
-	return out, req.Send()
-}
-
-// SetTaskStatusWithContext is the same as SetTaskStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetTaskStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) SetTaskStatusWithContext(ctx aws.Context, input *SetTaskStatusInput, opts ...aws.Option) (*SetTaskStatusOutput, error) {
-	req, out := c.SetTaskStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SetTaskStatusOutput{})
+	return SetTaskStatusRequest{Request: req, Input: input}
 }
 
 const opValidatePipelineDefinition = "ValidatePipelineDefinition"
 
-// ValidatePipelineDefinitionRequest generates a "aws.Request" representing the
-// client's request for the ValidatePipelineDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ValidatePipelineDefinitionRequest is a API request type for the ValidatePipelineDefinition API operation.
+type ValidatePipelineDefinitionRequest struct {
+	*aws.Request
+	Input *ValidatePipelineDefinitionInput
+}
+
+// Send marshals and sends the ValidatePipelineDefinition API request.
+func (r ValidatePipelineDefinitionRequest) Send() (*ValidatePipelineDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ValidatePipelineDefinitionOutput), nil
+}
+
+// ValidatePipelineDefinitionRequest returns a request value for making API operation for
+// AWS Data Pipeline.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ValidatePipelineDefinition for more information on using the ValidatePipelineDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Validates the specified pipeline definition to ensure that it is well formed
+// and can be run without error.
 //
 //    // Example sending a request using the ValidatePipelineDefinitionRequest method.
-//    req, resp := client.ValidatePipelineDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ValidatePipelineDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinition
-func (c *DataPipeline) ValidatePipelineDefinitionRequest(input *ValidatePipelineDefinitionInput) (req *aws.Request, output *ValidatePipelineDefinitionOutput) {
+func (c *DataPipeline) ValidatePipelineDefinitionRequest(input *ValidatePipelineDefinitionInput) ValidatePipelineDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opValidatePipelineDefinition,
 		HTTPMethod: "POST",
@@ -1924,59 +1139,8 @@ func (c *DataPipeline) ValidatePipelineDefinitionRequest(input *ValidatePipeline
 		input = &ValidatePipelineDefinitionInput{}
 	}
 
-	output = &ValidatePipelineDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ValidatePipelineDefinition API operation for AWS Data Pipeline.
-//
-// Validates the specified pipeline definition to ensure that it is well formed
-// and can be run without error.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Data Pipeline's
-// API operation ValidatePipelineDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceError "InternalServiceError"
-//   An internal service error occurred.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request was not valid. Verify that your request was properly formatted,
-//   that the signature was generated with the correct credentials, and that you
-//   haven't exceeded any of the service limits for your account.
-//
-//   * ErrCodePipelineNotFoundException "PipelineNotFoundException"
-//   The specified pipeline was not found. Verify that you used the correct user
-//   and account identifiers.
-//
-//   * ErrCodePipelineDeletedException "PipelineDeletedException"
-//   The specified pipeline has been deleted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinition
-func (c *DataPipeline) ValidatePipelineDefinition(input *ValidatePipelineDefinitionInput) (*ValidatePipelineDefinitionOutput, error) {
-	req, out := c.ValidatePipelineDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// ValidatePipelineDefinitionWithContext is the same as ValidatePipelineDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ValidatePipelineDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) ValidatePipelineDefinitionWithContext(ctx aws.Context, input *ValidatePipelineDefinitionInput, opts ...aws.Option) (*ValidatePipelineDefinitionOutput, error) {
-	req, out := c.ValidatePipelineDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ValidatePipelineDefinitionOutput{})
+	return ValidatePipelineDefinitionRequest{Request: req, Input: input}
 }
 
 // Contains the parameters for ActivatePipeline.

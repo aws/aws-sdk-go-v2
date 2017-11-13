@@ -12,31 +12,36 @@ import (
 
 const opAcceptPortfolioShare = "AcceptPortfolioShare"
 
-// AcceptPortfolioShareRequest generates a "aws.Request" representing the
-// client's request for the AcceptPortfolioShare operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AcceptPortfolioShareRequest is a API request type for the AcceptPortfolioShare API operation.
+type AcceptPortfolioShareRequest struct {
+	*aws.Request
+	Input *AcceptPortfolioShareInput
+}
+
+// Send marshals and sends the AcceptPortfolioShare API request.
+func (r AcceptPortfolioShareRequest) Send() (*AcceptPortfolioShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AcceptPortfolioShareOutput), nil
+}
+
+// AcceptPortfolioShareRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AcceptPortfolioShare for more information on using the AcceptPortfolioShare
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Accepts an offer to share a portfolio.
 //
 //    // Example sending a request using the AcceptPortfolioShareRequest method.
-//    req, resp := client.AcceptPortfolioShareRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AcceptPortfolioShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShare
-func (c *ServiceCatalog) AcceptPortfolioShareRequest(input *AcceptPortfolioShareInput) (req *aws.Request, output *AcceptPortfolioShareOutput) {
+func (c *ServiceCatalog) AcceptPortfolioShareRequest(input *AcceptPortfolioShareInput) AcceptPortfolioShareRequest {
 	op := &aws.Operation{
 		Name:       opAcceptPortfolioShare,
 		HTTPMethod: "POST",
@@ -47,82 +52,42 @@ func (c *ServiceCatalog) AcceptPortfolioShareRequest(input *AcceptPortfolioShare
 		input = &AcceptPortfolioShareInput{}
 	}
 
-	output = &AcceptPortfolioShareOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AcceptPortfolioShare API operation for AWS Service Catalog.
-//
-// Accepts an offer to share a portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation AcceptPortfolioShare for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShare
-func (c *ServiceCatalog) AcceptPortfolioShare(input *AcceptPortfolioShareInput) (*AcceptPortfolioShareOutput, error) {
-	req, out := c.AcceptPortfolioShareRequest(input)
-	return out, req.Send()
-}
-
-// AcceptPortfolioShareWithContext is the same as AcceptPortfolioShare with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AcceptPortfolioShare for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) AcceptPortfolioShareWithContext(ctx aws.Context, input *AcceptPortfolioShareInput, opts ...aws.Option) (*AcceptPortfolioShareOutput, error) {
-	req, out := c.AcceptPortfolioShareRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AcceptPortfolioShareOutput{})
+	return AcceptPortfolioShareRequest{Request: req, Input: input}
 }
 
 const opAssociatePrincipalWithPortfolio = "AssociatePrincipalWithPortfolio"
 
-// AssociatePrincipalWithPortfolioRequest generates a "aws.Request" representing the
-// client's request for the AssociatePrincipalWithPortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociatePrincipalWithPortfolioRequest is a API request type for the AssociatePrincipalWithPortfolio API operation.
+type AssociatePrincipalWithPortfolioRequest struct {
+	*aws.Request
+	Input *AssociatePrincipalWithPortfolioInput
+}
+
+// Send marshals and sends the AssociatePrincipalWithPortfolio API request.
+func (r AssociatePrincipalWithPortfolioRequest) Send() (*AssociatePrincipalWithPortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociatePrincipalWithPortfolioOutput), nil
+}
+
+// AssociatePrincipalWithPortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociatePrincipalWithPortfolio for more information on using the AssociatePrincipalWithPortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates the specified principal ARN with the specified portfolio.
 //
 //    // Example sending a request using the AssociatePrincipalWithPortfolioRequest method.
-//    req, resp := client.AssociatePrincipalWithPortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociatePrincipalWithPortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolio
-func (c *ServiceCatalog) AssociatePrincipalWithPortfolioRequest(input *AssociatePrincipalWithPortfolioInput) (req *aws.Request, output *AssociatePrincipalWithPortfolioOutput) {
+func (c *ServiceCatalog) AssociatePrincipalWithPortfolioRequest(input *AssociatePrincipalWithPortfolioInput) AssociatePrincipalWithPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opAssociatePrincipalWithPortfolio,
 		HTTPMethod: "POST",
@@ -133,82 +98,42 @@ func (c *ServiceCatalog) AssociatePrincipalWithPortfolioRequest(input *Associate
 		input = &AssociatePrincipalWithPortfolioInput{}
 	}
 
-	output = &AssociatePrincipalWithPortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociatePrincipalWithPortfolio API operation for AWS Service Catalog.
-//
-// Associates the specified principal ARN with the specified portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation AssociatePrincipalWithPortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolio
-func (c *ServiceCatalog) AssociatePrincipalWithPortfolio(input *AssociatePrincipalWithPortfolioInput) (*AssociatePrincipalWithPortfolioOutput, error) {
-	req, out := c.AssociatePrincipalWithPortfolioRequest(input)
-	return out, req.Send()
-}
-
-// AssociatePrincipalWithPortfolioWithContext is the same as AssociatePrincipalWithPortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociatePrincipalWithPortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) AssociatePrincipalWithPortfolioWithContext(ctx aws.Context, input *AssociatePrincipalWithPortfolioInput, opts ...aws.Option) (*AssociatePrincipalWithPortfolioOutput, error) {
-	req, out := c.AssociatePrincipalWithPortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociatePrincipalWithPortfolioOutput{})
+	return AssociatePrincipalWithPortfolioRequest{Request: req, Input: input}
 }
 
 const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
 
-// AssociateProductWithPortfolioRequest generates a "aws.Request" representing the
-// client's request for the AssociateProductWithPortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateProductWithPortfolioRequest is a API request type for the AssociateProductWithPortfolio API operation.
+type AssociateProductWithPortfolioRequest struct {
+	*aws.Request
+	Input *AssociateProductWithPortfolioInput
+}
+
+// Send marshals and sends the AssociateProductWithPortfolio API request.
+func (r AssociateProductWithPortfolioRequest) Send() (*AssociateProductWithPortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateProductWithPortfolioOutput), nil
+}
+
+// AssociateProductWithPortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateProductWithPortfolio for more information on using the AssociateProductWithPortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates a product with a portfolio.
 //
 //    // Example sending a request using the AssociateProductWithPortfolioRequest method.
-//    req, resp := client.AssociateProductWithPortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateProductWithPortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolio
-func (c *ServiceCatalog) AssociateProductWithPortfolioRequest(input *AssociateProductWithPortfolioInput) (req *aws.Request, output *AssociateProductWithPortfolioOutput) {
+func (c *ServiceCatalog) AssociateProductWithPortfolioRequest(input *AssociateProductWithPortfolioInput) AssociateProductWithPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opAssociateProductWithPortfolio,
 		HTTPMethod: "POST",
@@ -219,82 +144,42 @@ func (c *ServiceCatalog) AssociateProductWithPortfolioRequest(input *AssociatePr
 		input = &AssociateProductWithPortfolioInput{}
 	}
 
-	output = &AssociateProductWithPortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateProductWithPortfolio API operation for AWS Service Catalog.
-//
-// Associates a product with a portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation AssociateProductWithPortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolio
-func (c *ServiceCatalog) AssociateProductWithPortfolio(input *AssociateProductWithPortfolioInput) (*AssociateProductWithPortfolioOutput, error) {
-	req, out := c.AssociateProductWithPortfolioRequest(input)
-	return out, req.Send()
-}
-
-// AssociateProductWithPortfolioWithContext is the same as AssociateProductWithPortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateProductWithPortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) AssociateProductWithPortfolioWithContext(ctx aws.Context, input *AssociateProductWithPortfolioInput, opts ...aws.Option) (*AssociateProductWithPortfolioOutput, error) {
-	req, out := c.AssociateProductWithPortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateProductWithPortfolioOutput{})
+	return AssociateProductWithPortfolioRequest{Request: req, Input: input}
 }
 
 const opAssociateTagOptionWithResource = "AssociateTagOptionWithResource"
 
-// AssociateTagOptionWithResourceRequest generates a "aws.Request" representing the
-// client's request for the AssociateTagOptionWithResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateTagOptionWithResourceRequest is a API request type for the AssociateTagOptionWithResource API operation.
+type AssociateTagOptionWithResourceRequest struct {
+	*aws.Request
+	Input *AssociateTagOptionWithResourceInput
+}
+
+// Send marshals and sends the AssociateTagOptionWithResource API request.
+func (r AssociateTagOptionWithResourceRequest) Send() (*AssociateTagOptionWithResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateTagOptionWithResourceOutput), nil
+}
+
+// AssociateTagOptionWithResourceRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateTagOptionWithResource for more information on using the AssociateTagOptionWithResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associate a TagOption identifier with a resource identifier.
 //
 //    // Example sending a request using the AssociateTagOptionWithResourceRequest method.
-//    req, resp := client.AssociateTagOptionWithResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateTagOptionWithResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResource
-func (c *ServiceCatalog) AssociateTagOptionWithResourceRequest(input *AssociateTagOptionWithResourceInput) (req *aws.Request, output *AssociateTagOptionWithResourceOutput) {
+func (c *ServiceCatalog) AssociateTagOptionWithResourceRequest(input *AssociateTagOptionWithResourceInput) AssociateTagOptionWithResourceRequest {
 	op := &aws.Operation{
 		Name:       opAssociateTagOptionWithResource,
 		HTTPMethod: "POST",
@@ -305,111 +190,30 @@ func (c *ServiceCatalog) AssociateTagOptionWithResourceRequest(input *AssociateT
 		input = &AssociateTagOptionWithResourceInput{}
 	}
 
-	output = &AssociateTagOptionWithResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateTagOptionWithResource API operation for AWS Service Catalog.
-//
-// Associate a TagOption identifier with a resource identifier.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation AssociateTagOptionWithResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-//   * ErrCodeDuplicateResourceException "DuplicateResourceException"
-//   The specified resource is a duplicate.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   An attempt was made to modify a resource that is in an invalid state. Inspect
-//   the resource you are using for this operation to ensure that all resource
-//   states are valid before retrying the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResource
-func (c *ServiceCatalog) AssociateTagOptionWithResource(input *AssociateTagOptionWithResourceInput) (*AssociateTagOptionWithResourceOutput, error) {
-	req, out := c.AssociateTagOptionWithResourceRequest(input)
-	return out, req.Send()
-}
-
-// AssociateTagOptionWithResourceWithContext is the same as AssociateTagOptionWithResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateTagOptionWithResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) AssociateTagOptionWithResourceWithContext(ctx aws.Context, input *AssociateTagOptionWithResourceInput, opts ...aws.Option) (*AssociateTagOptionWithResourceOutput, error) {
-	req, out := c.AssociateTagOptionWithResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateTagOptionWithResourceOutput{})
+	return AssociateTagOptionWithResourceRequest{Request: req, Input: input}
 }
 
 const opCopyProduct = "CopyProduct"
 
-// CopyProductRequest generates a "aws.Request" representing the
-// client's request for the CopyProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyProduct for more information on using the CopyProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CopyProductRequest method.
-//    req, resp := client.CopyProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProduct
-func (c *ServiceCatalog) CopyProductRequest(input *CopyProductInput) (req *aws.Request, output *CopyProductOutput) {
-	op := &aws.Operation{
-		Name:       opCopyProduct,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CopyProductInput{}
-	}
-
-	output = &CopyProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CopyProductRequest is a API request type for the CopyProduct API operation.
+type CopyProductRequest struct {
+	*aws.Request
+	Input *CopyProductInput
 }
 
-// CopyProduct API operation for AWS Service Catalog.
+// Send marshals and sends the CopyProduct API request.
+func (r CopyProductRequest) Send() (*CopyProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyProductOutput), nil
+}
+
+// CopyProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
 // Copies the specified source product to the specified target product or a
 // new product.
@@ -420,69 +224,61 @@ func (c *ServiceCatalog) CopyProductRequest(input *CopyProductInput) (req *aws.R
 // This operation is performed asynchronously. To track the progress of the
 // operation, use DescribeCopyProductStatus.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation CopyProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
+//    // Example sending a request using the CopyProductRequest method.
+//    req := client.CopyProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProduct
-func (c *ServiceCatalog) CopyProduct(input *CopyProductInput) (*CopyProductOutput, error) {
-	req, out := c.CopyProductRequest(input)
-	return out, req.Send()
-}
+func (c *ServiceCatalog) CopyProductRequest(input *CopyProductInput) CopyProductRequest {
+	op := &aws.Operation{
+		Name:       opCopyProduct,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CopyProductWithContext is the same as CopyProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) CopyProductWithContext(ctx aws.Context, input *CopyProductInput, opts ...aws.Option) (*CopyProductOutput, error) {
-	req, out := c.CopyProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CopyProductInput{}
+	}
+
+	req := c.newRequest(op, input, &CopyProductOutput{})
+	return CopyProductRequest{Request: req, Input: input}
 }
 
 const opCreateConstraint = "CreateConstraint"
 
-// CreateConstraintRequest generates a "aws.Request" representing the
-// client's request for the CreateConstraint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateConstraintRequest is a API request type for the CreateConstraint API operation.
+type CreateConstraintRequest struct {
+	*aws.Request
+	Input *CreateConstraintInput
+}
+
+// Send marshals and sends the CreateConstraint API request.
+func (r CreateConstraintRequest) Send() (*CreateConstraintOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateConstraintOutput), nil
+}
+
+// CreateConstraintRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateConstraint for more information on using the CreateConstraint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new constraint. For more information, see Using Constraints (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html).
 //
 //    // Example sending a request using the CreateConstraintRequest method.
-//    req, resp := client.CreateConstraintRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateConstraintRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraint
-func (c *ServiceCatalog) CreateConstraintRequest(input *CreateConstraintInput) (req *aws.Request, output *CreateConstraintOutput) {
+func (c *ServiceCatalog) CreateConstraintRequest(input *CreateConstraintInput) CreateConstraintRequest {
 	op := &aws.Operation{
 		Name:       opCreateConstraint,
 		HTTPMethod: "POST",
@@ -493,85 +289,42 @@ func (c *ServiceCatalog) CreateConstraintRequest(input *CreateConstraintInput) (
 		input = &CreateConstraintInput{}
 	}
 
-	output = &CreateConstraintOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateConstraint API operation for AWS Service Catalog.
-//
-// Creates a new constraint. For more information, see Using Constraints (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation CreateConstraint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-//   * ErrCodeDuplicateResourceException "DuplicateResourceException"
-//   The specified resource is a duplicate.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraint
-func (c *ServiceCatalog) CreateConstraint(input *CreateConstraintInput) (*CreateConstraintOutput, error) {
-	req, out := c.CreateConstraintRequest(input)
-	return out, req.Send()
-}
-
-// CreateConstraintWithContext is the same as CreateConstraint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateConstraint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) CreateConstraintWithContext(ctx aws.Context, input *CreateConstraintInput, opts ...aws.Option) (*CreateConstraintOutput, error) {
-	req, out := c.CreateConstraintRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateConstraintOutput{})
+	return CreateConstraintRequest{Request: req, Input: input}
 }
 
 const opCreatePortfolio = "CreatePortfolio"
 
-// CreatePortfolioRequest generates a "aws.Request" representing the
-// client's request for the CreatePortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePortfolioRequest is a API request type for the CreatePortfolio API operation.
+type CreatePortfolioRequest struct {
+	*aws.Request
+	Input *CreatePortfolioInput
+}
+
+// Send marshals and sends the CreatePortfolio API request.
+func (r CreatePortfolioRequest) Send() (*CreatePortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePortfolioOutput), nil
+}
+
+// CreatePortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePortfolio for more information on using the CreatePortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new portfolio.
 //
 //    // Example sending a request using the CreatePortfolioRequest method.
-//    req, resp := client.CreatePortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolio
-func (c *ServiceCatalog) CreatePortfolioRequest(input *CreatePortfolioInput) (req *aws.Request, output *CreatePortfolioOutput) {
+func (c *ServiceCatalog) CreatePortfolioRequest(input *CreatePortfolioInput) CreatePortfolioRequest {
 	op := &aws.Operation{
 		Name:       opCreatePortfolio,
 		HTTPMethod: "POST",
@@ -582,84 +335,42 @@ func (c *ServiceCatalog) CreatePortfolioRequest(input *CreatePortfolioInput) (re
 		input = &CreatePortfolioInput{}
 	}
 
-	output = &CreatePortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePortfolio API operation for AWS Service Catalog.
-//
-// Creates a new portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation CreatePortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolio
-func (c *ServiceCatalog) CreatePortfolio(input *CreatePortfolioInput) (*CreatePortfolioOutput, error) {
-	req, out := c.CreatePortfolioRequest(input)
-	return out, req.Send()
-}
-
-// CreatePortfolioWithContext is the same as CreatePortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) CreatePortfolioWithContext(ctx aws.Context, input *CreatePortfolioInput, opts ...aws.Option) (*CreatePortfolioOutput, error) {
-	req, out := c.CreatePortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePortfolioOutput{})
+	return CreatePortfolioRequest{Request: req, Input: input}
 }
 
 const opCreatePortfolioShare = "CreatePortfolioShare"
 
-// CreatePortfolioShareRequest generates a "aws.Request" representing the
-// client's request for the CreatePortfolioShare operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePortfolioShareRequest is a API request type for the CreatePortfolioShare API operation.
+type CreatePortfolioShareRequest struct {
+	*aws.Request
+	Input *CreatePortfolioShareInput
+}
+
+// Send marshals and sends the CreatePortfolioShare API request.
+func (r CreatePortfolioShareRequest) Send() (*CreatePortfolioShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePortfolioShareOutput), nil
+}
+
+// CreatePortfolioShareRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePortfolioShare for more information on using the CreatePortfolioShare
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new portfolio share.
 //
 //    // Example sending a request using the CreatePortfolioShareRequest method.
-//    req, resp := client.CreatePortfolioShareRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePortfolioShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShare
-func (c *ServiceCatalog) CreatePortfolioShareRequest(input *CreatePortfolioShareInput) (req *aws.Request, output *CreatePortfolioShareOutput) {
+func (c *ServiceCatalog) CreatePortfolioShareRequest(input *CreatePortfolioShareInput) CreatePortfolioShareRequest {
 	op := &aws.Operation{
 		Name:       opCreatePortfolioShare,
 		HTTPMethod: "POST",
@@ -670,82 +381,42 @@ func (c *ServiceCatalog) CreatePortfolioShareRequest(input *CreatePortfolioShare
 		input = &CreatePortfolioShareInput{}
 	}
 
-	output = &CreatePortfolioShareOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePortfolioShare API operation for AWS Service Catalog.
-//
-// Creates a new portfolio share.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation CreatePortfolioShare for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShare
-func (c *ServiceCatalog) CreatePortfolioShare(input *CreatePortfolioShareInput) (*CreatePortfolioShareOutput, error) {
-	req, out := c.CreatePortfolioShareRequest(input)
-	return out, req.Send()
-}
-
-// CreatePortfolioShareWithContext is the same as CreatePortfolioShare with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePortfolioShare for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) CreatePortfolioShareWithContext(ctx aws.Context, input *CreatePortfolioShareInput, opts ...aws.Option) (*CreatePortfolioShareOutput, error) {
-	req, out := c.CreatePortfolioShareRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePortfolioShareOutput{})
+	return CreatePortfolioShareRequest{Request: req, Input: input}
 }
 
 const opCreateProduct = "CreateProduct"
 
-// CreateProductRequest generates a "aws.Request" representing the
-// client's request for the CreateProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProductRequest is a API request type for the CreateProduct API operation.
+type CreateProductRequest struct {
+	*aws.Request
+	Input *CreateProductInput
+}
+
+// Send marshals and sends the CreateProduct API request.
+func (r CreateProductRequest) Send() (*CreateProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProductOutput), nil
+}
+
+// CreateProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProduct for more information on using the CreateProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new product.
 //
 //    // Example sending a request using the CreateProductRequest method.
-//    req, resp := client.CreateProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProduct
-func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) (req *aws.Request, output *CreateProductOutput) {
+func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) CreateProductRequest {
 	op := &aws.Operation{
 		Name:       opCreateProduct,
 		HTTPMethod: "POST",
@@ -756,84 +427,43 @@ func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) (req *a
 		input = &CreateProductInput{}
 	}
 
-	output = &CreateProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProduct API operation for AWS Service Catalog.
-//
-// Creates a new product.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation CreateProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProduct
-func (c *ServiceCatalog) CreateProduct(input *CreateProductInput) (*CreateProductOutput, error) {
-	req, out := c.CreateProductRequest(input)
-	return out, req.Send()
-}
-
-// CreateProductWithContext is the same as CreateProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) CreateProductWithContext(ctx aws.Context, input *CreateProductInput, opts ...aws.Option) (*CreateProductOutput, error) {
-	req, out := c.CreateProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProductOutput{})
+	return CreateProductRequest{Request: req, Input: input}
 }
 
 const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
 
-// CreateProvisioningArtifactRequest generates a "aws.Request" representing the
-// client's request for the CreateProvisioningArtifact operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProvisioningArtifactRequest is a API request type for the CreateProvisioningArtifact API operation.
+type CreateProvisioningArtifactRequest struct {
+	*aws.Request
+	Input *CreateProvisioningArtifactInput
+}
+
+// Send marshals and sends the CreateProvisioningArtifact API request.
+func (r CreateProvisioningArtifactRequest) Send() (*CreateProvisioningArtifactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProvisioningArtifactOutput), nil
+}
+
+// CreateProvisioningArtifactRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProvisioningArtifact for more information on using the CreateProvisioningArtifact
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new provisioning artifact for the specified product. This operation
+// does not work with a product that has been shared with you.
 //
 //    // Example sending a request using the CreateProvisioningArtifactRequest method.
-//    req, resp := client.CreateProvisioningArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProvisioningArtifactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifact
-func (c *ServiceCatalog) CreateProvisioningArtifactRequest(input *CreateProvisioningArtifactInput) (req *aws.Request, output *CreateProvisioningArtifactOutput) {
+func (c *ServiceCatalog) CreateProvisioningArtifactRequest(input *CreateProvisioningArtifactInput) CreateProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opCreateProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -844,83 +474,42 @@ func (c *ServiceCatalog) CreateProvisioningArtifactRequest(input *CreateProvisio
 		input = &CreateProvisioningArtifactInput{}
 	}
 
-	output = &CreateProvisioningArtifactOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProvisioningArtifact API operation for AWS Service Catalog.
-//
-// Create a new provisioning artifact for the specified product. This operation
-// does not work with a product that has been shared with you.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation CreateProvisioningArtifact for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifact
-func (c *ServiceCatalog) CreateProvisioningArtifact(input *CreateProvisioningArtifactInput) (*CreateProvisioningArtifactOutput, error) {
-	req, out := c.CreateProvisioningArtifactRequest(input)
-	return out, req.Send()
-}
-
-// CreateProvisioningArtifactWithContext is the same as CreateProvisioningArtifact with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProvisioningArtifact for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) CreateProvisioningArtifactWithContext(ctx aws.Context, input *CreateProvisioningArtifactInput, opts ...aws.Option) (*CreateProvisioningArtifactOutput, error) {
-	req, out := c.CreateProvisioningArtifactRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProvisioningArtifactOutput{})
+	return CreateProvisioningArtifactRequest{Request: req, Input: input}
 }
 
 const opCreateTagOption = "CreateTagOption"
 
-// CreateTagOptionRequest generates a "aws.Request" representing the
-// client's request for the CreateTagOption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTagOptionRequest is a API request type for the CreateTagOption API operation.
+type CreateTagOptionRequest struct {
+	*aws.Request
+	Input *CreateTagOptionInput
+}
+
+// Send marshals and sends the CreateTagOption API request.
+func (r CreateTagOptionRequest) Send() (*CreateTagOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTagOptionOutput), nil
+}
+
+// CreateTagOptionRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTagOption for more information on using the CreateTagOption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new TagOption.
 //
 //    // Example sending a request using the CreateTagOptionRequest method.
-//    req, resp := client.CreateTagOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTagOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOption
-func (c *ServiceCatalog) CreateTagOptionRequest(input *CreateTagOptionInput) (req *aws.Request, output *CreateTagOptionOutput) {
+func (c *ServiceCatalog) CreateTagOptionRequest(input *CreateTagOptionInput) CreateTagOptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateTagOption,
 		HTTPMethod: "POST",
@@ -931,84 +520,42 @@ func (c *ServiceCatalog) CreateTagOptionRequest(input *CreateTagOptionInput) (re
 		input = &CreateTagOptionInput{}
 	}
 
-	output = &CreateTagOptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTagOption API operation for AWS Service Catalog.
-//
-// Create a new TagOption.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation CreateTagOption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-//   * ErrCodeDuplicateResourceException "DuplicateResourceException"
-//   The specified resource is a duplicate.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOption
-func (c *ServiceCatalog) CreateTagOption(input *CreateTagOptionInput) (*CreateTagOptionOutput, error) {
-	req, out := c.CreateTagOptionRequest(input)
-	return out, req.Send()
-}
-
-// CreateTagOptionWithContext is the same as CreateTagOption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTagOption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) CreateTagOptionWithContext(ctx aws.Context, input *CreateTagOptionInput, opts ...aws.Option) (*CreateTagOptionOutput, error) {
-	req, out := c.CreateTagOptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTagOptionOutput{})
+	return CreateTagOptionRequest{Request: req, Input: input}
 }
 
 const opDeleteConstraint = "DeleteConstraint"
 
-// DeleteConstraintRequest generates a "aws.Request" representing the
-// client's request for the DeleteConstraint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteConstraintRequest is a API request type for the DeleteConstraint API operation.
+type DeleteConstraintRequest struct {
+	*aws.Request
+	Input *DeleteConstraintInput
+}
+
+// Send marshals and sends the DeleteConstraint API request.
+func (r DeleteConstraintRequest) Send() (*DeleteConstraintOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteConstraintOutput), nil
+}
+
+// DeleteConstraintRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteConstraint for more information on using the DeleteConstraint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified constraint.
 //
 //    // Example sending a request using the DeleteConstraintRequest method.
-//    req, resp := client.DeleteConstraintRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteConstraintRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraint
-func (c *ServiceCatalog) DeleteConstraintRequest(input *DeleteConstraintInput) (req *aws.Request, output *DeleteConstraintOutput) {
+func (c *ServiceCatalog) DeleteConstraintRequest(input *DeleteConstraintInput) DeleteConstraintRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConstraint,
 		HTTPMethod: "POST",
@@ -1019,78 +566,44 @@ func (c *ServiceCatalog) DeleteConstraintRequest(input *DeleteConstraintInput) (
 		input = &DeleteConstraintInput{}
 	}
 
-	output = &DeleteConstraintOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteConstraint API operation for AWS Service Catalog.
-//
-// Deletes the specified constraint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DeleteConstraint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraint
-func (c *ServiceCatalog) DeleteConstraint(input *DeleteConstraintInput) (*DeleteConstraintOutput, error) {
-	req, out := c.DeleteConstraintRequest(input)
-	return out, req.Send()
-}
-
-// DeleteConstraintWithContext is the same as DeleteConstraint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteConstraint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DeleteConstraintWithContext(ctx aws.Context, input *DeleteConstraintInput, opts ...aws.Option) (*DeleteConstraintOutput, error) {
-	req, out := c.DeleteConstraintRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteConstraintOutput{})
+	return DeleteConstraintRequest{Request: req, Input: input}
 }
 
 const opDeletePortfolio = "DeletePortfolio"
 
-// DeletePortfolioRequest generates a "aws.Request" representing the
-// client's request for the DeletePortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePortfolioRequest is a API request type for the DeletePortfolio API operation.
+type DeletePortfolioRequest struct {
+	*aws.Request
+	Input *DeletePortfolioInput
+}
+
+// Send marshals and sends the DeletePortfolio API request.
+func (r DeletePortfolioRequest) Send() (*DeletePortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePortfolioOutput), nil
+}
+
+// DeletePortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePortfolio for more information on using the DeletePortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified portfolio. This operation does not work with a portfolio
+// that has been shared with you or if it has products, users, constraints,
+// or shared accounts associated with it.
 //
 //    // Example sending a request using the DeletePortfolioRequest method.
-//    req, resp := client.DeletePortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolio
-func (c *ServiceCatalog) DeletePortfolioRequest(input *DeletePortfolioInput) (req *aws.Request, output *DeletePortfolioOutput) {
+func (c *ServiceCatalog) DeletePortfolioRequest(input *DeletePortfolioInput) DeletePortfolioRequest {
 	op := &aws.Operation{
 		Name:       opDeletePortfolio,
 		HTTPMethod: "POST",
@@ -1101,89 +614,42 @@ func (c *ServiceCatalog) DeletePortfolioRequest(input *DeletePortfolioInput) (re
 		input = &DeletePortfolioInput{}
 	}
 
-	output = &DeletePortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeletePortfolio API operation for AWS Service Catalog.
-//
-// Deletes the specified portfolio. This operation does not work with a portfolio
-// that has been shared with you or if it has products, users, constraints,
-// or shared accounts associated with it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DeletePortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation was requested against a resource that is currently in use.
-//   Free the resource from use and retry the operation.
-//
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolio
-func (c *ServiceCatalog) DeletePortfolio(input *DeletePortfolioInput) (*DeletePortfolioOutput, error) {
-	req, out := c.DeletePortfolioRequest(input)
-	return out, req.Send()
-}
-
-// DeletePortfolioWithContext is the same as DeletePortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DeletePortfolioWithContext(ctx aws.Context, input *DeletePortfolioInput, opts ...aws.Option) (*DeletePortfolioOutput, error) {
-	req, out := c.DeletePortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeletePortfolioOutput{})
+	return DeletePortfolioRequest{Request: req, Input: input}
 }
 
 const opDeletePortfolioShare = "DeletePortfolioShare"
 
-// DeletePortfolioShareRequest generates a "aws.Request" representing the
-// client's request for the DeletePortfolioShare operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePortfolioShareRequest is a API request type for the DeletePortfolioShare API operation.
+type DeletePortfolioShareRequest struct {
+	*aws.Request
+	Input *DeletePortfolioShareInput
+}
+
+// Send marshals and sends the DeletePortfolioShare API request.
+func (r DeletePortfolioShareRequest) Send() (*DeletePortfolioShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePortfolioShareOutput), nil
+}
+
+// DeletePortfolioShareRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePortfolioShare for more information on using the DeletePortfolioShare
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified portfolio share.
 //
 //    // Example sending a request using the DeletePortfolioShareRequest method.
-//    req, resp := client.DeletePortfolioShareRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePortfolioShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShare
-func (c *ServiceCatalog) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) (req *aws.Request, output *DeletePortfolioShareOutput) {
+func (c *ServiceCatalog) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) DeletePortfolioShareRequest {
 	op := &aws.Operation{
 		Name:       opDeletePortfolioShare,
 		HTTPMethod: "POST",
@@ -1194,75 +660,43 @@ func (c *ServiceCatalog) DeletePortfolioShareRequest(input *DeletePortfolioShare
 		input = &DeletePortfolioShareInput{}
 	}
 
-	output = &DeletePortfolioShareOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeletePortfolioShare API operation for AWS Service Catalog.
-//
-// Deletes the specified portfolio share.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DeletePortfolioShare for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShare
-func (c *ServiceCatalog) DeletePortfolioShare(input *DeletePortfolioShareInput) (*DeletePortfolioShareOutput, error) {
-	req, out := c.DeletePortfolioShareRequest(input)
-	return out, req.Send()
-}
-
-// DeletePortfolioShareWithContext is the same as DeletePortfolioShare with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePortfolioShare for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DeletePortfolioShareWithContext(ctx aws.Context, input *DeletePortfolioShareInput, opts ...aws.Option) (*DeletePortfolioShareOutput, error) {
-	req, out := c.DeletePortfolioShareRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeletePortfolioShareOutput{})
+	return DeletePortfolioShareRequest{Request: req, Input: input}
 }
 
 const opDeleteProduct = "DeleteProduct"
 
-// DeleteProductRequest generates a "aws.Request" representing the
-// client's request for the DeleteProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteProductRequest is a API request type for the DeleteProduct API operation.
+type DeleteProductRequest struct {
+	*aws.Request
+	Input *DeleteProductInput
+}
+
+// Send marshals and sends the DeleteProduct API request.
+func (r DeleteProductRequest) Send() (*DeleteProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProductOutput), nil
+}
+
+// DeleteProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteProduct for more information on using the DeleteProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified product. This operation does not work with a product
+// that has been shared with you or is associated with a portfolio.
 //
 //    // Example sending a request using the DeleteProductRequest method.
-//    req, resp := client.DeleteProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProduct
-func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) (req *aws.Request, output *DeleteProductOutput) {
+func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) DeleteProductRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProduct,
 		HTTPMethod: "POST",
@@ -1273,88 +707,45 @@ func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) (req *a
 		input = &DeleteProductInput{}
 	}
 
-	output = &DeleteProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteProduct API operation for AWS Service Catalog.
-//
-// Deletes the specified product. This operation does not work with a product
-// that has been shared with you or is associated with a portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DeleteProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation was requested against a resource that is currently in use.
-//   Free the resource from use and retry the operation.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProduct
-func (c *ServiceCatalog) DeleteProduct(input *DeleteProductInput) (*DeleteProductOutput, error) {
-	req, out := c.DeleteProductRequest(input)
-	return out, req.Send()
-}
-
-// DeleteProductWithContext is the same as DeleteProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DeleteProductWithContext(ctx aws.Context, input *DeleteProductInput, opts ...aws.Option) (*DeleteProductOutput, error) {
-	req, out := c.DeleteProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteProductOutput{})
+	return DeleteProductRequest{Request: req, Input: input}
 }
 
 const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
 
-// DeleteProvisioningArtifactRequest generates a "aws.Request" representing the
-// client's request for the DeleteProvisioningArtifact operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteProvisioningArtifactRequest is a API request type for the DeleteProvisioningArtifact API operation.
+type DeleteProvisioningArtifactRequest struct {
+	*aws.Request
+	Input *DeleteProvisioningArtifactInput
+}
+
+// Send marshals and sends the DeleteProvisioningArtifact API request.
+func (r DeleteProvisioningArtifactRequest) Send() (*DeleteProvisioningArtifactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProvisioningArtifactOutput), nil
+}
+
+// DeleteProvisioningArtifactRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteProvisioningArtifact for more information on using the DeleteProvisioningArtifact
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified provisioning artifact. This operation does not work
+// on a provisioning artifact associated with a product that has been shared
+// with you, or on the last provisioning artifact associated with a product
+// (a product must have at least one provisioning artifact).
 //
 //    // Example sending a request using the DeleteProvisioningArtifactRequest method.
-//    req, resp := client.DeleteProvisioningArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteProvisioningArtifactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifact
-func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArtifactInput) (req *aws.Request, output *DeleteProvisioningArtifactOutput) {
+func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArtifactInput) DeleteProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -1365,85 +756,42 @@ func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisio
 		input = &DeleteProvisioningArtifactInput{}
 	}
 
-	output = &DeleteProvisioningArtifactOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteProvisioningArtifact API operation for AWS Service Catalog.
-//
-// Deletes the specified provisioning artifact. This operation does not work
-// on a provisioning artifact associated with a product that has been shared
-// with you, or on the last provisioning artifact associated with a product
-// (a product must have at least one provisioning artifact).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DeleteProvisioningArtifact for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation was requested against a resource that is currently in use.
-//   Free the resource from use and retry the operation.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifact
-func (c *ServiceCatalog) DeleteProvisioningArtifact(input *DeleteProvisioningArtifactInput) (*DeleteProvisioningArtifactOutput, error) {
-	req, out := c.DeleteProvisioningArtifactRequest(input)
-	return out, req.Send()
-}
-
-// DeleteProvisioningArtifactWithContext is the same as DeleteProvisioningArtifact with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProvisioningArtifact for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DeleteProvisioningArtifactWithContext(ctx aws.Context, input *DeleteProvisioningArtifactInput, opts ...aws.Option) (*DeleteProvisioningArtifactOutput, error) {
-	req, out := c.DeleteProvisioningArtifactRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteProvisioningArtifactOutput{})
+	return DeleteProvisioningArtifactRequest{Request: req, Input: input}
 }
 
 const opDescribeConstraint = "DescribeConstraint"
 
-// DescribeConstraintRequest generates a "aws.Request" representing the
-// client's request for the DescribeConstraint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConstraintRequest is a API request type for the DescribeConstraint API operation.
+type DescribeConstraintRequest struct {
+	*aws.Request
+	Input *DescribeConstraintInput
+}
+
+// Send marshals and sends the DescribeConstraint API request.
+func (r DescribeConstraintRequest) Send() (*DescribeConstraintOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConstraintOutput), nil
+}
+
+// DescribeConstraintRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeConstraint for more information on using the DescribeConstraint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves detailed information for a specified constraint.
 //
 //    // Example sending a request using the DescribeConstraintRequest method.
-//    req, resp := client.DescribeConstraintRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConstraintRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraint
-func (c *ServiceCatalog) DescribeConstraintRequest(input *DescribeConstraintInput) (req *aws.Request, output *DescribeConstraintOutput) {
+func (c *ServiceCatalog) DescribeConstraintRequest(input *DescribeConstraintInput) DescribeConstraintRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConstraint,
 		HTTPMethod: "POST",
@@ -1454,75 +802,42 @@ func (c *ServiceCatalog) DescribeConstraintRequest(input *DescribeConstraintInpu
 		input = &DescribeConstraintInput{}
 	}
 
-	output = &DescribeConstraintOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConstraint API operation for AWS Service Catalog.
-//
-// Retrieves detailed information for a specified constraint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeConstraint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraint
-func (c *ServiceCatalog) DescribeConstraint(input *DescribeConstraintInput) (*DescribeConstraintOutput, error) {
-	req, out := c.DescribeConstraintRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConstraintWithContext is the same as DescribeConstraint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConstraint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeConstraintWithContext(ctx aws.Context, input *DescribeConstraintInput, opts ...aws.Option) (*DescribeConstraintOutput, error) {
-	req, out := c.DescribeConstraintRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConstraintOutput{})
+	return DescribeConstraintRequest{Request: req, Input: input}
 }
 
 const opDescribeCopyProductStatus = "DescribeCopyProductStatus"
 
-// DescribeCopyProductStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeCopyProductStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCopyProductStatusRequest is a API request type for the DescribeCopyProductStatus API operation.
+type DescribeCopyProductStatusRequest struct {
+	*aws.Request
+	Input *DescribeCopyProductStatusInput
+}
+
+// Send marshals and sends the DescribeCopyProductStatus API request.
+func (r DescribeCopyProductStatusRequest) Send() (*DescribeCopyProductStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCopyProductStatusOutput), nil
+}
+
+// DescribeCopyProductStatusRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCopyProductStatus for more information on using the DescribeCopyProductStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the status of the specified copy product operation.
 //
 //    // Example sending a request using the DescribeCopyProductStatusRequest method.
-//    req, resp := client.DescribeCopyProductStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCopyProductStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatus
-func (c *ServiceCatalog) DescribeCopyProductStatusRequest(input *DescribeCopyProductStatusInput) (req *aws.Request, output *DescribeCopyProductStatusOutput) {
+func (c *ServiceCatalog) DescribeCopyProductStatusRequest(input *DescribeCopyProductStatusInput) DescribeCopyProductStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCopyProductStatus,
 		HTTPMethod: "POST",
@@ -1533,75 +848,43 @@ func (c *ServiceCatalog) DescribeCopyProductStatusRequest(input *DescribeCopyPro
 		input = &DescribeCopyProductStatusInput{}
 	}
 
-	output = &DescribeCopyProductStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCopyProductStatus API operation for AWS Service Catalog.
-//
-// Describes the status of the specified copy product operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeCopyProductStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatus
-func (c *ServiceCatalog) DescribeCopyProductStatus(input *DescribeCopyProductStatusInput) (*DescribeCopyProductStatusOutput, error) {
-	req, out := c.DescribeCopyProductStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCopyProductStatusWithContext is the same as DescribeCopyProductStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCopyProductStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeCopyProductStatusWithContext(ctx aws.Context, input *DescribeCopyProductStatusInput, opts ...aws.Option) (*DescribeCopyProductStatusOutput, error) {
-	req, out := c.DescribeCopyProductStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCopyProductStatusOutput{})
+	return DescribeCopyProductStatusRequest{Request: req, Input: input}
 }
 
 const opDescribePortfolio = "DescribePortfolio"
 
-// DescribePortfolioRequest generates a "aws.Request" representing the
-// client's request for the DescribePortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePortfolioRequest is a API request type for the DescribePortfolio API operation.
+type DescribePortfolioRequest struct {
+	*aws.Request
+	Input *DescribePortfolioInput
+}
+
+// Send marshals and sends the DescribePortfolio API request.
+func (r DescribePortfolioRequest) Send() (*DescribePortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePortfolioOutput), nil
+}
+
+// DescribePortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePortfolio for more information on using the DescribePortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves detailed information and any tags associated with the specified
+// portfolio.
 //
 //    // Example sending a request using the DescribePortfolioRequest method.
-//    req, resp := client.DescribePortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolio
-func (c *ServiceCatalog) DescribePortfolioRequest(input *DescribePortfolioInput) (req *aws.Request, output *DescribePortfolioOutput) {
+func (c *ServiceCatalog) DescribePortfolioRequest(input *DescribePortfolioInput) DescribePortfolioRequest {
 	op := &aws.Operation{
 		Name:       opDescribePortfolio,
 		HTTPMethod: "POST",
@@ -1612,76 +895,45 @@ func (c *ServiceCatalog) DescribePortfolioRequest(input *DescribePortfolioInput)
 		input = &DescribePortfolioInput{}
 	}
 
-	output = &DescribePortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePortfolio API operation for AWS Service Catalog.
-//
-// Retrieves detailed information and any tags associated with the specified
-// portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribePortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolio
-func (c *ServiceCatalog) DescribePortfolio(input *DescribePortfolioInput) (*DescribePortfolioOutput, error) {
-	req, out := c.DescribePortfolioRequest(input)
-	return out, req.Send()
-}
-
-// DescribePortfolioWithContext is the same as DescribePortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribePortfolioWithContext(ctx aws.Context, input *DescribePortfolioInput, opts ...aws.Option) (*DescribePortfolioOutput, error) {
-	req, out := c.DescribePortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePortfolioOutput{})
+	return DescribePortfolioRequest{Request: req, Input: input}
 }
 
 const opDescribeProduct = "DescribeProduct"
 
-// DescribeProductRequest generates a "aws.Request" representing the
-// client's request for the DescribeProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProductRequest is a API request type for the DescribeProduct API operation.
+type DescribeProductRequest struct {
+	*aws.Request
+	Input *DescribeProductInput
+}
+
+// Send marshals and sends the DescribeProduct API request.
+func (r DescribeProductRequest) Send() (*DescribeProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProductOutput), nil
+}
+
+// DescribeProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves information about a specified product.
 //
-// See DescribeProduct for more information on using the DescribeProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is functionally identical to DescribeProductView except that
+// it takes as input ProductId instead of ProductViewId.
 //
 //    // Example sending a request using the DescribeProductRequest method.
-//    req, resp := client.DescribeProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProduct
-func (c *ServiceCatalog) DescribeProductRequest(input *DescribeProductInput) (req *aws.Request, output *DescribeProductOutput) {
+func (c *ServiceCatalog) DescribeProductRequest(input *DescribeProductInput) DescribeProductRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProduct,
 		HTTPMethod: "POST",
@@ -1692,81 +944,42 @@ func (c *ServiceCatalog) DescribeProductRequest(input *DescribeProductInput) (re
 		input = &DescribeProductInput{}
 	}
 
-	output = &DescribeProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProduct API operation for AWS Service Catalog.
-//
-// Retrieves information about a specified product.
-//
-// This operation is functionally identical to DescribeProductView except that
-// it takes as input ProductId instead of ProductViewId.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProduct
-func (c *ServiceCatalog) DescribeProduct(input *DescribeProductInput) (*DescribeProductOutput, error) {
-	req, out := c.DescribeProductRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProductWithContext is the same as DescribeProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProductWithContext(ctx aws.Context, input *DescribeProductInput, opts ...aws.Option) (*DescribeProductOutput, error) {
-	req, out := c.DescribeProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProductOutput{})
+	return DescribeProductRequest{Request: req, Input: input}
 }
 
 const opDescribeProductAsAdmin = "DescribeProductAsAdmin"
 
-// DescribeProductAsAdminRequest generates a "aws.Request" representing the
-// client's request for the DescribeProductAsAdmin operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProductAsAdminRequest is a API request type for the DescribeProductAsAdmin API operation.
+type DescribeProductAsAdminRequest struct {
+	*aws.Request
+	Input *DescribeProductAsAdminInput
+}
+
+// Send marshals and sends the DescribeProductAsAdmin API request.
+func (r DescribeProductAsAdminRequest) Send() (*DescribeProductAsAdminOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProductAsAdminOutput), nil
+}
+
+// DescribeProductAsAdminRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeProductAsAdmin for more information on using the DescribeProductAsAdmin
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a specified product, run with administrator access.
 //
 //    // Example sending a request using the DescribeProductAsAdminRequest method.
-//    req, resp := client.DescribeProductAsAdminRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProductAsAdminRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdmin
-func (c *ServiceCatalog) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInput) (req *aws.Request, output *DescribeProductAsAdminOutput) {
+func (c *ServiceCatalog) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInput) DescribeProductAsAdminRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProductAsAdmin,
 		HTTPMethod: "POST",
@@ -1777,75 +990,45 @@ func (c *ServiceCatalog) DescribeProductAsAdminRequest(input *DescribeProductAsA
 		input = &DescribeProductAsAdminInput{}
 	}
 
-	output = &DescribeProductAsAdminOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProductAsAdmin API operation for AWS Service Catalog.
-//
-// Retrieves information about a specified product, run with administrator access.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeProductAsAdmin for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdmin
-func (c *ServiceCatalog) DescribeProductAsAdmin(input *DescribeProductAsAdminInput) (*DescribeProductAsAdminOutput, error) {
-	req, out := c.DescribeProductAsAdminRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProductAsAdminWithContext is the same as DescribeProductAsAdmin with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProductAsAdmin for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProductAsAdminWithContext(ctx aws.Context, input *DescribeProductAsAdminInput, opts ...aws.Option) (*DescribeProductAsAdminOutput, error) {
-	req, out := c.DescribeProductAsAdminRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProductAsAdminOutput{})
+	return DescribeProductAsAdminRequest{Request: req, Input: input}
 }
 
 const opDescribeProductView = "DescribeProductView"
 
-// DescribeProductViewRequest generates a "aws.Request" representing the
-// client's request for the DescribeProductView operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProductViewRequest is a API request type for the DescribeProductView API operation.
+type DescribeProductViewRequest struct {
+	*aws.Request
+	Input *DescribeProductViewInput
+}
+
+// Send marshals and sends the DescribeProductView API request.
+func (r DescribeProductViewRequest) Send() (*DescribeProductViewOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProductViewOutput), nil
+}
+
+// DescribeProductViewRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves information about a specified product.
 //
-// See DescribeProductView for more information on using the DescribeProductView
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is functionally identical to DescribeProduct except that it
+// takes as input ProductViewId instead of ProductId.
 //
 //    // Example sending a request using the DescribeProductViewRequest method.
-//    req, resp := client.DescribeProductViewRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProductViewRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductView
-func (c *ServiceCatalog) DescribeProductViewRequest(input *DescribeProductViewInput) (req *aws.Request, output *DescribeProductViewOutput) {
+func (c *ServiceCatalog) DescribeProductViewRequest(input *DescribeProductViewInput) DescribeProductViewRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProductView,
 		HTTPMethod: "POST",
@@ -1856,81 +1039,42 @@ func (c *ServiceCatalog) DescribeProductViewRequest(input *DescribeProductViewIn
 		input = &DescribeProductViewInput{}
 	}
 
-	output = &DescribeProductViewOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProductView API operation for AWS Service Catalog.
-//
-// Retrieves information about a specified product.
-//
-// This operation is functionally identical to DescribeProduct except that it
-// takes as input ProductViewId instead of ProductId.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeProductView for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductView
-func (c *ServiceCatalog) DescribeProductView(input *DescribeProductViewInput) (*DescribeProductViewOutput, error) {
-	req, out := c.DescribeProductViewRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProductViewWithContext is the same as DescribeProductView with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProductView for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProductViewWithContext(ctx aws.Context, input *DescribeProductViewInput, opts ...aws.Option) (*DescribeProductViewOutput, error) {
-	req, out := c.DescribeProductViewRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProductViewOutput{})
+	return DescribeProductViewRequest{Request: req, Input: input}
 }
 
 const opDescribeProvisionedProduct = "DescribeProvisionedProduct"
 
-// DescribeProvisionedProductRequest generates a "aws.Request" representing the
-// client's request for the DescribeProvisionedProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProvisionedProductRequest is a API request type for the DescribeProvisionedProduct API operation.
+type DescribeProvisionedProductRequest struct {
+	*aws.Request
+	Input *DescribeProvisionedProductInput
+}
+
+// Send marshals and sends the DescribeProvisionedProduct API request.
+func (r DescribeProvisionedProductRequest) Send() (*DescribeProvisionedProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProvisionedProductOutput), nil
+}
+
+// DescribeProvisionedProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeProvisionedProduct for more information on using the DescribeProvisionedProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieve detailed information about the provisioned product.
 //
 //    // Example sending a request using the DescribeProvisionedProductRequest method.
-//    req, resp := client.DescribeProvisionedProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProvisionedProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProduct
-func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvisionedProductInput) (req *aws.Request, output *DescribeProvisionedProductOutput) {
+func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvisionedProductInput) DescribeProvisionedProductRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProvisionedProduct,
 		HTTPMethod: "POST",
@@ -1941,75 +1085,42 @@ func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvis
 		input = &DescribeProvisionedProductInput{}
 	}
 
-	output = &DescribeProvisionedProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProvisionedProduct API operation for AWS Service Catalog.
-//
-// Retrieve detailed information about the provisioned product.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeProvisionedProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProduct
-func (c *ServiceCatalog) DescribeProvisionedProduct(input *DescribeProvisionedProductInput) (*DescribeProvisionedProductOutput, error) {
-	req, out := c.DescribeProvisionedProductRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProvisionedProductWithContext is the same as DescribeProvisionedProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProvisionedProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProvisionedProductWithContext(ctx aws.Context, input *DescribeProvisionedProductInput, opts ...aws.Option) (*DescribeProvisionedProductOutput, error) {
-	req, out := c.DescribeProvisionedProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProvisionedProductOutput{})
+	return DescribeProvisionedProductRequest{Request: req, Input: input}
 }
 
 const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
 
-// DescribeProvisioningArtifactRequest generates a "aws.Request" representing the
-// client's request for the DescribeProvisioningArtifact operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProvisioningArtifactRequest is a API request type for the DescribeProvisioningArtifact API operation.
+type DescribeProvisioningArtifactRequest struct {
+	*aws.Request
+	Input *DescribeProvisioningArtifactInput
+}
+
+// Send marshals and sends the DescribeProvisioningArtifact API request.
+func (r DescribeProvisioningArtifactRequest) Send() (*DescribeProvisioningArtifactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProvisioningArtifactOutput), nil
+}
+
+// DescribeProvisioningArtifactRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeProvisioningArtifact for more information on using the DescribeProvisioningArtifact
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves detailed information about the specified provisioning artifact.
 //
 //    // Example sending a request using the DescribeProvisioningArtifactRequest method.
-//    req, resp := client.DescribeProvisioningArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProvisioningArtifactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifact
-func (c *ServiceCatalog) DescribeProvisioningArtifactRequest(input *DescribeProvisioningArtifactInput) (req *aws.Request, output *DescribeProvisioningArtifactOutput) {
+func (c *ServiceCatalog) DescribeProvisioningArtifactRequest(input *DescribeProvisioningArtifactInput) DescribeProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -2020,91 +1131,30 @@ func (c *ServiceCatalog) DescribeProvisioningArtifactRequest(input *DescribeProv
 		input = &DescribeProvisioningArtifactInput{}
 	}
 
-	output = &DescribeProvisioningArtifactOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProvisioningArtifact API operation for AWS Service Catalog.
-//
-// Retrieves detailed information about the specified provisioning artifact.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeProvisioningArtifact for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifact
-func (c *ServiceCatalog) DescribeProvisioningArtifact(input *DescribeProvisioningArtifactInput) (*DescribeProvisioningArtifactOutput, error) {
-	req, out := c.DescribeProvisioningArtifactRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProvisioningArtifactWithContext is the same as DescribeProvisioningArtifact with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProvisioningArtifact for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProvisioningArtifactWithContext(ctx aws.Context, input *DescribeProvisioningArtifactInput, opts ...aws.Option) (*DescribeProvisioningArtifactOutput, error) {
-	req, out := c.DescribeProvisioningArtifactRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProvisioningArtifactOutput{})
+	return DescribeProvisioningArtifactRequest{Request: req, Input: input}
 }
 
 const opDescribeProvisioningParameters = "DescribeProvisioningParameters"
 
-// DescribeProvisioningParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeProvisioningParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeProvisioningParameters for more information on using the DescribeProvisioningParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeProvisioningParametersRequest method.
-//    req, resp := client.DescribeProvisioningParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters
-func (c *ServiceCatalog) DescribeProvisioningParametersRequest(input *DescribeProvisioningParametersInput) (req *aws.Request, output *DescribeProvisioningParametersOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeProvisioningParameters,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeProvisioningParametersInput{}
-	}
-
-	output = &DescribeProvisioningParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeProvisioningParametersRequest is a API request type for the DescribeProvisioningParameters API operation.
+type DescribeProvisioningParametersRequest struct {
+	*aws.Request
+	Input *DescribeProvisioningParametersInput
 }
 
-// DescribeProvisioningParameters API operation for AWS Service Catalog.
+// Send marshals and sends the DescribeProvisioningParameters API request.
+func (r DescribeProvisioningParametersRequest) Send() (*DescribeProvisioningParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProvisioningParametersOutput), nil
+}
+
+// DescribeProvisioningParametersRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
 // Provides information about parameters required to provision a specified product
 // in a specified manner. Use this operation to obtain the list of ProvisioningArtifactParameters
@@ -2120,69 +1170,63 @@ func (c *ServiceCatalog) DescribeProvisioningParametersRequest(input *DescribePr
 // with conflicted TagOption keys automatically tag the provisioned product
 // with the conflicted keys with the value "sc-tagoption-conflict-portfolioId-productId".
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeProvisioningParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
+//    // Example sending a request using the DescribeProvisioningParametersRequest method.
+//    req := client.DescribeProvisioningParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters
-func (c *ServiceCatalog) DescribeProvisioningParameters(input *DescribeProvisioningParametersInput) (*DescribeProvisioningParametersOutput, error) {
-	req, out := c.DescribeProvisioningParametersRequest(input)
-	return out, req.Send()
-}
+func (c *ServiceCatalog) DescribeProvisioningParametersRequest(input *DescribeProvisioningParametersInput) DescribeProvisioningParametersRequest {
+	op := &aws.Operation{
+		Name:       opDescribeProvisioningParameters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeProvisioningParametersWithContext is the same as DescribeProvisioningParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProvisioningParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProvisioningParametersWithContext(ctx aws.Context, input *DescribeProvisioningParametersInput, opts ...aws.Option) (*DescribeProvisioningParametersOutput, error) {
-	req, out := c.DescribeProvisioningParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeProvisioningParametersInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeProvisioningParametersOutput{})
+	return DescribeProvisioningParametersRequest{Request: req, Input: input}
 }
 
 const opDescribeRecord = "DescribeRecord"
 
-// DescribeRecordRequest generates a "aws.Request" representing the
-// client's request for the DescribeRecord operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeRecordRequest is a API request type for the DescribeRecord API operation.
+type DescribeRecordRequest struct {
+	*aws.Request
+	Input *DescribeRecordInput
+}
+
+// Send marshals and sends the DescribeRecord API request.
+func (r DescribeRecordRequest) Send() (*DescribeRecordOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRecordOutput), nil
+}
+
+// DescribeRecordRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeRecord for more information on using the DescribeRecord
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a paginated list of the full details of a specific request. Use
+// this operation after calling a request operation (ProvisionProduct, TerminateProvisionedProduct,
+// or UpdateProvisionedProduct).
 //
 //    // Example sending a request using the DescribeRecordRequest method.
-//    req, resp := client.DescribeRecordRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeRecordRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecord
-func (c *ServiceCatalog) DescribeRecordRequest(input *DescribeRecordInput) (req *aws.Request, output *DescribeRecordOutput) {
+func (c *ServiceCatalog) DescribeRecordRequest(input *DescribeRecordInput) DescribeRecordRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRecord,
 		HTTPMethod: "POST",
@@ -2193,77 +1237,42 @@ func (c *ServiceCatalog) DescribeRecordRequest(input *DescribeRecordInput) (req 
 		input = &DescribeRecordInput{}
 	}
 
-	output = &DescribeRecordOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeRecord API operation for AWS Service Catalog.
-//
-// Retrieves a paginated list of the full details of a specific request. Use
-// this operation after calling a request operation (ProvisionProduct, TerminateProvisionedProduct,
-// or UpdateProvisionedProduct).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeRecord for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecord
-func (c *ServiceCatalog) DescribeRecord(input *DescribeRecordInput) (*DescribeRecordOutput, error) {
-	req, out := c.DescribeRecordRequest(input)
-	return out, req.Send()
-}
-
-// DescribeRecordWithContext is the same as DescribeRecord with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeRecord for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeRecordWithContext(ctx aws.Context, input *DescribeRecordInput, opts ...aws.Option) (*DescribeRecordOutput, error) {
-	req, out := c.DescribeRecordRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeRecordOutput{})
+	return DescribeRecordRequest{Request: req, Input: input}
 }
 
 const opDescribeTagOption = "DescribeTagOption"
 
-// DescribeTagOptionRequest generates a "aws.Request" representing the
-// client's request for the DescribeTagOption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagOptionRequest is a API request type for the DescribeTagOption API operation.
+type DescribeTagOptionRequest struct {
+	*aws.Request
+	Input *DescribeTagOptionInput
+}
+
+// Send marshals and sends the DescribeTagOption API request.
+func (r DescribeTagOptionRequest) Send() (*DescribeTagOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagOptionOutput), nil
+}
+
+// DescribeTagOptionRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTagOption for more information on using the DescribeTagOption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes a TagOption.
 //
 //    // Example sending a request using the DescribeTagOptionRequest method.
-//    req, resp := client.DescribeTagOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOption
-func (c *ServiceCatalog) DescribeTagOptionRequest(input *DescribeTagOptionInput) (req *aws.Request, output *DescribeTagOptionOutput) {
+func (c *ServiceCatalog) DescribeTagOptionRequest(input *DescribeTagOptionInput) DescribeTagOptionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTagOption,
 		HTTPMethod: "POST",
@@ -2274,80 +1283,42 @@ func (c *ServiceCatalog) DescribeTagOptionRequest(input *DescribeTagOptionInput)
 		input = &DescribeTagOptionInput{}
 	}
 
-	output = &DescribeTagOptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTagOption API operation for AWS Service Catalog.
-//
-// Describes a TagOption.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DescribeTagOption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOption
-func (c *ServiceCatalog) DescribeTagOption(input *DescribeTagOptionInput) (*DescribeTagOptionOutput, error) {
-	req, out := c.DescribeTagOptionRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagOptionWithContext is the same as DescribeTagOption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTagOption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DescribeTagOptionWithContext(ctx aws.Context, input *DescribeTagOptionInput, opts ...aws.Option) (*DescribeTagOptionOutput, error) {
-	req, out := c.DescribeTagOptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagOptionOutput{})
+	return DescribeTagOptionRequest{Request: req, Input: input}
 }
 
 const opDisassociatePrincipalFromPortfolio = "DisassociatePrincipalFromPortfolio"
 
-// DisassociatePrincipalFromPortfolioRequest generates a "aws.Request" representing the
-// client's request for the DisassociatePrincipalFromPortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociatePrincipalFromPortfolioRequest is a API request type for the DisassociatePrincipalFromPortfolio API operation.
+type DisassociatePrincipalFromPortfolioRequest struct {
+	*aws.Request
+	Input *DisassociatePrincipalFromPortfolioInput
+}
+
+// Send marshals and sends the DisassociatePrincipalFromPortfolio API request.
+func (r DisassociatePrincipalFromPortfolioRequest) Send() (*DisassociatePrincipalFromPortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociatePrincipalFromPortfolioOutput), nil
+}
+
+// DisassociatePrincipalFromPortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociatePrincipalFromPortfolio for more information on using the DisassociatePrincipalFromPortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates a previously associated principal ARN from a specified portfolio.
 //
 //    // Example sending a request using the DisassociatePrincipalFromPortfolioRequest method.
-//    req, resp := client.DisassociatePrincipalFromPortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociatePrincipalFromPortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolio
-func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePrincipalFromPortfolioInput) (req *aws.Request, output *DisassociatePrincipalFromPortfolioOutput) {
+func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePrincipalFromPortfolioInput) DisassociatePrincipalFromPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opDisassociatePrincipalFromPortfolio,
 		HTTPMethod: "POST",
@@ -2358,78 +1329,42 @@ func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioRequest(input *Disass
 		input = &DisassociatePrincipalFromPortfolioInput{}
 	}
 
-	output = &DisassociatePrincipalFromPortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociatePrincipalFromPortfolio API operation for AWS Service Catalog.
-//
-// Disassociates a previously associated principal ARN from a specified portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DisassociatePrincipalFromPortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolio
-func (c *ServiceCatalog) DisassociatePrincipalFromPortfolio(input *DisassociatePrincipalFromPortfolioInput) (*DisassociatePrincipalFromPortfolioOutput, error) {
-	req, out := c.DisassociatePrincipalFromPortfolioRequest(input)
-	return out, req.Send()
-}
-
-// DisassociatePrincipalFromPortfolioWithContext is the same as DisassociatePrincipalFromPortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociatePrincipalFromPortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioWithContext(ctx aws.Context, input *DisassociatePrincipalFromPortfolioInput, opts ...aws.Option) (*DisassociatePrincipalFromPortfolioOutput, error) {
-	req, out := c.DisassociatePrincipalFromPortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociatePrincipalFromPortfolioOutput{})
+	return DisassociatePrincipalFromPortfolioRequest{Request: req, Input: input}
 }
 
 const opDisassociateProductFromPortfolio = "DisassociateProductFromPortfolio"
 
-// DisassociateProductFromPortfolioRequest generates a "aws.Request" representing the
-// client's request for the DisassociateProductFromPortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateProductFromPortfolioRequest is a API request type for the DisassociateProductFromPortfolio API operation.
+type DisassociateProductFromPortfolioRequest struct {
+	*aws.Request
+	Input *DisassociateProductFromPortfolioInput
+}
+
+// Send marshals and sends the DisassociateProductFromPortfolio API request.
+func (r DisassociateProductFromPortfolioRequest) Send() (*DisassociateProductFromPortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateProductFromPortfolioOutput), nil
+}
+
+// DisassociateProductFromPortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateProductFromPortfolio for more information on using the DisassociateProductFromPortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates the specified product from the specified portfolio.
 //
 //    // Example sending a request using the DisassociateProductFromPortfolioRequest method.
-//    req, resp := client.DisassociateProductFromPortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateProductFromPortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolio
-func (c *ServiceCatalog) DisassociateProductFromPortfolioRequest(input *DisassociateProductFromPortfolioInput) (req *aws.Request, output *DisassociateProductFromPortfolioOutput) {
+func (c *ServiceCatalog) DisassociateProductFromPortfolioRequest(input *DisassociateProductFromPortfolioInput) DisassociateProductFromPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateProductFromPortfolio,
 		HTTPMethod: "POST",
@@ -2440,82 +1375,42 @@ func (c *ServiceCatalog) DisassociateProductFromPortfolioRequest(input *Disassoc
 		input = &DisassociateProductFromPortfolioInput{}
 	}
 
-	output = &DisassociateProductFromPortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateProductFromPortfolio API operation for AWS Service Catalog.
-//
-// Disassociates the specified product from the specified portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DisassociateProductFromPortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation was requested against a resource that is currently in use.
-//   Free the resource from use and retry the operation.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolio
-func (c *ServiceCatalog) DisassociateProductFromPortfolio(input *DisassociateProductFromPortfolioInput) (*DisassociateProductFromPortfolioOutput, error) {
-	req, out := c.DisassociateProductFromPortfolioRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateProductFromPortfolioWithContext is the same as DisassociateProductFromPortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateProductFromPortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DisassociateProductFromPortfolioWithContext(ctx aws.Context, input *DisassociateProductFromPortfolioInput, opts ...aws.Option) (*DisassociateProductFromPortfolioOutput, error) {
-	req, out := c.DisassociateProductFromPortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateProductFromPortfolioOutput{})
+	return DisassociateProductFromPortfolioRequest{Request: req, Input: input}
 }
 
 const opDisassociateTagOptionFromResource = "DisassociateTagOptionFromResource"
 
-// DisassociateTagOptionFromResourceRequest generates a "aws.Request" representing the
-// client's request for the DisassociateTagOptionFromResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateTagOptionFromResourceRequest is a API request type for the DisassociateTagOptionFromResource API operation.
+type DisassociateTagOptionFromResourceRequest struct {
+	*aws.Request
+	Input *DisassociateTagOptionFromResourceInput
+}
+
+// Send marshals and sends the DisassociateTagOptionFromResource API request.
+func (r DisassociateTagOptionFromResourceRequest) Send() (*DisassociateTagOptionFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateTagOptionFromResourceOutput), nil
+}
+
+// DisassociateTagOptionFromResourceRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateTagOptionFromResource for more information on using the DisassociateTagOptionFromResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates a TagOption from a resource.
 //
 //    // Example sending a request using the DisassociateTagOptionFromResourceRequest method.
-//    req, resp := client.DisassociateTagOptionFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateTagOptionFromResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResource
-func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *DisassociateTagOptionFromResourceInput) (req *aws.Request, output *DisassociateTagOptionFromResourceOutput) {
+func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *DisassociateTagOptionFromResourceInput) DisassociateTagOptionFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateTagOptionFromResource,
 		HTTPMethod: "POST",
@@ -2526,80 +1421,42 @@ func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *Disasso
 		input = &DisassociateTagOptionFromResourceInput{}
 	}
 
-	output = &DisassociateTagOptionFromResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateTagOptionFromResource API operation for AWS Service Catalog.
-//
-// Disassociates a TagOption from a resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation DisassociateTagOptionFromResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResource
-func (c *ServiceCatalog) DisassociateTagOptionFromResource(input *DisassociateTagOptionFromResourceInput) (*DisassociateTagOptionFromResourceOutput, error) {
-	req, out := c.DisassociateTagOptionFromResourceRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateTagOptionFromResourceWithContext is the same as DisassociateTagOptionFromResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateTagOptionFromResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) DisassociateTagOptionFromResourceWithContext(ctx aws.Context, input *DisassociateTagOptionFromResourceInput, opts ...aws.Option) (*DisassociateTagOptionFromResourceOutput, error) {
-	req, out := c.DisassociateTagOptionFromResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateTagOptionFromResourceOutput{})
+	return DisassociateTagOptionFromResourceRequest{Request: req, Input: input}
 }
 
 const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
 
-// ListAcceptedPortfolioSharesRequest generates a "aws.Request" representing the
-// client's request for the ListAcceptedPortfolioShares operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAcceptedPortfolioSharesRequest is a API request type for the ListAcceptedPortfolioShares API operation.
+type ListAcceptedPortfolioSharesRequest struct {
+	*aws.Request
+	Input *ListAcceptedPortfolioSharesInput
+}
+
+// Send marshals and sends the ListAcceptedPortfolioShares API request.
+func (r ListAcceptedPortfolioSharesRequest) Send() (*ListAcceptedPortfolioSharesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAcceptedPortfolioSharesOutput), nil
+}
+
+// ListAcceptedPortfolioSharesRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAcceptedPortfolioShares for more information on using the ListAcceptedPortfolioShares
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists details of all portfolios for which sharing was accepted by this account.
 //
 //    // Example sending a request using the ListAcceptedPortfolioSharesRequest method.
-//    req, resp := client.ListAcceptedPortfolioSharesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAcceptedPortfolioSharesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioShares
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedPortfolioSharesInput) (req *aws.Request, output *ListAcceptedPortfolioSharesOutput) {
+func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedPortfolioSharesInput) ListAcceptedPortfolioSharesRequest {
 	op := &aws.Operation{
 		Name:       opListAcceptedPortfolioShares,
 		HTTPMethod: "POST",
@@ -2616,46 +1473,8 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedP
 		input = &ListAcceptedPortfolioSharesInput{}
 	}
 
-	output = &ListAcceptedPortfolioSharesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAcceptedPortfolioShares API operation for AWS Service Catalog.
-//
-// Lists details of all portfolios for which sharing was accepted by this account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListAcceptedPortfolioShares for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioShares
-func (c *ServiceCatalog) ListAcceptedPortfolioShares(input *ListAcceptedPortfolioSharesInput) (*ListAcceptedPortfolioSharesOutput, error) {
-	req, out := c.ListAcceptedPortfolioSharesRequest(input)
-	return out, req.Send()
-}
-
-// ListAcceptedPortfolioSharesWithContext is the same as ListAcceptedPortfolioShares with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAcceptedPortfolioShares for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesWithContext(ctx aws.Context, input *ListAcceptedPortfolioSharesInput, opts ...aws.Option) (*ListAcceptedPortfolioSharesOutput, error) {
-	req, out := c.ListAcceptedPortfolioSharesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAcceptedPortfolioSharesOutput{})
+	return ListAcceptedPortfolioSharesRequest{Request: req, Input: input}
 }
 
 // ListAcceptedPortfolioSharesPages iterates over the pages of a ListAcceptedPortfolioShares operation,
@@ -2694,10 +1513,10 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesPagesWithContext(ctx aws.Con
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAcceptedPortfolioSharesRequest(inCpy)
+			req := c.ListAcceptedPortfolioSharesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2710,31 +1529,37 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesPagesWithContext(ctx aws.Con
 
 const opListConstraintsForPortfolio = "ListConstraintsForPortfolio"
 
-// ListConstraintsForPortfolioRequest generates a "aws.Request" representing the
-// client's request for the ListConstraintsForPortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListConstraintsForPortfolioRequest is a API request type for the ListConstraintsForPortfolio API operation.
+type ListConstraintsForPortfolioRequest struct {
+	*aws.Request
+	Input *ListConstraintsForPortfolioInput
+}
+
+// Send marshals and sends the ListConstraintsForPortfolio API request.
+func (r ListConstraintsForPortfolioRequest) Send() (*ListConstraintsForPortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListConstraintsForPortfolioOutput), nil
+}
+
+// ListConstraintsForPortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListConstraintsForPortfolio for more information on using the ListConstraintsForPortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves detailed constraint information for the specified portfolio and
+// product.
 //
 //    // Example sending a request using the ListConstraintsForPortfolioRequest method.
-//    req, resp := client.ListConstraintsForPortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListConstraintsForPortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolio
-func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstraintsForPortfolioInput) (req *aws.Request, output *ListConstraintsForPortfolioOutput) {
+func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstraintsForPortfolioInput) ListConstraintsForPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opListConstraintsForPortfolio,
 		HTTPMethod: "POST",
@@ -2751,50 +1576,8 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstrain
 		input = &ListConstraintsForPortfolioInput{}
 	}
 
-	output = &ListConstraintsForPortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListConstraintsForPortfolio API operation for AWS Service Catalog.
-//
-// Retrieves detailed constraint information for the specified portfolio and
-// product.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListConstraintsForPortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolio
-func (c *ServiceCatalog) ListConstraintsForPortfolio(input *ListConstraintsForPortfolioInput) (*ListConstraintsForPortfolioOutput, error) {
-	req, out := c.ListConstraintsForPortfolioRequest(input)
-	return out, req.Send()
-}
-
-// ListConstraintsForPortfolioWithContext is the same as ListConstraintsForPortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListConstraintsForPortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListConstraintsForPortfolioWithContext(ctx aws.Context, input *ListConstraintsForPortfolioInput, opts ...aws.Option) (*ListConstraintsForPortfolioOutput, error) {
-	req, out := c.ListConstraintsForPortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListConstraintsForPortfolioOutput{})
+	return ListConstraintsForPortfolioRequest{Request: req, Input: input}
 }
 
 // ListConstraintsForPortfolioPages iterates over the pages of a ListConstraintsForPortfolio operation,
@@ -2833,10 +1616,10 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioPagesWithContext(ctx aws.Con
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListConstraintsForPortfolioRequest(inCpy)
+			req := c.ListConstraintsForPortfolioRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2849,31 +1632,38 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioPagesWithContext(ctx aws.Con
 
 const opListLaunchPaths = "ListLaunchPaths"
 
-// ListLaunchPathsRequest generates a "aws.Request" representing the
-// client's request for the ListLaunchPaths operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListLaunchPathsRequest is a API request type for the ListLaunchPaths API operation.
+type ListLaunchPathsRequest struct {
+	*aws.Request
+	Input *ListLaunchPathsInput
+}
+
+// Send marshals and sends the ListLaunchPaths API request.
+func (r ListLaunchPathsRequest) Send() (*ListLaunchPathsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLaunchPathsOutput), nil
+}
+
+// ListLaunchPathsRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListLaunchPaths for more information on using the ListLaunchPaths
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of all paths to a specified product. A path is how
+// the user has access to a specified product, and is necessary when provisioning
+// a product. A path also determines the constraints put on the product.
 //
 //    // Example sending a request using the ListLaunchPathsRequest method.
-//    req, resp := client.ListLaunchPathsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListLaunchPathsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPaths
-func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) (req *aws.Request, output *ListLaunchPathsOutput) {
+func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) ListLaunchPathsRequest {
 	op := &aws.Operation{
 		Name:       opListLaunchPaths,
 		HTTPMethod: "POST",
@@ -2890,51 +1680,8 @@ func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) (re
 		input = &ListLaunchPathsInput{}
 	}
 
-	output = &ListLaunchPathsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListLaunchPaths API operation for AWS Service Catalog.
-//
-// Returns a paginated list of all paths to a specified product. A path is how
-// the user has access to a specified product, and is necessary when provisioning
-// a product. A path also determines the constraints put on the product.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListLaunchPaths for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPaths
-func (c *ServiceCatalog) ListLaunchPaths(input *ListLaunchPathsInput) (*ListLaunchPathsOutput, error) {
-	req, out := c.ListLaunchPathsRequest(input)
-	return out, req.Send()
-}
-
-// ListLaunchPathsWithContext is the same as ListLaunchPaths with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListLaunchPaths for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListLaunchPathsWithContext(ctx aws.Context, input *ListLaunchPathsInput, opts ...aws.Option) (*ListLaunchPathsOutput, error) {
-	req, out := c.ListLaunchPathsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListLaunchPathsOutput{})
+	return ListLaunchPathsRequest{Request: req, Input: input}
 }
 
 // ListLaunchPathsPages iterates over the pages of a ListLaunchPaths operation,
@@ -2973,10 +1720,10 @@ func (c *ServiceCatalog) ListLaunchPathsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListLaunchPathsRequest(inCpy)
+			req := c.ListLaunchPathsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2989,31 +1736,37 @@ func (c *ServiceCatalog) ListLaunchPathsPagesWithContext(ctx aws.Context, input 
 
 const opListPortfolioAccess = "ListPortfolioAccess"
 
-// ListPortfolioAccessRequest generates a "aws.Request" representing the
-// client's request for the ListPortfolioAccess operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPortfolioAccessRequest is a API request type for the ListPortfolioAccess API operation.
+type ListPortfolioAccessRequest struct {
+	*aws.Request
+	Input *ListPortfolioAccessInput
+}
+
+// Send marshals and sends the ListPortfolioAccess API request.
+func (r ListPortfolioAccessRequest) Send() (*ListPortfolioAccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPortfolioAccessOutput), nil
+}
+
+// ListPortfolioAccessRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPortfolioAccess for more information on using the ListPortfolioAccess
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the account IDs that have been authorized sharing of the specified
+// portfolio.
 //
 //    // Example sending a request using the ListPortfolioAccessRequest method.
-//    req, resp := client.ListPortfolioAccessRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPortfolioAccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccess
-func (c *ServiceCatalog) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) (req *aws.Request, output *ListPortfolioAccessOutput) {
+func (c *ServiceCatalog) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) ListPortfolioAccessRequest {
 	op := &aws.Operation{
 		Name:       opListPortfolioAccess,
 		HTTPMethod: "POST",
@@ -3024,76 +1777,42 @@ func (c *ServiceCatalog) ListPortfolioAccessRequest(input *ListPortfolioAccessIn
 		input = &ListPortfolioAccessInput{}
 	}
 
-	output = &ListPortfolioAccessOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPortfolioAccess API operation for AWS Service Catalog.
-//
-// Lists the account IDs that have been authorized sharing of the specified
-// portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListPortfolioAccess for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccess
-func (c *ServiceCatalog) ListPortfolioAccess(input *ListPortfolioAccessInput) (*ListPortfolioAccessOutput, error) {
-	req, out := c.ListPortfolioAccessRequest(input)
-	return out, req.Send()
-}
-
-// ListPortfolioAccessWithContext is the same as ListPortfolioAccess with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPortfolioAccess for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfolioAccessWithContext(ctx aws.Context, input *ListPortfolioAccessInput, opts ...aws.Option) (*ListPortfolioAccessOutput, error) {
-	req, out := c.ListPortfolioAccessRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPortfolioAccessOutput{})
+	return ListPortfolioAccessRequest{Request: req, Input: input}
 }
 
 const opListPortfolios = "ListPortfolios"
 
-// ListPortfoliosRequest generates a "aws.Request" representing the
-// client's request for the ListPortfolios operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPortfoliosRequest is a API request type for the ListPortfolios API operation.
+type ListPortfoliosRequest struct {
+	*aws.Request
+	Input *ListPortfoliosInput
+}
+
+// Send marshals and sends the ListPortfolios API request.
+func (r ListPortfoliosRequest) Send() (*ListPortfoliosOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPortfoliosOutput), nil
+}
+
+// ListPortfoliosRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPortfolios for more information on using the ListPortfolios
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all portfolios in the catalog.
 //
 //    // Example sending a request using the ListPortfoliosRequest method.
-//    req, resp := client.ListPortfoliosRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPortfoliosRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolios
-func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) (req *aws.Request, output *ListPortfoliosOutput) {
+func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) ListPortfoliosRequest {
 	op := &aws.Operation{
 		Name:       opListPortfolios,
 		HTTPMethod: "POST",
@@ -3110,46 +1829,8 @@ func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) (req 
 		input = &ListPortfoliosInput{}
 	}
 
-	output = &ListPortfoliosOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPortfolios API operation for AWS Service Catalog.
-//
-// Lists all portfolios in the catalog.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListPortfolios for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolios
-func (c *ServiceCatalog) ListPortfolios(input *ListPortfoliosInput) (*ListPortfoliosOutput, error) {
-	req, out := c.ListPortfoliosRequest(input)
-	return out, req.Send()
-}
-
-// ListPortfoliosWithContext is the same as ListPortfolios with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPortfolios for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosWithContext(ctx aws.Context, input *ListPortfoliosInput, opts ...aws.Option) (*ListPortfoliosOutput, error) {
-	req, out := c.ListPortfoliosRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPortfoliosOutput{})
+	return ListPortfoliosRequest{Request: req, Input: input}
 }
 
 // ListPortfoliosPages iterates over the pages of a ListPortfolios operation,
@@ -3188,10 +1869,10 @@ func (c *ServiceCatalog) ListPortfoliosPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPortfoliosRequest(inCpy)
+			req := c.ListPortfoliosRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3204,31 +1885,36 @@ func (c *ServiceCatalog) ListPortfoliosPagesWithContext(ctx aws.Context, input *
 
 const opListPortfoliosForProduct = "ListPortfoliosForProduct"
 
-// ListPortfoliosForProductRequest generates a "aws.Request" representing the
-// client's request for the ListPortfoliosForProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPortfoliosForProductRequest is a API request type for the ListPortfoliosForProduct API operation.
+type ListPortfoliosForProductRequest struct {
+	*aws.Request
+	Input *ListPortfoliosForProductInput
+}
+
+// Send marshals and sends the ListPortfoliosForProduct API request.
+func (r ListPortfoliosForProductRequest) Send() (*ListPortfoliosForProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPortfoliosForProductOutput), nil
+}
+
+// ListPortfoliosForProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPortfoliosForProduct for more information on using the ListPortfoliosForProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all portfolios that the specified product is associated with.
 //
 //    // Example sending a request using the ListPortfoliosForProductRequest method.
-//    req, resp := client.ListPortfoliosForProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPortfoliosForProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProduct
-func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosForProductInput) (req *aws.Request, output *ListPortfoliosForProductOutput) {
+func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosForProductInput) ListPortfoliosForProductRequest {
 	op := &aws.Operation{
 		Name:       opListPortfoliosForProduct,
 		HTTPMethod: "POST",
@@ -3245,49 +1931,8 @@ func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosFo
 		input = &ListPortfoliosForProductInput{}
 	}
 
-	output = &ListPortfoliosForProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPortfoliosForProduct API operation for AWS Service Catalog.
-//
-// Lists all portfolios that the specified product is associated with.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListPortfoliosForProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProduct
-func (c *ServiceCatalog) ListPortfoliosForProduct(input *ListPortfoliosForProductInput) (*ListPortfoliosForProductOutput, error) {
-	req, out := c.ListPortfoliosForProductRequest(input)
-	return out, req.Send()
-}
-
-// ListPortfoliosForProductWithContext is the same as ListPortfoliosForProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPortfoliosForProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosForProductWithContext(ctx aws.Context, input *ListPortfoliosForProductInput, opts ...aws.Option) (*ListPortfoliosForProductOutput, error) {
-	req, out := c.ListPortfoliosForProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPortfoliosForProductOutput{})
+	return ListPortfoliosForProductRequest{Request: req, Input: input}
 }
 
 // ListPortfoliosForProductPages iterates over the pages of a ListPortfoliosForProduct operation,
@@ -3326,10 +1971,10 @@ func (c *ServiceCatalog) ListPortfoliosForProductPagesWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPortfoliosForProductRequest(inCpy)
+			req := c.ListPortfoliosForProductRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3342,31 +1987,36 @@ func (c *ServiceCatalog) ListPortfoliosForProductPagesWithContext(ctx aws.Contex
 
 const opListPrincipalsForPortfolio = "ListPrincipalsForPortfolio"
 
-// ListPrincipalsForPortfolioRequest generates a "aws.Request" representing the
-// client's request for the ListPrincipalsForPortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPrincipalsForPortfolioRequest is a API request type for the ListPrincipalsForPortfolio API operation.
+type ListPrincipalsForPortfolioRequest struct {
+	*aws.Request
+	Input *ListPrincipalsForPortfolioInput
+}
+
+// Send marshals and sends the ListPrincipalsForPortfolio API request.
+func (r ListPrincipalsForPortfolioRequest) Send() (*ListPrincipalsForPortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPrincipalsForPortfolioOutput), nil
+}
+
+// ListPrincipalsForPortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPrincipalsForPortfolio for more information on using the ListPrincipalsForPortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all principal ARNs associated with the specified portfolio.
 //
 //    // Example sending a request using the ListPrincipalsForPortfolioRequest method.
-//    req, resp := client.ListPrincipalsForPortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPrincipalsForPortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolio
-func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipalsForPortfolioInput) (req *aws.Request, output *ListPrincipalsForPortfolioOutput) {
+func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipalsForPortfolioInput) ListPrincipalsForPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opListPrincipalsForPortfolio,
 		HTTPMethod: "POST",
@@ -3383,49 +2033,8 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipals
 		input = &ListPrincipalsForPortfolioInput{}
 	}
 
-	output = &ListPrincipalsForPortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPrincipalsForPortfolio API operation for AWS Service Catalog.
-//
-// Lists all principal ARNs associated with the specified portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListPrincipalsForPortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolio
-func (c *ServiceCatalog) ListPrincipalsForPortfolio(input *ListPrincipalsForPortfolioInput) (*ListPrincipalsForPortfolioOutput, error) {
-	req, out := c.ListPrincipalsForPortfolioRequest(input)
-	return out, req.Send()
-}
-
-// ListPrincipalsForPortfolioWithContext is the same as ListPrincipalsForPortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPrincipalsForPortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPrincipalsForPortfolioWithContext(ctx aws.Context, input *ListPrincipalsForPortfolioInput, opts ...aws.Option) (*ListPrincipalsForPortfolioOutput, error) {
-	req, out := c.ListPrincipalsForPortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPrincipalsForPortfolioOutput{})
+	return ListPrincipalsForPortfolioRequest{Request: req, Input: input}
 }
 
 // ListPrincipalsForPortfolioPages iterates over the pages of a ListPrincipalsForPortfolio operation,
@@ -3464,10 +2073,10 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioPagesWithContext(ctx aws.Cont
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPrincipalsForPortfolioRequest(inCpy)
+			req := c.ListPrincipalsForPortfolioRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3480,31 +2089,36 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioPagesWithContext(ctx aws.Cont
 
 const opListProvisioningArtifacts = "ListProvisioningArtifacts"
 
-// ListProvisioningArtifactsRequest generates a "aws.Request" representing the
-// client's request for the ListProvisioningArtifacts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProvisioningArtifactsRequest is a API request type for the ListProvisioningArtifacts API operation.
+type ListProvisioningArtifactsRequest struct {
+	*aws.Request
+	Input *ListProvisioningArtifactsInput
+}
+
+// Send marshals and sends the ListProvisioningArtifacts API request.
+func (r ListProvisioningArtifactsRequest) Send() (*ListProvisioningArtifactsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProvisioningArtifactsOutput), nil
+}
+
+// ListProvisioningArtifactsRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProvisioningArtifacts for more information on using the ListProvisioningArtifacts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all provisioning artifacts associated with the specified product.
 //
 //    // Example sending a request using the ListProvisioningArtifactsRequest method.
-//    req, resp := client.ListProvisioningArtifactsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProvisioningArtifactsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts
-func (c *ServiceCatalog) ListProvisioningArtifactsRequest(input *ListProvisioningArtifactsInput) (req *aws.Request, output *ListProvisioningArtifactsOutput) {
+func (c *ServiceCatalog) ListProvisioningArtifactsRequest(input *ListProvisioningArtifactsInput) ListProvisioningArtifactsRequest {
 	op := &aws.Operation{
 		Name:       opListProvisioningArtifacts,
 		HTTPMethod: "POST",
@@ -3515,78 +2129,43 @@ func (c *ServiceCatalog) ListProvisioningArtifactsRequest(input *ListProvisionin
 		input = &ListProvisioningArtifactsInput{}
 	}
 
-	output = &ListProvisioningArtifactsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProvisioningArtifacts API operation for AWS Service Catalog.
-//
-// Lists all provisioning artifacts associated with the specified product.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListProvisioningArtifacts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts
-func (c *ServiceCatalog) ListProvisioningArtifacts(input *ListProvisioningArtifactsInput) (*ListProvisioningArtifactsOutput, error) {
-	req, out := c.ListProvisioningArtifactsRequest(input)
-	return out, req.Send()
-}
-
-// ListProvisioningArtifactsWithContext is the same as ListProvisioningArtifacts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProvisioningArtifacts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListProvisioningArtifactsWithContext(ctx aws.Context, input *ListProvisioningArtifactsInput, opts ...aws.Option) (*ListProvisioningArtifactsOutput, error) {
-	req, out := c.ListProvisioningArtifactsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProvisioningArtifactsOutput{})
+	return ListProvisioningArtifactsRequest{Request: req, Input: input}
 }
 
 const opListRecordHistory = "ListRecordHistory"
 
-// ListRecordHistoryRequest generates a "aws.Request" representing the
-// client's request for the ListRecordHistory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRecordHistoryRequest is a API request type for the ListRecordHistory API operation.
+type ListRecordHistoryRequest struct {
+	*aws.Request
+	Input *ListRecordHistoryInput
+}
+
+// Send marshals and sends the ListRecordHistory API request.
+func (r ListRecordHistoryRequest) Send() (*ListRecordHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRecordHistoryOutput), nil
+}
+
+// ListRecordHistoryRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListRecordHistory for more information on using the ListRecordHistory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of all performed requests, in the form of RecordDetails
+// objects that are filtered as specified.
 //
 //    // Example sending a request using the ListRecordHistoryRequest method.
-//    req, resp := client.ListRecordHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRecordHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistory
-func (c *ServiceCatalog) ListRecordHistoryRequest(input *ListRecordHistoryInput) (req *aws.Request, output *ListRecordHistoryOutput) {
+func (c *ServiceCatalog) ListRecordHistoryRequest(input *ListRecordHistoryInput) ListRecordHistoryRequest {
 	op := &aws.Operation{
 		Name:       opListRecordHistory,
 		HTTPMethod: "POST",
@@ -3597,76 +2176,42 @@ func (c *ServiceCatalog) ListRecordHistoryRequest(input *ListRecordHistoryInput)
 		input = &ListRecordHistoryInput{}
 	}
 
-	output = &ListRecordHistoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRecordHistory API operation for AWS Service Catalog.
-//
-// Returns a paginated list of all performed requests, in the form of RecordDetails
-// objects that are filtered as specified.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListRecordHistory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistory
-func (c *ServiceCatalog) ListRecordHistory(input *ListRecordHistoryInput) (*ListRecordHistoryOutput, error) {
-	req, out := c.ListRecordHistoryRequest(input)
-	return out, req.Send()
-}
-
-// ListRecordHistoryWithContext is the same as ListRecordHistory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRecordHistory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListRecordHistoryWithContext(ctx aws.Context, input *ListRecordHistoryInput, opts ...aws.Option) (*ListRecordHistoryOutput, error) {
-	req, out := c.ListRecordHistoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRecordHistoryOutput{})
+	return ListRecordHistoryRequest{Request: req, Input: input}
 }
 
 const opListResourcesForTagOption = "ListResourcesForTagOption"
 
-// ListResourcesForTagOptionRequest generates a "aws.Request" representing the
-// client's request for the ListResourcesForTagOption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListResourcesForTagOptionRequest is a API request type for the ListResourcesForTagOption API operation.
+type ListResourcesForTagOptionRequest struct {
+	*aws.Request
+	Input *ListResourcesForTagOptionInput
+}
+
+// Send marshals and sends the ListResourcesForTagOption API request.
+func (r ListResourcesForTagOptionRequest) Send() (*ListResourcesForTagOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourcesForTagOptionOutput), nil
+}
+
+// ListResourcesForTagOptionRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListResourcesForTagOption for more information on using the ListResourcesForTagOption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists resources associated with a TagOption.
 //
 //    // Example sending a request using the ListResourcesForTagOptionRequest method.
-//    req, resp := client.ListResourcesForTagOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListResourcesForTagOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOption
-func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesForTagOptionInput) (req *aws.Request, output *ListResourcesForTagOptionOutput) {
+func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesForTagOptionInput) ListResourcesForTagOptionRequest {
 	op := &aws.Operation{
 		Name:       opListResourcesForTagOption,
 		HTTPMethod: "POST",
@@ -3683,54 +2228,8 @@ func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesFo
 		input = &ListResourcesForTagOptionInput{}
 	}
 
-	output = &ListResourcesForTagOptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListResourcesForTagOption API operation for AWS Service Catalog.
-//
-// Lists resources associated with a TagOption.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListResourcesForTagOption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOption
-func (c *ServiceCatalog) ListResourcesForTagOption(input *ListResourcesForTagOptionInput) (*ListResourcesForTagOptionOutput, error) {
-	req, out := c.ListResourcesForTagOptionRequest(input)
-	return out, req.Send()
-}
-
-// ListResourcesForTagOptionWithContext is the same as ListResourcesForTagOption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListResourcesForTagOption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListResourcesForTagOptionWithContext(ctx aws.Context, input *ListResourcesForTagOptionInput, opts ...aws.Option) (*ListResourcesForTagOptionOutput, error) {
-	req, out := c.ListResourcesForTagOptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListResourcesForTagOptionOutput{})
+	return ListResourcesForTagOptionRequest{Request: req, Input: input}
 }
 
 // ListResourcesForTagOptionPages iterates over the pages of a ListResourcesForTagOption operation,
@@ -3769,10 +2268,10 @@ func (c *ServiceCatalog) ListResourcesForTagOptionPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListResourcesForTagOptionRequest(inCpy)
+			req := c.ListResourcesForTagOptionRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3785,31 +2284,36 @@ func (c *ServiceCatalog) ListResourcesForTagOptionPagesWithContext(ctx aws.Conte
 
 const opListTagOptions = "ListTagOptions"
 
-// ListTagOptionsRequest generates a "aws.Request" representing the
-// client's request for the ListTagOptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagOptionsRequest is a API request type for the ListTagOptions API operation.
+type ListTagOptionsRequest struct {
+	*aws.Request
+	Input *ListTagOptionsInput
+}
+
+// Send marshals and sends the ListTagOptions API request.
+func (r ListTagOptionsRequest) Send() (*ListTagOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagOptionsOutput), nil
+}
+
+// ListTagOptionsRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagOptions for more information on using the ListTagOptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists detailed TagOptions information.
 //
 //    // Example sending a request using the ListTagOptionsRequest method.
-//    req, resp := client.ListTagOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptions
-func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) (req *aws.Request, output *ListTagOptionsOutput) {
+func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) ListTagOptionsRequest {
 	op := &aws.Operation{
 		Name:       opListTagOptions,
 		HTTPMethod: "POST",
@@ -3826,51 +2330,8 @@ func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) (req 
 		input = &ListTagOptionsInput{}
 	}
 
-	output = &ListTagOptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagOptions API operation for AWS Service Catalog.
-//
-// Lists detailed TagOptions information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ListTagOptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptions
-func (c *ServiceCatalog) ListTagOptions(input *ListTagOptionsInput) (*ListTagOptionsOutput, error) {
-	req, out := c.ListTagOptionsRequest(input)
-	return out, req.Send()
-}
-
-// ListTagOptionsWithContext is the same as ListTagOptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagOptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListTagOptionsWithContext(ctx aws.Context, input *ListTagOptionsInput, opts ...aws.Option) (*ListTagOptionsOutput, error) {
-	req, out := c.ListTagOptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagOptionsOutput{})
+	return ListTagOptionsRequest{Request: req, Input: input}
 }
 
 // ListTagOptionsPages iterates over the pages of a ListTagOptions operation,
@@ -3909,10 +2370,10 @@ func (c *ServiceCatalog) ListTagOptionsPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTagOptionsRequest(inCpy)
+			req := c.ListTagOptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3925,47 +2386,24 @@ func (c *ServiceCatalog) ListTagOptionsPagesWithContext(ctx aws.Context, input *
 
 const opProvisionProduct = "ProvisionProduct"
 
-// ProvisionProductRequest generates a "aws.Request" representing the
-// client's request for the ProvisionProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ProvisionProduct for more information on using the ProvisionProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ProvisionProductRequest method.
-//    req, resp := client.ProvisionProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProduct
-func (c *ServiceCatalog) ProvisionProductRequest(input *ProvisionProductInput) (req *aws.Request, output *ProvisionProductOutput) {
-	op := &aws.Operation{
-		Name:       opProvisionProduct,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ProvisionProductInput{}
-	}
-
-	output = &ProvisionProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ProvisionProductRequest is a API request type for the ProvisionProduct API operation.
+type ProvisionProductRequest struct {
+	*aws.Request
+	Input *ProvisionProductInput
 }
 
-// ProvisionProduct API operation for AWS Service Catalog.
+// Send marshals and sends the ProvisionProduct API request.
+func (r ProvisionProductRequest) Send() (*ProvisionProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ProvisionProductOutput), nil
+}
+
+// ProvisionProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
 // Requests a provision of a specified product. A provisioned product is a resourced
 // instance for a product. For example, provisioning a CloudFormation-template-backed
@@ -3980,72 +2418,61 @@ func (c *ServiceCatalog) ProvisionProductRequest(input *ProvisionProductInput) (
 // with an empty list. This happens when TagOption keys are in conflict. For
 // more information, see DescribeProvisioningParameters.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ProvisionProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeDuplicateResourceException "DuplicateResourceException"
-//   The specified resource is a duplicate.
+//    // Example sending a request using the ProvisionProductRequest method.
+//    req := client.ProvisionProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProduct
-func (c *ServiceCatalog) ProvisionProduct(input *ProvisionProductInput) (*ProvisionProductOutput, error) {
-	req, out := c.ProvisionProductRequest(input)
-	return out, req.Send()
-}
+func (c *ServiceCatalog) ProvisionProductRequest(input *ProvisionProductInput) ProvisionProductRequest {
+	op := &aws.Operation{
+		Name:       opProvisionProduct,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ProvisionProductWithContext is the same as ProvisionProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ProvisionProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ProvisionProductWithContext(ctx aws.Context, input *ProvisionProductInput, opts ...aws.Option) (*ProvisionProductOutput, error) {
-	req, out := c.ProvisionProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ProvisionProductInput{}
+	}
+
+	req := c.newRequest(op, input, &ProvisionProductOutput{})
+	return ProvisionProductRequest{Request: req, Input: input}
 }
 
 const opRejectPortfolioShare = "RejectPortfolioShare"
 
-// RejectPortfolioShareRequest generates a "aws.Request" representing the
-// client's request for the RejectPortfolioShare operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RejectPortfolioShareRequest is a API request type for the RejectPortfolioShare API operation.
+type RejectPortfolioShareRequest struct {
+	*aws.Request
+	Input *RejectPortfolioShareInput
+}
+
+// Send marshals and sends the RejectPortfolioShare API request.
+func (r RejectPortfolioShareRequest) Send() (*RejectPortfolioShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RejectPortfolioShareOutput), nil
+}
+
+// RejectPortfolioShareRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RejectPortfolioShare for more information on using the RejectPortfolioShare
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Rejects an offer to share a portfolio.
 //
 //    // Example sending a request using the RejectPortfolioShareRequest method.
-//    req, resp := client.RejectPortfolioShareRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RejectPortfolioShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShare
-func (c *ServiceCatalog) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) (req *aws.Request, output *RejectPortfolioShareOutput) {
+func (c *ServiceCatalog) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) RejectPortfolioShareRequest {
 	op := &aws.Operation{
 		Name:       opRejectPortfolioShare,
 		HTTPMethod: "POST",
@@ -4056,75 +2483,43 @@ func (c *ServiceCatalog) RejectPortfolioShareRequest(input *RejectPortfolioShare
 		input = &RejectPortfolioShareInput{}
 	}
 
-	output = &RejectPortfolioShareOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RejectPortfolioShare API operation for AWS Service Catalog.
-//
-// Rejects an offer to share a portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation RejectPortfolioShare for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShare
-func (c *ServiceCatalog) RejectPortfolioShare(input *RejectPortfolioShareInput) (*RejectPortfolioShareOutput, error) {
-	req, out := c.RejectPortfolioShareRequest(input)
-	return out, req.Send()
-}
-
-// RejectPortfolioShareWithContext is the same as RejectPortfolioShare with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RejectPortfolioShare for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) RejectPortfolioShareWithContext(ctx aws.Context, input *RejectPortfolioShareInput, opts ...aws.Option) (*RejectPortfolioShareOutput, error) {
-	req, out := c.RejectPortfolioShareRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RejectPortfolioShareOutput{})
+	return RejectPortfolioShareRequest{Request: req, Input: input}
 }
 
 const opScanProvisionedProducts = "ScanProvisionedProducts"
 
-// ScanProvisionedProductsRequest generates a "aws.Request" representing the
-// client's request for the ScanProvisionedProducts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ScanProvisionedProductsRequest is a API request type for the ScanProvisionedProducts API operation.
+type ScanProvisionedProductsRequest struct {
+	*aws.Request
+	Input *ScanProvisionedProductsInput
+}
+
+// Send marshals and sends the ScanProvisionedProducts API request.
+func (r ScanProvisionedProductsRequest) Send() (*ScanProvisionedProductsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ScanProvisionedProductsOutput), nil
+}
+
+// ScanProvisionedProductsRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ScanProvisionedProducts for more information on using the ScanProvisionedProducts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of all the ProvisionedProduct objects that are currently
+// available (not terminated).
 //
 //    // Example sending a request using the ScanProvisionedProductsRequest method.
-//    req, resp := client.ScanProvisionedProductsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ScanProvisionedProductsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts
-func (c *ServiceCatalog) ScanProvisionedProductsRequest(input *ScanProvisionedProductsInput) (req *aws.Request, output *ScanProvisionedProductsOutput) {
+func (c *ServiceCatalog) ScanProvisionedProductsRequest(input *ScanProvisionedProductsInput) ScanProvisionedProductsRequest {
 	op := &aws.Operation{
 		Name:       opScanProvisionedProducts,
 		HTTPMethod: "POST",
@@ -4135,76 +2530,46 @@ func (c *ServiceCatalog) ScanProvisionedProductsRequest(input *ScanProvisionedPr
 		input = &ScanProvisionedProductsInput{}
 	}
 
-	output = &ScanProvisionedProductsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ScanProvisionedProducts API operation for AWS Service Catalog.
-//
-// Returns a paginated list of all the ProvisionedProduct objects that are currently
-// available (not terminated).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation ScanProvisionedProducts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts
-func (c *ServiceCatalog) ScanProvisionedProducts(input *ScanProvisionedProductsInput) (*ScanProvisionedProductsOutput, error) {
-	req, out := c.ScanProvisionedProductsRequest(input)
-	return out, req.Send()
-}
-
-// ScanProvisionedProductsWithContext is the same as ScanProvisionedProducts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ScanProvisionedProducts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ScanProvisionedProductsWithContext(ctx aws.Context, input *ScanProvisionedProductsInput, opts ...aws.Option) (*ScanProvisionedProductsOutput, error) {
-	req, out := c.ScanProvisionedProductsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ScanProvisionedProductsOutput{})
+	return ScanProvisionedProductsRequest{Request: req, Input: input}
 }
 
 const opSearchProducts = "SearchProducts"
 
-// SearchProductsRequest generates a "aws.Request" representing the
-// client's request for the SearchProducts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SearchProductsRequest is a API request type for the SearchProducts API operation.
+type SearchProductsRequest struct {
+	*aws.Request
+	Input *SearchProductsInput
+}
+
+// Send marshals and sends the SearchProducts API request.
+func (r SearchProductsRequest) Send() (*SearchProductsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchProductsOutput), nil
+}
+
+// SearchProductsRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a paginated list all of the Products objects to which the caller
+// has access.
 //
-// See SearchProducts for more information on using the SearchProducts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The output of this operation can be used as input for other operations, such
+// as DescribeProductView.
 //
 //    // Example sending a request using the SearchProductsRequest method.
-//    req, resp := client.SearchProductsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SearchProductsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProducts
-func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) (req *aws.Request, output *SearchProductsOutput) {
+func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) SearchProductsRequest {
 	op := &aws.Operation{
 		Name:       opSearchProducts,
 		HTTPMethod: "POST",
@@ -4221,50 +2586,8 @@ func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) (req 
 		input = &SearchProductsInput{}
 	}
 
-	output = &SearchProductsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SearchProducts API operation for AWS Service Catalog.
-//
-// Returns a paginated list all of the Products objects to which the caller
-// has access.
-//
-// The output of this operation can be used as input for other operations, such
-// as DescribeProductView.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation SearchProducts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProducts
-func (c *ServiceCatalog) SearchProducts(input *SearchProductsInput) (*SearchProductsOutput, error) {
-	req, out := c.SearchProductsRequest(input)
-	return out, req.Send()
-}
-
-// SearchProductsWithContext is the same as SearchProducts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SearchProducts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsWithContext(ctx aws.Context, input *SearchProductsInput, opts ...aws.Option) (*SearchProductsOutput, error) {
-	req, out := c.SearchProductsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SearchProductsOutput{})
+	return SearchProductsRequest{Request: req, Input: input}
 }
 
 // SearchProductsPages iterates over the pages of a SearchProducts operation,
@@ -4303,10 +2626,10 @@ func (c *ServiceCatalog) SearchProductsPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.SearchProductsRequest(inCpy)
+			req := c.SearchProductsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4319,31 +2642,39 @@ func (c *ServiceCatalog) SearchProductsPagesWithContext(ctx aws.Context, input *
 
 const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
 
-// SearchProductsAsAdminRequest generates a "aws.Request" representing the
-// client's request for the SearchProductsAsAdmin operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SearchProductsAsAdminRequest is a API request type for the SearchProductsAsAdmin API operation.
+type SearchProductsAsAdminRequest struct {
+	*aws.Request
+	Input *SearchProductsAsAdminInput
+}
+
+// Send marshals and sends the SearchProductsAsAdmin API request.
+func (r SearchProductsAsAdminRequest) Send() (*SearchProductsAsAdminOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchProductsAsAdminOutput), nil
+}
+
+// SearchProductsAsAdminRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SearchProductsAsAdmin for more information on using the SearchProductsAsAdmin
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves summary and status information about all products created within
+// the caller's account. If a portfolio ID is provided, this operation retrieves
+// information for only those products that are associated with the specified
+// portfolio.
 //
 //    // Example sending a request using the SearchProductsAsAdminRequest method.
-//    req, resp := client.SearchProductsAsAdminRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SearchProductsAsAdminRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdmin
-func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput) (req *aws.Request, output *SearchProductsAsAdminOutput) {
+func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput) SearchProductsAsAdminRequest {
 	op := &aws.Operation{
 		Name:       opSearchProductsAsAdmin,
 		HTTPMethod: "POST",
@@ -4360,52 +2691,8 @@ func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdm
 		input = &SearchProductsAsAdminInput{}
 	}
 
-	output = &SearchProductsAsAdminOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SearchProductsAsAdmin API operation for AWS Service Catalog.
-//
-// Retrieves summary and status information about all products created within
-// the caller's account. If a portfolio ID is provided, this operation retrieves
-// information for only those products that are associated with the specified
-// portfolio.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation SearchProductsAsAdmin for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdmin
-func (c *ServiceCatalog) SearchProductsAsAdmin(input *SearchProductsAsAdminInput) (*SearchProductsAsAdminOutput, error) {
-	req, out := c.SearchProductsAsAdminRequest(input)
-	return out, req.Send()
-}
-
-// SearchProductsAsAdminWithContext is the same as SearchProductsAsAdmin with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SearchProductsAsAdmin for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsAsAdminWithContext(ctx aws.Context, input *SearchProductsAsAdminInput, opts ...aws.Option) (*SearchProductsAsAdminOutput, error) {
-	req, out := c.SearchProductsAsAdminRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SearchProductsAsAdminOutput{})
+	return SearchProductsAsAdminRequest{Request: req, Input: input}
 }
 
 // SearchProductsAsAdminPages iterates over the pages of a SearchProductsAsAdmin operation,
@@ -4444,10 +2731,10 @@ func (c *ServiceCatalog) SearchProductsAsAdminPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.SearchProductsAsAdminRequest(inCpy)
+			req := c.SearchProductsAsAdminRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4460,47 +2747,24 @@ func (c *ServiceCatalog) SearchProductsAsAdminPagesWithContext(ctx aws.Context, 
 
 const opTerminateProvisionedProduct = "TerminateProvisionedProduct"
 
-// TerminateProvisionedProductRequest generates a "aws.Request" representing the
-// client's request for the TerminateProvisionedProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TerminateProvisionedProduct for more information on using the TerminateProvisionedProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TerminateProvisionedProductRequest method.
-//    req, resp := client.TerminateProvisionedProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProduct
-func (c *ServiceCatalog) TerminateProvisionedProductRequest(input *TerminateProvisionedProductInput) (req *aws.Request, output *TerminateProvisionedProductOutput) {
-	op := &aws.Operation{
-		Name:       opTerminateProvisionedProduct,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &TerminateProvisionedProductInput{}
-	}
-
-	output = &TerminateProvisionedProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// TerminateProvisionedProductRequest is a API request type for the TerminateProvisionedProduct API operation.
+type TerminateProvisionedProductRequest struct {
+	*aws.Request
+	Input *TerminateProvisionedProductInput
 }
 
-// TerminateProvisionedProduct API operation for AWS Service Catalog.
+// Send marshals and sends the TerminateProvisionedProduct API request.
+func (r TerminateProvisionedProductRequest) Send() (*TerminateProvisionedProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TerminateProvisionedProductOutput), nil
+}
+
+// TerminateProvisionedProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
 // Requests termination of an existing ProvisionedProduct object. If there are
 // Tags associated with the object, they are terminated when the ProvisionedProduct
@@ -4511,66 +2775,61 @@ func (c *ServiceCatalog) TerminateProvisionedProductRequest(input *TerminateProv
 //
 // You can check the status of this request using the DescribeRecord operation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation TerminateProvisionedProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
+//    // Example sending a request using the TerminateProvisionedProductRequest method.
+//    req := client.TerminateProvisionedProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProduct
-func (c *ServiceCatalog) TerminateProvisionedProduct(input *TerminateProvisionedProductInput) (*TerminateProvisionedProductOutput, error) {
-	req, out := c.TerminateProvisionedProductRequest(input)
-	return out, req.Send()
-}
+func (c *ServiceCatalog) TerminateProvisionedProductRequest(input *TerminateProvisionedProductInput) TerminateProvisionedProductRequest {
+	op := &aws.Operation{
+		Name:       opTerminateProvisionedProduct,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// TerminateProvisionedProductWithContext is the same as TerminateProvisionedProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TerminateProvisionedProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) TerminateProvisionedProductWithContext(ctx aws.Context, input *TerminateProvisionedProductInput, opts ...aws.Option) (*TerminateProvisionedProductOutput, error) {
-	req, out := c.TerminateProvisionedProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &TerminateProvisionedProductInput{}
+	}
+
+	req := c.newRequest(op, input, &TerminateProvisionedProductOutput{})
+	return TerminateProvisionedProductRequest{Request: req, Input: input}
 }
 
 const opUpdateConstraint = "UpdateConstraint"
 
-// UpdateConstraintRequest generates a "aws.Request" representing the
-// client's request for the UpdateConstraint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateConstraintRequest is a API request type for the UpdateConstraint API operation.
+type UpdateConstraintRequest struct {
+	*aws.Request
+	Input *UpdateConstraintInput
+}
+
+// Send marshals and sends the UpdateConstraint API request.
+func (r UpdateConstraintRequest) Send() (*UpdateConstraintOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateConstraintOutput), nil
+}
+
+// UpdateConstraintRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateConstraint for more information on using the UpdateConstraint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing constraint.
 //
 //    // Example sending a request using the UpdateConstraintRequest method.
-//    req, resp := client.UpdateConstraintRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateConstraintRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraint
-func (c *ServiceCatalog) UpdateConstraintRequest(input *UpdateConstraintInput) (req *aws.Request, output *UpdateConstraintOutput) {
+func (c *ServiceCatalog) UpdateConstraintRequest(input *UpdateConstraintInput) UpdateConstraintRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConstraint,
 		HTTPMethod: "POST",
@@ -4581,78 +2840,43 @@ func (c *ServiceCatalog) UpdateConstraintRequest(input *UpdateConstraintInput) (
 		input = &UpdateConstraintInput{}
 	}
 
-	output = &UpdateConstraintOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateConstraint API operation for AWS Service Catalog.
-//
-// Updates an existing constraint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation UpdateConstraint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraint
-func (c *ServiceCatalog) UpdateConstraint(input *UpdateConstraintInput) (*UpdateConstraintOutput, error) {
-	req, out := c.UpdateConstraintRequest(input)
-	return out, req.Send()
-}
-
-// UpdateConstraintWithContext is the same as UpdateConstraint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateConstraint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) UpdateConstraintWithContext(ctx aws.Context, input *UpdateConstraintInput, opts ...aws.Option) (*UpdateConstraintOutput, error) {
-	req, out := c.UpdateConstraintRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateConstraintOutput{})
+	return UpdateConstraintRequest{Request: req, Input: input}
 }
 
 const opUpdatePortfolio = "UpdatePortfolio"
 
-// UpdatePortfolioRequest generates a "aws.Request" representing the
-// client's request for the UpdatePortfolio operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdatePortfolioRequest is a API request type for the UpdatePortfolio API operation.
+type UpdatePortfolioRequest struct {
+	*aws.Request
+	Input *UpdatePortfolioInput
+}
+
+// Send marshals and sends the UpdatePortfolio API request.
+func (r UpdatePortfolioRequest) Send() (*UpdatePortfolioOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePortfolioOutput), nil
+}
+
+// UpdatePortfolioRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdatePortfolio for more information on using the UpdatePortfolio
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the specified portfolio's details. This operation does not work with
+// a product that has been shared with you.
 //
 //    // Example sending a request using the UpdatePortfolioRequest method.
-//    req, resp := client.UpdatePortfolioRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdatePortfolioRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolio
-func (c *ServiceCatalog) UpdatePortfolioRequest(input *UpdatePortfolioInput) (req *aws.Request, output *UpdatePortfolioOutput) {
+func (c *ServiceCatalog) UpdatePortfolioRequest(input *UpdatePortfolioInput) UpdatePortfolioRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePortfolio,
 		HTTPMethod: "POST",
@@ -4663,88 +2887,42 @@ func (c *ServiceCatalog) UpdatePortfolioRequest(input *UpdatePortfolioInput) (re
 		input = &UpdatePortfolioInput{}
 	}
 
-	output = &UpdatePortfolioOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdatePortfolio API operation for AWS Service Catalog.
-//
-// Updates the specified portfolio's details. This operation does not work with
-// a product that has been shared with you.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation UpdatePortfolio for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The current limits of the service would have been exceeded by this operation.
-//   Reduce the resource use or increase the service limits and retry the operation.
-//
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolio
-func (c *ServiceCatalog) UpdatePortfolio(input *UpdatePortfolioInput) (*UpdatePortfolioOutput, error) {
-	req, out := c.UpdatePortfolioRequest(input)
-	return out, req.Send()
-}
-
-// UpdatePortfolioWithContext is the same as UpdatePortfolio with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdatePortfolio for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) UpdatePortfolioWithContext(ctx aws.Context, input *UpdatePortfolioInput, opts ...aws.Option) (*UpdatePortfolioOutput, error) {
-	req, out := c.UpdatePortfolioRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdatePortfolioOutput{})
+	return UpdatePortfolioRequest{Request: req, Input: input}
 }
 
 const opUpdateProduct = "UpdateProduct"
 
-// UpdateProductRequest generates a "aws.Request" representing the
-// client's request for the UpdateProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateProductRequest is a API request type for the UpdateProduct API operation.
+type UpdateProductRequest struct {
+	*aws.Request
+	Input *UpdateProductInput
+}
+
+// Send marshals and sends the UpdateProduct API request.
+func (r UpdateProductRequest) Send() (*UpdateProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateProductOutput), nil
+}
+
+// UpdateProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateProduct for more information on using the UpdateProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing product.
 //
 //    // Example sending a request using the UpdateProductRequest method.
-//    req, resp := client.UpdateProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProduct
-func (c *ServiceCatalog) UpdateProductRequest(input *UpdateProductInput) (req *aws.Request, output *UpdateProductOutput) {
+func (c *ServiceCatalog) UpdateProductRequest(input *UpdateProductInput) UpdateProductRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProduct,
 		HTTPMethod: "POST",
@@ -4755,83 +2933,48 @@ func (c *ServiceCatalog) UpdateProductRequest(input *UpdateProductInput) (req *a
 		input = &UpdateProductInput{}
 	}
 
-	output = &UpdateProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateProduct API operation for AWS Service Catalog.
-//
-// Updates an existing product.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation UpdateProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProduct
-func (c *ServiceCatalog) UpdateProduct(input *UpdateProductInput) (*UpdateProductOutput, error) {
-	req, out := c.UpdateProductRequest(input)
-	return out, req.Send()
-}
-
-// UpdateProductWithContext is the same as UpdateProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) UpdateProductWithContext(ctx aws.Context, input *UpdateProductInput, opts ...aws.Option) (*UpdateProductOutput, error) {
-	req, out := c.UpdateProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateProductOutput{})
+	return UpdateProductRequest{Request: req, Input: input}
 }
 
 const opUpdateProvisionedProduct = "UpdateProvisionedProduct"
 
-// UpdateProvisionedProductRequest generates a "aws.Request" representing the
-// client's request for the UpdateProvisionedProduct operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateProvisionedProductRequest is a API request type for the UpdateProvisionedProduct API operation.
+type UpdateProvisionedProductRequest struct {
+	*aws.Request
+	Input *UpdateProvisionedProductInput
+}
+
+// Send marshals and sends the UpdateProvisionedProduct API request.
+func (r UpdateProvisionedProductRequest) Send() (*UpdateProvisionedProductOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateProvisionedProductOutput), nil
+}
+
+// UpdateProvisionedProductRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Requests updates to the configuration of an existing ProvisionedProduct object.
+// If there are tags associated with the object, they cannot be updated or added
+// with this operation. Depending on the specific updates requested, this operation
+// may update with no interruption, with some interruption, or replace the ProvisionedProduct
+// object entirely.
 //
-// See UpdateProvisionedProduct for more information on using the UpdateProvisionedProduct
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can check the status of this request using the DescribeRecord operation.
 //
 //    // Example sending a request using the UpdateProvisionedProductRequest method.
-//    req, resp := client.UpdateProvisionedProductRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateProvisionedProductRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProduct
-func (c *ServiceCatalog) UpdateProvisionedProductRequest(input *UpdateProvisionedProductInput) (req *aws.Request, output *UpdateProvisionedProductOutput) {
+func (c *ServiceCatalog) UpdateProvisionedProductRequest(input *UpdateProvisionedProductInput) UpdateProvisionedProductRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProvisionedProduct,
 		HTTPMethod: "POST",
@@ -4842,84 +2985,44 @@ func (c *ServiceCatalog) UpdateProvisionedProductRequest(input *UpdateProvisione
 		input = &UpdateProvisionedProductInput{}
 	}
 
-	output = &UpdateProvisionedProductOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateProvisionedProduct API operation for AWS Service Catalog.
-//
-// Requests updates to the configuration of an existing ProvisionedProduct object.
-// If there are tags associated with the object, they cannot be updated or added
-// with this operation. Depending on the specific updates requested, this operation
-// may update with no interruption, with some interruption, or replace the ProvisionedProduct
-// object entirely.
-//
-// You can check the status of this request using the DescribeRecord operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation UpdateProvisionedProduct for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProduct
-func (c *ServiceCatalog) UpdateProvisionedProduct(input *UpdateProvisionedProductInput) (*UpdateProvisionedProductOutput, error) {
-	req, out := c.UpdateProvisionedProductRequest(input)
-	return out, req.Send()
-}
-
-// UpdateProvisionedProductWithContext is the same as UpdateProvisionedProduct with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateProvisionedProduct for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) UpdateProvisionedProductWithContext(ctx aws.Context, input *UpdateProvisionedProductInput, opts ...aws.Option) (*UpdateProvisionedProductOutput, error) {
-	req, out := c.UpdateProvisionedProductRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateProvisionedProductOutput{})
+	return UpdateProvisionedProductRequest{Request: req, Input: input}
 }
 
 const opUpdateProvisioningArtifact = "UpdateProvisioningArtifact"
 
-// UpdateProvisioningArtifactRequest generates a "aws.Request" representing the
-// client's request for the UpdateProvisioningArtifact operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateProvisioningArtifactRequest is a API request type for the UpdateProvisioningArtifact API operation.
+type UpdateProvisioningArtifactRequest struct {
+	*aws.Request
+	Input *UpdateProvisioningArtifactInput
+}
+
+// Send marshals and sends the UpdateProvisioningArtifact API request.
+func (r UpdateProvisioningArtifactRequest) Send() (*UpdateProvisioningArtifactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateProvisioningArtifactOutput), nil
+}
+
+// UpdateProvisioningArtifactRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateProvisioningArtifact for more information on using the UpdateProvisioningArtifact
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing provisioning artifact's information. This operation does
+// not work on a provisioning artifact associated with a product that has been
+// shared with you.
 //
 //    // Example sending a request using the UpdateProvisioningArtifactRequest method.
-//    req, resp := client.UpdateProvisioningArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateProvisioningArtifactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifact
-func (c *ServiceCatalog) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArtifactInput) (req *aws.Request, output *UpdateProvisioningArtifactOutput) {
+func (c *ServiceCatalog) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArtifactInput) UpdateProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -4930,80 +3033,42 @@ func (c *ServiceCatalog) UpdateProvisioningArtifactRequest(input *UpdateProvisio
 		input = &UpdateProvisioningArtifactInput{}
 	}
 
-	output = &UpdateProvisioningArtifactOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateProvisioningArtifact API operation for AWS Service Catalog.
-//
-// Updates an existing provisioning artifact's information. This operation does
-// not work on a provisioning artifact associated with a product that has been
-// shared with you.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation UpdateProvisioningArtifact for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifact
-func (c *ServiceCatalog) UpdateProvisioningArtifact(input *UpdateProvisioningArtifactInput) (*UpdateProvisioningArtifactOutput, error) {
-	req, out := c.UpdateProvisioningArtifactRequest(input)
-	return out, req.Send()
-}
-
-// UpdateProvisioningArtifactWithContext is the same as UpdateProvisioningArtifact with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateProvisioningArtifact for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) UpdateProvisioningArtifactWithContext(ctx aws.Context, input *UpdateProvisioningArtifactInput, opts ...aws.Option) (*UpdateProvisioningArtifactOutput, error) {
-	req, out := c.UpdateProvisioningArtifactRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateProvisioningArtifactOutput{})
+	return UpdateProvisioningArtifactRequest{Request: req, Input: input}
 }
 
 const opUpdateTagOption = "UpdateTagOption"
 
-// UpdateTagOptionRequest generates a "aws.Request" representing the
-// client's request for the UpdateTagOption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateTagOptionRequest is a API request type for the UpdateTagOption API operation.
+type UpdateTagOptionRequest struct {
+	*aws.Request
+	Input *UpdateTagOptionInput
+}
+
+// Send marshals and sends the UpdateTagOption API request.
+func (r UpdateTagOptionRequest) Send() (*UpdateTagOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTagOptionOutput), nil
+}
+
+// UpdateTagOptionRequest returns a request value for making API operation for
+// AWS Service Catalog.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTagOption for more information on using the UpdateTagOption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an existing TagOption.
 //
 //    // Example sending a request using the UpdateTagOptionRequest method.
-//    req, resp := client.UpdateTagOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateTagOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOption
-func (c *ServiceCatalog) UpdateTagOptionRequest(input *UpdateTagOptionInput) (req *aws.Request, output *UpdateTagOptionOutput) {
+func (c *ServiceCatalog) UpdateTagOptionRequest(input *UpdateTagOptionInput) UpdateTagOptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTagOption,
 		HTTPMethod: "POST",
@@ -5014,57 +3079,8 @@ func (c *ServiceCatalog) UpdateTagOptionRequest(input *UpdateTagOptionInput) (re
 		input = &UpdateTagOptionInput{}
 	}
 
-	output = &UpdateTagOptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateTagOption API operation for AWS Service Catalog.
-//
-// Updates an existing TagOption.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Service Catalog's
-// API operation UpdateTagOption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTagOptionNotMigratedException "TagOptionNotMigratedException"
-//   An operation requiring TagOptions failed because the TagOptions migration
-//   process has not been performed for this account. Please use the AWS console
-//   to perform the migration process before retrying the operation.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeDuplicateResourceException "DuplicateResourceException"
-//   The specified resource is a duplicate.
-//
-//   * ErrCodeInvalidParametersException "InvalidParametersException"
-//   One or more parameters provided to the operation are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOption
-func (c *ServiceCatalog) UpdateTagOption(input *UpdateTagOptionInput) (*UpdateTagOptionOutput, error) {
-	req, out := c.UpdateTagOptionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTagOptionWithContext is the same as UpdateTagOption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTagOption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) UpdateTagOptionWithContext(ctx aws.Context, input *UpdateTagOptionInput, opts ...aws.Option) (*UpdateTagOptionOutput, error) {
-	req, out := c.UpdateTagOptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateTagOptionOutput{})
+	return UpdateTagOptionRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareInput

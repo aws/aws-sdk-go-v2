@@ -11,31 +11,37 @@ import (
 
 const opGetEntitlements = "GetEntitlements"
 
-// GetEntitlementsRequest generates a "aws.Request" representing the
-// client's request for the GetEntitlements operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetEntitlementsRequest is a API request type for the GetEntitlements API operation.
+type GetEntitlementsRequest struct {
+	*aws.Request
+	Input *GetEntitlementsInput
+}
+
+// Send marshals and sends the GetEntitlements API request.
+func (r GetEntitlementsRequest) Send() (*GetEntitlementsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEntitlementsOutput), nil
+}
+
+// GetEntitlementsRequest returns a request value for making API operation for
+// AWS Marketplace Entitlement Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetEntitlements for more information on using the GetEntitlements
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// GetEntitlements retrieves entitlement values for a given product. The results
+// can be filtered based on customer identifier or product dimensions.
 //
 //    // Example sending a request using the GetEntitlementsRequest method.
-//    req, resp := client.GetEntitlementsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetEntitlementsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlements
-func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitlementsInput) (req *aws.Request, output *GetEntitlementsOutput) {
+func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitlementsInput) GetEntitlementsRequest {
 	op := &aws.Operation{
 		Name:       opGetEntitlements,
 		HTTPMethod: "POST",
@@ -46,54 +52,8 @@ func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitle
 		input = &GetEntitlementsInput{}
 	}
 
-	output = &GetEntitlementsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetEntitlements API operation for AWS Marketplace Entitlement Service.
-//
-// GetEntitlements retrieves entitlement values for a given product. The results
-// can be filtered based on customer identifier or product dimensions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Marketplace Entitlement Service's
-// API operation GetEntitlements for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters in your request was invalid.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the GetEntitlements API are throttled.
-//
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlements
-func (c *MarketplaceEntitlementService) GetEntitlements(input *GetEntitlementsInput) (*GetEntitlementsOutput, error) {
-	req, out := c.GetEntitlementsRequest(input)
-	return out, req.Send()
-}
-
-// GetEntitlementsWithContext is the same as GetEntitlements with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEntitlements for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MarketplaceEntitlementService) GetEntitlementsWithContext(ctx aws.Context, input *GetEntitlementsInput, opts ...aws.Option) (*GetEntitlementsOutput, error) {
-	req, out := c.GetEntitlementsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetEntitlementsOutput{})
+	return GetEntitlementsRequest{Request: req, Input: input}
 }
 
 // An entitlement represents capacity in a product owned by the customer. For

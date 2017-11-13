@@ -15,31 +15,40 @@ import (
 
 const opAbortMultipartUpload = "AbortMultipartUpload"
 
-// AbortMultipartUploadRequest generates a "aws.Request" representing the
-// client's request for the AbortMultipartUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AbortMultipartUploadRequest is a API request type for the AbortMultipartUpload API operation.
+type AbortMultipartUploadRequest struct {
+	*aws.Request
+	Input *AbortMultipartUploadInput
+}
+
+// Send marshals and sends the AbortMultipartUpload API request.
+func (r AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AbortMultipartUploadOutput), nil
+}
+
+// AbortMultipartUploadRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Aborts a multipart upload.
 //
-// See AbortMultipartUpload for more information on using the AbortMultipartUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To verify that all parts have been removed, so you don't get charged for
+// the part storage, you should call the List Parts operation and ensure the
+// parts list is empty.
 //
 //    // Example sending a request using the AbortMultipartUploadRequest method.
-//    req, resp := client.AbortMultipartUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AbortMultipartUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUpload
-func (c *S3) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) (req *aws.Request, output *AbortMultipartUploadOutput) {
+func (c *S3) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) AbortMultipartUploadRequest {
 	op := &aws.Operation{
 		Name:       opAbortMultipartUpload,
 		HTTPMethod: "DELETE",
@@ -50,79 +59,42 @@ func (c *S3) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) (req 
 		input = &AbortMultipartUploadInput{}
 	}
 
-	output = &AbortMultipartUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AbortMultipartUpload API operation for Amazon Simple Storage Service.
-//
-// Aborts a multipart upload.
-//
-// To verify that all parts have been removed, so you don't get charged for
-// the part storage, you should call the List Parts operation and ensure the
-// parts list is empty.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation AbortMultipartUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchUpload "NoSuchUpload"
-//   The specified multipart upload does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUpload
-func (c *S3) AbortMultipartUpload(input *AbortMultipartUploadInput) (*AbortMultipartUploadOutput, error) {
-	req, out := c.AbortMultipartUploadRequest(input)
-	return out, req.Send()
-}
-
-// AbortMultipartUploadWithContext is the same as AbortMultipartUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AbortMultipartUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortMultipartUploadInput, opts ...aws.Option) (*AbortMultipartUploadOutput, error) {
-	req, out := c.AbortMultipartUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AbortMultipartUploadOutput{})
+	return AbortMultipartUploadRequest{Request: req, Input: input}
 }
 
 const opCompleteMultipartUpload = "CompleteMultipartUpload"
 
-// CompleteMultipartUploadRequest generates a "aws.Request" representing the
-// client's request for the CompleteMultipartUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CompleteMultipartUploadRequest is a API request type for the CompleteMultipartUpload API operation.
+type CompleteMultipartUploadRequest struct {
+	*aws.Request
+	Input *CompleteMultipartUploadInput
+}
+
+// Send marshals and sends the CompleteMultipartUpload API request.
+func (r CompleteMultipartUploadRequest) Send() (*CompleteMultipartUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CompleteMultipartUploadOutput), nil
+}
+
+// CompleteMultipartUploadRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CompleteMultipartUpload for more information on using the CompleteMultipartUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Completes a multipart upload by assembling previously uploaded parts.
 //
 //    // Example sending a request using the CompleteMultipartUploadRequest method.
-//    req, resp := client.CompleteMultipartUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CompleteMultipartUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUpload
-func (c *S3) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) (req *aws.Request, output *CompleteMultipartUploadOutput) {
+func (c *S3) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) CompleteMultipartUploadRequest {
 	op := &aws.Operation{
 		Name:       opCompleteMultipartUpload,
 		HTTPMethod: "POST",
@@ -133,70 +105,42 @@ func (c *S3) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput)
 		input = &CompleteMultipartUploadInput{}
 	}
 
-	output = &CompleteMultipartUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CompleteMultipartUpload API operation for Amazon Simple Storage Service.
-//
-// Completes a multipart upload by assembling previously uploaded parts.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation CompleteMultipartUpload for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUpload
-func (c *S3) CompleteMultipartUpload(input *CompleteMultipartUploadInput) (*CompleteMultipartUploadOutput, error) {
-	req, out := c.CompleteMultipartUploadRequest(input)
-	return out, req.Send()
-}
-
-// CompleteMultipartUploadWithContext is the same as CompleteMultipartUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CompleteMultipartUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) CompleteMultipartUploadWithContext(ctx aws.Context, input *CompleteMultipartUploadInput, opts ...aws.Option) (*CompleteMultipartUploadOutput, error) {
-	req, out := c.CompleteMultipartUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CompleteMultipartUploadOutput{})
+	return CompleteMultipartUploadRequest{Request: req, Input: input}
 }
 
 const opCopyObject = "CopyObject"
 
-// CopyObjectRequest generates a "aws.Request" representing the
-// client's request for the CopyObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CopyObjectRequest is a API request type for the CopyObject API operation.
+type CopyObjectRequest struct {
+	*aws.Request
+	Input *CopyObjectInput
+}
+
+// Send marshals and sends the CopyObject API request.
+func (r CopyObjectRequest) Send() (*CopyObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyObjectOutput), nil
+}
+
+// CopyObjectRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyObject for more information on using the CopyObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a copy of an object that is already stored in Amazon S3.
 //
 //    // Example sending a request using the CopyObjectRequest method.
-//    req, resp := client.CopyObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CopyObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObject
-func (c *S3) CopyObjectRequest(input *CopyObjectInput) (req *aws.Request, output *CopyObjectOutput) {
+func (c *S3) CopyObjectRequest(input *CopyObjectInput) CopyObjectRequest {
 	op := &aws.Operation{
 		Name:       opCopyObject,
 		HTTPMethod: "PUT",
@@ -207,76 +151,42 @@ func (c *S3) CopyObjectRequest(input *CopyObjectInput) (req *aws.Request, output
 		input = &CopyObjectInput{}
 	}
 
-	output = &CopyObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CopyObject API operation for Amazon Simple Storage Service.
-//
-// Creates a copy of an object that is already stored in Amazon S3.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation CopyObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeObjectNotInActiveTierError "ObjectNotInActiveTierError"
-//   The source object of the COPY operation is not in the active tier and is
-//   only stored in Amazon Glacier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObject
-func (c *S3) CopyObject(input *CopyObjectInput) (*CopyObjectOutput, error) {
-	req, out := c.CopyObjectRequest(input)
-	return out, req.Send()
-}
-
-// CopyObjectWithContext is the same as CopyObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) CopyObjectWithContext(ctx aws.Context, input *CopyObjectInput, opts ...aws.Option) (*CopyObjectOutput, error) {
-	req, out := c.CopyObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CopyObjectOutput{})
+	return CopyObjectRequest{Request: req, Input: input}
 }
 
 const opCreateBucket = "CreateBucket"
 
-// CreateBucketRequest generates a "aws.Request" representing the
-// client's request for the CreateBucket operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateBucketRequest is a API request type for the CreateBucket API operation.
+type CreateBucketRequest struct {
+	*aws.Request
+	Input *CreateBucketInput
+}
+
+// Send marshals and sends the CreateBucket API request.
+func (r CreateBucketRequest) Send() (*CreateBucketOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBucketOutput), nil
+}
+
+// CreateBucketRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateBucket for more information on using the CreateBucket
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new bucket.
 //
 //    // Example sending a request using the CreateBucketRequest method.
-//    req, resp := client.CreateBucketRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateBucketRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucket
-func (c *S3) CreateBucketRequest(input *CreateBucketInput) (req *aws.Request, output *CreateBucketOutput) {
+func (c *S3) CreateBucketRequest(input *CreateBucketInput) CreateBucketRequest {
 	op := &aws.Operation{
 		Name:       opCreateBucket,
 		HTTPMethod: "PUT",
@@ -287,78 +197,48 @@ func (c *S3) CreateBucketRequest(input *CreateBucketInput) (req *aws.Request, ou
 		input = &CreateBucketInput{}
 	}
 
-	output = &CreateBucketOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateBucket API operation for Amazon Simple Storage Service.
-//
-// Creates a new bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation CreateBucket for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBucketAlreadyExists "BucketAlreadyExists"
-//   The requested bucket name is not available. The bucket namespace is shared
-//   by all users of the system. Please select a different name and try again.
-//
-//   * ErrCodeBucketAlreadyOwnedByYou "BucketAlreadyOwnedByYou"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucket
-func (c *S3) CreateBucket(input *CreateBucketInput) (*CreateBucketOutput, error) {
-	req, out := c.CreateBucketRequest(input)
-	return out, req.Send()
-}
-
-// CreateBucketWithContext is the same as CreateBucket with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBucket for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) CreateBucketWithContext(ctx aws.Context, input *CreateBucketInput, opts ...aws.Option) (*CreateBucketOutput, error) {
-	req, out := c.CreateBucketRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateBucketOutput{})
+	return CreateBucketRequest{Request: req, Input: input}
 }
 
 const opCreateMultipartUpload = "CreateMultipartUpload"
 
-// CreateMultipartUploadRequest generates a "aws.Request" representing the
-// client's request for the CreateMultipartUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateMultipartUploadRequest is a API request type for the CreateMultipartUpload API operation.
+type CreateMultipartUploadRequest struct {
+	*aws.Request
+	Input *CreateMultipartUploadInput
+}
+
+// Send marshals and sends the CreateMultipartUpload API request.
+func (r CreateMultipartUploadRequest) Send() (*CreateMultipartUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateMultipartUploadOutput), nil
+}
+
+// CreateMultipartUploadRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Initiates a multipart upload and returns an upload ID.
 //
-// See CreateMultipartUpload for more information on using the CreateMultipartUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Note: After you initiate multipart upload and upload one or more parts, you
+// must either complete or abort multipart upload in order to stop getting charged
+// for storage of the uploaded parts. Only after you either complete or abort
+// multipart upload, Amazon S3 frees up the parts storage and stops charging
+// you for the parts storage.
 //
 //    // Example sending a request using the CreateMultipartUploadRequest method.
-//    req, resp := client.CreateMultipartUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateMultipartUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload
-func (c *S3) CreateMultipartUploadRequest(input *CreateMultipartUploadInput) (req *aws.Request, output *CreateMultipartUploadOutput) {
+func (c *S3) CreateMultipartUploadRequest(input *CreateMultipartUploadInput) CreateMultipartUploadRequest {
 	op := &aws.Operation{
 		Name:       opCreateMultipartUpload,
 		HTTPMethod: "POST",
@@ -369,76 +249,43 @@ func (c *S3) CreateMultipartUploadRequest(input *CreateMultipartUploadInput) (re
 		input = &CreateMultipartUploadInput{}
 	}
 
-	output = &CreateMultipartUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateMultipartUpload API operation for Amazon Simple Storage Service.
-//
-// Initiates a multipart upload and returns an upload ID.
-//
-// Note: After you initiate multipart upload and upload one or more parts, you
-// must either complete or abort multipart upload in order to stop getting charged
-// for storage of the uploaded parts. Only after you either complete or abort
-// multipart upload, Amazon S3 frees up the parts storage and stops charging
-// you for the parts storage.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation CreateMultipartUpload for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload
-func (c *S3) CreateMultipartUpload(input *CreateMultipartUploadInput) (*CreateMultipartUploadOutput, error) {
-	req, out := c.CreateMultipartUploadRequest(input)
-	return out, req.Send()
-}
-
-// CreateMultipartUploadWithContext is the same as CreateMultipartUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateMultipartUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) CreateMultipartUploadWithContext(ctx aws.Context, input *CreateMultipartUploadInput, opts ...aws.Option) (*CreateMultipartUploadOutput, error) {
-	req, out := c.CreateMultipartUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateMultipartUploadOutput{})
+	return CreateMultipartUploadRequest{Request: req, Input: input}
 }
 
 const opDeleteBucket = "DeleteBucket"
 
-// DeleteBucketRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucket operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketRequest is a API request type for the DeleteBucket API operation.
+type DeleteBucketRequest struct {
+	*aws.Request
+	Input *DeleteBucketInput
+}
+
+// Send marshals and sends the DeleteBucket API request.
+func (r DeleteBucketRequest) Send() (*DeleteBucketOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketOutput), nil
+}
+
+// DeleteBucketRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucket for more information on using the DeleteBucket
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the bucket. All objects (including all object versions and Delete
+// Markers) in the bucket must be deleted before the bucket itself can be deleted.
 //
 //    // Example sending a request using the DeleteBucketRequest method.
-//    req, resp := client.DeleteBucketRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucket
-func (c *S3) DeleteBucketRequest(input *DeleteBucketInput) (req *aws.Request, output *DeleteBucketOutput) {
+func (c *S3) DeleteBucketRequest(input *DeleteBucketInput) DeleteBucketRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucket,
 		HTTPMethod: "DELETE",
@@ -449,73 +296,45 @@ func (c *S3) DeleteBucketRequest(input *DeleteBucketInput) (req *aws.Request, ou
 		input = &DeleteBucketInput{}
 	}
 
-	output = &DeleteBucketOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucket API operation for Amazon Simple Storage Service.
-//
-// Deletes the bucket. All objects (including all object versions and Delete
-// Markers) in the bucket must be deleted before the bucket itself can be deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucket for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucket
-func (c *S3) DeleteBucket(input *DeleteBucketInput) (*DeleteBucketOutput, error) {
-	req, out := c.DeleteBucketRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketWithContext is the same as DeleteBucket with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucket for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketWithContext(ctx aws.Context, input *DeleteBucketInput, opts ...aws.Option) (*DeleteBucketOutput, error) {
-	req, out := c.DeleteBucketRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration"
 
-// DeleteBucketAnalyticsConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketAnalyticsConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketAnalyticsConfigurationRequest is a API request type for the DeleteBucketAnalyticsConfiguration API operation.
+type DeleteBucketAnalyticsConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteBucketAnalyticsConfigurationInput
+}
+
+// Send marshals and sends the DeleteBucketAnalyticsConfiguration API request.
+func (r DeleteBucketAnalyticsConfigurationRequest) Send() (*DeleteBucketAnalyticsConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketAnalyticsConfigurationOutput), nil
+}
+
+// DeleteBucketAnalyticsConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketAnalyticsConfiguration for more information on using the DeleteBucketAnalyticsConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an analytics configuration for the bucket (specified by the analytics
+// configuration ID).
 //
 //    // Example sending a request using the DeleteBucketAnalyticsConfigurationRequest method.
-//    req, resp := client.DeleteBucketAnalyticsConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketAnalyticsConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfiguration
-func (c *S3) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyticsConfigurationInput) (req *aws.Request, output *DeleteBucketAnalyticsConfigurationOutput) {
+func (c *S3) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyticsConfigurationInput) DeleteBucketAnalyticsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketAnalyticsConfiguration,
 		HTTPMethod: "DELETE",
@@ -526,73 +345,44 @@ func (c *S3) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyt
 		input = &DeleteBucketAnalyticsConfigurationInput{}
 	}
 
-	output = &DeleteBucketAnalyticsConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketAnalyticsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketAnalyticsConfiguration API operation for Amazon Simple Storage Service.
-//
-// Deletes an analytics configuration for the bucket (specified by the analytics
-// configuration ID).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketAnalyticsConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfiguration
-func (c *S3) DeleteBucketAnalyticsConfiguration(input *DeleteBucketAnalyticsConfigurationInput) (*DeleteBucketAnalyticsConfigurationOutput, error) {
-	req, out := c.DeleteBucketAnalyticsConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketAnalyticsConfigurationWithContext is the same as DeleteBucketAnalyticsConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketAnalyticsConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *DeleteBucketAnalyticsConfigurationInput, opts ...aws.Option) (*DeleteBucketAnalyticsConfigurationOutput, error) {
-	req, out := c.DeleteBucketAnalyticsConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketAnalyticsConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketCors = "DeleteBucketCors"
 
-// DeleteBucketCorsRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketCors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketCorsRequest is a API request type for the DeleteBucketCors API operation.
+type DeleteBucketCorsRequest struct {
+	*aws.Request
+	Input *DeleteBucketCorsInput
+}
+
+// Send marshals and sends the DeleteBucketCors API request.
+func (r DeleteBucketCorsRequest) Send() (*DeleteBucketCorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketCorsOutput), nil
+}
+
+// DeleteBucketCorsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketCors for more information on using the DeleteBucketCors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the cors configuration information set for the bucket.
 //
 //    // Example sending a request using the DeleteBucketCorsRequest method.
-//    req, resp := client.DeleteBucketCorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketCorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCors
-func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) (req *aws.Request, output *DeleteBucketCorsOutput) {
+func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) DeleteBucketCorsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketCors,
 		HTTPMethod: "DELETE",
@@ -603,72 +393,45 @@ func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) (req *aws.Req
 		input = &DeleteBucketCorsInput{}
 	}
 
-	output = &DeleteBucketCorsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketCorsOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketCors API operation for Amazon Simple Storage Service.
-//
-// Deletes the cors configuration information set for the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketCors for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCors
-func (c *S3) DeleteBucketCors(input *DeleteBucketCorsInput) (*DeleteBucketCorsOutput, error) {
-	req, out := c.DeleteBucketCorsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketCorsWithContext is the same as DeleteBucketCors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketCors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketCorsWithContext(ctx aws.Context, input *DeleteBucketCorsInput, opts ...aws.Option) (*DeleteBucketCorsOutput, error) {
-	req, out := c.DeleteBucketCorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketCorsRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketInventoryConfiguration = "DeleteBucketInventoryConfiguration"
 
-// DeleteBucketInventoryConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketInventoryConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketInventoryConfigurationRequest is a API request type for the DeleteBucketInventoryConfiguration API operation.
+type DeleteBucketInventoryConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteBucketInventoryConfigurationInput
+}
+
+// Send marshals and sends the DeleteBucketInventoryConfiguration API request.
+func (r DeleteBucketInventoryConfigurationRequest) Send() (*DeleteBucketInventoryConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketInventoryConfigurationOutput), nil
+}
+
+// DeleteBucketInventoryConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketInventoryConfiguration for more information on using the DeleteBucketInventoryConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an inventory configuration (identified by the inventory ID) from
+// the bucket.
 //
 //    // Example sending a request using the DeleteBucketInventoryConfigurationRequest method.
-//    req, resp := client.DeleteBucketInventoryConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketInventoryConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfiguration
-func (c *S3) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketInventoryConfigurationInput) (req *aws.Request, output *DeleteBucketInventoryConfigurationOutput) {
+func (c *S3) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketInventoryConfigurationInput) DeleteBucketInventoryConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketInventoryConfiguration,
 		HTTPMethod: "DELETE",
@@ -679,73 +442,44 @@ func (c *S3) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketInvent
 		input = &DeleteBucketInventoryConfigurationInput{}
 	}
 
-	output = &DeleteBucketInventoryConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketInventoryConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketInventoryConfiguration API operation for Amazon Simple Storage Service.
-//
-// Deletes an inventory configuration (identified by the inventory ID) from
-// the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketInventoryConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfiguration
-func (c *S3) DeleteBucketInventoryConfiguration(input *DeleteBucketInventoryConfigurationInput) (*DeleteBucketInventoryConfigurationOutput, error) {
-	req, out := c.DeleteBucketInventoryConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketInventoryConfigurationWithContext is the same as DeleteBucketInventoryConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketInventoryConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketInventoryConfigurationWithContext(ctx aws.Context, input *DeleteBucketInventoryConfigurationInput, opts ...aws.Option) (*DeleteBucketInventoryConfigurationOutput, error) {
-	req, out := c.DeleteBucketInventoryConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketInventoryConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketLifecycle = "DeleteBucketLifecycle"
 
-// DeleteBucketLifecycleRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketLifecycle operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketLifecycleRequest is a API request type for the DeleteBucketLifecycle API operation.
+type DeleteBucketLifecycleRequest struct {
+	*aws.Request
+	Input *DeleteBucketLifecycleInput
+}
+
+// Send marshals and sends the DeleteBucketLifecycle API request.
+func (r DeleteBucketLifecycleRequest) Send() (*DeleteBucketLifecycleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketLifecycleOutput), nil
+}
+
+// DeleteBucketLifecycleRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketLifecycle for more information on using the DeleteBucketLifecycle
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the lifecycle configuration from the bucket.
 //
 //    // Example sending a request using the DeleteBucketLifecycleRequest method.
-//    req, resp := client.DeleteBucketLifecycleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketLifecycleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycle
-func (c *S3) DeleteBucketLifecycleRequest(input *DeleteBucketLifecycleInput) (req *aws.Request, output *DeleteBucketLifecycleOutput) {
+func (c *S3) DeleteBucketLifecycleRequest(input *DeleteBucketLifecycleInput) DeleteBucketLifecycleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketLifecycle,
 		HTTPMethod: "DELETE",
@@ -756,72 +490,45 @@ func (c *S3) DeleteBucketLifecycleRequest(input *DeleteBucketLifecycleInput) (re
 		input = &DeleteBucketLifecycleInput{}
 	}
 
-	output = &DeleteBucketLifecycleOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketLifecycleOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketLifecycle API operation for Amazon Simple Storage Service.
-//
-// Deletes the lifecycle configuration from the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketLifecycle for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycle
-func (c *S3) DeleteBucketLifecycle(input *DeleteBucketLifecycleInput) (*DeleteBucketLifecycleOutput, error) {
-	req, out := c.DeleteBucketLifecycleRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketLifecycleWithContext is the same as DeleteBucketLifecycle with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketLifecycle for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketLifecycleWithContext(ctx aws.Context, input *DeleteBucketLifecycleInput, opts ...aws.Option) (*DeleteBucketLifecycleOutput, error) {
-	req, out := c.DeleteBucketLifecycleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketLifecycleRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
 
-// DeleteBucketMetricsConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketMetricsConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketMetricsConfigurationRequest is a API request type for the DeleteBucketMetricsConfiguration API operation.
+type DeleteBucketMetricsConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteBucketMetricsConfigurationInput
+}
+
+// Send marshals and sends the DeleteBucketMetricsConfiguration API request.
+func (r DeleteBucketMetricsConfigurationRequest) Send() (*DeleteBucketMetricsConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketMetricsConfigurationOutput), nil
+}
+
+// DeleteBucketMetricsConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketMetricsConfiguration for more information on using the DeleteBucketMetricsConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a metrics configuration (specified by the metrics configuration ID)
+// from the bucket.
 //
 //    // Example sending a request using the DeleteBucketMetricsConfigurationRequest method.
-//    req, resp := client.DeleteBucketMetricsConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketMetricsConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfiguration
-func (c *S3) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsConfigurationInput) (req *aws.Request, output *DeleteBucketMetricsConfigurationOutput) {
+func (c *S3) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsConfigurationInput) DeleteBucketMetricsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketMetricsConfiguration,
 		HTTPMethod: "DELETE",
@@ -832,73 +539,44 @@ func (c *S3) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsC
 		input = &DeleteBucketMetricsConfigurationInput{}
 	}
 
-	output = &DeleteBucketMetricsConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketMetricsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketMetricsConfiguration API operation for Amazon Simple Storage Service.
-//
-// Deletes a metrics configuration (specified by the metrics configuration ID)
-// from the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketMetricsConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfiguration
-func (c *S3) DeleteBucketMetricsConfiguration(input *DeleteBucketMetricsConfigurationInput) (*DeleteBucketMetricsConfigurationOutput, error) {
-	req, out := c.DeleteBucketMetricsConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketMetricsConfigurationWithContext is the same as DeleteBucketMetricsConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketMetricsConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketMetricsConfigurationWithContext(ctx aws.Context, input *DeleteBucketMetricsConfigurationInput, opts ...aws.Option) (*DeleteBucketMetricsConfigurationOutput, error) {
-	req, out := c.DeleteBucketMetricsConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketMetricsConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketPolicy = "DeleteBucketPolicy"
 
-// DeleteBucketPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketPolicyRequest is a API request type for the DeleteBucketPolicy API operation.
+type DeleteBucketPolicyRequest struct {
+	*aws.Request
+	Input *DeleteBucketPolicyInput
+}
+
+// Send marshals and sends the DeleteBucketPolicy API request.
+func (r DeleteBucketPolicyRequest) Send() (*DeleteBucketPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketPolicyOutput), nil
+}
+
+// DeleteBucketPolicyRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketPolicy for more information on using the DeleteBucketPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the policy from the bucket.
 //
 //    // Example sending a request using the DeleteBucketPolicyRequest method.
-//    req, resp := client.DeleteBucketPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicy
-func (c *S3) DeleteBucketPolicyRequest(input *DeleteBucketPolicyInput) (req *aws.Request, output *DeleteBucketPolicyOutput) {
+func (c *S3) DeleteBucketPolicyRequest(input *DeleteBucketPolicyInput) DeleteBucketPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketPolicy,
 		HTTPMethod: "DELETE",
@@ -909,72 +587,44 @@ func (c *S3) DeleteBucketPolicyRequest(input *DeleteBucketPolicyInput) (req *aws
 		input = &DeleteBucketPolicyInput{}
 	}
 
-	output = &DeleteBucketPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketPolicy API operation for Amazon Simple Storage Service.
-//
-// Deletes the policy from the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketPolicy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicy
-func (c *S3) DeleteBucketPolicy(input *DeleteBucketPolicyInput) (*DeleteBucketPolicyOutput, error) {
-	req, out := c.DeleteBucketPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketPolicyWithContext is the same as DeleteBucketPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketPolicyWithContext(ctx aws.Context, input *DeleteBucketPolicyInput, opts ...aws.Option) (*DeleteBucketPolicyOutput, error) {
-	req, out := c.DeleteBucketPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketReplication = "DeleteBucketReplication"
 
-// DeleteBucketReplicationRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketReplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketReplicationRequest is a API request type for the DeleteBucketReplication API operation.
+type DeleteBucketReplicationRequest struct {
+	*aws.Request
+	Input *DeleteBucketReplicationInput
+}
+
+// Send marshals and sends the DeleteBucketReplication API request.
+func (r DeleteBucketReplicationRequest) Send() (*DeleteBucketReplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketReplicationOutput), nil
+}
+
+// DeleteBucketReplicationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketReplication for more information on using the DeleteBucketReplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the replication configuration from the bucket.
 //
 //    // Example sending a request using the DeleteBucketReplicationRequest method.
-//    req, resp := client.DeleteBucketReplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketReplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplication
-func (c *S3) DeleteBucketReplicationRequest(input *DeleteBucketReplicationInput) (req *aws.Request, output *DeleteBucketReplicationOutput) {
+func (c *S3) DeleteBucketReplicationRequest(input *DeleteBucketReplicationInput) DeleteBucketReplicationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketReplication,
 		HTTPMethod: "DELETE",
@@ -985,72 +635,44 @@ func (c *S3) DeleteBucketReplicationRequest(input *DeleteBucketReplicationInput)
 		input = &DeleteBucketReplicationInput{}
 	}
 
-	output = &DeleteBucketReplicationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketReplicationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketReplication API operation for Amazon Simple Storage Service.
-//
-// Deletes the replication configuration from the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketReplication for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplication
-func (c *S3) DeleteBucketReplication(input *DeleteBucketReplicationInput) (*DeleteBucketReplicationOutput, error) {
-	req, out := c.DeleteBucketReplicationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketReplicationWithContext is the same as DeleteBucketReplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketReplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketReplicationWithContext(ctx aws.Context, input *DeleteBucketReplicationInput, opts ...aws.Option) (*DeleteBucketReplicationOutput, error) {
-	req, out := c.DeleteBucketReplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketReplicationRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketTagging = "DeleteBucketTagging"
 
-// DeleteBucketTaggingRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketTagging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketTaggingRequest is a API request type for the DeleteBucketTagging API operation.
+type DeleteBucketTaggingRequest struct {
+	*aws.Request
+	Input *DeleteBucketTaggingInput
+}
+
+// Send marshals and sends the DeleteBucketTagging API request.
+func (r DeleteBucketTaggingRequest) Send() (*DeleteBucketTaggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketTaggingOutput), nil
+}
+
+// DeleteBucketTaggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketTagging for more information on using the DeleteBucketTagging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the tags from the bucket.
 //
 //    // Example sending a request using the DeleteBucketTaggingRequest method.
-//    req, resp := client.DeleteBucketTaggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketTaggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTagging
-func (c *S3) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) (req *aws.Request, output *DeleteBucketTaggingOutput) {
+func (c *S3) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) DeleteBucketTaggingRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketTagging,
 		HTTPMethod: "DELETE",
@@ -1061,72 +683,44 @@ func (c *S3) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) (req *a
 		input = &DeleteBucketTaggingInput{}
 	}
 
-	output = &DeleteBucketTaggingOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketTaggingOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketTagging API operation for Amazon Simple Storage Service.
-//
-// Deletes the tags from the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketTagging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTagging
-func (c *S3) DeleteBucketTagging(input *DeleteBucketTaggingInput) (*DeleteBucketTaggingOutput, error) {
-	req, out := c.DeleteBucketTaggingRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketTaggingWithContext is the same as DeleteBucketTagging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketTagging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketTaggingWithContext(ctx aws.Context, input *DeleteBucketTaggingInput, opts ...aws.Option) (*DeleteBucketTaggingOutput, error) {
-	req, out := c.DeleteBucketTaggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketTaggingRequest{Request: req, Input: input}
 }
 
 const opDeleteBucketWebsite = "DeleteBucketWebsite"
 
-// DeleteBucketWebsiteRequest generates a "aws.Request" representing the
-// client's request for the DeleteBucketWebsite operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBucketWebsiteRequest is a API request type for the DeleteBucketWebsite API operation.
+type DeleteBucketWebsiteRequest struct {
+	*aws.Request
+	Input *DeleteBucketWebsiteInput
+}
+
+// Send marshals and sends the DeleteBucketWebsite API request.
+func (r DeleteBucketWebsiteRequest) Send() (*DeleteBucketWebsiteOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketWebsiteOutput), nil
+}
+
+// DeleteBucketWebsiteRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBucketWebsite for more information on using the DeleteBucketWebsite
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation removes the website configuration from the bucket.
 //
 //    // Example sending a request using the DeleteBucketWebsiteRequest method.
-//    req, resp := client.DeleteBucketWebsiteRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBucketWebsiteRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsite
-func (c *S3) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) (req *aws.Request, output *DeleteBucketWebsiteOutput) {
+func (c *S3) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) DeleteBucketWebsiteRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketWebsite,
 		HTTPMethod: "DELETE",
@@ -1137,72 +731,46 @@ func (c *S3) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) (req *a
 		input = &DeleteBucketWebsiteInput{}
 	}
 
-	output = &DeleteBucketWebsiteOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBucketWebsiteOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteBucketWebsite API operation for Amazon Simple Storage Service.
-//
-// This operation removes the website configuration from the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteBucketWebsite for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsite
-func (c *S3) DeleteBucketWebsite(input *DeleteBucketWebsiteInput) (*DeleteBucketWebsiteOutput, error) {
-	req, out := c.DeleteBucketWebsiteRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBucketWebsiteWithContext is the same as DeleteBucketWebsite with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBucketWebsite for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteBucketWebsiteWithContext(ctx aws.Context, input *DeleteBucketWebsiteInput, opts ...aws.Option) (*DeleteBucketWebsiteOutput, error) {
-	req, out := c.DeleteBucketWebsiteRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteBucketWebsiteRequest{Request: req, Input: input}
 }
 
 const opDeleteObject = "DeleteObject"
 
-// DeleteObjectRequest generates a "aws.Request" representing the
-// client's request for the DeleteObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteObjectRequest is a API request type for the DeleteObject API operation.
+type DeleteObjectRequest struct {
+	*aws.Request
+	Input *DeleteObjectInput
+}
+
+// Send marshals and sends the DeleteObject API request.
+func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteObjectOutput), nil
+}
+
+// DeleteObjectRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteObject for more information on using the DeleteObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the null version (if there is one) of an object and inserts a delete
+// marker, which becomes the latest version of the object. If there isn't a
+// null version, Amazon S3 does not remove any objects.
 //
 //    // Example sending a request using the DeleteObjectRequest method.
-//    req, resp := client.DeleteObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObject
-func (c *S3) DeleteObjectRequest(input *DeleteObjectInput) (req *aws.Request, output *DeleteObjectOutput) {
+func (c *S3) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteObject,
 		HTTPMethod: "DELETE",
@@ -1213,72 +781,42 @@ func (c *S3) DeleteObjectRequest(input *DeleteObjectInput) (req *aws.Request, ou
 		input = &DeleteObjectInput{}
 	}
 
-	output = &DeleteObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteObject API operation for Amazon Simple Storage Service.
-//
-// Removes the null version (if there is one) of an object and inserts a delete
-// marker, which becomes the latest version of the object. If there isn't a
-// null version, Amazon S3 does not remove any objects.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteObject for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObject
-func (c *S3) DeleteObject(input *DeleteObjectInput) (*DeleteObjectOutput, error) {
-	req, out := c.DeleteObjectRequest(input)
-	return out, req.Send()
-}
-
-// DeleteObjectWithContext is the same as DeleteObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteObjectWithContext(ctx aws.Context, input *DeleteObjectInput, opts ...aws.Option) (*DeleteObjectOutput, error) {
-	req, out := c.DeleteObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteObjectOutput{})
+	return DeleteObjectRequest{Request: req, Input: input}
 }
 
 const opDeleteObjectTagging = "DeleteObjectTagging"
 
-// DeleteObjectTaggingRequest generates a "aws.Request" representing the
-// client's request for the DeleteObjectTagging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteObjectTaggingRequest is a API request type for the DeleteObjectTagging API operation.
+type DeleteObjectTaggingRequest struct {
+	*aws.Request
+	Input *DeleteObjectTaggingInput
+}
+
+// Send marshals and sends the DeleteObjectTagging API request.
+func (r DeleteObjectTaggingRequest) Send() (*DeleteObjectTaggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteObjectTaggingOutput), nil
+}
+
+// DeleteObjectTaggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteObjectTagging for more information on using the DeleteObjectTagging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the tag-set from an existing object.
 //
 //    // Example sending a request using the DeleteObjectTaggingRequest method.
-//    req, resp := client.DeleteObjectTaggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteObjectTaggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTagging
-func (c *S3) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) (req *aws.Request, output *DeleteObjectTaggingOutput) {
+func (c *S3) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) DeleteObjectTaggingRequest {
 	op := &aws.Operation{
 		Name:       opDeleteObjectTagging,
 		HTTPMethod: "DELETE",
@@ -1289,70 +827,43 @@ func (c *S3) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) (req *a
 		input = &DeleteObjectTaggingInput{}
 	}
 
-	output = &DeleteObjectTaggingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteObjectTagging API operation for Amazon Simple Storage Service.
-//
-// Removes the tag-set from an existing object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteObjectTagging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTagging
-func (c *S3) DeleteObjectTagging(input *DeleteObjectTaggingInput) (*DeleteObjectTaggingOutput, error) {
-	req, out := c.DeleteObjectTaggingRequest(input)
-	return out, req.Send()
-}
-
-// DeleteObjectTaggingWithContext is the same as DeleteObjectTagging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteObjectTagging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteObjectTaggingWithContext(ctx aws.Context, input *DeleteObjectTaggingInput, opts ...aws.Option) (*DeleteObjectTaggingOutput, error) {
-	req, out := c.DeleteObjectTaggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteObjectTaggingOutput{})
+	return DeleteObjectTaggingRequest{Request: req, Input: input}
 }
 
 const opDeleteObjects = "DeleteObjects"
 
-// DeleteObjectsRequest generates a "aws.Request" representing the
-// client's request for the DeleteObjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteObjectsRequest is a API request type for the DeleteObjects API operation.
+type DeleteObjectsRequest struct {
+	*aws.Request
+	Input *DeleteObjectsInput
+}
+
+// Send marshals and sends the DeleteObjects API request.
+func (r DeleteObjectsRequest) Send() (*DeleteObjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteObjectsOutput), nil
+}
+
+// DeleteObjectsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteObjects for more information on using the DeleteObjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation enables you to delete multiple objects from a bucket using
+// a single HTTP request. You may specify up to 1000 keys.
 //
 //    // Example sending a request using the DeleteObjectsRequest method.
-//    req, resp := client.DeleteObjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteObjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjects
-func (c *S3) DeleteObjectsRequest(input *DeleteObjectsInput) (req *aws.Request, output *DeleteObjectsOutput) {
+func (c *S3) DeleteObjectsRequest(input *DeleteObjectsInput) DeleteObjectsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteObjects,
 		HTTPMethod: "POST",
@@ -1363,71 +874,42 @@ func (c *S3) DeleteObjectsRequest(input *DeleteObjectsInput) (req *aws.Request, 
 		input = &DeleteObjectsInput{}
 	}
 
-	output = &DeleteObjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteObjects API operation for Amazon Simple Storage Service.
-//
-// This operation enables you to delete multiple objects from a bucket using
-// a single HTTP request. You may specify up to 1000 keys.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation DeleteObjects for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjects
-func (c *S3) DeleteObjects(input *DeleteObjectsInput) (*DeleteObjectsOutput, error) {
-	req, out := c.DeleteObjectsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteObjectsWithContext is the same as DeleteObjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteObjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) DeleteObjectsWithContext(ctx aws.Context, input *DeleteObjectsInput, opts ...aws.Option) (*DeleteObjectsOutput, error) {
-	req, out := c.DeleteObjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteObjectsOutput{})
+	return DeleteObjectsRequest{Request: req, Input: input}
 }
 
 const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 
-// GetBucketAccelerateConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketAccelerateConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketAccelerateConfigurationRequest is a API request type for the GetBucketAccelerateConfiguration API operation.
+type GetBucketAccelerateConfigurationRequest struct {
+	*aws.Request
+	Input *GetBucketAccelerateConfigurationInput
+}
+
+// Send marshals and sends the GetBucketAccelerateConfiguration API request.
+func (r GetBucketAccelerateConfigurationRequest) Send() (*GetBucketAccelerateConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketAccelerateConfigurationOutput), nil
+}
+
+// GetBucketAccelerateConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketAccelerateConfiguration for more information on using the GetBucketAccelerateConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the accelerate configuration of a bucket.
 //
 //    // Example sending a request using the GetBucketAccelerateConfigurationRequest method.
-//    req, resp := client.GetBucketAccelerateConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketAccelerateConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfiguration
-func (c *S3) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateConfigurationInput) (req *aws.Request, output *GetBucketAccelerateConfigurationOutput) {
+func (c *S3) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateConfigurationInput) GetBucketAccelerateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketAccelerateConfiguration,
 		HTTPMethod: "GET",
@@ -1438,70 +920,42 @@ func (c *S3) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateC
 		input = &GetBucketAccelerateConfigurationInput{}
 	}
 
-	output = &GetBucketAccelerateConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketAccelerateConfiguration API operation for Amazon Simple Storage Service.
-//
-// Returns the accelerate configuration of a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketAccelerateConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfiguration
-func (c *S3) GetBucketAccelerateConfiguration(input *GetBucketAccelerateConfigurationInput) (*GetBucketAccelerateConfigurationOutput, error) {
-	req, out := c.GetBucketAccelerateConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketAccelerateConfigurationWithContext is the same as GetBucketAccelerateConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketAccelerateConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketAccelerateConfigurationWithContext(ctx aws.Context, input *GetBucketAccelerateConfigurationInput, opts ...aws.Option) (*GetBucketAccelerateConfigurationOutput, error) {
-	req, out := c.GetBucketAccelerateConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketAccelerateConfigurationOutput{})
+	return GetBucketAccelerateConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetBucketAcl = "GetBucketAcl"
 
-// GetBucketAclRequest generates a "aws.Request" representing the
-// client's request for the GetBucketAcl operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketAclRequest is a API request type for the GetBucketAcl API operation.
+type GetBucketAclRequest struct {
+	*aws.Request
+	Input *GetBucketAclInput
+}
+
+// Send marshals and sends the GetBucketAcl API request.
+func (r GetBucketAclRequest) Send() (*GetBucketAclOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketAclOutput), nil
+}
+
+// GetBucketAclRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketAcl for more information on using the GetBucketAcl
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the access control policy for the bucket.
 //
 //    // Example sending a request using the GetBucketAclRequest method.
-//    req, resp := client.GetBucketAclRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketAclRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAcl
-func (c *S3) GetBucketAclRequest(input *GetBucketAclInput) (req *aws.Request, output *GetBucketAclOutput) {
+func (c *S3) GetBucketAclRequest(input *GetBucketAclInput) GetBucketAclRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketAcl,
 		HTTPMethod: "GET",
@@ -1512,70 +966,43 @@ func (c *S3) GetBucketAclRequest(input *GetBucketAclInput) (req *aws.Request, ou
 		input = &GetBucketAclInput{}
 	}
 
-	output = &GetBucketAclOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketAcl API operation for Amazon Simple Storage Service.
-//
-// Gets the access control policy for the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketAcl for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAcl
-func (c *S3) GetBucketAcl(input *GetBucketAclInput) (*GetBucketAclOutput, error) {
-	req, out := c.GetBucketAclRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketAclWithContext is the same as GetBucketAcl with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketAcl for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketAclWithContext(ctx aws.Context, input *GetBucketAclInput, opts ...aws.Option) (*GetBucketAclOutput, error) {
-	req, out := c.GetBucketAclRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketAclOutput{})
+	return GetBucketAclRequest{Request: req, Input: input}
 }
 
 const opGetBucketAnalyticsConfiguration = "GetBucketAnalyticsConfiguration"
 
-// GetBucketAnalyticsConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketAnalyticsConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketAnalyticsConfigurationRequest is a API request type for the GetBucketAnalyticsConfiguration API operation.
+type GetBucketAnalyticsConfigurationRequest struct {
+	*aws.Request
+	Input *GetBucketAnalyticsConfigurationInput
+}
+
+// Send marshals and sends the GetBucketAnalyticsConfiguration API request.
+func (r GetBucketAnalyticsConfigurationRequest) Send() (*GetBucketAnalyticsConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketAnalyticsConfigurationOutput), nil
+}
+
+// GetBucketAnalyticsConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketAnalyticsConfiguration for more information on using the GetBucketAnalyticsConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets an analytics configuration for the bucket (specified by the analytics
+// configuration ID).
 //
 //    // Example sending a request using the GetBucketAnalyticsConfigurationRequest method.
-//    req, resp := client.GetBucketAnalyticsConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketAnalyticsConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfiguration
-func (c *S3) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalyticsConfigurationInput) (req *aws.Request, output *GetBucketAnalyticsConfigurationOutput) {
+func (c *S3) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalyticsConfigurationInput) GetBucketAnalyticsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketAnalyticsConfiguration,
 		HTTPMethod: "GET",
@@ -1586,71 +1013,42 @@ func (c *S3) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalyticsCon
 		input = &GetBucketAnalyticsConfigurationInput{}
 	}
 
-	output = &GetBucketAnalyticsConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketAnalyticsConfiguration API operation for Amazon Simple Storage Service.
-//
-// Gets an analytics configuration for the bucket (specified by the analytics
-// configuration ID).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketAnalyticsConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfiguration
-func (c *S3) GetBucketAnalyticsConfiguration(input *GetBucketAnalyticsConfigurationInput) (*GetBucketAnalyticsConfigurationOutput, error) {
-	req, out := c.GetBucketAnalyticsConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketAnalyticsConfigurationWithContext is the same as GetBucketAnalyticsConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketAnalyticsConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *GetBucketAnalyticsConfigurationInput, opts ...aws.Option) (*GetBucketAnalyticsConfigurationOutput, error) {
-	req, out := c.GetBucketAnalyticsConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketAnalyticsConfigurationOutput{})
+	return GetBucketAnalyticsConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetBucketCors = "GetBucketCors"
 
-// GetBucketCorsRequest generates a "aws.Request" representing the
-// client's request for the GetBucketCors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketCorsRequest is a API request type for the GetBucketCors API operation.
+type GetBucketCorsRequest struct {
+	*aws.Request
+	Input *GetBucketCorsInput
+}
+
+// Send marshals and sends the GetBucketCors API request.
+func (r GetBucketCorsRequest) Send() (*GetBucketCorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketCorsOutput), nil
+}
+
+// GetBucketCorsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketCors for more information on using the GetBucketCors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the cors configuration for the bucket.
 //
 //    // Example sending a request using the GetBucketCorsRequest method.
-//    req, resp := client.GetBucketCorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketCorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCors
-func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) (req *aws.Request, output *GetBucketCorsOutput) {
+func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketCors,
 		HTTPMethod: "GET",
@@ -1661,70 +1059,43 @@ func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) (req *aws.Request, 
 		input = &GetBucketCorsInput{}
 	}
 
-	output = &GetBucketCorsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketCors API operation for Amazon Simple Storage Service.
-//
-// Returns the cors configuration for the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketCors for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCors
-func (c *S3) GetBucketCors(input *GetBucketCorsInput) (*GetBucketCorsOutput, error) {
-	req, out := c.GetBucketCorsRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketCorsWithContext is the same as GetBucketCors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketCors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketCorsWithContext(ctx aws.Context, input *GetBucketCorsInput, opts ...aws.Option) (*GetBucketCorsOutput, error) {
-	req, out := c.GetBucketCorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketCorsOutput{})
+	return GetBucketCorsRequest{Request: req, Input: input}
 }
 
 const opGetBucketInventoryConfiguration = "GetBucketInventoryConfiguration"
 
-// GetBucketInventoryConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketInventoryConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketInventoryConfigurationRequest is a API request type for the GetBucketInventoryConfiguration API operation.
+type GetBucketInventoryConfigurationRequest struct {
+	*aws.Request
+	Input *GetBucketInventoryConfigurationInput
+}
+
+// Send marshals and sends the GetBucketInventoryConfiguration API request.
+func (r GetBucketInventoryConfigurationRequest) Send() (*GetBucketInventoryConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketInventoryConfigurationOutput), nil
+}
+
+// GetBucketInventoryConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketInventoryConfiguration for more information on using the GetBucketInventoryConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an inventory configuration (identified by the inventory ID) from
+// the bucket.
 //
 //    // Example sending a request using the GetBucketInventoryConfigurationRequest method.
-//    req, resp := client.GetBucketInventoryConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketInventoryConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfiguration
-func (c *S3) GetBucketInventoryConfigurationRequest(input *GetBucketInventoryConfigurationInput) (req *aws.Request, output *GetBucketInventoryConfigurationOutput) {
+func (c *S3) GetBucketInventoryConfigurationRequest(input *GetBucketInventoryConfigurationInput) GetBucketInventoryConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketInventoryConfiguration,
 		HTTPMethod: "GET",
@@ -1735,71 +1106,42 @@ func (c *S3) GetBucketInventoryConfigurationRequest(input *GetBucketInventoryCon
 		input = &GetBucketInventoryConfigurationInput{}
 	}
 
-	output = &GetBucketInventoryConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketInventoryConfiguration API operation for Amazon Simple Storage Service.
-//
-// Returns an inventory configuration (identified by the inventory ID) from
-// the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketInventoryConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfiguration
-func (c *S3) GetBucketInventoryConfiguration(input *GetBucketInventoryConfigurationInput) (*GetBucketInventoryConfigurationOutput, error) {
-	req, out := c.GetBucketInventoryConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketInventoryConfigurationWithContext is the same as GetBucketInventoryConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketInventoryConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketInventoryConfigurationWithContext(ctx aws.Context, input *GetBucketInventoryConfigurationInput, opts ...aws.Option) (*GetBucketInventoryConfigurationOutput, error) {
-	req, out := c.GetBucketInventoryConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketInventoryConfigurationOutput{})
+	return GetBucketInventoryConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetBucketLifecycle = "GetBucketLifecycle"
 
-// GetBucketLifecycleRequest generates a "aws.Request" representing the
-// client's request for the GetBucketLifecycle operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketLifecycleRequest is a API request type for the GetBucketLifecycle API operation.
+type GetBucketLifecycleRequest struct {
+	*aws.Request
+	Input *GetBucketLifecycleInput
+}
+
+// Send marshals and sends the GetBucketLifecycle API request.
+func (r GetBucketLifecycleRequest) Send() (*GetBucketLifecycleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketLifecycleOutput), nil
+}
+
+// GetBucketLifecycleRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketLifecycle for more information on using the GetBucketLifecycle
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deprecated, see the GetBucketLifecycleConfiguration operation.
 //
 //    // Example sending a request using the GetBucketLifecycleRequest method.
-//    req, resp := client.GetBucketLifecycleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketLifecycleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycle
-func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) (req *aws.Request, output *GetBucketLifecycleOutput) {
+func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) GetBucketLifecycleRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, GetBucketLifecycle, has been deprecated")
 	}
@@ -1813,70 +1155,42 @@ func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) (req *aws
 		input = &GetBucketLifecycleInput{}
 	}
 
-	output = &GetBucketLifecycleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketLifecycle API operation for Amazon Simple Storage Service.
-//
-// Deprecated, see the GetBucketLifecycleConfiguration operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketLifecycle for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycle
-func (c *S3) GetBucketLifecycle(input *GetBucketLifecycleInput) (*GetBucketLifecycleOutput, error) {
-	req, out := c.GetBucketLifecycleRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketLifecycleWithContext is the same as GetBucketLifecycle with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketLifecycle for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketLifecycleWithContext(ctx aws.Context, input *GetBucketLifecycleInput, opts ...aws.Option) (*GetBucketLifecycleOutput, error) {
-	req, out := c.GetBucketLifecycleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketLifecycleOutput{})
+	return GetBucketLifecycleRequest{Request: req, Input: input}
 }
 
 const opGetBucketLifecycleConfiguration = "GetBucketLifecycleConfiguration"
 
-// GetBucketLifecycleConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketLifecycleConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketLifecycleConfigurationRequest is a API request type for the GetBucketLifecycleConfiguration API operation.
+type GetBucketLifecycleConfigurationRequest struct {
+	*aws.Request
+	Input *GetBucketLifecycleConfigurationInput
+}
+
+// Send marshals and sends the GetBucketLifecycleConfiguration API request.
+func (r GetBucketLifecycleConfigurationRequest) Send() (*GetBucketLifecycleConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketLifecycleConfigurationOutput), nil
+}
+
+// GetBucketLifecycleConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketLifecycleConfiguration for more information on using the GetBucketLifecycleConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the lifecycle configuration information set on the bucket.
 //
 //    // Example sending a request using the GetBucketLifecycleConfigurationRequest method.
-//    req, resp := client.GetBucketLifecycleConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketLifecycleConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfiguration
-func (c *S3) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycleConfigurationInput) (req *aws.Request, output *GetBucketLifecycleConfigurationOutput) {
+func (c *S3) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycleConfigurationInput) GetBucketLifecycleConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketLifecycleConfiguration,
 		HTTPMethod: "GET",
@@ -1887,70 +1201,42 @@ func (c *S3) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycleCon
 		input = &GetBucketLifecycleConfigurationInput{}
 	}
 
-	output = &GetBucketLifecycleConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketLifecycleConfiguration API operation for Amazon Simple Storage Service.
-//
-// Returns the lifecycle configuration information set on the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketLifecycleConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfiguration
-func (c *S3) GetBucketLifecycleConfiguration(input *GetBucketLifecycleConfigurationInput) (*GetBucketLifecycleConfigurationOutput, error) {
-	req, out := c.GetBucketLifecycleConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketLifecycleConfigurationWithContext is the same as GetBucketLifecycleConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketLifecycleConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketLifecycleConfigurationWithContext(ctx aws.Context, input *GetBucketLifecycleConfigurationInput, opts ...aws.Option) (*GetBucketLifecycleConfigurationOutput, error) {
-	req, out := c.GetBucketLifecycleConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketLifecycleConfigurationOutput{})
+	return GetBucketLifecycleConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetBucketLocation = "GetBucketLocation"
 
-// GetBucketLocationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketLocation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketLocationRequest is a API request type for the GetBucketLocation API operation.
+type GetBucketLocationRequest struct {
+	*aws.Request
+	Input *GetBucketLocationInput
+}
+
+// Send marshals and sends the GetBucketLocation API request.
+func (r GetBucketLocationRequest) Send() (*GetBucketLocationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketLocationOutput), nil
+}
+
+// GetBucketLocationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketLocation for more information on using the GetBucketLocation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the region the bucket resides in.
 //
 //    // Example sending a request using the GetBucketLocationRequest method.
-//    req, resp := client.GetBucketLocationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketLocationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocation
-func (c *S3) GetBucketLocationRequest(input *GetBucketLocationInput) (req *aws.Request, output *GetBucketLocationOutput) {
+func (c *S3) GetBucketLocationRequest(input *GetBucketLocationInput) GetBucketLocationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketLocation,
 		HTTPMethod: "GET",
@@ -1961,70 +1247,43 @@ func (c *S3) GetBucketLocationRequest(input *GetBucketLocationInput) (req *aws.R
 		input = &GetBucketLocationInput{}
 	}
 
-	output = &GetBucketLocationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketLocation API operation for Amazon Simple Storage Service.
-//
-// Returns the region the bucket resides in.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketLocation for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocation
-func (c *S3) GetBucketLocation(input *GetBucketLocationInput) (*GetBucketLocationOutput, error) {
-	req, out := c.GetBucketLocationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketLocationWithContext is the same as GetBucketLocation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketLocation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketLocationWithContext(ctx aws.Context, input *GetBucketLocationInput, opts ...aws.Option) (*GetBucketLocationOutput, error) {
-	req, out := c.GetBucketLocationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketLocationOutput{})
+	return GetBucketLocationRequest{Request: req, Input: input}
 }
 
 const opGetBucketLogging = "GetBucketLogging"
 
-// GetBucketLoggingRequest generates a "aws.Request" representing the
-// client's request for the GetBucketLogging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketLoggingRequest is a API request type for the GetBucketLogging API operation.
+type GetBucketLoggingRequest struct {
+	*aws.Request
+	Input *GetBucketLoggingInput
+}
+
+// Send marshals and sends the GetBucketLogging API request.
+func (r GetBucketLoggingRequest) Send() (*GetBucketLoggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketLoggingOutput), nil
+}
+
+// GetBucketLoggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketLogging for more information on using the GetBucketLogging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the logging status of a bucket and the permissions users have to
+// view and modify that status. To use GET, you must be the bucket owner.
 //
 //    // Example sending a request using the GetBucketLoggingRequest method.
-//    req, resp := client.GetBucketLoggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketLoggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLogging
-func (c *S3) GetBucketLoggingRequest(input *GetBucketLoggingInput) (req *aws.Request, output *GetBucketLoggingOutput) {
+func (c *S3) GetBucketLoggingRequest(input *GetBucketLoggingInput) GetBucketLoggingRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketLogging,
 		HTTPMethod: "GET",
@@ -2035,71 +1294,43 @@ func (c *S3) GetBucketLoggingRequest(input *GetBucketLoggingInput) (req *aws.Req
 		input = &GetBucketLoggingInput{}
 	}
 
-	output = &GetBucketLoggingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketLogging API operation for Amazon Simple Storage Service.
-//
-// Returns the logging status of a bucket and the permissions users have to
-// view and modify that status. To use GET, you must be the bucket owner.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketLogging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLogging
-func (c *S3) GetBucketLogging(input *GetBucketLoggingInput) (*GetBucketLoggingOutput, error) {
-	req, out := c.GetBucketLoggingRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketLoggingWithContext is the same as GetBucketLogging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketLogging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketLoggingWithContext(ctx aws.Context, input *GetBucketLoggingInput, opts ...aws.Option) (*GetBucketLoggingOutput, error) {
-	req, out := c.GetBucketLoggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketLoggingOutput{})
+	return GetBucketLoggingRequest{Request: req, Input: input}
 }
 
 const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 
-// GetBucketMetricsConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketMetricsConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketMetricsConfigurationRequest is a API request type for the GetBucketMetricsConfiguration API operation.
+type GetBucketMetricsConfigurationRequest struct {
+	*aws.Request
+	Input *GetBucketMetricsConfigurationInput
+}
+
+// Send marshals and sends the GetBucketMetricsConfiguration API request.
+func (r GetBucketMetricsConfigurationRequest) Send() (*GetBucketMetricsConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketMetricsConfigurationOutput), nil
+}
+
+// GetBucketMetricsConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketMetricsConfiguration for more information on using the GetBucketMetricsConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a metrics configuration (specified by the metrics configuration ID)
+// from the bucket.
 //
 //    // Example sending a request using the GetBucketMetricsConfigurationRequest method.
-//    req, resp := client.GetBucketMetricsConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketMetricsConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfiguration
-func (c *S3) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigurationInput) (req *aws.Request, output *GetBucketMetricsConfigurationOutput) {
+func (c *S3) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigurationInput) GetBucketMetricsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketMetricsConfiguration,
 		HTTPMethod: "GET",
@@ -2110,71 +1341,42 @@ func (c *S3) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigu
 		input = &GetBucketMetricsConfigurationInput{}
 	}
 
-	output = &GetBucketMetricsConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketMetricsConfiguration API operation for Amazon Simple Storage Service.
-//
-// Gets a metrics configuration (specified by the metrics configuration ID)
-// from the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketMetricsConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfiguration
-func (c *S3) GetBucketMetricsConfiguration(input *GetBucketMetricsConfigurationInput) (*GetBucketMetricsConfigurationOutput, error) {
-	req, out := c.GetBucketMetricsConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketMetricsConfigurationWithContext is the same as GetBucketMetricsConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketMetricsConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketMetricsConfigurationWithContext(ctx aws.Context, input *GetBucketMetricsConfigurationInput, opts ...aws.Option) (*GetBucketMetricsConfigurationOutput, error) {
-	req, out := c.GetBucketMetricsConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketMetricsConfigurationOutput{})
+	return GetBucketMetricsConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetBucketNotification = "GetBucketNotification"
 
-// GetBucketNotificationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketNotification operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketNotificationRequest is a API request type for the GetBucketNotification API operation.
+type GetBucketNotificationRequest struct {
+	*aws.Request
+	Input *GetBucketNotificationConfigurationInput
+}
+
+// Send marshals and sends the GetBucketNotification API request.
+func (r GetBucketNotificationRequest) Send() (*GetBucketNotificationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketNotificationOutput), nil
+}
+
+// GetBucketNotificationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketNotification for more information on using the GetBucketNotification
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deprecated, see the GetBucketNotificationConfiguration operation.
 //
 //    // Example sending a request using the GetBucketNotificationRequest method.
-//    req, resp := client.GetBucketNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketNotificationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotification
-func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurationRequest) (req *aws.Request, output *NotificationConfigurationDeprecated) {
+func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurationInput) GetBucketNotificationRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, GetBucketNotification, has been deprecated")
 	}
@@ -2185,73 +1387,45 @@ func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurat
 	}
 
 	if input == nil {
-		input = &GetBucketNotificationConfigurationRequest{}
+		input = &GetBucketNotificationConfigurationInput{}
 	}
 
-	output = &NotificationConfigurationDeprecated{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketNotification API operation for Amazon Simple Storage Service.
-//
-// Deprecated, see the GetBucketNotificationConfiguration operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketNotification for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotification
-func (c *S3) GetBucketNotification(input *GetBucketNotificationConfigurationRequest) (*NotificationConfigurationDeprecated, error) {
-	req, out := c.GetBucketNotificationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketNotificationWithContext is the same as GetBucketNotification with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketNotification for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketNotificationWithContext(ctx aws.Context, input *GetBucketNotificationConfigurationRequest, opts ...aws.Option) (*NotificationConfigurationDeprecated, error) {
-	req, out := c.GetBucketNotificationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketNotificationOutput{})
+	return GetBucketNotificationRequest{Request: req, Input: input}
 }
 
 const opGetBucketNotificationConfiguration = "GetBucketNotificationConfiguration"
 
-// GetBucketNotificationConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketNotificationConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketNotificationConfigurationRequest is a API request type for the GetBucketNotificationConfiguration API operation.
+type GetBucketNotificationConfigurationRequest struct {
+	*aws.Request
+	Input *GetBucketNotificationConfigurationInput
+}
+
+// Send marshals and sends the GetBucketNotificationConfiguration API request.
+func (r GetBucketNotificationConfigurationRequest) Send() (*GetBucketNotificationConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketNotificationConfigurationOutput), nil
+}
+
+// GetBucketNotificationConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketNotificationConfiguration for more information on using the GetBucketNotificationConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the notification configuration of a bucket.
 //
 //    // Example sending a request using the GetBucketNotificationConfigurationRequest method.
-//    req, resp := client.GetBucketNotificationConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketNotificationConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfiguration
-func (c *S3) GetBucketNotificationConfigurationRequest(input *GetBucketNotificationConfigurationRequest) (req *aws.Request, output *NotificationConfiguration) {
+func (c *S3) GetBucketNotificationConfigurationRequest(input *GetBucketNotificationConfigurationInput) GetBucketNotificationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketNotificationConfiguration,
 		HTTPMethod: "GET",
@@ -2259,73 +1433,45 @@ func (c *S3) GetBucketNotificationConfigurationRequest(input *GetBucketNotificat
 	}
 
 	if input == nil {
-		input = &GetBucketNotificationConfigurationRequest{}
+		input = &GetBucketNotificationConfigurationInput{}
 	}
 
-	output = &NotificationConfiguration{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketNotificationConfiguration API operation for Amazon Simple Storage Service.
-//
-// Returns the notification configuration of a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketNotificationConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfiguration
-func (c *S3) GetBucketNotificationConfiguration(input *GetBucketNotificationConfigurationRequest) (*NotificationConfiguration, error) {
-	req, out := c.GetBucketNotificationConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketNotificationConfigurationWithContext is the same as GetBucketNotificationConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketNotificationConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketNotificationConfigurationWithContext(ctx aws.Context, input *GetBucketNotificationConfigurationRequest, opts ...aws.Option) (*NotificationConfiguration, error) {
-	req, out := c.GetBucketNotificationConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketNotificationConfigurationOutput{})
+	return GetBucketNotificationConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetBucketPolicy = "GetBucketPolicy"
 
-// GetBucketPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetBucketPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketPolicyRequest is a API request type for the GetBucketPolicy API operation.
+type GetBucketPolicyRequest struct {
+	*aws.Request
+	Input *GetBucketPolicyInput
+}
+
+// Send marshals and sends the GetBucketPolicy API request.
+func (r GetBucketPolicyRequest) Send() (*GetBucketPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketPolicyOutput), nil
+}
+
+// GetBucketPolicyRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketPolicy for more information on using the GetBucketPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the policy of a specified bucket.
 //
 //    // Example sending a request using the GetBucketPolicyRequest method.
-//    req, resp := client.GetBucketPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicy
-func (c *S3) GetBucketPolicyRequest(input *GetBucketPolicyInput) (req *aws.Request, output *GetBucketPolicyOutput) {
+func (c *S3) GetBucketPolicyRequest(input *GetBucketPolicyInput) GetBucketPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketPolicy,
 		HTTPMethod: "GET",
@@ -2336,70 +1482,42 @@ func (c *S3) GetBucketPolicyRequest(input *GetBucketPolicyInput) (req *aws.Reque
 		input = &GetBucketPolicyInput{}
 	}
 
-	output = &GetBucketPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketPolicy API operation for Amazon Simple Storage Service.
-//
-// Returns the policy of a specified bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketPolicy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicy
-func (c *S3) GetBucketPolicy(input *GetBucketPolicyInput) (*GetBucketPolicyOutput, error) {
-	req, out := c.GetBucketPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketPolicyWithContext is the same as GetBucketPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketPolicyWithContext(ctx aws.Context, input *GetBucketPolicyInput, opts ...aws.Option) (*GetBucketPolicyOutput, error) {
-	req, out := c.GetBucketPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketPolicyOutput{})
+	return GetBucketPolicyRequest{Request: req, Input: input}
 }
 
 const opGetBucketReplication = "GetBucketReplication"
 
-// GetBucketReplicationRequest generates a "aws.Request" representing the
-// client's request for the GetBucketReplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketReplicationRequest is a API request type for the GetBucketReplication API operation.
+type GetBucketReplicationRequest struct {
+	*aws.Request
+	Input *GetBucketReplicationInput
+}
+
+// Send marshals and sends the GetBucketReplication API request.
+func (r GetBucketReplicationRequest) Send() (*GetBucketReplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketReplicationOutput), nil
+}
+
+// GetBucketReplicationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketReplication for more information on using the GetBucketReplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the replication configuration of a bucket.
 //
 //    // Example sending a request using the GetBucketReplicationRequest method.
-//    req, resp := client.GetBucketReplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketReplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication
-func (c *S3) GetBucketReplicationRequest(input *GetBucketReplicationInput) (req *aws.Request, output *GetBucketReplicationOutput) {
+func (c *S3) GetBucketReplicationRequest(input *GetBucketReplicationInput) GetBucketReplicationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketReplication,
 		HTTPMethod: "GET",
@@ -2410,70 +1528,42 @@ func (c *S3) GetBucketReplicationRequest(input *GetBucketReplicationInput) (req 
 		input = &GetBucketReplicationInput{}
 	}
 
-	output = &GetBucketReplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketReplication API operation for Amazon Simple Storage Service.
-//
-// Returns the replication configuration of a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketReplication for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication
-func (c *S3) GetBucketReplication(input *GetBucketReplicationInput) (*GetBucketReplicationOutput, error) {
-	req, out := c.GetBucketReplicationRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketReplicationWithContext is the same as GetBucketReplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketReplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketReplicationWithContext(ctx aws.Context, input *GetBucketReplicationInput, opts ...aws.Option) (*GetBucketReplicationOutput, error) {
-	req, out := c.GetBucketReplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketReplicationOutput{})
+	return GetBucketReplicationRequest{Request: req, Input: input}
 }
 
 const opGetBucketRequestPayment = "GetBucketRequestPayment"
 
-// GetBucketRequestPaymentRequest generates a "aws.Request" representing the
-// client's request for the GetBucketRequestPayment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketRequestPaymentRequest is a API request type for the GetBucketRequestPayment API operation.
+type GetBucketRequestPaymentRequest struct {
+	*aws.Request
+	Input *GetBucketRequestPaymentInput
+}
+
+// Send marshals and sends the GetBucketRequestPayment API request.
+func (r GetBucketRequestPaymentRequest) Send() (*GetBucketRequestPaymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketRequestPaymentOutput), nil
+}
+
+// GetBucketRequestPaymentRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketRequestPayment for more information on using the GetBucketRequestPayment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the request payment configuration of a bucket.
 //
 //    // Example sending a request using the GetBucketRequestPaymentRequest method.
-//    req, resp := client.GetBucketRequestPaymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketRequestPaymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPayment
-func (c *S3) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentInput) (req *aws.Request, output *GetBucketRequestPaymentOutput) {
+func (c *S3) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentInput) GetBucketRequestPaymentRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketRequestPayment,
 		HTTPMethod: "GET",
@@ -2484,70 +1574,42 @@ func (c *S3) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentInput)
 		input = &GetBucketRequestPaymentInput{}
 	}
 
-	output = &GetBucketRequestPaymentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketRequestPayment API operation for Amazon Simple Storage Service.
-//
-// Returns the request payment configuration of a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketRequestPayment for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPayment
-func (c *S3) GetBucketRequestPayment(input *GetBucketRequestPaymentInput) (*GetBucketRequestPaymentOutput, error) {
-	req, out := c.GetBucketRequestPaymentRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketRequestPaymentWithContext is the same as GetBucketRequestPayment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketRequestPayment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketRequestPaymentWithContext(ctx aws.Context, input *GetBucketRequestPaymentInput, opts ...aws.Option) (*GetBucketRequestPaymentOutput, error) {
-	req, out := c.GetBucketRequestPaymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketRequestPaymentOutput{})
+	return GetBucketRequestPaymentRequest{Request: req, Input: input}
 }
 
 const opGetBucketTagging = "GetBucketTagging"
 
-// GetBucketTaggingRequest generates a "aws.Request" representing the
-// client's request for the GetBucketTagging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketTaggingRequest is a API request type for the GetBucketTagging API operation.
+type GetBucketTaggingRequest struct {
+	*aws.Request
+	Input *GetBucketTaggingInput
+}
+
+// Send marshals and sends the GetBucketTagging API request.
+func (r GetBucketTaggingRequest) Send() (*GetBucketTaggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketTaggingOutput), nil
+}
+
+// GetBucketTaggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketTagging for more information on using the GetBucketTagging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the tag set associated with the bucket.
 //
 //    // Example sending a request using the GetBucketTaggingRequest method.
-//    req, resp := client.GetBucketTaggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketTaggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTagging
-func (c *S3) GetBucketTaggingRequest(input *GetBucketTaggingInput) (req *aws.Request, output *GetBucketTaggingOutput) {
+func (c *S3) GetBucketTaggingRequest(input *GetBucketTaggingInput) GetBucketTaggingRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketTagging,
 		HTTPMethod: "GET",
@@ -2558,70 +1620,42 @@ func (c *S3) GetBucketTaggingRequest(input *GetBucketTaggingInput) (req *aws.Req
 		input = &GetBucketTaggingInput{}
 	}
 
-	output = &GetBucketTaggingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketTagging API operation for Amazon Simple Storage Service.
-//
-// Returns the tag set associated with the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketTagging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTagging
-func (c *S3) GetBucketTagging(input *GetBucketTaggingInput) (*GetBucketTaggingOutput, error) {
-	req, out := c.GetBucketTaggingRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketTaggingWithContext is the same as GetBucketTagging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketTagging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketTaggingWithContext(ctx aws.Context, input *GetBucketTaggingInput, opts ...aws.Option) (*GetBucketTaggingOutput, error) {
-	req, out := c.GetBucketTaggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketTaggingOutput{})
+	return GetBucketTaggingRequest{Request: req, Input: input}
 }
 
 const opGetBucketVersioning = "GetBucketVersioning"
 
-// GetBucketVersioningRequest generates a "aws.Request" representing the
-// client's request for the GetBucketVersioning operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketVersioningRequest is a API request type for the GetBucketVersioning API operation.
+type GetBucketVersioningRequest struct {
+	*aws.Request
+	Input *GetBucketVersioningInput
+}
+
+// Send marshals and sends the GetBucketVersioning API request.
+func (r GetBucketVersioningRequest) Send() (*GetBucketVersioningOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketVersioningOutput), nil
+}
+
+// GetBucketVersioningRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketVersioning for more information on using the GetBucketVersioning
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the versioning state of a bucket.
 //
 //    // Example sending a request using the GetBucketVersioningRequest method.
-//    req, resp := client.GetBucketVersioningRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketVersioningRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioning
-func (c *S3) GetBucketVersioningRequest(input *GetBucketVersioningInput) (req *aws.Request, output *GetBucketVersioningOutput) {
+func (c *S3) GetBucketVersioningRequest(input *GetBucketVersioningInput) GetBucketVersioningRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketVersioning,
 		HTTPMethod: "GET",
@@ -2632,70 +1666,42 @@ func (c *S3) GetBucketVersioningRequest(input *GetBucketVersioningInput) (req *a
 		input = &GetBucketVersioningInput{}
 	}
 
-	output = &GetBucketVersioningOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketVersioning API operation for Amazon Simple Storage Service.
-//
-// Returns the versioning state of a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketVersioning for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioning
-func (c *S3) GetBucketVersioning(input *GetBucketVersioningInput) (*GetBucketVersioningOutput, error) {
-	req, out := c.GetBucketVersioningRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketVersioningWithContext is the same as GetBucketVersioning with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketVersioning for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketVersioningWithContext(ctx aws.Context, input *GetBucketVersioningInput, opts ...aws.Option) (*GetBucketVersioningOutput, error) {
-	req, out := c.GetBucketVersioningRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketVersioningOutput{})
+	return GetBucketVersioningRequest{Request: req, Input: input}
 }
 
 const opGetBucketWebsite = "GetBucketWebsite"
 
-// GetBucketWebsiteRequest generates a "aws.Request" representing the
-// client's request for the GetBucketWebsite operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBucketWebsiteRequest is a API request type for the GetBucketWebsite API operation.
+type GetBucketWebsiteRequest struct {
+	*aws.Request
+	Input *GetBucketWebsiteInput
+}
+
+// Send marshals and sends the GetBucketWebsite API request.
+func (r GetBucketWebsiteRequest) Send() (*GetBucketWebsiteOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketWebsiteOutput), nil
+}
+
+// GetBucketWebsiteRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBucketWebsite for more information on using the GetBucketWebsite
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the website configuration for a bucket.
 //
 //    // Example sending a request using the GetBucketWebsiteRequest method.
-//    req, resp := client.GetBucketWebsiteRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBucketWebsiteRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsite
-func (c *S3) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) (req *aws.Request, output *GetBucketWebsiteOutput) {
+func (c *S3) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) GetBucketWebsiteRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketWebsite,
 		HTTPMethod: "GET",
@@ -2706,70 +1712,42 @@ func (c *S3) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) (req *aws.Req
 		input = &GetBucketWebsiteInput{}
 	}
 
-	output = &GetBucketWebsiteOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBucketWebsite API operation for Amazon Simple Storage Service.
-//
-// Returns the website configuration for a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetBucketWebsite for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsite
-func (c *S3) GetBucketWebsite(input *GetBucketWebsiteInput) (*GetBucketWebsiteOutput, error) {
-	req, out := c.GetBucketWebsiteRequest(input)
-	return out, req.Send()
-}
-
-// GetBucketWebsiteWithContext is the same as GetBucketWebsite with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBucketWebsite for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetBucketWebsiteWithContext(ctx aws.Context, input *GetBucketWebsiteInput, opts ...aws.Option) (*GetBucketWebsiteOutput, error) {
-	req, out := c.GetBucketWebsiteRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBucketWebsiteOutput{})
+	return GetBucketWebsiteRequest{Request: req, Input: input}
 }
 
 const opGetObject = "GetObject"
 
-// GetObjectRequest generates a "aws.Request" representing the
-// client's request for the GetObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetObjectRequest is a API request type for the GetObject API operation.
+type GetObjectRequest struct {
+	*aws.Request
+	Input *GetObjectInput
+}
+
+// Send marshals and sends the GetObject API request.
+func (r GetObjectRequest) Send() (*GetObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetObjectOutput), nil
+}
+
+// GetObjectRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetObject for more information on using the GetObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves objects from Amazon S3.
 //
 //    // Example sending a request using the GetObjectRequest method.
-//    req, resp := client.GetObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObject
-func (c *S3) GetObjectRequest(input *GetObjectInput) (req *aws.Request, output *GetObjectOutput) {
+func (c *S3) GetObjectRequest(input *GetObjectInput) GetObjectRequest {
 	op := &aws.Operation{
 		Name:       opGetObject,
 		HTTPMethod: "GET",
@@ -2780,75 +1758,42 @@ func (c *S3) GetObjectRequest(input *GetObjectInput) (req *aws.Request, output *
 		input = &GetObjectInput{}
 	}
 
-	output = &GetObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetObject API operation for Amazon Simple Storage Service.
-//
-// Retrieves objects from Amazon S3.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchKey "NoSuchKey"
-//   The specified key does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObject
-func (c *S3) GetObject(input *GetObjectInput) (*GetObjectOutput, error) {
-	req, out := c.GetObjectRequest(input)
-	return out, req.Send()
-}
-
-// GetObjectWithContext is the same as GetObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetObjectWithContext(ctx aws.Context, input *GetObjectInput, opts ...aws.Option) (*GetObjectOutput, error) {
-	req, out := c.GetObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetObjectOutput{})
+	return GetObjectRequest{Request: req, Input: input}
 }
 
 const opGetObjectAcl = "GetObjectAcl"
 
-// GetObjectAclRequest generates a "aws.Request" representing the
-// client's request for the GetObjectAcl operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetObjectAclRequest is a API request type for the GetObjectAcl API operation.
+type GetObjectAclRequest struct {
+	*aws.Request
+	Input *GetObjectAclInput
+}
+
+// Send marshals and sends the GetObjectAcl API request.
+func (r GetObjectAclRequest) Send() (*GetObjectAclOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetObjectAclOutput), nil
+}
+
+// GetObjectAclRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetObjectAcl for more information on using the GetObjectAcl
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the access control list (ACL) of an object.
 //
 //    // Example sending a request using the GetObjectAclRequest method.
-//    req, resp := client.GetObjectAclRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetObjectAclRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAcl
-func (c *S3) GetObjectAclRequest(input *GetObjectAclInput) (req *aws.Request, output *GetObjectAclOutput) {
+func (c *S3) GetObjectAclRequest(input *GetObjectAclInput) GetObjectAclRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectAcl,
 		HTTPMethod: "GET",
@@ -2859,75 +1804,42 @@ func (c *S3) GetObjectAclRequest(input *GetObjectAclInput) (req *aws.Request, ou
 		input = &GetObjectAclInput{}
 	}
 
-	output = &GetObjectAclOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetObjectAcl API operation for Amazon Simple Storage Service.
-//
-// Returns the access control list (ACL) of an object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetObjectAcl for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchKey "NoSuchKey"
-//   The specified key does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAcl
-func (c *S3) GetObjectAcl(input *GetObjectAclInput) (*GetObjectAclOutput, error) {
-	req, out := c.GetObjectAclRequest(input)
-	return out, req.Send()
-}
-
-// GetObjectAclWithContext is the same as GetObjectAcl with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetObjectAcl for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetObjectAclWithContext(ctx aws.Context, input *GetObjectAclInput, opts ...aws.Option) (*GetObjectAclOutput, error) {
-	req, out := c.GetObjectAclRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetObjectAclOutput{})
+	return GetObjectAclRequest{Request: req, Input: input}
 }
 
 const opGetObjectTagging = "GetObjectTagging"
 
-// GetObjectTaggingRequest generates a "aws.Request" representing the
-// client's request for the GetObjectTagging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetObjectTaggingRequest is a API request type for the GetObjectTagging API operation.
+type GetObjectTaggingRequest struct {
+	*aws.Request
+	Input *GetObjectTaggingInput
+}
+
+// Send marshals and sends the GetObjectTagging API request.
+func (r GetObjectTaggingRequest) Send() (*GetObjectTaggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetObjectTaggingOutput), nil
+}
+
+// GetObjectTaggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetObjectTagging for more information on using the GetObjectTagging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the tag-set of an object.
 //
 //    // Example sending a request using the GetObjectTaggingRequest method.
-//    req, resp := client.GetObjectTaggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetObjectTaggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTagging
-func (c *S3) GetObjectTaggingRequest(input *GetObjectTaggingInput) (req *aws.Request, output *GetObjectTaggingOutput) {
+func (c *S3) GetObjectTaggingRequest(input *GetObjectTaggingInput) GetObjectTaggingRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectTagging,
 		HTTPMethod: "GET",
@@ -2938,70 +1850,42 @@ func (c *S3) GetObjectTaggingRequest(input *GetObjectTaggingInput) (req *aws.Req
 		input = &GetObjectTaggingInput{}
 	}
 
-	output = &GetObjectTaggingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetObjectTagging API operation for Amazon Simple Storage Service.
-//
-// Returns the tag-set of an object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetObjectTagging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTagging
-func (c *S3) GetObjectTagging(input *GetObjectTaggingInput) (*GetObjectTaggingOutput, error) {
-	req, out := c.GetObjectTaggingRequest(input)
-	return out, req.Send()
-}
-
-// GetObjectTaggingWithContext is the same as GetObjectTagging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetObjectTagging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetObjectTaggingWithContext(ctx aws.Context, input *GetObjectTaggingInput, opts ...aws.Option) (*GetObjectTaggingOutput, error) {
-	req, out := c.GetObjectTaggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetObjectTaggingOutput{})
+	return GetObjectTaggingRequest{Request: req, Input: input}
 }
 
 const opGetObjectTorrent = "GetObjectTorrent"
 
-// GetObjectTorrentRequest generates a "aws.Request" representing the
-// client's request for the GetObjectTorrent operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetObjectTorrentRequest is a API request type for the GetObjectTorrent API operation.
+type GetObjectTorrentRequest struct {
+	*aws.Request
+	Input *GetObjectTorrentInput
+}
+
+// Send marshals and sends the GetObjectTorrent API request.
+func (r GetObjectTorrentRequest) Send() (*GetObjectTorrentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetObjectTorrentOutput), nil
+}
+
+// GetObjectTorrentRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetObjectTorrent for more information on using the GetObjectTorrent
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Return torrent files from a bucket.
 //
 //    // Example sending a request using the GetObjectTorrentRequest method.
-//    req, resp := client.GetObjectTorrentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetObjectTorrentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrent
-func (c *S3) GetObjectTorrentRequest(input *GetObjectTorrentInput) (req *aws.Request, output *GetObjectTorrentOutput) {
+func (c *S3) GetObjectTorrentRequest(input *GetObjectTorrentInput) GetObjectTorrentRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectTorrent,
 		HTTPMethod: "GET",
@@ -3012,70 +1896,43 @@ func (c *S3) GetObjectTorrentRequest(input *GetObjectTorrentInput) (req *aws.Req
 		input = &GetObjectTorrentInput{}
 	}
 
-	output = &GetObjectTorrentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetObjectTorrent API operation for Amazon Simple Storage Service.
-//
-// Return torrent files from a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation GetObjectTorrent for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrent
-func (c *S3) GetObjectTorrent(input *GetObjectTorrentInput) (*GetObjectTorrentOutput, error) {
-	req, out := c.GetObjectTorrentRequest(input)
-	return out, req.Send()
-}
-
-// GetObjectTorrentWithContext is the same as GetObjectTorrent with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetObjectTorrent for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) GetObjectTorrentWithContext(ctx aws.Context, input *GetObjectTorrentInput, opts ...aws.Option) (*GetObjectTorrentOutput, error) {
-	req, out := c.GetObjectTorrentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetObjectTorrentOutput{})
+	return GetObjectTorrentRequest{Request: req, Input: input}
 }
 
 const opHeadBucket = "HeadBucket"
 
-// HeadBucketRequest generates a "aws.Request" representing the
-// client's request for the HeadBucket operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// HeadBucketRequest is a API request type for the HeadBucket API operation.
+type HeadBucketRequest struct {
+	*aws.Request
+	Input *HeadBucketInput
+}
+
+// Send marshals and sends the HeadBucket API request.
+func (r HeadBucketRequest) Send() (*HeadBucketOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*HeadBucketOutput), nil
+}
+
+// HeadBucketRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See HeadBucket for more information on using the HeadBucket
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is useful to determine if a bucket exists and you have permission
+// to access it.
 //
 //    // Example sending a request using the HeadBucketRequest method.
-//    req, resp := client.HeadBucketRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.HeadBucketRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucket
-func (c *S3) HeadBucketRequest(input *HeadBucketInput) (req *aws.Request, output *HeadBucketOutput) {
+func (c *S3) HeadBucketRequest(input *HeadBucketInput) HeadBucketRequest {
 	op := &aws.Operation{
 		Name:       opHeadBucket,
 		HTTPMethod: "HEAD",
@@ -3086,78 +1943,49 @@ func (c *S3) HeadBucketRequest(input *HeadBucketInput) (req *aws.Request, output
 		input = &HeadBucketInput{}
 	}
 
-	output = &HeadBucketOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &HeadBucketOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// HeadBucket API operation for Amazon Simple Storage Service.
-//
-// This operation is useful to determine if a bucket exists and you have permission
-// to access it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation HeadBucket for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchBucket "NoSuchBucket"
-//   The specified bucket does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucket
-func (c *S3) HeadBucket(input *HeadBucketInput) (*HeadBucketOutput, error) {
-	req, out := c.HeadBucketRequest(input)
-	return out, req.Send()
-}
-
-// HeadBucketWithContext is the same as HeadBucket with the addition of
-// the ability to pass a context and additional request options.
-//
-// See HeadBucket for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) HeadBucketWithContext(ctx aws.Context, input *HeadBucketInput, opts ...aws.Option) (*HeadBucketOutput, error) {
-	req, out := c.HeadBucketRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return HeadBucketRequest{Request: req, Input: input}
 }
 
 const opHeadObject = "HeadObject"
 
-// HeadObjectRequest generates a "aws.Request" representing the
-// client's request for the HeadObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// HeadObjectRequest is a API request type for the HeadObject API operation.
+type HeadObjectRequest struct {
+	*aws.Request
+	Input *HeadObjectInput
+}
+
+// Send marshals and sends the HeadObject API request.
+func (r HeadObjectRequest) Send() (*HeadObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*HeadObjectOutput), nil
+}
+
+// HeadObjectRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The HEAD operation retrieves metadata from an object without returning the
+// object itself. This operation is useful if you're only interested in an object's
+// metadata. To use HEAD, you must have READ access to the object.
 //
-// See HeadObject for more information on using the HeadObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// See http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses
+// for more information on returned errors.
 //
 //    // Example sending a request using the HeadObjectRequest method.
-//    req, resp := client.HeadObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.HeadObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject
-func (c *S3) HeadObjectRequest(input *HeadObjectInput) (req *aws.Request, output *HeadObjectOutput) {
+func (c *S3) HeadObjectRequest(input *HeadObjectInput) HeadObjectRequest {
 	op := &aws.Operation{
 		Name:       opHeadObject,
 		HTTPMethod: "HEAD",
@@ -3168,75 +1996,42 @@ func (c *S3) HeadObjectRequest(input *HeadObjectInput) (req *aws.Request, output
 		input = &HeadObjectInput{}
 	}
 
-	output = &HeadObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// HeadObject API operation for Amazon Simple Storage Service.
-//
-// The HEAD operation retrieves metadata from an object without returning the
-// object itself. This operation is useful if you're only interested in an object's
-// metadata. To use HEAD, you must have READ access to the object.
-//
-// See http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses
-// for more information on returned errors.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation HeadObject for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject
-func (c *S3) HeadObject(input *HeadObjectInput) (*HeadObjectOutput, error) {
-	req, out := c.HeadObjectRequest(input)
-	return out, req.Send()
-}
-
-// HeadObjectWithContext is the same as HeadObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See HeadObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) HeadObjectWithContext(ctx aws.Context, input *HeadObjectInput, opts ...aws.Option) (*HeadObjectOutput, error) {
-	req, out := c.HeadObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &HeadObjectOutput{})
+	return HeadObjectRequest{Request: req, Input: input}
 }
 
 const opListBucketAnalyticsConfigurations = "ListBucketAnalyticsConfigurations"
 
-// ListBucketAnalyticsConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the ListBucketAnalyticsConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBucketAnalyticsConfigurationsRequest is a API request type for the ListBucketAnalyticsConfigurations API operation.
+type ListBucketAnalyticsConfigurationsRequest struct {
+	*aws.Request
+	Input *ListBucketAnalyticsConfigurationsInput
+}
+
+// Send marshals and sends the ListBucketAnalyticsConfigurations API request.
+func (r ListBucketAnalyticsConfigurationsRequest) Send() (*ListBucketAnalyticsConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBucketAnalyticsConfigurationsOutput), nil
+}
+
+// ListBucketAnalyticsConfigurationsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBucketAnalyticsConfigurations for more information on using the ListBucketAnalyticsConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the analytics configurations for the bucket.
 //
 //    // Example sending a request using the ListBucketAnalyticsConfigurationsRequest method.
-//    req, resp := client.ListBucketAnalyticsConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBucketAnalyticsConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurations
-func (c *S3) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnalyticsConfigurationsInput) (req *aws.Request, output *ListBucketAnalyticsConfigurationsOutput) {
+func (c *S3) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnalyticsConfigurationsInput) ListBucketAnalyticsConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListBucketAnalyticsConfigurations,
 		HTTPMethod: "GET",
@@ -3247,70 +2042,42 @@ func (c *S3) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnalytics
 		input = &ListBucketAnalyticsConfigurationsInput{}
 	}
 
-	output = &ListBucketAnalyticsConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBucketAnalyticsConfigurations API operation for Amazon Simple Storage Service.
-//
-// Lists the analytics configurations for the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListBucketAnalyticsConfigurations for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurations
-func (c *S3) ListBucketAnalyticsConfigurations(input *ListBucketAnalyticsConfigurationsInput) (*ListBucketAnalyticsConfigurationsOutput, error) {
-	req, out := c.ListBucketAnalyticsConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// ListBucketAnalyticsConfigurationsWithContext is the same as ListBucketAnalyticsConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBucketAnalyticsConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListBucketAnalyticsConfigurationsWithContext(ctx aws.Context, input *ListBucketAnalyticsConfigurationsInput, opts ...aws.Option) (*ListBucketAnalyticsConfigurationsOutput, error) {
-	req, out := c.ListBucketAnalyticsConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBucketAnalyticsConfigurationsOutput{})
+	return ListBucketAnalyticsConfigurationsRequest{Request: req, Input: input}
 }
 
 const opListBucketInventoryConfigurations = "ListBucketInventoryConfigurations"
 
-// ListBucketInventoryConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the ListBucketInventoryConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBucketInventoryConfigurationsRequest is a API request type for the ListBucketInventoryConfigurations API operation.
+type ListBucketInventoryConfigurationsRequest struct {
+	*aws.Request
+	Input *ListBucketInventoryConfigurationsInput
+}
+
+// Send marshals and sends the ListBucketInventoryConfigurations API request.
+func (r ListBucketInventoryConfigurationsRequest) Send() (*ListBucketInventoryConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBucketInventoryConfigurationsOutput), nil
+}
+
+// ListBucketInventoryConfigurationsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBucketInventoryConfigurations for more information on using the ListBucketInventoryConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of inventory configurations for the bucket.
 //
 //    // Example sending a request using the ListBucketInventoryConfigurationsRequest method.
-//    req, resp := client.ListBucketInventoryConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBucketInventoryConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurations
-func (c *S3) ListBucketInventoryConfigurationsRequest(input *ListBucketInventoryConfigurationsInput) (req *aws.Request, output *ListBucketInventoryConfigurationsOutput) {
+func (c *S3) ListBucketInventoryConfigurationsRequest(input *ListBucketInventoryConfigurationsInput) ListBucketInventoryConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListBucketInventoryConfigurations,
 		HTTPMethod: "GET",
@@ -3321,70 +2088,42 @@ func (c *S3) ListBucketInventoryConfigurationsRequest(input *ListBucketInventory
 		input = &ListBucketInventoryConfigurationsInput{}
 	}
 
-	output = &ListBucketInventoryConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBucketInventoryConfigurations API operation for Amazon Simple Storage Service.
-//
-// Returns a list of inventory configurations for the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListBucketInventoryConfigurations for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurations
-func (c *S3) ListBucketInventoryConfigurations(input *ListBucketInventoryConfigurationsInput) (*ListBucketInventoryConfigurationsOutput, error) {
-	req, out := c.ListBucketInventoryConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// ListBucketInventoryConfigurationsWithContext is the same as ListBucketInventoryConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBucketInventoryConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListBucketInventoryConfigurationsWithContext(ctx aws.Context, input *ListBucketInventoryConfigurationsInput, opts ...aws.Option) (*ListBucketInventoryConfigurationsOutput, error) {
-	req, out := c.ListBucketInventoryConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBucketInventoryConfigurationsOutput{})
+	return ListBucketInventoryConfigurationsRequest{Request: req, Input: input}
 }
 
 const opListBucketMetricsConfigurations = "ListBucketMetricsConfigurations"
 
-// ListBucketMetricsConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the ListBucketMetricsConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBucketMetricsConfigurationsRequest is a API request type for the ListBucketMetricsConfigurations API operation.
+type ListBucketMetricsConfigurationsRequest struct {
+	*aws.Request
+	Input *ListBucketMetricsConfigurationsInput
+}
+
+// Send marshals and sends the ListBucketMetricsConfigurations API request.
+func (r ListBucketMetricsConfigurationsRequest) Send() (*ListBucketMetricsConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBucketMetricsConfigurationsOutput), nil
+}
+
+// ListBucketMetricsConfigurationsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBucketMetricsConfigurations for more information on using the ListBucketMetricsConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the metrics configurations for the bucket.
 //
 //    // Example sending a request using the ListBucketMetricsConfigurationsRequest method.
-//    req, resp := client.ListBucketMetricsConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBucketMetricsConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurations
-func (c *S3) ListBucketMetricsConfigurationsRequest(input *ListBucketMetricsConfigurationsInput) (req *aws.Request, output *ListBucketMetricsConfigurationsOutput) {
+func (c *S3) ListBucketMetricsConfigurationsRequest(input *ListBucketMetricsConfigurationsInput) ListBucketMetricsConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListBucketMetricsConfigurations,
 		HTTPMethod: "GET",
@@ -3395,70 +2134,42 @@ func (c *S3) ListBucketMetricsConfigurationsRequest(input *ListBucketMetricsConf
 		input = &ListBucketMetricsConfigurationsInput{}
 	}
 
-	output = &ListBucketMetricsConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBucketMetricsConfigurations API operation for Amazon Simple Storage Service.
-//
-// Lists the metrics configurations for the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListBucketMetricsConfigurations for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurations
-func (c *S3) ListBucketMetricsConfigurations(input *ListBucketMetricsConfigurationsInput) (*ListBucketMetricsConfigurationsOutput, error) {
-	req, out := c.ListBucketMetricsConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// ListBucketMetricsConfigurationsWithContext is the same as ListBucketMetricsConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBucketMetricsConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListBucketMetricsConfigurationsWithContext(ctx aws.Context, input *ListBucketMetricsConfigurationsInput, opts ...aws.Option) (*ListBucketMetricsConfigurationsOutput, error) {
-	req, out := c.ListBucketMetricsConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBucketMetricsConfigurationsOutput{})
+	return ListBucketMetricsConfigurationsRequest{Request: req, Input: input}
 }
 
 const opListBuckets = "ListBuckets"
 
-// ListBucketsRequest generates a "aws.Request" representing the
-// client's request for the ListBuckets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBucketsRequest is a API request type for the ListBuckets API operation.
+type ListBucketsRequest struct {
+	*aws.Request
+	Input *ListBucketsInput
+}
+
+// Send marshals and sends the ListBuckets API request.
+func (r ListBucketsRequest) Send() (*ListBucketsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBucketsOutput), nil
+}
+
+// ListBucketsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBuckets for more information on using the ListBuckets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of all buckets owned by the authenticated sender of the request.
 //
 //    // Example sending a request using the ListBucketsRequest method.
-//    req, resp := client.ListBucketsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBucketsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets
-func (c *S3) ListBucketsRequest(input *ListBucketsInput) (req *aws.Request, output *ListBucketsOutput) {
+func (c *S3) ListBucketsRequest(input *ListBucketsInput) ListBucketsRequest {
 	op := &aws.Operation{
 		Name:       opListBuckets,
 		HTTPMethod: "GET",
@@ -3469,70 +2180,42 @@ func (c *S3) ListBucketsRequest(input *ListBucketsInput) (req *aws.Request, outp
 		input = &ListBucketsInput{}
 	}
 
-	output = &ListBucketsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBuckets API operation for Amazon Simple Storage Service.
-//
-// Returns a list of all buckets owned by the authenticated sender of the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListBuckets for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets
-func (c *S3) ListBuckets(input *ListBucketsInput) (*ListBucketsOutput, error) {
-	req, out := c.ListBucketsRequest(input)
-	return out, req.Send()
-}
-
-// ListBucketsWithContext is the same as ListBuckets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBuckets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListBucketsWithContext(ctx aws.Context, input *ListBucketsInput, opts ...aws.Option) (*ListBucketsOutput, error) {
-	req, out := c.ListBucketsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBucketsOutput{})
+	return ListBucketsRequest{Request: req, Input: input}
 }
 
 const opListMultipartUploads = "ListMultipartUploads"
 
-// ListMultipartUploadsRequest generates a "aws.Request" representing the
-// client's request for the ListMultipartUploads operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListMultipartUploadsRequest is a API request type for the ListMultipartUploads API operation.
+type ListMultipartUploadsRequest struct {
+	*aws.Request
+	Input *ListMultipartUploadsInput
+}
+
+// Send marshals and sends the ListMultipartUploads API request.
+func (r ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListMultipartUploadsOutput), nil
+}
+
+// ListMultipartUploadsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListMultipartUploads for more information on using the ListMultipartUploads
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation lists in-progress multipart uploads.
 //
 //    // Example sending a request using the ListMultipartUploadsRequest method.
-//    req, resp := client.ListMultipartUploadsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListMultipartUploadsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploads
-func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) (req *aws.Request, output *ListMultipartUploadsOutput) {
+func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListMultipartUploadsRequest {
 	op := &aws.Operation{
 		Name:       opListMultipartUploads,
 		HTTPMethod: "GET",
@@ -3549,41 +2232,8 @@ func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) (req 
 		input = &ListMultipartUploadsInput{}
 	}
 
-	output = &ListMultipartUploadsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListMultipartUploads API operation for Amazon Simple Storage Service.
-//
-// This operation lists in-progress multipart uploads.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListMultipartUploads for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploads
-func (c *S3) ListMultipartUploads(input *ListMultipartUploadsInput) (*ListMultipartUploadsOutput, error) {
-	req, out := c.ListMultipartUploadsRequest(input)
-	return out, req.Send()
-}
-
-// ListMultipartUploadsWithContext is the same as ListMultipartUploads with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListMultipartUploads for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListMultipartUploadsWithContext(ctx aws.Context, input *ListMultipartUploadsInput, opts ...aws.Option) (*ListMultipartUploadsOutput, error) {
-	req, out := c.ListMultipartUploadsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListMultipartUploadsOutput{})
+	return ListMultipartUploadsRequest{Request: req, Input: input}
 }
 
 // ListMultipartUploadsPages iterates over the pages of a ListMultipartUploads operation,
@@ -3622,10 +2272,10 @@ func (c *S3) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListMultipartUploadsRequest(inCpy)
+			req := c.ListMultipartUploadsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3638,31 +2288,36 @@ func (c *S3) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMu
 
 const opListObjectVersions = "ListObjectVersions"
 
-// ListObjectVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListObjectVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectVersionsRequest is a API request type for the ListObjectVersions API operation.
+type ListObjectVersionsRequest struct {
+	*aws.Request
+	Input *ListObjectVersionsInput
+}
+
+// Send marshals and sends the ListObjectVersions API request.
+func (r ListObjectVersionsRequest) Send() (*ListObjectVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectVersionsOutput), nil
+}
+
+// ListObjectVersionsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListObjectVersions for more information on using the ListObjectVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns metadata about all of the versions of objects in a bucket.
 //
 //    // Example sending a request using the ListObjectVersionsRequest method.
-//    req, resp := client.ListObjectVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersions
-func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) (req *aws.Request, output *ListObjectVersionsOutput) {
+func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) ListObjectVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListObjectVersions,
 		HTTPMethod: "GET",
@@ -3679,41 +2334,8 @@ func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) (req *aws
 		input = &ListObjectVersionsInput{}
 	}
 
-	output = &ListObjectVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjectVersions API operation for Amazon Simple Storage Service.
-//
-// Returns metadata about all of the versions of objects in a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListObjectVersions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersions
-func (c *S3) ListObjectVersions(input *ListObjectVersionsInput) (*ListObjectVersionsOutput, error) {
-	req, out := c.ListObjectVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListObjectVersionsWithContext is the same as ListObjectVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjectVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectVersionsWithContext(ctx aws.Context, input *ListObjectVersionsInput, opts ...aws.Option) (*ListObjectVersionsOutput, error) {
-	req, out := c.ListObjectVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectVersionsOutput{})
+	return ListObjectVersionsRequest{Request: req, Input: input}
 }
 
 // ListObjectVersionsPages iterates over the pages of a ListObjectVersions operation,
@@ -3752,10 +2374,10 @@ func (c *S3) ListObjectVersionsPagesWithContext(ctx aws.Context, input *ListObje
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectVersionsRequest(inCpy)
+			req := c.ListObjectVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3768,31 +2390,38 @@ func (c *S3) ListObjectVersionsPagesWithContext(ctx aws.Context, input *ListObje
 
 const opListObjects = "ListObjects"
 
-// ListObjectsRequest generates a "aws.Request" representing the
-// client's request for the ListObjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectsRequest is a API request type for the ListObjects API operation.
+type ListObjectsRequest struct {
+	*aws.Request
+	Input *ListObjectsInput
+}
+
+// Send marshals and sends the ListObjects API request.
+func (r ListObjectsRequest) Send() (*ListObjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectsOutput), nil
+}
+
+// ListObjectsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListObjects for more information on using the ListObjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns some or all (up to 1000) of the objects in a bucket. You can use
+// the request parameters as selection criteria to return a subset of the objects
+// in a bucket.
 //
 //    // Example sending a request using the ListObjectsRequest method.
-//    req, resp := client.ListObjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjects
-func (c *S3) ListObjectsRequest(input *ListObjectsInput) (req *aws.Request, output *ListObjectsOutput) {
+func (c *S3) ListObjectsRequest(input *ListObjectsInput) ListObjectsRequest {
 	op := &aws.Operation{
 		Name:       opListObjects,
 		HTTPMethod: "GET",
@@ -3809,48 +2438,8 @@ func (c *S3) ListObjectsRequest(input *ListObjectsInput) (req *aws.Request, outp
 		input = &ListObjectsInput{}
 	}
 
-	output = &ListObjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjects API operation for Amazon Simple Storage Service.
-//
-// Returns some or all (up to 1000) of the objects in a bucket. You can use
-// the request parameters as selection criteria to return a subset of the objects
-// in a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListObjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchBucket "NoSuchBucket"
-//   The specified bucket does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjects
-func (c *S3) ListObjects(input *ListObjectsInput) (*ListObjectsOutput, error) {
-	req, out := c.ListObjectsRequest(input)
-	return out, req.Send()
-}
-
-// ListObjectsWithContext is the same as ListObjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectsWithContext(ctx aws.Context, input *ListObjectsInput, opts ...aws.Option) (*ListObjectsOutput, error) {
-	req, out := c.ListObjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectsOutput{})
+	return ListObjectsRequest{Request: req, Input: input}
 }
 
 // ListObjectsPages iterates over the pages of a ListObjects operation,
@@ -3889,10 +2478,10 @@ func (c *S3) ListObjectsPagesWithContext(ctx aws.Context, input *ListObjectsInpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectsRequest(inCpy)
+			req := c.ListObjectsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3905,31 +2494,39 @@ func (c *S3) ListObjectsPagesWithContext(ctx aws.Context, input *ListObjectsInpu
 
 const opListObjectsV2 = "ListObjectsV2"
 
-// ListObjectsV2Request generates a "aws.Request" representing the
-// client's request for the ListObjectsV2 operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectsV2Request is a API request type for the ListObjectsV2 API operation.
+type ListObjectsV2Request struct {
+	*aws.Request
+	Input *ListObjectsV2Input
+}
+
+// Send marshals and sends the ListObjectsV2 API request.
+func (r ListObjectsV2Request) Send() (*ListObjectsV2Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectsV2Output), nil
+}
+
+// ListObjectsV2Request returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListObjectsV2 for more information on using the ListObjectsV2
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns some or all (up to 1000) of the objects in a bucket. You can use
+// the request parameters as selection criteria to return a subset of the objects
+// in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend
+// you use this revised API for new application development.
 //
 //    // Example sending a request using the ListObjectsV2Request method.
-//    req, resp := client.ListObjectsV2Request(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectsV2Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2
-func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) (req *aws.Request, output *ListObjectsV2Output) {
+func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Request {
 	op := &aws.Operation{
 		Name:       opListObjectsV2,
 		HTTPMethod: "GET",
@@ -3946,49 +2543,8 @@ func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) (req *aws.Request, 
 		input = &ListObjectsV2Input{}
 	}
 
-	output = &ListObjectsV2Output{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjectsV2 API operation for Amazon Simple Storage Service.
-//
-// Returns some or all (up to 1000) of the objects in a bucket. You can use
-// the request parameters as selection criteria to return a subset of the objects
-// in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend
-// you use this revised API for new application development.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListObjectsV2 for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchBucket "NoSuchBucket"
-//   The specified bucket does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2
-func (c *S3) ListObjectsV2(input *ListObjectsV2Input) (*ListObjectsV2Output, error) {
-	req, out := c.ListObjectsV2Request(input)
-	return out, req.Send()
-}
-
-// ListObjectsV2WithContext is the same as ListObjectsV2 with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjectsV2 for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectsV2WithContext(ctx aws.Context, input *ListObjectsV2Input, opts ...aws.Option) (*ListObjectsV2Output, error) {
-	req, out := c.ListObjectsV2Request(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectsV2Output{})
+	return ListObjectsV2Request{Request: req, Input: input}
 }
 
 // ListObjectsV2Pages iterates over the pages of a ListObjectsV2 operation,
@@ -4027,10 +2583,10 @@ func (c *S3) ListObjectsV2PagesWithContext(ctx aws.Context, input *ListObjectsV2
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectsV2Request(inCpy)
+			req := c.ListObjectsV2Request(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4043,31 +2599,36 @@ func (c *S3) ListObjectsV2PagesWithContext(ctx aws.Context, input *ListObjectsV2
 
 const opListParts = "ListParts"
 
-// ListPartsRequest generates a "aws.Request" representing the
-// client's request for the ListParts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPartsRequest is a API request type for the ListParts API operation.
+type ListPartsRequest struct {
+	*aws.Request
+	Input *ListPartsInput
+}
+
+// Send marshals and sends the ListParts API request.
+func (r ListPartsRequest) Send() (*ListPartsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPartsOutput), nil
+}
+
+// ListPartsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListParts for more information on using the ListParts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the parts that have been uploaded for a specific multipart upload.
 //
 //    // Example sending a request using the ListPartsRequest method.
-//    req, resp := client.ListPartsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPartsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts
-func (c *S3) ListPartsRequest(input *ListPartsInput) (req *aws.Request, output *ListPartsOutput) {
+func (c *S3) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 	op := &aws.Operation{
 		Name:       opListParts,
 		HTTPMethod: "GET",
@@ -4084,41 +2645,8 @@ func (c *S3) ListPartsRequest(input *ListPartsInput) (req *aws.Request, output *
 		input = &ListPartsInput{}
 	}
 
-	output = &ListPartsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListParts API operation for Amazon Simple Storage Service.
-//
-// Lists the parts that have been uploaded for a specific multipart upload.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation ListParts for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts
-func (c *S3) ListParts(input *ListPartsInput) (*ListPartsOutput, error) {
-	req, out := c.ListPartsRequest(input)
-	return out, req.Send()
-}
-
-// ListPartsWithContext is the same as ListParts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListParts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListPartsWithContext(ctx aws.Context, input *ListPartsInput, opts ...aws.Option) (*ListPartsOutput, error) {
-	req, out := c.ListPartsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPartsOutput{})
+	return ListPartsRequest{Request: req, Input: input}
 }
 
 // ListPartsPages iterates over the pages of a ListParts operation,
@@ -4157,10 +2685,10 @@ func (c *S3) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, f
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPartsRequest(inCpy)
+			req := c.ListPartsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4173,31 +2701,36 @@ func (c *S3) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, f
 
 const opPutBucketAccelerateConfiguration = "PutBucketAccelerateConfiguration"
 
-// PutBucketAccelerateConfigurationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketAccelerateConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketAccelerateConfigurationRequest is a API request type for the PutBucketAccelerateConfiguration API operation.
+type PutBucketAccelerateConfigurationRequest struct {
+	*aws.Request
+	Input *PutBucketAccelerateConfigurationInput
+}
+
+// Send marshals and sends the PutBucketAccelerateConfiguration API request.
+func (r PutBucketAccelerateConfigurationRequest) Send() (*PutBucketAccelerateConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketAccelerateConfigurationOutput), nil
+}
+
+// PutBucketAccelerateConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketAccelerateConfiguration for more information on using the PutBucketAccelerateConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the accelerate configuration of an existing bucket.
 //
 //    // Example sending a request using the PutBucketAccelerateConfigurationRequest method.
-//    req, resp := client.PutBucketAccelerateConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketAccelerateConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfiguration
-func (c *S3) PutBucketAccelerateConfigurationRequest(input *PutBucketAccelerateConfigurationInput) (req *aws.Request, output *PutBucketAccelerateConfigurationOutput) {
+func (c *S3) PutBucketAccelerateConfigurationRequest(input *PutBucketAccelerateConfigurationInput) PutBucketAccelerateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketAccelerateConfiguration,
 		HTTPMethod: "PUT",
@@ -4208,72 +2741,44 @@ func (c *S3) PutBucketAccelerateConfigurationRequest(input *PutBucketAccelerateC
 		input = &PutBucketAccelerateConfigurationInput{}
 	}
 
-	output = &PutBucketAccelerateConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketAccelerateConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketAccelerateConfiguration API operation for Amazon Simple Storage Service.
-//
-// Sets the accelerate configuration of an existing bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketAccelerateConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfiguration
-func (c *S3) PutBucketAccelerateConfiguration(input *PutBucketAccelerateConfigurationInput) (*PutBucketAccelerateConfigurationOutput, error) {
-	req, out := c.PutBucketAccelerateConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketAccelerateConfigurationWithContext is the same as PutBucketAccelerateConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketAccelerateConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketAccelerateConfigurationWithContext(ctx aws.Context, input *PutBucketAccelerateConfigurationInput, opts ...aws.Option) (*PutBucketAccelerateConfigurationOutput, error) {
-	req, out := c.PutBucketAccelerateConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketAccelerateConfigurationRequest{Request: req, Input: input}
 }
 
 const opPutBucketAcl = "PutBucketAcl"
 
-// PutBucketAclRequest generates a "aws.Request" representing the
-// client's request for the PutBucketAcl operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketAclRequest is a API request type for the PutBucketAcl API operation.
+type PutBucketAclRequest struct {
+	*aws.Request
+	Input *PutBucketAclInput
+}
+
+// Send marshals and sends the PutBucketAcl API request.
+func (r PutBucketAclRequest) Send() (*PutBucketAclOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketAclOutput), nil
+}
+
+// PutBucketAclRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketAcl for more information on using the PutBucketAcl
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the permissions on a bucket using access control lists (ACL).
 //
 //    // Example sending a request using the PutBucketAclRequest method.
-//    req, resp := client.PutBucketAclRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketAclRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAcl
-func (c *S3) PutBucketAclRequest(input *PutBucketAclInput) (req *aws.Request, output *PutBucketAclOutput) {
+func (c *S3) PutBucketAclRequest(input *PutBucketAclInput) PutBucketAclRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketAcl,
 		HTTPMethod: "PUT",
@@ -4284,72 +2789,45 @@ func (c *S3) PutBucketAclRequest(input *PutBucketAclInput) (req *aws.Request, ou
 		input = &PutBucketAclInput{}
 	}
 
-	output = &PutBucketAclOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketAclOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketAcl API operation for Amazon Simple Storage Service.
-//
-// Sets the permissions on a bucket using access control lists (ACL).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketAcl for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAcl
-func (c *S3) PutBucketAcl(input *PutBucketAclInput) (*PutBucketAclOutput, error) {
-	req, out := c.PutBucketAclRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketAclWithContext is the same as PutBucketAcl with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketAcl for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketAclWithContext(ctx aws.Context, input *PutBucketAclInput, opts ...aws.Option) (*PutBucketAclOutput, error) {
-	req, out := c.PutBucketAclRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketAclRequest{Request: req, Input: input}
 }
 
 const opPutBucketAnalyticsConfiguration = "PutBucketAnalyticsConfiguration"
 
-// PutBucketAnalyticsConfigurationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketAnalyticsConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketAnalyticsConfigurationRequest is a API request type for the PutBucketAnalyticsConfiguration API operation.
+type PutBucketAnalyticsConfigurationRequest struct {
+	*aws.Request
+	Input *PutBucketAnalyticsConfigurationInput
+}
+
+// Send marshals and sends the PutBucketAnalyticsConfiguration API request.
+func (r PutBucketAnalyticsConfigurationRequest) Send() (*PutBucketAnalyticsConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketAnalyticsConfigurationOutput), nil
+}
+
+// PutBucketAnalyticsConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketAnalyticsConfiguration for more information on using the PutBucketAnalyticsConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets an analytics configuration for the bucket (specified by the analytics
+// configuration ID).
 //
 //    // Example sending a request using the PutBucketAnalyticsConfigurationRequest method.
-//    req, resp := client.PutBucketAnalyticsConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketAnalyticsConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfiguration
-func (c *S3) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalyticsConfigurationInput) (req *aws.Request, output *PutBucketAnalyticsConfigurationOutput) {
+func (c *S3) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalyticsConfigurationInput) PutBucketAnalyticsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketAnalyticsConfiguration,
 		HTTPMethod: "PUT",
@@ -4360,73 +2838,44 @@ func (c *S3) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalyticsCon
 		input = &PutBucketAnalyticsConfigurationInput{}
 	}
 
-	output = &PutBucketAnalyticsConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketAnalyticsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketAnalyticsConfiguration API operation for Amazon Simple Storage Service.
-//
-// Sets an analytics configuration for the bucket (specified by the analytics
-// configuration ID).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketAnalyticsConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfiguration
-func (c *S3) PutBucketAnalyticsConfiguration(input *PutBucketAnalyticsConfigurationInput) (*PutBucketAnalyticsConfigurationOutput, error) {
-	req, out := c.PutBucketAnalyticsConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketAnalyticsConfigurationWithContext is the same as PutBucketAnalyticsConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketAnalyticsConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *PutBucketAnalyticsConfigurationInput, opts ...aws.Option) (*PutBucketAnalyticsConfigurationOutput, error) {
-	req, out := c.PutBucketAnalyticsConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketAnalyticsConfigurationRequest{Request: req, Input: input}
 }
 
 const opPutBucketCors = "PutBucketCors"
 
-// PutBucketCorsRequest generates a "aws.Request" representing the
-// client's request for the PutBucketCors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketCorsRequest is a API request type for the PutBucketCors API operation.
+type PutBucketCorsRequest struct {
+	*aws.Request
+	Input *PutBucketCorsInput
+}
+
+// Send marshals and sends the PutBucketCors API request.
+func (r PutBucketCorsRequest) Send() (*PutBucketCorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketCorsOutput), nil
+}
+
+// PutBucketCorsRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketCors for more information on using the PutBucketCors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the cors configuration for a bucket.
 //
 //    // Example sending a request using the PutBucketCorsRequest method.
-//    req, resp := client.PutBucketCorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketCorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCors
-func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) (req *aws.Request, output *PutBucketCorsOutput) {
+func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) PutBucketCorsRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketCors,
 		HTTPMethod: "PUT",
@@ -4437,72 +2886,45 @@ func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) (req *aws.Request, 
 		input = &PutBucketCorsInput{}
 	}
 
-	output = &PutBucketCorsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketCorsOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketCors API operation for Amazon Simple Storage Service.
-//
-// Sets the cors configuration for a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketCors for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCors
-func (c *S3) PutBucketCors(input *PutBucketCorsInput) (*PutBucketCorsOutput, error) {
-	req, out := c.PutBucketCorsRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketCorsWithContext is the same as PutBucketCors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketCors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketCorsWithContext(ctx aws.Context, input *PutBucketCorsInput, opts ...aws.Option) (*PutBucketCorsOutput, error) {
-	req, out := c.PutBucketCorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketCorsRequest{Request: req, Input: input}
 }
 
 const opPutBucketInventoryConfiguration = "PutBucketInventoryConfiguration"
 
-// PutBucketInventoryConfigurationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketInventoryConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketInventoryConfigurationRequest is a API request type for the PutBucketInventoryConfiguration API operation.
+type PutBucketInventoryConfigurationRequest struct {
+	*aws.Request
+	Input *PutBucketInventoryConfigurationInput
+}
+
+// Send marshals and sends the PutBucketInventoryConfiguration API request.
+func (r PutBucketInventoryConfigurationRequest) Send() (*PutBucketInventoryConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketInventoryConfigurationOutput), nil
+}
+
+// PutBucketInventoryConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketInventoryConfiguration for more information on using the PutBucketInventoryConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds an inventory configuration (identified by the inventory ID) from the
+// bucket.
 //
 //    // Example sending a request using the PutBucketInventoryConfigurationRequest method.
-//    req, resp := client.PutBucketInventoryConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketInventoryConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfiguration
-func (c *S3) PutBucketInventoryConfigurationRequest(input *PutBucketInventoryConfigurationInput) (req *aws.Request, output *PutBucketInventoryConfigurationOutput) {
+func (c *S3) PutBucketInventoryConfigurationRequest(input *PutBucketInventoryConfigurationInput) PutBucketInventoryConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketInventoryConfiguration,
 		HTTPMethod: "PUT",
@@ -4513,73 +2935,44 @@ func (c *S3) PutBucketInventoryConfigurationRequest(input *PutBucketInventoryCon
 		input = &PutBucketInventoryConfigurationInput{}
 	}
 
-	output = &PutBucketInventoryConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketInventoryConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketInventoryConfiguration API operation for Amazon Simple Storage Service.
-//
-// Adds an inventory configuration (identified by the inventory ID) from the
-// bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketInventoryConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfiguration
-func (c *S3) PutBucketInventoryConfiguration(input *PutBucketInventoryConfigurationInput) (*PutBucketInventoryConfigurationOutput, error) {
-	req, out := c.PutBucketInventoryConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketInventoryConfigurationWithContext is the same as PutBucketInventoryConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketInventoryConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketInventoryConfigurationWithContext(ctx aws.Context, input *PutBucketInventoryConfigurationInput, opts ...aws.Option) (*PutBucketInventoryConfigurationOutput, error) {
-	req, out := c.PutBucketInventoryConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketInventoryConfigurationRequest{Request: req, Input: input}
 }
 
 const opPutBucketLifecycle = "PutBucketLifecycle"
 
-// PutBucketLifecycleRequest generates a "aws.Request" representing the
-// client's request for the PutBucketLifecycle operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketLifecycleRequest is a API request type for the PutBucketLifecycle API operation.
+type PutBucketLifecycleRequest struct {
+	*aws.Request
+	Input *PutBucketLifecycleInput
+}
+
+// Send marshals and sends the PutBucketLifecycle API request.
+func (r PutBucketLifecycleRequest) Send() (*PutBucketLifecycleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketLifecycleOutput), nil
+}
+
+// PutBucketLifecycleRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketLifecycle for more information on using the PutBucketLifecycle
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deprecated, see the PutBucketLifecycleConfiguration operation.
 //
 //    // Example sending a request using the PutBucketLifecycleRequest method.
-//    req, resp := client.PutBucketLifecycleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketLifecycleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycle
-func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) (req *aws.Request, output *PutBucketLifecycleOutput) {
+func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) PutBucketLifecycleRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, PutBucketLifecycle, has been deprecated")
 	}
@@ -4593,72 +2986,45 @@ func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) (req *aws
 		input = &PutBucketLifecycleInput{}
 	}
 
-	output = &PutBucketLifecycleOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketLifecycleOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketLifecycle API operation for Amazon Simple Storage Service.
-//
-// Deprecated, see the PutBucketLifecycleConfiguration operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketLifecycle for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycle
-func (c *S3) PutBucketLifecycle(input *PutBucketLifecycleInput) (*PutBucketLifecycleOutput, error) {
-	req, out := c.PutBucketLifecycleRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketLifecycleWithContext is the same as PutBucketLifecycle with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketLifecycle for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketLifecycleWithContext(ctx aws.Context, input *PutBucketLifecycleInput, opts ...aws.Option) (*PutBucketLifecycleOutput, error) {
-	req, out := c.PutBucketLifecycleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketLifecycleRequest{Request: req, Input: input}
 }
 
 const opPutBucketLifecycleConfiguration = "PutBucketLifecycleConfiguration"
 
-// PutBucketLifecycleConfigurationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketLifecycleConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketLifecycleConfigurationRequest is a API request type for the PutBucketLifecycleConfiguration API operation.
+type PutBucketLifecycleConfigurationRequest struct {
+	*aws.Request
+	Input *PutBucketLifecycleConfigurationInput
+}
+
+// Send marshals and sends the PutBucketLifecycleConfiguration API request.
+func (r PutBucketLifecycleConfigurationRequest) Send() (*PutBucketLifecycleConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketLifecycleConfigurationOutput), nil
+}
+
+// PutBucketLifecycleConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketLifecycleConfiguration for more information on using the PutBucketLifecycleConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets lifecycle configuration for your bucket. If a lifecycle configuration
+// exists, it replaces it.
 //
 //    // Example sending a request using the PutBucketLifecycleConfigurationRequest method.
-//    req, resp := client.PutBucketLifecycleConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketLifecycleConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfiguration
-func (c *S3) PutBucketLifecycleConfigurationRequest(input *PutBucketLifecycleConfigurationInput) (req *aws.Request, output *PutBucketLifecycleConfigurationOutput) {
+func (c *S3) PutBucketLifecycleConfigurationRequest(input *PutBucketLifecycleConfigurationInput) PutBucketLifecycleConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketLifecycleConfiguration,
 		HTTPMethod: "PUT",
@@ -4669,73 +3035,46 @@ func (c *S3) PutBucketLifecycleConfigurationRequest(input *PutBucketLifecycleCon
 		input = &PutBucketLifecycleConfigurationInput{}
 	}
 
-	output = &PutBucketLifecycleConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketLifecycleConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketLifecycleConfiguration API operation for Amazon Simple Storage Service.
-//
-// Sets lifecycle configuration for your bucket. If a lifecycle configuration
-// exists, it replaces it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketLifecycleConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfiguration
-func (c *S3) PutBucketLifecycleConfiguration(input *PutBucketLifecycleConfigurationInput) (*PutBucketLifecycleConfigurationOutput, error) {
-	req, out := c.PutBucketLifecycleConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketLifecycleConfigurationWithContext is the same as PutBucketLifecycleConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketLifecycleConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketLifecycleConfigurationWithContext(ctx aws.Context, input *PutBucketLifecycleConfigurationInput, opts ...aws.Option) (*PutBucketLifecycleConfigurationOutput, error) {
-	req, out := c.PutBucketLifecycleConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketLifecycleConfigurationRequest{Request: req, Input: input}
 }
 
 const opPutBucketLogging = "PutBucketLogging"
 
-// PutBucketLoggingRequest generates a "aws.Request" representing the
-// client's request for the PutBucketLogging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketLoggingRequest is a API request type for the PutBucketLogging API operation.
+type PutBucketLoggingRequest struct {
+	*aws.Request
+	Input *PutBucketLoggingInput
+}
+
+// Send marshals and sends the PutBucketLogging API request.
+func (r PutBucketLoggingRequest) Send() (*PutBucketLoggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketLoggingOutput), nil
+}
+
+// PutBucketLoggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketLogging for more information on using the PutBucketLogging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Set the logging parameters for a bucket and to specify permissions for who
+// can view and modify the logging parameters. To set the logging status of
+// a bucket, you must be the bucket owner.
 //
 //    // Example sending a request using the PutBucketLoggingRequest method.
-//    req, resp := client.PutBucketLoggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketLoggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLogging
-func (c *S3) PutBucketLoggingRequest(input *PutBucketLoggingInput) (req *aws.Request, output *PutBucketLoggingOutput) {
+func (c *S3) PutBucketLoggingRequest(input *PutBucketLoggingInput) PutBucketLoggingRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketLogging,
 		HTTPMethod: "PUT",
@@ -4746,74 +3085,45 @@ func (c *S3) PutBucketLoggingRequest(input *PutBucketLoggingInput) (req *aws.Req
 		input = &PutBucketLoggingInput{}
 	}
 
-	output = &PutBucketLoggingOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketLoggingOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketLogging API operation for Amazon Simple Storage Service.
-//
-// Set the logging parameters for a bucket and to specify permissions for who
-// can view and modify the logging parameters. To set the logging status of
-// a bucket, you must be the bucket owner.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketLogging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLogging
-func (c *S3) PutBucketLogging(input *PutBucketLoggingInput) (*PutBucketLoggingOutput, error) {
-	req, out := c.PutBucketLoggingRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketLoggingWithContext is the same as PutBucketLogging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketLogging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketLoggingWithContext(ctx aws.Context, input *PutBucketLoggingInput, opts ...aws.Option) (*PutBucketLoggingOutput, error) {
-	req, out := c.PutBucketLoggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketLoggingRequest{Request: req, Input: input}
 }
 
 const opPutBucketMetricsConfiguration = "PutBucketMetricsConfiguration"
 
-// PutBucketMetricsConfigurationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketMetricsConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketMetricsConfigurationRequest is a API request type for the PutBucketMetricsConfiguration API operation.
+type PutBucketMetricsConfigurationRequest struct {
+	*aws.Request
+	Input *PutBucketMetricsConfigurationInput
+}
+
+// Send marshals and sends the PutBucketMetricsConfiguration API request.
+func (r PutBucketMetricsConfigurationRequest) Send() (*PutBucketMetricsConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketMetricsConfigurationOutput), nil
+}
+
+// PutBucketMetricsConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketMetricsConfiguration for more information on using the PutBucketMetricsConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets a metrics configuration (specified by the metrics configuration ID)
+// for the bucket.
 //
 //    // Example sending a request using the PutBucketMetricsConfigurationRequest method.
-//    req, resp := client.PutBucketMetricsConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketMetricsConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfiguration
-func (c *S3) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsConfigurationInput) (req *aws.Request, output *PutBucketMetricsConfigurationOutput) {
+func (c *S3) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsConfigurationInput) PutBucketMetricsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketMetricsConfiguration,
 		HTTPMethod: "PUT",
@@ -4824,73 +3134,44 @@ func (c *S3) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsConfigu
 		input = &PutBucketMetricsConfigurationInput{}
 	}
 
-	output = &PutBucketMetricsConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketMetricsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketMetricsConfiguration API operation for Amazon Simple Storage Service.
-//
-// Sets a metrics configuration (specified by the metrics configuration ID)
-// for the bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketMetricsConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfiguration
-func (c *S3) PutBucketMetricsConfiguration(input *PutBucketMetricsConfigurationInput) (*PutBucketMetricsConfigurationOutput, error) {
-	req, out := c.PutBucketMetricsConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketMetricsConfigurationWithContext is the same as PutBucketMetricsConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketMetricsConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketMetricsConfigurationWithContext(ctx aws.Context, input *PutBucketMetricsConfigurationInput, opts ...aws.Option) (*PutBucketMetricsConfigurationOutput, error) {
-	req, out := c.PutBucketMetricsConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketMetricsConfigurationRequest{Request: req, Input: input}
 }
 
 const opPutBucketNotification = "PutBucketNotification"
 
-// PutBucketNotificationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketNotification operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketNotificationRequest is a API request type for the PutBucketNotification API operation.
+type PutBucketNotificationRequest struct {
+	*aws.Request
+	Input *PutBucketNotificationInput
+}
+
+// Send marshals and sends the PutBucketNotification API request.
+func (r PutBucketNotificationRequest) Send() (*PutBucketNotificationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketNotificationOutput), nil
+}
+
+// PutBucketNotificationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketNotification for more information on using the PutBucketNotification
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deprecated, see the PutBucketNotificationConfiguraiton operation.
 //
 //    // Example sending a request using the PutBucketNotificationRequest method.
-//    req, resp := client.PutBucketNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketNotificationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotification
-func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) (req *aws.Request, output *PutBucketNotificationOutput) {
+func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) PutBucketNotificationRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, PutBucketNotification, has been deprecated")
 	}
@@ -4904,72 +3185,44 @@ func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) (re
 		input = &PutBucketNotificationInput{}
 	}
 
-	output = &PutBucketNotificationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketNotificationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketNotification API operation for Amazon Simple Storage Service.
-//
-// Deprecated, see the PutBucketNotificationConfiguraiton operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketNotification for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotification
-func (c *S3) PutBucketNotification(input *PutBucketNotificationInput) (*PutBucketNotificationOutput, error) {
-	req, out := c.PutBucketNotificationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketNotificationWithContext is the same as PutBucketNotification with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketNotification for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketNotificationWithContext(ctx aws.Context, input *PutBucketNotificationInput, opts ...aws.Option) (*PutBucketNotificationOutput, error) {
-	req, out := c.PutBucketNotificationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketNotificationRequest{Request: req, Input: input}
 }
 
 const opPutBucketNotificationConfiguration = "PutBucketNotificationConfiguration"
 
-// PutBucketNotificationConfigurationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketNotificationConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketNotificationConfigurationRequest is a API request type for the PutBucketNotificationConfiguration API operation.
+type PutBucketNotificationConfigurationRequest struct {
+	*aws.Request
+	Input *PutBucketNotificationConfigurationInput
+}
+
+// Send marshals and sends the PutBucketNotificationConfiguration API request.
+func (r PutBucketNotificationConfigurationRequest) Send() (*PutBucketNotificationConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketNotificationConfigurationOutput), nil
+}
+
+// PutBucketNotificationConfigurationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketNotificationConfiguration for more information on using the PutBucketNotificationConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables notifications of specified events for a bucket.
 //
 //    // Example sending a request using the PutBucketNotificationConfigurationRequest method.
-//    req, resp := client.PutBucketNotificationConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketNotificationConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfiguration
-func (c *S3) PutBucketNotificationConfigurationRequest(input *PutBucketNotificationConfigurationInput) (req *aws.Request, output *PutBucketNotificationConfigurationOutput) {
+func (c *S3) PutBucketNotificationConfigurationRequest(input *PutBucketNotificationConfigurationInput) PutBucketNotificationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketNotificationConfiguration,
 		HTTPMethod: "PUT",
@@ -4980,72 +3233,45 @@ func (c *S3) PutBucketNotificationConfigurationRequest(input *PutBucketNotificat
 		input = &PutBucketNotificationConfigurationInput{}
 	}
 
-	output = &PutBucketNotificationConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketNotificationConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketNotificationConfiguration API operation for Amazon Simple Storage Service.
-//
-// Enables notifications of specified events for a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketNotificationConfiguration for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfiguration
-func (c *S3) PutBucketNotificationConfiguration(input *PutBucketNotificationConfigurationInput) (*PutBucketNotificationConfigurationOutput, error) {
-	req, out := c.PutBucketNotificationConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketNotificationConfigurationWithContext is the same as PutBucketNotificationConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketNotificationConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketNotificationConfigurationWithContext(ctx aws.Context, input *PutBucketNotificationConfigurationInput, opts ...aws.Option) (*PutBucketNotificationConfigurationOutput, error) {
-	req, out := c.PutBucketNotificationConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketNotificationConfigurationRequest{Request: req, Input: input}
 }
 
 const opPutBucketPolicy = "PutBucketPolicy"
 
-// PutBucketPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutBucketPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketPolicyRequest is a API request type for the PutBucketPolicy API operation.
+type PutBucketPolicyRequest struct {
+	*aws.Request
+	Input *PutBucketPolicyInput
+}
+
+// Send marshals and sends the PutBucketPolicy API request.
+func (r PutBucketPolicyRequest) Send() (*PutBucketPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketPolicyOutput), nil
+}
+
+// PutBucketPolicyRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketPolicy for more information on using the PutBucketPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Replaces a policy on a bucket. If the bucket already has a policy, the one
+// in this request completely replaces it.
 //
 //    // Example sending a request using the PutBucketPolicyRequest method.
-//    req, resp := client.PutBucketPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicy
-func (c *S3) PutBucketPolicyRequest(input *PutBucketPolicyInput) (req *aws.Request, output *PutBucketPolicyOutput) {
+func (c *S3) PutBucketPolicyRequest(input *PutBucketPolicyInput) PutBucketPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketPolicy,
 		HTTPMethod: "PUT",
@@ -5056,73 +3282,45 @@ func (c *S3) PutBucketPolicyRequest(input *PutBucketPolicyInput) (req *aws.Reque
 		input = &PutBucketPolicyInput{}
 	}
 
-	output = &PutBucketPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketPolicy API operation for Amazon Simple Storage Service.
-//
-// Replaces a policy on a bucket. If the bucket already has a policy, the one
-// in this request completely replaces it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketPolicy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicy
-func (c *S3) PutBucketPolicy(input *PutBucketPolicyInput) (*PutBucketPolicyOutput, error) {
-	req, out := c.PutBucketPolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketPolicyWithContext is the same as PutBucketPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketPolicyWithContext(ctx aws.Context, input *PutBucketPolicyInput, opts ...aws.Option) (*PutBucketPolicyOutput, error) {
-	req, out := c.PutBucketPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketPolicyRequest{Request: req, Input: input}
 }
 
 const opPutBucketReplication = "PutBucketReplication"
 
-// PutBucketReplicationRequest generates a "aws.Request" representing the
-// client's request for the PutBucketReplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketReplicationRequest is a API request type for the PutBucketReplication API operation.
+type PutBucketReplicationRequest struct {
+	*aws.Request
+	Input *PutBucketReplicationInput
+}
+
+// Send marshals and sends the PutBucketReplication API request.
+func (r PutBucketReplicationRequest) Send() (*PutBucketReplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketReplicationOutput), nil
+}
+
+// PutBucketReplicationRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketReplication for more information on using the PutBucketReplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new replication configuration (or replaces an existing one, if
+// present).
 //
 //    // Example sending a request using the PutBucketReplicationRequest method.
-//    req, resp := client.PutBucketReplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketReplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplication
-func (c *S3) PutBucketReplicationRequest(input *PutBucketReplicationInput) (req *aws.Request, output *PutBucketReplicationOutput) {
+func (c *S3) PutBucketReplicationRequest(input *PutBucketReplicationInput) PutBucketReplicationRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketReplication,
 		HTTPMethod: "PUT",
@@ -5133,73 +3331,48 @@ func (c *S3) PutBucketReplicationRequest(input *PutBucketReplicationInput) (req 
 		input = &PutBucketReplicationInput{}
 	}
 
-	output = &PutBucketReplicationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketReplicationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketReplication API operation for Amazon Simple Storage Service.
-//
-// Creates a new replication configuration (or replaces an existing one, if
-// present).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketReplication for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplication
-func (c *S3) PutBucketReplication(input *PutBucketReplicationInput) (*PutBucketReplicationOutput, error) {
-	req, out := c.PutBucketReplicationRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketReplicationWithContext is the same as PutBucketReplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketReplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketReplicationWithContext(ctx aws.Context, input *PutBucketReplicationInput, opts ...aws.Option) (*PutBucketReplicationOutput, error) {
-	req, out := c.PutBucketReplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketReplicationRequest{Request: req, Input: input}
 }
 
 const opPutBucketRequestPayment = "PutBucketRequestPayment"
 
-// PutBucketRequestPaymentRequest generates a "aws.Request" representing the
-// client's request for the PutBucketRequestPayment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketRequestPaymentRequest is a API request type for the PutBucketRequestPayment API operation.
+type PutBucketRequestPaymentRequest struct {
+	*aws.Request
+	Input *PutBucketRequestPaymentInput
+}
+
+// Send marshals and sends the PutBucketRequestPayment API request.
+func (r PutBucketRequestPaymentRequest) Send() (*PutBucketRequestPaymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketRequestPaymentOutput), nil
+}
+
+// PutBucketRequestPaymentRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketRequestPayment for more information on using the PutBucketRequestPayment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the request payment configuration for a bucket. By default, the bucket
+// owner pays for downloads from the bucket. This configuration parameter enables
+// the bucket owner (only) to specify that the person requesting the download
+// will be charged for the download. Documentation on requester pays buckets
+// can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
 //
 //    // Example sending a request using the PutBucketRequestPaymentRequest method.
-//    req, resp := client.PutBucketRequestPaymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketRequestPaymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPayment
-func (c *S3) PutBucketRequestPaymentRequest(input *PutBucketRequestPaymentInput) (req *aws.Request, output *PutBucketRequestPaymentOutput) {
+func (c *S3) PutBucketRequestPaymentRequest(input *PutBucketRequestPaymentInput) PutBucketRequestPaymentRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketRequestPayment,
 		HTTPMethod: "PUT",
@@ -5210,76 +3383,44 @@ func (c *S3) PutBucketRequestPaymentRequest(input *PutBucketRequestPaymentInput)
 		input = &PutBucketRequestPaymentInput{}
 	}
 
-	output = &PutBucketRequestPaymentOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketRequestPaymentOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketRequestPayment API operation for Amazon Simple Storage Service.
-//
-// Sets the request payment configuration for a bucket. By default, the bucket
-// owner pays for downloads from the bucket. This configuration parameter enables
-// the bucket owner (only) to specify that the person requesting the download
-// will be charged for the download. Documentation on requester pays buckets
-// can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketRequestPayment for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPayment
-func (c *S3) PutBucketRequestPayment(input *PutBucketRequestPaymentInput) (*PutBucketRequestPaymentOutput, error) {
-	req, out := c.PutBucketRequestPaymentRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketRequestPaymentWithContext is the same as PutBucketRequestPayment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketRequestPayment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketRequestPaymentWithContext(ctx aws.Context, input *PutBucketRequestPaymentInput, opts ...aws.Option) (*PutBucketRequestPaymentOutput, error) {
-	req, out := c.PutBucketRequestPaymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketRequestPaymentRequest{Request: req, Input: input}
 }
 
 const opPutBucketTagging = "PutBucketTagging"
 
-// PutBucketTaggingRequest generates a "aws.Request" representing the
-// client's request for the PutBucketTagging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketTaggingRequest is a API request type for the PutBucketTagging API operation.
+type PutBucketTaggingRequest struct {
+	*aws.Request
+	Input *PutBucketTaggingInput
+}
+
+// Send marshals and sends the PutBucketTagging API request.
+func (r PutBucketTaggingRequest) Send() (*PutBucketTaggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketTaggingOutput), nil
+}
+
+// PutBucketTaggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketTagging for more information on using the PutBucketTagging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the tags for a bucket.
 //
 //    // Example sending a request using the PutBucketTaggingRequest method.
-//    req, resp := client.PutBucketTaggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketTaggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTagging
-func (c *S3) PutBucketTaggingRequest(input *PutBucketTaggingInput) (req *aws.Request, output *PutBucketTaggingOutput) {
+func (c *S3) PutBucketTaggingRequest(input *PutBucketTaggingInput) PutBucketTaggingRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketTagging,
 		HTTPMethod: "PUT",
@@ -5290,72 +3431,45 @@ func (c *S3) PutBucketTaggingRequest(input *PutBucketTaggingInput) (req *aws.Req
 		input = &PutBucketTaggingInput{}
 	}
 
-	output = &PutBucketTaggingOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketTaggingOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketTagging API operation for Amazon Simple Storage Service.
-//
-// Sets the tags for a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketTagging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTagging
-func (c *S3) PutBucketTagging(input *PutBucketTaggingInput) (*PutBucketTaggingOutput, error) {
-	req, out := c.PutBucketTaggingRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketTaggingWithContext is the same as PutBucketTagging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketTagging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketTaggingWithContext(ctx aws.Context, input *PutBucketTaggingInput, opts ...aws.Option) (*PutBucketTaggingOutput, error) {
-	req, out := c.PutBucketTaggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketTaggingRequest{Request: req, Input: input}
 }
 
 const opPutBucketVersioning = "PutBucketVersioning"
 
-// PutBucketVersioningRequest generates a "aws.Request" representing the
-// client's request for the PutBucketVersioning operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketVersioningRequest is a API request type for the PutBucketVersioning API operation.
+type PutBucketVersioningRequest struct {
+	*aws.Request
+	Input *PutBucketVersioningInput
+}
+
+// Send marshals and sends the PutBucketVersioning API request.
+func (r PutBucketVersioningRequest) Send() (*PutBucketVersioningOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketVersioningOutput), nil
+}
+
+// PutBucketVersioningRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketVersioning for more information on using the PutBucketVersioning
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the versioning state of an existing bucket. To set the versioning state,
+// you must be the bucket owner.
 //
 //    // Example sending a request using the PutBucketVersioningRequest method.
-//    req, resp := client.PutBucketVersioningRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketVersioningRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioning
-func (c *S3) PutBucketVersioningRequest(input *PutBucketVersioningInput) (req *aws.Request, output *PutBucketVersioningOutput) {
+func (c *S3) PutBucketVersioningRequest(input *PutBucketVersioningInput) PutBucketVersioningRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketVersioning,
 		HTTPMethod: "PUT",
@@ -5366,73 +3480,44 @@ func (c *S3) PutBucketVersioningRequest(input *PutBucketVersioningInput) (req *a
 		input = &PutBucketVersioningInput{}
 	}
 
-	output = &PutBucketVersioningOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketVersioningOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketVersioning API operation for Amazon Simple Storage Service.
-//
-// Sets the versioning state of an existing bucket. To set the versioning state,
-// you must be the bucket owner.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketVersioning for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioning
-func (c *S3) PutBucketVersioning(input *PutBucketVersioningInput) (*PutBucketVersioningOutput, error) {
-	req, out := c.PutBucketVersioningRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketVersioningWithContext is the same as PutBucketVersioning with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketVersioning for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketVersioningWithContext(ctx aws.Context, input *PutBucketVersioningInput, opts ...aws.Option) (*PutBucketVersioningOutput, error) {
-	req, out := c.PutBucketVersioningRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketVersioningRequest{Request: req, Input: input}
 }
 
 const opPutBucketWebsite = "PutBucketWebsite"
 
-// PutBucketWebsiteRequest generates a "aws.Request" representing the
-// client's request for the PutBucketWebsite operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutBucketWebsiteRequest is a API request type for the PutBucketWebsite API operation.
+type PutBucketWebsiteRequest struct {
+	*aws.Request
+	Input *PutBucketWebsiteInput
+}
+
+// Send marshals and sends the PutBucketWebsite API request.
+func (r PutBucketWebsiteRequest) Send() (*PutBucketWebsiteOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketWebsiteOutput), nil
+}
+
+// PutBucketWebsiteRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutBucketWebsite for more information on using the PutBucketWebsite
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Set the website configuration for a bucket.
 //
 //    // Example sending a request using the PutBucketWebsiteRequest method.
-//    req, resp := client.PutBucketWebsiteRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutBucketWebsiteRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsite
-func (c *S3) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) (req *aws.Request, output *PutBucketWebsiteOutput) {
+func (c *S3) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) PutBucketWebsiteRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketWebsite,
 		HTTPMethod: "PUT",
@@ -5443,72 +3528,44 @@ func (c *S3) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) (req *aws.Req
 		input = &PutBucketWebsiteInput{}
 	}
 
-	output = &PutBucketWebsiteOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutBucketWebsiteOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutBucketWebsite API operation for Amazon Simple Storage Service.
-//
-// Set the website configuration for a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutBucketWebsite for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsite
-func (c *S3) PutBucketWebsite(input *PutBucketWebsiteInput) (*PutBucketWebsiteOutput, error) {
-	req, out := c.PutBucketWebsiteRequest(input)
-	return out, req.Send()
-}
-
-// PutBucketWebsiteWithContext is the same as PutBucketWebsite with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutBucketWebsite for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutBucketWebsiteWithContext(ctx aws.Context, input *PutBucketWebsiteInput, opts ...aws.Option) (*PutBucketWebsiteOutput, error) {
-	req, out := c.PutBucketWebsiteRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutBucketWebsiteRequest{Request: req, Input: input}
 }
 
 const opPutObject = "PutObject"
 
-// PutObjectRequest generates a "aws.Request" representing the
-// client's request for the PutObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutObjectRequest is a API request type for the PutObject API operation.
+type PutObjectRequest struct {
+	*aws.Request
+	Input *PutObjectInput
+}
+
+// Send marshals and sends the PutObject API request.
+func (r PutObjectRequest) Send() (*PutObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutObjectOutput), nil
+}
+
+// PutObjectRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutObject for more information on using the PutObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds an object to a bucket.
 //
 //    // Example sending a request using the PutObjectRequest method.
-//    req, resp := client.PutObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObject
-func (c *S3) PutObjectRequest(input *PutObjectInput) (req *aws.Request, output *PutObjectOutput) {
+func (c *S3) PutObjectRequest(input *PutObjectInput) PutObjectRequest {
 	op := &aws.Operation{
 		Name:       opPutObject,
 		HTTPMethod: "PUT",
@@ -5519,70 +3576,43 @@ func (c *S3) PutObjectRequest(input *PutObjectInput) (req *aws.Request, output *
 		input = &PutObjectInput{}
 	}
 
-	output = &PutObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutObject API operation for Amazon Simple Storage Service.
-//
-// Adds an object to a bucket.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutObject for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObject
-func (c *S3) PutObject(input *PutObjectInput) (*PutObjectOutput, error) {
-	req, out := c.PutObjectRequest(input)
-	return out, req.Send()
-}
-
-// PutObjectWithContext is the same as PutObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutObjectWithContext(ctx aws.Context, input *PutObjectInput, opts ...aws.Option) (*PutObjectOutput, error) {
-	req, out := c.PutObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutObjectOutput{})
+	return PutObjectRequest{Request: req, Input: input}
 }
 
 const opPutObjectAcl = "PutObjectAcl"
 
-// PutObjectAclRequest generates a "aws.Request" representing the
-// client's request for the PutObjectAcl operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutObjectAclRequest is a API request type for the PutObjectAcl API operation.
+type PutObjectAclRequest struct {
+	*aws.Request
+	Input *PutObjectAclInput
+}
+
+// Send marshals and sends the PutObjectAcl API request.
+func (r PutObjectAclRequest) Send() (*PutObjectAclOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutObjectAclOutput), nil
+}
+
+// PutObjectAclRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutObjectAcl for more information on using the PutObjectAcl
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// uses the acl subresource to set the access control list (ACL) permissions
+// for an object that already exists in a bucket
 //
 //    // Example sending a request using the PutObjectAclRequest method.
-//    req, resp := client.PutObjectAclRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutObjectAclRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAcl
-func (c *S3) PutObjectAclRequest(input *PutObjectAclInput) (req *aws.Request, output *PutObjectAclOutput) {
+func (c *S3) PutObjectAclRequest(input *PutObjectAclInput) PutObjectAclRequest {
 	op := &aws.Operation{
 		Name:       opPutObjectAcl,
 		HTTPMethod: "PUT",
@@ -5593,76 +3623,42 @@ func (c *S3) PutObjectAclRequest(input *PutObjectAclInput) (req *aws.Request, ou
 		input = &PutObjectAclInput{}
 	}
 
-	output = &PutObjectAclOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutObjectAcl API operation for Amazon Simple Storage Service.
-//
-// uses the acl subresource to set the access control list (ACL) permissions
-// for an object that already exists in a bucket
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutObjectAcl for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchKey "NoSuchKey"
-//   The specified key does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAcl
-func (c *S3) PutObjectAcl(input *PutObjectAclInput) (*PutObjectAclOutput, error) {
-	req, out := c.PutObjectAclRequest(input)
-	return out, req.Send()
-}
-
-// PutObjectAclWithContext is the same as PutObjectAcl with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutObjectAcl for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutObjectAclWithContext(ctx aws.Context, input *PutObjectAclInput, opts ...aws.Option) (*PutObjectAclOutput, error) {
-	req, out := c.PutObjectAclRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutObjectAclOutput{})
+	return PutObjectAclRequest{Request: req, Input: input}
 }
 
 const opPutObjectTagging = "PutObjectTagging"
 
-// PutObjectTaggingRequest generates a "aws.Request" representing the
-// client's request for the PutObjectTagging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutObjectTaggingRequest is a API request type for the PutObjectTagging API operation.
+type PutObjectTaggingRequest struct {
+	*aws.Request
+	Input *PutObjectTaggingInput
+}
+
+// Send marshals and sends the PutObjectTagging API request.
+func (r PutObjectTaggingRequest) Send() (*PutObjectTaggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutObjectTaggingOutput), nil
+}
+
+// PutObjectTaggingRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutObjectTagging for more information on using the PutObjectTagging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the supplied tag-set to an object that already exists in a bucket
 //
 //    // Example sending a request using the PutObjectTaggingRequest method.
-//    req, resp := client.PutObjectTaggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutObjectTaggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTagging
-func (c *S3) PutObjectTaggingRequest(input *PutObjectTaggingInput) (req *aws.Request, output *PutObjectTaggingOutput) {
+func (c *S3) PutObjectTaggingRequest(input *PutObjectTaggingInput) PutObjectTaggingRequest {
 	op := &aws.Operation{
 		Name:       opPutObjectTagging,
 		HTTPMethod: "PUT",
@@ -5673,70 +3669,42 @@ func (c *S3) PutObjectTaggingRequest(input *PutObjectTaggingInput) (req *aws.Req
 		input = &PutObjectTaggingInput{}
 	}
 
-	output = &PutObjectTaggingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutObjectTagging API operation for Amazon Simple Storage Service.
-//
-// Sets the supplied tag-set to an object that already exists in a bucket
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation PutObjectTagging for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTagging
-func (c *S3) PutObjectTagging(input *PutObjectTaggingInput) (*PutObjectTaggingOutput, error) {
-	req, out := c.PutObjectTaggingRequest(input)
-	return out, req.Send()
-}
-
-// PutObjectTaggingWithContext is the same as PutObjectTagging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutObjectTagging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) PutObjectTaggingWithContext(ctx aws.Context, input *PutObjectTaggingInput, opts ...aws.Option) (*PutObjectTaggingOutput, error) {
-	req, out := c.PutObjectTaggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutObjectTaggingOutput{})
+	return PutObjectTaggingRequest{Request: req, Input: input}
 }
 
 const opRestoreObject = "RestoreObject"
 
-// RestoreObjectRequest generates a "aws.Request" representing the
-// client's request for the RestoreObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RestoreObjectRequest is a API request type for the RestoreObject API operation.
+type RestoreObjectRequest struct {
+	*aws.Request
+	Input *RestoreObjectInput
+}
+
+// Send marshals and sends the RestoreObject API request.
+func (r RestoreObjectRequest) Send() (*RestoreObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreObjectOutput), nil
+}
+
+// RestoreObjectRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreObject for more information on using the RestoreObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Restores an archived copy of an object back into Amazon S3
 //
 //    // Example sending a request using the RestoreObjectRequest method.
-//    req, resp := client.RestoreObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RestoreObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObject
-func (c *S3) RestoreObjectRequest(input *RestoreObjectInput) (req *aws.Request, output *RestoreObjectOutput) {
+func (c *S3) RestoreObjectRequest(input *RestoreObjectInput) RestoreObjectRequest {
 	op := &aws.Operation{
 		Name:       opRestoreObject,
 		HTTPMethod: "POST",
@@ -5747,75 +3715,48 @@ func (c *S3) RestoreObjectRequest(input *RestoreObjectInput) (req *aws.Request, 
 		input = &RestoreObjectInput{}
 	}
 
-	output = &RestoreObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RestoreObject API operation for Amazon Simple Storage Service.
-//
-// Restores an archived copy of an object back into Amazon S3
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation RestoreObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeObjectAlreadyInActiveTierError "ObjectAlreadyInActiveTierError"
-//   This operation is not allowed against this storage tier
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObject
-func (c *S3) RestoreObject(input *RestoreObjectInput) (*RestoreObjectOutput, error) {
-	req, out := c.RestoreObjectRequest(input)
-	return out, req.Send()
-}
-
-// RestoreObjectWithContext is the same as RestoreObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) RestoreObjectWithContext(ctx aws.Context, input *RestoreObjectInput, opts ...aws.Option) (*RestoreObjectOutput, error) {
-	req, out := c.RestoreObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RestoreObjectOutput{})
+	return RestoreObjectRequest{Request: req, Input: input}
 }
 
 const opUploadPart = "UploadPart"
 
-// UploadPartRequest generates a "aws.Request" representing the
-// client's request for the UploadPart operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UploadPartRequest is a API request type for the UploadPart API operation.
+type UploadPartRequest struct {
+	*aws.Request
+	Input *UploadPartInput
+}
+
+// Send marshals and sends the UploadPart API request.
+func (r UploadPartRequest) Send() (*UploadPartOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadPartOutput), nil
+}
+
+// UploadPartRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Uploads a part in a multipart upload.
 //
-// See UploadPart for more information on using the UploadPart
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Note: After you initiate multipart upload and upload one or more parts, you
+// must either complete or abort multipart upload in order to stop getting charged
+// for storage of the uploaded parts. Only after you either complete or abort
+// multipart upload, Amazon S3 frees up the parts storage and stops charging
+// you for the parts storage.
 //
 //    // Example sending a request using the UploadPartRequest method.
-//    req, resp := client.UploadPartRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UploadPartRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPart
-func (c *S3) UploadPartRequest(input *UploadPartInput) (req *aws.Request, output *UploadPartOutput) {
+func (c *S3) UploadPartRequest(input *UploadPartInput) UploadPartRequest {
 	op := &aws.Operation{
 		Name:       opUploadPart,
 		HTTPMethod: "PUT",
@@ -5826,76 +3767,42 @@ func (c *S3) UploadPartRequest(input *UploadPartInput) (req *aws.Request, output
 		input = &UploadPartInput{}
 	}
 
-	output = &UploadPartOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UploadPart API operation for Amazon Simple Storage Service.
-//
-// Uploads a part in a multipart upload.
-//
-// Note: After you initiate multipart upload and upload one or more parts, you
-// must either complete or abort multipart upload in order to stop getting charged
-// for storage of the uploaded parts. Only after you either complete or abort
-// multipart upload, Amazon S3 frees up the parts storage and stops charging
-// you for the parts storage.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation UploadPart for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPart
-func (c *S3) UploadPart(input *UploadPartInput) (*UploadPartOutput, error) {
-	req, out := c.UploadPartRequest(input)
-	return out, req.Send()
-}
-
-// UploadPartWithContext is the same as UploadPart with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadPart for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) UploadPartWithContext(ctx aws.Context, input *UploadPartInput, opts ...aws.Option) (*UploadPartOutput, error) {
-	req, out := c.UploadPartRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UploadPartOutput{})
+	return UploadPartRequest{Request: req, Input: input}
 }
 
 const opUploadPartCopy = "UploadPartCopy"
 
-// UploadPartCopyRequest generates a "aws.Request" representing the
-// client's request for the UploadPartCopy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UploadPartCopyRequest is a API request type for the UploadPartCopy API operation.
+type UploadPartCopyRequest struct {
+	*aws.Request
+	Input *UploadPartCopyInput
+}
+
+// Send marshals and sends the UploadPartCopy API request.
+func (r UploadPartCopyRequest) Send() (*UploadPartCopyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadPartCopyOutput), nil
+}
+
+// UploadPartCopyRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UploadPartCopy for more information on using the UploadPartCopy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Uploads a part by copying data from an existing object as data source.
 //
 //    // Example sending a request using the UploadPartCopyRequest method.
-//    req, resp := client.UploadPartCopyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UploadPartCopyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopy
-func (c *S3) UploadPartCopyRequest(input *UploadPartCopyInput) (req *aws.Request, output *UploadPartCopyOutput) {
+func (c *S3) UploadPartCopyRequest(input *UploadPartCopyInput) UploadPartCopyRequest {
 	op := &aws.Operation{
 		Name:       opUploadPartCopy,
 		HTTPMethod: "PUT",
@@ -5906,41 +3813,8 @@ func (c *S3) UploadPartCopyRequest(input *UploadPartCopyInput) (req *aws.Request
 		input = &UploadPartCopyInput{}
 	}
 
-	output = &UploadPartCopyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UploadPartCopy API operation for Amazon Simple Storage Service.
-//
-// Uploads a part by copying data from an existing object as data source.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Storage Service's
-// API operation UploadPartCopy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopy
-func (c *S3) UploadPartCopy(input *UploadPartCopyInput) (*UploadPartCopyOutput, error) {
-	req, out := c.UploadPartCopyRequest(input)
-	return out, req.Send()
-}
-
-// UploadPartCopyWithContext is the same as UploadPartCopy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadPartCopy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) UploadPartCopyWithContext(ctx aws.Context, input *UploadPartCopyInput, opts ...aws.Option) (*UploadPartCopyOutput, error) {
-	req, out := c.UploadPartCopyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UploadPartCopyOutput{})
+	return UploadPartCopyRequest{Request: req, Input: input}
 }
 
 // Specifies the days since the initiation of an Incomplete Multipart Upload
@@ -10312,8 +8186,8 @@ func (s *GetBucketMetricsConfigurationOutput) SetMetricsConfiguration(v *Metrics
 	return s
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfigurationRequest
-type GetBucketNotificationConfigurationRequest struct {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationInput
+type GetBucketNotificationConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
 	// Name of the bucket to get the notification configuration for.
@@ -10323,18 +8197,18 @@ type GetBucketNotificationConfigurationRequest struct {
 }
 
 // String returns the string representation
-func (s GetBucketNotificationConfigurationRequest) String() string {
+func (s GetBucketNotificationConfigurationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s GetBucketNotificationConfigurationRequest) GoString() string {
+func (s GetBucketNotificationConfigurationInput) GoString() string {
 	return s.String()
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketNotificationConfigurationRequest) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketNotificationConfigurationRequest"}
+func (s *GetBucketNotificationConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketNotificationConfigurationInput"}
 
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
@@ -10347,16 +8221,136 @@ func (s *GetBucketNotificationConfigurationRequest) Validate() error {
 }
 
 // SetBucket sets the Bucket field's value.
-func (s *GetBucketNotificationConfigurationRequest) SetBucket(v string) *GetBucketNotificationConfigurationRequest {
+func (s *GetBucketNotificationConfigurationInput) SetBucket(v string) *GetBucketNotificationConfigurationInput {
 	s.Bucket = &v
 	return s
 }
 
-func (s *GetBucketNotificationConfigurationRequest) getBucket() (v string) {
+func (s *GetBucketNotificationConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
+}
+
+// Container for specifying the notification configuration of the bucket. If
+// this element is empty, notifications are turned off on the bucket.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfiguration
+type GetBucketNotificationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	LambdaFunctionConfigurations []*LambdaFunctionConfiguration `locationName:"CloudFunctionConfiguration" type:"list" flattened:"true"`
+
+	QueueConfigurations []*QueueConfiguration `locationName:"QueueConfiguration" type:"list" flattened:"true"`
+
+	TopicConfigurations []*TopicConfiguration `locationName:"TopicConfiguration" type:"list" flattened:"true"`
+}
+
+// String returns the string representation
+func (s GetBucketNotificationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetBucketNotificationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetBucketNotificationConfigurationOutput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketNotificationConfigurationOutput"}
+	if s.LambdaFunctionConfigurations != nil {
+		for i, v := range s.LambdaFunctionConfigurations {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LambdaFunctionConfigurations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.QueueConfigurations != nil {
+		for i, v := range s.QueueConfigurations {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueueConfigurations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TopicConfigurations != nil {
+		for i, v := range s.TopicConfigurations {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TopicConfigurations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLambdaFunctionConfigurations sets the LambdaFunctionConfigurations field's value.
+func (s *GetBucketNotificationConfigurationOutput) SetLambdaFunctionConfigurations(v []*LambdaFunctionConfiguration) *GetBucketNotificationConfigurationOutput {
+	s.LambdaFunctionConfigurations = v
+	return s
+}
+
+// SetQueueConfigurations sets the QueueConfigurations field's value.
+func (s *GetBucketNotificationConfigurationOutput) SetQueueConfigurations(v []*QueueConfiguration) *GetBucketNotificationConfigurationOutput {
+	s.QueueConfigurations = v
+	return s
+}
+
+// SetTopicConfigurations sets the TopicConfigurations field's value.
+func (s *GetBucketNotificationConfigurationOutput) SetTopicConfigurations(v []*TopicConfiguration) *GetBucketNotificationConfigurationOutput {
+	s.TopicConfigurations = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationDeprecated
+type GetBucketNotificationOutput struct {
+	_ struct{} `type:"structure"`
+
+	CloudFunctionConfiguration *CloudFunctionConfiguration `type:"structure"`
+
+	QueueConfiguration *QueueConfigurationDeprecated `type:"structure"`
+
+	TopicConfiguration *TopicConfigurationDeprecated `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetBucketNotificationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetBucketNotificationOutput) GoString() string {
+	return s.String()
+}
+
+// SetCloudFunctionConfiguration sets the CloudFunctionConfiguration field's value.
+func (s *GetBucketNotificationOutput) SetCloudFunctionConfiguration(v *CloudFunctionConfiguration) *GetBucketNotificationOutput {
+	s.CloudFunctionConfiguration = v
+	return s
+}
+
+// SetQueueConfiguration sets the QueueConfiguration field's value.
+func (s *GetBucketNotificationOutput) SetQueueConfiguration(v *QueueConfigurationDeprecated) *GetBucketNotificationOutput {
+	s.QueueConfiguration = v
+	return s
+}
+
+// SetTopicConfiguration sets the TopicConfiguration field's value.
+func (s *GetBucketNotificationOutput) SetTopicConfiguration(v *TopicConfigurationDeprecated) *GetBucketNotificationOutput {
+	s.TopicConfiguration = v
+	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyRequest
@@ -15152,126 +13146,6 @@ func (s *NoncurrentVersionTransition) SetStorageClass(v TransitionStorageClass) 
 	return s
 }
 
-// Container for specifying the notification configuration of the bucket. If
-// this element is empty, notifications are turned off on the bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfiguration
-type NotificationConfiguration struct {
-	_ struct{} `type:"structure"`
-
-	LambdaFunctionConfigurations []*LambdaFunctionConfiguration `locationName:"CloudFunctionConfiguration" type:"list" flattened:"true"`
-
-	QueueConfigurations []*QueueConfiguration `locationName:"QueueConfiguration" type:"list" flattened:"true"`
-
-	TopicConfigurations []*TopicConfiguration `locationName:"TopicConfiguration" type:"list" flattened:"true"`
-}
-
-// String returns the string representation
-func (s NotificationConfiguration) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s NotificationConfiguration) GoString() string {
-	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *NotificationConfiguration) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "NotificationConfiguration"}
-	if s.LambdaFunctionConfigurations != nil {
-		for i, v := range s.LambdaFunctionConfigurations {
-			if v == nil {
-				continue
-			}
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LambdaFunctionConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.QueueConfigurations != nil {
-		for i, v := range s.QueueConfigurations {
-			if v == nil {
-				continue
-			}
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueueConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.TopicConfigurations != nil {
-		for i, v := range s.TopicConfigurations {
-			if v == nil {
-				continue
-			}
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TopicConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// SetLambdaFunctionConfigurations sets the LambdaFunctionConfigurations field's value.
-func (s *NotificationConfiguration) SetLambdaFunctionConfigurations(v []*LambdaFunctionConfiguration) *NotificationConfiguration {
-	s.LambdaFunctionConfigurations = v
-	return s
-}
-
-// SetQueueConfigurations sets the QueueConfigurations field's value.
-func (s *NotificationConfiguration) SetQueueConfigurations(v []*QueueConfiguration) *NotificationConfiguration {
-	s.QueueConfigurations = v
-	return s
-}
-
-// SetTopicConfigurations sets the TopicConfigurations field's value.
-func (s *NotificationConfiguration) SetTopicConfigurations(v []*TopicConfiguration) *NotificationConfiguration {
-	s.TopicConfigurations = v
-	return s
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationDeprecated
-type NotificationConfigurationDeprecated struct {
-	_ struct{} `type:"structure"`
-
-	CloudFunctionConfiguration *CloudFunctionConfiguration `type:"structure"`
-
-	QueueConfiguration *QueueConfigurationDeprecated `type:"structure"`
-
-	TopicConfiguration *TopicConfigurationDeprecated `type:"structure"`
-}
-
-// String returns the string representation
-func (s NotificationConfigurationDeprecated) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s NotificationConfigurationDeprecated) GoString() string {
-	return s.String()
-}
-
-// SetCloudFunctionConfiguration sets the CloudFunctionConfiguration field's value.
-func (s *NotificationConfigurationDeprecated) SetCloudFunctionConfiguration(v *CloudFunctionConfiguration) *NotificationConfigurationDeprecated {
-	s.CloudFunctionConfiguration = v
-	return s
-}
-
-// SetQueueConfiguration sets the QueueConfiguration field's value.
-func (s *NotificationConfigurationDeprecated) SetQueueConfiguration(v *QueueConfigurationDeprecated) *NotificationConfigurationDeprecated {
-	s.QueueConfiguration = v
-	return s
-}
-
-// SetTopicConfiguration sets the TopicConfiguration field's value.
-func (s *NotificationConfigurationDeprecated) SetTopicConfiguration(v *TopicConfigurationDeprecated) *NotificationConfigurationDeprecated {
-	s.TopicConfiguration = v
-	return s
-}
-
 // Container for object key name filtering rules. For information about key
 // name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter
@@ -16392,7 +14266,7 @@ type PutBucketNotificationConfigurationInput struct {
 	// this element is empty, notifications are turned off on the bucket.
 	//
 	// NotificationConfiguration is a required field
-	NotificationConfiguration *NotificationConfiguration `locationName:"NotificationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
+	NotificationConfiguration *GetBucketNotificationConfigurationOutput `locationName:"NotificationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 }
 
 // String returns the string representation
@@ -16442,7 +14316,7 @@ func (s *PutBucketNotificationConfigurationInput) getBucket() (v string) {
 }
 
 // SetNotificationConfiguration sets the NotificationConfiguration field's value.
-func (s *PutBucketNotificationConfigurationInput) SetNotificationConfiguration(v *NotificationConfiguration) *PutBucketNotificationConfigurationInput {
+func (s *PutBucketNotificationConfigurationInput) SetNotificationConfiguration(v *GetBucketNotificationConfigurationOutput) *PutBucketNotificationConfigurationInput {
 	s.NotificationConfiguration = v
 	return s
 }
@@ -16470,7 +14344,7 @@ type PutBucketNotificationInput struct {
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
 	// NotificationConfiguration is a required field
-	NotificationConfiguration *NotificationConfigurationDeprecated `locationName:"NotificationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
+	NotificationConfiguration *GetBucketNotificationOutput `locationName:"NotificationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 }
 
 // String returns the string representation
@@ -16515,7 +14389,7 @@ func (s *PutBucketNotificationInput) getBucket() (v string) {
 }
 
 // SetNotificationConfiguration sets the NotificationConfiguration field's value.
-func (s *PutBucketNotificationInput) SetNotificationConfiguration(v *NotificationConfigurationDeprecated) *PutBucketNotificationInput {
+func (s *PutBucketNotificationInput) SetNotificationConfiguration(v *GetBucketNotificationOutput) *PutBucketNotificationInput {
 	s.NotificationConfiguration = v
 	return s
 }

@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To delete a lexicon
 //
 // Deletes a specified pronunciation lexicon stored in an AWS Region.
-func ExamplePolly_DeleteLexicon_shared00() {
+func ExamplePolly_DeleteLexiconRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -39,7 +39,8 @@ func ExamplePolly_DeleteLexicon_shared00() {
 		Name: aws.String("example"),
 	}
 
-	result, err := svc.DeleteLexicon(input)
+	req := svc.DeleteLexiconRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -66,7 +67,7 @@ func ExamplePolly_DeleteLexicon_shared00() {
 // Returns the list of voices that are available for use when requesting speech synthesis.
 // Displayed languages are those within the specified language code. If no language
 // code is specified, voices for all available languages are displayed.
-func ExamplePolly_DescribeVoices_shared00() {
+func ExamplePolly_DescribeVoicesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -77,7 +78,8 @@ func ExamplePolly_DescribeVoices_shared00() {
 		LanguageCode: polly.LanguageCodeEnGb,
 	}
 
-	result, err := svc.DescribeVoices(input)
+	req := svc.DescribeVoicesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -102,7 +104,7 @@ func ExamplePolly_DescribeVoices_shared00() {
 // To retrieve a lexicon
 //
 // Returns the content of the specified pronunciation lexicon stored in an AWS Region.
-func ExamplePolly_GetLexicon_shared00() {
+func ExamplePolly_GetLexiconRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -113,7 +115,8 @@ func ExamplePolly_GetLexicon_shared00() {
 		Name: aws.String(""),
 	}
 
-	result, err := svc.GetLexicon(input)
+	req := svc.GetLexiconRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -138,7 +141,7 @@ func ExamplePolly_GetLexicon_shared00() {
 // To list all lexicons in a region
 //
 // Returns a list of pronunciation lexicons stored in an AWS Region.
-func ExamplePolly_ListLexicons_shared00() {
+func ExamplePolly_ListLexiconsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -147,7 +150,8 @@ func ExamplePolly_ListLexicons_shared00() {
 	svc := polly.New(cfg)
 	input := &polly.ListLexiconsInput{}
 
-	result, err := svc.ListLexicons(input)
+	req := svc.ListLexiconsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -172,7 +176,7 @@ func ExamplePolly_ListLexicons_shared00() {
 // To save a lexicon
 //
 // Stores a pronunciation lexicon in an AWS Region.
-func ExamplePolly_PutLexicon_shared00() {
+func ExamplePolly_PutLexiconRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -184,7 +188,8 @@ func ExamplePolly_PutLexicon_shared00() {
 		Name:    aws.String("W3C"),
 	}
 
-	result, err := svc.PutLexicon(input)
+	req := svc.PutLexiconRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -219,7 +224,7 @@ func ExamplePolly_PutLexicon_shared00() {
 // To synthesize speech
 //
 // Synthesizes plain text or SSML into a file of human-like speech.
-func ExamplePolly_SynthesizeSpeech_shared00() {
+func ExamplePolly_SynthesizeSpeechRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -237,7 +242,8 @@ func ExamplePolly_SynthesizeSpeech_shared00() {
 		VoiceId:      polly.VoiceIdJoanna,
 	}
 
-	result, err := svc.SynthesizeSpeech(input)
+	req := svc.SynthesizeSpeechRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

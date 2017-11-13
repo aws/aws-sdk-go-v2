@@ -14,31 +14,40 @@ import (
 
 const opAddClientIDToOpenIDConnectProvider = "AddClientIDToOpenIDConnectProvider"
 
-// AddClientIDToOpenIDConnectProviderRequest generates a "aws.Request" representing the
-// client's request for the AddClientIDToOpenIDConnectProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddClientIDToOpenIDConnectProviderRequest is a API request type for the AddClientIDToOpenIDConnectProvider API operation.
+type AddClientIDToOpenIDConnectProviderRequest struct {
+	*aws.Request
+	Input *AddClientIDToOpenIDConnectProviderInput
+}
+
+// Send marshals and sends the AddClientIDToOpenIDConnectProvider API request.
+func (r AddClientIDToOpenIDConnectProviderRequest) Send() (*AddClientIDToOpenIDConnectProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddClientIDToOpenIDConnectProviderOutput), nil
+}
+
+// AddClientIDToOpenIDConnectProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds a new client ID (also known as audience) to the list of client IDs already
+// registered for the specified IAM OpenID Connect (OIDC) provider resource.
 //
-// See AddClientIDToOpenIDConnectProvider for more information on using the AddClientIDToOpenIDConnectProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This action is idempotent; it does not fail or return an error if you add
+// an existing client ID to the provider.
 //
 //    // Example sending a request using the AddClientIDToOpenIDConnectProviderRequest method.
-//    req, resp := client.AddClientIDToOpenIDConnectProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddClientIDToOpenIDConnectProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProvider
-func (c *IAM) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToOpenIDConnectProviderInput) (req *aws.Request, output *AddClientIDToOpenIDConnectProviderOutput) {
+func (c *IAM) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToOpenIDConnectProviderInput) AddClientIDToOpenIDConnectProviderRequest {
 	op := &aws.Operation{
 		Name:       opAddClientIDToOpenIDConnectProvider,
 		HTTPMethod: "POST",
@@ -49,112 +58,32 @@ func (c *IAM) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToOpen
 		input = &AddClientIDToOpenIDConnectProviderInput{}
 	}
 
-	output = &AddClientIDToOpenIDConnectProviderOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddClientIDToOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddClientIDToOpenIDConnectProvider API operation for AWS Identity and Access Management.
-//
-// Adds a new client ID (also known as audience) to the list of client IDs already
-// registered for the specified IAM OpenID Connect (OIDC) provider resource.
-//
-// This action is idempotent; it does not fail or return an error if you add
-// an existing client ID to the provider.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation AddClientIDToOpenIDConnectProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProvider
-func (c *IAM) AddClientIDToOpenIDConnectProvider(input *AddClientIDToOpenIDConnectProviderInput) (*AddClientIDToOpenIDConnectProviderOutput, error) {
-	req, out := c.AddClientIDToOpenIDConnectProviderRequest(input)
-	return out, req.Send()
-}
-
-// AddClientIDToOpenIDConnectProviderWithContext is the same as AddClientIDToOpenIDConnectProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddClientIDToOpenIDConnectProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) AddClientIDToOpenIDConnectProviderWithContext(ctx aws.Context, input *AddClientIDToOpenIDConnectProviderInput, opts ...aws.Option) (*AddClientIDToOpenIDConnectProviderOutput, error) {
-	req, out := c.AddClientIDToOpenIDConnectProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddClientIDToOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
 const opAddRoleToInstanceProfile = "AddRoleToInstanceProfile"
 
-// AddRoleToInstanceProfileRequest generates a "aws.Request" representing the
-// client's request for the AddRoleToInstanceProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddRoleToInstanceProfile for more information on using the AddRoleToInstanceProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddRoleToInstanceProfileRequest method.
-//    req, resp := client.AddRoleToInstanceProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfile
-func (c *IAM) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfileInput) (req *aws.Request, output *AddRoleToInstanceProfileOutput) {
-	op := &aws.Operation{
-		Name:       opAddRoleToInstanceProfile,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddRoleToInstanceProfileInput{}
-	}
-
-	output = &AddRoleToInstanceProfileOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AddRoleToInstanceProfileRequest is a API request type for the AddRoleToInstanceProfile API operation.
+type AddRoleToInstanceProfileRequest struct {
+	*aws.Request
+	Input *AddRoleToInstanceProfileInput
 }
 
-// AddRoleToInstanceProfile API operation for AWS Identity and Access Management.
+// Send marshals and sends the AddRoleToInstanceProfile API request.
+func (r AddRoleToInstanceProfileRequest) Send() (*AddRoleToInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddRoleToInstanceProfileOutput), nil
+}
+
+// AddRoleToInstanceProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Adds the specified IAM role to the specified instance profile. An instance
 // profile can contain only one role, and this limit cannot be increased.
@@ -166,85 +95,63 @@ func (c *IAM) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfileInp
 // For more information about instance profiles, go to About Instance Profiles
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation AddRoleToInstanceProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the AddRoleToInstanceProfileRequest method.
+//    req := client.AddRoleToInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfile
-func (c *IAM) AddRoleToInstanceProfile(input *AddRoleToInstanceProfileInput) (*AddRoleToInstanceProfileOutput, error) {
-	req, out := c.AddRoleToInstanceProfileRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfileInput) AddRoleToInstanceProfileRequest {
+	op := &aws.Operation{
+		Name:       opAddRoleToInstanceProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddRoleToInstanceProfileWithContext is the same as AddRoleToInstanceProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddRoleToInstanceProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) AddRoleToInstanceProfileWithContext(ctx aws.Context, input *AddRoleToInstanceProfileInput, opts ...aws.Option) (*AddRoleToInstanceProfileOutput, error) {
-	req, out := c.AddRoleToInstanceProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddRoleToInstanceProfileInput{}
+	}
+
+	req := c.newRequest(op, input, &AddRoleToInstanceProfileOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return AddRoleToInstanceProfileRequest{Request: req, Input: input}
 }
 
 const opAddUserToGroup = "AddUserToGroup"
 
-// AddUserToGroupRequest generates a "aws.Request" representing the
-// client's request for the AddUserToGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddUserToGroupRequest is a API request type for the AddUserToGroup API operation.
+type AddUserToGroupRequest struct {
+	*aws.Request
+	Input *AddUserToGroupInput
+}
+
+// Send marshals and sends the AddUserToGroup API request.
+func (r AddUserToGroupRequest) Send() (*AddUserToGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddUserToGroupOutput), nil
+}
+
+// AddUserToGroupRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddUserToGroup for more information on using the AddUserToGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds the specified user to the specified group.
 //
 //    // Example sending a request using the AddUserToGroupRequest method.
-//    req, resp := client.AddUserToGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddUserToGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroup
-func (c *IAM) AddUserToGroupRequest(input *AddUserToGroupInput) (req *aws.Request, output *AddUserToGroupOutput) {
+func (c *IAM) AddUserToGroupRequest(input *AddUserToGroupInput) AddUserToGroupRequest {
 	op := &aws.Operation{
 		Name:       opAddUserToGroup,
 		HTTPMethod: "POST",
@@ -255,104 +162,32 @@ func (c *IAM) AddUserToGroupRequest(input *AddUserToGroupInput) (req *aws.Reques
 		input = &AddUserToGroupInput{}
 	}
 
-	output = &AddUserToGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddUserToGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddUserToGroup API operation for AWS Identity and Access Management.
-//
-// Adds the specified user to the specified group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation AddUserToGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroup
-func (c *IAM) AddUserToGroup(input *AddUserToGroupInput) (*AddUserToGroupOutput, error) {
-	req, out := c.AddUserToGroupRequest(input)
-	return out, req.Send()
-}
-
-// AddUserToGroupWithContext is the same as AddUserToGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddUserToGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) AddUserToGroupWithContext(ctx aws.Context, input *AddUserToGroupInput, opts ...aws.Option) (*AddUserToGroupOutput, error) {
-	req, out := c.AddUserToGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddUserToGroupRequest{Request: req, Input: input}
 }
 
 const opAttachGroupPolicy = "AttachGroupPolicy"
 
-// AttachGroupPolicyRequest generates a "aws.Request" representing the
-// client's request for the AttachGroupPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachGroupPolicy for more information on using the AttachGroupPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AttachGroupPolicyRequest method.
-//    req, resp := client.AttachGroupPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicy
-func (c *IAM) AttachGroupPolicyRequest(input *AttachGroupPolicyInput) (req *aws.Request, output *AttachGroupPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opAttachGroupPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AttachGroupPolicyInput{}
-	}
-
-	output = &AttachGroupPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AttachGroupPolicyRequest is a API request type for the AttachGroupPolicy API operation.
+type AttachGroupPolicyRequest struct {
+	*aws.Request
+	Input *AttachGroupPolicyInput
 }
 
-// AttachGroupPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the AttachGroupPolicy API request.
+func (r AttachGroupPolicyRequest) Send() (*AttachGroupPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachGroupPolicyOutput), nil
+}
+
+// AttachGroupPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Attaches the specified managed policy to the specified IAM group.
 //
@@ -363,101 +198,51 @@ func (c *IAM) AttachGroupPolicyRequest(input *AttachGroupPolicyInput) (req *aws.
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation AttachGroupPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodePolicyNotAttachableException "PolicyNotAttachable"
-//   The request failed because AWS service role policies can only be attached
-//   to the service-linked role for that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicy
-func (c *IAM) AttachGroupPolicy(input *AttachGroupPolicyInput) (*AttachGroupPolicyOutput, error) {
-	req, out := c.AttachGroupPolicyRequest(input)
-	return out, req.Send()
-}
-
-// AttachGroupPolicyWithContext is the same as AttachGroupPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachGroupPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) AttachGroupPolicyWithContext(ctx aws.Context, input *AttachGroupPolicyInput, opts ...aws.Option) (*AttachGroupPolicyOutput, error) {
-	req, out := c.AttachGroupPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAttachRolePolicy = "AttachRolePolicy"
-
-// AttachRolePolicyRequest generates a "aws.Request" representing the
-// client's request for the AttachRolePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachRolePolicy for more information on using the AttachRolePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AttachRolePolicyRequest method.
-//    req, resp := client.AttachRolePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AttachGroupPolicyRequest method.
+//    req := client.AttachGroupPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicy
-func (c *IAM) AttachRolePolicyRequest(input *AttachRolePolicyInput) (req *aws.Request, output *AttachRolePolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicy
+func (c *IAM) AttachGroupPolicyRequest(input *AttachGroupPolicyInput) AttachGroupPolicyRequest {
 	op := &aws.Operation{
-		Name:       opAttachRolePolicy,
+		Name:       opAttachGroupPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AttachRolePolicyInput{}
+		input = &AttachGroupPolicyInput{}
 	}
 
-	output = &AttachRolePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AttachGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return AttachGroupPolicyRequest{Request: req, Input: input}
 }
 
-// AttachRolePolicy API operation for AWS Identity and Access Management.
+const opAttachRolePolicy = "AttachRolePolicy"
+
+// AttachRolePolicyRequest is a API request type for the AttachRolePolicy API operation.
+type AttachRolePolicyRequest struct {
+	*aws.Request
+	Input *AttachRolePolicyInput
+}
+
+// Send marshals and sends the AttachRolePolicy API request.
+func (r AttachRolePolicyRequest) Send() (*AttachRolePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachRolePolicyOutput), nil
+}
+
+// AttachRolePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Attaches the specified managed policy to the specified IAM role. When you
 // attach a managed policy to a role, the managed policy becomes part of the
@@ -472,107 +257,51 @@ func (c *IAM) AttachRolePolicyRequest(input *AttachRolePolicyInput) (req *aws.Re
 // Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation AttachRolePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodePolicyNotAttachableException "PolicyNotAttachable"
-//   The request failed because AWS service role policies can only be attached
-//   to the service-linked role for that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicy
-func (c *IAM) AttachRolePolicy(input *AttachRolePolicyInput) (*AttachRolePolicyOutput, error) {
-	req, out := c.AttachRolePolicyRequest(input)
-	return out, req.Send()
-}
-
-// AttachRolePolicyWithContext is the same as AttachRolePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachRolePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) AttachRolePolicyWithContext(ctx aws.Context, input *AttachRolePolicyInput, opts ...aws.Option) (*AttachRolePolicyOutput, error) {
-	req, out := c.AttachRolePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAttachUserPolicy = "AttachUserPolicy"
-
-// AttachUserPolicyRequest generates a "aws.Request" representing the
-// client's request for the AttachUserPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachUserPolicy for more information on using the AttachUserPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AttachUserPolicyRequest method.
-//    req, resp := client.AttachUserPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AttachRolePolicyRequest method.
+//    req := client.AttachRolePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicy
-func (c *IAM) AttachUserPolicyRequest(input *AttachUserPolicyInput) (req *aws.Request, output *AttachUserPolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicy
+func (c *IAM) AttachRolePolicyRequest(input *AttachRolePolicyInput) AttachRolePolicyRequest {
 	op := &aws.Operation{
-		Name:       opAttachUserPolicy,
+		Name:       opAttachRolePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AttachUserPolicyInput{}
+		input = &AttachRolePolicyInput{}
 	}
 
-	output = &AttachUserPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AttachRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return AttachRolePolicyRequest{Request: req, Input: input}
 }
 
-// AttachUserPolicy API operation for AWS Identity and Access Management.
+const opAttachUserPolicy = "AttachUserPolicy"
+
+// AttachUserPolicyRequest is a API request type for the AttachUserPolicy API operation.
+type AttachUserPolicyRequest struct {
+	*aws.Request
+	Input *AttachUserPolicyInput
+}
+
+// Send marshals and sends the AttachUserPolicy API request.
+func (r AttachUserPolicyRequest) Send() (*AttachUserPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachUserPolicyOutput), nil
+}
+
+// AttachUserPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Attaches the specified managed policy to the specified user.
 //
@@ -583,83 +312,68 @@ func (c *IAM) AttachUserPolicyRequest(input *AttachUserPolicyInput) (req *aws.Re
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation AttachUserPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodePolicyNotAttachableException "PolicyNotAttachable"
-//   The request failed because AWS service role policies can only be attached
-//   to the service-linked role for that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the AttachUserPolicyRequest method.
+//    req := client.AttachUserPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicy
-func (c *IAM) AttachUserPolicy(input *AttachUserPolicyInput) (*AttachUserPolicyOutput, error) {
-	req, out := c.AttachUserPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) AttachUserPolicyRequest(input *AttachUserPolicyInput) AttachUserPolicyRequest {
+	op := &aws.Operation{
+		Name:       opAttachUserPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AttachUserPolicyWithContext is the same as AttachUserPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachUserPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) AttachUserPolicyWithContext(ctx aws.Context, input *AttachUserPolicyInput, opts ...aws.Option) (*AttachUserPolicyOutput, error) {
-	req, out := c.AttachUserPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AttachUserPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &AttachUserPolicyOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return AttachUserPolicyRequest{Request: req, Input: input}
 }
 
 const opChangePassword = "ChangePassword"
 
-// ChangePasswordRequest generates a "aws.Request" representing the
-// client's request for the ChangePassword operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ChangePasswordRequest is a API request type for the ChangePassword API operation.
+type ChangePasswordRequest struct {
+	*aws.Request
+	Input *ChangePasswordInput
+}
+
+// Send marshals and sends the ChangePassword API request.
+func (r ChangePasswordRequest) Send() (*ChangePasswordOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ChangePasswordOutput), nil
+}
+
+// ChangePasswordRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Changes the password of the IAM user who is calling this action. The root
+// account password is not affected by this action.
 //
-// See ChangePassword for more information on using the ChangePassword
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// To change the password for a different user, see UpdateLoginProfile. For
+// more information about modifying passwords, see Managing Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the ChangePasswordRequest method.
-//    req, resp := client.ChangePasswordRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ChangePasswordRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePassword
-func (c *IAM) ChangePasswordRequest(input *ChangePasswordInput) (req *aws.Request, output *ChangePasswordOutput) {
+func (c *IAM) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswordRequest {
 	op := &aws.Operation{
 		Name:       opChangePassword,
 		HTTPMethod: "POST",
@@ -670,121 +384,32 @@ func (c *IAM) ChangePasswordRequest(input *ChangePasswordInput) (req *aws.Reques
 		input = &ChangePasswordInput{}
 	}
 
-	output = &ChangePasswordOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &ChangePasswordOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// ChangePassword API operation for AWS Identity and Access Management.
-//
-// Changes the password of the IAM user who is calling this action. The root
-// account password is not affected by this action.
-//
-// To change the password for a different user, see UpdateLoginProfile. For
-// more information about modifying passwords, see Managing Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ChangePassword for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidUserTypeException "InvalidUserType"
-//   The request was rejected because the type of user for the transaction was
-//   incorrect.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityTemporarilyUnmodifiableException "EntityTemporarilyUnmodifiable"
-//   The request was rejected because it referenced an entity that is temporarily
-//   unmodifiable, such as a user name that was deleted and then recreated. The
-//   error indicates that the request is likely to succeed if you try again after
-//   waiting several minutes. The error message describes the entity.
-//
-//   * ErrCodePasswordPolicyViolationException "PasswordPolicyViolation"
-//   The request was rejected because the provided password did not meet the requirements
-//   imposed by the account password policy.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePassword
-func (c *IAM) ChangePassword(input *ChangePasswordInput) (*ChangePasswordOutput, error) {
-	req, out := c.ChangePasswordRequest(input)
-	return out, req.Send()
-}
-
-// ChangePasswordWithContext is the same as ChangePassword with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ChangePassword for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ChangePasswordWithContext(ctx aws.Context, input *ChangePasswordInput, opts ...aws.Option) (*ChangePasswordOutput, error) {
-	req, out := c.ChangePasswordRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return ChangePasswordRequest{Request: req, Input: input}
 }
 
 const opCreateAccessKey = "CreateAccessKey"
 
-// CreateAccessKeyRequest generates a "aws.Request" representing the
-// client's request for the CreateAccessKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAccessKey for more information on using the CreateAccessKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateAccessKeyRequest method.
-//    req, resp := client.CreateAccessKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKey
-func (c *IAM) CreateAccessKeyRequest(input *CreateAccessKeyInput) (req *aws.Request, output *CreateAccessKeyOutput) {
-	op := &aws.Operation{
-		Name:       opCreateAccessKey,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateAccessKeyInput{}
-	}
-
-	output = &CreateAccessKeyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateAccessKeyRequest is a API request type for the CreateAccessKey API operation.
+type CreateAccessKeyRequest struct {
+	*aws.Request
+	Input *CreateAccessKeyInput
 }
 
-// CreateAccessKey API operation for AWS Identity and Access Management.
+// Send marshals and sends the CreateAccessKey API request.
+func (r CreateAccessKeyRequest) Send() (*CreateAccessKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAccessKeyOutput), nil
+}
+
+// CreateAccessKeyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Creates a new AWS secret access key and corresponding AWS access key ID for
 // the specified user. The default status for new keys is Active.
@@ -804,75 +429,63 @@ func (c *IAM) CreateAccessKeyRequest(input *CreateAccessKeyInput) (req *aws.Requ
 // lost, you can delete the access keys for the associated user and then create
 // new keys.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateAccessKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the CreateAccessKeyRequest method.
+//    req := client.CreateAccessKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKey
-func (c *IAM) CreateAccessKey(input *CreateAccessKeyInput) (*CreateAccessKeyOutput, error) {
-	req, out := c.CreateAccessKeyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) CreateAccessKeyRequest(input *CreateAccessKeyInput) CreateAccessKeyRequest {
+	op := &aws.Operation{
+		Name:       opCreateAccessKey,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateAccessKeyWithContext is the same as CreateAccessKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAccessKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateAccessKeyWithContext(ctx aws.Context, input *CreateAccessKeyInput, opts ...aws.Option) (*CreateAccessKeyOutput, error) {
-	req, out := c.CreateAccessKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateAccessKeyInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateAccessKeyOutput{})
+	return CreateAccessKeyRequest{Request: req, Input: input}
 }
 
 const opCreateAccountAlias = "CreateAccountAlias"
 
-// CreateAccountAliasRequest generates a "aws.Request" representing the
-// client's request for the CreateAccountAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateAccountAliasRequest is a API request type for the CreateAccountAlias API operation.
+type CreateAccountAliasRequest struct {
+	*aws.Request
+	Input *CreateAccountAliasInput
+}
+
+// Send marshals and sends the CreateAccountAlias API request.
+func (r CreateAccountAliasRequest) Send() (*CreateAccountAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAccountAliasOutput), nil
+}
+
+// CreateAccountAliasRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAccountAlias for more information on using the CreateAccountAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an alias for your AWS account. For information about using an AWS
+// account alias, see Using an Alias for Your AWS Account ID (http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the CreateAccountAliasRequest method.
-//    req, resp := client.CreateAccountAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateAccountAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAlias
-func (c *IAM) CreateAccountAliasRequest(input *CreateAccountAliasInput) (req *aws.Request, output *CreateAccountAliasOutput) {
+func (c *IAM) CreateAccountAliasRequest(input *CreateAccountAliasInput) CreateAccountAliasRequest {
 	op := &aws.Operation{
 		Name:       opCreateAccountAlias,
 		HTTPMethod: "POST",
@@ -883,88 +496,48 @@ func (c *IAM) CreateAccountAliasRequest(input *CreateAccountAliasInput) (req *aw
 		input = &CreateAccountAliasInput{}
 	}
 
-	output = &CreateAccountAliasOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateAccountAliasOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// CreateAccountAlias API operation for AWS Identity and Access Management.
-//
-// Creates an alias for your AWS account. For information about using an AWS
-// account alias, see Using an Alias for Your AWS Account ID (http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateAccountAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAlias
-func (c *IAM) CreateAccountAlias(input *CreateAccountAliasInput) (*CreateAccountAliasOutput, error) {
-	req, out := c.CreateAccountAliasRequest(input)
-	return out, req.Send()
-}
-
-// CreateAccountAliasWithContext is the same as CreateAccountAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAccountAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateAccountAliasWithContext(ctx aws.Context, input *CreateAccountAliasInput, opts ...aws.Option) (*CreateAccountAliasOutput, error) {
-	req, out := c.CreateAccountAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return CreateAccountAliasRequest{Request: req, Input: input}
 }
 
 const opCreateGroup = "CreateGroup"
 
-// CreateGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateGroupRequest is a API request type for the CreateGroup API operation.
+type CreateGroupRequest struct {
+	*aws.Request
+	Input *CreateGroupInput
+}
+
+// Send marshals and sends the CreateGroup API request.
+func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGroupOutput), nil
+}
+
+// CreateGroupRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new group.
 //
-// See CreateGroup for more information on using the CreateGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about the number of groups you can create, see Limitations
+// on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the CreateGroupRequest method.
-//    req, resp := client.CreateGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroup
-func (c *IAM) CreateGroupRequest(input *CreateGroupInput) (req *aws.Request, output *CreateGroupOutput) {
+func (c *IAM) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
@@ -975,92 +548,47 @@ func (c *IAM) CreateGroupRequest(input *CreateGroupInput) (req *aws.Request, out
 		input = &CreateGroupInput{}
 	}
 
-	output = &CreateGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateGroup API operation for AWS Identity and Access Management.
-//
-// Creates a new group.
-//
-// For information about the number of groups you can create, see Limitations
-// on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroup
-func (c *IAM) CreateGroup(input *CreateGroupInput) (*CreateGroupOutput, error) {
-	req, out := c.CreateGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateGroupWithContext is the same as CreateGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateGroupWithContext(ctx aws.Context, input *CreateGroupInput, opts ...aws.Option) (*CreateGroupOutput, error) {
-	req, out := c.CreateGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateGroupOutput{})
+	return CreateGroupRequest{Request: req, Input: input}
 }
 
 const opCreateInstanceProfile = "CreateInstanceProfile"
 
-// CreateInstanceProfileRequest generates a "aws.Request" representing the
-// client's request for the CreateInstanceProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateInstanceProfileRequest is a API request type for the CreateInstanceProfile API operation.
+type CreateInstanceProfileRequest struct {
+	*aws.Request
+	Input *CreateInstanceProfileInput
+}
+
+// Send marshals and sends the CreateInstanceProfile API request.
+func (r CreateInstanceProfileRequest) Send() (*CreateInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInstanceProfileOutput), nil
+}
+
+// CreateInstanceProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new instance profile. For information about instance profiles,
+// go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
-// See CreateInstanceProfile for more information on using the CreateInstanceProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about the number of instance profiles you can create, see
+// Limitations on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the CreateInstanceProfileRequest method.
-//    req, resp := client.CreateInstanceProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfile
-func (c *IAM) CreateInstanceProfileRequest(input *CreateInstanceProfileInput) (req *aws.Request, output *CreateInstanceProfileOutput) {
+func (c *IAM) CreateInstanceProfileRequest(input *CreateInstanceProfileInput) CreateInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstanceProfile,
 		HTTPMethod: "POST",
@@ -1071,89 +599,45 @@ func (c *IAM) CreateInstanceProfileRequest(input *CreateInstanceProfileInput) (r
 		input = &CreateInstanceProfileInput{}
 	}
 
-	output = &CreateInstanceProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateInstanceProfile API operation for AWS Identity and Access Management.
-//
-// Creates a new instance profile. For information about instance profiles,
-// go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
-//
-// For information about the number of instance profiles you can create, see
-// Limitations on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateInstanceProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfile
-func (c *IAM) CreateInstanceProfile(input *CreateInstanceProfileInput) (*CreateInstanceProfileOutput, error) {
-	req, out := c.CreateInstanceProfileRequest(input)
-	return out, req.Send()
-}
-
-// CreateInstanceProfileWithContext is the same as CreateInstanceProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateInstanceProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateInstanceProfileWithContext(ctx aws.Context, input *CreateInstanceProfileInput, opts ...aws.Option) (*CreateInstanceProfileOutput, error) {
-	req, out := c.CreateInstanceProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateInstanceProfileOutput{})
+	return CreateInstanceProfileRequest{Request: req, Input: input}
 }
 
 const opCreateLoginProfile = "CreateLoginProfile"
 
-// CreateLoginProfileRequest generates a "aws.Request" representing the
-// client's request for the CreateLoginProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateLoginProfileRequest is a API request type for the CreateLoginProfile API operation.
+type CreateLoginProfileRequest struct {
+	*aws.Request
+	Input *CreateLoginProfileInput
+}
+
+// Send marshals and sends the CreateLoginProfile API request.
+func (r CreateLoginProfileRequest) Send() (*CreateLoginProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLoginProfileOutput), nil
+}
+
+// CreateLoginProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLoginProfile for more information on using the CreateLoginProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a password for the specified user, giving the user the ability to
+// access AWS services through the AWS Management Console. For more information
+// about managing passwords, see Managing Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the CreateLoginProfileRequest method.
-//    req, resp := client.CreateLoginProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateLoginProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfile
-func (c *IAM) CreateLoginProfileRequest(input *CreateLoginProfileInput) (req *aws.Request, output *CreateLoginProfileOutput) {
+func (c *IAM) CreateLoginProfileRequest(input *CreateLoginProfileInput) CreateLoginProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoginProfile,
 		HTTPMethod: "POST",
@@ -1164,111 +648,30 @@ func (c *IAM) CreateLoginProfileRequest(input *CreateLoginProfileInput) (req *aw
 		input = &CreateLoginProfileInput{}
 	}
 
-	output = &CreateLoginProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateLoginProfile API operation for AWS Identity and Access Management.
-//
-// Creates a password for the specified user, giving the user the ability to
-// access AWS services through the AWS Management Console. For more information
-// about managing passwords, see Managing Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateLoginProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodePasswordPolicyViolationException "PasswordPolicyViolation"
-//   The request was rejected because the provided password did not meet the requirements
-//   imposed by the account password policy.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfile
-func (c *IAM) CreateLoginProfile(input *CreateLoginProfileInput) (*CreateLoginProfileOutput, error) {
-	req, out := c.CreateLoginProfileRequest(input)
-	return out, req.Send()
-}
-
-// CreateLoginProfileWithContext is the same as CreateLoginProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLoginProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateLoginProfileWithContext(ctx aws.Context, input *CreateLoginProfileInput, opts ...aws.Option) (*CreateLoginProfileOutput, error) {
-	req, out := c.CreateLoginProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateLoginProfileOutput{})
+	return CreateLoginProfileRequest{Request: req, Input: input}
 }
 
 const opCreateOpenIDConnectProvider = "CreateOpenIDConnectProvider"
 
-// CreateOpenIDConnectProviderRequest generates a "aws.Request" representing the
-// client's request for the CreateOpenIDConnectProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateOpenIDConnectProvider for more information on using the CreateOpenIDConnectProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateOpenIDConnectProviderRequest method.
-//    req, resp := client.CreateOpenIDConnectProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProvider
-func (c *IAM) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectProviderInput) (req *aws.Request, output *CreateOpenIDConnectProviderOutput) {
-	op := &aws.Operation{
-		Name:       opCreateOpenIDConnectProvider,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateOpenIDConnectProviderInput{}
-	}
-
-	output = &CreateOpenIDConnectProviderOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateOpenIDConnectProviderRequest is a API request type for the CreateOpenIDConnectProvider API operation.
+type CreateOpenIDConnectProviderRequest struct {
+	*aws.Request
+	Input *CreateOpenIDConnectProviderInput
 }
 
-// CreateOpenIDConnectProvider API operation for AWS Identity and Access Management.
+// Send marshals and sends the CreateOpenIDConnectProvider API request.
+func (r CreateOpenIDConnectProviderRequest) Send() (*CreateOpenIDConnectProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateOpenIDConnectProviderOutput), nil
+}
+
+// CreateOpenIDConnectProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Creates an IAM entity to describe an identity provider (IdP) that supports
 // OpenID Connect (OIDC) (http://openid.net/connect/).
@@ -1288,95 +691,49 @@ func (c *IAM) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectProvi
 // that this action creates, it is a best practice to limit access to the CreateOpenIDConnectProvider
 // action to highly-privileged users.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateOpenIDConnectProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProvider
-func (c *IAM) CreateOpenIDConnectProvider(input *CreateOpenIDConnectProviderInput) (*CreateOpenIDConnectProviderOutput, error) {
-	req, out := c.CreateOpenIDConnectProviderRequest(input)
-	return out, req.Send()
-}
-
-// CreateOpenIDConnectProviderWithContext is the same as CreateOpenIDConnectProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateOpenIDConnectProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateOpenIDConnectProviderWithContext(ctx aws.Context, input *CreateOpenIDConnectProviderInput, opts ...aws.Option) (*CreateOpenIDConnectProviderOutput, error) {
-	req, out := c.CreateOpenIDConnectProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreatePolicy = "CreatePolicy"
-
-// CreatePolicyRequest generates a "aws.Request" representing the
-// client's request for the CreatePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePolicy for more information on using the CreatePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePolicyRequest method.
-//    req, resp := client.CreatePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateOpenIDConnectProviderRequest method.
+//    req := client.CreateOpenIDConnectProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicy
-func (c *IAM) CreatePolicyRequest(input *CreatePolicyInput) (req *aws.Request, output *CreatePolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProvider
+func (c *IAM) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectProviderInput) CreateOpenIDConnectProviderRequest {
 	op := &aws.Operation{
-		Name:       opCreatePolicy,
+		Name:       opCreateOpenIDConnectProvider,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreatePolicyInput{}
+		input = &CreateOpenIDConnectProviderInput{}
 	}
 
-	output = &CreatePolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateOpenIDConnectProviderOutput{})
+	return CreateOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
-// CreatePolicy API operation for AWS Identity and Access Management.
+const opCreatePolicy = "CreatePolicy"
+
+// CreatePolicyRequest is a API request type for the CreatePolicy API operation.
+type CreatePolicyRequest struct {
+	*aws.Request
+	Input *CreatePolicyInput
+}
+
+// Send marshals and sends the CreatePolicy API request.
+func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePolicyOutput), nil
+}
+
+// CreatePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Creates a new managed policy for your AWS account.
 //
@@ -1389,99 +746,49 @@ func (c *IAM) CreatePolicyRequest(input *CreatePolicyInput) (req *aws.Request, o
 // and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreatePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicy
-func (c *IAM) CreatePolicy(input *CreatePolicyInput) (*CreatePolicyOutput, error) {
-	req, out := c.CreatePolicyRequest(input)
-	return out, req.Send()
-}
-
-// CreatePolicyWithContext is the same as CreatePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreatePolicyWithContext(ctx aws.Context, input *CreatePolicyInput, opts ...aws.Option) (*CreatePolicyOutput, error) {
-	req, out := c.CreatePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreatePolicyVersion = "CreatePolicyVersion"
-
-// CreatePolicyVersionRequest generates a "aws.Request" representing the
-// client's request for the CreatePolicyVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePolicyVersion for more information on using the CreatePolicyVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePolicyVersionRequest method.
-//    req, resp := client.CreatePolicyVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreatePolicyRequest method.
+//    req := client.CreatePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersion
-func (c *IAM) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) (req *aws.Request, output *CreatePolicyVersionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicy
+func (c *IAM) CreatePolicyRequest(input *CreatePolicyInput) CreatePolicyRequest {
 	op := &aws.Operation{
-		Name:       opCreatePolicyVersion,
+		Name:       opCreatePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreatePolicyVersionInput{}
+		input = &CreatePolicyInput{}
 	}
 
-	output = &CreatePolicyVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreatePolicyOutput{})
+	return CreatePolicyRequest{Request: req, Input: input}
 }
 
-// CreatePolicyVersion API operation for AWS Identity and Access Management.
+const opCreatePolicyVersion = "CreatePolicyVersion"
+
+// CreatePolicyVersionRequest is a API request type for the CreatePolicyVersion API operation.
+type CreatePolicyVersionRequest struct {
+	*aws.Request
+	Input *CreatePolicyVersionInput
+}
+
+// Send marshals and sends the CreatePolicyVersion API request.
+func (r CreatePolicyVersionRequest) Send() (*CreatePolicyVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePolicyVersionOutput), nil
+}
+
+// CreatePolicyVersionRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Creates a new version of the specified managed policy. To update a managed
 // policy, you create a new policy version. A managed policy can have up to
@@ -1496,83 +803,65 @@ func (c *IAM) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) (req *
 // Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreatePolicyVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the CreatePolicyVersionRequest method.
+//    req := client.CreatePolicyVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersion
-func (c *IAM) CreatePolicyVersion(input *CreatePolicyVersionInput) (*CreatePolicyVersionOutput, error) {
-	req, out := c.CreatePolicyVersionRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) CreatePolicyVersionRequest {
+	op := &aws.Operation{
+		Name:       opCreatePolicyVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreatePolicyVersionWithContext is the same as CreatePolicyVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePolicyVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreatePolicyVersionWithContext(ctx aws.Context, input *CreatePolicyVersionInput, opts ...aws.Option) (*CreatePolicyVersionOutput, error) {
-	req, out := c.CreatePolicyVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreatePolicyVersionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreatePolicyVersionOutput{})
+	return CreatePolicyVersionRequest{Request: req, Input: input}
 }
 
 const opCreateRole = "CreateRole"
 
-// CreateRoleRequest generates a "aws.Request" representing the
-// client's request for the CreateRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateRoleRequest is a API request type for the CreateRole API operation.
+type CreateRoleRequest struct {
+	*aws.Request
+	Input *CreateRoleInput
+}
+
+// Send marshals and sends the CreateRole API request.
+func (r CreateRoleRequest) Send() (*CreateRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRoleOutput), nil
+}
+
+// CreateRoleRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateRole for more information on using the CreateRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new role for your AWS account. For more information about roles,
+// go to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
+// For information about limitations on role names and the number of roles you
+// can create, go to Limitations on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the CreateRoleRequest method.
-//    req, resp := client.CreateRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRole
-func (c *IAM) CreateRoleRequest(input *CreateRoleInput) (req *aws.Request, output *CreateRoleOutput) {
+func (c *IAM) CreateRoleRequest(input *CreateRoleInput) CreateRoleRequest {
 	op := &aws.Operation{
 		Name:       opCreateRole,
 		HTTPMethod: "POST",
@@ -1583,112 +872,30 @@ func (c *IAM) CreateRoleRequest(input *CreateRoleInput) (req *aws.Request, outpu
 		input = &CreateRoleInput{}
 	}
 
-	output = &CreateRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateRole API operation for AWS Identity and Access Management.
-//
-// Creates a new role for your AWS account. For more information about roles,
-// go to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
-// For information about limitations on role names and the number of roles you
-// can create, go to Limitations on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRole
-func (c *IAM) CreateRole(input *CreateRoleInput) (*CreateRoleOutput, error) {
-	req, out := c.CreateRoleRequest(input)
-	return out, req.Send()
-}
-
-// CreateRoleWithContext is the same as CreateRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateRoleWithContext(ctx aws.Context, input *CreateRoleInput, opts ...aws.Option) (*CreateRoleOutput, error) {
-	req, out := c.CreateRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateRoleOutput{})
+	return CreateRoleRequest{Request: req, Input: input}
 }
 
 const opCreateSAMLProvider = "CreateSAMLProvider"
 
-// CreateSAMLProviderRequest generates a "aws.Request" representing the
-// client's request for the CreateSAMLProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSAMLProvider for more information on using the CreateSAMLProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateSAMLProviderRequest method.
-//    req, resp := client.CreateSAMLProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProvider
-func (c *IAM) CreateSAMLProviderRequest(input *CreateSAMLProviderInput) (req *aws.Request, output *CreateSAMLProviderOutput) {
-	op := &aws.Operation{
-		Name:       opCreateSAMLProvider,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateSAMLProviderInput{}
-	}
-
-	output = &CreateSAMLProviderOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateSAMLProviderRequest is a API request type for the CreateSAMLProvider API operation.
+type CreateSAMLProviderRequest struct {
+	*aws.Request
+	Input *CreateSAMLProviderInput
 }
 
-// CreateSAMLProvider API operation for AWS Identity and Access Management.
+// Send marshals and sends the CreateSAMLProvider API request.
+func (r CreateSAMLProviderRequest) Send() (*CreateSAMLProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSAMLProviderOutput), nil
+}
+
+// CreateSAMLProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Creates an IAM resource that describes an identity provider (IdP) that supports
 // SAML 2.0.
@@ -1713,95 +920,49 @@ func (c *IAM) CreateSAMLProviderRequest(input *CreateSAMLProviderInput) (req *aw
 // and About SAML 2.0-based Federation (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateSAMLProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProvider
-func (c *IAM) CreateSAMLProvider(input *CreateSAMLProviderInput) (*CreateSAMLProviderOutput, error) {
-	req, out := c.CreateSAMLProviderRequest(input)
-	return out, req.Send()
-}
-
-// CreateSAMLProviderWithContext is the same as CreateSAMLProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSAMLProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateSAMLProviderWithContext(ctx aws.Context, input *CreateSAMLProviderInput, opts ...aws.Option) (*CreateSAMLProviderOutput, error) {
-	req, out := c.CreateSAMLProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateServiceLinkedRole = "CreateServiceLinkedRole"
-
-// CreateServiceLinkedRoleRequest generates a "aws.Request" representing the
-// client's request for the CreateServiceLinkedRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateServiceLinkedRole for more information on using the CreateServiceLinkedRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateServiceLinkedRoleRequest method.
-//    req, resp := client.CreateServiceLinkedRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateSAMLProviderRequest method.
+//    req := client.CreateSAMLProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole
-func (c *IAM) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleInput) (req *aws.Request, output *CreateServiceLinkedRoleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProvider
+func (c *IAM) CreateSAMLProviderRequest(input *CreateSAMLProviderInput) CreateSAMLProviderRequest {
 	op := &aws.Operation{
-		Name:       opCreateServiceLinkedRole,
+		Name:       opCreateSAMLProvider,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateServiceLinkedRoleInput{}
+		input = &CreateSAMLProviderInput{}
 	}
 
-	output = &CreateServiceLinkedRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateSAMLProviderOutput{})
+	return CreateSAMLProviderRequest{Request: req, Input: input}
 }
 
-// CreateServiceLinkedRole API operation for AWS Identity and Access Management.
+const opCreateServiceLinkedRole = "CreateServiceLinkedRole"
+
+// CreateServiceLinkedRoleRequest is a API request type for the CreateServiceLinkedRole API operation.
+type CreateServiceLinkedRoleRequest struct {
+	*aws.Request
+	Input *CreateServiceLinkedRoleInput
+}
+
+// Send marshals and sends the CreateServiceLinkedRole API request.
+func (r CreateServiceLinkedRoleRequest) Send() (*CreateServiceLinkedRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateServiceLinkedRoleOutput), nil
+}
+
+// CreateServiceLinkedRoleRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Creates an IAM role that is linked to a specific AWS service. The service
 // controls the attached policies and when the role can be deleted. This helps
@@ -1818,95 +979,49 @@ func (c *IAM) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleInput
 // To attach a policy to this service-linked role, you must make the request
 // using the AWS service that depends on this role.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateServiceLinkedRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole
-func (c *IAM) CreateServiceLinkedRole(input *CreateServiceLinkedRoleInput) (*CreateServiceLinkedRoleOutput, error) {
-	req, out := c.CreateServiceLinkedRoleRequest(input)
-	return out, req.Send()
-}
-
-// CreateServiceLinkedRoleWithContext is the same as CreateServiceLinkedRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateServiceLinkedRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateServiceLinkedRoleWithContext(ctx aws.Context, input *CreateServiceLinkedRoleInput, opts ...aws.Option) (*CreateServiceLinkedRoleOutput, error) {
-	req, out := c.CreateServiceLinkedRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateServiceSpecificCredential = "CreateServiceSpecificCredential"
-
-// CreateServiceSpecificCredentialRequest generates a "aws.Request" representing the
-// client's request for the CreateServiceSpecificCredential operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateServiceSpecificCredential for more information on using the CreateServiceSpecificCredential
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateServiceSpecificCredentialRequest method.
-//    req, resp := client.CreateServiceSpecificCredentialRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateServiceLinkedRoleRequest method.
+//    req := client.CreateServiceLinkedRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredential
-func (c *IAM) CreateServiceSpecificCredentialRequest(input *CreateServiceSpecificCredentialInput) (req *aws.Request, output *CreateServiceSpecificCredentialOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole
+func (c *IAM) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleInput) CreateServiceLinkedRoleRequest {
 	op := &aws.Operation{
-		Name:       opCreateServiceSpecificCredential,
+		Name:       opCreateServiceLinkedRole,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateServiceSpecificCredentialInput{}
+		input = &CreateServiceLinkedRoleInput{}
 	}
 
-	output = &CreateServiceSpecificCredentialOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateServiceLinkedRoleOutput{})
+	return CreateServiceLinkedRoleRequest{Request: req, Input: input}
 }
 
-// CreateServiceSpecificCredential API operation for AWS Identity and Access Management.
+const opCreateServiceSpecificCredential = "CreateServiceSpecificCredential"
+
+// CreateServiceSpecificCredentialRequest is a API request type for the CreateServiceSpecificCredential API operation.
+type CreateServiceSpecificCredentialRequest struct {
+	*aws.Request
+	Input *CreateServiceSpecificCredentialInput
+}
+
+// Send marshals and sends the CreateServiceSpecificCredential API request.
+func (r CreateServiceSpecificCredentialRequest) Send() (*CreateServiceSpecificCredentialOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateServiceSpecificCredentialOutput), nil
+}
+
+// CreateServiceSpecificCredentialRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Generates a set of credentials consisting of a user name and password that
 // can be used to access the service specified in the request. These credentials
@@ -1923,74 +1038,65 @@ func (c *IAM) CreateServiceSpecificCredentialRequest(input *CreateServiceSpecifi
 // AWS CodeCommit: Git Credentials, SSH Keys, and AWS Access Keys (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateServiceSpecificCredential for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceNotSupportedException "NotSupportedService"
-//   The specified service does not support service-specific credentials.
+//    // Example sending a request using the CreateServiceSpecificCredentialRequest method.
+//    req := client.CreateServiceSpecificCredentialRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredential
-func (c *IAM) CreateServiceSpecificCredential(input *CreateServiceSpecificCredentialInput) (*CreateServiceSpecificCredentialOutput, error) {
-	req, out := c.CreateServiceSpecificCredentialRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) CreateServiceSpecificCredentialRequest(input *CreateServiceSpecificCredentialInput) CreateServiceSpecificCredentialRequest {
+	op := &aws.Operation{
+		Name:       opCreateServiceSpecificCredential,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateServiceSpecificCredentialWithContext is the same as CreateServiceSpecificCredential with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateServiceSpecificCredential for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateServiceSpecificCredentialWithContext(ctx aws.Context, input *CreateServiceSpecificCredentialInput, opts ...aws.Option) (*CreateServiceSpecificCredentialOutput, error) {
-	req, out := c.CreateServiceSpecificCredentialRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateServiceSpecificCredentialInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateServiceSpecificCredentialOutput{})
+	return CreateServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
 const opCreateUser = "CreateUser"
 
-// CreateUserRequest generates a "aws.Request" representing the
-// client's request for the CreateUser operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateUserRequest is a API request type for the CreateUser API operation.
+type CreateUserRequest struct {
+	*aws.Request
+	Input *CreateUserInput
+}
+
+// Send marshals and sends the CreateUser API request.
+func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateUserOutput), nil
+}
+
+// CreateUserRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new IAM user for your AWS account.
 //
-// See CreateUser for more information on using the CreateUser
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about limitations on the number of IAM users you can create,
+// see Limitations on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the CreateUserRequest method.
-//    req, resp := client.CreateUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUser
-func (c *IAM) CreateUserRequest(input *CreateUserInput) (req *aws.Request, output *CreateUserOutput) {
+func (c *IAM) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	op := &aws.Operation{
 		Name:       opCreateUser,
 		HTTPMethod: "POST",
@@ -2001,108 +1107,30 @@ func (c *IAM) CreateUserRequest(input *CreateUserInput) (req *aws.Request, outpu
 		input = &CreateUserInput{}
 	}
 
-	output = &CreateUserOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateUser API operation for AWS Identity and Access Management.
-//
-// Creates a new IAM user for your AWS account.
-//
-// For information about limitations on the number of IAM users you can create,
-// see Limitations on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateUser for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUser
-func (c *IAM) CreateUser(input *CreateUserInput) (*CreateUserOutput, error) {
-	req, out := c.CreateUserRequest(input)
-	return out, req.Send()
-}
-
-// CreateUserWithContext is the same as CreateUser with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateUser for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateUserWithContext(ctx aws.Context, input *CreateUserInput, opts ...aws.Option) (*CreateUserOutput, error) {
-	req, out := c.CreateUserRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateUserOutput{})
+	return CreateUserRequest{Request: req, Input: input}
 }
 
 const opCreateVirtualMFADevice = "CreateVirtualMFADevice"
 
-// CreateVirtualMFADeviceRequest generates a "aws.Request" representing the
-// client's request for the CreateVirtualMFADevice operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateVirtualMFADevice for more information on using the CreateVirtualMFADevice
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateVirtualMFADeviceRequest method.
-//    req, resp := client.CreateVirtualMFADeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADevice
-func (c *IAM) CreateVirtualMFADeviceRequest(input *CreateVirtualMFADeviceInput) (req *aws.Request, output *CreateVirtualMFADeviceOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVirtualMFADevice,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateVirtualMFADeviceInput{}
-	}
-
-	output = &CreateVirtualMFADeviceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateVirtualMFADeviceRequest is a API request type for the CreateVirtualMFADevice API operation.
+type CreateVirtualMFADeviceRequest struct {
+	*aws.Request
+	Input *CreateVirtualMFADeviceInput
 }
 
-// CreateVirtualMFADevice API operation for AWS Identity and Access Management.
+// Send marshals and sends the CreateVirtualMFADevice API request.
+func (r CreateVirtualMFADeviceRequest) Send() (*CreateVirtualMFADeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVirtualMFADeviceOutput), nil
+}
+
+// CreateVirtualMFADeviceRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Creates a new virtual MFA device for the AWS account. After creating the
 // virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user.
@@ -2119,75 +1147,66 @@ func (c *IAM) CreateVirtualMFADeviceRequest(input *CreateVirtualMFADeviceInput) 
 // keys or your passwords. After you provision your virtual device, you should
 // ensure that the information is destroyed following secure procedures.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation CreateVirtualMFADevice for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the CreateVirtualMFADeviceRequest method.
+//    req := client.CreateVirtualMFADeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADevice
-func (c *IAM) CreateVirtualMFADevice(input *CreateVirtualMFADeviceInput) (*CreateVirtualMFADeviceOutput, error) {
-	req, out := c.CreateVirtualMFADeviceRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) CreateVirtualMFADeviceRequest(input *CreateVirtualMFADeviceInput) CreateVirtualMFADeviceRequest {
+	op := &aws.Operation{
+		Name:       opCreateVirtualMFADevice,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateVirtualMFADeviceWithContext is the same as CreateVirtualMFADevice with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateVirtualMFADevice for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) CreateVirtualMFADeviceWithContext(ctx aws.Context, input *CreateVirtualMFADeviceInput, opts ...aws.Option) (*CreateVirtualMFADeviceOutput, error) {
-	req, out := c.CreateVirtualMFADeviceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateVirtualMFADeviceInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateVirtualMFADeviceOutput{})
+	return CreateVirtualMFADeviceRequest{Request: req, Input: input}
 }
 
 const opDeactivateMFADevice = "DeactivateMFADevice"
 
-// DeactivateMFADeviceRequest generates a "aws.Request" representing the
-// client's request for the DeactivateMFADevice operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeactivateMFADeviceRequest is a API request type for the DeactivateMFADevice API operation.
+type DeactivateMFADeviceRequest struct {
+	*aws.Request
+	Input *DeactivateMFADeviceInput
+}
+
+// Send marshals and sends the DeactivateMFADevice API request.
+func (r DeactivateMFADeviceRequest) Send() (*DeactivateMFADeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeactivateMFADeviceOutput), nil
+}
+
+// DeactivateMFADeviceRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deactivates the specified MFA device and removes it from association with
+// the user name for which it was originally enabled.
 //
-// See DeactivateMFADevice for more information on using the DeactivateMFADevice
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about creating and working with virtual MFA devices,
+// go to Using a Virtual MFA Device (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DeactivateMFADeviceRequest method.
-//    req, resp := client.DeactivateMFADeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeactivateMFADeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADevice
-func (c *IAM) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) (req *aws.Request, output *DeactivateMFADeviceOutput) {
+func (c *IAM) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) DeactivateMFADeviceRequest {
 	op := &aws.Operation{
 		Name:       opDeactivateMFADevice,
 		HTTPMethod: "POST",
@@ -2198,97 +1217,49 @@ func (c *IAM) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) (req *
 		input = &DeactivateMFADeviceInput{}
 	}
 
-	output = &DeactivateMFADeviceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeactivateMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeactivateMFADevice API operation for AWS Identity and Access Management.
-//
-// Deactivates the specified MFA device and removes it from association with
-// the user name for which it was originally enabled.
-//
-// For more information about creating and working with virtual MFA devices,
-// go to Using a Virtual MFA Device (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeactivateMFADevice for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityTemporarilyUnmodifiableException "EntityTemporarilyUnmodifiable"
-//   The request was rejected because it referenced an entity that is temporarily
-//   unmodifiable, such as a user name that was deleted and then recreated. The
-//   error indicates that the request is likely to succeed if you try again after
-//   waiting several minutes. The error message describes the entity.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADevice
-func (c *IAM) DeactivateMFADevice(input *DeactivateMFADeviceInput) (*DeactivateMFADeviceOutput, error) {
-	req, out := c.DeactivateMFADeviceRequest(input)
-	return out, req.Send()
-}
-
-// DeactivateMFADeviceWithContext is the same as DeactivateMFADevice with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeactivateMFADevice for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeactivateMFADeviceWithContext(ctx aws.Context, input *DeactivateMFADeviceInput, opts ...aws.Option) (*DeactivateMFADeviceOutput, error) {
-	req, out := c.DeactivateMFADeviceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeactivateMFADeviceRequest{Request: req, Input: input}
 }
 
 const opDeleteAccessKey = "DeleteAccessKey"
 
-// DeleteAccessKeyRequest generates a "aws.Request" representing the
-// client's request for the DeleteAccessKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAccessKeyRequest is a API request type for the DeleteAccessKey API operation.
+type DeleteAccessKeyRequest struct {
+	*aws.Request
+	Input *DeleteAccessKeyInput
+}
+
+// Send marshals and sends the DeleteAccessKey API request.
+func (r DeleteAccessKeyRequest) Send() (*DeleteAccessKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAccessKeyOutput), nil
+}
+
+// DeleteAccessKeyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the access key pair associated with the specified IAM user.
 //
-// See DeleteAccessKey for more information on using the DeleteAccessKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you do not specify a user name, IAM determines the user name implicitly
+// based on the AWS access key ID signing the request. Because this action works
+// for access keys under the AWS account, you can use this action to manage
+// root credentials even if the AWS account has no associated users.
 //
 //    // Example sending a request using the DeleteAccessKeyRequest method.
-//    req, resp := client.DeleteAccessKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAccessKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKey
-func (c *IAM) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) (req *aws.Request, output *DeleteAccessKeyOutput) {
+func (c *IAM) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) DeleteAccessKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccessKey,
 		HTTPMethod: "POST",
@@ -2299,91 +1270,46 @@ func (c *IAM) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) (req *aws.Requ
 		input = &DeleteAccessKeyInput{}
 	}
 
-	output = &DeleteAccessKeyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAccessKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteAccessKey API operation for AWS Identity and Access Management.
-//
-// Deletes the access key pair associated with the specified IAM user.
-//
-// If you do not specify a user name, IAM determines the user name implicitly
-// based on the AWS access key ID signing the request. Because this action works
-// for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteAccessKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKey
-func (c *IAM) DeleteAccessKey(input *DeleteAccessKeyInput) (*DeleteAccessKeyOutput, error) {
-	req, out := c.DeleteAccessKeyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAccessKeyWithContext is the same as DeleteAccessKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAccessKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteAccessKeyWithContext(ctx aws.Context, input *DeleteAccessKeyInput, opts ...aws.Option) (*DeleteAccessKeyOutput, error) {
-	req, out := c.DeleteAccessKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteAccessKeyRequest{Request: req, Input: input}
 }
 
 const opDeleteAccountAlias = "DeleteAccountAlias"
 
-// DeleteAccountAliasRequest generates a "aws.Request" representing the
-// client's request for the DeleteAccountAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAccountAliasRequest is a API request type for the DeleteAccountAlias API operation.
+type DeleteAccountAliasRequest struct {
+	*aws.Request
+	Input *DeleteAccountAliasInput
+}
+
+// Send marshals and sends the DeleteAccountAlias API request.
+func (r DeleteAccountAliasRequest) Send() (*DeleteAccountAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAccountAliasOutput), nil
+}
+
+// DeleteAccountAliasRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAccountAlias for more information on using the DeleteAccountAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified AWS account alias. For information about using an AWS
+// account alias, see Using an Alias for Your AWS Account ID (http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DeleteAccountAliasRequest method.
-//    req, resp := client.DeleteAccountAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAccountAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAlias
-func (c *IAM) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) (req *aws.Request, output *DeleteAccountAliasOutput) {
+func (c *IAM) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) DeleteAccountAliasRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccountAlias,
 		HTTPMethod: "POST",
@@ -2394,88 +1320,44 @@ func (c *IAM) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) (req *aw
 		input = &DeleteAccountAliasInput{}
 	}
 
-	output = &DeleteAccountAliasOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAccountAliasOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteAccountAlias API operation for AWS Identity and Access Management.
-//
-// Deletes the specified AWS account alias. For information about using an AWS
-// account alias, see Using an Alias for Your AWS Account ID (http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteAccountAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAlias
-func (c *IAM) DeleteAccountAlias(input *DeleteAccountAliasInput) (*DeleteAccountAliasOutput, error) {
-	req, out := c.DeleteAccountAliasRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAccountAliasWithContext is the same as DeleteAccountAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAccountAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteAccountAliasWithContext(ctx aws.Context, input *DeleteAccountAliasInput, opts ...aws.Option) (*DeleteAccountAliasOutput, error) {
-	req, out := c.DeleteAccountAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteAccountAliasRequest{Request: req, Input: input}
 }
 
 const opDeleteAccountPasswordPolicy = "DeleteAccountPasswordPolicy"
 
-// DeleteAccountPasswordPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteAccountPasswordPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAccountPasswordPolicyRequest is a API request type for the DeleteAccountPasswordPolicy API operation.
+type DeleteAccountPasswordPolicyRequest struct {
+	*aws.Request
+	Input *DeleteAccountPasswordPolicyInput
+}
+
+// Send marshals and sends the DeleteAccountPasswordPolicy API request.
+func (r DeleteAccountPasswordPolicyRequest) Send() (*DeleteAccountPasswordPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAccountPasswordPolicyOutput), nil
+}
+
+// DeleteAccountPasswordPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAccountPasswordPolicy for more information on using the DeleteAccountPasswordPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the password policy for the AWS account. There are no parameters.
 //
 //    // Example sending a request using the DeleteAccountPasswordPolicyRequest method.
-//    req, resp := client.DeleteAccountPasswordPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAccountPasswordPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicy
-func (c *IAM) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPasswordPolicyInput) (req *aws.Request, output *DeleteAccountPasswordPolicyOutput) {
+func (c *IAM) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPasswordPolicyInput) DeleteAccountPasswordPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccountPasswordPolicy,
 		HTTPMethod: "POST",
@@ -2486,86 +1368,45 @@ func (c *IAM) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPasswordPol
 		input = &DeleteAccountPasswordPolicyInput{}
 	}
 
-	output = &DeleteAccountPasswordPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAccountPasswordPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteAccountPasswordPolicy API operation for AWS Identity and Access Management.
-//
-// Deletes the password policy for the AWS account. There are no parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteAccountPasswordPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicy
-func (c *IAM) DeleteAccountPasswordPolicy(input *DeleteAccountPasswordPolicyInput) (*DeleteAccountPasswordPolicyOutput, error) {
-	req, out := c.DeleteAccountPasswordPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAccountPasswordPolicyWithContext is the same as DeleteAccountPasswordPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAccountPasswordPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteAccountPasswordPolicyWithContext(ctx aws.Context, input *DeleteAccountPasswordPolicyInput, opts ...aws.Option) (*DeleteAccountPasswordPolicyOutput, error) {
-	req, out := c.DeleteAccountPasswordPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteAccountPasswordPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteGroup = "DeleteGroup"
 
-// DeleteGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteGroupRequest is a API request type for the DeleteGroup API operation.
+type DeleteGroupRequest struct {
+	*aws.Request
+	Input *DeleteGroupInput
+}
+
+// Send marshals and sends the DeleteGroup API request.
+func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGroupOutput), nil
+}
+
+// DeleteGroupRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteGroup for more information on using the DeleteGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified IAM group. The group must not contain any users or
+// have any attached policies.
 //
 //    // Example sending a request using the DeleteGroupRequest method.
-//    req, resp := client.DeleteGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroup
-func (c *IAM) DeleteGroupRequest(input *DeleteGroupInput) (req *aws.Request, output *DeleteGroupOutput) {
+func (c *IAM) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGroup,
 		HTTPMethod: "POST",
@@ -2576,91 +1417,50 @@ func (c *IAM) DeleteGroupRequest(input *DeleteGroupInput) (req *aws.Request, out
 		input = &DeleteGroupInput{}
 	}
 
-	output = &DeleteGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteGroup API operation for AWS Identity and Access Management.
-//
-// Deletes the specified IAM group. The group must not contain any users or
-// have any attached policies.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroup
-func (c *IAM) DeleteGroup(input *DeleteGroupInput) (*DeleteGroupOutput, error) {
-	req, out := c.DeleteGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteGroupWithContext is the same as DeleteGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupInput, opts ...aws.Option) (*DeleteGroupOutput, error) {
-	req, out := c.DeleteGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteGroupPolicy = "DeleteGroupPolicy"
 
-// DeleteGroupPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteGroupPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteGroupPolicyRequest is a API request type for the DeleteGroupPolicy API operation.
+type DeleteGroupPolicyRequest struct {
+	*aws.Request
+	Input *DeleteGroupPolicyInput
+}
+
+// Send marshals and sends the DeleteGroupPolicy API request.
+func (r DeleteGroupPolicyRequest) Send() (*DeleteGroupPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGroupPolicyOutput), nil
+}
+
+// DeleteGroupPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified inline policy that is embedded in the specified IAM
+// group.
 //
-// See DeleteGroupPolicy for more information on using the DeleteGroupPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A group can also have managed policies attached to it. To detach a managed
+// policy from a group, use DetachGroupPolicy. For more information about policies,
+// refer to Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DeleteGroupPolicyRequest method.
-//    req, resp := client.DeleteGroupPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteGroupPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicy
-func (c *IAM) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) (req *aws.Request, output *DeleteGroupPolicyOutput) {
+func (c *IAM) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) DeleteGroupPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGroupPolicy,
 		HTTPMethod: "POST",
@@ -2671,110 +1471,32 @@ func (c *IAM) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) (req *aws.
 		input = &DeleteGroupPolicyInput{}
 	}
 
-	output = &DeleteGroupPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteGroupPolicy API operation for AWS Identity and Access Management.
-//
-// Deletes the specified inline policy that is embedded in the specified IAM
-// group.
-//
-// A group can also have managed policies attached to it. To detach a managed
-// policy from a group, use DetachGroupPolicy. For more information about policies,
-// refer to Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteGroupPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicy
-func (c *IAM) DeleteGroupPolicy(input *DeleteGroupPolicyInput) (*DeleteGroupPolicyOutput, error) {
-	req, out := c.DeleteGroupPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteGroupPolicyWithContext is the same as DeleteGroupPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteGroupPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteGroupPolicyWithContext(ctx aws.Context, input *DeleteGroupPolicyInput, opts ...aws.Option) (*DeleteGroupPolicyOutput, error) {
-	req, out := c.DeleteGroupPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteGroupPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteInstanceProfile = "DeleteInstanceProfile"
 
-// DeleteInstanceProfileRequest generates a "aws.Request" representing the
-// client's request for the DeleteInstanceProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteInstanceProfile for more information on using the DeleteInstanceProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteInstanceProfileRequest method.
-//    req, resp := client.DeleteInstanceProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfile
-func (c *IAM) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput) (req *aws.Request, output *DeleteInstanceProfileOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteInstanceProfile,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteInstanceProfileInput{}
-	}
-
-	output = &DeleteInstanceProfileOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteInstanceProfileRequest is a API request type for the DeleteInstanceProfile API operation.
+type DeleteInstanceProfileRequest struct {
+	*aws.Request
+	Input *DeleteInstanceProfileInput
 }
 
-// DeleteInstanceProfile API operation for AWS Identity and Access Management.
+// Send marshals and sends the DeleteInstanceProfile API request.
+func (r DeleteInstanceProfileRequest) Send() (*DeleteInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteInstanceProfileOutput), nil
+}
+
+// DeleteInstanceProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Deletes the specified instance profile. The instance profile must not have
 // an associated role.
@@ -2787,79 +1509,69 @@ func (c *IAM) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput) (r
 // For more information about instance profiles, go to About Instance Profiles
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteInstanceProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the DeleteInstanceProfileRequest method.
+//    req := client.DeleteInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfile
-func (c *IAM) DeleteInstanceProfile(input *DeleteInstanceProfileInput) (*DeleteInstanceProfileOutput, error) {
-	req, out := c.DeleteInstanceProfileRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput) DeleteInstanceProfileRequest {
+	op := &aws.Operation{
+		Name:       opDeleteInstanceProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteInstanceProfileWithContext is the same as DeleteInstanceProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteInstanceProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteInstanceProfileWithContext(ctx aws.Context, input *DeleteInstanceProfileInput, opts ...aws.Option) (*DeleteInstanceProfileOutput, error) {
-	req, out := c.DeleteInstanceProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteInstanceProfileInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteInstanceProfileOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteInstanceProfileRequest{Request: req, Input: input}
 }
 
 const opDeleteLoginProfile = "DeleteLoginProfile"
 
-// DeleteLoginProfileRequest generates a "aws.Request" representing the
-// client's request for the DeleteLoginProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLoginProfileRequest is a API request type for the DeleteLoginProfile API operation.
+type DeleteLoginProfileRequest struct {
+	*aws.Request
+	Input *DeleteLoginProfileInput
+}
+
+// Send marshals and sends the DeleteLoginProfile API request.
+func (r DeleteLoginProfileRequest) Send() (*DeleteLoginProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLoginProfileOutput), nil
+}
+
+// DeleteLoginProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the password for the specified IAM user, which terminates the user's
+// ability to access AWS services through the AWS Management Console.
 //
-// See DeleteLoginProfile for more information on using the DeleteLoginProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deleting a user's password does not prevent a user from accessing AWS through
+// the command line interface or the API. To prevent all user access you must
+// also either make any access keys inactive or delete them. For more information
+// about making keys inactive or deleting them, see UpdateAccessKey and DeleteAccessKey.
 //
 //    // Example sending a request using the DeleteLoginProfileRequest method.
-//    req, resp := client.DeleteLoginProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLoginProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfile
-func (c *IAM) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) (req *aws.Request, output *DeleteLoginProfileOutput) {
+func (c *IAM) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) DeleteLoginProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoginProfile,
 		HTTPMethod: "POST",
@@ -2870,116 +1582,32 @@ func (c *IAM) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) (req *aw
 		input = &DeleteLoginProfileInput{}
 	}
 
-	output = &DeleteLoginProfileOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteLoginProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteLoginProfile API operation for AWS Identity and Access Management.
-//
-// Deletes the password for the specified IAM user, which terminates the user's
-// ability to access AWS services through the AWS Management Console.
-//
-// Deleting a user's password does not prevent a user from accessing AWS through
-// the command line interface or the API. To prevent all user access you must
-// also either make any access keys inactive or delete them. For more information
-// about making keys inactive or deleting them, see UpdateAccessKey and DeleteAccessKey.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteLoginProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityTemporarilyUnmodifiableException "EntityTemporarilyUnmodifiable"
-//   The request was rejected because it referenced an entity that is temporarily
-//   unmodifiable, such as a user name that was deleted and then recreated. The
-//   error indicates that the request is likely to succeed if you try again after
-//   waiting several minutes. The error message describes the entity.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfile
-func (c *IAM) DeleteLoginProfile(input *DeleteLoginProfileInput) (*DeleteLoginProfileOutput, error) {
-	req, out := c.DeleteLoginProfileRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLoginProfileWithContext is the same as DeleteLoginProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLoginProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteLoginProfileWithContext(ctx aws.Context, input *DeleteLoginProfileInput, opts ...aws.Option) (*DeleteLoginProfileOutput, error) {
-	req, out := c.DeleteLoginProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteLoginProfileRequest{Request: req, Input: input}
 }
 
 const opDeleteOpenIDConnectProvider = "DeleteOpenIDConnectProvider"
 
-// DeleteOpenIDConnectProviderRequest generates a "aws.Request" representing the
-// client's request for the DeleteOpenIDConnectProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteOpenIDConnectProvider for more information on using the DeleteOpenIDConnectProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteOpenIDConnectProviderRequest method.
-//    req, resp := client.DeleteOpenIDConnectProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProvider
-func (c *IAM) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectProviderInput) (req *aws.Request, output *DeleteOpenIDConnectProviderOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteOpenIDConnectProvider,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteOpenIDConnectProviderInput{}
-	}
-
-	output = &DeleteOpenIDConnectProviderOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteOpenIDConnectProviderRequest is a API request type for the DeleteOpenIDConnectProvider API operation.
+type DeleteOpenIDConnectProviderRequest struct {
+	*aws.Request
+	Input *DeleteOpenIDConnectProviderInput
 }
 
-// DeleteOpenIDConnectProvider API operation for AWS Identity and Access Management.
+// Send marshals and sends the DeleteOpenIDConnectProvider API request.
+func (r DeleteOpenIDConnectProviderRequest) Send() (*DeleteOpenIDConnectProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteOpenIDConnectProviderOutput), nil
+}
+
+// DeleteOpenIDConnectProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Deletes an OpenID Connect identity provider (IdP) resource object in IAM.
 //
@@ -2990,93 +1618,51 @@ func (c *IAM) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectProvi
 // This action is idempotent; it does not fail or return an error if you call
 // the action for a provider that does not exist.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteOpenIDConnectProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProvider
-func (c *IAM) DeleteOpenIDConnectProvider(input *DeleteOpenIDConnectProviderInput) (*DeleteOpenIDConnectProviderOutput, error) {
-	req, out := c.DeleteOpenIDConnectProviderRequest(input)
-	return out, req.Send()
-}
-
-// DeleteOpenIDConnectProviderWithContext is the same as DeleteOpenIDConnectProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteOpenIDConnectProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteOpenIDConnectProviderWithContext(ctx aws.Context, input *DeleteOpenIDConnectProviderInput, opts ...aws.Option) (*DeleteOpenIDConnectProviderOutput, error) {
-	req, out := c.DeleteOpenIDConnectProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeletePolicy = "DeletePolicy"
-
-// DeletePolicyRequest generates a "aws.Request" representing the
-// client's request for the DeletePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePolicy for more information on using the DeletePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeletePolicyRequest method.
-//    req, resp := client.DeletePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteOpenIDConnectProviderRequest method.
+//    req := client.DeleteOpenIDConnectProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicy
-func (c *IAM) DeletePolicyRequest(input *DeletePolicyInput) (req *aws.Request, output *DeletePolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProvider
+func (c *IAM) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectProviderInput) DeleteOpenIDConnectProviderRequest {
 	op := &aws.Operation{
-		Name:       opDeletePolicy,
+		Name:       opDeleteOpenIDConnectProvider,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeletePolicyInput{}
+		input = &DeleteOpenIDConnectProviderInput{}
 	}
 
-	output = &DeletePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeleteOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
-// DeletePolicy API operation for AWS Identity and Access Management.
+const opDeletePolicy = "DeletePolicy"
+
+// DeletePolicyRequest is a API request type for the DeletePolicy API operation.
+type DeletePolicyRequest struct {
+	*aws.Request
+	Input *DeletePolicyInput
+}
+
+// Send marshals and sends the DeletePolicy API request.
+func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePolicyOutput), nil
+}
+
+// DeletePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Deletes the specified managed policy.
 //
@@ -3102,101 +1688,51 @@ func (c *IAM) DeletePolicyRequest(input *DeletePolicyInput) (req *aws.Request, o
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeletePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicy
-func (c *IAM) DeletePolicy(input *DeletePolicyInput) (*DeletePolicyOutput, error) {
-	req, out := c.DeletePolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeletePolicyWithContext is the same as DeletePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeletePolicyWithContext(ctx aws.Context, input *DeletePolicyInput, opts ...aws.Option) (*DeletePolicyOutput, error) {
-	req, out := c.DeletePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeletePolicyVersion = "DeletePolicyVersion"
-
-// DeletePolicyVersionRequest generates a "aws.Request" representing the
-// client's request for the DeletePolicyVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeletePolicyVersion for more information on using the DeletePolicyVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeletePolicyVersionRequest method.
-//    req, resp := client.DeletePolicyVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeletePolicyRequest method.
+//    req := client.DeletePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersion
-func (c *IAM) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) (req *aws.Request, output *DeletePolicyVersionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicy
+func (c *IAM) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyRequest {
 	op := &aws.Operation{
-		Name:       opDeletePolicyVersion,
+		Name:       opDeletePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeletePolicyVersionInput{}
+		input = &DeletePolicyInput{}
 	}
 
-	output = &DeletePolicyVersionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeletePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeletePolicyRequest{Request: req, Input: input}
 }
 
-// DeletePolicyVersion API operation for AWS Identity and Access Management.
+const opDeletePolicyVersion = "DeletePolicyVersion"
+
+// DeletePolicyVersionRequest is a API request type for the DeletePolicyVersion API operation.
+type DeletePolicyVersionRequest struct {
+	*aws.Request
+	Input *DeletePolicyVersionInput
+}
+
+// Send marshals and sends the DeletePolicyVersion API request.
+func (r DeletePolicyVersionRequest) Send() (*DeletePolicyVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePolicyVersionOutput), nil
+}
+
+// DeletePolicyVersionRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Deletes the specified version from the specified managed policy.
 //
@@ -3208,83 +1744,68 @@ func (c *IAM) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) (req *
 // Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeletePolicyVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the DeletePolicyVersionRequest method.
+//    req := client.DeletePolicyVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersion
-func (c *IAM) DeletePolicyVersion(input *DeletePolicyVersionInput) (*DeletePolicyVersionOutput, error) {
-	req, out := c.DeletePolicyVersionRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) DeletePolicyVersionRequest {
+	op := &aws.Operation{
+		Name:       opDeletePolicyVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeletePolicyVersionWithContext is the same as DeletePolicyVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePolicyVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeletePolicyVersionWithContext(ctx aws.Context, input *DeletePolicyVersionInput, opts ...aws.Option) (*DeletePolicyVersionOutput, error) {
-	req, out := c.DeletePolicyVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeletePolicyVersionInput{}
+	}
+
+	req := c.newRequest(op, input, &DeletePolicyVersionOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeletePolicyVersionRequest{Request: req, Input: input}
 }
 
 const opDeleteRole = "DeleteRole"
 
-// DeleteRoleRequest generates a "aws.Request" representing the
-// client's request for the DeleteRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRoleRequest is a API request type for the DeleteRole API operation.
+type DeleteRoleRequest struct {
+	*aws.Request
+	Input *DeleteRoleInput
+}
+
+// Send marshals and sends the DeleteRole API request.
+func (r DeleteRoleRequest) Send() (*DeleteRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRoleOutput), nil
+}
+
+// DeleteRoleRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified role. The role must not have any policies attached.
+// For more information about roles, go to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
 //
-// See DeleteRole for more information on using the DeleteRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Make sure you do not have any Amazon EC2 instances running with the role
+// you are about to delete. Deleting a role or instance profile that is associated
+// with a running instance will break any applications running on the instance.
 //
 //    // Example sending a request using the DeleteRoleRequest method.
-//    req, resp := client.DeleteRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRole
-func (c *IAM) DeleteRoleRequest(input *DeleteRoleInput) (req *aws.Request, output *DeleteRoleOutput) {
+func (c *IAM) DeleteRoleRequest(input *DeleteRoleInput) DeleteRoleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRole,
 		HTTPMethod: "POST",
@@ -3295,101 +1816,50 @@ func (c *IAM) DeleteRoleRequest(input *DeleteRoleInput) (req *aws.Request, outpu
 		input = &DeleteRoleInput{}
 	}
 
-	output = &DeleteRoleOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteRoleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteRole API operation for AWS Identity and Access Management.
-//
-// Deletes the specified role. The role must not have any policies attached.
-// For more information about roles, go to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
-//
-// Make sure you do not have any Amazon EC2 instances running with the role
-// you are about to delete. Deleting a role or instance profile that is associated
-// with a running instance will break any applications running on the instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRole
-func (c *IAM) DeleteRole(input *DeleteRoleInput) (*DeleteRoleOutput, error) {
-	req, out := c.DeleteRoleRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRoleWithContext is the same as DeleteRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteRoleWithContext(ctx aws.Context, input *DeleteRoleInput, opts ...aws.Option) (*DeleteRoleOutput, error) {
-	req, out := c.DeleteRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteRoleRequest{Request: req, Input: input}
 }
 
 const opDeleteRolePolicy = "DeleteRolePolicy"
 
-// DeleteRolePolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteRolePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRolePolicyRequest is a API request type for the DeleteRolePolicy API operation.
+type DeleteRolePolicyRequest struct {
+	*aws.Request
+	Input *DeleteRolePolicyInput
+}
+
+// Send marshals and sends the DeleteRolePolicy API request.
+func (r DeleteRolePolicyRequest) Send() (*DeleteRolePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRolePolicyOutput), nil
+}
+
+// DeleteRolePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified inline policy that is embedded in the specified IAM
+// role.
 //
-// See DeleteRolePolicy for more information on using the DeleteRolePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A role can also have managed policies attached to it. To detach a managed
+// policy from a role, use DetachRolePolicy. For more information about policies,
+// refer to Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DeleteRolePolicyRequest method.
-//    req, resp := client.DeleteRolePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRolePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicy
-func (c *IAM) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) (req *aws.Request, output *DeleteRolePolicyOutput) {
+func (c *IAM) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) DeleteRolePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRolePolicy,
 		HTTPMethod: "POST",
@@ -3400,116 +1870,32 @@ func (c *IAM) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) (req *aws.Re
 		input = &DeleteRolePolicyInput{}
 	}
 
-	output = &DeleteRolePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteRolePolicy API operation for AWS Identity and Access Management.
-//
-// Deletes the specified inline policy that is embedded in the specified IAM
-// role.
-//
-// A role can also have managed policies attached to it. To detach a managed
-// policy from a role, use DetachRolePolicy. For more information about policies,
-// refer to Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteRolePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicy
-func (c *IAM) DeleteRolePolicy(input *DeleteRolePolicyInput) (*DeleteRolePolicyOutput, error) {
-	req, out := c.DeleteRolePolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRolePolicyWithContext is the same as DeleteRolePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRolePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteRolePolicyWithContext(ctx aws.Context, input *DeleteRolePolicyInput, opts ...aws.Option) (*DeleteRolePolicyOutput, error) {
-	req, out := c.DeleteRolePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteRolePolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteSAMLProvider = "DeleteSAMLProvider"
 
-// DeleteSAMLProviderRequest generates a "aws.Request" representing the
-// client's request for the DeleteSAMLProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSAMLProvider for more information on using the DeleteSAMLProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteSAMLProviderRequest method.
-//    req, resp := client.DeleteSAMLProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProvider
-func (c *IAM) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) (req *aws.Request, output *DeleteSAMLProviderOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteSAMLProvider,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteSAMLProviderInput{}
-	}
-
-	output = &DeleteSAMLProviderOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteSAMLProviderRequest is a API request type for the DeleteSAMLProvider API operation.
+type DeleteSAMLProviderRequest struct {
+	*aws.Request
+	Input *DeleteSAMLProviderInput
 }
 
-// DeleteSAMLProvider API operation for AWS Identity and Access Management.
+// Send marshals and sends the DeleteSAMLProvider API request.
+func (r DeleteSAMLProviderRequest) Send() (*DeleteSAMLProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSAMLProviderOutput), nil
+}
+
+// DeleteSAMLProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Deletes a SAML provider resource in IAM.
 //
@@ -3520,79 +1906,69 @@ func (c *IAM) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) (req *aw
 //
 // This operation requires Signature Version 4 (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteSAMLProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the DeleteSAMLProviderRequest method.
+//    req := client.DeleteSAMLProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProvider
-func (c *IAM) DeleteSAMLProvider(input *DeleteSAMLProviderInput) (*DeleteSAMLProviderOutput, error) {
-	req, out := c.DeleteSAMLProviderRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) DeleteSAMLProviderRequest {
+	op := &aws.Operation{
+		Name:       opDeleteSAMLProvider,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteSAMLProviderWithContext is the same as DeleteSAMLProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSAMLProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteSAMLProviderWithContext(ctx aws.Context, input *DeleteSAMLProviderInput, opts ...aws.Option) (*DeleteSAMLProviderOutput, error) {
-	req, out := c.DeleteSAMLProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteSAMLProviderInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteSAMLProviderOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteSAMLProviderRequest{Request: req, Input: input}
 }
 
 const opDeleteSSHPublicKey = "DeleteSSHPublicKey"
 
-// DeleteSSHPublicKeyRequest generates a "aws.Request" representing the
-// client's request for the DeleteSSHPublicKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSSHPublicKeyRequest is a API request type for the DeleteSSHPublicKey API operation.
+type DeleteSSHPublicKeyRequest struct {
+	*aws.Request
+	Input *DeleteSSHPublicKeyInput
+}
+
+// Send marshals and sends the DeleteSSHPublicKey API request.
+func (r DeleteSSHPublicKeyRequest) Send() (*DeleteSSHPublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSSHPublicKeyOutput), nil
+}
+
+// DeleteSSHPublicKeyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified SSH public key.
 //
-// See DeleteSSHPublicKey for more information on using the DeleteSSHPublicKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The SSH public key deleted by this action is used only for authenticating
+// the associated IAM user to an AWS CodeCommit repository. For more information
+// about using SSH keys to authenticate to an AWS CodeCommit repository, see
+// Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using the DeleteSSHPublicKeyRequest method.
-//    req, resp := client.DeleteSSHPublicKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSSHPublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKey
-func (c *IAM) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) (req *aws.Request, output *DeleteSSHPublicKeyOutput) {
+func (c *IAM) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) DeleteSSHPublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSSHPublicKey,
 		HTTPMethod: "POST",
@@ -3603,102 +1979,32 @@ func (c *IAM) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) (req *aw
 		input = &DeleteSSHPublicKeyInput{}
 	}
 
-	output = &DeleteSSHPublicKeyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteSSHPublicKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteSSHPublicKey API operation for AWS Identity and Access Management.
-//
-// Deletes the specified SSH public key.
-//
-// The SSH public key deleted by this action is used only for authenticating
-// the associated IAM user to an AWS CodeCommit repository. For more information
-// about using SSH keys to authenticate to an AWS CodeCommit repository, see
-// Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
-// in the AWS CodeCommit User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteSSHPublicKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKey
-func (c *IAM) DeleteSSHPublicKey(input *DeleteSSHPublicKeyInput) (*DeleteSSHPublicKeyOutput, error) {
-	req, out := c.DeleteSSHPublicKeyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSSHPublicKeyWithContext is the same as DeleteSSHPublicKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSSHPublicKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteSSHPublicKeyWithContext(ctx aws.Context, input *DeleteSSHPublicKeyInput, opts ...aws.Option) (*DeleteSSHPublicKeyOutput, error) {
-	req, out := c.DeleteSSHPublicKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteSSHPublicKeyRequest{Request: req, Input: input}
 }
 
 const opDeleteServerCertificate = "DeleteServerCertificate"
 
-// DeleteServerCertificateRequest generates a "aws.Request" representing the
-// client's request for the DeleteServerCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteServerCertificate for more information on using the DeleteServerCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteServerCertificateRequest method.
-//    req, resp := client.DeleteServerCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificate
-func (c *IAM) DeleteServerCertificateRequest(input *DeleteServerCertificateInput) (req *aws.Request, output *DeleteServerCertificateOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteServerCertificate,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteServerCertificateInput{}
-	}
-
-	output = &DeleteServerCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteServerCertificateRequest is a API request type for the DeleteServerCertificate API operation.
+type DeleteServerCertificateRequest struct {
+	*aws.Request
+	Input *DeleteServerCertificateInput
 }
 
-// DeleteServerCertificate API operation for AWS Identity and Access Management.
+// Send marshals and sends the DeleteServerCertificate API request.
+func (r DeleteServerCertificateRequest) Send() (*DeleteServerCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServerCertificateOutput), nil
+}
+
+// DeleteServerCertificateRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Deletes the specified server certificate.
 //
@@ -3717,95 +2023,51 @@ func (c *IAM) DeleteServerCertificateRequest(input *DeleteServerCertificateInput
 // (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html)
 // in the Elastic Load Balancing API Reference.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteServerCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificate
-func (c *IAM) DeleteServerCertificate(input *DeleteServerCertificateInput) (*DeleteServerCertificateOutput, error) {
-	req, out := c.DeleteServerCertificateRequest(input)
-	return out, req.Send()
-}
-
-// DeleteServerCertificateWithContext is the same as DeleteServerCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteServerCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteServerCertificateWithContext(ctx aws.Context, input *DeleteServerCertificateInput, opts ...aws.Option) (*DeleteServerCertificateOutput, error) {
-	req, out := c.DeleteServerCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole"
-
-// DeleteServiceLinkedRoleRequest generates a "aws.Request" representing the
-// client's request for the DeleteServiceLinkedRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteServiceLinkedRole for more information on using the DeleteServiceLinkedRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteServiceLinkedRoleRequest method.
-//    req, resp := client.DeleteServiceLinkedRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteServerCertificateRequest method.
+//    req := client.DeleteServerCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRole
-func (c *IAM) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput) (req *aws.Request, output *DeleteServiceLinkedRoleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificate
+func (c *IAM) DeleteServerCertificateRequest(input *DeleteServerCertificateInput) DeleteServerCertificateRequest {
 	op := &aws.Operation{
-		Name:       opDeleteServiceLinkedRole,
+		Name:       opDeleteServerCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteServiceLinkedRoleInput{}
+		input = &DeleteServerCertificateInput{}
 	}
 
-	output = &DeleteServiceLinkedRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteServerCertificateOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteServerCertificateRequest{Request: req, Input: input}
 }
 
-// DeleteServiceLinkedRole API operation for AWS Identity and Access Management.
+const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole"
+
+// DeleteServiceLinkedRoleRequest is a API request type for the DeleteServiceLinkedRole API operation.
+type DeleteServiceLinkedRoleRequest struct {
+	*aws.Request
+	Input *DeleteServiceLinkedRoleInput
+}
+
+// Send marshals and sends the DeleteServiceLinkedRole API request.
+func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServiceLinkedRoleOutput), nil
+}
+
+// DeleteServiceLinkedRoleRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Submits a service-linked role deletion request and returns a DeletionTaskId,
 // which you can use to check the status of the deletion. Before you call this
@@ -3828,75 +2090,61 @@ func (c *IAM) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput
 // AWS Service-Linked Role (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteServiceLinkedRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the DeleteServiceLinkedRoleRequest method.
+//    req := client.DeleteServiceLinkedRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRole
-func (c *IAM) DeleteServiceLinkedRole(input *DeleteServiceLinkedRoleInput) (*DeleteServiceLinkedRoleOutput, error) {
-	req, out := c.DeleteServiceLinkedRoleRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest {
+	op := &aws.Operation{
+		Name:       opDeleteServiceLinkedRole,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteServiceLinkedRoleWithContext is the same as DeleteServiceLinkedRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteServiceLinkedRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteServiceLinkedRoleWithContext(ctx aws.Context, input *DeleteServiceLinkedRoleInput, opts ...aws.Option) (*DeleteServiceLinkedRoleOutput, error) {
-	req, out := c.DeleteServiceLinkedRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteServiceLinkedRoleInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteServiceLinkedRoleOutput{})
+	return DeleteServiceLinkedRoleRequest{Request: req, Input: input}
 }
 
 const opDeleteServiceSpecificCredential = "DeleteServiceSpecificCredential"
 
-// DeleteServiceSpecificCredentialRequest generates a "aws.Request" representing the
-// client's request for the DeleteServiceSpecificCredential operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteServiceSpecificCredentialRequest is a API request type for the DeleteServiceSpecificCredential API operation.
+type DeleteServiceSpecificCredentialRequest struct {
+	*aws.Request
+	Input *DeleteServiceSpecificCredentialInput
+}
+
+// Send marshals and sends the DeleteServiceSpecificCredential API request.
+func (r DeleteServiceSpecificCredentialRequest) Send() (*DeleteServiceSpecificCredentialOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServiceSpecificCredentialOutput), nil
+}
+
+// DeleteServiceSpecificCredentialRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteServiceSpecificCredential for more information on using the DeleteServiceSpecificCredential
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified service-specific credential.
 //
 //    // Example sending a request using the DeleteServiceSpecificCredentialRequest method.
-//    req, resp := client.DeleteServiceSpecificCredentialRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteServiceSpecificCredentialRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredential
-func (c *IAM) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpecificCredentialInput) (req *aws.Request, output *DeleteServiceSpecificCredentialOutput) {
+func (c *IAM) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpecificCredentialInput) DeleteServiceSpecificCredentialRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServiceSpecificCredential,
 		HTTPMethod: "POST",
@@ -3907,78 +2155,49 @@ func (c *IAM) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpecifi
 		input = &DeleteServiceSpecificCredentialInput{}
 	}
 
-	output = &DeleteServiceSpecificCredentialOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteServiceSpecificCredentialOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteServiceSpecificCredential API operation for AWS Identity and Access Management.
-//
-// Deletes the specified service-specific credential.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteServiceSpecificCredential for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredential
-func (c *IAM) DeleteServiceSpecificCredential(input *DeleteServiceSpecificCredentialInput) (*DeleteServiceSpecificCredentialOutput, error) {
-	req, out := c.DeleteServiceSpecificCredentialRequest(input)
-	return out, req.Send()
-}
-
-// DeleteServiceSpecificCredentialWithContext is the same as DeleteServiceSpecificCredential with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteServiceSpecificCredential for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteServiceSpecificCredentialWithContext(ctx aws.Context, input *DeleteServiceSpecificCredentialInput, opts ...aws.Option) (*DeleteServiceSpecificCredentialOutput, error) {
-	req, out := c.DeleteServiceSpecificCredentialRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
 const opDeleteSigningCertificate = "DeleteSigningCertificate"
 
-// DeleteSigningCertificateRequest generates a "aws.Request" representing the
-// client's request for the DeleteSigningCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSigningCertificateRequest is a API request type for the DeleteSigningCertificate API operation.
+type DeleteSigningCertificateRequest struct {
+	*aws.Request
+	Input *DeleteSigningCertificateInput
+}
+
+// Send marshals and sends the DeleteSigningCertificate API request.
+func (r DeleteSigningCertificateRequest) Send() (*DeleteSigningCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSigningCertificateOutput), nil
+}
+
+// DeleteSigningCertificateRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a signing certificate associated with the specified IAM user.
 //
-// See DeleteSigningCertificate for more information on using the DeleteSigningCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you do not specify a user name, IAM determines the user name implicitly
+// based on the AWS access key ID signing the request. Because this action works
+// for access keys under the AWS account, you can use this action to manage
+// root credentials even if the AWS account has no associated IAM users.
 //
 //    // Example sending a request using the DeleteSigningCertificateRequest method.
-//    req, resp := client.DeleteSigningCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSigningCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificate
-func (c *IAM) DeleteSigningCertificateRequest(input *DeleteSigningCertificateInput) (req *aws.Request, output *DeleteSigningCertificateOutput) {
+func (c *IAM) DeleteSigningCertificateRequest(input *DeleteSigningCertificateInput) DeleteSigningCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSigningCertificate,
 		HTTPMethod: "POST",
@@ -3989,91 +2208,45 @@ func (c *IAM) DeleteSigningCertificateRequest(input *DeleteSigningCertificateInp
 		input = &DeleteSigningCertificateInput{}
 	}
 
-	output = &DeleteSigningCertificateOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteSigningCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteSigningCertificate API operation for AWS Identity and Access Management.
-//
-// Deletes a signing certificate associated with the specified IAM user.
-//
-// If you do not specify a user name, IAM determines the user name implicitly
-// based on the AWS access key ID signing the request. Because this action works
-// for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated IAM users.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteSigningCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificate
-func (c *IAM) DeleteSigningCertificate(input *DeleteSigningCertificateInput) (*DeleteSigningCertificateOutput, error) {
-	req, out := c.DeleteSigningCertificateRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSigningCertificateWithContext is the same as DeleteSigningCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSigningCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteSigningCertificateWithContext(ctx aws.Context, input *DeleteSigningCertificateInput, opts ...aws.Option) (*DeleteSigningCertificateOutput, error) {
-	req, out := c.DeleteSigningCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteSigningCertificateRequest{Request: req, Input: input}
 }
 
 const opDeleteUser = "DeleteUser"
 
-// DeleteUserRequest generates a "aws.Request" representing the
-// client's request for the DeleteUser operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteUserRequest is a API request type for the DeleteUser API operation.
+type DeleteUserRequest struct {
+	*aws.Request
+	Input *DeleteUserInput
+}
+
+// Send marshals and sends the DeleteUser API request.
+func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserOutput), nil
+}
+
+// DeleteUserRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteUser for more information on using the DeleteUser
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified IAM user. The user must not belong to any groups or
+// have any access keys, signing certificates, or attached policies.
 //
 //    // Example sending a request using the DeleteUserRequest method.
-//    req, resp := client.DeleteUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUser
-func (c *IAM) DeleteUserRequest(input *DeleteUserInput) (req *aws.Request, output *DeleteUserOutput) {
+func (c *IAM) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "POST",
@@ -4084,91 +2257,50 @@ func (c *IAM) DeleteUserRequest(input *DeleteUserInput) (req *aws.Request, outpu
 		input = &DeleteUserInput{}
 	}
 
-	output = &DeleteUserOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteUserOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteUser API operation for AWS Identity and Access Management.
-//
-// Deletes the specified IAM user. The user must not belong to any groups or
-// have any access keys, signing certificates, or attached policies.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteUser for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUser
-func (c *IAM) DeleteUser(input *DeleteUserInput) (*DeleteUserOutput, error) {
-	req, out := c.DeleteUserRequest(input)
-	return out, req.Send()
-}
-
-// DeleteUserWithContext is the same as DeleteUser with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteUser for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteUserWithContext(ctx aws.Context, input *DeleteUserInput, opts ...aws.Option) (*DeleteUserOutput, error) {
-	req, out := c.DeleteUserRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteUserRequest{Request: req, Input: input}
 }
 
 const opDeleteUserPolicy = "DeleteUserPolicy"
 
-// DeleteUserPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteUserPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteUserPolicyRequest is a API request type for the DeleteUserPolicy API operation.
+type DeleteUserPolicyRequest struct {
+	*aws.Request
+	Input *DeleteUserPolicyInput
+}
+
+// Send marshals and sends the DeleteUserPolicy API request.
+func (r DeleteUserPolicyRequest) Send() (*DeleteUserPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserPolicyOutput), nil
+}
+
+// DeleteUserPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified inline policy that is embedded in the specified IAM
+// user.
 //
-// See DeleteUserPolicy for more information on using the DeleteUserPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A user can also have managed policies attached to it. To detach a managed
+// policy from a user, use DetachUserPolicy. For more information about policies,
+// refer to Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DeleteUserPolicyRequest method.
-//    req, resp := client.DeleteUserPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteUserPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicy
-func (c *IAM) DeleteUserPolicyRequest(input *DeleteUserPolicyInput) (req *aws.Request, output *DeleteUserPolicyOutput) {
+func (c *IAM) DeleteUserPolicyRequest(input *DeleteUserPolicyInput) DeleteUserPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserPolicy,
 		HTTPMethod: "POST",
@@ -4179,92 +2311,47 @@ func (c *IAM) DeleteUserPolicyRequest(input *DeleteUserPolicyInput) (req *aws.Re
 		input = &DeleteUserPolicyInput{}
 	}
 
-	output = &DeleteUserPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteUserPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteUserPolicy API operation for AWS Identity and Access Management.
-//
-// Deletes the specified inline policy that is embedded in the specified IAM
-// user.
-//
-// A user can also have managed policies attached to it. To detach a managed
-// policy from a user, use DetachUserPolicy. For more information about policies,
-// refer to Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteUserPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicy
-func (c *IAM) DeleteUserPolicy(input *DeleteUserPolicyInput) (*DeleteUserPolicyOutput, error) {
-	req, out := c.DeleteUserPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteUserPolicyWithContext is the same as DeleteUserPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteUserPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteUserPolicyWithContext(ctx aws.Context, input *DeleteUserPolicyInput, opts ...aws.Option) (*DeleteUserPolicyOutput, error) {
-	req, out := c.DeleteUserPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteUserPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteVirtualMFADevice = "DeleteVirtualMFADevice"
 
-// DeleteVirtualMFADeviceRequest generates a "aws.Request" representing the
-// client's request for the DeleteVirtualMFADevice operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteVirtualMFADeviceRequest is a API request type for the DeleteVirtualMFADevice API operation.
+type DeleteVirtualMFADeviceRequest struct {
+	*aws.Request
+	Input *DeleteVirtualMFADeviceInput
+}
+
+// Send marshals and sends the DeleteVirtualMFADevice API request.
+func (r DeleteVirtualMFADeviceRequest) Send() (*DeleteVirtualMFADeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVirtualMFADeviceOutput), nil
+}
+
+// DeleteVirtualMFADeviceRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a virtual MFA device.
 //
-// See DeleteVirtualMFADevice for more information on using the DeleteVirtualMFADevice
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You must deactivate a user's virtual MFA device before you can delete it.
+// For information about deactivating MFA devices, see DeactivateMFADevice.
 //
 //    // Example sending a request using the DeleteVirtualMFADeviceRequest method.
-//    req, resp := client.DeleteVirtualMFADeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteVirtualMFADeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADevice
-func (c *IAM) DeleteVirtualMFADeviceRequest(input *DeleteVirtualMFADeviceInput) (req *aws.Request, output *DeleteVirtualMFADeviceOutput) {
+func (c *IAM) DeleteVirtualMFADeviceRequest(input *DeleteVirtualMFADeviceInput) DeleteVirtualMFADeviceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVirtualMFADevice,
 		HTTPMethod: "POST",
@@ -4275,93 +2362,49 @@ func (c *IAM) DeleteVirtualMFADeviceRequest(input *DeleteVirtualMFADeviceInput) 
 		input = &DeleteVirtualMFADeviceInput{}
 	}
 
-	output = &DeleteVirtualMFADeviceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteVirtualMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteVirtualMFADevice API operation for AWS Identity and Access Management.
-//
-// Deletes a virtual MFA device.
-//
-// You must deactivate a user's virtual MFA device before you can delete it.
-// For information about deactivating MFA devices, see DeactivateMFADevice.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DeleteVirtualMFADevice for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeDeleteConflictException "DeleteConflict"
-//   The request was rejected because it attempted to delete a resource that has
-//   attached subordinate entities. The error message describes these entities.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADevice
-func (c *IAM) DeleteVirtualMFADevice(input *DeleteVirtualMFADeviceInput) (*DeleteVirtualMFADeviceOutput, error) {
-	req, out := c.DeleteVirtualMFADeviceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteVirtualMFADeviceWithContext is the same as DeleteVirtualMFADevice with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVirtualMFADevice for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DeleteVirtualMFADeviceWithContext(ctx aws.Context, input *DeleteVirtualMFADeviceInput, opts ...aws.Option) (*DeleteVirtualMFADeviceOutput, error) {
-	req, out := c.DeleteVirtualMFADeviceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteVirtualMFADeviceRequest{Request: req, Input: input}
 }
 
 const opDetachGroupPolicy = "DetachGroupPolicy"
 
-// DetachGroupPolicyRequest generates a "aws.Request" representing the
-// client's request for the DetachGroupPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachGroupPolicyRequest is a API request type for the DetachGroupPolicy API operation.
+type DetachGroupPolicyRequest struct {
+	*aws.Request
+	Input *DetachGroupPolicyInput
+}
+
+// Send marshals and sends the DetachGroupPolicy API request.
+func (r DetachGroupPolicyRequest) Send() (*DetachGroupPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachGroupPolicyOutput), nil
+}
+
+// DetachGroupPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the specified managed policy from the specified IAM group.
 //
-// See DetachGroupPolicy for more information on using the DetachGroupPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A group can also have inline policies embedded with it. To delete an inline
+// policy, use the DeleteGroupPolicy API. For information about policies, see
+// Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DetachGroupPolicyRequest method.
-//    req, resp := client.DetachGroupPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachGroupPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicy
-func (c *IAM) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) (req *aws.Request, output *DetachGroupPolicyOutput) {
+func (c *IAM) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) DetachGroupPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachGroupPolicy,
 		HTTPMethod: "POST",
@@ -4372,95 +2415,49 @@ func (c *IAM) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) (req *aws.
 		input = &DetachGroupPolicyInput{}
 	}
 
-	output = &DetachGroupPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DetachGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DetachGroupPolicy API operation for AWS Identity and Access Management.
-//
-// Removes the specified managed policy from the specified IAM group.
-//
-// A group can also have inline policies embedded with it. To delete an inline
-// policy, use the DeleteGroupPolicy API. For information about policies, see
-// Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DetachGroupPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicy
-func (c *IAM) DetachGroupPolicy(input *DetachGroupPolicyInput) (*DetachGroupPolicyOutput, error) {
-	req, out := c.DetachGroupPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DetachGroupPolicyWithContext is the same as DetachGroupPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachGroupPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DetachGroupPolicyWithContext(ctx aws.Context, input *DetachGroupPolicyInput, opts ...aws.Option) (*DetachGroupPolicyOutput, error) {
-	req, out := c.DetachGroupPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DetachGroupPolicyRequest{Request: req, Input: input}
 }
 
 const opDetachRolePolicy = "DetachRolePolicy"
 
-// DetachRolePolicyRequest generates a "aws.Request" representing the
-// client's request for the DetachRolePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachRolePolicyRequest is a API request type for the DetachRolePolicy API operation.
+type DetachRolePolicyRequest struct {
+	*aws.Request
+	Input *DetachRolePolicyInput
+}
+
+// Send marshals and sends the DetachRolePolicy API request.
+func (r DetachRolePolicyRequest) Send() (*DetachRolePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachRolePolicyOutput), nil
+}
+
+// DetachRolePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the specified managed policy from the specified role.
 //
-// See DetachRolePolicy for more information on using the DetachRolePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A role can also have inline policies embedded with it. To delete an inline
+// policy, use the DeleteRolePolicy API. For information about policies, see
+// Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DetachRolePolicyRequest method.
-//    req, resp := client.DetachRolePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachRolePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicy
-func (c *IAM) DetachRolePolicyRequest(input *DetachRolePolicyInput) (req *aws.Request, output *DetachRolePolicyOutput) {
+func (c *IAM) DetachRolePolicyRequest(input *DetachRolePolicyInput) DetachRolePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachRolePolicy,
 		HTTPMethod: "POST",
@@ -4471,101 +2468,49 @@ func (c *IAM) DetachRolePolicyRequest(input *DetachRolePolicyInput) (req *aws.Re
 		input = &DetachRolePolicyInput{}
 	}
 
-	output = &DetachRolePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DetachRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DetachRolePolicy API operation for AWS Identity and Access Management.
-//
-// Removes the specified managed policy from the specified role.
-//
-// A role can also have inline policies embedded with it. To delete an inline
-// policy, use the DeleteRolePolicy API. For information about policies, see
-// Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DetachRolePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicy
-func (c *IAM) DetachRolePolicy(input *DetachRolePolicyInput) (*DetachRolePolicyOutput, error) {
-	req, out := c.DetachRolePolicyRequest(input)
-	return out, req.Send()
-}
-
-// DetachRolePolicyWithContext is the same as DetachRolePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachRolePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DetachRolePolicyWithContext(ctx aws.Context, input *DetachRolePolicyInput, opts ...aws.Option) (*DetachRolePolicyOutput, error) {
-	req, out := c.DetachRolePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DetachRolePolicyRequest{Request: req, Input: input}
 }
 
 const opDetachUserPolicy = "DetachUserPolicy"
 
-// DetachUserPolicyRequest generates a "aws.Request" representing the
-// client's request for the DetachUserPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachUserPolicyRequest is a API request type for the DetachUserPolicy API operation.
+type DetachUserPolicyRequest struct {
+	*aws.Request
+	Input *DetachUserPolicyInput
+}
+
+// Send marshals and sends the DetachUserPolicy API request.
+func (r DetachUserPolicyRequest) Send() (*DetachUserPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachUserPolicyOutput), nil
+}
+
+// DetachUserPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the specified managed policy from the specified user.
 //
-// See DetachUserPolicy for more information on using the DetachUserPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A user can also have inline policies embedded with it. To delete an inline
+// policy, use the DeleteUserPolicy API. For information about policies, see
+// Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the DetachUserPolicyRequest method.
-//    req, resp := client.DetachUserPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachUserPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicy
-func (c *IAM) DetachUserPolicyRequest(input *DetachUserPolicyInput) (req *aws.Request, output *DetachUserPolicyOutput) {
+func (c *IAM) DetachUserPolicyRequest(input *DetachUserPolicyInput) DetachUserPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachUserPolicy,
 		HTTPMethod: "POST",
@@ -4576,95 +2521,46 @@ func (c *IAM) DetachUserPolicyRequest(input *DetachUserPolicyInput) (req *aws.Re
 		input = &DetachUserPolicyInput{}
 	}
 
-	output = &DetachUserPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DetachUserPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DetachUserPolicy API operation for AWS Identity and Access Management.
-//
-// Removes the specified managed policy from the specified user.
-//
-// A user can also have inline policies embedded with it. To delete an inline
-// policy, use the DeleteUserPolicy API. For information about policies, see
-// Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation DetachUserPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicy
-func (c *IAM) DetachUserPolicy(input *DetachUserPolicyInput) (*DetachUserPolicyOutput, error) {
-	req, out := c.DetachUserPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DetachUserPolicyWithContext is the same as DetachUserPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachUserPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) DetachUserPolicyWithContext(ctx aws.Context, input *DetachUserPolicyInput, opts ...aws.Option) (*DetachUserPolicyOutput, error) {
-	req, out := c.DetachUserPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DetachUserPolicyRequest{Request: req, Input: input}
 }
 
 const opEnableMFADevice = "EnableMFADevice"
 
-// EnableMFADeviceRequest generates a "aws.Request" representing the
-// client's request for the EnableMFADevice operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableMFADeviceRequest is a API request type for the EnableMFADevice API operation.
+type EnableMFADeviceRequest struct {
+	*aws.Request
+	Input *EnableMFADeviceInput
+}
+
+// Send marshals and sends the EnableMFADevice API request.
+func (r EnableMFADeviceRequest) Send() (*EnableMFADeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableMFADeviceOutput), nil
+}
+
+// EnableMFADeviceRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableMFADevice for more information on using the EnableMFADevice
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables the specified MFA device and associates it with the specified IAM
+// user. When enabled, the MFA device is required for every subsequent login
+// by the IAM user associated with the device.
 //
 //    // Example sending a request using the EnableMFADeviceRequest method.
-//    req, resp := client.EnableMFADeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableMFADeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADevice
-func (c *IAM) EnableMFADeviceRequest(input *EnableMFADeviceInput) (req *aws.Request, output *EnableMFADeviceOutput) {
+func (c *IAM) EnableMFADeviceRequest(input *EnableMFADeviceInput) EnableMFADeviceRequest {
 	op := &aws.Operation{
 		Name:       opEnableMFADevice,
 		HTTPMethod: "POST",
@@ -4675,102 +2571,46 @@ func (c *IAM) EnableMFADeviceRequest(input *EnableMFADeviceInput) (req *aws.Requ
 		input = &EnableMFADeviceInput{}
 	}
 
-	output = &EnableMFADeviceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &EnableMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// EnableMFADevice API operation for AWS Identity and Access Management.
-//
-// Enables the specified MFA device and associates it with the specified IAM
-// user. When enabled, the MFA device is required for every subsequent login
-// by the IAM user associated with the device.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation EnableMFADevice for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeEntityTemporarilyUnmodifiableException "EntityTemporarilyUnmodifiable"
-//   The request was rejected because it referenced an entity that is temporarily
-//   unmodifiable, such as a user name that was deleted and then recreated. The
-//   error indicates that the request is likely to succeed if you try again after
-//   waiting several minutes. The error message describes the entity.
-//
-//   * ErrCodeInvalidAuthenticationCodeException "InvalidAuthenticationCode"
-//   The request was rejected because the authentication code was not recognized.
-//   The error message describes the specific error.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADevice
-func (c *IAM) EnableMFADevice(input *EnableMFADeviceInput) (*EnableMFADeviceOutput, error) {
-	req, out := c.EnableMFADeviceRequest(input)
-	return out, req.Send()
-}
-
-// EnableMFADeviceWithContext is the same as EnableMFADevice with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableMFADevice for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) EnableMFADeviceWithContext(ctx aws.Context, input *EnableMFADeviceInput, opts ...aws.Option) (*EnableMFADeviceOutput, error) {
-	req, out := c.EnableMFADeviceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return EnableMFADeviceRequest{Request: req, Input: input}
 }
 
 const opGenerateCredentialReport = "GenerateCredentialReport"
 
-// GenerateCredentialReportRequest generates a "aws.Request" representing the
-// client's request for the GenerateCredentialReport operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GenerateCredentialReportRequest is a API request type for the GenerateCredentialReport API operation.
+type GenerateCredentialReportRequest struct {
+	*aws.Request
+	Input *GenerateCredentialReportInput
+}
+
+// Send marshals and sends the GenerateCredentialReport API request.
+func (r GenerateCredentialReportRequest) Send() (*GenerateCredentialReportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GenerateCredentialReportOutput), nil
+}
+
+// GenerateCredentialReportRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GenerateCredentialReport for more information on using the GenerateCredentialReport
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Generates a credential report for the AWS account. For more information about
+// the credential report, see Getting Credential Reports (http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the GenerateCredentialReportRequest method.
-//    req, resp := client.GenerateCredentialReportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GenerateCredentialReportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReport
-func (c *IAM) GenerateCredentialReportRequest(input *GenerateCredentialReportInput) (req *aws.Request, output *GenerateCredentialReportOutput) {
+func (c *IAM) GenerateCredentialReportRequest(input *GenerateCredentialReportInput) GenerateCredentialReportRequest {
 	op := &aws.Operation{
 		Name:       opGenerateCredentialReport,
 		HTTPMethod: "POST",
@@ -4781,82 +2621,45 @@ func (c *IAM) GenerateCredentialReportRequest(input *GenerateCredentialReportInp
 		input = &GenerateCredentialReportInput{}
 	}
 
-	output = &GenerateCredentialReportOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GenerateCredentialReport API operation for AWS Identity and Access Management.
-//
-// Generates a credential report for the AWS account. For more information about
-// the credential report, see Getting Credential Reports (http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GenerateCredentialReport for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReport
-func (c *IAM) GenerateCredentialReport(input *GenerateCredentialReportInput) (*GenerateCredentialReportOutput, error) {
-	req, out := c.GenerateCredentialReportRequest(input)
-	return out, req.Send()
-}
-
-// GenerateCredentialReportWithContext is the same as GenerateCredentialReport with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GenerateCredentialReport for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GenerateCredentialReportWithContext(ctx aws.Context, input *GenerateCredentialReportInput, opts ...aws.Option) (*GenerateCredentialReportOutput, error) {
-	req, out := c.GenerateCredentialReportRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GenerateCredentialReportOutput{})
+	return GenerateCredentialReportRequest{Request: req, Input: input}
 }
 
 const opGetAccessKeyLastUsed = "GetAccessKeyLastUsed"
 
-// GetAccessKeyLastUsedRequest generates a "aws.Request" representing the
-// client's request for the GetAccessKeyLastUsed operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAccessKeyLastUsedRequest is a API request type for the GetAccessKeyLastUsed API operation.
+type GetAccessKeyLastUsedRequest struct {
+	*aws.Request
+	Input *GetAccessKeyLastUsedInput
+}
+
+// Send marshals and sends the GetAccessKeyLastUsed API request.
+func (r GetAccessKeyLastUsedRequest) Send() (*GetAccessKeyLastUsedOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAccessKeyLastUsedOutput), nil
+}
+
+// GetAccessKeyLastUsedRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAccessKeyLastUsed for more information on using the GetAccessKeyLastUsed
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about when the specified access key was last used.
+// The information includes the date and time of last use, along with the AWS
+// service and region that were specified in the last request made with that
+// key.
 //
 //    // Example sending a request using the GetAccessKeyLastUsedRequest method.
-//    req, resp := client.GetAccessKeyLastUsedRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAccessKeyLastUsedRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsed
-func (c *IAM) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) (req *aws.Request, output *GetAccessKeyLastUsedOutput) {
+func (c *IAM) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) GetAccessKeyLastUsedRequest {
 	op := &aws.Operation{
 		Name:       opGetAccessKeyLastUsed,
 		HTTPMethod: "POST",
@@ -4867,79 +2670,48 @@ func (c *IAM) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) (req
 		input = &GetAccessKeyLastUsedInput{}
 	}
 
-	output = &GetAccessKeyLastUsedOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAccessKeyLastUsed API operation for AWS Identity and Access Management.
-//
-// Retrieves information about when the specified access key was last used.
-// The information includes the date and time of last use, along with the AWS
-// service and region that were specified in the last request made with that
-// key.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetAccessKeyLastUsed for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsed
-func (c *IAM) GetAccessKeyLastUsed(input *GetAccessKeyLastUsedInput) (*GetAccessKeyLastUsedOutput, error) {
-	req, out := c.GetAccessKeyLastUsedRequest(input)
-	return out, req.Send()
-}
-
-// GetAccessKeyLastUsedWithContext is the same as GetAccessKeyLastUsed with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAccessKeyLastUsed for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetAccessKeyLastUsedWithContext(ctx aws.Context, input *GetAccessKeyLastUsedInput, opts ...aws.Option) (*GetAccessKeyLastUsedOutput, error) {
-	req, out := c.GetAccessKeyLastUsedRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAccessKeyLastUsedOutput{})
+	return GetAccessKeyLastUsedRequest{Request: req, Input: input}
 }
 
 const opGetAccountAuthorizationDetails = "GetAccountAuthorizationDetails"
 
-// GetAccountAuthorizationDetailsRequest generates a "aws.Request" representing the
-// client's request for the GetAccountAuthorizationDetails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAccountAuthorizationDetailsRequest is a API request type for the GetAccountAuthorizationDetails API operation.
+type GetAccountAuthorizationDetailsRequest struct {
+	*aws.Request
+	Input *GetAccountAuthorizationDetailsInput
+}
+
+// Send marshals and sends the GetAccountAuthorizationDetails API request.
+func (r GetAccountAuthorizationDetailsRequest) Send() (*GetAccountAuthorizationDetailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAccountAuthorizationDetailsOutput), nil
+}
+
+// GetAccountAuthorizationDetailsRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves information about all IAM users, groups, roles, and policies in
+// your AWS account, including their relationships to one another. Use this
+// API to obtain a snapshot of the configuration of IAM permissions (users,
+// groups, roles, and policies) in your account.
 //
-// See GetAccountAuthorizationDetails for more information on using the GetAccountAuthorizationDetails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can optionally filter the results using the Filter parameter. You can
+// paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the GetAccountAuthorizationDetailsRequest method.
-//    req, resp := client.GetAccountAuthorizationDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAccountAuthorizationDetailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetails
-func (c *IAM) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizationDetailsInput) (req *aws.Request, output *GetAccountAuthorizationDetailsOutput) {
+func (c *IAM) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizationDetailsInput) GetAccountAuthorizationDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountAuthorizationDetails,
 		HTTPMethod: "POST",
@@ -4956,53 +2728,8 @@ func (c *IAM) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizati
 		input = &GetAccountAuthorizationDetailsInput{}
 	}
 
-	output = &GetAccountAuthorizationDetailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAccountAuthorizationDetails API operation for AWS Identity and Access Management.
-//
-// Retrieves information about all IAM users, groups, roles, and policies in
-// your AWS account, including their relationships to one another. Use this
-// API to obtain a snapshot of the configuration of IAM permissions (users,
-// groups, roles, and policies) in your account.
-//
-// You can optionally filter the results using the Filter parameter. You can
-// paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetAccountAuthorizationDetails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetails
-func (c *IAM) GetAccountAuthorizationDetails(input *GetAccountAuthorizationDetailsInput) (*GetAccountAuthorizationDetailsOutput, error) {
-	req, out := c.GetAccountAuthorizationDetailsRequest(input)
-	return out, req.Send()
-}
-
-// GetAccountAuthorizationDetailsWithContext is the same as GetAccountAuthorizationDetails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAccountAuthorizationDetails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetAccountAuthorizationDetailsWithContext(ctx aws.Context, input *GetAccountAuthorizationDetailsInput, opts ...aws.Option) (*GetAccountAuthorizationDetailsOutput, error) {
-	req, out := c.GetAccountAuthorizationDetailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAccountAuthorizationDetailsOutput{})
+	return GetAccountAuthorizationDetailsRequest{Request: req, Input: input}
 }
 
 // GetAccountAuthorizationDetailsPages iterates over the pages of a GetAccountAuthorizationDetails operation,
@@ -5041,10 +2768,10 @@ func (c *IAM) GetAccountAuthorizationDetailsPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetAccountAuthorizationDetailsRequest(inCpy)
+			req := c.GetAccountAuthorizationDetailsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5057,31 +2784,37 @@ func (c *IAM) GetAccountAuthorizationDetailsPagesWithContext(ctx aws.Context, in
 
 const opGetAccountPasswordPolicy = "GetAccountPasswordPolicy"
 
-// GetAccountPasswordPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetAccountPasswordPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAccountPasswordPolicyRequest is a API request type for the GetAccountPasswordPolicy API operation.
+type GetAccountPasswordPolicyRequest struct {
+	*aws.Request
+	Input *GetAccountPasswordPolicyInput
+}
+
+// Send marshals and sends the GetAccountPasswordPolicy API request.
+func (r GetAccountPasswordPolicyRequest) Send() (*GetAccountPasswordPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAccountPasswordPolicyOutput), nil
+}
+
+// GetAccountPasswordPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAccountPasswordPolicy for more information on using the GetAccountPasswordPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the password policy for the AWS account. For more information about
+// using a password policy, go to Managing an IAM Password Policy (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html).
 //
 //    // Example sending a request using the GetAccountPasswordPolicyRequest method.
-//    req, resp := client.GetAccountPasswordPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAccountPasswordPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicy
-func (c *IAM) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicyInput) (req *aws.Request, output *GetAccountPasswordPolicyOutput) {
+func (c *IAM) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicyInput) GetAccountPasswordPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountPasswordPolicy,
 		HTTPMethod: "POST",
@@ -5092,81 +2825,46 @@ func (c *IAM) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicyInp
 		input = &GetAccountPasswordPolicyInput{}
 	}
 
-	output = &GetAccountPasswordPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAccountPasswordPolicy API operation for AWS Identity and Access Management.
-//
-// Retrieves the password policy for the AWS account. For more information about
-// using a password policy, go to Managing an IAM Password Policy (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetAccountPasswordPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicy
-func (c *IAM) GetAccountPasswordPolicy(input *GetAccountPasswordPolicyInput) (*GetAccountPasswordPolicyOutput, error) {
-	req, out := c.GetAccountPasswordPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetAccountPasswordPolicyWithContext is the same as GetAccountPasswordPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAccountPasswordPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetAccountPasswordPolicyWithContext(ctx aws.Context, input *GetAccountPasswordPolicyInput, opts ...aws.Option) (*GetAccountPasswordPolicyOutput, error) {
-	req, out := c.GetAccountPasswordPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAccountPasswordPolicyOutput{})
+	return GetAccountPasswordPolicyRequest{Request: req, Input: input}
 }
 
 const opGetAccountSummary = "GetAccountSummary"
 
-// GetAccountSummaryRequest generates a "aws.Request" representing the
-// client's request for the GetAccountSummary operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAccountSummaryRequest is a API request type for the GetAccountSummary API operation.
+type GetAccountSummaryRequest struct {
+	*aws.Request
+	Input *GetAccountSummaryInput
+}
+
+// Send marshals and sends the GetAccountSummary API request.
+func (r GetAccountSummaryRequest) Send() (*GetAccountSummaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAccountSummaryOutput), nil
+}
+
+// GetAccountSummaryRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves information about IAM entity usage and IAM quotas in the AWS account.
 //
-// See GetAccountSummary for more information on using the GetAccountSummary
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about limitations on IAM entities, see Limitations on IAM
+// Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the GetAccountSummaryRequest method.
-//    req, resp := client.GetAccountSummaryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAccountSummaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountSummary
-func (c *IAM) GetAccountSummaryRequest(input *GetAccountSummaryInput) (req *aws.Request, output *GetAccountSummaryOutput) {
+func (c *IAM) GetAccountSummaryRequest(input *GetAccountSummaryInput) GetAccountSummaryRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSummary,
 		HTTPMethod: "POST",
@@ -5177,96 +2875,30 @@ func (c *IAM) GetAccountSummaryRequest(input *GetAccountSummaryInput) (req *aws.
 		input = &GetAccountSummaryInput{}
 	}
 
-	output = &GetAccountSummaryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAccountSummary API operation for AWS Identity and Access Management.
-//
-// Retrieves information about IAM entity usage and IAM quotas in the AWS account.
-//
-// For information about limitations on IAM entities, see Limitations on IAM
-// Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetAccountSummary for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountSummary
-func (c *IAM) GetAccountSummary(input *GetAccountSummaryInput) (*GetAccountSummaryOutput, error) {
-	req, out := c.GetAccountSummaryRequest(input)
-	return out, req.Send()
-}
-
-// GetAccountSummaryWithContext is the same as GetAccountSummary with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAccountSummary for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetAccountSummaryWithContext(ctx aws.Context, input *GetAccountSummaryInput, opts ...aws.Option) (*GetAccountSummaryOutput, error) {
-	req, out := c.GetAccountSummaryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAccountSummaryOutput{})
+	return GetAccountSummaryRequest{Request: req, Input: input}
 }
 
 const opGetContextKeysForCustomPolicy = "GetContextKeysForCustomPolicy"
 
-// GetContextKeysForCustomPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetContextKeysForCustomPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetContextKeysForCustomPolicy for more information on using the GetContextKeysForCustomPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetContextKeysForCustomPolicyRequest method.
-//    req, resp := client.GetContextKeysForCustomPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicy
-func (c *IAM) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCustomPolicyInput) (req *aws.Request, output *GetContextKeysForPolicyResponse) {
-	op := &aws.Operation{
-		Name:       opGetContextKeysForCustomPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetContextKeysForCustomPolicyInput{}
-	}
-
-	output = &GetContextKeysForPolicyResponse{}
-	req = c.newRequest(op, input, output)
-	return
+// GetContextKeysForCustomPolicyRequest is a API request type for the GetContextKeysForCustomPolicy API operation.
+type GetContextKeysForCustomPolicyRequest struct {
+	*aws.Request
+	Input *GetContextKeysForCustomPolicyInput
 }
 
-// GetContextKeysForCustomPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the GetContextKeysForCustomPolicy API request.
+func (r GetContextKeysForCustomPolicyRequest) Send() (*GetContextKeysForPrincipalPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetContextKeysForPrincipalPolicyOutput), nil
+}
+
+// GetContextKeysForCustomPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Gets a list of all of the context keys referenced in the input policies.
 // The policies are supplied as a list of one or more strings. To get the context
@@ -5279,83 +2911,49 @@ func (c *IAM) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCusto
 // Note that all parameters are shown in unencoded form here for clarity, but
 // must be URL encoded to be included as a part of a real HTML request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetContextKeysForCustomPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicy
-func (c *IAM) GetContextKeysForCustomPolicy(input *GetContextKeysForCustomPolicyInput) (*GetContextKeysForPolicyResponse, error) {
-	req, out := c.GetContextKeysForCustomPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetContextKeysForCustomPolicyWithContext is the same as GetContextKeysForCustomPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetContextKeysForCustomPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetContextKeysForCustomPolicyWithContext(ctx aws.Context, input *GetContextKeysForCustomPolicyInput, opts ...aws.Option) (*GetContextKeysForPolicyResponse, error) {
-	req, out := c.GetContextKeysForCustomPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetContextKeysForPrincipalPolicy = "GetContextKeysForPrincipalPolicy"
-
-// GetContextKeysForPrincipalPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetContextKeysForPrincipalPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetContextKeysForPrincipalPolicy for more information on using the GetContextKeysForPrincipalPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetContextKeysForPrincipalPolicyRequest method.
-//    req, resp := client.GetContextKeysForPrincipalPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetContextKeysForCustomPolicyRequest method.
+//    req := client.GetContextKeysForCustomPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicy
-func (c *IAM) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysForPrincipalPolicyInput) (req *aws.Request, output *GetContextKeysForPolicyResponse) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicy
+func (c *IAM) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCustomPolicyInput) GetContextKeysForCustomPolicyRequest {
 	op := &aws.Operation{
-		Name:       opGetContextKeysForPrincipalPolicy,
+		Name:       opGetContextKeysForCustomPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetContextKeysForPrincipalPolicyInput{}
+		input = &GetContextKeysForCustomPolicyInput{}
 	}
 
-	output = &GetContextKeysForPolicyResponse{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetContextKeysForPrincipalPolicyOutput{})
+	return GetContextKeysForCustomPolicyRequest{Request: req, Input: input}
 }
 
-// GetContextKeysForPrincipalPolicy API operation for AWS Identity and Access Management.
+const opGetContextKeysForPrincipalPolicy = "GetContextKeysForPrincipalPolicy"
+
+// GetContextKeysForPrincipalPolicyRequest is a API request type for the GetContextKeysForPrincipalPolicy API operation.
+type GetContextKeysForPrincipalPolicyRequest struct {
+	*aws.Request
+	Input *GetContextKeysForPrincipalPolicyInput
+}
+
+// Send marshals and sends the GetContextKeysForPrincipalPolicy API request.
+func (r GetContextKeysForPrincipalPolicyRequest) Send() (*GetContextKeysForPrincipalPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetContextKeysForPrincipalPolicyOutput), nil
+}
+
+// GetContextKeysForPrincipalPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Gets a list of all of the context keys referenced in all of the IAM policies
 // attached to the specified IAM entity. The entity can be an IAM user, group,
@@ -5375,71 +2973,63 @@ func (c *IAM) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysForPr
 // testing against a value in an IAM policy. Use GetContextKeysForPrincipalPolicy
 // to understand what key names and values you must supply when you call SimulatePrincipalPolicy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetContextKeysForPrincipalPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//    // Example sending a request using the GetContextKeysForPrincipalPolicyRequest method.
+//    req := client.GetContextKeysForPrincipalPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicy
-func (c *IAM) GetContextKeysForPrincipalPolicy(input *GetContextKeysForPrincipalPolicyInput) (*GetContextKeysForPolicyResponse, error) {
-	req, out := c.GetContextKeysForPrincipalPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysForPrincipalPolicyInput) GetContextKeysForPrincipalPolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetContextKeysForPrincipalPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetContextKeysForPrincipalPolicyWithContext is the same as GetContextKeysForPrincipalPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetContextKeysForPrincipalPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetContextKeysForPrincipalPolicyWithContext(ctx aws.Context, input *GetContextKeysForPrincipalPolicyInput, opts ...aws.Option) (*GetContextKeysForPolicyResponse, error) {
-	req, out := c.GetContextKeysForPrincipalPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetContextKeysForPrincipalPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &GetContextKeysForPrincipalPolicyOutput{})
+	return GetContextKeysForPrincipalPolicyRequest{Request: req, Input: input}
 }
 
 const opGetCredentialReport = "GetCredentialReport"
 
-// GetCredentialReportRequest generates a "aws.Request" representing the
-// client's request for the GetCredentialReport operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCredentialReportRequest is a API request type for the GetCredentialReport API operation.
+type GetCredentialReportRequest struct {
+	*aws.Request
+	Input *GetCredentialReportInput
+}
+
+// Send marshals and sends the GetCredentialReport API request.
+func (r GetCredentialReportRequest) Send() (*GetCredentialReportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCredentialReportOutput), nil
+}
+
+// GetCredentialReportRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCredentialReport for more information on using the GetCredentialReport
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a credential report for the AWS account. For more information about
+// the credential report, see Getting Credential Reports (http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the GetCredentialReportRequest method.
-//    req, resp := client.GetCredentialReportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCredentialReportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetCredentialReport
-func (c *IAM) GetCredentialReportRequest(input *GetCredentialReportInput) (req *aws.Request, output *GetCredentialReportOutput) {
+func (c *IAM) GetCredentialReportRequest(input *GetCredentialReportInput) GetCredentialReportRequest {
 	op := &aws.Operation{
 		Name:       opGetCredentialReport,
 		HTTPMethod: "POST",
@@ -5450,92 +3040,43 @@ func (c *IAM) GetCredentialReportRequest(input *GetCredentialReportInput) (req *
 		input = &GetCredentialReportInput{}
 	}
 
-	output = &GetCredentialReportOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCredentialReport API operation for AWS Identity and Access Management.
-//
-// Retrieves a credential report for the AWS account. For more information about
-// the credential report, see Getting Credential Reports (http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetCredentialReport for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCredentialReportNotPresentException "ReportNotPresent"
-//   The request was rejected because the credential report does not exist. To
-//   generate a credential report, use GenerateCredentialReport.
-//
-//   * ErrCodeCredentialReportExpiredException "ReportExpired"
-//   The request was rejected because the most recent credential report has expired.
-//   To generate a new credential report, use GenerateCredentialReport. For more
-//   information about credential report expiration, see Getting Credential Reports
-//   (http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
-//   in the IAM User Guide.
-//
-//   * ErrCodeCredentialReportNotReadyException "ReportInProgress"
-//   The request was rejected because the credential report is still being generated.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetCredentialReport
-func (c *IAM) GetCredentialReport(input *GetCredentialReportInput) (*GetCredentialReportOutput, error) {
-	req, out := c.GetCredentialReportRequest(input)
-	return out, req.Send()
-}
-
-// GetCredentialReportWithContext is the same as GetCredentialReport with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCredentialReport for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetCredentialReportWithContext(ctx aws.Context, input *GetCredentialReportInput, opts ...aws.Option) (*GetCredentialReportOutput, error) {
-	req, out := c.GetCredentialReportRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCredentialReportOutput{})
+	return GetCredentialReportRequest{Request: req, Input: input}
 }
 
 const opGetGroup = "GetGroup"
 
-// GetGroupRequest generates a "aws.Request" representing the
-// client's request for the GetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetGroupRequest is a API request type for the GetGroup API operation.
+type GetGroupRequest struct {
+	*aws.Request
+	Input *GetGroupInput
+}
+
+// Send marshals and sends the GetGroup API request.
+func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupOutput), nil
+}
+
+// GetGroupRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGroup for more information on using the GetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of IAM users that are in the specified IAM group. You can
+// paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the GetGroupRequest method.
-//    req, resp := client.GetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroup
-func (c *IAM) GetGroupRequest(input *GetGroupInput) (req *aws.Request, output *GetGroupOutput) {
+func (c *IAM) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetGroup,
 		HTTPMethod: "POST",
@@ -5552,52 +3093,8 @@ func (c *IAM) GetGroupRequest(input *GetGroupInput) (req *aws.Request, output *G
 		input = &GetGroupInput{}
 	}
 
-	output = &GetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetGroup API operation for AWS Identity and Access Management.
-//
-// Returns a list of IAM users that are in the specified IAM group. You can
-// paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroup
-func (c *IAM) GetGroup(input *GetGroupInput) (*GetGroupOutput, error) {
-	req, out := c.GetGroupRequest(input)
-	return out, req.Send()
-}
-
-// GetGroupWithContext is the same as GetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetGroupWithContext(ctx aws.Context, input *GetGroupInput, opts ...aws.Option) (*GetGroupOutput, error) {
-	req, out := c.GetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetGroupOutput{})
+	return GetGroupRequest{Request: req, Input: input}
 }
 
 // GetGroupPages iterates over the pages of a GetGroup operation,
@@ -5636,10 +3133,10 @@ func (c *IAM) GetGroupPagesWithContext(ctx aws.Context, input *GetGroupInput, fn
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetGroupRequest(inCpy)
+			req := c.GetGroupRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5652,47 +3149,24 @@ func (c *IAM) GetGroupPagesWithContext(ctx aws.Context, input *GetGroupInput, fn
 
 const opGetGroupPolicy = "GetGroupPolicy"
 
-// GetGroupPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetGroupPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGroupPolicy for more information on using the GetGroupPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetGroupPolicyRequest method.
-//    req, resp := client.GetGroupPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicy
-func (c *IAM) GetGroupPolicyRequest(input *GetGroupPolicyInput) (req *aws.Request, output *GetGroupPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opGetGroupPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetGroupPolicyInput{}
-	}
-
-	output = &GetGroupPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetGroupPolicyRequest is a API request type for the GetGroupPolicy API operation.
+type GetGroupPolicyRequest struct {
+	*aws.Request
+	Input *GetGroupPolicyInput
 }
 
-// GetGroupPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the GetGroupPolicy API request.
+func (r GetGroupPolicyRequest) Send() (*GetGroupPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupPolicyOutput), nil
+}
+
+// GetGroupPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Retrieves the specified inline policy document that is embedded in the specified
 // IAM group.
@@ -5712,71 +3186,64 @@ func (c *IAM) GetGroupPolicyRequest(input *GetGroupPolicyInput) (req *aws.Reques
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetGroupPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the GetGroupPolicyRequest method.
+//    req := client.GetGroupPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicy
-func (c *IAM) GetGroupPolicy(input *GetGroupPolicyInput) (*GetGroupPolicyOutput, error) {
-	req, out := c.GetGroupPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) GetGroupPolicyRequest(input *GetGroupPolicyInput) GetGroupPolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetGroupPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetGroupPolicyWithContext is the same as GetGroupPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGroupPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetGroupPolicyWithContext(ctx aws.Context, input *GetGroupPolicyInput, opts ...aws.Option) (*GetGroupPolicyOutput, error) {
-	req, out := c.GetGroupPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetGroupPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &GetGroupPolicyOutput{})
+	return GetGroupPolicyRequest{Request: req, Input: input}
 }
 
 const opGetInstanceProfile = "GetInstanceProfile"
 
-// GetInstanceProfileRequest generates a "aws.Request" representing the
-// client's request for the GetInstanceProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstanceProfileRequest is a API request type for the GetInstanceProfile API operation.
+type GetInstanceProfileRequest struct {
+	*aws.Request
+	Input *GetInstanceProfileInput
+}
+
+// Send marshals and sends the GetInstanceProfile API request.
+func (r GetInstanceProfileRequest) Send() (*GetInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceProfileOutput), nil
+}
+
+// GetInstanceProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstanceProfile for more information on using the GetInstanceProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about the specified instance profile, including the
+// instance profile's path, GUID, ARN, and role. For more information about
+// instance profiles, see About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the GetInstanceProfileRequest method.
-//    req, resp := client.GetInstanceProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfile
-func (c *IAM) GetInstanceProfileRequest(input *GetInstanceProfileInput) (req *aws.Request, output *GetInstanceProfileOutput) {
+func (c *IAM) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceProfile,
 		HTTPMethod: "POST",
@@ -5787,83 +3254,44 @@ func (c *IAM) GetInstanceProfileRequest(input *GetInstanceProfileInput) (req *aw
 		input = &GetInstanceProfileInput{}
 	}
 
-	output = &GetInstanceProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstanceProfile API operation for AWS Identity and Access Management.
-//
-// Retrieves information about the specified instance profile, including the
-// instance profile's path, GUID, ARN, and role. For more information about
-// instance profiles, see About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetInstanceProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfile
-func (c *IAM) GetInstanceProfile(input *GetInstanceProfileInput) (*GetInstanceProfileOutput, error) {
-	req, out := c.GetInstanceProfileRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceProfileWithContext is the same as GetInstanceProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstanceProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetInstanceProfileWithContext(ctx aws.Context, input *GetInstanceProfileInput, opts ...aws.Option) (*GetInstanceProfileOutput, error) {
-	req, out := c.GetInstanceProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstanceProfileOutput{})
+	return GetInstanceProfileRequest{Request: req, Input: input}
 }
 
 const opGetLoginProfile = "GetLoginProfile"
 
-// GetLoginProfileRequest generates a "aws.Request" representing the
-// client's request for the GetLoginProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetLoginProfileRequest is a API request type for the GetLoginProfile API operation.
+type GetLoginProfileRequest struct {
+	*aws.Request
+	Input *GetLoginProfileInput
+}
+
+// Send marshals and sends the GetLoginProfile API request.
+func (r GetLoginProfileRequest) Send() (*GetLoginProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLoginProfileOutput), nil
+}
+
+// GetLoginProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetLoginProfile for more information on using the GetLoginProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the user name and password-creation date for the specified IAM
+// user. If the user has not been assigned a password, the action returns a
+// 404 (NoSuchEntity) error.
 //
 //    // Example sending a request using the GetLoginProfileRequest method.
-//    req, resp := client.GetLoginProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetLoginProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfile
-func (c *IAM) GetLoginProfileRequest(input *GetLoginProfileInput) (req *aws.Request, output *GetLoginProfileOutput) {
+func (c *IAM) GetLoginProfileRequest(input *GetLoginProfileInput) GetLoginProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetLoginProfile,
 		HTTPMethod: "POST",
@@ -5874,82 +3302,43 @@ func (c *IAM) GetLoginProfileRequest(input *GetLoginProfileInput) (req *aws.Requ
 		input = &GetLoginProfileInput{}
 	}
 
-	output = &GetLoginProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetLoginProfile API operation for AWS Identity and Access Management.
-//
-// Retrieves the user name and password-creation date for the specified IAM
-// user. If the user has not been assigned a password, the action returns a
-// 404 (NoSuchEntity) error.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetLoginProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfile
-func (c *IAM) GetLoginProfile(input *GetLoginProfileInput) (*GetLoginProfileOutput, error) {
-	req, out := c.GetLoginProfileRequest(input)
-	return out, req.Send()
-}
-
-// GetLoginProfileWithContext is the same as GetLoginProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetLoginProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetLoginProfileWithContext(ctx aws.Context, input *GetLoginProfileInput, opts ...aws.Option) (*GetLoginProfileOutput, error) {
-	req, out := c.GetLoginProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetLoginProfileOutput{})
+	return GetLoginProfileRequest{Request: req, Input: input}
 }
 
 const opGetOpenIDConnectProvider = "GetOpenIDConnectProvider"
 
-// GetOpenIDConnectProviderRequest generates a "aws.Request" representing the
-// client's request for the GetOpenIDConnectProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetOpenIDConnectProviderRequest is a API request type for the GetOpenIDConnectProvider API operation.
+type GetOpenIDConnectProviderRequest struct {
+	*aws.Request
+	Input *GetOpenIDConnectProviderInput
+}
+
+// Send marshals and sends the GetOpenIDConnectProvider API request.
+func (r GetOpenIDConnectProviderRequest) Send() (*GetOpenIDConnectProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetOpenIDConnectProviderOutput), nil
+}
+
+// GetOpenIDConnectProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetOpenIDConnectProvider for more information on using the GetOpenIDConnectProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the specified OpenID Connect (OIDC) provider resource
+// object in IAM.
 //
 //    // Example sending a request using the GetOpenIDConnectProviderRequest method.
-//    req, resp := client.GetOpenIDConnectProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetOpenIDConnectProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProvider
-func (c *IAM) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProviderInput) (req *aws.Request, output *GetOpenIDConnectProviderOutput) {
+func (c *IAM) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProviderInput) GetOpenIDConnectProviderRequest {
 	op := &aws.Operation{
 		Name:       opGetOpenIDConnectProvider,
 		HTTPMethod: "POST",
@@ -5960,101 +3349,30 @@ func (c *IAM) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProviderInp
 		input = &GetOpenIDConnectProviderInput{}
 	}
 
-	output = &GetOpenIDConnectProviderOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetOpenIDConnectProvider API operation for AWS Identity and Access Management.
-//
-// Returns information about the specified OpenID Connect (OIDC) provider resource
-// object in IAM.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetOpenIDConnectProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProvider
-func (c *IAM) GetOpenIDConnectProvider(input *GetOpenIDConnectProviderInput) (*GetOpenIDConnectProviderOutput, error) {
-	req, out := c.GetOpenIDConnectProviderRequest(input)
-	return out, req.Send()
-}
-
-// GetOpenIDConnectProviderWithContext is the same as GetOpenIDConnectProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetOpenIDConnectProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetOpenIDConnectProviderWithContext(ctx aws.Context, input *GetOpenIDConnectProviderInput, opts ...aws.Option) (*GetOpenIDConnectProviderOutput, error) {
-	req, out := c.GetOpenIDConnectProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetOpenIDConnectProviderOutput{})
+	return GetOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
 const opGetPolicy = "GetPolicy"
 
-// GetPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPolicy for more information on using the GetPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetPolicyRequest method.
-//    req, resp := client.GetPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicy
-func (c *IAM) GetPolicyRequest(input *GetPolicyInput) (req *aws.Request, output *GetPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opGetPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetPolicyInput{}
-	}
-
-	output = &GetPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetPolicyRequest is a API request type for the GetPolicy API operation.
+type GetPolicyRequest struct {
+	*aws.Request
+	Input *GetPolicyInput
 }
 
-// GetPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the GetPolicy API request.
+func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPolicyOutput), nil
+}
+
+// GetPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Retrieves information about the specified managed policy, including the policy's
 // default version and the total number of IAM users, groups, and roles to which
@@ -6071,91 +3389,49 @@ func (c *IAM) GetPolicyRequest(input *GetPolicyInput) (req *aws.Request, output 
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicy
-func (c *IAM) GetPolicy(input *GetPolicyInput) (*GetPolicyOutput, error) {
-	req, out := c.GetPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetPolicyWithContext is the same as GetPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, opts ...aws.Option) (*GetPolicyOutput, error) {
-	req, out := c.GetPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetPolicyVersion = "GetPolicyVersion"
-
-// GetPolicyVersionRequest generates a "aws.Request" representing the
-// client's request for the GetPolicyVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetPolicyVersion for more information on using the GetPolicyVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetPolicyVersionRequest method.
-//    req, resp := client.GetPolicyVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetPolicyRequest method.
+//    req := client.GetPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersion
-func (c *IAM) GetPolicyVersionRequest(input *GetPolicyVersionInput) (req *aws.Request, output *GetPolicyVersionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicy
+func (c *IAM) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	op := &aws.Operation{
-		Name:       opGetPolicyVersion,
+		Name:       opGetPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetPolicyVersionInput{}
+		input = &GetPolicyInput{}
 	}
 
-	output = &GetPolicyVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetPolicyOutput{})
+	return GetPolicyRequest{Request: req, Input: input}
 }
 
-// GetPolicyVersion API operation for AWS Identity and Access Management.
+const opGetPolicyVersion = "GetPolicyVersion"
+
+// GetPolicyVersionRequest is a API request type for the GetPolicyVersion API operation.
+type GetPolicyVersionRequest struct {
+	*aws.Request
+	Input *GetPolicyVersionInput
+}
+
+// Send marshals and sends the GetPolicyVersion API request.
+func (r GetPolicyVersionRequest) Send() (*GetPolicyVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPolicyVersionOutput), nil
+}
+
+// GetPolicyVersionRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Retrieves information about the specified version of the specified managed
 // policy, including the policy document.
@@ -6180,91 +3456,49 @@ func (c *IAM) GetPolicyVersionRequest(input *GetPolicyVersionInput) (req *aws.Re
 // Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetPolicyVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersion
-func (c *IAM) GetPolicyVersion(input *GetPolicyVersionInput) (*GetPolicyVersionOutput, error) {
-	req, out := c.GetPolicyVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetPolicyVersionWithContext is the same as GetPolicyVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetPolicyVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetPolicyVersionWithContext(ctx aws.Context, input *GetPolicyVersionInput, opts ...aws.Option) (*GetPolicyVersionOutput, error) {
-	req, out := c.GetPolicyVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetRole = "GetRole"
-
-// GetRoleRequest generates a "aws.Request" representing the
-// client's request for the GetRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRole for more information on using the GetRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetRoleRequest method.
-//    req, resp := client.GetRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetPolicyVersionRequest method.
+//    req := client.GetPolicyVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole
-func (c *IAM) GetRoleRequest(input *GetRoleInput) (req *aws.Request, output *GetRoleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersion
+func (c *IAM) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicyVersionRequest {
 	op := &aws.Operation{
-		Name:       opGetRole,
+		Name:       opGetPolicyVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetRoleInput{}
+		input = &GetPolicyVersionInput{}
 	}
 
-	output = &GetRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetPolicyVersionOutput{})
+	return GetPolicyVersionRequest{Request: req, Input: input}
 }
 
-// GetRole API operation for AWS Identity and Access Management.
+const opGetRole = "GetRole"
+
+// GetRoleRequest is a API request type for the GetRole API operation.
+type GetRoleRequest struct {
+	*aws.Request
+	Input *GetRoleInput
+}
+
+// Send marshals and sends the GetRole API request.
+func (r GetRoleRequest) Send() (*GetRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRoleOutput), nil
+}
+
+// GetRoleRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Retrieves information about the specified role, including the role's path,
 // GUID, ARN, and the role's trust policy that grants permission to assume the
@@ -6276,87 +3510,49 @@ func (c *IAM) GetRoleRequest(input *GetRoleInput) (req *aws.Request, output *Get
 // java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
 // provide similar functionality.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole
-func (c *IAM) GetRole(input *GetRoleInput) (*GetRoleOutput, error) {
-	req, out := c.GetRoleRequest(input)
-	return out, req.Send()
-}
-
-// GetRoleWithContext is the same as GetRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetRoleWithContext(ctx aws.Context, input *GetRoleInput, opts ...aws.Option) (*GetRoleOutput, error) {
-	req, out := c.GetRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetRolePolicy = "GetRolePolicy"
-
-// GetRolePolicyRequest generates a "aws.Request" representing the
-// client's request for the GetRolePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRolePolicy for more information on using the GetRolePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetRolePolicyRequest method.
-//    req, resp := client.GetRolePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetRoleRequest method.
+//    req := client.GetRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicy
-func (c *IAM) GetRolePolicyRequest(input *GetRolePolicyInput) (req *aws.Request, output *GetRolePolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole
+func (c *IAM) GetRoleRequest(input *GetRoleInput) GetRoleRequest {
 	op := &aws.Operation{
-		Name:       opGetRolePolicy,
+		Name:       opGetRole,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetRolePolicyInput{}
+		input = &GetRoleInput{}
 	}
 
-	output = &GetRolePolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetRoleOutput{})
+	return GetRoleRequest{Request: req, Input: input}
 }
 
-// GetRolePolicy API operation for AWS Identity and Access Management.
+const opGetRolePolicy = "GetRolePolicy"
+
+// GetRolePolicyRequest is a API request type for the GetRolePolicy API operation.
+type GetRolePolicyRequest struct {
+	*aws.Request
+	Input *GetRolePolicyInput
+}
+
+// Send marshals and sends the GetRolePolicy API request.
+func (r GetRolePolicyRequest) Send() (*GetRolePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRolePolicyOutput), nil
+}
+
+// GetRolePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Retrieves the specified inline policy document that is embedded with the
 // specified IAM role.
@@ -6379,71 +3575,64 @@ func (c *IAM) GetRolePolicyRequest(input *GetRolePolicyInput) (req *aws.Request,
 // For more information about roles, see Using Roles to Delegate Permissions
 // and Federate Identities (http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetRolePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the GetRolePolicyRequest method.
+//    req := client.GetRolePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicy
-func (c *IAM) GetRolePolicy(input *GetRolePolicyInput) (*GetRolePolicyOutput, error) {
-	req, out := c.GetRolePolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) GetRolePolicyRequest(input *GetRolePolicyInput) GetRolePolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetRolePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetRolePolicyWithContext is the same as GetRolePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRolePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetRolePolicyWithContext(ctx aws.Context, input *GetRolePolicyInput, opts ...aws.Option) (*GetRolePolicyOutput, error) {
-	req, out := c.GetRolePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetRolePolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &GetRolePolicyOutput{})
+	return GetRolePolicyRequest{Request: req, Input: input}
 }
 
 const opGetSAMLProvider = "GetSAMLProvider"
 
-// GetSAMLProviderRequest generates a "aws.Request" representing the
-// client's request for the GetSAMLProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSAMLProviderRequest is a API request type for the GetSAMLProvider API operation.
+type GetSAMLProviderRequest struct {
+	*aws.Request
+	Input *GetSAMLProviderInput
+}
+
+// Send marshals and sends the GetSAMLProvider API request.
+func (r GetSAMLProviderRequest) Send() (*GetSAMLProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSAMLProviderOutput), nil
+}
+
+// GetSAMLProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the SAML provider metadocument that was uploaded when the IAM SAML
+// provider resource object was created or updated.
 //
-// See GetSAMLProvider for more information on using the GetSAMLProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires Signature Version 4 (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 //
 //    // Example sending a request using the GetSAMLProviderRequest method.
-//    req, resp := client.GetSAMLProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSAMLProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProvider
-func (c *IAM) GetSAMLProviderRequest(input *GetSAMLProviderInput) (req *aws.Request, output *GetSAMLProviderOutput) {
+func (c *IAM) GetSAMLProviderRequest(input *GetSAMLProviderInput) GetSAMLProviderRequest {
 	op := &aws.Operation{
 		Name:       opGetSAMLProvider,
 		HTTPMethod: "POST",
@@ -6454,87 +3643,48 @@ func (c *IAM) GetSAMLProviderRequest(input *GetSAMLProviderInput) (req *aws.Requ
 		input = &GetSAMLProviderInput{}
 	}
 
-	output = &GetSAMLProviderOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSAMLProvider API operation for AWS Identity and Access Management.
-//
-// Returns the SAML provider metadocument that was uploaded when the IAM SAML
-// provider resource object was created or updated.
-//
-// This operation requires Signature Version 4 (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetSAMLProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProvider
-func (c *IAM) GetSAMLProvider(input *GetSAMLProviderInput) (*GetSAMLProviderOutput, error) {
-	req, out := c.GetSAMLProviderRequest(input)
-	return out, req.Send()
-}
-
-// GetSAMLProviderWithContext is the same as GetSAMLProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSAMLProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetSAMLProviderWithContext(ctx aws.Context, input *GetSAMLProviderInput, opts ...aws.Option) (*GetSAMLProviderOutput, error) {
-	req, out := c.GetSAMLProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSAMLProviderOutput{})
+	return GetSAMLProviderRequest{Request: req, Input: input}
 }
 
 const opGetSSHPublicKey = "GetSSHPublicKey"
 
-// GetSSHPublicKeyRequest generates a "aws.Request" representing the
-// client's request for the GetSSHPublicKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSSHPublicKeyRequest is a API request type for the GetSSHPublicKey API operation.
+type GetSSHPublicKeyRequest struct {
+	*aws.Request
+	Input *GetSSHPublicKeyInput
+}
+
+// Send marshals and sends the GetSSHPublicKey API request.
+func (r GetSSHPublicKeyRequest) Send() (*GetSSHPublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSSHPublicKeyOutput), nil
+}
+
+// GetSSHPublicKeyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves the specified SSH public key, including metadata about the key.
 //
-// See GetSSHPublicKey for more information on using the GetSSHPublicKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The SSH public key retrieved by this action is used only for authenticating
+// the associated IAM user to an AWS CodeCommit repository. For more information
+// about using SSH keys to authenticate to an AWS CodeCommit repository, see
+// Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using the GetSSHPublicKeyRequest method.
-//    req, resp := client.GetSSHPublicKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSSHPublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKey
-func (c *IAM) GetSSHPublicKeyRequest(input *GetSSHPublicKeyInput) (req *aws.Request, output *GetSSHPublicKeyOutput) {
+func (c *IAM) GetSSHPublicKeyRequest(input *GetSSHPublicKeyInput) GetSSHPublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opGetSSHPublicKey,
 		HTTPMethod: "POST",
@@ -6545,86 +3695,47 @@ func (c *IAM) GetSSHPublicKeyRequest(input *GetSSHPublicKeyInput) (req *aws.Requ
 		input = &GetSSHPublicKeyInput{}
 	}
 
-	output = &GetSSHPublicKeyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSSHPublicKey API operation for AWS Identity and Access Management.
-//
-// Retrieves the specified SSH public key, including metadata about the key.
-//
-// The SSH public key retrieved by this action is used only for authenticating
-// the associated IAM user to an AWS CodeCommit repository. For more information
-// about using SSH keys to authenticate to an AWS CodeCommit repository, see
-// Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
-// in the AWS CodeCommit User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetSSHPublicKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeUnrecognizedPublicKeyEncodingException "UnrecognizedPublicKeyEncoding"
-//   The request was rejected because the public key encoding format is unsupported
-//   or unrecognized.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKey
-func (c *IAM) GetSSHPublicKey(input *GetSSHPublicKeyInput) (*GetSSHPublicKeyOutput, error) {
-	req, out := c.GetSSHPublicKeyRequest(input)
-	return out, req.Send()
-}
-
-// GetSSHPublicKeyWithContext is the same as GetSSHPublicKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSSHPublicKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetSSHPublicKeyWithContext(ctx aws.Context, input *GetSSHPublicKeyInput, opts ...aws.Option) (*GetSSHPublicKeyOutput, error) {
-	req, out := c.GetSSHPublicKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSSHPublicKeyOutput{})
+	return GetSSHPublicKeyRequest{Request: req, Input: input}
 }
 
 const opGetServerCertificate = "GetServerCertificate"
 
-// GetServerCertificateRequest generates a "aws.Request" representing the
-// client's request for the GetServerCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetServerCertificateRequest is a API request type for the GetServerCertificate API operation.
+type GetServerCertificateRequest struct {
+	*aws.Request
+	Input *GetServerCertificateInput
+}
+
+// Send marshals and sends the GetServerCertificate API request.
+func (r GetServerCertificateRequest) Send() (*GetServerCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetServerCertificateOutput), nil
+}
+
+// GetServerCertificateRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves information about the specified server certificate stored in IAM.
 //
-// See GetServerCertificate for more information on using the GetServerCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about working with server certificates, including a
+// list of AWS services that can use the server certificates that you manage
+// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the GetServerCertificateRequest method.
-//    req, resp := client.GetServerCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetServerCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificate
-func (c *IAM) GetServerCertificateRequest(input *GetServerCertificateInput) (req *aws.Request, output *GetServerCertificateOutput) {
+func (c *IAM) GetServerCertificateRequest(input *GetServerCertificateInput) GetServerCertificateRequest {
 	op := &aws.Operation{
 		Name:       opGetServerCertificate,
 		HTTPMethod: "POST",
@@ -6635,85 +3746,46 @@ func (c *IAM) GetServerCertificateRequest(input *GetServerCertificateInput) (req
 		input = &GetServerCertificateInput{}
 	}
 
-	output = &GetServerCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetServerCertificate API operation for AWS Identity and Access Management.
-//
-// Retrieves information about the specified server certificate stored in IAM.
-//
-// For more information about working with server certificates, including a
-// list of AWS services that can use the server certificates that you manage
-// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetServerCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificate
-func (c *IAM) GetServerCertificate(input *GetServerCertificateInput) (*GetServerCertificateOutput, error) {
-	req, out := c.GetServerCertificateRequest(input)
-	return out, req.Send()
-}
-
-// GetServerCertificateWithContext is the same as GetServerCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetServerCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetServerCertificateWithContext(ctx aws.Context, input *GetServerCertificateInput, opts ...aws.Option) (*GetServerCertificateOutput, error) {
-	req, out := c.GetServerCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetServerCertificateOutput{})
+	return GetServerCertificateRequest{Request: req, Input: input}
 }
 
 const opGetServiceLinkedRoleDeletionStatus = "GetServiceLinkedRoleDeletionStatus"
 
-// GetServiceLinkedRoleDeletionStatusRequest generates a "aws.Request" representing the
-// client's request for the GetServiceLinkedRoleDeletionStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetServiceLinkedRoleDeletionStatusRequest is a API request type for the GetServiceLinkedRoleDeletionStatus API operation.
+type GetServiceLinkedRoleDeletionStatusRequest struct {
+	*aws.Request
+	Input *GetServiceLinkedRoleDeletionStatusInput
+}
+
+// Send marshals and sends the GetServiceLinkedRoleDeletionStatus API request.
+func (r GetServiceLinkedRoleDeletionStatusRequest) Send() (*GetServiceLinkedRoleDeletionStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetServiceLinkedRoleDeletionStatusOutput), nil
+}
+
+// GetServiceLinkedRoleDeletionStatusRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetServiceLinkedRoleDeletionStatus for more information on using the GetServiceLinkedRoleDeletionStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the status of your service-linked role deletion. After you use
+// the DeleteServiceLinkedRole API operation to submit a service-linked role
+// for deletion, you can use the DeletionTaskId parameter in GetServiceLinkedRoleDeletionStatus
+// to check the status of the deletion. If the deletion fails, this operation
+// returns the reason that it failed.
 //
 //    // Example sending a request using the GetServiceLinkedRoleDeletionStatusRequest method.
-//    req, resp := client.GetServiceLinkedRoleDeletionStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetServiceLinkedRoleDeletionStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatus
-func (c *IAM) GetServiceLinkedRoleDeletionStatusRequest(input *GetServiceLinkedRoleDeletionStatusInput) (req *aws.Request, output *GetServiceLinkedRoleDeletionStatusOutput) {
+func (c *IAM) GetServiceLinkedRoleDeletionStatusRequest(input *GetServiceLinkedRoleDeletionStatusInput) GetServiceLinkedRoleDeletionStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetServiceLinkedRoleDeletionStatus,
 		HTTPMethod: "POST",
@@ -6724,88 +3796,46 @@ func (c *IAM) GetServiceLinkedRoleDeletionStatusRequest(input *GetServiceLinkedR
 		input = &GetServiceLinkedRoleDeletionStatusInput{}
 	}
 
-	output = &GetServiceLinkedRoleDeletionStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetServiceLinkedRoleDeletionStatus API operation for AWS Identity and Access Management.
-//
-// Retrieves the status of your service-linked role deletion. After you use
-// the DeleteServiceLinkedRole API operation to submit a service-linked role
-// for deletion, you can use the DeletionTaskId parameter in GetServiceLinkedRoleDeletionStatus
-// to check the status of the deletion. If the deletion fails, this operation
-// returns the reason that it failed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetServiceLinkedRoleDeletionStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatus
-func (c *IAM) GetServiceLinkedRoleDeletionStatus(input *GetServiceLinkedRoleDeletionStatusInput) (*GetServiceLinkedRoleDeletionStatusOutput, error) {
-	req, out := c.GetServiceLinkedRoleDeletionStatusRequest(input)
-	return out, req.Send()
-}
-
-// GetServiceLinkedRoleDeletionStatusWithContext is the same as GetServiceLinkedRoleDeletionStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetServiceLinkedRoleDeletionStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetServiceLinkedRoleDeletionStatusWithContext(ctx aws.Context, input *GetServiceLinkedRoleDeletionStatusInput, opts ...aws.Option) (*GetServiceLinkedRoleDeletionStatusOutput, error) {
-	req, out := c.GetServiceLinkedRoleDeletionStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetServiceLinkedRoleDeletionStatusOutput{})
+	return GetServiceLinkedRoleDeletionStatusRequest{Request: req, Input: input}
 }
 
 const opGetUser = "GetUser"
 
-// GetUserRequest generates a "aws.Request" representing the
-// client's request for the GetUser operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetUserRequest is a API request type for the GetUser API operation.
+type GetUserRequest struct {
+	*aws.Request
+	Input *GetUserInput
+}
+
+// Send marshals and sends the GetUser API request.
+func (r GetUserRequest) Send() (*GetUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUserOutput), nil
+}
+
+// GetUserRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves information about the specified IAM user, including the user's
+// creation date, path, unique ID, and ARN.
 //
-// See GetUser for more information on using the GetUser
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you do not specify a user name, IAM determines the user name implicitly
+// based on the AWS access key ID used to sign the request to this API.
 //
 //    // Example sending a request using the GetUserRequest method.
-//    req, resp := client.GetUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUser
-func (c *IAM) GetUserRequest(input *GetUserInput) (req *aws.Request, output *GetUserOutput) {
+func (c *IAM) GetUserRequest(input *GetUserInput) GetUserRequest {
 	op := &aws.Operation{
 		Name:       opGetUser,
 		HTTPMethod: "POST",
@@ -6816,100 +3846,30 @@ func (c *IAM) GetUserRequest(input *GetUserInput) (req *aws.Request, output *Get
 		input = &GetUserInput{}
 	}
 
-	output = &GetUserOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetUser API operation for AWS Identity and Access Management.
-//
-// Retrieves information about the specified IAM user, including the user's
-// creation date, path, unique ID, and ARN.
-//
-// If you do not specify a user name, IAM determines the user name implicitly
-// based on the AWS access key ID used to sign the request to this API.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetUser for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUser
-func (c *IAM) GetUser(input *GetUserInput) (*GetUserOutput, error) {
-	req, out := c.GetUserRequest(input)
-	return out, req.Send()
-}
-
-// GetUserWithContext is the same as GetUser with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetUser for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetUserWithContext(ctx aws.Context, input *GetUserInput, opts ...aws.Option) (*GetUserOutput, error) {
-	req, out := c.GetUserRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetUserOutput{})
+	return GetUserRequest{Request: req, Input: input}
 }
 
 const opGetUserPolicy = "GetUserPolicy"
 
-// GetUserPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetUserPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetUserPolicy for more information on using the GetUserPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetUserPolicyRequest method.
-//    req, resp := client.GetUserPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicy
-func (c *IAM) GetUserPolicyRequest(input *GetUserPolicyInput) (req *aws.Request, output *GetUserPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opGetUserPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetUserPolicyInput{}
-	}
-
-	output = &GetUserPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetUserPolicyRequest is a API request type for the GetUserPolicy API operation.
+type GetUserPolicyRequest struct {
+	*aws.Request
+	Input *GetUserPolicyInput
 }
 
-// GetUserPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the GetUserPolicy API request.
+func (r GetUserPolicyRequest) Send() (*GetUserPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUserPolicyOutput), nil
+}
+
+// GetUserPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Retrieves the specified inline policy document that is embedded in the specified
 // IAM user.
@@ -6929,71 +3889,73 @@ func (c *IAM) GetUserPolicyRequest(input *GetUserPolicyInput) (req *aws.Request,
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation GetUserPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the GetUserPolicyRequest method.
+//    req := client.GetUserPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicy
-func (c *IAM) GetUserPolicy(input *GetUserPolicyInput) (*GetUserPolicyOutput, error) {
-	req, out := c.GetUserPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) GetUserPolicyRequest(input *GetUserPolicyInput) GetUserPolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetUserPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetUserPolicyWithContext is the same as GetUserPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetUserPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetUserPolicyWithContext(ctx aws.Context, input *GetUserPolicyInput, opts ...aws.Option) (*GetUserPolicyOutput, error) {
-	req, out := c.GetUserPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetUserPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &GetUserPolicyOutput{})
+	return GetUserPolicyRequest{Request: req, Input: input}
 }
 
 const opListAccessKeys = "ListAccessKeys"
 
-// ListAccessKeysRequest generates a "aws.Request" representing the
-// client's request for the ListAccessKeys operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAccessKeysRequest is a API request type for the ListAccessKeys API operation.
+type ListAccessKeysRequest struct {
+	*aws.Request
+	Input *ListAccessKeysInput
+}
+
+// Send marshals and sends the ListAccessKeys API request.
+func (r ListAccessKeysRequest) Send() (*ListAccessKeysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAccessKeysOutput), nil
+}
+
+// ListAccessKeysRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the access key IDs associated with the specified
+// IAM user. If there are none, the action returns an empty list.
 //
-// See ListAccessKeys for more information on using the ListAccessKeys
-// API call, and error handling.
+// Although each user is limited to a small number of keys, you can still paginate
+// the results using the MaxItems and Marker parameters.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// If the UserName field is not specified, the UserName is determined implicitly
+// based on the AWS access key ID used to sign the request. Because this action
+// works for access keys under the AWS account, you can use this action to manage
+// root credentials even if the AWS account has no associated users.
 //
+// To ensure the security of your AWS account, the secret access key is accessible
+// only during key and user creation.
 //
 //    // Example sending a request using the ListAccessKeysRequest method.
-//    req, resp := client.ListAccessKeysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAccessKeysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeys
-func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) (req *aws.Request, output *ListAccessKeysOutput) {
+func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKeysRequest {
 	op := &aws.Operation{
 		Name:       opListAccessKeys,
 		HTTPMethod: "POST",
@@ -7010,63 +3972,8 @@ func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) (req *aws.Reques
 		input = &ListAccessKeysInput{}
 	}
 
-	output = &ListAccessKeysOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAccessKeys API operation for AWS Identity and Access Management.
-//
-// Returns information about the access key IDs associated with the specified
-// IAM user. If there are none, the action returns an empty list.
-//
-// Although each user is limited to a small number of keys, you can still paginate
-// the results using the MaxItems and Marker parameters.
-//
-// If the UserName field is not specified, the UserName is determined implicitly
-// based on the AWS access key ID used to sign the request. Because this action
-// works for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
-//
-// To ensure the security of your AWS account, the secret access key is accessible
-// only during key and user creation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListAccessKeys for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeys
-func (c *IAM) ListAccessKeys(input *ListAccessKeysInput) (*ListAccessKeysOutput, error) {
-	req, out := c.ListAccessKeysRequest(input)
-	return out, req.Send()
-}
-
-// ListAccessKeysWithContext is the same as ListAccessKeys with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAccessKeys for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAccessKeysWithContext(ctx aws.Context, input *ListAccessKeysInput, opts ...aws.Option) (*ListAccessKeysOutput, error) {
-	req, out := c.ListAccessKeysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAccessKeysOutput{})
+	return ListAccessKeysRequest{Request: req, Input: input}
 }
 
 // ListAccessKeysPages iterates over the pages of a ListAccessKeys operation,
@@ -7105,10 +4012,10 @@ func (c *IAM) ListAccessKeysPagesWithContext(ctx aws.Context, input *ListAccessK
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAccessKeysRequest(inCpy)
+			req := c.ListAccessKeysRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -7121,31 +4028,39 @@ func (c *IAM) ListAccessKeysPagesWithContext(ctx aws.Context, input *ListAccessK
 
 const opListAccountAliases = "ListAccountAliases"
 
-// ListAccountAliasesRequest generates a "aws.Request" representing the
-// client's request for the ListAccountAliases operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAccountAliasesRequest is a API request type for the ListAccountAliases API operation.
+type ListAccountAliasesRequest struct {
+	*aws.Request
+	Input *ListAccountAliasesInput
+}
+
+// Send marshals and sends the ListAccountAliases API request.
+func (r ListAccountAliasesRequest) Send() (*ListAccountAliasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAccountAliasesOutput), nil
+}
+
+// ListAccountAliasesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAccountAliases for more information on using the ListAccountAliases
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the account alias associated with the AWS account (Note: you can have
+// only one). For information about using an AWS account alias, see Using an
+// Alias for Your AWS Account ID (http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the ListAccountAliasesRequest method.
-//    req, resp := client.ListAccountAliasesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAccountAliasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliases
-func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) (req *aws.Request, output *ListAccountAliasesOutput) {
+func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) ListAccountAliasesRequest {
 	op := &aws.Operation{
 		Name:       opListAccountAliases,
 		HTTPMethod: "POST",
@@ -7162,50 +4077,8 @@ func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) (req *aw
 		input = &ListAccountAliasesInput{}
 	}
 
-	output = &ListAccountAliasesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAccountAliases API operation for AWS Identity and Access Management.
-//
-// Lists the account alias associated with the AWS account (Note: you can have
-// only one). For information about using an AWS account alias, see Using an
-// Alias for Your AWS Account ID (http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListAccountAliases for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliases
-func (c *IAM) ListAccountAliases(input *ListAccountAliasesInput) (*ListAccountAliasesOutput, error) {
-	req, out := c.ListAccountAliasesRequest(input)
-	return out, req.Send()
-}
-
-// ListAccountAliasesWithContext is the same as ListAccountAliases with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAccountAliases for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAccountAliasesWithContext(ctx aws.Context, input *ListAccountAliasesInput, opts ...aws.Option) (*ListAccountAliasesOutput, error) {
-	req, out := c.ListAccountAliasesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAccountAliasesOutput{})
+	return ListAccountAliasesRequest{Request: req, Input: input}
 }
 
 // ListAccountAliasesPages iterates over the pages of a ListAccountAliases operation,
@@ -7244,10 +4117,10 @@ func (c *IAM) ListAccountAliasesPagesWithContext(ctx aws.Context, input *ListAcc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAccountAliasesRequest(inCpy)
+			req := c.ListAccountAliasesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -7260,31 +4133,47 @@ func (c *IAM) ListAccountAliasesPagesWithContext(ctx aws.Context, input *ListAcc
 
 const opListAttachedGroupPolicies = "ListAttachedGroupPolicies"
 
-// ListAttachedGroupPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListAttachedGroupPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAttachedGroupPoliciesRequest is a API request type for the ListAttachedGroupPolicies API operation.
+type ListAttachedGroupPoliciesRequest struct {
+	*aws.Request
+	Input *ListAttachedGroupPoliciesInput
+}
+
+// Send marshals and sends the ListAttachedGroupPolicies API request.
+func (r ListAttachedGroupPoliciesRequest) Send() (*ListAttachedGroupPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAttachedGroupPoliciesOutput), nil
+}
+
+// ListAttachedGroupPoliciesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all managed policies that are attached to the specified IAM group.
 //
-// See ListAttachedGroupPolicies for more information on using the ListAttachedGroupPolicies
-// API call, and error handling.
+// An IAM group can also have inline policies embedded with it. To list the
+// inline policies for a group, use the ListGroupPolicies API. For information
+// about policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters. You
+// can use the PathPrefix parameter to limit the list of policies to only those
+// matching the specified path prefix. If there are no policies attached to
+// the specified group (or none that match the specified path prefix), the action
+// returns an empty list.
 //
 //    // Example sending a request using the ListAttachedGroupPoliciesRequest method.
-//    req, resp := client.ListAttachedGroupPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAttachedGroupPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPolicies
-func (c *IAM) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPoliciesInput) (req *aws.Request, output *ListAttachedGroupPoliciesOutput) {
+func (c *IAM) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPoliciesInput) ListAttachedGroupPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListAttachedGroupPolicies,
 		HTTPMethod: "POST",
@@ -7301,66 +4190,8 @@ func (c *IAM) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPoliciesI
 		input = &ListAttachedGroupPoliciesInput{}
 	}
 
-	output = &ListAttachedGroupPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAttachedGroupPolicies API operation for AWS Identity and Access Management.
-//
-// Lists all managed policies that are attached to the specified IAM group.
-//
-// An IAM group can also have inline policies embedded with it. To list the
-// inline policies for a group, use the ListGroupPolicies API. For information
-// about policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// You can paginate the results using the MaxItems and Marker parameters. You
-// can use the PathPrefix parameter to limit the list of policies to only those
-// matching the specified path prefix. If there are no policies attached to
-// the specified group (or none that match the specified path prefix), the action
-// returns an empty list.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListAttachedGroupPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPolicies
-func (c *IAM) ListAttachedGroupPolicies(input *ListAttachedGroupPoliciesInput) (*ListAttachedGroupPoliciesOutput, error) {
-	req, out := c.ListAttachedGroupPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListAttachedGroupPoliciesWithContext is the same as ListAttachedGroupPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAttachedGroupPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAttachedGroupPoliciesWithContext(ctx aws.Context, input *ListAttachedGroupPoliciesInput, opts ...aws.Option) (*ListAttachedGroupPoliciesOutput, error) {
-	req, out := c.ListAttachedGroupPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAttachedGroupPoliciesOutput{})
+	return ListAttachedGroupPoliciesRequest{Request: req, Input: input}
 }
 
 // ListAttachedGroupPoliciesPages iterates over the pages of a ListAttachedGroupPolicies operation,
@@ -7399,10 +4230,10 @@ func (c *IAM) ListAttachedGroupPoliciesPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAttachedGroupPoliciesRequest(inCpy)
+			req := c.ListAttachedGroupPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -7415,31 +4246,47 @@ func (c *IAM) ListAttachedGroupPoliciesPagesWithContext(ctx aws.Context, input *
 
 const opListAttachedRolePolicies = "ListAttachedRolePolicies"
 
-// ListAttachedRolePoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListAttachedRolePolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAttachedRolePoliciesRequest is a API request type for the ListAttachedRolePolicies API operation.
+type ListAttachedRolePoliciesRequest struct {
+	*aws.Request
+	Input *ListAttachedRolePoliciesInput
+}
+
+// Send marshals and sends the ListAttachedRolePolicies API request.
+func (r ListAttachedRolePoliciesRequest) Send() (*ListAttachedRolePoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAttachedRolePoliciesOutput), nil
+}
+
+// ListAttachedRolePoliciesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all managed policies that are attached to the specified IAM role.
 //
-// See ListAttachedRolePolicies for more information on using the ListAttachedRolePolicies
-// API call, and error handling.
+// An IAM role can also have inline policies embedded with it. To list the inline
+// policies for a role, use the ListRolePolicies API. For information about
+// policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters. You
+// can use the PathPrefix parameter to limit the list of policies to only those
+// matching the specified path prefix. If there are no policies attached to
+// the specified role (or none that match the specified path prefix), the action
+// returns an empty list.
 //
 //    // Example sending a request using the ListAttachedRolePoliciesRequest method.
-//    req, resp := client.ListAttachedRolePoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAttachedRolePoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePolicies
-func (c *IAM) ListAttachedRolePoliciesRequest(input *ListAttachedRolePoliciesInput) (req *aws.Request, output *ListAttachedRolePoliciesOutput) {
+func (c *IAM) ListAttachedRolePoliciesRequest(input *ListAttachedRolePoliciesInput) ListAttachedRolePoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListAttachedRolePolicies,
 		HTTPMethod: "POST",
@@ -7456,66 +4303,8 @@ func (c *IAM) ListAttachedRolePoliciesRequest(input *ListAttachedRolePoliciesInp
 		input = &ListAttachedRolePoliciesInput{}
 	}
 
-	output = &ListAttachedRolePoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAttachedRolePolicies API operation for AWS Identity and Access Management.
-//
-// Lists all managed policies that are attached to the specified IAM role.
-//
-// An IAM role can also have inline policies embedded with it. To list the inline
-// policies for a role, use the ListRolePolicies API. For information about
-// policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// You can paginate the results using the MaxItems and Marker parameters. You
-// can use the PathPrefix parameter to limit the list of policies to only those
-// matching the specified path prefix. If there are no policies attached to
-// the specified role (or none that match the specified path prefix), the action
-// returns an empty list.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListAttachedRolePolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePolicies
-func (c *IAM) ListAttachedRolePolicies(input *ListAttachedRolePoliciesInput) (*ListAttachedRolePoliciesOutput, error) {
-	req, out := c.ListAttachedRolePoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListAttachedRolePoliciesWithContext is the same as ListAttachedRolePolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAttachedRolePolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAttachedRolePoliciesWithContext(ctx aws.Context, input *ListAttachedRolePoliciesInput, opts ...aws.Option) (*ListAttachedRolePoliciesOutput, error) {
-	req, out := c.ListAttachedRolePoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAttachedRolePoliciesOutput{})
+	return ListAttachedRolePoliciesRequest{Request: req, Input: input}
 }
 
 // ListAttachedRolePoliciesPages iterates over the pages of a ListAttachedRolePolicies operation,
@@ -7554,10 +4343,10 @@ func (c *IAM) ListAttachedRolePoliciesPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAttachedRolePoliciesRequest(inCpy)
+			req := c.ListAttachedRolePoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -7570,31 +4359,47 @@ func (c *IAM) ListAttachedRolePoliciesPagesWithContext(ctx aws.Context, input *L
 
 const opListAttachedUserPolicies = "ListAttachedUserPolicies"
 
-// ListAttachedUserPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListAttachedUserPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAttachedUserPoliciesRequest is a API request type for the ListAttachedUserPolicies API operation.
+type ListAttachedUserPoliciesRequest struct {
+	*aws.Request
+	Input *ListAttachedUserPoliciesInput
+}
+
+// Send marshals and sends the ListAttachedUserPolicies API request.
+func (r ListAttachedUserPoliciesRequest) Send() (*ListAttachedUserPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAttachedUserPoliciesOutput), nil
+}
+
+// ListAttachedUserPoliciesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all managed policies that are attached to the specified IAM user.
 //
-// See ListAttachedUserPolicies for more information on using the ListAttachedUserPolicies
-// API call, and error handling.
+// An IAM user can also have inline policies embedded with it. To list the inline
+// policies for a user, use the ListUserPolicies API. For information about
+// policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters. You
+// can use the PathPrefix parameter to limit the list of policies to only those
+// matching the specified path prefix. If there are no policies attached to
+// the specified group (or none that match the specified path prefix), the action
+// returns an empty list.
 //
 //    // Example sending a request using the ListAttachedUserPoliciesRequest method.
-//    req, resp := client.ListAttachedUserPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAttachedUserPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPolicies
-func (c *IAM) ListAttachedUserPoliciesRequest(input *ListAttachedUserPoliciesInput) (req *aws.Request, output *ListAttachedUserPoliciesOutput) {
+func (c *IAM) ListAttachedUserPoliciesRequest(input *ListAttachedUserPoliciesInput) ListAttachedUserPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListAttachedUserPolicies,
 		HTTPMethod: "POST",
@@ -7611,66 +4416,8 @@ func (c *IAM) ListAttachedUserPoliciesRequest(input *ListAttachedUserPoliciesInp
 		input = &ListAttachedUserPoliciesInput{}
 	}
 
-	output = &ListAttachedUserPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAttachedUserPolicies API operation for AWS Identity and Access Management.
-//
-// Lists all managed policies that are attached to the specified IAM user.
-//
-// An IAM user can also have inline policies embedded with it. To list the inline
-// policies for a user, use the ListUserPolicies API. For information about
-// policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// You can paginate the results using the MaxItems and Marker parameters. You
-// can use the PathPrefix parameter to limit the list of policies to only those
-// matching the specified path prefix. If there are no policies attached to
-// the specified group (or none that match the specified path prefix), the action
-// returns an empty list.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListAttachedUserPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPolicies
-func (c *IAM) ListAttachedUserPolicies(input *ListAttachedUserPoliciesInput) (*ListAttachedUserPoliciesOutput, error) {
-	req, out := c.ListAttachedUserPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListAttachedUserPoliciesWithContext is the same as ListAttachedUserPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAttachedUserPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAttachedUserPoliciesWithContext(ctx aws.Context, input *ListAttachedUserPoliciesInput, opts ...aws.Option) (*ListAttachedUserPoliciesOutput, error) {
-	req, out := c.ListAttachedUserPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAttachedUserPoliciesOutput{})
+	return ListAttachedUserPoliciesRequest{Request: req, Input: input}
 }
 
 // ListAttachedUserPoliciesPages iterates over the pages of a ListAttachedUserPolicies operation,
@@ -7709,10 +4456,10 @@ func (c *IAM) ListAttachedUserPoliciesPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAttachedUserPoliciesRequest(inCpy)
+			req := c.ListAttachedUserPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -7725,31 +4472,44 @@ func (c *IAM) ListAttachedUserPoliciesPagesWithContext(ctx aws.Context, input *L
 
 const opListEntitiesForPolicy = "ListEntitiesForPolicy"
 
-// ListEntitiesForPolicyRequest generates a "aws.Request" representing the
-// client's request for the ListEntitiesForPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListEntitiesForPolicyRequest is a API request type for the ListEntitiesForPolicy API operation.
+type ListEntitiesForPolicyRequest struct {
+	*aws.Request
+	Input *ListEntitiesForPolicyInput
+}
+
+// Send marshals and sends the ListEntitiesForPolicy API request.
+func (r ListEntitiesForPolicyRequest) Send() (*ListEntitiesForPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListEntitiesForPolicyOutput), nil
+}
+
+// ListEntitiesForPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all IAM users, groups, and roles that the specified managed policy
+// is attached to.
 //
-// See ListEntitiesForPolicy for more information on using the ListEntitiesForPolicy
-// API call, and error handling.
+// You can use the optional EntityFilter parameter to limit the results to a
+// particular type of entity (users, groups, or roles). For example, to list
+// only the roles that are attached to the specified policy, set EntityFilter
+// to Role.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListEntitiesForPolicyRequest method.
-//    req, resp := client.ListEntitiesForPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListEntitiesForPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicy
-func (c *IAM) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) (req *aws.Request, output *ListEntitiesForPolicyOutput) {
+func (c *IAM) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) ListEntitiesForPolicyRequest {
 	op := &aws.Operation{
 		Name:       opListEntitiesForPolicy,
 		HTTPMethod: "POST",
@@ -7766,63 +4526,8 @@ func (c *IAM) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) (r
 		input = &ListEntitiesForPolicyInput{}
 	}
 
-	output = &ListEntitiesForPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListEntitiesForPolicy API operation for AWS Identity and Access Management.
-//
-// Lists all IAM users, groups, and roles that the specified managed policy
-// is attached to.
-//
-// You can use the optional EntityFilter parameter to limit the results to a
-// particular type of entity (users, groups, or roles). For example, to list
-// only the roles that are attached to the specified policy, set EntityFilter
-// to Role.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListEntitiesForPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicy
-func (c *IAM) ListEntitiesForPolicy(input *ListEntitiesForPolicyInput) (*ListEntitiesForPolicyOutput, error) {
-	req, out := c.ListEntitiesForPolicyRequest(input)
-	return out, req.Send()
-}
-
-// ListEntitiesForPolicyWithContext is the same as ListEntitiesForPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListEntitiesForPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListEntitiesForPolicyWithContext(ctx aws.Context, input *ListEntitiesForPolicyInput, opts ...aws.Option) (*ListEntitiesForPolicyOutput, error) {
-	req, out := c.ListEntitiesForPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListEntitiesForPolicyOutput{})
+	return ListEntitiesForPolicyRequest{Request: req, Input: input}
 }
 
 // ListEntitiesForPolicyPages iterates over the pages of a ListEntitiesForPolicy operation,
@@ -7861,10 +4566,10 @@ func (c *IAM) ListEntitiesForPolicyPagesWithContext(ctx aws.Context, input *List
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListEntitiesForPolicyRequest(inCpy)
+			req := c.ListEntitiesForPolicyRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -7877,31 +4582,47 @@ func (c *IAM) ListEntitiesForPolicyPagesWithContext(ctx aws.Context, input *List
 
 const opListGroupPolicies = "ListGroupPolicies"
 
-// ListGroupPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListGroupPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGroupPoliciesRequest is a API request type for the ListGroupPolicies API operation.
+type ListGroupPoliciesRequest struct {
+	*aws.Request
+	Input *ListGroupPoliciesInput
+}
+
+// Send marshals and sends the ListGroupPolicies API request.
+func (r ListGroupPoliciesRequest) Send() (*ListGroupPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGroupPoliciesOutput), nil
+}
+
+// ListGroupPoliciesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the names of the inline policies that are embedded in the specified
+// IAM group.
 //
-// See ListGroupPolicies for more information on using the ListGroupPolicies
-// API call, and error handling.
+// An IAM group can also have managed policies attached to it. To list the managed
+// policies that are attached to a group, use ListAttachedGroupPolicies. For
+// more information about policies, see Managed Policies and Inline Policies
+// (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters. If
+// there are no inline policies embedded with the specified group, the action
+// returns an empty list.
 //
 //    // Example sending a request using the ListGroupPoliciesRequest method.
-//    req, resp := client.ListGroupPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGroupPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPolicies
-func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) (req *aws.Request, output *ListGroupPoliciesOutput) {
+func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) ListGroupPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListGroupPolicies,
 		HTTPMethod: "POST",
@@ -7918,62 +4639,8 @@ func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) (req *aws.
 		input = &ListGroupPoliciesInput{}
 	}
 
-	output = &ListGroupPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGroupPolicies API operation for AWS Identity and Access Management.
-//
-// Lists the names of the inline policies that are embedded in the specified
-// IAM group.
-//
-// An IAM group can also have managed policies attached to it. To list the managed
-// policies that are attached to a group, use ListAttachedGroupPolicies. For
-// more information about policies, see Managed Policies and Inline Policies
-// (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// You can paginate the results using the MaxItems and Marker parameters. If
-// there are no inline policies embedded with the specified group, the action
-// returns an empty list.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListGroupPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPolicies
-func (c *IAM) ListGroupPolicies(input *ListGroupPoliciesInput) (*ListGroupPoliciesOutput, error) {
-	req, out := c.ListGroupPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListGroupPoliciesWithContext is the same as ListGroupPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGroupPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListGroupPoliciesWithContext(ctx aws.Context, input *ListGroupPoliciesInput, opts ...aws.Option) (*ListGroupPoliciesOutput, error) {
-	req, out := c.ListGroupPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGroupPoliciesOutput{})
+	return ListGroupPoliciesRequest{Request: req, Input: input}
 }
 
 // ListGroupPoliciesPages iterates over the pages of a ListGroupPolicies operation,
@@ -8012,10 +4679,10 @@ func (c *IAM) ListGroupPoliciesPagesWithContext(ctx aws.Context, input *ListGrou
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListGroupPoliciesRequest(inCpy)
+			req := c.ListGroupPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -8028,31 +4695,38 @@ func (c *IAM) ListGroupPoliciesPagesWithContext(ctx aws.Context, input *ListGrou
 
 const opListGroups = "ListGroups"
 
-// ListGroupsRequest generates a "aws.Request" representing the
-// client's request for the ListGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGroupsRequest is a API request type for the ListGroups API operation.
+type ListGroupsRequest struct {
+	*aws.Request
+	Input *ListGroupsInput
+}
+
+// Send marshals and sends the ListGroups API request.
+func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGroupsOutput), nil
+}
+
+// ListGroupsRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the IAM groups that have the specified path prefix.
 //
-// See ListGroups for more information on using the ListGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListGroupsRequest method.
-//    req, resp := client.ListGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroups
-func (c *IAM) ListGroupsRequest(input *ListGroupsInput) (req *aws.Request, output *ListGroupsOutput) {
+func (c *IAM) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListGroups,
 		HTTPMethod: "POST",
@@ -8069,49 +4743,8 @@ func (c *IAM) ListGroupsRequest(input *ListGroupsInput) (req *aws.Request, outpu
 		input = &ListGroupsInput{}
 	}
 
-	output = &ListGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGroups API operation for AWS Identity and Access Management.
-//
-// Lists the IAM groups that have the specified path prefix.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroups
-func (c *IAM) ListGroups(input *ListGroupsInput) (*ListGroupsOutput, error) {
-	req, out := c.ListGroupsRequest(input)
-	return out, req.Send()
-}
-
-// ListGroupsWithContext is the same as ListGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListGroupsWithContext(ctx aws.Context, input *ListGroupsInput, opts ...aws.Option) (*ListGroupsOutput, error) {
-	req, out := c.ListGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGroupsOutput{})
+	return ListGroupsRequest{Request: req, Input: input}
 }
 
 // ListGroupsPages iterates over the pages of a ListGroups operation,
@@ -8150,10 +4783,10 @@ func (c *IAM) ListGroupsPagesWithContext(ctx aws.Context, input *ListGroupsInput
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListGroupsRequest(inCpy)
+			req := c.ListGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -8166,31 +4799,38 @@ func (c *IAM) ListGroupsPagesWithContext(ctx aws.Context, input *ListGroupsInput
 
 const opListGroupsForUser = "ListGroupsForUser"
 
-// ListGroupsForUserRequest generates a "aws.Request" representing the
-// client's request for the ListGroupsForUser operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGroupsForUserRequest is a API request type for the ListGroupsForUser API operation.
+type ListGroupsForUserRequest struct {
+	*aws.Request
+	Input *ListGroupsForUserInput
+}
+
+// Send marshals and sends the ListGroupsForUser API request.
+func (r ListGroupsForUserRequest) Send() (*ListGroupsForUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGroupsForUserOutput), nil
+}
+
+// ListGroupsForUserRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the IAM groups that the specified IAM user belongs to.
 //
-// See ListGroupsForUser for more information on using the ListGroupsForUser
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListGroupsForUserRequest method.
-//    req, resp := client.ListGroupsForUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGroupsForUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUser
-func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) (req *aws.Request, output *ListGroupsForUserOutput) {
+func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) ListGroupsForUserRequest {
 	op := &aws.Operation{
 		Name:       opListGroupsForUser,
 		HTTPMethod: "POST",
@@ -8207,53 +4847,8 @@ func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) (req *aws.
 		input = &ListGroupsForUserInput{}
 	}
 
-	output = &ListGroupsForUserOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGroupsForUser API operation for AWS Identity and Access Management.
-//
-// Lists the IAM groups that the specified IAM user belongs to.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListGroupsForUser for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUser
-func (c *IAM) ListGroupsForUser(input *ListGroupsForUserInput) (*ListGroupsForUserOutput, error) {
-	req, out := c.ListGroupsForUserRequest(input)
-	return out, req.Send()
-}
-
-// ListGroupsForUserWithContext is the same as ListGroupsForUser with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGroupsForUser for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListGroupsForUserWithContext(ctx aws.Context, input *ListGroupsForUserInput, opts ...aws.Option) (*ListGroupsForUserOutput, error) {
-	req, out := c.ListGroupsForUserRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGroupsForUserOutput{})
+	return ListGroupsForUserRequest{Request: req, Input: input}
 }
 
 // ListGroupsForUserPages iterates over the pages of a ListGroupsForUser operation,
@@ -8292,10 +4887,10 @@ func (c *IAM) ListGroupsForUserPagesWithContext(ctx aws.Context, input *ListGrou
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListGroupsForUserRequest(inCpy)
+			req := c.ListGroupsForUserRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -8308,31 +4903,40 @@ func (c *IAM) ListGroupsForUserPagesWithContext(ctx aws.Context, input *ListGrou
 
 const opListInstanceProfiles = "ListInstanceProfiles"
 
-// ListInstanceProfilesRequest generates a "aws.Request" representing the
-// client's request for the ListInstanceProfiles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListInstanceProfilesRequest is a API request type for the ListInstanceProfiles API operation.
+type ListInstanceProfilesRequest struct {
+	*aws.Request
+	Input *ListInstanceProfilesInput
+}
+
+// Send marshals and sends the ListInstanceProfiles API request.
+func (r ListInstanceProfilesRequest) Send() (*ListInstanceProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInstanceProfilesOutput), nil
+}
+
+// ListInstanceProfilesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the instance profiles that have the specified path prefix. If there
+// are none, the action returns an empty list. For more information about instance
+// profiles, go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
-// See ListInstanceProfiles for more information on using the ListInstanceProfiles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListInstanceProfilesRequest method.
-//    req, resp := client.ListInstanceProfilesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListInstanceProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfiles
-func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) (req *aws.Request, output *ListInstanceProfilesOutput) {
+func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) ListInstanceProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceProfiles,
 		HTTPMethod: "POST",
@@ -8349,51 +4953,8 @@ func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) (req
 		input = &ListInstanceProfilesInput{}
 	}
 
-	output = &ListInstanceProfilesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListInstanceProfiles API operation for AWS Identity and Access Management.
-//
-// Lists the instance profiles that have the specified path prefix. If there
-// are none, the action returns an empty list. For more information about instance
-// profiles, go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListInstanceProfiles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfiles
-func (c *IAM) ListInstanceProfiles(input *ListInstanceProfilesInput) (*ListInstanceProfilesOutput, error) {
-	req, out := c.ListInstanceProfilesRequest(input)
-	return out, req.Send()
-}
-
-// ListInstanceProfilesWithContext is the same as ListInstanceProfiles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListInstanceProfiles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListInstanceProfilesWithContext(ctx aws.Context, input *ListInstanceProfilesInput, opts ...aws.Option) (*ListInstanceProfilesOutput, error) {
-	req, out := c.ListInstanceProfilesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListInstanceProfilesOutput{})
+	return ListInstanceProfilesRequest{Request: req, Input: input}
 }
 
 // ListInstanceProfilesPages iterates over the pages of a ListInstanceProfiles operation,
@@ -8432,10 +4993,10 @@ func (c *IAM) ListInstanceProfilesPagesWithContext(ctx aws.Context, input *ListI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListInstanceProfilesRequest(inCpy)
+			req := c.ListInstanceProfilesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -8448,31 +5009,40 @@ func (c *IAM) ListInstanceProfilesPagesWithContext(ctx aws.Context, input *ListI
 
 const opListInstanceProfilesForRole = "ListInstanceProfilesForRole"
 
-// ListInstanceProfilesForRoleRequest generates a "aws.Request" representing the
-// client's request for the ListInstanceProfilesForRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListInstanceProfilesForRoleRequest is a API request type for the ListInstanceProfilesForRole API operation.
+type ListInstanceProfilesForRoleRequest struct {
+	*aws.Request
+	Input *ListInstanceProfilesForRoleInput
+}
+
+// Send marshals and sends the ListInstanceProfilesForRole API request.
+func (r ListInstanceProfilesForRoleRequest) Send() (*ListInstanceProfilesForRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInstanceProfilesForRoleOutput), nil
+}
+
+// ListInstanceProfilesForRoleRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the instance profiles that have the specified associated IAM role.
+// If there are none, the action returns an empty list. For more information
+// about instance profiles, go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
-// See ListInstanceProfilesForRole for more information on using the ListInstanceProfilesForRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListInstanceProfilesForRoleRequest method.
-//    req, resp := client.ListInstanceProfilesForRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListInstanceProfilesForRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRole
-func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForRoleInput) (req *aws.Request, output *ListInstanceProfilesForRoleOutput) {
+func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForRoleInput) ListInstanceProfilesForRoleRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceProfilesForRole,
 		HTTPMethod: "POST",
@@ -8489,55 +5059,8 @@ func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForR
 		input = &ListInstanceProfilesForRoleInput{}
 	}
 
-	output = &ListInstanceProfilesForRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListInstanceProfilesForRole API operation for AWS Identity and Access Management.
-//
-// Lists the instance profiles that have the specified associated IAM role.
-// If there are none, the action returns an empty list. For more information
-// about instance profiles, go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListInstanceProfilesForRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRole
-func (c *IAM) ListInstanceProfilesForRole(input *ListInstanceProfilesForRoleInput) (*ListInstanceProfilesForRoleOutput, error) {
-	req, out := c.ListInstanceProfilesForRoleRequest(input)
-	return out, req.Send()
-}
-
-// ListInstanceProfilesForRoleWithContext is the same as ListInstanceProfilesForRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListInstanceProfilesForRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListInstanceProfilesForRoleWithContext(ctx aws.Context, input *ListInstanceProfilesForRoleInput, opts ...aws.Option) (*ListInstanceProfilesForRoleOutput, error) {
-	req, out := c.ListInstanceProfilesForRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListInstanceProfilesForRoleOutput{})
+	return ListInstanceProfilesForRoleRequest{Request: req, Input: input}
 }
 
 // ListInstanceProfilesForRolePages iterates over the pages of a ListInstanceProfilesForRole operation,
@@ -8576,10 +5099,10 @@ func (c *IAM) ListInstanceProfilesForRolePagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListInstanceProfilesForRoleRequest(inCpy)
+			req := c.ListInstanceProfilesForRoleRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -8592,31 +5115,41 @@ func (c *IAM) ListInstanceProfilesForRolePagesWithContext(ctx aws.Context, input
 
 const opListMFADevices = "ListMFADevices"
 
-// ListMFADevicesRequest generates a "aws.Request" representing the
-// client's request for the ListMFADevices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListMFADevicesRequest is a API request type for the ListMFADevices API operation.
+type ListMFADevicesRequest struct {
+	*aws.Request
+	Input *ListMFADevicesInput
+}
+
+// Send marshals and sends the ListMFADevices API request.
+func (r ListMFADevicesRequest) Send() (*ListMFADevicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListMFADevicesOutput), nil
+}
+
+// ListMFADevicesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the MFA devices for an IAM user. If the request includes a IAM user
+// name, then this action lists all the MFA devices associated with the specified
+// user. If you do not specify a user name, IAM determines the user name implicitly
+// based on the AWS access key ID signing the request for this API.
 //
-// See ListMFADevices for more information on using the ListMFADevices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListMFADevicesRequest method.
-//    req, resp := client.ListMFADevicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListMFADevicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevices
-func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) (req *aws.Request, output *ListMFADevicesOutput) {
+func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) ListMFADevicesRequest {
 	op := &aws.Operation{
 		Name:       opListMFADevices,
 		HTTPMethod: "POST",
@@ -8633,56 +5166,8 @@ func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) (req *aws.Reques
 		input = &ListMFADevicesInput{}
 	}
 
-	output = &ListMFADevicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListMFADevices API operation for AWS Identity and Access Management.
-//
-// Lists the MFA devices for an IAM user. If the request includes a IAM user
-// name, then this action lists all the MFA devices associated with the specified
-// user. If you do not specify a user name, IAM determines the user name implicitly
-// based on the AWS access key ID signing the request for this API.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListMFADevices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevices
-func (c *IAM) ListMFADevices(input *ListMFADevicesInput) (*ListMFADevicesOutput, error) {
-	req, out := c.ListMFADevicesRequest(input)
-	return out, req.Send()
-}
-
-// ListMFADevicesWithContext is the same as ListMFADevices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListMFADevices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListMFADevicesWithContext(ctx aws.Context, input *ListMFADevicesInput, opts ...aws.Option) (*ListMFADevicesOutput, error) {
-	req, out := c.ListMFADevicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListMFADevicesOutput{})
+	return ListMFADevicesRequest{Request: req, Input: input}
 }
 
 // ListMFADevicesPages iterates over the pages of a ListMFADevices operation,
@@ -8721,10 +5206,10 @@ func (c *IAM) ListMFADevicesPagesWithContext(ctx aws.Context, input *ListMFADevi
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListMFADevicesRequest(inCpy)
+			req := c.ListMFADevicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -8737,31 +5222,37 @@ func (c *IAM) ListMFADevicesPagesWithContext(ctx aws.Context, input *ListMFADevi
 
 const opListOpenIDConnectProviders = "ListOpenIDConnectProviders"
 
-// ListOpenIDConnectProvidersRequest generates a "aws.Request" representing the
-// client's request for the ListOpenIDConnectProviders operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListOpenIDConnectProvidersRequest is a API request type for the ListOpenIDConnectProviders API operation.
+type ListOpenIDConnectProvidersRequest struct {
+	*aws.Request
+	Input *ListOpenIDConnectProvidersInput
+}
+
+// Send marshals and sends the ListOpenIDConnectProviders API request.
+func (r ListOpenIDConnectProvidersRequest) Send() (*ListOpenIDConnectProvidersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOpenIDConnectProvidersOutput), nil
+}
+
+// ListOpenIDConnectProvidersRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListOpenIDConnectProviders for more information on using the ListOpenIDConnectProviders
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists information about the IAM OpenID Connect (OIDC) provider resource objects
+// defined in the AWS account.
 //
 //    // Example sending a request using the ListOpenIDConnectProvidersRequest method.
-//    req, resp := client.ListOpenIDConnectProvidersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListOpenIDConnectProvidersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProviders
-func (c *IAM) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvidersInput) (req *aws.Request, output *ListOpenIDConnectProvidersOutput) {
+func (c *IAM) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvidersInput) ListOpenIDConnectProvidersRequest {
 	op := &aws.Operation{
 		Name:       opListOpenIDConnectProviders,
 		HTTPMethod: "POST",
@@ -8772,77 +5263,54 @@ func (c *IAM) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvider
 		input = &ListOpenIDConnectProvidersInput{}
 	}
 
-	output = &ListOpenIDConnectProvidersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListOpenIDConnectProviders API operation for AWS Identity and Access Management.
-//
-// Lists information about the IAM OpenID Connect (OIDC) provider resource objects
-// defined in the AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListOpenIDConnectProviders for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProviders
-func (c *IAM) ListOpenIDConnectProviders(input *ListOpenIDConnectProvidersInput) (*ListOpenIDConnectProvidersOutput, error) {
-	req, out := c.ListOpenIDConnectProvidersRequest(input)
-	return out, req.Send()
-}
-
-// ListOpenIDConnectProvidersWithContext is the same as ListOpenIDConnectProviders with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListOpenIDConnectProviders for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListOpenIDConnectProvidersWithContext(ctx aws.Context, input *ListOpenIDConnectProvidersInput, opts ...aws.Option) (*ListOpenIDConnectProvidersOutput, error) {
-	req, out := c.ListOpenIDConnectProvidersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListOpenIDConnectProvidersOutput{})
+	return ListOpenIDConnectProvidersRequest{Request: req, Input: input}
 }
 
 const opListPolicies = "ListPolicies"
 
-// ListPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPoliciesRequest is a API request type for the ListPolicies API operation.
+type ListPoliciesRequest struct {
+	*aws.Request
+	Input *ListPoliciesInput
+}
+
+// Send marshals and sends the ListPolicies API request.
+func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPoliciesOutput), nil
+}
+
+// ListPoliciesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all the managed policies that are available in your AWS account, including
+// your own customer-defined managed policies and all AWS managed policies.
 //
-// See ListPolicies for more information on using the ListPolicies
-// API call, and error handling.
+// You can filter the list of policies that is returned using the optional OnlyAttached,
+// Scope, and PathPrefix parameters. For example, to list only the customer
+// managed policies in your AWS account, set Scope to Local. To list only AWS
+// managed policies, set Scope to AWS.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// You can paginate the results using the MaxItems and Marker parameters.
 //
+// For more information about managed policies, see Managed Policies and Inline
+// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the ListPoliciesRequest method.
-//    req, resp := client.ListPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicies
-func (c *IAM) ListPoliciesRequest(input *ListPoliciesInput) (req *aws.Request, output *ListPoliciesOutput) {
+func (c *IAM) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListPolicies,
 		HTTPMethod: "POST",
@@ -8859,59 +5327,8 @@ func (c *IAM) ListPoliciesRequest(input *ListPoliciesInput) (req *aws.Request, o
 		input = &ListPoliciesInput{}
 	}
 
-	output = &ListPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPolicies API operation for AWS Identity and Access Management.
-//
-// Lists all the managed policies that are available in your AWS account, including
-// your own customer-defined managed policies and all AWS managed policies.
-//
-// You can filter the list of policies that is returned using the optional OnlyAttached,
-// Scope, and PathPrefix parameters. For example, to list only the customer
-// managed policies in your AWS account, set Scope to Local. To list only AWS
-// managed policies, set Scope to AWS.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// For more information about managed policies, see Managed Policies and Inline
-// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicies
-func (c *IAM) ListPolicies(input *ListPoliciesInput) (*ListPoliciesOutput, error) {
-	req, out := c.ListPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListPoliciesWithContext is the same as ListPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListPoliciesWithContext(ctx aws.Context, input *ListPoliciesInput, opts ...aws.Option) (*ListPoliciesOutput, error) {
-	req, out := c.ListPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPoliciesOutput{})
+	return ListPoliciesRequest{Request: req, Input: input}
 }
 
 // ListPoliciesPages iterates over the pages of a ListPolicies operation,
@@ -8950,10 +5367,10 @@ func (c *IAM) ListPoliciesPagesWithContext(ctx aws.Context, input *ListPoliciesI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPoliciesRequest(inCpy)
+			req := c.ListPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -8966,31 +5383,41 @@ func (c *IAM) ListPoliciesPagesWithContext(ctx aws.Context, input *ListPoliciesI
 
 const opListPolicyVersions = "ListPolicyVersions"
 
-// ListPolicyVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListPolicyVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPolicyVersionsRequest is a API request type for the ListPolicyVersions API operation.
+type ListPolicyVersionsRequest struct {
+	*aws.Request
+	Input *ListPolicyVersionsInput
+}
+
+// Send marshals and sends the ListPolicyVersions API request.
+func (r ListPolicyVersionsRequest) Send() (*ListPolicyVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPolicyVersionsOutput), nil
+}
+
+// ListPolicyVersionsRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists information about the versions of the specified managed policy, including
+// the version that is currently set as the policy's default version.
 //
-// See ListPolicyVersions for more information on using the ListPolicyVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about managed policies, see Managed Policies and Inline
+// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the ListPolicyVersionsRequest method.
-//    req, resp := client.ListPolicyVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPolicyVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersions
-func (c *IAM) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) (req *aws.Request, output *ListPolicyVersionsOutput) {
+func (c *IAM) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPolicyVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListPolicyVersions,
 		HTTPMethod: "POST",
@@ -9007,60 +5434,8 @@ func (c *IAM) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) (req *aw
 		input = &ListPolicyVersionsInput{}
 	}
 
-	output = &ListPolicyVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPolicyVersions API operation for AWS Identity and Access Management.
-//
-// Lists information about the versions of the specified managed policy, including
-// the version that is currently set as the policy's default version.
-//
-// For more information about managed policies, see Managed Policies and Inline
-// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListPolicyVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersions
-func (c *IAM) ListPolicyVersions(input *ListPolicyVersionsInput) (*ListPolicyVersionsOutput, error) {
-	req, out := c.ListPolicyVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListPolicyVersionsWithContext is the same as ListPolicyVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPolicyVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListPolicyVersionsWithContext(ctx aws.Context, input *ListPolicyVersionsInput, opts ...aws.Option) (*ListPolicyVersionsOutput, error) {
-	req, out := c.ListPolicyVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPolicyVersionsOutput{})
+	return ListPolicyVersionsRequest{Request: req, Input: input}
 }
 
 // ListPolicyVersionsPages iterates over the pages of a ListPolicyVersions operation,
@@ -9099,10 +5474,10 @@ func (c *IAM) ListPolicyVersionsPagesWithContext(ctx aws.Context, input *ListPol
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPolicyVersionsRequest(inCpy)
+			req := c.ListPolicyVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -9115,31 +5490,46 @@ func (c *IAM) ListPolicyVersionsPagesWithContext(ctx aws.Context, input *ListPol
 
 const opListRolePolicies = "ListRolePolicies"
 
-// ListRolePoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListRolePolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRolePoliciesRequest is a API request type for the ListRolePolicies API operation.
+type ListRolePoliciesRequest struct {
+	*aws.Request
+	Input *ListRolePoliciesInput
+}
+
+// Send marshals and sends the ListRolePolicies API request.
+func (r ListRolePoliciesRequest) Send() (*ListRolePoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRolePoliciesOutput), nil
+}
+
+// ListRolePoliciesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the names of the inline policies that are embedded in the specified
+// IAM role.
 //
-// See ListRolePolicies for more information on using the ListRolePolicies
-// API call, and error handling.
+// An IAM role can also have managed policies attached to it. To list the managed
+// policies that are attached to a role, use ListAttachedRolePolicies. For more
+// information about policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters. If
+// there are no inline policies embedded with the specified role, the action
+// returns an empty list.
 //
 //    // Example sending a request using the ListRolePoliciesRequest method.
-//    req, resp := client.ListRolePoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRolePoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePolicies
-func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) (req *aws.Request, output *ListRolePoliciesOutput) {
+func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) ListRolePoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListRolePolicies,
 		HTTPMethod: "POST",
@@ -9156,61 +5546,8 @@ func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) (req *aws.Re
 		input = &ListRolePoliciesInput{}
 	}
 
-	output = &ListRolePoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRolePolicies API operation for AWS Identity and Access Management.
-//
-// Lists the names of the inline policies that are embedded in the specified
-// IAM role.
-//
-// An IAM role can also have managed policies attached to it. To list the managed
-// policies that are attached to a role, use ListAttachedRolePolicies. For more
-// information about policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// You can paginate the results using the MaxItems and Marker parameters. If
-// there are no inline policies embedded with the specified role, the action
-// returns an empty list.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListRolePolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePolicies
-func (c *IAM) ListRolePolicies(input *ListRolePoliciesInput) (*ListRolePoliciesOutput, error) {
-	req, out := c.ListRolePoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListRolePoliciesWithContext is the same as ListRolePolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRolePolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListRolePoliciesWithContext(ctx aws.Context, input *ListRolePoliciesInput, opts ...aws.Option) (*ListRolePoliciesOutput, error) {
-	req, out := c.ListRolePoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRolePoliciesOutput{})
+	return ListRolePoliciesRequest{Request: req, Input: input}
 }
 
 // ListRolePoliciesPages iterates over the pages of a ListRolePolicies operation,
@@ -9249,10 +5586,10 @@ func (c *IAM) ListRolePoliciesPagesWithContext(ctx aws.Context, input *ListRoleP
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListRolePoliciesRequest(inCpy)
+			req := c.ListRolePoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -9265,31 +5602,40 @@ func (c *IAM) ListRolePoliciesPagesWithContext(ctx aws.Context, input *ListRoleP
 
 const opListRoles = "ListRoles"
 
-// ListRolesRequest generates a "aws.Request" representing the
-// client's request for the ListRoles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRolesRequest is a API request type for the ListRoles API operation.
+type ListRolesRequest struct {
+	*aws.Request
+	Input *ListRolesInput
+}
+
+// Send marshals and sends the ListRoles API request.
+func (r ListRolesRequest) Send() (*ListRolesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRolesOutput), nil
+}
+
+// ListRolesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the IAM roles that have the specified path prefix. If there are none,
+// the action returns an empty list. For more information about roles, go to
+// Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
 //
-// See ListRoles for more information on using the ListRoles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListRolesRequest method.
-//    req, resp := client.ListRolesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRolesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoles
-func (c *IAM) ListRolesRequest(input *ListRolesInput) (req *aws.Request, output *ListRolesOutput) {
+func (c *IAM) ListRolesRequest(input *ListRolesInput) ListRolesRequest {
 	op := &aws.Operation{
 		Name:       opListRoles,
 		HTTPMethod: "POST",
@@ -9306,51 +5652,8 @@ func (c *IAM) ListRolesRequest(input *ListRolesInput) (req *aws.Request, output 
 		input = &ListRolesInput{}
 	}
 
-	output = &ListRolesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRoles API operation for AWS Identity and Access Management.
-//
-// Lists the IAM roles that have the specified path prefix. If there are none,
-// the action returns an empty list. For more information about roles, go to
-// Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListRoles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoles
-func (c *IAM) ListRoles(input *ListRolesInput) (*ListRolesOutput, error) {
-	req, out := c.ListRolesRequest(input)
-	return out, req.Send()
-}
-
-// ListRolesWithContext is the same as ListRoles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRoles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListRolesWithContext(ctx aws.Context, input *ListRolesInput, opts ...aws.Option) (*ListRolesOutput, error) {
-	req, out := c.ListRolesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRolesOutput{})
+	return ListRolesRequest{Request: req, Input: input}
 }
 
 // ListRolesPages iterates over the pages of a ListRoles operation,
@@ -9389,10 +5692,10 @@ func (c *IAM) ListRolesPagesWithContext(ctx aws.Context, input *ListRolesInput, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListRolesRequest(inCpy)
+			req := c.ListRolesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -9405,31 +5708,38 @@ func (c *IAM) ListRolesPagesWithContext(ctx aws.Context, input *ListRolesInput, 
 
 const opListSAMLProviders = "ListSAMLProviders"
 
-// ListSAMLProvidersRequest generates a "aws.Request" representing the
-// client's request for the ListSAMLProviders operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSAMLProvidersRequest is a API request type for the ListSAMLProviders API operation.
+type ListSAMLProvidersRequest struct {
+	*aws.Request
+	Input *ListSAMLProvidersInput
+}
+
+// Send marshals and sends the ListSAMLProviders API request.
+func (r ListSAMLProvidersRequest) Send() (*ListSAMLProvidersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSAMLProvidersOutput), nil
+}
+
+// ListSAMLProvidersRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the SAML provider resource objects defined in IAM in the account.
 //
-// See ListSAMLProviders for more information on using the ListSAMLProviders
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires Signature Version 4 (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 //
 //    // Example sending a request using the ListSAMLProvidersRequest method.
-//    req, resp := client.ListSAMLProvidersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSAMLProvidersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProviders
-func (c *IAM) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) (req *aws.Request, output *ListSAMLProvidersOutput) {
+func (c *IAM) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) ListSAMLProvidersRequest {
 	op := &aws.Operation{
 		Name:       opListSAMLProviders,
 		HTTPMethod: "POST",
@@ -9440,78 +5750,52 @@ func (c *IAM) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) (req *aws.
 		input = &ListSAMLProvidersInput{}
 	}
 
-	output = &ListSAMLProvidersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSAMLProviders API operation for AWS Identity and Access Management.
-//
-// Lists the SAML provider resource objects defined in IAM in the account.
-//
-// This operation requires Signature Version 4 (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListSAMLProviders for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProviders
-func (c *IAM) ListSAMLProviders(input *ListSAMLProvidersInput) (*ListSAMLProvidersOutput, error) {
-	req, out := c.ListSAMLProvidersRequest(input)
-	return out, req.Send()
-}
-
-// ListSAMLProvidersWithContext is the same as ListSAMLProviders with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSAMLProviders for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListSAMLProvidersWithContext(ctx aws.Context, input *ListSAMLProvidersInput, opts ...aws.Option) (*ListSAMLProvidersOutput, error) {
-	req, out := c.ListSAMLProvidersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSAMLProvidersOutput{})
+	return ListSAMLProvidersRequest{Request: req, Input: input}
 }
 
 const opListSSHPublicKeys = "ListSSHPublicKeys"
 
-// ListSSHPublicKeysRequest generates a "aws.Request" representing the
-// client's request for the ListSSHPublicKeys operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSSHPublicKeysRequest is a API request type for the ListSSHPublicKeys API operation.
+type ListSSHPublicKeysRequest struct {
+	*aws.Request
+	Input *ListSSHPublicKeysInput
+}
+
+// Send marshals and sends the ListSSHPublicKeys API request.
+func (r ListSSHPublicKeysRequest) Send() (*ListSSHPublicKeysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSSHPublicKeysOutput), nil
+}
+
+// ListSSHPublicKeysRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the SSH public keys associated with the specified
+// IAM user. If there are none, the action returns an empty list.
 //
-// See ListSSHPublicKeys for more information on using the ListSSHPublicKeys
-// API call, and error handling.
+// The SSH public keys returned by this action are used only for authenticating
+// the IAM user to an AWS CodeCommit repository. For more information about
+// using SSH keys to authenticate to an AWS CodeCommit repository, see Set up
+// AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// in the AWS CodeCommit User Guide.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Although each user is limited to a small number of keys, you can still paginate
+// the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListSSHPublicKeysRequest method.
-//    req, resp := client.ListSSHPublicKeysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSSHPublicKeysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeys
-func (c *IAM) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) (req *aws.Request, output *ListSSHPublicKeysOutput) {
+func (c *IAM) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSHPublicKeysRequest {
 	op := &aws.Operation{
 		Name:       opListSSHPublicKeys,
 		HTTPMethod: "POST",
@@ -9528,57 +5812,8 @@ func (c *IAM) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) (req *aws.
 		input = &ListSSHPublicKeysInput{}
 	}
 
-	output = &ListSSHPublicKeysOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSSHPublicKeys API operation for AWS Identity and Access Management.
-//
-// Returns information about the SSH public keys associated with the specified
-// IAM user. If there are none, the action returns an empty list.
-//
-// The SSH public keys returned by this action are used only for authenticating
-// the IAM user to an AWS CodeCommit repository. For more information about
-// using SSH keys to authenticate to an AWS CodeCommit repository, see Set up
-// AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
-// in the AWS CodeCommit User Guide.
-//
-// Although each user is limited to a small number of keys, you can still paginate
-// the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListSSHPublicKeys for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeys
-func (c *IAM) ListSSHPublicKeys(input *ListSSHPublicKeysInput) (*ListSSHPublicKeysOutput, error) {
-	req, out := c.ListSSHPublicKeysRequest(input)
-	return out, req.Send()
-}
-
-// ListSSHPublicKeysWithContext is the same as ListSSHPublicKeys with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSSHPublicKeys for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListSSHPublicKeysWithContext(ctx aws.Context, input *ListSSHPublicKeysInput, opts ...aws.Option) (*ListSSHPublicKeysOutput, error) {
-	req, out := c.ListSSHPublicKeysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSSHPublicKeysOutput{})
+	return ListSSHPublicKeysRequest{Request: req, Input: input}
 }
 
 // ListSSHPublicKeysPages iterates over the pages of a ListSSHPublicKeys operation,
@@ -9617,10 +5852,10 @@ func (c *IAM) ListSSHPublicKeysPagesWithContext(ctx aws.Context, input *ListSSHP
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListSSHPublicKeysRequest(inCpy)
+			req := c.ListSSHPublicKeysRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -9633,31 +5868,44 @@ func (c *IAM) ListSSHPublicKeysPagesWithContext(ctx aws.Context, input *ListSSHP
 
 const opListServerCertificates = "ListServerCertificates"
 
-// ListServerCertificatesRequest generates a "aws.Request" representing the
-// client's request for the ListServerCertificates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListServerCertificatesRequest is a API request type for the ListServerCertificates API operation.
+type ListServerCertificatesRequest struct {
+	*aws.Request
+	Input *ListServerCertificatesInput
+}
+
+// Send marshals and sends the ListServerCertificates API request.
+func (r ListServerCertificatesRequest) Send() (*ListServerCertificatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListServerCertificatesOutput), nil
+}
+
+// ListServerCertificatesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the server certificates stored in IAM that have the specified path
+// prefix. If none exist, the action returns an empty list.
 //
-// See ListServerCertificates for more information on using the ListServerCertificates
-// API call, and error handling.
+// You can paginate the results using the MaxItems and Marker parameters.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about working with server certificates, including a
+// list of AWS services that can use the server certificates that you manage
+// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the ListServerCertificatesRequest method.
-//    req, resp := client.ListServerCertificatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListServerCertificatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificates
-func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) (req *aws.Request, output *ListServerCertificatesOutput) {
+func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) ListServerCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opListServerCertificates,
 		HTTPMethod: "POST",
@@ -9674,55 +5922,8 @@ func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) 
 		input = &ListServerCertificatesInput{}
 	}
 
-	output = &ListServerCertificatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListServerCertificates API operation for AWS Identity and Access Management.
-//
-// Lists the server certificates stored in IAM that have the specified path
-// prefix. If none exist, the action returns an empty list.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// For more information about working with server certificates, including a
-// list of AWS services that can use the server certificates that you manage
-// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListServerCertificates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificates
-func (c *IAM) ListServerCertificates(input *ListServerCertificatesInput) (*ListServerCertificatesOutput, error) {
-	req, out := c.ListServerCertificatesRequest(input)
-	return out, req.Send()
-}
-
-// ListServerCertificatesWithContext is the same as ListServerCertificates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListServerCertificates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListServerCertificatesWithContext(ctx aws.Context, input *ListServerCertificatesInput, opts ...aws.Option) (*ListServerCertificatesOutput, error) {
-	req, out := c.ListServerCertificatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListServerCertificatesOutput{})
+	return ListServerCertificatesRequest{Request: req, Input: input}
 }
 
 // ListServerCertificatesPages iterates over the pages of a ListServerCertificates operation,
@@ -9761,10 +5962,10 @@ func (c *IAM) ListServerCertificatesPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListServerCertificatesRequest(inCpy)
+			req := c.ListServerCertificatesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -9777,31 +5978,42 @@ func (c *IAM) ListServerCertificatesPagesWithContext(ctx aws.Context, input *Lis
 
 const opListServiceSpecificCredentials = "ListServiceSpecificCredentials"
 
-// ListServiceSpecificCredentialsRequest generates a "aws.Request" representing the
-// client's request for the ListServiceSpecificCredentials operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListServiceSpecificCredentialsRequest is a API request type for the ListServiceSpecificCredentials API operation.
+type ListServiceSpecificCredentialsRequest struct {
+	*aws.Request
+	Input *ListServiceSpecificCredentialsInput
+}
+
+// Send marshals and sends the ListServiceSpecificCredentials API request.
+func (r ListServiceSpecificCredentialsRequest) Send() (*ListServiceSpecificCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListServiceSpecificCredentialsOutput), nil
+}
+
+// ListServiceSpecificCredentialsRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListServiceSpecificCredentials for more information on using the ListServiceSpecificCredentials
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the service-specific credentials associated with
+// the specified IAM user. If there are none, the action returns an empty list.
+// The service-specific credentials returned by this action are used only for
+// authenticating the IAM user to a specific service. For more information about
+// using service-specific credentials to authenticate to an AWS service, see
+// Set Up service-specific credentials (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
+// in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using the ListServiceSpecificCredentialsRequest method.
-//    req, resp := client.ListServiceSpecificCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListServiceSpecificCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentials
-func (c *IAM) ListServiceSpecificCredentialsRequest(input *ListServiceSpecificCredentialsInput) (req *aws.Request, output *ListServiceSpecificCredentialsOutput) {
+func (c *IAM) ListServiceSpecificCredentialsRequest(input *ListServiceSpecificCredentialsInput) ListServiceSpecificCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opListServiceSpecificCredentials,
 		HTTPMethod: "POST",
@@ -9812,85 +6024,52 @@ func (c *IAM) ListServiceSpecificCredentialsRequest(input *ListServiceSpecificCr
 		input = &ListServiceSpecificCredentialsInput{}
 	}
 
-	output = &ListServiceSpecificCredentialsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListServiceSpecificCredentials API operation for AWS Identity and Access Management.
-//
-// Returns information about the service-specific credentials associated with
-// the specified IAM user. If there are none, the action returns an empty list.
-// The service-specific credentials returned by this action are used only for
-// authenticating the IAM user to a specific service. For more information about
-// using service-specific credentials to authenticate to an AWS service, see
-// Set Up service-specific credentials (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
-// in the AWS CodeCommit User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListServiceSpecificCredentials for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceNotSupportedException "NotSupportedService"
-//   The specified service does not support service-specific credentials.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentials
-func (c *IAM) ListServiceSpecificCredentials(input *ListServiceSpecificCredentialsInput) (*ListServiceSpecificCredentialsOutput, error) {
-	req, out := c.ListServiceSpecificCredentialsRequest(input)
-	return out, req.Send()
-}
-
-// ListServiceSpecificCredentialsWithContext is the same as ListServiceSpecificCredentials with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListServiceSpecificCredentials for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListServiceSpecificCredentialsWithContext(ctx aws.Context, input *ListServiceSpecificCredentialsInput, opts ...aws.Option) (*ListServiceSpecificCredentialsOutput, error) {
-	req, out := c.ListServiceSpecificCredentialsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListServiceSpecificCredentialsOutput{})
+	return ListServiceSpecificCredentialsRequest{Request: req, Input: input}
 }
 
 const opListSigningCertificates = "ListSigningCertificates"
 
-// ListSigningCertificatesRequest generates a "aws.Request" representing the
-// client's request for the ListSigningCertificates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSigningCertificatesRequest is a API request type for the ListSigningCertificates API operation.
+type ListSigningCertificatesRequest struct {
+	*aws.Request
+	Input *ListSigningCertificatesInput
+}
+
+// Send marshals and sends the ListSigningCertificates API request.
+func (r ListSigningCertificatesRequest) Send() (*ListSigningCertificatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSigningCertificatesOutput), nil
+}
+
+// ListSigningCertificatesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the signing certificates associated with the specified
+// IAM user. If there are none, the action returns an empty list.
 //
-// See ListSigningCertificates for more information on using the ListSigningCertificates
-// API call, and error handling.
+// Although each user is limited to a small number of signing certificates,
+// you can still paginate the results using the MaxItems and Marker parameters.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If the UserName field is not specified, the user name is determined implicitly
+// based on the AWS access key ID used to sign the request for this API. Because
+// this action works for access keys under the AWS account, you can use this
+// action to manage root credentials even if the AWS account has no associated
+// users.
 //
 //    // Example sending a request using the ListSigningCertificatesRequest method.
-//    req, resp := client.ListSigningCertificatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSigningCertificatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificates
-func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput) (req *aws.Request, output *ListSigningCertificatesOutput) {
+func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput) ListSigningCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opListSigningCertificates,
 		HTTPMethod: "POST",
@@ -9907,61 +6086,8 @@ func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput
 		input = &ListSigningCertificatesInput{}
 	}
 
-	output = &ListSigningCertificatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSigningCertificates API operation for AWS Identity and Access Management.
-//
-// Returns information about the signing certificates associated with the specified
-// IAM user. If there are none, the action returns an empty list.
-//
-// Although each user is limited to a small number of signing certificates,
-// you can still paginate the results using the MaxItems and Marker parameters.
-//
-// If the UserName field is not specified, the user name is determined implicitly
-// based on the AWS access key ID used to sign the request for this API. Because
-// this action works for access keys under the AWS account, you can use this
-// action to manage root credentials even if the AWS account has no associated
-// users.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListSigningCertificates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificates
-func (c *IAM) ListSigningCertificates(input *ListSigningCertificatesInput) (*ListSigningCertificatesOutput, error) {
-	req, out := c.ListSigningCertificatesRequest(input)
-	return out, req.Send()
-}
-
-// ListSigningCertificatesWithContext is the same as ListSigningCertificates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSigningCertificates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListSigningCertificatesWithContext(ctx aws.Context, input *ListSigningCertificatesInput, opts ...aws.Option) (*ListSigningCertificatesOutput, error) {
-	req, out := c.ListSigningCertificatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSigningCertificatesOutput{})
+	return ListSigningCertificatesRequest{Request: req, Input: input}
 }
 
 // ListSigningCertificatesPages iterates over the pages of a ListSigningCertificates operation,
@@ -10000,10 +6126,10 @@ func (c *IAM) ListSigningCertificatesPagesWithContext(ctx aws.Context, input *Li
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListSigningCertificatesRequest(inCpy)
+			req := c.ListSigningCertificatesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -10016,31 +6142,45 @@ func (c *IAM) ListSigningCertificatesPagesWithContext(ctx aws.Context, input *Li
 
 const opListUserPolicies = "ListUserPolicies"
 
-// ListUserPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListUserPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListUserPoliciesRequest is a API request type for the ListUserPolicies API operation.
+type ListUserPoliciesRequest struct {
+	*aws.Request
+	Input *ListUserPoliciesInput
+}
+
+// Send marshals and sends the ListUserPolicies API request.
+func (r ListUserPoliciesRequest) Send() (*ListUserPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUserPoliciesOutput), nil
+}
+
+// ListUserPoliciesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the names of the inline policies embedded in the specified IAM user.
 //
-// See ListUserPolicies for more information on using the ListUserPolicies
-// API call, and error handling.
+// An IAM user can also have managed policies attached to it. To list the managed
+// policies that are attached to a user, use ListAttachedUserPolicies. For more
+// information about policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters. If
+// there are no inline policies embedded with the specified user, the action
+// returns an empty list.
 //
 //    // Example sending a request using the ListUserPoliciesRequest method.
-//    req, resp := client.ListUserPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListUserPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPolicies
-func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) (req *aws.Request, output *ListUserPoliciesOutput) {
+func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) ListUserPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListUserPolicies,
 		HTTPMethod: "POST",
@@ -10057,60 +6197,8 @@ func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) (req *aws.Re
 		input = &ListUserPoliciesInput{}
 	}
 
-	output = &ListUserPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListUserPolicies API operation for AWS Identity and Access Management.
-//
-// Lists the names of the inline policies embedded in the specified IAM user.
-//
-// An IAM user can also have managed policies attached to it. To list the managed
-// policies that are attached to a user, use ListAttachedUserPolicies. For more
-// information about policies, see Managed Policies and Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
-//
-// You can paginate the results using the MaxItems and Marker parameters. If
-// there are no inline policies embedded with the specified user, the action
-// returns an empty list.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListUserPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPolicies
-func (c *IAM) ListUserPolicies(input *ListUserPoliciesInput) (*ListUserPoliciesOutput, error) {
-	req, out := c.ListUserPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListUserPoliciesWithContext is the same as ListUserPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListUserPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListUserPoliciesWithContext(ctx aws.Context, input *ListUserPoliciesInput, opts ...aws.Option) (*ListUserPoliciesOutput, error) {
-	req, out := c.ListUserPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListUserPoliciesOutput{})
+	return ListUserPoliciesRequest{Request: req, Input: input}
 }
 
 // ListUserPoliciesPages iterates over the pages of a ListUserPolicies operation,
@@ -10149,10 +6237,10 @@ func (c *IAM) ListUserPoliciesPagesWithContext(ctx aws.Context, input *ListUserP
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListUserPoliciesRequest(inCpy)
+			req := c.ListUserPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -10165,31 +6253,40 @@ func (c *IAM) ListUserPoliciesPagesWithContext(ctx aws.Context, input *ListUserP
 
 const opListUsers = "ListUsers"
 
-// ListUsersRequest generates a "aws.Request" representing the
-// client's request for the ListUsers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListUsersRequest is a API request type for the ListUsers API operation.
+type ListUsersRequest struct {
+	*aws.Request
+	Input *ListUsersInput
+}
+
+// Send marshals and sends the ListUsers API request.
+func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUsersOutput), nil
+}
+
+// ListUsersRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the IAM users that have the specified path prefix. If no path prefix
+// is specified, the action returns all users in the AWS account. If there are
+// none, the action returns an empty list.
 //
-// See ListUsers for more information on using the ListUsers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListUsersRequest method.
-//    req, resp := client.ListUsersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListUsersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsers
-func (c *IAM) ListUsersRequest(input *ListUsersInput) (req *aws.Request, output *ListUsersOutput) {
+func (c *IAM) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "POST",
@@ -10206,51 +6303,8 @@ func (c *IAM) ListUsersRequest(input *ListUsersInput) (req *aws.Request, output 
 		input = &ListUsersInput{}
 	}
 
-	output = &ListUsersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListUsers API operation for AWS Identity and Access Management.
-//
-// Lists the IAM users that have the specified path prefix. If no path prefix
-// is specified, the action returns all users in the AWS account. If there are
-// none, the action returns an empty list.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListUsers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsers
-func (c *IAM) ListUsers(input *ListUsersInput) (*ListUsersOutput, error) {
-	req, out := c.ListUsersRequest(input)
-	return out, req.Send()
-}
-
-// ListUsersWithContext is the same as ListUsers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListUsers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListUsersWithContext(ctx aws.Context, input *ListUsersInput, opts ...aws.Option) (*ListUsersOutput, error) {
-	req, out := c.ListUsersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListUsersOutput{})
+	return ListUsersRequest{Request: req, Input: input}
 }
 
 // ListUsersPages iterates over the pages of a ListUsers operation,
@@ -10289,10 +6343,10 @@ func (c *IAM) ListUsersPagesWithContext(ctx aws.Context, input *ListUsersInput, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListUsersRequest(inCpy)
+			req := c.ListUsersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -10305,31 +6359,41 @@ func (c *IAM) ListUsersPagesWithContext(ctx aws.Context, input *ListUsersInput, 
 
 const opListVirtualMFADevices = "ListVirtualMFADevices"
 
-// ListVirtualMFADevicesRequest generates a "aws.Request" representing the
-// client's request for the ListVirtualMFADevices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListVirtualMFADevicesRequest is a API request type for the ListVirtualMFADevices API operation.
+type ListVirtualMFADevicesRequest struct {
+	*aws.Request
+	Input *ListVirtualMFADevicesInput
+}
+
+// Send marshals and sends the ListVirtualMFADevices API request.
+func (r ListVirtualMFADevicesRequest) Send() (*ListVirtualMFADevicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVirtualMFADevicesOutput), nil
+}
+
+// ListVirtualMFADevicesRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the virtual MFA devices defined in the AWS account by assignment status.
+// If you do not specify an assignment status, the action returns a list of
+// all virtual MFA devices. Assignment status can be Assigned, Unassigned, or
+// Any.
 //
-// See ListVirtualMFADevices for more information on using the ListVirtualMFADevices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can paginate the results using the MaxItems and Marker parameters.
 //
 //    // Example sending a request using the ListVirtualMFADevicesRequest method.
-//    req, resp := client.ListVirtualMFADevicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListVirtualMFADevicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevices
-func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) (req *aws.Request, output *ListVirtualMFADevicesOutput) {
+func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) ListVirtualMFADevicesRequest {
 	op := &aws.Operation{
 		Name:       opListVirtualMFADevices,
 		HTTPMethod: "POST",
@@ -10346,46 +6410,8 @@ func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) (r
 		input = &ListVirtualMFADevicesInput{}
 	}
 
-	output = &ListVirtualMFADevicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListVirtualMFADevices API operation for AWS Identity and Access Management.
-//
-// Lists the virtual MFA devices defined in the AWS account by assignment status.
-// If you do not specify an assignment status, the action returns a list of
-// all virtual MFA devices. Assignment status can be Assigned, Unassigned, or
-// Any.
-//
-// You can paginate the results using the MaxItems and Marker parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ListVirtualMFADevices for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevices
-func (c *IAM) ListVirtualMFADevices(input *ListVirtualMFADevicesInput) (*ListVirtualMFADevicesOutput, error) {
-	req, out := c.ListVirtualMFADevicesRequest(input)
-	return out, req.Send()
-}
-
-// ListVirtualMFADevicesWithContext is the same as ListVirtualMFADevices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListVirtualMFADevices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListVirtualMFADevicesWithContext(ctx aws.Context, input *ListVirtualMFADevicesInput, opts ...aws.Option) (*ListVirtualMFADevicesOutput, error) {
-	req, out := c.ListVirtualMFADevicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListVirtualMFADevicesOutput{})
+	return ListVirtualMFADevicesRequest{Request: req, Input: input}
 }
 
 // ListVirtualMFADevicesPages iterates over the pages of a ListVirtualMFADevices operation,
@@ -10424,10 +6450,10 @@ func (c *IAM) ListVirtualMFADevicesPagesWithContext(ctx aws.Context, input *List
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListVirtualMFADevicesRequest(inCpy)
+			req := c.ListVirtualMFADevicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -10440,49 +6466,24 @@ func (c *IAM) ListVirtualMFADevicesPagesWithContext(ctx aws.Context, input *List
 
 const opPutGroupPolicy = "PutGroupPolicy"
 
-// PutGroupPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutGroupPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutGroupPolicy for more information on using the PutGroupPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutGroupPolicyRequest method.
-//    req, resp := client.PutGroupPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicy
-func (c *IAM) PutGroupPolicyRequest(input *PutGroupPolicyInput) (req *aws.Request, output *PutGroupPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opPutGroupPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutGroupPolicyInput{}
-	}
-
-	output = &PutGroupPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// PutGroupPolicyRequest is a API request type for the PutGroupPolicy API operation.
+type PutGroupPolicyRequest struct {
+	*aws.Request
+	Input *PutGroupPolicyInput
 }
 
-// PutGroupPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the PutGroupPolicy API request.
+func (r PutGroupPolicyRequest) Send() (*PutGroupPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutGroupPolicyOutput), nil
+}
+
+// PutGroupPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Adds or updates an inline policy document that is embedded in the specified
 // IAM group.
@@ -10502,97 +6503,51 @@ func (c *IAM) PutGroupPolicyRequest(input *PutGroupPolicyInput) (req *aws.Reques
 // API with IAM, go to Making Query Requests (http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation PutGroupPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicy
-func (c *IAM) PutGroupPolicy(input *PutGroupPolicyInput) (*PutGroupPolicyOutput, error) {
-	req, out := c.PutGroupPolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutGroupPolicyWithContext is the same as PutGroupPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutGroupPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) PutGroupPolicyWithContext(ctx aws.Context, input *PutGroupPolicyInput, opts ...aws.Option) (*PutGroupPolicyOutput, error) {
-	req, out := c.PutGroupPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutRolePolicy = "PutRolePolicy"
-
-// PutRolePolicyRequest generates a "aws.Request" representing the
-// client's request for the PutRolePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRolePolicy for more information on using the PutRolePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutRolePolicyRequest method.
-//    req, resp := client.PutRolePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutGroupPolicyRequest method.
+//    req := client.PutGroupPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicy
-func (c *IAM) PutRolePolicyRequest(input *PutRolePolicyInput) (req *aws.Request, output *PutRolePolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicy
+func (c *IAM) PutGroupPolicyRequest(input *PutGroupPolicyInput) PutGroupPolicyRequest {
 	op := &aws.Operation{
-		Name:       opPutRolePolicy,
+		Name:       opPutGroupPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutRolePolicyInput{}
+		input = &PutGroupPolicyInput{}
 	}
 
-	output = &PutRolePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return PutGroupPolicyRequest{Request: req, Input: input}
 }
 
-// PutRolePolicy API operation for AWS Identity and Access Management.
+const opPutRolePolicy = "PutRolePolicy"
+
+// PutRolePolicyRequest is a API request type for the PutRolePolicy API operation.
+type PutRolePolicyRequest struct {
+	*aws.Request
+	Input *PutRolePolicyInput
+}
+
+// Send marshals and sends the PutRolePolicy API request.
+func (r PutRolePolicyRequest) Send() (*PutRolePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRolePolicyOutput), nil
+}
+
+// PutRolePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Adds or updates an inline policy document that is embedded in the specified
 // IAM role.
@@ -10618,103 +6573,51 @@ func (c *IAM) PutRolePolicyRequest(input *PutRolePolicyInput) (req *aws.Request,
 // API with IAM, go to Making Query Requests (http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation PutRolePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicy
-func (c *IAM) PutRolePolicy(input *PutRolePolicyInput) (*PutRolePolicyOutput, error) {
-	req, out := c.PutRolePolicyRequest(input)
-	return out, req.Send()
-}
-
-// PutRolePolicyWithContext is the same as PutRolePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRolePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) PutRolePolicyWithContext(ctx aws.Context, input *PutRolePolicyInput, opts ...aws.Option) (*PutRolePolicyOutput, error) {
-	req, out := c.PutRolePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutUserPolicy = "PutUserPolicy"
-
-// PutUserPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutUserPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutUserPolicy for more information on using the PutUserPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutUserPolicyRequest method.
-//    req, resp := client.PutUserPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutRolePolicyRequest method.
+//    req := client.PutRolePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicy
-func (c *IAM) PutUserPolicyRequest(input *PutUserPolicyInput) (req *aws.Request, output *PutUserPolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicy
+func (c *IAM) PutRolePolicyRequest(input *PutRolePolicyInput) PutRolePolicyRequest {
 	op := &aws.Operation{
-		Name:       opPutUserPolicy,
+		Name:       opPutRolePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutUserPolicyInput{}
+		input = &PutRolePolicyInput{}
 	}
 
-	output = &PutUserPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return PutRolePolicyRequest{Request: req, Input: input}
 }
 
-// PutUserPolicy API operation for AWS Identity and Access Management.
+const opPutUserPolicy = "PutUserPolicy"
+
+// PutUserPolicyRequest is a API request type for the PutUserPolicy API operation.
+type PutUserPolicyRequest struct {
+	*aws.Request
+	Input *PutUserPolicyInput
+}
+
+// Send marshals and sends the PutUserPolicy API request.
+func (r PutUserPolicyRequest) Send() (*PutUserPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutUserPolicyOutput), nil
+}
+
+// PutUserPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Adds or updates an inline policy document that is embedded in the specified
 // IAM user.
@@ -10734,79 +6637,68 @@ func (c *IAM) PutUserPolicyRequest(input *PutUserPolicyInput) (req *aws.Request,
 // API with IAM, go to Making Query Requests (http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation PutUserPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the PutUserPolicyRequest method.
+//    req := client.PutUserPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicy
-func (c *IAM) PutUserPolicy(input *PutUserPolicyInput) (*PutUserPolicyOutput, error) {
-	req, out := c.PutUserPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) PutUserPolicyRequest(input *PutUserPolicyInput) PutUserPolicyRequest {
+	op := &aws.Operation{
+		Name:       opPutUserPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutUserPolicyWithContext is the same as PutUserPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutUserPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) PutUserPolicyWithContext(ctx aws.Context, input *PutUserPolicyInput, opts ...aws.Option) (*PutUserPolicyOutput, error) {
-	req, out := c.PutUserPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutUserPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &PutUserPolicyOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return PutUserPolicyRequest{Request: req, Input: input}
 }
 
 const opRemoveClientIDFromOpenIDConnectProvider = "RemoveClientIDFromOpenIDConnectProvider"
 
-// RemoveClientIDFromOpenIDConnectProviderRequest generates a "aws.Request" representing the
-// client's request for the RemoveClientIDFromOpenIDConnectProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveClientIDFromOpenIDConnectProviderRequest is a API request type for the RemoveClientIDFromOpenIDConnectProvider API operation.
+type RemoveClientIDFromOpenIDConnectProviderRequest struct {
+	*aws.Request
+	Input *RemoveClientIDFromOpenIDConnectProviderInput
+}
+
+// Send marshals and sends the RemoveClientIDFromOpenIDConnectProvider API request.
+func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send() (*RemoveClientIDFromOpenIDConnectProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveClientIDFromOpenIDConnectProviderOutput), nil
+}
+
+// RemoveClientIDFromOpenIDConnectProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the specified client ID (also known as audience) from the list of
+// client IDs registered for the specified IAM OpenID Connect (OIDC) provider
+// resource object.
 //
-// See RemoveClientIDFromOpenIDConnectProvider for more information on using the RemoveClientIDFromOpenIDConnectProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This action is idempotent; it does not fail or return an error if you try
+// to remove a client ID that does not exist.
 //
 //    // Example sending a request using the RemoveClientIDFromOpenIDConnectProviderRequest method.
-//    req, resp := client.RemoveClientIDFromOpenIDConnectProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveClientIDFromOpenIDConnectProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProvider
-func (c *IAM) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveClientIDFromOpenIDConnectProviderInput) (req *aws.Request, output *RemoveClientIDFromOpenIDConnectProviderOutput) {
+func (c *IAM) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveClientIDFromOpenIDConnectProviderInput) RemoveClientIDFromOpenIDConnectProviderRequest {
 	op := &aws.Operation{
 		Name:       opRemoveClientIDFromOpenIDConnectProvider,
 		HTTPMethod: "POST",
@@ -10817,109 +6709,32 @@ func (c *IAM) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveClient
 		input = &RemoveClientIDFromOpenIDConnectProviderInput{}
 	}
 
-	output = &RemoveClientIDFromOpenIDConnectProviderOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveClientIDFromOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveClientIDFromOpenIDConnectProvider API operation for AWS Identity and Access Management.
-//
-// Removes the specified client ID (also known as audience) from the list of
-// client IDs registered for the specified IAM OpenID Connect (OIDC) provider
-// resource object.
-//
-// This action is idempotent; it does not fail or return an error if you try
-// to remove a client ID that does not exist.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation RemoveClientIDFromOpenIDConnectProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProvider
-func (c *IAM) RemoveClientIDFromOpenIDConnectProvider(input *RemoveClientIDFromOpenIDConnectProviderInput) (*RemoveClientIDFromOpenIDConnectProviderOutput, error) {
-	req, out := c.RemoveClientIDFromOpenIDConnectProviderRequest(input)
-	return out, req.Send()
-}
-
-// RemoveClientIDFromOpenIDConnectProviderWithContext is the same as RemoveClientIDFromOpenIDConnectProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveClientIDFromOpenIDConnectProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) RemoveClientIDFromOpenIDConnectProviderWithContext(ctx aws.Context, input *RemoveClientIDFromOpenIDConnectProviderInput, opts ...aws.Option) (*RemoveClientIDFromOpenIDConnectProviderOutput, error) {
-	req, out := c.RemoveClientIDFromOpenIDConnectProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveClientIDFromOpenIDConnectProviderRequest{Request: req, Input: input}
 }
 
 const opRemoveRoleFromInstanceProfile = "RemoveRoleFromInstanceProfile"
 
-// RemoveRoleFromInstanceProfileRequest generates a "aws.Request" representing the
-// client's request for the RemoveRoleFromInstanceProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveRoleFromInstanceProfile for more information on using the RemoveRoleFromInstanceProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RemoveRoleFromInstanceProfileRequest method.
-//    req, resp := client.RemoveRoleFromInstanceProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfile
-func (c *IAM) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInstanceProfileInput) (req *aws.Request, output *RemoveRoleFromInstanceProfileOutput) {
-	op := &aws.Operation{
-		Name:       opRemoveRoleFromInstanceProfile,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RemoveRoleFromInstanceProfileInput{}
-	}
-
-	output = &RemoveRoleFromInstanceProfileOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// RemoveRoleFromInstanceProfileRequest is a API request type for the RemoveRoleFromInstanceProfile API operation.
+type RemoveRoleFromInstanceProfileRequest struct {
+	*aws.Request
+	Input *RemoveRoleFromInstanceProfileInput
 }
 
-// RemoveRoleFromInstanceProfile API operation for AWS Identity and Access Management.
+// Send marshals and sends the RemoveRoleFromInstanceProfile API request.
+func (r RemoveRoleFromInstanceProfileRequest) Send() (*RemoveRoleFromInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveRoleFromInstanceProfileOutput), nil
+}
+
+// RemoveRoleFromInstanceProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Removes the specified IAM role from the specified EC2 instance profile.
 //
@@ -10932,81 +6747,63 @@ func (c *IAM) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInstance
 // For more information about instance profiles, go to About Instance Profiles
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation RemoveRoleFromInstanceProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the RemoveRoleFromInstanceProfileRequest method.
+//    req := client.RemoveRoleFromInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfile
-func (c *IAM) RemoveRoleFromInstanceProfile(input *RemoveRoleFromInstanceProfileInput) (*RemoveRoleFromInstanceProfileOutput, error) {
-	req, out := c.RemoveRoleFromInstanceProfileRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInstanceProfileInput) RemoveRoleFromInstanceProfileRequest {
+	op := &aws.Operation{
+		Name:       opRemoveRoleFromInstanceProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RemoveRoleFromInstanceProfileWithContext is the same as RemoveRoleFromInstanceProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveRoleFromInstanceProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) RemoveRoleFromInstanceProfileWithContext(ctx aws.Context, input *RemoveRoleFromInstanceProfileInput, opts ...aws.Option) (*RemoveRoleFromInstanceProfileOutput, error) {
-	req, out := c.RemoveRoleFromInstanceProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RemoveRoleFromInstanceProfileInput{}
+	}
+
+	req := c.newRequest(op, input, &RemoveRoleFromInstanceProfileOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return RemoveRoleFromInstanceProfileRequest{Request: req, Input: input}
 }
 
 const opRemoveUserFromGroup = "RemoveUserFromGroup"
 
-// RemoveUserFromGroupRequest generates a "aws.Request" representing the
-// client's request for the RemoveUserFromGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveUserFromGroupRequest is a API request type for the RemoveUserFromGroup API operation.
+type RemoveUserFromGroupRequest struct {
+	*aws.Request
+	Input *RemoveUserFromGroupInput
+}
+
+// Send marshals and sends the RemoveUserFromGroup API request.
+func (r RemoveUserFromGroupRequest) Send() (*RemoveUserFromGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveUserFromGroupOutput), nil
+}
+
+// RemoveUserFromGroupRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveUserFromGroup for more information on using the RemoveUserFromGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the specified user from the specified group.
 //
 //    // Example sending a request using the RemoveUserFromGroupRequest method.
-//    req, resp := client.RemoveUserFromGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveUserFromGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroup
-func (c *IAM) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) (req *aws.Request, output *RemoveUserFromGroupOutput) {
+func (c *IAM) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) RemoveUserFromGroupRequest {
 	op := &aws.Operation{
 		Name:       opRemoveUserFromGroup,
 		HTTPMethod: "POST",
@@ -11017,86 +6814,47 @@ func (c *IAM) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) (req *
 		input = &RemoveUserFromGroupInput{}
 	}
 
-	output = &RemoveUserFromGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveUserFromGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveUserFromGroup API operation for AWS Identity and Access Management.
-//
-// Removes the specified user from the specified group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation RemoveUserFromGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroup
-func (c *IAM) RemoveUserFromGroup(input *RemoveUserFromGroupInput) (*RemoveUserFromGroupOutput, error) {
-	req, out := c.RemoveUserFromGroupRequest(input)
-	return out, req.Send()
-}
-
-// RemoveUserFromGroupWithContext is the same as RemoveUserFromGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveUserFromGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) RemoveUserFromGroupWithContext(ctx aws.Context, input *RemoveUserFromGroupInput, opts ...aws.Option) (*RemoveUserFromGroupOutput, error) {
-	req, out := c.RemoveUserFromGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveUserFromGroupRequest{Request: req, Input: input}
 }
 
 const opResetServiceSpecificCredential = "ResetServiceSpecificCredential"
 
-// ResetServiceSpecificCredentialRequest generates a "aws.Request" representing the
-// client's request for the ResetServiceSpecificCredential operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResetServiceSpecificCredentialRequest is a API request type for the ResetServiceSpecificCredential API operation.
+type ResetServiceSpecificCredentialRequest struct {
+	*aws.Request
+	Input *ResetServiceSpecificCredentialInput
+}
+
+// Send marshals and sends the ResetServiceSpecificCredential API request.
+func (r ResetServiceSpecificCredentialRequest) Send() (*ResetServiceSpecificCredentialOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetServiceSpecificCredentialOutput), nil
+}
+
+// ResetServiceSpecificCredentialRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetServiceSpecificCredential for more information on using the ResetServiceSpecificCredential
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Resets the password for a service-specific credential. The new password is
+// AWS generated and cryptographically strong. It cannot be configured by the
+// user. Resetting the password immediately invalidates the previous password
+// associated with this user.
 //
 //    // Example sending a request using the ResetServiceSpecificCredentialRequest method.
-//    req, resp := client.ResetServiceSpecificCredentialRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResetServiceSpecificCredentialRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredential
-func (c *IAM) ResetServiceSpecificCredentialRequest(input *ResetServiceSpecificCredentialInput) (req *aws.Request, output *ResetServiceSpecificCredentialOutput) {
+func (c *IAM) ResetServiceSpecificCredentialRequest(input *ResetServiceSpecificCredentialInput) ResetServiceSpecificCredentialRequest {
 	op := &aws.Operation{
 		Name:       opResetServiceSpecificCredential,
 		HTTPMethod: "POST",
@@ -11107,79 +6865,47 @@ func (c *IAM) ResetServiceSpecificCredentialRequest(input *ResetServiceSpecificC
 		input = &ResetServiceSpecificCredentialInput{}
 	}
 
-	output = &ResetServiceSpecificCredentialOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResetServiceSpecificCredential API operation for AWS Identity and Access Management.
-//
-// Resets the password for a service-specific credential. The new password is
-// AWS generated and cryptographically strong. It cannot be configured by the
-// user. Resetting the password immediately invalidates the previous password
-// associated with this user.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ResetServiceSpecificCredential for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredential
-func (c *IAM) ResetServiceSpecificCredential(input *ResetServiceSpecificCredentialInput) (*ResetServiceSpecificCredentialOutput, error) {
-	req, out := c.ResetServiceSpecificCredentialRequest(input)
-	return out, req.Send()
-}
-
-// ResetServiceSpecificCredentialWithContext is the same as ResetServiceSpecificCredential with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetServiceSpecificCredential for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ResetServiceSpecificCredentialWithContext(ctx aws.Context, input *ResetServiceSpecificCredentialInput, opts ...aws.Option) (*ResetServiceSpecificCredentialOutput, error) {
-	req, out := c.ResetServiceSpecificCredentialRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetServiceSpecificCredentialOutput{})
+	return ResetServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
 const opResyncMFADevice = "ResyncMFADevice"
 
-// ResyncMFADeviceRequest generates a "aws.Request" representing the
-// client's request for the ResyncMFADevice operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResyncMFADeviceRequest is a API request type for the ResyncMFADevice API operation.
+type ResyncMFADeviceRequest struct {
+	*aws.Request
+	Input *ResyncMFADeviceInput
+}
+
+// Send marshals and sends the ResyncMFADevice API request.
+func (r ResyncMFADeviceRequest) Send() (*ResyncMFADeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResyncMFADeviceOutput), nil
+}
+
+// ResyncMFADeviceRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Synchronizes the specified MFA device with its IAM resource object on the
+// AWS servers.
 //
-// See ResyncMFADevice for more information on using the ResyncMFADevice
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about creating and working with virtual MFA devices,
+// go to Using a Virtual MFA Device (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the ResyncMFADeviceRequest method.
-//    req, resp := client.ResyncMFADeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResyncMFADeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADevice
-func (c *IAM) ResyncMFADeviceRequest(input *ResyncMFADeviceInput) (req *aws.Request, output *ResyncMFADeviceOutput) {
+func (c *IAM) ResyncMFADeviceRequest(input *ResyncMFADeviceInput) ResyncMFADeviceRequest {
 	op := &aws.Operation{
 		Name:       opResyncMFADevice,
 		HTTPMethod: "POST",
@@ -11190,113 +6916,32 @@ func (c *IAM) ResyncMFADeviceRequest(input *ResyncMFADeviceInput) (req *aws.Requ
 		input = &ResyncMFADeviceInput{}
 	}
 
-	output = &ResyncMFADeviceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &ResyncMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// ResyncMFADevice API operation for AWS Identity and Access Management.
-//
-// Synchronizes the specified MFA device with its IAM resource object on the
-// AWS servers.
-//
-// For more information about creating and working with virtual MFA devices,
-// go to Using a Virtual MFA Device (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation ResyncMFADevice for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidAuthenticationCodeException "InvalidAuthenticationCode"
-//   The request was rejected because the authentication code was not recognized.
-//   The error message describes the specific error.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADevice
-func (c *IAM) ResyncMFADevice(input *ResyncMFADeviceInput) (*ResyncMFADeviceOutput, error) {
-	req, out := c.ResyncMFADeviceRequest(input)
-	return out, req.Send()
-}
-
-// ResyncMFADeviceWithContext is the same as ResyncMFADevice with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResyncMFADevice for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ResyncMFADeviceWithContext(ctx aws.Context, input *ResyncMFADeviceInput, opts ...aws.Option) (*ResyncMFADeviceOutput, error) {
-	req, out := c.ResyncMFADeviceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return ResyncMFADeviceRequest{Request: req, Input: input}
 }
 
 const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 
-// SetDefaultPolicyVersionRequest generates a "aws.Request" representing the
-// client's request for the SetDefaultPolicyVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetDefaultPolicyVersion for more information on using the SetDefaultPolicyVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetDefaultPolicyVersionRequest method.
-//    req, resp := client.SetDefaultPolicyVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersion
-func (c *IAM) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput) (req *aws.Request, output *SetDefaultPolicyVersionOutput) {
-	op := &aws.Operation{
-		Name:       opSetDefaultPolicyVersion,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &SetDefaultPolicyVersionInput{}
-	}
-
-	output = &SetDefaultPolicyVersionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// SetDefaultPolicyVersionRequest is a API request type for the SetDefaultPolicyVersion API operation.
+type SetDefaultPolicyVersionRequest struct {
+	*aws.Request
+	Input *SetDefaultPolicyVersionInput
 }
 
-// SetDefaultPolicyVersion API operation for AWS Identity and Access Management.
+// Send marshals and sends the SetDefaultPolicyVersion API request.
+func (r SetDefaultPolicyVersionRequest) Send() (*SetDefaultPolicyVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetDefaultPolicyVersionOutput), nil
+}
+
+// SetDefaultPolicyVersionRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Sets the specified version of the specified policy as the policy's default
 // (operative) version.
@@ -11309,101 +6954,51 @@ func (c *IAM) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation SetDefaultPolicyVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the SetDefaultPolicyVersionRequest method.
+//    req := client.SetDefaultPolicyVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersion
-func (c *IAM) SetDefaultPolicyVersion(input *SetDefaultPolicyVersionInput) (*SetDefaultPolicyVersionOutput, error) {
-	req, out := c.SetDefaultPolicyVersionRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest {
+	op := &aws.Operation{
+		Name:       opSetDefaultPolicyVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SetDefaultPolicyVersionWithContext is the same as SetDefaultPolicyVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetDefaultPolicyVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) SetDefaultPolicyVersionWithContext(ctx aws.Context, input *SetDefaultPolicyVersionInput, opts ...aws.Option) (*SetDefaultPolicyVersionOutput, error) {
-	req, out := c.SetDefaultPolicyVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetDefaultPolicyVersionInput{}
+	}
+
+	req := c.newRequest(op, input, &SetDefaultPolicyVersionOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SetDefaultPolicyVersionRequest{Request: req, Input: input}
 }
 
 const opSimulateCustomPolicy = "SimulateCustomPolicy"
 
-// SimulateCustomPolicyRequest generates a "aws.Request" representing the
-// client's request for the SimulateCustomPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SimulateCustomPolicy for more information on using the SimulateCustomPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SimulateCustomPolicyRequest method.
-//    req, resp := client.SimulateCustomPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicy
-func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) (req *aws.Request, output *SimulatePolicyResponse) {
-	op := &aws.Operation{
-		Name:       opSimulateCustomPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"Marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "MaxItems",
-			TruncationToken: "IsTruncated",
-		},
-	}
-
-	if input == nil {
-		input = &SimulateCustomPolicyInput{}
-	}
-
-	output = &SimulatePolicyResponse{}
-	req = c.newRequest(op, input, output)
-	return
+// SimulateCustomPolicyRequest is a API request type for the SimulateCustomPolicy API operation.
+type SimulateCustomPolicyRequest struct {
+	*aws.Request
+	Input *SimulateCustomPolicyInput
 }
 
-// SimulateCustomPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the SimulateCustomPolicy API request.
+func (r SimulateCustomPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SimulatePrincipalPolicyOutput), nil
+}
+
+// SimulateCustomPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Simulate how a set of IAM policies and optionally a resource-based policy
 // works with a list of API actions and AWS resources to determine the policies'
@@ -11423,42 +7018,33 @@ func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) (req
 // If the output is long, you can use MaxItems and Marker parameters to paginate
 // the results.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation SimulateCustomPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodePolicyEvaluationException "PolicyEvaluation"
-//   The request failed because a provided policy could not be successfully evaluated.
-//   An additional detailed message indicates the source of the failure.
+//    // Example sending a request using the SimulateCustomPolicyRequest method.
+//    req := client.SimulateCustomPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicy
-func (c *IAM) SimulateCustomPolicy(input *SimulateCustomPolicyInput) (*SimulatePolicyResponse, error) {
-	req, out := c.SimulateCustomPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) SimulateCustomPolicyRequest {
+	op := &aws.Operation{
+		Name:       opSimulateCustomPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "IsTruncated",
+		},
+	}
 
-// SimulateCustomPolicyWithContext is the same as SimulateCustomPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SimulateCustomPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) SimulateCustomPolicyWithContext(ctx aws.Context, input *SimulateCustomPolicyInput, opts ...aws.Option) (*SimulatePolicyResponse, error) {
-	req, out := c.SimulateCustomPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SimulateCustomPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &SimulatePrincipalPolicyOutput{})
+	return SimulateCustomPolicyRequest{Request: req, Input: input}
 }
 
 // SimulateCustomPolicyPages iterates over the pages of a SimulateCustomPolicy operation,
@@ -11472,13 +7058,13 @@ func (c *IAM) SimulateCustomPolicyWithContext(ctx aws.Context, input *SimulateCu
 //    // Example iterating over at most 3 pages of a SimulateCustomPolicy operation.
 //    pageNum := 0
 //    err := client.SimulateCustomPolicyPages(params,
-//        func(page *SimulatePolicyResponse, lastPage bool) bool {
+//        func(page *SimulatePrincipalPolicyOutput, lastPage bool) bool {
 //            pageNum++
 //            fmt.Println(page)
 //            return pageNum <= 3
 //        })
 //
-func (c *IAM) SimulateCustomPolicyPages(input *SimulateCustomPolicyInput, fn func(*SimulatePolicyResponse, bool) bool) error {
+func (c *IAM) SimulateCustomPolicyPages(input *SimulateCustomPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool) error {
 	return c.SimulateCustomPolicyPagesWithContext(aws.BackgroundContext(), input, fn)
 }
 
@@ -11489,7 +7075,7 @@ func (c *IAM) SimulateCustomPolicyPages(input *SimulateCustomPolicyInput, fn fun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IAM) SimulateCustomPolicyPagesWithContext(ctx aws.Context, input *SimulateCustomPolicyInput, fn func(*SimulatePolicyResponse, bool) bool, opts ...aws.Option) error {
+func (c *IAM) SimulateCustomPolicyPagesWithContext(ctx aws.Context, input *SimulateCustomPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool, opts ...aws.Option) error {
 	p := aws.Pagination{
 		NewRequest: func() (*aws.Request, error) {
 			var inCpy *SimulateCustomPolicyInput
@@ -11497,69 +7083,40 @@ func (c *IAM) SimulateCustomPolicyPagesWithContext(ctx aws.Context, input *Simul
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.SimulateCustomPolicyRequest(inCpy)
+			req := c.SimulateCustomPolicyRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
 	cont := true
 	for p.Next() && cont {
-		cont = fn(p.Page().(*SimulatePolicyResponse), !p.HasNextPage())
+		cont = fn(p.Page().(*SimulatePrincipalPolicyOutput), !p.HasNextPage())
 	}
 	return p.Err()
 }
 
 const opSimulatePrincipalPolicy = "SimulatePrincipalPolicy"
 
-// SimulatePrincipalPolicyRequest generates a "aws.Request" representing the
-// client's request for the SimulatePrincipalPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SimulatePrincipalPolicy for more information on using the SimulatePrincipalPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SimulatePrincipalPolicyRequest method.
-//    req, resp := client.SimulatePrincipalPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicy
-func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput) (req *aws.Request, output *SimulatePolicyResponse) {
-	op := &aws.Operation{
-		Name:       opSimulatePrincipalPolicy,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"Marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "MaxItems",
-			TruncationToken: "IsTruncated",
-		},
-	}
-
-	if input == nil {
-		input = &SimulatePrincipalPolicyInput{}
-	}
-
-	output = &SimulatePolicyResponse{}
-	req = c.newRequest(op, input, output)
-	return
+// SimulatePrincipalPolicyRequest is a API request type for the SimulatePrincipalPolicy API operation.
+type SimulatePrincipalPolicyRequest struct {
+	*aws.Request
+	Input *SimulatePrincipalPolicyInput
 }
 
-// SimulatePrincipalPolicy API operation for AWS Identity and Access Management.
+// Send marshals and sends the SimulatePrincipalPolicy API request.
+func (r SimulatePrincipalPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SimulatePrincipalPolicyOutput), nil
+}
+
+// SimulatePrincipalPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Simulate how a set of IAM policies attached to an IAM entity works with a
 // list of API actions and AWS resources to determine the policies' effective
@@ -11589,46 +7146,33 @@ func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput
 // If the output is long, you can use the MaxItems and Marker parameters to
 // paginate the results.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation SimulatePrincipalPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodePolicyEvaluationException "PolicyEvaluation"
-//   The request failed because a provided policy could not be successfully evaluated.
-//   An additional detailed message indicates the source of the failure.
+//    // Example sending a request using the SimulatePrincipalPolicyRequest method.
+//    req := client.SimulatePrincipalPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicy
-func (c *IAM) SimulatePrincipalPolicy(input *SimulatePrincipalPolicyInput) (*SimulatePolicyResponse, error) {
-	req, out := c.SimulatePrincipalPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput) SimulatePrincipalPolicyRequest {
+	op := &aws.Operation{
+		Name:       opSimulatePrincipalPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "IsTruncated",
+		},
+	}
 
-// SimulatePrincipalPolicyWithContext is the same as SimulatePrincipalPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SimulatePrincipalPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) SimulatePrincipalPolicyWithContext(ctx aws.Context, input *SimulatePrincipalPolicyInput, opts ...aws.Option) (*SimulatePolicyResponse, error) {
-	req, out := c.SimulatePrincipalPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SimulatePrincipalPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &SimulatePrincipalPolicyOutput{})
+	return SimulatePrincipalPolicyRequest{Request: req, Input: input}
 }
 
 // SimulatePrincipalPolicyPages iterates over the pages of a SimulatePrincipalPolicy operation,
@@ -11642,13 +7186,13 @@ func (c *IAM) SimulatePrincipalPolicyWithContext(ctx aws.Context, input *Simulat
 //    // Example iterating over at most 3 pages of a SimulatePrincipalPolicy operation.
 //    pageNum := 0
 //    err := client.SimulatePrincipalPolicyPages(params,
-//        func(page *SimulatePolicyResponse, lastPage bool) bool {
+//        func(page *SimulatePrincipalPolicyOutput, lastPage bool) bool {
 //            pageNum++
 //            fmt.Println(page)
 //            return pageNum <= 3
 //        })
 //
-func (c *IAM) SimulatePrincipalPolicyPages(input *SimulatePrincipalPolicyInput, fn func(*SimulatePolicyResponse, bool) bool) error {
+func (c *IAM) SimulatePrincipalPolicyPages(input *SimulatePrincipalPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool) error {
 	return c.SimulatePrincipalPolicyPagesWithContext(aws.BackgroundContext(), input, fn)
 }
 
@@ -11659,7 +7203,7 @@ func (c *IAM) SimulatePrincipalPolicyPages(input *SimulatePrincipalPolicyInput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IAM) SimulatePrincipalPolicyPagesWithContext(ctx aws.Context, input *SimulatePrincipalPolicyInput, fn func(*SimulatePolicyResponse, bool) bool, opts ...aws.Option) error {
+func (c *IAM) SimulatePrincipalPolicyPagesWithContext(ctx aws.Context, input *SimulatePrincipalPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool, opts ...aws.Option) error {
 	p := aws.Pagination{
 		NewRequest: func() (*aws.Request, error) {
 			var inCpy *SimulatePrincipalPolicyInput
@@ -11667,65 +7211,40 @@ func (c *IAM) SimulatePrincipalPolicyPagesWithContext(ctx aws.Context, input *Si
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.SimulatePrincipalPolicyRequest(inCpy)
+			req := c.SimulatePrincipalPolicyRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
 	cont := true
 	for p.Next() && cont {
-		cont = fn(p.Page().(*SimulatePolicyResponse), !p.HasNextPage())
+		cont = fn(p.Page().(*SimulatePrincipalPolicyOutput), !p.HasNextPage())
 	}
 	return p.Err()
 }
 
 const opUpdateAccessKey = "UpdateAccessKey"
 
-// UpdateAccessKeyRequest generates a "aws.Request" representing the
-// client's request for the UpdateAccessKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAccessKey for more information on using the UpdateAccessKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateAccessKeyRequest method.
-//    req, resp := client.UpdateAccessKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKey
-func (c *IAM) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) (req *aws.Request, output *UpdateAccessKeyOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateAccessKey,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateAccessKeyInput{}
-	}
-
-	output = &UpdateAccessKeyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UpdateAccessKeyRequest is a API request type for the UpdateAccessKey API operation.
+type UpdateAccessKeyRequest struct {
+	*aws.Request
+	Input *UpdateAccessKeyInput
 }
 
-// UpdateAccessKey API operation for AWS Identity and Access Management.
+// Send marshals and sends the UpdateAccessKey API request.
+func (r UpdateAccessKeyRequest) Send() (*UpdateAccessKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAccessKeyOutput), nil
+}
+
+// UpdateAccessKeyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Changes the status of the specified access key from Active to Inactive, or
 // vice versa. This action can be used to disable a user's key as part of a
@@ -11739,93 +7258,51 @@ func (c *IAM) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) (req *aws.Requ
 // For information about rotating keys, see Managing Keys and Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateAccessKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKey
-func (c *IAM) UpdateAccessKey(input *UpdateAccessKeyInput) (*UpdateAccessKeyOutput, error) {
-	req, out := c.UpdateAccessKeyRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAccessKeyWithContext is the same as UpdateAccessKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAccessKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateAccessKeyWithContext(ctx aws.Context, input *UpdateAccessKeyInput, opts ...aws.Option) (*UpdateAccessKeyOutput, error) {
-	req, out := c.UpdateAccessKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateAccountPasswordPolicy = "UpdateAccountPasswordPolicy"
-
-// UpdateAccountPasswordPolicyRequest generates a "aws.Request" representing the
-// client's request for the UpdateAccountPasswordPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAccountPasswordPolicy for more information on using the UpdateAccountPasswordPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateAccountPasswordPolicyRequest method.
-//    req, resp := client.UpdateAccountPasswordPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateAccessKeyRequest method.
+//    req := client.UpdateAccessKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicy
-func (c *IAM) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPasswordPolicyInput) (req *aws.Request, output *UpdateAccountPasswordPolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKey
+func (c *IAM) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) UpdateAccessKeyRequest {
 	op := &aws.Operation{
-		Name:       opUpdateAccountPasswordPolicy,
+		Name:       opUpdateAccessKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateAccountPasswordPolicyInput{}
+		input = &UpdateAccessKeyInput{}
 	}
 
-	output = &UpdateAccountPasswordPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateAccessKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return UpdateAccessKeyRequest{Request: req, Input: input}
 }
 
-// UpdateAccountPasswordPolicy API operation for AWS Identity and Access Management.
+const opUpdateAccountPasswordPolicy = "UpdateAccountPasswordPolicy"
+
+// UpdateAccountPasswordPolicyRequest is a API request type for the UpdateAccountPasswordPolicy API operation.
+type UpdateAccountPasswordPolicyRequest struct {
+	*aws.Request
+	Input *UpdateAccountPasswordPolicyInput
+}
+
+// Send marshals and sends the UpdateAccountPasswordPolicy API request.
+func (r UpdateAccountPasswordPolicyRequest) Send() (*UpdateAccountPasswordPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAccountPasswordPolicyOutput), nil
+}
+
+// UpdateAccountPasswordPolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Updates the password policy settings for the AWS account.
 //
@@ -11838,79 +7315,66 @@ func (c *IAM) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPasswordPol
 // Policy (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateAccountPasswordPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the UpdateAccountPasswordPolicyRequest method.
+//    req := client.UpdateAccountPasswordPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicy
-func (c *IAM) UpdateAccountPasswordPolicy(input *UpdateAccountPasswordPolicyInput) (*UpdateAccountPasswordPolicyOutput, error) {
-	req, out := c.UpdateAccountPasswordPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPasswordPolicyInput) UpdateAccountPasswordPolicyRequest {
+	op := &aws.Operation{
+		Name:       opUpdateAccountPasswordPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateAccountPasswordPolicyWithContext is the same as UpdateAccountPasswordPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAccountPasswordPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateAccountPasswordPolicyWithContext(ctx aws.Context, input *UpdateAccountPasswordPolicyInput, opts ...aws.Option) (*UpdateAccountPasswordPolicyOutput, error) {
-	req, out := c.UpdateAccountPasswordPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateAccountPasswordPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateAccountPasswordPolicyOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UpdateAccountPasswordPolicyRequest{Request: req, Input: input}
 }
 
 const opUpdateAssumeRolePolicy = "UpdateAssumeRolePolicy"
 
-// UpdateAssumeRolePolicyRequest generates a "aws.Request" representing the
-// client's request for the UpdateAssumeRolePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateAssumeRolePolicyRequest is a API request type for the UpdateAssumeRolePolicy API operation.
+type UpdateAssumeRolePolicyRequest struct {
+	*aws.Request
+	Input *UpdateAssumeRolePolicyInput
+}
+
+// Send marshals and sends the UpdateAssumeRolePolicy API request.
+func (r UpdateAssumeRolePolicyRequest) Send() (*UpdateAssumeRolePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAssumeRolePolicyOutput), nil
+}
+
+// UpdateAssumeRolePolicyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAssumeRolePolicy for more information on using the UpdateAssumeRolePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the policy that grants an IAM entity permission to assume a role.
+// This is typically referred to as the "role trust policy". For more information
+// about roles, go to Using Roles to Delegate Permissions and Federate Identities
+// (http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html).
 //
 //    // Example sending a request using the UpdateAssumeRolePolicyRequest method.
-//    req, resp := client.UpdateAssumeRolePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateAssumeRolePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicy
-func (c *IAM) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInput) (req *aws.Request, output *UpdateAssumeRolePolicyOutput) {
+func (c *IAM) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInput) UpdateAssumeRolePolicyRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAssumeRolePolicy,
 		HTTPMethod: "POST",
@@ -11921,117 +7385,32 @@ func (c *IAM) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInput) 
 		input = &UpdateAssumeRolePolicyInput{}
 	}
 
-	output = &UpdateAssumeRolePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateAssumeRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateAssumeRolePolicy API operation for AWS Identity and Access Management.
-//
-// Updates the policy that grants an IAM entity permission to assume a role.
-// This is typically referred to as the "role trust policy". For more information
-// about roles, go to Using Roles to Delegate Permissions and Federate Identities
-// (http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateAssumeRolePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeMalformedPolicyDocumentException "MalformedPolicyDocument"
-//   The request was rejected because the policy document was malformed. The error
-//   message describes the specific error.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicy
-func (c *IAM) UpdateAssumeRolePolicy(input *UpdateAssumeRolePolicyInput) (*UpdateAssumeRolePolicyOutput, error) {
-	req, out := c.UpdateAssumeRolePolicyRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAssumeRolePolicyWithContext is the same as UpdateAssumeRolePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAssumeRolePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateAssumeRolePolicyWithContext(ctx aws.Context, input *UpdateAssumeRolePolicyInput, opts ...aws.Option) (*UpdateAssumeRolePolicyOutput, error) {
-	req, out := c.UpdateAssumeRolePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateAssumeRolePolicyRequest{Request: req, Input: input}
 }
 
 const opUpdateGroup = "UpdateGroup"
 
-// UpdateGroupRequest generates a "aws.Request" representing the
-// client's request for the UpdateGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateGroup for more information on using the UpdateGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateGroupRequest method.
-//    req, resp := client.UpdateGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroup
-func (c *IAM) UpdateGroupRequest(input *UpdateGroupInput) (req *aws.Request, output *UpdateGroupOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateGroupInput{}
-	}
-
-	output = &UpdateGroupOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UpdateGroupRequest is a API request type for the UpdateGroup API operation.
+type UpdateGroupRequest struct {
+	*aws.Request
+	Input *UpdateGroupInput
 }
 
-// UpdateGroup API operation for AWS Identity and Access Management.
+// Send marshals and sends the UpdateGroup API request.
+func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGroupOutput), nil
+}
+
+// UpdateGroupRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Updates the name and/or the path of the specified IAM group.
 //
@@ -12045,79 +7424,67 @@ func (c *IAM) UpdateGroupRequest(input *UpdateGroupInput) (req *aws.Request, out
 // and "MGRs", or must have permission on all (*). For more information about
 // permissions, see Permissions and Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the UpdateGroupRequest method.
+//    req := client.UpdateGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroup
-func (c *IAM) UpdateGroup(input *UpdateGroupInput) (*UpdateGroupOutput, error) {
-	req, out := c.UpdateGroupRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateGroupWithContext is the same as UpdateGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateGroupWithContext(ctx aws.Context, input *UpdateGroupInput, opts ...aws.Option) (*UpdateGroupOutput, error) {
-	req, out := c.UpdateGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UpdateGroupRequest{Request: req, Input: input}
 }
 
 const opUpdateLoginProfile = "UpdateLoginProfile"
 
-// UpdateLoginProfileRequest generates a "aws.Request" representing the
-// client's request for the UpdateLoginProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateLoginProfileRequest is a API request type for the UpdateLoginProfile API operation.
+type UpdateLoginProfileRequest struct {
+	*aws.Request
+	Input *UpdateLoginProfileInput
+}
+
+// Send marshals and sends the UpdateLoginProfile API request.
+func (r UpdateLoginProfileRequest) Send() (*UpdateLoginProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateLoginProfileOutput), nil
+}
+
+// UpdateLoginProfileRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Changes the password for the specified IAM user.
 //
-// See UpdateLoginProfile for more information on using the UpdateLoginProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// IAM users can change their own passwords by calling ChangePassword. For more
+// information about modifying passwords, see Managing Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the UpdateLoginProfileRequest method.
-//    req, resp := client.UpdateLoginProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateLoginProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfile
-func (c *IAM) UpdateLoginProfileRequest(input *UpdateLoginProfileInput) (req *aws.Request, output *UpdateLoginProfileOutput) {
+func (c *IAM) UpdateLoginProfileRequest(input *UpdateLoginProfileInput) UpdateLoginProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLoginProfile,
 		HTTPMethod: "POST",
@@ -12128,118 +7495,32 @@ func (c *IAM) UpdateLoginProfileRequest(input *UpdateLoginProfileInput) (req *aw
 		input = &UpdateLoginProfileInput{}
 	}
 
-	output = &UpdateLoginProfileOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateLoginProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateLoginProfile API operation for AWS Identity and Access Management.
-//
-// Changes the password for the specified IAM user.
-//
-// IAM users can change their own passwords by calling ChangePassword. For more
-// information about modifying passwords, see Managing Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
-// in the IAM User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateLoginProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEntityTemporarilyUnmodifiableException "EntityTemporarilyUnmodifiable"
-//   The request was rejected because it referenced an entity that is temporarily
-//   unmodifiable, such as a user name that was deleted and then recreated. The
-//   error indicates that the request is likely to succeed if you try again after
-//   waiting several minutes. The error message describes the entity.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodePasswordPolicyViolationException "PasswordPolicyViolation"
-//   The request was rejected because the provided password did not meet the requirements
-//   imposed by the account password policy.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfile
-func (c *IAM) UpdateLoginProfile(input *UpdateLoginProfileInput) (*UpdateLoginProfileOutput, error) {
-	req, out := c.UpdateLoginProfileRequest(input)
-	return out, req.Send()
-}
-
-// UpdateLoginProfileWithContext is the same as UpdateLoginProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateLoginProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateLoginProfileWithContext(ctx aws.Context, input *UpdateLoginProfileInput, opts ...aws.Option) (*UpdateLoginProfileOutput, error) {
-	req, out := c.UpdateLoginProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateLoginProfileRequest{Request: req, Input: input}
 }
 
 const opUpdateOpenIDConnectProviderThumbprint = "UpdateOpenIDConnectProviderThumbprint"
 
-// UpdateOpenIDConnectProviderThumbprintRequest generates a "aws.Request" representing the
-// client's request for the UpdateOpenIDConnectProviderThumbprint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateOpenIDConnectProviderThumbprint for more information on using the UpdateOpenIDConnectProviderThumbprint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateOpenIDConnectProviderThumbprintRequest method.
-//    req, resp := client.UpdateOpenIDConnectProviderThumbprintRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprint
-func (c *IAM) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDConnectProviderThumbprintInput) (req *aws.Request, output *UpdateOpenIDConnectProviderThumbprintOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateOpenIDConnectProviderThumbprint,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateOpenIDConnectProviderThumbprintInput{}
-	}
-
-	output = &UpdateOpenIDConnectProviderThumbprintOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UpdateOpenIDConnectProviderThumbprintRequest is a API request type for the UpdateOpenIDConnectProviderThumbprint API operation.
+type UpdateOpenIDConnectProviderThumbprintRequest struct {
+	*aws.Request
+	Input *UpdateOpenIDConnectProviderThumbprintInput
 }
 
-// UpdateOpenIDConnectProviderThumbprint API operation for AWS Identity and Access Management.
+// Send marshals and sends the UpdateOpenIDConnectProviderThumbprint API request.
+func (r UpdateOpenIDConnectProviderThumbprintRequest) Send() (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateOpenIDConnectProviderThumbprintOutput), nil
+}
+
+// UpdateOpenIDConnectProviderThumbprintRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Replaces the existing list of server certificate thumbprints associated with
 // an OpenID Connect (OIDC) provider resource object with a new list of thumbprints.
@@ -12257,75 +7538,63 @@ func (c *IAM) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDCo
 // limit access to the UpdateOpenIDConnectProviderThumbprint action to highly-privileged
 // users.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateOpenIDConnectProviderThumbprint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the UpdateOpenIDConnectProviderThumbprintRequest method.
+//    req := client.UpdateOpenIDConnectProviderThumbprintRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprint
-func (c *IAM) UpdateOpenIDConnectProviderThumbprint(input *UpdateOpenIDConnectProviderThumbprintInput) (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
-	req, out := c.UpdateOpenIDConnectProviderThumbprintRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDConnectProviderThumbprintInput) UpdateOpenIDConnectProviderThumbprintRequest {
+	op := &aws.Operation{
+		Name:       opUpdateOpenIDConnectProviderThumbprint,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateOpenIDConnectProviderThumbprintWithContext is the same as UpdateOpenIDConnectProviderThumbprint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateOpenIDConnectProviderThumbprint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateOpenIDConnectProviderThumbprintWithContext(ctx aws.Context, input *UpdateOpenIDConnectProviderThumbprintInput, opts ...aws.Option) (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
-	req, out := c.UpdateOpenIDConnectProviderThumbprintRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateOpenIDConnectProviderThumbprintInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateOpenIDConnectProviderThumbprintOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UpdateOpenIDConnectProviderThumbprintRequest{Request: req, Input: input}
 }
 
 const opUpdateRoleDescription = "UpdateRoleDescription"
 
-// UpdateRoleDescriptionRequest generates a "aws.Request" representing the
-// client's request for the UpdateRoleDescription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateRoleDescriptionRequest is a API request type for the UpdateRoleDescription API operation.
+type UpdateRoleDescriptionRequest struct {
+	*aws.Request
+	Input *UpdateRoleDescriptionInput
+}
+
+// Send marshals and sends the UpdateRoleDescription API request.
+func (r UpdateRoleDescriptionRequest) Send() (*UpdateRoleDescriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRoleDescriptionOutput), nil
+}
+
+// UpdateRoleDescriptionRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateRoleDescription for more information on using the UpdateRoleDescription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the description of a role.
 //
 //    // Example sending a request using the UpdateRoleDescriptionRequest method.
-//    req, resp := client.UpdateRoleDescriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateRoleDescriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescription
-func (c *IAM) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput) (req *aws.Request, output *UpdateRoleDescriptionOutput) {
+func (c *IAM) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput) UpdateRoleDescriptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRoleDescription,
 		HTTPMethod: "POST",
@@ -12336,86 +7605,44 @@ func (c *IAM) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput) (r
 		input = &UpdateRoleDescriptionInput{}
 	}
 
-	output = &UpdateRoleDescriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateRoleDescription API operation for AWS Identity and Access Management.
-//
-// Modifies the description of a role.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateRoleDescription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeUnmodifiableEntityException "UnmodifiableEntity"
-//   The request was rejected because only the service that depends on the service-linked
-//   role can modify or delete the role on your behalf. The error message includes
-//   the name of the service that depends on this service-linked role. You must
-//   request the change through that service.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescription
-func (c *IAM) UpdateRoleDescription(input *UpdateRoleDescriptionInput) (*UpdateRoleDescriptionOutput, error) {
-	req, out := c.UpdateRoleDescriptionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateRoleDescriptionWithContext is the same as UpdateRoleDescription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateRoleDescription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateRoleDescriptionWithContext(ctx aws.Context, input *UpdateRoleDescriptionInput, opts ...aws.Option) (*UpdateRoleDescriptionOutput, error) {
-	req, out := c.UpdateRoleDescriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateRoleDescriptionOutput{})
+	return UpdateRoleDescriptionRequest{Request: req, Input: input}
 }
 
 const opUpdateSAMLProvider = "UpdateSAMLProvider"
 
-// UpdateSAMLProviderRequest generates a "aws.Request" representing the
-// client's request for the UpdateSAMLProvider operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateSAMLProviderRequest is a API request type for the UpdateSAMLProvider API operation.
+type UpdateSAMLProviderRequest struct {
+	*aws.Request
+	Input *UpdateSAMLProviderInput
+}
+
+// Send marshals and sends the UpdateSAMLProvider API request.
+func (r UpdateSAMLProviderRequest) Send() (*UpdateSAMLProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSAMLProviderOutput), nil
+}
+
+// UpdateSAMLProviderRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the metadata document for an existing SAML provider resource object.
 //
-// See UpdateSAMLProvider for more information on using the UpdateSAMLProvider
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires Signature Version 4 (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 //
 //    // Example sending a request using the UpdateSAMLProviderRequest method.
-//    req, resp := client.UpdateSAMLProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateSAMLProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProvider
-func (c *IAM) UpdateSAMLProviderRequest(input *UpdateSAMLProviderInput) (req *aws.Request, output *UpdateSAMLProviderOutput) {
+func (c *IAM) UpdateSAMLProviderRequest(input *UpdateSAMLProviderInput) UpdateSAMLProviderRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSAMLProvider,
 		HTTPMethod: "POST",
@@ -12426,108 +7653,30 @@ func (c *IAM) UpdateSAMLProviderRequest(input *UpdateSAMLProviderInput) (req *aw
 		input = &UpdateSAMLProviderInput{}
 	}
 
-	output = &UpdateSAMLProviderOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateSAMLProvider API operation for AWS Identity and Access Management.
-//
-// Updates the metadata document for an existing SAML provider resource object.
-//
-// This operation requires Signature Version 4 (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateSAMLProvider for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidInputException "InvalidInput"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProvider
-func (c *IAM) UpdateSAMLProvider(input *UpdateSAMLProviderInput) (*UpdateSAMLProviderOutput, error) {
-	req, out := c.UpdateSAMLProviderRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSAMLProviderWithContext is the same as UpdateSAMLProvider with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSAMLProvider for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateSAMLProviderWithContext(ctx aws.Context, input *UpdateSAMLProviderInput, opts ...aws.Option) (*UpdateSAMLProviderOutput, error) {
-	req, out := c.UpdateSAMLProviderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateSAMLProviderOutput{})
+	return UpdateSAMLProviderRequest{Request: req, Input: input}
 }
 
 const opUpdateSSHPublicKey = "UpdateSSHPublicKey"
 
-// UpdateSSHPublicKeyRequest generates a "aws.Request" representing the
-// client's request for the UpdateSSHPublicKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSSHPublicKey for more information on using the UpdateSSHPublicKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateSSHPublicKeyRequest method.
-//    req, resp := client.UpdateSSHPublicKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKey
-func (c *IAM) UpdateSSHPublicKeyRequest(input *UpdateSSHPublicKeyInput) (req *aws.Request, output *UpdateSSHPublicKeyOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateSSHPublicKey,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateSSHPublicKeyInput{}
-	}
-
-	output = &UpdateSSHPublicKeyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UpdateSSHPublicKeyRequest is a API request type for the UpdateSSHPublicKey API operation.
+type UpdateSSHPublicKeyRequest struct {
+	*aws.Request
+	Input *UpdateSSHPublicKeyInput
 }
 
-// UpdateSSHPublicKey API operation for AWS Identity and Access Management.
+// Send marshals and sends the UpdateSSHPublicKey API request.
+func (r UpdateSSHPublicKeyRequest) Send() (*UpdateSSHPublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSSHPublicKeyOutput), nil
+}
+
+// UpdateSSHPublicKeyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Sets the status of an IAM user's SSH public key to active or inactive. SSH
 // public keys that are inactive cannot be used for authentication. This action
@@ -12540,85 +7689,51 @@ func (c *IAM) UpdateSSHPublicKeyRequest(input *UpdateSSHPublicKeyInput) (req *aw
 // Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the AWS CodeCommit User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateSSHPublicKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKey
-func (c *IAM) UpdateSSHPublicKey(input *UpdateSSHPublicKeyInput) (*UpdateSSHPublicKeyOutput, error) {
-	req, out := c.UpdateSSHPublicKeyRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSSHPublicKeyWithContext is the same as UpdateSSHPublicKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSSHPublicKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateSSHPublicKeyWithContext(ctx aws.Context, input *UpdateSSHPublicKeyInput, opts ...aws.Option) (*UpdateSSHPublicKeyOutput, error) {
-	req, out := c.UpdateSSHPublicKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateServerCertificate = "UpdateServerCertificate"
-
-// UpdateServerCertificateRequest generates a "aws.Request" representing the
-// client's request for the UpdateServerCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateServerCertificate for more information on using the UpdateServerCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateServerCertificateRequest method.
-//    req, resp := client.UpdateServerCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateSSHPublicKeyRequest method.
+//    req := client.UpdateSSHPublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificate
-func (c *IAM) UpdateServerCertificateRequest(input *UpdateServerCertificateInput) (req *aws.Request, output *UpdateServerCertificateOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKey
+func (c *IAM) UpdateSSHPublicKeyRequest(input *UpdateSSHPublicKeyInput) UpdateSSHPublicKeyRequest {
 	op := &aws.Operation{
-		Name:       opUpdateServerCertificate,
+		Name:       opUpdateSSHPublicKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateServerCertificateInput{}
+		input = &UpdateSSHPublicKeyInput{}
 	}
 
-	output = &UpdateServerCertificateOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateSSHPublicKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return UpdateSSHPublicKeyRequest{Request: req, Input: input}
 }
 
-// UpdateServerCertificate API operation for AWS Identity and Access Management.
+const opUpdateServerCertificate = "UpdateServerCertificate"
+
+// UpdateServerCertificateRequest is a API request type for the UpdateServerCertificate API operation.
+type UpdateServerCertificateRequest struct {
+	*aws.Request
+	Input *UpdateServerCertificateInput
+}
+
+// Send marshals and sends the UpdateServerCertificate API request.
+func (r UpdateServerCertificateRequest) Send() (*UpdateServerCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateServerCertificateOutput), nil
+}
+
+// UpdateServerCertificateRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Updates the name and/or the path of the specified server certificate stored
 // in IAM.
@@ -12640,79 +7755,66 @@ func (c *IAM) UpdateServerCertificateRequest(input *UpdateServerCertificateInput
 // (http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the IAM
 // User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateServerCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the UpdateServerCertificateRequest method.
+//    req := client.UpdateServerCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificate
-func (c *IAM) UpdateServerCertificate(input *UpdateServerCertificateInput) (*UpdateServerCertificateOutput, error) {
-	req, out := c.UpdateServerCertificateRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) UpdateServerCertificateRequest(input *UpdateServerCertificateInput) UpdateServerCertificateRequest {
+	op := &aws.Operation{
+		Name:       opUpdateServerCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateServerCertificateWithContext is the same as UpdateServerCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateServerCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateServerCertificateWithContext(ctx aws.Context, input *UpdateServerCertificateInput, opts ...aws.Option) (*UpdateServerCertificateOutput, error) {
-	req, out := c.UpdateServerCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateServerCertificateInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateServerCertificateOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UpdateServerCertificateRequest{Request: req, Input: input}
 }
 
 const opUpdateServiceSpecificCredential = "UpdateServiceSpecificCredential"
 
-// UpdateServiceSpecificCredentialRequest generates a "aws.Request" representing the
-// client's request for the UpdateServiceSpecificCredential operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateServiceSpecificCredentialRequest is a API request type for the UpdateServiceSpecificCredential API operation.
+type UpdateServiceSpecificCredentialRequest struct {
+	*aws.Request
+	Input *UpdateServiceSpecificCredentialInput
+}
+
+// Send marshals and sends the UpdateServiceSpecificCredential API request.
+func (r UpdateServiceSpecificCredentialRequest) Send() (*UpdateServiceSpecificCredentialOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateServiceSpecificCredentialOutput), nil
+}
+
+// UpdateServiceSpecificCredentialRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateServiceSpecificCredential for more information on using the UpdateServiceSpecificCredential
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the status of a service-specific credential to Active or Inactive. Service-specific
+// credentials that are inactive cannot be used for authentication to the service.
+// This action can be used to disable a user’s service-specific credential as
+// part of a credential rotation work flow.
 //
 //    // Example sending a request using the UpdateServiceSpecificCredentialRequest method.
-//    req, resp := client.UpdateServiceSpecificCredentialRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateServiceSpecificCredentialRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredential
-func (c *IAM) UpdateServiceSpecificCredentialRequest(input *UpdateServiceSpecificCredentialInput) (req *aws.Request, output *UpdateServiceSpecificCredentialOutput) {
+func (c *IAM) UpdateServiceSpecificCredentialRequest(input *UpdateServiceSpecificCredentialInput) UpdateServiceSpecificCredentialRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServiceSpecificCredential,
 		HTTPMethod: "POST",
@@ -12723,99 +7825,32 @@ func (c *IAM) UpdateServiceSpecificCredentialRequest(input *UpdateServiceSpecifi
 		input = &UpdateServiceSpecificCredentialInput{}
 	}
 
-	output = &UpdateServiceSpecificCredentialOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateServiceSpecificCredentialOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateServiceSpecificCredential API operation for AWS Identity and Access Management.
-//
-// Sets the status of a service-specific credential to Active or Inactive. Service-specific
-// credentials that are inactive cannot be used for authentication to the service.
-// This action can be used to disable a user’s service-specific credential as
-// part of a credential rotation work flow.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateServiceSpecificCredential for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredential
-func (c *IAM) UpdateServiceSpecificCredential(input *UpdateServiceSpecificCredentialInput) (*UpdateServiceSpecificCredentialOutput, error) {
-	req, out := c.UpdateServiceSpecificCredentialRequest(input)
-	return out, req.Send()
-}
-
-// UpdateServiceSpecificCredentialWithContext is the same as UpdateServiceSpecificCredential with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateServiceSpecificCredential for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateServiceSpecificCredentialWithContext(ctx aws.Context, input *UpdateServiceSpecificCredentialInput, opts ...aws.Option) (*UpdateServiceSpecificCredentialOutput, error) {
-	req, out := c.UpdateServiceSpecificCredentialRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateServiceSpecificCredentialRequest{Request: req, Input: input}
 }
 
 const opUpdateSigningCertificate = "UpdateSigningCertificate"
 
-// UpdateSigningCertificateRequest generates a "aws.Request" representing the
-// client's request for the UpdateSigningCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSigningCertificate for more information on using the UpdateSigningCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateSigningCertificateRequest method.
-//    req, resp := client.UpdateSigningCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificate
-func (c *IAM) UpdateSigningCertificateRequest(input *UpdateSigningCertificateInput) (req *aws.Request, output *UpdateSigningCertificateOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateSigningCertificate,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateSigningCertificateInput{}
-	}
-
-	output = &UpdateSigningCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UpdateSigningCertificateRequest is a API request type for the UpdateSigningCertificate API operation.
+type UpdateSigningCertificateRequest struct {
+	*aws.Request
+	Input *UpdateSigningCertificateInput
 }
 
-// UpdateSigningCertificate API operation for AWS Identity and Access Management.
+// Send marshals and sends the UpdateSigningCertificate API request.
+func (r UpdateSigningCertificateRequest) Send() (*UpdateSigningCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSigningCertificateOutput), nil
+}
+
+// UpdateSigningCertificateRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Changes the status of the specified user signing certificate from active
 // to disabled, or vice versa. This action can be used to disable an IAM user's
@@ -12826,93 +7861,51 @@ func (c *IAM) UpdateSigningCertificateRequest(input *UpdateSigningCertificateInp
 // works for access keys under the AWS account, you can use this action to manage
 // root credentials even if the AWS account has no associated users.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateSigningCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificate
-func (c *IAM) UpdateSigningCertificate(input *UpdateSigningCertificateInput) (*UpdateSigningCertificateOutput, error) {
-	req, out := c.UpdateSigningCertificateRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSigningCertificateWithContext is the same as UpdateSigningCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSigningCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateSigningCertificateWithContext(ctx aws.Context, input *UpdateSigningCertificateInput, opts ...aws.Option) (*UpdateSigningCertificateOutput, error) {
-	req, out := c.UpdateSigningCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateUser = "UpdateUser"
-
-// UpdateUserRequest generates a "aws.Request" representing the
-// client's request for the UpdateUser operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateUser for more information on using the UpdateUser
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateUserRequest method.
-//    req, resp := client.UpdateUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateSigningCertificateRequest method.
+//    req := client.UpdateSigningCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUser
-func (c *IAM) UpdateUserRequest(input *UpdateUserInput) (req *aws.Request, output *UpdateUserOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificate
+func (c *IAM) UpdateSigningCertificateRequest(input *UpdateSigningCertificateInput) UpdateSigningCertificateRequest {
 	op := &aws.Operation{
-		Name:       opUpdateUser,
+		Name:       opUpdateSigningCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateUserInput{}
+		input = &UpdateSigningCertificateInput{}
 	}
 
-	output = &UpdateUserOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateSigningCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return UpdateSigningCertificateRequest{Request: req, Input: input}
 }
 
-// UpdateUser API operation for AWS Identity and Access Management.
+const opUpdateUser = "UpdateUser"
+
+// UpdateUserRequest is a API request type for the UpdateUser API operation.
+type UpdateUserRequest struct {
+	*aws.Request
+	Input *UpdateUserInput
+}
+
+// Send marshals and sends the UpdateUser API request.
+func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserOutput), nil
+}
+
+// UpdateUserRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Updates the name and/or the path of the specified IAM user.
 //
@@ -12927,85 +7920,69 @@ func (c *IAM) UpdateUserRequest(input *UpdateUserInput) (req *aws.Request, outpu
 // Robert, or must have permission on all (*). For more information about permissions,
 // see Permissions and Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UpdateUser for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeEntityTemporarilyUnmodifiableException "EntityTemporarilyUnmodifiable"
-//   The request was rejected because it referenced an entity that is temporarily
-//   unmodifiable, such as a user name that was deleted and then recreated. The
-//   error indicates that the request is likely to succeed if you try again after
-//   waiting several minutes. The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the UpdateUserRequest method.
+//    req := client.UpdateUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUser
-func (c *IAM) UpdateUser(input *UpdateUserInput) (*UpdateUserOutput, error) {
-	req, out := c.UpdateUserRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUser,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateUserWithContext is the same as UpdateUser with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateUser for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UpdateUserWithContext(ctx aws.Context, input *UpdateUserInput, opts ...aws.Option) (*UpdateUserOutput, error) {
-	req, out := c.UpdateUserRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateUserInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateUserOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UpdateUserRequest{Request: req, Input: input}
 }
 
 const opUploadSSHPublicKey = "UploadSSHPublicKey"
 
-// UploadSSHPublicKeyRequest generates a "aws.Request" representing the
-// client's request for the UploadSSHPublicKey operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UploadSSHPublicKeyRequest is a API request type for the UploadSSHPublicKey API operation.
+type UploadSSHPublicKeyRequest struct {
+	*aws.Request
+	Input *UploadSSHPublicKeyInput
+}
+
+// Send marshals and sends the UploadSSHPublicKey API request.
+func (r UploadSSHPublicKeyRequest) Send() (*UploadSSHPublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadSSHPublicKeyOutput), nil
+}
+
+// UploadSSHPublicKeyRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Uploads an SSH public key and associates it with the specified IAM user.
 //
-// See UploadSSHPublicKey for more information on using the UploadSSHPublicKey
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The SSH public key uploaded by this action can be used only for authenticating
+// the associated IAM user to an AWS CodeCommit repository. For more information
+// about using SSH keys to authenticate to an AWS CodeCommit repository, see
+// Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using the UploadSSHPublicKeyRequest method.
-//    req, resp := client.UploadSSHPublicKeyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UploadSSHPublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKey
-func (c *IAM) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) (req *aws.Request, output *UploadSSHPublicKeyOutput) {
+func (c *IAM) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) UploadSSHPublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opUploadSSHPublicKey,
 		HTTPMethod: "POST",
@@ -13016,114 +7993,30 @@ func (c *IAM) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) (req *aw
 		input = &UploadSSHPublicKeyInput{}
 	}
 
-	output = &UploadSSHPublicKeyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UploadSSHPublicKey API operation for AWS Identity and Access Management.
-//
-// Uploads an SSH public key and associates it with the specified IAM user.
-//
-// The SSH public key uploaded by this action can be used only for authenticating
-// the associated IAM user to an AWS CodeCommit repository. For more information
-// about using SSH keys to authenticate to an AWS CodeCommit repository, see
-// Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
-// in the AWS CodeCommit User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UploadSSHPublicKey for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeInvalidPublicKeyException "InvalidPublicKey"
-//   The request was rejected because the public key is malformed or otherwise
-//   invalid.
-//
-//   * ErrCodeDuplicateSSHPublicKeyException "DuplicateSSHPublicKey"
-//   The request was rejected because the SSH public key is already associated
-//   with the specified IAM user.
-//
-//   * ErrCodeUnrecognizedPublicKeyEncodingException "UnrecognizedPublicKeyEncoding"
-//   The request was rejected because the public key encoding format is unsupported
-//   or unrecognized.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKey
-func (c *IAM) UploadSSHPublicKey(input *UploadSSHPublicKeyInput) (*UploadSSHPublicKeyOutput, error) {
-	req, out := c.UploadSSHPublicKeyRequest(input)
-	return out, req.Send()
-}
-
-// UploadSSHPublicKeyWithContext is the same as UploadSSHPublicKey with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadSSHPublicKey for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UploadSSHPublicKeyWithContext(ctx aws.Context, input *UploadSSHPublicKeyInput, opts ...aws.Option) (*UploadSSHPublicKeyOutput, error) {
-	req, out := c.UploadSSHPublicKeyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UploadSSHPublicKeyOutput{})
+	return UploadSSHPublicKeyRequest{Request: req, Input: input}
 }
 
 const opUploadServerCertificate = "UploadServerCertificate"
 
-// UploadServerCertificateRequest generates a "aws.Request" representing the
-// client's request for the UploadServerCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UploadServerCertificate for more information on using the UploadServerCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UploadServerCertificateRequest method.
-//    req, resp := client.UploadServerCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificate
-func (c *IAM) UploadServerCertificateRequest(input *UploadServerCertificateInput) (req *aws.Request, output *UploadServerCertificateOutput) {
-	op := &aws.Operation{
-		Name:       opUploadServerCertificate,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UploadServerCertificateInput{}
-	}
-
-	output = &UploadServerCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UploadServerCertificateRequest is a API request type for the UploadServerCertificate API operation.
+type UploadServerCertificateRequest struct {
+	*aws.Request
+	Input *UploadServerCertificateInput
 }
 
-// UploadServerCertificate API operation for AWS Identity and Access Management.
+// Send marshals and sends the UploadServerCertificate API request.
+func (r UploadServerCertificateRequest) Send() (*UploadServerCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadServerCertificateOutput), nil
+}
+
+// UploadServerCertificateRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Uploads a server certificate entity for the AWS account. The server certificate
 // entity includes a public key certificate, a private key, and an optional
@@ -13152,99 +8045,49 @@ func (c *IAM) UploadServerCertificateRequest(input *UploadServerCertificateInput
 // API with IAM, go to Calling the API by Making HTTP Query Requests (http://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UploadServerCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeMalformedCertificateException "MalformedCertificate"
-//   The request was rejected because the certificate was malformed or expired.
-//   The error message describes the specific error.
-//
-//   * ErrCodeKeyPairMismatchException "KeyPairMismatch"
-//   The request was rejected because the public key certificate and the private
-//   key do not match.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificate
-func (c *IAM) UploadServerCertificate(input *UploadServerCertificateInput) (*UploadServerCertificateOutput, error) {
-	req, out := c.UploadServerCertificateRequest(input)
-	return out, req.Send()
-}
-
-// UploadServerCertificateWithContext is the same as UploadServerCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadServerCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UploadServerCertificateWithContext(ctx aws.Context, input *UploadServerCertificateInput, opts ...aws.Option) (*UploadServerCertificateOutput, error) {
-	req, out := c.UploadServerCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUploadSigningCertificate = "UploadSigningCertificate"
-
-// UploadSigningCertificateRequest generates a "aws.Request" representing the
-// client's request for the UploadSigningCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UploadSigningCertificate for more information on using the UploadSigningCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UploadSigningCertificateRequest method.
-//    req, resp := client.UploadSigningCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UploadServerCertificateRequest method.
+//    req := client.UploadServerCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificate
-func (c *IAM) UploadSigningCertificateRequest(input *UploadSigningCertificateInput) (req *aws.Request, output *UploadSigningCertificateOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificate
+func (c *IAM) UploadServerCertificateRequest(input *UploadServerCertificateInput) UploadServerCertificateRequest {
 	op := &aws.Operation{
-		Name:       opUploadSigningCertificate,
+		Name:       opUploadServerCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UploadSigningCertificateInput{}
+		input = &UploadServerCertificateInput{}
 	}
 
-	output = &UploadSigningCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UploadServerCertificateOutput{})
+	return UploadServerCertificateRequest{Request: req, Input: input}
 }
 
-// UploadSigningCertificate API operation for AWS Identity and Access Management.
+const opUploadSigningCertificate = "UploadSigningCertificate"
+
+// UploadSigningCertificateRequest is a API request type for the UploadSigningCertificate API operation.
+type UploadSigningCertificateRequest struct {
+	*aws.Request
+	Input *UploadSigningCertificateInput
+}
+
+// Send marshals and sends the UploadSigningCertificate API request.
+func (r UploadSigningCertificateRequest) Send() (*UploadSigningCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadSigningCertificateOutput), nil
+}
+
+// UploadSigningCertificateRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
 //
 // Uploads an X.509 signing certificate and associates it with the specified
 // IAM user. Some AWS services use X.509 signing certificates to validate requests
@@ -13264,61 +8107,27 @@ func (c *IAM) UploadSigningCertificateRequest(input *UploadSigningCertificateInp
 // API with IAM, go to Making Query Requests (http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html)
 // in the IAM User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Identity and Access Management's
-// API operation UploadSigningCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error message describes the limit exceeded.
-//
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExists"
-//   The request was rejected because it attempted to create a resource that already
-//   exists.
-//
-//   * ErrCodeMalformedCertificateException "MalformedCertificate"
-//   The request was rejected because the certificate was malformed or expired.
-//   The error message describes the specific error.
-//
-//   * ErrCodeInvalidCertificateException "InvalidCertificate"
-//   The request was rejected because the certificate is invalid.
-//
-//   * ErrCodeDuplicateCertificateException "DuplicateCertificate"
-//   The request was rejected because the same certificate is associated with
-//   an IAM user in the account.
-//
-//   * ErrCodeNoSuchEntityException "NoSuchEntity"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error message describes the entity.
-//
-//   * ErrCodeServiceFailureException "ServiceFailure"
-//   The request processing has failed because of an unknown error, exception
-//   or failure.
+//    // Example sending a request using the UploadSigningCertificateRequest method.
+//    req := client.UploadSigningCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificate
-func (c *IAM) UploadSigningCertificate(input *UploadSigningCertificateInput) (*UploadSigningCertificateOutput, error) {
-	req, out := c.UploadSigningCertificateRequest(input)
-	return out, req.Send()
-}
+func (c *IAM) UploadSigningCertificateRequest(input *UploadSigningCertificateInput) UploadSigningCertificateRequest {
+	op := &aws.Operation{
+		Name:       opUploadSigningCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UploadSigningCertificateWithContext is the same as UploadSigningCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadSigningCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) UploadSigningCertificateWithContext(ctx aws.Context, input *UploadSigningCertificateInput, opts ...aws.Option) (*UploadSigningCertificateOutput, error) {
-	req, out := c.UploadSigningCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UploadSigningCertificateInput{}
+	}
+
+	req := c.newRequest(op, input, &UploadSigningCertificateOutput{})
+	return UploadSigningCertificateRequest{Request: req, Input: input}
 }
 
 // Contains information about an AWS access key.
@@ -18151,32 +12960,6 @@ func (s *GetContextKeysForCustomPolicyInput) SetPolicyInputList(v []*string) *Ge
 	return s
 }
 
-// Contains the response to a successful GetContextKeysForPrincipalPolicy or
-// GetContextKeysForCustomPolicy request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPolicyResponse
-type GetContextKeysForPolicyResponse struct {
-	_ struct{} `type:"structure"`
-
-	// The list of context keys that are referenced in the input policies.
-	ContextKeyNames []*string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetContextKeysForPolicyResponse) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s GetContextKeysForPolicyResponse) GoString() string {
-	return s.String()
-}
-
-// SetContextKeyNames sets the ContextKeyNames field's value.
-func (s *GetContextKeysForPolicyResponse) SetContextKeyNames(v []*string) *GetContextKeysForPolicyResponse {
-	s.ContextKeyNames = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicyRequest
 type GetContextKeysForPrincipalPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -18244,6 +13027,32 @@ func (s *GetContextKeysForPrincipalPolicyInput) SetPolicyInputList(v []*string) 
 // SetPolicySourceArn sets the PolicySourceArn field's value.
 func (s *GetContextKeysForPrincipalPolicyInput) SetPolicySourceArn(v string) *GetContextKeysForPrincipalPolicyInput {
 	s.PolicySourceArn = &v
+	return s
+}
+
+// Contains the response to a successful GetContextKeysForPrincipalPolicy or
+// GetContextKeysForCustomPolicy request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicyOutput
+type GetContextKeysForPrincipalPolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of context keys that are referenced in the input policies.
+	ContextKeyNames []*string `type:"list"`
+}
+
+// String returns the string representation
+func (s GetContextKeysForPrincipalPolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetContextKeysForPrincipalPolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SetContextKeyNames sets the ContextKeyNames field's value.
+func (s *GetContextKeysForPrincipalPolicyOutput) SetContextKeyNames(v []*string) *GetContextKeysForPrincipalPolicyOutput {
+	s.ContextKeyNames = v
 	return s
 }
 
@@ -26011,56 +20820,6 @@ func (s *SimulateCustomPolicyInput) SetResourcePolicy(v string) *SimulateCustomP
 	return s
 }
 
-// Contains the response to a successful SimulatePrincipalPolicy or SimulateCustomPolicy
-// request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePolicyResponse
-type SimulatePolicyResponse struct {
-	_ struct{} `type:"structure"`
-
-	// The results of the simulation.
-	EvaluationResults []*EvaluationResult `type:"list"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all of your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s SimulatePolicyResponse) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s SimulatePolicyResponse) GoString() string {
-	return s.String()
-}
-
-// SetEvaluationResults sets the EvaluationResults field's value.
-func (s *SimulatePolicyResponse) SetEvaluationResults(v []*EvaluationResult) *SimulatePolicyResponse {
-	s.EvaluationResults = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *SimulatePolicyResponse) SetIsTruncated(v bool) *SimulatePolicyResponse {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *SimulatePolicyResponse) SetMarker(v string) *SimulatePolicyResponse {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicyRequest
 type SimulatePrincipalPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -26340,6 +21099,56 @@ func (s *SimulatePrincipalPolicyInput) SetResourceOwner(v string) *SimulatePrinc
 // SetResourcePolicy sets the ResourcePolicy field's value.
 func (s *SimulatePrincipalPolicyInput) SetResourcePolicy(v string) *SimulatePrincipalPolicyInput {
 	s.ResourcePolicy = &v
+	return s
+}
+
+// Contains the response to a successful SimulatePrincipalPolicy or SimulateCustomPolicy
+// request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicyOutput
+type SimulatePrincipalPolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The results of the simulation.
+	EvaluationResults []*EvaluationResult `type:"list"`
+
+	// A flag that indicates whether there are more items to return. If your results
+	// were truncated, you can make a subsequent pagination request using the Marker
+	// request parameter to retrieve more items. Note that IAM might return fewer
+	// than the MaxItems number of results even when there are more results available.
+	// We recommend that you check IsTruncated after every call to ensure that you
+	// receive all of your results.
+	IsTruncated *bool `type:"boolean"`
+
+	// When IsTruncated is true, this element is present and contains the value
+	// to use for the Marker parameter in a subsequent pagination request.
+	Marker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s SimulatePrincipalPolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SimulatePrincipalPolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SetEvaluationResults sets the EvaluationResults field's value.
+func (s *SimulatePrincipalPolicyOutput) SetEvaluationResults(v []*EvaluationResult) *SimulatePrincipalPolicyOutput {
+	s.EvaluationResults = v
+	return s
+}
+
+// SetIsTruncated sets the IsTruncated field's value.
+func (s *SimulatePrincipalPolicyOutput) SetIsTruncated(v bool) *SimulatePrincipalPolicyOutput {
+	s.IsTruncated = &v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *SimulatePrincipalPolicyOutput) SetMarker(v string) *SimulatePrincipalPolicyOutput {
+	s.Marker = &v
 	return s
 }
 

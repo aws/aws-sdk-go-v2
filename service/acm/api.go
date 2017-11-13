@@ -14,49 +14,24 @@ import (
 
 const opAddTagsToCertificate = "AddTagsToCertificate"
 
-// AddTagsToCertificateRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTagsToCertificate for more information on using the AddTagsToCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddTagsToCertificateRequest method.
-//    req, resp := client.AddTagsToCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificate
-func (c *ACM) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) (req *aws.Request, output *AddTagsToCertificateOutput) {
-	op := &aws.Operation{
-		Name:       opAddTagsToCertificate,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddTagsToCertificateInput{}
-	}
-
-	output = &AddTagsToCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AddTagsToCertificateRequest is a API request type for the AddTagsToCertificate API operation.
+type AddTagsToCertificateRequest struct {
+	*aws.Request
+	Input *AddTagsToCertificateInput
 }
 
-// AddTagsToCertificate API operation for AWS Certificate Manager.
+// Send marshals and sends the AddTagsToCertificate API request.
+func (r AddTagsToCertificateRequest) Send() (*AddTagsToCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToCertificateOutput), nil
+}
+
+// AddTagsToCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
 // Adds one or more tags to an ACM Certificate. Tags are labels that you can
 // use to identify and organize your AWS resources. Each tag consists of a key
@@ -76,95 +51,51 @@ func (c *ACM) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) (req
 // view all of the tags that have been applied to the certificate, use the ListTagsForCertificate
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation AddTagsToCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   One or both of the values that make up the key-value pair is not valid. For
-//   example, you cannot specify a tag value that begins with aws:.
-//
-//   * ErrCodeTooManyTagsException "TooManyTagsException"
-//   The request contains too many tags. Try the request again with fewer tags.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificate
-func (c *ACM) AddTagsToCertificate(input *AddTagsToCertificateInput) (*AddTagsToCertificateOutput, error) {
-	req, out := c.AddTagsToCertificateRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsToCertificateWithContext is the same as AddTagsToCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) AddTagsToCertificateWithContext(ctx aws.Context, input *AddTagsToCertificateInput, opts ...aws.Option) (*AddTagsToCertificateOutput, error) {
-	req, out := c.AddTagsToCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteCertificate = "DeleteCertificate"
-
-// DeleteCertificateRequest generates a "aws.Request" representing the
-// client's request for the DeleteCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCertificate for more information on using the DeleteCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteCertificateRequest method.
-//    req, resp := client.DeleteCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AddTagsToCertificateRequest method.
+//    req := client.AddTagsToCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificate
-func (c *ACM) DeleteCertificateRequest(input *DeleteCertificateInput) (req *aws.Request, output *DeleteCertificateOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificate
+func (c *ACM) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) AddTagsToCertificateRequest {
 	op := &aws.Operation{
-		Name:       opDeleteCertificate,
+		Name:       opAddTagsToCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteCertificateInput{}
+		input = &AddTagsToCertificateInput{}
 	}
 
-	output = &DeleteCertificateOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddTagsToCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return AddTagsToCertificateRequest{Request: req, Input: input}
 }
 
-// DeleteCertificate API operation for AWS Certificate Manager.
+const opDeleteCertificate = "DeleteCertificate"
+
+// DeleteCertificateRequest is a API request type for the DeleteCertificate API operation.
+type DeleteCertificateRequest struct {
+	*aws.Request
+	Input *DeleteCertificateInput
+}
+
+// Send marshals and sends the DeleteCertificate API request.
+func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCertificateOutput), nil
+}
+
+// DeleteCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
 // Deletes an ACM Certificate and its associated private key. If this action
 // succeeds, the certificate no longer appears in the list of ACM Certificates
@@ -176,74 +107,63 @@ func (c *ACM) DeleteCertificateRequest(input *DeleteCertificateInput) (req *aws.
 // To delete a certificate that is in use, the certificate association must
 // first be removed.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation DeleteCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The certificate is in use by another AWS service in the caller's account.
-//   Remove the association and try again.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
+//    // Example sending a request using the DeleteCertificateRequest method.
+//    req := client.DeleteCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificate
-func (c *ACM) DeleteCertificate(input *DeleteCertificateInput) (*DeleteCertificateOutput, error) {
-	req, out := c.DeleteCertificateRequest(input)
-	return out, req.Send()
-}
+func (c *ACM) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCertificateRequest {
+	op := &aws.Operation{
+		Name:       opDeleteCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteCertificateWithContext is the same as DeleteCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...aws.Option) (*DeleteCertificateOutput, error) {
-	req, out := c.DeleteCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteCertificateInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteCertificateOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteCertificateRequest{Request: req, Input: input}
 }
 
 const opDescribeCertificate = "DescribeCertificate"
 
-// DescribeCertificateRequest generates a "aws.Request" representing the
-// client's request for the DescribeCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCertificateRequest is a API request type for the DescribeCertificate API operation.
+type DescribeCertificateRequest struct {
+	*aws.Request
+	Input *DescribeCertificateInput
+}
+
+// Send marshals and sends the DescribeCertificate API request.
+func (r DescribeCertificateRequest) Send() (*DescribeCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCertificateOutput), nil
+}
+
+// DescribeCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCertificate for more information on using the DescribeCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns detailed metadata about the specified ACM Certificate.
 //
 //    // Example sending a request using the DescribeCertificateRequest method.
-//    req, resp := client.DescribeCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate
-func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) (req *aws.Request, output *DescribeCertificateOutput) {
+func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) DescribeCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCertificate,
 		HTTPMethod: "POST",
@@ -254,95 +174,30 @@ func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) (req *
 		input = &DescribeCertificateInput{}
 	}
 
-	output = &DescribeCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCertificate API operation for AWS Certificate Manager.
-//
-// Returns detailed metadata about the specified ACM Certificate.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation DescribeCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate
-func (c *ACM) DescribeCertificate(input *DescribeCertificateInput) (*DescribeCertificateOutput, error) {
-	req, out := c.DescribeCertificateRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCertificateWithContext is the same as DescribeCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCertificateInput, opts ...aws.Option) (*DescribeCertificateOutput, error) {
-	req, out := c.DescribeCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCertificateOutput{})
+	return DescribeCertificateRequest{Request: req, Input: input}
 }
 
 const opGetCertificate = "GetCertificate"
 
-// GetCertificateRequest generates a "aws.Request" representing the
-// client's request for the GetCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCertificate for more information on using the GetCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetCertificateRequest method.
-//    req, resp := client.GetCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificate
-func (c *ACM) GetCertificateRequest(input *GetCertificateInput) (req *aws.Request, output *GetCertificateOutput) {
-	op := &aws.Operation{
-		Name:       opGetCertificate,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetCertificateInput{}
-	}
-
-	output = &GetCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetCertificateRequest is a API request type for the GetCertificate API operation.
+type GetCertificateRequest struct {
+	*aws.Request
+	Input *GetCertificateInput
 }
 
-// GetCertificate API operation for AWS Certificate Manager.
+// Send marshals and sends the GetCertificate API request.
+func (r GetCertificateRequest) Send() (*GetCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCertificateOutput), nil
+}
+
+// GetCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
 // Retrieves an ACM Certificate and certificate chain for the certificate specified
 // by an ARN. The chain is an ordered list of certificates that contains the
@@ -354,90 +209,49 @@ func (c *ACM) GetCertificateRequest(input *GetCertificateInput) (req *aws.Reques
 // Currently, ACM Certificates can be used only with Elastic Load Balancing
 // and Amazon CloudFront.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation GetCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeRequestInProgressException "RequestInProgressException"
-//   The certificate request is in process and the certificate in your account
-//   has not yet been issued.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificate
-func (c *ACM) GetCertificate(input *GetCertificateInput) (*GetCertificateOutput, error) {
-	req, out := c.GetCertificateRequest(input)
-	return out, req.Send()
-}
-
-// GetCertificateWithContext is the same as GetCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) GetCertificateWithContext(ctx aws.Context, input *GetCertificateInput, opts ...aws.Option) (*GetCertificateOutput, error) {
-	req, out := c.GetCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opImportCertificate = "ImportCertificate"
-
-// ImportCertificateRequest generates a "aws.Request" representing the
-// client's request for the ImportCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ImportCertificate for more information on using the ImportCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ImportCertificateRequest method.
-//    req, resp := client.ImportCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetCertificateRequest method.
+//    req := client.GetCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificate
-func (c *ACM) ImportCertificateRequest(input *ImportCertificateInput) (req *aws.Request, output *ImportCertificateOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificate
+func (c *ACM) GetCertificateRequest(input *GetCertificateInput) GetCertificateRequest {
 	op := &aws.Operation{
-		Name:       opImportCertificate,
+		Name:       opGetCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ImportCertificateInput{}
+		input = &GetCertificateInput{}
 	}
 
-	output = &ImportCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetCertificateOutput{})
+	return GetCertificateRequest{Request: req, Input: input}
 }
 
-// ImportCertificate API operation for AWS Certificate Manager.
+const opImportCertificate = "ImportCertificate"
+
+// ImportCertificateRequest is a API request type for the ImportCertificate API operation.
+type ImportCertificateRequest struct {
+	*aws.Request
+	Input *ImportCertificateInput
+}
+
+// Send marshals and sends the ImportCertificate API request.
+func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportCertificateOutput), nil
+}
+
+// ImportCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
 // Imports an SSL/TLS certificate into AWS Certificate Manager (ACM) to use
 // with ACM's integrated AWS services (http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html).
@@ -466,74 +280,63 @@ func (c *ACM) ImportCertificateRequest(input *ImportCertificateInput) (req *aws.
 // This operation returns the Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // of the imported certificate.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation ImportCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   An ACM limit has been exceeded. For example, you may have input more domains
-//   than are allowed or you've requested too many certificates for your account.
-//   See the exception message returned by ACM to determine which limit you have
-//   violated. For more information about ACM limits, see the Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html)
-//   topic.
+//    // Example sending a request using the ImportCertificateRequest method.
+//    req := client.ImportCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificate
-func (c *ACM) ImportCertificate(input *ImportCertificateInput) (*ImportCertificateOutput, error) {
-	req, out := c.ImportCertificateRequest(input)
-	return out, req.Send()
-}
+func (c *ACM) ImportCertificateRequest(input *ImportCertificateInput) ImportCertificateRequest {
+	op := &aws.Operation{
+		Name:       opImportCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ImportCertificateWithContext is the same as ImportCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ImportCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) ImportCertificateWithContext(ctx aws.Context, input *ImportCertificateInput, opts ...aws.Option) (*ImportCertificateOutput, error) {
-	req, out := c.ImportCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ImportCertificateInput{}
+	}
+
+	req := c.newRequest(op, input, &ImportCertificateOutput{})
+	return ImportCertificateRequest{Request: req, Input: input}
 }
 
 const opListCertificates = "ListCertificates"
 
-// ListCertificatesRequest generates a "aws.Request" representing the
-// client's request for the ListCertificates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCertificatesRequest is a API request type for the ListCertificates API operation.
+type ListCertificatesRequest struct {
+	*aws.Request
+	Input *ListCertificatesInput
+}
+
+// Send marshals and sends the ListCertificates API request.
+func (r ListCertificatesRequest) Send() (*ListCertificatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCertificatesOutput), nil
+}
+
+// ListCertificatesRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCertificates for more information on using the ListCertificates
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of ACM Certificates and the domain name for each. You can
+// optionally filter the list to return only the certificates that match the
+// specified status.
 //
 //    // Example sending a request using the ListCertificatesRequest method.
-//    req, resp := client.ListCertificatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCertificatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates
-func (c *ACM) ListCertificatesRequest(input *ListCertificatesInput) (req *aws.Request, output *ListCertificatesOutput) {
+func (c *ACM) ListCertificatesRequest(input *ListCertificatesInput) ListCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opListCertificates,
 		HTTPMethod: "POST",
@@ -550,43 +353,8 @@ func (c *ACM) ListCertificatesRequest(input *ListCertificatesInput) (req *aws.Re
 		input = &ListCertificatesInput{}
 	}
 
-	output = &ListCertificatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCertificates API operation for AWS Certificate Manager.
-//
-// Retrieves a list of ACM Certificates and the domain name for each. You can
-// optionally filter the list to return only the certificates that match the
-// specified status.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation ListCertificates for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates
-func (c *ACM) ListCertificates(input *ListCertificatesInput) (*ListCertificatesOutput, error) {
-	req, out := c.ListCertificatesRequest(input)
-	return out, req.Send()
-}
-
-// ListCertificatesWithContext is the same as ListCertificates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCertificates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) ListCertificatesWithContext(ctx aws.Context, input *ListCertificatesInput, opts ...aws.Option) (*ListCertificatesOutput, error) {
-	req, out := c.ListCertificatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCertificatesOutput{})
+	return ListCertificatesRequest{Request: req, Input: input}
 }
 
 // ListCertificatesPages iterates over the pages of a ListCertificates operation,
@@ -625,10 +393,10 @@ func (c *ACM) ListCertificatesPagesWithContext(ctx aws.Context, input *ListCerti
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListCertificatesRequest(inCpy)
+			req := c.ListCertificatesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -641,31 +409,39 @@ func (c *ACM) ListCertificatesPagesWithContext(ctx aws.Context, input *ListCerti
 
 const opListTagsForCertificate = "ListTagsForCertificate"
 
-// ListTagsForCertificateRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForCertificateRequest is a API request type for the ListTagsForCertificate API operation.
+type ListTagsForCertificateRequest struct {
+	*aws.Request
+	Input *ListTagsForCertificateInput
+}
+
+// Send marshals and sends the ListTagsForCertificate API request.
+func (r ListTagsForCertificateRequest) Send() (*ListTagsForCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForCertificateOutput), nil
+}
+
+// ListTagsForCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForCertificate for more information on using the ListTagsForCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the tags that have been applied to the ACM Certificate. Use the certificate's
+// Amazon Resource Name (ARN) to specify the certificate. To add a tag to an
+// ACM Certificate, use the AddTagsToCertificate action. To delete a tag, use
+// the RemoveTagsFromCertificate action.
 //
 //    // Example sending a request using the ListTagsForCertificateRequest method.
-//    req, resp := client.ListTagsForCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificate
-func (c *ACM) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) (req *aws.Request, output *ListTagsForCertificateOutput) {
+func (c *ACM) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) ListTagsForCertificateRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForCertificate,
 		HTTPMethod: "POST",
@@ -676,100 +452,30 @@ func (c *ACM) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) 
 		input = &ListTagsForCertificateInput{}
 	}
 
-	output = &ListTagsForCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForCertificate API operation for AWS Certificate Manager.
-//
-// Lists the tags that have been applied to the ACM Certificate. Use the certificate's
-// Amazon Resource Name (ARN) to specify the certificate. To add a tag to an
-// ACM Certificate, use the AddTagsToCertificate action. To delete a tag, use
-// the RemoveTagsFromCertificate action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation ListTagsForCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificate
-func (c *ACM) ListTagsForCertificate(input *ListTagsForCertificateInput) (*ListTagsForCertificateOutput, error) {
-	req, out := c.ListTagsForCertificateRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForCertificateWithContext is the same as ListTagsForCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) ListTagsForCertificateWithContext(ctx aws.Context, input *ListTagsForCertificateInput, opts ...aws.Option) (*ListTagsForCertificateOutput, error) {
-	req, out := c.ListTagsForCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForCertificateOutput{})
+	return ListTagsForCertificateRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromCertificate = "RemoveTagsFromCertificate"
 
-// RemoveTagsFromCertificateRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTagsFromCertificate for more information on using the RemoveTagsFromCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RemoveTagsFromCertificateRequest method.
-//    req, resp := client.RemoveTagsFromCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificate
-func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateInput) (req *aws.Request, output *RemoveTagsFromCertificateOutput) {
-	op := &aws.Operation{
-		Name:       opRemoveTagsFromCertificate,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RemoveTagsFromCertificateInput{}
-	}
-
-	output = &RemoveTagsFromCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// RemoveTagsFromCertificateRequest is a API request type for the RemoveTagsFromCertificate API operation.
+type RemoveTagsFromCertificateRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromCertificateInput
 }
 
-// RemoveTagsFromCertificate API operation for AWS Certificate Manager.
+// Send marshals and sends the RemoveTagsFromCertificate API request.
+func (r RemoveTagsFromCertificateRequest) Send() (*RemoveTagsFromCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromCertificateOutput), nil
+}
+
+// RemoveTagsFromCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
 // Remove one or more tags from an ACM Certificate. A tag consists of a key-value
 // pair. If you do not specify the value portion of the tag when calling this
@@ -780,74 +486,69 @@ func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateI
 // all of the tags that have been applied to a specific ACM Certificate, use
 // the ListTagsForCertificate action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation RemoveTagsFromCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   One or both of the values that make up the key-value pair is not valid. For
-//   example, you cannot specify a tag value that begins with aws:.
+//    // Example sending a request using the RemoveTagsFromCertificateRequest method.
+//    req := client.RemoveTagsFromCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificate
-func (c *ACM) RemoveTagsFromCertificate(input *RemoveTagsFromCertificateInput) (*RemoveTagsFromCertificateOutput, error) {
-	req, out := c.RemoveTagsFromCertificateRequest(input)
-	return out, req.Send()
-}
+func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateInput) RemoveTagsFromCertificateRequest {
+	op := &aws.Operation{
+		Name:       opRemoveTagsFromCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RemoveTagsFromCertificateWithContext is the same as RemoveTagsFromCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) RemoveTagsFromCertificateWithContext(ctx aws.Context, input *RemoveTagsFromCertificateInput, opts ...aws.Option) (*RemoveTagsFromCertificateOutput, error) {
-	req, out := c.RemoveTagsFromCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RemoveTagsFromCertificateInput{}
+	}
+
+	req := c.newRequest(op, input, &RemoveTagsFromCertificateOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return RemoveTagsFromCertificateRequest{Request: req, Input: input}
 }
 
 const opRequestCertificate = "RequestCertificate"
 
-// RequestCertificateRequest generates a "aws.Request" representing the
-// client's request for the RequestCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RequestCertificateRequest is a API request type for the RequestCertificate API operation.
+type RequestCertificateRequest struct {
+	*aws.Request
+	Input *RequestCertificateInput
+}
+
+// Send marshals and sends the RequestCertificate API request.
+func (r RequestCertificateRequest) Send() (*RequestCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RequestCertificateOutput), nil
+}
+
+// RequestCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RequestCertificate for more information on using the RequestCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Requests an ACM Certificate for use with other AWS services. To request an
+// ACM Certificate, you must specify the fully qualified domain name (FQDN)
+// for your site. You can also specify additional FQDNs if users can reach your
+// site by using other names. For each domain name you specify, email is sent
+// to the domain owner to request approval to issue the certificate. After receiving
+// approval from the domain owner, the ACM Certificate is issued. For more information,
+// see the AWS Certificate Manager User Guide (http://docs.aws.amazon.com/acm/latest/userguide/).
 //
 //    // Example sending a request using the RequestCertificateRequest method.
-//    req, resp := client.RequestCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RequestCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificate
-func (c *ACM) RequestCertificateRequest(input *RequestCertificateInput) (req *aws.Request, output *RequestCertificateOutput) {
+func (c *ACM) RequestCertificateRequest(input *RequestCertificateInput) RequestCertificateRequest {
 	op := &aws.Operation{
 		Name:       opRequestCertificate,
 		HTTPMethod: "POST",
@@ -858,106 +559,30 @@ func (c *ACM) RequestCertificateRequest(input *RequestCertificateInput) (req *aw
 		input = &RequestCertificateInput{}
 	}
 
-	output = &RequestCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RequestCertificate API operation for AWS Certificate Manager.
-//
-// Requests an ACM Certificate for use with other AWS services. To request an
-// ACM Certificate, you must specify the fully qualified domain name (FQDN)
-// for your site. You can also specify additional FQDNs if users can reach your
-// site by using other names. For each domain name you specify, email is sent
-// to the domain owner to request approval to issue the certificate. After receiving
-// approval from the domain owner, the ACM Certificate is issued. For more information,
-// see the AWS Certificate Manager User Guide (http://docs.aws.amazon.com/acm/latest/userguide/).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation RequestCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   An ACM limit has been exceeded. For example, you may have input more domains
-//   than are allowed or you've requested too many certificates for your account.
-//   See the exception message returned by ACM to determine which limit you have
-//   violated. For more information about ACM limits, see the Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html)
-//   topic.
-//
-//   * ErrCodeInvalidDomainValidationOptionsException "InvalidDomainValidationOptionsException"
-//   One or more values in the DomainValidationOption structure is incorrect.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificate
-func (c *ACM) RequestCertificate(input *RequestCertificateInput) (*RequestCertificateOutput, error) {
-	req, out := c.RequestCertificateRequest(input)
-	return out, req.Send()
-}
-
-// RequestCertificateWithContext is the same as RequestCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RequestCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) RequestCertificateWithContext(ctx aws.Context, input *RequestCertificateInput, opts ...aws.Option) (*RequestCertificateOutput, error) {
-	req, out := c.RequestCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RequestCertificateOutput{})
+	return RequestCertificateRequest{Request: req, Input: input}
 }
 
 const opResendValidationEmail = "ResendValidationEmail"
 
-// ResendValidationEmailRequest generates a "aws.Request" representing the
-// client's request for the ResendValidationEmail operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResendValidationEmail for more information on using the ResendValidationEmail
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ResendValidationEmailRequest method.
-//    req, resp := client.ResendValidationEmailRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmail
-func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) (req *aws.Request, output *ResendValidationEmailOutput) {
-	op := &aws.Operation{
-		Name:       opResendValidationEmail,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ResendValidationEmailInput{}
-	}
-
-	output = &ResendValidationEmailOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// ResendValidationEmailRequest is a API request type for the ResendValidationEmail API operation.
+type ResendValidationEmailRequest struct {
+	*aws.Request
+	Input *ResendValidationEmailInput
 }
 
-// ResendValidationEmail API operation for AWS Certificate Manager.
+// Send marshals and sends the ResendValidationEmail API request.
+func (r ResendValidationEmailRequest) Send() (*ResendValidationEmailOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResendValidationEmailOutput), nil
+}
+
+// ResendValidationEmailRequest returns a request value for making API operation for
+// AWS Certificate Manager.
 //
 // Resends the email that requests domain ownership validation. The domain owner
 // or an authorized representative must approve the ACM Certificate before it
@@ -971,50 +596,29 @@ func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) (r
 // For more information about setting up your contact email addresses, see Configure
 // Email for your Domain (http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Certificate Manager's
-// API operation ResendValidationEmail for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified certificate cannot be found in the caller's account, or the
-//   caller's account cannot be found.
-//
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   Processing has reached an invalid state. For example, this exception can
-//   occur if the specified domain is not using email validation, or the current
-//   certificate status does not permit the requested operation. See the exception
-//   message returned by ACM to determine which state is not valid.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
-//
-//   * ErrCodeInvalidDomainValidationOptionsException "InvalidDomainValidationOptionsException"
-//   One or more values in the DomainValidationOption structure is incorrect.
+//    // Example sending a request using the ResendValidationEmailRequest method.
+//    req := client.ResendValidationEmailRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmail
-func (c *ACM) ResendValidationEmail(input *ResendValidationEmailInput) (*ResendValidationEmailOutput, error) {
-	req, out := c.ResendValidationEmailRequest(input)
-	return out, req.Send()
-}
+func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) ResendValidationEmailRequest {
+	op := &aws.Operation{
+		Name:       opResendValidationEmail,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ResendValidationEmailWithContext is the same as ResendValidationEmail with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResendValidationEmail for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) ResendValidationEmailWithContext(ctx aws.Context, input *ResendValidationEmailInput, opts ...aws.Option) (*ResendValidationEmailOutput, error) {
-	req, out := c.ResendValidationEmailRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ResendValidationEmailInput{}
+	}
+
+	req := c.newRequest(op, input, &ResendValidationEmailOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return ResendValidationEmailRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificateRequest

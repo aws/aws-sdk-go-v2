@@ -36,14 +36,14 @@ func setup() {
 		fmt.Sprintf("aws-sdk-go-integration-%d-%s", time.Now().Unix(), integration.UniqueID()))
 
 	for i := 0; i < 10; i++ {
-		_, err := svc.CreateBucket(&s3.CreateBucketInput{Bucket: bucketName})
+		_, err := svc.CreateBucketRequest(&s3.CreateBucketInput{Bucket: bucketName}).Send()
 		if err == nil {
 			break
 		}
 	}
 
 	for {
-		_, err := svc.HeadBucket(&s3.HeadBucketInput{Bucket: bucketName})
+		_, err := svc.HeadBucketRequest(&s3.HeadBucketInput{Bucket: bucketName}).Send()
 		if err == nil {
 			break
 		}
@@ -53,27 +53,27 @@ func setup() {
 
 // Delete the bucket
 func teardown() {
-	resp, _ := svc.ListObjects(&s3.ListObjectsInput{Bucket: bucketName})
+	resp, _ := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: bucketName}).Send()
 	for _, o := range resp.Contents {
-		svc.DeleteObject(&s3.DeleteObjectInput{Bucket: bucketName, Key: o.Key})
+		svc.DeleteObjectRequest(&s3.DeleteObjectInput{Bucket: bucketName, Key: o.Key}).Send()
 	}
-	svc.DeleteBucket(&s3.DeleteBucketInput{Bucket: bucketName})
+	svc.DeleteBucketRequest(&s3.DeleteBucketInput{Bucket: bucketName}).Send()
 }
 
 func TestWriteToObject(t *testing.T) {
-	_, err := svc.PutObject(&s3.PutObjectInput{
+	_, err := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("key name"),
 		Body:   bytes.NewReader([]byte("hello world")),
-	})
+	}).Send()
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 
-	resp, err := svc.GetObject(&s3.GetObjectInput{
+	resp, err := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("key name"),
-	})
+	}).Send()
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -85,7 +85,7 @@ func TestWriteToObject(t *testing.T) {
 }
 
 func TestPresignedGetPut(t *testing.T) {
-	putreq, _ := svc.PutObjectRequest(&s3.PutObjectInput{
+	putreq := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("presigned-key"),
 	})
@@ -116,7 +116,7 @@ func TestPresignedGetPut(t *testing.T) {
 	}
 
 	// Presign a GET on the same URL
-	getreq, _ := svc.GetObjectRequest(&s3.GetObjectInput{
+	getreq := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("presigned-key"),
 	})

@@ -9,31 +9,38 @@ import (
 
 const opAssociateRoleToGroup = "AssociateRoleToGroup"
 
-// AssociateRoleToGroupRequest generates a "aws.Request" representing the
-// client's request for the AssociateRoleToGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateRoleToGroupRequest is a API request type for the AssociateRoleToGroup API operation.
+type AssociateRoleToGroupRequest struct {
+	*aws.Request
+	Input *AssociateRoleToGroupInput
+}
+
+// Send marshals and sends the AssociateRoleToGroup API request.
+func (r AssociateRoleToGroupRequest) Send() (*AssociateRoleToGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateRoleToGroupOutput), nil
+}
+
+// AssociateRoleToGroupRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateRoleToGroup for more information on using the AssociateRoleToGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates a role with a group. The role will be used by the AWS Greengrass
+// core in order to access AWS cloud services. The role's permissions will allow
+// Greengrass core Lambda functions to perform actions against the cloud.
 //
 //    // Example sending a request using the AssociateRoleToGroupRequest method.
-//    req, resp := client.AssociateRoleToGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateRoleToGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroup
-func (c *Greengrass) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) (req *aws.Request, output *AssociateRoleToGroupOutput) {
+func (c *Greengrass) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) AssociateRoleToGroupRequest {
 	op := &aws.Operation{
 		Name:       opAssociateRoleToGroup,
 		HTTPMethod: "PUT",
@@ -44,80 +51,45 @@ func (c *Greengrass) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInpu
 		input = &AssociateRoleToGroupInput{}
 	}
 
-	output = &AssociateRoleToGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateRoleToGroup API operation for AWS Greengrass.
-//
-// Associates a role with a group. The role will be used by the AWS Greengrass
-// core in order to access AWS cloud services. The role's permissions will allow
-// Greengrass core Lambda functions to perform actions against the cloud.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation AssociateRoleToGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroup
-func (c *Greengrass) AssociateRoleToGroup(input *AssociateRoleToGroupInput) (*AssociateRoleToGroupOutput, error) {
-	req, out := c.AssociateRoleToGroupRequest(input)
-	return out, req.Send()
-}
-
-// AssociateRoleToGroupWithContext is the same as AssociateRoleToGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateRoleToGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) AssociateRoleToGroupWithContext(ctx aws.Context, input *AssociateRoleToGroupInput, opts ...aws.Option) (*AssociateRoleToGroupOutput, error) {
-	req, out := c.AssociateRoleToGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateRoleToGroupOutput{})
+	return AssociateRoleToGroupRequest{Request: req, Input: input}
 }
 
 const opAssociateServiceRoleToAccount = "AssociateServiceRoleToAccount"
 
-// AssociateServiceRoleToAccountRequest generates a "aws.Request" representing the
-// client's request for the AssociateServiceRoleToAccount operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateServiceRoleToAccountRequest is a API request type for the AssociateServiceRoleToAccount API operation.
+type AssociateServiceRoleToAccountRequest struct {
+	*aws.Request
+	Input *AssociateServiceRoleToAccountInput
+}
+
+// Send marshals and sends the AssociateServiceRoleToAccount API request.
+func (r AssociateServiceRoleToAccountRequest) Send() (*AssociateServiceRoleToAccountOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateServiceRoleToAccountOutput), nil
+}
+
+// AssociateServiceRoleToAccountRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateServiceRoleToAccount for more information on using the AssociateServiceRoleToAccount
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates a role which is used by AWS Greengrass. AWS Greengrass uses the
+// role to access your Lambda functions and AWS IoT resources. This is necessary
+// for deployments to succeed. It needs to have minimum permissions in policy
+// ``AWSGreengrassResourceAccessRolePolicy``
 //
 //    // Example sending a request using the AssociateServiceRoleToAccountRequest method.
-//    req, resp := client.AssociateServiceRoleToAccountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateServiceRoleToAccountRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccount
-func (c *Greengrass) AssociateServiceRoleToAccountRequest(input *AssociateServiceRoleToAccountInput) (req *aws.Request, output *AssociateServiceRoleToAccountOutput) {
+func (c *Greengrass) AssociateServiceRoleToAccountRequest(input *AssociateServiceRoleToAccountInput) AssociateServiceRoleToAccountRequest {
 	op := &aws.Operation{
 		Name:       opAssociateServiceRoleToAccount,
 		HTTPMethod: "PUT",
@@ -128,81 +100,44 @@ func (c *Greengrass) AssociateServiceRoleToAccountRequest(input *AssociateServic
 		input = &AssociateServiceRoleToAccountInput{}
 	}
 
-	output = &AssociateServiceRoleToAccountOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateServiceRoleToAccount API operation for AWS Greengrass.
-//
-// Associates a role which is used by AWS Greengrass. AWS Greengrass uses the
-// role to access your Lambda functions and AWS IoT resources. This is necessary
-// for deployments to succeed. It needs to have minimum permissions in policy
-// ``AWSGreengrassResourceAccessRolePolicy``
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation AssociateServiceRoleToAccount for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccount
-func (c *Greengrass) AssociateServiceRoleToAccount(input *AssociateServiceRoleToAccountInput) (*AssociateServiceRoleToAccountOutput, error) {
-	req, out := c.AssociateServiceRoleToAccountRequest(input)
-	return out, req.Send()
-}
-
-// AssociateServiceRoleToAccountWithContext is the same as AssociateServiceRoleToAccount with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateServiceRoleToAccount for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) AssociateServiceRoleToAccountWithContext(ctx aws.Context, input *AssociateServiceRoleToAccountInput, opts ...aws.Option) (*AssociateServiceRoleToAccountOutput, error) {
-	req, out := c.AssociateServiceRoleToAccountRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateServiceRoleToAccountOutput{})
+	return AssociateServiceRoleToAccountRequest{Request: req, Input: input}
 }
 
 const opCreateCoreDefinition = "CreateCoreDefinition"
 
-// CreateCoreDefinitionRequest generates a "aws.Request" representing the
-// client's request for the CreateCoreDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCoreDefinitionRequest is a API request type for the CreateCoreDefinition API operation.
+type CreateCoreDefinitionRequest struct {
+	*aws.Request
+	Input *CreateCoreDefinitionInput
+}
+
+// Send marshals and sends the CreateCoreDefinition API request.
+func (r CreateCoreDefinitionRequest) Send() (*CreateCoreDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCoreDefinitionOutput), nil
+}
+
+// CreateCoreDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCoreDefinition for more information on using the CreateCoreDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a core definition. You may optionally provide the initial version
+// of the core definition or use ''CreateCoreDefinitionVersion'' at a later
+// time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
 //
 //    // Example sending a request using the CreateCoreDefinitionRequest method.
-//    req, resp := client.CreateCoreDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCoreDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinition
-func (c *Greengrass) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInput) (req *aws.Request, output *CreateCoreDefinitionOutput) {
+func (c *Greengrass) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInput) CreateCoreDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opCreateCoreDefinition,
 		HTTPMethod: "POST",
@@ -213,77 +148,43 @@ func (c *Greengrass) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInpu
 		input = &CreateCoreDefinitionInput{}
 	}
 
-	output = &CreateCoreDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCoreDefinition API operation for AWS Greengrass.
-//
-// Creates a core definition. You may optionally provide the initial version
-// of the core definition or use ''CreateCoreDefinitionVersion'' at a later
-// time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateCoreDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinition
-func (c *Greengrass) CreateCoreDefinition(input *CreateCoreDefinitionInput) (*CreateCoreDefinitionOutput, error) {
-	req, out := c.CreateCoreDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// CreateCoreDefinitionWithContext is the same as CreateCoreDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCoreDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateCoreDefinitionWithContext(ctx aws.Context, input *CreateCoreDefinitionInput, opts ...aws.Option) (*CreateCoreDefinitionOutput, error) {
-	req, out := c.CreateCoreDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCoreDefinitionOutput{})
+	return CreateCoreDefinitionRequest{Request: req, Input: input}
 }
 
 const opCreateCoreDefinitionVersion = "CreateCoreDefinitionVersion"
 
-// CreateCoreDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateCoreDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCoreDefinitionVersionRequest is a API request type for the CreateCoreDefinitionVersion API operation.
+type CreateCoreDefinitionVersionRequest struct {
+	*aws.Request
+	Input *CreateCoreDefinitionVersionInput
+}
+
+// Send marshals and sends the CreateCoreDefinitionVersion API request.
+func (r CreateCoreDefinitionVersionRequest) Send() (*CreateCoreDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCoreDefinitionVersionOutput), nil
+}
+
+// CreateCoreDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCoreDefinitionVersion for more information on using the CreateCoreDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a version of a core definition that has already been defined. AWS
+// Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
 //
 //    // Example sending a request using the CreateCoreDefinitionVersionRequest method.
-//    req, resp := client.CreateCoreDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCoreDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersion
-func (c *Greengrass) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionVersionInput) (req *aws.Request, output *CreateCoreDefinitionVersionOutput) {
+func (c *Greengrass) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionVersionInput) CreateCoreDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateCoreDefinitionVersion,
 		HTTPMethod: "POST",
@@ -294,76 +195,42 @@ func (c *Greengrass) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinit
 		input = &CreateCoreDefinitionVersionInput{}
 	}
 
-	output = &CreateCoreDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCoreDefinitionVersion API operation for AWS Greengrass.
-//
-// Creates a version of a core definition that has already been defined. AWS
-// Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateCoreDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersion
-func (c *Greengrass) CreateCoreDefinitionVersion(input *CreateCoreDefinitionVersionInput) (*CreateCoreDefinitionVersionOutput, error) {
-	req, out := c.CreateCoreDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreateCoreDefinitionVersionWithContext is the same as CreateCoreDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCoreDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateCoreDefinitionVersionWithContext(ctx aws.Context, input *CreateCoreDefinitionVersionInput, opts ...aws.Option) (*CreateCoreDefinitionVersionOutput, error) {
-	req, out := c.CreateCoreDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCoreDefinitionVersionOutput{})
+	return CreateCoreDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opCreateDeployment = "CreateDeployment"
 
-// CreateDeploymentRequest generates a "aws.Request" representing the
-// client's request for the CreateDeployment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDeploymentRequest is a API request type for the CreateDeployment API operation.
+type CreateDeploymentRequest struct {
+	*aws.Request
+	Input *CreateDeploymentInput
+}
+
+// Send marshals and sends the CreateDeployment API request.
+func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeploymentOutput), nil
+}
+
+// CreateDeploymentRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeployment for more information on using the CreateDeployment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a deployment.
 //
 //    // Example sending a request using the CreateDeploymentRequest method.
-//    req, resp := client.CreateDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDeploymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeployment
-func (c *Greengrass) CreateDeploymentRequest(input *CreateDeploymentInput) (req *aws.Request, output *CreateDeploymentOutput) {
+func (c *Greengrass) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
@@ -374,75 +241,44 @@ func (c *Greengrass) CreateDeploymentRequest(input *CreateDeploymentInput) (req 
 		input = &CreateDeploymentInput{}
 	}
 
-	output = &CreateDeploymentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDeployment API operation for AWS Greengrass.
-//
-// Creates a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateDeployment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeployment
-func (c *Greengrass) CreateDeployment(input *CreateDeploymentInput) (*CreateDeploymentOutput, error) {
-	req, out := c.CreateDeploymentRequest(input)
-	return out, req.Send()
-}
-
-// CreateDeploymentWithContext is the same as CreateDeployment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeployment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...aws.Option) (*CreateDeploymentOutput, error) {
-	req, out := c.CreateDeploymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	return CreateDeploymentRequest{Request: req, Input: input}
 }
 
 const opCreateDeviceDefinition = "CreateDeviceDefinition"
 
-// CreateDeviceDefinitionRequest generates a "aws.Request" representing the
-// client's request for the CreateDeviceDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDeviceDefinitionRequest is a API request type for the CreateDeviceDefinition API operation.
+type CreateDeviceDefinitionRequest struct {
+	*aws.Request
+	Input *CreateDeviceDefinitionInput
+}
+
+// Send marshals and sends the CreateDeviceDefinition API request.
+func (r CreateDeviceDefinitionRequest) Send() (*CreateDeviceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeviceDefinitionOutput), nil
+}
+
+// CreateDeviceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeviceDefinition for more information on using the CreateDeviceDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a device definition. You may optinally provide the initial version
+// of the device definition or use ``CreateDeviceDefinitionVersion`` at a later
+// time.
 //
 //    // Example sending a request using the CreateDeviceDefinitionRequest method.
-//    req, resp := client.CreateDeviceDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDeviceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinition
-func (c *Greengrass) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInput) (req *aws.Request, output *CreateDeviceDefinitionOutput) {
+func (c *Greengrass) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInput) CreateDeviceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeviceDefinition,
 		HTTPMethod: "POST",
@@ -453,77 +289,42 @@ func (c *Greengrass) CreateDeviceDefinitionRequest(input *CreateDeviceDefinition
 		input = &CreateDeviceDefinitionInput{}
 	}
 
-	output = &CreateDeviceDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDeviceDefinition API operation for AWS Greengrass.
-//
-// Creates a device definition. You may optinally provide the initial version
-// of the device definition or use ``CreateDeviceDefinitionVersion`` at a later
-// time.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateDeviceDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinition
-func (c *Greengrass) CreateDeviceDefinition(input *CreateDeviceDefinitionInput) (*CreateDeviceDefinitionOutput, error) {
-	req, out := c.CreateDeviceDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// CreateDeviceDefinitionWithContext is the same as CreateDeviceDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeviceDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateDeviceDefinitionWithContext(ctx aws.Context, input *CreateDeviceDefinitionInput, opts ...aws.Option) (*CreateDeviceDefinitionOutput, error) {
-	req, out := c.CreateDeviceDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDeviceDefinitionOutput{})
+	return CreateDeviceDefinitionRequest{Request: req, Input: input}
 }
 
 const opCreateDeviceDefinitionVersion = "CreateDeviceDefinitionVersion"
 
-// CreateDeviceDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateDeviceDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDeviceDefinitionVersionRequest is a API request type for the CreateDeviceDefinitionVersion API operation.
+type CreateDeviceDefinitionVersionRequest struct {
+	*aws.Request
+	Input *CreateDeviceDefinitionVersionInput
+}
+
+// Send marshals and sends the CreateDeviceDefinitionVersion API request.
+func (r CreateDeviceDefinitionVersionRequest) Send() (*CreateDeviceDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeviceDefinitionVersionOutput), nil
+}
+
+// CreateDeviceDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeviceDefinitionVersion for more information on using the CreateDeviceDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a version of a device definition that has already been defined.
 //
 //    // Example sending a request using the CreateDeviceDefinitionVersionRequest method.
-//    req, resp := client.CreateDeviceDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDeviceDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionVersion
-func (c *Greengrass) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDefinitionVersionInput) (req *aws.Request, output *CreateDeviceDefinitionVersionOutput) {
+func (c *Greengrass) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDefinitionVersionInput) CreateDeviceDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeviceDefinitionVersion,
 		HTTPMethod: "POST",
@@ -534,75 +335,45 @@ func (c *Greengrass) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDef
 		input = &CreateDeviceDefinitionVersionInput{}
 	}
 
-	output = &CreateDeviceDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDeviceDefinitionVersion API operation for AWS Greengrass.
-//
-// Creates a version of a device definition that has already been defined.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateDeviceDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionVersion
-func (c *Greengrass) CreateDeviceDefinitionVersion(input *CreateDeviceDefinitionVersionInput) (*CreateDeviceDefinitionVersionOutput, error) {
-	req, out := c.CreateDeviceDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreateDeviceDefinitionVersionWithContext is the same as CreateDeviceDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeviceDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateDeviceDefinitionVersionWithContext(ctx aws.Context, input *CreateDeviceDefinitionVersionInput, opts ...aws.Option) (*CreateDeviceDefinitionVersionOutput, error) {
-	req, out := c.CreateDeviceDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDeviceDefinitionVersionOutput{})
+	return CreateDeviceDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opCreateFunctionDefinition = "CreateFunctionDefinition"
 
-// CreateFunctionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the CreateFunctionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateFunctionDefinitionRequest is a API request type for the CreateFunctionDefinition API operation.
+type CreateFunctionDefinitionRequest struct {
+	*aws.Request
+	Input *CreateFunctionDefinitionInput
+}
+
+// Send marshals and sends the CreateFunctionDefinition API request.
+func (r CreateFunctionDefinitionRequest) Send() (*CreateFunctionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFunctionDefinitionOutput), nil
+}
+
+// CreateFunctionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateFunctionDefinition for more information on using the CreateFunctionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a Lambda function definition which contains a list of Lambda functions
+// and their configurations to be used in a group. You can create an initial
+// version of the definition by providing a list of Lambda functions and their
+// configurations now, or use ``CreateFunctionDefinitionVersion`` later.
 //
 //    // Example sending a request using the CreateFunctionDefinitionRequest method.
-//    req, resp := client.CreateFunctionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateFunctionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinition
-func (c *Greengrass) CreateFunctionDefinitionRequest(input *CreateFunctionDefinitionInput) (req *aws.Request, output *CreateFunctionDefinitionOutput) {
+func (c *Greengrass) CreateFunctionDefinitionRequest(input *CreateFunctionDefinitionInput) CreateFunctionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opCreateFunctionDefinition,
 		HTTPMethod: "POST",
@@ -613,78 +384,42 @@ func (c *Greengrass) CreateFunctionDefinitionRequest(input *CreateFunctionDefini
 		input = &CreateFunctionDefinitionInput{}
 	}
 
-	output = &CreateFunctionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateFunctionDefinition API operation for AWS Greengrass.
-//
-// Creates a Lambda function definition which contains a list of Lambda functions
-// and their configurations to be used in a group. You can create an initial
-// version of the definition by providing a list of Lambda functions and their
-// configurations now, or use ``CreateFunctionDefinitionVersion`` later.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateFunctionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinition
-func (c *Greengrass) CreateFunctionDefinition(input *CreateFunctionDefinitionInput) (*CreateFunctionDefinitionOutput, error) {
-	req, out := c.CreateFunctionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// CreateFunctionDefinitionWithContext is the same as CreateFunctionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateFunctionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateFunctionDefinitionWithContext(ctx aws.Context, input *CreateFunctionDefinitionInput, opts ...aws.Option) (*CreateFunctionDefinitionOutput, error) {
-	req, out := c.CreateFunctionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateFunctionDefinitionOutput{})
+	return CreateFunctionDefinitionRequest{Request: req, Input: input}
 }
 
 const opCreateFunctionDefinitionVersion = "CreateFunctionDefinitionVersion"
 
-// CreateFunctionDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateFunctionDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateFunctionDefinitionVersionRequest is a API request type for the CreateFunctionDefinitionVersion API operation.
+type CreateFunctionDefinitionVersionRequest struct {
+	*aws.Request
+	Input *CreateFunctionDefinitionVersionInput
+}
+
+// Send marshals and sends the CreateFunctionDefinitionVersion API request.
+func (r CreateFunctionDefinitionVersionRequest) Send() (*CreateFunctionDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFunctionDefinitionVersionOutput), nil
+}
+
+// CreateFunctionDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateFunctionDefinitionVersion for more information on using the CreateFunctionDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a version of a Lambda function definition that has already been defined.
 //
 //    // Example sending a request using the CreateFunctionDefinitionVersionRequest method.
-//    req, resp := client.CreateFunctionDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateFunctionDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersion
-func (c *Greengrass) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDefinitionVersionInput) (req *aws.Request, output *CreateFunctionDefinitionVersionOutput) {
+func (c *Greengrass) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDefinitionVersionInput) CreateFunctionDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateFunctionDefinitionVersion,
 		HTTPMethod: "POST",
@@ -695,75 +430,43 @@ func (c *Greengrass) CreateFunctionDefinitionVersionRequest(input *CreateFunctio
 		input = &CreateFunctionDefinitionVersionInput{}
 	}
 
-	output = &CreateFunctionDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateFunctionDefinitionVersion API operation for AWS Greengrass.
-//
-// Create a version of a Lambda function definition that has already been defined.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateFunctionDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersion
-func (c *Greengrass) CreateFunctionDefinitionVersion(input *CreateFunctionDefinitionVersionInput) (*CreateFunctionDefinitionVersionOutput, error) {
-	req, out := c.CreateFunctionDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreateFunctionDefinitionVersionWithContext is the same as CreateFunctionDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateFunctionDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateFunctionDefinitionVersionWithContext(ctx aws.Context, input *CreateFunctionDefinitionVersionInput, opts ...aws.Option) (*CreateFunctionDefinitionVersionOutput, error) {
-	req, out := c.CreateFunctionDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateFunctionDefinitionVersionOutput{})
+	return CreateFunctionDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opCreateGroup = "CreateGroup"
 
-// CreateGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateGroupRequest is a API request type for the CreateGroup API operation.
+type CreateGroupRequest struct {
+	*aws.Request
+	Input *CreateGroupInput
+}
+
+// Send marshals and sends the CreateGroup API request.
+func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGroupOutput), nil
+}
+
+// CreateGroupRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateGroup for more information on using the CreateGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a group. You may optionally provide the initial version of the group
+// or use ''CreateGroupVersion'' at a later time.
 //
 //    // Example sending a request using the CreateGroupRequest method.
-//    req, resp := client.CreateGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroup
-func (c *Greengrass) CreateGroupRequest(input *CreateGroupInput) (req *aws.Request, output *CreateGroupOutput) {
+func (c *Greengrass) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
@@ -774,76 +477,43 @@ func (c *Greengrass) CreateGroupRequest(input *CreateGroupInput) (req *aws.Reque
 		input = &CreateGroupInput{}
 	}
 
-	output = &CreateGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateGroup API operation for AWS Greengrass.
-//
-// Creates a group. You may optionally provide the initial version of the group
-// or use ''CreateGroupVersion'' at a later time.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroup
-func (c *Greengrass) CreateGroup(input *CreateGroupInput) (*CreateGroupOutput, error) {
-	req, out := c.CreateGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateGroupWithContext is the same as CreateGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateGroupWithContext(ctx aws.Context, input *CreateGroupInput, opts ...aws.Option) (*CreateGroupOutput, error) {
-	req, out := c.CreateGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateGroupOutput{})
+	return CreateGroupRequest{Request: req, Input: input}
 }
 
 const opCreateGroupCertificateAuthority = "CreateGroupCertificateAuthority"
 
-// CreateGroupCertificateAuthorityRequest generates a "aws.Request" representing the
-// client's request for the CreateGroupCertificateAuthority operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateGroupCertificateAuthorityRequest is a API request type for the CreateGroupCertificateAuthority API operation.
+type CreateGroupCertificateAuthorityRequest struct {
+	*aws.Request
+	Input *CreateGroupCertificateAuthorityInput
+}
+
+// Send marshals and sends the CreateGroupCertificateAuthority API request.
+func (r CreateGroupCertificateAuthorityRequest) Send() (*CreateGroupCertificateAuthorityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGroupCertificateAuthorityOutput), nil
+}
+
+// CreateGroupCertificateAuthorityRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateGroupCertificateAuthority for more information on using the CreateGroupCertificateAuthority
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a CA for the group. If a CA already exists, it will rotate the existing
+// CA.
 //
 //    // Example sending a request using the CreateGroupCertificateAuthorityRequest method.
-//    req, resp := client.CreateGroupCertificateAuthorityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateGroupCertificateAuthorityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthority
-func (c *Greengrass) CreateGroupCertificateAuthorityRequest(input *CreateGroupCertificateAuthorityInput) (req *aws.Request, output *CreateGroupCertificateAuthorityOutput) {
+func (c *Greengrass) CreateGroupCertificateAuthorityRequest(input *CreateGroupCertificateAuthorityInput) CreateGroupCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroupCertificateAuthority,
 		HTTPMethod: "POST",
@@ -854,79 +524,42 @@ func (c *Greengrass) CreateGroupCertificateAuthorityRequest(input *CreateGroupCe
 		input = &CreateGroupCertificateAuthorityInput{}
 	}
 
-	output = &CreateGroupCertificateAuthorityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateGroupCertificateAuthority API operation for AWS Greengrass.
-//
-// Creates a CA for the group. If a CA already exists, it will rotate the existing
-// CA.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateGroupCertificateAuthority for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthority
-func (c *Greengrass) CreateGroupCertificateAuthority(input *CreateGroupCertificateAuthorityInput) (*CreateGroupCertificateAuthorityOutput, error) {
-	req, out := c.CreateGroupCertificateAuthorityRequest(input)
-	return out, req.Send()
-}
-
-// CreateGroupCertificateAuthorityWithContext is the same as CreateGroupCertificateAuthority with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateGroupCertificateAuthority for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateGroupCertificateAuthorityWithContext(ctx aws.Context, input *CreateGroupCertificateAuthorityInput, opts ...aws.Option) (*CreateGroupCertificateAuthorityOutput, error) {
-	req, out := c.CreateGroupCertificateAuthorityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateGroupCertificateAuthorityOutput{})
+	return CreateGroupCertificateAuthorityRequest{Request: req, Input: input}
 }
 
 const opCreateGroupVersion = "CreateGroupVersion"
 
-// CreateGroupVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateGroupVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateGroupVersionRequest is a API request type for the CreateGroupVersion API operation.
+type CreateGroupVersionRequest struct {
+	*aws.Request
+	Input *CreateGroupVersionInput
+}
+
+// Send marshals and sends the CreateGroupVersion API request.
+func (r CreateGroupVersionRequest) Send() (*CreateGroupVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGroupVersionOutput), nil
+}
+
+// CreateGroupVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateGroupVersion for more information on using the CreateGroupVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a version of a group which has already been defined.
 //
 //    // Example sending a request using the CreateGroupVersionRequest method.
-//    req, resp := client.CreateGroupVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateGroupVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupVersion
-func (c *Greengrass) CreateGroupVersionRequest(input *CreateGroupVersionInput) (req *aws.Request, output *CreateGroupVersionOutput) {
+func (c *Greengrass) CreateGroupVersionRequest(input *CreateGroupVersionInput) CreateGroupVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroupVersion,
 		HTTPMethod: "POST",
@@ -937,75 +570,44 @@ func (c *Greengrass) CreateGroupVersionRequest(input *CreateGroupVersionInput) (
 		input = &CreateGroupVersionInput{}
 	}
 
-	output = &CreateGroupVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateGroupVersion API operation for AWS Greengrass.
-//
-// Creates a version of a group which has already been defined.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateGroupVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupVersion
-func (c *Greengrass) CreateGroupVersion(input *CreateGroupVersionInput) (*CreateGroupVersionOutput, error) {
-	req, out := c.CreateGroupVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreateGroupVersionWithContext is the same as CreateGroupVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateGroupVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateGroupVersionWithContext(ctx aws.Context, input *CreateGroupVersionInput, opts ...aws.Option) (*CreateGroupVersionOutput, error) {
-	req, out := c.CreateGroupVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateGroupVersionOutput{})
+	return CreateGroupVersionRequest{Request: req, Input: input}
 }
 
 const opCreateLoggerDefinition = "CreateLoggerDefinition"
 
-// CreateLoggerDefinitionRequest generates a "aws.Request" representing the
-// client's request for the CreateLoggerDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateLoggerDefinitionRequest is a API request type for the CreateLoggerDefinition API operation.
+type CreateLoggerDefinitionRequest struct {
+	*aws.Request
+	Input *CreateLoggerDefinitionInput
+}
+
+// Send marshals and sends the CreateLoggerDefinition API request.
+func (r CreateLoggerDefinitionRequest) Send() (*CreateLoggerDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLoggerDefinitionOutput), nil
+}
+
+// CreateLoggerDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLoggerDefinition for more information on using the CreateLoggerDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a logger definition. You may optionally provide the initial version
+// of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later
+// time.
 //
 //    // Example sending a request using the CreateLoggerDefinitionRequest method.
-//    req, resp := client.CreateLoggerDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateLoggerDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinition
-func (c *Greengrass) CreateLoggerDefinitionRequest(input *CreateLoggerDefinitionInput) (req *aws.Request, output *CreateLoggerDefinitionOutput) {
+func (c *Greengrass) CreateLoggerDefinitionRequest(input *CreateLoggerDefinitionInput) CreateLoggerDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoggerDefinition,
 		HTTPMethod: "POST",
@@ -1016,77 +618,42 @@ func (c *Greengrass) CreateLoggerDefinitionRequest(input *CreateLoggerDefinition
 		input = &CreateLoggerDefinitionInput{}
 	}
 
-	output = &CreateLoggerDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateLoggerDefinition API operation for AWS Greengrass.
-//
-// Creates a logger definition. You may optionally provide the initial version
-// of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later
-// time.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateLoggerDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinition
-func (c *Greengrass) CreateLoggerDefinition(input *CreateLoggerDefinitionInput) (*CreateLoggerDefinitionOutput, error) {
-	req, out := c.CreateLoggerDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// CreateLoggerDefinitionWithContext is the same as CreateLoggerDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLoggerDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateLoggerDefinitionWithContext(ctx aws.Context, input *CreateLoggerDefinitionInput, opts ...aws.Option) (*CreateLoggerDefinitionOutput, error) {
-	req, out := c.CreateLoggerDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateLoggerDefinitionOutput{})
+	return CreateLoggerDefinitionRequest{Request: req, Input: input}
 }
 
 const opCreateLoggerDefinitionVersion = "CreateLoggerDefinitionVersion"
 
-// CreateLoggerDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateLoggerDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateLoggerDefinitionVersionRequest is a API request type for the CreateLoggerDefinitionVersion API operation.
+type CreateLoggerDefinitionVersionRequest struct {
+	*aws.Request
+	Input *CreateLoggerDefinitionVersionInput
+}
+
+// Send marshals and sends the CreateLoggerDefinitionVersion API request.
+func (r CreateLoggerDefinitionVersionRequest) Send() (*CreateLoggerDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLoggerDefinitionVersionOutput), nil
+}
+
+// CreateLoggerDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLoggerDefinitionVersion for more information on using the CreateLoggerDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a version of a logger definition that has already been defined.
 //
 //    // Example sending a request using the CreateLoggerDefinitionVersionRequest method.
-//    req, resp := client.CreateLoggerDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateLoggerDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersion
-func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDefinitionVersionInput) (req *aws.Request, output *CreateLoggerDefinitionVersionOutput) {
+func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDefinitionVersionInput) CreateLoggerDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoggerDefinitionVersion,
 		HTTPMethod: "POST",
@@ -1097,75 +664,44 @@ func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDef
 		input = &CreateLoggerDefinitionVersionInput{}
 	}
 
-	output = &CreateLoggerDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateLoggerDefinitionVersion API operation for AWS Greengrass.
-//
-// Creates a version of a logger definition that has already been defined.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateLoggerDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersion
-func (c *Greengrass) CreateLoggerDefinitionVersion(input *CreateLoggerDefinitionVersionInput) (*CreateLoggerDefinitionVersionOutput, error) {
-	req, out := c.CreateLoggerDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreateLoggerDefinitionVersionWithContext is the same as CreateLoggerDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLoggerDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateLoggerDefinitionVersionWithContext(ctx aws.Context, input *CreateLoggerDefinitionVersionInput, opts ...aws.Option) (*CreateLoggerDefinitionVersionOutput, error) {
-	req, out := c.CreateLoggerDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateLoggerDefinitionVersionOutput{})
+	return CreateLoggerDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opCreateSubscriptionDefinition = "CreateSubscriptionDefinition"
 
-// CreateSubscriptionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the CreateSubscriptionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSubscriptionDefinitionRequest is a API request type for the CreateSubscriptionDefinition API operation.
+type CreateSubscriptionDefinitionRequest struct {
+	*aws.Request
+	Input *CreateSubscriptionDefinitionInput
+}
+
+// Send marshals and sends the CreateSubscriptionDefinition API request.
+func (r CreateSubscriptionDefinitionRequest) Send() (*CreateSubscriptionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSubscriptionDefinitionOutput), nil
+}
+
+// CreateSubscriptionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSubscriptionDefinition for more information on using the CreateSubscriptionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a subscription definition. You may optionally provide the initial
+// version of the subscription definition or use ``CreateSubscriptionDefinitionVersion``
+// at a later time.
 //
 //    // Example sending a request using the CreateSubscriptionDefinitionRequest method.
-//    req, resp := client.CreateSubscriptionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSubscriptionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinition
-func (c *Greengrass) CreateSubscriptionDefinitionRequest(input *CreateSubscriptionDefinitionInput) (req *aws.Request, output *CreateSubscriptionDefinitionOutput) {
+func (c *Greengrass) CreateSubscriptionDefinitionRequest(input *CreateSubscriptionDefinitionInput) CreateSubscriptionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubscriptionDefinition,
 		HTTPMethod: "POST",
@@ -1176,77 +712,42 @@ func (c *Greengrass) CreateSubscriptionDefinitionRequest(input *CreateSubscripti
 		input = &CreateSubscriptionDefinitionInput{}
 	}
 
-	output = &CreateSubscriptionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSubscriptionDefinition API operation for AWS Greengrass.
-//
-// Creates a subscription definition. You may optionally provide the initial
-// version of the subscription definition or use ``CreateSubscriptionDefinitionVersion``
-// at a later time.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateSubscriptionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinition
-func (c *Greengrass) CreateSubscriptionDefinition(input *CreateSubscriptionDefinitionInput) (*CreateSubscriptionDefinitionOutput, error) {
-	req, out := c.CreateSubscriptionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// CreateSubscriptionDefinitionWithContext is the same as CreateSubscriptionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSubscriptionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateSubscriptionDefinitionWithContext(ctx aws.Context, input *CreateSubscriptionDefinitionInput, opts ...aws.Option) (*CreateSubscriptionDefinitionOutput, error) {
-	req, out := c.CreateSubscriptionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSubscriptionDefinitionOutput{})
+	return CreateSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
 const opCreateSubscriptionDefinitionVersion = "CreateSubscriptionDefinitionVersion"
 
-// CreateSubscriptionDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateSubscriptionDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSubscriptionDefinitionVersionRequest is a API request type for the CreateSubscriptionDefinitionVersion API operation.
+type CreateSubscriptionDefinitionVersionRequest struct {
+	*aws.Request
+	Input *CreateSubscriptionDefinitionVersionInput
+}
+
+// Send marshals and sends the CreateSubscriptionDefinitionVersion API request.
+func (r CreateSubscriptionDefinitionVersionRequest) Send() (*CreateSubscriptionDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSubscriptionDefinitionVersionOutput), nil
+}
+
+// CreateSubscriptionDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSubscriptionDefinitionVersion for more information on using the CreateSubscriptionDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a version of a subscription definition which has already been defined.
 //
 //    // Example sending a request using the CreateSubscriptionDefinitionVersionRequest method.
-//    req, resp := client.CreateSubscriptionDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSubscriptionDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersion
-func (c *Greengrass) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscriptionDefinitionVersionInput) (req *aws.Request, output *CreateSubscriptionDefinitionVersionOutput) {
+func (c *Greengrass) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscriptionDefinitionVersionInput) CreateSubscriptionDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubscriptionDefinitionVersion,
 		HTTPMethod: "POST",
@@ -1257,75 +758,43 @@ func (c *Greengrass) CreateSubscriptionDefinitionVersionRequest(input *CreateSub
 		input = &CreateSubscriptionDefinitionVersionInput{}
 	}
 
-	output = &CreateSubscriptionDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSubscriptionDefinitionVersion API operation for AWS Greengrass.
-//
-// Creates a version of a subscription definition which has already been defined.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation CreateSubscriptionDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersion
-func (c *Greengrass) CreateSubscriptionDefinitionVersion(input *CreateSubscriptionDefinitionVersionInput) (*CreateSubscriptionDefinitionVersionOutput, error) {
-	req, out := c.CreateSubscriptionDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// CreateSubscriptionDefinitionVersionWithContext is the same as CreateSubscriptionDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSubscriptionDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) CreateSubscriptionDefinitionVersionWithContext(ctx aws.Context, input *CreateSubscriptionDefinitionVersionInput, opts ...aws.Option) (*CreateSubscriptionDefinitionVersionOutput, error) {
-	req, out := c.CreateSubscriptionDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSubscriptionDefinitionVersionOutput{})
+	return CreateSubscriptionDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opDeleteCoreDefinition = "DeleteCoreDefinition"
 
-// DeleteCoreDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeleteCoreDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCoreDefinitionRequest is a API request type for the DeleteCoreDefinition API operation.
+type DeleteCoreDefinitionRequest struct {
+	*aws.Request
+	Input *DeleteCoreDefinitionInput
+}
+
+// Send marshals and sends the DeleteCoreDefinition API request.
+func (r DeleteCoreDefinitionRequest) Send() (*DeleteCoreDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCoreDefinitionOutput), nil
+}
+
+// DeleteCoreDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCoreDefinition for more information on using the DeleteCoreDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a core definition. The core definition must not have been used in
+// a deployment.
 //
 //    // Example sending a request using the DeleteCoreDefinitionRequest method.
-//    req, resp := client.DeleteCoreDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCoreDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinition
-func (c *Greengrass) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) (req *aws.Request, output *DeleteCoreDefinitionOutput) {
+func (c *Greengrass) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) DeleteCoreDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCoreDefinition,
 		HTTPMethod: "DELETE",
@@ -1336,76 +805,43 @@ func (c *Greengrass) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInpu
 		input = &DeleteCoreDefinitionInput{}
 	}
 
-	output = &DeleteCoreDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCoreDefinition API operation for AWS Greengrass.
-//
-// Deletes a core definition. The core definition must not have been used in
-// a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DeleteCoreDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinition
-func (c *Greengrass) DeleteCoreDefinition(input *DeleteCoreDefinitionInput) (*DeleteCoreDefinitionOutput, error) {
-	req, out := c.DeleteCoreDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCoreDefinitionWithContext is the same as DeleteCoreDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCoreDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DeleteCoreDefinitionWithContext(ctx aws.Context, input *DeleteCoreDefinitionInput, opts ...aws.Option) (*DeleteCoreDefinitionOutput, error) {
-	req, out := c.DeleteCoreDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteCoreDefinitionOutput{})
+	return DeleteCoreDefinitionRequest{Request: req, Input: input}
 }
 
 const opDeleteDeviceDefinition = "DeleteDeviceDefinition"
 
-// DeleteDeviceDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeleteDeviceDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDeviceDefinitionRequest is a API request type for the DeleteDeviceDefinition API operation.
+type DeleteDeviceDefinitionRequest struct {
+	*aws.Request
+	Input *DeleteDeviceDefinitionInput
+}
+
+// Send marshals and sends the DeleteDeviceDefinition API request.
+func (r DeleteDeviceDefinitionRequest) Send() (*DeleteDeviceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDeviceDefinitionOutput), nil
+}
+
+// DeleteDeviceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDeviceDefinition for more information on using the DeleteDeviceDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a device definition. The device definition must not have been used
+// in a deployment.
 //
 //    // Example sending a request using the DeleteDeviceDefinitionRequest method.
-//    req, resp := client.DeleteDeviceDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDeviceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinition
-func (c *Greengrass) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInput) (req *aws.Request, output *DeleteDeviceDefinitionOutput) {
+func (c *Greengrass) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInput) DeleteDeviceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeviceDefinition,
 		HTTPMethod: "DELETE",
@@ -1416,76 +852,43 @@ func (c *Greengrass) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinition
 		input = &DeleteDeviceDefinitionInput{}
 	}
 
-	output = &DeleteDeviceDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDeviceDefinition API operation for AWS Greengrass.
-//
-// Deletes a device definition. The device definition must not have been used
-// in a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DeleteDeviceDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinition
-func (c *Greengrass) DeleteDeviceDefinition(input *DeleteDeviceDefinitionInput) (*DeleteDeviceDefinitionOutput, error) {
-	req, out := c.DeleteDeviceDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDeviceDefinitionWithContext is the same as DeleteDeviceDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDeviceDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DeleteDeviceDefinitionWithContext(ctx aws.Context, input *DeleteDeviceDefinitionInput, opts ...aws.Option) (*DeleteDeviceDefinitionOutput, error) {
-	req, out := c.DeleteDeviceDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDeviceDefinitionOutput{})
+	return DeleteDeviceDefinitionRequest{Request: req, Input: input}
 }
 
 const opDeleteFunctionDefinition = "DeleteFunctionDefinition"
 
-// DeleteFunctionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeleteFunctionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteFunctionDefinitionRequest is a API request type for the DeleteFunctionDefinition API operation.
+type DeleteFunctionDefinitionRequest struct {
+	*aws.Request
+	Input *DeleteFunctionDefinitionInput
+}
+
+// Send marshals and sends the DeleteFunctionDefinition API request.
+func (r DeleteFunctionDefinitionRequest) Send() (*DeleteFunctionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFunctionDefinitionOutput), nil
+}
+
+// DeleteFunctionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteFunctionDefinition for more information on using the DeleteFunctionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a Lambda function definition. The Lambda function definition must
+// not have been used in a deployment.
 //
 //    // Example sending a request using the DeleteFunctionDefinitionRequest method.
-//    req, resp := client.DeleteFunctionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteFunctionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinition
-func (c *Greengrass) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinitionInput) (req *aws.Request, output *DeleteFunctionDefinitionOutput) {
+func (c *Greengrass) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinitionInput) DeleteFunctionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFunctionDefinition,
 		HTTPMethod: "DELETE",
@@ -1496,76 +899,42 @@ func (c *Greengrass) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefini
 		input = &DeleteFunctionDefinitionInput{}
 	}
 
-	output = &DeleteFunctionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteFunctionDefinition API operation for AWS Greengrass.
-//
-// Deletes a Lambda function definition. The Lambda function definition must
-// not have been used in a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DeleteFunctionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinition
-func (c *Greengrass) DeleteFunctionDefinition(input *DeleteFunctionDefinitionInput) (*DeleteFunctionDefinitionOutput, error) {
-	req, out := c.DeleteFunctionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteFunctionDefinitionWithContext is the same as DeleteFunctionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFunctionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DeleteFunctionDefinitionWithContext(ctx aws.Context, input *DeleteFunctionDefinitionInput, opts ...aws.Option) (*DeleteFunctionDefinitionOutput, error) {
-	req, out := c.DeleteFunctionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteFunctionDefinitionOutput{})
+	return DeleteFunctionDefinitionRequest{Request: req, Input: input}
 }
 
 const opDeleteGroup = "DeleteGroup"
 
-// DeleteGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteGroupRequest is a API request type for the DeleteGroup API operation.
+type DeleteGroupRequest struct {
+	*aws.Request
+	Input *DeleteGroupInput
+}
+
+// Send marshals and sends the DeleteGroup API request.
+func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGroupOutput), nil
+}
+
+// DeleteGroupRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteGroup for more information on using the DeleteGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a group. The group must not have been used in deployment.
 //
 //    // Example sending a request using the DeleteGroupRequest method.
-//    req, resp := client.DeleteGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroup
-func (c *Greengrass) DeleteGroupRequest(input *DeleteGroupInput) (req *aws.Request, output *DeleteGroupOutput) {
+func (c *Greengrass) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGroup,
 		HTTPMethod: "DELETE",
@@ -1576,75 +945,43 @@ func (c *Greengrass) DeleteGroupRequest(input *DeleteGroupInput) (req *aws.Reque
 		input = &DeleteGroupInput{}
 	}
 
-	output = &DeleteGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteGroup API operation for AWS Greengrass.
-//
-// Deletes a group. The group must not have been used in deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DeleteGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroup
-func (c *Greengrass) DeleteGroup(input *DeleteGroupInput) (*DeleteGroupOutput, error) {
-	req, out := c.DeleteGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteGroupWithContext is the same as DeleteGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupInput, opts ...aws.Option) (*DeleteGroupOutput, error) {
-	req, out := c.DeleteGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteGroupOutput{})
+	return DeleteGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteLoggerDefinition = "DeleteLoggerDefinition"
 
-// DeleteLoggerDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeleteLoggerDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLoggerDefinitionRequest is a API request type for the DeleteLoggerDefinition API operation.
+type DeleteLoggerDefinitionRequest struct {
+	*aws.Request
+	Input *DeleteLoggerDefinitionInput
+}
+
+// Send marshals and sends the DeleteLoggerDefinition API request.
+func (r DeleteLoggerDefinitionRequest) Send() (*DeleteLoggerDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLoggerDefinitionOutput), nil
+}
+
+// DeleteLoggerDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLoggerDefinition for more information on using the DeleteLoggerDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a logger definition. The logger definition must not have been used
+// in a deployment.
 //
 //    // Example sending a request using the DeleteLoggerDefinitionRequest method.
-//    req, resp := client.DeleteLoggerDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLoggerDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinition
-func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInput) (req *aws.Request, output *DeleteLoggerDefinitionOutput) {
+func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInput) DeleteLoggerDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoggerDefinition,
 		HTTPMethod: "DELETE",
@@ -1655,76 +992,43 @@ func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinition
 		input = &DeleteLoggerDefinitionInput{}
 	}
 
-	output = &DeleteLoggerDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteLoggerDefinition API operation for AWS Greengrass.
-//
-// Deletes a logger definition. The logger definition must not have been used
-// in a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DeleteLoggerDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinition
-func (c *Greengrass) DeleteLoggerDefinition(input *DeleteLoggerDefinitionInput) (*DeleteLoggerDefinitionOutput, error) {
-	req, out := c.DeleteLoggerDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLoggerDefinitionWithContext is the same as DeleteLoggerDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLoggerDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DeleteLoggerDefinitionWithContext(ctx aws.Context, input *DeleteLoggerDefinitionInput, opts ...aws.Option) (*DeleteLoggerDefinitionOutput, error) {
-	req, out := c.DeleteLoggerDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteLoggerDefinitionOutput{})
+	return DeleteLoggerDefinitionRequest{Request: req, Input: input}
 }
 
 const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
 
-// DeleteSubscriptionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeleteSubscriptionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSubscriptionDefinitionRequest is a API request type for the DeleteSubscriptionDefinition API operation.
+type DeleteSubscriptionDefinitionRequest struct {
+	*aws.Request
+	Input *DeleteSubscriptionDefinitionInput
+}
+
+// Send marshals and sends the DeleteSubscriptionDefinition API request.
+func (r DeleteSubscriptionDefinitionRequest) Send() (*DeleteSubscriptionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSubscriptionDefinitionOutput), nil
+}
+
+// DeleteSubscriptionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSubscriptionDefinition for more information on using the DeleteSubscriptionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a subscription definition. The subscription definition must not have
+// been used in a deployment.
 //
 //    // Example sending a request using the DeleteSubscriptionDefinitionRequest method.
-//    req, resp := client.DeleteSubscriptionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSubscriptionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinition
-func (c *Greengrass) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDefinitionInput) (req *aws.Request, output *DeleteSubscriptionDefinitionOutput) {
+func (c *Greengrass) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDefinitionInput) DeleteSubscriptionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubscriptionDefinition,
 		HTTPMethod: "DELETE",
@@ -1735,76 +1039,42 @@ func (c *Greengrass) DeleteSubscriptionDefinitionRequest(input *DeleteSubscripti
 		input = &DeleteSubscriptionDefinitionInput{}
 	}
 
-	output = &DeleteSubscriptionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSubscriptionDefinition API operation for AWS Greengrass.
-//
-// Deletes a subscription definition. The subscription definition must not have
-// been used in a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DeleteSubscriptionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinition
-func (c *Greengrass) DeleteSubscriptionDefinition(input *DeleteSubscriptionDefinitionInput) (*DeleteSubscriptionDefinitionOutput, error) {
-	req, out := c.DeleteSubscriptionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSubscriptionDefinitionWithContext is the same as DeleteSubscriptionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSubscriptionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DeleteSubscriptionDefinitionWithContext(ctx aws.Context, input *DeleteSubscriptionDefinitionInput, opts ...aws.Option) (*DeleteSubscriptionDefinitionOutput, error) {
-	req, out := c.DeleteSubscriptionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSubscriptionDefinitionOutput{})
+	return DeleteSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
 const opDisassociateRoleFromGroup = "DisassociateRoleFromGroup"
 
-// DisassociateRoleFromGroupRequest generates a "aws.Request" representing the
-// client's request for the DisassociateRoleFromGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateRoleFromGroupRequest is a API request type for the DisassociateRoleFromGroup API operation.
+type DisassociateRoleFromGroupRequest struct {
+	*aws.Request
+	Input *DisassociateRoleFromGroupInput
+}
+
+// Send marshals and sends the DisassociateRoleFromGroup API request.
+func (r DisassociateRoleFromGroupRequest) Send() (*DisassociateRoleFromGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateRoleFromGroupOutput), nil
+}
+
+// DisassociateRoleFromGroupRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateRoleFromGroup for more information on using the DisassociateRoleFromGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates the role from a group.
 //
 //    // Example sending a request using the DisassociateRoleFromGroupRequest method.
-//    req, resp := client.DisassociateRoleFromGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateRoleFromGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroup
-func (c *Greengrass) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGroupInput) (req *aws.Request, output *DisassociateRoleFromGroupOutput) {
+func (c *Greengrass) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGroupInput) DisassociateRoleFromGroupRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateRoleFromGroup,
 		HTTPMethod: "DELETE",
@@ -1815,78 +1085,43 @@ func (c *Greengrass) DisassociateRoleFromGroupRequest(input *DisassociateRoleFro
 		input = &DisassociateRoleFromGroupInput{}
 	}
 
-	output = &DisassociateRoleFromGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateRoleFromGroup API operation for AWS Greengrass.
-//
-// Disassociates the role from a group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DisassociateRoleFromGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroup
-func (c *Greengrass) DisassociateRoleFromGroup(input *DisassociateRoleFromGroupInput) (*DisassociateRoleFromGroupOutput, error) {
-	req, out := c.DisassociateRoleFromGroupRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateRoleFromGroupWithContext is the same as DisassociateRoleFromGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateRoleFromGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DisassociateRoleFromGroupWithContext(ctx aws.Context, input *DisassociateRoleFromGroupInput, opts ...aws.Option) (*DisassociateRoleFromGroupOutput, error) {
-	req, out := c.DisassociateRoleFromGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateRoleFromGroupOutput{})
+	return DisassociateRoleFromGroupRequest{Request: req, Input: input}
 }
 
 const opDisassociateServiceRoleFromAccount = "DisassociateServiceRoleFromAccount"
 
-// DisassociateServiceRoleFromAccountRequest generates a "aws.Request" representing the
-// client's request for the DisassociateServiceRoleFromAccount operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateServiceRoleFromAccountRequest is a API request type for the DisassociateServiceRoleFromAccount API operation.
+type DisassociateServiceRoleFromAccountRequest struct {
+	*aws.Request
+	Input *DisassociateServiceRoleFromAccountInput
+}
+
+// Send marshals and sends the DisassociateServiceRoleFromAccount API request.
+func (r DisassociateServiceRoleFromAccountRequest) Send() (*DisassociateServiceRoleFromAccountOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateServiceRoleFromAccountOutput), nil
+}
+
+// DisassociateServiceRoleFromAccountRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateServiceRoleFromAccount for more information on using the DisassociateServiceRoleFromAccount
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates the service role from the account. Without a service role,
+// deployments will not work.
 //
 //    // Example sending a request using the DisassociateServiceRoleFromAccountRequest method.
-//    req, resp := client.DisassociateServiceRoleFromAccountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateServiceRoleFromAccountRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccount
-func (c *Greengrass) DisassociateServiceRoleFromAccountRequest(input *DisassociateServiceRoleFromAccountInput) (req *aws.Request, output *DisassociateServiceRoleFromAccountOutput) {
+func (c *Greengrass) DisassociateServiceRoleFromAccountRequest(input *DisassociateServiceRoleFromAccountInput) DisassociateServiceRoleFromAccountRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateServiceRoleFromAccount,
 		HTTPMethod: "DELETE",
@@ -1897,76 +1132,42 @@ func (c *Greengrass) DisassociateServiceRoleFromAccountRequest(input *Disassocia
 		input = &DisassociateServiceRoleFromAccountInput{}
 	}
 
-	output = &DisassociateServiceRoleFromAccountOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateServiceRoleFromAccount API operation for AWS Greengrass.
-//
-// Disassociates the service role from the account. Without a service role,
-// deployments will not work.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation DisassociateServiceRoleFromAccount for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccount
-func (c *Greengrass) DisassociateServiceRoleFromAccount(input *DisassociateServiceRoleFromAccountInput) (*DisassociateServiceRoleFromAccountOutput, error) {
-	req, out := c.DisassociateServiceRoleFromAccountRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateServiceRoleFromAccountWithContext is the same as DisassociateServiceRoleFromAccount with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateServiceRoleFromAccount for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) DisassociateServiceRoleFromAccountWithContext(ctx aws.Context, input *DisassociateServiceRoleFromAccountInput, opts ...aws.Option) (*DisassociateServiceRoleFromAccountOutput, error) {
-	req, out := c.DisassociateServiceRoleFromAccountRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateServiceRoleFromAccountOutput{})
+	return DisassociateServiceRoleFromAccountRequest{Request: req, Input: input}
 }
 
 const opGetAssociatedRole = "GetAssociatedRole"
 
-// GetAssociatedRoleRequest generates a "aws.Request" representing the
-// client's request for the GetAssociatedRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAssociatedRoleRequest is a API request type for the GetAssociatedRole API operation.
+type GetAssociatedRoleRequest struct {
+	*aws.Request
+	Input *GetAssociatedRoleInput
+}
+
+// Send marshals and sends the GetAssociatedRole API request.
+func (r GetAssociatedRoleRequest) Send() (*GetAssociatedRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAssociatedRoleOutput), nil
+}
+
+// GetAssociatedRoleRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAssociatedRole for more information on using the GetAssociatedRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the role associated with a particular group.
 //
 //    // Example sending a request using the GetAssociatedRoleRequest method.
-//    req, resp := client.GetAssociatedRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAssociatedRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRole
-func (c *Greengrass) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) (req *aws.Request, output *GetAssociatedRoleOutput) {
+func (c *Greengrass) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) GetAssociatedRoleRequest {
 	op := &aws.Operation{
 		Name:       opGetAssociatedRole,
 		HTTPMethod: "GET",
@@ -1977,78 +1178,42 @@ func (c *Greengrass) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) (re
 		input = &GetAssociatedRoleInput{}
 	}
 
-	output = &GetAssociatedRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAssociatedRole API operation for AWS Greengrass.
-//
-// Retrieves the role associated with a particular group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetAssociatedRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRole
-func (c *Greengrass) GetAssociatedRole(input *GetAssociatedRoleInput) (*GetAssociatedRoleOutput, error) {
-	req, out := c.GetAssociatedRoleRequest(input)
-	return out, req.Send()
-}
-
-// GetAssociatedRoleWithContext is the same as GetAssociatedRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAssociatedRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetAssociatedRoleWithContext(ctx aws.Context, input *GetAssociatedRoleInput, opts ...aws.Option) (*GetAssociatedRoleOutput, error) {
-	req, out := c.GetAssociatedRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAssociatedRoleOutput{})
+	return GetAssociatedRoleRequest{Request: req, Input: input}
 }
 
 const opGetConnectivityInfo = "GetConnectivityInfo"
 
-// GetConnectivityInfoRequest generates a "aws.Request" representing the
-// client's request for the GetConnectivityInfo operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetConnectivityInfoRequest is a API request type for the GetConnectivityInfo API operation.
+type GetConnectivityInfoRequest struct {
+	*aws.Request
+	Input *GetConnectivityInfoInput
+}
+
+// Send marshals and sends the GetConnectivityInfo API request.
+func (r GetConnectivityInfoRequest) Send() (*GetConnectivityInfoOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetConnectivityInfoOutput), nil
+}
+
+// GetConnectivityInfoRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetConnectivityInfo for more information on using the GetConnectivityInfo
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the connectivity information for a core.
 //
 //    // Example sending a request using the GetConnectivityInfoRequest method.
-//    req, resp := client.GetConnectivityInfoRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetConnectivityInfoRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfo
-func (c *Greengrass) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) (req *aws.Request, output *GetConnectivityInfoOutput) {
+func (c *Greengrass) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) GetConnectivityInfoRequest {
 	op := &aws.Operation{
 		Name:       opGetConnectivityInfo,
 		HTTPMethod: "GET",
@@ -2059,78 +1224,42 @@ func (c *Greengrass) GetConnectivityInfoRequest(input *GetConnectivityInfoInput)
 		input = &GetConnectivityInfoInput{}
 	}
 
-	output = &GetConnectivityInfoOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetConnectivityInfo API operation for AWS Greengrass.
-//
-// Retrieves the connectivity information for a core.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetConnectivityInfo for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfo
-func (c *Greengrass) GetConnectivityInfo(input *GetConnectivityInfoInput) (*GetConnectivityInfoOutput, error) {
-	req, out := c.GetConnectivityInfoRequest(input)
-	return out, req.Send()
-}
-
-// GetConnectivityInfoWithContext is the same as GetConnectivityInfo with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetConnectivityInfo for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetConnectivityInfoWithContext(ctx aws.Context, input *GetConnectivityInfoInput, opts ...aws.Option) (*GetConnectivityInfoOutput, error) {
-	req, out := c.GetConnectivityInfoRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetConnectivityInfoOutput{})
+	return GetConnectivityInfoRequest{Request: req, Input: input}
 }
 
 const opGetCoreDefinition = "GetCoreDefinition"
 
-// GetCoreDefinitionRequest generates a "aws.Request" representing the
-// client's request for the GetCoreDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCoreDefinitionRequest is a API request type for the GetCoreDefinition API operation.
+type GetCoreDefinitionRequest struct {
+	*aws.Request
+	Input *GetCoreDefinitionInput
+}
+
+// Send marshals and sends the GetCoreDefinition API request.
+func (r GetCoreDefinitionRequest) Send() (*GetCoreDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCoreDefinitionOutput), nil
+}
+
+// GetCoreDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCoreDefinition for more information on using the GetCoreDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a core definition version.
 //
 //    // Example sending a request using the GetCoreDefinitionRequest method.
-//    req, resp := client.GetCoreDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCoreDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinition
-func (c *Greengrass) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) (req *aws.Request, output *GetCoreDefinitionOutput) {
+func (c *Greengrass) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) GetCoreDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetCoreDefinition,
 		HTTPMethod: "GET",
@@ -2141,75 +1270,42 @@ func (c *Greengrass) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) (re
 		input = &GetCoreDefinitionInput{}
 	}
 
-	output = &GetCoreDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCoreDefinition API operation for AWS Greengrass.
-//
-// Retrieves information about a core definition version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetCoreDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinition
-func (c *Greengrass) GetCoreDefinition(input *GetCoreDefinitionInput) (*GetCoreDefinitionOutput, error) {
-	req, out := c.GetCoreDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// GetCoreDefinitionWithContext is the same as GetCoreDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCoreDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetCoreDefinitionWithContext(ctx aws.Context, input *GetCoreDefinitionInput, opts ...aws.Option) (*GetCoreDefinitionOutput, error) {
-	req, out := c.GetCoreDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCoreDefinitionOutput{})
+	return GetCoreDefinitionRequest{Request: req, Input: input}
 }
 
 const opGetCoreDefinitionVersion = "GetCoreDefinitionVersion"
 
-// GetCoreDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the GetCoreDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCoreDefinitionVersionRequest is a API request type for the GetCoreDefinitionVersion API operation.
+type GetCoreDefinitionVersionRequest struct {
+	*aws.Request
+	Input *GetCoreDefinitionVersionInput
+}
+
+// Send marshals and sends the GetCoreDefinitionVersion API request.
+func (r GetCoreDefinitionVersionRequest) Send() (*GetCoreDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCoreDefinitionVersionOutput), nil
+}
+
+// GetCoreDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCoreDefinitionVersion for more information on using the GetCoreDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a core definition version.
 //
 //    // Example sending a request using the GetCoreDefinitionVersionRequest method.
-//    req, resp := client.GetCoreDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCoreDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersion
-func (c *Greengrass) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVersionInput) (req *aws.Request, output *GetCoreDefinitionVersionOutput) {
+func (c *Greengrass) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVersionInput) GetCoreDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetCoreDefinitionVersion,
 		HTTPMethod: "GET",
@@ -2220,75 +1316,42 @@ func (c *Greengrass) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVer
 		input = &GetCoreDefinitionVersionInput{}
 	}
 
-	output = &GetCoreDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCoreDefinitionVersion API operation for AWS Greengrass.
-//
-// Retrieves information about a core definition version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetCoreDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersion
-func (c *Greengrass) GetCoreDefinitionVersion(input *GetCoreDefinitionVersionInput) (*GetCoreDefinitionVersionOutput, error) {
-	req, out := c.GetCoreDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetCoreDefinitionVersionWithContext is the same as GetCoreDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCoreDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetCoreDefinitionVersionWithContext(ctx aws.Context, input *GetCoreDefinitionVersionInput, opts ...aws.Option) (*GetCoreDefinitionVersionOutput, error) {
-	req, out := c.GetCoreDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCoreDefinitionVersionOutput{})
+	return GetCoreDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opGetDeploymentStatus = "GetDeploymentStatus"
 
-// GetDeploymentStatusRequest generates a "aws.Request" representing the
-// client's request for the GetDeploymentStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeploymentStatusRequest is a API request type for the GetDeploymentStatus API operation.
+type GetDeploymentStatusRequest struct {
+	*aws.Request
+	Input *GetDeploymentStatusInput
+}
+
+// Send marshals and sends the GetDeploymentStatus API request.
+func (r GetDeploymentStatusRequest) Send() (*GetDeploymentStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeploymentStatusOutput), nil
+}
+
+// GetDeploymentStatusRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeploymentStatus for more information on using the GetDeploymentStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the status of a deployment.
 //
 //    // Example sending a request using the GetDeploymentStatusRequest method.
-//    req, resp := client.GetDeploymentStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeploymentStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatus
-func (c *Greengrass) GetDeploymentStatusRequest(input *GetDeploymentStatusInput) (req *aws.Request, output *GetDeploymentStatusOutput) {
+func (c *Greengrass) GetDeploymentStatusRequest(input *GetDeploymentStatusInput) GetDeploymentStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetDeploymentStatus,
 		HTTPMethod: "GET",
@@ -2299,75 +1362,42 @@ func (c *Greengrass) GetDeploymentStatusRequest(input *GetDeploymentStatusInput)
 		input = &GetDeploymentStatusInput{}
 	}
 
-	output = &GetDeploymentStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeploymentStatus API operation for AWS Greengrass.
-//
-// Returns the status of a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetDeploymentStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatus
-func (c *Greengrass) GetDeploymentStatus(input *GetDeploymentStatusInput) (*GetDeploymentStatusOutput, error) {
-	req, out := c.GetDeploymentStatusRequest(input)
-	return out, req.Send()
-}
-
-// GetDeploymentStatusWithContext is the same as GetDeploymentStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeploymentStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetDeploymentStatusWithContext(ctx aws.Context, input *GetDeploymentStatusInput, opts ...aws.Option) (*GetDeploymentStatusOutput, error) {
-	req, out := c.GetDeploymentStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeploymentStatusOutput{})
+	return GetDeploymentStatusRequest{Request: req, Input: input}
 }
 
 const opGetDeviceDefinition = "GetDeviceDefinition"
 
-// GetDeviceDefinitionRequest generates a "aws.Request" representing the
-// client's request for the GetDeviceDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeviceDefinitionRequest is a API request type for the GetDeviceDefinition API operation.
+type GetDeviceDefinitionRequest struct {
+	*aws.Request
+	Input *GetDeviceDefinitionInput
+}
+
+// Send marshals and sends the GetDeviceDefinition API request.
+func (r GetDeviceDefinitionRequest) Send() (*GetDeviceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeviceDefinitionOutput), nil
+}
+
+// GetDeviceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeviceDefinition for more information on using the GetDeviceDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a device definition.
 //
 //    // Example sending a request using the GetDeviceDefinitionRequest method.
-//    req, resp := client.GetDeviceDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeviceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinition
-func (c *Greengrass) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput) (req *aws.Request, output *GetDeviceDefinitionOutput) {
+func (c *Greengrass) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput) GetDeviceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetDeviceDefinition,
 		HTTPMethod: "GET",
@@ -2378,75 +1408,42 @@ func (c *Greengrass) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput)
 		input = &GetDeviceDefinitionInput{}
 	}
 
-	output = &GetDeviceDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeviceDefinition API operation for AWS Greengrass.
-//
-// Retrieves information about a device definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetDeviceDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinition
-func (c *Greengrass) GetDeviceDefinition(input *GetDeviceDefinitionInput) (*GetDeviceDefinitionOutput, error) {
-	req, out := c.GetDeviceDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// GetDeviceDefinitionWithContext is the same as GetDeviceDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeviceDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetDeviceDefinitionWithContext(ctx aws.Context, input *GetDeviceDefinitionInput, opts ...aws.Option) (*GetDeviceDefinitionOutput, error) {
-	req, out := c.GetDeviceDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeviceDefinitionOutput{})
+	return GetDeviceDefinitionRequest{Request: req, Input: input}
 }
 
 const opGetDeviceDefinitionVersion = "GetDeviceDefinitionVersion"
 
-// GetDeviceDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the GetDeviceDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeviceDefinitionVersionRequest is a API request type for the GetDeviceDefinitionVersion API operation.
+type GetDeviceDefinitionVersionRequest struct {
+	*aws.Request
+	Input *GetDeviceDefinitionVersionInput
+}
+
+// Send marshals and sends the GetDeviceDefinitionVersion API request.
+func (r GetDeviceDefinitionVersionRequest) Send() (*GetDeviceDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeviceDefinitionVersionOutput), nil
+}
+
+// GetDeviceDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeviceDefinitionVersion for more information on using the GetDeviceDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a device definition version.
 //
 //    // Example sending a request using the GetDeviceDefinitionVersionRequest method.
-//    req, resp := client.GetDeviceDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeviceDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersion
-func (c *Greengrass) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVersionInput) (req *aws.Request, output *GetDeviceDefinitionVersionOutput) {
+func (c *Greengrass) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVersionInput) GetDeviceDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetDeviceDefinitionVersion,
 		HTTPMethod: "GET",
@@ -2457,75 +1454,43 @@ func (c *Greengrass) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitio
 		input = &GetDeviceDefinitionVersionInput{}
 	}
 
-	output = &GetDeviceDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeviceDefinitionVersion API operation for AWS Greengrass.
-//
-// Retrieves information about a device definition version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetDeviceDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersion
-func (c *Greengrass) GetDeviceDefinitionVersion(input *GetDeviceDefinitionVersionInput) (*GetDeviceDefinitionVersionOutput, error) {
-	req, out := c.GetDeviceDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetDeviceDefinitionVersionWithContext is the same as GetDeviceDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeviceDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetDeviceDefinitionVersionWithContext(ctx aws.Context, input *GetDeviceDefinitionVersionInput, opts ...aws.Option) (*GetDeviceDefinitionVersionOutput, error) {
-	req, out := c.GetDeviceDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeviceDefinitionVersionOutput{})
+	return GetDeviceDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opGetFunctionDefinition = "GetFunctionDefinition"
 
-// GetFunctionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the GetFunctionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetFunctionDefinitionRequest is a API request type for the GetFunctionDefinition API operation.
+type GetFunctionDefinitionRequest struct {
+	*aws.Request
+	Input *GetFunctionDefinitionInput
+}
+
+// Send marshals and sends the GetFunctionDefinition API request.
+func (r GetFunctionDefinitionRequest) Send() (*GetFunctionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFunctionDefinitionOutput), nil
+}
+
+// GetFunctionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetFunctionDefinition for more information on using the GetFunctionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a Lambda function definition, such as its creation
+// time and latest version.
 //
 //    // Example sending a request using the GetFunctionDefinitionRequest method.
-//    req, resp := client.GetFunctionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetFunctionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinition
-func (c *Greengrass) GetFunctionDefinitionRequest(input *GetFunctionDefinitionInput) (req *aws.Request, output *GetFunctionDefinitionOutput) {
+func (c *Greengrass) GetFunctionDefinitionRequest(input *GetFunctionDefinitionInput) GetFunctionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetFunctionDefinition,
 		HTTPMethod: "GET",
@@ -2536,76 +1501,43 @@ func (c *Greengrass) GetFunctionDefinitionRequest(input *GetFunctionDefinitionIn
 		input = &GetFunctionDefinitionInput{}
 	}
 
-	output = &GetFunctionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetFunctionDefinition API operation for AWS Greengrass.
-//
-// Retrieves information about a Lambda function definition, such as its creation
-// time and latest version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetFunctionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinition
-func (c *Greengrass) GetFunctionDefinition(input *GetFunctionDefinitionInput) (*GetFunctionDefinitionOutput, error) {
-	req, out := c.GetFunctionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// GetFunctionDefinitionWithContext is the same as GetFunctionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetFunctionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetFunctionDefinitionWithContext(ctx aws.Context, input *GetFunctionDefinitionInput, opts ...aws.Option) (*GetFunctionDefinitionOutput, error) {
-	req, out := c.GetFunctionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetFunctionDefinitionOutput{})
+	return GetFunctionDefinitionRequest{Request: req, Input: input}
 }
 
 const opGetFunctionDefinitionVersion = "GetFunctionDefinitionVersion"
 
-// GetFunctionDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the GetFunctionDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetFunctionDefinitionVersionRequest is a API request type for the GetFunctionDefinitionVersion API operation.
+type GetFunctionDefinitionVersionRequest struct {
+	*aws.Request
+	Input *GetFunctionDefinitionVersionInput
+}
+
+// Send marshals and sends the GetFunctionDefinitionVersion API request.
+func (r GetFunctionDefinitionVersionRequest) Send() (*GetFunctionDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFunctionDefinitionVersionOutput), nil
+}
+
+// GetFunctionDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetFunctionDefinitionVersion for more information on using the GetFunctionDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a Lambda function definition version, such as
+// which Lambda functions are included in the version and their configurations.
 //
 //    // Example sending a request using the GetFunctionDefinitionVersionRequest method.
-//    req, resp := client.GetFunctionDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetFunctionDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersion
-func (c *Greengrass) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitionVersionInput) (req *aws.Request, output *GetFunctionDefinitionVersionOutput) {
+func (c *Greengrass) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitionVersionInput) GetFunctionDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetFunctionDefinitionVersion,
 		HTTPMethod: "GET",
@@ -2616,76 +1548,42 @@ func (c *Greengrass) GetFunctionDefinitionVersionRequest(input *GetFunctionDefin
 		input = &GetFunctionDefinitionVersionInput{}
 	}
 
-	output = &GetFunctionDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetFunctionDefinitionVersion API operation for AWS Greengrass.
-//
-// Retrieves information about a Lambda function definition version, such as
-// which Lambda functions are included in the version and their configurations.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetFunctionDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersion
-func (c *Greengrass) GetFunctionDefinitionVersion(input *GetFunctionDefinitionVersionInput) (*GetFunctionDefinitionVersionOutput, error) {
-	req, out := c.GetFunctionDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetFunctionDefinitionVersionWithContext is the same as GetFunctionDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetFunctionDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetFunctionDefinitionVersionWithContext(ctx aws.Context, input *GetFunctionDefinitionVersionInput, opts ...aws.Option) (*GetFunctionDefinitionVersionOutput, error) {
-	req, out := c.GetFunctionDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetFunctionDefinitionVersionOutput{})
+	return GetFunctionDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opGetGroup = "GetGroup"
 
-// GetGroupRequest generates a "aws.Request" representing the
-// client's request for the GetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetGroupRequest is a API request type for the GetGroup API operation.
+type GetGroupRequest struct {
+	*aws.Request
+	Input *GetGroupInput
+}
+
+// Send marshals and sends the GetGroup API request.
+func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupOutput), nil
+}
+
+// GetGroupRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGroup for more information on using the GetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a group.
 //
 //    // Example sending a request using the GetGroupRequest method.
-//    req, resp := client.GetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroup
-func (c *Greengrass) GetGroupRequest(input *GetGroupInput) (req *aws.Request, output *GetGroupOutput) {
+func (c *Greengrass) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetGroup,
 		HTTPMethod: "GET",
@@ -2696,75 +1594,42 @@ func (c *Greengrass) GetGroupRequest(input *GetGroupInput) (req *aws.Request, ou
 		input = &GetGroupInput{}
 	}
 
-	output = &GetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetGroup API operation for AWS Greengrass.
-//
-// Retrieves information about a group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroup
-func (c *Greengrass) GetGroup(input *GetGroupInput) (*GetGroupOutput, error) {
-	req, out := c.GetGroupRequest(input)
-	return out, req.Send()
-}
-
-// GetGroupWithContext is the same as GetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetGroupWithContext(ctx aws.Context, input *GetGroupInput, opts ...aws.Option) (*GetGroupOutput, error) {
-	req, out := c.GetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetGroupOutput{})
+	return GetGroupRequest{Request: req, Input: input}
 }
 
 const opGetGroupCertificateAuthority = "GetGroupCertificateAuthority"
 
-// GetGroupCertificateAuthorityRequest generates a "aws.Request" representing the
-// client's request for the GetGroupCertificateAuthority operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetGroupCertificateAuthorityRequest is a API request type for the GetGroupCertificateAuthority API operation.
+type GetGroupCertificateAuthorityRequest struct {
+	*aws.Request
+	Input *GetGroupCertificateAuthorityInput
+}
+
+// Send marshals and sends the GetGroupCertificateAuthority API request.
+func (r GetGroupCertificateAuthorityRequest) Send() (*GetGroupCertificateAuthorityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupCertificateAuthorityOutput), nil
+}
+
+// GetGroupCertificateAuthorityRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGroupCertificateAuthority for more information on using the GetGroupCertificateAuthority
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retreives the CA associated with a group. Returns the public key of the CA.
 //
 //    // Example sending a request using the GetGroupCertificateAuthorityRequest method.
-//    req, resp := client.GetGroupCertificateAuthorityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetGroupCertificateAuthorityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthority
-func (c *Greengrass) GetGroupCertificateAuthorityRequest(input *GetGroupCertificateAuthorityInput) (req *aws.Request, output *GetGroupCertificateAuthorityOutput) {
+func (c *Greengrass) GetGroupCertificateAuthorityRequest(input *GetGroupCertificateAuthorityInput) GetGroupCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opGetGroupCertificateAuthority,
 		HTTPMethod: "GET",
@@ -2775,78 +1640,42 @@ func (c *Greengrass) GetGroupCertificateAuthorityRequest(input *GetGroupCertific
 		input = &GetGroupCertificateAuthorityInput{}
 	}
 
-	output = &GetGroupCertificateAuthorityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetGroupCertificateAuthority API operation for AWS Greengrass.
-//
-// Retreives the CA associated with a group. Returns the public key of the CA.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetGroupCertificateAuthority for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthority
-func (c *Greengrass) GetGroupCertificateAuthority(input *GetGroupCertificateAuthorityInput) (*GetGroupCertificateAuthorityOutput, error) {
-	req, out := c.GetGroupCertificateAuthorityRequest(input)
-	return out, req.Send()
-}
-
-// GetGroupCertificateAuthorityWithContext is the same as GetGroupCertificateAuthority with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGroupCertificateAuthority for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetGroupCertificateAuthorityWithContext(ctx aws.Context, input *GetGroupCertificateAuthorityInput, opts ...aws.Option) (*GetGroupCertificateAuthorityOutput, error) {
-	req, out := c.GetGroupCertificateAuthorityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetGroupCertificateAuthorityOutput{})
+	return GetGroupCertificateAuthorityRequest{Request: req, Input: input}
 }
 
 const opGetGroupCertificateConfiguration = "GetGroupCertificateConfiguration"
 
-// GetGroupCertificateConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetGroupCertificateConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetGroupCertificateConfigurationRequest is a API request type for the GetGroupCertificateConfiguration API operation.
+type GetGroupCertificateConfigurationRequest struct {
+	*aws.Request
+	Input *GetGroupCertificateConfigurationInput
+}
+
+// Send marshals and sends the GetGroupCertificateConfiguration API request.
+func (r GetGroupCertificateConfigurationRequest) Send() (*GetGroupCertificateConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupCertificateConfigurationOutput), nil
+}
+
+// GetGroupCertificateConfigurationRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGroupCertificateConfiguration for more information on using the GetGroupCertificateConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the current configuration for the CA used by the group.
 //
 //    // Example sending a request using the GetGroupCertificateConfigurationRequest method.
-//    req, resp := client.GetGroupCertificateConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetGroupCertificateConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfiguration
-func (c *Greengrass) GetGroupCertificateConfigurationRequest(input *GetGroupCertificateConfigurationInput) (req *aws.Request, output *GetGroupCertificateConfigurationOutput) {
+func (c *Greengrass) GetGroupCertificateConfigurationRequest(input *GetGroupCertificateConfigurationInput) GetGroupCertificateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetGroupCertificateConfiguration,
 		HTTPMethod: "GET",
@@ -2857,78 +1686,42 @@ func (c *Greengrass) GetGroupCertificateConfigurationRequest(input *GetGroupCert
 		input = &GetGroupCertificateConfigurationInput{}
 	}
 
-	output = &GetGroupCertificateConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetGroupCertificateConfiguration API operation for AWS Greengrass.
-//
-// Retrieves the current configuration for the CA used by the group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetGroupCertificateConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfiguration
-func (c *Greengrass) GetGroupCertificateConfiguration(input *GetGroupCertificateConfigurationInput) (*GetGroupCertificateConfigurationOutput, error) {
-	req, out := c.GetGroupCertificateConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetGroupCertificateConfigurationWithContext is the same as GetGroupCertificateConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGroupCertificateConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetGroupCertificateConfigurationWithContext(ctx aws.Context, input *GetGroupCertificateConfigurationInput, opts ...aws.Option) (*GetGroupCertificateConfigurationOutput, error) {
-	req, out := c.GetGroupCertificateConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetGroupCertificateConfigurationOutput{})
+	return GetGroupCertificateConfigurationRequest{Request: req, Input: input}
 }
 
 const opGetGroupVersion = "GetGroupVersion"
 
-// GetGroupVersionRequest generates a "aws.Request" representing the
-// client's request for the GetGroupVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetGroupVersionRequest is a API request type for the GetGroupVersion API operation.
+type GetGroupVersionRequest struct {
+	*aws.Request
+	Input *GetGroupVersionInput
+}
+
+// Send marshals and sends the GetGroupVersion API request.
+func (r GetGroupVersionRequest) Send() (*GetGroupVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupVersionOutput), nil
+}
+
+// GetGroupVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGroupVersion for more information on using the GetGroupVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a group version.
 //
 //    // Example sending a request using the GetGroupVersionRequest method.
-//    req, resp := client.GetGroupVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetGroupVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersion
-func (c *Greengrass) GetGroupVersionRequest(input *GetGroupVersionInput) (req *aws.Request, output *GetGroupVersionOutput) {
+func (c *Greengrass) GetGroupVersionRequest(input *GetGroupVersionInput) GetGroupVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetGroupVersion,
 		HTTPMethod: "GET",
@@ -2939,75 +1732,42 @@ func (c *Greengrass) GetGroupVersionRequest(input *GetGroupVersionInput) (req *a
 		input = &GetGroupVersionInput{}
 	}
 
-	output = &GetGroupVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetGroupVersion API operation for AWS Greengrass.
-//
-// Retrieves information about a group version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetGroupVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersion
-func (c *Greengrass) GetGroupVersion(input *GetGroupVersionInput) (*GetGroupVersionOutput, error) {
-	req, out := c.GetGroupVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetGroupVersionWithContext is the same as GetGroupVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGroupVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetGroupVersionWithContext(ctx aws.Context, input *GetGroupVersionInput, opts ...aws.Option) (*GetGroupVersionOutput, error) {
-	req, out := c.GetGroupVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetGroupVersionOutput{})
+	return GetGroupVersionRequest{Request: req, Input: input}
 }
 
 const opGetLoggerDefinition = "GetLoggerDefinition"
 
-// GetLoggerDefinitionRequest generates a "aws.Request" representing the
-// client's request for the GetLoggerDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetLoggerDefinitionRequest is a API request type for the GetLoggerDefinition API operation.
+type GetLoggerDefinitionRequest struct {
+	*aws.Request
+	Input *GetLoggerDefinitionInput
+}
+
+// Send marshals and sends the GetLoggerDefinition API request.
+func (r GetLoggerDefinitionRequest) Send() (*GetLoggerDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLoggerDefinitionOutput), nil
+}
+
+// GetLoggerDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetLoggerDefinition for more information on using the GetLoggerDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a logger definition.
 //
 //    // Example sending a request using the GetLoggerDefinitionRequest method.
-//    req, resp := client.GetLoggerDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetLoggerDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinition
-func (c *Greengrass) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) (req *aws.Request, output *GetLoggerDefinitionOutput) {
+func (c *Greengrass) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) GetLoggerDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetLoggerDefinition,
 		HTTPMethod: "GET",
@@ -3018,75 +1778,42 @@ func (c *Greengrass) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput)
 		input = &GetLoggerDefinitionInput{}
 	}
 
-	output = &GetLoggerDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetLoggerDefinition API operation for AWS Greengrass.
-//
-// Retrieves information about a logger definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetLoggerDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinition
-func (c *Greengrass) GetLoggerDefinition(input *GetLoggerDefinitionInput) (*GetLoggerDefinitionOutput, error) {
-	req, out := c.GetLoggerDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// GetLoggerDefinitionWithContext is the same as GetLoggerDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetLoggerDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetLoggerDefinitionWithContext(ctx aws.Context, input *GetLoggerDefinitionInput, opts ...aws.Option) (*GetLoggerDefinitionOutput, error) {
-	req, out := c.GetLoggerDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetLoggerDefinitionOutput{})
+	return GetLoggerDefinitionRequest{Request: req, Input: input}
 }
 
 const opGetLoggerDefinitionVersion = "GetLoggerDefinitionVersion"
 
-// GetLoggerDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the GetLoggerDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetLoggerDefinitionVersionRequest is a API request type for the GetLoggerDefinitionVersion API operation.
+type GetLoggerDefinitionVersionRequest struct {
+	*aws.Request
+	Input *GetLoggerDefinitionVersionInput
+}
+
+// Send marshals and sends the GetLoggerDefinitionVersion API request.
+func (r GetLoggerDefinitionVersionRequest) Send() (*GetLoggerDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLoggerDefinitionVersionOutput), nil
+}
+
+// GetLoggerDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetLoggerDefinitionVersion for more information on using the GetLoggerDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a logger definition version.
 //
 //    // Example sending a request using the GetLoggerDefinitionVersionRequest method.
-//    req, resp := client.GetLoggerDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetLoggerDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersion
-func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitionVersionInput) (req *aws.Request, output *GetLoggerDefinitionVersionOutput) {
+func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitionVersionInput) GetLoggerDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetLoggerDefinitionVersion,
 		HTTPMethod: "GET",
@@ -3097,75 +1824,42 @@ func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitio
 		input = &GetLoggerDefinitionVersionInput{}
 	}
 
-	output = &GetLoggerDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetLoggerDefinitionVersion API operation for AWS Greengrass.
-//
-// Retrieves information about a logger definition version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetLoggerDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersion
-func (c *Greengrass) GetLoggerDefinitionVersion(input *GetLoggerDefinitionVersionInput) (*GetLoggerDefinitionVersionOutput, error) {
-	req, out := c.GetLoggerDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetLoggerDefinitionVersionWithContext is the same as GetLoggerDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetLoggerDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetLoggerDefinitionVersionWithContext(ctx aws.Context, input *GetLoggerDefinitionVersionInput, opts ...aws.Option) (*GetLoggerDefinitionVersionOutput, error) {
-	req, out := c.GetLoggerDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetLoggerDefinitionVersionOutput{})
+	return GetLoggerDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
 
-// GetServiceRoleForAccountRequest generates a "aws.Request" representing the
-// client's request for the GetServiceRoleForAccount operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetServiceRoleForAccountRequest is a API request type for the GetServiceRoleForAccount API operation.
+type GetServiceRoleForAccountRequest struct {
+	*aws.Request
+	Input *GetServiceRoleForAccountInput
+}
+
+// Send marshals and sends the GetServiceRoleForAccount API request.
+func (r GetServiceRoleForAccountRequest) Send() (*GetServiceRoleForAccountOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetServiceRoleForAccountOutput), nil
+}
+
+// GetServiceRoleForAccountRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetServiceRoleForAccount for more information on using the GetServiceRoleForAccount
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the service role that is attached to the account.
 //
 //    // Example sending a request using the GetServiceRoleForAccountRequest method.
-//    req, resp := client.GetServiceRoleForAccountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetServiceRoleForAccountRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccount
-func (c *Greengrass) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccountInput) (req *aws.Request, output *GetServiceRoleForAccountOutput) {
+func (c *Greengrass) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccountInput) GetServiceRoleForAccountRequest {
 	op := &aws.Operation{
 		Name:       opGetServiceRoleForAccount,
 		HTTPMethod: "GET",
@@ -3176,75 +1870,42 @@ func (c *Greengrass) GetServiceRoleForAccountRequest(input *GetServiceRoleForAcc
 		input = &GetServiceRoleForAccountInput{}
 	}
 
-	output = &GetServiceRoleForAccountOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetServiceRoleForAccount API operation for AWS Greengrass.
-//
-// Retrieves the service role that is attached to the account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetServiceRoleForAccount for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccount
-func (c *Greengrass) GetServiceRoleForAccount(input *GetServiceRoleForAccountInput) (*GetServiceRoleForAccountOutput, error) {
-	req, out := c.GetServiceRoleForAccountRequest(input)
-	return out, req.Send()
-}
-
-// GetServiceRoleForAccountWithContext is the same as GetServiceRoleForAccount with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetServiceRoleForAccount for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetServiceRoleForAccountWithContext(ctx aws.Context, input *GetServiceRoleForAccountInput, opts ...aws.Option) (*GetServiceRoleForAccountOutput, error) {
-	req, out := c.GetServiceRoleForAccountRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetServiceRoleForAccountOutput{})
+	return GetServiceRoleForAccountRequest{Request: req, Input: input}
 }
 
 const opGetSubscriptionDefinition = "GetSubscriptionDefinition"
 
-// GetSubscriptionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the GetSubscriptionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSubscriptionDefinitionRequest is a API request type for the GetSubscriptionDefinition API operation.
+type GetSubscriptionDefinitionRequest struct {
+	*aws.Request
+	Input *GetSubscriptionDefinitionInput
+}
+
+// Send marshals and sends the GetSubscriptionDefinition API request.
+func (r GetSubscriptionDefinitionRequest) Send() (*GetSubscriptionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSubscriptionDefinitionOutput), nil
+}
+
+// GetSubscriptionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSubscriptionDefinition for more information on using the GetSubscriptionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a subscription definition.
 //
 //    // Example sending a request using the GetSubscriptionDefinitionRequest method.
-//    req, resp := client.GetSubscriptionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSubscriptionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinition
-func (c *Greengrass) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefinitionInput) (req *aws.Request, output *GetSubscriptionDefinitionOutput) {
+func (c *Greengrass) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefinitionInput) GetSubscriptionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetSubscriptionDefinition,
 		HTTPMethod: "GET",
@@ -3255,75 +1916,42 @@ func (c *Greengrass) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefi
 		input = &GetSubscriptionDefinitionInput{}
 	}
 
-	output = &GetSubscriptionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSubscriptionDefinition API operation for AWS Greengrass.
-//
-// Retrieves information about a subscription definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetSubscriptionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinition
-func (c *Greengrass) GetSubscriptionDefinition(input *GetSubscriptionDefinitionInput) (*GetSubscriptionDefinitionOutput, error) {
-	req, out := c.GetSubscriptionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// GetSubscriptionDefinitionWithContext is the same as GetSubscriptionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSubscriptionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetSubscriptionDefinitionWithContext(ctx aws.Context, input *GetSubscriptionDefinitionInput, opts ...aws.Option) (*GetSubscriptionDefinitionOutput, error) {
-	req, out := c.GetSubscriptionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSubscriptionDefinitionOutput{})
+	return GetSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
 const opGetSubscriptionDefinitionVersion = "GetSubscriptionDefinitionVersion"
 
-// GetSubscriptionDefinitionVersionRequest generates a "aws.Request" representing the
-// client's request for the GetSubscriptionDefinitionVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSubscriptionDefinitionVersionRequest is a API request type for the GetSubscriptionDefinitionVersion API operation.
+type GetSubscriptionDefinitionVersionRequest struct {
+	*aws.Request
+	Input *GetSubscriptionDefinitionVersionInput
+}
+
+// Send marshals and sends the GetSubscriptionDefinitionVersion API request.
+func (r GetSubscriptionDefinitionVersionRequest) Send() (*GetSubscriptionDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSubscriptionDefinitionVersionOutput), nil
+}
+
+// GetSubscriptionDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSubscriptionDefinitionVersion for more information on using the GetSubscriptionDefinitionVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a subscription definition version.
 //
 //    // Example sending a request using the GetSubscriptionDefinitionVersionRequest method.
-//    req, resp := client.GetSubscriptionDefinitionVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSubscriptionDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersion
-func (c *Greengrass) GetSubscriptionDefinitionVersionRequest(input *GetSubscriptionDefinitionVersionInput) (req *aws.Request, output *GetSubscriptionDefinitionVersionOutput) {
+func (c *Greengrass) GetSubscriptionDefinitionVersionRequest(input *GetSubscriptionDefinitionVersionInput) GetSubscriptionDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetSubscriptionDefinitionVersion,
 		HTTPMethod: "GET",
@@ -3334,75 +1962,42 @@ func (c *Greengrass) GetSubscriptionDefinitionVersionRequest(input *GetSubscript
 		input = &GetSubscriptionDefinitionVersionInput{}
 	}
 
-	output = &GetSubscriptionDefinitionVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSubscriptionDefinitionVersion API operation for AWS Greengrass.
-//
-// Retrieves information about a subscription definition version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation GetSubscriptionDefinitionVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersion
-func (c *Greengrass) GetSubscriptionDefinitionVersion(input *GetSubscriptionDefinitionVersionInput) (*GetSubscriptionDefinitionVersionOutput, error) {
-	req, out := c.GetSubscriptionDefinitionVersionRequest(input)
-	return out, req.Send()
-}
-
-// GetSubscriptionDefinitionVersionWithContext is the same as GetSubscriptionDefinitionVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSubscriptionDefinitionVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) GetSubscriptionDefinitionVersionWithContext(ctx aws.Context, input *GetSubscriptionDefinitionVersionInput, opts ...aws.Option) (*GetSubscriptionDefinitionVersionOutput, error) {
-	req, out := c.GetSubscriptionDefinitionVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSubscriptionDefinitionVersionOutput{})
+	return GetSubscriptionDefinitionVersionRequest{Request: req, Input: input}
 }
 
 const opListCoreDefinitionVersions = "ListCoreDefinitionVersions"
 
-// ListCoreDefinitionVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListCoreDefinitionVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCoreDefinitionVersionsRequest is a API request type for the ListCoreDefinitionVersions API operation.
+type ListCoreDefinitionVersionsRequest struct {
+	*aws.Request
+	Input *ListCoreDefinitionVersionsInput
+}
+
+// Send marshals and sends the ListCoreDefinitionVersions API request.
+func (r ListCoreDefinitionVersionsRequest) Send() (*ListCoreDefinitionVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCoreDefinitionVersionsOutput), nil
+}
+
+// ListCoreDefinitionVersionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCoreDefinitionVersions for more information on using the ListCoreDefinitionVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists versions of a core definition.
 //
 //    // Example sending a request using the ListCoreDefinitionVersionsRequest method.
-//    req, resp := client.ListCoreDefinitionVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCoreDefinitionVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersions
-func (c *Greengrass) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVersionsInput) (req *aws.Request, output *ListCoreDefinitionVersionsOutput) {
+func (c *Greengrass) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVersionsInput) ListCoreDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListCoreDefinitionVersions,
 		HTTPMethod: "GET",
@@ -3413,75 +2008,42 @@ func (c *Greengrass) ListCoreDefinitionVersionsRequest(input *ListCoreDefinition
 		input = &ListCoreDefinitionVersionsInput{}
 	}
 
-	output = &ListCoreDefinitionVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCoreDefinitionVersions API operation for AWS Greengrass.
-//
-// Lists versions of a core definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListCoreDefinitionVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersions
-func (c *Greengrass) ListCoreDefinitionVersions(input *ListCoreDefinitionVersionsInput) (*ListCoreDefinitionVersionsOutput, error) {
-	req, out := c.ListCoreDefinitionVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListCoreDefinitionVersionsWithContext is the same as ListCoreDefinitionVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCoreDefinitionVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListCoreDefinitionVersionsWithContext(ctx aws.Context, input *ListCoreDefinitionVersionsInput, opts ...aws.Option) (*ListCoreDefinitionVersionsOutput, error) {
-	req, out := c.ListCoreDefinitionVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCoreDefinitionVersionsOutput{})
+	return ListCoreDefinitionVersionsRequest{Request: req, Input: input}
 }
 
 const opListCoreDefinitions = "ListCoreDefinitions"
 
-// ListCoreDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the ListCoreDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCoreDefinitionsRequest is a API request type for the ListCoreDefinitions API operation.
+type ListCoreDefinitionsRequest struct {
+	*aws.Request
+	Input *ListCoreDefinitionsInput
+}
+
+// Send marshals and sends the ListCoreDefinitions API request.
+func (r ListCoreDefinitionsRequest) Send() (*ListCoreDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCoreDefinitionsOutput), nil
+}
+
+// ListCoreDefinitionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCoreDefinitions for more information on using the ListCoreDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of core definitions.
 //
 //    // Example sending a request using the ListCoreDefinitionsRequest method.
-//    req, resp := client.ListCoreDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCoreDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitions
-func (c *Greengrass) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) (req *aws.Request, output *ListCoreDefinitionsOutput) {
+func (c *Greengrass) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) ListCoreDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListCoreDefinitions,
 		HTTPMethod: "GET",
@@ -3492,70 +2054,42 @@ func (c *Greengrass) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput)
 		input = &ListCoreDefinitionsInput{}
 	}
 
-	output = &ListCoreDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCoreDefinitions API operation for AWS Greengrass.
-//
-// Retrieves a list of core definitions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListCoreDefinitions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitions
-func (c *Greengrass) ListCoreDefinitions(input *ListCoreDefinitionsInput) (*ListCoreDefinitionsOutput, error) {
-	req, out := c.ListCoreDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// ListCoreDefinitionsWithContext is the same as ListCoreDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCoreDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListCoreDefinitionsWithContext(ctx aws.Context, input *ListCoreDefinitionsInput, opts ...aws.Option) (*ListCoreDefinitionsOutput, error) {
-	req, out := c.ListCoreDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCoreDefinitionsOutput{})
+	return ListCoreDefinitionsRequest{Request: req, Input: input}
 }
 
 const opListDeployments = "ListDeployments"
 
-// ListDeploymentsRequest generates a "aws.Request" representing the
-// client's request for the ListDeployments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeploymentsRequest is a API request type for the ListDeployments API operation.
+type ListDeploymentsRequest struct {
+	*aws.Request
+	Input *ListDeploymentsInput
+}
+
+// Send marshals and sends the ListDeployments API request.
+func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeploymentsOutput), nil
+}
+
+// ListDeploymentsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeployments for more information on using the ListDeployments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a history of deployments for the group.
 //
 //    // Example sending a request using the ListDeploymentsRequest method.
-//    req, resp := client.ListDeploymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeploymentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeployments
-func (c *Greengrass) ListDeploymentsRequest(input *ListDeploymentsInput) (req *aws.Request, output *ListDeploymentsOutput) {
+func (c *Greengrass) ListDeploymentsRequest(input *ListDeploymentsInput) ListDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opListDeployments,
 		HTTPMethod: "GET",
@@ -3566,75 +2100,42 @@ func (c *Greengrass) ListDeploymentsRequest(input *ListDeploymentsInput) (req *a
 		input = &ListDeploymentsInput{}
 	}
 
-	output = &ListDeploymentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeployments API operation for AWS Greengrass.
-//
-// Returns a history of deployments for the group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListDeployments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeployments
-func (c *Greengrass) ListDeployments(input *ListDeploymentsInput) (*ListDeploymentsOutput, error) {
-	req, out := c.ListDeploymentsRequest(input)
-	return out, req.Send()
-}
-
-// ListDeploymentsWithContext is the same as ListDeployments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeployments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListDeploymentsWithContext(ctx aws.Context, input *ListDeploymentsInput, opts ...aws.Option) (*ListDeploymentsOutput, error) {
-	req, out := c.ListDeploymentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeploymentsOutput{})
+	return ListDeploymentsRequest{Request: req, Input: input}
 }
 
 const opListDeviceDefinitionVersions = "ListDeviceDefinitionVersions"
 
-// ListDeviceDefinitionVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListDeviceDefinitionVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeviceDefinitionVersionsRequest is a API request type for the ListDeviceDefinitionVersions API operation.
+type ListDeviceDefinitionVersionsRequest struct {
+	*aws.Request
+	Input *ListDeviceDefinitionVersionsInput
+}
+
+// Send marshals and sends the ListDeviceDefinitionVersions API request.
+func (r ListDeviceDefinitionVersionsRequest) Send() (*ListDeviceDefinitionVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeviceDefinitionVersionsOutput), nil
+}
+
+// ListDeviceDefinitionVersionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeviceDefinitionVersions for more information on using the ListDeviceDefinitionVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the versions of a device definition.
 //
 //    // Example sending a request using the ListDeviceDefinitionVersionsRequest method.
-//    req, resp := client.ListDeviceDefinitionVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeviceDefinitionVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersions
-func (c *Greengrass) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefinitionVersionsInput) (req *aws.Request, output *ListDeviceDefinitionVersionsOutput) {
+func (c *Greengrass) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefinitionVersionsInput) ListDeviceDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListDeviceDefinitionVersions,
 		HTTPMethod: "GET",
@@ -3645,75 +2146,42 @@ func (c *Greengrass) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefini
 		input = &ListDeviceDefinitionVersionsInput{}
 	}
 
-	output = &ListDeviceDefinitionVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeviceDefinitionVersions API operation for AWS Greengrass.
-//
-// Lists the versions of a device definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListDeviceDefinitionVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersions
-func (c *Greengrass) ListDeviceDefinitionVersions(input *ListDeviceDefinitionVersionsInput) (*ListDeviceDefinitionVersionsOutput, error) {
-	req, out := c.ListDeviceDefinitionVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListDeviceDefinitionVersionsWithContext is the same as ListDeviceDefinitionVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeviceDefinitionVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListDeviceDefinitionVersionsWithContext(ctx aws.Context, input *ListDeviceDefinitionVersionsInput, opts ...aws.Option) (*ListDeviceDefinitionVersionsOutput, error) {
-	req, out := c.ListDeviceDefinitionVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeviceDefinitionVersionsOutput{})
+	return ListDeviceDefinitionVersionsRequest{Request: req, Input: input}
 }
 
 const opListDeviceDefinitions = "ListDeviceDefinitions"
 
-// ListDeviceDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the ListDeviceDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeviceDefinitionsRequest is a API request type for the ListDeviceDefinitions API operation.
+type ListDeviceDefinitionsRequest struct {
+	*aws.Request
+	Input *ListDeviceDefinitionsInput
+}
+
+// Send marshals and sends the ListDeviceDefinitions API request.
+func (r ListDeviceDefinitionsRequest) Send() (*ListDeviceDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeviceDefinitionsOutput), nil
+}
+
+// ListDeviceDefinitionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeviceDefinitions for more information on using the ListDeviceDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of device definitions.
 //
 //    // Example sending a request using the ListDeviceDefinitionsRequest method.
-//    req, resp := client.ListDeviceDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeviceDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitions
-func (c *Greengrass) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput) (req *aws.Request, output *ListDeviceDefinitionsOutput) {
+func (c *Greengrass) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput) ListDeviceDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListDeviceDefinitions,
 		HTTPMethod: "GET",
@@ -3724,70 +2192,42 @@ func (c *Greengrass) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsIn
 		input = &ListDeviceDefinitionsInput{}
 	}
 
-	output = &ListDeviceDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeviceDefinitions API operation for AWS Greengrass.
-//
-// Retrieves a list of device definitions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListDeviceDefinitions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitions
-func (c *Greengrass) ListDeviceDefinitions(input *ListDeviceDefinitionsInput) (*ListDeviceDefinitionsOutput, error) {
-	req, out := c.ListDeviceDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// ListDeviceDefinitionsWithContext is the same as ListDeviceDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeviceDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListDeviceDefinitionsWithContext(ctx aws.Context, input *ListDeviceDefinitionsInput, opts ...aws.Option) (*ListDeviceDefinitionsOutput, error) {
-	req, out := c.ListDeviceDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeviceDefinitionsOutput{})
+	return ListDeviceDefinitionsRequest{Request: req, Input: input}
 }
 
 const opListFunctionDefinitionVersions = "ListFunctionDefinitionVersions"
 
-// ListFunctionDefinitionVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListFunctionDefinitionVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListFunctionDefinitionVersionsRequest is a API request type for the ListFunctionDefinitionVersions API operation.
+type ListFunctionDefinitionVersionsRequest struct {
+	*aws.Request
+	Input *ListFunctionDefinitionVersionsInput
+}
+
+// Send marshals and sends the ListFunctionDefinitionVersions API request.
+func (r ListFunctionDefinitionVersionsRequest) Send() (*ListFunctionDefinitionVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFunctionDefinitionVersionsOutput), nil
+}
+
+// ListFunctionDefinitionVersionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListFunctionDefinitionVersions for more information on using the ListFunctionDefinitionVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the versions of a Lambda function definition.
 //
 //    // Example sending a request using the ListFunctionDefinitionVersionsRequest method.
-//    req, resp := client.ListFunctionDefinitionVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListFunctionDefinitionVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersions
-func (c *Greengrass) ListFunctionDefinitionVersionsRequest(input *ListFunctionDefinitionVersionsInput) (req *aws.Request, output *ListFunctionDefinitionVersionsOutput) {
+func (c *Greengrass) ListFunctionDefinitionVersionsRequest(input *ListFunctionDefinitionVersionsInput) ListFunctionDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListFunctionDefinitionVersions,
 		HTTPMethod: "GET",
@@ -3798,75 +2238,42 @@ func (c *Greengrass) ListFunctionDefinitionVersionsRequest(input *ListFunctionDe
 		input = &ListFunctionDefinitionVersionsInput{}
 	}
 
-	output = &ListFunctionDefinitionVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListFunctionDefinitionVersions API operation for AWS Greengrass.
-//
-// Lists the versions of a Lambda function definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListFunctionDefinitionVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersions
-func (c *Greengrass) ListFunctionDefinitionVersions(input *ListFunctionDefinitionVersionsInput) (*ListFunctionDefinitionVersionsOutput, error) {
-	req, out := c.ListFunctionDefinitionVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListFunctionDefinitionVersionsWithContext is the same as ListFunctionDefinitionVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFunctionDefinitionVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListFunctionDefinitionVersionsWithContext(ctx aws.Context, input *ListFunctionDefinitionVersionsInput, opts ...aws.Option) (*ListFunctionDefinitionVersionsOutput, error) {
-	req, out := c.ListFunctionDefinitionVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListFunctionDefinitionVersionsOutput{})
+	return ListFunctionDefinitionVersionsRequest{Request: req, Input: input}
 }
 
 const opListFunctionDefinitions = "ListFunctionDefinitions"
 
-// ListFunctionDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the ListFunctionDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListFunctionDefinitionsRequest is a API request type for the ListFunctionDefinitions API operation.
+type ListFunctionDefinitionsRequest struct {
+	*aws.Request
+	Input *ListFunctionDefinitionsInput
+}
+
+// Send marshals and sends the ListFunctionDefinitions API request.
+func (r ListFunctionDefinitionsRequest) Send() (*ListFunctionDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFunctionDefinitionsOutput), nil
+}
+
+// ListFunctionDefinitionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListFunctionDefinitions for more information on using the ListFunctionDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of Lambda function definitions.
 //
 //    // Example sending a request using the ListFunctionDefinitionsRequest method.
-//    req, resp := client.ListFunctionDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListFunctionDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitions
-func (c *Greengrass) ListFunctionDefinitionsRequest(input *ListFunctionDefinitionsInput) (req *aws.Request, output *ListFunctionDefinitionsOutput) {
+func (c *Greengrass) ListFunctionDefinitionsRequest(input *ListFunctionDefinitionsInput) ListFunctionDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListFunctionDefinitions,
 		HTTPMethod: "GET",
@@ -3877,70 +2284,42 @@ func (c *Greengrass) ListFunctionDefinitionsRequest(input *ListFunctionDefinitio
 		input = &ListFunctionDefinitionsInput{}
 	}
 
-	output = &ListFunctionDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListFunctionDefinitions API operation for AWS Greengrass.
-//
-// Retrieves a list of Lambda function definitions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListFunctionDefinitions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitions
-func (c *Greengrass) ListFunctionDefinitions(input *ListFunctionDefinitionsInput) (*ListFunctionDefinitionsOutput, error) {
-	req, out := c.ListFunctionDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// ListFunctionDefinitionsWithContext is the same as ListFunctionDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFunctionDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListFunctionDefinitionsWithContext(ctx aws.Context, input *ListFunctionDefinitionsInput, opts ...aws.Option) (*ListFunctionDefinitionsOutput, error) {
-	req, out := c.ListFunctionDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListFunctionDefinitionsOutput{})
+	return ListFunctionDefinitionsRequest{Request: req, Input: input}
 }
 
 const opListGroupCertificateAuthorities = "ListGroupCertificateAuthorities"
 
-// ListGroupCertificateAuthoritiesRequest generates a "aws.Request" representing the
-// client's request for the ListGroupCertificateAuthorities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGroupCertificateAuthoritiesRequest is a API request type for the ListGroupCertificateAuthorities API operation.
+type ListGroupCertificateAuthoritiesRequest struct {
+	*aws.Request
+	Input *ListGroupCertificateAuthoritiesInput
+}
+
+// Send marshals and sends the ListGroupCertificateAuthorities API request.
+func (r ListGroupCertificateAuthoritiesRequest) Send() (*ListGroupCertificateAuthoritiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGroupCertificateAuthoritiesOutput), nil
+}
+
+// ListGroupCertificateAuthoritiesRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListGroupCertificateAuthorities for more information on using the ListGroupCertificateAuthorities
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the current CAs for a group.
 //
 //    // Example sending a request using the ListGroupCertificateAuthoritiesRequest method.
-//    req, resp := client.ListGroupCertificateAuthoritiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGroupCertificateAuthoritiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthorities
-func (c *Greengrass) ListGroupCertificateAuthoritiesRequest(input *ListGroupCertificateAuthoritiesInput) (req *aws.Request, output *ListGroupCertificateAuthoritiesOutput) {
+func (c *Greengrass) ListGroupCertificateAuthoritiesRequest(input *ListGroupCertificateAuthoritiesInput) ListGroupCertificateAuthoritiesRequest {
 	op := &aws.Operation{
 		Name:       opListGroupCertificateAuthorities,
 		HTTPMethod: "GET",
@@ -3951,78 +2330,42 @@ func (c *Greengrass) ListGroupCertificateAuthoritiesRequest(input *ListGroupCert
 		input = &ListGroupCertificateAuthoritiesInput{}
 	}
 
-	output = &ListGroupCertificateAuthoritiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGroupCertificateAuthorities API operation for AWS Greengrass.
-//
-// Retrieves the current CAs for a group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListGroupCertificateAuthorities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthorities
-func (c *Greengrass) ListGroupCertificateAuthorities(input *ListGroupCertificateAuthoritiesInput) (*ListGroupCertificateAuthoritiesOutput, error) {
-	req, out := c.ListGroupCertificateAuthoritiesRequest(input)
-	return out, req.Send()
-}
-
-// ListGroupCertificateAuthoritiesWithContext is the same as ListGroupCertificateAuthorities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGroupCertificateAuthorities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListGroupCertificateAuthoritiesWithContext(ctx aws.Context, input *ListGroupCertificateAuthoritiesInput, opts ...aws.Option) (*ListGroupCertificateAuthoritiesOutput, error) {
-	req, out := c.ListGroupCertificateAuthoritiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGroupCertificateAuthoritiesOutput{})
+	return ListGroupCertificateAuthoritiesRequest{Request: req, Input: input}
 }
 
 const opListGroupVersions = "ListGroupVersions"
 
-// ListGroupVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListGroupVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGroupVersionsRequest is a API request type for the ListGroupVersions API operation.
+type ListGroupVersionsRequest struct {
+	*aws.Request
+	Input *ListGroupVersionsInput
+}
+
+// Send marshals and sends the ListGroupVersions API request.
+func (r ListGroupVersionsRequest) Send() (*ListGroupVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGroupVersionsOutput), nil
+}
+
+// ListGroupVersionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListGroupVersions for more information on using the ListGroupVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List the versions of a group.
 //
 //    // Example sending a request using the ListGroupVersionsRequest method.
-//    req, resp := client.ListGroupVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGroupVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupVersions
-func (c *Greengrass) ListGroupVersionsRequest(input *ListGroupVersionsInput) (req *aws.Request, output *ListGroupVersionsOutput) {
+func (c *Greengrass) ListGroupVersionsRequest(input *ListGroupVersionsInput) ListGroupVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListGroupVersions,
 		HTTPMethod: "GET",
@@ -4033,75 +2376,42 @@ func (c *Greengrass) ListGroupVersionsRequest(input *ListGroupVersionsInput) (re
 		input = &ListGroupVersionsInput{}
 	}
 
-	output = &ListGroupVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGroupVersions API operation for AWS Greengrass.
-//
-// List the versions of a group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListGroupVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupVersions
-func (c *Greengrass) ListGroupVersions(input *ListGroupVersionsInput) (*ListGroupVersionsOutput, error) {
-	req, out := c.ListGroupVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListGroupVersionsWithContext is the same as ListGroupVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGroupVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListGroupVersionsWithContext(ctx aws.Context, input *ListGroupVersionsInput, opts ...aws.Option) (*ListGroupVersionsOutput, error) {
-	req, out := c.ListGroupVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGroupVersionsOutput{})
+	return ListGroupVersionsRequest{Request: req, Input: input}
 }
 
 const opListGroups = "ListGroups"
 
-// ListGroupsRequest generates a "aws.Request" representing the
-// client's request for the ListGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGroupsRequest is a API request type for the ListGroups API operation.
+type ListGroupsRequest struct {
+	*aws.Request
+	Input *ListGroupsInput
+}
+
+// Send marshals and sends the ListGroups API request.
+func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGroupsOutput), nil
+}
+
+// ListGroupsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListGroups for more information on using the ListGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of groups.
 //
 //    // Example sending a request using the ListGroupsRequest method.
-//    req, resp := client.ListGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroups
-func (c *Greengrass) ListGroupsRequest(input *ListGroupsInput) (req *aws.Request, output *ListGroupsOutput) {
+func (c *Greengrass) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListGroups,
 		HTTPMethod: "GET",
@@ -4112,70 +2422,42 @@ func (c *Greengrass) ListGroupsRequest(input *ListGroupsInput) (req *aws.Request
 		input = &ListGroupsInput{}
 	}
 
-	output = &ListGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGroups API operation for AWS Greengrass.
-//
-// Retrieves a list of groups.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListGroups for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroups
-func (c *Greengrass) ListGroups(input *ListGroupsInput) (*ListGroupsOutput, error) {
-	req, out := c.ListGroupsRequest(input)
-	return out, req.Send()
-}
-
-// ListGroupsWithContext is the same as ListGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListGroupsWithContext(ctx aws.Context, input *ListGroupsInput, opts ...aws.Option) (*ListGroupsOutput, error) {
-	req, out := c.ListGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGroupsOutput{})
+	return ListGroupsRequest{Request: req, Input: input}
 }
 
 const opListLoggerDefinitionVersions = "ListLoggerDefinitionVersions"
 
-// ListLoggerDefinitionVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListLoggerDefinitionVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListLoggerDefinitionVersionsRequest is a API request type for the ListLoggerDefinitionVersions API operation.
+type ListLoggerDefinitionVersionsRequest struct {
+	*aws.Request
+	Input *ListLoggerDefinitionVersionsInput
+}
+
+// Send marshals and sends the ListLoggerDefinitionVersions API request.
+func (r ListLoggerDefinitionVersionsRequest) Send() (*ListLoggerDefinitionVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLoggerDefinitionVersionsOutput), nil
+}
+
+// ListLoggerDefinitionVersionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListLoggerDefinitionVersions for more information on using the ListLoggerDefinitionVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the versions of a logger definition.
 //
 //    // Example sending a request using the ListLoggerDefinitionVersionsRequest method.
-//    req, resp := client.ListLoggerDefinitionVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListLoggerDefinitionVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersions
-func (c *Greengrass) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinitionVersionsInput) (req *aws.Request, output *ListLoggerDefinitionVersionsOutput) {
+func (c *Greengrass) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinitionVersionsInput) ListLoggerDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListLoggerDefinitionVersions,
 		HTTPMethod: "GET",
@@ -4186,75 +2468,42 @@ func (c *Greengrass) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefini
 		input = &ListLoggerDefinitionVersionsInput{}
 	}
 
-	output = &ListLoggerDefinitionVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListLoggerDefinitionVersions API operation for AWS Greengrass.
-//
-// Lists the versions of a logger definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListLoggerDefinitionVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersions
-func (c *Greengrass) ListLoggerDefinitionVersions(input *ListLoggerDefinitionVersionsInput) (*ListLoggerDefinitionVersionsOutput, error) {
-	req, out := c.ListLoggerDefinitionVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListLoggerDefinitionVersionsWithContext is the same as ListLoggerDefinitionVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListLoggerDefinitionVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListLoggerDefinitionVersionsWithContext(ctx aws.Context, input *ListLoggerDefinitionVersionsInput, opts ...aws.Option) (*ListLoggerDefinitionVersionsOutput, error) {
-	req, out := c.ListLoggerDefinitionVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListLoggerDefinitionVersionsOutput{})
+	return ListLoggerDefinitionVersionsRequest{Request: req, Input: input}
 }
 
 const opListLoggerDefinitions = "ListLoggerDefinitions"
 
-// ListLoggerDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the ListLoggerDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListLoggerDefinitionsRequest is a API request type for the ListLoggerDefinitions API operation.
+type ListLoggerDefinitionsRequest struct {
+	*aws.Request
+	Input *ListLoggerDefinitionsInput
+}
+
+// Send marshals and sends the ListLoggerDefinitions API request.
+func (r ListLoggerDefinitionsRequest) Send() (*ListLoggerDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLoggerDefinitionsOutput), nil
+}
+
+// ListLoggerDefinitionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListLoggerDefinitions for more information on using the ListLoggerDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of logger definitions.
 //
 //    // Example sending a request using the ListLoggerDefinitionsRequest method.
-//    req, resp := client.ListLoggerDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListLoggerDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitions
-func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput) (req *aws.Request, output *ListLoggerDefinitionsOutput) {
+func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput) ListLoggerDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListLoggerDefinitions,
 		HTTPMethod: "GET",
@@ -4265,70 +2514,42 @@ func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsIn
 		input = &ListLoggerDefinitionsInput{}
 	}
 
-	output = &ListLoggerDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListLoggerDefinitions API operation for AWS Greengrass.
-//
-// Retrieves a list of logger definitions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListLoggerDefinitions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitions
-func (c *Greengrass) ListLoggerDefinitions(input *ListLoggerDefinitionsInput) (*ListLoggerDefinitionsOutput, error) {
-	req, out := c.ListLoggerDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// ListLoggerDefinitionsWithContext is the same as ListLoggerDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListLoggerDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListLoggerDefinitionsWithContext(ctx aws.Context, input *ListLoggerDefinitionsInput, opts ...aws.Option) (*ListLoggerDefinitionsOutput, error) {
-	req, out := c.ListLoggerDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListLoggerDefinitionsOutput{})
+	return ListLoggerDefinitionsRequest{Request: req, Input: input}
 }
 
 const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions"
 
-// ListSubscriptionDefinitionVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListSubscriptionDefinitionVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSubscriptionDefinitionVersionsRequest is a API request type for the ListSubscriptionDefinitionVersions API operation.
+type ListSubscriptionDefinitionVersionsRequest struct {
+	*aws.Request
+	Input *ListSubscriptionDefinitionVersionsInput
+}
+
+// Send marshals and sends the ListSubscriptionDefinitionVersions API request.
+func (r ListSubscriptionDefinitionVersionsRequest) Send() (*ListSubscriptionDefinitionVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSubscriptionDefinitionVersionsOutput), nil
+}
+
+// ListSubscriptionDefinitionVersionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSubscriptionDefinitionVersions for more information on using the ListSubscriptionDefinitionVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the versions of a subscription definition.
 //
 //    // Example sending a request using the ListSubscriptionDefinitionVersionsRequest method.
-//    req, resp := client.ListSubscriptionDefinitionVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSubscriptionDefinitionVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersions
-func (c *Greengrass) ListSubscriptionDefinitionVersionsRequest(input *ListSubscriptionDefinitionVersionsInput) (req *aws.Request, output *ListSubscriptionDefinitionVersionsOutput) {
+func (c *Greengrass) ListSubscriptionDefinitionVersionsRequest(input *ListSubscriptionDefinitionVersionsInput) ListSubscriptionDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptionDefinitionVersions,
 		HTTPMethod: "GET",
@@ -4339,75 +2560,42 @@ func (c *Greengrass) ListSubscriptionDefinitionVersionsRequest(input *ListSubscr
 		input = &ListSubscriptionDefinitionVersionsInput{}
 	}
 
-	output = &ListSubscriptionDefinitionVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSubscriptionDefinitionVersions API operation for AWS Greengrass.
-//
-// Lists the versions of a subscription definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListSubscriptionDefinitionVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersions
-func (c *Greengrass) ListSubscriptionDefinitionVersions(input *ListSubscriptionDefinitionVersionsInput) (*ListSubscriptionDefinitionVersionsOutput, error) {
-	req, out := c.ListSubscriptionDefinitionVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListSubscriptionDefinitionVersionsWithContext is the same as ListSubscriptionDefinitionVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSubscriptionDefinitionVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListSubscriptionDefinitionVersionsWithContext(ctx aws.Context, input *ListSubscriptionDefinitionVersionsInput, opts ...aws.Option) (*ListSubscriptionDefinitionVersionsOutput, error) {
-	req, out := c.ListSubscriptionDefinitionVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSubscriptionDefinitionVersionsOutput{})
+	return ListSubscriptionDefinitionVersionsRequest{Request: req, Input: input}
 }
 
 const opListSubscriptionDefinitions = "ListSubscriptionDefinitions"
 
-// ListSubscriptionDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the ListSubscriptionDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListSubscriptionDefinitionsRequest is a API request type for the ListSubscriptionDefinitions API operation.
+type ListSubscriptionDefinitionsRequest struct {
+	*aws.Request
+	Input *ListSubscriptionDefinitionsInput
+}
+
+// Send marshals and sends the ListSubscriptionDefinitions API request.
+func (r ListSubscriptionDefinitionsRequest) Send() (*ListSubscriptionDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSubscriptionDefinitionsOutput), nil
+}
+
+// ListSubscriptionDefinitionsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListSubscriptionDefinitions for more information on using the ListSubscriptionDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of subscription definitions.
 //
 //    // Example sending a request using the ListSubscriptionDefinitionsRequest method.
-//    req, resp := client.ListSubscriptionDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListSubscriptionDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitions
-func (c *Greengrass) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefinitionsInput) (req *aws.Request, output *ListSubscriptionDefinitionsOutput) {
+func (c *Greengrass) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefinitionsInput) ListSubscriptionDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptionDefinitions,
 		HTTPMethod: "GET",
@@ -4418,70 +2606,42 @@ func (c *Greengrass) ListSubscriptionDefinitionsRequest(input *ListSubscriptionD
 		input = &ListSubscriptionDefinitionsInput{}
 	}
 
-	output = &ListSubscriptionDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListSubscriptionDefinitions API operation for AWS Greengrass.
-//
-// Retrieves a list of subscription definitions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ListSubscriptionDefinitions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitions
-func (c *Greengrass) ListSubscriptionDefinitions(input *ListSubscriptionDefinitionsInput) (*ListSubscriptionDefinitionsOutput, error) {
-	req, out := c.ListSubscriptionDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// ListSubscriptionDefinitionsWithContext is the same as ListSubscriptionDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListSubscriptionDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ListSubscriptionDefinitionsWithContext(ctx aws.Context, input *ListSubscriptionDefinitionsInput, opts ...aws.Option) (*ListSubscriptionDefinitionsOutput, error) {
-	req, out := c.ListSubscriptionDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListSubscriptionDefinitionsOutput{})
+	return ListSubscriptionDefinitionsRequest{Request: req, Input: input}
 }
 
 const opResetDeployments = "ResetDeployments"
 
-// ResetDeploymentsRequest generates a "aws.Request" representing the
-// client's request for the ResetDeployments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResetDeploymentsRequest is a API request type for the ResetDeployments API operation.
+type ResetDeploymentsRequest struct {
+	*aws.Request
+	Input *ResetDeploymentsInput
+}
+
+// Send marshals and sends the ResetDeployments API request.
+func (r ResetDeploymentsRequest) Send() (*ResetDeploymentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetDeploymentsOutput), nil
+}
+
+// ResetDeploymentsRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetDeployments for more information on using the ResetDeployments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Resets a group's deployments.
 //
 //    // Example sending a request using the ResetDeploymentsRequest method.
-//    req, resp := client.ResetDeploymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResetDeploymentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeployments
-func (c *Greengrass) ResetDeploymentsRequest(input *ResetDeploymentsInput) (req *aws.Request, output *ResetDeploymentsOutput) {
+func (c *Greengrass) ResetDeploymentsRequest(input *ResetDeploymentsInput) ResetDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opResetDeployments,
 		HTTPMethod: "POST",
@@ -4492,75 +2652,44 @@ func (c *Greengrass) ResetDeploymentsRequest(input *ResetDeploymentsInput) (req 
 		input = &ResetDeploymentsInput{}
 	}
 
-	output = &ResetDeploymentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResetDeployments API operation for AWS Greengrass.
-//
-// Resets a group's deployments.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation ResetDeployments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeployments
-func (c *Greengrass) ResetDeployments(input *ResetDeploymentsInput) (*ResetDeploymentsOutput, error) {
-	req, out := c.ResetDeploymentsRequest(input)
-	return out, req.Send()
-}
-
-// ResetDeploymentsWithContext is the same as ResetDeployments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetDeployments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) ResetDeploymentsWithContext(ctx aws.Context, input *ResetDeploymentsInput, opts ...aws.Option) (*ResetDeploymentsOutput, error) {
-	req, out := c.ResetDeploymentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetDeploymentsOutput{})
+	return ResetDeploymentsRequest{Request: req, Input: input}
 }
 
 const opUpdateConnectivityInfo = "UpdateConnectivityInfo"
 
-// UpdateConnectivityInfoRequest generates a "aws.Request" representing the
-// client's request for the UpdateConnectivityInfo operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateConnectivityInfoRequest is a API request type for the UpdateConnectivityInfo API operation.
+type UpdateConnectivityInfoRequest struct {
+	*aws.Request
+	Input *UpdateConnectivityInfoInput
+}
+
+// Send marshals and sends the UpdateConnectivityInfo API request.
+func (r UpdateConnectivityInfoRequest) Send() (*UpdateConnectivityInfoOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateConnectivityInfoOutput), nil
+}
+
+// UpdateConnectivityInfoRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateConnectivityInfo for more information on using the UpdateConnectivityInfo
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the connectivity information for the core. Any devices that belong
+// to the group which has this core will receive this information in order to
+// find the location of the core and connect to it.
 //
 //    // Example sending a request using the UpdateConnectivityInfoRequest method.
-//    req, resp := client.UpdateConnectivityInfoRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateConnectivityInfoRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfo
-func (c *Greengrass) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInput) (req *aws.Request, output *UpdateConnectivityInfoOutput) {
+func (c *Greengrass) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInput) UpdateConnectivityInfoRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConnectivityInfo,
 		HTTPMethod: "PUT",
@@ -4571,80 +2700,42 @@ func (c *Greengrass) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfo
 		input = &UpdateConnectivityInfoInput{}
 	}
 
-	output = &UpdateConnectivityInfoOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateConnectivityInfo API operation for AWS Greengrass.
-//
-// Updates the connectivity information for the core. Any devices that belong
-// to the group which has this core will receive this information in order to
-// find the location of the core and connect to it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateConnectivityInfo for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfo
-func (c *Greengrass) UpdateConnectivityInfo(input *UpdateConnectivityInfoInput) (*UpdateConnectivityInfoOutput, error) {
-	req, out := c.UpdateConnectivityInfoRequest(input)
-	return out, req.Send()
-}
-
-// UpdateConnectivityInfoWithContext is the same as UpdateConnectivityInfo with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateConnectivityInfo for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateConnectivityInfoWithContext(ctx aws.Context, input *UpdateConnectivityInfoInput, opts ...aws.Option) (*UpdateConnectivityInfoOutput, error) {
-	req, out := c.UpdateConnectivityInfoRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateConnectivityInfoOutput{})
+	return UpdateConnectivityInfoRequest{Request: req, Input: input}
 }
 
 const opUpdateCoreDefinition = "UpdateCoreDefinition"
 
-// UpdateCoreDefinitionRequest generates a "aws.Request" representing the
-// client's request for the UpdateCoreDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateCoreDefinitionRequest is a API request type for the UpdateCoreDefinition API operation.
+type UpdateCoreDefinitionRequest struct {
+	*aws.Request
+	Input *UpdateCoreDefinitionInput
+}
+
+// Send marshals and sends the UpdateCoreDefinition API request.
+func (r UpdateCoreDefinitionRequest) Send() (*UpdateCoreDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateCoreDefinitionOutput), nil
+}
+
+// UpdateCoreDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateCoreDefinition for more information on using the UpdateCoreDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a core definition.
 //
 //    // Example sending a request using the UpdateCoreDefinitionRequest method.
-//    req, resp := client.UpdateCoreDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateCoreDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinition
-func (c *Greengrass) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) (req *aws.Request, output *UpdateCoreDefinitionOutput) {
+func (c *Greengrass) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) UpdateCoreDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCoreDefinition,
 		HTTPMethod: "PUT",
@@ -4655,75 +2746,42 @@ func (c *Greengrass) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInpu
 		input = &UpdateCoreDefinitionInput{}
 	}
 
-	output = &UpdateCoreDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateCoreDefinition API operation for AWS Greengrass.
-//
-// Updates a core definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateCoreDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinition
-func (c *Greengrass) UpdateCoreDefinition(input *UpdateCoreDefinitionInput) (*UpdateCoreDefinitionOutput, error) {
-	req, out := c.UpdateCoreDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateCoreDefinitionWithContext is the same as UpdateCoreDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateCoreDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateCoreDefinitionWithContext(ctx aws.Context, input *UpdateCoreDefinitionInput, opts ...aws.Option) (*UpdateCoreDefinitionOutput, error) {
-	req, out := c.UpdateCoreDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateCoreDefinitionOutput{})
+	return UpdateCoreDefinitionRequest{Request: req, Input: input}
 }
 
 const opUpdateDeviceDefinition = "UpdateDeviceDefinition"
 
-// UpdateDeviceDefinitionRequest generates a "aws.Request" representing the
-// client's request for the UpdateDeviceDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDeviceDefinitionRequest is a API request type for the UpdateDeviceDefinition API operation.
+type UpdateDeviceDefinitionRequest struct {
+	*aws.Request
+	Input *UpdateDeviceDefinitionInput
+}
+
+// Send marshals and sends the UpdateDeviceDefinition API request.
+func (r UpdateDeviceDefinitionRequest) Send() (*UpdateDeviceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDeviceDefinitionOutput), nil
+}
+
+// UpdateDeviceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDeviceDefinition for more information on using the UpdateDeviceDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a device definition.
 //
 //    // Example sending a request using the UpdateDeviceDefinitionRequest method.
-//    req, resp := client.UpdateDeviceDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDeviceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinition
-func (c *Greengrass) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInput) (req *aws.Request, output *UpdateDeviceDefinitionOutput) {
+func (c *Greengrass) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInput) UpdateDeviceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDeviceDefinition,
 		HTTPMethod: "PUT",
@@ -4734,75 +2792,42 @@ func (c *Greengrass) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinition
 		input = &UpdateDeviceDefinitionInput{}
 	}
 
-	output = &UpdateDeviceDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDeviceDefinition API operation for AWS Greengrass.
-//
-// Updates a device definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateDeviceDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinition
-func (c *Greengrass) UpdateDeviceDefinition(input *UpdateDeviceDefinitionInput) (*UpdateDeviceDefinitionOutput, error) {
-	req, out := c.UpdateDeviceDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDeviceDefinitionWithContext is the same as UpdateDeviceDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDeviceDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateDeviceDefinitionWithContext(ctx aws.Context, input *UpdateDeviceDefinitionInput, opts ...aws.Option) (*UpdateDeviceDefinitionOutput, error) {
-	req, out := c.UpdateDeviceDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDeviceDefinitionOutput{})
+	return UpdateDeviceDefinitionRequest{Request: req, Input: input}
 }
 
 const opUpdateFunctionDefinition = "UpdateFunctionDefinition"
 
-// UpdateFunctionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the UpdateFunctionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateFunctionDefinitionRequest is a API request type for the UpdateFunctionDefinition API operation.
+type UpdateFunctionDefinitionRequest struct {
+	*aws.Request
+	Input *UpdateFunctionDefinitionInput
+}
+
+// Send marshals and sends the UpdateFunctionDefinition API request.
+func (r UpdateFunctionDefinitionRequest) Send() (*UpdateFunctionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFunctionDefinitionOutput), nil
+}
+
+// UpdateFunctionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateFunctionDefinition for more information on using the UpdateFunctionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a Lambda function definition.
 //
 //    // Example sending a request using the UpdateFunctionDefinitionRequest method.
-//    req, resp := client.UpdateFunctionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateFunctionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinition
-func (c *Greengrass) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinitionInput) (req *aws.Request, output *UpdateFunctionDefinitionOutput) {
+func (c *Greengrass) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinitionInput) UpdateFunctionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFunctionDefinition,
 		HTTPMethod: "PUT",
@@ -4813,75 +2838,42 @@ func (c *Greengrass) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefini
 		input = &UpdateFunctionDefinitionInput{}
 	}
 
-	output = &UpdateFunctionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateFunctionDefinition API operation for AWS Greengrass.
-//
-// Updates a Lambda function definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateFunctionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinition
-func (c *Greengrass) UpdateFunctionDefinition(input *UpdateFunctionDefinitionInput) (*UpdateFunctionDefinitionOutput, error) {
-	req, out := c.UpdateFunctionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateFunctionDefinitionWithContext is the same as UpdateFunctionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFunctionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateFunctionDefinitionWithContext(ctx aws.Context, input *UpdateFunctionDefinitionInput, opts ...aws.Option) (*UpdateFunctionDefinitionOutput, error) {
-	req, out := c.UpdateFunctionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateFunctionDefinitionOutput{})
+	return UpdateFunctionDefinitionRequest{Request: req, Input: input}
 }
 
 const opUpdateGroup = "UpdateGroup"
 
-// UpdateGroupRequest generates a "aws.Request" representing the
-// client's request for the UpdateGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateGroupRequest is a API request type for the UpdateGroup API operation.
+type UpdateGroupRequest struct {
+	*aws.Request
+	Input *UpdateGroupInput
+}
+
+// Send marshals and sends the UpdateGroup API request.
+func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGroupOutput), nil
+}
+
+// UpdateGroupRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateGroup for more information on using the UpdateGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a group.
 //
 //    // Example sending a request using the UpdateGroupRequest method.
-//    req, resp := client.UpdateGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroup
-func (c *Greengrass) UpdateGroupRequest(input *UpdateGroupInput) (req *aws.Request, output *UpdateGroupOutput) {
+func (c *Greengrass) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGroup,
 		HTTPMethod: "PUT",
@@ -4892,75 +2884,42 @@ func (c *Greengrass) UpdateGroupRequest(input *UpdateGroupInput) (req *aws.Reque
 		input = &UpdateGroupInput{}
 	}
 
-	output = &UpdateGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateGroup API operation for AWS Greengrass.
-//
-// Updates a group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroup
-func (c *Greengrass) UpdateGroup(input *UpdateGroupInput) (*UpdateGroupOutput, error) {
-	req, out := c.UpdateGroupRequest(input)
-	return out, req.Send()
-}
-
-// UpdateGroupWithContext is the same as UpdateGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateGroupWithContext(ctx aws.Context, input *UpdateGroupInput, opts ...aws.Option) (*UpdateGroupOutput, error) {
-	req, out := c.UpdateGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	return UpdateGroupRequest{Request: req, Input: input}
 }
 
 const opUpdateGroupCertificateConfiguration = "UpdateGroupCertificateConfiguration"
 
-// UpdateGroupCertificateConfigurationRequest generates a "aws.Request" representing the
-// client's request for the UpdateGroupCertificateConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateGroupCertificateConfigurationRequest is a API request type for the UpdateGroupCertificateConfiguration API operation.
+type UpdateGroupCertificateConfigurationRequest struct {
+	*aws.Request
+	Input *UpdateGroupCertificateConfigurationInput
+}
+
+// Send marshals and sends the UpdateGroupCertificateConfiguration API request.
+func (r UpdateGroupCertificateConfigurationRequest) Send() (*UpdateGroupCertificateConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGroupCertificateConfigurationOutput), nil
+}
+
+// UpdateGroupCertificateConfigurationRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateGroupCertificateConfiguration for more information on using the UpdateGroupCertificateConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the Cert expiry time for a group.
 //
 //    // Example sending a request using the UpdateGroupCertificateConfigurationRequest method.
-//    req, resp := client.UpdateGroupCertificateConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateGroupCertificateConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfiguration
-func (c *Greengrass) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCertificateConfigurationInput) (req *aws.Request, output *UpdateGroupCertificateConfigurationOutput) {
+func (c *Greengrass) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCertificateConfigurationInput) UpdateGroupCertificateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGroupCertificateConfiguration,
 		HTTPMethod: "PUT",
@@ -4971,78 +2930,42 @@ func (c *Greengrass) UpdateGroupCertificateConfigurationRequest(input *UpdateGro
 		input = &UpdateGroupCertificateConfigurationInput{}
 	}
 
-	output = &UpdateGroupCertificateConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateGroupCertificateConfiguration API operation for AWS Greengrass.
-//
-// Updates the Cert expiry time for a group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateGroupCertificateConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Server Error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfiguration
-func (c *Greengrass) UpdateGroupCertificateConfiguration(input *UpdateGroupCertificateConfigurationInput) (*UpdateGroupCertificateConfigurationOutput, error) {
-	req, out := c.UpdateGroupCertificateConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateGroupCertificateConfigurationWithContext is the same as UpdateGroupCertificateConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGroupCertificateConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateGroupCertificateConfigurationWithContext(ctx aws.Context, input *UpdateGroupCertificateConfigurationInput, opts ...aws.Option) (*UpdateGroupCertificateConfigurationOutput, error) {
-	req, out := c.UpdateGroupCertificateConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateGroupCertificateConfigurationOutput{})
+	return UpdateGroupCertificateConfigurationRequest{Request: req, Input: input}
 }
 
 const opUpdateLoggerDefinition = "UpdateLoggerDefinition"
 
-// UpdateLoggerDefinitionRequest generates a "aws.Request" representing the
-// client's request for the UpdateLoggerDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateLoggerDefinitionRequest is a API request type for the UpdateLoggerDefinition API operation.
+type UpdateLoggerDefinitionRequest struct {
+	*aws.Request
+	Input *UpdateLoggerDefinitionInput
+}
+
+// Send marshals and sends the UpdateLoggerDefinition API request.
+func (r UpdateLoggerDefinitionRequest) Send() (*UpdateLoggerDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateLoggerDefinitionOutput), nil
+}
+
+// UpdateLoggerDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateLoggerDefinition for more information on using the UpdateLoggerDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a logger definition.
 //
 //    // Example sending a request using the UpdateLoggerDefinitionRequest method.
-//    req, resp := client.UpdateLoggerDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateLoggerDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinition
-func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinitionInput) (req *aws.Request, output *UpdateLoggerDefinitionOutput) {
+func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinitionInput) UpdateLoggerDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLoggerDefinition,
 		HTTPMethod: "PUT",
@@ -5053,75 +2976,42 @@ func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinition
 		input = &UpdateLoggerDefinitionInput{}
 	}
 
-	output = &UpdateLoggerDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateLoggerDefinition API operation for AWS Greengrass.
-//
-// Updates a logger definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateLoggerDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinition
-func (c *Greengrass) UpdateLoggerDefinition(input *UpdateLoggerDefinitionInput) (*UpdateLoggerDefinitionOutput, error) {
-	req, out := c.UpdateLoggerDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateLoggerDefinitionWithContext is the same as UpdateLoggerDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateLoggerDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateLoggerDefinitionWithContext(ctx aws.Context, input *UpdateLoggerDefinitionInput, opts ...aws.Option) (*UpdateLoggerDefinitionOutput, error) {
-	req, out := c.UpdateLoggerDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateLoggerDefinitionOutput{})
+	return UpdateLoggerDefinitionRequest{Request: req, Input: input}
 }
 
 const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
 
-// UpdateSubscriptionDefinitionRequest generates a "aws.Request" representing the
-// client's request for the UpdateSubscriptionDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateSubscriptionDefinitionRequest is a API request type for the UpdateSubscriptionDefinition API operation.
+type UpdateSubscriptionDefinitionRequest struct {
+	*aws.Request
+	Input *UpdateSubscriptionDefinitionInput
+}
+
+// Send marshals and sends the UpdateSubscriptionDefinition API request.
+func (r UpdateSubscriptionDefinitionRequest) Send() (*UpdateSubscriptionDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSubscriptionDefinitionOutput), nil
+}
+
+// UpdateSubscriptionDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSubscriptionDefinition for more information on using the UpdateSubscriptionDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a subscription definition.
 //
 //    // Example sending a request using the UpdateSubscriptionDefinitionRequest method.
-//    req, resp := client.UpdateSubscriptionDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateSubscriptionDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinition
-func (c *Greengrass) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDefinitionInput) (req *aws.Request, output *UpdateSubscriptionDefinitionOutput) {
+func (c *Greengrass) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDefinitionInput) UpdateSubscriptionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSubscriptionDefinition,
 		HTTPMethod: "PUT",
@@ -5132,46 +3022,8 @@ func (c *Greengrass) UpdateSubscriptionDefinitionRequest(input *UpdateSubscripti
 		input = &UpdateSubscriptionDefinitionInput{}
 	}
 
-	output = &UpdateSubscriptionDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateSubscriptionDefinition API operation for AWS Greengrass.
-//
-// Updates a subscription definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Greengrass's
-// API operation UpdateSubscriptionDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   user error
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinition
-func (c *Greengrass) UpdateSubscriptionDefinition(input *UpdateSubscriptionDefinitionInput) (*UpdateSubscriptionDefinitionOutput, error) {
-	req, out := c.UpdateSubscriptionDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSubscriptionDefinitionWithContext is the same as UpdateSubscriptionDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSubscriptionDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Greengrass) UpdateSubscriptionDefinitionWithContext(ctx aws.Context, input *UpdateSubscriptionDefinitionInput, opts ...aws.Option) (*UpdateSubscriptionDefinitionOutput, error) {
-	req, out := c.UpdateSubscriptionDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateSubscriptionDefinitionOutput{})
+	return UpdateSubscriptionDefinitionRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroupRequest

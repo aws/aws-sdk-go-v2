@@ -1,6 +1,8 @@
 package aws_test
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
@@ -30,10 +32,15 @@ func ExampleEndpointResolverFunc() {
 	// endpoint resolver wrapping the default endpoint resolver.
 	s3Svc := s3.New(cfg)
 	// Operation calls will be made to the custom endpoint.
-	s3Svc.GetObject(&s3.GetObjectInput{
+	objReq := s3Svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("myBucket"),
 		Key:    aws.String("myObjectKey"),
 	})
+	objResp, err := objReq.Send()
+	if err != nil {
+		panic("S3 Get Object error, " + err.Error())
+	}
+	fmt.Println("S3 Get object", objResp)
 
 	// Create the SQS service client with the shared cfg. This will
 	// fallback to the default endpoint resolver because the customization
@@ -41,7 +48,12 @@ func ExampleEndpointResolverFunc() {
 	sqsSvc := sqs.New(cfg)
 	// Operation calls will be made to the default endpoint for SQS for the
 	// region configured.
-	sqsSvc.ReceiveMessage(&sqs.ReceiveMessageInput{
+	msgReq := sqsSvc.ReceiveMessageRequest(&sqs.ReceiveMessageInput{
 		QueueUrl: aws.String("my-queue-url"),
 	})
+	msgResp, err := msgReq.Send()
+	if err != nil {
+		panic("SQS Receive Message error, " + err.Error())
+	}
+	fmt.Println("SQS Receive Message", msgResp)
 }

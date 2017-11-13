@@ -14,47 +14,24 @@ import (
 
 const opAcceptMatch = "AcceptMatch"
 
-// AcceptMatchRequest generates a "aws.Request" representing the
-// client's request for the AcceptMatch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AcceptMatch for more information on using the AcceptMatch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AcceptMatchRequest method.
-//    req, resp := client.AcceptMatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatch
-func (c *GameLift) AcceptMatchRequest(input *AcceptMatchInput) (req *aws.Request, output *AcceptMatchOutput) {
-	op := &aws.Operation{
-		Name:       opAcceptMatch,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AcceptMatchInput{}
-	}
-
-	output = &AcceptMatchOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AcceptMatchRequest is a API request type for the AcceptMatch API operation.
+type AcceptMatchRequest struct {
+	*aws.Request
+	Input *AcceptMatchInput
 }
 
-// AcceptMatch API operation for Amazon GameLift.
+// Send marshals and sends the AcceptMatch API request.
+func (r AcceptMatchRequest) Send() (*AcceptMatchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AcceptMatchOutput), nil
+}
+
+// AcceptMatchRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Registers a player's acceptance or rejection of a proposed FlexMatch match.
 // A matchmaking configuration may require player acceptance; if so, then matches
@@ -89,95 +66,49 @@ func (c *GameLift) AcceptMatchRequest(input *AcceptMatchInput) (req *aws.Request
 //
 //    * AcceptMatch
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation AcceptMatch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatch
-func (c *GameLift) AcceptMatch(input *AcceptMatchInput) (*AcceptMatchOutput, error) {
-	req, out := c.AcceptMatchRequest(input)
-	return out, req.Send()
-}
-
-// AcceptMatchWithContext is the same as AcceptMatch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AcceptMatch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) AcceptMatchWithContext(ctx aws.Context, input *AcceptMatchInput, opts ...aws.Option) (*AcceptMatchOutput, error) {
-	req, out := c.AcceptMatchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateAlias = "CreateAlias"
-
-// CreateAliasRequest generates a "aws.Request" representing the
-// client's request for the CreateAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAlias for more information on using the CreateAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateAliasRequest method.
-//    req, resp := client.CreateAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AcceptMatchRequest method.
+//    req := client.AcceptMatchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAlias
-func (c *GameLift) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, output *CreateAliasOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatch
+func (c *GameLift) AcceptMatchRequest(input *AcceptMatchInput) AcceptMatchRequest {
 	op := &aws.Operation{
-		Name:       opCreateAlias,
+		Name:       opAcceptMatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateAliasInput{}
+		input = &AcceptMatchInput{}
 	}
 
-	output = &CreateAliasOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AcceptMatchOutput{})
+	return AcceptMatchRequest{Request: req, Input: input}
 }
 
-// CreateAlias API operation for Amazon GameLift.
+const opCreateAlias = "CreateAlias"
+
+// CreateAliasRequest is a API request type for the CreateAlias API operation.
+type CreateAliasRequest struct {
+	*aws.Request
+	Input *CreateAliasInput
+}
+
+// Send marshals and sends the CreateAlias API request.
+func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAliasOutput), nil
+}
+
+// CreateAliasRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Creates an alias for a fleet. In most situations, you can use an alias ID
 // in place of a fleet ID. By using a fleet alias instead of a specific fleet
@@ -213,100 +144,49 @@ func (c *GameLift) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request
 //
 //    * ResolveAlias
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAlias
-func (c *GameLift) CreateAlias(input *CreateAliasInput) (*CreateAliasOutput, error) {
-	req, out := c.CreateAliasRequest(input)
-	return out, req.Send()
-}
-
-// CreateAliasWithContext is the same as CreateAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...aws.Option) (*CreateAliasOutput, error) {
-	req, out := c.CreateAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateBuild = "CreateBuild"
-
-// CreateBuildRequest generates a "aws.Request" representing the
-// client's request for the CreateBuild operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateBuild for more information on using the CreateBuild
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateBuildRequest method.
-//    req, resp := client.CreateBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateAliasRequest method.
+//    req := client.CreateAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild
-func (c *GameLift) CreateBuildRequest(input *CreateBuildInput) (req *aws.Request, output *CreateBuildOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAlias
+func (c *GameLift) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
 	op := &aws.Operation{
-		Name:       opCreateBuild,
+		Name:       opCreateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateBuildInput{}
+		input = &CreateAliasInput{}
 	}
 
-	output = &CreateBuildOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateAliasOutput{})
+	return CreateAliasRequest{Request: req, Input: input}
 }
 
-// CreateBuild API operation for Amazon GameLift.
+const opCreateBuild = "CreateBuild"
+
+// CreateBuildRequest is a API request type for the CreateBuild API operation.
+type CreateBuildRequest struct {
+	*aws.Request
+	Input *CreateBuildInput
+}
+
+// Send marshals and sends the CreateBuild API request.
+func (r CreateBuildRequest) Send() (*CreateBuildOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBuildOutput), nil
+}
+
+// CreateBuildRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Creates a new Amazon GameLift build from a set of game server binary files
 // stored in an Amazon Simple Storage Service (Amazon S3) location. To use this
@@ -339,96 +219,49 @@ func (c *GameLift) CreateBuildRequest(input *CreateBuildInput) (req *aws.Request
 //
 //    * DeleteBuild
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateBuild for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild
-func (c *GameLift) CreateBuild(input *CreateBuildInput) (*CreateBuildOutput, error) {
-	req, out := c.CreateBuildRequest(input)
-	return out, req.Send()
-}
-
-// CreateBuildWithContext is the same as CreateBuild with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBuild for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateBuildWithContext(ctx aws.Context, input *CreateBuildInput, opts ...aws.Option) (*CreateBuildOutput, error) {
-	req, out := c.CreateBuildRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateFleet = "CreateFleet"
-
-// CreateFleetRequest generates a "aws.Request" representing the
-// client's request for the CreateFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateFleet for more information on using the CreateFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateFleetRequest method.
-//    req, resp := client.CreateFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateBuildRequest method.
+//    req := client.CreateBuildRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet
-func (c *GameLift) CreateFleetRequest(input *CreateFleetInput) (req *aws.Request, output *CreateFleetOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild
+func (c *GameLift) CreateBuildRequest(input *CreateBuildInput) CreateBuildRequest {
 	op := &aws.Operation{
-		Name:       opCreateFleet,
+		Name:       opCreateBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateFleetInput{}
+		input = &CreateBuildInput{}
 	}
 
-	output = &CreateFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateBuildOutput{})
+	return CreateBuildRequest{Request: req, Input: input}
 }
 
-// CreateFleet API operation for Amazon GameLift.
+const opCreateFleet = "CreateFleet"
+
+// CreateFleetRequest is a API request type for the CreateFleet API operation.
+type CreateFleetRequest struct {
+	*aws.Request
+	Input *CreateFleetInput
+}
+
+// Send marshals and sends the CreateFleet API request.
+func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFleetOutput), nil
+}
+
+// CreateFleetRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Creates a new fleet to run your game servers. A fleet is a set of Amazon
 // Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple
@@ -525,104 +358,49 @@ func (c *GameLift) CreateFleetRequest(input *CreateFleetInput) (req *aws.Request
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet
-func (c *GameLift) CreateFleet(input *CreateFleetInput) (*CreateFleetOutput, error) {
-	req, out := c.CreateFleetRequest(input)
-	return out, req.Send()
-}
-
-// CreateFleetWithContext is the same as CreateFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateFleetWithContext(ctx aws.Context, input *CreateFleetInput, opts ...aws.Option) (*CreateFleetOutput, error) {
-	req, out := c.CreateFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateGameSession = "CreateGameSession"
-
-// CreateGameSessionRequest generates a "aws.Request" representing the
-// client's request for the CreateGameSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateGameSession for more information on using the CreateGameSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateGameSessionRequest method.
-//    req, resp := client.CreateGameSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateFleetRequest method.
+//    req := client.CreateFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession
-func (c *GameLift) CreateGameSessionRequest(input *CreateGameSessionInput) (req *aws.Request, output *CreateGameSessionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet
+func (c *GameLift) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest {
 	op := &aws.Operation{
-		Name:       opCreateGameSession,
+		Name:       opCreateFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateGameSessionInput{}
+		input = &CreateFleetInput{}
 	}
 
-	output = &CreateGameSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateFleetOutput{})
+	return CreateFleetRequest{Request: req, Input: input}
 }
 
-// CreateGameSession API operation for Amazon GameLift.
+const opCreateGameSession = "CreateGameSession"
+
+// CreateGameSessionRequest is a API request type for the CreateGameSession API operation.
+type CreateGameSessionRequest struct {
+	*aws.Request
+	Input *CreateGameSessionInput
+}
+
+// Send marshals and sends the CreateGameSession API request.
+func (r CreateGameSessionRequest) Send() (*CreateGameSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGameSessionOutput), nil
+}
+
+// CreateGameSessionRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Creates a multiplayer game session for players. This action creates a game
 // session record and assigns an available server process in the specified fleet
@@ -677,124 +455,49 @@ func (c *GameLift) CreateGameSessionRequest(input *CreateGameSessionInput) (req 
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateGameSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidFleetStatusException "InvalidFleetStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the fleet. Resolve the conflict
-//   before retrying.
-//
-//   * ErrCodeTerminalRoutingStrategyException "TerminalRoutingStrategyException"
-//   The service is unable to resolve the routing for a particular alias because
-//   it has a terminal RoutingStrategy associated with it. The message returned
-//   in this exception is the message defined in the routing strategy itself.
-//   Such requests should only be retried if the routing strategy for the specified
-//   alias is modified.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeFleetCapacityExceededException "FleetCapacityExceededException"
-//   The specified fleet has no available instances to fulfill a CreateGameSession
-//   request. Clients can retry such requests immediately or after a waiting period.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A game session with this custom ID string already exists in this fleet. Resolve
-//   this conflict before retrying this request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession
-func (c *GameLift) CreateGameSession(input *CreateGameSessionInput) (*CreateGameSessionOutput, error) {
-	req, out := c.CreateGameSessionRequest(input)
-	return out, req.Send()
-}
-
-// CreateGameSessionWithContext is the same as CreateGameSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateGameSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateGameSessionWithContext(ctx aws.Context, input *CreateGameSessionInput, opts ...aws.Option) (*CreateGameSessionOutput, error) {
-	req, out := c.CreateGameSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateGameSessionQueue = "CreateGameSessionQueue"
-
-// CreateGameSessionQueueRequest generates a "aws.Request" representing the
-// client's request for the CreateGameSessionQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateGameSessionQueue for more information on using the CreateGameSessionQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateGameSessionQueueRequest method.
-//    req, resp := client.CreateGameSessionQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateGameSessionRequest method.
+//    req := client.CreateGameSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueue
-func (c *GameLift) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInput) (req *aws.Request, output *CreateGameSessionQueueOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession
+func (c *GameLift) CreateGameSessionRequest(input *CreateGameSessionInput) CreateGameSessionRequest {
 	op := &aws.Operation{
-		Name:       opCreateGameSessionQueue,
+		Name:       opCreateGameSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateGameSessionQueueInput{}
+		input = &CreateGameSessionInput{}
 	}
 
-	output = &CreateGameSessionQueueOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateGameSessionOutput{})
+	return CreateGameSessionRequest{Request: req, Input: input}
 }
 
-// CreateGameSessionQueue API operation for Amazon GameLift.
+const opCreateGameSessionQueue = "CreateGameSessionQueue"
+
+// CreateGameSessionQueueRequest is a API request type for the CreateGameSessionQueue API operation.
+type CreateGameSessionQueueRequest struct {
+	*aws.Request
+	Input *CreateGameSessionQueueInput
+}
+
+// Send marshals and sends the CreateGameSessionQueue API request.
+func (r CreateGameSessionQueueRequest) Send() (*CreateGameSessionQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGameSessionQueueOutput), nil
+}
+
+// CreateGameSessionQueueRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Establishes a new queue for processing requests to place new game sessions.
 // A queue identifies where new game sessions can be hosted -- by specifying
@@ -837,95 +540,49 @@ func (c *GameLift) CreateGameSessionQueueRequest(input *CreateGameSessionQueueIn
 //
 //    * DeleteGameSessionQueue
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateGameSessionQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueue
-func (c *GameLift) CreateGameSessionQueue(input *CreateGameSessionQueueInput) (*CreateGameSessionQueueOutput, error) {
-	req, out := c.CreateGameSessionQueueRequest(input)
-	return out, req.Send()
-}
-
-// CreateGameSessionQueueWithContext is the same as CreateGameSessionQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateGameSessionQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateGameSessionQueueWithContext(ctx aws.Context, input *CreateGameSessionQueueInput, opts ...aws.Option) (*CreateGameSessionQueueOutput, error) {
-	req, out := c.CreateGameSessionQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
-
-// CreateMatchmakingConfigurationRequest generates a "aws.Request" representing the
-// client's request for the CreateMatchmakingConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateMatchmakingConfiguration for more information on using the CreateMatchmakingConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateMatchmakingConfigurationRequest method.
-//    req, resp := client.CreateMatchmakingConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateGameSessionQueueRequest method.
+//    req := client.CreateGameSessionQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration
-func (c *GameLift) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingConfigurationInput) (req *aws.Request, output *CreateMatchmakingConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueue
+func (c *GameLift) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInput) CreateGameSessionQueueRequest {
 	op := &aws.Operation{
-		Name:       opCreateMatchmakingConfiguration,
+		Name:       opCreateGameSessionQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateMatchmakingConfigurationInput{}
+		input = &CreateGameSessionQueueInput{}
 	}
 
-	output = &CreateMatchmakingConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateGameSessionQueueOutput{})
+	return CreateGameSessionQueueRequest{Request: req, Input: input}
 }
 
-// CreateMatchmakingConfiguration API operation for Amazon GameLift.
+const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
+
+// CreateMatchmakingConfigurationRequest is a API request type for the CreateMatchmakingConfiguration API operation.
+type CreateMatchmakingConfigurationRequest struct {
+	*aws.Request
+	Input *CreateMatchmakingConfigurationInput
+}
+
+// Send marshals and sends the CreateMatchmakingConfiguration API request.
+func (r CreateMatchmakingConfigurationRequest) Send() (*CreateMatchmakingConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateMatchmakingConfigurationOutput), nil
+}
+
+// CreateMatchmakingConfigurationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Defines a new matchmaking configuration for use with FlexMatch. A matchmaking
 // configuration sets out guidelines for matching players and getting the matches
@@ -972,99 +629,49 @@ func (c *GameLift) CreateMatchmakingConfigurationRequest(input *CreateMatchmakin
 //
 //    * ValidateMatchmakingRuleSet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateMatchmakingConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration
-func (c *GameLift) CreateMatchmakingConfiguration(input *CreateMatchmakingConfigurationInput) (*CreateMatchmakingConfigurationOutput, error) {
-	req, out := c.CreateMatchmakingConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// CreateMatchmakingConfigurationWithContext is the same as CreateMatchmakingConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateMatchmakingConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateMatchmakingConfigurationWithContext(ctx aws.Context, input *CreateMatchmakingConfigurationInput, opts ...aws.Option) (*CreateMatchmakingConfigurationOutput, error) {
-	req, out := c.CreateMatchmakingConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
-
-// CreateMatchmakingRuleSetRequest generates a "aws.Request" representing the
-// client's request for the CreateMatchmakingRuleSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateMatchmakingRuleSet for more information on using the CreateMatchmakingRuleSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateMatchmakingRuleSetRequest method.
-//    req, resp := client.CreateMatchmakingRuleSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateMatchmakingConfigurationRequest method.
+//    req := client.CreateMatchmakingConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSet
-func (c *GameLift) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSetInput) (req *aws.Request, output *CreateMatchmakingRuleSetOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration
+func (c *GameLift) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingConfigurationInput) CreateMatchmakingConfigurationRequest {
 	op := &aws.Operation{
-		Name:       opCreateMatchmakingRuleSet,
+		Name:       opCreateMatchmakingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateMatchmakingRuleSetInput{}
+		input = &CreateMatchmakingConfigurationInput{}
 	}
 
-	output = &CreateMatchmakingRuleSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateMatchmakingConfigurationOutput{})
+	return CreateMatchmakingConfigurationRequest{Request: req, Input: input}
 }
 
-// CreateMatchmakingRuleSet API operation for Amazon GameLift.
+const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
+
+// CreateMatchmakingRuleSetRequest is a API request type for the CreateMatchmakingRuleSet API operation.
+type CreateMatchmakingRuleSetRequest struct {
+	*aws.Request
+	Input *CreateMatchmakingRuleSetInput
+}
+
+// Send marshals and sends the CreateMatchmakingRuleSet API request.
+func (r CreateMatchmakingRuleSetRequest) Send() (*CreateMatchmakingRuleSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateMatchmakingRuleSetOutput), nil
+}
+
+// CreateMatchmakingRuleSetRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Creates a new rule set for FlexMatch matchmaking. A rule set describes the
 // type of match to create, such as the number and size of teams, and sets the
@@ -1104,91 +711,49 @@ func (c *GameLift) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleS
 //
 //    * ValidateMatchmakingRuleSet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateMatchmakingRuleSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSet
-func (c *GameLift) CreateMatchmakingRuleSet(input *CreateMatchmakingRuleSetInput) (*CreateMatchmakingRuleSetOutput, error) {
-	req, out := c.CreateMatchmakingRuleSetRequest(input)
-	return out, req.Send()
-}
-
-// CreateMatchmakingRuleSetWithContext is the same as CreateMatchmakingRuleSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateMatchmakingRuleSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateMatchmakingRuleSetWithContext(ctx aws.Context, input *CreateMatchmakingRuleSetInput, opts ...aws.Option) (*CreateMatchmakingRuleSetOutput, error) {
-	req, out := c.CreateMatchmakingRuleSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreatePlayerSession = "CreatePlayerSession"
-
-// CreatePlayerSessionRequest generates a "aws.Request" representing the
-// client's request for the CreatePlayerSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePlayerSession for more information on using the CreatePlayerSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePlayerSessionRequest method.
-//    req, resp := client.CreatePlayerSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateMatchmakingRuleSetRequest method.
+//    req := client.CreateMatchmakingRuleSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSession
-func (c *GameLift) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) (req *aws.Request, output *CreatePlayerSessionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSet
+func (c *GameLift) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSetInput) CreateMatchmakingRuleSetRequest {
 	op := &aws.Operation{
-		Name:       opCreatePlayerSession,
+		Name:       opCreateMatchmakingRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreatePlayerSessionInput{}
+		input = &CreateMatchmakingRuleSetInput{}
 	}
 
-	output = &CreatePlayerSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateMatchmakingRuleSetOutput{})
+	return CreateMatchmakingRuleSetRequest{Request: req, Input: input}
 }
 
-// CreatePlayerSession API operation for Amazon GameLift.
+const opCreatePlayerSession = "CreatePlayerSession"
+
+// CreatePlayerSessionRequest is a API request type for the CreatePlayerSession API operation.
+type CreatePlayerSessionRequest struct {
+	*aws.Request
+	Input *CreatePlayerSessionInput
+}
+
+// Send marshals and sends the CreatePlayerSession API request.
+func (r CreatePlayerSessionRequest) Send() (*CreatePlayerSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePlayerSessionOutput), nil
+}
+
+// CreatePlayerSessionRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Adds a player to a game session and creates a player session record. Before
 // a player can be added, a game session must have an ACTIVE status, have a
@@ -1217,111 +782,49 @@ func (c *GameLift) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) (
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreatePlayerSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidGameSessionStatusException "InvalidGameSessionStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the game instance. Resolve
-//   the conflict before retrying.
-//
-//   * ErrCodeGameSessionFullException "GameSessionFullException"
-//   The game instance is currently full and cannot allow the requested player(s)
-//   to join. Clients can retry such requests immediately or after a waiting period.
-//
-//   * ErrCodeTerminalRoutingStrategyException "TerminalRoutingStrategyException"
-//   The service is unable to resolve the routing for a particular alias because
-//   it has a terminal RoutingStrategy associated with it. The message returned
-//   in this exception is the message defined in the routing strategy itself.
-//   Such requests should only be retried if the routing strategy for the specified
-//   alias is modified.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSession
-func (c *GameLift) CreatePlayerSession(input *CreatePlayerSessionInput) (*CreatePlayerSessionOutput, error) {
-	req, out := c.CreatePlayerSessionRequest(input)
-	return out, req.Send()
-}
-
-// CreatePlayerSessionWithContext is the same as CreatePlayerSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePlayerSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreatePlayerSessionWithContext(ctx aws.Context, input *CreatePlayerSessionInput, opts ...aws.Option) (*CreatePlayerSessionOutput, error) {
-	req, out := c.CreatePlayerSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreatePlayerSessions = "CreatePlayerSessions"
-
-// CreatePlayerSessionsRequest generates a "aws.Request" representing the
-// client's request for the CreatePlayerSessions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePlayerSessions for more information on using the CreatePlayerSessions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePlayerSessionsRequest method.
-//    req, resp := client.CreatePlayerSessionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreatePlayerSessionRequest method.
+//    req := client.CreatePlayerSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessions
-func (c *GameLift) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput) (req *aws.Request, output *CreatePlayerSessionsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSession
+func (c *GameLift) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) CreatePlayerSessionRequest {
 	op := &aws.Operation{
-		Name:       opCreatePlayerSessions,
+		Name:       opCreatePlayerSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreatePlayerSessionsInput{}
+		input = &CreatePlayerSessionInput{}
 	}
 
-	output = &CreatePlayerSessionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreatePlayerSessionOutput{})
+	return CreatePlayerSessionRequest{Request: req, Input: input}
 }
 
-// CreatePlayerSessions API operation for Amazon GameLift.
+const opCreatePlayerSessions = "CreatePlayerSessions"
+
+// CreatePlayerSessionsRequest is a API request type for the CreatePlayerSessions API operation.
+type CreatePlayerSessionsRequest struct {
+	*aws.Request
+	Input *CreatePlayerSessionsInput
+}
+
+// Send marshals and sends the CreatePlayerSessions API request.
+func (r CreatePlayerSessionsRequest) Send() (*CreatePlayerSessionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePlayerSessionsOutput), nil
+}
+
+// CreatePlayerSessionsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Adds a group of players to a game session. This action is useful with a team
 // matching feature. Before players can be added, a game session must have an
@@ -1351,111 +854,49 @@ func (c *GameLift) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput)
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreatePlayerSessions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidGameSessionStatusException "InvalidGameSessionStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the game instance. Resolve
-//   the conflict before retrying.
-//
-//   * ErrCodeGameSessionFullException "GameSessionFullException"
-//   The game instance is currently full and cannot allow the requested player(s)
-//   to join. Clients can retry such requests immediately or after a waiting period.
-//
-//   * ErrCodeTerminalRoutingStrategyException "TerminalRoutingStrategyException"
-//   The service is unable to resolve the routing for a particular alias because
-//   it has a terminal RoutingStrategy associated with it. The message returned
-//   in this exception is the message defined in the routing strategy itself.
-//   Such requests should only be retried if the routing strategy for the specified
-//   alias is modified.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessions
-func (c *GameLift) CreatePlayerSessions(input *CreatePlayerSessionsInput) (*CreatePlayerSessionsOutput, error) {
-	req, out := c.CreatePlayerSessionsRequest(input)
-	return out, req.Send()
-}
-
-// CreatePlayerSessionsWithContext is the same as CreatePlayerSessions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePlayerSessions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreatePlayerSessionsWithContext(ctx aws.Context, input *CreatePlayerSessionsInput, opts ...aws.Option) (*CreatePlayerSessionsOutput, error) {
-	req, out := c.CreatePlayerSessionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
-
-// CreateVpcPeeringAuthorizationRequest generates a "aws.Request" representing the
-// client's request for the CreateVpcPeeringAuthorization operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateVpcPeeringAuthorization for more information on using the CreateVpcPeeringAuthorization
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateVpcPeeringAuthorizationRequest method.
-//    req, resp := client.CreateVpcPeeringAuthorizationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreatePlayerSessionsRequest method.
+//    req := client.CreatePlayerSessionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorization
-func (c *GameLift) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAuthorizationInput) (req *aws.Request, output *CreateVpcPeeringAuthorizationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessions
+func (c *GameLift) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput) CreatePlayerSessionsRequest {
 	op := &aws.Operation{
-		Name:       opCreateVpcPeeringAuthorization,
+		Name:       opCreatePlayerSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateVpcPeeringAuthorizationInput{}
+		input = &CreatePlayerSessionsInput{}
 	}
 
-	output = &CreateVpcPeeringAuthorizationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreatePlayerSessionsOutput{})
+	return CreatePlayerSessionsRequest{Request: req, Input: input}
 }
 
-// CreateVpcPeeringAuthorization API operation for Amazon GameLift.
+const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
+
+// CreateVpcPeeringAuthorizationRequest is a API request type for the CreateVpcPeeringAuthorization API operation.
+type CreateVpcPeeringAuthorizationRequest struct {
+	*aws.Request
+	Input *CreateVpcPeeringAuthorizationInput
+}
+
+// Send marshals and sends the CreateVpcPeeringAuthorization API request.
+func (r CreateVpcPeeringAuthorizationRequest) Send() (*CreateVpcPeeringAuthorizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVpcPeeringAuthorizationOutput), nil
+}
+
+// CreateVpcPeeringAuthorizationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Requests authorization to create or delete a peer connection between the
 // VPC for your Amazon GameLift fleet and a virtual private cloud (VPC) in your
@@ -1500,95 +941,49 @@ func (c *GameLift) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringA
 //
 //    * DeleteVpcPeeringConnection
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateVpcPeeringAuthorization for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorization
-func (c *GameLift) CreateVpcPeeringAuthorization(input *CreateVpcPeeringAuthorizationInput) (*CreateVpcPeeringAuthorizationOutput, error) {
-	req, out := c.CreateVpcPeeringAuthorizationRequest(input)
-	return out, req.Send()
-}
-
-// CreateVpcPeeringAuthorizationWithContext is the same as CreateVpcPeeringAuthorization with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateVpcPeeringAuthorization for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateVpcPeeringAuthorizationWithContext(ctx aws.Context, input *CreateVpcPeeringAuthorizationInput, opts ...aws.Option) (*CreateVpcPeeringAuthorizationOutput, error) {
-	req, out := c.CreateVpcPeeringAuthorizationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
-
-// CreateVpcPeeringConnectionRequest generates a "aws.Request" representing the
-// client's request for the CreateVpcPeeringConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateVpcPeeringConnection for more information on using the CreateVpcPeeringConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateVpcPeeringConnectionRequest method.
-//    req, resp := client.CreateVpcPeeringConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateVpcPeeringAuthorizationRequest method.
+//    req := client.CreateVpcPeeringAuthorizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnection
-func (c *GameLift) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectionInput) (req *aws.Request, output *CreateVpcPeeringConnectionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorization
+func (c *GameLift) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAuthorizationInput) CreateVpcPeeringAuthorizationRequest {
 	op := &aws.Operation{
-		Name:       opCreateVpcPeeringConnection,
+		Name:       opCreateVpcPeeringAuthorization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateVpcPeeringConnectionInput{}
+		input = &CreateVpcPeeringAuthorizationInput{}
 	}
 
-	output = &CreateVpcPeeringConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateVpcPeeringAuthorizationOutput{})
+	return CreateVpcPeeringAuthorizationRequest{Request: req, Input: input}
 }
 
-// CreateVpcPeeringConnection API operation for Amazon GameLift.
+const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
+
+// CreateVpcPeeringConnectionRequest is a API request type for the CreateVpcPeeringConnection API operation.
+type CreateVpcPeeringConnectionRequest struct {
+	*aws.Request
+	Input *CreateVpcPeeringConnectionInput
+}
+
+// Send marshals and sends the CreateVpcPeeringConnection API request.
+func (r CreateVpcPeeringConnectionRequest) Send() (*CreateVpcPeeringConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVpcPeeringConnectionOutput), nil
+}
+
+// CreateVpcPeeringConnectionRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Establishes a VPC peering connection between a virtual private cloud (VPC)
 // in an AWS account with the VPC for your Amazon GameLift fleet. VPC peering
@@ -1628,97 +1023,49 @@ func (c *GameLift) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConn
 //
 //    * DeleteVpcPeeringConnection
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation CreateVpcPeeringConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnection
-func (c *GameLift) CreateVpcPeeringConnection(input *CreateVpcPeeringConnectionInput) (*CreateVpcPeeringConnectionOutput, error) {
-	req, out := c.CreateVpcPeeringConnectionRequest(input)
-	return out, req.Send()
-}
-
-// CreateVpcPeeringConnectionWithContext is the same as CreateVpcPeeringConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateVpcPeeringConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) CreateVpcPeeringConnectionWithContext(ctx aws.Context, input *CreateVpcPeeringConnectionInput, opts ...aws.Option) (*CreateVpcPeeringConnectionOutput, error) {
-	req, out := c.CreateVpcPeeringConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteAlias = "DeleteAlias"
-
-// DeleteAliasRequest generates a "aws.Request" representing the
-// client's request for the DeleteAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAlias for more information on using the DeleteAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteAliasRequest method.
-//    req, resp := client.DeleteAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateVpcPeeringConnectionRequest method.
+//    req := client.CreateVpcPeeringConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteAlias
-func (c *GameLift) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, output *DeleteAliasOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnection
+func (c *GameLift) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest {
 	op := &aws.Operation{
-		Name:       opDeleteAlias,
+		Name:       opCreateVpcPeeringConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteAliasInput{}
+		input = &CreateVpcPeeringConnectionInput{}
 	}
 
-	output = &DeleteAliasOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &CreateVpcPeeringConnectionOutput{})
+	return CreateVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
-// DeleteAlias API operation for Amazon GameLift.
+const opDeleteAlias = "DeleteAlias"
+
+// DeleteAliasRequest is a API request type for the DeleteAlias API operation.
+type DeleteAliasRequest struct {
+	*aws.Request
+	Input *DeleteAliasInput
+}
+
+// Send marshals and sends the DeleteAlias API request.
+func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAliasOutput), nil
+}
+
+// DeleteAliasRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Deletes an alias. This action removes all record of the alias. Game clients
 // attempting to access a server process using the deleted alias receive an
@@ -1738,97 +1085,51 @@ func (c *GameLift) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request
 //
 //    * ResolveAlias
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteAlias
-func (c *GameLift) DeleteAlias(input *DeleteAliasInput) (*DeleteAliasOutput, error) {
-	req, out := c.DeleteAliasRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAliasWithContext is the same as DeleteAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...aws.Option) (*DeleteAliasOutput, error) {
-	req, out := c.DeleteAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteBuild = "DeleteBuild"
-
-// DeleteBuildRequest generates a "aws.Request" representing the
-// client's request for the DeleteBuild operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBuild for more information on using the DeleteBuild
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteBuildRequest method.
-//    req, resp := client.DeleteBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteAliasRequest method.
+//    req := client.DeleteAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuild
-func (c *GameLift) DeleteBuildRequest(input *DeleteBuildInput) (req *aws.Request, output *DeleteBuildOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteAlias
+func (c *GameLift) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest {
 	op := &aws.Operation{
-		Name:       opDeleteBuild,
+		Name:       opDeleteAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteBuildInput{}
+		input = &DeleteAliasInput{}
 	}
 
-	output = &DeleteBuildOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAliasOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeleteAliasRequest{Request: req, Input: input}
 }
 
-// DeleteBuild API operation for Amazon GameLift.
+const opDeleteBuild = "DeleteBuild"
+
+// DeleteBuildRequest is a API request type for the DeleteBuild API operation.
+type DeleteBuildRequest struct {
+	*aws.Request
+	Input *DeleteBuildInput
+}
+
+// Send marshals and sends the DeleteBuild API request.
+func (r DeleteBuildRequest) Send() (*DeleteBuildOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBuildOutput), nil
+}
+
+// DeleteBuildRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Deletes a build. This action permanently deletes the build record and any
 // uploaded build files.
@@ -1849,97 +1150,51 @@ func (c *GameLift) DeleteBuildRequest(input *DeleteBuildInput) (req *aws.Request
 //
 //    * DeleteBuild
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteBuild for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuild
-func (c *GameLift) DeleteBuild(input *DeleteBuildInput) (*DeleteBuildOutput, error) {
-	req, out := c.DeleteBuildRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBuildWithContext is the same as DeleteBuild with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBuild for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteBuildWithContext(ctx aws.Context, input *DeleteBuildInput, opts ...aws.Option) (*DeleteBuildOutput, error) {
-	req, out := c.DeleteBuildRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteFleet = "DeleteFleet"
-
-// DeleteFleetRequest generates a "aws.Request" representing the
-// client's request for the DeleteFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteFleet for more information on using the DeleteFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteFleetRequest method.
-//    req, resp := client.DeleteFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteBuildRequest method.
+//    req := client.DeleteBuildRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleet
-func (c *GameLift) DeleteFleetRequest(input *DeleteFleetInput) (req *aws.Request, output *DeleteFleetOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuild
+func (c *GameLift) DeleteBuildRequest(input *DeleteBuildInput) DeleteBuildRequest {
 	op := &aws.Operation{
-		Name:       opDeleteFleet,
+		Name:       opDeleteBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteFleetInput{}
+		input = &DeleteBuildInput{}
 	}
 
-	output = &DeleteFleetOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteBuildOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeleteBuildRequest{Request: req, Input: input}
 }
 
-// DeleteFleet API operation for Amazon GameLift.
+const opDeleteFleet = "DeleteFleet"
+
+// DeleteFleetRequest is a API request type for the DeleteFleet API operation.
+type DeleteFleetRequest struct {
+	*aws.Request
+	Input *DeleteFleetInput
+}
+
+// Send marshals and sends the DeleteFleet API request.
+func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFleetOutput), nil
+}
+
+// DeleteFleetRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Deletes everything related to a fleet. Before deleting a fleet, you must
 // set the fleet's desired capacity to zero. See UpdateFleetCapacity.
@@ -1991,100 +1246,51 @@ func (c *GameLift) DeleteFleetRequest(input *DeleteFleetInput) (req *aws.Request
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidFleetStatusException "InvalidFleetStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the fleet. Resolve the conflict
-//   before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleet
-func (c *GameLift) DeleteFleet(input *DeleteFleetInput) (*DeleteFleetOutput, error) {
-	req, out := c.DeleteFleetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteFleetWithContext is the same as DeleteFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetInput, opts ...aws.Option) (*DeleteFleetOutput, error) {
-	req, out := c.DeleteFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
-
-// DeleteGameSessionQueueRequest generates a "aws.Request" representing the
-// client's request for the DeleteGameSessionQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteGameSessionQueue for more information on using the DeleteGameSessionQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteGameSessionQueueRequest method.
-//    req, resp := client.DeleteGameSessionQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteFleetRequest method.
+//    req := client.DeleteFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueue
-func (c *GameLift) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInput) (req *aws.Request, output *DeleteGameSessionQueueOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleet
+func (c *GameLift) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest {
 	op := &aws.Operation{
-		Name:       opDeleteGameSessionQueue,
+		Name:       opDeleteFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteGameSessionQueueInput{}
+		input = &DeleteFleetInput{}
 	}
 
-	output = &DeleteGameSessionQueueOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteFleetOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteFleetRequest{Request: req, Input: input}
 }
 
-// DeleteGameSessionQueue API operation for Amazon GameLift.
+const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
+
+// DeleteGameSessionQueueRequest is a API request type for the DeleteGameSessionQueue API operation.
+type DeleteGameSessionQueueRequest struct {
+	*aws.Request
+	Input *DeleteGameSessionQueueInput
+}
+
+// Send marshals and sends the DeleteGameSessionQueue API request.
+func (r DeleteGameSessionQueueRequest) Send() (*DeleteGameSessionQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGameSessionQueueOutput), nil
+}
+
+// DeleteGameSessionQueueRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Deletes a game session queue. This action means that any StartGameSessionPlacement
 // requests that reference this queue will fail. To delete a queue, specify
@@ -2100,95 +1306,49 @@ func (c *GameLift) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueIn
 //
 //    * DeleteGameSessionQueue
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteGameSessionQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueue
-func (c *GameLift) DeleteGameSessionQueue(input *DeleteGameSessionQueueInput) (*DeleteGameSessionQueueOutput, error) {
-	req, out := c.DeleteGameSessionQueueRequest(input)
-	return out, req.Send()
-}
-
-// DeleteGameSessionQueueWithContext is the same as DeleteGameSessionQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteGameSessionQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteGameSessionQueueWithContext(ctx aws.Context, input *DeleteGameSessionQueueInput, opts ...aws.Option) (*DeleteGameSessionQueueOutput, error) {
-	req, out := c.DeleteGameSessionQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
-
-// DeleteMatchmakingConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteMatchmakingConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteMatchmakingConfiguration for more information on using the DeleteMatchmakingConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteMatchmakingConfigurationRequest method.
-//    req, resp := client.DeleteMatchmakingConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteGameSessionQueueRequest method.
+//    req := client.DeleteGameSessionQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfiguration
-func (c *GameLift) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingConfigurationInput) (req *aws.Request, output *DeleteMatchmakingConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueue
+func (c *GameLift) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInput) DeleteGameSessionQueueRequest {
 	op := &aws.Operation{
-		Name:       opDeleteMatchmakingConfiguration,
+		Name:       opDeleteGameSessionQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteMatchmakingConfigurationInput{}
+		input = &DeleteGameSessionQueueInput{}
 	}
 
-	output = &DeleteMatchmakingConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteGameSessionQueueOutput{})
+	return DeleteGameSessionQueueRequest{Request: req, Input: input}
 }
 
-// DeleteMatchmakingConfiguration API operation for Amazon GameLift.
+const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
+
+// DeleteMatchmakingConfigurationRequest is a API request type for the DeleteMatchmakingConfiguration API operation.
+type DeleteMatchmakingConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteMatchmakingConfigurationInput
+}
+
+// Send marshals and sends the DeleteMatchmakingConfiguration API request.
+func (r DeleteMatchmakingConfigurationRequest) Send() (*DeleteMatchmakingConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMatchmakingConfigurationOutput), nil
+}
+
+// DeleteMatchmakingConfigurationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Permanently removes a FlexMatch matchmaking configuration. To delete, specify
 // the configuration name. A matchmaking configuration cannot be deleted if
@@ -2210,97 +1370,49 @@ func (c *GameLift) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakin
 //
 //    * ValidateMatchmakingRuleSet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteMatchmakingConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfiguration
-func (c *GameLift) DeleteMatchmakingConfiguration(input *DeleteMatchmakingConfigurationInput) (*DeleteMatchmakingConfigurationOutput, error) {
-	req, out := c.DeleteMatchmakingConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteMatchmakingConfigurationWithContext is the same as DeleteMatchmakingConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteMatchmakingConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteMatchmakingConfigurationWithContext(ctx aws.Context, input *DeleteMatchmakingConfigurationInput, opts ...aws.Option) (*DeleteMatchmakingConfigurationOutput, error) {
-	req, out := c.DeleteMatchmakingConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteScalingPolicy = "DeleteScalingPolicy"
-
-// DeleteScalingPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteScalingPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteScalingPolicy for more information on using the DeleteScalingPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteScalingPolicyRequest method.
-//    req, resp := client.DeleteScalingPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteMatchmakingConfigurationRequest method.
+//    req := client.DeleteMatchmakingConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicy
-func (c *GameLift) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) (req *aws.Request, output *DeleteScalingPolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfiguration
+func (c *GameLift) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingConfigurationInput) DeleteMatchmakingConfigurationRequest {
 	op := &aws.Operation{
-		Name:       opDeleteScalingPolicy,
+		Name:       opDeleteMatchmakingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteScalingPolicyInput{}
+		input = &DeleteMatchmakingConfigurationInput{}
 	}
 
-	output = &DeleteScalingPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &DeleteMatchmakingConfigurationOutput{})
+	return DeleteMatchmakingConfigurationRequest{Request: req, Input: input}
 }
 
-// DeleteScalingPolicy API operation for Amazon GameLift.
+const opDeleteScalingPolicy = "DeleteScalingPolicy"
+
+// DeleteScalingPolicyRequest is a API request type for the DeleteScalingPolicy API operation.
+type DeleteScalingPolicyRequest struct {
+	*aws.Request
+	Input *DeleteScalingPolicyInput
+}
+
+// Send marshals and sends the DeleteScalingPolicy API request.
+func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteScalingPolicyOutput), nil
+}
+
+// DeleteScalingPolicyRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Deletes a fleet scaling policy. This action means that the policy is no longer
 // in force and removes all record of it. To delete a scaling policy, specify
@@ -2350,95 +1462,51 @@ func (c *GameLift) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) (
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteScalingPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicy
-func (c *GameLift) DeleteScalingPolicy(input *DeleteScalingPolicyInput) (*DeleteScalingPolicyOutput, error) {
-	req, out := c.DeleteScalingPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteScalingPolicyWithContext is the same as DeleteScalingPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteScalingPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteScalingPolicyWithContext(ctx aws.Context, input *DeleteScalingPolicyInput, opts ...aws.Option) (*DeleteScalingPolicyOutput, error) {
-	req, out := c.DeleteScalingPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
-
-// DeleteVpcPeeringAuthorizationRequest generates a "aws.Request" representing the
-// client's request for the DeleteVpcPeeringAuthorization operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVpcPeeringAuthorization for more information on using the DeleteVpcPeeringAuthorization
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteVpcPeeringAuthorizationRequest method.
-//    req, resp := client.DeleteVpcPeeringAuthorizationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteScalingPolicyRequest method.
+//    req := client.DeleteScalingPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorization
-func (c *GameLift) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAuthorizationInput) (req *aws.Request, output *DeleteVpcPeeringAuthorizationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicy
+func (c *GameLift) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) DeleteScalingPolicyRequest {
 	op := &aws.Operation{
-		Name:       opDeleteVpcPeeringAuthorization,
+		Name:       opDeleteScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteVpcPeeringAuthorizationInput{}
+		input = &DeleteScalingPolicyInput{}
 	}
 
-	output = &DeleteVpcPeeringAuthorizationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteScalingPolicyOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteScalingPolicyRequest{Request: req, Input: input}
 }
 
-// DeleteVpcPeeringAuthorization API operation for Amazon GameLift.
+const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
+
+// DeleteVpcPeeringAuthorizationRequest is a API request type for the DeleteVpcPeeringAuthorization API operation.
+type DeleteVpcPeeringAuthorizationRequest struct {
+	*aws.Request
+	Input *DeleteVpcPeeringAuthorizationInput
+}
+
+// Send marshals and sends the DeleteVpcPeeringAuthorization API request.
+func (r DeleteVpcPeeringAuthorizationRequest) Send() (*DeleteVpcPeeringAuthorizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVpcPeeringAuthorizationOutput), nil
+}
+
+// DeleteVpcPeeringAuthorizationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Cancels a pending VPC peering authorization for the specified VPC. If the
 // authorization has already been used to create a peering connection, call
@@ -2458,95 +1526,49 @@ func (c *GameLift) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringA
 //
 //    * DeleteVpcPeeringConnection
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteVpcPeeringAuthorization for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorization
-func (c *GameLift) DeleteVpcPeeringAuthorization(input *DeleteVpcPeeringAuthorizationInput) (*DeleteVpcPeeringAuthorizationOutput, error) {
-	req, out := c.DeleteVpcPeeringAuthorizationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteVpcPeeringAuthorizationWithContext is the same as DeleteVpcPeeringAuthorization with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVpcPeeringAuthorization for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteVpcPeeringAuthorizationWithContext(ctx aws.Context, input *DeleteVpcPeeringAuthorizationInput, opts ...aws.Option) (*DeleteVpcPeeringAuthorizationOutput, error) {
-	req, out := c.DeleteVpcPeeringAuthorizationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
-
-// DeleteVpcPeeringConnectionRequest generates a "aws.Request" representing the
-// client's request for the DeleteVpcPeeringConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVpcPeeringConnection for more information on using the DeleteVpcPeeringConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteVpcPeeringConnectionRequest method.
-//    req, resp := client.DeleteVpcPeeringConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteVpcPeeringAuthorizationRequest method.
+//    req := client.DeleteVpcPeeringAuthorizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnection
-func (c *GameLift) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectionInput) (req *aws.Request, output *DeleteVpcPeeringConnectionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorization
+func (c *GameLift) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAuthorizationInput) DeleteVpcPeeringAuthorizationRequest {
 	op := &aws.Operation{
-		Name:       opDeleteVpcPeeringConnection,
+		Name:       opDeleteVpcPeeringAuthorization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteVpcPeeringConnectionInput{}
+		input = &DeleteVpcPeeringAuthorizationInput{}
 	}
 
-	output = &DeleteVpcPeeringConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteVpcPeeringAuthorizationOutput{})
+	return DeleteVpcPeeringAuthorizationRequest{Request: req, Input: input}
 }
 
-// DeleteVpcPeeringConnection API operation for Amazon GameLift.
+const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
+
+// DeleteVpcPeeringConnectionRequest is a API request type for the DeleteVpcPeeringConnection API operation.
+type DeleteVpcPeeringConnectionRequest struct {
+	*aws.Request
+	Input *DeleteVpcPeeringConnectionInput
+}
+
+// Send marshals and sends the DeleteVpcPeeringConnection API request.
+func (r DeleteVpcPeeringConnectionRequest) Send() (*DeleteVpcPeeringConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVpcPeeringConnectionOutput), nil
+}
+
+// DeleteVpcPeeringConnectionRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Removes a VPC peering connection. To delete the connection, you must have
 // a valid authorization for the VPC peering connection that you want to delete.
@@ -2572,95 +1594,49 @@ func (c *GameLift) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConn
 //
 //    * DeleteVpcPeeringConnection
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DeleteVpcPeeringConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnection
-func (c *GameLift) DeleteVpcPeeringConnection(input *DeleteVpcPeeringConnectionInput) (*DeleteVpcPeeringConnectionOutput, error) {
-	req, out := c.DeleteVpcPeeringConnectionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteVpcPeeringConnectionWithContext is the same as DeleteVpcPeeringConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVpcPeeringConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DeleteVpcPeeringConnectionWithContext(ctx aws.Context, input *DeleteVpcPeeringConnectionInput, opts ...aws.Option) (*DeleteVpcPeeringConnectionOutput, error) {
-	req, out := c.DeleteVpcPeeringConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeAlias = "DescribeAlias"
-
-// DescribeAliasRequest generates a "aws.Request" representing the
-// client's request for the DescribeAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAlias for more information on using the DescribeAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeAliasRequest method.
-//    req, resp := client.DescribeAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteVpcPeeringConnectionRequest method.
+//    req := client.DeleteVpcPeeringConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAlias
-func (c *GameLift) DescribeAliasRequest(input *DescribeAliasInput) (req *aws.Request, output *DescribeAliasOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnection
+func (c *GameLift) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest {
 	op := &aws.Operation{
-		Name:       opDescribeAlias,
+		Name:       opDeleteVpcPeeringConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeAliasInput{}
+		input = &DeleteVpcPeeringConnectionInput{}
 	}
 
-	output = &DescribeAliasOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteVpcPeeringConnectionOutput{})
+	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input}
 }
 
-// DescribeAlias API operation for Amazon GameLift.
+const opDescribeAlias = "DescribeAlias"
+
+// DescribeAliasRequest is a API request type for the DescribeAlias API operation.
+type DescribeAliasRequest struct {
+	*aws.Request
+	Input *DescribeAliasInput
+}
+
+// Send marshals and sends the DescribeAlias API request.
+func (r DescribeAliasRequest) Send() (*DescribeAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAliasOutput), nil
+}
+
+// DescribeAliasRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves properties for an alias. This operation returns all alias metadata
 // and settings. To get an alias's target fleet ID only, use ResolveAlias.
@@ -2682,95 +1658,49 @@ func (c *GameLift) DescribeAliasRequest(input *DescribeAliasInput) (req *aws.Req
 //
 //    * ResolveAlias
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAlias
-func (c *GameLift) DescribeAlias(input *DescribeAliasInput) (*DescribeAliasOutput, error) {
-	req, out := c.DescribeAliasRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAliasWithContext is the same as DescribeAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeAliasWithContext(ctx aws.Context, input *DescribeAliasInput, opts ...aws.Option) (*DescribeAliasOutput, error) {
-	req, out := c.DescribeAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeBuild = "DescribeBuild"
-
-// DescribeBuildRequest generates a "aws.Request" representing the
-// client's request for the DescribeBuild operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeBuild for more information on using the DescribeBuild
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeBuildRequest method.
-//    req, resp := client.DescribeBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeAliasRequest method.
+//    req := client.DescribeAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuild
-func (c *GameLift) DescribeBuildRequest(input *DescribeBuildInput) (req *aws.Request, output *DescribeBuildOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAlias
+func (c *GameLift) DescribeAliasRequest(input *DescribeAliasInput) DescribeAliasRequest {
 	op := &aws.Operation{
-		Name:       opDescribeBuild,
+		Name:       opDescribeAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeBuildInput{}
+		input = &DescribeAliasInput{}
 	}
 
-	output = &DescribeBuildOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeAliasOutput{})
+	return DescribeAliasRequest{Request: req, Input: input}
 }
 
-// DescribeBuild API operation for Amazon GameLift.
+const opDescribeBuild = "DescribeBuild"
+
+// DescribeBuildRequest is a API request type for the DescribeBuild API operation.
+type DescribeBuildRequest struct {
+	*aws.Request
+	Input *DescribeBuildInput
+}
+
+// Send marshals and sends the DescribeBuild API request.
+func (r DescribeBuildRequest) Send() (*DescribeBuildOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBuildOutput), nil
+}
+
+// DescribeBuildRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves properties for a build. To get a build record, specify a build
 // ID. If successful, an object containing the build properties is returned.
@@ -2787,95 +1717,49 @@ func (c *GameLift) DescribeBuildRequest(input *DescribeBuildInput) (req *aws.Req
 //
 //    * DeleteBuild
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeBuild for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuild
-func (c *GameLift) DescribeBuild(input *DescribeBuildInput) (*DescribeBuildOutput, error) {
-	req, out := c.DescribeBuildRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBuildWithContext is the same as DescribeBuild with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBuild for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeBuildWithContext(ctx aws.Context, input *DescribeBuildInput, opts ...aws.Option) (*DescribeBuildOutput, error) {
-	req, out := c.DescribeBuildRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
-
-// DescribeEC2InstanceLimitsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEC2InstanceLimits operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEC2InstanceLimits for more information on using the DescribeEC2InstanceLimits
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeEC2InstanceLimitsRequest method.
-//    req, resp := client.DescribeEC2InstanceLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeBuildRequest method.
+//    req := client.DescribeBuildRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimits
-func (c *GameLift) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimitsInput) (req *aws.Request, output *DescribeEC2InstanceLimitsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuild
+func (c *GameLift) DescribeBuildRequest(input *DescribeBuildInput) DescribeBuildRequest {
 	op := &aws.Operation{
-		Name:       opDescribeEC2InstanceLimits,
+		Name:       opDescribeBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeEC2InstanceLimitsInput{}
+		input = &DescribeBuildInput{}
 	}
 
-	output = &DescribeEC2InstanceLimitsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeBuildOutput{})
+	return DescribeBuildRequest{Request: req, Input: input}
 }
 
-// DescribeEC2InstanceLimits API operation for Amazon GameLift.
+const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
+
+// DescribeEC2InstanceLimitsRequest is a API request type for the DescribeEC2InstanceLimits API operation.
+type DescribeEC2InstanceLimitsRequest struct {
+	*aws.Request
+	Input *DescribeEC2InstanceLimitsInput
+}
+
+// Send marshals and sends the DescribeEC2InstanceLimits API request.
+func (r DescribeEC2InstanceLimitsRequest) Send() (*DescribeEC2InstanceLimitsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEC2InstanceLimitsOutput), nil
+}
+
+// DescribeEC2InstanceLimitsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the following information for the specified EC2 instance type:
 //
@@ -2931,91 +1815,49 @@ func (c *GameLift) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLi
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeEC2InstanceLimits for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimits
-func (c *GameLift) DescribeEC2InstanceLimits(input *DescribeEC2InstanceLimitsInput) (*DescribeEC2InstanceLimitsOutput, error) {
-	req, out := c.DescribeEC2InstanceLimitsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEC2InstanceLimitsWithContext is the same as DescribeEC2InstanceLimits with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEC2InstanceLimits for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeEC2InstanceLimitsWithContext(ctx aws.Context, input *DescribeEC2InstanceLimitsInput, opts ...aws.Option) (*DescribeEC2InstanceLimitsOutput, error) {
-	req, out := c.DescribeEC2InstanceLimitsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeFleetAttributes = "DescribeFleetAttributes"
-
-// DescribeFleetAttributesRequest generates a "aws.Request" representing the
-// client's request for the DescribeFleetAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeFleetAttributes for more information on using the DescribeFleetAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeFleetAttributesRequest method.
-//    req, resp := client.DescribeFleetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeEC2InstanceLimitsRequest method.
+//    req := client.DescribeEC2InstanceLimitsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes
-func (c *GameLift) DescribeFleetAttributesRequest(input *DescribeFleetAttributesInput) (req *aws.Request, output *DescribeFleetAttributesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimits
+func (c *GameLift) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimitsInput) DescribeEC2InstanceLimitsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeFleetAttributes,
+		Name:       opDescribeEC2InstanceLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeFleetAttributesInput{}
+		input = &DescribeEC2InstanceLimitsInput{}
 	}
 
-	output = &DescribeFleetAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeEC2InstanceLimitsOutput{})
+	return DescribeEC2InstanceLimitsRequest{Request: req, Input: input}
 }
 
-// DescribeFleetAttributes API operation for Amazon GameLift.
+const opDescribeFleetAttributes = "DescribeFleetAttributes"
+
+// DescribeFleetAttributesRequest is a API request type for the DescribeFleetAttributes API operation.
+type DescribeFleetAttributesRequest struct {
+	*aws.Request
+	Input *DescribeFleetAttributesInput
+}
+
+// Send marshals and sends the DescribeFleetAttributes API request.
+func (r DescribeFleetAttributesRequest) Send() (*DescribeFleetAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetAttributesOutput), nil
+}
+
+// DescribeFleetAttributesRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves fleet properties, including metadata, status, and configuration,
 // for one or more fleets. You can request attributes for all fleets, or specify
@@ -3073,95 +1915,49 @@ func (c *GameLift) DescribeFleetAttributesRequest(input *DescribeFleetAttributes
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeFleetAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes
-func (c *GameLift) DescribeFleetAttributes(input *DescribeFleetAttributesInput) (*DescribeFleetAttributesOutput, error) {
-	req, out := c.DescribeFleetAttributesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeFleetAttributesWithContext is the same as DescribeFleetAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeFleetAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeFleetAttributesWithContext(ctx aws.Context, input *DescribeFleetAttributesInput, opts ...aws.Option) (*DescribeFleetAttributesOutput, error) {
-	req, out := c.DescribeFleetAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeFleetCapacity = "DescribeFleetCapacity"
-
-// DescribeFleetCapacityRequest generates a "aws.Request" representing the
-// client's request for the DescribeFleetCapacity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeFleetCapacity for more information on using the DescribeFleetCapacity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeFleetCapacityRequest method.
-//    req, resp := client.DescribeFleetCapacityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeFleetAttributesRequest method.
+//    req := client.DescribeFleetAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity
-func (c *GameLift) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInput) (req *aws.Request, output *DescribeFleetCapacityOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes
+func (c *GameLift) DescribeFleetAttributesRequest(input *DescribeFleetAttributesInput) DescribeFleetAttributesRequest {
 	op := &aws.Operation{
-		Name:       opDescribeFleetCapacity,
+		Name:       opDescribeFleetAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeFleetCapacityInput{}
+		input = &DescribeFleetAttributesInput{}
 	}
 
-	output = &DescribeFleetCapacityOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeFleetAttributesOutput{})
+	return DescribeFleetAttributesRequest{Request: req, Input: input}
 }
 
-// DescribeFleetCapacity API operation for Amazon GameLift.
+const opDescribeFleetCapacity = "DescribeFleetCapacity"
+
+// DescribeFleetCapacityRequest is a API request type for the DescribeFleetCapacity API operation.
+type DescribeFleetCapacityRequest struct {
+	*aws.Request
+	Input *DescribeFleetCapacityInput
+}
+
+// Send marshals and sends the DescribeFleetCapacity API request.
+func (r DescribeFleetCapacityRequest) Send() (*DescribeFleetCapacityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetCapacityOutput), nil
+}
+
+// DescribeFleetCapacityRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the current status of fleet capacity for one or more fleets. This
 // information includes the number of instances that have been requested for
@@ -3220,95 +2016,49 @@ func (c *GameLift) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInpu
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeFleetCapacity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity
-func (c *GameLift) DescribeFleetCapacity(input *DescribeFleetCapacityInput) (*DescribeFleetCapacityOutput, error) {
-	req, out := c.DescribeFleetCapacityRequest(input)
-	return out, req.Send()
-}
-
-// DescribeFleetCapacityWithContext is the same as DescribeFleetCapacity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeFleetCapacity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeFleetCapacityWithContext(ctx aws.Context, input *DescribeFleetCapacityInput, opts ...aws.Option) (*DescribeFleetCapacityOutput, error) {
-	req, out := c.DescribeFleetCapacityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeFleetEvents = "DescribeFleetEvents"
-
-// DescribeFleetEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeFleetEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeFleetEvents for more information on using the DescribeFleetEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeFleetEventsRequest method.
-//    req, resp := client.DescribeFleetEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeFleetCapacityRequest method.
+//    req := client.DescribeFleetCapacityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEvents
-func (c *GameLift) DescribeFleetEventsRequest(input *DescribeFleetEventsInput) (req *aws.Request, output *DescribeFleetEventsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity
+func (c *GameLift) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInput) DescribeFleetCapacityRequest {
 	op := &aws.Operation{
-		Name:       opDescribeFleetEvents,
+		Name:       opDescribeFleetCapacity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeFleetEventsInput{}
+		input = &DescribeFleetCapacityInput{}
 	}
 
-	output = &DescribeFleetEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeFleetCapacityOutput{})
+	return DescribeFleetCapacityRequest{Request: req, Input: input}
 }
 
-// DescribeFleetEvents API operation for Amazon GameLift.
+const opDescribeFleetEvents = "DescribeFleetEvents"
+
+// DescribeFleetEventsRequest is a API request type for the DescribeFleetEvents API operation.
+type DescribeFleetEventsRequest struct {
+	*aws.Request
+	Input *DescribeFleetEventsInput
+}
+
+// Send marshals and sends the DescribeFleetEvents API request.
+func (r DescribeFleetEventsRequest) Send() (*DescribeFleetEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetEventsOutput), nil
+}
+
+// DescribeFleetEventsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves entries from the specified fleet's event log. You can specify a
 // time range to limit the result set. Use the pagination parameters to retrieve
@@ -3359,95 +2109,49 @@ func (c *GameLift) DescribeFleetEventsRequest(input *DescribeFleetEventsInput) (
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeFleetEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEvents
-func (c *GameLift) DescribeFleetEvents(input *DescribeFleetEventsInput) (*DescribeFleetEventsOutput, error) {
-	req, out := c.DescribeFleetEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeFleetEventsWithContext is the same as DescribeFleetEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeFleetEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeFleetEventsWithContext(ctx aws.Context, input *DescribeFleetEventsInput, opts ...aws.Option) (*DescribeFleetEventsOutput, error) {
-	req, out := c.DescribeFleetEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
-
-// DescribeFleetPortSettingsRequest generates a "aws.Request" representing the
-// client's request for the DescribeFleetPortSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeFleetPortSettings for more information on using the DescribeFleetPortSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeFleetPortSettingsRequest method.
-//    req, resp := client.DescribeFleetPortSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeFleetEventsRequest method.
+//    req := client.DescribeFleetEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetPortSettings
-func (c *GameLift) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettingsInput) (req *aws.Request, output *DescribeFleetPortSettingsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEvents
+func (c *GameLift) DescribeFleetEventsRequest(input *DescribeFleetEventsInput) DescribeFleetEventsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeFleetPortSettings,
+		Name:       opDescribeFleetEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeFleetPortSettingsInput{}
+		input = &DescribeFleetEventsInput{}
 	}
 
-	output = &DescribeFleetPortSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeFleetEventsOutput{})
+	return DescribeFleetEventsRequest{Request: req, Input: input}
 }
 
-// DescribeFleetPortSettings API operation for Amazon GameLift.
+const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
+
+// DescribeFleetPortSettingsRequest is a API request type for the DescribeFleetPortSettings API operation.
+type DescribeFleetPortSettingsRequest struct {
+	*aws.Request
+	Input *DescribeFleetPortSettingsInput
+}
+
+// Send marshals and sends the DescribeFleetPortSettings API request.
+func (r DescribeFleetPortSettingsRequest) Send() (*DescribeFleetPortSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetPortSettingsOutput), nil
+}
+
+// DescribeFleetPortSettingsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the inbound connection permissions for a fleet. Connection permissions
 // include a range of IP addresses and port settings that incoming traffic can
@@ -3500,95 +2204,49 @@ func (c *GameLift) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSett
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeFleetPortSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetPortSettings
-func (c *GameLift) DescribeFleetPortSettings(input *DescribeFleetPortSettingsInput) (*DescribeFleetPortSettingsOutput, error) {
-	req, out := c.DescribeFleetPortSettingsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeFleetPortSettingsWithContext is the same as DescribeFleetPortSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeFleetPortSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeFleetPortSettingsWithContext(ctx aws.Context, input *DescribeFleetPortSettingsInput, opts ...aws.Option) (*DescribeFleetPortSettingsOutput, error) {
-	req, out := c.DescribeFleetPortSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeFleetUtilization = "DescribeFleetUtilization"
-
-// DescribeFleetUtilizationRequest generates a "aws.Request" representing the
-// client's request for the DescribeFleetUtilization operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeFleetUtilization for more information on using the DescribeFleetUtilization
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeFleetUtilizationRequest method.
-//    req, resp := client.DescribeFleetUtilizationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeFleetPortSettingsRequest method.
+//    req := client.DescribeFleetPortSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilization
-func (c *GameLift) DescribeFleetUtilizationRequest(input *DescribeFleetUtilizationInput) (req *aws.Request, output *DescribeFleetUtilizationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetPortSettings
+func (c *GameLift) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettingsInput) DescribeFleetPortSettingsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeFleetUtilization,
+		Name:       opDescribeFleetPortSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeFleetUtilizationInput{}
+		input = &DescribeFleetPortSettingsInput{}
 	}
 
-	output = &DescribeFleetUtilizationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeFleetPortSettingsOutput{})
+	return DescribeFleetPortSettingsRequest{Request: req, Input: input}
 }
 
-// DescribeFleetUtilization API operation for Amazon GameLift.
+const opDescribeFleetUtilization = "DescribeFleetUtilization"
+
+// DescribeFleetUtilizationRequest is a API request type for the DescribeFleetUtilization API operation.
+type DescribeFleetUtilizationRequest struct {
+	*aws.Request
+	Input *DescribeFleetUtilizationInput
+}
+
+// Send marshals and sends the DescribeFleetUtilization API request.
+func (r DescribeFleetUtilizationRequest) Send() (*DescribeFleetUtilizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetUtilizationOutput), nil
+}
+
+// DescribeFleetUtilizationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves utilization statistics for one or more fleets. You can request
 // utilization data for all fleets, or specify a list of one or more fleet IDs.
@@ -3645,95 +2303,49 @@ func (c *GameLift) DescribeFleetUtilizationRequest(input *DescribeFleetUtilizati
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeFleetUtilization for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilization
-func (c *GameLift) DescribeFleetUtilization(input *DescribeFleetUtilizationInput) (*DescribeFleetUtilizationOutput, error) {
-	req, out := c.DescribeFleetUtilizationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeFleetUtilizationWithContext is the same as DescribeFleetUtilization with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeFleetUtilization for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeFleetUtilizationWithContext(ctx aws.Context, input *DescribeFleetUtilizationInput, opts ...aws.Option) (*DescribeFleetUtilizationOutput, error) {
-	req, out := c.DescribeFleetUtilizationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
-
-// DescribeGameSessionDetailsRequest generates a "aws.Request" representing the
-// client's request for the DescribeGameSessionDetails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeGameSessionDetails for more information on using the DescribeGameSessionDetails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeGameSessionDetailsRequest method.
-//    req, resp := client.DescribeGameSessionDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeFleetUtilizationRequest method.
+//    req := client.DescribeFleetUtilizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetails
-func (c *GameLift) DescribeGameSessionDetailsRequest(input *DescribeGameSessionDetailsInput) (req *aws.Request, output *DescribeGameSessionDetailsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilization
+func (c *GameLift) DescribeFleetUtilizationRequest(input *DescribeFleetUtilizationInput) DescribeFleetUtilizationRequest {
 	op := &aws.Operation{
-		Name:       opDescribeGameSessionDetails,
+		Name:       opDescribeFleetUtilization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeGameSessionDetailsInput{}
+		input = &DescribeFleetUtilizationInput{}
 	}
 
-	output = &DescribeGameSessionDetailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeFleetUtilizationOutput{})
+	return DescribeFleetUtilizationRequest{Request: req, Input: input}
 }
 
-// DescribeGameSessionDetails API operation for Amazon GameLift.
+const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
+
+// DescribeGameSessionDetailsRequest is a API request type for the DescribeGameSessionDetails API operation.
+type DescribeGameSessionDetailsRequest struct {
+	*aws.Request
+	Input *DescribeGameSessionDetailsInput
+}
+
+// Send marshals and sends the DescribeGameSessionDetails API request.
+func (r DescribeGameSessionDetailsRequest) Send() (*DescribeGameSessionDetailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeGameSessionDetailsOutput), nil
+}
+
+// DescribeGameSessionDetailsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves properties, including the protection policy in force, for one or
 // more game sessions. This action can be used in several ways: (1) provide
@@ -3769,102 +2381,49 @@ func (c *GameLift) DescribeGameSessionDetailsRequest(input *DescribeGameSessionD
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeGameSessionDetails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeTerminalRoutingStrategyException "TerminalRoutingStrategyException"
-//   The service is unable to resolve the routing for a particular alias because
-//   it has a terminal RoutingStrategy associated with it. The message returned
-//   in this exception is the message defined in the routing strategy itself.
-//   Such requests should only be retried if the routing strategy for the specified
-//   alias is modified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetails
-func (c *GameLift) DescribeGameSessionDetails(input *DescribeGameSessionDetailsInput) (*DescribeGameSessionDetailsOutput, error) {
-	req, out := c.DescribeGameSessionDetailsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeGameSessionDetailsWithContext is the same as DescribeGameSessionDetails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeGameSessionDetails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionDetailsWithContext(ctx aws.Context, input *DescribeGameSessionDetailsInput, opts ...aws.Option) (*DescribeGameSessionDetailsOutput, error) {
-	req, out := c.DescribeGameSessionDetailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
-
-// DescribeGameSessionPlacementRequest generates a "aws.Request" representing the
-// client's request for the DescribeGameSessionPlacement operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeGameSessionPlacement for more information on using the DescribeGameSessionPlacement
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeGameSessionPlacementRequest method.
-//    req, resp := client.DescribeGameSessionPlacementRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeGameSessionDetailsRequest method.
+//    req := client.DescribeGameSessionDetailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement
-func (c *GameLift) DescribeGameSessionPlacementRequest(input *DescribeGameSessionPlacementInput) (req *aws.Request, output *DescribeGameSessionPlacementOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetails
+func (c *GameLift) DescribeGameSessionDetailsRequest(input *DescribeGameSessionDetailsInput) DescribeGameSessionDetailsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeGameSessionPlacement,
+		Name:       opDescribeGameSessionDetails,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeGameSessionPlacementInput{}
+		input = &DescribeGameSessionDetailsInput{}
 	}
 
-	output = &DescribeGameSessionPlacementOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeGameSessionDetailsOutput{})
+	return DescribeGameSessionDetailsRequest{Request: req, Input: input}
 }
 
-// DescribeGameSessionPlacement API operation for Amazon GameLift.
+const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
+
+// DescribeGameSessionPlacementRequest is a API request type for the DescribeGameSessionPlacement API operation.
+type DescribeGameSessionPlacementRequest struct {
+	*aws.Request
+	Input *DescribeGameSessionPlacementInput
+}
+
+// Send marshals and sends the DescribeGameSessionPlacement API request.
+func (r DescribeGameSessionPlacementRequest) Send() (*DescribeGameSessionPlacementOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeGameSessionPlacementOutput), nil
+}
+
+// DescribeGameSessionPlacementRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves properties and current status of a game session placement request.
 // To get game session placement details, specify the placement ID. If successful,
@@ -3892,95 +2451,49 @@ func (c *GameLift) DescribeGameSessionPlacementRequest(input *DescribeGameSessio
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeGameSessionPlacement for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement
-func (c *GameLift) DescribeGameSessionPlacement(input *DescribeGameSessionPlacementInput) (*DescribeGameSessionPlacementOutput, error) {
-	req, out := c.DescribeGameSessionPlacementRequest(input)
-	return out, req.Send()
-}
-
-// DescribeGameSessionPlacementWithContext is the same as DescribeGameSessionPlacement with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeGameSessionPlacement for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionPlacementWithContext(ctx aws.Context, input *DescribeGameSessionPlacementInput, opts ...aws.Option) (*DescribeGameSessionPlacementOutput, error) {
-	req, out := c.DescribeGameSessionPlacementRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
-
-// DescribeGameSessionQueuesRequest generates a "aws.Request" representing the
-// client's request for the DescribeGameSessionQueues operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeGameSessionQueues for more information on using the DescribeGameSessionQueues
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeGameSessionQueuesRequest method.
-//    req, resp := client.DescribeGameSessionQueuesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeGameSessionPlacementRequest method.
+//    req := client.DescribeGameSessionPlacementRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueues
-func (c *GameLift) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueuesInput) (req *aws.Request, output *DescribeGameSessionQueuesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement
+func (c *GameLift) DescribeGameSessionPlacementRequest(input *DescribeGameSessionPlacementInput) DescribeGameSessionPlacementRequest {
 	op := &aws.Operation{
-		Name:       opDescribeGameSessionQueues,
+		Name:       opDescribeGameSessionPlacement,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeGameSessionQueuesInput{}
+		input = &DescribeGameSessionPlacementInput{}
 	}
 
-	output = &DescribeGameSessionQueuesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeGameSessionPlacementOutput{})
+	return DescribeGameSessionPlacementRequest{Request: req, Input: input}
 }
 
-// DescribeGameSessionQueues API operation for Amazon GameLift.
+const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
+
+// DescribeGameSessionQueuesRequest is a API request type for the DescribeGameSessionQueues API operation.
+type DescribeGameSessionQueuesRequest struct {
+	*aws.Request
+	Input *DescribeGameSessionQueuesInput
+}
+
+// Send marshals and sends the DescribeGameSessionQueues API request.
+func (r DescribeGameSessionQueuesRequest) Send() (*DescribeGameSessionQueuesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeGameSessionQueuesOutput), nil
+}
+
+// DescribeGameSessionQueuesRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the properties for one or more game session queues. When requesting
 // multiple queues, use the pagination parameters to retrieve results as a set
@@ -3998,95 +2511,49 @@ func (c *GameLift) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQu
 //
 //    * DeleteGameSessionQueue
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeGameSessionQueues for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueues
-func (c *GameLift) DescribeGameSessionQueues(input *DescribeGameSessionQueuesInput) (*DescribeGameSessionQueuesOutput, error) {
-	req, out := c.DescribeGameSessionQueuesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeGameSessionQueuesWithContext is the same as DescribeGameSessionQueues with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeGameSessionQueues for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionQueuesWithContext(ctx aws.Context, input *DescribeGameSessionQueuesInput, opts ...aws.Option) (*DescribeGameSessionQueuesOutput, error) {
-	req, out := c.DescribeGameSessionQueuesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeGameSessions = "DescribeGameSessions"
-
-// DescribeGameSessionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeGameSessions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeGameSessions for more information on using the DescribeGameSessions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeGameSessionsRequest method.
-//    req, resp := client.DescribeGameSessionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeGameSessionQueuesRequest method.
+//    req := client.DescribeGameSessionQueuesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions
-func (c *GameLift) DescribeGameSessionsRequest(input *DescribeGameSessionsInput) (req *aws.Request, output *DescribeGameSessionsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueues
+func (c *GameLift) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueuesInput) DescribeGameSessionQueuesRequest {
 	op := &aws.Operation{
-		Name:       opDescribeGameSessions,
+		Name:       opDescribeGameSessionQueues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeGameSessionsInput{}
+		input = &DescribeGameSessionQueuesInput{}
 	}
 
-	output = &DescribeGameSessionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeGameSessionQueuesOutput{})
+	return DescribeGameSessionQueuesRequest{Request: req, Input: input}
 }
 
-// DescribeGameSessions API operation for Amazon GameLift.
+const opDescribeGameSessions = "DescribeGameSessions"
+
+// DescribeGameSessionsRequest is a API request type for the DescribeGameSessions API operation.
+type DescribeGameSessionsRequest struct {
+	*aws.Request
+	Input *DescribeGameSessionsInput
+}
+
+// Send marshals and sends the DescribeGameSessions API request.
+func (r DescribeGameSessionsRequest) Send() (*DescribeGameSessionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeGameSessionsOutput), nil
+}
+
+// DescribeGameSessionsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves a set of one or more game sessions. Request a specific game session
 // or request all game sessions on a fleet. Alternatively, use SearchGameSessions
@@ -4123,102 +2590,49 @@ func (c *GameLift) DescribeGameSessionsRequest(input *DescribeGameSessionsInput)
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeGameSessions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeTerminalRoutingStrategyException "TerminalRoutingStrategyException"
-//   The service is unable to resolve the routing for a particular alias because
-//   it has a terminal RoutingStrategy associated with it. The message returned
-//   in this exception is the message defined in the routing strategy itself.
-//   Such requests should only be retried if the routing strategy for the specified
-//   alias is modified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions
-func (c *GameLift) DescribeGameSessions(input *DescribeGameSessionsInput) (*DescribeGameSessionsOutput, error) {
-	req, out := c.DescribeGameSessionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeGameSessionsWithContext is the same as DescribeGameSessions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeGameSessions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionsWithContext(ctx aws.Context, input *DescribeGameSessionsInput, opts ...aws.Option) (*DescribeGameSessionsOutput, error) {
-	req, out := c.DescribeGameSessionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeInstances = "DescribeInstances"
-
-// DescribeInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstances for more information on using the DescribeInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeInstancesRequest method.
-//    req, resp := client.DescribeInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeGameSessionsRequest method.
+//    req := client.DescribeGameSessionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstances
-func (c *GameLift) DescribeInstancesRequest(input *DescribeInstancesInput) (req *aws.Request, output *DescribeInstancesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions
+func (c *GameLift) DescribeGameSessionsRequest(input *DescribeGameSessionsInput) DescribeGameSessionsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeInstances,
+		Name:       opDescribeGameSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeInstancesInput{}
+		input = &DescribeGameSessionsInput{}
 	}
 
-	output = &DescribeInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeGameSessionsOutput{})
+	return DescribeGameSessionsRequest{Request: req, Input: input}
 }
 
-// DescribeInstances API operation for Amazon GameLift.
+const opDescribeInstances = "DescribeInstances"
+
+// DescribeInstancesRequest is a API request type for the DescribeInstances API operation.
+type DescribeInstancesRequest struct {
+	*aws.Request
+	Input *DescribeInstancesInput
+}
+
+// Send marshals and sends the DescribeInstances API request.
+func (r DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstancesOutput), nil
+}
+
+// DescribeInstancesRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves information about a fleet's instances, including instance IDs.
 // Use this action to get details on all instances in the fleet or get details
@@ -4229,95 +2643,49 @@ func (c *GameLift) DescribeInstancesRequest(input *DescribeInstancesInput) (req 
 // to retrieve results as a set of sequential pages. If successful, an Instance
 // object is returned for each result.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstances
-func (c *GameLift) DescribeInstances(input *DescribeInstancesInput) (*DescribeInstancesOutput, error) {
-	req, out := c.DescribeInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstancesWithContext is the same as DescribeInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeInstancesWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.Option) (*DescribeInstancesOutput, error) {
-	req, out := c.DescribeInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeMatchmaking = "DescribeMatchmaking"
-
-// DescribeMatchmakingRequest generates a "aws.Request" representing the
-// client's request for the DescribeMatchmaking operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMatchmaking for more information on using the DescribeMatchmaking
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeMatchmakingRequest method.
-//    req, resp := client.DescribeMatchmakingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeInstancesRequest method.
+//    req := client.DescribeInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmaking
-func (c *GameLift) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) (req *aws.Request, output *DescribeMatchmakingOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstances
+func (c *GameLift) DescribeInstancesRequest(input *DescribeInstancesInput) DescribeInstancesRequest {
 	op := &aws.Operation{
-		Name:       opDescribeMatchmaking,
+		Name:       opDescribeInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeMatchmakingInput{}
+		input = &DescribeInstancesInput{}
 	}
 
-	output = &DescribeMatchmakingOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+	return DescribeInstancesRequest{Request: req, Input: input}
 }
 
-// DescribeMatchmaking API operation for Amazon GameLift.
+const opDescribeMatchmaking = "DescribeMatchmaking"
+
+// DescribeMatchmakingRequest is a API request type for the DescribeMatchmaking API operation.
+type DescribeMatchmakingRequest struct {
+	*aws.Request
+	Input *DescribeMatchmakingInput
+}
+
+// Send marshals and sends the DescribeMatchmaking API request.
+func (r DescribeMatchmakingRequest) Send() (*DescribeMatchmakingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMatchmakingOutput), nil
+}
+
+// DescribeMatchmakingRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves a set of one or more matchmaking tickets. Use this operation to
 // retrieve ticket information, including status and--once a successful match
@@ -4343,91 +2711,49 @@ func (c *GameLift) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) (
 //
 //    * AcceptMatch
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeMatchmaking for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmaking
-func (c *GameLift) DescribeMatchmaking(input *DescribeMatchmakingInput) (*DescribeMatchmakingOutput, error) {
-	req, out := c.DescribeMatchmakingRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMatchmakingWithContext is the same as DescribeMatchmaking with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMatchmaking for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeMatchmakingWithContext(ctx aws.Context, input *DescribeMatchmakingInput, opts ...aws.Option) (*DescribeMatchmakingOutput, error) {
-	req, out := c.DescribeMatchmakingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
-
-// DescribeMatchmakingConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMatchmakingConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMatchmakingConfigurations for more information on using the DescribeMatchmakingConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeMatchmakingConfigurationsRequest method.
-//    req, resp := client.DescribeMatchmakingConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeMatchmakingRequest method.
+//    req := client.DescribeMatchmakingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations
-func (c *GameLift) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchmakingConfigurationsInput) (req *aws.Request, output *DescribeMatchmakingConfigurationsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmaking
+func (c *GameLift) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) DescribeMatchmakingRequest {
 	op := &aws.Operation{
-		Name:       opDescribeMatchmakingConfigurations,
+		Name:       opDescribeMatchmaking,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeMatchmakingConfigurationsInput{}
+		input = &DescribeMatchmakingInput{}
 	}
 
-	output = &DescribeMatchmakingConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeMatchmakingOutput{})
+	return DescribeMatchmakingRequest{Request: req, Input: input}
 }
 
-// DescribeMatchmakingConfigurations API operation for Amazon GameLift.
+const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
+
+// DescribeMatchmakingConfigurationsRequest is a API request type for the DescribeMatchmakingConfigurations API operation.
+type DescribeMatchmakingConfigurationsRequest struct {
+	*aws.Request
+	Input *DescribeMatchmakingConfigurationsInput
+}
+
+// Send marshals and sends the DescribeMatchmakingConfigurations API request.
+func (r DescribeMatchmakingConfigurationsRequest) Send() (*DescribeMatchmakingConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMatchmakingConfigurationsOutput), nil
+}
+
+// DescribeMatchmakingConfigurationsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the details of FlexMatch matchmaking configurations. with this
 // operation, you have the following options: (1) retrieve all existing configurations,
@@ -4454,91 +2780,49 @@ func (c *GameLift) DescribeMatchmakingConfigurationsRequest(input *DescribeMatch
 //
 //    * ValidateMatchmakingRuleSet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeMatchmakingConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations
-func (c *GameLift) DescribeMatchmakingConfigurations(input *DescribeMatchmakingConfigurationsInput) (*DescribeMatchmakingConfigurationsOutput, error) {
-	req, out := c.DescribeMatchmakingConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMatchmakingConfigurationsWithContext is the same as DescribeMatchmakingConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMatchmakingConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeMatchmakingConfigurationsWithContext(ctx aws.Context, input *DescribeMatchmakingConfigurationsInput, opts ...aws.Option) (*DescribeMatchmakingConfigurationsOutput, error) {
-	req, out := c.DescribeMatchmakingConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeMatchmakingRuleSets = "DescribeMatchmakingRuleSets"
-
-// DescribeMatchmakingRuleSetsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMatchmakingRuleSets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMatchmakingRuleSets for more information on using the DescribeMatchmakingRuleSets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeMatchmakingRuleSetsRequest method.
-//    req, resp := client.DescribeMatchmakingRuleSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeMatchmakingConfigurationsRequest method.
+//    req := client.DescribeMatchmakingConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSets
-func (c *GameLift) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmakingRuleSetsInput) (req *aws.Request, output *DescribeMatchmakingRuleSetsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations
+func (c *GameLift) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchmakingConfigurationsInput) DescribeMatchmakingConfigurationsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeMatchmakingRuleSets,
+		Name:       opDescribeMatchmakingConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeMatchmakingRuleSetsInput{}
+		input = &DescribeMatchmakingConfigurationsInput{}
 	}
 
-	output = &DescribeMatchmakingRuleSetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeMatchmakingConfigurationsOutput{})
+	return DescribeMatchmakingConfigurationsRequest{Request: req, Input: input}
 }
 
-// DescribeMatchmakingRuleSets API operation for Amazon GameLift.
+const opDescribeMatchmakingRuleSets = "DescribeMatchmakingRuleSets"
+
+// DescribeMatchmakingRuleSetsRequest is a API request type for the DescribeMatchmakingRuleSets API operation.
+type DescribeMatchmakingRuleSetsRequest struct {
+	*aws.Request
+	Input *DescribeMatchmakingRuleSetsInput
+}
+
+// Send marshals and sends the DescribeMatchmakingRuleSets API request.
+func (r DescribeMatchmakingRuleSetsRequest) Send() (*DescribeMatchmakingRuleSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMatchmakingRuleSetsOutput), nil
+}
+
+// DescribeMatchmakingRuleSetsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the details for FlexMatch matchmaking rule sets. You can request
 // all existing rule sets for the region, or provide a list of one or more rule
@@ -4562,95 +2846,49 @@ func (c *GameLift) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmaking
 //
 //    * ValidateMatchmakingRuleSet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeMatchmakingRuleSets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSets
-func (c *GameLift) DescribeMatchmakingRuleSets(input *DescribeMatchmakingRuleSetsInput) (*DescribeMatchmakingRuleSetsOutput, error) {
-	req, out := c.DescribeMatchmakingRuleSetsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMatchmakingRuleSetsWithContext is the same as DescribeMatchmakingRuleSets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMatchmakingRuleSets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeMatchmakingRuleSetsWithContext(ctx aws.Context, input *DescribeMatchmakingRuleSetsInput, opts ...aws.Option) (*DescribeMatchmakingRuleSetsOutput, error) {
-	req, out := c.DescribeMatchmakingRuleSetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribePlayerSessions = "DescribePlayerSessions"
-
-// DescribePlayerSessionsRequest generates a "aws.Request" representing the
-// client's request for the DescribePlayerSessions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePlayerSessions for more information on using the DescribePlayerSessions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribePlayerSessionsRequest method.
-//    req, resp := client.DescribePlayerSessionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeMatchmakingRuleSetsRequest method.
+//    req := client.DescribeMatchmakingRuleSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessions
-func (c *GameLift) DescribePlayerSessionsRequest(input *DescribePlayerSessionsInput) (req *aws.Request, output *DescribePlayerSessionsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSets
+func (c *GameLift) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmakingRuleSetsInput) DescribeMatchmakingRuleSetsRequest {
 	op := &aws.Operation{
-		Name:       opDescribePlayerSessions,
+		Name:       opDescribeMatchmakingRuleSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribePlayerSessionsInput{}
+		input = &DescribeMatchmakingRuleSetsInput{}
 	}
 
-	output = &DescribePlayerSessionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeMatchmakingRuleSetsOutput{})
+	return DescribeMatchmakingRuleSetsRequest{Request: req, Input: input}
 }
 
-// DescribePlayerSessions API operation for Amazon GameLift.
+const opDescribePlayerSessions = "DescribePlayerSessions"
+
+// DescribePlayerSessionsRequest is a API request type for the DescribePlayerSessions API operation.
+type DescribePlayerSessionsRequest struct {
+	*aws.Request
+	Input *DescribePlayerSessionsInput
+}
+
+// Send marshals and sends the DescribePlayerSessions API request.
+func (r DescribePlayerSessionsRequest) Send() (*DescribePlayerSessionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePlayerSessionsOutput), nil
+}
+
+// DescribePlayerSessionsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves properties for one or more player sessions. This action can be
 // used in several ways: (1) provide a PlayerSessionId to request properties
@@ -4682,95 +2920,49 @@ func (c *GameLift) DescribePlayerSessionsRequest(input *DescribePlayerSessionsIn
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribePlayerSessions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessions
-func (c *GameLift) DescribePlayerSessions(input *DescribePlayerSessionsInput) (*DescribePlayerSessionsOutput, error) {
-	req, out := c.DescribePlayerSessionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribePlayerSessionsWithContext is the same as DescribePlayerSessions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePlayerSessions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribePlayerSessionsWithContext(ctx aws.Context, input *DescribePlayerSessionsInput, opts ...aws.Option) (*DescribePlayerSessionsOutput, error) {
-	req, out := c.DescribePlayerSessionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
-
-// DescribeRuntimeConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DescribeRuntimeConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeRuntimeConfiguration for more information on using the DescribeRuntimeConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeRuntimeConfigurationRequest method.
-//    req, resp := client.DescribeRuntimeConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribePlayerSessionsRequest method.
+//    req := client.DescribePlayerSessionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfiguration
-func (c *GameLift) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfigurationInput) (req *aws.Request, output *DescribeRuntimeConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessions
+func (c *GameLift) DescribePlayerSessionsRequest(input *DescribePlayerSessionsInput) DescribePlayerSessionsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeRuntimeConfiguration,
+		Name:       opDescribePlayerSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeRuntimeConfigurationInput{}
+		input = &DescribePlayerSessionsInput{}
 	}
 
-	output = &DescribeRuntimeConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribePlayerSessionsOutput{})
+	return DescribePlayerSessionsRequest{Request: req, Input: input}
 }
 
-// DescribeRuntimeConfiguration API operation for Amazon GameLift.
+const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
+
+// DescribeRuntimeConfigurationRequest is a API request type for the DescribeRuntimeConfiguration API operation.
+type DescribeRuntimeConfigurationRequest struct {
+	*aws.Request
+	Input *DescribeRuntimeConfigurationInput
+}
+
+// Send marshals and sends the DescribeRuntimeConfiguration API request.
+func (r DescribeRuntimeConfigurationRequest) Send() (*DescribeRuntimeConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRuntimeConfigurationOutput), nil
+}
+
+// DescribeRuntimeConfigurationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the current run-time configuration for the specified fleet. The
 // run-time configuration tells Amazon GameLift how to launch server processes
@@ -4820,95 +3012,49 @@ func (c *GameLift) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeCon
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeRuntimeConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfiguration
-func (c *GameLift) DescribeRuntimeConfiguration(input *DescribeRuntimeConfigurationInput) (*DescribeRuntimeConfigurationOutput, error) {
-	req, out := c.DescribeRuntimeConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeRuntimeConfigurationWithContext is the same as DescribeRuntimeConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeRuntimeConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeRuntimeConfigurationWithContext(ctx aws.Context, input *DescribeRuntimeConfigurationInput, opts ...aws.Option) (*DescribeRuntimeConfigurationOutput, error) {
-	req, out := c.DescribeRuntimeConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeScalingPolicies = "DescribeScalingPolicies"
-
-// DescribeScalingPoliciesRequest generates a "aws.Request" representing the
-// client's request for the DescribeScalingPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeScalingPolicies for more information on using the DescribeScalingPolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeScalingPoliciesRequest method.
-//    req, resp := client.DescribeScalingPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeRuntimeConfigurationRequest method.
+//    req := client.DescribeRuntimeConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPolicies
-func (c *GameLift) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) (req *aws.Request, output *DescribeScalingPoliciesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfiguration
+func (c *GameLift) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfigurationInput) DescribeRuntimeConfigurationRequest {
 	op := &aws.Operation{
-		Name:       opDescribeScalingPolicies,
+		Name:       opDescribeRuntimeConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeScalingPoliciesInput{}
+		input = &DescribeRuntimeConfigurationInput{}
 	}
 
-	output = &DescribeScalingPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeRuntimeConfigurationOutput{})
+	return DescribeRuntimeConfigurationRequest{Request: req, Input: input}
 }
 
-// DescribeScalingPolicies API operation for Amazon GameLift.
+const opDescribeScalingPolicies = "DescribeScalingPolicies"
+
+// DescribeScalingPoliciesRequest is a API request type for the DescribeScalingPolicies API operation.
+type DescribeScalingPoliciesRequest struct {
+	*aws.Request
+	Input *DescribeScalingPoliciesInput
+}
+
+// Send marshals and sends the DescribeScalingPolicies API request.
+func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScalingPoliciesOutput), nil
+}
+
+// DescribeScalingPoliciesRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves all scaling policies applied to a fleet.
 //
@@ -4961,95 +3107,49 @@ func (c *GameLift) DescribeScalingPoliciesRequest(input *DescribeScalingPolicies
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeScalingPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPolicies
-func (c *GameLift) DescribeScalingPolicies(input *DescribeScalingPoliciesInput) (*DescribeScalingPoliciesOutput, error) {
-	req, out := c.DescribeScalingPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScalingPoliciesWithContext is the same as DescribeScalingPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScalingPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeScalingPoliciesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, opts ...aws.Option) (*DescribeScalingPoliciesOutput, error) {
-	req, out := c.DescribeScalingPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeVpcPeeringAuthorizations = "DescribeVpcPeeringAuthorizations"
-
-// DescribeVpcPeeringAuthorizationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeVpcPeeringAuthorizations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeVpcPeeringAuthorizations for more information on using the DescribeVpcPeeringAuthorizations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeVpcPeeringAuthorizationsRequest method.
-//    req, resp := client.DescribeVpcPeeringAuthorizationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeScalingPoliciesRequest method.
+//    req := client.DescribeScalingPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizations
-func (c *GameLift) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPeeringAuthorizationsInput) (req *aws.Request, output *DescribeVpcPeeringAuthorizationsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPolicies
+func (c *GameLift) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest {
 	op := &aws.Operation{
-		Name:       opDescribeVpcPeeringAuthorizations,
+		Name:       opDescribeScalingPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeVpcPeeringAuthorizationsInput{}
+		input = &DescribeScalingPoliciesInput{}
 	}
 
-	output = &DescribeVpcPeeringAuthorizationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeScalingPoliciesOutput{})
+	return DescribeScalingPoliciesRequest{Request: req, Input: input}
 }
 
-// DescribeVpcPeeringAuthorizations API operation for Amazon GameLift.
+const opDescribeVpcPeeringAuthorizations = "DescribeVpcPeeringAuthorizations"
+
+// DescribeVpcPeeringAuthorizationsRequest is a API request type for the DescribeVpcPeeringAuthorizations API operation.
+type DescribeVpcPeeringAuthorizationsRequest struct {
+	*aws.Request
+	Input *DescribeVpcPeeringAuthorizationsInput
+}
+
+// Send marshals and sends the DescribeVpcPeeringAuthorizations API request.
+func (r DescribeVpcPeeringAuthorizationsRequest) Send() (*DescribeVpcPeeringAuthorizationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVpcPeeringAuthorizationsOutput), nil
+}
+
+// DescribeVpcPeeringAuthorizationsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves valid VPC peering authorizations that are pending for the AWS account.
 // This operation returns all VPC peering authorizations and requests for peering.
@@ -5069,91 +3169,49 @@ func (c *GameLift) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPee
 //
 //    * DeleteVpcPeeringConnection
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeVpcPeeringAuthorizations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizations
-func (c *GameLift) DescribeVpcPeeringAuthorizations(input *DescribeVpcPeeringAuthorizationsInput) (*DescribeVpcPeeringAuthorizationsOutput, error) {
-	req, out := c.DescribeVpcPeeringAuthorizationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeVpcPeeringAuthorizationsWithContext is the same as DescribeVpcPeeringAuthorizations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVpcPeeringAuthorizations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeVpcPeeringAuthorizationsWithContext(ctx aws.Context, input *DescribeVpcPeeringAuthorizationsInput, opts ...aws.Option) (*DescribeVpcPeeringAuthorizationsOutput, error) {
-	req, out := c.DescribeVpcPeeringAuthorizationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
-
-// DescribeVpcPeeringConnectionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeVpcPeeringConnections operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeVpcPeeringConnections for more information on using the DescribeVpcPeeringConnections
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeVpcPeeringConnectionsRequest method.
-//    req, resp := client.DescribeVpcPeeringConnectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeVpcPeeringAuthorizationsRequest method.
+//    req := client.DescribeVpcPeeringAuthorizationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnections
-func (c *GameLift) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConnectionsInput) (req *aws.Request, output *DescribeVpcPeeringConnectionsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizations
+func (c *GameLift) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPeeringAuthorizationsInput) DescribeVpcPeeringAuthorizationsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeVpcPeeringConnections,
+		Name:       opDescribeVpcPeeringAuthorizations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeVpcPeeringConnectionsInput{}
+		input = &DescribeVpcPeeringAuthorizationsInput{}
 	}
 
-	output = &DescribeVpcPeeringConnectionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeVpcPeeringAuthorizationsOutput{})
+	return DescribeVpcPeeringAuthorizationsRequest{Request: req, Input: input}
 }
 
-// DescribeVpcPeeringConnections API operation for Amazon GameLift.
+const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
+
+// DescribeVpcPeeringConnectionsRequest is a API request type for the DescribeVpcPeeringConnections API operation.
+type DescribeVpcPeeringConnectionsRequest struct {
+	*aws.Request
+	Input *DescribeVpcPeeringConnectionsInput
+}
+
+// Send marshals and sends the DescribeVpcPeeringConnections API request.
+func (r DescribeVpcPeeringConnectionsRequest) Send() (*DescribeVpcPeeringConnectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVpcPeeringConnectionsOutput), nil
+}
+
+// DescribeVpcPeeringConnectionsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves information on VPC peering connections. Use this operation to get
 // peering information for all fleets or for one specific fleet ID.
@@ -5178,95 +3236,49 @@ func (c *GameLift) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeerin
 //
 //    * DeleteVpcPeeringConnection
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation DescribeVpcPeeringConnections for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnections
-func (c *GameLift) DescribeVpcPeeringConnections(input *DescribeVpcPeeringConnectionsInput) (*DescribeVpcPeeringConnectionsOutput, error) {
-	req, out := c.DescribeVpcPeeringConnectionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeVpcPeeringConnectionsWithContext is the same as DescribeVpcPeeringConnections with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVpcPeeringConnections for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) DescribeVpcPeeringConnectionsWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.Option) (*DescribeVpcPeeringConnectionsOutput, error) {
-	req, out := c.DescribeVpcPeeringConnectionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
-
-// GetGameSessionLogUrlRequest generates a "aws.Request" representing the
-// client's request for the GetGameSessionLogUrl operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGameSessionLogUrl for more information on using the GetGameSessionLogUrl
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetGameSessionLogUrlRequest method.
-//    req, resp := client.GetGameSessionLogUrlRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeVpcPeeringConnectionsRequest method.
+//    req := client.DescribeVpcPeeringConnectionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrl
-func (c *GameLift) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) (req *aws.Request, output *GetGameSessionLogUrlOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnections
+func (c *GameLift) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConnectionsInput) DescribeVpcPeeringConnectionsRequest {
 	op := &aws.Operation{
-		Name:       opGetGameSessionLogUrl,
+		Name:       opDescribeVpcPeeringConnections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetGameSessionLogUrlInput{}
+		input = &DescribeVpcPeeringConnectionsInput{}
 	}
 
-	output = &GetGameSessionLogUrlOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeVpcPeeringConnectionsOutput{})
+	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input}
 }
 
-// GetGameSessionLogUrl API operation for Amazon GameLift.
+const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
+
+// GetGameSessionLogUrlRequest is a API request type for the GetGameSessionLogUrl API operation.
+type GetGameSessionLogUrlRequest struct {
+	*aws.Request
+	Input *GetGameSessionLogUrlInput
+}
+
+// Send marshals and sends the GetGameSessionLogUrl API request.
+func (r GetGameSessionLogUrlRequest) Send() (*GetGameSessionLogUrlOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGameSessionLogUrlOutput), nil
+}
+
+// GetGameSessionLogUrlRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the location of stored game session logs for a specified game session.
 // When a game session is terminated, Amazon GameLift automatically stores the
@@ -5299,95 +3311,49 @@ func (c *GameLift) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput)
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation GetGameSessionLogUrl for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrl
-func (c *GameLift) GetGameSessionLogUrl(input *GetGameSessionLogUrlInput) (*GetGameSessionLogUrlOutput, error) {
-	req, out := c.GetGameSessionLogUrlRequest(input)
-	return out, req.Send()
-}
-
-// GetGameSessionLogUrlWithContext is the same as GetGameSessionLogUrl with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGameSessionLogUrl for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) GetGameSessionLogUrlWithContext(ctx aws.Context, input *GetGameSessionLogUrlInput, opts ...aws.Option) (*GetGameSessionLogUrlOutput, error) {
-	req, out := c.GetGameSessionLogUrlRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetInstanceAccess = "GetInstanceAccess"
-
-// GetInstanceAccessRequest generates a "aws.Request" representing the
-// client's request for the GetInstanceAccess operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstanceAccess for more information on using the GetInstanceAccess
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetInstanceAccessRequest method.
-//    req, resp := client.GetInstanceAccessRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetGameSessionLogUrlRequest method.
+//    req := client.GetGameSessionLogUrlRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetInstanceAccess
-func (c *GameLift) GetInstanceAccessRequest(input *GetInstanceAccessInput) (req *aws.Request, output *GetInstanceAccessOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrl
+func (c *GameLift) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) GetGameSessionLogUrlRequest {
 	op := &aws.Operation{
-		Name:       opGetInstanceAccess,
+		Name:       opGetGameSessionLogUrl,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetInstanceAccessInput{}
+		input = &GetGameSessionLogUrlInput{}
 	}
 
-	output = &GetInstanceAccessOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetGameSessionLogUrlOutput{})
+	return GetGameSessionLogUrlRequest{Request: req, Input: input}
 }
 
-// GetInstanceAccess API operation for Amazon GameLift.
+const opGetInstanceAccess = "GetInstanceAccess"
+
+// GetInstanceAccessRequest is a API request type for the GetInstanceAccess API operation.
+type GetInstanceAccessRequest struct {
+	*aws.Request
+	Input *GetInstanceAccessInput
+}
+
+// Send marshals and sends the GetInstanceAccess API request.
+func (r GetInstanceAccessRequest) Send() (*GetInstanceAccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceAccessOutput), nil
+}
+
+// GetInstanceAccessRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Requests remote access to a fleet instance. Remote access is useful for debugging,
 // gathering benchmarking data, or watching activity in real time.
@@ -5406,95 +3372,49 @@ func (c *GameLift) GetInstanceAccessRequest(input *GetInstanceAccessInput) (req 
 // and the fleet it belongs to. If successful, an InstanceAccess object is returned
 // containing the instance's IP address and a set of credentials.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation GetInstanceAccess for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetInstanceAccess
-func (c *GameLift) GetInstanceAccess(input *GetInstanceAccessInput) (*GetInstanceAccessOutput, error) {
-	req, out := c.GetInstanceAccessRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceAccessWithContext is the same as GetInstanceAccess with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstanceAccess for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) GetInstanceAccessWithContext(ctx aws.Context, input *GetInstanceAccessInput, opts ...aws.Option) (*GetInstanceAccessOutput, error) {
-	req, out := c.GetInstanceAccessRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opListAliases = "ListAliases"
-
-// ListAliasesRequest generates a "aws.Request" representing the
-// client's request for the ListAliases operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAliases for more information on using the ListAliases
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListAliasesRequest method.
-//    req, resp := client.ListAliasesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetInstanceAccessRequest method.
+//    req := client.GetInstanceAccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliases
-func (c *GameLift) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, output *ListAliasesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetInstanceAccess
+func (c *GameLift) GetInstanceAccessRequest(input *GetInstanceAccessInput) GetInstanceAccessRequest {
 	op := &aws.Operation{
-		Name:       opListAliases,
+		Name:       opGetInstanceAccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ListAliasesInput{}
+		input = &GetInstanceAccessInput{}
 	}
 
-	output = &ListAliasesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetInstanceAccessOutput{})
+	return GetInstanceAccessRequest{Request: req, Input: input}
 }
 
-// ListAliases API operation for Amazon GameLift.
+const opListAliases = "ListAliases"
+
+// ListAliasesRequest is a API request type for the ListAliases API operation.
+type ListAliasesRequest struct {
+	*aws.Request
+	Input *ListAliasesInput
+}
+
+// Send marshals and sends the ListAliases API request.
+func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAliasesOutput), nil
+}
+
+// ListAliasesRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves all aliases for this AWS account. You can filter the result set
 // by alias name and/or routing strategy type. Use the pagination parameters
@@ -5516,91 +3436,49 @@ func (c *GameLift) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request
 //
 //    * ResolveAlias
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation ListAliases for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliases
-func (c *GameLift) ListAliases(input *ListAliasesInput) (*ListAliasesOutput, error) {
-	req, out := c.ListAliasesRequest(input)
-	return out, req.Send()
-}
-
-// ListAliasesWithContext is the same as ListAliases with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAliases for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...aws.Option) (*ListAliasesOutput, error) {
-	req, out := c.ListAliasesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opListBuilds = "ListBuilds"
-
-// ListBuildsRequest generates a "aws.Request" representing the
-// client's request for the ListBuilds operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBuilds for more information on using the ListBuilds
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListBuildsRequest method.
-//    req, resp := client.ListBuildsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ListAliasesRequest method.
+//    req := client.ListAliasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuilds
-func (c *GameLift) ListBuildsRequest(input *ListBuildsInput) (req *aws.Request, output *ListBuildsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliases
+func (c *GameLift) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
 	op := &aws.Operation{
-		Name:       opListBuilds,
+		Name:       opListAliases,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ListBuildsInput{}
+		input = &ListAliasesInput{}
 	}
 
-	output = &ListBuildsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ListAliasesOutput{})
+	return ListAliasesRequest{Request: req, Input: input}
 }
 
-// ListBuilds API operation for Amazon GameLift.
+const opListBuilds = "ListBuilds"
+
+// ListBuildsRequest is a API request type for the ListBuilds API operation.
+type ListBuildsRequest struct {
+	*aws.Request
+	Input *ListBuildsInput
+}
+
+// Send marshals and sends the ListBuilds API request.
+func (r ListBuildsRequest) Send() (*ListBuildsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBuildsOutput), nil
+}
+
+// ListBuildsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves build records for all builds associated with the AWS account in
 // use. You can limit results to builds that are in a specific status by using
@@ -5621,91 +3499,49 @@ func (c *GameLift) ListBuildsRequest(input *ListBuildsInput) (req *aws.Request, 
 //
 //    * DeleteBuild
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation ListBuilds for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuilds
-func (c *GameLift) ListBuilds(input *ListBuildsInput) (*ListBuildsOutput, error) {
-	req, out := c.ListBuildsRequest(input)
-	return out, req.Send()
-}
-
-// ListBuildsWithContext is the same as ListBuilds with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBuilds for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInput, opts ...aws.Option) (*ListBuildsOutput, error) {
-	req, out := c.ListBuildsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opListFleets = "ListFleets"
-
-// ListFleetsRequest generates a "aws.Request" representing the
-// client's request for the ListFleets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListFleets for more information on using the ListFleets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListFleetsRequest method.
-//    req, resp := client.ListFleetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ListBuildsRequest method.
+//    req := client.ListBuildsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleets
-func (c *GameLift) ListFleetsRequest(input *ListFleetsInput) (req *aws.Request, output *ListFleetsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuilds
+func (c *GameLift) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 	op := &aws.Operation{
-		Name:       opListFleets,
+		Name:       opListBuilds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ListFleetsInput{}
+		input = &ListBuildsInput{}
 	}
 
-	output = &ListFleetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ListBuildsOutput{})
+	return ListBuildsRequest{Request: req, Input: input}
 }
 
-// ListFleets API operation for Amazon GameLift.
+const opListFleets = "ListFleets"
+
+// ListFleetsRequest is a API request type for the ListFleets API operation.
+type ListFleetsRequest struct {
+	*aws.Request
+	Input *ListFleetsInput
+}
+
+// Send marshals and sends the ListFleets API request.
+func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFleetsOutput), nil
+}
+
+// ListFleetsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves a collection of fleet records for this AWS account. You can filter
 // the result set by build ID. Use the pagination parameters to retrieve results
@@ -5757,95 +3593,49 @@ func (c *GameLift) ListFleetsRequest(input *ListFleetsInput) (req *aws.Request, 
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation ListFleets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleets
-func (c *GameLift) ListFleets(input *ListFleetsInput) (*ListFleetsOutput, error) {
-	req, out := c.ListFleetsRequest(input)
-	return out, req.Send()
-}
-
-// ListFleetsWithContext is the same as ListFleets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFleets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) ListFleetsWithContext(ctx aws.Context, input *ListFleetsInput, opts ...aws.Option) (*ListFleetsOutput, error) {
-	req, out := c.ListFleetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutScalingPolicy = "PutScalingPolicy"
-
-// PutScalingPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutScalingPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutScalingPolicy for more information on using the PutScalingPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutScalingPolicyRequest method.
-//    req, resp := client.PutScalingPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ListFleetsRequest method.
+//    req := client.ListFleetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PutScalingPolicy
-func (c *GameLift) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *aws.Request, output *PutScalingPolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleets
+func (c *GameLift) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 	op := &aws.Operation{
-		Name:       opPutScalingPolicy,
+		Name:       opListFleets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutScalingPolicyInput{}
+		input = &ListFleetsInput{}
 	}
 
-	output = &PutScalingPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ListFleetsOutput{})
+	return ListFleetsRequest{Request: req, Input: input}
 }
 
-// PutScalingPolicy API operation for Amazon GameLift.
+const opPutScalingPolicy = "PutScalingPolicy"
+
+// PutScalingPolicyRequest is a API request type for the PutScalingPolicy API operation.
+type PutScalingPolicyRequest struct {
+	*aws.Request
+	Input *PutScalingPolicyInput
+}
+
+// Send marshals and sends the PutScalingPolicy API request.
+func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutScalingPolicyOutput), nil
+}
+
+// PutScalingPolicyRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Creates or updates a scaling policy for a fleet. An active scaling policy
 // prompts Amazon GameLift to track a certain metric for a fleet and automatically
@@ -5914,79 +3704,63 @@ func (c *GameLift) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *a
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation PutScalingPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
+//    // Example sending a request using the PutScalingPolicyRequest method.
+//    req := client.PutScalingPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PutScalingPolicy
-func (c *GameLift) PutScalingPolicy(input *PutScalingPolicyInput) (*PutScalingPolicyOutput, error) {
-	req, out := c.PutScalingPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *GameLift) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScalingPolicyRequest {
+	op := &aws.Operation{
+		Name:       opPutScalingPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutScalingPolicyWithContext is the same as PutScalingPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutScalingPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalingPolicyInput, opts ...aws.Option) (*PutScalingPolicyOutput, error) {
-	req, out := c.PutScalingPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutScalingPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+	return PutScalingPolicyRequest{Request: req, Input: input}
 }
 
 const opRequestUploadCredentials = "RequestUploadCredentials"
 
-// RequestUploadCredentialsRequest generates a "aws.Request" representing the
-// client's request for the RequestUploadCredentials operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RequestUploadCredentialsRequest is a API request type for the RequestUploadCredentials API operation.
+type RequestUploadCredentialsRequest struct {
+	*aws.Request
+	Input *RequestUploadCredentialsInput
+}
+
+// Send marshals and sends the RequestUploadCredentials API request.
+func (r RequestUploadCredentialsRequest) Send() (*RequestUploadCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RequestUploadCredentialsOutput), nil
+}
+
+// RequestUploadCredentialsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RequestUploadCredentials for more information on using the RequestUploadCredentials
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API call is not currently in use.  Retrieves a fresh set of upload credentials
+// and the assigned Amazon S3 storage location for a specific build. Valid credentials
+// are required to upload your game build files to Amazon S3.
 //
 //    // Example sending a request using the RequestUploadCredentialsRequest method.
-//    req, resp := client.RequestUploadCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RequestUploadCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials
-func (c *GameLift) RequestUploadCredentialsRequest(input *RequestUploadCredentialsInput) (req *aws.Request, output *RequestUploadCredentialsOutput) {
+func (c *GameLift) RequestUploadCredentialsRequest(input *RequestUploadCredentialsInput) RequestUploadCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opRequestUploadCredentials,
 		HTTPMethod: "POST",
@@ -5997,106 +3771,30 @@ func (c *GameLift) RequestUploadCredentialsRequest(input *RequestUploadCredentia
 		input = &RequestUploadCredentialsInput{}
 	}
 
-	output = &RequestUploadCredentialsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RequestUploadCredentials API operation for Amazon GameLift.
-//
-// This API call is not currently in use.  Retrieves a fresh set of upload credentials
-// and the assigned Amazon S3 storage location for a specific build. Valid credentials
-// are required to upload your game build files to Amazon S3.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation RequestUploadCredentials for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials
-func (c *GameLift) RequestUploadCredentials(input *RequestUploadCredentialsInput) (*RequestUploadCredentialsOutput, error) {
-	req, out := c.RequestUploadCredentialsRequest(input)
-	return out, req.Send()
-}
-
-// RequestUploadCredentialsWithContext is the same as RequestUploadCredentials with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RequestUploadCredentials for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) RequestUploadCredentialsWithContext(ctx aws.Context, input *RequestUploadCredentialsInput, opts ...aws.Option) (*RequestUploadCredentialsOutput, error) {
-	req, out := c.RequestUploadCredentialsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RequestUploadCredentialsOutput{})
+	return RequestUploadCredentialsRequest{Request: req, Input: input}
 }
 
 const opResolveAlias = "ResolveAlias"
 
-// ResolveAliasRequest generates a "aws.Request" representing the
-// client's request for the ResolveAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResolveAlias for more information on using the ResolveAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ResolveAliasRequest method.
-//    req, resp := client.ResolveAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResolveAlias
-func (c *GameLift) ResolveAliasRequest(input *ResolveAliasInput) (req *aws.Request, output *ResolveAliasOutput) {
-	op := &aws.Operation{
-		Name:       opResolveAlias,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ResolveAliasInput{}
-	}
-
-	output = &ResolveAliasOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ResolveAliasRequest is a API request type for the ResolveAlias API operation.
+type ResolveAliasRequest struct {
+	*aws.Request
+	Input *ResolveAliasInput
 }
 
-// ResolveAlias API operation for Amazon GameLift.
+// Send marshals and sends the ResolveAlias API request.
+func (r ResolveAliasRequest) Send() (*ResolveAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResolveAliasOutput), nil
+}
+
+// ResolveAliasRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves the fleet ID that a specified alias is currently pointing to.
 //
@@ -6114,102 +3812,49 @@ func (c *GameLift) ResolveAliasRequest(input *ResolveAliasInput) (req *aws.Reque
 //
 //    * ResolveAlias
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation ResolveAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeTerminalRoutingStrategyException "TerminalRoutingStrategyException"
-//   The service is unable to resolve the routing for a particular alias because
-//   it has a terminal RoutingStrategy associated with it. The message returned
-//   in this exception is the message defined in the routing strategy itself.
-//   Such requests should only be retried if the routing strategy for the specified
-//   alias is modified.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResolveAlias
-func (c *GameLift) ResolveAlias(input *ResolveAliasInput) (*ResolveAliasOutput, error) {
-	req, out := c.ResolveAliasRequest(input)
-	return out, req.Send()
-}
-
-// ResolveAliasWithContext is the same as ResolveAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResolveAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) ResolveAliasWithContext(ctx aws.Context, input *ResolveAliasInput, opts ...aws.Option) (*ResolveAliasOutput, error) {
-	req, out := c.ResolveAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSearchGameSessions = "SearchGameSessions"
-
-// SearchGameSessionsRequest generates a "aws.Request" representing the
-// client's request for the SearchGameSessions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SearchGameSessions for more information on using the SearchGameSessions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SearchGameSessionsRequest method.
-//    req, resp := client.SearchGameSessionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ResolveAliasRequest method.
+//    req := client.ResolveAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions
-func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) (req *aws.Request, output *SearchGameSessionsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResolveAlias
+func (c *GameLift) ResolveAliasRequest(input *ResolveAliasInput) ResolveAliasRequest {
 	op := &aws.Operation{
-		Name:       opSearchGameSessions,
+		Name:       opResolveAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SearchGameSessionsInput{}
+		input = &ResolveAliasInput{}
 	}
 
-	output = &SearchGameSessionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ResolveAliasOutput{})
+	return ResolveAliasRequest{Request: req, Input: input}
 }
 
-// SearchGameSessions API operation for Amazon GameLift.
+const opSearchGameSessions = "SearchGameSessions"
+
+// SearchGameSessionsRequest is a API request type for the SearchGameSessions API operation.
+type SearchGameSessionsRequest struct {
+	*aws.Request
+	Input *SearchGameSessionsInput
+}
+
+// Send marshals and sends the SearchGameSessions API request.
+func (r SearchGameSessionsRequest) Send() (*SearchGameSessionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchGameSessionsOutput), nil
+}
+
+// SearchGameSessionsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Retrieves a set of game sessions that match a set of search criteria and
 // sorts them in a specified order. A game session search is limited to a single
@@ -6277,102 +3922,49 @@ func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) (re
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation SearchGameSessions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeTerminalRoutingStrategyException "TerminalRoutingStrategyException"
-//   The service is unable to resolve the routing for a particular alias because
-//   it has a terminal RoutingStrategy associated with it. The message returned
-//   in this exception is the message defined in the routing strategy itself.
-//   Such requests should only be retried if the routing strategy for the specified
-//   alias is modified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions
-func (c *GameLift) SearchGameSessions(input *SearchGameSessionsInput) (*SearchGameSessionsOutput, error) {
-	req, out := c.SearchGameSessionsRequest(input)
-	return out, req.Send()
-}
-
-// SearchGameSessionsWithContext is the same as SearchGameSessions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SearchGameSessions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) SearchGameSessionsWithContext(ctx aws.Context, input *SearchGameSessionsInput, opts ...aws.Option) (*SearchGameSessionsOutput, error) {
-	req, out := c.SearchGameSessionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartGameSessionPlacement = "StartGameSessionPlacement"
-
-// StartGameSessionPlacementRequest generates a "aws.Request" representing the
-// client's request for the StartGameSessionPlacement operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartGameSessionPlacement for more information on using the StartGameSessionPlacement
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartGameSessionPlacementRequest method.
-//    req, resp := client.StartGameSessionPlacementRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the SearchGameSessionsRequest method.
+//    req := client.SearchGameSessionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacement
-func (c *GameLift) StartGameSessionPlacementRequest(input *StartGameSessionPlacementInput) (req *aws.Request, output *StartGameSessionPlacementOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions
+func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) SearchGameSessionsRequest {
 	op := &aws.Operation{
-		Name:       opStartGameSessionPlacement,
+		Name:       opSearchGameSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartGameSessionPlacementInput{}
+		input = &SearchGameSessionsInput{}
 	}
 
-	output = &StartGameSessionPlacementOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &SearchGameSessionsOutput{})
+	return SearchGameSessionsRequest{Request: req, Input: input}
 }
 
-// StartGameSessionPlacement API operation for Amazon GameLift.
+const opStartGameSessionPlacement = "StartGameSessionPlacement"
+
+// StartGameSessionPlacementRequest is a API request type for the StartGameSessionPlacement API operation.
+type StartGameSessionPlacementRequest struct {
+	*aws.Request
+	Input *StartGameSessionPlacementInput
+}
+
+// Send marshals and sends the StartGameSessionPlacement API request.
+func (r StartGameSessionPlacementRequest) Send() (*StartGameSessionPlacementOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartGameSessionPlacementOutput), nil
+}
+
+// StartGameSessionPlacementRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Places a request for a new game session in a queue (see CreateGameSessionQueue).
 // When processing a placement request, Amazon GameLift searches for available
@@ -6438,95 +4030,49 @@ func (c *GameLift) StartGameSessionPlacementRequest(input *StartGameSessionPlace
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation StartGameSessionPlacement for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacement
-func (c *GameLift) StartGameSessionPlacement(input *StartGameSessionPlacementInput) (*StartGameSessionPlacementOutput, error) {
-	req, out := c.StartGameSessionPlacementRequest(input)
-	return out, req.Send()
-}
-
-// StartGameSessionPlacementWithContext is the same as StartGameSessionPlacement with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartGameSessionPlacement for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) StartGameSessionPlacementWithContext(ctx aws.Context, input *StartGameSessionPlacementInput, opts ...aws.Option) (*StartGameSessionPlacementOutput, error) {
-	req, out := c.StartGameSessionPlacementRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartMatchmaking = "StartMatchmaking"
-
-// StartMatchmakingRequest generates a "aws.Request" representing the
-// client's request for the StartMatchmaking operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartMatchmaking for more information on using the StartMatchmaking
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartMatchmakingRequest method.
-//    req, resp := client.StartMatchmakingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StartGameSessionPlacementRequest method.
+//    req := client.StartGameSessionPlacementRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmaking
-func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) (req *aws.Request, output *StartMatchmakingOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacement
+func (c *GameLift) StartGameSessionPlacementRequest(input *StartGameSessionPlacementInput) StartGameSessionPlacementRequest {
 	op := &aws.Operation{
-		Name:       opStartMatchmaking,
+		Name:       opStartGameSessionPlacement,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartMatchmakingInput{}
+		input = &StartGameSessionPlacementInput{}
 	}
 
-	output = &StartMatchmakingOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StartGameSessionPlacementOutput{})
+	return StartGameSessionPlacementRequest{Request: req, Input: input}
 }
 
-// StartMatchmaking API operation for Amazon GameLift.
+const opStartMatchmaking = "StartMatchmaking"
+
+// StartMatchmakingRequest is a API request type for the StartMatchmaking API operation.
+type StartMatchmakingRequest struct {
+	*aws.Request
+	Input *StartMatchmakingInput
+}
+
+// Send marshals and sends the StartMatchmaking API request.
+func (r StartMatchmakingRequest) Send() (*StartMatchmakingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartMatchmakingOutput), nil
+}
+
+// StartMatchmakingRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Uses FlexMatch to create a game match for a group of players based on custom
 // matchmaking rules, and starts a new game for the matched players. Each matchmaking
@@ -6600,95 +4146,49 @@ func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) (req *a
 //
 //    * AcceptMatch
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation StartMatchmaking for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmaking
-func (c *GameLift) StartMatchmaking(input *StartMatchmakingInput) (*StartMatchmakingOutput, error) {
-	req, out := c.StartMatchmakingRequest(input)
-	return out, req.Send()
-}
-
-// StartMatchmakingWithContext is the same as StartMatchmaking with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartMatchmaking for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) StartMatchmakingWithContext(ctx aws.Context, input *StartMatchmakingInput, opts ...aws.Option) (*StartMatchmakingOutput, error) {
-	req, out := c.StartMatchmakingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStopGameSessionPlacement = "StopGameSessionPlacement"
-
-// StopGameSessionPlacementRequest generates a "aws.Request" representing the
-// client's request for the StopGameSessionPlacement operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopGameSessionPlacement for more information on using the StopGameSessionPlacement
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StopGameSessionPlacementRequest method.
-//    req, resp := client.StopGameSessionPlacementRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StartMatchmakingRequest method.
+//    req := client.StartMatchmakingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacement
-func (c *GameLift) StopGameSessionPlacementRequest(input *StopGameSessionPlacementInput) (req *aws.Request, output *StopGameSessionPlacementOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmaking
+func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) StartMatchmakingRequest {
 	op := &aws.Operation{
-		Name:       opStopGameSessionPlacement,
+		Name:       opStartMatchmaking,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StopGameSessionPlacementInput{}
+		input = &StartMatchmakingInput{}
 	}
 
-	output = &StopGameSessionPlacementOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StartMatchmakingOutput{})
+	return StartMatchmakingRequest{Request: req, Input: input}
 }
 
-// StopGameSessionPlacement API operation for Amazon GameLift.
+const opStopGameSessionPlacement = "StopGameSessionPlacement"
+
+// StopGameSessionPlacementRequest is a API request type for the StopGameSessionPlacement API operation.
+type StopGameSessionPlacementRequest struct {
+	*aws.Request
+	Input *StopGameSessionPlacementInput
+}
+
+// Send marshals and sends the StopGameSessionPlacement API request.
+func (r StopGameSessionPlacementRequest) Send() (*StopGameSessionPlacementOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopGameSessionPlacementOutput), nil
+}
+
+// StopGameSessionPlacementRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Cancels a game session placement that is in PENDING status. To stop a placement,
 // provide the placement ID values. If successful, the placement is moved to
@@ -6716,95 +4216,49 @@ func (c *GameLift) StopGameSessionPlacementRequest(input *StopGameSessionPlaceme
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation StopGameSessionPlacement for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacement
-func (c *GameLift) StopGameSessionPlacement(input *StopGameSessionPlacementInput) (*StopGameSessionPlacementOutput, error) {
-	req, out := c.StopGameSessionPlacementRequest(input)
-	return out, req.Send()
-}
-
-// StopGameSessionPlacementWithContext is the same as StopGameSessionPlacement with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopGameSessionPlacement for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) StopGameSessionPlacementWithContext(ctx aws.Context, input *StopGameSessionPlacementInput, opts ...aws.Option) (*StopGameSessionPlacementOutput, error) {
-	req, out := c.StopGameSessionPlacementRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStopMatchmaking = "StopMatchmaking"
-
-// StopMatchmakingRequest generates a "aws.Request" representing the
-// client's request for the StopMatchmaking operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopMatchmaking for more information on using the StopMatchmaking
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StopMatchmakingRequest method.
-//    req, resp := client.StopMatchmakingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StopGameSessionPlacementRequest method.
+//    req := client.StopGameSessionPlacementRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmaking
-func (c *GameLift) StopMatchmakingRequest(input *StopMatchmakingInput) (req *aws.Request, output *StopMatchmakingOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacement
+func (c *GameLift) StopGameSessionPlacementRequest(input *StopGameSessionPlacementInput) StopGameSessionPlacementRequest {
 	op := &aws.Operation{
-		Name:       opStopMatchmaking,
+		Name:       opStopGameSessionPlacement,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StopMatchmakingInput{}
+		input = &StopGameSessionPlacementInput{}
 	}
 
-	output = &StopMatchmakingOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StopGameSessionPlacementOutput{})
+	return StopGameSessionPlacementRequest{Request: req, Input: input}
 }
 
-// StopMatchmaking API operation for Amazon GameLift.
+const opStopMatchmaking = "StopMatchmaking"
+
+// StopMatchmakingRequest is a API request type for the StopMatchmaking API operation.
+type StopMatchmakingRequest struct {
+	*aws.Request
+	Input *StopMatchmakingInput
+}
+
+// Send marshals and sends the StopMatchmaking API request.
+func (r StopMatchmakingRequest) Send() (*StopMatchmakingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopMatchmakingOutput), nil
+}
+
+// StopMatchmakingRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Cancels a matchmaking ticket that is currently being processed. To stop the
 // matchmaking operation, specify the ticket ID. If successful, work on the
@@ -6820,95 +4274,49 @@ func (c *GameLift) StopMatchmakingRequest(input *StopMatchmakingInput) (req *aws
 //
 //    * AcceptMatch
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation StopMatchmaking for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmaking
-func (c *GameLift) StopMatchmaking(input *StopMatchmakingInput) (*StopMatchmakingOutput, error) {
-	req, out := c.StopMatchmakingRequest(input)
-	return out, req.Send()
-}
-
-// StopMatchmakingWithContext is the same as StopMatchmaking with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopMatchmaking for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) StopMatchmakingWithContext(ctx aws.Context, input *StopMatchmakingInput, opts ...aws.Option) (*StopMatchmakingOutput, error) {
-	req, out := c.StopMatchmakingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateAlias = "UpdateAlias"
-
-// UpdateAliasRequest generates a "aws.Request" representing the
-// client's request for the UpdateAlias operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAlias for more information on using the UpdateAlias
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateAliasRequest method.
-//    req, resp := client.UpdateAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StopMatchmakingRequest method.
+//    req := client.StopMatchmakingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateAlias
-func (c *GameLift) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, output *UpdateAliasOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmaking
+func (c *GameLift) StopMatchmakingRequest(input *StopMatchmakingInput) StopMatchmakingRequest {
 	op := &aws.Operation{
-		Name:       opUpdateAlias,
+		Name:       opStopMatchmaking,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateAliasInput{}
+		input = &StopMatchmakingInput{}
 	}
 
-	output = &UpdateAliasOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StopMatchmakingOutput{})
+	return StopMatchmakingRequest{Request: req, Input: input}
 }
 
-// UpdateAlias API operation for Amazon GameLift.
+const opUpdateAlias = "UpdateAlias"
+
+// UpdateAliasRequest is a API request type for the UpdateAlias API operation.
+type UpdateAliasRequest struct {
+	*aws.Request
+	Input *UpdateAliasInput
+}
+
+// Send marshals and sends the UpdateAlias API request.
+func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAliasOutput), nil
+}
+
+// UpdateAliasRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates properties for an alias. To update properties, specify the alias
 // ID to be updated and provide the information to be changed. To reassign an
@@ -6929,95 +4337,49 @@ func (c *GameLift) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request
 //
 //    * ResolveAlias
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateAlias for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateAlias
-func (c *GameLift) UpdateAlias(input *UpdateAliasInput) (*UpdateAliasOutput, error) {
-	req, out := c.UpdateAliasRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAliasWithContext is the same as UpdateAlias with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAlias for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...aws.Option) (*UpdateAliasOutput, error) {
-	req, out := c.UpdateAliasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateBuild = "UpdateBuild"
-
-// UpdateBuildRequest generates a "aws.Request" representing the
-// client's request for the UpdateBuild operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateBuild for more information on using the UpdateBuild
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateBuildRequest method.
-//    req, resp := client.UpdateBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateAliasRequest method.
+//    req := client.UpdateAliasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild
-func (c *GameLift) UpdateBuildRequest(input *UpdateBuildInput) (req *aws.Request, output *UpdateBuildOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateAlias
+func (c *GameLift) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest {
 	op := &aws.Operation{
-		Name:       opUpdateBuild,
+		Name:       opUpdateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateBuildInput{}
+		input = &UpdateAliasInput{}
 	}
 
-	output = &UpdateBuildOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	return UpdateAliasRequest{Request: req, Input: input}
 }
 
-// UpdateBuild API operation for Amazon GameLift.
+const opUpdateBuild = "UpdateBuild"
+
+// UpdateBuildRequest is a API request type for the UpdateBuild API operation.
+type UpdateBuildRequest struct {
+	*aws.Request
+	Input *UpdateBuildInput
+}
+
+// Send marshals and sends the UpdateBuild API request.
+func (r UpdateBuildRequest) Send() (*UpdateBuildOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateBuildOutput), nil
+}
+
+// UpdateBuildRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates metadata in a build record, including the build name and version.
 // To update the metadata, specify the build ID to update and provide the new
@@ -7036,95 +4398,49 @@ func (c *GameLift) UpdateBuildRequest(input *UpdateBuildInput) (req *aws.Request
 //
 //    * DeleteBuild
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateBuild for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild
-func (c *GameLift) UpdateBuild(input *UpdateBuildInput) (*UpdateBuildOutput, error) {
-	req, out := c.UpdateBuildRequest(input)
-	return out, req.Send()
-}
-
-// UpdateBuildWithContext is the same as UpdateBuild with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateBuild for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateBuildWithContext(ctx aws.Context, input *UpdateBuildInput, opts ...aws.Option) (*UpdateBuildOutput, error) {
-	req, out := c.UpdateBuildRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateFleetAttributes = "UpdateFleetAttributes"
-
-// UpdateFleetAttributesRequest generates a "aws.Request" representing the
-// client's request for the UpdateFleetAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateFleetAttributes for more information on using the UpdateFleetAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateFleetAttributesRequest method.
-//    req, resp := client.UpdateFleetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateBuildRequest method.
+//    req := client.UpdateBuildRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributes
-func (c *GameLift) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput) (req *aws.Request, output *UpdateFleetAttributesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild
+func (c *GameLift) UpdateBuildRequest(input *UpdateBuildInput) UpdateBuildRequest {
 	op := &aws.Operation{
-		Name:       opUpdateFleetAttributes,
+		Name:       opUpdateBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateFleetAttributesInput{}
+		input = &UpdateBuildInput{}
 	}
 
-	output = &UpdateFleetAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateBuildOutput{})
+	return UpdateBuildRequest{Request: req, Input: input}
 }
 
-// UpdateFleetAttributes API operation for Amazon GameLift.
+const opUpdateFleetAttributes = "UpdateFleetAttributes"
+
+// UpdateFleetAttributesRequest is a API request type for the UpdateFleetAttributes API operation.
+type UpdateFleetAttributesRequest struct {
+	*aws.Request
+	Input *UpdateFleetAttributesInput
+}
+
+// Send marshals and sends the UpdateFleetAttributes API request.
+func (r UpdateFleetAttributesRequest) Send() (*UpdateFleetAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFleetAttributesOutput), nil
+}
+
+// UpdateFleetAttributesRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates fleet properties, including name and description, for a fleet. To
 // update metadata, specify the fleet ID and the property values that you want
@@ -7174,109 +4490,49 @@ func (c *GameLift) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInpu
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateFleetAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeInvalidFleetStatusException "InvalidFleetStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the fleet. Resolve the conflict
-//   before retrying.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributes
-func (c *GameLift) UpdateFleetAttributes(input *UpdateFleetAttributesInput) (*UpdateFleetAttributesOutput, error) {
-	req, out := c.UpdateFleetAttributesRequest(input)
-	return out, req.Send()
-}
-
-// UpdateFleetAttributesWithContext is the same as UpdateFleetAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFleetAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateFleetAttributesWithContext(ctx aws.Context, input *UpdateFleetAttributesInput, opts ...aws.Option) (*UpdateFleetAttributesOutput, error) {
-	req, out := c.UpdateFleetAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateFleetCapacity = "UpdateFleetCapacity"
-
-// UpdateFleetCapacityRequest generates a "aws.Request" representing the
-// client's request for the UpdateFleetCapacity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateFleetCapacity for more information on using the UpdateFleetCapacity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateFleetCapacityRequest method.
-//    req, resp := client.UpdateFleetCapacityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateFleetAttributesRequest method.
+//    req := client.UpdateFleetAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacity
-func (c *GameLift) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) (req *aws.Request, output *UpdateFleetCapacityOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributes
+func (c *GameLift) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput) UpdateFleetAttributesRequest {
 	op := &aws.Operation{
-		Name:       opUpdateFleetCapacity,
+		Name:       opUpdateFleetAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateFleetCapacityInput{}
+		input = &UpdateFleetAttributesInput{}
 	}
 
-	output = &UpdateFleetCapacityOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateFleetAttributesOutput{})
+	return UpdateFleetAttributesRequest{Request: req, Input: input}
 }
 
-// UpdateFleetCapacity API operation for Amazon GameLift.
+const opUpdateFleetCapacity = "UpdateFleetCapacity"
+
+// UpdateFleetCapacityRequest is a API request type for the UpdateFleetCapacity API operation.
+type UpdateFleetCapacityRequest struct {
+	*aws.Request
+	Input *UpdateFleetCapacityInput
+}
+
+// Send marshals and sends the UpdateFleetCapacity API request.
+func (r UpdateFleetCapacityRequest) Send() (*UpdateFleetCapacityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFleetCapacityOutput), nil
+}
+
+// UpdateFleetCapacityRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates capacity settings for a fleet. Use this action to specify the number
 // of EC2 instances (hosts) that you want this fleet to contain. Before calling
@@ -7338,109 +4594,49 @@ func (c *GameLift) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) (
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateFleetCapacity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-//   * ErrCodeInvalidFleetStatusException "InvalidFleetStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the fleet. Resolve the conflict
-//   before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacity
-func (c *GameLift) UpdateFleetCapacity(input *UpdateFleetCapacityInput) (*UpdateFleetCapacityOutput, error) {
-	req, out := c.UpdateFleetCapacityRequest(input)
-	return out, req.Send()
-}
-
-// UpdateFleetCapacityWithContext is the same as UpdateFleetCapacity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFleetCapacity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateFleetCapacityWithContext(ctx aws.Context, input *UpdateFleetCapacityInput, opts ...aws.Option) (*UpdateFleetCapacityOutput, error) {
-	req, out := c.UpdateFleetCapacityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
-
-// UpdateFleetPortSettingsRequest generates a "aws.Request" representing the
-// client's request for the UpdateFleetPortSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateFleetPortSettings for more information on using the UpdateFleetPortSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateFleetPortSettingsRequest method.
-//    req, resp := client.UpdateFleetPortSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateFleetCapacityRequest method.
+//    req := client.UpdateFleetCapacityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetPortSettings
-func (c *GameLift) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsInput) (req *aws.Request, output *UpdateFleetPortSettingsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacity
+func (c *GameLift) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) UpdateFleetCapacityRequest {
 	op := &aws.Operation{
-		Name:       opUpdateFleetPortSettings,
+		Name:       opUpdateFleetCapacity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateFleetPortSettingsInput{}
+		input = &UpdateFleetCapacityInput{}
 	}
 
-	output = &UpdateFleetPortSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateFleetCapacityOutput{})
+	return UpdateFleetCapacityRequest{Request: req, Input: input}
 }
 
-// UpdateFleetPortSettings API operation for Amazon GameLift.
+const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
+
+// UpdateFleetPortSettingsRequest is a API request type for the UpdateFleetPortSettings API operation.
+type UpdateFleetPortSettingsRequest struct {
+	*aws.Request
+	Input *UpdateFleetPortSettingsInput
+}
+
+// Send marshals and sends the UpdateFleetPortSettings API request.
+func (r UpdateFleetPortSettingsRequest) Send() (*UpdateFleetPortSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFleetPortSettingsOutput), nil
+}
+
+// UpdateFleetPortSettingsRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates port settings for a fleet. To update settings, specify the fleet
 // ID to be updated and list the permissions you want to update. List the permissions
@@ -7493,109 +4689,49 @@ func (c *GameLift) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettings
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateFleetPortSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeInvalidFleetStatusException "InvalidFleetStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the fleet. Resolve the conflict
-//   before retrying.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested operation would cause the resource to exceed the allowed service
-//   limit. Resolve the issue before retrying.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetPortSettings
-func (c *GameLift) UpdateFleetPortSettings(input *UpdateFleetPortSettingsInput) (*UpdateFleetPortSettingsOutput, error) {
-	req, out := c.UpdateFleetPortSettingsRequest(input)
-	return out, req.Send()
-}
-
-// UpdateFleetPortSettingsWithContext is the same as UpdateFleetPortSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFleetPortSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateFleetPortSettingsWithContext(ctx aws.Context, input *UpdateFleetPortSettingsInput, opts ...aws.Option) (*UpdateFleetPortSettingsOutput, error) {
-	req, out := c.UpdateFleetPortSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateGameSession = "UpdateGameSession"
-
-// UpdateGameSessionRequest generates a "aws.Request" representing the
-// client's request for the UpdateGameSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateGameSession for more information on using the UpdateGameSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateGameSessionRequest method.
-//    req, resp := client.UpdateGameSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateFleetPortSettingsRequest method.
+//    req := client.UpdateFleetPortSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession
-func (c *GameLift) UpdateGameSessionRequest(input *UpdateGameSessionInput) (req *aws.Request, output *UpdateGameSessionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetPortSettings
+func (c *GameLift) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsInput) UpdateFleetPortSettingsRequest {
 	op := &aws.Operation{
-		Name:       opUpdateGameSession,
+		Name:       opUpdateFleetPortSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateGameSessionInput{}
+		input = &UpdateFleetPortSettingsInput{}
 	}
 
-	output = &UpdateGameSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateFleetPortSettingsOutput{})
+	return UpdateFleetPortSettingsRequest{Request: req, Input: input}
 }
 
-// UpdateGameSession API operation for Amazon GameLift.
+const opUpdateGameSession = "UpdateGameSession"
+
+// UpdateGameSessionRequest is a API request type for the UpdateGameSession API operation.
+type UpdateGameSessionRequest struct {
+	*aws.Request
+	Input *UpdateGameSessionInput
+}
+
+// Send marshals and sends the UpdateGameSession API request.
+func (r UpdateGameSessionRequest) Send() (*UpdateGameSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGameSessionOutput), nil
+}
+
+// UpdateGameSessionRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates game session properties. This includes the session name, maximum
 // player count, protection policy, which controls whether or not an active
@@ -7627,105 +4763,49 @@ func (c *GameLift) UpdateGameSessionRequest(input *UpdateGameSessionInput) (req 
 //
 // StopGameSessionPlacement
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateGameSession for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeConflictException "ConflictException"
-//   The requested operation would cause a conflict with the current state of
-//   a service resource associated with the request. Resolve the conflict before
-//   retrying this request.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeInvalidGameSessionStatusException "InvalidGameSessionStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the game instance. Resolve
-//   the conflict before retrying.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession
-func (c *GameLift) UpdateGameSession(input *UpdateGameSessionInput) (*UpdateGameSessionOutput, error) {
-	req, out := c.UpdateGameSessionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateGameSessionWithContext is the same as UpdateGameSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGameSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateGameSessionWithContext(ctx aws.Context, input *UpdateGameSessionInput, opts ...aws.Option) (*UpdateGameSessionOutput, error) {
-	req, out := c.UpdateGameSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateGameSessionQueue = "UpdateGameSessionQueue"
-
-// UpdateGameSessionQueueRequest generates a "aws.Request" representing the
-// client's request for the UpdateGameSessionQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateGameSessionQueue for more information on using the UpdateGameSessionQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateGameSessionQueueRequest method.
-//    req, resp := client.UpdateGameSessionQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateGameSessionRequest method.
+//    req := client.UpdateGameSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueue
-func (c *GameLift) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueInput) (req *aws.Request, output *UpdateGameSessionQueueOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession
+func (c *GameLift) UpdateGameSessionRequest(input *UpdateGameSessionInput) UpdateGameSessionRequest {
 	op := &aws.Operation{
-		Name:       opUpdateGameSessionQueue,
+		Name:       opUpdateGameSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateGameSessionQueueInput{}
+		input = &UpdateGameSessionInput{}
 	}
 
-	output = &UpdateGameSessionQueueOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateGameSessionOutput{})
+	return UpdateGameSessionRequest{Request: req, Input: input}
 }
 
-// UpdateGameSessionQueue API operation for Amazon GameLift.
+const opUpdateGameSessionQueue = "UpdateGameSessionQueue"
+
+// UpdateGameSessionQueueRequest is a API request type for the UpdateGameSessionQueue API operation.
+type UpdateGameSessionQueueRequest struct {
+	*aws.Request
+	Input *UpdateGameSessionQueueInput
+}
+
+// Send marshals and sends the UpdateGameSessionQueue API request.
+func (r UpdateGameSessionQueueRequest) Send() (*UpdateGameSessionQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGameSessionQueueOutput), nil
+}
+
+// UpdateGameSessionQueueRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates settings for a game session queue, which determines how new game
 // session requests in the queue are processed. To update settings, specify
@@ -7742,95 +4822,49 @@ func (c *GameLift) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueIn
 //
 //    * DeleteGameSessionQueue
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateGameSessionQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueue
-func (c *GameLift) UpdateGameSessionQueue(input *UpdateGameSessionQueueInput) (*UpdateGameSessionQueueOutput, error) {
-	req, out := c.UpdateGameSessionQueueRequest(input)
-	return out, req.Send()
-}
-
-// UpdateGameSessionQueueWithContext is the same as UpdateGameSessionQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGameSessionQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateGameSessionQueueWithContext(ctx aws.Context, input *UpdateGameSessionQueueInput, opts ...aws.Option) (*UpdateGameSessionQueueOutput, error) {
-	req, out := c.UpdateGameSessionQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateMatchmakingConfiguration = "UpdateMatchmakingConfiguration"
-
-// UpdateMatchmakingConfigurationRequest generates a "aws.Request" representing the
-// client's request for the UpdateMatchmakingConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateMatchmakingConfiguration for more information on using the UpdateMatchmakingConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateMatchmakingConfigurationRequest method.
-//    req, resp := client.UpdateMatchmakingConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateGameSessionQueueRequest method.
+//    req := client.UpdateGameSessionQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfiguration
-func (c *GameLift) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakingConfigurationInput) (req *aws.Request, output *UpdateMatchmakingConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueue
+func (c *GameLift) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueInput) UpdateGameSessionQueueRequest {
 	op := &aws.Operation{
-		Name:       opUpdateMatchmakingConfiguration,
+		Name:       opUpdateGameSessionQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateMatchmakingConfigurationInput{}
+		input = &UpdateGameSessionQueueInput{}
 	}
 
-	output = &UpdateMatchmakingConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateGameSessionQueueOutput{})
+	return UpdateGameSessionQueueRequest{Request: req, Input: input}
 }
 
-// UpdateMatchmakingConfiguration API operation for Amazon GameLift.
+const opUpdateMatchmakingConfiguration = "UpdateMatchmakingConfiguration"
+
+// UpdateMatchmakingConfigurationRequest is a API request type for the UpdateMatchmakingConfiguration API operation.
+type UpdateMatchmakingConfigurationRequest struct {
+	*aws.Request
+	Input *UpdateMatchmakingConfigurationInput
+}
+
+// Send marshals and sends the UpdateMatchmakingConfiguration API request.
+func (r UpdateMatchmakingConfigurationRequest) Send() (*UpdateMatchmakingConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMatchmakingConfigurationOutput), nil
+}
+
+// UpdateMatchmakingConfigurationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates settings for a FlexMatch matchmaking configuration. To update settings,
 // specify the configuration name to be updated and provide the new settings.
@@ -7851,95 +4885,49 @@ func (c *GameLift) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakin
 //
 //    * ValidateMatchmakingRuleSet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateMatchmakingConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfiguration
-func (c *GameLift) UpdateMatchmakingConfiguration(input *UpdateMatchmakingConfigurationInput) (*UpdateMatchmakingConfigurationOutput, error) {
-	req, out := c.UpdateMatchmakingConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateMatchmakingConfigurationWithContext is the same as UpdateMatchmakingConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateMatchmakingConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateMatchmakingConfigurationWithContext(ctx aws.Context, input *UpdateMatchmakingConfigurationInput, opts ...aws.Option) (*UpdateMatchmakingConfigurationOutput, error) {
-	req, out := c.UpdateMatchmakingConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
-
-// UpdateRuntimeConfigurationRequest generates a "aws.Request" representing the
-// client's request for the UpdateRuntimeConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateRuntimeConfiguration for more information on using the UpdateRuntimeConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateRuntimeConfigurationRequest method.
-//    req, resp := client.UpdateRuntimeConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateMatchmakingConfigurationRequest method.
+//    req := client.UpdateMatchmakingConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfiguration
-func (c *GameLift) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigurationInput) (req *aws.Request, output *UpdateRuntimeConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfiguration
+func (c *GameLift) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakingConfigurationInput) UpdateMatchmakingConfigurationRequest {
 	op := &aws.Operation{
-		Name:       opUpdateRuntimeConfiguration,
+		Name:       opUpdateMatchmakingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateRuntimeConfigurationInput{}
+		input = &UpdateMatchmakingConfigurationInput{}
 	}
 
-	output = &UpdateRuntimeConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateMatchmakingConfigurationOutput{})
+	return UpdateMatchmakingConfigurationRequest{Request: req, Input: input}
 }
 
-// UpdateRuntimeConfiguration API operation for Amazon GameLift.
+const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
+
+// UpdateRuntimeConfigurationRequest is a API request type for the UpdateRuntimeConfiguration API operation.
+type UpdateRuntimeConfigurationRequest struct {
+	*aws.Request
+	Input *UpdateRuntimeConfigurationInput
+}
+
+// Send marshals and sends the UpdateRuntimeConfiguration API request.
+func (r UpdateRuntimeConfigurationRequest) Send() (*UpdateRuntimeConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRuntimeConfigurationOutput), nil
+}
+
+// UpdateRuntimeConfigurationRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Updates the current run-time configuration for the specified fleet, which
 // tells Amazon GameLift how to launch server processes on instances in the
@@ -8002,100 +4990,49 @@ func (c *GameLift) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigu
 //
 //    * DeleteFleet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation UpdateRuntimeConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The client failed authentication. Clients should not retry such requests.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   A service resource associated with the request could not be found. Clients
-//   should not retry such requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
-//
-//   * ErrCodeInvalidFleetStatusException "InvalidFleetStatusException"
-//   The requested operation would cause a conflict with the current state of
-//   a resource associated with the request and/or the fleet. Resolve the conflict
-//   before retrying.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfiguration
-func (c *GameLift) UpdateRuntimeConfiguration(input *UpdateRuntimeConfigurationInput) (*UpdateRuntimeConfigurationOutput, error) {
-	req, out := c.UpdateRuntimeConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateRuntimeConfigurationWithContext is the same as UpdateRuntimeConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateRuntimeConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) UpdateRuntimeConfigurationWithContext(ctx aws.Context, input *UpdateRuntimeConfigurationInput, opts ...aws.Option) (*UpdateRuntimeConfigurationOutput, error) {
-	req, out := c.UpdateRuntimeConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
-
-// ValidateMatchmakingRuleSetRequest generates a "aws.Request" representing the
-// client's request for the ValidateMatchmakingRuleSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ValidateMatchmakingRuleSet for more information on using the ValidateMatchmakingRuleSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ValidateMatchmakingRuleSetRequest method.
-//    req, resp := client.ValidateMatchmakingRuleSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateRuntimeConfigurationRequest method.
+//    req := client.UpdateRuntimeConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSet
-func (c *GameLift) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRuleSetInput) (req *aws.Request, output *ValidateMatchmakingRuleSetOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfiguration
+func (c *GameLift) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigurationInput) UpdateRuntimeConfigurationRequest {
 	op := &aws.Operation{
-		Name:       opValidateMatchmakingRuleSet,
+		Name:       opUpdateRuntimeConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ValidateMatchmakingRuleSetInput{}
+		input = &UpdateRuntimeConfigurationInput{}
 	}
 
-	output = &ValidateMatchmakingRuleSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateRuntimeConfigurationOutput{})
+	return UpdateRuntimeConfigurationRequest{Request: req, Input: input}
 }
 
-// ValidateMatchmakingRuleSet API operation for Amazon GameLift.
+const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
+
+// ValidateMatchmakingRuleSetRequest is a API request type for the ValidateMatchmakingRuleSet API operation.
+type ValidateMatchmakingRuleSetRequest struct {
+	*aws.Request
+	Input *ValidateMatchmakingRuleSetInput
+}
+
+// Send marshals and sends the ValidateMatchmakingRuleSet API request.
+func (r ValidateMatchmakingRuleSetRequest) Send() (*ValidateMatchmakingRuleSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ValidateMatchmakingRuleSetOutput), nil
+}
+
+// ValidateMatchmakingRuleSetRequest returns a request value for making API operation for
+// Amazon GameLift.
 //
 // Validates the syntax of a matchmaking rule or rule set. This operation checks
 // that the rule set uses syntactically correct JSON and that it conforms to
@@ -8117,46 +5054,27 @@ func (c *GameLift) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingR
 //
 //    * ValidateMatchmakingRuleSet
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon GameLift's
-// API operation ValidateMatchmakingRuleSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an unrecoverable internal failure while processing
-//   the request. Clients can retry such requests immediately or after a waiting
-//   period.
-//
-//   * ErrCodeUnsupportedRegionException "UnsupportedRegionException"
-//   The requested operation is not supported in the region specified.
-//
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   One or more parameter values in the request are invalid. Correct the invalid
-//   parameter values before retrying.
+//    // Example sending a request using the ValidateMatchmakingRuleSetRequest method.
+//    req := client.ValidateMatchmakingRuleSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSet
-func (c *GameLift) ValidateMatchmakingRuleSet(input *ValidateMatchmakingRuleSetInput) (*ValidateMatchmakingRuleSetOutput, error) {
-	req, out := c.ValidateMatchmakingRuleSetRequest(input)
-	return out, req.Send()
-}
+func (c *GameLift) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRuleSetInput) ValidateMatchmakingRuleSetRequest {
+	op := &aws.Operation{
+		Name:       opValidateMatchmakingRuleSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ValidateMatchmakingRuleSetWithContext is the same as ValidateMatchmakingRuleSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ValidateMatchmakingRuleSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *GameLift) ValidateMatchmakingRuleSetWithContext(ctx aws.Context, input *ValidateMatchmakingRuleSetInput, opts ...aws.Option) (*ValidateMatchmakingRuleSetOutput, error) {
-	req, out := c.ValidateMatchmakingRuleSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ValidateMatchmakingRuleSetInput{}
+	}
+
+	req := c.newRequest(op, input, &ValidateMatchmakingRuleSetOutput{})
+	return ValidateMatchmakingRuleSetRequest{Request: req, Input: input}
 }
 
 // Represents the input for a request action.

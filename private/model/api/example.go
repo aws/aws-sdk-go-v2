@@ -68,7 +68,8 @@ func Example{{ .API.StructName }}_{{ .MethodName }}() {
 		{{ generateExampleInput . -}}
 	}
 
-	result, err := svc.{{ .OperationName }}(input)
+	req := svc.{{ .OperationName }}Request(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -319,5 +320,5 @@ func parseTimeString(ref *ShapeRef, memName, v string) string {
 }
 
 func (ex *Example) MethodName() string {
-	return fmt.Sprintf("%s_%s", ex.OperationName, ex.Index)
+	return fmt.Sprintf("%sRequest_%s", ex.OperationName, ex.Index)
 }

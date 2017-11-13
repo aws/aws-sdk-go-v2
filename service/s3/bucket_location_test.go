@@ -30,7 +30,8 @@ func TestGetBucketLocation(t *testing.T) {
 			r.HTTPResponse = &http.Response{StatusCode: 200, Body: reader}
 		})
 
-		resp, err := s.GetBucketLocation(&s3.GetBucketLocationInput{Bucket: aws.String("bucket")})
+		req := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{Bucket: aws.String("bucket")})
+		resp, err := req.Send()
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
 		}
@@ -96,7 +97,7 @@ func TestPopulateLocationConstraint(t *testing.T) {
 	in := &s3.CreateBucketInput{
 		Bucket: aws.String("bucket"),
 	}
-	req, _ := s.CreateBucketRequest(in)
+	req := s.CreateBucketRequest(in)
 	if err := req.Build(); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -113,7 +114,7 @@ func TestPopulateLocationConstraint(t *testing.T) {
 
 func TestNoPopulateLocationConstraintIfProvided(t *testing.T) {
 	s := s3.New(unit.Config())
-	req, _ := s.CreateBucketRequest(&s3.CreateBucketInput{
+	req := s.CreateBucketRequest(&s3.CreateBucketInput{
 		Bucket: aws.String("bucket"),
 		CreateBucketConfiguration: &s3.CreateBucketConfiguration{},
 	})
@@ -134,7 +135,7 @@ func TestNoPopulateLocationConstraintIfClassic(t *testing.T) {
 	cfg.Region = "us-east-1"
 
 	s := s3.New(cfg)
-	req, _ := s.CreateBucketRequest(&s3.CreateBucketInput{
+	req := s.CreateBucketRequest(&s3.CreateBucketInput{
 		Bucket: aws.String("bucket"),
 	})
 	if err := req.Build(); err != nil {

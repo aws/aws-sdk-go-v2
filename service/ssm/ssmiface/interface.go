@@ -63,416 +63,224 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SSMAPI interface {
-	AddTagsToResource(*ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error)
-	AddTagsToResourceWithContext(aws.Context, *ssm.AddTagsToResourceInput, ...aws.Option) (*ssm.AddTagsToResourceOutput, error)
-	AddTagsToResourceRequest(*ssm.AddTagsToResourceInput) (*aws.Request, *ssm.AddTagsToResourceOutput)
+	AddTagsToResourceRequest(*ssm.AddTagsToResourceInput) ssm.AddTagsToResourceRequest
 
-	CancelCommand(*ssm.CancelCommandInput) (*ssm.CancelCommandOutput, error)
-	CancelCommandWithContext(aws.Context, *ssm.CancelCommandInput, ...aws.Option) (*ssm.CancelCommandOutput, error)
-	CancelCommandRequest(*ssm.CancelCommandInput) (*aws.Request, *ssm.CancelCommandOutput)
+	CancelCommandRequest(*ssm.CancelCommandInput) ssm.CancelCommandRequest
 
-	CreateActivation(*ssm.CreateActivationInput) (*ssm.CreateActivationOutput, error)
-	CreateActivationWithContext(aws.Context, *ssm.CreateActivationInput, ...aws.Option) (*ssm.CreateActivationOutput, error)
-	CreateActivationRequest(*ssm.CreateActivationInput) (*aws.Request, *ssm.CreateActivationOutput)
+	CreateActivationRequest(*ssm.CreateActivationInput) ssm.CreateActivationRequest
 
-	CreateAssociation(*ssm.CreateAssociationInput) (*ssm.CreateAssociationOutput, error)
-	CreateAssociationWithContext(aws.Context, *ssm.CreateAssociationInput, ...aws.Option) (*ssm.CreateAssociationOutput, error)
-	CreateAssociationRequest(*ssm.CreateAssociationInput) (*aws.Request, *ssm.CreateAssociationOutput)
+	CreateAssociationRequest(*ssm.CreateAssociationInput) ssm.CreateAssociationRequest
 
-	CreateAssociationBatch(*ssm.CreateAssociationBatchInput) (*ssm.CreateAssociationBatchOutput, error)
-	CreateAssociationBatchWithContext(aws.Context, *ssm.CreateAssociationBatchInput, ...aws.Option) (*ssm.CreateAssociationBatchOutput, error)
-	CreateAssociationBatchRequest(*ssm.CreateAssociationBatchInput) (*aws.Request, *ssm.CreateAssociationBatchOutput)
+	CreateAssociationBatchRequest(*ssm.CreateAssociationBatchInput) ssm.CreateAssociationBatchRequest
 
-	CreateDocument(*ssm.CreateDocumentInput) (*ssm.CreateDocumentOutput, error)
-	CreateDocumentWithContext(aws.Context, *ssm.CreateDocumentInput, ...aws.Option) (*ssm.CreateDocumentOutput, error)
-	CreateDocumentRequest(*ssm.CreateDocumentInput) (*aws.Request, *ssm.CreateDocumentOutput)
+	CreateDocumentRequest(*ssm.CreateDocumentInput) ssm.CreateDocumentRequest
 
-	CreateMaintenanceWindow(*ssm.CreateMaintenanceWindowInput) (*ssm.CreateMaintenanceWindowOutput, error)
-	CreateMaintenanceWindowWithContext(aws.Context, *ssm.CreateMaintenanceWindowInput, ...aws.Option) (*ssm.CreateMaintenanceWindowOutput, error)
-	CreateMaintenanceWindowRequest(*ssm.CreateMaintenanceWindowInput) (*aws.Request, *ssm.CreateMaintenanceWindowOutput)
+	CreateMaintenanceWindowRequest(*ssm.CreateMaintenanceWindowInput) ssm.CreateMaintenanceWindowRequest
 
-	CreatePatchBaseline(*ssm.CreatePatchBaselineInput) (*ssm.CreatePatchBaselineOutput, error)
-	CreatePatchBaselineWithContext(aws.Context, *ssm.CreatePatchBaselineInput, ...aws.Option) (*ssm.CreatePatchBaselineOutput, error)
-	CreatePatchBaselineRequest(*ssm.CreatePatchBaselineInput) (*aws.Request, *ssm.CreatePatchBaselineOutput)
+	CreatePatchBaselineRequest(*ssm.CreatePatchBaselineInput) ssm.CreatePatchBaselineRequest
 
-	CreateResourceDataSync(*ssm.CreateResourceDataSyncInput) (*ssm.CreateResourceDataSyncOutput, error)
-	CreateResourceDataSyncWithContext(aws.Context, *ssm.CreateResourceDataSyncInput, ...aws.Option) (*ssm.CreateResourceDataSyncOutput, error)
-	CreateResourceDataSyncRequest(*ssm.CreateResourceDataSyncInput) (*aws.Request, *ssm.CreateResourceDataSyncOutput)
+	CreateResourceDataSyncRequest(*ssm.CreateResourceDataSyncInput) ssm.CreateResourceDataSyncRequest
 
-	DeleteActivation(*ssm.DeleteActivationInput) (*ssm.DeleteActivationOutput, error)
-	DeleteActivationWithContext(aws.Context, *ssm.DeleteActivationInput, ...aws.Option) (*ssm.DeleteActivationOutput, error)
-	DeleteActivationRequest(*ssm.DeleteActivationInput) (*aws.Request, *ssm.DeleteActivationOutput)
+	DeleteActivationRequest(*ssm.DeleteActivationInput) ssm.DeleteActivationRequest
 
-	DeleteAssociation(*ssm.DeleteAssociationInput) (*ssm.DeleteAssociationOutput, error)
-	DeleteAssociationWithContext(aws.Context, *ssm.DeleteAssociationInput, ...aws.Option) (*ssm.DeleteAssociationOutput, error)
-	DeleteAssociationRequest(*ssm.DeleteAssociationInput) (*aws.Request, *ssm.DeleteAssociationOutput)
+	DeleteAssociationRequest(*ssm.DeleteAssociationInput) ssm.DeleteAssociationRequest
 
-	DeleteDocument(*ssm.DeleteDocumentInput) (*ssm.DeleteDocumentOutput, error)
-	DeleteDocumentWithContext(aws.Context, *ssm.DeleteDocumentInput, ...aws.Option) (*ssm.DeleteDocumentOutput, error)
-	DeleteDocumentRequest(*ssm.DeleteDocumentInput) (*aws.Request, *ssm.DeleteDocumentOutput)
+	DeleteDocumentRequest(*ssm.DeleteDocumentInput) ssm.DeleteDocumentRequest
 
-	DeleteMaintenanceWindow(*ssm.DeleteMaintenanceWindowInput) (*ssm.DeleteMaintenanceWindowOutput, error)
-	DeleteMaintenanceWindowWithContext(aws.Context, *ssm.DeleteMaintenanceWindowInput, ...aws.Option) (*ssm.DeleteMaintenanceWindowOutput, error)
-	DeleteMaintenanceWindowRequest(*ssm.DeleteMaintenanceWindowInput) (*aws.Request, *ssm.DeleteMaintenanceWindowOutput)
+	DeleteMaintenanceWindowRequest(*ssm.DeleteMaintenanceWindowInput) ssm.DeleteMaintenanceWindowRequest
 
-	DeleteParameter(*ssm.DeleteParameterInput) (*ssm.DeleteParameterOutput, error)
-	DeleteParameterWithContext(aws.Context, *ssm.DeleteParameterInput, ...aws.Option) (*ssm.DeleteParameterOutput, error)
-	DeleteParameterRequest(*ssm.DeleteParameterInput) (*aws.Request, *ssm.DeleteParameterOutput)
+	DeleteParameterRequest(*ssm.DeleteParameterInput) ssm.DeleteParameterRequest
 
-	DeleteParameters(*ssm.DeleteParametersInput) (*ssm.DeleteParametersOutput, error)
-	DeleteParametersWithContext(aws.Context, *ssm.DeleteParametersInput, ...aws.Option) (*ssm.DeleteParametersOutput, error)
-	DeleteParametersRequest(*ssm.DeleteParametersInput) (*aws.Request, *ssm.DeleteParametersOutput)
+	DeleteParametersRequest(*ssm.DeleteParametersInput) ssm.DeleteParametersRequest
 
-	DeletePatchBaseline(*ssm.DeletePatchBaselineInput) (*ssm.DeletePatchBaselineOutput, error)
-	DeletePatchBaselineWithContext(aws.Context, *ssm.DeletePatchBaselineInput, ...aws.Option) (*ssm.DeletePatchBaselineOutput, error)
-	DeletePatchBaselineRequest(*ssm.DeletePatchBaselineInput) (*aws.Request, *ssm.DeletePatchBaselineOutput)
+	DeletePatchBaselineRequest(*ssm.DeletePatchBaselineInput) ssm.DeletePatchBaselineRequest
 
-	DeleteResourceDataSync(*ssm.DeleteResourceDataSyncInput) (*ssm.DeleteResourceDataSyncOutput, error)
-	DeleteResourceDataSyncWithContext(aws.Context, *ssm.DeleteResourceDataSyncInput, ...aws.Option) (*ssm.DeleteResourceDataSyncOutput, error)
-	DeleteResourceDataSyncRequest(*ssm.DeleteResourceDataSyncInput) (*aws.Request, *ssm.DeleteResourceDataSyncOutput)
+	DeleteResourceDataSyncRequest(*ssm.DeleteResourceDataSyncInput) ssm.DeleteResourceDataSyncRequest
 
-	DeregisterManagedInstance(*ssm.DeregisterManagedInstanceInput) (*ssm.DeregisterManagedInstanceOutput, error)
-	DeregisterManagedInstanceWithContext(aws.Context, *ssm.DeregisterManagedInstanceInput, ...aws.Option) (*ssm.DeregisterManagedInstanceOutput, error)
-	DeregisterManagedInstanceRequest(*ssm.DeregisterManagedInstanceInput) (*aws.Request, *ssm.DeregisterManagedInstanceOutput)
+	DeregisterManagedInstanceRequest(*ssm.DeregisterManagedInstanceInput) ssm.DeregisterManagedInstanceRequest
 
-	DeregisterPatchBaselineForPatchGroup(*ssm.DeregisterPatchBaselineForPatchGroupInput) (*ssm.DeregisterPatchBaselineForPatchGroupOutput, error)
-	DeregisterPatchBaselineForPatchGroupWithContext(aws.Context, *ssm.DeregisterPatchBaselineForPatchGroupInput, ...aws.Option) (*ssm.DeregisterPatchBaselineForPatchGroupOutput, error)
-	DeregisterPatchBaselineForPatchGroupRequest(*ssm.DeregisterPatchBaselineForPatchGroupInput) (*aws.Request, *ssm.DeregisterPatchBaselineForPatchGroupOutput)
+	DeregisterPatchBaselineForPatchGroupRequest(*ssm.DeregisterPatchBaselineForPatchGroupInput) ssm.DeregisterPatchBaselineForPatchGroupRequest
 
-	DeregisterTargetFromMaintenanceWindow(*ssm.DeregisterTargetFromMaintenanceWindowInput) (*ssm.DeregisterTargetFromMaintenanceWindowOutput, error)
-	DeregisterTargetFromMaintenanceWindowWithContext(aws.Context, *ssm.DeregisterTargetFromMaintenanceWindowInput, ...aws.Option) (*ssm.DeregisterTargetFromMaintenanceWindowOutput, error)
-	DeregisterTargetFromMaintenanceWindowRequest(*ssm.DeregisterTargetFromMaintenanceWindowInput) (*aws.Request, *ssm.DeregisterTargetFromMaintenanceWindowOutput)
+	DeregisterTargetFromMaintenanceWindowRequest(*ssm.DeregisterTargetFromMaintenanceWindowInput) ssm.DeregisterTargetFromMaintenanceWindowRequest
 
-	DeregisterTaskFromMaintenanceWindow(*ssm.DeregisterTaskFromMaintenanceWindowInput) (*ssm.DeregisterTaskFromMaintenanceWindowOutput, error)
-	DeregisterTaskFromMaintenanceWindowWithContext(aws.Context, *ssm.DeregisterTaskFromMaintenanceWindowInput, ...aws.Option) (*ssm.DeregisterTaskFromMaintenanceWindowOutput, error)
-	DeregisterTaskFromMaintenanceWindowRequest(*ssm.DeregisterTaskFromMaintenanceWindowInput) (*aws.Request, *ssm.DeregisterTaskFromMaintenanceWindowOutput)
+	DeregisterTaskFromMaintenanceWindowRequest(*ssm.DeregisterTaskFromMaintenanceWindowInput) ssm.DeregisterTaskFromMaintenanceWindowRequest
 
-	DescribeActivations(*ssm.DescribeActivationsInput) (*ssm.DescribeActivationsOutput, error)
-	DescribeActivationsWithContext(aws.Context, *ssm.DescribeActivationsInput, ...aws.Option) (*ssm.DescribeActivationsOutput, error)
-	DescribeActivationsRequest(*ssm.DescribeActivationsInput) (*aws.Request, *ssm.DescribeActivationsOutput)
+	DescribeActivationsRequest(*ssm.DescribeActivationsInput) ssm.DescribeActivationsRequest
 
 	DescribeActivationsPages(*ssm.DescribeActivationsInput, func(*ssm.DescribeActivationsOutput, bool) bool) error
 	DescribeActivationsPagesWithContext(aws.Context, *ssm.DescribeActivationsInput, func(*ssm.DescribeActivationsOutput, bool) bool, ...aws.Option) error
 
-	DescribeAssociation(*ssm.DescribeAssociationInput) (*ssm.DescribeAssociationOutput, error)
-	DescribeAssociationWithContext(aws.Context, *ssm.DescribeAssociationInput, ...aws.Option) (*ssm.DescribeAssociationOutput, error)
-	DescribeAssociationRequest(*ssm.DescribeAssociationInput) (*aws.Request, *ssm.DescribeAssociationOutput)
+	DescribeAssociationRequest(*ssm.DescribeAssociationInput) ssm.DescribeAssociationRequest
 
-	DescribeAutomationExecutions(*ssm.DescribeAutomationExecutionsInput) (*ssm.DescribeAutomationExecutionsOutput, error)
-	DescribeAutomationExecutionsWithContext(aws.Context, *ssm.DescribeAutomationExecutionsInput, ...aws.Option) (*ssm.DescribeAutomationExecutionsOutput, error)
-	DescribeAutomationExecutionsRequest(*ssm.DescribeAutomationExecutionsInput) (*aws.Request, *ssm.DescribeAutomationExecutionsOutput)
+	DescribeAutomationExecutionsRequest(*ssm.DescribeAutomationExecutionsInput) ssm.DescribeAutomationExecutionsRequest
 
-	DescribeAvailablePatches(*ssm.DescribeAvailablePatchesInput) (*ssm.DescribeAvailablePatchesOutput, error)
-	DescribeAvailablePatchesWithContext(aws.Context, *ssm.DescribeAvailablePatchesInput, ...aws.Option) (*ssm.DescribeAvailablePatchesOutput, error)
-	DescribeAvailablePatchesRequest(*ssm.DescribeAvailablePatchesInput) (*aws.Request, *ssm.DescribeAvailablePatchesOutput)
+	DescribeAvailablePatchesRequest(*ssm.DescribeAvailablePatchesInput) ssm.DescribeAvailablePatchesRequest
 
-	DescribeDocument(*ssm.DescribeDocumentInput) (*ssm.DescribeDocumentOutput, error)
-	DescribeDocumentWithContext(aws.Context, *ssm.DescribeDocumentInput, ...aws.Option) (*ssm.DescribeDocumentOutput, error)
-	DescribeDocumentRequest(*ssm.DescribeDocumentInput) (*aws.Request, *ssm.DescribeDocumentOutput)
+	DescribeDocumentRequest(*ssm.DescribeDocumentInput) ssm.DescribeDocumentRequest
 
-	DescribeDocumentPermission(*ssm.DescribeDocumentPermissionInput) (*ssm.DescribeDocumentPermissionOutput, error)
-	DescribeDocumentPermissionWithContext(aws.Context, *ssm.DescribeDocumentPermissionInput, ...aws.Option) (*ssm.DescribeDocumentPermissionOutput, error)
-	DescribeDocumentPermissionRequest(*ssm.DescribeDocumentPermissionInput) (*aws.Request, *ssm.DescribeDocumentPermissionOutput)
+	DescribeDocumentPermissionRequest(*ssm.DescribeDocumentPermissionInput) ssm.DescribeDocumentPermissionRequest
 
-	DescribeEffectiveInstanceAssociations(*ssm.DescribeEffectiveInstanceAssociationsInput) (*ssm.DescribeEffectiveInstanceAssociationsOutput, error)
-	DescribeEffectiveInstanceAssociationsWithContext(aws.Context, *ssm.DescribeEffectiveInstanceAssociationsInput, ...aws.Option) (*ssm.DescribeEffectiveInstanceAssociationsOutput, error)
-	DescribeEffectiveInstanceAssociationsRequest(*ssm.DescribeEffectiveInstanceAssociationsInput) (*aws.Request, *ssm.DescribeEffectiveInstanceAssociationsOutput)
+	DescribeEffectiveInstanceAssociationsRequest(*ssm.DescribeEffectiveInstanceAssociationsInput) ssm.DescribeEffectiveInstanceAssociationsRequest
 
-	DescribeEffectivePatchesForPatchBaseline(*ssm.DescribeEffectivePatchesForPatchBaselineInput) (*ssm.DescribeEffectivePatchesForPatchBaselineOutput, error)
-	DescribeEffectivePatchesForPatchBaselineWithContext(aws.Context, *ssm.DescribeEffectivePatchesForPatchBaselineInput, ...aws.Option) (*ssm.DescribeEffectivePatchesForPatchBaselineOutput, error)
-	DescribeEffectivePatchesForPatchBaselineRequest(*ssm.DescribeEffectivePatchesForPatchBaselineInput) (*aws.Request, *ssm.DescribeEffectivePatchesForPatchBaselineOutput)
+	DescribeEffectivePatchesForPatchBaselineRequest(*ssm.DescribeEffectivePatchesForPatchBaselineInput) ssm.DescribeEffectivePatchesForPatchBaselineRequest
 
-	DescribeInstanceAssociationsStatus(*ssm.DescribeInstanceAssociationsStatusInput) (*ssm.DescribeInstanceAssociationsStatusOutput, error)
-	DescribeInstanceAssociationsStatusWithContext(aws.Context, *ssm.DescribeInstanceAssociationsStatusInput, ...aws.Option) (*ssm.DescribeInstanceAssociationsStatusOutput, error)
-	DescribeInstanceAssociationsStatusRequest(*ssm.DescribeInstanceAssociationsStatusInput) (*aws.Request, *ssm.DescribeInstanceAssociationsStatusOutput)
+	DescribeInstanceAssociationsStatusRequest(*ssm.DescribeInstanceAssociationsStatusInput) ssm.DescribeInstanceAssociationsStatusRequest
 
-	DescribeInstanceInformation(*ssm.DescribeInstanceInformationInput) (*ssm.DescribeInstanceInformationOutput, error)
-	DescribeInstanceInformationWithContext(aws.Context, *ssm.DescribeInstanceInformationInput, ...aws.Option) (*ssm.DescribeInstanceInformationOutput, error)
-	DescribeInstanceInformationRequest(*ssm.DescribeInstanceInformationInput) (*aws.Request, *ssm.DescribeInstanceInformationOutput)
+	DescribeInstanceInformationRequest(*ssm.DescribeInstanceInformationInput) ssm.DescribeInstanceInformationRequest
 
 	DescribeInstanceInformationPages(*ssm.DescribeInstanceInformationInput, func(*ssm.DescribeInstanceInformationOutput, bool) bool) error
 	DescribeInstanceInformationPagesWithContext(aws.Context, *ssm.DescribeInstanceInformationInput, func(*ssm.DescribeInstanceInformationOutput, bool) bool, ...aws.Option) error
 
-	DescribeInstancePatchStates(*ssm.DescribeInstancePatchStatesInput) (*ssm.DescribeInstancePatchStatesOutput, error)
-	DescribeInstancePatchStatesWithContext(aws.Context, *ssm.DescribeInstancePatchStatesInput, ...aws.Option) (*ssm.DescribeInstancePatchStatesOutput, error)
-	DescribeInstancePatchStatesRequest(*ssm.DescribeInstancePatchStatesInput) (*aws.Request, *ssm.DescribeInstancePatchStatesOutput)
+	DescribeInstancePatchStatesRequest(*ssm.DescribeInstancePatchStatesInput) ssm.DescribeInstancePatchStatesRequest
 
-	DescribeInstancePatchStatesForPatchGroup(*ssm.DescribeInstancePatchStatesForPatchGroupInput) (*ssm.DescribeInstancePatchStatesForPatchGroupOutput, error)
-	DescribeInstancePatchStatesForPatchGroupWithContext(aws.Context, *ssm.DescribeInstancePatchStatesForPatchGroupInput, ...aws.Option) (*ssm.DescribeInstancePatchStatesForPatchGroupOutput, error)
-	DescribeInstancePatchStatesForPatchGroupRequest(*ssm.DescribeInstancePatchStatesForPatchGroupInput) (*aws.Request, *ssm.DescribeInstancePatchStatesForPatchGroupOutput)
+	DescribeInstancePatchStatesForPatchGroupRequest(*ssm.DescribeInstancePatchStatesForPatchGroupInput) ssm.DescribeInstancePatchStatesForPatchGroupRequest
 
-	DescribeInstancePatches(*ssm.DescribeInstancePatchesInput) (*ssm.DescribeInstancePatchesOutput, error)
-	DescribeInstancePatchesWithContext(aws.Context, *ssm.DescribeInstancePatchesInput, ...aws.Option) (*ssm.DescribeInstancePatchesOutput, error)
-	DescribeInstancePatchesRequest(*ssm.DescribeInstancePatchesInput) (*aws.Request, *ssm.DescribeInstancePatchesOutput)
+	DescribeInstancePatchesRequest(*ssm.DescribeInstancePatchesInput) ssm.DescribeInstancePatchesRequest
 
-	DescribeMaintenanceWindowExecutionTaskInvocations(*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput) (*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error)
-	DescribeMaintenanceWindowExecutionTaskInvocationsWithContext(aws.Context, *ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput, ...aws.Option) (*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error)
-	DescribeMaintenanceWindowExecutionTaskInvocationsRequest(*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput) (*aws.Request, *ssm.DescribeMaintenanceWindowExecutionTaskInvocationsOutput)
+	DescribeMaintenanceWindowExecutionTaskInvocationsRequest(*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput) ssm.DescribeMaintenanceWindowExecutionTaskInvocationsRequest
 
-	DescribeMaintenanceWindowExecutionTasks(*ssm.DescribeMaintenanceWindowExecutionTasksInput) (*ssm.DescribeMaintenanceWindowExecutionTasksOutput, error)
-	DescribeMaintenanceWindowExecutionTasksWithContext(aws.Context, *ssm.DescribeMaintenanceWindowExecutionTasksInput, ...aws.Option) (*ssm.DescribeMaintenanceWindowExecutionTasksOutput, error)
-	DescribeMaintenanceWindowExecutionTasksRequest(*ssm.DescribeMaintenanceWindowExecutionTasksInput) (*aws.Request, *ssm.DescribeMaintenanceWindowExecutionTasksOutput)
+	DescribeMaintenanceWindowExecutionTasksRequest(*ssm.DescribeMaintenanceWindowExecutionTasksInput) ssm.DescribeMaintenanceWindowExecutionTasksRequest
 
-	DescribeMaintenanceWindowExecutions(*ssm.DescribeMaintenanceWindowExecutionsInput) (*ssm.DescribeMaintenanceWindowExecutionsOutput, error)
-	DescribeMaintenanceWindowExecutionsWithContext(aws.Context, *ssm.DescribeMaintenanceWindowExecutionsInput, ...aws.Option) (*ssm.DescribeMaintenanceWindowExecutionsOutput, error)
-	DescribeMaintenanceWindowExecutionsRequest(*ssm.DescribeMaintenanceWindowExecutionsInput) (*aws.Request, *ssm.DescribeMaintenanceWindowExecutionsOutput)
+	DescribeMaintenanceWindowExecutionsRequest(*ssm.DescribeMaintenanceWindowExecutionsInput) ssm.DescribeMaintenanceWindowExecutionsRequest
 
-	DescribeMaintenanceWindowTargets(*ssm.DescribeMaintenanceWindowTargetsInput) (*ssm.DescribeMaintenanceWindowTargetsOutput, error)
-	DescribeMaintenanceWindowTargetsWithContext(aws.Context, *ssm.DescribeMaintenanceWindowTargetsInput, ...aws.Option) (*ssm.DescribeMaintenanceWindowTargetsOutput, error)
-	DescribeMaintenanceWindowTargetsRequest(*ssm.DescribeMaintenanceWindowTargetsInput) (*aws.Request, *ssm.DescribeMaintenanceWindowTargetsOutput)
+	DescribeMaintenanceWindowTargetsRequest(*ssm.DescribeMaintenanceWindowTargetsInput) ssm.DescribeMaintenanceWindowTargetsRequest
 
-	DescribeMaintenanceWindowTasks(*ssm.DescribeMaintenanceWindowTasksInput) (*ssm.DescribeMaintenanceWindowTasksOutput, error)
-	DescribeMaintenanceWindowTasksWithContext(aws.Context, *ssm.DescribeMaintenanceWindowTasksInput, ...aws.Option) (*ssm.DescribeMaintenanceWindowTasksOutput, error)
-	DescribeMaintenanceWindowTasksRequest(*ssm.DescribeMaintenanceWindowTasksInput) (*aws.Request, *ssm.DescribeMaintenanceWindowTasksOutput)
+	DescribeMaintenanceWindowTasksRequest(*ssm.DescribeMaintenanceWindowTasksInput) ssm.DescribeMaintenanceWindowTasksRequest
 
-	DescribeMaintenanceWindows(*ssm.DescribeMaintenanceWindowsInput) (*ssm.DescribeMaintenanceWindowsOutput, error)
-	DescribeMaintenanceWindowsWithContext(aws.Context, *ssm.DescribeMaintenanceWindowsInput, ...aws.Option) (*ssm.DescribeMaintenanceWindowsOutput, error)
-	DescribeMaintenanceWindowsRequest(*ssm.DescribeMaintenanceWindowsInput) (*aws.Request, *ssm.DescribeMaintenanceWindowsOutput)
+	DescribeMaintenanceWindowsRequest(*ssm.DescribeMaintenanceWindowsInput) ssm.DescribeMaintenanceWindowsRequest
 
-	DescribeParameters(*ssm.DescribeParametersInput) (*ssm.DescribeParametersOutput, error)
-	DescribeParametersWithContext(aws.Context, *ssm.DescribeParametersInput, ...aws.Option) (*ssm.DescribeParametersOutput, error)
-	DescribeParametersRequest(*ssm.DescribeParametersInput) (*aws.Request, *ssm.DescribeParametersOutput)
+	DescribeParametersRequest(*ssm.DescribeParametersInput) ssm.DescribeParametersRequest
 
 	DescribeParametersPages(*ssm.DescribeParametersInput, func(*ssm.DescribeParametersOutput, bool) bool) error
 	DescribeParametersPagesWithContext(aws.Context, *ssm.DescribeParametersInput, func(*ssm.DescribeParametersOutput, bool) bool, ...aws.Option) error
 
-	DescribePatchBaselines(*ssm.DescribePatchBaselinesInput) (*ssm.DescribePatchBaselinesOutput, error)
-	DescribePatchBaselinesWithContext(aws.Context, *ssm.DescribePatchBaselinesInput, ...aws.Option) (*ssm.DescribePatchBaselinesOutput, error)
-	DescribePatchBaselinesRequest(*ssm.DescribePatchBaselinesInput) (*aws.Request, *ssm.DescribePatchBaselinesOutput)
+	DescribePatchBaselinesRequest(*ssm.DescribePatchBaselinesInput) ssm.DescribePatchBaselinesRequest
 
-	DescribePatchGroupState(*ssm.DescribePatchGroupStateInput) (*ssm.DescribePatchGroupStateOutput, error)
-	DescribePatchGroupStateWithContext(aws.Context, *ssm.DescribePatchGroupStateInput, ...aws.Option) (*ssm.DescribePatchGroupStateOutput, error)
-	DescribePatchGroupStateRequest(*ssm.DescribePatchGroupStateInput) (*aws.Request, *ssm.DescribePatchGroupStateOutput)
+	DescribePatchGroupStateRequest(*ssm.DescribePatchGroupStateInput) ssm.DescribePatchGroupStateRequest
 
-	DescribePatchGroups(*ssm.DescribePatchGroupsInput) (*ssm.DescribePatchGroupsOutput, error)
-	DescribePatchGroupsWithContext(aws.Context, *ssm.DescribePatchGroupsInput, ...aws.Option) (*ssm.DescribePatchGroupsOutput, error)
-	DescribePatchGroupsRequest(*ssm.DescribePatchGroupsInput) (*aws.Request, *ssm.DescribePatchGroupsOutput)
+	DescribePatchGroupsRequest(*ssm.DescribePatchGroupsInput) ssm.DescribePatchGroupsRequest
 
-	GetAutomationExecution(*ssm.GetAutomationExecutionInput) (*ssm.GetAutomationExecutionOutput, error)
-	GetAutomationExecutionWithContext(aws.Context, *ssm.GetAutomationExecutionInput, ...aws.Option) (*ssm.GetAutomationExecutionOutput, error)
-	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) (*aws.Request, *ssm.GetAutomationExecutionOutput)
+	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest
 
-	GetCommandInvocation(*ssm.GetCommandInvocationInput) (*ssm.GetCommandInvocationOutput, error)
-	GetCommandInvocationWithContext(aws.Context, *ssm.GetCommandInvocationInput, ...aws.Option) (*ssm.GetCommandInvocationOutput, error)
-	GetCommandInvocationRequest(*ssm.GetCommandInvocationInput) (*aws.Request, *ssm.GetCommandInvocationOutput)
+	GetCommandInvocationRequest(*ssm.GetCommandInvocationInput) ssm.GetCommandInvocationRequest
 
-	GetDefaultPatchBaseline(*ssm.GetDefaultPatchBaselineInput) (*ssm.GetDefaultPatchBaselineOutput, error)
-	GetDefaultPatchBaselineWithContext(aws.Context, *ssm.GetDefaultPatchBaselineInput, ...aws.Option) (*ssm.GetDefaultPatchBaselineOutput, error)
-	GetDefaultPatchBaselineRequest(*ssm.GetDefaultPatchBaselineInput) (*aws.Request, *ssm.GetDefaultPatchBaselineOutput)
+	GetDefaultPatchBaselineRequest(*ssm.GetDefaultPatchBaselineInput) ssm.GetDefaultPatchBaselineRequest
 
-	GetDeployablePatchSnapshotForInstance(*ssm.GetDeployablePatchSnapshotForInstanceInput) (*ssm.GetDeployablePatchSnapshotForInstanceOutput, error)
-	GetDeployablePatchSnapshotForInstanceWithContext(aws.Context, *ssm.GetDeployablePatchSnapshotForInstanceInput, ...aws.Option) (*ssm.GetDeployablePatchSnapshotForInstanceOutput, error)
-	GetDeployablePatchSnapshotForInstanceRequest(*ssm.GetDeployablePatchSnapshotForInstanceInput) (*aws.Request, *ssm.GetDeployablePatchSnapshotForInstanceOutput)
+	GetDeployablePatchSnapshotForInstanceRequest(*ssm.GetDeployablePatchSnapshotForInstanceInput) ssm.GetDeployablePatchSnapshotForInstanceRequest
 
-	GetDocument(*ssm.GetDocumentInput) (*ssm.GetDocumentOutput, error)
-	GetDocumentWithContext(aws.Context, *ssm.GetDocumentInput, ...aws.Option) (*ssm.GetDocumentOutput, error)
-	GetDocumentRequest(*ssm.GetDocumentInput) (*aws.Request, *ssm.GetDocumentOutput)
+	GetDocumentRequest(*ssm.GetDocumentInput) ssm.GetDocumentRequest
 
-	GetInventory(*ssm.GetInventoryInput) (*ssm.GetInventoryOutput, error)
-	GetInventoryWithContext(aws.Context, *ssm.GetInventoryInput, ...aws.Option) (*ssm.GetInventoryOutput, error)
-	GetInventoryRequest(*ssm.GetInventoryInput) (*aws.Request, *ssm.GetInventoryOutput)
+	GetInventoryRequest(*ssm.GetInventoryInput) ssm.GetInventoryRequest
 
-	GetInventorySchema(*ssm.GetInventorySchemaInput) (*ssm.GetInventorySchemaOutput, error)
-	GetInventorySchemaWithContext(aws.Context, *ssm.GetInventorySchemaInput, ...aws.Option) (*ssm.GetInventorySchemaOutput, error)
-	GetInventorySchemaRequest(*ssm.GetInventorySchemaInput) (*aws.Request, *ssm.GetInventorySchemaOutput)
+	GetInventorySchemaRequest(*ssm.GetInventorySchemaInput) ssm.GetInventorySchemaRequest
 
-	GetMaintenanceWindow(*ssm.GetMaintenanceWindowInput) (*ssm.GetMaintenanceWindowOutput, error)
-	GetMaintenanceWindowWithContext(aws.Context, *ssm.GetMaintenanceWindowInput, ...aws.Option) (*ssm.GetMaintenanceWindowOutput, error)
-	GetMaintenanceWindowRequest(*ssm.GetMaintenanceWindowInput) (*aws.Request, *ssm.GetMaintenanceWindowOutput)
+	GetMaintenanceWindowRequest(*ssm.GetMaintenanceWindowInput) ssm.GetMaintenanceWindowRequest
 
-	GetMaintenanceWindowExecution(*ssm.GetMaintenanceWindowExecutionInput) (*ssm.GetMaintenanceWindowExecutionOutput, error)
-	GetMaintenanceWindowExecutionWithContext(aws.Context, *ssm.GetMaintenanceWindowExecutionInput, ...aws.Option) (*ssm.GetMaintenanceWindowExecutionOutput, error)
-	GetMaintenanceWindowExecutionRequest(*ssm.GetMaintenanceWindowExecutionInput) (*aws.Request, *ssm.GetMaintenanceWindowExecutionOutput)
+	GetMaintenanceWindowExecutionRequest(*ssm.GetMaintenanceWindowExecutionInput) ssm.GetMaintenanceWindowExecutionRequest
 
-	GetMaintenanceWindowExecutionTask(*ssm.GetMaintenanceWindowExecutionTaskInput) (*ssm.GetMaintenanceWindowExecutionTaskOutput, error)
-	GetMaintenanceWindowExecutionTaskWithContext(aws.Context, *ssm.GetMaintenanceWindowExecutionTaskInput, ...aws.Option) (*ssm.GetMaintenanceWindowExecutionTaskOutput, error)
-	GetMaintenanceWindowExecutionTaskRequest(*ssm.GetMaintenanceWindowExecutionTaskInput) (*aws.Request, *ssm.GetMaintenanceWindowExecutionTaskOutput)
+	GetMaintenanceWindowExecutionTaskRequest(*ssm.GetMaintenanceWindowExecutionTaskInput) ssm.GetMaintenanceWindowExecutionTaskRequest
 
-	GetMaintenanceWindowExecutionTaskInvocation(*ssm.GetMaintenanceWindowExecutionTaskInvocationInput) (*ssm.GetMaintenanceWindowExecutionTaskInvocationOutput, error)
-	GetMaintenanceWindowExecutionTaskInvocationWithContext(aws.Context, *ssm.GetMaintenanceWindowExecutionTaskInvocationInput, ...aws.Option) (*ssm.GetMaintenanceWindowExecutionTaskInvocationOutput, error)
-	GetMaintenanceWindowExecutionTaskInvocationRequest(*ssm.GetMaintenanceWindowExecutionTaskInvocationInput) (*aws.Request, *ssm.GetMaintenanceWindowExecutionTaskInvocationOutput)
+	GetMaintenanceWindowExecutionTaskInvocationRequest(*ssm.GetMaintenanceWindowExecutionTaskInvocationInput) ssm.GetMaintenanceWindowExecutionTaskInvocationRequest
 
-	GetMaintenanceWindowTask(*ssm.GetMaintenanceWindowTaskInput) (*ssm.GetMaintenanceWindowTaskOutput, error)
-	GetMaintenanceWindowTaskWithContext(aws.Context, *ssm.GetMaintenanceWindowTaskInput, ...aws.Option) (*ssm.GetMaintenanceWindowTaskOutput, error)
-	GetMaintenanceWindowTaskRequest(*ssm.GetMaintenanceWindowTaskInput) (*aws.Request, *ssm.GetMaintenanceWindowTaskOutput)
+	GetMaintenanceWindowTaskRequest(*ssm.GetMaintenanceWindowTaskInput) ssm.GetMaintenanceWindowTaskRequest
 
-	GetParameter(*ssm.GetParameterInput) (*ssm.GetParameterOutput, error)
-	GetParameterWithContext(aws.Context, *ssm.GetParameterInput, ...aws.Option) (*ssm.GetParameterOutput, error)
-	GetParameterRequest(*ssm.GetParameterInput) (*aws.Request, *ssm.GetParameterOutput)
+	GetParameterRequest(*ssm.GetParameterInput) ssm.GetParameterRequest
 
-	GetParameterHistory(*ssm.GetParameterHistoryInput) (*ssm.GetParameterHistoryOutput, error)
-	GetParameterHistoryWithContext(aws.Context, *ssm.GetParameterHistoryInput, ...aws.Option) (*ssm.GetParameterHistoryOutput, error)
-	GetParameterHistoryRequest(*ssm.GetParameterHistoryInput) (*aws.Request, *ssm.GetParameterHistoryOutput)
+	GetParameterHistoryRequest(*ssm.GetParameterHistoryInput) ssm.GetParameterHistoryRequest
 
 	GetParameterHistoryPages(*ssm.GetParameterHistoryInput, func(*ssm.GetParameterHistoryOutput, bool) bool) error
 	GetParameterHistoryPagesWithContext(aws.Context, *ssm.GetParameterHistoryInput, func(*ssm.GetParameterHistoryOutput, bool) bool, ...aws.Option) error
 
-	GetParameters(*ssm.GetParametersInput) (*ssm.GetParametersOutput, error)
-	GetParametersWithContext(aws.Context, *ssm.GetParametersInput, ...aws.Option) (*ssm.GetParametersOutput, error)
-	GetParametersRequest(*ssm.GetParametersInput) (*aws.Request, *ssm.GetParametersOutput)
+	GetParametersRequest(*ssm.GetParametersInput) ssm.GetParametersRequest
 
-	GetParametersByPath(*ssm.GetParametersByPathInput) (*ssm.GetParametersByPathOutput, error)
-	GetParametersByPathWithContext(aws.Context, *ssm.GetParametersByPathInput, ...aws.Option) (*ssm.GetParametersByPathOutput, error)
-	GetParametersByPathRequest(*ssm.GetParametersByPathInput) (*aws.Request, *ssm.GetParametersByPathOutput)
+	GetParametersByPathRequest(*ssm.GetParametersByPathInput) ssm.GetParametersByPathRequest
 
 	GetParametersByPathPages(*ssm.GetParametersByPathInput, func(*ssm.GetParametersByPathOutput, bool) bool) error
 	GetParametersByPathPagesWithContext(aws.Context, *ssm.GetParametersByPathInput, func(*ssm.GetParametersByPathOutput, bool) bool, ...aws.Option) error
 
-	GetPatchBaseline(*ssm.GetPatchBaselineInput) (*ssm.GetPatchBaselineOutput, error)
-	GetPatchBaselineWithContext(aws.Context, *ssm.GetPatchBaselineInput, ...aws.Option) (*ssm.GetPatchBaselineOutput, error)
-	GetPatchBaselineRequest(*ssm.GetPatchBaselineInput) (*aws.Request, *ssm.GetPatchBaselineOutput)
+	GetPatchBaselineRequest(*ssm.GetPatchBaselineInput) ssm.GetPatchBaselineRequest
 
-	GetPatchBaselineForPatchGroup(*ssm.GetPatchBaselineForPatchGroupInput) (*ssm.GetPatchBaselineForPatchGroupOutput, error)
-	GetPatchBaselineForPatchGroupWithContext(aws.Context, *ssm.GetPatchBaselineForPatchGroupInput, ...aws.Option) (*ssm.GetPatchBaselineForPatchGroupOutput, error)
-	GetPatchBaselineForPatchGroupRequest(*ssm.GetPatchBaselineForPatchGroupInput) (*aws.Request, *ssm.GetPatchBaselineForPatchGroupOutput)
+	GetPatchBaselineForPatchGroupRequest(*ssm.GetPatchBaselineForPatchGroupInput) ssm.GetPatchBaselineForPatchGroupRequest
 
-	ListAssociationVersions(*ssm.ListAssociationVersionsInput) (*ssm.ListAssociationVersionsOutput, error)
-	ListAssociationVersionsWithContext(aws.Context, *ssm.ListAssociationVersionsInput, ...aws.Option) (*ssm.ListAssociationVersionsOutput, error)
-	ListAssociationVersionsRequest(*ssm.ListAssociationVersionsInput) (*aws.Request, *ssm.ListAssociationVersionsOutput)
+	ListAssociationVersionsRequest(*ssm.ListAssociationVersionsInput) ssm.ListAssociationVersionsRequest
 
-	ListAssociations(*ssm.ListAssociationsInput) (*ssm.ListAssociationsOutput, error)
-	ListAssociationsWithContext(aws.Context, *ssm.ListAssociationsInput, ...aws.Option) (*ssm.ListAssociationsOutput, error)
-	ListAssociationsRequest(*ssm.ListAssociationsInput) (*aws.Request, *ssm.ListAssociationsOutput)
+	ListAssociationsRequest(*ssm.ListAssociationsInput) ssm.ListAssociationsRequest
 
 	ListAssociationsPages(*ssm.ListAssociationsInput, func(*ssm.ListAssociationsOutput, bool) bool) error
 	ListAssociationsPagesWithContext(aws.Context, *ssm.ListAssociationsInput, func(*ssm.ListAssociationsOutput, bool) bool, ...aws.Option) error
 
-	ListCommandInvocations(*ssm.ListCommandInvocationsInput) (*ssm.ListCommandInvocationsOutput, error)
-	ListCommandInvocationsWithContext(aws.Context, *ssm.ListCommandInvocationsInput, ...aws.Option) (*ssm.ListCommandInvocationsOutput, error)
-	ListCommandInvocationsRequest(*ssm.ListCommandInvocationsInput) (*aws.Request, *ssm.ListCommandInvocationsOutput)
+	ListCommandInvocationsRequest(*ssm.ListCommandInvocationsInput) ssm.ListCommandInvocationsRequest
 
 	ListCommandInvocationsPages(*ssm.ListCommandInvocationsInput, func(*ssm.ListCommandInvocationsOutput, bool) bool) error
 	ListCommandInvocationsPagesWithContext(aws.Context, *ssm.ListCommandInvocationsInput, func(*ssm.ListCommandInvocationsOutput, bool) bool, ...aws.Option) error
 
-	ListCommands(*ssm.ListCommandsInput) (*ssm.ListCommandsOutput, error)
-	ListCommandsWithContext(aws.Context, *ssm.ListCommandsInput, ...aws.Option) (*ssm.ListCommandsOutput, error)
-	ListCommandsRequest(*ssm.ListCommandsInput) (*aws.Request, *ssm.ListCommandsOutput)
+	ListCommandsRequest(*ssm.ListCommandsInput) ssm.ListCommandsRequest
 
 	ListCommandsPages(*ssm.ListCommandsInput, func(*ssm.ListCommandsOutput, bool) bool) error
 	ListCommandsPagesWithContext(aws.Context, *ssm.ListCommandsInput, func(*ssm.ListCommandsOutput, bool) bool, ...aws.Option) error
 
-	ListComplianceItems(*ssm.ListComplianceItemsInput) (*ssm.ListComplianceItemsOutput, error)
-	ListComplianceItemsWithContext(aws.Context, *ssm.ListComplianceItemsInput, ...aws.Option) (*ssm.ListComplianceItemsOutput, error)
-	ListComplianceItemsRequest(*ssm.ListComplianceItemsInput) (*aws.Request, *ssm.ListComplianceItemsOutput)
+	ListComplianceItemsRequest(*ssm.ListComplianceItemsInput) ssm.ListComplianceItemsRequest
 
-	ListComplianceSummaries(*ssm.ListComplianceSummariesInput) (*ssm.ListComplianceSummariesOutput, error)
-	ListComplianceSummariesWithContext(aws.Context, *ssm.ListComplianceSummariesInput, ...aws.Option) (*ssm.ListComplianceSummariesOutput, error)
-	ListComplianceSummariesRequest(*ssm.ListComplianceSummariesInput) (*aws.Request, *ssm.ListComplianceSummariesOutput)
+	ListComplianceSummariesRequest(*ssm.ListComplianceSummariesInput) ssm.ListComplianceSummariesRequest
 
-	ListDocumentVersions(*ssm.ListDocumentVersionsInput) (*ssm.ListDocumentVersionsOutput, error)
-	ListDocumentVersionsWithContext(aws.Context, *ssm.ListDocumentVersionsInput, ...aws.Option) (*ssm.ListDocumentVersionsOutput, error)
-	ListDocumentVersionsRequest(*ssm.ListDocumentVersionsInput) (*aws.Request, *ssm.ListDocumentVersionsOutput)
+	ListDocumentVersionsRequest(*ssm.ListDocumentVersionsInput) ssm.ListDocumentVersionsRequest
 
-	ListDocuments(*ssm.ListDocumentsInput) (*ssm.ListDocumentsOutput, error)
-	ListDocumentsWithContext(aws.Context, *ssm.ListDocumentsInput, ...aws.Option) (*ssm.ListDocumentsOutput, error)
-	ListDocumentsRequest(*ssm.ListDocumentsInput) (*aws.Request, *ssm.ListDocumentsOutput)
+	ListDocumentsRequest(*ssm.ListDocumentsInput) ssm.ListDocumentsRequest
 
 	ListDocumentsPages(*ssm.ListDocumentsInput, func(*ssm.ListDocumentsOutput, bool) bool) error
 	ListDocumentsPagesWithContext(aws.Context, *ssm.ListDocumentsInput, func(*ssm.ListDocumentsOutput, bool) bool, ...aws.Option) error
 
-	ListInventoryEntries(*ssm.ListInventoryEntriesInput) (*ssm.ListInventoryEntriesOutput, error)
-	ListInventoryEntriesWithContext(aws.Context, *ssm.ListInventoryEntriesInput, ...aws.Option) (*ssm.ListInventoryEntriesOutput, error)
-	ListInventoryEntriesRequest(*ssm.ListInventoryEntriesInput) (*aws.Request, *ssm.ListInventoryEntriesOutput)
+	ListInventoryEntriesRequest(*ssm.ListInventoryEntriesInput) ssm.ListInventoryEntriesRequest
 
-	ListResourceComplianceSummaries(*ssm.ListResourceComplianceSummariesInput) (*ssm.ListResourceComplianceSummariesOutput, error)
-	ListResourceComplianceSummariesWithContext(aws.Context, *ssm.ListResourceComplianceSummariesInput, ...aws.Option) (*ssm.ListResourceComplianceSummariesOutput, error)
-	ListResourceComplianceSummariesRequest(*ssm.ListResourceComplianceSummariesInput) (*aws.Request, *ssm.ListResourceComplianceSummariesOutput)
+	ListResourceComplianceSummariesRequest(*ssm.ListResourceComplianceSummariesInput) ssm.ListResourceComplianceSummariesRequest
 
-	ListResourceDataSync(*ssm.ListResourceDataSyncInput) (*ssm.ListResourceDataSyncOutput, error)
-	ListResourceDataSyncWithContext(aws.Context, *ssm.ListResourceDataSyncInput, ...aws.Option) (*ssm.ListResourceDataSyncOutput, error)
-	ListResourceDataSyncRequest(*ssm.ListResourceDataSyncInput) (*aws.Request, *ssm.ListResourceDataSyncOutput)
+	ListResourceDataSyncRequest(*ssm.ListResourceDataSyncInput) ssm.ListResourceDataSyncRequest
 
-	ListTagsForResource(*ssm.ListTagsForResourceInput) (*ssm.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *ssm.ListTagsForResourceInput, ...aws.Option) (*ssm.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*ssm.ListTagsForResourceInput) (*aws.Request, *ssm.ListTagsForResourceOutput)
+	ListTagsForResourceRequest(*ssm.ListTagsForResourceInput) ssm.ListTagsForResourceRequest
 
-	ModifyDocumentPermission(*ssm.ModifyDocumentPermissionInput) (*ssm.ModifyDocumentPermissionOutput, error)
-	ModifyDocumentPermissionWithContext(aws.Context, *ssm.ModifyDocumentPermissionInput, ...aws.Option) (*ssm.ModifyDocumentPermissionOutput, error)
-	ModifyDocumentPermissionRequest(*ssm.ModifyDocumentPermissionInput) (*aws.Request, *ssm.ModifyDocumentPermissionOutput)
+	ModifyDocumentPermissionRequest(*ssm.ModifyDocumentPermissionInput) ssm.ModifyDocumentPermissionRequest
 
-	PutComplianceItems(*ssm.PutComplianceItemsInput) (*ssm.PutComplianceItemsOutput, error)
-	PutComplianceItemsWithContext(aws.Context, *ssm.PutComplianceItemsInput, ...aws.Option) (*ssm.PutComplianceItemsOutput, error)
-	PutComplianceItemsRequest(*ssm.PutComplianceItemsInput) (*aws.Request, *ssm.PutComplianceItemsOutput)
+	PutComplianceItemsRequest(*ssm.PutComplianceItemsInput) ssm.PutComplianceItemsRequest
 
-	PutInventory(*ssm.PutInventoryInput) (*ssm.PutInventoryOutput, error)
-	PutInventoryWithContext(aws.Context, *ssm.PutInventoryInput, ...aws.Option) (*ssm.PutInventoryOutput, error)
-	PutInventoryRequest(*ssm.PutInventoryInput) (*aws.Request, *ssm.PutInventoryOutput)
+	PutInventoryRequest(*ssm.PutInventoryInput) ssm.PutInventoryRequest
 
-	PutParameter(*ssm.PutParameterInput) (*ssm.PutParameterOutput, error)
-	PutParameterWithContext(aws.Context, *ssm.PutParameterInput, ...aws.Option) (*ssm.PutParameterOutput, error)
-	PutParameterRequest(*ssm.PutParameterInput) (*aws.Request, *ssm.PutParameterOutput)
+	PutParameterRequest(*ssm.PutParameterInput) ssm.PutParameterRequest
 
-	RegisterDefaultPatchBaseline(*ssm.RegisterDefaultPatchBaselineInput) (*ssm.RegisterDefaultPatchBaselineOutput, error)
-	RegisterDefaultPatchBaselineWithContext(aws.Context, *ssm.RegisterDefaultPatchBaselineInput, ...aws.Option) (*ssm.RegisterDefaultPatchBaselineOutput, error)
-	RegisterDefaultPatchBaselineRequest(*ssm.RegisterDefaultPatchBaselineInput) (*aws.Request, *ssm.RegisterDefaultPatchBaselineOutput)
+	RegisterDefaultPatchBaselineRequest(*ssm.RegisterDefaultPatchBaselineInput) ssm.RegisterDefaultPatchBaselineRequest
 
-	RegisterPatchBaselineForPatchGroup(*ssm.RegisterPatchBaselineForPatchGroupInput) (*ssm.RegisterPatchBaselineForPatchGroupOutput, error)
-	RegisterPatchBaselineForPatchGroupWithContext(aws.Context, *ssm.RegisterPatchBaselineForPatchGroupInput, ...aws.Option) (*ssm.RegisterPatchBaselineForPatchGroupOutput, error)
-	RegisterPatchBaselineForPatchGroupRequest(*ssm.RegisterPatchBaselineForPatchGroupInput) (*aws.Request, *ssm.RegisterPatchBaselineForPatchGroupOutput)
+	RegisterPatchBaselineForPatchGroupRequest(*ssm.RegisterPatchBaselineForPatchGroupInput) ssm.RegisterPatchBaselineForPatchGroupRequest
 
-	RegisterTargetWithMaintenanceWindow(*ssm.RegisterTargetWithMaintenanceWindowInput) (*ssm.RegisterTargetWithMaintenanceWindowOutput, error)
-	RegisterTargetWithMaintenanceWindowWithContext(aws.Context, *ssm.RegisterTargetWithMaintenanceWindowInput, ...aws.Option) (*ssm.RegisterTargetWithMaintenanceWindowOutput, error)
-	RegisterTargetWithMaintenanceWindowRequest(*ssm.RegisterTargetWithMaintenanceWindowInput) (*aws.Request, *ssm.RegisterTargetWithMaintenanceWindowOutput)
+	RegisterTargetWithMaintenanceWindowRequest(*ssm.RegisterTargetWithMaintenanceWindowInput) ssm.RegisterTargetWithMaintenanceWindowRequest
 
-	RegisterTaskWithMaintenanceWindow(*ssm.RegisterTaskWithMaintenanceWindowInput) (*ssm.RegisterTaskWithMaintenanceWindowOutput, error)
-	RegisterTaskWithMaintenanceWindowWithContext(aws.Context, *ssm.RegisterTaskWithMaintenanceWindowInput, ...aws.Option) (*ssm.RegisterTaskWithMaintenanceWindowOutput, error)
-	RegisterTaskWithMaintenanceWindowRequest(*ssm.RegisterTaskWithMaintenanceWindowInput) (*aws.Request, *ssm.RegisterTaskWithMaintenanceWindowOutput)
+	RegisterTaskWithMaintenanceWindowRequest(*ssm.RegisterTaskWithMaintenanceWindowInput) ssm.RegisterTaskWithMaintenanceWindowRequest
 
-	RemoveTagsFromResource(*ssm.RemoveTagsFromResourceInput) (*ssm.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceWithContext(aws.Context, *ssm.RemoveTagsFromResourceInput, ...aws.Option) (*ssm.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceRequest(*ssm.RemoveTagsFromResourceInput) (*aws.Request, *ssm.RemoveTagsFromResourceOutput)
+	RemoveTagsFromResourceRequest(*ssm.RemoveTagsFromResourceInput) ssm.RemoveTagsFromResourceRequest
 
-	SendAutomationSignal(*ssm.SendAutomationSignalInput) (*ssm.SendAutomationSignalOutput, error)
-	SendAutomationSignalWithContext(aws.Context, *ssm.SendAutomationSignalInput, ...aws.Option) (*ssm.SendAutomationSignalOutput, error)
-	SendAutomationSignalRequest(*ssm.SendAutomationSignalInput) (*aws.Request, *ssm.SendAutomationSignalOutput)
+	SendAutomationSignalRequest(*ssm.SendAutomationSignalInput) ssm.SendAutomationSignalRequest
 
-	SendCommand(*ssm.SendCommandInput) (*ssm.SendCommandOutput, error)
-	SendCommandWithContext(aws.Context, *ssm.SendCommandInput, ...aws.Option) (*ssm.SendCommandOutput, error)
-	SendCommandRequest(*ssm.SendCommandInput) (*aws.Request, *ssm.SendCommandOutput)
+	SendCommandRequest(*ssm.SendCommandInput) ssm.SendCommandRequest
 
-	StartAutomationExecution(*ssm.StartAutomationExecutionInput) (*ssm.StartAutomationExecutionOutput, error)
-	StartAutomationExecutionWithContext(aws.Context, *ssm.StartAutomationExecutionInput, ...aws.Option) (*ssm.StartAutomationExecutionOutput, error)
-	StartAutomationExecutionRequest(*ssm.StartAutomationExecutionInput) (*aws.Request, *ssm.StartAutomationExecutionOutput)
+	StartAutomationExecutionRequest(*ssm.StartAutomationExecutionInput) ssm.StartAutomationExecutionRequest
 
-	StopAutomationExecution(*ssm.StopAutomationExecutionInput) (*ssm.StopAutomationExecutionOutput, error)
-	StopAutomationExecutionWithContext(aws.Context, *ssm.StopAutomationExecutionInput, ...aws.Option) (*ssm.StopAutomationExecutionOutput, error)
-	StopAutomationExecutionRequest(*ssm.StopAutomationExecutionInput) (*aws.Request, *ssm.StopAutomationExecutionOutput)
+	StopAutomationExecutionRequest(*ssm.StopAutomationExecutionInput) ssm.StopAutomationExecutionRequest
 
-	UpdateAssociation(*ssm.UpdateAssociationInput) (*ssm.UpdateAssociationOutput, error)
-	UpdateAssociationWithContext(aws.Context, *ssm.UpdateAssociationInput, ...aws.Option) (*ssm.UpdateAssociationOutput, error)
-	UpdateAssociationRequest(*ssm.UpdateAssociationInput) (*aws.Request, *ssm.UpdateAssociationOutput)
+	UpdateAssociationRequest(*ssm.UpdateAssociationInput) ssm.UpdateAssociationRequest
 
-	UpdateAssociationStatus(*ssm.UpdateAssociationStatusInput) (*ssm.UpdateAssociationStatusOutput, error)
-	UpdateAssociationStatusWithContext(aws.Context, *ssm.UpdateAssociationStatusInput, ...aws.Option) (*ssm.UpdateAssociationStatusOutput, error)
-	UpdateAssociationStatusRequest(*ssm.UpdateAssociationStatusInput) (*aws.Request, *ssm.UpdateAssociationStatusOutput)
+	UpdateAssociationStatusRequest(*ssm.UpdateAssociationStatusInput) ssm.UpdateAssociationStatusRequest
 
-	UpdateDocument(*ssm.UpdateDocumentInput) (*ssm.UpdateDocumentOutput, error)
-	UpdateDocumentWithContext(aws.Context, *ssm.UpdateDocumentInput, ...aws.Option) (*ssm.UpdateDocumentOutput, error)
-	UpdateDocumentRequest(*ssm.UpdateDocumentInput) (*aws.Request, *ssm.UpdateDocumentOutput)
+	UpdateDocumentRequest(*ssm.UpdateDocumentInput) ssm.UpdateDocumentRequest
 
-	UpdateDocumentDefaultVersion(*ssm.UpdateDocumentDefaultVersionInput) (*ssm.UpdateDocumentDefaultVersionOutput, error)
-	UpdateDocumentDefaultVersionWithContext(aws.Context, *ssm.UpdateDocumentDefaultVersionInput, ...aws.Option) (*ssm.UpdateDocumentDefaultVersionOutput, error)
-	UpdateDocumentDefaultVersionRequest(*ssm.UpdateDocumentDefaultVersionInput) (*aws.Request, *ssm.UpdateDocumentDefaultVersionOutput)
+	UpdateDocumentDefaultVersionRequest(*ssm.UpdateDocumentDefaultVersionInput) ssm.UpdateDocumentDefaultVersionRequest
 
-	UpdateMaintenanceWindow(*ssm.UpdateMaintenanceWindowInput) (*ssm.UpdateMaintenanceWindowOutput, error)
-	UpdateMaintenanceWindowWithContext(aws.Context, *ssm.UpdateMaintenanceWindowInput, ...aws.Option) (*ssm.UpdateMaintenanceWindowOutput, error)
-	UpdateMaintenanceWindowRequest(*ssm.UpdateMaintenanceWindowInput) (*aws.Request, *ssm.UpdateMaintenanceWindowOutput)
+	UpdateMaintenanceWindowRequest(*ssm.UpdateMaintenanceWindowInput) ssm.UpdateMaintenanceWindowRequest
 
-	UpdateMaintenanceWindowTarget(*ssm.UpdateMaintenanceWindowTargetInput) (*ssm.UpdateMaintenanceWindowTargetOutput, error)
-	UpdateMaintenanceWindowTargetWithContext(aws.Context, *ssm.UpdateMaintenanceWindowTargetInput, ...aws.Option) (*ssm.UpdateMaintenanceWindowTargetOutput, error)
-	UpdateMaintenanceWindowTargetRequest(*ssm.UpdateMaintenanceWindowTargetInput) (*aws.Request, *ssm.UpdateMaintenanceWindowTargetOutput)
+	UpdateMaintenanceWindowTargetRequest(*ssm.UpdateMaintenanceWindowTargetInput) ssm.UpdateMaintenanceWindowTargetRequest
 
-	UpdateMaintenanceWindowTask(*ssm.UpdateMaintenanceWindowTaskInput) (*ssm.UpdateMaintenanceWindowTaskOutput, error)
-	UpdateMaintenanceWindowTaskWithContext(aws.Context, *ssm.UpdateMaintenanceWindowTaskInput, ...aws.Option) (*ssm.UpdateMaintenanceWindowTaskOutput, error)
-	UpdateMaintenanceWindowTaskRequest(*ssm.UpdateMaintenanceWindowTaskInput) (*aws.Request, *ssm.UpdateMaintenanceWindowTaskOutput)
+	UpdateMaintenanceWindowTaskRequest(*ssm.UpdateMaintenanceWindowTaskInput) ssm.UpdateMaintenanceWindowTaskRequest
 
-	UpdateManagedInstanceRole(*ssm.UpdateManagedInstanceRoleInput) (*ssm.UpdateManagedInstanceRoleOutput, error)
-	UpdateManagedInstanceRoleWithContext(aws.Context, *ssm.UpdateManagedInstanceRoleInput, ...aws.Option) (*ssm.UpdateManagedInstanceRoleOutput, error)
-	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) (*aws.Request, *ssm.UpdateManagedInstanceRoleOutput)
+	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
 
-	UpdatePatchBaseline(*ssm.UpdatePatchBaselineInput) (*ssm.UpdatePatchBaselineOutput, error)
-	UpdatePatchBaselineWithContext(aws.Context, *ssm.UpdatePatchBaselineInput, ...aws.Option) (*ssm.UpdatePatchBaselineOutput, error)
-	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) (*aws.Request, *ssm.UpdatePatchBaselineOutput)
+	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
 }
 
 var _ SSMAPI = (*ssm.SSM)(nil)

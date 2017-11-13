@@ -314,14 +314,20 @@ type mockS3Client struct {
 	objects []*s3.ListObjectsOutput
 }
 
-func (client *mockS3Client) ListObjects(input *s3.ListObjectsInput) (*s3.ListObjectsOutput, error) {
+func (client *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
 	object := client.objects[client.index]
 	client.index++
-	return object, nil
+
+	req := client.S3.ListObjectsRequest(input)
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
+		r.Data = object
+	})
+
+	return req
 }
 
 func TestBatchDeleteList(t *testing.T) {
-	count := 0
+	var count int
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNoContent)
@@ -358,6 +364,7 @@ func TestBatchDeleteList(t *testing.T) {
 	}
 
 	svc := &mockS3Client{S3: buildS3SvcClient(server.URL), objects: objects}
+
 	batcher := BatchDelete{
 		Client:    svc,
 		BatchSize: 1,
@@ -375,11 +382,9 @@ func TestBatchDeleteList(t *testing.T) {
 					tmp := *input
 					inCpy = &tmp
 				}
-				req, _ := svc.ListObjectsRequest(inCpy)
-				req.Handlers.Clear()
-				output, _ := svc.ListObjects(inCpy)
-				req.Data = output
-				return req, nil
+
+				req := svc.ListObjectsRequest(inCpy)
+				return req.Request, nil
 			},
 		},
 	}
@@ -388,7 +393,7 @@ func TestBatchDeleteList(t *testing.T) {
 		t.Errorf("expected no error, but received %v", err)
 	}
 
-	if count != len(objects) {
+	if count != len(objects)*2 {
 		t.Errorf("Expected %d, but received %d", len(objects), count)
 	}
 }
@@ -410,7 +415,13 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 		count++
 	}))
 
-	svc := &mockS3Client{S3: buildS3SvcClient(server.URL)}
+	svc := &mockS3Client{
+		S3: buildS3SvcClient(server.URL),
+		objects: []*s3.ListObjectsOutput{
+			// Simulate empty listing
+			{Contents: []*s3.Object{}},
+		},
+	}
 	batcher := BatchDelete{
 		Client: svc,
 	}
@@ -429,10 +440,8 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 		Bucket: input.Bucket,
 		Paginator: request.Pagination{
 			NewRequest: func() (*request.Request, error) {
-				req, _ := svc.ListObjectsRequest(input)
-				// Simulate empty listing
-				req.Data = &s3.ListObjectsOutput{Contents: []*s3.Object{}}
-				return req, nil
+				req := svc.ListObjectsRequest(input)
+				return req.Request, nil
 			},
 		},
 	}
@@ -679,26 +688,18 @@ type response struct {
 	err error
 }
 
-func (client *mockClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
-	return client.Put()
-}
-
-func (client *mockClient) PutObjectRequest(input *s3.PutObjectInput) (*request.Request, *s3.PutObjectOutput) {
-	req, _ := client.S3API.PutObjectRequest(input)
+func (client *mockClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObjectRequest {
+	req := client.S3API.PutObjectRequest(input)
 	req.Handlers.Clear()
 	req.Data, req.Error = client.Put()
-	return req, req.Data.(*s3.PutObjectOutput)
+	return req
 }
 
-func (client *mockClient) ListObjects(input *s3.ListObjectsInput) (*s3.ListObjectsOutput, error) {
-	return client.List()
-}
-
-func (client *mockClient) ListObjectsRequest(input *s3.ListObjectsInput) (*request.Request, *s3.ListObjectsOutput) {
-	req, _ := client.S3API.ListObjectsRequest(input)
+func (client *mockClient) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
+	req := client.S3API.ListObjectsRequest(input)
 	req.Handlers.Clear()
 	req.Data, req.Error = client.List()
-	return req, req.Data.(*s3.ListObjectsOutput)
+	return req
 }
 
 func TestBatchError(t *testing.T) {

@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To create an IP set
 //
 // The following example creates an IP match set named MyIPSetFriendlyName.
-func ExampleWAF_CreateIPSet_shared00() {
+func ExampleWAF_CreateIPSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -40,7 +40,8 @@ func ExampleWAF_CreateIPSet_shared00() {
 		Name:        aws.String("MyIPSetFriendlyName"),
 	}
 
-	result, err := svc.CreateIPSet(input)
+	req := svc.CreateIPSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -73,7 +74,7 @@ func ExampleWAF_CreateIPSet_shared00() {
 // To create a rule
 //
 // The following example creates a rule named WAFByteHeaderRule.
-func ExampleWAF_CreateRule_shared00() {
+func ExampleWAF_CreateRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -86,7 +87,8 @@ func ExampleWAF_CreateRule_shared00() {
 		Name:        aws.String("WAFByteHeaderRule"),
 	}
 
-	result, err := svc.CreateRule(input)
+	req := svc.CreateRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -117,7 +119,7 @@ func ExampleWAF_CreateRule_shared00() {
 // To create a size constraint
 //
 // The following example creates size constraint set named MySampleSizeConstraintSet.
-func ExampleWAF_CreateSizeConstraintSet_shared00() {
+func ExampleWAF_CreateSizeConstraintSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -129,7 +131,8 @@ func ExampleWAF_CreateSizeConstraintSet_shared00() {
 		Name:        aws.String("MySampleSizeConstraintSet"),
 	}
 
-	result, err := svc.CreateSizeConstraintSet(input)
+	req := svc.CreateSizeConstraintSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -162,7 +165,7 @@ func ExampleWAF_CreateSizeConstraintSet_shared00() {
 // To create a SQL injection match set
 //
 // The following example creates a SQL injection match set named MySQLInjectionMatchSet.
-func ExampleWAF_CreateSqlInjectionMatchSet_shared00() {
+func ExampleWAF_CreateSqlInjectionMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -174,7 +177,8 @@ func ExampleWAF_CreateSqlInjectionMatchSet_shared00() {
 		Name:        aws.String("MySQLInjectionMatchSet"),
 	}
 
-	result, err := svc.CreateSqlInjectionMatchSet(input)
+	req := svc.CreateSqlInjectionMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -207,7 +211,7 @@ func ExampleWAF_CreateSqlInjectionMatchSet_shared00() {
 // To create a web ACL
 //
 // The following example creates a web ACL named CreateExample.
-func ExampleWAF_CreateWebACL_shared00() {
+func ExampleWAF_CreateWebACLRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -223,7 +227,8 @@ func ExampleWAF_CreateWebACL_shared00() {
 		Name:       aws.String("CreateExample"),
 	}
 
-	result, err := svc.CreateWebACL(input)
+	req := svc.CreateWebACLRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -256,7 +261,7 @@ func ExampleWAF_CreateWebACL_shared00() {
 // To create an XSS match set
 //
 // The following example creates an XSS match set named MySampleXssMatchSet.
-func ExampleWAF_CreateXssMatchSet_shared00() {
+func ExampleWAF_CreateXssMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -268,7 +273,8 @@ func ExampleWAF_CreateXssMatchSet_shared00() {
 		Name:        aws.String("MySampleXssMatchSet"),
 	}
 
-	result, err := svc.CreateXssMatchSet(input)
+	req := svc.CreateXssMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -301,7 +307,7 @@ func ExampleWAF_CreateXssMatchSet_shared00() {
 // To delete a byte match set
 //
 // The following example deletes a byte match set with the ID exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_DeleteByteMatchSet_shared00() {
+func ExampleWAF_DeleteByteMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -313,7 +319,8 @@ func ExampleWAF_DeleteByteMatchSet_shared00() {
 		ChangeToken:    aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 	}
 
-	result, err := svc.DeleteByteMatchSet(input)
+	req := svc.DeleteByteMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -346,7 +353,7 @@ func ExampleWAF_DeleteByteMatchSet_shared00() {
 // To delete an IP set
 //
 // The following example deletes an IP match set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_DeleteIPSet_shared00() {
+func ExampleWAF_DeleteIPSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -358,7 +365,8 @@ func ExampleWAF_DeleteIPSet_shared00() {
 		IPSetId:     aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.DeleteIPSet(input)
+	req := svc.DeleteIPSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -391,7 +399,7 @@ func ExampleWAF_DeleteIPSet_shared00() {
 // To delete a rule
 //
 // The following example deletes a rule with the ID WAFRule-1-Example.
-func ExampleWAF_DeleteRule_shared00() {
+func ExampleWAF_DeleteRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -403,7 +411,8 @@ func ExampleWAF_DeleteRule_shared00() {
 		RuleId:      aws.String("WAFRule-1-Example"),
 	}
 
-	result, err := svc.DeleteRule(input)
+	req := svc.DeleteRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -436,7 +445,7 @@ func ExampleWAF_DeleteRule_shared00() {
 // To delete a size constraint set
 //
 // The following example deletes a size constraint set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_DeleteSizeConstraintSet_shared00() {
+func ExampleWAF_DeleteSizeConstraintSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -448,7 +457,8 @@ func ExampleWAF_DeleteSizeConstraintSet_shared00() {
 		SizeConstraintSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.DeleteSizeConstraintSet(input)
+	req := svc.DeleteSizeConstraintSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -481,7 +491,7 @@ func ExampleWAF_DeleteSizeConstraintSet_shared00() {
 // To delete a SQL injection match set
 //
 // The following example deletes a SQL injection match set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_DeleteSqlInjectionMatchSet_shared00() {
+func ExampleWAF_DeleteSqlInjectionMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -493,7 +503,8 @@ func ExampleWAF_DeleteSqlInjectionMatchSet_shared00() {
 		SqlInjectionMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.DeleteSqlInjectionMatchSet(input)
+	req := svc.DeleteSqlInjectionMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -526,7 +537,7 @@ func ExampleWAF_DeleteSqlInjectionMatchSet_shared00() {
 // To delete a web ACL
 //
 // The following example deletes a web ACL with the ID example-46da-4444-5555-example.
-func ExampleWAF_DeleteWebACL_shared00() {
+func ExampleWAF_DeleteWebACLRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -538,7 +549,8 @@ func ExampleWAF_DeleteWebACL_shared00() {
 		WebACLId:    aws.String("example-46da-4444-5555-example"),
 	}
 
-	result, err := svc.DeleteWebACL(input)
+	req := svc.DeleteWebACLRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -571,7 +583,7 @@ func ExampleWAF_DeleteWebACL_shared00() {
 // To delete an XSS match set
 //
 // The following example deletes an XSS match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_DeleteXssMatchSet_shared00() {
+func ExampleWAF_DeleteXssMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -583,7 +595,8 @@ func ExampleWAF_DeleteXssMatchSet_shared00() {
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.DeleteXssMatchSet(input)
+	req := svc.DeleteXssMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -616,7 +629,7 @@ func ExampleWAF_DeleteXssMatchSet_shared00() {
 // To get a byte match set
 //
 // The following example returns the details of a byte match set with the ID exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_GetByteMatchSet_shared00() {
+func ExampleWAF_GetByteMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -627,7 +640,8 @@ func ExampleWAF_GetByteMatchSet_shared00() {
 		ByteMatchSetId: aws.String("exampleIDs3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.GetByteMatchSet(input)
+	req := svc.GetByteMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -655,7 +669,7 @@ func ExampleWAF_GetByteMatchSet_shared00() {
 //
 // The following example returns a change token to use for a create, update or delete
 // operation.
-func ExampleWAF_GetChangeToken_shared00() {
+func ExampleWAF_GetChangeTokenRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -664,7 +678,8 @@ func ExampleWAF_GetChangeToken_shared00() {
 	svc := waf.New(cfg)
 	input := &waf.GetChangeTokenInput{}
 
-	result, err := svc.GetChangeToken(input)
+	req := svc.GetChangeTokenRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -687,7 +702,7 @@ func ExampleWAF_GetChangeToken_shared00() {
 // To get the change token status
 //
 // The following example returns the status of a change token with the ID abcd12f2-46da-4fdb-b8d5-fbd4c466928f.
-func ExampleWAF_GetChangeTokenStatus_shared00() {
+func ExampleWAF_GetChangeTokenStatusRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -698,7 +713,8 @@ func ExampleWAF_GetChangeTokenStatus_shared00() {
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 	}
 
-	result, err := svc.GetChangeTokenStatus(input)
+	req := svc.GetChangeTokenStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -723,7 +739,7 @@ func ExampleWAF_GetChangeTokenStatus_shared00() {
 // To get an IP set
 //
 // The following example returns the details of an IP match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_GetIPSet_shared00() {
+func ExampleWAF_GetIPSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -734,7 +750,8 @@ func ExampleWAF_GetIPSet_shared00() {
 		IPSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.GetIPSet(input)
+	req := svc.GetIPSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -761,7 +778,7 @@ func ExampleWAF_GetIPSet_shared00() {
 // To get a rule
 //
 // The following example returns the details of a rule with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_GetRule_shared00() {
+func ExampleWAF_GetRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -772,7 +789,8 @@ func ExampleWAF_GetRule_shared00() {
 		RuleId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.GetRule(input)
+	req := svc.GetRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -801,7 +819,7 @@ func ExampleWAF_GetRule_shared00() {
 // The following example returns detailed information about 100 requests --a sample--
 // that AWS WAF randomly selects from among the first 5,000 requests that your AWS resource
 // received between the time period 2016-09-27T15:50Z to 2016-09-27T15:50Z.
-func ExampleWAF_GetSampledRequests_shared00() {
+func ExampleWAF_GetSampledRequestsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -818,7 +836,8 @@ func ExampleWAF_GetSampledRequests_shared00() {
 		WebAclId: aws.String("createwebacl-1472061481310"),
 	}
 
-	result, err := svc.GetSampledRequests(input)
+	req := svc.GetSampledRequestsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -844,7 +863,7 @@ func ExampleWAF_GetSampledRequests_shared00() {
 //
 // The following example returns the details of a size constraint match set with the
 // ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_GetSizeConstraintSet_shared00() {
+func ExampleWAF_GetSizeConstraintSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -855,7 +874,8 @@ func ExampleWAF_GetSizeConstraintSet_shared00() {
 		SizeConstraintSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.GetSizeConstraintSet(input)
+	req := svc.GetSizeConstraintSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -883,7 +903,7 @@ func ExampleWAF_GetSizeConstraintSet_shared00() {
 //
 // The following example returns the details of a SQL injection match set with the ID
 // example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_GetSqlInjectionMatchSet_shared00() {
+func ExampleWAF_GetSqlInjectionMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -894,7 +914,8 @@ func ExampleWAF_GetSqlInjectionMatchSet_shared00() {
 		SqlInjectionMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.GetSqlInjectionMatchSet(input)
+	req := svc.GetSqlInjectionMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -921,7 +942,7 @@ func ExampleWAF_GetSqlInjectionMatchSet_shared00() {
 // To get a web ACL
 //
 // The following example returns the details of a web ACL with the ID createwebacl-1472061481310.
-func ExampleWAF_GetWebACL_shared00() {
+func ExampleWAF_GetWebACLRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -932,7 +953,8 @@ func ExampleWAF_GetWebACL_shared00() {
 		WebACLId: aws.String("createwebacl-1472061481310"),
 	}
 
-	result, err := svc.GetWebACL(input)
+	req := svc.GetWebACLRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -959,7 +981,7 @@ func ExampleWAF_GetWebACL_shared00() {
 // To get an XSS match set
 //
 // The following example returns the details of an XSS match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_GetXssMatchSet_shared00() {
+func ExampleWAF_GetXssMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -970,7 +992,8 @@ func ExampleWAF_GetXssMatchSet_shared00() {
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.GetXssMatchSet(input)
+	req := svc.GetXssMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -997,7 +1020,7 @@ func ExampleWAF_GetXssMatchSet_shared00() {
 // To list IP sets
 //
 // The following example returns an array of up to 100 IP match sets.
-func ExampleWAF_ListIPSets_shared00() {
+func ExampleWAF_ListIPSetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1008,7 +1031,8 @@ func ExampleWAF_ListIPSets_shared00() {
 		Limit: aws.Int64(100),
 	}
 
-	result, err := svc.ListIPSets(input)
+	req := svc.ListIPSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1033,7 +1057,7 @@ func ExampleWAF_ListIPSets_shared00() {
 // To list rules
 //
 // The following example returns an array of up to 100 rules.
-func ExampleWAF_ListRules_shared00() {
+func ExampleWAF_ListRulesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1044,7 +1068,8 @@ func ExampleWAF_ListRules_shared00() {
 		Limit: aws.Int64(100),
 	}
 
-	result, err := svc.ListRules(input)
+	req := svc.ListRulesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1069,7 +1094,7 @@ func ExampleWAF_ListRules_shared00() {
 // To list a size constraint sets
 //
 // The following example returns an array of up to 100 size contraint match sets.
-func ExampleWAF_ListSizeConstraintSets_shared00() {
+func ExampleWAF_ListSizeConstraintSetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1080,7 +1105,8 @@ func ExampleWAF_ListSizeConstraintSets_shared00() {
 		Limit: aws.Int64(100),
 	}
 
-	result, err := svc.ListSizeConstraintSets(input)
+	req := svc.ListSizeConstraintSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1105,7 +1131,7 @@ func ExampleWAF_ListSizeConstraintSets_shared00() {
 // To list SQL injection match sets
 //
 // The following example returns an array of up to 100 SQL injection match sets.
-func ExampleWAF_ListSqlInjectionMatchSets_shared00() {
+func ExampleWAF_ListSqlInjectionMatchSetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1116,7 +1142,8 @@ func ExampleWAF_ListSqlInjectionMatchSets_shared00() {
 		Limit: aws.Int64(100),
 	}
 
-	result, err := svc.ListSqlInjectionMatchSets(input)
+	req := svc.ListSqlInjectionMatchSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1141,7 +1168,7 @@ func ExampleWAF_ListSqlInjectionMatchSets_shared00() {
 // To list Web ACLs
 //
 // The following example returns an array of up to 100 web ACLs.
-func ExampleWAF_ListWebACLs_shared00() {
+func ExampleWAF_ListWebACLsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1152,7 +1179,8 @@ func ExampleWAF_ListWebACLs_shared00() {
 		Limit: aws.Int64(100),
 	}
 
-	result, err := svc.ListWebACLs(input)
+	req := svc.ListWebACLsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1177,7 +1205,7 @@ func ExampleWAF_ListWebACLs_shared00() {
 // To list XSS match sets
 //
 // The following example returns an array of up to 100 XSS match sets.
-func ExampleWAF_ListXssMatchSets_shared00() {
+func ExampleWAF_ListXssMatchSetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1188,7 +1216,8 @@ func ExampleWAF_ListXssMatchSets_shared00() {
 		Limit: aws.Int64(100),
 	}
 
-	result, err := svc.ListXssMatchSets(input)
+	req := svc.ListXssMatchSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1214,7 +1243,7 @@ func ExampleWAF_ListXssMatchSets_shared00() {
 //
 // The following example deletes a ByteMatchTuple object (filters) in an byte match
 // set with the ID exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_UpdateByteMatchSet_shared00() {
+func ExampleWAF_UpdateByteMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1231,7 +1260,8 @@ func ExampleWAF_UpdateByteMatchSet_shared00() {
 		},
 	}
 
-	result, err := svc.UpdateByteMatchSet(input)
+	req := svc.UpdateByteMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1269,7 +1299,7 @@ func ExampleWAF_UpdateByteMatchSet_shared00() {
 //
 // The following example deletes an IPSetDescriptor object in an IP match set with the
 // ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_UpdateIPSet_shared00() {
+func ExampleWAF_UpdateIPSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1286,7 +1316,8 @@ func ExampleWAF_UpdateIPSet_shared00() {
 		},
 	}
 
-	result, err := svc.UpdateIPSet(input)
+	req := svc.UpdateIPSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1325,7 +1356,7 @@ func ExampleWAF_UpdateIPSet_shared00() {
 // To update a rule
 //
 // The following example deletes a Predicate object in a rule with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_UpdateRule_shared00() {
+func ExampleWAF_UpdateRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1342,7 +1373,8 @@ func ExampleWAF_UpdateRule_shared00() {
 		},
 	}
 
-	result, err := svc.UpdateRule(input)
+	req := svc.UpdateRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1382,7 +1414,7 @@ func ExampleWAF_UpdateRule_shared00() {
 //
 // The following example deletes a SizeConstraint object (filters) in a size constraint
 // set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_UpdateSizeConstraintSet_shared00() {
+func ExampleWAF_UpdateSizeConstraintSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1399,7 +1431,8 @@ func ExampleWAF_UpdateSizeConstraintSet_shared00() {
 		},
 	}
 
-	result, err := svc.UpdateSizeConstraintSet(input)
+	req := svc.UpdateSizeConstraintSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1439,7 +1472,7 @@ func ExampleWAF_UpdateSizeConstraintSet_shared00() {
 //
 // The following example deletes a SqlInjectionMatchTuple object (filters) in a SQL
 // injection match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_UpdateSqlInjectionMatchSet_shared00() {
+func ExampleWAF_UpdateSqlInjectionMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1456,7 +1489,8 @@ func ExampleWAF_UpdateSqlInjectionMatchSet_shared00() {
 		},
 	}
 
-	result, err := svc.UpdateSqlInjectionMatchSet(input)
+	req := svc.UpdateSqlInjectionMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1493,7 +1527,7 @@ func ExampleWAF_UpdateSqlInjectionMatchSet_shared00() {
 // To update a Web ACL
 //
 // The following example deletes an ActivatedRule object in a WebACL with the ID webacl-1472061481310.
-func ExampleWAF_UpdateWebACL_shared00() {
+func ExampleWAF_UpdateWebACLRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1513,7 +1547,8 @@ func ExampleWAF_UpdateWebACL_shared00() {
 		WebACLId: aws.String("webacl-1472061481310"),
 	}
 
-	result, err := svc.UpdateWebACL(input)
+	req := svc.UpdateWebACLRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1553,7 +1588,7 @@ func ExampleWAF_UpdateWebACL_shared00() {
 //
 // The following example deletes an XssMatchTuple object (filters) in an XssMatchSet
 // with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
-func ExampleWAF_UpdateXssMatchSet_shared00() {
+func ExampleWAF_UpdateXssMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1570,7 +1605,8 @@ func ExampleWAF_UpdateXssMatchSet_shared00() {
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
-	result, err := svc.UpdateXssMatchSet(input)
+	req := svc.UpdateXssMatchSetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

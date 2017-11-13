@@ -9,7 +9,6 @@
 package wafiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
@@ -63,181 +62,93 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type WAFAPI interface {
-	CreateByteMatchSet(*waf.CreateByteMatchSetInput) (*waf.CreateByteMatchSetOutput, error)
-	CreateByteMatchSetWithContext(aws.Context, *waf.CreateByteMatchSetInput, ...aws.Option) (*waf.CreateByteMatchSetOutput, error)
-	CreateByteMatchSetRequest(*waf.CreateByteMatchSetInput) (*aws.Request, *waf.CreateByteMatchSetOutput)
+	CreateByteMatchSetRequest(*waf.CreateByteMatchSetInput) waf.CreateByteMatchSetRequest
 
-	CreateIPSet(*waf.CreateIPSetInput) (*waf.CreateIPSetOutput, error)
-	CreateIPSetWithContext(aws.Context, *waf.CreateIPSetInput, ...aws.Option) (*waf.CreateIPSetOutput, error)
-	CreateIPSetRequest(*waf.CreateIPSetInput) (*aws.Request, *waf.CreateIPSetOutput)
+	CreateIPSetRequest(*waf.CreateIPSetInput) waf.CreateIPSetRequest
 
-	CreateRateBasedRule(*waf.CreateRateBasedRuleInput) (*waf.CreateRateBasedRuleOutput, error)
-	CreateRateBasedRuleWithContext(aws.Context, *waf.CreateRateBasedRuleInput, ...aws.Option) (*waf.CreateRateBasedRuleOutput, error)
-	CreateRateBasedRuleRequest(*waf.CreateRateBasedRuleInput) (*aws.Request, *waf.CreateRateBasedRuleOutput)
+	CreateRateBasedRuleRequest(*waf.CreateRateBasedRuleInput) waf.CreateRateBasedRuleRequest
 
-	CreateRule(*waf.CreateRuleInput) (*waf.CreateRuleOutput, error)
-	CreateRuleWithContext(aws.Context, *waf.CreateRuleInput, ...aws.Option) (*waf.CreateRuleOutput, error)
-	CreateRuleRequest(*waf.CreateRuleInput) (*aws.Request, *waf.CreateRuleOutput)
+	CreateRuleRequest(*waf.CreateRuleInput) waf.CreateRuleRequest
 
-	CreateSizeConstraintSet(*waf.CreateSizeConstraintSetInput) (*waf.CreateSizeConstraintSetOutput, error)
-	CreateSizeConstraintSetWithContext(aws.Context, *waf.CreateSizeConstraintSetInput, ...aws.Option) (*waf.CreateSizeConstraintSetOutput, error)
-	CreateSizeConstraintSetRequest(*waf.CreateSizeConstraintSetInput) (*aws.Request, *waf.CreateSizeConstraintSetOutput)
+	CreateSizeConstraintSetRequest(*waf.CreateSizeConstraintSetInput) waf.CreateSizeConstraintSetRequest
 
-	CreateSqlInjectionMatchSet(*waf.CreateSqlInjectionMatchSetInput) (*waf.CreateSqlInjectionMatchSetOutput, error)
-	CreateSqlInjectionMatchSetWithContext(aws.Context, *waf.CreateSqlInjectionMatchSetInput, ...aws.Option) (*waf.CreateSqlInjectionMatchSetOutput, error)
-	CreateSqlInjectionMatchSetRequest(*waf.CreateSqlInjectionMatchSetInput) (*aws.Request, *waf.CreateSqlInjectionMatchSetOutput)
+	CreateSqlInjectionMatchSetRequest(*waf.CreateSqlInjectionMatchSetInput) waf.CreateSqlInjectionMatchSetRequest
 
-	CreateWebACL(*waf.CreateWebACLInput) (*waf.CreateWebACLOutput, error)
-	CreateWebACLWithContext(aws.Context, *waf.CreateWebACLInput, ...aws.Option) (*waf.CreateWebACLOutput, error)
-	CreateWebACLRequest(*waf.CreateWebACLInput) (*aws.Request, *waf.CreateWebACLOutput)
+	CreateWebACLRequest(*waf.CreateWebACLInput) waf.CreateWebACLRequest
 
-	CreateXssMatchSet(*waf.CreateXssMatchSetInput) (*waf.CreateXssMatchSetOutput, error)
-	CreateXssMatchSetWithContext(aws.Context, *waf.CreateXssMatchSetInput, ...aws.Option) (*waf.CreateXssMatchSetOutput, error)
-	CreateXssMatchSetRequest(*waf.CreateXssMatchSetInput) (*aws.Request, *waf.CreateXssMatchSetOutput)
+	CreateXssMatchSetRequest(*waf.CreateXssMatchSetInput) waf.CreateXssMatchSetRequest
 
-	DeleteByteMatchSet(*waf.DeleteByteMatchSetInput) (*waf.DeleteByteMatchSetOutput, error)
-	DeleteByteMatchSetWithContext(aws.Context, *waf.DeleteByteMatchSetInput, ...aws.Option) (*waf.DeleteByteMatchSetOutput, error)
-	DeleteByteMatchSetRequest(*waf.DeleteByteMatchSetInput) (*aws.Request, *waf.DeleteByteMatchSetOutput)
+	DeleteByteMatchSetRequest(*waf.DeleteByteMatchSetInput) waf.DeleteByteMatchSetRequest
 
-	DeleteIPSet(*waf.DeleteIPSetInput) (*waf.DeleteIPSetOutput, error)
-	DeleteIPSetWithContext(aws.Context, *waf.DeleteIPSetInput, ...aws.Option) (*waf.DeleteIPSetOutput, error)
-	DeleteIPSetRequest(*waf.DeleteIPSetInput) (*aws.Request, *waf.DeleteIPSetOutput)
+	DeleteIPSetRequest(*waf.DeleteIPSetInput) waf.DeleteIPSetRequest
 
-	DeleteRateBasedRule(*waf.DeleteRateBasedRuleInput) (*waf.DeleteRateBasedRuleOutput, error)
-	DeleteRateBasedRuleWithContext(aws.Context, *waf.DeleteRateBasedRuleInput, ...aws.Option) (*waf.DeleteRateBasedRuleOutput, error)
-	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) (*aws.Request, *waf.DeleteRateBasedRuleOutput)
+	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) waf.DeleteRateBasedRuleRequest
 
-	DeleteRule(*waf.DeleteRuleInput) (*waf.DeleteRuleOutput, error)
-	DeleteRuleWithContext(aws.Context, *waf.DeleteRuleInput, ...aws.Option) (*waf.DeleteRuleOutput, error)
-	DeleteRuleRequest(*waf.DeleteRuleInput) (*aws.Request, *waf.DeleteRuleOutput)
+	DeleteRuleRequest(*waf.DeleteRuleInput) waf.DeleteRuleRequest
 
-	DeleteSizeConstraintSet(*waf.DeleteSizeConstraintSetInput) (*waf.DeleteSizeConstraintSetOutput, error)
-	DeleteSizeConstraintSetWithContext(aws.Context, *waf.DeleteSizeConstraintSetInput, ...aws.Option) (*waf.DeleteSizeConstraintSetOutput, error)
-	DeleteSizeConstraintSetRequest(*waf.DeleteSizeConstraintSetInput) (*aws.Request, *waf.DeleteSizeConstraintSetOutput)
+	DeleteSizeConstraintSetRequest(*waf.DeleteSizeConstraintSetInput) waf.DeleteSizeConstraintSetRequest
 
-	DeleteSqlInjectionMatchSet(*waf.DeleteSqlInjectionMatchSetInput) (*waf.DeleteSqlInjectionMatchSetOutput, error)
-	DeleteSqlInjectionMatchSetWithContext(aws.Context, *waf.DeleteSqlInjectionMatchSetInput, ...aws.Option) (*waf.DeleteSqlInjectionMatchSetOutput, error)
-	DeleteSqlInjectionMatchSetRequest(*waf.DeleteSqlInjectionMatchSetInput) (*aws.Request, *waf.DeleteSqlInjectionMatchSetOutput)
+	DeleteSqlInjectionMatchSetRequest(*waf.DeleteSqlInjectionMatchSetInput) waf.DeleteSqlInjectionMatchSetRequest
 
-	DeleteWebACL(*waf.DeleteWebACLInput) (*waf.DeleteWebACLOutput, error)
-	DeleteWebACLWithContext(aws.Context, *waf.DeleteWebACLInput, ...aws.Option) (*waf.DeleteWebACLOutput, error)
-	DeleteWebACLRequest(*waf.DeleteWebACLInput) (*aws.Request, *waf.DeleteWebACLOutput)
+	DeleteWebACLRequest(*waf.DeleteWebACLInput) waf.DeleteWebACLRequest
 
-	DeleteXssMatchSet(*waf.DeleteXssMatchSetInput) (*waf.DeleteXssMatchSetOutput, error)
-	DeleteXssMatchSetWithContext(aws.Context, *waf.DeleteXssMatchSetInput, ...aws.Option) (*waf.DeleteXssMatchSetOutput, error)
-	DeleteXssMatchSetRequest(*waf.DeleteXssMatchSetInput) (*aws.Request, *waf.DeleteXssMatchSetOutput)
+	DeleteXssMatchSetRequest(*waf.DeleteXssMatchSetInput) waf.DeleteXssMatchSetRequest
 
-	GetByteMatchSet(*waf.GetByteMatchSetInput) (*waf.GetByteMatchSetOutput, error)
-	GetByteMatchSetWithContext(aws.Context, *waf.GetByteMatchSetInput, ...aws.Option) (*waf.GetByteMatchSetOutput, error)
-	GetByteMatchSetRequest(*waf.GetByteMatchSetInput) (*aws.Request, *waf.GetByteMatchSetOutput)
+	GetByteMatchSetRequest(*waf.GetByteMatchSetInput) waf.GetByteMatchSetRequest
 
-	GetChangeToken(*waf.GetChangeTokenInput) (*waf.GetChangeTokenOutput, error)
-	GetChangeTokenWithContext(aws.Context, *waf.GetChangeTokenInput, ...aws.Option) (*waf.GetChangeTokenOutput, error)
-	GetChangeTokenRequest(*waf.GetChangeTokenInput) (*aws.Request, *waf.GetChangeTokenOutput)
+	GetChangeTokenRequest(*waf.GetChangeTokenInput) waf.GetChangeTokenRequest
 
-	GetChangeTokenStatus(*waf.GetChangeTokenStatusInput) (*waf.GetChangeTokenStatusOutput, error)
-	GetChangeTokenStatusWithContext(aws.Context, *waf.GetChangeTokenStatusInput, ...aws.Option) (*waf.GetChangeTokenStatusOutput, error)
-	GetChangeTokenStatusRequest(*waf.GetChangeTokenStatusInput) (*aws.Request, *waf.GetChangeTokenStatusOutput)
+	GetChangeTokenStatusRequest(*waf.GetChangeTokenStatusInput) waf.GetChangeTokenStatusRequest
 
-	GetIPSet(*waf.GetIPSetInput) (*waf.GetIPSetOutput, error)
-	GetIPSetWithContext(aws.Context, *waf.GetIPSetInput, ...aws.Option) (*waf.GetIPSetOutput, error)
-	GetIPSetRequest(*waf.GetIPSetInput) (*aws.Request, *waf.GetIPSetOutput)
+	GetIPSetRequest(*waf.GetIPSetInput) waf.GetIPSetRequest
 
-	GetRateBasedRule(*waf.GetRateBasedRuleInput) (*waf.GetRateBasedRuleOutput, error)
-	GetRateBasedRuleWithContext(aws.Context, *waf.GetRateBasedRuleInput, ...aws.Option) (*waf.GetRateBasedRuleOutput, error)
-	GetRateBasedRuleRequest(*waf.GetRateBasedRuleInput) (*aws.Request, *waf.GetRateBasedRuleOutput)
+	GetRateBasedRuleRequest(*waf.GetRateBasedRuleInput) waf.GetRateBasedRuleRequest
 
-	GetRateBasedRuleManagedKeys(*waf.GetRateBasedRuleManagedKeysInput) (*waf.GetRateBasedRuleManagedKeysOutput, error)
-	GetRateBasedRuleManagedKeysWithContext(aws.Context, *waf.GetRateBasedRuleManagedKeysInput, ...aws.Option) (*waf.GetRateBasedRuleManagedKeysOutput, error)
-	GetRateBasedRuleManagedKeysRequest(*waf.GetRateBasedRuleManagedKeysInput) (*aws.Request, *waf.GetRateBasedRuleManagedKeysOutput)
+	GetRateBasedRuleManagedKeysRequest(*waf.GetRateBasedRuleManagedKeysInput) waf.GetRateBasedRuleManagedKeysRequest
 
-	GetRule(*waf.GetRuleInput) (*waf.GetRuleOutput, error)
-	GetRuleWithContext(aws.Context, *waf.GetRuleInput, ...aws.Option) (*waf.GetRuleOutput, error)
-	GetRuleRequest(*waf.GetRuleInput) (*aws.Request, *waf.GetRuleOutput)
+	GetRuleRequest(*waf.GetRuleInput) waf.GetRuleRequest
 
-	GetSampledRequests(*waf.GetSampledRequestsInput) (*waf.GetSampledRequestsOutput, error)
-	GetSampledRequestsWithContext(aws.Context, *waf.GetSampledRequestsInput, ...aws.Option) (*waf.GetSampledRequestsOutput, error)
-	GetSampledRequestsRequest(*waf.GetSampledRequestsInput) (*aws.Request, *waf.GetSampledRequestsOutput)
+	GetSampledRequestsRequest(*waf.GetSampledRequestsInput) waf.GetSampledRequestsRequest
 
-	GetSizeConstraintSet(*waf.GetSizeConstraintSetInput) (*waf.GetSizeConstraintSetOutput, error)
-	GetSizeConstraintSetWithContext(aws.Context, *waf.GetSizeConstraintSetInput, ...aws.Option) (*waf.GetSizeConstraintSetOutput, error)
-	GetSizeConstraintSetRequest(*waf.GetSizeConstraintSetInput) (*aws.Request, *waf.GetSizeConstraintSetOutput)
+	GetSizeConstraintSetRequest(*waf.GetSizeConstraintSetInput) waf.GetSizeConstraintSetRequest
 
-	GetSqlInjectionMatchSet(*waf.GetSqlInjectionMatchSetInput) (*waf.GetSqlInjectionMatchSetOutput, error)
-	GetSqlInjectionMatchSetWithContext(aws.Context, *waf.GetSqlInjectionMatchSetInput, ...aws.Option) (*waf.GetSqlInjectionMatchSetOutput, error)
-	GetSqlInjectionMatchSetRequest(*waf.GetSqlInjectionMatchSetInput) (*aws.Request, *waf.GetSqlInjectionMatchSetOutput)
+	GetSqlInjectionMatchSetRequest(*waf.GetSqlInjectionMatchSetInput) waf.GetSqlInjectionMatchSetRequest
 
-	GetWebACL(*waf.GetWebACLInput) (*waf.GetWebACLOutput, error)
-	GetWebACLWithContext(aws.Context, *waf.GetWebACLInput, ...aws.Option) (*waf.GetWebACLOutput, error)
-	GetWebACLRequest(*waf.GetWebACLInput) (*aws.Request, *waf.GetWebACLOutput)
+	GetWebACLRequest(*waf.GetWebACLInput) waf.GetWebACLRequest
 
-	GetXssMatchSet(*waf.GetXssMatchSetInput) (*waf.GetXssMatchSetOutput, error)
-	GetXssMatchSetWithContext(aws.Context, *waf.GetXssMatchSetInput, ...aws.Option) (*waf.GetXssMatchSetOutput, error)
-	GetXssMatchSetRequest(*waf.GetXssMatchSetInput) (*aws.Request, *waf.GetXssMatchSetOutput)
+	GetXssMatchSetRequest(*waf.GetXssMatchSetInput) waf.GetXssMatchSetRequest
 
-	ListByteMatchSets(*waf.ListByteMatchSetsInput) (*waf.ListByteMatchSetsOutput, error)
-	ListByteMatchSetsWithContext(aws.Context, *waf.ListByteMatchSetsInput, ...aws.Option) (*waf.ListByteMatchSetsOutput, error)
-	ListByteMatchSetsRequest(*waf.ListByteMatchSetsInput) (*aws.Request, *waf.ListByteMatchSetsOutput)
+	ListByteMatchSetsRequest(*waf.ListByteMatchSetsInput) waf.ListByteMatchSetsRequest
 
-	ListIPSets(*waf.ListIPSetsInput) (*waf.ListIPSetsOutput, error)
-	ListIPSetsWithContext(aws.Context, *waf.ListIPSetsInput, ...aws.Option) (*waf.ListIPSetsOutput, error)
-	ListIPSetsRequest(*waf.ListIPSetsInput) (*aws.Request, *waf.ListIPSetsOutput)
+	ListIPSetsRequest(*waf.ListIPSetsInput) waf.ListIPSetsRequest
 
-	ListRateBasedRules(*waf.ListRateBasedRulesInput) (*waf.ListRateBasedRulesOutput, error)
-	ListRateBasedRulesWithContext(aws.Context, *waf.ListRateBasedRulesInput, ...aws.Option) (*waf.ListRateBasedRulesOutput, error)
-	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) (*aws.Request, *waf.ListRateBasedRulesOutput)
+	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) waf.ListRateBasedRulesRequest
 
-	ListRules(*waf.ListRulesInput) (*waf.ListRulesOutput, error)
-	ListRulesWithContext(aws.Context, *waf.ListRulesInput, ...aws.Option) (*waf.ListRulesOutput, error)
-	ListRulesRequest(*waf.ListRulesInput) (*aws.Request, *waf.ListRulesOutput)
+	ListRulesRequest(*waf.ListRulesInput) waf.ListRulesRequest
 
-	ListSizeConstraintSets(*waf.ListSizeConstraintSetsInput) (*waf.ListSizeConstraintSetsOutput, error)
-	ListSizeConstraintSetsWithContext(aws.Context, *waf.ListSizeConstraintSetsInput, ...aws.Option) (*waf.ListSizeConstraintSetsOutput, error)
-	ListSizeConstraintSetsRequest(*waf.ListSizeConstraintSetsInput) (*aws.Request, *waf.ListSizeConstraintSetsOutput)
+	ListSizeConstraintSetsRequest(*waf.ListSizeConstraintSetsInput) waf.ListSizeConstraintSetsRequest
 
-	ListSqlInjectionMatchSets(*waf.ListSqlInjectionMatchSetsInput) (*waf.ListSqlInjectionMatchSetsOutput, error)
-	ListSqlInjectionMatchSetsWithContext(aws.Context, *waf.ListSqlInjectionMatchSetsInput, ...aws.Option) (*waf.ListSqlInjectionMatchSetsOutput, error)
-	ListSqlInjectionMatchSetsRequest(*waf.ListSqlInjectionMatchSetsInput) (*aws.Request, *waf.ListSqlInjectionMatchSetsOutput)
+	ListSqlInjectionMatchSetsRequest(*waf.ListSqlInjectionMatchSetsInput) waf.ListSqlInjectionMatchSetsRequest
 
-	ListWebACLs(*waf.ListWebACLsInput) (*waf.ListWebACLsOutput, error)
-	ListWebACLsWithContext(aws.Context, *waf.ListWebACLsInput, ...aws.Option) (*waf.ListWebACLsOutput, error)
-	ListWebACLsRequest(*waf.ListWebACLsInput) (*aws.Request, *waf.ListWebACLsOutput)
+	ListWebACLsRequest(*waf.ListWebACLsInput) waf.ListWebACLsRequest
 
-	ListXssMatchSets(*waf.ListXssMatchSetsInput) (*waf.ListXssMatchSetsOutput, error)
-	ListXssMatchSetsWithContext(aws.Context, *waf.ListXssMatchSetsInput, ...aws.Option) (*waf.ListXssMatchSetsOutput, error)
-	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) (*aws.Request, *waf.ListXssMatchSetsOutput)
+	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
 
-	UpdateByteMatchSet(*waf.UpdateByteMatchSetInput) (*waf.UpdateByteMatchSetOutput, error)
-	UpdateByteMatchSetWithContext(aws.Context, *waf.UpdateByteMatchSetInput, ...aws.Option) (*waf.UpdateByteMatchSetOutput, error)
-	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) (*aws.Request, *waf.UpdateByteMatchSetOutput)
+	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) waf.UpdateByteMatchSetRequest
 
-	UpdateIPSet(*waf.UpdateIPSetInput) (*waf.UpdateIPSetOutput, error)
-	UpdateIPSetWithContext(aws.Context, *waf.UpdateIPSetInput, ...aws.Option) (*waf.UpdateIPSetOutput, error)
-	UpdateIPSetRequest(*waf.UpdateIPSetInput) (*aws.Request, *waf.UpdateIPSetOutput)
+	UpdateIPSetRequest(*waf.UpdateIPSetInput) waf.UpdateIPSetRequest
 
-	UpdateRateBasedRule(*waf.UpdateRateBasedRuleInput) (*waf.UpdateRateBasedRuleOutput, error)
-	UpdateRateBasedRuleWithContext(aws.Context, *waf.UpdateRateBasedRuleInput, ...aws.Option) (*waf.UpdateRateBasedRuleOutput, error)
-	UpdateRateBasedRuleRequest(*waf.UpdateRateBasedRuleInput) (*aws.Request, *waf.UpdateRateBasedRuleOutput)
+	UpdateRateBasedRuleRequest(*waf.UpdateRateBasedRuleInput) waf.UpdateRateBasedRuleRequest
 
-	UpdateRule(*waf.UpdateRuleInput) (*waf.UpdateRuleOutput, error)
-	UpdateRuleWithContext(aws.Context, *waf.UpdateRuleInput, ...aws.Option) (*waf.UpdateRuleOutput, error)
-	UpdateRuleRequest(*waf.UpdateRuleInput) (*aws.Request, *waf.UpdateRuleOutput)
+	UpdateRuleRequest(*waf.UpdateRuleInput) waf.UpdateRuleRequest
 
-	UpdateSizeConstraintSet(*waf.UpdateSizeConstraintSetInput) (*waf.UpdateSizeConstraintSetOutput, error)
-	UpdateSizeConstraintSetWithContext(aws.Context, *waf.UpdateSizeConstraintSetInput, ...aws.Option) (*waf.UpdateSizeConstraintSetOutput, error)
-	UpdateSizeConstraintSetRequest(*waf.UpdateSizeConstraintSetInput) (*aws.Request, *waf.UpdateSizeConstraintSetOutput)
+	UpdateSizeConstraintSetRequest(*waf.UpdateSizeConstraintSetInput) waf.UpdateSizeConstraintSetRequest
 
-	UpdateSqlInjectionMatchSet(*waf.UpdateSqlInjectionMatchSetInput) (*waf.UpdateSqlInjectionMatchSetOutput, error)
-	UpdateSqlInjectionMatchSetWithContext(aws.Context, *waf.UpdateSqlInjectionMatchSetInput, ...aws.Option) (*waf.UpdateSqlInjectionMatchSetOutput, error)
-	UpdateSqlInjectionMatchSetRequest(*waf.UpdateSqlInjectionMatchSetInput) (*aws.Request, *waf.UpdateSqlInjectionMatchSetOutput)
+	UpdateSqlInjectionMatchSetRequest(*waf.UpdateSqlInjectionMatchSetInput) waf.UpdateSqlInjectionMatchSetRequest
 
-	UpdateWebACL(*waf.UpdateWebACLInput) (*waf.UpdateWebACLOutput, error)
-	UpdateWebACLWithContext(aws.Context, *waf.UpdateWebACLInput, ...aws.Option) (*waf.UpdateWebACLOutput, error)
-	UpdateWebACLRequest(*waf.UpdateWebACLInput) (*aws.Request, *waf.UpdateWebACLOutput)
+	UpdateWebACLRequest(*waf.UpdateWebACLInput) waf.UpdateWebACLRequest
 
-	UpdateXssMatchSet(*waf.UpdateXssMatchSetInput) (*waf.UpdateXssMatchSetOutput, error)
-	UpdateXssMatchSetWithContext(aws.Context, *waf.UpdateXssMatchSetInput, ...aws.Option) (*waf.UpdateXssMatchSetOutput, error)
-	UpdateXssMatchSetRequest(*waf.UpdateXssMatchSetInput) (*aws.Request, *waf.UpdateXssMatchSetOutput)
+	UpdateXssMatchSetRequest(*waf.UpdateXssMatchSetInput) waf.UpdateXssMatchSetRequest
 }
 
 var _ WAFAPI = (*waf.WAF)(nil)

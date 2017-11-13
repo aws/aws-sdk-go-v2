@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To add tags to a load balancer
 //
 // This example adds the specified tags to the specified load balancer.
-func ExampleELBV2_AddTags_shared00() {
+func ExampleELBV2_AddTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -51,7 +51,8 @@ func ExampleELBV2_AddTags_shared00() {
 		},
 	}
 
-	result, err := svc.AddTags(input)
+	req := svc.AddTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -81,7 +82,7 @@ func ExampleELBV2_AddTags_shared00() {
 //
 // This example creates an HTTP listener for the specified load balancer that forwards
 // requests to the specified target group.
-func ExampleELBV2_CreateListener_shared00() {
+func ExampleELBV2_CreateListenerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -100,7 +101,8 @@ func ExampleELBV2_CreateListener_shared00() {
 		Protocol:        elbv2.ProtocolEnumHttp,
 	}
 
-	result, err := svc.CreateListener(input)
+	req := svc.CreateListenerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -152,7 +154,7 @@ func ExampleELBV2_CreateListener_shared00() {
 // Manager (ACM). Alternatively, you can create a certificate using SSL/TLS tools, get
 // the certificate signed by a certificate authority (CA), and upload the certificate
 // to AWS Identity and Access Management (IAM).
-func ExampleELBV2_CreateListener_shared01() {
+func ExampleELBV2_CreateListenerRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -177,7 +179,8 @@ func ExampleELBV2_CreateListener_shared01() {
 		SslPolicy:       aws.String("ELBSecurityPolicy-2015-05"),
 	}
 
-	result, err := svc.CreateListener(input)
+	req := svc.CreateListenerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -225,7 +228,7 @@ func ExampleELBV2_CreateListener_shared01() {
 //
 // This example creates an Internet-facing load balancer and enables the Availability
 // Zones for the specified subnets.
-func ExampleELBV2_CreateLoadBalancer_shared00() {
+func ExampleELBV2_CreateLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -240,7 +243,8 @@ func ExampleELBV2_CreateLoadBalancer_shared00() {
 		},
 	}
 
-	result, err := svc.CreateLoadBalancer(input)
+	req := svc.CreateLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -286,7 +290,7 @@ func ExampleELBV2_CreateLoadBalancer_shared00() {
 //
 // This example creates an internal load balancer and enables the Availability Zones
 // for the specified subnets.
-func ExampleELBV2_CreateLoadBalancer_shared01() {
+func ExampleELBV2_CreateLoadBalancerRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -302,7 +306,8 @@ func ExampleELBV2_CreateLoadBalancer_shared01() {
 		},
 	}
 
-	result, err := svc.CreateLoadBalancer(input)
+	req := svc.CreateLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -348,7 +353,7 @@ func ExampleELBV2_CreateLoadBalancer_shared01() {
 //
 // This example creates a rule that forwards requests to the specified target group
 // if the URL contains the specified pattern (for example, /img/*).
-func ExampleELBV2_CreateRule_shared00() {
+func ExampleELBV2_CreateRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -374,7 +379,8 @@ func ExampleELBV2_CreateRule_shared00() {
 		Priority:    aws.Int64(10),
 	}
 
-	result, err := svc.CreateRule(input)
+	req := svc.CreateRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -416,7 +422,7 @@ func ExampleELBV2_CreateRule_shared00() {
 //
 // This example creates a target group that you can use to route traffic to targets
 // using HTTP on port 80. This target group uses the default health check configuration.
-func ExampleELBV2_CreateTargetGroup_shared00() {
+func ExampleELBV2_CreateTargetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -430,7 +436,8 @@ func ExampleELBV2_CreateTargetGroup_shared00() {
 		VpcId:    aws.String("vpc-3ac0fb5f"),
 	}
 
-	result, err := svc.CreateTargetGroup(input)
+	req := svc.CreateTargetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -457,7 +464,7 @@ func ExampleELBV2_CreateTargetGroup_shared00() {
 // To delete a listener
 //
 // This example deletes the specified listener.
-func ExampleELBV2_DeleteListener_shared00() {
+func ExampleELBV2_DeleteListenerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -468,7 +475,8 @@ func ExampleELBV2_DeleteListener_shared00() {
 		ListenerArn: aws.String("arn:aws:elasticloadbalancing:ua-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"),
 	}
 
-	result, err := svc.DeleteListener(input)
+	req := svc.DeleteListenerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -491,7 +499,7 @@ func ExampleELBV2_DeleteListener_shared00() {
 // To delete a load balancer
 //
 // This example deletes the specified load balancer.
-func ExampleELBV2_DeleteLoadBalancer_shared00() {
+func ExampleELBV2_DeleteLoadBalancerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -502,7 +510,8 @@ func ExampleELBV2_DeleteLoadBalancer_shared00() {
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 	}
 
-	result, err := svc.DeleteLoadBalancer(input)
+	req := svc.DeleteLoadBalancerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -527,7 +536,7 @@ func ExampleELBV2_DeleteLoadBalancer_shared00() {
 // To delete a rule
 //
 // This example deletes the specified rule.
-func ExampleELBV2_DeleteRule_shared00() {
+func ExampleELBV2_DeleteRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -538,7 +547,8 @@ func ExampleELBV2_DeleteRule_shared00() {
 		RuleArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3"),
 	}
 
-	result, err := svc.DeleteRule(input)
+	req := svc.DeleteRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -563,7 +573,7 @@ func ExampleELBV2_DeleteRule_shared00() {
 // To delete a target group
 //
 // This example deletes the specified target group.
-func ExampleELBV2_DeleteTargetGroup_shared00() {
+func ExampleELBV2_DeleteTargetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -574,7 +584,8 @@ func ExampleELBV2_DeleteTargetGroup_shared00() {
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 	}
 
-	result, err := svc.DeleteTargetGroup(input)
+	req := svc.DeleteTargetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -597,7 +608,7 @@ func ExampleELBV2_DeleteTargetGroup_shared00() {
 // To deregister a target from a target group
 //
 // This example deregisters the specified instance from the specified target group.
-func ExampleELBV2_DeregisterTargets_shared00() {
+func ExampleELBV2_DeregisterTargetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -613,7 +624,8 @@ func ExampleELBV2_DeregisterTargets_shared00() {
 		},
 	}
 
-	result, err := svc.DeregisterTargets(input)
+	req := svc.DeregisterTargetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -638,7 +650,7 @@ func ExampleELBV2_DeregisterTargets_shared00() {
 // To describe a listener
 //
 // This example describes the specified listener.
-func ExampleELBV2_DescribeListeners_shared00() {
+func ExampleELBV2_DescribeListenersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -651,7 +663,8 @@ func ExampleELBV2_DescribeListeners_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeListeners(input)
+	req := svc.DescribeListenersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -676,7 +689,7 @@ func ExampleELBV2_DescribeListeners_shared00() {
 // To describe load balancer attributes
 //
 // This example describes the attributes of the specified load balancer.
-func ExampleELBV2_DescribeLoadBalancerAttributes_shared00() {
+func ExampleELBV2_DescribeLoadBalancerAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -687,7 +700,8 @@ func ExampleELBV2_DescribeLoadBalancerAttributes_shared00() {
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 	}
 
-	result, err := svc.DescribeLoadBalancerAttributes(input)
+	req := svc.DescribeLoadBalancerAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -710,7 +724,7 @@ func ExampleELBV2_DescribeLoadBalancerAttributes_shared00() {
 // To describe a load balancer
 //
 // This example describes the specified load balancer.
-func ExampleELBV2_DescribeLoadBalancers_shared00() {
+func ExampleELBV2_DescribeLoadBalancersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -723,7 +737,8 @@ func ExampleELBV2_DescribeLoadBalancers_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeLoadBalancers(input)
+	req := svc.DescribeLoadBalancersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -746,7 +761,7 @@ func ExampleELBV2_DescribeLoadBalancers_shared00() {
 // To describe a rule
 //
 // This example describes the specified rule.
-func ExampleELBV2_DescribeRules_shared00() {
+func ExampleELBV2_DescribeRulesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -759,7 +774,8 @@ func ExampleELBV2_DescribeRules_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeRules(input)
+	req := svc.DescribeRulesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -784,7 +800,7 @@ func ExampleELBV2_DescribeRules_shared00() {
 // To describe a policy used for SSL negotiation
 //
 // This example describes the specified policy used for SSL negotiation.
-func ExampleELBV2_DescribeSSLPolicies_shared00() {
+func ExampleELBV2_DescribeSSLPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -797,7 +813,8 @@ func ExampleELBV2_DescribeSSLPolicies_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeSSLPolicies(input)
+	req := svc.DescribeSSLPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -820,7 +837,7 @@ func ExampleELBV2_DescribeSSLPolicies_shared00() {
 // To describe the tags assigned to a load balancer
 //
 // This example describes the tags assigned to the specified load balancer.
-func ExampleELBV2_DescribeTags_shared00() {
+func ExampleELBV2_DescribeTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -833,7 +850,8 @@ func ExampleELBV2_DescribeTags_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeTags(input)
+	req := svc.DescribeTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -862,7 +880,7 @@ func ExampleELBV2_DescribeTags_shared00() {
 // To describe target group attributes
 //
 // This example describes the attributes of the specified target group.
-func ExampleELBV2_DescribeTargetGroupAttributes_shared00() {
+func ExampleELBV2_DescribeTargetGroupAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -873,7 +891,8 @@ func ExampleELBV2_DescribeTargetGroupAttributes_shared00() {
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 	}
 
-	result, err := svc.DescribeTargetGroupAttributes(input)
+	req := svc.DescribeTargetGroupAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -896,7 +915,7 @@ func ExampleELBV2_DescribeTargetGroupAttributes_shared00() {
 // To describe a target group
 //
 // This example describes the specified target group.
-func ExampleELBV2_DescribeTargetGroups_shared00() {
+func ExampleELBV2_DescribeTargetGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -909,7 +928,8 @@ func ExampleELBV2_DescribeTargetGroups_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeTargetGroups(input)
+	req := svc.DescribeTargetGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -936,7 +956,7 @@ func ExampleELBV2_DescribeTargetGroups_shared00() {
 // This example describes the health of the targets for the specified target group.
 // One target is healthy but the other is not specified in an action, so it can't receive
 // traffic from the load balancer.
-func ExampleELBV2_DescribeTargetHealth_shared00() {
+func ExampleELBV2_DescribeTargetHealthRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -947,7 +967,8 @@ func ExampleELBV2_DescribeTargetHealth_shared00() {
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 	}
 
-	result, err := svc.DescribeTargetHealth(input)
+	req := svc.DescribeTargetHealthRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -974,7 +995,7 @@ func ExampleELBV2_DescribeTargetHealth_shared00() {
 // To describe the health of a target
 //
 // This example describes the health of the specified target. This target is healthy.
-func ExampleELBV2_DescribeTargetHealth_shared01() {
+func ExampleELBV2_DescribeTargetHealthRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -991,7 +1012,8 @@ func ExampleELBV2_DescribeTargetHealth_shared01() {
 		},
 	}
 
-	result, err := svc.DescribeTargetHealth(input)
+	req := svc.DescribeTargetHealthRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1018,7 +1040,7 @@ func ExampleELBV2_DescribeTargetHealth_shared01() {
 // To change the default action for a listener
 //
 // This example changes the default action for the specified listener.
-func ExampleELBV2_ModifyListener_shared00() {
+func ExampleELBV2_ModifyListenerRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1035,7 +1057,8 @@ func ExampleELBV2_ModifyListener_shared00() {
 		ListenerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"),
 	}
 
-	result, err := svc.ModifyListener(input)
+	req := svc.ModifyListenerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1082,7 +1105,7 @@ func ExampleELBV2_ModifyListener_shared00() {
 // To change the server certificate
 //
 // This example changes the server certificate for the specified HTTPS listener.
-func ExampleELBV2_ModifyListener_shared01() {
+func ExampleELBV2_ModifyListenerRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1098,7 +1121,8 @@ func ExampleELBV2_ModifyListener_shared01() {
 		ListenerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65"),
 	}
 
-	result, err := svc.ModifyListener(input)
+	req := svc.ModifyListenerRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1145,7 +1169,7 @@ func ExampleELBV2_ModifyListener_shared01() {
 // To enable deletion protection
 //
 // This example enables deletion protection for the specified load balancer.
-func ExampleELBV2_ModifyLoadBalancerAttributes_shared00() {
+func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1162,7 +1186,8 @@ func ExampleELBV2_ModifyLoadBalancerAttributes_shared00() {
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 	}
 
-	result, err := svc.ModifyLoadBalancerAttributes(input)
+	req := svc.ModifyLoadBalancerAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1187,7 +1212,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributes_shared00() {
 // To change the idle timeout
 //
 // This example changes the idle timeout value for the specified load balancer.
-func ExampleELBV2_ModifyLoadBalancerAttributes_shared01() {
+func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1204,7 +1229,8 @@ func ExampleELBV2_ModifyLoadBalancerAttributes_shared01() {
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 	}
 
-	result, err := svc.ModifyLoadBalancerAttributes(input)
+	req := svc.ModifyLoadBalancerAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1231,7 +1257,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributes_shared01() {
 // This example enables access logs for the specified load balancer. Note that the S3
 // bucket must exist in the same region as the load balancer and must have a policy
 // attached that grants access to the Elastic Load Balancing service.
-func ExampleELBV2_ModifyLoadBalancerAttributes_shared02() {
+func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1256,7 +1282,8 @@ func ExampleELBV2_ModifyLoadBalancerAttributes_shared02() {
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 	}
 
-	result, err := svc.ModifyLoadBalancerAttributes(input)
+	req := svc.ModifyLoadBalancerAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1281,7 +1308,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributes_shared02() {
 // To modify a rule
 //
 // This example modifies the condition for the specified rule.
-func ExampleELBV2_ModifyRule_shared00() {
+func ExampleELBV2_ModifyRuleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1300,7 +1327,8 @@ func ExampleELBV2_ModifyRule_shared00() {
 		RuleArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee"),
 	}
 
-	result, err := svc.ModifyRule(input)
+	req := svc.ModifyRuleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1336,7 +1364,7 @@ func ExampleELBV2_ModifyRule_shared00() {
 //
 // This example changes the configuration of the health checks used to evaluate the
 // health of the targets for the specified target group.
-func ExampleELBV2_ModifyTargetGroup_shared00() {
+func ExampleELBV2_ModifyTargetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1349,7 +1377,8 @@ func ExampleELBV2_ModifyTargetGroup_shared00() {
 		TargetGroupArn:      aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f"),
 	}
 
-	result, err := svc.ModifyTargetGroup(input)
+	req := svc.ModifyTargetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1375,7 +1404,7 @@ func ExampleELBV2_ModifyTargetGroup_shared00() {
 //
 // This example sets the deregistration delay timeout to the specified value for the
 // specified target group.
-func ExampleELBV2_ModifyTargetGroupAttributes_shared00() {
+func ExampleELBV2_ModifyTargetGroupAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1392,7 +1421,8 @@ func ExampleELBV2_ModifyTargetGroupAttributes_shared00() {
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 	}
 
-	result, err := svc.ModifyTargetGroupAttributes(input)
+	req := svc.ModifyTargetGroupAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1417,7 +1447,7 @@ func ExampleELBV2_ModifyTargetGroupAttributes_shared00() {
 // To register targets with a target group
 //
 // This example registers the specified instances with the specified target group.
-func ExampleELBV2_RegisterTargets_shared00() {
+func ExampleELBV2_RegisterTargetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1436,7 +1466,8 @@ func ExampleELBV2_RegisterTargets_shared00() {
 		},
 	}
 
-	result, err := svc.RegisterTargets(input)
+	req := svc.RegisterTargetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1467,7 +1498,7 @@ func ExampleELBV2_RegisterTargets_shared00() {
 // This example registers the specified instance with the specified target group using
 // multiple ports. This enables you to register ECS containers on the same instance
 // as targets in the target group.
-func ExampleELBV2_RegisterTargets_shared01() {
+func ExampleELBV2_RegisterTargetsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1488,7 +1519,8 @@ func ExampleELBV2_RegisterTargets_shared01() {
 		},
 	}
 
-	result, err := svc.RegisterTargets(input)
+	req := svc.RegisterTargetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1517,7 +1549,7 @@ func ExampleELBV2_RegisterTargets_shared01() {
 // To remove tags from a load balancer
 //
 // This example removes the specified tags from the specified load balancer.
-func ExampleELBV2_RemoveTags_shared00() {
+func ExampleELBV2_RemoveTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1534,7 +1566,8 @@ func ExampleELBV2_RemoveTags_shared00() {
 		},
 	}
 
-	result, err := svc.RemoveTags(input)
+	req := svc.RemoveTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1565,7 +1598,7 @@ func ExampleELBV2_RemoveTags_shared00() {
 // To set the rule priority
 //
 // This example sets the priority of the specified rule.
-func ExampleELBV2_SetRulePriorities_shared00() {
+func ExampleELBV2_SetRulePrioritiesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1581,7 +1614,8 @@ func ExampleELBV2_SetRulePriorities_shared00() {
 		},
 	}
 
-	result, err := svc.SetRulePriorities(input)
+	req := svc.SetRulePrioritiesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1608,7 +1642,7 @@ func ExampleELBV2_SetRulePriorities_shared00() {
 // To associate a security group with a load balancer
 //
 // This example associates the specified security group with the specified load balancer.
-func ExampleELBV2_SetSecurityGroups_shared00() {
+func ExampleELBV2_SetSecurityGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1622,7 +1656,8 @@ func ExampleELBV2_SetSecurityGroups_shared00() {
 		},
 	}
 
-	result, err := svc.SetSecurityGroups(input)
+	req := svc.SetSecurityGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1650,7 +1685,7 @@ func ExampleELBV2_SetSecurityGroups_shared00() {
 //
 // This example enables the Availability Zones for the specified subnets for the specified
 // load balancer.
-func ExampleELBV2_SetSubnets_shared00() {
+func ExampleELBV2_SetSubnetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1665,7 +1700,8 @@ func ExampleELBV2_SetSubnets_shared00() {
 		},
 	}
 
-	result, err := svc.SetSubnets(input)
+	req := svc.SetSubnetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

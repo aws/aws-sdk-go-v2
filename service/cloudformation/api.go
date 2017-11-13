@@ -14,31 +14,39 @@ import (
 
 const opCancelUpdateStack = "CancelUpdateStack"
 
-// CancelUpdateStackRequest generates a "aws.Request" representing the
-// client's request for the CancelUpdateStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelUpdateStackRequest is a API request type for the CancelUpdateStack API operation.
+type CancelUpdateStackRequest struct {
+	*aws.Request
+	Input *CancelUpdateStackInput
+}
+
+// Send marshals and sends the CancelUpdateStack API request.
+func (r CancelUpdateStackRequest) Send() (*CancelUpdateStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelUpdateStackOutput), nil
+}
+
+// CancelUpdateStackRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Cancels an update on the specified stack. If the call completes successfully,
+// the stack rolls back the update and reverts to the previous stack configuration.
 //
-// See CancelUpdateStack for more information on using the CancelUpdateStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.
 //
 //    // Example sending a request using the CancelUpdateStackRequest method.
-//    req, resp := client.CancelUpdateStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelUpdateStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStack
-func (c *CloudFormation) CancelUpdateStackRequest(input *CancelUpdateStackInput) (req *aws.Request, output *CancelUpdateStackOutput) {
+func (c *CloudFormation) CancelUpdateStackRequest(input *CancelUpdateStackInput) CancelUpdateStackRequest {
 	op := &aws.Operation{
 		Name:       opCancelUpdateStack,
 		HTTPMethod: "POST",
@@ -49,96 +57,32 @@ func (c *CloudFormation) CancelUpdateStackRequest(input *CancelUpdateStackInput)
 		input = &CancelUpdateStackInput{}
 	}
 
-	output = &CancelUpdateStackOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CancelUpdateStackOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// CancelUpdateStack API operation for AWS CloudFormation.
-//
-// Cancels an update on the specified stack. If the call completes successfully,
-// the stack rolls back the update and reverts to the previous stack configuration.
-//
-// You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation CancelUpdateStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTokenAlreadyExistsException "TokenAlreadyExistsException"
-//   A client request token already exists.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStack
-func (c *CloudFormation) CancelUpdateStack(input *CancelUpdateStackInput) (*CancelUpdateStackOutput, error) {
-	req, out := c.CancelUpdateStackRequest(input)
-	return out, req.Send()
-}
-
-// CancelUpdateStackWithContext is the same as CancelUpdateStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelUpdateStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) CancelUpdateStackWithContext(ctx aws.Context, input *CancelUpdateStackInput, opts ...aws.Option) (*CancelUpdateStackOutput, error) {
-	req, out := c.CancelUpdateStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return CancelUpdateStackRequest{Request: req, Input: input}
 }
 
 const opContinueUpdateRollback = "ContinueUpdateRollback"
 
-// ContinueUpdateRollbackRequest generates a "aws.Request" representing the
-// client's request for the ContinueUpdateRollback operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ContinueUpdateRollback for more information on using the ContinueUpdateRollback
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ContinueUpdateRollbackRequest method.
-//    req, resp := client.ContinueUpdateRollbackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollback
-func (c *CloudFormation) ContinueUpdateRollbackRequest(input *ContinueUpdateRollbackInput) (req *aws.Request, output *ContinueUpdateRollbackOutput) {
-	op := &aws.Operation{
-		Name:       opContinueUpdateRollback,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ContinueUpdateRollbackInput{}
-	}
-
-	output = &ContinueUpdateRollbackOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ContinueUpdateRollbackRequest is a API request type for the ContinueUpdateRollback API operation.
+type ContinueUpdateRollbackRequest struct {
+	*aws.Request
+	Input *ContinueUpdateRollbackInput
 }
 
-// ContinueUpdateRollback API operation for AWS CloudFormation.
+// Send marshals and sends the ContinueUpdateRollback API request.
+func (r ContinueUpdateRollbackRequest) Send() (*ContinueUpdateRollbackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ContinueUpdateRollbackOutput), nil
+}
+
+// ContinueUpdateRollbackRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
 // For a specified stack that is in the UPDATE_ROLLBACK_FAILED state, continues
 // rolling it back to the UPDATE_ROLLBACK_COMPLETE state. Depending on the cause
@@ -154,82 +98,49 @@ func (c *CloudFormation) ContinueUpdateRollbackRequest(input *ContinueUpdateRoll
 // know the database was deleted, it assumes that the database instance still
 // exists and attempts to roll back to it, causing the update rollback to fail.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ContinueUpdateRollback for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTokenAlreadyExistsException "TokenAlreadyExistsException"
-//   A client request token already exists.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollback
-func (c *CloudFormation) ContinueUpdateRollback(input *ContinueUpdateRollbackInput) (*ContinueUpdateRollbackOutput, error) {
-	req, out := c.ContinueUpdateRollbackRequest(input)
-	return out, req.Send()
-}
-
-// ContinueUpdateRollbackWithContext is the same as ContinueUpdateRollback with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ContinueUpdateRollback for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ContinueUpdateRollbackWithContext(ctx aws.Context, input *ContinueUpdateRollbackInput, opts ...aws.Option) (*ContinueUpdateRollbackOutput, error) {
-	req, out := c.ContinueUpdateRollbackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateChangeSet = "CreateChangeSet"
-
-// CreateChangeSetRequest generates a "aws.Request" representing the
-// client's request for the CreateChangeSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateChangeSet for more information on using the CreateChangeSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateChangeSetRequest method.
-//    req, resp := client.CreateChangeSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ContinueUpdateRollbackRequest method.
+//    req := client.ContinueUpdateRollbackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
-func (c *CloudFormation) CreateChangeSetRequest(input *CreateChangeSetInput) (req *aws.Request, output *CreateChangeSetOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollback
+func (c *CloudFormation) ContinueUpdateRollbackRequest(input *ContinueUpdateRollbackInput) ContinueUpdateRollbackRequest {
 	op := &aws.Operation{
-		Name:       opCreateChangeSet,
+		Name:       opContinueUpdateRollback,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateChangeSetInput{}
+		input = &ContinueUpdateRollbackInput{}
 	}
 
-	output = &CreateChangeSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ContinueUpdateRollbackOutput{})
+	return ContinueUpdateRollbackRequest{Request: req, Input: input}
 }
 
-// CreateChangeSet API operation for AWS CloudFormation.
+const opCreateChangeSet = "CreateChangeSet"
+
+// CreateChangeSetRequest is a API request type for the CreateChangeSet API operation.
+type CreateChangeSetRequest struct {
+	*aws.Request
+	Input *CreateChangeSetInput
+}
+
+// Send marshals and sends the CreateChangeSet API request.
+func (r CreateChangeSetRequest) Send() (*CreateChangeSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateChangeSetOutput), nil
+}
+
+// CreateChangeSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
 // Creates a list of changes that will be applied to a stack so that you can
 // review the changes before executing them. You can create a change set for
@@ -253,75 +164,63 @@ func (c *CloudFormation) CreateChangeSetRequest(input *CreateChangeSetInput) (re
 // the change set by using the ExecuteChangeSet action. AWS CloudFormation doesn't
 // make changes until you execute the change set.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation CreateChangeSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource with the name requested already exists.
-//
-//   * ErrCodeInsufficientCapabilitiesException "InsufficientCapabilitiesException"
-//   The template contains resources with capabilities that weren't specified
-//   in the Capabilities parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The quota for the resource has already been reached.
-//
-//   For information on stack set limitations, see Limitations of StackSets (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-limitations.html).
+//    // Example sending a request using the CreateChangeSetRequest method.
+//    req := client.CreateChangeSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
-func (c *CloudFormation) CreateChangeSet(input *CreateChangeSetInput) (*CreateChangeSetOutput, error) {
-	req, out := c.CreateChangeSetRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFormation) CreateChangeSetRequest(input *CreateChangeSetInput) CreateChangeSetRequest {
+	op := &aws.Operation{
+		Name:       opCreateChangeSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateChangeSetWithContext is the same as CreateChangeSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateChangeSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) CreateChangeSetWithContext(ctx aws.Context, input *CreateChangeSetInput, opts ...aws.Option) (*CreateChangeSetOutput, error) {
-	req, out := c.CreateChangeSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateChangeSetInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateChangeSetOutput{})
+	return CreateChangeSetRequest{Request: req, Input: input}
 }
 
 const opCreateStack = "CreateStack"
 
-// CreateStackRequest generates a "aws.Request" representing the
-// client's request for the CreateStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStackRequest is a API request type for the CreateStack API operation.
+type CreateStackRequest struct {
+	*aws.Request
+	Input *CreateStackInput
+}
+
+// Send marshals and sends the CreateStack API request.
+func (r CreateStackRequest) Send() (*CreateStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStackOutput), nil
+}
+
+// CreateStackRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStack for more information on using the CreateStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a stack as specified in the template. After the call completes successfully,
+// the stack creation starts. You can check the status of the stack via the
+// DescribeStacks API.
 //
 //    // Example sending a request using the CreateStackRequest method.
-//    req, resp := client.CreateStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStack
-func (c *CloudFormation) CreateStackRequest(input *CreateStackInput) (req *aws.Request, output *CreateStackOutput) {
+func (c *CloudFormation) CreateStackRequest(input *CreateStackInput) CreateStackRequest {
 	op := &aws.Operation{
 		Name:       opCreateStack,
 		HTTPMethod: "POST",
@@ -332,89 +231,45 @@ func (c *CloudFormation) CreateStackRequest(input *CreateStackInput) (req *aws.R
 		input = &CreateStackInput{}
 	}
 
-	output = &CreateStackOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStack API operation for AWS CloudFormation.
-//
-// Creates a stack as specified in the template. After the call completes successfully,
-// the stack creation starts. You can check the status of the stack via the
-// DescribeStacks API.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation CreateStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The quota for the resource has already been reached.
-//
-//   For information on stack set limitations, see Limitations of StackSets (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-limitations.html).
-//
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource with the name requested already exists.
-//
-//   * ErrCodeTokenAlreadyExistsException "TokenAlreadyExistsException"
-//   A client request token already exists.
-//
-//   * ErrCodeInsufficientCapabilitiesException "InsufficientCapabilitiesException"
-//   The template contains resources with capabilities that weren't specified
-//   in the Capabilities parameter.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStack
-func (c *CloudFormation) CreateStack(input *CreateStackInput) (*CreateStackOutput, error) {
-	req, out := c.CreateStackRequest(input)
-	return out, req.Send()
-}
-
-// CreateStackWithContext is the same as CreateStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...aws.Option) (*CreateStackOutput, error) {
-	req, out := c.CreateStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStackOutput{})
+	return CreateStackRequest{Request: req, Input: input}
 }
 
 const opCreateStackInstances = "CreateStackInstances"
 
-// CreateStackInstancesRequest generates a "aws.Request" representing the
-// client's request for the CreateStackInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStackInstancesRequest is a API request type for the CreateStackInstances API operation.
+type CreateStackInstancesRequest struct {
+	*aws.Request
+	Input *CreateStackInstancesInput
+}
+
+// Send marshals and sends the CreateStackInstances API request.
+func (r CreateStackInstancesRequest) Send() (*CreateStackInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStackInstancesOutput), nil
+}
+
+// CreateStackInstancesRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStackInstances for more information on using the CreateStackInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates stack instances for the specified accounts, within the specified
+// regions. A stack instance refers to a stack in a specific account and region.
+// Accounts and Regions are required parameters—you must specify at least one
+// account and one region.
 //
 //    // Example sending a request using the CreateStackInstancesRequest method.
-//    req, resp := client.CreateStackInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStackInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstances
-func (c *CloudFormation) CreateStackInstancesRequest(input *CreateStackInstancesInput) (req *aws.Request, output *CreateStackInstancesOutput) {
+func (c *CloudFormation) CreateStackInstancesRequest(input *CreateStackInstancesInput) CreateStackInstancesRequest {
 	op := &aws.Operation{
 		Name:       opCreateStackInstances,
 		HTTPMethod: "POST",
@@ -425,97 +280,42 @@ func (c *CloudFormation) CreateStackInstancesRequest(input *CreateStackInstances
 		input = &CreateStackInstancesInput{}
 	}
 
-	output = &CreateStackInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStackInstances API operation for AWS CloudFormation.
-//
-// Creates stack instances for the specified accounts, within the specified
-// regions. A stack instance refers to a stack in a specific account and region.
-// Accounts and Regions are required parameters—you must specify at least one
-// account and one region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation CreateStackInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-//   * ErrCodeOperationInProgressException "OperationInProgressException"
-//   Another operation is currently in progress for this stack set. Only one operation
-//   can be performed for a stack set at a given time.
-//
-//   * ErrCodeOperationIdAlreadyExistsException "OperationIdAlreadyExistsException"
-//   The specified operation ID already exists.
-//
-//   * ErrCodeStaleRequestException "StaleRequestException"
-//   Another operation has been performed on this stack set since the specified
-//   operation was performed.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   The specified operation isn't valid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The quota for the resource has already been reached.
-//
-//   For information on stack set limitations, see Limitations of StackSets (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-limitations.html).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstances
-func (c *CloudFormation) CreateStackInstances(input *CreateStackInstancesInput) (*CreateStackInstancesOutput, error) {
-	req, out := c.CreateStackInstancesRequest(input)
-	return out, req.Send()
-}
-
-// CreateStackInstancesWithContext is the same as CreateStackInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStackInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) CreateStackInstancesWithContext(ctx aws.Context, input *CreateStackInstancesInput, opts ...aws.Option) (*CreateStackInstancesOutput, error) {
-	req, out := c.CreateStackInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStackInstancesOutput{})
+	return CreateStackInstancesRequest{Request: req, Input: input}
 }
 
 const opCreateStackSet = "CreateStackSet"
 
-// CreateStackSetRequest generates a "aws.Request" representing the
-// client's request for the CreateStackSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStackSetRequest is a API request type for the CreateStackSet API operation.
+type CreateStackSetRequest struct {
+	*aws.Request
+	Input *CreateStackSetInput
+}
+
+// Send marshals and sends the CreateStackSet API request.
+func (r CreateStackSetRequest) Send() (*CreateStackSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStackSetOutput), nil
+}
+
+// CreateStackSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStackSet for more information on using the CreateStackSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a stack set.
 //
 //    // Example sending a request using the CreateStackSetRequest method.
-//    req, resp := client.CreateStackSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStackSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSet
-func (c *CloudFormation) CreateStackSetRequest(input *CreateStackSetInput) (req *aws.Request, output *CreateStackSetOutput) {
+func (c *CloudFormation) CreateStackSetRequest(input *CreateStackSetInput) CreateStackSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateStackSet,
 		HTTPMethod: "POST",
@@ -526,83 +326,46 @@ func (c *CloudFormation) CreateStackSetRequest(input *CreateStackSetInput) (req 
 		input = &CreateStackSetInput{}
 	}
 
-	output = &CreateStackSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStackSet API operation for AWS CloudFormation.
-//
-// Creates a stack set.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation CreateStackSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNameAlreadyExistsException "NameAlreadyExistsException"
-//   The specified name is already in use.
-//
-//   * ErrCodeCreatedButModifiedException "CreatedButModifiedException"
-//   The specified resource exists, but has been changed.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The quota for the resource has already been reached.
-//
-//   For information on stack set limitations, see Limitations of StackSets (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-limitations.html).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSet
-func (c *CloudFormation) CreateStackSet(input *CreateStackSetInput) (*CreateStackSetOutput, error) {
-	req, out := c.CreateStackSetRequest(input)
-	return out, req.Send()
-}
-
-// CreateStackSetWithContext is the same as CreateStackSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStackSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) CreateStackSetWithContext(ctx aws.Context, input *CreateStackSetInput, opts ...aws.Option) (*CreateStackSetOutput, error) {
-	req, out := c.CreateStackSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStackSetOutput{})
+	return CreateStackSetRequest{Request: req, Input: input}
 }
 
 const opDeleteChangeSet = "DeleteChangeSet"
 
-// DeleteChangeSetRequest generates a "aws.Request" representing the
-// client's request for the DeleteChangeSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteChangeSetRequest is a API request type for the DeleteChangeSet API operation.
+type DeleteChangeSetRequest struct {
+	*aws.Request
+	Input *DeleteChangeSetInput
+}
+
+// Send marshals and sends the DeleteChangeSet API request.
+func (r DeleteChangeSetRequest) Send() (*DeleteChangeSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteChangeSetOutput), nil
+}
+
+// DeleteChangeSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified change set. Deleting change sets ensures that no one
+// executes the wrong change set.
 //
-// See DeleteChangeSet for more information on using the DeleteChangeSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If the call successfully completes, AWS CloudFormation successfully deleted
+// the change set.
 //
 //    // Example sending a request using the DeleteChangeSetRequest method.
-//    req, resp := client.DeleteChangeSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteChangeSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSet
-func (c *CloudFormation) DeleteChangeSetRequest(input *DeleteChangeSetInput) (req *aws.Request, output *DeleteChangeSetOutput) {
+func (c *CloudFormation) DeleteChangeSetRequest(input *DeleteChangeSetInput) DeleteChangeSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteChangeSet,
 		HTTPMethod: "POST",
@@ -613,81 +376,44 @@ func (c *CloudFormation) DeleteChangeSetRequest(input *DeleteChangeSetInput) (re
 		input = &DeleteChangeSetInput{}
 	}
 
-	output = &DeleteChangeSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteChangeSet API operation for AWS CloudFormation.
-//
-// Deletes the specified change set. Deleting change sets ensures that no one
-// executes the wrong change set.
-//
-// If the call successfully completes, AWS CloudFormation successfully deleted
-// the change set.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DeleteChangeSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidChangeSetStatusException "InvalidChangeSetStatus"
-//   The specified change set can't be used to update the stack. For example,
-//   the change set status might be CREATE_IN_PROGRESS, or the stack status might
-//   be UPDATE_IN_PROGRESS.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSet
-func (c *CloudFormation) DeleteChangeSet(input *DeleteChangeSetInput) (*DeleteChangeSetOutput, error) {
-	req, out := c.DeleteChangeSetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteChangeSetWithContext is the same as DeleteChangeSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteChangeSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DeleteChangeSetWithContext(ctx aws.Context, input *DeleteChangeSetInput, opts ...aws.Option) (*DeleteChangeSetOutput, error) {
-	req, out := c.DeleteChangeSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteChangeSetOutput{})
+	return DeleteChangeSetRequest{Request: req, Input: input}
 }
 
 const opDeleteStack = "DeleteStack"
 
-// DeleteStackRequest generates a "aws.Request" representing the
-// client's request for the DeleteStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteStackRequest is a API request type for the DeleteStack API operation.
+type DeleteStackRequest struct {
+	*aws.Request
+	Input *DeleteStackInput
+}
+
+// Send marshals and sends the DeleteStack API request.
+func (r DeleteStackRequest) Send() (*DeleteStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStackOutput), nil
+}
+
+// DeleteStackRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStack for more information on using the DeleteStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specified stack. Once the call completes successfully, stack deletion
+// starts. Deleted stacks do not show up in the DescribeStacks API if the deletion
+// has been completed successfully.
 //
 //    // Example sending a request using the DeleteStackRequest method.
-//    req, resp := client.DeleteStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStack
-func (c *CloudFormation) DeleteStackRequest(input *DeleteStackInput) (req *aws.Request, output *DeleteStackOutput) {
+func (c *CloudFormation) DeleteStackRequest(input *DeleteStackInput) DeleteStackRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStack,
 		HTTPMethod: "POST",
@@ -698,79 +424,44 @@ func (c *CloudFormation) DeleteStackRequest(input *DeleteStackInput) (req *aws.R
 		input = &DeleteStackInput{}
 	}
 
-	output = &DeleteStackOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteStackOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteStack API operation for AWS CloudFormation.
-//
-// Deletes a specified stack. Once the call completes successfully, stack deletion
-// starts. Deleted stacks do not show up in the DescribeStacks API if the deletion
-// has been completed successfully.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DeleteStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTokenAlreadyExistsException "TokenAlreadyExistsException"
-//   A client request token already exists.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStack
-func (c *CloudFormation) DeleteStack(input *DeleteStackInput) (*DeleteStackOutput, error) {
-	req, out := c.DeleteStackRequest(input)
-	return out, req.Send()
-}
-
-// DeleteStackWithContext is the same as DeleteStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...aws.Option) (*DeleteStackOutput, error) {
-	req, out := c.DeleteStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteStackRequest{Request: req, Input: input}
 }
 
 const opDeleteStackInstances = "DeleteStackInstances"
 
-// DeleteStackInstancesRequest generates a "aws.Request" representing the
-// client's request for the DeleteStackInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteStackInstancesRequest is a API request type for the DeleteStackInstances API operation.
+type DeleteStackInstancesRequest struct {
+	*aws.Request
+	Input *DeleteStackInstancesInput
+}
+
+// Send marshals and sends the DeleteStackInstances API request.
+func (r DeleteStackInstancesRequest) Send() (*DeleteStackInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStackInstancesOutput), nil
+}
+
+// DeleteStackInstancesRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStackInstances for more information on using the DeleteStackInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes stack instances for the specified accounts, in the specified regions.
 //
 //    // Example sending a request using the DeleteStackInstancesRequest method.
-//    req, resp := client.DeleteStackInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteStackInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstances
-func (c *CloudFormation) DeleteStackInstancesRequest(input *DeleteStackInstancesInput) (req *aws.Request, output *DeleteStackInstancesOutput) {
+func (c *CloudFormation) DeleteStackInstancesRequest(input *DeleteStackInstancesInput) DeleteStackInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStackInstances,
 		HTTPMethod: "POST",
@@ -781,89 +472,44 @@ func (c *CloudFormation) DeleteStackInstancesRequest(input *DeleteStackInstances
 		input = &DeleteStackInstancesInput{}
 	}
 
-	output = &DeleteStackInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteStackInstances API operation for AWS CloudFormation.
-//
-// Deletes stack instances for the specified accounts, in the specified regions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DeleteStackInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-//   * ErrCodeOperationInProgressException "OperationInProgressException"
-//   Another operation is currently in progress for this stack set. Only one operation
-//   can be performed for a stack set at a given time.
-//
-//   * ErrCodeOperationIdAlreadyExistsException "OperationIdAlreadyExistsException"
-//   The specified operation ID already exists.
-//
-//   * ErrCodeStaleRequestException "StaleRequestException"
-//   Another operation has been performed on this stack set since the specified
-//   operation was performed.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   The specified operation isn't valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstances
-func (c *CloudFormation) DeleteStackInstances(input *DeleteStackInstancesInput) (*DeleteStackInstancesOutput, error) {
-	req, out := c.DeleteStackInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DeleteStackInstancesWithContext is the same as DeleteStackInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStackInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DeleteStackInstancesWithContext(ctx aws.Context, input *DeleteStackInstancesInput, opts ...aws.Option) (*DeleteStackInstancesOutput, error) {
-	req, out := c.DeleteStackInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteStackInstancesOutput{})
+	return DeleteStackInstancesRequest{Request: req, Input: input}
 }
 
 const opDeleteStackSet = "DeleteStackSet"
 
-// DeleteStackSetRequest generates a "aws.Request" representing the
-// client's request for the DeleteStackSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteStackSetRequest is a API request type for the DeleteStackSet API operation.
+type DeleteStackSetRequest struct {
+	*aws.Request
+	Input *DeleteStackSetInput
+}
+
+// Send marshals and sends the DeleteStackSet API request.
+func (r DeleteStackSetRequest) Send() (*DeleteStackSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStackSetOutput), nil
+}
+
+// DeleteStackSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStackSet for more information on using the DeleteStackSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a stack set. Before you can delete a stack set, all of its member
+// stack instances must be deleted. For more information about how to do this,
+// see DeleteStackInstances.
 //
 //    // Example sending a request using the DeleteStackSetRequest method.
-//    req, resp := client.DeleteStackSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteStackSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSet
-func (c *CloudFormation) DeleteStackSetRequest(input *DeleteStackSetInput) (req *aws.Request, output *DeleteStackSetOutput) {
+func (c *CloudFormation) DeleteStackSetRequest(input *DeleteStackSetInput) DeleteStackSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStackSet,
 		HTTPMethod: "POST",
@@ -874,83 +520,43 @@ func (c *CloudFormation) DeleteStackSetRequest(input *DeleteStackSetInput) (req 
 		input = &DeleteStackSetInput{}
 	}
 
-	output = &DeleteStackSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteStackSet API operation for AWS CloudFormation.
-//
-// Deletes a stack set. Before you can delete a stack set, all of its member
-// stack instances must be deleted. For more information about how to do this,
-// see DeleteStackInstances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DeleteStackSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotEmptyException "StackSetNotEmptyException"
-//   You can't yet delete this stack set, because it still contains one or more
-//   stack instances. Delete all stack instances from the stack set before deleting
-//   the stack set.
-//
-//   * ErrCodeOperationInProgressException "OperationInProgressException"
-//   Another operation is currently in progress for this stack set. Only one operation
-//   can be performed for a stack set at a given time.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSet
-func (c *CloudFormation) DeleteStackSet(input *DeleteStackSetInput) (*DeleteStackSetOutput, error) {
-	req, out := c.DeleteStackSetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteStackSetWithContext is the same as DeleteStackSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStackSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DeleteStackSetWithContext(ctx aws.Context, input *DeleteStackSetInput, opts ...aws.Option) (*DeleteStackSetOutput, error) {
-	req, out := c.DeleteStackSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteStackSetOutput{})
+	return DeleteStackSetRequest{Request: req, Input: input}
 }
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
-// DescribeAccountLimitsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAccountLimits operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAccountLimitsRequest is a API request type for the DescribeAccountLimits API operation.
+type DescribeAccountLimitsRequest struct {
+	*aws.Request
+	Input *DescribeAccountLimitsInput
+}
+
+// Send marshals and sends the DescribeAccountLimits API request.
+func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountLimitsOutput), nil
+}
+
+// DescribeAccountLimitsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAccountLimits for more information on using the DescribeAccountLimits
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves your account's AWS CloudFormation limits, such as the maximum number
+// of stacks that you can create in your account.
 //
 //    // Example sending a request using the DescribeAccountLimitsRequest method.
-//    req, resp := client.DescribeAccountLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAccountLimitsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimits
-func (c *CloudFormation) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *aws.Request, output *DescribeAccountLimitsOutput) {
+func (c *CloudFormation) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
@@ -961,71 +567,45 @@ func (c *CloudFormation) DescribeAccountLimitsRequest(input *DescribeAccountLimi
 		input = &DescribeAccountLimitsInput{}
 	}
 
-	output = &DescribeAccountLimitsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAccountLimits API operation for AWS CloudFormation.
-//
-// Retrieves your account's AWS CloudFormation limits, such as the maximum number
-// of stacks that you can create in your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeAccountLimits for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimits
-func (c *CloudFormation) DescribeAccountLimits(input *DescribeAccountLimitsInput) (*DescribeAccountLimitsOutput, error) {
-	req, out := c.DescribeAccountLimitsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAccountLimitsWithContext is the same as DescribeAccountLimits with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAccountLimits for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...aws.Option) (*DescribeAccountLimitsOutput, error) {
-	req, out := c.DescribeAccountLimitsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	return DescribeAccountLimitsRequest{Request: req, Input: input}
 }
 
 const opDescribeChangeSet = "DescribeChangeSet"
 
-// DescribeChangeSetRequest generates a "aws.Request" representing the
-// client's request for the DescribeChangeSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeChangeSetRequest is a API request type for the DescribeChangeSet API operation.
+type DescribeChangeSetRequest struct {
+	*aws.Request
+	Input *DescribeChangeSetInput
+}
+
+// Send marshals and sends the DescribeChangeSet API request.
+func (r DescribeChangeSetRequest) Send() (*DescribeChangeSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeChangeSetOutput), nil
+}
+
+// DescribeChangeSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeChangeSet for more information on using the DescribeChangeSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the inputs for the change set and a list of changes that AWS CloudFormation
+// will make if you execute the change set. For more information, see Updating
+// Stacks Using Change Sets (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
+// in the AWS CloudFormation User Guide.
 //
 //    // Example sending a request using the DescribeChangeSetRequest method.
-//    req, resp := client.DescribeChangeSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeChangeSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSet
-func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput) (req *aws.Request, output *DescribeChangeSetOutput) {
+func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput) DescribeChangeSetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeChangeSet,
 		HTTPMethod: "POST",
@@ -1036,79 +616,47 @@ func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput)
 		input = &DescribeChangeSetInput{}
 	}
 
-	output = &DescribeChangeSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeChangeSet API operation for AWS CloudFormation.
-//
-// Returns the inputs for the change set and a list of changes that AWS CloudFormation
-// will make if you execute the change set. For more information, see Updating
-// Stacks Using Change Sets (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
-// in the AWS CloudFormation User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeChangeSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeChangeSetNotFoundException "ChangeSetNotFound"
-//   The specified change set name or ID doesn't exit. To view valid change sets
-//   for a stack, use the ListChangeSets action.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSet
-func (c *CloudFormation) DescribeChangeSet(input *DescribeChangeSetInput) (*DescribeChangeSetOutput, error) {
-	req, out := c.DescribeChangeSetRequest(input)
-	return out, req.Send()
-}
-
-// DescribeChangeSetWithContext is the same as DescribeChangeSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeChangeSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeChangeSetWithContext(ctx aws.Context, input *DescribeChangeSetInput, opts ...aws.Option) (*DescribeChangeSetOutput, error) {
-	req, out := c.DescribeChangeSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeChangeSetOutput{})
+	return DescribeChangeSetRequest{Request: req, Input: input}
 }
 
 const opDescribeStackEvents = "DescribeStackEvents"
 
-// DescribeStackEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStackEventsRequest is a API request type for the DescribeStackEvents API operation.
+type DescribeStackEventsRequest struct {
+	*aws.Request
+	Input *DescribeStackEventsInput
+}
+
+// Send marshals and sends the DescribeStackEvents API request.
+func (r DescribeStackEventsRequest) Send() (*DescribeStackEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackEventsOutput), nil
+}
+
+// DescribeStackEventsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns all stack related events for a specified stack in reverse chronological
+// order. For more information about a stack's event history, go to Stacks (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html)
+// in the AWS CloudFormation User Guide.
 //
-// See DescribeStackEvents for more information on using the DescribeStackEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can list events for stacks that have failed to create or have been deleted
+// by specifying the unique stack identifier (stack ID).
 //
 //    // Example sending a request using the DescribeStackEventsRequest method.
-//    req, resp := client.DescribeStackEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStackEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEvents
-func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsInput) (req *aws.Request, output *DescribeStackEventsOutput) {
+func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsInput) DescribeStackEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackEvents,
 		HTTPMethod: "POST",
@@ -1125,46 +673,8 @@ func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsIn
 		input = &DescribeStackEventsInput{}
 	}
 
-	output = &DescribeStackEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStackEvents API operation for AWS CloudFormation.
-//
-// Returns all stack related events for a specified stack in reverse chronological
-// order. For more information about a stack's event history, go to Stacks (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html)
-// in the AWS CloudFormation User Guide.
-//
-// You can list events for stacks that have failed to create or have been deleted
-// by specifying the unique stack identifier (stack ID).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeStackEvents for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEvents
-func (c *CloudFormation) DescribeStackEvents(input *DescribeStackEventsInput) (*DescribeStackEventsOutput, error) {
-	req, out := c.DescribeStackEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStackEventsWithContext is the same as DescribeStackEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeStackEventsWithContext(ctx aws.Context, input *DescribeStackEventsInput, opts ...aws.Option) (*DescribeStackEventsOutput, error) {
-	req, out := c.DescribeStackEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStackEventsOutput{})
+	return DescribeStackEventsRequest{Request: req, Input: input}
 }
 
 // DescribeStackEventsPages iterates over the pages of a DescribeStackEvents operation,
@@ -1203,10 +713,10 @@ func (c *CloudFormation) DescribeStackEventsPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStackEventsRequest(inCpy)
+			req := c.DescribeStackEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1219,31 +729,40 @@ func (c *CloudFormation) DescribeStackEventsPagesWithContext(ctx aws.Context, in
 
 const opDescribeStackInstance = "DescribeStackInstance"
 
-// DescribeStackInstanceRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStackInstanceRequest is a API request type for the DescribeStackInstance API operation.
+type DescribeStackInstanceRequest struct {
+	*aws.Request
+	Input *DescribeStackInstanceInput
+}
+
+// Send marshals and sends the DescribeStackInstance API request.
+func (r DescribeStackInstanceRequest) Send() (*DescribeStackInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackInstanceOutput), nil
+}
+
+// DescribeStackInstanceRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the stack instance that's associated with the specified stack set,
+// AWS account, and region.
 //
-// See DescribeStackInstance for more information on using the DescribeStackInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For a list of stack instances that are associated with a specific stack set,
+// use ListStackInstances.
 //
 //    // Example sending a request using the DescribeStackInstanceRequest method.
-//    req, resp := client.DescribeStackInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStackInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstance
-func (c *CloudFormation) DescribeStackInstanceRequest(input *DescribeStackInstanceInput) (req *aws.Request, output *DescribeStackInstanceOutput) {
+func (c *CloudFormation) DescribeStackInstanceRequest(input *DescribeStackInstanceInput) DescribeStackInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackInstance,
 		HTTPMethod: "POST",
@@ -1254,82 +773,45 @@ func (c *CloudFormation) DescribeStackInstanceRequest(input *DescribeStackInstan
 		input = &DescribeStackInstanceInput{}
 	}
 
-	output = &DescribeStackInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStackInstance API operation for AWS CloudFormation.
-//
-// Returns the stack instance that's associated with the specified stack set,
-// AWS account, and region.
-//
-// For a list of stack instances that are associated with a specific stack set,
-// use ListStackInstances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeStackInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-//   * ErrCodeStackInstanceNotFoundException "StackInstanceNotFoundException"
-//   The specified stack instance doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstance
-func (c *CloudFormation) DescribeStackInstance(input *DescribeStackInstanceInput) (*DescribeStackInstanceOutput, error) {
-	req, out := c.DescribeStackInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStackInstanceWithContext is the same as DescribeStackInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeStackInstanceWithContext(ctx aws.Context, input *DescribeStackInstanceInput, opts ...aws.Option) (*DescribeStackInstanceOutput, error) {
-	req, out := c.DescribeStackInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStackInstanceOutput{})
+	return DescribeStackInstanceRequest{Request: req, Input: input}
 }
 
 const opDescribeStackResource = "DescribeStackResource"
 
-// DescribeStackResourceRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStackResourceRequest is a API request type for the DescribeStackResource API operation.
+type DescribeStackResourceRequest struct {
+	*aws.Request
+	Input *DescribeStackResourceInput
+}
+
+// Send marshals and sends the DescribeStackResource API request.
+func (r DescribeStackResourceRequest) Send() (*DescribeStackResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackResourceOutput), nil
+}
+
+// DescribeStackResourceRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a description of the specified resource in the specified stack.
 //
-// See DescribeStackResource for more information on using the DescribeStackResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For deleted stacks, DescribeStackResource returns resource information for
+// up to 90 days after the stack has been deleted.
 //
 //    // Example sending a request using the DescribeStackResourceRequest method.
-//    req, resp := client.DescribeStackResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStackResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResource
-func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResourceInput) (req *aws.Request, output *DescribeStackResourceOutput) {
+func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResourceInput) DescribeStackResourceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackResource,
 		HTTPMethod: "POST",
@@ -1340,89 +822,30 @@ func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResour
 		input = &DescribeStackResourceInput{}
 	}
 
-	output = &DescribeStackResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStackResource API operation for AWS CloudFormation.
-//
-// Returns a description of the specified resource in the specified stack.
-//
-// For deleted stacks, DescribeStackResource returns resource information for
-// up to 90 days after the stack has been deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeStackResource for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResource
-func (c *CloudFormation) DescribeStackResource(input *DescribeStackResourceInput) (*DescribeStackResourceOutput, error) {
-	req, out := c.DescribeStackResourceRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStackResourceWithContext is the same as DescribeStackResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeStackResourceWithContext(ctx aws.Context, input *DescribeStackResourceInput, opts ...aws.Option) (*DescribeStackResourceOutput, error) {
-	req, out := c.DescribeStackResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStackResourceOutput{})
+	return DescribeStackResourceRequest{Request: req, Input: input}
 }
 
 const opDescribeStackResources = "DescribeStackResources"
 
-// DescribeStackResourcesRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStackResources for more information on using the DescribeStackResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeStackResourcesRequest method.
-//    req, resp := client.DescribeStackResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources
-func (c *CloudFormation) DescribeStackResourcesRequest(input *DescribeStackResourcesInput) (req *aws.Request, output *DescribeStackResourcesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeStackResources,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeStackResourcesInput{}
-	}
-
-	output = &DescribeStackResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeStackResourcesRequest is a API request type for the DescribeStackResources API operation.
+type DescribeStackResourcesRequest struct {
+	*aws.Request
+	Input *DescribeStackResourcesInput
 }
 
-// DescribeStackResources API operation for AWS CloudFormation.
+// Send marshals and sends the DescribeStackResources API request.
+func (r DescribeStackResourcesRequest) Send() (*DescribeStackResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackResourcesOutput), nil
+}
+
+// DescribeStackResourcesRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
 // Returns AWS resource descriptions for running and deleted stacks. If StackName
 // is specified, all the associated resources that are part of the stack are
@@ -1443,61 +866,61 @@ func (c *CloudFormation) DescribeStackResourcesRequest(input *DescribeStackResou
 // A ValidationError is returned if you specify both StackName and PhysicalResourceId
 // in the same request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
+//    // Example sending a request using the DescribeStackResourcesRequest method.
+//    req := client.DescribeStackResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeStackResources for usage and error information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources
-func (c *CloudFormation) DescribeStackResources(input *DescribeStackResourcesInput) (*DescribeStackResourcesOutput, error) {
-	req, out := c.DescribeStackResourcesRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFormation) DescribeStackResourcesRequest(input *DescribeStackResourcesInput) DescribeStackResourcesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeStackResources,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeStackResourcesWithContext is the same as DescribeStackResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeStackResourcesWithContext(ctx aws.Context, input *DescribeStackResourcesInput, opts ...aws.Option) (*DescribeStackResourcesOutput, error) {
-	req, out := c.DescribeStackResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeStackResourcesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeStackResourcesOutput{})
+	return DescribeStackResourcesRequest{Request: req, Input: input}
 }
 
 const opDescribeStackSet = "DescribeStackSet"
 
-// DescribeStackSetRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStackSetRequest is a API request type for the DescribeStackSet API operation.
+type DescribeStackSetRequest struct {
+	*aws.Request
+	Input *DescribeStackSetInput
+}
+
+// Send marshals and sends the DescribeStackSet API request.
+func (r DescribeStackSetRequest) Send() (*DescribeStackSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackSetOutput), nil
+}
+
+// DescribeStackSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStackSet for more information on using the DescribeStackSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the description of the specified stack set.
 //
 //    // Example sending a request using the DescribeStackSetRequest method.
-//    req, resp := client.DescribeStackSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStackSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet
-func (c *CloudFormation) DescribeStackSetRequest(input *DescribeStackSetInput) (req *aws.Request, output *DescribeStackSetOutput) {
+func (c *CloudFormation) DescribeStackSetRequest(input *DescribeStackSetInput) DescribeStackSetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackSet,
 		HTTPMethod: "POST",
@@ -1508,75 +931,42 @@ func (c *CloudFormation) DescribeStackSetRequest(input *DescribeStackSetInput) (
 		input = &DescribeStackSetInput{}
 	}
 
-	output = &DescribeStackSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStackSet API operation for AWS CloudFormation.
-//
-// Returns the description of the specified stack set.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeStackSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet
-func (c *CloudFormation) DescribeStackSet(input *DescribeStackSetInput) (*DescribeStackSetOutput, error) {
-	req, out := c.DescribeStackSetRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStackSetWithContext is the same as DescribeStackSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeStackSetWithContext(ctx aws.Context, input *DescribeStackSetInput, opts ...aws.Option) (*DescribeStackSetOutput, error) {
-	req, out := c.DescribeStackSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStackSetOutput{})
+	return DescribeStackSetRequest{Request: req, Input: input}
 }
 
 const opDescribeStackSetOperation = "DescribeStackSetOperation"
 
-// DescribeStackSetOperationRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackSetOperation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStackSetOperationRequest is a API request type for the DescribeStackSetOperation API operation.
+type DescribeStackSetOperationRequest struct {
+	*aws.Request
+	Input *DescribeStackSetOperationInput
+}
+
+// Send marshals and sends the DescribeStackSetOperation API request.
+func (r DescribeStackSetOperationRequest) Send() (*DescribeStackSetOperationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackSetOperationOutput), nil
+}
+
+// DescribeStackSetOperationRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStackSetOperation for more information on using the DescribeStackSetOperation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the description of the specified stack set operation.
 //
 //    // Example sending a request using the DescribeStackSetOperationRequest method.
-//    req, resp := client.DescribeStackSetOperationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStackSetOperationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation
-func (c *CloudFormation) DescribeStackSetOperationRequest(input *DescribeStackSetOperationInput) (req *aws.Request, output *DescribeStackSetOperationOutput) {
+func (c *CloudFormation) DescribeStackSetOperationRequest(input *DescribeStackSetOperationInput) DescribeStackSetOperationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackSetOperation,
 		HTTPMethod: "POST",
@@ -1587,78 +977,45 @@ func (c *CloudFormation) DescribeStackSetOperationRequest(input *DescribeStackSe
 		input = &DescribeStackSetOperationInput{}
 	}
 
-	output = &DescribeStackSetOperationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStackSetOperation API operation for AWS CloudFormation.
-//
-// Returns the description of the specified stack set operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeStackSetOperation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-//   * ErrCodeOperationNotFoundException "OperationNotFoundException"
-//   The specified ID refers to an operation that doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation
-func (c *CloudFormation) DescribeStackSetOperation(input *DescribeStackSetOperationInput) (*DescribeStackSetOperationOutput, error) {
-	req, out := c.DescribeStackSetOperationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStackSetOperationWithContext is the same as DescribeStackSetOperation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackSetOperation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeStackSetOperationWithContext(ctx aws.Context, input *DescribeStackSetOperationInput, opts ...aws.Option) (*DescribeStackSetOperationOutput, error) {
-	req, out := c.DescribeStackSetOperationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStackSetOperationOutput{})
+	return DescribeStackSetOperationRequest{Request: req, Input: input}
 }
 
 const opDescribeStacks = "DescribeStacks"
 
-// DescribeStacksRequest generates a "aws.Request" representing the
-// client's request for the DescribeStacks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStacksRequest is a API request type for the DescribeStacks API operation.
+type DescribeStacksRequest struct {
+	*aws.Request
+	Input *DescribeStacksInput
+}
+
+// Send marshals and sends the DescribeStacks API request.
+func (r DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStacksOutput), nil
+}
+
+// DescribeStacksRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the description for the specified stack; if no stack name was specified,
+// then it returns the description for all the stacks created.
 //
-// See DescribeStacks for more information on using the DescribeStacks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If the stack does not exist, an AmazonCloudFormationException is returned.
 //
 //    // Example sending a request using the DescribeStacksRequest method.
-//    req, resp := client.DescribeStacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStacksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks
-func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.Request, output *DescribeStacksOutput) {
+func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) DescribeStacksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
@@ -1675,44 +1032,8 @@ func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) (req 
 		input = &DescribeStacksInput{}
 	}
 
-	output = &DescribeStacksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStacks API operation for AWS CloudFormation.
-//
-// Returns the description for the specified stack; if no stack name was specified,
-// then it returns the description for all the stacks created.
-//
-// If the stack does not exist, an AmazonCloudFormationException is returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation DescribeStacks for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks
-func (c *CloudFormation) DescribeStacks(input *DescribeStacksInput) (*DescribeStacksOutput, error) {
-	req, out := c.DescribeStacksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStacksWithContext is the same as DescribeStacks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStacks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.Option) (*DescribeStacksOutput, error) {
-	req, out := c.DescribeStacksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	return DescribeStacksRequest{Request: req, Input: input}
 }
 
 // DescribeStacksPages iterates over the pages of a DescribeStacks operation,
@@ -1751,10 +1072,10 @@ func (c *CloudFormation) DescribeStacksPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStacksRequest(inCpy)
+			req := c.DescribeStacksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1767,31 +1088,38 @@ func (c *CloudFormation) DescribeStacksPagesWithContext(ctx aws.Context, input *
 
 const opEstimateTemplateCost = "EstimateTemplateCost"
 
-// EstimateTemplateCostRequest generates a "aws.Request" representing the
-// client's request for the EstimateTemplateCost operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EstimateTemplateCostRequest is a API request type for the EstimateTemplateCost API operation.
+type EstimateTemplateCostRequest struct {
+	*aws.Request
+	Input *EstimateTemplateCostInput
+}
+
+// Send marshals and sends the EstimateTemplateCost API request.
+func (r EstimateTemplateCostRequest) Send() (*EstimateTemplateCostOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EstimateTemplateCostOutput), nil
+}
+
+// EstimateTemplateCostRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EstimateTemplateCost for more information on using the EstimateTemplateCost
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the estimated monthly cost of a template. The return value is an
+// AWS Simple Monthly Calculator URL with a query string that describes the
+// resources required to run the template.
 //
 //    // Example sending a request using the EstimateTemplateCostRequest method.
-//    req, resp := client.EstimateTemplateCostRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EstimateTemplateCostRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCost
-func (c *CloudFormation) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) (req *aws.Request, output *EstimateTemplateCostOutput) {
+func (c *CloudFormation) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) EstimateTemplateCostRequest {
 	op := &aws.Operation{
 		Name:       opEstimateTemplateCost,
 		HTTPMethod: "POST",
@@ -1802,88 +1130,30 @@ func (c *CloudFormation) EstimateTemplateCostRequest(input *EstimateTemplateCost
 		input = &EstimateTemplateCostInput{}
 	}
 
-	output = &EstimateTemplateCostOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// EstimateTemplateCost API operation for AWS CloudFormation.
-//
-// Returns the estimated monthly cost of a template. The return value is an
-// AWS Simple Monthly Calculator URL with a query string that describes the
-// resources required to run the template.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation EstimateTemplateCost for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCost
-func (c *CloudFormation) EstimateTemplateCost(input *EstimateTemplateCostInput) (*EstimateTemplateCostOutput, error) {
-	req, out := c.EstimateTemplateCostRequest(input)
-	return out, req.Send()
-}
-
-// EstimateTemplateCostWithContext is the same as EstimateTemplateCost with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EstimateTemplateCost for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) EstimateTemplateCostWithContext(ctx aws.Context, input *EstimateTemplateCostInput, opts ...aws.Option) (*EstimateTemplateCostOutput, error) {
-	req, out := c.EstimateTemplateCostRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EstimateTemplateCostOutput{})
+	return EstimateTemplateCostRequest{Request: req, Input: input}
 }
 
 const opExecuteChangeSet = "ExecuteChangeSet"
 
-// ExecuteChangeSetRequest generates a "aws.Request" representing the
-// client's request for the ExecuteChangeSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ExecuteChangeSet for more information on using the ExecuteChangeSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ExecuteChangeSetRequest method.
-//    req, resp := client.ExecuteChangeSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet
-func (c *CloudFormation) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) (req *aws.Request, output *ExecuteChangeSetOutput) {
-	op := &aws.Operation{
-		Name:       opExecuteChangeSet,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ExecuteChangeSetInput{}
-	}
-
-	output = &ExecuteChangeSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ExecuteChangeSetRequest is a API request type for the ExecuteChangeSet API operation.
+type ExecuteChangeSetRequest struct {
+	*aws.Request
+	Input *ExecuteChangeSetInput
 }
 
-// ExecuteChangeSet API operation for AWS CloudFormation.
+// Send marshals and sends the ExecuteChangeSet API request.
+func (r ExecuteChangeSetRequest) Send() (*ExecuteChangeSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExecuteChangeSetOutput), nil
+}
+
+// ExecuteChangeSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
 // Updates a stack using the input information that was provided when the specified
 // change set was created. After the call successfully completes, AWS CloudFormation
@@ -1898,79 +1168,62 @@ func (c *CloudFormation) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) (
 // the policy during the update. You can't specify a temporary stack policy
 // that overrides the current policy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ExecuteChangeSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidChangeSetStatusException "InvalidChangeSetStatus"
-//   The specified change set can't be used to update the stack. For example,
-//   the change set status might be CREATE_IN_PROGRESS, or the stack status might
-//   be UPDATE_IN_PROGRESS.
-//
-//   * ErrCodeChangeSetNotFoundException "ChangeSetNotFound"
-//   The specified change set name or ID doesn't exit. To view valid change sets
-//   for a stack, use the ListChangeSets action.
-//
-//   * ErrCodeInsufficientCapabilitiesException "InsufficientCapabilitiesException"
-//   The template contains resources with capabilities that weren't specified
-//   in the Capabilities parameter.
-//
-//   * ErrCodeTokenAlreadyExistsException "TokenAlreadyExistsException"
-//   A client request token already exists.
+//    // Example sending a request using the ExecuteChangeSetRequest method.
+//    req := client.ExecuteChangeSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet
-func (c *CloudFormation) ExecuteChangeSet(input *ExecuteChangeSetInput) (*ExecuteChangeSetOutput, error) {
-	req, out := c.ExecuteChangeSetRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFormation) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) ExecuteChangeSetRequest {
+	op := &aws.Operation{
+		Name:       opExecuteChangeSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ExecuteChangeSetWithContext is the same as ExecuteChangeSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ExecuteChangeSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ExecuteChangeSetWithContext(ctx aws.Context, input *ExecuteChangeSetInput, opts ...aws.Option) (*ExecuteChangeSetOutput, error) {
-	req, out := c.ExecuteChangeSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ExecuteChangeSetInput{}
+	}
+
+	req := c.newRequest(op, input, &ExecuteChangeSetOutput{})
+	return ExecuteChangeSetRequest{Request: req, Input: input}
 }
 
 const opGetStackPolicy = "GetStackPolicy"
 
-// GetStackPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetStackPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetStackPolicyRequest is a API request type for the GetStackPolicy API operation.
+type GetStackPolicyRequest struct {
+	*aws.Request
+	Input *GetStackPolicyInput
+}
+
+// Send marshals and sends the GetStackPolicy API request.
+func (r GetStackPolicyRequest) Send() (*GetStackPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetStackPolicyOutput), nil
+}
+
+// GetStackPolicyRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetStackPolicy for more information on using the GetStackPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the stack policy for a specified stack. If a stack doesn't have a
+// policy, a null value is returned.
 //
 //    // Example sending a request using the GetStackPolicyRequest method.
-//    req, resp := client.GetStackPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetStackPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicy
-func (c *CloudFormation) GetStackPolicyRequest(input *GetStackPolicyInput) (req *aws.Request, output *GetStackPolicyOutput) {
+func (c *CloudFormation) GetStackPolicyRequest(input *GetStackPolicyInput) GetStackPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetStackPolicy,
 		HTTPMethod: "POST",
@@ -1981,71 +1234,48 @@ func (c *CloudFormation) GetStackPolicyRequest(input *GetStackPolicyInput) (req 
 		input = &GetStackPolicyInput{}
 	}
 
-	output = &GetStackPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetStackPolicy API operation for AWS CloudFormation.
-//
-// Returns the stack policy for a specified stack. If a stack doesn't have a
-// policy, a null value is returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation GetStackPolicy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicy
-func (c *CloudFormation) GetStackPolicy(input *GetStackPolicyInput) (*GetStackPolicyOutput, error) {
-	req, out := c.GetStackPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetStackPolicyWithContext is the same as GetStackPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetStackPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) GetStackPolicyWithContext(ctx aws.Context, input *GetStackPolicyInput, opts ...aws.Option) (*GetStackPolicyOutput, error) {
-	req, out := c.GetStackPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetStackPolicyOutput{})
+	return GetStackPolicyRequest{Request: req, Input: input}
 }
 
 const opGetTemplate = "GetTemplate"
 
-// GetTemplateRequest generates a "aws.Request" representing the
-// client's request for the GetTemplate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTemplateRequest is a API request type for the GetTemplate API operation.
+type GetTemplateRequest struct {
+	*aws.Request
+	Input *GetTemplateInput
+}
+
+// Send marshals and sends the GetTemplate API request.
+func (r GetTemplateRequest) Send() (*GetTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTemplateOutput), nil
+}
+
+// GetTemplateRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the template body for a specified stack. You can get the template
+// for running or deleted stacks.
 //
-// See GetTemplate for more information on using the GetTemplate
-// API call, and error handling.
+// For deleted stacks, GetTemplate returns the template for up to 90 days after
+// the stack has been deleted.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If the template does not exist, a ValidationError is returned.
 //
 //    // Example sending a request using the GetTemplateRequest method.
-//    req, resp := client.GetTemplateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplate
-func (c *CloudFormation) GetTemplateRequest(input *GetTemplateInput) (req *aws.Request, output *GetTemplateOutput) {
+func (c *CloudFormation) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetTemplate,
 		HTTPMethod: "POST",
@@ -2056,98 +1286,30 @@ func (c *CloudFormation) GetTemplateRequest(input *GetTemplateInput) (req *aws.R
 		input = &GetTemplateInput{}
 	}
 
-	output = &GetTemplateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTemplate API operation for AWS CloudFormation.
-//
-// Returns the template body for a specified stack. You can get the template
-// for running or deleted stacks.
-//
-// For deleted stacks, GetTemplate returns the template for up to 90 days after
-// the stack has been deleted.
-//
-// If the template does not exist, a ValidationError is returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation GetTemplate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeChangeSetNotFoundException "ChangeSetNotFound"
-//   The specified change set name or ID doesn't exit. To view valid change sets
-//   for a stack, use the ListChangeSets action.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplate
-func (c *CloudFormation) GetTemplate(input *GetTemplateInput) (*GetTemplateOutput, error) {
-	req, out := c.GetTemplateRequest(input)
-	return out, req.Send()
-}
-
-// GetTemplateWithContext is the same as GetTemplate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTemplate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) GetTemplateWithContext(ctx aws.Context, input *GetTemplateInput, opts ...aws.Option) (*GetTemplateOutput, error) {
-	req, out := c.GetTemplateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTemplateOutput{})
+	return GetTemplateRequest{Request: req, Input: input}
 }
 
 const opGetTemplateSummary = "GetTemplateSummary"
 
-// GetTemplateSummaryRequest generates a "aws.Request" representing the
-// client's request for the GetTemplateSummary operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTemplateSummary for more information on using the GetTemplateSummary
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetTemplateSummaryRequest method.
-//    req, resp := client.GetTemplateSummaryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummary
-func (c *CloudFormation) GetTemplateSummaryRequest(input *GetTemplateSummaryInput) (req *aws.Request, output *GetTemplateSummaryOutput) {
-	op := &aws.Operation{
-		Name:       opGetTemplateSummary,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetTemplateSummaryInput{}
-	}
-
-	output = &GetTemplateSummaryOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetTemplateSummaryRequest is a API request type for the GetTemplateSummary API operation.
+type GetTemplateSummaryRequest struct {
+	*aws.Request
+	Input *GetTemplateSummaryInput
 }
 
-// GetTemplateSummary API operation for AWS CloudFormation.
+// Send marshals and sends the GetTemplateSummary API request.
+func (r GetTemplateSummaryRequest) Send() (*GetTemplateSummaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTemplateSummaryOutput), nil
+}
+
+// GetTemplateSummaryRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
 // Returns information about a new or existing template. The GetTemplateSummary
 // action is useful for viewing parameter information, such as default parameter
@@ -2162,66 +1324,63 @@ func (c *CloudFormation) GetTemplateSummaryRequest(input *GetTemplateSummaryInpu
 // up to 90 days after the stack has been deleted. If the template does not
 // exist, a ValidationError is returned.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation GetTemplateSummary for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
+//    // Example sending a request using the GetTemplateSummaryRequest method.
+//    req := client.GetTemplateSummaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummary
-func (c *CloudFormation) GetTemplateSummary(input *GetTemplateSummaryInput) (*GetTemplateSummaryOutput, error) {
-	req, out := c.GetTemplateSummaryRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFormation) GetTemplateSummaryRequest(input *GetTemplateSummaryInput) GetTemplateSummaryRequest {
+	op := &aws.Operation{
+		Name:       opGetTemplateSummary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetTemplateSummaryWithContext is the same as GetTemplateSummary with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTemplateSummary for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) GetTemplateSummaryWithContext(ctx aws.Context, input *GetTemplateSummaryInput, opts ...aws.Option) (*GetTemplateSummaryOutput, error) {
-	req, out := c.GetTemplateSummaryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetTemplateSummaryInput{}
+	}
+
+	req := c.newRequest(op, input, &GetTemplateSummaryOutput{})
+	return GetTemplateSummaryRequest{Request: req, Input: input}
 }
 
 const opListChangeSets = "ListChangeSets"
 
-// ListChangeSetsRequest generates a "aws.Request" representing the
-// client's request for the ListChangeSets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListChangeSetsRequest is a API request type for the ListChangeSets API operation.
+type ListChangeSetsRequest struct {
+	*aws.Request
+	Input *ListChangeSetsInput
+}
+
+// Send marshals and sends the ListChangeSets API request.
+func (r ListChangeSetsRequest) Send() (*ListChangeSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListChangeSetsOutput), nil
+}
+
+// ListChangeSetsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListChangeSets for more information on using the ListChangeSets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the ID and status of each active change set for a stack. For example,
+// AWS CloudFormation lists change sets that are in the CREATE_IN_PROGRESS or
+// CREATE_PENDING state.
 //
 //    // Example sending a request using the ListChangeSetsRequest method.
-//    req, resp := client.ListChangeSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListChangeSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSets
-func (c *CloudFormation) ListChangeSetsRequest(input *ListChangeSetsInput) (req *aws.Request, output *ListChangeSetsOutput) {
+func (c *CloudFormation) ListChangeSetsRequest(input *ListChangeSetsInput) ListChangeSetsRequest {
 	op := &aws.Operation{
 		Name:       opListChangeSets,
 		HTTPMethod: "POST",
@@ -2232,72 +1391,48 @@ func (c *CloudFormation) ListChangeSetsRequest(input *ListChangeSetsInput) (req 
 		input = &ListChangeSetsInput{}
 	}
 
-	output = &ListChangeSetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListChangeSets API operation for AWS CloudFormation.
-//
-// Returns the ID and status of each active change set for a stack. For example,
-// AWS CloudFormation lists change sets that are in the CREATE_IN_PROGRESS or
-// CREATE_PENDING state.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListChangeSets for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSets
-func (c *CloudFormation) ListChangeSets(input *ListChangeSetsInput) (*ListChangeSetsOutput, error) {
-	req, out := c.ListChangeSetsRequest(input)
-	return out, req.Send()
-}
-
-// ListChangeSetsWithContext is the same as ListChangeSets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListChangeSets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListChangeSetsWithContext(ctx aws.Context, input *ListChangeSetsInput, opts ...aws.Option) (*ListChangeSetsOutput, error) {
-	req, out := c.ListChangeSetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListChangeSetsOutput{})
+	return ListChangeSetsRequest{Request: req, Input: input}
 }
 
 const opListExports = "ListExports"
 
-// ListExportsRequest generates a "aws.Request" representing the
-// client's request for the ListExports operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListExportsRequest is a API request type for the ListExports API operation.
+type ListExportsRequest struct {
+	*aws.Request
+	Input *ListExportsInput
+}
+
+// Send marshals and sends the ListExports API request.
+func (r ListExportsRequest) Send() (*ListExportsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListExportsOutput), nil
+}
+
+// ListExportsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all exported output values in the account and region in which you call
+// this action. Use this action to see the exported output values that you can
+// import into other stacks. To import values, use the Fn::ImportValue (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
+// function.
 //
-// See ListExports for more information on using the ListExports
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see  AWS CloudFormation Export Stack Output Values
+// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
 //
 //    // Example sending a request using the ListExportsRequest method.
-//    req, resp := client.ListExportsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListExportsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExports
-func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) (req *aws.Request, output *ListExportsOutput) {
+func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) ListExportsRequest {
 	op := &aws.Operation{
 		Name:       opListExports,
 		HTTPMethod: "POST",
@@ -2314,47 +1449,8 @@ func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) (req *aws.R
 		input = &ListExportsInput{}
 	}
 
-	output = &ListExportsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListExports API operation for AWS CloudFormation.
-//
-// Lists all exported output values in the account and region in which you call
-// this action. Use this action to see the exported output values that you can
-// import into other stacks. To import values, use the Fn::ImportValue (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
-// function.
-//
-// For more information, see  AWS CloudFormation Export Stack Output Values
-// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListExports for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExports
-func (c *CloudFormation) ListExports(input *ListExportsInput) (*ListExportsOutput, error) {
-	req, out := c.ListExportsRequest(input)
-	return out, req.Send()
-}
-
-// ListExportsWithContext is the same as ListExports with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListExports for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListExportsWithContext(ctx aws.Context, input *ListExportsInput, opts ...aws.Option) (*ListExportsOutput, error) {
-	req, out := c.ListExportsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListExportsOutput{})
+	return ListExportsRequest{Request: req, Input: input}
 }
 
 // ListExportsPages iterates over the pages of a ListExports operation,
@@ -2393,10 +1489,10 @@ func (c *CloudFormation) ListExportsPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListExportsRequest(inCpy)
+			req := c.ListExportsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2409,31 +1505,42 @@ func (c *CloudFormation) ListExportsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListImports = "ListImports"
 
-// ListImportsRequest generates a "aws.Request" representing the
-// client's request for the ListImports operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListImportsRequest is a API request type for the ListImports API operation.
+type ListImportsRequest struct {
+	*aws.Request
+	Input *ListImportsInput
+}
+
+// Send marshals and sends the ListImports API request.
+func (r ListImportsRequest) Send() (*ListImportsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListImportsOutput), nil
+}
+
+// ListImportsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all stacks that are importing an exported output value. To modify or
+// remove an exported output value, first use this action to see which stacks
+// are using it. To see the exported output values in your account, see ListExports.
 //
-// See ListImports for more information on using the ListImports
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about importing an exported output value, see the Fn::ImportValue
+// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
+// function.
 //
 //    // Example sending a request using the ListImportsRequest method.
-//    req, resp := client.ListImportsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListImportsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImports
-func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) (req *aws.Request, output *ListImportsOutput) {
+func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) ListImportsRequest {
 	op := &aws.Operation{
 		Name:       opListImports,
 		HTTPMethod: "POST",
@@ -2450,47 +1557,8 @@ func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) (req *aws.R
 		input = &ListImportsInput{}
 	}
 
-	output = &ListImportsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListImports API operation for AWS CloudFormation.
-//
-// Lists all stacks that are importing an exported output value. To modify or
-// remove an exported output value, first use this action to see which stacks
-// are using it. To see the exported output values in your account, see ListExports.
-//
-// For more information about importing an exported output value, see the Fn::ImportValue
-// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
-// function.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListImports for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImports
-func (c *CloudFormation) ListImports(input *ListImportsInput) (*ListImportsOutput, error) {
-	req, out := c.ListImportsRequest(input)
-	return out, req.Send()
-}
-
-// ListImportsWithContext is the same as ListImports with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListImports for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListImportsWithContext(ctx aws.Context, input *ListImportsInput, opts ...aws.Option) (*ListImportsOutput, error) {
-	req, out := c.ListImportsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListImportsOutput{})
+	return ListImportsRequest{Request: req, Input: input}
 }
 
 // ListImportsPages iterates over the pages of a ListImports operation,
@@ -2529,10 +1597,10 @@ func (c *CloudFormation) ListImportsPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListImportsRequest(inCpy)
+			req := c.ListImportsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2545,31 +1613,38 @@ func (c *CloudFormation) ListImportsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListStackInstances = "ListStackInstances"
 
-// ListStackInstancesRequest generates a "aws.Request" representing the
-// client's request for the ListStackInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStackInstancesRequest is a API request type for the ListStackInstances API operation.
+type ListStackInstancesRequest struct {
+	*aws.Request
+	Input *ListStackInstancesInput
+}
+
+// Send marshals and sends the ListStackInstances API request.
+func (r ListStackInstancesRequest) Send() (*ListStackInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStackInstancesOutput), nil
+}
+
+// ListStackInstancesRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStackInstances for more information on using the ListStackInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns summary information about stack instances that are associated with
+// the specified stack set. You can filter for stack instances that are associated
+// with a specific AWS account name or region.
 //
 //    // Example sending a request using the ListStackInstancesRequest method.
-//    req, resp := client.ListStackInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStackInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstances
-func (c *CloudFormation) ListStackInstancesRequest(input *ListStackInstancesInput) (req *aws.Request, output *ListStackInstancesOutput) {
+func (c *CloudFormation) ListStackInstancesRequest(input *ListStackInstancesInput) ListStackInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListStackInstances,
 		HTTPMethod: "POST",
@@ -2580,77 +1655,45 @@ func (c *CloudFormation) ListStackInstancesRequest(input *ListStackInstancesInpu
 		input = &ListStackInstancesInput{}
 	}
 
-	output = &ListStackInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStackInstances API operation for AWS CloudFormation.
-//
-// Returns summary information about stack instances that are associated with
-// the specified stack set. You can filter for stack instances that are associated
-// with a specific AWS account name or region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListStackInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstances
-func (c *CloudFormation) ListStackInstances(input *ListStackInstancesInput) (*ListStackInstancesOutput, error) {
-	req, out := c.ListStackInstancesRequest(input)
-	return out, req.Send()
-}
-
-// ListStackInstancesWithContext is the same as ListStackInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStackInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListStackInstancesWithContext(ctx aws.Context, input *ListStackInstancesInput, opts ...aws.Option) (*ListStackInstancesOutput, error) {
-	req, out := c.ListStackInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStackInstancesOutput{})
+	return ListStackInstancesRequest{Request: req, Input: input}
 }
 
 const opListStackResources = "ListStackResources"
 
-// ListStackResourcesRequest generates a "aws.Request" representing the
-// client's request for the ListStackResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStackResourcesRequest is a API request type for the ListStackResources API operation.
+type ListStackResourcesRequest struct {
+	*aws.Request
+	Input *ListStackResourcesInput
+}
+
+// Send marshals and sends the ListStackResources API request.
+func (r ListStackResourcesRequest) Send() (*ListStackResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStackResourcesOutput), nil
+}
+
+// ListStackResourcesRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns descriptions of all resources of the specified stack.
 //
-// See ListStackResources for more information on using the ListStackResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For deleted stacks, ListStackResources returns resource information for up
+// to 90 days after the stack has been deleted.
 //
 //    // Example sending a request using the ListStackResourcesRequest method.
-//    req, resp := client.ListStackResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStackResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources
-func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInput) (req *aws.Request, output *ListStackResourcesOutput) {
+func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInput) ListStackResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListStackResources,
 		HTTPMethod: "POST",
@@ -2667,44 +1710,8 @@ func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInpu
 		input = &ListStackResourcesInput{}
 	}
 
-	output = &ListStackResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStackResources API operation for AWS CloudFormation.
-//
-// Returns descriptions of all resources of the specified stack.
-//
-// For deleted stacks, ListStackResources returns resource information for up
-// to 90 days after the stack has been deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListStackResources for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources
-func (c *CloudFormation) ListStackResources(input *ListStackResourcesInput) (*ListStackResourcesOutput, error) {
-	req, out := c.ListStackResourcesRequest(input)
-	return out, req.Send()
-}
-
-// ListStackResourcesWithContext is the same as ListStackResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStackResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListStackResourcesWithContext(ctx aws.Context, input *ListStackResourcesInput, opts ...aws.Option) (*ListStackResourcesOutput, error) {
-	req, out := c.ListStackResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStackResourcesOutput{})
+	return ListStackResourcesRequest{Request: req, Input: input}
 }
 
 // ListStackResourcesPages iterates over the pages of a ListStackResources operation,
@@ -2743,10 +1750,10 @@ func (c *CloudFormation) ListStackResourcesPagesWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListStackResourcesRequest(inCpy)
+			req := c.ListStackResourcesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2759,31 +1766,36 @@ func (c *CloudFormation) ListStackResourcesPagesWithContext(ctx aws.Context, inp
 
 const opListStackSetOperationResults = "ListStackSetOperationResults"
 
-// ListStackSetOperationResultsRequest generates a "aws.Request" representing the
-// client's request for the ListStackSetOperationResults operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStackSetOperationResultsRequest is a API request type for the ListStackSetOperationResults API operation.
+type ListStackSetOperationResultsRequest struct {
+	*aws.Request
+	Input *ListStackSetOperationResultsInput
+}
+
+// Send marshals and sends the ListStackSetOperationResults API request.
+func (r ListStackSetOperationResultsRequest) Send() (*ListStackSetOperationResultsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStackSetOperationResultsOutput), nil
+}
+
+// ListStackSetOperationResultsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStackSetOperationResults for more information on using the ListStackSetOperationResults
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns summary information about the results of a stack set operation.
 //
 //    // Example sending a request using the ListStackSetOperationResultsRequest method.
-//    req, resp := client.ListStackSetOperationResultsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStackSetOperationResultsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResults
-func (c *CloudFormation) ListStackSetOperationResultsRequest(input *ListStackSetOperationResultsInput) (req *aws.Request, output *ListStackSetOperationResultsOutput) {
+func (c *CloudFormation) ListStackSetOperationResultsRequest(input *ListStackSetOperationResultsInput) ListStackSetOperationResultsRequest {
 	op := &aws.Operation{
 		Name:       opListStackSetOperationResults,
 		HTTPMethod: "POST",
@@ -2794,78 +1806,42 @@ func (c *CloudFormation) ListStackSetOperationResultsRequest(input *ListStackSet
 		input = &ListStackSetOperationResultsInput{}
 	}
 
-	output = &ListStackSetOperationResultsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStackSetOperationResults API operation for AWS CloudFormation.
-//
-// Returns summary information about the results of a stack set operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListStackSetOperationResults for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-//   * ErrCodeOperationNotFoundException "OperationNotFoundException"
-//   The specified ID refers to an operation that doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResults
-func (c *CloudFormation) ListStackSetOperationResults(input *ListStackSetOperationResultsInput) (*ListStackSetOperationResultsOutput, error) {
-	req, out := c.ListStackSetOperationResultsRequest(input)
-	return out, req.Send()
-}
-
-// ListStackSetOperationResultsWithContext is the same as ListStackSetOperationResults with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStackSetOperationResults for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListStackSetOperationResultsWithContext(ctx aws.Context, input *ListStackSetOperationResultsInput, opts ...aws.Option) (*ListStackSetOperationResultsOutput, error) {
-	req, out := c.ListStackSetOperationResultsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStackSetOperationResultsOutput{})
+	return ListStackSetOperationResultsRequest{Request: req, Input: input}
 }
 
 const opListStackSetOperations = "ListStackSetOperations"
 
-// ListStackSetOperationsRequest generates a "aws.Request" representing the
-// client's request for the ListStackSetOperations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStackSetOperationsRequest is a API request type for the ListStackSetOperations API operation.
+type ListStackSetOperationsRequest struct {
+	*aws.Request
+	Input *ListStackSetOperationsInput
+}
+
+// Send marshals and sends the ListStackSetOperations API request.
+func (r ListStackSetOperationsRequest) Send() (*ListStackSetOperationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStackSetOperationsOutput), nil
+}
+
+// ListStackSetOperationsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStackSetOperations for more information on using the ListStackSetOperations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns summary information about operations performed on a stack set.
 //
 //    // Example sending a request using the ListStackSetOperationsRequest method.
-//    req, resp := client.ListStackSetOperationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStackSetOperationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperations
-func (c *CloudFormation) ListStackSetOperationsRequest(input *ListStackSetOperationsInput) (req *aws.Request, output *ListStackSetOperationsOutput) {
+func (c *CloudFormation) ListStackSetOperationsRequest(input *ListStackSetOperationsInput) ListStackSetOperationsRequest {
 	op := &aws.Operation{
 		Name:       opListStackSetOperations,
 		HTTPMethod: "POST",
@@ -2876,75 +1852,43 @@ func (c *CloudFormation) ListStackSetOperationsRequest(input *ListStackSetOperat
 		input = &ListStackSetOperationsInput{}
 	}
 
-	output = &ListStackSetOperationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStackSetOperations API operation for AWS CloudFormation.
-//
-// Returns summary information about operations performed on a stack set.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListStackSetOperations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperations
-func (c *CloudFormation) ListStackSetOperations(input *ListStackSetOperationsInput) (*ListStackSetOperationsOutput, error) {
-	req, out := c.ListStackSetOperationsRequest(input)
-	return out, req.Send()
-}
-
-// ListStackSetOperationsWithContext is the same as ListStackSetOperations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStackSetOperations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListStackSetOperationsWithContext(ctx aws.Context, input *ListStackSetOperationsInput, opts ...aws.Option) (*ListStackSetOperationsOutput, error) {
-	req, out := c.ListStackSetOperationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStackSetOperationsOutput{})
+	return ListStackSetOperationsRequest{Request: req, Input: input}
 }
 
 const opListStackSets = "ListStackSets"
 
-// ListStackSetsRequest generates a "aws.Request" representing the
-// client's request for the ListStackSets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStackSetsRequest is a API request type for the ListStackSets API operation.
+type ListStackSetsRequest struct {
+	*aws.Request
+	Input *ListStackSetsInput
+}
+
+// Send marshals and sends the ListStackSets API request.
+func (r ListStackSetsRequest) Send() (*ListStackSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStackSetsOutput), nil
+}
+
+// ListStackSetsRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStackSets for more information on using the ListStackSets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns summary information about stack sets that are associated with the
+// user.
 //
 //    // Example sending a request using the ListStackSetsRequest method.
-//    req, resp := client.ListStackSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStackSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSets
-func (c *CloudFormation) ListStackSetsRequest(input *ListStackSetsInput) (req *aws.Request, output *ListStackSetsOutput) {
+func (c *CloudFormation) ListStackSetsRequest(input *ListStackSetsInput) ListStackSetsRequest {
 	op := &aws.Operation{
 		Name:       opListStackSets,
 		HTTPMethod: "POST",
@@ -2955,71 +1899,46 @@ func (c *CloudFormation) ListStackSetsRequest(input *ListStackSetsInput) (req *a
 		input = &ListStackSetsInput{}
 	}
 
-	output = &ListStackSetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStackSets API operation for AWS CloudFormation.
-//
-// Returns summary information about stack sets that are associated with the
-// user.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListStackSets for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSets
-func (c *CloudFormation) ListStackSets(input *ListStackSetsInput) (*ListStackSetsOutput, error) {
-	req, out := c.ListStackSetsRequest(input)
-	return out, req.Send()
-}
-
-// ListStackSetsWithContext is the same as ListStackSets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStackSets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListStackSetsWithContext(ctx aws.Context, input *ListStackSetsInput, opts ...aws.Option) (*ListStackSetsOutput, error) {
-	req, out := c.ListStackSetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStackSetsOutput{})
+	return ListStackSetsRequest{Request: req, Input: input}
 }
 
 const opListStacks = "ListStacks"
 
-// ListStacksRequest generates a "aws.Request" representing the
-// client's request for the ListStacks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStacksRequest is a API request type for the ListStacks API operation.
+type ListStacksRequest struct {
+	*aws.Request
+	Input *ListStacksInput
+}
+
+// Send marshals and sends the ListStacks API request.
+func (r ListStacksRequest) Send() (*ListStacksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStacksOutput), nil
+}
+
+// ListStacksRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStacks for more information on using the ListStacks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the summary information for stacks whose status matches the specified
+// StackStatusFilter. Summary information for stacks that have been deleted
+// is kept for 90 days after the stack is deleted. If no StackStatusFilter is
+// specified, summary information for all stacks is returned (including existing
+// stacks and stacks that have been deleted).
 //
 //    // Example sending a request using the ListStacksRequest method.
-//    req, resp := client.ListStacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStacksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacks
-func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) (req *aws.Request, output *ListStacksOutput) {
+func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) ListStacksRequest {
 	op := &aws.Operation{
 		Name:       opListStacks,
 		HTTPMethod: "POST",
@@ -3036,45 +1955,8 @@ func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) (req *aws.Req
 		input = &ListStacksInput{}
 	}
 
-	output = &ListStacksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStacks API operation for AWS CloudFormation.
-//
-// Returns the summary information for stacks whose status matches the specified
-// StackStatusFilter. Summary information for stacks that have been deleted
-// is kept for 90 days after the stack is deleted. If no StackStatusFilter is
-// specified, summary information for all stacks is returned (including existing
-// stacks and stacks that have been deleted).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ListStacks for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacks
-func (c *CloudFormation) ListStacks(input *ListStacksInput) (*ListStacksOutput, error) {
-	req, out := c.ListStacksRequest(input)
-	return out, req.Send()
-}
-
-// ListStacksWithContext is the same as ListStacks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStacks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ListStacksWithContext(ctx aws.Context, input *ListStacksInput, opts ...aws.Option) (*ListStacksOutput, error) {
-	req, out := c.ListStacksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStacksOutput{})
+	return ListStacksRequest{Request: req, Input: input}
 }
 
 // ListStacksPages iterates over the pages of a ListStacks operation,
@@ -3113,10 +1995,10 @@ func (c *CloudFormation) ListStacksPagesWithContext(ctx aws.Context, input *List
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListStacksRequest(inCpy)
+			req := c.ListStacksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3129,31 +2011,36 @@ func (c *CloudFormation) ListStacksPagesWithContext(ctx aws.Context, input *List
 
 const opSetStackPolicy = "SetStackPolicy"
 
-// SetStackPolicyRequest generates a "aws.Request" representing the
-// client's request for the SetStackPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetStackPolicyRequest is a API request type for the SetStackPolicy API operation.
+type SetStackPolicyRequest struct {
+	*aws.Request
+	Input *SetStackPolicyInput
+}
+
+// Send marshals and sends the SetStackPolicy API request.
+func (r SetStackPolicyRequest) Send() (*SetStackPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetStackPolicyOutput), nil
+}
+
+// SetStackPolicyRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetStackPolicy for more information on using the SetStackPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets a stack policy for a specified stack.
 //
 //    // Example sending a request using the SetStackPolicyRequest method.
-//    req, resp := client.SetStackPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetStackPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicy
-func (c *CloudFormation) SetStackPolicyRequest(input *SetStackPolicyInput) (req *aws.Request, output *SetStackPolicyOutput) {
+func (c *CloudFormation) SetStackPolicyRequest(input *SetStackPolicyInput) SetStackPolicyRequest {
 	op := &aws.Operation{
 		Name:       opSetStackPolicy,
 		HTTPMethod: "POST",
@@ -3164,72 +2051,49 @@ func (c *CloudFormation) SetStackPolicyRequest(input *SetStackPolicyInput) (req 
 		input = &SetStackPolicyInput{}
 	}
 
-	output = &SetStackPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetStackPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetStackPolicy API operation for AWS CloudFormation.
-//
-// Sets a stack policy for a specified stack.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation SetStackPolicy for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicy
-func (c *CloudFormation) SetStackPolicy(input *SetStackPolicyInput) (*SetStackPolicyOutput, error) {
-	req, out := c.SetStackPolicyRequest(input)
-	return out, req.Send()
-}
-
-// SetStackPolicyWithContext is the same as SetStackPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetStackPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) SetStackPolicyWithContext(ctx aws.Context, input *SetStackPolicyInput, opts ...aws.Option) (*SetStackPolicyOutput, error) {
-	req, out := c.SetStackPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetStackPolicyRequest{Request: req, Input: input}
 }
 
 const opSignalResource = "SignalResource"
 
-// SignalResourceRequest generates a "aws.Request" representing the
-// client's request for the SignalResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SignalResourceRequest is a API request type for the SignalResource API operation.
+type SignalResourceRequest struct {
+	*aws.Request
+	Input *SignalResourceInput
+}
+
+// Send marshals and sends the SignalResource API request.
+func (r SignalResourceRequest) Send() (*SignalResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SignalResourceOutput), nil
+}
+
+// SignalResourceRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SignalResource for more information on using the SignalResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sends a signal to the specified resource with a success or failure status.
+// You can use the SignalResource API in conjunction with a creation policy
+// or update policy. AWS CloudFormation doesn't proceed with a stack creation
+// or update until resources receive the required number of signals or the timeout
+// period is exceeded. The SignalResource API is useful in cases where you want
+// to send signals from anywhere other than an Amazon EC2 instance.
 //
 //    // Example sending a request using the SignalResourceRequest method.
-//    req, resp := client.SignalResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SignalResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResource
-func (c *CloudFormation) SignalResourceRequest(input *SignalResourceInput) (req *aws.Request, output *SignalResourceOutput) {
+func (c *CloudFormation) SignalResourceRequest(input *SignalResourceInput) SignalResourceRequest {
 	op := &aws.Operation{
 		Name:       opSignalResource,
 		HTTPMethod: "POST",
@@ -3240,77 +2104,44 @@ func (c *CloudFormation) SignalResourceRequest(input *SignalResourceInput) (req 
 		input = &SignalResourceInput{}
 	}
 
-	output = &SignalResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SignalResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SignalResource API operation for AWS CloudFormation.
-//
-// Sends a signal to the specified resource with a success or failure status.
-// You can use the SignalResource API in conjunction with a creation policy
-// or update policy. AWS CloudFormation doesn't proceed with a stack creation
-// or update until resources receive the required number of signals or the timeout
-// period is exceeded. The SignalResource API is useful in cases where you want
-// to send signals from anywhere other than an Amazon EC2 instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation SignalResource for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResource
-func (c *CloudFormation) SignalResource(input *SignalResourceInput) (*SignalResourceOutput, error) {
-	req, out := c.SignalResourceRequest(input)
-	return out, req.Send()
-}
-
-// SignalResourceWithContext is the same as SignalResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SignalResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) SignalResourceWithContext(ctx aws.Context, input *SignalResourceInput, opts ...aws.Option) (*SignalResourceOutput, error) {
-	req, out := c.SignalResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SignalResourceRequest{Request: req, Input: input}
 }
 
 const opStopStackSetOperation = "StopStackSetOperation"
 
-// StopStackSetOperationRequest generates a "aws.Request" representing the
-// client's request for the StopStackSetOperation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopStackSetOperationRequest is a API request type for the StopStackSetOperation API operation.
+type StopStackSetOperationRequest struct {
+	*aws.Request
+	Input *StopStackSetOperationInput
+}
+
+// Send marshals and sends the StopStackSetOperation API request.
+func (r StopStackSetOperationRequest) Send() (*StopStackSetOperationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopStackSetOperationOutput), nil
+}
+
+// StopStackSetOperationRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopStackSetOperation for more information on using the StopStackSetOperation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops an in-progress operation on a stack set and its associated stack instances.
 //
 //    // Example sending a request using the StopStackSetOperationRequest method.
-//    req, resp := client.StopStackSetOperationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopStackSetOperationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperation
-func (c *CloudFormation) StopStackSetOperationRequest(input *StopStackSetOperationInput) (req *aws.Request, output *StopStackSetOperationOutput) {
+func (c *CloudFormation) StopStackSetOperationRequest(input *StopStackSetOperationInput) StopStackSetOperationRequest {
 	op := &aws.Operation{
 		Name:       opStopStackSetOperation,
 		HTTPMethod: "POST",
@@ -3321,97 +2152,30 @@ func (c *CloudFormation) StopStackSetOperationRequest(input *StopStackSetOperati
 		input = &StopStackSetOperationInput{}
 	}
 
-	output = &StopStackSetOperationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopStackSetOperation API operation for AWS CloudFormation.
-//
-// Stops an in-progress operation on a stack set and its associated stack instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation StopStackSetOperation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-//   * ErrCodeOperationNotFoundException "OperationNotFoundException"
-//   The specified ID refers to an operation that doesn't exist.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   The specified operation isn't valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperation
-func (c *CloudFormation) StopStackSetOperation(input *StopStackSetOperationInput) (*StopStackSetOperationOutput, error) {
-	req, out := c.StopStackSetOperationRequest(input)
-	return out, req.Send()
-}
-
-// StopStackSetOperationWithContext is the same as StopStackSetOperation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopStackSetOperation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) StopStackSetOperationWithContext(ctx aws.Context, input *StopStackSetOperationInput, opts ...aws.Option) (*StopStackSetOperationOutput, error) {
-	req, out := c.StopStackSetOperationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopStackSetOperationOutput{})
+	return StopStackSetOperationRequest{Request: req, Input: input}
 }
 
 const opUpdateStack = "UpdateStack"
 
-// UpdateStackRequest generates a "aws.Request" representing the
-// client's request for the UpdateStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateStack for more information on using the UpdateStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateStackRequest method.
-//    req, resp := client.UpdateStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStack
-func (c *CloudFormation) UpdateStackRequest(input *UpdateStackInput) (req *aws.Request, output *UpdateStackOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateStack,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateStackInput{}
-	}
-
-	output = &UpdateStackOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateStackRequest is a API request type for the UpdateStack API operation.
+type UpdateStackRequest struct {
+	*aws.Request
+	Input *UpdateStackInput
 }
 
-// UpdateStack API operation for AWS CloudFormation.
+// Send marshals and sends the UpdateStack API request.
+func (r UpdateStackRequest) Send() (*UpdateStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateStackOutput), nil
+}
+
+// UpdateStackRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
 // Updates a stack as specified in the template. After the call completes successfully,
 // the stack update starts. You can check the status of the stack via the DescribeStacks
@@ -3423,70 +2187,66 @@ func (c *CloudFormation) UpdateStackRequest(input *UpdateStackInput) (req *aws.R
 // For more information about creating an update template, updating a stack,
 // and monitoring the progress of the update, see Updating a Stack (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation UpdateStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInsufficientCapabilitiesException "InsufficientCapabilitiesException"
-//   The template contains resources with capabilities that weren't specified
-//   in the Capabilities parameter.
-//
-//   * ErrCodeTokenAlreadyExistsException "TokenAlreadyExistsException"
-//   A client request token already exists.
+//    // Example sending a request using the UpdateStackRequest method.
+//    req := client.UpdateStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStack
-func (c *CloudFormation) UpdateStack(input *UpdateStackInput) (*UpdateStackOutput, error) {
-	req, out := c.UpdateStackRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFormation) UpdateStackRequest(input *UpdateStackInput) UpdateStackRequest {
+	op := &aws.Operation{
+		Name:       opUpdateStack,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateStackWithContext is the same as UpdateStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...aws.Option) (*UpdateStackOutput, error) {
-	req, out := c.UpdateStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateStackInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateStackOutput{})
+	return UpdateStackRequest{Request: req, Input: input}
 }
 
 const opUpdateStackSet = "UpdateStackSet"
 
-// UpdateStackSetRequest generates a "aws.Request" representing the
-// client's request for the UpdateStackSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateStackSetRequest is a API request type for the UpdateStackSet API operation.
+type UpdateStackSetRequest struct {
+	*aws.Request
+	Input *UpdateStackSetInput
+}
+
+// Send marshals and sends the UpdateStackSet API request.
+func (r UpdateStackSetRequest) Send() (*UpdateStackSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateStackSetOutput), nil
+}
+
+// UpdateStackSetRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the stack set and all associated stack instances.
 //
-// See UpdateStackSet for more information on using the UpdateStackSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Even if the stack set operation created by updating the stack set fails (completely
+// or partially, below or above a specified failure tolerance), the stack set
+// is updated with your changes. Subsequent CreateStackInstances calls on the
+// specified stack set use the updated stack set.
 //
 //    // Example sending a request using the UpdateStackSetRequest method.
-//    req, resp := client.UpdateStackSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateStackSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSet
-func (c *CloudFormation) UpdateStackSetRequest(input *UpdateStackSetInput) (req *aws.Request, output *UpdateStackSetOutput) {
+func (c *CloudFormation) UpdateStackSetRequest(input *UpdateStackSetInput) UpdateStackSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateStackSet,
 		HTTPMethod: "POST",
@@ -3497,110 +2257,30 @@ func (c *CloudFormation) UpdateStackSetRequest(input *UpdateStackSetInput) (req 
 		input = &UpdateStackSetInput{}
 	}
 
-	output = &UpdateStackSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateStackSet API operation for AWS CloudFormation.
-//
-// Updates the stack set and all associated stack instances.
-//
-// Even if the stack set operation created by updating the stack set fails (completely
-// or partially, below or above a specified failure tolerance), the stack set
-// is updated with your changes. Subsequent CreateStackInstances calls on the
-// specified stack set use the updated stack set.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation UpdateStackSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeStackSetNotFoundException "StackSetNotFoundException"
-//   The specified stack set doesn't exist.
-//
-//   * ErrCodeOperationInProgressException "OperationInProgressException"
-//   Another operation is currently in progress for this stack set. Only one operation
-//   can be performed for a stack set at a given time.
-//
-//   * ErrCodeOperationIdAlreadyExistsException "OperationIdAlreadyExistsException"
-//   The specified operation ID already exists.
-//
-//   * ErrCodeStaleRequestException "StaleRequestException"
-//   Another operation has been performed on this stack set since the specified
-//   operation was performed.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   The specified operation isn't valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSet
-func (c *CloudFormation) UpdateStackSet(input *UpdateStackSetInput) (*UpdateStackSetOutput, error) {
-	req, out := c.UpdateStackSetRequest(input)
-	return out, req.Send()
-}
-
-// UpdateStackSetWithContext is the same as UpdateStackSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateStackSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) UpdateStackSetWithContext(ctx aws.Context, input *UpdateStackSetInput, opts ...aws.Option) (*UpdateStackSetOutput, error) {
-	req, out := c.UpdateStackSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateStackSetOutput{})
+	return UpdateStackSetRequest{Request: req, Input: input}
 }
 
 const opUpdateTerminationProtection = "UpdateTerminationProtection"
 
-// UpdateTerminationProtectionRequest generates a "aws.Request" representing the
-// client's request for the UpdateTerminationProtection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTerminationProtection for more information on using the UpdateTerminationProtection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateTerminationProtectionRequest method.
-//    req, resp := client.UpdateTerminationProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtection
-func (c *CloudFormation) UpdateTerminationProtectionRequest(input *UpdateTerminationProtectionInput) (req *aws.Request, output *UpdateTerminationProtectionOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateTerminationProtection,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateTerminationProtectionInput{}
-	}
-
-	output = &UpdateTerminationProtectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateTerminationProtectionRequest is a API request type for the UpdateTerminationProtection API operation.
+type UpdateTerminationProtectionRequest struct {
+	*aws.Request
+	Input *UpdateTerminationProtectionInput
 }
 
-// UpdateTerminationProtection API operation for AWS CloudFormation.
+// Send marshals and sends the UpdateTerminationProtection API request.
+func (r UpdateTerminationProtectionRequest) Send() (*UpdateTerminationProtectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTerminationProtectionOutput), nil
+}
+
+// UpdateTerminationProtectionRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
 // Updates termination protection for the specified stack. If a user attempts
 // to delete a stack with termination protection enabled, the operation fails
@@ -3612,61 +2292,64 @@ func (c *CloudFormation) UpdateTerminationProtectionRequest(input *UpdateTermina
 // termination protection is set on the root stack and cannot be changed directly
 // on the nested stack.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
+//    // Example sending a request using the UpdateTerminationProtectionRequest method.
+//    req := client.UpdateTerminationProtectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation UpdateTerminationProtection for usage and error information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtection
-func (c *CloudFormation) UpdateTerminationProtection(input *UpdateTerminationProtectionInput) (*UpdateTerminationProtectionOutput, error) {
-	req, out := c.UpdateTerminationProtectionRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFormation) UpdateTerminationProtectionRequest(input *UpdateTerminationProtectionInput) UpdateTerminationProtectionRequest {
+	op := &aws.Operation{
+		Name:       opUpdateTerminationProtection,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateTerminationProtectionWithContext is the same as UpdateTerminationProtection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTerminationProtection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) UpdateTerminationProtectionWithContext(ctx aws.Context, input *UpdateTerminationProtectionInput, opts ...aws.Option) (*UpdateTerminationProtectionOutput, error) {
-	req, out := c.UpdateTerminationProtectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateTerminationProtectionInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateTerminationProtectionOutput{})
+	return UpdateTerminationProtectionRequest{Request: req, Input: input}
 }
 
 const opValidateTemplate = "ValidateTemplate"
 
-// ValidateTemplateRequest generates a "aws.Request" representing the
-// client's request for the ValidateTemplate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ValidateTemplateRequest is a API request type for the ValidateTemplate API operation.
+type ValidateTemplateRequest struct {
+	*aws.Request
+	Input *ValidateTemplateInput
+}
+
+// Send marshals and sends the ValidateTemplate API request.
+func (r ValidateTemplateRequest) Send() (*ValidateTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ValidateTemplateOutput), nil
+}
+
+// ValidateTemplateRequest returns a request value for making API operation for
+// AWS CloudFormation.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ValidateTemplate for more information on using the ValidateTemplate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Validates a specified template. AWS CloudFormation first checks if the template
+// is valid JSON. If it isn't, AWS CloudFormation checks if the template is
+// valid YAML. If both these checks fail, AWS CloudFormation returns a template
+// validation error.
 //
 //    // Example sending a request using the ValidateTemplateRequest method.
-//    req, resp := client.ValidateTemplateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ValidateTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplate
-func (c *CloudFormation) ValidateTemplateRequest(input *ValidateTemplateInput) (req *aws.Request, output *ValidateTemplateOutput) {
+func (c *CloudFormation) ValidateTemplateRequest(input *ValidateTemplateInput) ValidateTemplateRequest {
 	op := &aws.Operation{
 		Name:       opValidateTemplate,
 		HTTPMethod: "POST",
@@ -3677,44 +2360,8 @@ func (c *CloudFormation) ValidateTemplateRequest(input *ValidateTemplateInput) (
 		input = &ValidateTemplateInput{}
 	}
 
-	output = &ValidateTemplateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ValidateTemplate API operation for AWS CloudFormation.
-//
-// Validates a specified template. AWS CloudFormation first checks if the template
-// is valid JSON. If it isn't, AWS CloudFormation checks if the template is
-// valid YAML. If both these checks fail, AWS CloudFormation returns a template
-// validation error.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudFormation's
-// API operation ValidateTemplate for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplate
-func (c *CloudFormation) ValidateTemplate(input *ValidateTemplateInput) (*ValidateTemplateOutput, error) {
-	req, out := c.ValidateTemplateRequest(input)
-	return out, req.Send()
-}
-
-// ValidateTemplateWithContext is the same as ValidateTemplate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ValidateTemplate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFormation) ValidateTemplateWithContext(ctx aws.Context, input *ValidateTemplateInput, opts ...aws.Option) (*ValidateTemplateOutput, error) {
-	req, out := c.ValidateTemplateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ValidateTemplateOutput{})
+	return ValidateTemplateRequest{Request: req, Input: input}
 }
 
 // Structure that contains the results of the account gate function which AWS

@@ -55,12 +55,14 @@ func main() {
 
 	// Uploads the object to S3. The Context will interrupt the request if the
 	// timeout expires.
-	_, err = svc.PutObjectWithContext(ctx, &s3.PutObjectInput{
+	req := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String(bucket),
 		Key:    aws.String(key),
 		Body:   os.Stdin,
 	})
-	if err != nil {
+	req.SetContext(ctx)
+
+	if _, err := req.Send(); err != nil {
 		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == request.CanceledErrorCode {
 			// If the SDK can determine the request or retry delay was canceled
 			// by a context the CanceledErrorCode error code will be returned.

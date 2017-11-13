@@ -207,7 +207,7 @@ func TestPaginationEachPage(t *testing.T) {
 	})
 
 	params := &dynamodb.ListTablesInput{Limit: aws.Int64(2)}
-	req, _ := db.ListTablesRequest(params)
+	req := db.ListTablesRequest(params)
 	err := req.EachPage(func(p interface{}, last bool) bool {
 		numPages++
 		for _, t := range p.(*dynamodb.ListTablesOutput).TableNames {
@@ -297,7 +297,7 @@ func TestSkipPagination(t *testing.T) {
 		r.Data = &s3.HeadBucketOutput{}
 	})
 
-	req, _ := client.HeadBucketRequest(&s3.HeadBucketInput{Bucket: aws.String("bucket")})
+	req := client.HeadBucketRequest(&s3.HeadBucketInput{Bucket: aws.String("bucket")})
 
 	numPages, gotToEnd := 0, false
 	req.EachPage(func(p interface{}, last bool) bool {
@@ -623,8 +623,8 @@ func BenchmarkCodegenIterator(b *testing.B) {
 
 	input := &dynamodb.ListTablesInput{Limit: aws.Int64(2)}
 	iter := func(fn func(*dynamodb.ListTablesOutput, bool) bool) error {
-		page, _ := db.ListTablesRequest(input)
-		for ; page != nil; page = page.NextPage() {
+		page := db.ListTablesRequest(input)
+		for ; page.Request != nil; page.Request = page.NextPage() {
 			page.Send()
 			out := page.Data.(*dynamodb.ListTablesOutput)
 			if result := fn(out, !page.HasNextPage()); page.Error != nil || !result {
@@ -653,7 +653,7 @@ func BenchmarkEachPageIterator(b *testing.B) {
 	input := &dynamodb.ListTablesInput{Limit: aws.Int64(2)}
 	for i := 0; i < b.N; i++ {
 		reqNum = 0
-		req, _ := db.ListTablesRequest(input)
+		req := db.ListTablesRequest(input)
 		req.EachPage(func(p interface{}, last bool) bool {
 			return true
 		})

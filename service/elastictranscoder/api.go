@@ -11,29 +11,38 @@ import (
 
 const opCancelJob = "CancelJob"
 
-// CancelJobRequest generates a "aws.Request" representing the
-// client's request for the CancelJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelJobRequest is a API request type for the CancelJob API operation.
+type CancelJobRequest struct {
+	*aws.Request
+	Input *CancelJobInput
+}
+
+// Send marshals and sends the CancelJob API request.
+func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelJobOutput), nil
+}
+
+// CancelJobRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The CancelJob operation cancels an unfinished job.
 //
-// See CancelJob for more information on using the CancelJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can only cancel a job that has a status of Submitted. To prevent a pipeline
+// from starting to process a job while you're getting the job identifier, use
+// UpdatePipelineStatus to temporarily pause the pipeline.
 //
 //    // Example sending a request using the CancelJobRequest method.
-//    req, resp := client.CancelJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) (req *aws.Request, output *CancelJobOutput) {
+func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "DELETE",
@@ -44,94 +53,46 @@ func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) (req *aws.Re
 		input = &CancelJobInput{}
 	}
 
-	output = &CancelJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelJob API operation for Amazon Elastic Transcoder.
-//
-// The CancelJob operation cancels an unfinished job.
-//
-// You can only cancel a job that has a status of Submitted. To prevent a pipeline
-// from starting to process a job while you're getting the job identifier, use
-// UpdatePipelineStatus to temporarily pause the pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation CancelJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) CancelJob(input *CancelJobInput) (*CancelJobOutput, error) {
-	req, out := c.CancelJobRequest(input)
-	return out, req.Send()
-}
-
-// CancelJobWithContext is the same as CancelJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...aws.Option) (*CancelJobOutput, error) {
-	req, out := c.CancelJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelJobOutput{})
+	return CancelJobRequest{Request: req, Input: input}
 }
 
 const opCreateJob = "CreateJob"
 
-// CreateJobRequest generates a "aws.Request" representing the
-// client's request for the CreateJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateJobRequest is a API request type for the CreateJob API operation.
+type CreateJobRequest struct {
+	*aws.Request
+	Input *CreateJobInput
+}
+
+// Send marshals and sends the CreateJob API request.
+func (r CreateJobRequest) Send() (*CreateJobResponse, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateJobResponse), nil
+}
+
+// CreateJobRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// When you create a job, Elastic Transcoder returns JSON data that includes
+// the values that you specified plus information about the job that is created.
 //
-// See CreateJob for more information on using the CreateJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you have specified more than one output for your jobs (for example, one
+// output for the Kindle Fire and another output for the Apple iPhone 4s), you
+// currently must use the Elastic Transcoder API to list the jobs (as opposed
+// to the AWS Console).
 //
 //    // Example sending a request using the CreateJobRequest method.
-//    req, resp := client.CreateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) (req *aws.Request, output *CreateJobResponse) {
+func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
@@ -142,96 +103,40 @@ func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) (req *aws.Re
 		input = &CreateJobInput{}
 	}
 
-	output = &CreateJobResponse{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateJob API operation for Amazon Elastic Transcoder.
-//
-// When you create a job, Elastic Transcoder returns JSON data that includes
-// the values that you specified plus information about the job that is created.
-//
-// If you have specified more than one output for your jobs (for example, one
-// output for the Kindle Fire and another output for the Apple iPhone 4s), you
-// currently must use the Elastic Transcoder API to list the jobs (as opposed
-// to the AWS Console).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation CreateJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Too many operations for a given AWS account. For example, the number of pipelines
-//   exceeds the maximum allowed.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) CreateJob(input *CreateJobInput) (*CreateJobResponse, error) {
-	req, out := c.CreateJobRequest(input)
-	return out, req.Send()
-}
-
-// CreateJobWithContext is the same as CreateJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...aws.Option) (*CreateJobResponse, error) {
-	req, out := c.CreateJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateJobResponse{})
+	return CreateJobRequest{Request: req, Input: input}
 }
 
 const opCreatePipeline = "CreatePipeline"
 
-// CreatePipelineRequest generates a "aws.Request" representing the
-// client's request for the CreatePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePipelineRequest is a API request type for the CreatePipeline API operation.
+type CreatePipelineRequest struct {
+	*aws.Request
+	Input *CreatePipelineInput
+}
+
+// Send marshals and sends the CreatePipeline API request.
+func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePipelineOutput), nil
+}
+
+// CreatePipelineRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePipeline for more information on using the CreatePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The CreatePipeline operation creates a pipeline with settings that you specify.
 //
 //    // Example sending a request using the CreatePipelineRequest method.
-//    req, resp := client.CreatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) (req *aws.Request, output *CreatePipelineOutput) {
+func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opCreatePipeline,
 		HTTPMethod: "POST",
@@ -242,106 +147,30 @@ func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) (r
 		input = &CreatePipelineInput{}
 	}
 
-	output = &CreatePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePipeline API operation for Amazon Elastic Transcoder.
-//
-// The CreatePipeline operation creates a pipeline with settings that you specify.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation CreatePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Too many operations for a given AWS account. For example, the number of pipelines
-//   exceeds the maximum allowed.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) CreatePipeline(input *CreatePipelineInput) (*CreatePipelineOutput, error) {
-	req, out := c.CreatePipelineRequest(input)
-	return out, req.Send()
-}
-
-// CreatePipelineWithContext is the same as CreatePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) CreatePipelineWithContext(ctx aws.Context, input *CreatePipelineInput, opts ...aws.Option) (*CreatePipelineOutput, error) {
-	req, out := c.CreatePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	return CreatePipelineRequest{Request: req, Input: input}
 }
 
 const opCreatePreset = "CreatePreset"
 
-// CreatePresetRequest generates a "aws.Request" representing the
-// client's request for the CreatePreset operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePreset for more information on using the CreatePreset
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePresetRequest method.
-//    req, resp := client.CreatePresetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) (req *aws.Request, output *CreatePresetOutput) {
-	op := &aws.Operation{
-		Name:       opCreatePreset,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2012-09-25/presets",
-	}
-
-	if input == nil {
-		input = &CreatePresetInput{}
-	}
-
-	output = &CreatePresetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreatePresetRequest is a API request type for the CreatePreset API operation.
+type CreatePresetRequest struct {
+	*aws.Request
+	Input *CreatePresetInput
 }
 
-// CreatePreset API operation for Amazon Elastic Transcoder.
+// Send marshals and sends the CreatePreset API request.
+func (r CreatePresetRequest) Send() (*CreatePresetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePresetOutput), nil
+}
+
+// CreatePresetRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
 // The CreatePreset operation creates a preset with settings that you specify.
 //
@@ -359,76 +188,61 @@ func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) (req *
 // see the International Telecommunication Union publication Recommendation
 // ITU-T H.264: Advanced video coding for generic audiovisual services.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation CreatePreset for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Too many operations for a given AWS account. For example, the number of pipelines
-//   exceeds the maximum allowed.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) CreatePreset(input *CreatePresetInput) (*CreatePresetOutput, error) {
-	req, out := c.CreatePresetRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the CreatePresetRequest method.
+//    req := client.CreatePresetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) CreatePresetRequest {
+	op := &aws.Operation{
+		Name:       opCreatePreset,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2012-09-25/presets",
+	}
 
-// CreatePresetWithContext is the same as CreatePreset with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePreset for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) CreatePresetWithContext(ctx aws.Context, input *CreatePresetInput, opts ...aws.Option) (*CreatePresetOutput, error) {
-	req, out := c.CreatePresetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreatePresetInput{}
+	}
+
+	req := c.newRequest(op, input, &CreatePresetOutput{})
+	return CreatePresetRequest{Request: req, Input: input}
 }
 
 const opDeletePipeline = "DeletePipeline"
 
-// DeletePipelineRequest generates a "aws.Request" representing the
-// client's request for the DeletePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePipelineRequest is a API request type for the DeletePipeline API operation.
+type DeletePipelineRequest struct {
+	*aws.Request
+	Input *DeletePipelineInput
+}
+
+// Send marshals and sends the DeletePipeline API request.
+func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePipelineOutput), nil
+}
+
+// DeletePipelineRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The DeletePipeline operation removes a pipeline.
 //
-// See DeletePipeline for more information on using the DeletePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can only delete a pipeline that has never been used or that is not currently
+// in use (doesn't contain any active jobs). If the pipeline is currently in
+// use, DeletePipeline returns an error.
 //
 //    // Example sending a request using the DeletePipelineRequest method.
-//    req, resp := client.DeletePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) (req *aws.Request, output *DeletePipelineOutput) {
+func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelineRequest {
 	op := &aws.Operation{
 		Name:       opDeletePipeline,
 		HTTPMethod: "DELETE",
@@ -439,94 +253,42 @@ func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) (r
 		input = &DeletePipelineInput{}
 	}
 
-	output = &DeletePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeletePipeline API operation for Amazon Elastic Transcoder.
-//
-// The DeletePipeline operation removes a pipeline.
-//
-// You can only delete a pipeline that has never been used or that is not currently
-// in use (doesn't contain any active jobs). If the pipeline is currently in
-// use, DeletePipeline returns an error.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation DeletePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) DeletePipeline(input *DeletePipelineInput) (*DeletePipelineOutput, error) {
-	req, out := c.DeletePipelineRequest(input)
-	return out, req.Send()
-}
-
-// DeletePipelineWithContext is the same as DeletePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) DeletePipelineWithContext(ctx aws.Context, input *DeletePipelineInput, opts ...aws.Option) (*DeletePipelineOutput, error) {
-	req, out := c.DeletePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeletePipelineOutput{})
+	return DeletePipelineRequest{Request: req, Input: input}
 }
 
 const opDeletePreset = "DeletePreset"
 
-// DeletePresetRequest generates a "aws.Request" representing the
-// client's request for the DeletePreset operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePresetRequest is a API request type for the DeletePreset API operation.
+type DeletePresetRequest struct {
+	*aws.Request
+	Input *DeletePresetInput
+}
+
+// Send marshals and sends the DeletePreset API request.
+func (r DeletePresetRequest) Send() (*DeletePresetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePresetOutput), nil
+}
+
+// DeletePresetRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The DeletePreset operation removes a preset that you've added in an AWS region.
 //
-// See DeletePreset for more information on using the DeletePreset
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can't delete the default presets that are included with Elastic Transcoder.
 //
 //    // Example sending a request using the DeletePresetRequest method.
-//    req, resp := client.DeletePresetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePresetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) (req *aws.Request, output *DeletePresetOutput) {
+func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) DeletePresetRequest {
 	op := &aws.Operation{
 		Name:       opDeletePreset,
 		HTTPMethod: "DELETE",
@@ -537,88 +299,44 @@ func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) (req *
 		input = &DeletePresetInput{}
 	}
 
-	output = &DeletePresetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeletePreset API operation for Amazon Elastic Transcoder.
-//
-// The DeletePreset operation removes a preset that you've added in an AWS region.
-//
-// You can't delete the default presets that are included with Elastic Transcoder.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation DeletePreset for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) DeletePreset(input *DeletePresetInput) (*DeletePresetOutput, error) {
-	req, out := c.DeletePresetRequest(input)
-	return out, req.Send()
-}
-
-// DeletePresetWithContext is the same as DeletePreset with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePreset for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) DeletePresetWithContext(ctx aws.Context, input *DeletePresetInput, opts ...aws.Option) (*DeletePresetOutput, error) {
-	req, out := c.DeletePresetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeletePresetOutput{})
+	return DeletePresetRequest{Request: req, Input: input}
 }
 
 const opListJobsByPipeline = "ListJobsByPipeline"
 
-// ListJobsByPipelineRequest generates a "aws.Request" representing the
-// client's request for the ListJobsByPipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListJobsByPipelineRequest is a API request type for the ListJobsByPipeline API operation.
+type ListJobsByPipelineRequest struct {
+	*aws.Request
+	Input *ListJobsByPipelineInput
+}
+
+// Send marshals and sends the ListJobsByPipeline API request.
+func (r ListJobsByPipelineRequest) Send() (*ListJobsByPipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListJobsByPipelineOutput), nil
+}
+
+// ListJobsByPipelineRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline.
 //
-// See ListJobsByPipeline for more information on using the ListJobsByPipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Elastic Transcoder returns all of the jobs currently in the specified pipeline.
+// The response body contains one element for each job that satisfies the search
+// criteria.
 //
 //    // Example sending a request using the ListJobsByPipelineRequest method.
-//    req, resp := client.ListJobsByPipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListJobsByPipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) (req *aws.Request, output *ListJobsByPipelineOutput) {
+func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) ListJobsByPipelineRequest {
 	op := &aws.Operation{
 		Name:       opListJobsByPipeline,
 		HTTPMethod: "GET",
@@ -635,63 +353,8 @@ func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineI
 		input = &ListJobsByPipelineInput{}
 	}
 
-	output = &ListJobsByPipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListJobsByPipeline API operation for Amazon Elastic Transcoder.
-//
-// The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline.
-//
-// Elastic Transcoder returns all of the jobs currently in the specified pipeline.
-// The response body contains one element for each job that satisfies the search
-// criteria.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation ListJobsByPipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) ListJobsByPipeline(input *ListJobsByPipelineInput) (*ListJobsByPipelineOutput, error) {
-	req, out := c.ListJobsByPipelineRequest(input)
-	return out, req.Send()
-}
-
-// ListJobsByPipelineWithContext is the same as ListJobsByPipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListJobsByPipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) ListJobsByPipelineWithContext(ctx aws.Context, input *ListJobsByPipelineInput, opts ...aws.Option) (*ListJobsByPipelineOutput, error) {
-	req, out := c.ListJobsByPipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListJobsByPipelineOutput{})
+	return ListJobsByPipelineRequest{Request: req, Input: input}
 }
 
 // ListJobsByPipelinePages iterates over the pages of a ListJobsByPipeline operation,
@@ -730,10 +393,10 @@ func (c *ElasticTranscoder) ListJobsByPipelinePagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListJobsByPipelineRequest(inCpy)
+			req := c.ListJobsByPipelineRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -746,29 +409,36 @@ func (c *ElasticTranscoder) ListJobsByPipelinePagesWithContext(ctx aws.Context, 
 
 const opListJobsByStatus = "ListJobsByStatus"
 
-// ListJobsByStatusRequest generates a "aws.Request" representing the
-// client's request for the ListJobsByStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListJobsByStatusRequest is a API request type for the ListJobsByStatus API operation.
+type ListJobsByStatusRequest struct {
+	*aws.Request
+	Input *ListJobsByStatusInput
+}
+
+// Send marshals and sends the ListJobsByStatus API request.
+func (r ListJobsByStatusRequest) Send() (*ListJobsByStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListJobsByStatusOutput), nil
+}
+
+// ListJobsByStatusRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListJobsByStatus for more information on using the ListJobsByStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListJobsByStatus operation gets a list of jobs that have a specified
+// status. The response body contains one element for each job that satisfies
+// the search criteria.
 //
 //    // Example sending a request using the ListJobsByStatusRequest method.
-//    req, resp := client.ListJobsByStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListJobsByStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput) (req *aws.Request, output *ListJobsByStatusOutput) {
+func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput) ListJobsByStatusRequest {
 	op := &aws.Operation{
 		Name:       opListJobsByStatus,
 		HTTPMethod: "GET",
@@ -785,61 +455,8 @@ func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput
 		input = &ListJobsByStatusInput{}
 	}
 
-	output = &ListJobsByStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListJobsByStatus API operation for Amazon Elastic Transcoder.
-//
-// The ListJobsByStatus operation gets a list of jobs that have a specified
-// status. The response body contains one element for each job that satisfies
-// the search criteria.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation ListJobsByStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) ListJobsByStatus(input *ListJobsByStatusInput) (*ListJobsByStatusOutput, error) {
-	req, out := c.ListJobsByStatusRequest(input)
-	return out, req.Send()
-}
-
-// ListJobsByStatusWithContext is the same as ListJobsByStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListJobsByStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) ListJobsByStatusWithContext(ctx aws.Context, input *ListJobsByStatusInput, opts ...aws.Option) (*ListJobsByStatusOutput, error) {
-	req, out := c.ListJobsByStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListJobsByStatusOutput{})
+	return ListJobsByStatusRequest{Request: req, Input: input}
 }
 
 // ListJobsByStatusPages iterates over the pages of a ListJobsByStatus operation,
@@ -878,10 +495,10 @@ func (c *ElasticTranscoder) ListJobsByStatusPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListJobsByStatusRequest(inCpy)
+			req := c.ListJobsByStatusRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -894,29 +511,35 @@ func (c *ElasticTranscoder) ListJobsByStatusPagesWithContext(ctx aws.Context, in
 
 const opListPipelines = "ListPipelines"
 
-// ListPipelinesRequest generates a "aws.Request" representing the
-// client's request for the ListPipelines operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPipelinesRequest is a API request type for the ListPipelines API operation.
+type ListPipelinesRequest struct {
+	*aws.Request
+	Input *ListPipelinesInput
+}
+
+// Send marshals and sends the ListPipelines API request.
+func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPipelinesOutput), nil
+}
+
+// ListPipelinesRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPipelines for more information on using the ListPipelines
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListPipelines operation gets a list of the pipelines associated with
+// the current AWS account.
 //
 //    // Example sending a request using the ListPipelinesRequest method.
-//    req, resp := client.ListPipelinesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPipelinesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) (req *aws.Request, output *ListPipelinesOutput) {
+func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRequest {
 	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "GET",
@@ -933,55 +556,8 @@ func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) (req
 		input = &ListPipelinesInput{}
 	}
 
-	output = &ListPipelinesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPipelines API operation for Amazon Elastic Transcoder.
-//
-// The ListPipelines operation gets a list of the pipelines associated with
-// the current AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation ListPipelines for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) ListPipelines(input *ListPipelinesInput) (*ListPipelinesOutput, error) {
-	req, out := c.ListPipelinesRequest(input)
-	return out, req.Send()
-}
-
-// ListPipelinesWithContext is the same as ListPipelines with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPipelines for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) ListPipelinesWithContext(ctx aws.Context, input *ListPipelinesInput, opts ...aws.Option) (*ListPipelinesOutput, error) {
-	req, out := c.ListPipelinesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	return ListPipelinesRequest{Request: req, Input: input}
 }
 
 // ListPipelinesPages iterates over the pages of a ListPipelines operation,
@@ -1020,10 +596,10 @@ func (c *ElasticTranscoder) ListPipelinesPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPipelinesRequest(inCpy)
+			req := c.ListPipelinesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1036,29 +612,35 @@ func (c *ElasticTranscoder) ListPipelinesPagesWithContext(ctx aws.Context, input
 
 const opListPresets = "ListPresets"
 
-// ListPresetsRequest generates a "aws.Request" representing the
-// client's request for the ListPresets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPresetsRequest is a API request type for the ListPresets API operation.
+type ListPresetsRequest struct {
+	*aws.Request
+	Input *ListPresetsInput
+}
+
+// Send marshals and sends the ListPresets API request.
+func (r ListPresetsRequest) Send() (*ListPresetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPresetsOutput), nil
+}
+
+// ListPresetsRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPresets for more information on using the ListPresets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListPresets operation gets a list of the default presets included with
+// Elastic Transcoder and the presets that you've added in an AWS region.
 //
 //    // Example sending a request using the ListPresetsRequest method.
-//    req, resp := client.ListPresetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPresetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) (req *aws.Request, output *ListPresetsOutput) {
+func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest {
 	op := &aws.Operation{
 		Name:       opListPresets,
 		HTTPMethod: "GET",
@@ -1075,55 +657,8 @@ func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) (req *aw
 		input = &ListPresetsInput{}
 	}
 
-	output = &ListPresetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPresets API operation for Amazon Elastic Transcoder.
-//
-// The ListPresets operation gets a list of the default presets included with
-// Elastic Transcoder and the presets that you've added in an AWS region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation ListPresets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) ListPresets(input *ListPresetsInput) (*ListPresetsOutput, error) {
-	req, out := c.ListPresetsRequest(input)
-	return out, req.Send()
-}
-
-// ListPresetsWithContext is the same as ListPresets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPresets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) ListPresetsWithContext(ctx aws.Context, input *ListPresetsInput, opts ...aws.Option) (*ListPresetsOutput, error) {
-	req, out := c.ListPresetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPresetsOutput{})
+	return ListPresetsRequest{Request: req, Input: input}
 }
 
 // ListPresetsPages iterates over the pages of a ListPresets operation,
@@ -1162,10 +697,10 @@ func (c *ElasticTranscoder) ListPresetsPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPresetsRequest(inCpy)
+			req := c.ListPresetsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1178,29 +713,34 @@ func (c *ElasticTranscoder) ListPresetsPagesWithContext(ctx aws.Context, input *
 
 const opReadJob = "ReadJob"
 
-// ReadJobRequest generates a "aws.Request" representing the
-// client's request for the ReadJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ReadJobRequest is a API request type for the ReadJob API operation.
+type ReadJobRequest struct {
+	*aws.Request
+	Input *ReadJobInput
+}
+
+// Send marshals and sends the ReadJob API request.
+func (r ReadJobRequest) Send() (*ReadJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReadJobOutput), nil
+}
+
+// ReadJobRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReadJob for more information on using the ReadJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ReadJob operation returns detailed information about a job.
 //
 //    // Example sending a request using the ReadJobRequest method.
-//    req, resp := client.ReadJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ReadJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) (req *aws.Request, output *ReadJobOutput) {
+func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) ReadJobRequest {
 	op := &aws.Operation{
 		Name:       opReadJob,
 		HTTPMethod: "GET",
@@ -1211,86 +751,40 @@ func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) (req *aws.Reques
 		input = &ReadJobInput{}
 	}
 
-	output = &ReadJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ReadJob API operation for Amazon Elastic Transcoder.
-//
-// The ReadJob operation returns detailed information about a job.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation ReadJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) ReadJob(input *ReadJobInput) (*ReadJobOutput, error) {
-	req, out := c.ReadJobRequest(input)
-	return out, req.Send()
-}
-
-// ReadJobWithContext is the same as ReadJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReadJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) ReadJobWithContext(ctx aws.Context, input *ReadJobInput, opts ...aws.Option) (*ReadJobOutput, error) {
-	req, out := c.ReadJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ReadJobOutput{})
+	return ReadJobRequest{Request: req, Input: input}
 }
 
 const opReadPipeline = "ReadPipeline"
 
-// ReadPipelineRequest generates a "aws.Request" representing the
-// client's request for the ReadPipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ReadPipelineRequest is a API request type for the ReadPipeline API operation.
+type ReadPipelineRequest struct {
+	*aws.Request
+	Input *ReadPipelineInput
+}
+
+// Send marshals and sends the ReadPipeline API request.
+func (r ReadPipelineRequest) Send() (*ReadPipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReadPipelineOutput), nil
+}
+
+// ReadPipelineRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReadPipeline for more information on using the ReadPipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ReadPipeline operation gets detailed information about a pipeline.
 //
 //    // Example sending a request using the ReadPipelineRequest method.
-//    req, resp := client.ReadPipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ReadPipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) (req *aws.Request, output *ReadPipelineOutput) {
+func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) ReadPipelineRequest {
 	op := &aws.Operation{
 		Name:       opReadPipeline,
 		HTTPMethod: "GET",
@@ -1301,86 +795,40 @@ func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) (req *
 		input = &ReadPipelineInput{}
 	}
 
-	output = &ReadPipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ReadPipeline API operation for Amazon Elastic Transcoder.
-//
-// The ReadPipeline operation gets detailed information about a pipeline.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation ReadPipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) ReadPipeline(input *ReadPipelineInput) (*ReadPipelineOutput, error) {
-	req, out := c.ReadPipelineRequest(input)
-	return out, req.Send()
-}
-
-// ReadPipelineWithContext is the same as ReadPipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReadPipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) ReadPipelineWithContext(ctx aws.Context, input *ReadPipelineInput, opts ...aws.Option) (*ReadPipelineOutput, error) {
-	req, out := c.ReadPipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ReadPipelineOutput{})
+	return ReadPipelineRequest{Request: req, Input: input}
 }
 
 const opReadPreset = "ReadPreset"
 
-// ReadPresetRequest generates a "aws.Request" representing the
-// client's request for the ReadPreset operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ReadPresetRequest is a API request type for the ReadPreset API operation.
+type ReadPresetRequest struct {
+	*aws.Request
+	Input *ReadPresetInput
+}
+
+// Send marshals and sends the ReadPreset API request.
+func (r ReadPresetRequest) Send() (*ReadPresetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReadPresetOutput), nil
+}
+
+// ReadPresetRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReadPreset for more information on using the ReadPreset
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ReadPreset operation gets detailed information about a preset.
 //
 //    // Example sending a request using the ReadPresetRequest method.
-//    req, resp := client.ReadPresetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ReadPresetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) (req *aws.Request, output *ReadPresetOutput) {
+func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) ReadPresetRequest {
 	op := &aws.Operation{
 		Name:       opReadPreset,
 		HTTPMethod: "GET",
@@ -1391,86 +839,46 @@ func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) (req *aws.
 		input = &ReadPresetInput{}
 	}
 
-	output = &ReadPresetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ReadPreset API operation for Amazon Elastic Transcoder.
-//
-// The ReadPreset operation gets detailed information about a preset.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation ReadPreset for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) ReadPreset(input *ReadPresetInput) (*ReadPresetOutput, error) {
-	req, out := c.ReadPresetRequest(input)
-	return out, req.Send()
-}
-
-// ReadPresetWithContext is the same as ReadPreset with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReadPreset for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) ReadPresetWithContext(ctx aws.Context, input *ReadPresetInput, opts ...aws.Option) (*ReadPresetOutput, error) {
-	req, out := c.ReadPresetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ReadPresetOutput{})
+	return ReadPresetRequest{Request: req, Input: input}
 }
 
 const opTestRole = "TestRole"
 
-// TestRoleRequest generates a "aws.Request" representing the
-// client's request for the TestRole operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TestRoleRequest is a API request type for the TestRole API operation.
+type TestRoleRequest struct {
+	*aws.Request
+	Input *TestRoleInput
+}
+
+// Send marshals and sends the TestRole API request.
+func (r TestRoleRequest) Send() (*TestRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TestRoleOutput), nil
+}
+
+// TestRoleRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The TestRole operation tests the IAM role used to create the pipeline.
 //
-// See TestRole for more information on using the TestRole
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The TestRole action lets you determine whether the IAM role you are using
+// has sufficient permissions to let Elastic Transcoder perform tasks associated
+// with the transcoding process. The action attempts to assume the specified
+// IAM role, checks read access to the input and output buckets, and tries to
+// send a test notification to Amazon SNS topics that you specify.
 //
 //    // Example sending a request using the TestRoleRequest method.
-//    req, resp := client.TestRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TestRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) (req *aws.Request, output *TestRoleOutput) {
+func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) TestRoleRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, TestRole, has been deprecated")
 	}
@@ -1484,92 +892,45 @@ func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) (req *aws.Requ
 		input = &TestRoleInput{}
 	}
 
-	output = &TestRoleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TestRole API operation for Amazon Elastic Transcoder.
-//
-// The TestRole operation tests the IAM role used to create the pipeline.
-//
-// The TestRole action lets you determine whether the IAM role you are using
-// has sufficient permissions to let Elastic Transcoder perform tasks associated
-// with the transcoding process. The action attempts to assume the specified
-// IAM role, checks read access to the input and output buckets, and tries to
-// send a test notification to Amazon SNS topics that you specify.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation TestRole for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) TestRole(input *TestRoleInput) (*TestRoleOutput, error) {
-	req, out := c.TestRoleRequest(input)
-	return out, req.Send()
-}
-
-// TestRoleWithContext is the same as TestRole with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TestRole for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) TestRoleWithContext(ctx aws.Context, input *TestRoleInput, opts ...aws.Option) (*TestRoleOutput, error) {
-	req, out := c.TestRoleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TestRoleOutput{})
+	return TestRoleRequest{Request: req, Input: input}
 }
 
 const opUpdatePipeline = "UpdatePipeline"
 
-// UpdatePipelineRequest generates a "aws.Request" representing the
-// client's request for the UpdatePipeline operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdatePipelineRequest is a API request type for the UpdatePipeline API operation.
+type UpdatePipelineRequest struct {
+	*aws.Request
+	Input *UpdatePipelineInput
+}
+
+// Send marshals and sends the UpdatePipeline API request.
+func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePipelineOutput), nil
+}
+
+// UpdatePipelineRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Use the UpdatePipeline operation to update settings for a pipeline.
 //
-// See UpdatePipeline for more information on using the UpdatePipeline
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you change pipeline settings, your changes take effect immediately.
+// Jobs that you have already submitted and that Elastic Transcoder has not
+// started to process are affected in addition to jobs that you submit after
+// you change settings.
 //
 //    // Example sending a request using the UpdatePipelineRequest method.
-//    req, resp := client.UpdatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdatePipelineRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) (req *aws.Request, output *UpdatePipelineOutput) {
+func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePipeline,
 		HTTPMethod: "PUT",
@@ -1580,95 +941,44 @@ func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) (r
 		input = &UpdatePipelineInput{}
 	}
 
-	output = &UpdatePipelineOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdatePipeline API operation for Amazon Elastic Transcoder.
-//
-// Use the UpdatePipeline operation to update settings for a pipeline.
-//
-// When you change pipeline settings, your changes take effect immediately.
-// Jobs that you have already submitted and that Elastic Transcoder has not
-// started to process are affected in addition to jobs that you submit after
-// you change settings.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation UpdatePipeline for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) UpdatePipeline(input *UpdatePipelineInput) (*UpdatePipelineOutput, error) {
-	req, out := c.UpdatePipelineRequest(input)
-	return out, req.Send()
-}
-
-// UpdatePipelineWithContext is the same as UpdatePipeline with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdatePipeline for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) UpdatePipelineWithContext(ctx aws.Context, input *UpdatePipelineInput, opts ...aws.Option) (*UpdatePipelineOutput, error) {
-	req, out := c.UpdatePipelineRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdatePipelineOutput{})
+	return UpdatePipelineRequest{Request: req, Input: input}
 }
 
 const opUpdatePipelineNotifications = "UpdatePipelineNotifications"
 
-// UpdatePipelineNotificationsRequest generates a "aws.Request" representing the
-// client's request for the UpdatePipelineNotifications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdatePipelineNotificationsRequest is a API request type for the UpdatePipelineNotifications API operation.
+type UpdatePipelineNotificationsRequest struct {
+	*aws.Request
+	Input *UpdatePipelineNotificationsInput
+}
+
+// Send marshals and sends the UpdatePipelineNotifications API request.
+func (r UpdatePipelineNotificationsRequest) Send() (*UpdatePipelineNotificationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePipelineNotificationsOutput), nil
+}
+
+// UpdatePipelineNotificationsRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// With the UpdatePipelineNotifications operation, you can update Amazon Simple
+// Notification Service (Amazon SNS) notifications for a pipeline.
 //
-// See UpdatePipelineNotifications for more information on using the UpdatePipelineNotifications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you update notifications for a pipeline, Elastic Transcoder returns
+// the values that you specified in the request.
 //
 //    // Example sending a request using the UpdatePipelineNotificationsRequest method.
-//    req, resp := client.UpdatePipelineNotificationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdatePipelineNotificationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipelineNotificationsInput) (req *aws.Request, output *UpdatePipelineNotificationsOutput) {
+func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipelineNotificationsInput) UpdatePipelineNotificationsRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePipelineNotifications,
 		HTTPMethod: "POST",
@@ -1679,110 +989,30 @@ func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipe
 		input = &UpdatePipelineNotificationsInput{}
 	}
 
-	output = &UpdatePipelineNotificationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdatePipelineNotifications API operation for Amazon Elastic Transcoder.
-//
-// With the UpdatePipelineNotifications operation, you can update Amazon Simple
-// Notification Service (Amazon SNS) notifications for a pipeline.
-//
-// When you update notifications for a pipeline, Elastic Transcoder returns
-// the values that you specified in the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation UpdatePipelineNotifications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) UpdatePipelineNotifications(input *UpdatePipelineNotificationsInput) (*UpdatePipelineNotificationsOutput, error) {
-	req, out := c.UpdatePipelineNotificationsRequest(input)
-	return out, req.Send()
-}
-
-// UpdatePipelineNotificationsWithContext is the same as UpdatePipelineNotifications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdatePipelineNotifications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) UpdatePipelineNotificationsWithContext(ctx aws.Context, input *UpdatePipelineNotificationsInput, opts ...aws.Option) (*UpdatePipelineNotificationsOutput, error) {
-	req, out := c.UpdatePipelineNotificationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdatePipelineNotificationsOutput{})
+	return UpdatePipelineNotificationsRequest{Request: req, Input: input}
 }
 
 const opUpdatePipelineStatus = "UpdatePipelineStatus"
 
-// UpdatePipelineStatusRequest generates a "aws.Request" representing the
-// client's request for the UpdatePipelineStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdatePipelineStatus for more information on using the UpdatePipelineStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdatePipelineStatusRequest method.
-//    req, resp := client.UpdatePipelineStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) (req *aws.Request, output *UpdatePipelineStatusOutput) {
-	op := &aws.Operation{
-		Name:       opUpdatePipelineStatus,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2012-09-25/pipelines/{Id}/status",
-	}
-
-	if input == nil {
-		input = &UpdatePipelineStatusInput{}
-	}
-
-	output = &UpdatePipelineStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdatePipelineStatusRequest is a API request type for the UpdatePipelineStatus API operation.
+type UpdatePipelineStatusRequest struct {
+	*aws.Request
+	Input *UpdatePipelineStatusInput
 }
 
-// UpdatePipelineStatus API operation for Amazon Elastic Transcoder.
+// Send marshals and sends the UpdatePipelineStatus API request.
+func (r UpdatePipelineStatusRequest) Send() (*UpdatePipelineStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePipelineStatusOutput), nil
+}
+
+// UpdatePipelineStatusRequest returns a request value for making API operation for
+// Amazon Elastic Transcoder.
 //
 // The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that
 // the pipeline stops or restarts the processing of jobs.
@@ -1793,54 +1023,25 @@ func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineSta
 // more time to get the job IDs for the jobs that you want to cancel, and to
 // send a CancelJob request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic Transcoder's
-// API operation UpdatePipelineStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
-//
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
-//
-func (c *ElasticTranscoder) UpdatePipelineStatus(input *UpdatePipelineStatusInput) (*UpdatePipelineStatusOutput, error) {
-	req, out := c.UpdatePipelineStatusRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the UpdatePipelineStatusRequest method.
+//    req := client.UpdatePipelineStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) UpdatePipelineStatusRequest {
+	op := &aws.Operation{
+		Name:       opUpdatePipelineStatus,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2012-09-25/pipelines/{Id}/status",
+	}
 
-// UpdatePipelineStatusWithContext is the same as UpdatePipelineStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdatePipelineStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticTranscoder) UpdatePipelineStatusWithContext(ctx aws.Context, input *UpdatePipelineStatusInput, opts ...aws.Option) (*UpdatePipelineStatusOutput, error) {
-	req, out := c.UpdatePipelineStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdatePipelineStatusInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdatePipelineStatusOutput{})
+	return UpdatePipelineStatusRequest{Request: req, Input: input}
 }
 
 // The file to be used as album art. There can be multiple artworks associated

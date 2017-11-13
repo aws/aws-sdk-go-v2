@@ -13,31 +13,36 @@ import (
 
 const opAddTagsToOnPremisesInstances = "AddTagsToOnPremisesInstances"
 
-// AddTagsToOnPremisesInstancesRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToOnPremisesInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsToOnPremisesInstancesRequest is a API request type for the AddTagsToOnPremisesInstances API operation.
+type AddTagsToOnPremisesInstancesRequest struct {
+	*aws.Request
+	Input *AddTagsToOnPremisesInstancesInput
+}
+
+// Send marshals and sends the AddTagsToOnPremisesInstances API request.
+func (r AddTagsToOnPremisesInstancesRequest) Send() (*AddTagsToOnPremisesInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToOnPremisesInstancesOutput), nil
+}
+
+// AddTagsToOnPremisesInstancesRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTagsToOnPremisesInstances for more information on using the AddTagsToOnPremisesInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds tags to on-premises instances.
 //
 //    // Example sending a request using the AddTagsToOnPremisesInstancesRequest method.
-//    req, resp := client.AddTagsToOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsToOnPremisesInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstances
-func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesInstancesInput) (req *aws.Request, output *AddTagsToOnPremisesInstancesOutput) {
+func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesInstancesInput) AddTagsToOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -48,93 +53,44 @@ func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremi
 		input = &AddTagsToOnPremisesInstancesInput{}
 	}
 
-	output = &AddTagsToOnPremisesInstancesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddTagsToOnPremisesInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddTagsToOnPremisesInstances API operation for AWS CodeDeploy.
-//
-// Adds tags to on-premises instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation AddTagsToOnPremisesInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
-//
-//   * ErrCodeTagRequiredException "TagRequiredException"
-//   A tag was not specified.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The specified tag was specified in an invalid format.
-//
-//   * ErrCodeTagLimitExceededException "TagLimitExceededException"
-//   The maximum allowed number of tags was exceeded.
-//
-//   * ErrCodeInstanceLimitExceededException "InstanceLimitExceededException"
-//   The maximum number of allowed on-premises instances in a single call was
-//   exceeded.
-//
-//   * ErrCodeInstanceNotRegisteredException "InstanceNotRegisteredException"
-//   The specified on-premises instance is not registered.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstances
-func (c *CodeDeploy) AddTagsToOnPremisesInstances(input *AddTagsToOnPremisesInstancesInput) (*AddTagsToOnPremisesInstancesOutput, error) {
-	req, out := c.AddTagsToOnPremisesInstancesRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsToOnPremisesInstancesWithContext is the same as AddTagsToOnPremisesInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToOnPremisesInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) AddTagsToOnPremisesInstancesWithContext(ctx aws.Context, input *AddTagsToOnPremisesInstancesInput, opts ...aws.Option) (*AddTagsToOnPremisesInstancesOutput, error) {
-	req, out := c.AddTagsToOnPremisesInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddTagsToOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
 const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 
-// BatchGetApplicationRevisionsRequest generates a "aws.Request" representing the
-// client's request for the BatchGetApplicationRevisions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetApplicationRevisionsRequest is a API request type for the BatchGetApplicationRevisions API operation.
+type BatchGetApplicationRevisionsRequest struct {
+	*aws.Request
+	Input *BatchGetApplicationRevisionsInput
+}
+
+// Send marshals and sends the BatchGetApplicationRevisions API request.
+func (r BatchGetApplicationRevisionsRequest) Send() (*BatchGetApplicationRevisionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetApplicationRevisionsOutput), nil
+}
+
+// BatchGetApplicationRevisionsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetApplicationRevisions for more information on using the BatchGetApplicationRevisions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more application revisions.
 //
 //    // Example sending a request using the BatchGetApplicationRevisionsRequest method.
-//    req, resp := client.BatchGetApplicationRevisionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetApplicationRevisionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions
-func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationRevisionsInput) (req *aws.Request, output *BatchGetApplicationRevisionsOutput) {
+func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationRevisionsInput) BatchGetApplicationRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetApplicationRevisions,
 		HTTPMethod: "POST",
@@ -145,90 +101,42 @@ func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicat
 		input = &BatchGetApplicationRevisionsInput{}
 	}
 
-	output = &BatchGetApplicationRevisionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetApplicationRevisions API operation for AWS CodeDeploy.
-//
-// Gets information about one or more application revisions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation BatchGetApplicationRevisions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
-//
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
-//
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions
-func (c *CodeDeploy) BatchGetApplicationRevisions(input *BatchGetApplicationRevisionsInput) (*BatchGetApplicationRevisionsOutput, error) {
-	req, out := c.BatchGetApplicationRevisionsRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetApplicationRevisionsWithContext is the same as BatchGetApplicationRevisions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetApplicationRevisions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) BatchGetApplicationRevisionsWithContext(ctx aws.Context, input *BatchGetApplicationRevisionsInput, opts ...aws.Option) (*BatchGetApplicationRevisionsOutput, error) {
-	req, out := c.BatchGetApplicationRevisionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetApplicationRevisionsOutput{})
+	return BatchGetApplicationRevisionsRequest{Request: req, Input: input}
 }
 
 const opBatchGetApplications = "BatchGetApplications"
 
-// BatchGetApplicationsRequest generates a "aws.Request" representing the
-// client's request for the BatchGetApplications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetApplicationsRequest is a API request type for the BatchGetApplications API operation.
+type BatchGetApplicationsRequest struct {
+	*aws.Request
+	Input *BatchGetApplicationsInput
+}
+
+// Send marshals and sends the BatchGetApplications API request.
+func (r BatchGetApplicationsRequest) Send() (*BatchGetApplicationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetApplicationsOutput), nil
+}
+
+// BatchGetApplicationsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetApplications for more information on using the BatchGetApplications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more applications.
 //
 //    // Example sending a request using the BatchGetApplicationsRequest method.
-//    req, resp := client.BatchGetApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetApplicationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications
-func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) (req *aws.Request, output *BatchGetApplicationsOutput) {
+func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) BatchGetApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetApplications,
 		HTTPMethod: "POST",
@@ -239,84 +147,42 @@ func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInpu
 		input = &BatchGetApplicationsInput{}
 	}
 
-	output = &BatchGetApplicationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetApplications API operation for AWS CodeDeploy.
-//
-// Gets information about one or more applications.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation BatchGetApplications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications
-func (c *CodeDeploy) BatchGetApplications(input *BatchGetApplicationsInput) (*BatchGetApplicationsOutput, error) {
-	req, out := c.BatchGetApplicationsRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetApplicationsWithContext is the same as BatchGetApplications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetApplications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) BatchGetApplicationsWithContext(ctx aws.Context, input *BatchGetApplicationsInput, opts ...aws.Option) (*BatchGetApplicationsOutput, error) {
-	req, out := c.BatchGetApplicationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetApplicationsOutput{})
+	return BatchGetApplicationsRequest{Request: req, Input: input}
 }
 
 const opBatchGetDeploymentGroups = "BatchGetDeploymentGroups"
 
-// BatchGetDeploymentGroupsRequest generates a "aws.Request" representing the
-// client's request for the BatchGetDeploymentGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetDeploymentGroupsRequest is a API request type for the BatchGetDeploymentGroups API operation.
+type BatchGetDeploymentGroupsRequest struct {
+	*aws.Request
+	Input *BatchGetDeploymentGroupsInput
+}
+
+// Send marshals and sends the BatchGetDeploymentGroups API request.
+func (r BatchGetDeploymentGroupsRequest) Send() (*BatchGetDeploymentGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetDeploymentGroupsOutput), nil
+}
+
+// BatchGetDeploymentGroupsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetDeploymentGroups for more information on using the BatchGetDeploymentGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more deployment groups.
 //
 //    // Example sending a request using the BatchGetDeploymentGroupsRequest method.
-//    req, resp := client.BatchGetDeploymentGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetDeploymentGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups
-func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGroupsInput) (req *aws.Request, output *BatchGetDeploymentGroupsOutput) {
+func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGroupsInput) BatchGetDeploymentGroupsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetDeploymentGroups,
 		HTTPMethod: "POST",
@@ -327,90 +193,43 @@ func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGr
 		input = &BatchGetDeploymentGroupsInput{}
 	}
 
-	output = &BatchGetDeploymentGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetDeploymentGroups API operation for AWS CodeDeploy.
-//
-// Gets information about one or more deployment groups.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation BatchGetDeploymentGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
-//
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
-//
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups
-func (c *CodeDeploy) BatchGetDeploymentGroups(input *BatchGetDeploymentGroupsInput) (*BatchGetDeploymentGroupsOutput, error) {
-	req, out := c.BatchGetDeploymentGroupsRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetDeploymentGroupsWithContext is the same as BatchGetDeploymentGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetDeploymentGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) BatchGetDeploymentGroupsWithContext(ctx aws.Context, input *BatchGetDeploymentGroupsInput, opts ...aws.Option) (*BatchGetDeploymentGroupsOutput, error) {
-	req, out := c.BatchGetDeploymentGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetDeploymentGroupsOutput{})
+	return BatchGetDeploymentGroupsRequest{Request: req, Input: input}
 }
 
 const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 
-// BatchGetDeploymentInstancesRequest generates a "aws.Request" representing the
-// client's request for the BatchGetDeploymentInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetDeploymentInstancesRequest is a API request type for the BatchGetDeploymentInstances API operation.
+type BatchGetDeploymentInstancesRequest struct {
+	*aws.Request
+	Input *BatchGetDeploymentInstancesInput
+}
+
+// Send marshals and sends the BatchGetDeploymentInstances API request.
+func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetDeploymentInstancesOutput), nil
+}
+
+// BatchGetDeploymentInstancesRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetDeploymentInstances for more information on using the BatchGetDeploymentInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more instance that are part of a deployment
+// group.
 //
 //    // Example sending a request using the BatchGetDeploymentInstancesRequest method.
-//    req, resp := client.BatchGetDeploymentInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetDeploymentInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
-func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) (req *aws.Request, output *BatchGetDeploymentInstancesOutput) {
+func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetDeploymentInstances,
 		HTTPMethod: "POST",
@@ -421,91 +240,42 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymen
 		input = &BatchGetDeploymentInstancesInput{}
 	}
 
-	output = &BatchGetDeploymentInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetDeploymentInstances API operation for AWS CodeDeploy.
-//
-// Gets information about one or more instance that are part of a deployment
-// group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation BatchGetDeploymentInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeInstanceIdRequiredException "InstanceIdRequiredException"
-//   The instance ID was not specified.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The specified on-premises instance name was specified in an invalid format.
-//
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
-func (c *CodeDeploy) BatchGetDeploymentInstances(input *BatchGetDeploymentInstancesInput) (*BatchGetDeploymentInstancesOutput, error) {
-	req, out := c.BatchGetDeploymentInstancesRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetDeploymentInstancesWithContext is the same as BatchGetDeploymentInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetDeploymentInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) BatchGetDeploymentInstancesWithContext(ctx aws.Context, input *BatchGetDeploymentInstancesInput, opts ...aws.Option) (*BatchGetDeploymentInstancesOutput, error) {
-	req, out := c.BatchGetDeploymentInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetDeploymentInstancesOutput{})
+	return BatchGetDeploymentInstancesRequest{Request: req, Input: input}
 }
 
 const opBatchGetDeployments = "BatchGetDeployments"
 
-// BatchGetDeploymentsRequest generates a "aws.Request" representing the
-// client's request for the BatchGetDeployments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetDeploymentsRequest is a API request type for the BatchGetDeployments API operation.
+type BatchGetDeploymentsRequest struct {
+	*aws.Request
+	Input *BatchGetDeploymentsInput
+}
+
+// Send marshals and sends the BatchGetDeployments API request.
+func (r BatchGetDeploymentsRequest) Send() (*BatchGetDeploymentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetDeploymentsOutput), nil
+}
+
+// BatchGetDeploymentsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetDeployments for more information on using the BatchGetDeployments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more deployments.
 //
 //    // Example sending a request using the BatchGetDeploymentsRequest method.
-//    req, resp := client.BatchGetDeploymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetDeploymentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments
-func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) (req *aws.Request, output *BatchGetDeploymentsOutput) {
+func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) BatchGetDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetDeployments,
 		HTTPMethod: "POST",
@@ -516,81 +286,42 @@ func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput)
 		input = &BatchGetDeploymentsInput{}
 	}
 
-	output = &BatchGetDeploymentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetDeployments API operation for AWS CodeDeploy.
-//
-// Gets information about one or more deployments.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation BatchGetDeployments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments
-func (c *CodeDeploy) BatchGetDeployments(input *BatchGetDeploymentsInput) (*BatchGetDeploymentsOutput, error) {
-	req, out := c.BatchGetDeploymentsRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetDeploymentsWithContext is the same as BatchGetDeployments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetDeployments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) BatchGetDeploymentsWithContext(ctx aws.Context, input *BatchGetDeploymentsInput, opts ...aws.Option) (*BatchGetDeploymentsOutput, error) {
-	req, out := c.BatchGetDeploymentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetDeploymentsOutput{})
+	return BatchGetDeploymentsRequest{Request: req, Input: input}
 }
 
 const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 
-// BatchGetOnPremisesInstancesRequest generates a "aws.Request" representing the
-// client's request for the BatchGetOnPremisesInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetOnPremisesInstancesRequest is a API request type for the BatchGetOnPremisesInstances API operation.
+type BatchGetOnPremisesInstancesRequest struct {
+	*aws.Request
+	Input *BatchGetOnPremisesInstancesInput
+}
+
+// Send marshals and sends the BatchGetOnPremisesInstances API request.
+func (r BatchGetOnPremisesInstancesRequest) Send() (*BatchGetOnPremisesInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetOnPremisesInstancesOutput), nil
+}
+
+// BatchGetOnPremisesInstancesRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetOnPremisesInstances for more information on using the BatchGetOnPremisesInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more on-premises instances.
 //
 //    // Example sending a request using the BatchGetOnPremisesInstancesRequest method.
-//    req, resp := client.BatchGetOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetOnPremisesInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstances
-func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesInstancesInput) (req *aws.Request, output *BatchGetOnPremisesInstancesOutput) {
+func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesInstancesInput) BatchGetOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -601,81 +332,47 @@ func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremise
 		input = &BatchGetOnPremisesInstancesInput{}
 	}
 
-	output = &BatchGetOnPremisesInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetOnPremisesInstances API operation for AWS CodeDeploy.
-//
-// Gets information about one or more on-premises instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation BatchGetOnPremisesInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
-//
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The specified on-premises instance name was specified in an invalid format.
-//
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstances
-func (c *CodeDeploy) BatchGetOnPremisesInstances(input *BatchGetOnPremisesInstancesInput) (*BatchGetOnPremisesInstancesOutput, error) {
-	req, out := c.BatchGetOnPremisesInstancesRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetOnPremisesInstancesWithContext is the same as BatchGetOnPremisesInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetOnPremisesInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) BatchGetOnPremisesInstancesWithContext(ctx aws.Context, input *BatchGetOnPremisesInstancesInput, opts ...aws.Option) (*BatchGetOnPremisesInstancesOutput, error) {
-	req, out := c.BatchGetOnPremisesInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetOnPremisesInstancesOutput{})
+	return BatchGetOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
 const opContinueDeployment = "ContinueDeployment"
 
-// ContinueDeploymentRequest generates a "aws.Request" representing the
-// client's request for the ContinueDeployment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ContinueDeploymentRequest is a API request type for the ContinueDeployment API operation.
+type ContinueDeploymentRequest struct {
+	*aws.Request
+	Input *ContinueDeploymentInput
+}
+
+// Send marshals and sends the ContinueDeployment API request.
+func (r ContinueDeploymentRequest) Send() (*ContinueDeploymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ContinueDeploymentOutput), nil
+}
+
+// ContinueDeploymentRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ContinueDeployment for more information on using the ContinueDeployment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For a blue/green deployment, starts the process of rerouting traffic from
+// instances in the original environment to instances in the replacement environment
+// without waiting for a specified wait time to elapse. (Traffic rerouting,
+// which is achieved by registering instances in the replacement environment
+// with the load balancer, can start as soon as all instances have a status
+// of Ready.)
 //
 //    // Example sending a request using the ContinueDeploymentRequest method.
-//    req, resp := client.ContinueDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ContinueDeploymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment
-func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) (req *aws.Request, output *ContinueDeploymentOutput) {
+func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) ContinueDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opContinueDeployment,
 		HTTPMethod: "POST",
@@ -686,97 +383,44 @@ func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) (
 		input = &ContinueDeploymentInput{}
 	}
 
-	output = &ContinueDeploymentOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &ContinueDeploymentOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// ContinueDeployment API operation for AWS CodeDeploy.
-//
-// For a blue/green deployment, starts the process of rerouting traffic from
-// instances in the original environment to instances in the replacement environment
-// without waiting for a specified wait time to elapse. (Traffic rerouting,
-// which is achieved by registering instances in the replacement environment
-// with the load balancer, can start as soon as all instances have a status
-// of Ready.)
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ContinueDeployment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentAlreadyCompletedException "DeploymentAlreadyCompletedException"
-//   The deployment is already complete.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-//   * ErrCodeDeploymentIsNotInReadyStateException "DeploymentIsNotInReadyStateException"
-//   The deployment does not have a status of Ready and can't continue yet.
-//
-//   * ErrCodeUnsupportedActionForDeploymentTypeException "UnsupportedActionForDeploymentTypeException"
-//   A call was submitted that is not supported for the specified deployment type.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment
-func (c *CodeDeploy) ContinueDeployment(input *ContinueDeploymentInput) (*ContinueDeploymentOutput, error) {
-	req, out := c.ContinueDeploymentRequest(input)
-	return out, req.Send()
-}
-
-// ContinueDeploymentWithContext is the same as ContinueDeployment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ContinueDeployment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ContinueDeploymentWithContext(ctx aws.Context, input *ContinueDeploymentInput, opts ...aws.Option) (*ContinueDeploymentOutput, error) {
-	req, out := c.ContinueDeploymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return ContinueDeploymentRequest{Request: req, Input: input}
 }
 
 const opCreateApplication = "CreateApplication"
 
-// CreateApplicationRequest generates a "aws.Request" representing the
-// client's request for the CreateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateApplicationRequest is a API request type for the CreateApplication API operation.
+type CreateApplicationRequest struct {
+	*aws.Request
+	Input *CreateApplicationInput
+}
+
+// Send marshals and sends the CreateApplication API request.
+func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateApplicationOutput), nil
+}
+
+// CreateApplicationRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateApplication for more information on using the CreateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an application.
 //
 //    // Example sending a request using the CreateApplicationRequest method.
-//    req, resp := client.CreateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplication
-func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *CreateApplicationOutput) {
+func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
@@ -787,85 +431,42 @@ func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) (re
 		input = &CreateApplicationInput{}
 	}
 
-	output = &CreateApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateApplication API operation for AWS CodeDeploy.
-//
-// Creates an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation CreateApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationAlreadyExistsException "ApplicationAlreadyExistsException"
-//   An application with the specified name already exists with the applicable
-//   IAM user or AWS account.
-//
-//   * ErrCodeApplicationLimitExceededException "ApplicationLimitExceededException"
-//   More applications were attempted to be created than are allowed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplication
-func (c *CodeDeploy) CreateApplication(input *CreateApplicationInput) (*CreateApplicationOutput, error) {
-	req, out := c.CreateApplicationRequest(input)
-	return out, req.Send()
-}
-
-// CreateApplicationWithContext is the same as CreateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*CreateApplicationOutput, error) {
-	req, out := c.CreateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	return CreateApplicationRequest{Request: req, Input: input}
 }
 
 const opCreateDeployment = "CreateDeployment"
 
-// CreateDeploymentRequest generates a "aws.Request" representing the
-// client's request for the CreateDeployment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDeploymentRequest is a API request type for the CreateDeployment API operation.
+type CreateDeploymentRequest struct {
+	*aws.Request
+	Input *CreateDeploymentInput
+}
+
+// Send marshals and sends the CreateDeployment API request.
+func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeploymentOutput), nil
+}
+
+// CreateDeploymentRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeployment for more information on using the CreateDeployment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deploys an application revision through the specified deployment group.
 //
 //    // Example sending a request using the CreateDeploymentRequest method.
-//    req, resp := client.CreateDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDeploymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeployment
-func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) (req *aws.Request, output *CreateDeploymentOutput) {
+func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
@@ -876,139 +477,42 @@ func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) (req 
 		input = &CreateDeploymentInput{}
 	}
 
-	output = &CreateDeploymentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDeployment API operation for AWS CodeDeploy.
-//
-// Deploys an application revision through the specified deployment group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation CreateDeployment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
-//
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group does not exist with the applicable IAM user or
-//   AWS account.
-//
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
-//
-//   * ErrCodeRevisionDoesNotExistException "RevisionDoesNotExistException"
-//   The named revision does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
-//
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the applicable IAM user
-//   or AWS account.
-//
-//   * ErrCodeDescriptionTooLongException "DescriptionTooLongException"
-//   The description is too long.
-//
-//   * ErrCodeDeploymentLimitExceededException "DeploymentLimitExceededException"
-//   The number of allowed deployments was exceeded.
-//
-//   * ErrCodeInvalidTargetInstancesException "InvalidTargetInstancesException"
-//   The target instance configuration is invalid. Possible causes include:
-//
-//      * Configuration data for target instances was entered for an in-place
-//      deployment.
-//
-//      * The limit of 10 tags for a tag type was exceeded.
-//
-//      * The combined length of the tag names exceeded the limit.
-//
-//      * A specified tag is not currently applied to any instances.
-//
-//   * ErrCodeInvalidAutoRollbackConfigException "InvalidAutoRollbackConfigException"
-//   The automatic rollback configuration was specified in an invalid format.
-//   For example, automatic rollback is enabled but an invalid triggering event
-//   type or no event types were listed.
-//
-//   * ErrCodeInvalidLoadBalancerInfoException "InvalidLoadBalancerInfoException"
-//   An invalid load balancer name, or no load balancer name, was specified.
-//
-//   * ErrCodeInvalidFileExistsBehaviorException "InvalidFileExistsBehaviorException"
-//   An invalid fileExistsBehavior option was specified to determine how AWS CodeDeploy
-//   handles files or directories that already exist in a deployment target location
-//   but weren't part of the previous successful deployment. Valid values include
-//   "DISALLOW", "OVERWRITE", and "RETAIN".
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeployment
-func (c *CodeDeploy) CreateDeployment(input *CreateDeploymentInput) (*CreateDeploymentOutput, error) {
-	req, out := c.CreateDeploymentRequest(input)
-	return out, req.Send()
-}
-
-// CreateDeploymentWithContext is the same as CreateDeployment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeployment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...aws.Option) (*CreateDeploymentOutput, error) {
-	req, out := c.CreateDeploymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	return CreateDeploymentRequest{Request: req, Input: input}
 }
 
 const opCreateDeploymentConfig = "CreateDeploymentConfig"
 
-// CreateDeploymentConfigRequest generates a "aws.Request" representing the
-// client's request for the CreateDeploymentConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDeploymentConfigRequest is a API request type for the CreateDeploymentConfig API operation.
+type CreateDeploymentConfigRequest struct {
+	*aws.Request
+	Input *CreateDeploymentConfigInput
+}
+
+// Send marshals and sends the CreateDeploymentConfig API request.
+func (r CreateDeploymentConfigRequest) Send() (*CreateDeploymentConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeploymentConfigOutput), nil
+}
+
+// CreateDeploymentConfigRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeploymentConfig for more information on using the CreateDeploymentConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a deployment configuration.
 //
 //    // Example sending a request using the CreateDeploymentConfigRequest method.
-//    req, resp := client.CreateDeploymentConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDeploymentConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfig
-func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfigInput) (req *aws.Request, output *CreateDeploymentConfigOutput) {
+func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfigInput) CreateDeploymentConfigRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeploymentConfig,
 		HTTPMethod: "POST",
@@ -1019,88 +523,42 @@ func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfig
 		input = &CreateDeploymentConfigInput{}
 	}
 
-	output = &CreateDeploymentConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDeploymentConfig API operation for AWS CodeDeploy.
-//
-// Creates a deployment configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation CreateDeploymentConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentConfigNameRequiredException "DeploymentConfigNameRequiredException"
-//   The deployment configuration name was not specified.
-//
-//   * ErrCodeDeploymentConfigAlreadyExistsException "DeploymentConfigAlreadyExistsException"
-//   A deployment configuration with the specified name already exists with the
-//   applicable IAM user or AWS account.
-//
-//   * ErrCodeInvalidMinimumHealthyHostValueException "InvalidMinimumHealthyHostValueException"
-//   The minimum healthy instance value was specified in an invalid format.
-//
-//   * ErrCodeDeploymentConfigLimitExceededException "DeploymentConfigLimitExceededException"
-//   The deployment configurations limit was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfig
-func (c *CodeDeploy) CreateDeploymentConfig(input *CreateDeploymentConfigInput) (*CreateDeploymentConfigOutput, error) {
-	req, out := c.CreateDeploymentConfigRequest(input)
-	return out, req.Send()
-}
-
-// CreateDeploymentConfigWithContext is the same as CreateDeploymentConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeploymentConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) CreateDeploymentConfigWithContext(ctx aws.Context, input *CreateDeploymentConfigInput, opts ...aws.Option) (*CreateDeploymentConfigOutput, error) {
-	req, out := c.CreateDeploymentConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDeploymentConfigOutput{})
+	return CreateDeploymentConfigRequest{Request: req, Input: input}
 }
 
 const opCreateDeploymentGroup = "CreateDeploymentGroup"
 
-// CreateDeploymentGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateDeploymentGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDeploymentGroupRequest is a API request type for the CreateDeploymentGroup API operation.
+type CreateDeploymentGroupRequest struct {
+	*aws.Request
+	Input *CreateDeploymentGroupInput
+}
+
+// Send marshals and sends the CreateDeploymentGroup API request.
+func (r CreateDeploymentGroupRequest) Send() (*CreateDeploymentGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeploymentGroupOutput), nil
+}
+
+// CreateDeploymentGroupRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeploymentGroup for more information on using the CreateDeploymentGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a deployment group to which application revisions will be deployed.
 //
 //    // Example sending a request using the CreateDeploymentGroupRequest method.
-//    req, resp := client.CreateDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDeploymentGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroup
-func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupInput) (req *aws.Request, output *CreateDeploymentGroupOutput) {
+func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupInput) CreateDeploymentGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeploymentGroup,
 		HTTPMethod: "POST",
@@ -1111,173 +569,42 @@ func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupIn
 		input = &CreateDeploymentGroupInput{}
 	}
 
-	output = &CreateDeploymentGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDeploymentGroup API operation for AWS CodeDeploy.
-//
-// Creates a deployment group to which application revisions will be deployed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation CreateDeploymentGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
-//
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentGroupAlreadyExistsException "DeploymentGroupAlreadyExistsException"
-//   A deployment group with the specified name already exists with the applicable
-//   IAM user or AWS account.
-//
-//   * ErrCodeInvalidEC2TagException "InvalidEC2TagException"
-//   The tag was specified in an invalid format.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The specified tag was specified in an invalid format.
-//
-//   * ErrCodeInvalidAutoScalingGroupException "InvalidAutoScalingGroupException"
-//   The Auto Scaling group was specified in an invalid format or does not exist.
-//
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the applicable IAM user
-//   or AWS account.
-//
-//   * ErrCodeRoleRequiredException "RoleRequiredException"
-//   The role ID was not specified.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The service role ARN was specified in an invalid format. Or, if an Auto Scaling
-//   group was specified, the specified service role does not grant the appropriate
-//   permissions to Auto Scaling.
-//
-//   * ErrCodeDeploymentGroupLimitExceededException "DeploymentGroupLimitExceededException"
-//   The deployment groups limit was exceeded.
-//
-//   * ErrCodeLifecycleHookLimitExceededException "LifecycleHookLimitExceededException"
-//   The limit for lifecycle hooks was exceeded.
-//
-//   * ErrCodeInvalidTriggerConfigException "InvalidTriggerConfigException"
-//   The trigger was specified in an invalid format.
-//
-//   * ErrCodeTriggerTargetsLimitExceededException "TriggerTargetsLimitExceededException"
-//   The maximum allowed number of triggers was exceeded.
-//
-//   * ErrCodeInvalidAlarmConfigException "InvalidAlarmConfigException"
-//   The format of the alarm configuration is invalid. Possible causes include:
-//
-//      * The alarm list is null.
-//
-//      * The alarm object is null.
-//
-//      * The alarm name is empty or null or exceeds the 255 character limit.
-//
-//      * Two alarms with the same name have been specified.
-//
-//      * The alarm configuration is enabled but the alarm list is empty.
-//
-//   * ErrCodeAlarmsLimitExceededException "AlarmsLimitExceededException"
-//   The maximum number of alarms for a deployment group (10) was exceeded.
-//
-//   * ErrCodeInvalidAutoRollbackConfigException "InvalidAutoRollbackConfigException"
-//   The automatic rollback configuration was specified in an invalid format.
-//   For example, automatic rollback is enabled but an invalid triggering event
-//   type or no event types were listed.
-//
-//   * ErrCodeInvalidLoadBalancerInfoException "InvalidLoadBalancerInfoException"
-//   An invalid load balancer name, or no load balancer name, was specified.
-//
-//   * ErrCodeInvalidDeploymentStyleException "InvalidDeploymentStyleException"
-//   An invalid deployment style was specified. Valid deployment types include
-//   "IN_PLACE" and "BLUE_GREEN". Valid deployment options include "WITH_TRAFFIC_CONTROL"
-//   and "WITHOUT_TRAFFIC_CONTROL".
-//
-//   * ErrCodeInvalidBlueGreenDeploymentConfigurationException "InvalidBlueGreenDeploymentConfigurationException"
-//   The configuration for the blue/green deployment group was provided in an
-//   invalid format. For information about deployment configuration format, see
-//   CreateDeploymentConfig.
-//
-//   * ErrCodeInvalidEC2TagCombinationException "InvalidEC2TagCombinationException"
-//   A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
-//   only one of these data types can be used in a single call.
-//
-//   * ErrCodeInvalidOnPremisesTagCombinationException "InvalidOnPremisesTagCombinationException"
-//   A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
-//   but only one of these data types can be used in a single call.
-//
-//   * ErrCodeTagSetListLimitExceededException "TagSetListLimitExceededException"
-//   The number of tag groups included in the tag set list exceeded the maximum
-//   allowed limit of 3.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroup
-func (c *CodeDeploy) CreateDeploymentGroup(input *CreateDeploymentGroupInput) (*CreateDeploymentGroupOutput, error) {
-	req, out := c.CreateDeploymentGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateDeploymentGroupWithContext is the same as CreateDeploymentGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeploymentGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) CreateDeploymentGroupWithContext(ctx aws.Context, input *CreateDeploymentGroupInput, opts ...aws.Option) (*CreateDeploymentGroupOutput, error) {
-	req, out := c.CreateDeploymentGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDeploymentGroupOutput{})
+	return CreateDeploymentGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteApplication = "DeleteApplication"
 
-// DeleteApplicationRequest generates a "aws.Request" representing the
-// client's request for the DeleteApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteApplicationRequest is a API request type for the DeleteApplication API operation.
+type DeleteApplicationRequest struct {
+	*aws.Request
+	Input *DeleteApplicationInput
+}
+
+// Send marshals and sends the DeleteApplication API request.
+func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationOutput), nil
+}
+
+// DeleteApplicationRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteApplication for more information on using the DeleteApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an application.
 //
 //    // Example sending a request using the DeleteApplicationRequest method.
-//    req, resp := client.DeleteApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplication
-func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) (req *aws.Request, output *DeleteApplicationOutput) {
+func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) DeleteApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplication,
 		HTTPMethod: "POST",
@@ -1288,80 +615,47 @@ func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) (re
 		input = &DeleteApplicationInput{}
 	}
 
-	output = &DeleteApplicationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteApplication API operation for AWS CodeDeploy.
-//
-// Deletes an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation DeleteApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplication
-func (c *CodeDeploy) DeleteApplication(input *DeleteApplicationInput) (*DeleteApplicationOutput, error) {
-	req, out := c.DeleteApplicationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteApplicationWithContext is the same as DeleteApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...aws.Option) (*DeleteApplicationOutput, error) {
-	req, out := c.DeleteApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteApplicationRequest{Request: req, Input: input}
 }
 
 const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
 
-// DeleteDeploymentConfigRequest generates a "aws.Request" representing the
-// client's request for the DeleteDeploymentConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDeploymentConfigRequest is a API request type for the DeleteDeploymentConfig API operation.
+type DeleteDeploymentConfigRequest struct {
+	*aws.Request
+	Input *DeleteDeploymentConfigInput
+}
+
+// Send marshals and sends the DeleteDeploymentConfig API request.
+func (r DeleteDeploymentConfigRequest) Send() (*DeleteDeploymentConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDeploymentConfigOutput), nil
+}
+
+// DeleteDeploymentConfigRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a deployment configuration.
 //
-// See DeleteDeploymentConfig for more information on using the DeleteDeploymentConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A deployment configuration cannot be deleted if it is currently in use. Predefined
+// configurations cannot be deleted.
 //
 //    // Example sending a request using the DeleteDeploymentConfigRequest method.
-//    req, resp := client.DeleteDeploymentConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDeploymentConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfig
-func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInput) (req *aws.Request, output *DeleteDeploymentConfigOutput) {
+func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInput) DeleteDeploymentConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeploymentConfig,
 		HTTPMethod: "POST",
@@ -1372,89 +666,44 @@ func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfig
 		input = &DeleteDeploymentConfigInput{}
 	}
 
-	output = &DeleteDeploymentConfigOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDeploymentConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDeploymentConfig API operation for AWS CodeDeploy.
-//
-// Deletes a deployment configuration.
-//
-// A deployment configuration cannot be deleted if it is currently in use. Predefined
-// configurations cannot be deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation DeleteDeploymentConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentConfigNameRequiredException "DeploymentConfigNameRequiredException"
-//   The deployment configuration name was not specified.
-//
-//   * ErrCodeDeploymentConfigInUseException "DeploymentConfigInUseException"
-//   The deployment configuration is still in use.
-//
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   An invalid operation was detected.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfig
-func (c *CodeDeploy) DeleteDeploymentConfig(input *DeleteDeploymentConfigInput) (*DeleteDeploymentConfigOutput, error) {
-	req, out := c.DeleteDeploymentConfigRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDeploymentConfigWithContext is the same as DeleteDeploymentConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDeploymentConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) DeleteDeploymentConfigWithContext(ctx aws.Context, input *DeleteDeploymentConfigInput, opts ...aws.Option) (*DeleteDeploymentConfigOutput, error) {
-	req, out := c.DeleteDeploymentConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDeploymentConfigRequest{Request: req, Input: input}
 }
 
 const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
 
-// DeleteDeploymentGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteDeploymentGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDeploymentGroupRequest is a API request type for the DeleteDeploymentGroup API operation.
+type DeleteDeploymentGroupRequest struct {
+	*aws.Request
+	Input *DeleteDeploymentGroupInput
+}
+
+// Send marshals and sends the DeleteDeploymentGroup API request.
+func (r DeleteDeploymentGroupRequest) Send() (*DeleteDeploymentGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDeploymentGroupOutput), nil
+}
+
+// DeleteDeploymentGroupRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDeploymentGroup for more information on using the DeleteDeploymentGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a deployment group.
 //
 //    // Example sending a request using the DeleteDeploymentGroupRequest method.
-//    req, resp := client.DeleteDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDeploymentGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup
-func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput) (req *aws.Request, output *DeleteDeploymentGroupOutput) {
+func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput) DeleteDeploymentGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeploymentGroup,
 		HTTPMethod: "POST",
@@ -1465,89 +714,42 @@ func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupIn
 		input = &DeleteDeploymentGroupInput{}
 	}
 
-	output = &DeleteDeploymentGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDeploymentGroup API operation for AWS CodeDeploy.
-//
-// Deletes a deployment group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation DeleteDeploymentGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
-//
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The service role ARN was specified in an invalid format. Or, if an Auto Scaling
-//   group was specified, the specified service role does not grant the appropriate
-//   permissions to Auto Scaling.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup
-func (c *CodeDeploy) DeleteDeploymentGroup(input *DeleteDeploymentGroupInput) (*DeleteDeploymentGroupOutput, error) {
-	req, out := c.DeleteDeploymentGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDeploymentGroupWithContext is the same as DeleteDeploymentGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDeploymentGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) DeleteDeploymentGroupWithContext(ctx aws.Context, input *DeleteDeploymentGroupInput, opts ...aws.Option) (*DeleteDeploymentGroupOutput, error) {
-	req, out := c.DeleteDeploymentGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDeploymentGroupOutput{})
+	return DeleteDeploymentGroupRequest{Request: req, Input: input}
 }
 
 const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
 
-// DeregisterOnPremisesInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeregisterOnPremisesInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterOnPremisesInstanceRequest is a API request type for the DeregisterOnPremisesInstance API operation.
+type DeregisterOnPremisesInstanceRequest struct {
+	*aws.Request
+	Input *DeregisterOnPremisesInstanceInput
+}
+
+// Send marshals and sends the DeregisterOnPremisesInstance API request.
+func (r DeregisterOnPremisesInstanceRequest) Send() (*DeregisterOnPremisesInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterOnPremisesInstanceOutput), nil
+}
+
+// DeregisterOnPremisesInstanceRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterOnPremisesInstance for more information on using the DeregisterOnPremisesInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deregisters an on-premises instance.
 //
 //    // Example sending a request using the DeregisterOnPremisesInstanceRequest method.
-//    req, resp := client.DeregisterOnPremisesInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterOnPremisesInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstance
-func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPremisesInstanceInput) (req *aws.Request, output *DeregisterOnPremisesInstanceOutput) {
+func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPremisesInstanceInput) DeregisterOnPremisesInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterOnPremisesInstance,
 		HTTPMethod: "POST",
@@ -1558,80 +760,44 @@ func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPrem
 		input = &DeregisterOnPremisesInstanceInput{}
 	}
 
-	output = &DeregisterOnPremisesInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeregisterOnPremisesInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeregisterOnPremisesInstance API operation for AWS CodeDeploy.
-//
-// Deregisters an on-premises instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation DeregisterOnPremisesInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
-//
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The specified on-premises instance name was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstance
-func (c *CodeDeploy) DeregisterOnPremisesInstance(input *DeregisterOnPremisesInstanceInput) (*DeregisterOnPremisesInstanceOutput, error) {
-	req, out := c.DeregisterOnPremisesInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterOnPremisesInstanceWithContext is the same as DeregisterOnPremisesInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterOnPremisesInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) DeregisterOnPremisesInstanceWithContext(ctx aws.Context, input *DeregisterOnPremisesInstanceInput, opts ...aws.Option) (*DeregisterOnPremisesInstanceOutput, error) {
-	req, out := c.DeregisterOnPremisesInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeregisterOnPremisesInstanceRequest{Request: req, Input: input}
 }
 
 const opGetApplication = "GetApplication"
 
-// GetApplicationRequest generates a "aws.Request" representing the
-// client's request for the GetApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetApplicationRequest is a API request type for the GetApplication API operation.
+type GetApplicationRequest struct {
+	*aws.Request
+	Input *GetApplicationInput
+}
+
+// Send marshals and sends the GetApplication API request.
+func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetApplicationOutput), nil
+}
+
+// GetApplicationRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetApplication for more information on using the GetApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about an application.
 //
 //    // Example sending a request using the GetApplicationRequest method.
-//    req, resp := client.GetApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication
-func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) (req *aws.Request, output *GetApplicationOutput) {
+func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) GetApplicationRequest {
 	op := &aws.Operation{
 		Name:       opGetApplication,
 		HTTPMethod: "POST",
@@ -1642,81 +808,42 @@ func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) (req *aws
 		input = &GetApplicationInput{}
 	}
 
-	output = &GetApplicationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetApplication API operation for AWS CodeDeploy.
-//
-// Gets information about an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation GetApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication
-func (c *CodeDeploy) GetApplication(input *GetApplicationInput) (*GetApplicationOutput, error) {
-	req, out := c.GetApplicationRequest(input)
-	return out, req.Send()
-}
-
-// GetApplicationWithContext is the same as GetApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) GetApplicationWithContext(ctx aws.Context, input *GetApplicationInput, opts ...aws.Option) (*GetApplicationOutput, error) {
-	req, out := c.GetApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetApplicationOutput{})
+	return GetApplicationRequest{Request: req, Input: input}
 }
 
 const opGetApplicationRevision = "GetApplicationRevision"
 
-// GetApplicationRevisionRequest generates a "aws.Request" representing the
-// client's request for the GetApplicationRevision operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetApplicationRevisionRequest is a API request type for the GetApplicationRevision API operation.
+type GetApplicationRevisionRequest struct {
+	*aws.Request
+	Input *GetApplicationRevisionInput
+}
+
+// Send marshals and sends the GetApplicationRevision API request.
+func (r GetApplicationRevisionRequest) Send() (*GetApplicationRevisionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetApplicationRevisionOutput), nil
+}
+
+// GetApplicationRevisionRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetApplicationRevision for more information on using the GetApplicationRevision
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about an application revision.
 //
 //    // Example sending a request using the GetApplicationRevisionRequest method.
-//    req, resp := client.GetApplicationRevisionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetApplicationRevisionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision
-func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevisionInput) (req *aws.Request, output *GetApplicationRevisionOutput) {
+func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevisionInput) GetApplicationRevisionRequest {
 	op := &aws.Operation{
 		Name:       opGetApplicationRevision,
 		HTTPMethod: "POST",
@@ -1727,90 +854,42 @@ func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevision
 		input = &GetApplicationRevisionInput{}
 	}
 
-	output = &GetApplicationRevisionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetApplicationRevision API operation for AWS CodeDeploy.
-//
-// Gets information about an application revision.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation GetApplicationRevision for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeRevisionDoesNotExistException "RevisionDoesNotExistException"
-//   The named revision does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
-//
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision
-func (c *CodeDeploy) GetApplicationRevision(input *GetApplicationRevisionInput) (*GetApplicationRevisionOutput, error) {
-	req, out := c.GetApplicationRevisionRequest(input)
-	return out, req.Send()
-}
-
-// GetApplicationRevisionWithContext is the same as GetApplicationRevision with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetApplicationRevision for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) GetApplicationRevisionWithContext(ctx aws.Context, input *GetApplicationRevisionInput, opts ...aws.Option) (*GetApplicationRevisionOutput, error) {
-	req, out := c.GetApplicationRevisionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetApplicationRevisionOutput{})
+	return GetApplicationRevisionRequest{Request: req, Input: input}
 }
 
 const opGetDeployment = "GetDeployment"
 
-// GetDeploymentRequest generates a "aws.Request" representing the
-// client's request for the GetDeployment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeploymentRequest is a API request type for the GetDeployment API operation.
+type GetDeploymentRequest struct {
+	*aws.Request
+	Input *GetDeploymentInput
+}
+
+// Send marshals and sends the GetDeployment API request.
+func (r GetDeploymentRequest) Send() (*GetDeploymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeploymentOutput), nil
+}
+
+// GetDeploymentRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeployment for more information on using the GetDeployment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a deployment.
 //
 //    // Example sending a request using the GetDeploymentRequest method.
-//    req, resp := client.GetDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeploymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment
-func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) (req *aws.Request, output *GetDeploymentOutput) {
+func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) GetDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opGetDeployment,
 		HTTPMethod: "POST",
@@ -1821,81 +900,42 @@ func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) (req *aws.R
 		input = &GetDeploymentInput{}
 	}
 
-	output = &GetDeploymentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeployment API operation for AWS CodeDeploy.
-//
-// Gets information about a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation GetDeployment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment does not exist with the applicable IAM user or AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment
-func (c *CodeDeploy) GetDeployment(input *GetDeploymentInput) (*GetDeploymentOutput, error) {
-	req, out := c.GetDeploymentRequest(input)
-	return out, req.Send()
-}
-
-// GetDeploymentWithContext is the same as GetDeployment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeployment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentWithContext(ctx aws.Context, input *GetDeploymentInput, opts ...aws.Option) (*GetDeploymentOutput, error) {
-	req, out := c.GetDeploymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeploymentOutput{})
+	return GetDeploymentRequest{Request: req, Input: input}
 }
 
 const opGetDeploymentConfig = "GetDeploymentConfig"
 
-// GetDeploymentConfigRequest generates a "aws.Request" representing the
-// client's request for the GetDeploymentConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeploymentConfigRequest is a API request type for the GetDeploymentConfig API operation.
+type GetDeploymentConfigRequest struct {
+	*aws.Request
+	Input *GetDeploymentConfigInput
+}
+
+// Send marshals and sends the GetDeploymentConfig API request.
+func (r GetDeploymentConfigRequest) Send() (*GetDeploymentConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeploymentConfigOutput), nil
+}
+
+// GetDeploymentConfigRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeploymentConfig for more information on using the GetDeploymentConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a deployment configuration.
 //
 //    // Example sending a request using the GetDeploymentConfigRequest method.
-//    req, resp := client.GetDeploymentConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeploymentConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig
-func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) (req *aws.Request, output *GetDeploymentConfigOutput) {
+func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) GetDeploymentConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetDeploymentConfig,
 		HTTPMethod: "POST",
@@ -1906,82 +946,42 @@ func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput)
 		input = &GetDeploymentConfigInput{}
 	}
 
-	output = &GetDeploymentConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeploymentConfig API operation for AWS CodeDeploy.
-//
-// Gets information about a deployment configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation GetDeploymentConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentConfigNameRequiredException "DeploymentConfigNameRequiredException"
-//   The deployment configuration name was not specified.
-//
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the applicable IAM user
-//   or AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig
-func (c *CodeDeploy) GetDeploymentConfig(input *GetDeploymentConfigInput) (*GetDeploymentConfigOutput, error) {
-	req, out := c.GetDeploymentConfigRequest(input)
-	return out, req.Send()
-}
-
-// GetDeploymentConfigWithContext is the same as GetDeploymentConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeploymentConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentConfigWithContext(ctx aws.Context, input *GetDeploymentConfigInput, opts ...aws.Option) (*GetDeploymentConfigOutput, error) {
-	req, out := c.GetDeploymentConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeploymentConfigOutput{})
+	return GetDeploymentConfigRequest{Request: req, Input: input}
 }
 
 const opGetDeploymentGroup = "GetDeploymentGroup"
 
-// GetDeploymentGroupRequest generates a "aws.Request" representing the
-// client's request for the GetDeploymentGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeploymentGroupRequest is a API request type for the GetDeploymentGroup API operation.
+type GetDeploymentGroupRequest struct {
+	*aws.Request
+	Input *GetDeploymentGroupInput
+}
+
+// Send marshals and sends the GetDeploymentGroup API request.
+func (r GetDeploymentGroupRequest) Send() (*GetDeploymentGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeploymentGroupOutput), nil
+}
+
+// GetDeploymentGroupRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeploymentGroup for more information on using the GetDeploymentGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a deployment group.
 //
 //    // Example sending a request using the GetDeploymentGroupRequest method.
-//    req, resp := client.GetDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeploymentGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup
-func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) (req *aws.Request, output *GetDeploymentGroupOutput) {
+func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) GetDeploymentGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetDeploymentGroup,
 		HTTPMethod: "POST",
@@ -1992,91 +992,42 @@ func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) (
 		input = &GetDeploymentGroupInput{}
 	}
 
-	output = &GetDeploymentGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeploymentGroup API operation for AWS CodeDeploy.
-//
-// Gets information about a deployment group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation GetDeploymentGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
-//
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group does not exist with the applicable IAM user or
-//   AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup
-func (c *CodeDeploy) GetDeploymentGroup(input *GetDeploymentGroupInput) (*GetDeploymentGroupOutput, error) {
-	req, out := c.GetDeploymentGroupRequest(input)
-	return out, req.Send()
-}
-
-// GetDeploymentGroupWithContext is the same as GetDeploymentGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeploymentGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentGroupWithContext(ctx aws.Context, input *GetDeploymentGroupInput, opts ...aws.Option) (*GetDeploymentGroupOutput, error) {
-	req, out := c.GetDeploymentGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeploymentGroupOutput{})
+	return GetDeploymentGroupRequest{Request: req, Input: input}
 }
 
 const opGetDeploymentInstance = "GetDeploymentInstance"
 
-// GetDeploymentInstanceRequest generates a "aws.Request" representing the
-// client's request for the GetDeploymentInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDeploymentInstanceRequest is a API request type for the GetDeploymentInstance API operation.
+type GetDeploymentInstanceRequest struct {
+	*aws.Request
+	Input *GetDeploymentInstanceInput
+}
+
+// Send marshals and sends the GetDeploymentInstance API request.
+func (r GetDeploymentInstanceRequest) Send() (*GetDeploymentInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeploymentInstanceOutput), nil
+}
+
+// GetDeploymentInstanceRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDeploymentInstance for more information on using the GetDeploymentInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about an instance as part of a deployment.
 //
 //    // Example sending a request using the GetDeploymentInstanceRequest method.
-//    req, resp := client.GetDeploymentInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDeploymentInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance
-func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput) (req *aws.Request, output *GetDeploymentInstanceOutput) {
+func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput) GetDeploymentInstanceRequest {
 	op := &aws.Operation{
 		Name:       opGetDeploymentInstance,
 		HTTPMethod: "POST",
@@ -2087,90 +1038,42 @@ func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceIn
 		input = &GetDeploymentInstanceInput{}
 	}
 
-	output = &GetDeploymentInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDeploymentInstance API operation for AWS CodeDeploy.
-//
-// Gets information about an instance as part of a deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation GetDeploymentInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeInstanceIdRequiredException "InstanceIdRequiredException"
-//   The instance ID was not specified.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-//   * ErrCodeInstanceDoesNotExistException "InstanceDoesNotExistException"
-//   The specified instance does not exist in the deployment group.
-//
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The specified on-premises instance name was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance
-func (c *CodeDeploy) GetDeploymentInstance(input *GetDeploymentInstanceInput) (*GetDeploymentInstanceOutput, error) {
-	req, out := c.GetDeploymentInstanceRequest(input)
-	return out, req.Send()
-}
-
-// GetDeploymentInstanceWithContext is the same as GetDeploymentInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDeploymentInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentInstanceWithContext(ctx aws.Context, input *GetDeploymentInstanceInput, opts ...aws.Option) (*GetDeploymentInstanceOutput, error) {
-	req, out := c.GetDeploymentInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDeploymentInstanceOutput{})
+	return GetDeploymentInstanceRequest{Request: req, Input: input}
 }
 
 const opGetOnPremisesInstance = "GetOnPremisesInstance"
 
-// GetOnPremisesInstanceRequest generates a "aws.Request" representing the
-// client's request for the GetOnPremisesInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetOnPremisesInstanceRequest is a API request type for the GetOnPremisesInstance API operation.
+type GetOnPremisesInstanceRequest struct {
+	*aws.Request
+	Input *GetOnPremisesInstanceInput
+}
+
+// Send marshals and sends the GetOnPremisesInstance API request.
+func (r GetOnPremisesInstanceRequest) Send() (*GetOnPremisesInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetOnPremisesInstanceOutput), nil
+}
+
+// GetOnPremisesInstanceRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetOnPremisesInstance for more information on using the GetOnPremisesInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about an on-premises instance.
 //
 //    // Example sending a request using the GetOnPremisesInstanceRequest method.
-//    req, resp := client.GetOnPremisesInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetOnPremisesInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstance
-func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput) (req *aws.Request, output *GetOnPremisesInstanceOutput) {
+func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput) GetOnPremisesInstanceRequest {
 	op := &aws.Operation{
 		Name:       opGetOnPremisesInstance,
 		HTTPMethod: "POST",
@@ -2181,81 +1084,42 @@ func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceIn
 		input = &GetOnPremisesInstanceInput{}
 	}
 
-	output = &GetOnPremisesInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetOnPremisesInstance API operation for AWS CodeDeploy.
-//
-// Gets information about an on-premises instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation GetOnPremisesInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
-//
-//   * ErrCodeInstanceNotRegisteredException "InstanceNotRegisteredException"
-//   The specified on-premises instance is not registered.
-//
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The specified on-premises instance name was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstance
-func (c *CodeDeploy) GetOnPremisesInstance(input *GetOnPremisesInstanceInput) (*GetOnPremisesInstanceOutput, error) {
-	req, out := c.GetOnPremisesInstanceRequest(input)
-	return out, req.Send()
-}
-
-// GetOnPremisesInstanceWithContext is the same as GetOnPremisesInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetOnPremisesInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) GetOnPremisesInstanceWithContext(ctx aws.Context, input *GetOnPremisesInstanceInput, opts ...aws.Option) (*GetOnPremisesInstanceOutput, error) {
-	req, out := c.GetOnPremisesInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetOnPremisesInstanceOutput{})
+	return GetOnPremisesInstanceRequest{Request: req, Input: input}
 }
 
 const opListApplicationRevisions = "ListApplicationRevisions"
 
-// ListApplicationRevisionsRequest generates a "aws.Request" representing the
-// client's request for the ListApplicationRevisions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListApplicationRevisionsRequest is a API request type for the ListApplicationRevisions API operation.
+type ListApplicationRevisionsRequest struct {
+	*aws.Request
+	Input *ListApplicationRevisionsInput
+}
+
+// Send marshals and sends the ListApplicationRevisions API request.
+func (r ListApplicationRevisionsRequest) Send() (*ListApplicationRevisionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListApplicationRevisionsOutput), nil
+}
+
+// ListApplicationRevisionsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListApplicationRevisions for more information on using the ListApplicationRevisions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists information about revisions for an application.
 //
 //    // Example sending a request using the ListApplicationRevisionsRequest method.
-//    req, resp := client.ListApplicationRevisionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListApplicationRevisionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions
-func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevisionsInput) (req *aws.Request, output *ListApplicationRevisionsOutput) {
+func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevisionsInput) ListApplicationRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opListApplicationRevisions,
 		HTTPMethod: "POST",
@@ -2272,74 +1136,8 @@ func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevis
 		input = &ListApplicationRevisionsInput{}
 	}
 
-	output = &ListApplicationRevisionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListApplicationRevisions API operation for AWS CodeDeploy.
-//
-// Lists information about revisions for an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListApplicationRevisions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeInvalidSortByException "InvalidSortByException"
-//   The column name to sort by is either not present or was specified in an invalid
-//   format.
-//
-//   * ErrCodeInvalidSortOrderException "InvalidSortOrderException"
-//   The sort order was specified in an invalid format.
-//
-//   * ErrCodeInvalidBucketNameFilterException "InvalidBucketNameFilterException"
-//   The bucket name either doesn't exist or was specified in an invalid format.
-//
-//   * ErrCodeInvalidKeyPrefixFilterException "InvalidKeyPrefixFilterException"
-//   The specified key prefix filter was specified in an invalid format.
-//
-//   * ErrCodeBucketNameFilterRequiredException "BucketNameFilterRequiredException"
-//   A bucket name is required, but was not provided.
-//
-//   * ErrCodeInvalidDeployedStateFilterException "InvalidDeployedStateFilterException"
-//   The deployed state filter was specified in an invalid format.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions
-func (c *CodeDeploy) ListApplicationRevisions(input *ListApplicationRevisionsInput) (*ListApplicationRevisionsOutput, error) {
-	req, out := c.ListApplicationRevisionsRequest(input)
-	return out, req.Send()
-}
-
-// ListApplicationRevisionsWithContext is the same as ListApplicationRevisions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListApplicationRevisions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListApplicationRevisionsWithContext(ctx aws.Context, input *ListApplicationRevisionsInput, opts ...aws.Option) (*ListApplicationRevisionsOutput, error) {
-	req, out := c.ListApplicationRevisionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListApplicationRevisionsOutput{})
+	return ListApplicationRevisionsRequest{Request: req, Input: input}
 }
 
 // ListApplicationRevisionsPages iterates over the pages of a ListApplicationRevisions operation,
@@ -2378,10 +1176,10 @@ func (c *CodeDeploy) ListApplicationRevisionsPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListApplicationRevisionsRequest(inCpy)
+			req := c.ListApplicationRevisionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2394,31 +1192,36 @@ func (c *CodeDeploy) ListApplicationRevisionsPagesWithContext(ctx aws.Context, i
 
 const opListApplications = "ListApplications"
 
-// ListApplicationsRequest generates a "aws.Request" representing the
-// client's request for the ListApplications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListApplicationsRequest is a API request type for the ListApplications API operation.
+type ListApplicationsRequest struct {
+	*aws.Request
+	Input *ListApplicationsInput
+}
+
+// Send marshals and sends the ListApplications API request.
+func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListApplicationsOutput), nil
+}
+
+// ListApplicationsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListApplications for more information on using the ListApplications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the applications registered with the applicable IAM user or AWS account.
 //
 //    // Example sending a request using the ListApplicationsRequest method.
-//    req, resp := client.ListApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListApplicationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplications
-func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) (req *aws.Request, output *ListApplicationsOutput) {
+func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) ListApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListApplications,
 		HTTPMethod: "POST",
@@ -2435,46 +1238,8 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) (req 
 		input = &ListApplicationsInput{}
 	}
 
-	output = &ListApplicationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListApplications API operation for AWS CodeDeploy.
-//
-// Lists the applications registered with the applicable IAM user or AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListApplications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplications
-func (c *CodeDeploy) ListApplications(input *ListApplicationsInput) (*ListApplicationsOutput, error) {
-	req, out := c.ListApplicationsRequest(input)
-	return out, req.Send()
-}
-
-// ListApplicationsWithContext is the same as ListApplications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListApplications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListApplicationsWithContext(ctx aws.Context, input *ListApplicationsInput, opts ...aws.Option) (*ListApplicationsOutput, error) {
-	req, out := c.ListApplicationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	return ListApplicationsRequest{Request: req, Input: input}
 }
 
 // ListApplicationsPages iterates over the pages of a ListApplications operation,
@@ -2513,10 +1278,10 @@ func (c *CodeDeploy) ListApplicationsPagesWithContext(ctx aws.Context, input *Li
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListApplicationsRequest(inCpy)
+			req := c.ListApplicationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2529,31 +1294,36 @@ func (c *CodeDeploy) ListApplicationsPagesWithContext(ctx aws.Context, input *Li
 
 const opListDeploymentConfigs = "ListDeploymentConfigs"
 
-// ListDeploymentConfigsRequest generates a "aws.Request" representing the
-// client's request for the ListDeploymentConfigs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeploymentConfigsRequest is a API request type for the ListDeploymentConfigs API operation.
+type ListDeploymentConfigsRequest struct {
+	*aws.Request
+	Input *ListDeploymentConfigsInput
+}
+
+// Send marshals and sends the ListDeploymentConfigs API request.
+func (r ListDeploymentConfigsRequest) Send() (*ListDeploymentConfigsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeploymentConfigsOutput), nil
+}
+
+// ListDeploymentConfigsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeploymentConfigs for more information on using the ListDeploymentConfigs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the deployment configurations with the applicable IAM user or AWS account.
 //
 //    // Example sending a request using the ListDeploymentConfigsRequest method.
-//    req, resp := client.ListDeploymentConfigsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeploymentConfigsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigs
-func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput) (req *aws.Request, output *ListDeploymentConfigsOutput) {
+func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput) ListDeploymentConfigsRequest {
 	op := &aws.Operation{
 		Name:       opListDeploymentConfigs,
 		HTTPMethod: "POST",
@@ -2570,46 +1340,8 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 		input = &ListDeploymentConfigsInput{}
 	}
 
-	output = &ListDeploymentConfigsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeploymentConfigs API operation for AWS CodeDeploy.
-//
-// Lists the deployment configurations with the applicable IAM user or AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListDeploymentConfigs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigs
-func (c *CodeDeploy) ListDeploymentConfigs(input *ListDeploymentConfigsInput) (*ListDeploymentConfigsOutput, error) {
-	req, out := c.ListDeploymentConfigsRequest(input)
-	return out, req.Send()
-}
-
-// ListDeploymentConfigsWithContext is the same as ListDeploymentConfigs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeploymentConfigs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentConfigsWithContext(ctx aws.Context, input *ListDeploymentConfigsInput, opts ...aws.Option) (*ListDeploymentConfigsOutput, error) {
-	req, out := c.ListDeploymentConfigsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeploymentConfigsOutput{})
+	return ListDeploymentConfigsRequest{Request: req, Input: input}
 }
 
 // ListDeploymentConfigsPages iterates over the pages of a ListDeploymentConfigs operation,
@@ -2648,10 +1380,10 @@ func (c *CodeDeploy) ListDeploymentConfigsPagesWithContext(ctx aws.Context, inpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDeploymentConfigsRequest(inCpy)
+			req := c.ListDeploymentConfigsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2664,31 +1396,37 @@ func (c *CodeDeploy) ListDeploymentConfigsPagesWithContext(ctx aws.Context, inpu
 
 const opListDeploymentGroups = "ListDeploymentGroups"
 
-// ListDeploymentGroupsRequest generates a "aws.Request" representing the
-// client's request for the ListDeploymentGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeploymentGroupsRequest is a API request type for the ListDeploymentGroups API operation.
+type ListDeploymentGroupsRequest struct {
+	*aws.Request
+	Input *ListDeploymentGroupsInput
+}
+
+// Send marshals and sends the ListDeploymentGroups API request.
+func (r ListDeploymentGroupsRequest) Send() (*ListDeploymentGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeploymentGroupsOutput), nil
+}
+
+// ListDeploymentGroupsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeploymentGroups for more information on using the ListDeploymentGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the deployment groups for an application registered with the applicable
+// IAM user or AWS account.
 //
 //    // Example sending a request using the ListDeploymentGroupsRequest method.
-//    req, resp := client.ListDeploymentGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeploymentGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroups
-func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) (req *aws.Request, output *ListDeploymentGroupsOutput) {
+func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) ListDeploymentGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListDeploymentGroups,
 		HTTPMethod: "POST",
@@ -2705,56 +1443,8 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 		input = &ListDeploymentGroupsInput{}
 	}
 
-	output = &ListDeploymentGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeploymentGroups API operation for AWS CodeDeploy.
-//
-// Lists the deployment groups for an application registered with the applicable
-// IAM user or AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListDeploymentGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroups
-func (c *CodeDeploy) ListDeploymentGroups(input *ListDeploymentGroupsInput) (*ListDeploymentGroupsOutput, error) {
-	req, out := c.ListDeploymentGroupsRequest(input)
-	return out, req.Send()
-}
-
-// ListDeploymentGroupsWithContext is the same as ListDeploymentGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeploymentGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentGroupsWithContext(ctx aws.Context, input *ListDeploymentGroupsInput, opts ...aws.Option) (*ListDeploymentGroupsOutput, error) {
-	req, out := c.ListDeploymentGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeploymentGroupsOutput{})
+	return ListDeploymentGroupsRequest{Request: req, Input: input}
 }
 
 // ListDeploymentGroupsPages iterates over the pages of a ListDeploymentGroups operation,
@@ -2793,10 +1483,10 @@ func (c *CodeDeploy) ListDeploymentGroupsPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDeploymentGroupsRequest(inCpy)
+			req := c.ListDeploymentGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2809,31 +1499,37 @@ func (c *CodeDeploy) ListDeploymentGroupsPagesWithContext(ctx aws.Context, input
 
 const opListDeploymentInstances = "ListDeploymentInstances"
 
-// ListDeploymentInstancesRequest generates a "aws.Request" representing the
-// client's request for the ListDeploymentInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeploymentInstancesRequest is a API request type for the ListDeploymentInstances API operation.
+type ListDeploymentInstancesRequest struct {
+	*aws.Request
+	Input *ListDeploymentInstancesInput
+}
+
+// Send marshals and sends the ListDeploymentInstances API request.
+func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeploymentInstancesOutput), nil
+}
+
+// ListDeploymentInstancesRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeploymentInstances for more information on using the ListDeploymentInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the instance for a deployment associated with the applicable IAM user
+// or AWS account.
 //
 //    // Example sending a request using the ListDeploymentInstancesRequest method.
-//    req, resp := client.ListDeploymentInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeploymentInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances
-func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstancesInput) (req *aws.Request, output *ListDeploymentInstancesOutput) {
+func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstancesInput) ListDeploymentInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListDeploymentInstances,
 		HTTPMethod: "POST",
@@ -2850,71 +1546,8 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 		input = &ListDeploymentInstancesInput{}
 	}
 
-	output = &ListDeploymentInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeploymentInstances API operation for AWS CodeDeploy.
-//
-// Lists the instance for a deployment associated with the applicable IAM user
-// or AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListDeploymentInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentNotStartedException "DeploymentNotStartedException"
-//   The specified deployment has not started.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-//   * ErrCodeInvalidInstanceStatusException "InvalidInstanceStatusException"
-//   The specified instance status does not exist.
-//
-//   * ErrCodeInvalidInstanceTypeException "InvalidInstanceTypeException"
-//   An invalid instance type was specified for instances in a blue/green deployment.
-//   Valid values include "Blue" for an original environment and "Green" for a
-//   replacement environment.
-//
-//   * ErrCodeInvalidDeploymentInstanceTypeException "InvalidDeploymentInstanceTypeException"
-//   An instance type was specified for an in-place deployment. Instance types
-//   are supported for blue/green deployments only.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances
-func (c *CodeDeploy) ListDeploymentInstances(input *ListDeploymentInstancesInput) (*ListDeploymentInstancesOutput, error) {
-	req, out := c.ListDeploymentInstancesRequest(input)
-	return out, req.Send()
-}
-
-// ListDeploymentInstancesWithContext is the same as ListDeploymentInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeploymentInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentInstancesWithContext(ctx aws.Context, input *ListDeploymentInstancesInput, opts ...aws.Option) (*ListDeploymentInstancesOutput, error) {
-	req, out := c.ListDeploymentInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeploymentInstancesOutput{})
+	return ListDeploymentInstancesRequest{Request: req, Input: input}
 }
 
 // ListDeploymentInstancesPages iterates over the pages of a ListDeploymentInstances operation,
@@ -2953,10 +1586,10 @@ func (c *CodeDeploy) ListDeploymentInstancesPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDeploymentInstancesRequest(inCpy)
+			req := c.ListDeploymentInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2969,31 +1602,37 @@ func (c *CodeDeploy) ListDeploymentInstancesPagesWithContext(ctx aws.Context, in
 
 const opListDeployments = "ListDeployments"
 
-// ListDeploymentsRequest generates a "aws.Request" representing the
-// client's request for the ListDeployments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDeploymentsRequest is a API request type for the ListDeployments API operation.
+type ListDeploymentsRequest struct {
+	*aws.Request
+	Input *ListDeploymentsInput
+}
+
+// Send marshals and sends the ListDeployments API request.
+func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeploymentsOutput), nil
+}
+
+// ListDeploymentsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeployments for more information on using the ListDeployments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the deployments in a deployment group for an application registered
+// with the applicable IAM user or AWS account.
 //
 //    // Example sending a request using the ListDeploymentsRequest method.
-//    req, resp := client.ListDeploymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDeploymentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeployments
-func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) (req *aws.Request, output *ListDeploymentsOutput) {
+func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) ListDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opListDeployments,
 		HTTPMethod: "POST",
@@ -3010,72 +1649,8 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) (req *a
 		input = &ListDeploymentsInput{}
 	}
 
-	output = &ListDeploymentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDeployments API operation for AWS CodeDeploy.
-//
-// Lists the deployments in a deployment group for an application registered
-// with the applicable IAM user or AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListDeployments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group does not exist with the applicable IAM user or
-//   AWS account.
-//
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
-//
-//   * ErrCodeInvalidTimeRangeException "InvalidTimeRangeException"
-//   The specified time range was specified in an invalid format.
-//
-//   * ErrCodeInvalidDeploymentStatusException "InvalidDeploymentStatusException"
-//   The specified deployment status doesn't exist or cannot be determined.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeployments
-func (c *CodeDeploy) ListDeployments(input *ListDeploymentsInput) (*ListDeploymentsOutput, error) {
-	req, out := c.ListDeploymentsRequest(input)
-	return out, req.Send()
-}
-
-// ListDeploymentsWithContext is the same as ListDeployments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeployments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentsWithContext(ctx aws.Context, input *ListDeploymentsInput, opts ...aws.Option) (*ListDeploymentsOutput, error) {
-	req, out := c.ListDeploymentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDeploymentsOutput{})
+	return ListDeploymentsRequest{Request: req, Input: input}
 }
 
 // ListDeploymentsPages iterates over the pages of a ListDeployments operation,
@@ -3114,10 +1689,10 @@ func (c *CodeDeploy) ListDeploymentsPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDeploymentsRequest(inCpy)
+			req := c.ListDeploymentsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3130,31 +1705,36 @@ func (c *CodeDeploy) ListDeploymentsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListGitHubAccountTokenNames = "ListGitHubAccountTokenNames"
 
-// ListGitHubAccountTokenNamesRequest generates a "aws.Request" representing the
-// client's request for the ListGitHubAccountTokenNames operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGitHubAccountTokenNamesRequest is a API request type for the ListGitHubAccountTokenNames API operation.
+type ListGitHubAccountTokenNamesRequest struct {
+	*aws.Request
+	Input *ListGitHubAccountTokenNamesInput
+}
+
+// Send marshals and sends the ListGitHubAccountTokenNames API request.
+func (r ListGitHubAccountTokenNamesRequest) Send() (*ListGitHubAccountTokenNamesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGitHubAccountTokenNamesOutput), nil
+}
+
+// ListGitHubAccountTokenNamesRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListGitHubAccountTokenNames for more information on using the ListGitHubAccountTokenNames
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the names of stored connections to GitHub accounts.
 //
 //    // Example sending a request using the ListGitHubAccountTokenNamesRequest method.
-//    req, resp := client.ListGitHubAccountTokenNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGitHubAccountTokenNamesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNames
-func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountTokenNamesInput) (req *aws.Request, output *ListGitHubAccountTokenNamesOutput) {
+func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountTokenNamesInput) ListGitHubAccountTokenNamesRequest {
 	op := &aws.Operation{
 		Name:       opListGitHubAccountTokenNames,
 		HTTPMethod: "POST",
@@ -3165,78 +1745,46 @@ func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccount
 		input = &ListGitHubAccountTokenNamesInput{}
 	}
 
-	output = &ListGitHubAccountTokenNamesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGitHubAccountTokenNames API operation for AWS CodeDeploy.
-//
-// Lists the names of stored connections to GitHub accounts.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListGitHubAccountTokenNames for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-//   * ErrCodeResourceValidationException "ResourceValidationException"
-//   The specified resource could not be validated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNames
-func (c *CodeDeploy) ListGitHubAccountTokenNames(input *ListGitHubAccountTokenNamesInput) (*ListGitHubAccountTokenNamesOutput, error) {
-	req, out := c.ListGitHubAccountTokenNamesRequest(input)
-	return out, req.Send()
-}
-
-// ListGitHubAccountTokenNamesWithContext is the same as ListGitHubAccountTokenNames with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGitHubAccountTokenNames for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListGitHubAccountTokenNamesWithContext(ctx aws.Context, input *ListGitHubAccountTokenNamesInput, opts ...aws.Option) (*ListGitHubAccountTokenNamesOutput, error) {
-	req, out := c.ListGitHubAccountTokenNamesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGitHubAccountTokenNamesOutput{})
+	return ListGitHubAccountTokenNamesRequest{Request: req, Input: input}
 }
 
 const opListOnPremisesInstances = "ListOnPremisesInstances"
 
-// ListOnPremisesInstancesRequest generates a "aws.Request" representing the
-// client's request for the ListOnPremisesInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListOnPremisesInstancesRequest is a API request type for the ListOnPremisesInstances API operation.
+type ListOnPremisesInstancesRequest struct {
+	*aws.Request
+	Input *ListOnPremisesInstancesInput
+}
+
+// Send marshals and sends the ListOnPremisesInstances API request.
+func (r ListOnPremisesInstancesRequest) Send() (*ListOnPremisesInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOnPremisesInstancesOutput), nil
+}
+
+// ListOnPremisesInstancesRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets a list of names for one or more on-premises instances.
 //
-// See ListOnPremisesInstances for more information on using the ListOnPremisesInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Unless otherwise specified, both registered and deregistered on-premises
+// instance names will be listed. To list only registered or deregistered on-premises
+// instance names, use the registration status parameter.
 //
 //    // Example sending a request using the ListOnPremisesInstancesRequest method.
-//    req, resp := client.ListOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListOnPremisesInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances
-func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesInput) (req *aws.Request, output *ListOnPremisesInstancesOutput) {
+func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesInput) ListOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -3247,85 +1795,42 @@ func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstanc
 		input = &ListOnPremisesInstancesInput{}
 	}
 
-	output = &ListOnPremisesInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListOnPremisesInstances API operation for AWS CodeDeploy.
-//
-// Gets a list of names for one or more on-premises instances.
-//
-// Unless otherwise specified, both registered and deregistered on-premises
-// instance names will be listed. To list only registered or deregistered on-premises
-// instance names, use the registration status parameter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation ListOnPremisesInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRegistrationStatusException "InvalidRegistrationStatusException"
-//   The registration status was specified in an invalid format.
-//
-//   * ErrCodeInvalidTagFilterException "InvalidTagFilterException"
-//   The specified tag filter was specified in an invalid format.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances
-func (c *CodeDeploy) ListOnPremisesInstances(input *ListOnPremisesInstancesInput) (*ListOnPremisesInstancesOutput, error) {
-	req, out := c.ListOnPremisesInstancesRequest(input)
-	return out, req.Send()
-}
-
-// ListOnPremisesInstancesWithContext is the same as ListOnPremisesInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListOnPremisesInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) ListOnPremisesInstancesWithContext(ctx aws.Context, input *ListOnPremisesInstancesInput, opts ...aws.Option) (*ListOnPremisesInstancesOutput, error) {
-	req, out := c.ListOnPremisesInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListOnPremisesInstancesOutput{})
+	return ListOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
 const opRegisterApplicationRevision = "RegisterApplicationRevision"
 
-// RegisterApplicationRevisionRequest generates a "aws.Request" representing the
-// client's request for the RegisterApplicationRevision operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterApplicationRevisionRequest is a API request type for the RegisterApplicationRevision API operation.
+type RegisterApplicationRevisionRequest struct {
+	*aws.Request
+	Input *RegisterApplicationRevisionInput
+}
+
+// Send marshals and sends the RegisterApplicationRevision API request.
+func (r RegisterApplicationRevisionRequest) Send() (*RegisterApplicationRevisionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterApplicationRevisionOutput), nil
+}
+
+// RegisterApplicationRevisionRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterApplicationRevision for more information on using the RegisterApplicationRevision
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Registers with AWS CodeDeploy a revision for the specified application.
 //
 //    // Example sending a request using the RegisterApplicationRevisionRequest method.
-//    req, resp := client.RegisterApplicationRevisionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterApplicationRevisionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevision
-func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicationRevisionInput) (req *aws.Request, output *RegisterApplicationRevisionOutput) {
+func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicationRevisionInput) RegisterApplicationRevisionRequest {
 	op := &aws.Operation{
 		Name:       opRegisterApplicationRevision,
 		HTTPMethod: "POST",
@@ -3336,92 +1841,47 @@ func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicati
 		input = &RegisterApplicationRevisionInput{}
 	}
 
-	output = &RegisterApplicationRevisionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RegisterApplicationRevisionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RegisterApplicationRevision API operation for AWS CodeDeploy.
-//
-// Registers with AWS CodeDeploy a revision for the specified application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation RegisterApplicationRevision for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeDescriptionTooLongException "DescriptionTooLongException"
-//   The description is too long.
-//
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
-//
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevision
-func (c *CodeDeploy) RegisterApplicationRevision(input *RegisterApplicationRevisionInput) (*RegisterApplicationRevisionOutput, error) {
-	req, out := c.RegisterApplicationRevisionRequest(input)
-	return out, req.Send()
-}
-
-// RegisterApplicationRevisionWithContext is the same as RegisterApplicationRevision with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterApplicationRevision for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) RegisterApplicationRevisionWithContext(ctx aws.Context, input *RegisterApplicationRevisionInput, opts ...aws.Option) (*RegisterApplicationRevisionOutput, error) {
-	req, out := c.RegisterApplicationRevisionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RegisterApplicationRevisionRequest{Request: req, Input: input}
 }
 
 const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
 
-// RegisterOnPremisesInstanceRequest generates a "aws.Request" representing the
-// client's request for the RegisterOnPremisesInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterOnPremisesInstanceRequest is a API request type for the RegisterOnPremisesInstance API operation.
+type RegisterOnPremisesInstanceRequest struct {
+	*aws.Request
+	Input *RegisterOnPremisesInstanceInput
+}
+
+// Send marshals and sends the RegisterOnPremisesInstance API request.
+func (r RegisterOnPremisesInstanceRequest) Send() (*RegisterOnPremisesInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterOnPremisesInstanceOutput), nil
+}
+
+// RegisterOnPremisesInstanceRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Registers an on-premises instance.
 //
-// See RegisterOnPremisesInstance for more information on using the RegisterOnPremisesInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the
+// request. You cannot use both.
 //
 //    // Example sending a request using the RegisterOnPremisesInstanceRequest method.
-//    req, resp := client.RegisterOnPremisesInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterOnPremisesInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstance
-func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInstanceInput) (req *aws.Request, output *RegisterOnPremisesInstanceOutput) {
+func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInstanceInput) RegisterOnPremisesInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRegisterOnPremisesInstance,
 		HTTPMethod: "POST",
@@ -3432,110 +1892,44 @@ func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremises
 		input = &RegisterOnPremisesInstanceInput{}
 	}
 
-	output = &RegisterOnPremisesInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RegisterOnPremisesInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RegisterOnPremisesInstance API operation for AWS CodeDeploy.
-//
-// Registers an on-premises instance.
-//
-// Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the
-// request. You cannot use both.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation RegisterOnPremisesInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInstanceNameAlreadyRegisteredException "InstanceNameAlreadyRegisteredException"
-//   The specified on-premises instance name is already registered.
-//
-//   * ErrCodeIamArnRequiredException "IamArnRequiredException"
-//   No IAM ARN was included in the request. You must use an IAM session ARN or
-//   IAM user ARN in the request.
-//
-//   * ErrCodeIamSessionArnAlreadyRegisteredException "IamSessionArnAlreadyRegisteredException"
-//   The request included an IAM session ARN that has already been used to register
-//   a different instance.
-//
-//   * ErrCodeIamUserArnAlreadyRegisteredException "IamUserArnAlreadyRegisteredException"
-//   The specified IAM user ARN is already registered with an on-premises instance.
-//
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
-//
-//   * ErrCodeIamUserArnRequiredException "IamUserArnRequiredException"
-//   An IAM user ARN was not specified.
-//
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The specified on-premises instance name was specified in an invalid format.
-//
-//   * ErrCodeInvalidIamSessionArnException "InvalidIamSessionArnException"
-//   The IAM session ARN was specified in an invalid format.
-//
-//   * ErrCodeInvalidIamUserArnException "InvalidIamUserArnException"
-//   The IAM user ARN was specified in an invalid format.
-//
-//   * ErrCodeMultipleIamArnsProvidedException "MultipleIamArnsProvidedException"
-//   Both an IAM user ARN and an IAM session ARN were included in the request.
-//   Use only one ARN type.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstance
-func (c *CodeDeploy) RegisterOnPremisesInstance(input *RegisterOnPremisesInstanceInput) (*RegisterOnPremisesInstanceOutput, error) {
-	req, out := c.RegisterOnPremisesInstanceRequest(input)
-	return out, req.Send()
-}
-
-// RegisterOnPremisesInstanceWithContext is the same as RegisterOnPremisesInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterOnPremisesInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) RegisterOnPremisesInstanceWithContext(ctx aws.Context, input *RegisterOnPremisesInstanceInput, opts ...aws.Option) (*RegisterOnPremisesInstanceOutput, error) {
-	req, out := c.RegisterOnPremisesInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RegisterOnPremisesInstanceRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
 
-// RemoveTagsFromOnPremisesInstancesRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromOnPremisesInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromOnPremisesInstancesRequest is a API request type for the RemoveTagsFromOnPremisesInstances API operation.
+type RemoveTagsFromOnPremisesInstancesRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromOnPremisesInstancesInput
+}
+
+// Send marshals and sends the RemoveTagsFromOnPremisesInstances API request.
+func (r RemoveTagsFromOnPremisesInstancesRequest) Send() (*RemoveTagsFromOnPremisesInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromOnPremisesInstancesOutput), nil
+}
+
+// RemoveTagsFromOnPremisesInstancesRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTagsFromOnPremisesInstances for more information on using the RemoveTagsFromOnPremisesInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes one or more tags from one or more on-premises instances.
 //
 //    // Example sending a request using the RemoveTagsFromOnPremisesInstancesRequest method.
-//    req, resp := client.RemoveTagsFromOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromOnPremisesInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstances
-func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromOnPremisesInstancesInput) (req *aws.Request, output *RemoveTagsFromOnPremisesInstancesOutput) {
+func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromOnPremisesInstancesInput) RemoveTagsFromOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -3546,93 +1940,45 @@ func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsF
 		input = &RemoveTagsFromOnPremisesInstancesInput{}
 	}
 
-	output = &RemoveTagsFromOnPremisesInstancesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveTagsFromOnPremisesInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveTagsFromOnPremisesInstances API operation for AWS CodeDeploy.
-//
-// Removes one or more tags from one or more on-premises instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation RemoveTagsFromOnPremisesInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
-//
-//   * ErrCodeTagRequiredException "TagRequiredException"
-//   A tag was not specified.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The specified tag was specified in an invalid format.
-//
-//   * ErrCodeTagLimitExceededException "TagLimitExceededException"
-//   The maximum allowed number of tags was exceeded.
-//
-//   * ErrCodeInstanceLimitExceededException "InstanceLimitExceededException"
-//   The maximum number of allowed on-premises instances in a single call was
-//   exceeded.
-//
-//   * ErrCodeInstanceNotRegisteredException "InstanceNotRegisteredException"
-//   The specified on-premises instance is not registered.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstances
-func (c *CodeDeploy) RemoveTagsFromOnPremisesInstances(input *RemoveTagsFromOnPremisesInstancesInput) (*RemoveTagsFromOnPremisesInstancesOutput, error) {
-	req, out := c.RemoveTagsFromOnPremisesInstancesRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromOnPremisesInstancesWithContext is the same as RemoveTagsFromOnPremisesInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromOnPremisesInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesWithContext(ctx aws.Context, input *RemoveTagsFromOnPremisesInstancesInput, opts ...aws.Option) (*RemoveTagsFromOnPremisesInstancesOutput, error) {
-	req, out := c.RemoveTagsFromOnPremisesInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveTagsFromOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
 const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination"
 
-// SkipWaitTimeForInstanceTerminationRequest generates a "aws.Request" representing the
-// client's request for the SkipWaitTimeForInstanceTermination operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SkipWaitTimeForInstanceTerminationRequest is a API request type for the SkipWaitTimeForInstanceTermination API operation.
+type SkipWaitTimeForInstanceTerminationRequest struct {
+	*aws.Request
+	Input *SkipWaitTimeForInstanceTerminationInput
+}
+
+// Send marshals and sends the SkipWaitTimeForInstanceTermination API request.
+func (r SkipWaitTimeForInstanceTerminationRequest) Send() (*SkipWaitTimeForInstanceTerminationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SkipWaitTimeForInstanceTerminationOutput), nil
+}
+
+// SkipWaitTimeForInstanceTerminationRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SkipWaitTimeForInstanceTermination for more information on using the SkipWaitTimeForInstanceTermination
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// In a blue/green deployment, overrides any specified wait time and starts
+// terminating instances immediately after the traffic routing is completed.
 //
 //    // Example sending a request using the SkipWaitTimeForInstanceTerminationRequest method.
-//    req, resp := client.SkipWaitTimeForInstanceTerminationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SkipWaitTimeForInstanceTerminationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
-func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) (req *aws.Request, output *SkipWaitTimeForInstanceTerminationOutput) {
+func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest {
 	op := &aws.Operation{
 		Name:       opSkipWaitTimeForInstanceTermination,
 		HTTPMethod: "POST",
@@ -3643,93 +1989,44 @@ func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTi
 		input = &SkipWaitTimeForInstanceTerminationInput{}
 	}
 
-	output = &SkipWaitTimeForInstanceTerminationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SkipWaitTimeForInstanceTerminationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SkipWaitTimeForInstanceTermination API operation for AWS CodeDeploy.
-//
-// In a blue/green deployment, overrides any specified wait time and starts
-// terminating instances immediately after the traffic routing is completed.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation SkipWaitTimeForInstanceTermination for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentAlreadyCompletedException "DeploymentAlreadyCompletedException"
-//   The deployment is already complete.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-//   * ErrCodeDeploymentNotStartedException "DeploymentNotStartedException"
-//   The specified deployment has not started.
-//
-//   * ErrCodeUnsupportedActionForDeploymentTypeException "UnsupportedActionForDeploymentTypeException"
-//   A call was submitted that is not supported for the specified deployment type.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
-func (c *CodeDeploy) SkipWaitTimeForInstanceTermination(input *SkipWaitTimeForInstanceTerminationInput) (*SkipWaitTimeForInstanceTerminationOutput, error) {
-	req, out := c.SkipWaitTimeForInstanceTerminationRequest(input)
-	return out, req.Send()
-}
-
-// SkipWaitTimeForInstanceTerminationWithContext is the same as SkipWaitTimeForInstanceTermination with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SkipWaitTimeForInstanceTermination for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationWithContext(ctx aws.Context, input *SkipWaitTimeForInstanceTerminationInput, opts ...aws.Option) (*SkipWaitTimeForInstanceTerminationOutput, error) {
-	req, out := c.SkipWaitTimeForInstanceTerminationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SkipWaitTimeForInstanceTerminationRequest{Request: req, Input: input}
 }
 
 const opStopDeployment = "StopDeployment"
 
-// StopDeploymentRequest generates a "aws.Request" representing the
-// client's request for the StopDeployment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopDeploymentRequest is a API request type for the StopDeployment API operation.
+type StopDeploymentRequest struct {
+	*aws.Request
+	Input *StopDeploymentInput
+}
+
+// Send marshals and sends the StopDeployment API request.
+func (r StopDeploymentRequest) Send() (*StopDeploymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopDeploymentOutput), nil
+}
+
+// StopDeploymentRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopDeployment for more information on using the StopDeployment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attempts to stop an ongoing deployment.
 //
 //    // Example sending a request using the StopDeploymentRequest method.
-//    req, resp := client.StopDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopDeploymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeployment
-func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) (req *aws.Request, output *StopDeploymentOutput) {
+func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) StopDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opStopDeployment,
 		HTTPMethod: "POST",
@@ -3740,84 +2037,42 @@ func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) (req *aws
 		input = &StopDeploymentInput{}
 	}
 
-	output = &StopDeploymentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopDeployment API operation for AWS CodeDeploy.
-//
-// Attempts to stop an ongoing deployment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation StopDeployment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
-//
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeDeploymentAlreadyCompletedException "DeploymentAlreadyCompletedException"
-//   The deployment is already complete.
-//
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeployment
-func (c *CodeDeploy) StopDeployment(input *StopDeploymentInput) (*StopDeploymentOutput, error) {
-	req, out := c.StopDeploymentRequest(input)
-	return out, req.Send()
-}
-
-// StopDeploymentWithContext is the same as StopDeployment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopDeployment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) StopDeploymentWithContext(ctx aws.Context, input *StopDeploymentInput, opts ...aws.Option) (*StopDeploymentOutput, error) {
-	req, out := c.StopDeploymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopDeploymentOutput{})
+	return StopDeploymentRequest{Request: req, Input: input}
 }
 
 const opUpdateApplication = "UpdateApplication"
 
-// UpdateApplicationRequest generates a "aws.Request" representing the
-// client's request for the UpdateApplication operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateApplicationRequest is a API request type for the UpdateApplication API operation.
+type UpdateApplicationRequest struct {
+	*aws.Request
+	Input *UpdateApplicationInput
+}
+
+// Send marshals and sends the UpdateApplication API request.
+func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApplicationOutput), nil
+}
+
+// UpdateApplicationRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateApplication for more information on using the UpdateApplication
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Changes the name of an application.
 //
 //    // Example sending a request using the UpdateApplicationRequest method.
-//    req, resp := client.UpdateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplication
-func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *UpdateApplicationOutput) {
+func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
@@ -3828,87 +2083,44 @@ func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) (re
 		input = &UpdateApplicationInput{}
 	}
 
-	output = &UpdateApplicationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateApplication API operation for AWS CodeDeploy.
-//
-// Changes the name of an application.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation UpdateApplication for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationAlreadyExistsException "ApplicationAlreadyExistsException"
-//   An application with the specified name already exists with the applicable
-//   IAM user or AWS account.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplication
-func (c *CodeDeploy) UpdateApplication(input *UpdateApplicationInput) (*UpdateApplicationOutput, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateApplicationWithContext is the same as UpdateApplication with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApplication for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*UpdateApplicationOutput, error) {
-	req, out := c.UpdateApplicationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateApplicationRequest{Request: req, Input: input}
 }
 
 const opUpdateDeploymentGroup = "UpdateDeploymentGroup"
 
-// UpdateDeploymentGroupRequest generates a "aws.Request" representing the
-// client's request for the UpdateDeploymentGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDeploymentGroupRequest is a API request type for the UpdateDeploymentGroup API operation.
+type UpdateDeploymentGroupRequest struct {
+	*aws.Request
+	Input *UpdateDeploymentGroupInput
+}
+
+// Send marshals and sends the UpdateDeploymentGroup API request.
+func (r UpdateDeploymentGroupRequest) Send() (*UpdateDeploymentGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDeploymentGroupOutput), nil
+}
+
+// UpdateDeploymentGroupRequest returns a request value for making API operation for
+// AWS CodeDeploy.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDeploymentGroup for more information on using the UpdateDeploymentGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Changes information about a deployment group.
 //
 //    // Example sending a request using the UpdateDeploymentGroupRequest method.
-//    req, resp := client.UpdateDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDeploymentGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroup
-func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupInput) (req *aws.Request, output *UpdateDeploymentGroupOutput) {
+func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupInput) UpdateDeploymentGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDeploymentGroup,
 		HTTPMethod: "POST",
@@ -3919,142 +2131,8 @@ func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupIn
 		input = &UpdateDeploymentGroupInput{}
 	}
 
-	output = &UpdateDeploymentGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDeploymentGroup API operation for AWS CodeDeploy.
-//
-// Changes information about a deployment group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeDeploy's
-// API operation UpdateDeploymentGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
-//
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
-//
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the applicable IAM user or AWS account.
-//
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentGroupAlreadyExistsException "DeploymentGroupAlreadyExistsException"
-//   A deployment group with the specified name already exists with the applicable
-//   IAM user or AWS account.
-//
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
-//
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group does not exist with the applicable IAM user or
-//   AWS account.
-//
-//   * ErrCodeInvalidEC2TagException "InvalidEC2TagException"
-//   The tag was specified in an invalid format.
-//
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The specified tag was specified in an invalid format.
-//
-//   * ErrCodeInvalidAutoScalingGroupException "InvalidAutoScalingGroupException"
-//   The Auto Scaling group was specified in an invalid format or does not exist.
-//
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
-//
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the applicable IAM user
-//   or AWS account.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The service role ARN was specified in an invalid format. Or, if an Auto Scaling
-//   group was specified, the specified service role does not grant the appropriate
-//   permissions to Auto Scaling.
-//
-//   * ErrCodeLifecycleHookLimitExceededException "LifecycleHookLimitExceededException"
-//   The limit for lifecycle hooks was exceeded.
-//
-//   * ErrCodeInvalidTriggerConfigException "InvalidTriggerConfigException"
-//   The trigger was specified in an invalid format.
-//
-//   * ErrCodeTriggerTargetsLimitExceededException "TriggerTargetsLimitExceededException"
-//   The maximum allowed number of triggers was exceeded.
-//
-//   * ErrCodeInvalidAlarmConfigException "InvalidAlarmConfigException"
-//   The format of the alarm configuration is invalid. Possible causes include:
-//
-//      * The alarm list is null.
-//
-//      * The alarm object is null.
-//
-//      * The alarm name is empty or null or exceeds the 255 character limit.
-//
-//      * Two alarms with the same name have been specified.
-//
-//      * The alarm configuration is enabled but the alarm list is empty.
-//
-//   * ErrCodeAlarmsLimitExceededException "AlarmsLimitExceededException"
-//   The maximum number of alarms for a deployment group (10) was exceeded.
-//
-//   * ErrCodeInvalidAutoRollbackConfigException "InvalidAutoRollbackConfigException"
-//   The automatic rollback configuration was specified in an invalid format.
-//   For example, automatic rollback is enabled but an invalid triggering event
-//   type or no event types were listed.
-//
-//   * ErrCodeInvalidLoadBalancerInfoException "InvalidLoadBalancerInfoException"
-//   An invalid load balancer name, or no load balancer name, was specified.
-//
-//   * ErrCodeInvalidDeploymentStyleException "InvalidDeploymentStyleException"
-//   An invalid deployment style was specified. Valid deployment types include
-//   "IN_PLACE" and "BLUE_GREEN". Valid deployment options include "WITH_TRAFFIC_CONTROL"
-//   and "WITHOUT_TRAFFIC_CONTROL".
-//
-//   * ErrCodeInvalidBlueGreenDeploymentConfigurationException "InvalidBlueGreenDeploymentConfigurationException"
-//   The configuration for the blue/green deployment group was provided in an
-//   invalid format. For information about deployment configuration format, see
-//   CreateDeploymentConfig.
-//
-//   * ErrCodeInvalidEC2TagCombinationException "InvalidEC2TagCombinationException"
-//   A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
-//   only one of these data types can be used in a single call.
-//
-//   * ErrCodeInvalidOnPremisesTagCombinationException "InvalidOnPremisesTagCombinationException"
-//   A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
-//   but only one of these data types can be used in a single call.
-//
-//   * ErrCodeTagSetListLimitExceededException "TagSetListLimitExceededException"
-//   The number of tag groups included in the tag set list exceeded the maximum
-//   allowed limit of 3.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroup
-func (c *CodeDeploy) UpdateDeploymentGroup(input *UpdateDeploymentGroupInput) (*UpdateDeploymentGroupOutput, error) {
-	req, out := c.UpdateDeploymentGroupRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDeploymentGroupWithContext is the same as UpdateDeploymentGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDeploymentGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeDeploy) UpdateDeploymentGroupWithContext(ctx aws.Context, input *UpdateDeploymentGroupInput, opts ...aws.Option) (*UpdateDeploymentGroupOutput, error) {
-	req, out := c.UpdateDeploymentGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDeploymentGroupOutput{})
+	return UpdateDeploymentGroupRequest{Request: req, Input: input}
 }
 
 // Represents the input of, and adds tags to, an on-premises instance operation.

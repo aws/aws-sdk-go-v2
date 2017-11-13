@@ -14,31 +14,42 @@ import (
 
 const opBatchGetRepositories = "BatchGetRepositories"
 
-// BatchGetRepositoriesRequest generates a "aws.Request" representing the
-// client's request for the BatchGetRepositories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetRepositoriesRequest is a API request type for the BatchGetRepositories API operation.
+type BatchGetRepositoriesRequest struct {
+	*aws.Request
+	Input *BatchGetRepositoriesInput
+}
+
+// Send marshals and sends the BatchGetRepositories API request.
+func (r BatchGetRepositoriesRequest) Send() (*BatchGetRepositoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetRepositoriesOutput), nil
+}
+
+// BatchGetRepositoriesRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about one or more repositories.
 //
-// See BatchGetRepositories for more information on using the BatchGetRepositories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The description field for a repository accepts all HTML characters and all
+// valid Unicode characters. Applications that do not HTML-encode the description
+// and display it in a web page could expose users to potentially malicious
+// code. Make sure that you HTML-encode the description field in any application
+// that uses this API to display the repository description on a web page.
 //
 //    // Example sending a request using the BatchGetRepositoriesRequest method.
-//    req, resp := client.BatchGetRepositoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetRepositoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositories
-func (c *CodeCommit) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) (req *aws.Request, output *BatchGetRepositoriesOutput) {
+func (c *CodeCommit) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) BatchGetRepositoriesRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetRepositories,
 		HTTPMethod: "POST",
@@ -49,107 +60,45 @@ func (c *CodeCommit) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInpu
 		input = &BatchGetRepositoriesInput{}
 	}
 
-	output = &BatchGetRepositoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetRepositories API operation for AWS CodeCommit.
-//
-// Returns information about one or more repositories.
-//
-// The description field for a repository accepts all HTML characters and all
-// valid Unicode characters. Applications that do not HTML-encode the description
-// and display it in a web page could expose users to potentially malicious
-// code. Make sure that you HTML-encode the description field in any application
-// that uses this API to display the repository description on a web page.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation BatchGetRepositories for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNamesRequiredException "RepositoryNamesRequiredException"
-//   A repository names object is required but was not specified.
-//
-//   * ErrCodeMaximumRepositoryNamesExceededException "MaximumRepositoryNamesExceededException"
-//   The maximum number of allowed repository names was exceeded. Currently, this
-//   number is 25.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositories
-func (c *CodeCommit) BatchGetRepositories(input *BatchGetRepositoriesInput) (*BatchGetRepositoriesOutput, error) {
-	req, out := c.BatchGetRepositoriesRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetRepositoriesWithContext is the same as BatchGetRepositories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetRepositories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) BatchGetRepositoriesWithContext(ctx aws.Context, input *BatchGetRepositoriesInput, opts ...aws.Option) (*BatchGetRepositoriesOutput, error) {
-	req, out := c.BatchGetRepositoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetRepositoriesOutput{})
+	return BatchGetRepositoriesRequest{Request: req, Input: input}
 }
 
 const opCreateBranch = "CreateBranch"
 
-// CreateBranchRequest generates a "aws.Request" representing the
-// client's request for the CreateBranch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateBranchRequest is a API request type for the CreateBranch API operation.
+type CreateBranchRequest struct {
+	*aws.Request
+	Input *CreateBranchInput
+}
+
+// Send marshals and sends the CreateBranch API request.
+func (r CreateBranchRequest) Send() (*CreateBranchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBranchOutput), nil
+}
+
+// CreateBranchRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new branch in a repository and points the branch to a commit.
 //
-// See CreateBranch for more information on using the CreateBranch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Calling the create branch operation does not set a repository's default branch.
+// To do this, call the update default branch operation.
 //
 //    // Example sending a request using the CreateBranchRequest method.
-//    req, resp := client.CreateBranchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateBranchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranch
-func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) (req *aws.Request, output *CreateBranchOutput) {
+func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) CreateBranchRequest {
 	op := &aws.Operation{
 		Name:       opCreateBranch,
 		HTTPMethod: "POST",
@@ -160,124 +109,44 @@ func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) (req *aws.Req
 		input = &CreateBranchInput{}
 	}
 
-	output = &CreateBranchOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateBranchOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// CreateBranch API operation for AWS CodeCommit.
-//
-// Creates a new branch in a repository and points the branch to a commit.
-//
-// Calling the create branch operation does not set a repository's default branch.
-// To do this, call the update default branch operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation CreateBranch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeBranchNameRequiredException "BranchNameRequiredException"
-//   A branch name is required but was not specified.
-//
-//   * ErrCodeBranchNameExistsException "BranchNameExistsException"
-//   The specified branch name already exists.
-//
-//   * ErrCodeInvalidBranchNameException "InvalidBranchNameException"
-//   The specified branch name is not valid.
-//
-//   * ErrCodeCommitIdRequiredException "CommitIdRequiredException"
-//   A commit ID was not specified.
-//
-//   * ErrCodeCommitDoesNotExistException "CommitDoesNotExistException"
-//   The specified commit does not exist or no commit was specified, and the specified
-//   repository has no default branch.
-//
-//   * ErrCodeInvalidCommitIdException "InvalidCommitIdException"
-//   The specified commit ID is not valid.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranch
-func (c *CodeCommit) CreateBranch(input *CreateBranchInput) (*CreateBranchOutput, error) {
-	req, out := c.CreateBranchRequest(input)
-	return out, req.Send()
-}
-
-// CreateBranchWithContext is the same as CreateBranch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBranch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) CreateBranchWithContext(ctx aws.Context, input *CreateBranchInput, opts ...aws.Option) (*CreateBranchOutput, error) {
-	req, out := c.CreateBranchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return CreateBranchRequest{Request: req, Input: input}
 }
 
 const opCreateRepository = "CreateRepository"
 
-// CreateRepositoryRequest generates a "aws.Request" representing the
-// client's request for the CreateRepository operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateRepositoryRequest is a API request type for the CreateRepository API operation.
+type CreateRepositoryRequest struct {
+	*aws.Request
+	Input *CreateRepositoryInput
+}
+
+// Send marshals and sends the CreateRepository API request.
+func (r CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRepositoryOutput), nil
+}
+
+// CreateRepositoryRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateRepository for more information on using the CreateRepository
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new, empty repository.
 //
 //    // Example sending a request using the CreateRepositoryRequest method.
-//    req, resp := client.CreateRepositoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepository
-func (c *CodeCommit) CreateRepositoryRequest(input *CreateRepositoryInput) (req *aws.Request, output *CreateRepositoryOutput) {
+func (c *CodeCommit) CreateRepositoryRequest(input *CreateRepositoryInput) CreateRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateRepository,
 		HTTPMethod: "POST",
@@ -288,106 +157,47 @@ func (c *CodeCommit) CreateRepositoryRequest(input *CreateRepositoryInput) (req 
 		input = &CreateRepositoryInput{}
 	}
 
-	output = &CreateRepositoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateRepository API operation for AWS CodeCommit.
-//
-// Creates a new, empty repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation CreateRepository for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameExistsException "RepositoryNameExistsException"
-//   The specified repository name already exists.
-//
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryDescriptionException "InvalidRepositoryDescriptionException"
-//   The specified repository description is not valid.
-//
-//   * ErrCodeRepositoryLimitExceededException "RepositoryLimitExceededException"
-//   A repository resource limit was exceeded.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepository
-func (c *CodeCommit) CreateRepository(input *CreateRepositoryInput) (*CreateRepositoryOutput, error) {
-	req, out := c.CreateRepositoryRequest(input)
-	return out, req.Send()
-}
-
-// CreateRepositoryWithContext is the same as CreateRepository with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateRepository for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) CreateRepositoryWithContext(ctx aws.Context, input *CreateRepositoryInput, opts ...aws.Option) (*CreateRepositoryOutput, error) {
-	req, out := c.CreateRepositoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateRepositoryOutput{})
+	return CreateRepositoryRequest{Request: req, Input: input}
 }
 
 const opDeleteRepository = "DeleteRepository"
 
-// DeleteRepositoryRequest generates a "aws.Request" representing the
-// client's request for the DeleteRepository operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRepositoryRequest is a API request type for the DeleteRepository API operation.
+type DeleteRepositoryRequest struct {
+	*aws.Request
+	Input *DeleteRepositoryInput
+}
+
+// Send marshals and sends the DeleteRepository API request.
+func (r DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRepositoryOutput), nil
+}
+
+// DeleteRepositoryRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a repository. If a specified repository was already deleted, a null
+// repository ID will be returned.
 //
-// See DeleteRepository for more information on using the DeleteRepository
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deleting a repository also deletes all associated objects and metadata. After
+// a repository is deleted, all future push calls to the deleted repository
+// will fail.
 //
 //    // Example sending a request using the DeleteRepositoryRequest method.
-//    req, resp := client.DeleteRepositoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepository
-func (c *CodeCommit) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req *aws.Request, output *DeleteRepositoryOutput) {
+func (c *CodeCommit) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRepository,
 		HTTPMethod: "POST",
@@ -398,102 +208,42 @@ func (c *CodeCommit) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req 
 		input = &DeleteRepositoryInput{}
 	}
 
-	output = &DeleteRepositoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteRepository API operation for AWS CodeCommit.
-//
-// Deletes a repository. If a specified repository was already deleted, a null
-// repository ID will be returned.
-//
-// Deleting a repository also deletes all associated objects and metadata. After
-// a repository is deleted, all future push calls to the deleted repository
-// will fail.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation DeleteRepository for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepository
-func (c *CodeCommit) DeleteRepository(input *DeleteRepositoryInput) (*DeleteRepositoryOutput, error) {
-	req, out := c.DeleteRepositoryRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRepositoryWithContext is the same as DeleteRepository with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRepository for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteRepositoryInput, opts ...aws.Option) (*DeleteRepositoryOutput, error) {
-	req, out := c.DeleteRepositoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteRepositoryOutput{})
+	return DeleteRepositoryRequest{Request: req, Input: input}
 }
 
 const opGetBlob = "GetBlob"
 
-// GetBlobRequest generates a "aws.Request" representing the
-// client's request for the GetBlob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBlobRequest is a API request type for the GetBlob API operation.
+type GetBlobRequest struct {
+	*aws.Request
+	Input *GetBlobInput
+}
+
+// Send marshals and sends the GetBlob API request.
+func (r GetBlobRequest) Send() (*GetBlobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBlobOutput), nil
+}
+
+// GetBlobRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBlob for more information on using the GetBlob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the base-64 encoded content of an individual blob within a repository.
 //
 //    // Example sending a request using the GetBlobRequest method.
-//    req, resp := client.GetBlobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBlobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlob
-func (c *CodeCommit) GetBlobRequest(input *GetBlobInput) (req *aws.Request, output *GetBlobOutput) {
+func (c *CodeCommit) GetBlobRequest(input *GetBlobInput) GetBlobRequest {
 	op := &aws.Operation{
 		Name:       opGetBlob,
 		HTTPMethod: "POST",
@@ -504,114 +254,43 @@ func (c *CodeCommit) GetBlobRequest(input *GetBlobInput) (req *aws.Request, outp
 		input = &GetBlobInput{}
 	}
 
-	output = &GetBlobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBlob API operation for AWS CodeCommit.
-//
-// Returns the base-64 encoded content of an individual blob within a repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation GetBlob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeBlobIdRequiredException "BlobIdRequiredException"
-//   A blob ID is required but was not specified.
-//
-//   * ErrCodeInvalidBlobIdException "InvalidBlobIdException"
-//   The specified blob is not valid.
-//
-//   * ErrCodeBlobIdDoesNotExistException "BlobIdDoesNotExistException"
-//   The specified blob does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-//   * ErrCodeFileTooLargeException "FileTooLargeException"
-//   The specified file exceeds the file size limit for AWS CodeCommit. For more
-//   information about limits in AWS CodeCommit, see AWS CodeCommit User Guide
-//   (http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlob
-func (c *CodeCommit) GetBlob(input *GetBlobInput) (*GetBlobOutput, error) {
-	req, out := c.GetBlobRequest(input)
-	return out, req.Send()
-}
-
-// GetBlobWithContext is the same as GetBlob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBlob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) GetBlobWithContext(ctx aws.Context, input *GetBlobInput, opts ...aws.Option) (*GetBlobOutput, error) {
-	req, out := c.GetBlobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBlobOutput{})
+	return GetBlobRequest{Request: req, Input: input}
 }
 
 const opGetBranch = "GetBranch"
 
-// GetBranchRequest generates a "aws.Request" representing the
-// client's request for the GetBranch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBranchRequest is a API request type for the GetBranch API operation.
+type GetBranchRequest struct {
+	*aws.Request
+	Input *GetBranchInput
+}
+
+// Send marshals and sends the GetBranch API request.
+func (r GetBranchRequest) Send() (*GetBranchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBranchOutput), nil
+}
+
+// GetBranchRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBranch for more information on using the GetBranch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a repository branch, including its name and the
+// last commit ID.
 //
 //    // Example sending a request using the GetBranchRequest method.
-//    req, resp := client.GetBranchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBranchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranch
-func (c *CodeCommit) GetBranchRequest(input *GetBranchInput) (req *aws.Request, output *GetBranchOutput) {
+func (c *CodeCommit) GetBranchRequest(input *GetBranchInput) GetBranchRequest {
 	op := &aws.Operation{
 		Name:       opGetBranch,
 		HTTPMethod: "POST",
@@ -622,110 +301,43 @@ func (c *CodeCommit) GetBranchRequest(input *GetBranchInput) (req *aws.Request, 
 		input = &GetBranchInput{}
 	}
 
-	output = &GetBranchOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBranch API operation for AWS CodeCommit.
-//
-// Returns information about a repository branch, including its name and the
-// last commit ID.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation GetBranch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeBranchNameRequiredException "BranchNameRequiredException"
-//   A branch name is required but was not specified.
-//
-//   * ErrCodeInvalidBranchNameException "InvalidBranchNameException"
-//   The specified branch name is not valid.
-//
-//   * ErrCodeBranchDoesNotExistException "BranchDoesNotExistException"
-//   The specified branch does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranch
-func (c *CodeCommit) GetBranch(input *GetBranchInput) (*GetBranchOutput, error) {
-	req, out := c.GetBranchRequest(input)
-	return out, req.Send()
-}
-
-// GetBranchWithContext is the same as GetBranch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBranch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) GetBranchWithContext(ctx aws.Context, input *GetBranchInput, opts ...aws.Option) (*GetBranchOutput, error) {
-	req, out := c.GetBranchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBranchOutput{})
+	return GetBranchRequest{Request: req, Input: input}
 }
 
 const opGetCommit = "GetCommit"
 
-// GetCommitRequest generates a "aws.Request" representing the
-// client's request for the GetCommit operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCommitRequest is a API request type for the GetCommit API operation.
+type GetCommitRequest struct {
+	*aws.Request
+	Input *GetCommitInput
+}
+
+// Send marshals and sends the GetCommit API request.
+func (r GetCommitRequest) Send() (*GetCommitOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCommitOutput), nil
+}
+
+// GetCommitRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCommit for more information on using the GetCommit
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a commit, including commit message and committer
+// information.
 //
 //    // Example sending a request using the GetCommitRequest method.
-//    req, resp := client.GetCommitRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCommitRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommit
-func (c *CodeCommit) GetCommitRequest(input *GetCommitInput) (req *aws.Request, output *GetCommitOutput) {
+func (c *CodeCommit) GetCommitRequest(input *GetCommitInput) GetCommitRequest {
 	op := &aws.Operation{
 		Name:       opGetCommit,
 		HTTPMethod: "POST",
@@ -736,110 +348,44 @@ func (c *CodeCommit) GetCommitRequest(input *GetCommitInput) (req *aws.Request, 
 		input = &GetCommitInput{}
 	}
 
-	output = &GetCommitOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCommit API operation for AWS CodeCommit.
-//
-// Returns information about a commit, including commit message and committer
-// information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation GetCommit for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeCommitIdRequiredException "CommitIdRequiredException"
-//   A commit ID was not specified.
-//
-//   * ErrCodeInvalidCommitIdException "InvalidCommitIdException"
-//   The specified commit ID is not valid.
-//
-//   * ErrCodeCommitIdDoesNotExistException "CommitIdDoesNotExistException"
-//   The specified commit ID does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommit
-func (c *CodeCommit) GetCommit(input *GetCommitInput) (*GetCommitOutput, error) {
-	req, out := c.GetCommitRequest(input)
-	return out, req.Send()
-}
-
-// GetCommitWithContext is the same as GetCommit with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCommit for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) GetCommitWithContext(ctx aws.Context, input *GetCommitInput, opts ...aws.Option) (*GetCommitOutput, error) {
-	req, out := c.GetCommitRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCommitOutput{})
+	return GetCommitRequest{Request: req, Input: input}
 }
 
 const opGetDifferences = "GetDifferences"
 
-// GetDifferencesRequest generates a "aws.Request" representing the
-// client's request for the GetDifferences operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDifferencesRequest is a API request type for the GetDifferences API operation.
+type GetDifferencesRequest struct {
+	*aws.Request
+	Input *GetDifferencesInput
+}
+
+// Send marshals and sends the GetDifferences API request.
+func (r GetDifferencesRequest) Send() (*GetDifferencesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDifferencesOutput), nil
+}
+
+// GetDifferencesRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDifferences for more information on using the GetDifferences
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the differences in a valid commit specifier (such
+// as a branch, tag, HEAD, commit ID or other fully qualified reference). Results
+// can be limited to a specified path.
 //
 //    // Example sending a request using the GetDifferencesRequest method.
-//    req, resp := client.GetDifferencesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDifferencesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferences
-func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) (req *aws.Request, output *GetDifferencesOutput) {
+func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) GetDifferencesRequest {
 	op := &aws.Operation{
 		Name:       opGetDifferences,
 		HTTPMethod: "POST",
@@ -856,98 +402,8 @@ func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) (req *aws
 		input = &GetDifferencesInput{}
 	}
 
-	output = &GetDifferencesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDifferences API operation for AWS CodeCommit.
-//
-// Returns information about the differences in a valid commit specifier (such
-// as a branch, tag, HEAD, commit ID or other fully qualified reference). Results
-// can be limited to a specified path.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation GetDifferences for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeInvalidContinuationTokenException "InvalidContinuationTokenException"
-//   The specified continuation token is not valid.
-//
-//   * ErrCodeInvalidMaxResultsException "InvalidMaxResultsException"
-//   The specified number of maximum results is not valid.
-//
-//   * ErrCodeInvalidCommitIdException "InvalidCommitIdException"
-//   The specified commit ID is not valid.
-//
-//   * ErrCodeCommitRequiredException "CommitRequiredException"
-//   A commit was not specified.
-//
-//   * ErrCodeInvalidCommitException "InvalidCommitException"
-//   The specified commit is not valid.
-//
-//   * ErrCodeCommitDoesNotExistException "CommitDoesNotExistException"
-//   The specified commit does not exist or no commit was specified, and the specified
-//   repository has no default branch.
-//
-//   * ErrCodeInvalidPathException "InvalidPathException"
-//   The specified path is not valid.
-//
-//   * ErrCodePathDoesNotExistException "PathDoesNotExistException"
-//   The specified path does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferences
-func (c *CodeCommit) GetDifferences(input *GetDifferencesInput) (*GetDifferencesOutput, error) {
-	req, out := c.GetDifferencesRequest(input)
-	return out, req.Send()
-}
-
-// GetDifferencesWithContext is the same as GetDifferences with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDifferences for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) GetDifferencesWithContext(ctx aws.Context, input *GetDifferencesInput, opts ...aws.Option) (*GetDifferencesOutput, error) {
-	req, out := c.GetDifferencesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDifferencesOutput{})
+	return GetDifferencesRequest{Request: req, Input: input}
 }
 
 // GetDifferencesPages iterates over the pages of a GetDifferences operation,
@@ -986,10 +442,10 @@ func (c *CodeCommit) GetDifferencesPagesWithContext(ctx aws.Context, input *GetD
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetDifferencesRequest(inCpy)
+			req := c.GetDifferencesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1002,31 +458,42 @@ func (c *CodeCommit) GetDifferencesPagesWithContext(ctx aws.Context, input *GetD
 
 const opGetRepository = "GetRepository"
 
-// GetRepositoryRequest generates a "aws.Request" representing the
-// client's request for the GetRepository operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetRepositoryRequest is a API request type for the GetRepository API operation.
+type GetRepositoryRequest struct {
+	*aws.Request
+	Input *GetRepositoryInput
+}
+
+// Send marshals and sends the GetRepository API request.
+func (r GetRepositoryRequest) Send() (*GetRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRepositoryOutput), nil
+}
+
+// GetRepositoryRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about a repository.
 //
-// See GetRepository for more information on using the GetRepository
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The description field for a repository accepts all HTML characters and all
+// valid Unicode characters. Applications that do not HTML-encode the description
+// and display it in a web page could expose users to potentially malicious
+// code. Make sure that you HTML-encode the description field in any application
+// that uses this API to display the repository description on a web page.
 //
 //    // Example sending a request using the GetRepositoryRequest method.
-//    req, resp := client.GetRepositoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepository
-func (c *CodeCommit) GetRepositoryRequest(input *GetRepositoryInput) (req *aws.Request, output *GetRepositoryOutput) {
+func (c *CodeCommit) GetRepositoryRequest(input *GetRepositoryInput) GetRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opGetRepository,
 		HTTPMethod: "POST",
@@ -1037,106 +504,42 @@ func (c *CodeCommit) GetRepositoryRequest(input *GetRepositoryInput) (req *aws.R
 		input = &GetRepositoryInput{}
 	}
 
-	output = &GetRepositoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetRepository API operation for AWS CodeCommit.
-//
-// Returns information about a repository.
-//
-// The description field for a repository accepts all HTML characters and all
-// valid Unicode characters. Applications that do not HTML-encode the description
-// and display it in a web page could expose users to potentially malicious
-// code. Make sure that you HTML-encode the description field in any application
-// that uses this API to display the repository description on a web page.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation GetRepository for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepository
-func (c *CodeCommit) GetRepository(input *GetRepositoryInput) (*GetRepositoryOutput, error) {
-	req, out := c.GetRepositoryRequest(input)
-	return out, req.Send()
-}
-
-// GetRepositoryWithContext is the same as GetRepository with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRepository for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) GetRepositoryWithContext(ctx aws.Context, input *GetRepositoryInput, opts ...aws.Option) (*GetRepositoryOutput, error) {
-	req, out := c.GetRepositoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetRepositoryOutput{})
+	return GetRepositoryRequest{Request: req, Input: input}
 }
 
 const opGetRepositoryTriggers = "GetRepositoryTriggers"
 
-// GetRepositoryTriggersRequest generates a "aws.Request" representing the
-// client's request for the GetRepositoryTriggers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetRepositoryTriggersRequest is a API request type for the GetRepositoryTriggers API operation.
+type GetRepositoryTriggersRequest struct {
+	*aws.Request
+	Input *GetRepositoryTriggersInput
+}
+
+// Send marshals and sends the GetRepositoryTriggers API request.
+func (r GetRepositoryTriggersRequest) Send() (*GetRepositoryTriggersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRepositoryTriggersOutput), nil
+}
+
+// GetRepositoryTriggersRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRepositoryTriggers for more information on using the GetRepositoryTriggers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about triggers configured for a repository.
 //
 //    // Example sending a request using the GetRepositoryTriggersRequest method.
-//    req, resp := client.GetRepositoryTriggersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetRepositoryTriggersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggers
-func (c *CodeCommit) GetRepositoryTriggersRequest(input *GetRepositoryTriggersInput) (req *aws.Request, output *GetRepositoryTriggersOutput) {
+func (c *CodeCommit) GetRepositoryTriggersRequest(input *GetRepositoryTriggersInput) GetRepositoryTriggersRequest {
 	op := &aws.Operation{
 		Name:       opGetRepositoryTriggers,
 		HTTPMethod: "POST",
@@ -1147,100 +550,42 @@ func (c *CodeCommit) GetRepositoryTriggersRequest(input *GetRepositoryTriggersIn
 		input = &GetRepositoryTriggersInput{}
 	}
 
-	output = &GetRepositoryTriggersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetRepositoryTriggers API operation for AWS CodeCommit.
-//
-// Gets information about triggers configured for a repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation GetRepositoryTriggers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggers
-func (c *CodeCommit) GetRepositoryTriggers(input *GetRepositoryTriggersInput) (*GetRepositoryTriggersOutput, error) {
-	req, out := c.GetRepositoryTriggersRequest(input)
-	return out, req.Send()
-}
-
-// GetRepositoryTriggersWithContext is the same as GetRepositoryTriggers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRepositoryTriggers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) GetRepositoryTriggersWithContext(ctx aws.Context, input *GetRepositoryTriggersInput, opts ...aws.Option) (*GetRepositoryTriggersOutput, error) {
-	req, out := c.GetRepositoryTriggersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetRepositoryTriggersOutput{})
+	return GetRepositoryTriggersRequest{Request: req, Input: input}
 }
 
 const opListBranches = "ListBranches"
 
-// ListBranchesRequest generates a "aws.Request" representing the
-// client's request for the ListBranches operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBranchesRequest is a API request type for the ListBranches API operation.
+type ListBranchesRequest struct {
+	*aws.Request
+	Input *ListBranchesInput
+}
+
+// Send marshals and sends the ListBranches API request.
+func (r ListBranchesRequest) Send() (*ListBranchesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBranchesOutput), nil
+}
+
+// ListBranchesRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBranches for more information on using the ListBranches
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more branches in a repository.
 //
 //    // Example sending a request using the ListBranchesRequest method.
-//    req, resp := client.ListBranchesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBranchesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranches
-func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) (req *aws.Request, output *ListBranchesOutput) {
+func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) ListBranchesRequest {
 	op := &aws.Operation{
 		Name:       opListBranches,
 		HTTPMethod: "POST",
@@ -1257,74 +602,8 @@ func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) (req *aws.Req
 		input = &ListBranchesInput{}
 	}
 
-	output = &ListBranchesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBranches API operation for AWS CodeCommit.
-//
-// Gets information about one or more branches in a repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation ListBranches for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-//   * ErrCodeInvalidContinuationTokenException "InvalidContinuationTokenException"
-//   The specified continuation token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranches
-func (c *CodeCommit) ListBranches(input *ListBranchesInput) (*ListBranchesOutput, error) {
-	req, out := c.ListBranchesRequest(input)
-	return out, req.Send()
-}
-
-// ListBranchesWithContext is the same as ListBranches with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBranches for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) ListBranchesWithContext(ctx aws.Context, input *ListBranchesInput, opts ...aws.Option) (*ListBranchesOutput, error) {
-	req, out := c.ListBranchesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBranchesOutput{})
+	return ListBranchesRequest{Request: req, Input: input}
 }
 
 // ListBranchesPages iterates over the pages of a ListBranches operation,
@@ -1363,10 +642,10 @@ func (c *CodeCommit) ListBranchesPagesWithContext(ctx aws.Context, input *ListBr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListBranchesRequest(inCpy)
+			req := c.ListBranchesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1379,31 +658,36 @@ func (c *CodeCommit) ListBranchesPagesWithContext(ctx aws.Context, input *ListBr
 
 const opListRepositories = "ListRepositories"
 
-// ListRepositoriesRequest generates a "aws.Request" representing the
-// client's request for the ListRepositories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListRepositoriesRequest is a API request type for the ListRepositories API operation.
+type ListRepositoriesRequest struct {
+	*aws.Request
+	Input *ListRepositoriesInput
+}
+
+// Send marshals and sends the ListRepositories API request.
+func (r ListRepositoriesRequest) Send() (*ListRepositoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRepositoriesOutput), nil
+}
+
+// ListRepositoriesRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListRepositories for more information on using the ListRepositories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about one or more repositories.
 //
 //    // Example sending a request using the ListRepositoriesRequest method.
-//    req, resp := client.ListRepositoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListRepositoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositories
-func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) (req *aws.Request, output *ListRepositoriesOutput) {
+func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) ListRepositoriesRequest {
 	op := &aws.Operation{
 		Name:       opListRepositories,
 		HTTPMethod: "POST",
@@ -1420,52 +704,8 @@ func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) (req 
 		input = &ListRepositoriesInput{}
 	}
 
-	output = &ListRepositoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListRepositories API operation for AWS CodeCommit.
-//
-// Gets information about one or more repositories.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation ListRepositories for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidSortByException "InvalidSortByException"
-//   The specified sort by value is not valid.
-//
-//   * ErrCodeInvalidOrderException "InvalidOrderException"
-//   The specified sort order is not valid.
-//
-//   * ErrCodeInvalidContinuationTokenException "InvalidContinuationTokenException"
-//   The specified continuation token is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositories
-func (c *CodeCommit) ListRepositories(input *ListRepositoriesInput) (*ListRepositoriesOutput, error) {
-	req, out := c.ListRepositoriesRequest(input)
-	return out, req.Send()
-}
-
-// ListRepositoriesWithContext is the same as ListRepositories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRepositories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) ListRepositoriesWithContext(ctx aws.Context, input *ListRepositoriesInput, opts ...aws.Option) (*ListRepositoriesOutput, error) {
-	req, out := c.ListRepositoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListRepositoriesOutput{})
+	return ListRepositoriesRequest{Request: req, Input: input}
 }
 
 // ListRepositoriesPages iterates over the pages of a ListRepositories operation,
@@ -1504,10 +744,10 @@ func (c *CodeCommit) ListRepositoriesPagesWithContext(ctx aws.Context, input *Li
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListRepositoriesRequest(inCpy)
+			req := c.ListRepositoriesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1520,31 +760,37 @@ func (c *CodeCommit) ListRepositoriesPagesWithContext(ctx aws.Context, input *Li
 
 const opPutRepositoryTriggers = "PutRepositoryTriggers"
 
-// PutRepositoryTriggersRequest generates a "aws.Request" representing the
-// client's request for the PutRepositoryTriggers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutRepositoryTriggersRequest is a API request type for the PutRepositoryTriggers API operation.
+type PutRepositoryTriggersRequest struct {
+	*aws.Request
+	Input *PutRepositoryTriggersInput
+}
+
+// Send marshals and sends the PutRepositoryTriggers API request.
+func (r PutRepositoryTriggersRequest) Send() (*PutRepositoryTriggersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRepositoryTriggersOutput), nil
+}
+
+// PutRepositoryTriggersRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRepositoryTriggers for more information on using the PutRepositoryTriggers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Replaces all triggers for a repository. This can be used to create or delete
+// triggers.
 //
 //    // Example sending a request using the PutRepositoryTriggersRequest method.
-//    req, resp := client.PutRepositoryTriggersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutRepositoryTriggersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggers
-func (c *CodeCommit) PutRepositoryTriggersRequest(input *PutRepositoryTriggersInput) (req *aws.Request, output *PutRepositoryTriggersOutput) {
+func (c *CodeCommit) PutRepositoryTriggersRequest(input *PutRepositoryTriggersInput) PutRepositoryTriggersRequest {
 	op := &aws.Operation{
 		Name:       opPutRepositoryTriggers,
 		HTTPMethod: "POST",
@@ -1555,146 +801,45 @@ func (c *CodeCommit) PutRepositoryTriggersRequest(input *PutRepositoryTriggersIn
 		input = &PutRepositoryTriggersInput{}
 	}
 
-	output = &PutRepositoryTriggersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutRepositoryTriggers API operation for AWS CodeCommit.
-//
-// Replaces all triggers for a repository. This can be used to create or delete
-// triggers.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation PutRepositoryTriggers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeRepositoryTriggersListRequiredException "RepositoryTriggersListRequiredException"
-//   The list of triggers for the repository is required but was not specified.
-//
-//   * ErrCodeMaximumRepositoryTriggersExceededException "MaximumRepositoryTriggersExceededException"
-//   The number of triggers allowed for the repository was exceeded.
-//
-//   * ErrCodeInvalidRepositoryTriggerNameException "InvalidRepositoryTriggerNameException"
-//   The name of the trigger is not valid.
-//
-//   * ErrCodeInvalidRepositoryTriggerDestinationArnException "InvalidRepositoryTriggerDestinationArnException"
-//   The Amazon Resource Name (ARN) for the trigger is not valid for the specified
-//   destination. The most common reason for this error is that the ARN does not
-//   meet the requirements for the service type.
-//
-//   * ErrCodeInvalidRepositoryTriggerRegionException "InvalidRepositoryTriggerRegionException"
-//   The region for the trigger target does not match the region for the repository.
-//   Triggers must be created in the same region as the target for the trigger.
-//
-//   * ErrCodeInvalidRepositoryTriggerCustomDataException "InvalidRepositoryTriggerCustomDataException"
-//   The custom data provided for the trigger is not valid.
-//
-//   * ErrCodeMaximumBranchesExceededException "MaximumBranchesExceededException"
-//   The number of branches for the trigger was exceeded.
-//
-//   * ErrCodeInvalidRepositoryTriggerBranchNameException "InvalidRepositoryTriggerBranchNameException"
-//   One or more branch names specified for the trigger is not valid.
-//
-//   * ErrCodeInvalidRepositoryTriggerEventsException "InvalidRepositoryTriggerEventsException"
-//   One or more events specified for the trigger is not valid. Check to make
-//   sure that all events specified match the requirements for allowed events.
-//
-//   * ErrCodeRepositoryTriggerNameRequiredException "RepositoryTriggerNameRequiredException"
-//   A name for the trigger is required but was not specified.
-//
-//   * ErrCodeRepositoryTriggerDestinationArnRequiredException "RepositoryTriggerDestinationArnRequiredException"
-//   A destination ARN for the target service for the trigger is required but
-//   was not specified.
-//
-//   * ErrCodeRepositoryTriggerBranchNameListRequiredException "RepositoryTriggerBranchNameListRequiredException"
-//   At least one branch name is required but was not specified in the trigger
-//   configuration.
-//
-//   * ErrCodeRepositoryTriggerEventsListRequiredException "RepositoryTriggerEventsListRequiredException"
-//   At least one event for the trigger is required but was not specified.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggers
-func (c *CodeCommit) PutRepositoryTriggers(input *PutRepositoryTriggersInput) (*PutRepositoryTriggersOutput, error) {
-	req, out := c.PutRepositoryTriggersRequest(input)
-	return out, req.Send()
-}
-
-// PutRepositoryTriggersWithContext is the same as PutRepositoryTriggers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRepositoryTriggers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) PutRepositoryTriggersWithContext(ctx aws.Context, input *PutRepositoryTriggersInput, opts ...aws.Option) (*PutRepositoryTriggersOutput, error) {
-	req, out := c.PutRepositoryTriggersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutRepositoryTriggersOutput{})
+	return PutRepositoryTriggersRequest{Request: req, Input: input}
 }
 
 const opTestRepositoryTriggers = "TestRepositoryTriggers"
 
-// TestRepositoryTriggersRequest generates a "aws.Request" representing the
-// client's request for the TestRepositoryTriggers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TestRepositoryTriggersRequest is a API request type for the TestRepositoryTriggers API operation.
+type TestRepositoryTriggersRequest struct {
+	*aws.Request
+	Input *TestRepositoryTriggersInput
+}
+
+// Send marshals and sends the TestRepositoryTriggers API request.
+func (r TestRepositoryTriggersRequest) Send() (*TestRepositoryTriggersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TestRepositoryTriggersOutput), nil
+}
+
+// TestRepositoryTriggersRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TestRepositoryTriggers for more information on using the TestRepositoryTriggers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Tests the functionality of repository triggers by sending information to
+// the trigger target. If real data is available in the repository, the test
+// will send data from the last commit. If no data is available, sample data
+// will be generated.
 //
 //    // Example sending a request using the TestRepositoryTriggersRequest method.
-//    req, resp := client.TestRepositoryTriggersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TestRepositoryTriggersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggers
-func (c *CodeCommit) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInput) (req *aws.Request, output *TestRepositoryTriggersOutput) {
+func (c *CodeCommit) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInput) TestRepositoryTriggersRequest {
 	op := &aws.Operation{
 		Name:       opTestRepositoryTriggers,
 		HTTPMethod: "POST",
@@ -1705,148 +850,46 @@ func (c *CodeCommit) TestRepositoryTriggersRequest(input *TestRepositoryTriggers
 		input = &TestRepositoryTriggersInput{}
 	}
 
-	output = &TestRepositoryTriggersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TestRepositoryTriggers API operation for AWS CodeCommit.
-//
-// Tests the functionality of repository triggers by sending information to
-// the trigger target. If real data is available in the repository, the test
-// will send data from the last commit. If no data is available, sample data
-// will be generated.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation TestRepositoryTriggers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeRepositoryTriggersListRequiredException "RepositoryTriggersListRequiredException"
-//   The list of triggers for the repository is required but was not specified.
-//
-//   * ErrCodeMaximumRepositoryTriggersExceededException "MaximumRepositoryTriggersExceededException"
-//   The number of triggers allowed for the repository was exceeded.
-//
-//   * ErrCodeInvalidRepositoryTriggerNameException "InvalidRepositoryTriggerNameException"
-//   The name of the trigger is not valid.
-//
-//   * ErrCodeInvalidRepositoryTriggerDestinationArnException "InvalidRepositoryTriggerDestinationArnException"
-//   The Amazon Resource Name (ARN) for the trigger is not valid for the specified
-//   destination. The most common reason for this error is that the ARN does not
-//   meet the requirements for the service type.
-//
-//   * ErrCodeInvalidRepositoryTriggerRegionException "InvalidRepositoryTriggerRegionException"
-//   The region for the trigger target does not match the region for the repository.
-//   Triggers must be created in the same region as the target for the trigger.
-//
-//   * ErrCodeInvalidRepositoryTriggerCustomDataException "InvalidRepositoryTriggerCustomDataException"
-//   The custom data provided for the trigger is not valid.
-//
-//   * ErrCodeMaximumBranchesExceededException "MaximumBranchesExceededException"
-//   The number of branches for the trigger was exceeded.
-//
-//   * ErrCodeInvalidRepositoryTriggerBranchNameException "InvalidRepositoryTriggerBranchNameException"
-//   One or more branch names specified for the trigger is not valid.
-//
-//   * ErrCodeInvalidRepositoryTriggerEventsException "InvalidRepositoryTriggerEventsException"
-//   One or more events specified for the trigger is not valid. Check to make
-//   sure that all events specified match the requirements for allowed events.
-//
-//   * ErrCodeRepositoryTriggerNameRequiredException "RepositoryTriggerNameRequiredException"
-//   A name for the trigger is required but was not specified.
-//
-//   * ErrCodeRepositoryTriggerDestinationArnRequiredException "RepositoryTriggerDestinationArnRequiredException"
-//   A destination ARN for the target service for the trigger is required but
-//   was not specified.
-//
-//   * ErrCodeRepositoryTriggerBranchNameListRequiredException "RepositoryTriggerBranchNameListRequiredException"
-//   At least one branch name is required but was not specified in the trigger
-//   configuration.
-//
-//   * ErrCodeRepositoryTriggerEventsListRequiredException "RepositoryTriggerEventsListRequiredException"
-//   At least one event for the trigger is required but was not specified.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggers
-func (c *CodeCommit) TestRepositoryTriggers(input *TestRepositoryTriggersInput) (*TestRepositoryTriggersOutput, error) {
-	req, out := c.TestRepositoryTriggersRequest(input)
-	return out, req.Send()
-}
-
-// TestRepositoryTriggersWithContext is the same as TestRepositoryTriggers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TestRepositoryTriggers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) TestRepositoryTriggersWithContext(ctx aws.Context, input *TestRepositoryTriggersInput, opts ...aws.Option) (*TestRepositoryTriggersOutput, error) {
-	req, out := c.TestRepositoryTriggersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TestRepositoryTriggersOutput{})
+	return TestRepositoryTriggersRequest{Request: req, Input: input}
 }
 
 const opUpdateDefaultBranch = "UpdateDefaultBranch"
 
-// UpdateDefaultBranchRequest generates a "aws.Request" representing the
-// client's request for the UpdateDefaultBranch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDefaultBranchRequest is a API request type for the UpdateDefaultBranch API operation.
+type UpdateDefaultBranchRequest struct {
+	*aws.Request
+	Input *UpdateDefaultBranchInput
+}
+
+// Send marshals and sends the UpdateDefaultBranch API request.
+func (r UpdateDefaultBranchRequest) Send() (*UpdateDefaultBranchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDefaultBranchOutput), nil
+}
+
+// UpdateDefaultBranchRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Sets or changes the default branch name for the specified repository.
 //
-// See UpdateDefaultBranch for more information on using the UpdateDefaultBranch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you use this operation to change the default branch name to the current
+// default branch name, a success message is returned even though the default
+// branch did not change.
 //
 //    // Example sending a request using the UpdateDefaultBranchRequest method.
-//    req, resp := client.UpdateDefaultBranchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDefaultBranchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranch
-func (c *CodeCommit) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) (req *aws.Request, output *UpdateDefaultBranchOutput) {
+func (c *CodeCommit) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) UpdateDefaultBranchRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDefaultBranch,
 		HTTPMethod: "POST",
@@ -1857,115 +900,50 @@ func (c *CodeCommit) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput)
 		input = &UpdateDefaultBranchInput{}
 	}
 
-	output = &UpdateDefaultBranchOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateDefaultBranchOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateDefaultBranch API operation for AWS CodeCommit.
-//
-// Sets or changes the default branch name for the specified repository.
-//
-// If you use this operation to change the default branch name to the current
-// default branch name, a success message is returned even though the default
-// branch did not change.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation UpdateDefaultBranch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeBranchNameRequiredException "BranchNameRequiredException"
-//   A branch name is required but was not specified.
-//
-//   * ErrCodeInvalidBranchNameException "InvalidBranchNameException"
-//   The specified branch name is not valid.
-//
-//   * ErrCodeBranchDoesNotExistException "BranchDoesNotExistException"
-//   The specified branch does not exist.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranch
-func (c *CodeCommit) UpdateDefaultBranch(input *UpdateDefaultBranchInput) (*UpdateDefaultBranchOutput, error) {
-	req, out := c.UpdateDefaultBranchRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDefaultBranchWithContext is the same as UpdateDefaultBranch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDefaultBranch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) UpdateDefaultBranchWithContext(ctx aws.Context, input *UpdateDefaultBranchInput, opts ...aws.Option) (*UpdateDefaultBranchOutput, error) {
-	req, out := c.UpdateDefaultBranchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateDefaultBranchRequest{Request: req, Input: input}
 }
 
 const opUpdateRepositoryDescription = "UpdateRepositoryDescription"
 
-// UpdateRepositoryDescriptionRequest generates a "aws.Request" representing the
-// client's request for the UpdateRepositoryDescription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateRepositoryDescriptionRequest is a API request type for the UpdateRepositoryDescription API operation.
+type UpdateRepositoryDescriptionRequest struct {
+	*aws.Request
+	Input *UpdateRepositoryDescriptionInput
+}
+
+// Send marshals and sends the UpdateRepositoryDescription API request.
+func (r UpdateRepositoryDescriptionRequest) Send() (*UpdateRepositoryDescriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRepositoryDescriptionOutput), nil
+}
+
+// UpdateRepositoryDescriptionRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Sets or changes the comment or description for a repository.
 //
-// See UpdateRepositoryDescription for more information on using the UpdateRepositoryDescription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The description field for a repository accepts all HTML characters and all
+// valid Unicode characters. Applications that do not HTML-encode the description
+// and display it in a web page could expose users to potentially malicious
+// code. Make sure that you HTML-encode the description field in any application
+// that uses this API to display the repository description on a web page.
 //
 //    // Example sending a request using the UpdateRepositoryDescriptionRequest method.
-//    req, resp := client.UpdateRepositoryDescriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateRepositoryDescriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryDescription
-func (c *CodeCommit) UpdateRepositoryDescriptionRequest(input *UpdateRepositoryDescriptionInput) (req *aws.Request, output *UpdateRepositoryDescriptionOutput) {
+func (c *CodeCommit) UpdateRepositoryDescriptionRequest(input *UpdateRepositoryDescriptionInput) UpdateRepositoryDescriptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRepositoryDescription,
 		HTTPMethod: "POST",
@@ -1976,111 +954,49 @@ func (c *CodeCommit) UpdateRepositoryDescriptionRequest(input *UpdateRepositoryD
 		input = &UpdateRepositoryDescriptionInput{}
 	}
 
-	output = &UpdateRepositoryDescriptionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateRepositoryDescriptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateRepositoryDescription API operation for AWS CodeCommit.
-//
-// Sets or changes the comment or description for a repository.
-//
-// The description field for a repository accepts all HTML characters and all
-// valid Unicode characters. Applications that do not HTML-encode the description
-// and display it in a web page could expose users to potentially malicious
-// code. Make sure that you HTML-encode the description field in any application
-// that uses this API to display the repository description on a web page.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation UpdateRepositoryDescription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-//   * ErrCodeInvalidRepositoryDescriptionException "InvalidRepositoryDescriptionException"
-//   The specified repository description is not valid.
-//
-//   * ErrCodeEncryptionIntegrityChecksFailedException "EncryptionIntegrityChecksFailedException"
-//   An encryption integrity check failed.
-//
-//   * ErrCodeEncryptionKeyAccessDeniedException "EncryptionKeyAccessDeniedException"
-//   An encryption key could not be accessed.
-//
-//   * ErrCodeEncryptionKeyDisabledException "EncryptionKeyDisabledException"
-//   The encryption key is disabled.
-//
-//   * ErrCodeEncryptionKeyNotFoundException "EncryptionKeyNotFoundException"
-//   No encryption key was found.
-//
-//   * ErrCodeEncryptionKeyUnavailableException "EncryptionKeyUnavailableException"
-//   The encryption key is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryDescription
-func (c *CodeCommit) UpdateRepositoryDescription(input *UpdateRepositoryDescriptionInput) (*UpdateRepositoryDescriptionOutput, error) {
-	req, out := c.UpdateRepositoryDescriptionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateRepositoryDescriptionWithContext is the same as UpdateRepositoryDescription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateRepositoryDescription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) UpdateRepositoryDescriptionWithContext(ctx aws.Context, input *UpdateRepositoryDescriptionInput, opts ...aws.Option) (*UpdateRepositoryDescriptionOutput, error) {
-	req, out := c.UpdateRepositoryDescriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateRepositoryDescriptionRequest{Request: req, Input: input}
 }
 
 const opUpdateRepositoryName = "UpdateRepositoryName"
 
-// UpdateRepositoryNameRequest generates a "aws.Request" representing the
-// client's request for the UpdateRepositoryName operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateRepositoryNameRequest is a API request type for the UpdateRepositoryName API operation.
+type UpdateRepositoryNameRequest struct {
+	*aws.Request
+	Input *UpdateRepositoryNameInput
+}
+
+// Send marshals and sends the UpdateRepositoryName API request.
+func (r UpdateRepositoryNameRequest) Send() (*UpdateRepositoryNameOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRepositoryNameOutput), nil
+}
+
+// UpdateRepositoryNameRequest returns a request value for making API operation for
+// AWS CodeCommit.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateRepositoryName for more information on using the UpdateRepositoryName
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Renames a repository. The repository name must be unique across the calling
+// AWS account. In addition, repository names are limited to 100 alphanumeric,
+// dash, and underscore characters, and cannot include certain characters. The
+// suffix ".git" is prohibited. For a full description of the limits on repository
+// names, see Limits (http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using the UpdateRepositoryNameRequest method.
-//    req, resp := client.UpdateRepositoryNameRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateRepositoryNameRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryName
-func (c *CodeCommit) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) (req *aws.Request, output *UpdateRepositoryNameOutput) {
+func (c *CodeCommit) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) UpdateRepositoryNameRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRepositoryName,
 		HTTPMethod: "POST",
@@ -2091,66 +1007,10 @@ func (c *CodeCommit) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInpu
 		input = &UpdateRepositoryNameInput{}
 	}
 
-	output = &UpdateRepositoryNameOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateRepositoryNameOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateRepositoryName API operation for AWS CodeCommit.
-//
-// Renames a repository. The repository name must be unique across the calling
-// AWS account. In addition, repository names are limited to 100 alphanumeric,
-// dash, and underscore characters, and cannot include certain characters. The
-// suffix ".git" is prohibited. For a full description of the limits on repository
-// names, see Limits (http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// in the AWS CodeCommit User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeCommit's
-// API operation UpdateRepositoryName for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryDoesNotExistException "RepositoryDoesNotExistException"
-//   The specified repository does not exist.
-//
-//   * ErrCodeRepositoryNameExistsException "RepositoryNameExistsException"
-//   The specified repository name already exists.
-//
-//   * ErrCodeRepositoryNameRequiredException "RepositoryNameRequiredException"
-//   A repository name is required but was not specified.
-//
-//   * ErrCodeInvalidRepositoryNameException "InvalidRepositoryNameException"
-//   At least one specified repository name is not valid.
-//
-//   This exception only occurs when a specified repository name is not valid.
-//   Other exceptions occur when a required repository parameter is missing, or
-//   when a specified repository does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryName
-func (c *CodeCommit) UpdateRepositoryName(input *UpdateRepositoryNameInput) (*UpdateRepositoryNameOutput, error) {
-	req, out := c.UpdateRepositoryNameRequest(input)
-	return out, req.Send()
-}
-
-// UpdateRepositoryNameWithContext is the same as UpdateRepositoryName with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateRepositoryName for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeCommit) UpdateRepositoryNameWithContext(ctx aws.Context, input *UpdateRepositoryNameInput, opts ...aws.Option) (*UpdateRepositoryNameOutput, error) {
-	req, out := c.UpdateRepositoryNameRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateRepositoryNameRequest{Request: req, Input: input}
 }
 
 // Represents the input of a batch get repositories operation.

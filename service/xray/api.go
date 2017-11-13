@@ -11,31 +11,38 @@ import (
 
 const opBatchGetTraces = "BatchGetTraces"
 
-// BatchGetTracesRequest generates a "aws.Request" representing the
-// client's request for the BatchGetTraces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetTracesRequest is a API request type for the BatchGetTraces API operation.
+type BatchGetTracesRequest struct {
+	*aws.Request
+	Input *BatchGetTracesInput
+}
+
+// Send marshals and sends the BatchGetTraces API request.
+func (r BatchGetTracesRequest) Send() (*BatchGetTracesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetTracesOutput), nil
+}
+
+// BatchGetTracesRequest returns a request value for making API operation for
+// AWS X-Ray.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetTraces for more information on using the BatchGetTraces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of traces specified by ID. Each trace is a collection of
+// segment documents that originates from a single request. Use GetTraceSummaries
+// to get a list of trace IDs.
 //
 //    // Example sending a request using the BatchGetTracesRequest method.
-//    req, resp := client.BatchGetTracesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetTracesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTraces
-func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) (req *aws.Request, output *BatchGetTracesOutput) {
+func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTracesRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetTraces,
 		HTTPMethod: "POST",
@@ -46,80 +53,46 @@ func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) (req *aws.Reque
 		input = &BatchGetTracesInput{}
 	}
 
-	output = &BatchGetTracesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetTraces API operation for AWS X-Ray.
-//
-// Retrieves a list of traces specified by ID. Each trace is a collection of
-// segment documents that originates from a single request. Use GetTraceSummaries
-// to get a list of trace IDs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS X-Ray's
-// API operation BatchGetTraces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTraces
-func (c *XRay) BatchGetTraces(input *BatchGetTracesInput) (*BatchGetTracesOutput, error) {
-	req, out := c.BatchGetTracesRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetTracesWithContext is the same as BatchGetTraces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetTraces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) BatchGetTracesWithContext(ctx aws.Context, input *BatchGetTracesInput, opts ...aws.Option) (*BatchGetTracesOutput, error) {
-	req, out := c.BatchGetTracesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetTracesOutput{})
+	return BatchGetTracesRequest{Request: req, Input: input}
 }
 
 const opGetServiceGraph = "GetServiceGraph"
 
-// GetServiceGraphRequest generates a "aws.Request" representing the
-// client's request for the GetServiceGraph operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetServiceGraphRequest is a API request type for the GetServiceGraph API operation.
+type GetServiceGraphRequest struct {
+	*aws.Request
+	Input *GetServiceGraphInput
+}
+
+// Send marshals and sends the GetServiceGraph API request.
+func (r GetServiceGraphRequest) Send() (*GetServiceGraphOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetServiceGraphOutput), nil
+}
+
+// GetServiceGraphRequest returns a request value for making API operation for
+// AWS X-Ray.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetServiceGraph for more information on using the GetServiceGraph
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a document that describes services that process incoming requests,
+// and downstream services that they call as a result. Root services process
+// incoming requests and make calls to downstream services. Root services are
+// applications that use the AWS X-Ray SDK. Downstream services can be other
+// applications, AWS resources, HTTP web APIs, or SQL databases.
 //
 //    // Example sending a request using the GetServiceGraphRequest method.
-//    req, resp := client.GetServiceGraphRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetServiceGraphRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph
-func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) (req *aws.Request, output *GetServiceGraphOutput) {
+func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceGraphRequest {
 	op := &aws.Operation{
 		Name:       opGetServiceGraph,
 		HTTPMethod: "POST",
@@ -130,82 +103,42 @@ func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) (req *aws.Req
 		input = &GetServiceGraphInput{}
 	}
 
-	output = &GetServiceGraphOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetServiceGraph API operation for AWS X-Ray.
-//
-// Retrieves a document that describes services that process incoming requests,
-// and downstream services that they call as a result. Root services process
-// incoming requests and make calls to downstream services. Root services are
-// applications that use the AWS X-Ray SDK. Downstream services can be other
-// applications, AWS resources, HTTP web APIs, or SQL databases.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS X-Ray's
-// API operation GetServiceGraph for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph
-func (c *XRay) GetServiceGraph(input *GetServiceGraphInput) (*GetServiceGraphOutput, error) {
-	req, out := c.GetServiceGraphRequest(input)
-	return out, req.Send()
-}
-
-// GetServiceGraphWithContext is the same as GetServiceGraph with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetServiceGraph for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) GetServiceGraphWithContext(ctx aws.Context, input *GetServiceGraphInput, opts ...aws.Option) (*GetServiceGraphOutput, error) {
-	req, out := c.GetServiceGraphRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetServiceGraphOutput{})
+	return GetServiceGraphRequest{Request: req, Input: input}
 }
 
 const opGetTraceGraph = "GetTraceGraph"
 
-// GetTraceGraphRequest generates a "aws.Request" representing the
-// client's request for the GetTraceGraph operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTraceGraphRequest is a API request type for the GetTraceGraph API operation.
+type GetTraceGraphRequest struct {
+	*aws.Request
+	Input *GetTraceGraphInput
+}
+
+// Send marshals and sends the GetTraceGraph API request.
+func (r GetTraceGraphRequest) Send() (*GetTraceGraphOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTraceGraphOutput), nil
+}
+
+// GetTraceGraphRequest returns a request value for making API operation for
+// AWS X-Ray.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTraceGraph for more information on using the GetTraceGraph
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a service graph for one or more specific trace IDs.
 //
 //    // Example sending a request using the GetTraceGraphRequest method.
-//    req, resp := client.GetTraceGraphRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTraceGraphRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraph
-func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) (req *aws.Request, output *GetTraceGraphOutput) {
+func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRequest {
 	op := &aws.Operation{
 		Name:       opGetTraceGraph,
 		HTTPMethod: "POST",
@@ -216,94 +149,30 @@ func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) (req *aws.Request
 		input = &GetTraceGraphInput{}
 	}
 
-	output = &GetTraceGraphOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTraceGraph API operation for AWS X-Ray.
-//
-// Retrieves a service graph for one or more specific trace IDs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS X-Ray's
-// API operation GetTraceGraph for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraph
-func (c *XRay) GetTraceGraph(input *GetTraceGraphInput) (*GetTraceGraphOutput, error) {
-	req, out := c.GetTraceGraphRequest(input)
-	return out, req.Send()
-}
-
-// GetTraceGraphWithContext is the same as GetTraceGraph with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTraceGraph for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) GetTraceGraphWithContext(ctx aws.Context, input *GetTraceGraphInput, opts ...aws.Option) (*GetTraceGraphOutput, error) {
-	req, out := c.GetTraceGraphRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTraceGraphOutput{})
+	return GetTraceGraphRequest{Request: req, Input: input}
 }
 
 const opGetTraceSummaries = "GetTraceSummaries"
 
-// GetTraceSummariesRequest generates a "aws.Request" representing the
-// client's request for the GetTraceSummaries operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTraceSummaries for more information on using the GetTraceSummaries
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetTraceSummariesRequest method.
-//    req, resp := client.GetTraceSummariesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummaries
-func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *aws.Request, output *GetTraceSummariesOutput) {
-	op := &aws.Operation{
-		Name:       opGetTraceSummaries,
-		HTTPMethod: "POST",
-		HTTPPath:   "/TraceSummaries",
-	}
-
-	if input == nil {
-		input = &GetTraceSummariesInput{}
-	}
-
-	output = &GetTraceSummariesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetTraceSummariesRequest is a API request type for the GetTraceSummaries API operation.
+type GetTraceSummariesRequest struct {
+	*aws.Request
+	Input *GetTraceSummariesInput
 }
 
-// GetTraceSummaries API operation for AWS X-Ray.
+// Send marshals and sends the GetTraceSummaries API request.
+func (r GetTraceSummariesRequest) Send() (*GetTraceSummariesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTraceSummariesOutput), nil
+}
+
+// GetTraceSummariesRequest returns a request value for making API operation for
+// AWS X-Ray.
 //
 // Retrieves IDs and metadata for traces available for a specified time frame
 // using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces.
@@ -323,69 +192,61 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *aws
 // expressions, see Using Filter Expressions (http://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
 // in the AWS X-Ray Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS X-Ray's
-// API operation GetTraceSummaries for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//    // Example sending a request using the GetTraceSummariesRequest method.
+//    req := client.GetTraceSummariesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummaries
-func (c *XRay) GetTraceSummaries(input *GetTraceSummariesInput) (*GetTraceSummariesOutput, error) {
-	req, out := c.GetTraceSummariesRequest(input)
-	return out, req.Send()
-}
+func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) GetTraceSummariesRequest {
+	op := &aws.Operation{
+		Name:       opGetTraceSummaries,
+		HTTPMethod: "POST",
+		HTTPPath:   "/TraceSummaries",
+	}
 
-// GetTraceSummariesWithContext is the same as GetTraceSummaries with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTraceSummaries for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) GetTraceSummariesWithContext(ctx aws.Context, input *GetTraceSummariesInput, opts ...aws.Option) (*GetTraceSummariesOutput, error) {
-	req, out := c.GetTraceSummariesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetTraceSummariesInput{}
+	}
+
+	req := c.newRequest(op, input, &GetTraceSummariesOutput{})
+	return GetTraceSummariesRequest{Request: req, Input: input}
 }
 
 const opPutTelemetryRecords = "PutTelemetryRecords"
 
-// PutTelemetryRecordsRequest generates a "aws.Request" representing the
-// client's request for the PutTelemetryRecords operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutTelemetryRecordsRequest is a API request type for the PutTelemetryRecords API operation.
+type PutTelemetryRecordsRequest struct {
+	*aws.Request
+	Input *PutTelemetryRecordsInput
+}
+
+// Send marshals and sends the PutTelemetryRecords API request.
+func (r PutTelemetryRecordsRequest) Send() (*PutTelemetryRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutTelemetryRecordsOutput), nil
+}
+
+// PutTelemetryRecordsRequest returns a request value for making API operation for
+// AWS X-Ray.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutTelemetryRecords for more information on using the PutTelemetryRecords
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used by the AWS X-Ray daemon to upload telemetry.
 //
 //    // Example sending a request using the PutTelemetryRecordsRequest method.
-//    req, resp := client.PutTelemetryRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutTelemetryRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecords
-func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) (req *aws.Request, output *PutTelemetryRecordsOutput) {
+func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) PutTelemetryRecordsRequest {
 	op := &aws.Operation{
 		Name:       opPutTelemetryRecords,
 		HTTPMethod: "POST",
@@ -396,94 +257,30 @@ func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) (req 
 		input = &PutTelemetryRecordsInput{}
 	}
 
-	output = &PutTelemetryRecordsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutTelemetryRecords API operation for AWS X-Ray.
-//
-// Used by the AWS X-Ray daemon to upload telemetry.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS X-Ray's
-// API operation PutTelemetryRecords for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecords
-func (c *XRay) PutTelemetryRecords(input *PutTelemetryRecordsInput) (*PutTelemetryRecordsOutput, error) {
-	req, out := c.PutTelemetryRecordsRequest(input)
-	return out, req.Send()
-}
-
-// PutTelemetryRecordsWithContext is the same as PutTelemetryRecords with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutTelemetryRecords for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) PutTelemetryRecordsWithContext(ctx aws.Context, input *PutTelemetryRecordsInput, opts ...aws.Option) (*PutTelemetryRecordsOutput, error) {
-	req, out := c.PutTelemetryRecordsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutTelemetryRecordsOutput{})
+	return PutTelemetryRecordsRequest{Request: req, Input: input}
 }
 
 const opPutTraceSegments = "PutTraceSegments"
 
-// PutTraceSegmentsRequest generates a "aws.Request" representing the
-// client's request for the PutTraceSegments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutTraceSegments for more information on using the PutTraceSegments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutTraceSegmentsRequest method.
-//    req, resp := client.PutTraceSegmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegments
-func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) (req *aws.Request, output *PutTraceSegmentsOutput) {
-	op := &aws.Operation{
-		Name:       opPutTraceSegments,
-		HTTPMethod: "POST",
-		HTTPPath:   "/TraceSegments",
-	}
-
-	if input == nil {
-		input = &PutTraceSegmentsInput{}
-	}
-
-	output = &PutTraceSegmentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutTraceSegmentsRequest is a API request type for the PutTraceSegments API operation.
+type PutTraceSegmentsRequest struct {
+	*aws.Request
+	Input *PutTraceSegmentsInput
 }
 
-// PutTraceSegments API operation for AWS X-Ray.
+// Send marshals and sends the PutTraceSegments API request.
+func (r PutTraceSegmentsRequest) Send() (*PutTraceSegmentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutTraceSegmentsOutput), nil
+}
+
+// PutTraceSegmentsRequest returns a request value for making API operation for
+// AWS X-Ray.
 //
 // Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents
 // and sends them to the X-Ray daemon, which uploads them in batches. A segment
@@ -532,40 +329,27 @@ func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) (req *aws.R
 //    * A 96-bit identifier for the trace, globally unique, in 24 hexadecimal
 //    digits.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS X-Ray's
-// API operation PutTraceSegments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//    // Example sending a request using the PutTraceSegmentsRequest method.
+//    req := client.PutTraceSegmentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegments
-func (c *XRay) PutTraceSegments(input *PutTraceSegmentsInput) (*PutTraceSegmentsOutput, error) {
-	req, out := c.PutTraceSegmentsRequest(input)
-	return out, req.Send()
-}
+func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceSegmentsRequest {
+	op := &aws.Operation{
+		Name:       opPutTraceSegments,
+		HTTPMethod: "POST",
+		HTTPPath:   "/TraceSegments",
+	}
 
-// PutTraceSegmentsWithContext is the same as PutTraceSegments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutTraceSegments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) PutTraceSegmentsWithContext(ctx aws.Context, input *PutTraceSegmentsInput, opts ...aws.Option) (*PutTraceSegmentsOutput, error) {
-	req, out := c.PutTraceSegmentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutTraceSegmentsInput{}
+	}
+
+	req := c.newRequest(op, input, &PutTraceSegmentsOutput{})
+	return PutTraceSegmentsRequest{Request: req, Input: input}
 }
 
 // An alias for an edge.
