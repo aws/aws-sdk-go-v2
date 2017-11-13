@@ -215,10 +215,15 @@ func setValue(dstVal reflect.Value, src interface{}) {
 			srcVal = reflect.ValueOf(src).Elem()
 		}
 		dstVal.Set(srcVal)
-	} else if dstVal.Kind() == reflect.String {
-		dstVal.SetString(srcVal.Interface().(string))
 	} else {
+		srcType := srcVal.Type()
+		dstType := dstVal.Type()
+		if srcType != dstType {
+			// Will panic if types are not convertable, this
+			// is a failure in the src/dst types
+			dstVal.Set(srcVal.Convert(dstType))
+			return
+		}
 		dstVal.Set(srcVal)
 	}
-
 }
