@@ -17,7 +17,7 @@ import (
 // indicates if this is the EC2 Query sub-protocol.
 func Parse(body url.Values, i interface{}, isEC2 bool) error {
 	q := queryParser{isEC2: isEC2}
-	return q.parseValue(body, reflect.ValueOf(i), "", "")
+	return q.parseValue(body, reflect.ValueOf(i), "", "", false)
 }
 
 func elemOf(value reflect.Value) reflect.Value {
@@ -31,7 +31,7 @@ type queryParser struct {
 	isEC2 bool
 }
 
-func (q *queryParser) parseValue(v url.Values, value reflect.Value, prefix string, tag reflect.StructTag) error {
+func (q *queryParser) parseValue(v url.Values, value reflect.Value, prefix string, tag reflect.StructTag, parentCollection bool) error {
 	value = elemOf(value)
 
 	// no need to handle zero values
@@ -60,7 +60,7 @@ func (q *queryParser) parseValue(v url.Values, value reflect.Value, prefix strin
 	case "map":
 		err = q.parseMap(v, value, prefix, tag)
 	default:
-		err = q.parseScalar(v, value, prefix, tag)
+		err = q.parseScalar(v, value, prefix, tag, parentCollection)
 	}
 
 	if protocol.IsNotSetError(err) {
@@ -113,7 +113,7 @@ func (q *queryParser) parseStruct(v url.Values, value reflect.Value, prefix stri
 			name = prefix + "." + name
 		}
 
-		if err := q.parseValue(v, elemValue, name, field.Tag); err != nil {
+		if err := q.parseValue(v, elemValue, name, field.Tag, false); err != nil {
 			return err
 		}
 	}
@@ -128,7 +128,7 @@ func (q *queryParser) parseList(v url.Values, value reflect.Value, prefix string
 	}
 
 	if _, ok := value.Interface().([]byte); ok {
-		return q.parseScalar(v, value, prefix, tag)
+		return q.parseScalar(v, value, prefix, tag, true)
 	}
 
 	// check for unflattened list member
@@ -147,7 +147,7 @@ func (q *queryParser) parseList(v url.Values, value reflect.Value, prefix string
 		} else {
 			slicePrefix = slicePrefix + "." + strconv.Itoa(i+1)
 		}
-		if err := q.parseValue(v, value.Index(i), slicePrefix, ""); err != nil {
+		if err := q.parseValue(v, value.Index(i), slicePrefix, "", true); err != nil {
 			return err
 		}
 	}
@@ -199,7 +199,7 @@ func (q *queryParser) parseMap(v url.Values, value reflect.Value, prefix string,
 			keyName = prefix + "." + strconv.Itoa(i+1) + "." + kname
 		}
 
-		if err := q.parseValue(v, mapKey, keyName, ""); err != nil {
+		if err := q.parseValue(v, mapKey, keyName, "", true); err != nil {
 			return err
 		}
 
@@ -211,7 +211,7 @@ func (q *queryParser) parseMap(v url.Values, value reflect.Value, prefix string,
 			valueName = prefix + "." + strconv.Itoa(i+1) + "." + vname
 		}
 
-		if err := q.parseValue(v, mapValue, valueName, ""); err != nil {
+		if err := q.parseValue(v, mapValue, valueName, "", true); err != nil {
 			return err
 		}
 	}
@@ -219,10 +219,10 @@ func (q *queryParser) parseMap(v url.Values, value reflect.Value, prefix string,
 	return nil
 }
 
-func (q *queryParser) parseScalar(v url.Values, r reflect.Value, name string, tag reflect.StructTag) error {
+func (q *queryParser) parseScalar(v url.Values, r reflect.Value, name string, tag reflect.StructTag, parentCollection bool) error {
 	if r.Kind() == reflect.String {
 		val, err := protocol.GetValue(r)
-		if err == nil {
+		if _, ok := err.(*protocol.ErrValueNotSet); err == nil || (ok && parentCollection) {
 			v.Set(name, val)
 		}
 		return err

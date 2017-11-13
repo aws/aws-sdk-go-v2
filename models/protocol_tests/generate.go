@@ -184,6 +184,11 @@ func (t tplInputTestCaseData) BodyAssertions() string {
 
 	// Generate the body verification code
 	expectedBody := util.Trim(t.TestCase.InputTest.Body)
+	if len(expectedBody) == 0 {
+		code.WriteString("awstesting.AssertTrue(len(body) != 0)")
+		return code.String()
+	}
+
 	switch protocol {
 	case "ec2", "query":
 		fmt.Fprintf(code, "awstesting.AssertQuery(t, `%s`, util.Trim(string(body)))",

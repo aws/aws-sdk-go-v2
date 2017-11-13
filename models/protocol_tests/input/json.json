@@ -579,12 +579,12 @@
         },
         "params": {
           "FooEnum": "foo",
-          "ListEnums": ["foo", "bar"]
+          "ListEnums": ["foo", "", "bar"]
         },
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "{\"FooEnum\": \"foo\", \"ListEnums\": [\"foo\", \"bar\"]}"
+          "body": "{\"FooEnum\": \"foo\", \"ListEnums\": [\"foo\", \"\", \"bar\"]}"
         }
       },
       {

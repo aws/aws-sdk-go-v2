@@ -1756,13 +1756,13 @@
 					"HeaderEnum": "baz",
           "FooEnum": "foo",
           "URIFooEnum": "bar",
-					"ListEnums": ["foo", "bar"],
-					"URIListEnums": ["0", "1"]
+					"ListEnums": ["foo", "", "bar"],
+					"URIListEnums": ["0", "", "1"]
         },
         "serialized": {
-          "uri": "/Enum/bar?ListEnums=0&ListEnums=1",
+          "uri": "/Enum/bar?ListEnums=0&ListEnums=&ListEnums=1",
           "headers": {"x-amz-enum": "baz"},
-          "body": "<InputShape><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member>bar</member></ListEnums></InputShape>"
+          "body": "<InputShape><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member></member><member>bar</member></ListEnums></InputShape>"
         }
       },
       {

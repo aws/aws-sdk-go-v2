@@ -3798,6 +3798,7 @@ func TestInputService14ProtocolTestEnumCase1(t *testing.T) {
 		FooEnum: InputService14TestShapeEnumType("foo"),
 		ListEnums: []InputService14TestShapeEnumType{
 			InputService14TestShapeEnumType("foo"),
+			InputService14TestShapeEnumType(""),
 			InputService14TestShapeEnumType("bar"),
 		},
 	}
@@ -3815,7 +3816,7 @@ func TestInputService14ProtocolTestEnumCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertQuery(t, `Action=OperationName&FooEnum=foo&ListEnums.member.1=foo&ListEnums.member.2=bar&Version=2014-01-01`, util.Trim(string(body)))
+	awstesting.AssertQuery(t, `Action=OperationName&FooEnum=foo&ListEnums.member.1=foo&ListEnums.member.2=&ListEnums.member.3=bar&Version=2014-01-01`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/", r.URL.String())

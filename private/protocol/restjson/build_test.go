@@ -5400,11 +5400,13 @@ func TestInputService22ProtocolTestEnumCase1(t *testing.T) {
 		HeaderEnum: InputService22TestShapeEnumType("baz"),
 		ListEnums: []InputService22TestShapeEnumType{
 			InputService22TestShapeEnumType("foo"),
+			InputService22TestShapeEnumType(""),
 			InputService22TestShapeEnumType("bar"),
 		},
 		QueryFooEnum: InputService22TestShapeEnumType("bar"),
 		QueryListEnums: []InputService22TestShapeEnumType{
 			InputService22TestShapeEnumType("0"),
+			InputService22TestShapeEnumType(""),
 			InputService22TestShapeEnumType("1"),
 		},
 	}
@@ -5422,10 +5424,10 @@ func TestInputService22ProtocolTestEnumCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"FooEnum":"foo","ListEnums":["foo","bar"]}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"FooEnum":"foo","ListEnums":["foo","","bar"]}`, util.Trim(string(body)))
 
 	// assert URL
-	awstesting.AssertURL(t, "https://test/path?Enum=bar&List=0&List=1", r.URL.String())
+	awstesting.AssertURL(t, "https://test/path?Enum=bar&List=0&List=1&List=", r.URL.String())
 
 	// assert headers
 	if e, a := "baz", r.Header.Get("x-amz-enum"); e != a {

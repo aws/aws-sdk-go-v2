@@ -1979,6 +1979,7 @@ func TestInputService10ProtocolTestEnumCase1(t *testing.T) {
 	input := &InputService10TestShapeInputService10TestCaseOperation2Input{
 		ListEnums: []InputService10TestShapeEnumType{
 			InputService10TestShapeEnumType("foo"),
+			InputService10TestShapeEnumType(""),
 			InputService10TestShapeEnumType("bar"),
 		},
 	}
@@ -1996,7 +1997,7 @@ func TestInputService10ProtocolTestEnumCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertQuery(t, `Action=OperationName&ListEnums.1=foo&ListEnums.2=bar&Version=2014-01-01`, util.Trim(string(body)))
+	awstesting.AssertQuery(t, `Action=OperationName&ListEnums.1=foo&ListEnums.2=&ListEnums.3=bar&Version=2014-01-01`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/", r.URL.String())
