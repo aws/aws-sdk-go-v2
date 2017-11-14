@@ -13,6 +13,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
@@ -58,7 +59,14 @@ func Config() aws.Config {
 // Does not use http.DefaultClient nor http.DefaultTransport.
 func HTTPClient() *http.Client {
 	return &http.Client{
-		Transport: &http.Transport{},
+		Transport: &http.Transport{
+			Proxy:                 http.ProxyFromEnvironment,
+			MaxIdleConns:          100,
+			MaxIdleConnsPerHost:   10,
+			IdleConnTimeout:       30 * time.Second,
+			TLSHandshakeTimeout:   10 * time.Second,
+			ExpectContinueTimeout: 5 * time.Second,
+		},
 	}
 }
 
