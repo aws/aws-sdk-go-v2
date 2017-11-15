@@ -60,6 +60,15 @@ func (a *API) resolveReferences() {
 			o.ErrorRefs[i].Shape.IsError = true
 		}
 	}
+
+	for _, s := range a.Shapes {
+		switch s.Type {
+		case "list":
+			s.MemberRef.Shape.UsedInList = true
+		case "map":
+			s.ValueRef.Shape.UsedInMap = true
+		}
+	}
 }
 
 // A referenceResolver provides a way to resolve shape references to
@@ -189,6 +198,13 @@ func (a *API) renameExportable() {
 
 		for mName, member := range s.MemberRefs {
 			newName := a.ExportableName(mName)
+
+			// if no location name is set on the member ref, but is set on the shape,
+			// we will take that name and place it on the reference.
+			if member.LocationName == "" && member.Shape.LocationName != "" {
+				member.LocationName = member.Shape.LocationName
+			}
+
 			if newName != mName {
 				delete(s.MemberRefs, mName)
 				s.MemberRefs[newName] = member
@@ -216,6 +232,9 @@ func (a *API) renameExportable() {
 		for i, n := range s.Required {
 			s.Required[i] = a.ExportableName(n)
 		}
+
+		// remove location name
+		s.LocationName = ""
 	}
 
 	for _, s := range a.Shapes {
