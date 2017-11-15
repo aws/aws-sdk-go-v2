@@ -237,300 +237,300 @@ func (r *Request) ParamsFilled() bool {
 	return r.Params != nil && reflect.ValueOf(r.Params).Elem().IsValid()
 }
 
-// SetBufferBody will set the request's body bytes that will be sent to
-// the service API.
-func (r *Request) SetBufferBody(buf []byte) {
-	r.SetReaderBody(bytes.NewReader(buf))
+// setbufferbody will set the request's body bytes that will be sent to
+// the service api.
+func (r *request) setbufferbody(buf []byte) {
+	r.setreaderbody(bytes.newreader(buf))
 }
 
-// SetStringBody sets the body of the request to be backed by a string.
-func (r *Request) SetStringBody(s string) {
-	r.SetReaderBody(strings.NewReader(s))
+// setstringbody sets the body of the request to be backed by a string.
+func (r *request) setstringbody(s string) {
+	r.setreaderbody(strings.newreader(s))
 }
 
-// SetReaderBody will set the request's body reader.
-func (r *Request) SetReaderBody(reader io.ReadSeeker) {
-	r.Body = reader
-	r.ResetBody()
+// setreaderbody will set the request's body reader.
+func (r *request) setreaderbody(reader io.readseeker) {
+	r.body = reader
+	r.resetbody()
 }
 
-// Presign returns the request's signed URL. Error will be returned
+// presign returns the request's signed url. error will be returned
 // if the signing fails.
-func (r *Request) Presign(expireTime time.Duration) (string, error) {
-	r.ExpireTime = expireTime
-	r.NotHoist = false
+func (r *request) presign(expiretime time.duration) (string, error) {
+	r.expiretime = expiretime
+	r.nothoist = false
 
-	if r.Operation.BeforePresignFn != nil {
+	if r.operation.beforepresignfn != nil {
 		r = r.copy()
-		err := r.Operation.BeforePresignFn(r)
+		err := r.operation.beforepresignfn(r)
 		if err != nil {
 			return "", err
 		}
 	}
 
-	r.Sign()
-	if r.Error != nil {
-		return "", r.Error
+	r.sign()
+	if r.error != nil {
+		return "", r.error
 	}
-	return r.HTTPRequest.URL.String(), nil
+	return r.httprequest.url.string(), nil
 }
 
-// PresignRequest behaves just like presign, with the addition of returning a
+// presignrequest behaves just like presign, with the addition of returning a
 // set of headers that were signed.
 //
-// Returns the URL string for the API operation with signature in the query string,
-// and the HTTP headers that were included in the signature. These headers must
-// be included in any HTTP request made with the presigned URL.
+// returns the url string for the api operation with signature in the query string,
+// and the http headers that were included in the signature. these headers must
+// be included in any http request made with the presigned url.
 //
-// To prevent hoisting any headers to the query string set NotHoist to true on
-// this Request value prior to calling PresignRequest.
-func (r *Request) PresignRequest(expireTime time.Duration) (string, http.Header, error) {
-	r.ExpireTime = expireTime
-	r.Sign()
-	if r.Error != nil {
-		return "", nil, r.Error
+// to prevent hoisting any headers to the query string set nothoist to true on
+// this request value prior to calling presignrequest.
+func (r *request) presignrequest(expiretime time.duration) (string, http.header, error) {
+	r.expiretime = expiretime
+	r.sign()
+	if r.error != nil {
+		return "", nil, r.error
 	}
-	return r.HTTPRequest.URL.String(), r.SignedHeaderVals, nil
+	return r.httprequest.url.string(), r.signedheadervals, nil
 }
 
-func debugLogReqError(r *Request, stage string, retrying bool, err error) {
-	if !r.Config.LogLevel.Matches(LogDebugWithRequestErrors) {
+func debuglogreqerror(r *request, stage string, retrying bool, err error) {
+	if !r.config.loglevel.matches(logdebugwithrequesterrors) {
 		return
 	}
 
-	retryStr := "not retrying"
+	retrystr := "not retrying"
 	if retrying {
-		retryStr = "will retry"
+		retrystr = "will retry"
 	}
 
-	r.Config.Logger.Log(fmt.Sprintf("DEBUG: %s %s/%s failed, %s, error %v",
-		stage, r.Metadata.ServiceName, r.Operation.Name, retryStr, err))
+	r.config.logger.log(fmt.sprintf("debug: %s %s/%s failed, %s, error %v",
+		stage, r.metadata.servicename, r.operation.name, retrystr, err))
 }
 
-// Build will build the request's object so it can be signed and sent
-// to the service. Build will also validate all the request's parameters.
-// Anny additional build Handlers set on this request will be run
+// build will build the request's object so it can be signed and sent
+// to the service. build will also validate all the request's parameters.
+// anny additional build handlers set on this request will be run
 // in the order they were set.
 //
-// The request will only be built once. Multiple calls to build will have
+// the request will only be built once. multiple calls to build will have
 // no effect.
 //
-// If any Validate or Build errors occur the build will stop and the error
+// if any validate or build errors occur the build will stop and the error
 // which occurred will be returned.
-func (r *Request) Build() error {
+func (r *request) build() error {
 	if !r.built {
-		r.Handlers.Validate.Run(r)
-		if r.Error != nil {
-			debugLogReqError(r, "Validate Request", false, r.Error)
-			return r.Error
+		r.handlers.validate.run(r)
+		if r.error != nil {
+			debuglogreqerror(r, "validate request", false, r.error)
+			return r.error
 		}
-		r.Handlers.Build.Run(r)
-		if r.Error != nil {
-			debugLogReqError(r, "Build Request", false, r.Error)
-			return r.Error
+		r.handlers.build.run(r)
+		if r.error != nil {
+			debuglogreqerror(r, "build request", false, r.error)
+			return r.error
 		}
 		r.built = true
 	}
 
-	return r.Error
+	return r.error
 }
 
-// Sign will sign the request returning error if errors are encountered.
+// sign will sign the request returning error if errors are encountered.
 //
-// Send will build the request prior to signing. All Sign Handlers will
+// send will build the request prior to signing. all sign handlers will
 // be executed in the order they were set.
-func (r *Request) Sign() error {
-	r.Build()
-	if r.Error != nil {
-		debugLogReqError(r, "Build Request", false, r.Error)
-		return r.Error
+func (r *request) sign() error {
+	r.build()
+	if r.error != nil {
+		debuglogreqerror(r, "build request", false, r.error)
+		return r.error
 	}
 
-	r.Handlers.Sign.Run(r)
-	return r.Error
+	r.handlers.sign.run(r)
+	return r.error
 }
 
-func (r *Request) getNextRequestBody() (io.ReadCloser, error) {
-	if r.safeBody != nil {
-		r.safeBody.Close()
+func (r *request) getnextrequestbody() (io.readcloser, error) {
+	if r.safebody != nil {
+		r.safebody.close()
 	}
 
-	r.safeBody = newOffsetReader(r.Body, r.BodyStart)
+	r.safebody = newoffsetreader(r.body, r.bodystart)
 
-	// Go 1.8 tightened and clarified the rules code needs to use when building
-	// requests with the http package. Go 1.8 removed the automatic detection
-	// of if the Request.Body was empty, or actually had bytes in it. The SDK
-	// always sets the Request.Body even if it is empty and should not actually
-	// be sent. This is incorrect.
+	// go 1.8 tightened and clarified the rules code needs to use when building
+	// requests with the http package. go 1.8 removed the automatic detection
+	// of if the request.body was empty, or actually had bytes in it. the sdk
+	// always sets the request.body even if it is empty and should not actually
+	// be sent. this is incorrect.
 	//
-	// Go 1.8 did add a http.NoBody value that the SDK can use to tell the http
-	// client that the request really should be sent without a body. The
-	// Request.Body cannot be set to nil, which is preferable, because the
+	// go 1.8 did add a http.nobody value that the sdk can use to tell the http
+	// client that the request really should be sent without a body. the
+	// request.body cannot be set to nil, which is preferable, because the
 	// field is exported and could introduce nil pointer dereferences for users
-	// of the SDK if they used that field.
+	// of the sdk if they used that field.
 	//
-	// Related golang/go#18257
-	l, err := computeBodyLength(r.Body)
+	// related golang/go#18257
+	l, err := computebodylength(r.body)
 	if err != nil {
-		return nil, awserr.New(ErrCodeSerialization, "failed to compute request body size", err)
+		return nil, awserr.new(errcodeserialization, "failed to compute request body size", err)
 	}
 
-	var body io.ReadCloser
+	var body io.readcloser
 	if l == 0 {
-		body = NoBody
+		body = nobody
 	} else if l > 0 {
-		body = r.safeBody
+		body = r.safebody
 	} else {
-		// Hack to prevent sending bodies for methods where the body
-		// should be ignored by the server. Sending bodies on these
-		// methods without an associated ContentLength will cause the
+		// hack to prevent sending bodies for methods where the body
+		// should be ignored by the server. sending bodies on these
+		// methods without an associated contentlength will cause the
 		// request to socket timeout because the server does not handle
-		// Transfer-Encoding: chunked bodies for these methods.
+		// transfer-encoding: chunked bodies for these methods.
 		//
-		// This would only happen if a ReaderSeekerCloser was used with
-		// a io.Reader that was not also an io.Seeker.
-		switch r.Operation.HTTPMethod {
-		case "GET", "HEAD", "DELETE":
-			body = NoBody
+		// this would only happen if a readerseekercloser was used with
+		// a io.reader that was not also an io.seeker.
+		switch r.operation.httpmethod {
+		case "get", "head", "delete":
+			body = nobody
 		default:
-			body = r.safeBody
+			body = r.safebody
 		}
 	}
 
 	return body, nil
 }
 
-// Attempts to compute the length of the body of the reader using the
-// io.Seeker interface. If the value is not seekable because of being
-// a ReaderSeekerCloser without an unerlying Seeker -1 will be returned.
-// If no error occurs the length of the body will be returned.
-func computeBodyLength(r io.ReadSeeker) (int64, error) {
+// attempts to compute the length of the body of the reader using the
+// io.seeker interface. if the value is not seekable because of being
+// a readerseekercloser without an unerlying seeker -1 will be returned.
+// if no error occurs the length of the body will be returned.
+func computebodylength(r io.readseeker) (int64, error) {
 	seekable := true
-	// Determine if the seeker is actually seekable. ReaderSeekerCloser
-	// hides the fact that a io.Readers might not actually be seekable.
+	// determine if the seeker is actually seekable. readerseekercloser
+	// hides the fact that a io.readers might not actually be seekable.
 	switch v := r.(type) {
-	case ReaderSeekerCloser:
-		seekable = v.IsSeeker()
-	case *ReaderSeekerCloser:
-		seekable = v.IsSeeker()
+	case readerseekercloser:
+		seekable = v.isseeker()
+	case *readerseekercloser:
+		seekable = v.isseeker()
 	}
 	if !seekable {
 		return -1, nil
 	}
 
-	curOffset, err := r.Seek(0, 1)
+	curoffset, err := r.seek(0, 1)
 	if err != nil {
 		return 0, err
 	}
 
-	endOffset, err := r.Seek(0, 2)
+	endoffset, err := r.seek(0, 2)
 	if err != nil {
 		return 0, err
 	}
 
-	_, err = r.Seek(curOffset, 0)
+	_, err = r.seek(curoffset, 0)
 	if err != nil {
 		return 0, err
 	}
 
-	return endOffset - curOffset, nil
+	return endoffset - curoffset, nil
 }
 
-// GetBody will return an io.ReadSeeker of the Request's underlying
+// getbody will return an io.readseeker of the request's underlying
 // input body with a concurrency safe wrapper.
-func (r *Request) GetBody() io.ReadSeeker {
-	return r.safeBody
+func (r *request) getbody() io.readseeker {
+	return r.safebody
 }
 
-// Send will send the request returning error if errors are encountered.
+// send will send the request returning error if errors are encountered.
 //
-// Send will sign the request prior to sending. All Send Handlers will
+// send will sign the request prior to sending. all send handlers will
 // be executed in the order they were set.
 //
-// Canceling a request is non-deterministic. If a request has been canceled,
+// canceling a request is non-deterministic. if a request has been canceled,
 // then the transport will choose, randomly, one of the state channels during
 // reads or getting the connection.
 //
-// readLoop() and getConn(req *Request, cm connectMethod)
+// readloop() and getconn(req *request, cm connectmethod)
 // https://github.com/golang/go/blob/master/src/net/http/transport.go
 //
-// Send will not close the request.Request's body.
-func (r *Request) Send() error {
+// send will not close the request.request's body.
+func (r *request) send() error {
 	defer func() {
-		// Regardless of success or failure of the request trigger the Complete
+		// regardless of success or failure of the request trigger the complete
 		// request handlers.
-		r.Handlers.Complete.Run(r)
+		r.handlers.complete.run(r)
 	}()
 
 	for {
-		if BoolValue(r.Retryable) {
-			if r.Config.LogLevel.Matches(LogDebugWithRequestRetries) {
-				r.Config.Logger.Log(fmt.Sprintf("DEBUG: Retrying Request %s/%s, attempt %d",
-					r.Metadata.ServiceName, r.Operation.Name, r.RetryCount))
+		if boolvalue(r.retryable) {
+			if r.config.loglevel.matches(logdebugwithrequestretries) {
+				r.config.logger.log(fmt.sprintf("debug: retrying request %s/%s, attempt %d",
+					r.metadata.servicename, r.operation.name, r.retrycount))
 			}
 
-			// The previous http.Request will have a reference to the r.Body
-			// and the HTTP Client's Transport may still be reading from
-			// the request's body even though the Client's Do returned.
-			r.HTTPRequest = copyHTTPRequest(r.HTTPRequest, nil)
-			r.ResetBody()
+			// the previous http.request will have a reference to the r.body
+			// and the http client's transport may still be reading from
+			// the request's body even though the client's do returned.
+			r.httprequest = copyhttprequest(r.httprequest, nil)
+			r.resetbody()
 
-			// Closing response body to ensure that no response body is leaked
+			// closing response body to ensure that no response body is leaked
 			// between retry attempts.
-			if r.HTTPResponse != nil && r.HTTPResponse.Body != nil {
-				r.HTTPResponse.Body.Close()
+			if r.httpresponse != nil && r.httpresponse.body != nil {
+				r.httpresponse.body.close()
 			}
 		}
 
-		r.Sign()
-		if r.Error != nil {
-			return r.Error
+		r.sign()
+		if r.error != nil {
+			return r.error
 		}
 
-		r.Retryable = nil
+		r.retryable = nil
 
-		r.Handlers.Send.Run(r)
-		if r.Error != nil {
-			if !shouldRetryCancel(r) {
-				return r.Error
+		r.handlers.send.run(r)
+		if r.error != nil {
+			if !shouldretrycancel(r) {
+				return r.error
 			}
 
-			err := r.Error
-			r.Handlers.Retry.Run(r)
-			r.Handlers.AfterRetry.Run(r)
-			if r.Error != nil {
-				debugLogReqError(r, "Send Request", false, err)
-				return r.Error
+			err := r.error
+			r.handlers.retry.run(r)
+			r.handlers.afterretry.run(r)
+			if r.error != nil {
+				debuglogreqerror(r, "send request", false, err)
+				return r.error
 			}
-			debugLogReqError(r, "Send Request", true, err)
+			debuglogreqerror(r, "send request", true, err)
 			continue
 		}
-		r.Handlers.UnmarshalMeta.Run(r)
-		r.Handlers.ValidateResponse.Run(r)
-		if r.Error != nil {
-			r.Handlers.UnmarshalError.Run(r)
-			err := r.Error
+		r.handlers.unmarshalmeta.run(r)
+		r.handlers.validateresponse.run(r)
+		if r.error != nil {
+			r.handlers.unmarshalerror.run(r)
+			err := r.error
 
-			r.Handlers.Retry.Run(r)
-			r.Handlers.AfterRetry.Run(r)
-			if r.Error != nil {
-				debugLogReqError(r, "Validate Response", false, err)
-				return r.Error
+			r.handlers.retry.run(r)
+			r.handlers.afterretry.run(r)
+			if r.error != nil {
+				debuglogreqerror(r, "validate response", false, err)
+				return r.error
 			}
-			debugLogReqError(r, "Validate Response", true, err)
+			debuglogreqerror(r, "validate response", true, err)
 			continue
 		}
 
-		r.Handlers.Unmarshal.Run(r)
-		if r.Error != nil {
-			err := r.Error
-			r.Handlers.Retry.Run(r)
-			r.Handlers.AfterRetry.Run(r)
-			if r.Error != nil {
-				debugLogReqError(r, "Unmarshal Response", false, err)
-				return r.Error
+		r.handlers.unmarshal.run(r)
+		if r.error != nil {
+			err := r.error
+			r.handlers.retry.run(r)
+			r.handlers.afterretry.run(r)
+			if r.error != nil {
+				debuglogreqerror(r, "unmarshal response", false, err)
+				return r.error
 			}
-			debugLogReqError(r, "Unmarshal Response", true, err)
+			debuglogreqerror(r, "unmarshal response", true, err)
 			continue
 		}
 
@@ -542,46 +542,46 @@ func (r *Request) Send() error {
 
 // copy will copy a request which will allow for local manipulation of the
 // request.
-func (r *Request) copy() *Request {
-	req := &Request{}
+func (r *request) copy() *request {
+	req := &request{}
 	*req = *r
-	req.Handlers = r.Handlers.Copy()
-	op := *r.Operation
-	req.Operation = &op
+	req.handlers = r.handlers.copy()
+	op := *r.operation
+	req.operation = &op
 	return req
 }
 
-// AddToUserAgent adds the string to the end of the request's current user agent.
-func AddToUserAgent(r *Request, s string) {
-	curUA := r.HTTPRequest.Header.Get("User-Agent")
-	if len(curUA) > 0 {
-		s = curUA + " " + s
+// addtouseragent adds the string to the end of the request's current user agent.
+func addtouseragent(r *request, s string) {
+	curua := r.httprequest.header.get("user-agent")
+	if len(curua) > 0 {
+		s = curua + " " + s
 	}
-	r.HTTPRequest.Header.Set("User-Agent", s)
+	r.httprequest.header.set("user-agent", s)
 }
 
-func shouldRetryCancel(r *Request) bool {
-	awsErr, ok := r.Error.(awserr.Error)
-	timeoutErr := false
-	errStr := r.Error.Error()
+func shouldretrycancel(r *request) bool {
+	awserr, ok := r.error.(awserr.error)
+	timeouterr := false
+	errstr := r.error.error()
 	if ok {
-		if awsErr.Code() == CanceledErrorCode {
+		if awserr.code() == cancelederrorcode {
 			return false
 		}
-		err := awsErr.OrigErr()
-		netErr, netOK := err.(net.Error)
-		timeoutErr = netOK && netErr.Temporary()
-		if urlErr, ok := err.(*url.Error); !timeoutErr && ok {
-			errStr = urlErr.Err.Error()
+		err := awserr.origerr()
+		neterr, netok := err.(net.error)
+		timeouterr = netok && neterr.temporary()
+		if urlerr, ok := err.(*url.error); !timeouterr && ok {
+			errstr = urlerr.err.error()
 		}
 	}
 
-	// There can be two types of canceled errors here.
-	// The first being a net.Error and the other being an error.
-	// If the request was timed out, we want to continue the retry
-	// process. Otherwise, return the canceled error.
-	return timeoutErr ||
-		(errStr != "net/http: request canceled" &&
-			errStr != "net/http: request canceled while waiting for connection")
+	// there can be two types of canceled errors here.
+	// the first being a net.error and the other being an error.
+	// if the request was timed out, we want to continue the retry
+	// process. otherwise, return the canceled error.
+	return timeouterr ||
+		(errstr != "net/http: request canceled" &&
+			errstr != "net/http: request canceled while waiting for connection")
 
 }
