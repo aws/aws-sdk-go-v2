@@ -476,11 +476,11 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 type InputService4TestShapeInputService4TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	Items []*string `location:"querystring" locationName:"item" type:"list"`
+	Items []string `location:"querystring" locationName:"item" type:"list"`
 }
 
 // SetItems sets the Items field's value.
-func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetItems(v []*string) *InputService4TestShapeInputService4TestCaseOperation1Input {
+func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetItems(v []string) *InputService4TestShapeInputService4TestCaseOperation1Input {
 	s.Items = v
 	return s
 }
@@ -592,7 +592,7 @@ type InputService5TestShapeInputService5TestCaseOperation1Input struct {
 
 	PipelineId *string `location:"uri" type:"string"`
 
-	QueryDoc map[string]*string `location:"querystring" type:"map"`
+	QueryDoc map[string]string `location:"querystring" type:"map"`
 }
 
 // SetPipelineId sets the PipelineId field's value.
@@ -602,7 +602,7 @@ func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetPipeline
 }
 
 // SetQueryDoc sets the QueryDoc field's value.
-func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetQueryDoc(v map[string]*string) *InputService5TestShapeInputService5TestCaseOperation1Input {
+func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetQueryDoc(v map[string]string) *InputService5TestShapeInputService5TestCaseOperation1Input {
 	s.QueryDoc = v
 	return s
 }
@@ -714,7 +714,7 @@ type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 
 	PipelineId *string `location:"uri" type:"string"`
 
-	QueryDoc map[string][]*string `location:"querystring" type:"map"`
+	QueryDoc map[string][]string `location:"querystring" type:"map"`
 }
 
 // SetPipelineId sets the PipelineId field's value.
@@ -724,7 +724,7 @@ func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetPipeline
 }
 
 // SetQueryDoc sets the QueryDoc field's value.
-func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetQueryDoc(v map[string][]*string) *InputService6TestShapeInputService6TestCaseOperation1Input {
+func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetQueryDoc(v map[string][]string) *InputService6TestShapeInputService6TestCaseOperation1Input {
 	s.QueryDoc = v
 	return s
 }
@@ -2489,9 +2489,9 @@ type InputService16TestShapeRecursiveStructType struct {
 
 	NoRecurse *string `type:"string"`
 
-	RecursiveList []*InputService16TestShapeRecursiveStructType `type:"list"`
+	RecursiveList []InputService16TestShapeRecursiveStructType `type:"list"`
 
-	RecursiveMap map[string]*InputService16TestShapeRecursiveStructType `type:"map"`
+	RecursiveMap map[string]InputService16TestShapeRecursiveStructType `type:"map"`
 
 	RecursiveStruct *InputService16TestShapeRecursiveStructType `type:"structure"`
 }
@@ -2503,13 +2503,13 @@ func (s *InputService16TestShapeRecursiveStructType) SetNoRecurse(v string) *Inp
 }
 
 // SetRecursiveList sets the RecursiveList field's value.
-func (s *InputService16TestShapeRecursiveStructType) SetRecursiveList(v []*InputService16TestShapeRecursiveStructType) *InputService16TestShapeRecursiveStructType {
+func (s *InputService16TestShapeRecursiveStructType) SetRecursiveList(v []InputService16TestShapeRecursiveStructType) *InputService16TestShapeRecursiveStructType {
 	s.RecursiveList = v
 	return s
 }
 
 // SetRecursiveMap sets the RecursiveMap field's value.
-func (s *InputService16TestShapeRecursiveStructType) SetRecursiveMap(v map[string]*InputService16TestShapeRecursiveStructType) *InputService16TestShapeRecursiveStructType {
+func (s *InputService16TestShapeRecursiveStructType) SetRecursiveMap(v map[string]InputService16TestShapeRecursiveStructType) *InputService16TestShapeRecursiveStructType {
 	s.RecursiveMap = v
 	return s
 }
@@ -3528,9 +3528,9 @@ func TestInputService4ProtocolTestQuerystringListOfStringsCase1(t *testing.T) {
 
 	svc := NewInputService4ProtocolTest(cfg)
 	input := &InputService4TestShapeInputService4TestCaseOperation1Input{
-		Items: []*string{
-			aws.String("value1"),
-			aws.String("value2"),
+		Items: []string{
+			"value1",
+			"value2",
 		},
 	}
 
@@ -3557,9 +3557,9 @@ func TestInputService5ProtocolTestStringToStringMapsInQuerystringCase1(t *testin
 	svc := NewInputService5ProtocolTest(cfg)
 	input := &InputService5TestShapeInputService5TestCaseOperation1Input{
 		PipelineId: aws.String("foo"),
-		QueryDoc: map[string]*string{
-			"bar":  aws.String("baz"),
-			"fizz": aws.String("buzz"),
+		QueryDoc: map[string]string{
+			"bar":  "baz",
+			"fizz": "buzz",
 		},
 	}
 
@@ -3586,14 +3586,14 @@ func TestInputService6ProtocolTestStringToStringListMapsInQuerystringCase1(t *te
 	svc := NewInputService6ProtocolTest(cfg)
 	input := &InputService6TestShapeInputService6TestCaseOperation1Input{
 		PipelineId: aws.String("id"),
-		QueryDoc: map[string][]*string{
+		QueryDoc: map[string][]string{
 			"fizz": {
-				aws.String("buzz"),
-				aws.String("pop"),
+				"buzz",
+				"pop",
 			},
 			"foo": {
-				aws.String("bar"),
-				aws.String("baz"),
+				"bar",
+				"baz",
 			},
 		},
 	}
@@ -4122,7 +4122,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase4(t *testing.T) {
 	svc := NewInputService16ProtocolTest(cfg)
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
-			RecursiveList: []*InputService16TestShapeRecursiveStructType{
+			RecursiveList: []InputService16TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -4163,7 +4163,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase5(t *testing.T) {
 	svc := NewInputService16ProtocolTest(cfg)
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
-			RecursiveList: []*InputService16TestShapeRecursiveStructType{
+			RecursiveList: []InputService16TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -4206,7 +4206,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase6(t *testing.T) {
 	svc := NewInputService16ProtocolTest(cfg)
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
-			RecursiveMap: map[string]*InputService16TestShapeRecursiveStructType{
+			RecursiveMap: map[string]InputService16TestShapeRecursiveStructType{
 				"bar": {
 					NoRecurse: aws.String("bar"),
 				},

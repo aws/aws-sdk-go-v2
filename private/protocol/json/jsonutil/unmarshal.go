@@ -41,7 +41,8 @@ func unmarshalAny(value reflect.Value, data interface{}, tag reflect.StructTag) 
 		switch vtype.Kind() {
 		case reflect.Struct:
 			// also it can't be a time object
-			if _, ok := value.Interface().(*time.Time); !ok {
+			_, tok := value.Interface().(*time.Time)
+			if _, ok := value.Interface().(time.Time); !(ok || tok) {
 				t = "structure"
 			}
 		case reflect.Slice:
@@ -73,6 +74,7 @@ func unmarshalStruct(value reflect.Value, data interface{}, tag reflect.StructTa
 	if data == nil {
 		return nil
 	}
+
 	mapData, ok := data.(map[string]interface{})
 	if !ok {
 		return fmt.Errorf("JSON value is not a structure (%#v)", data)
@@ -157,7 +159,6 @@ func unmarshalMap(value reflect.Value, data interface{}, tag reflect.StructTag) 
 	for k, v := range mapData {
 		kvalue := reflect.ValueOf(k)
 		vvalue := reflect.New(value.Type().Elem()).Elem()
-
 		unmarshalAny(vvalue, v, "")
 		value.SetMapIndex(kvalue, vvalue)
 	}
@@ -196,11 +197,19 @@ func unmarshalScalar(value reflect.Value, data interface{}, tag reflect.StructTa
 		case *int64:
 			di := int64(d)
 			value.Set(reflect.ValueOf(&di))
+		case int64:
+			di := int64(d)
+			value.Set(reflect.ValueOf(di))
 		case *float64:
 			value.Set(reflect.ValueOf(&d))
+		case float64:
+			value.Set(reflect.ValueOf(d))
 		case *time.Time:
 			t := time.Unix(int64(d), 0).UTC()
 			value.Set(reflect.ValueOf(&t))
+		case time.Time:
+			t := time.Unix(int64(d), 0).UTC()
+			value.Set(reflect.ValueOf(t))
 		default:
 			return errf()
 		}

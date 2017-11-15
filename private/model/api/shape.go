@@ -144,11 +144,11 @@ func (s *Shape) MemberNames() []string {
 // GoTypeWithPkgName returns a shape's type as a string with the package name in
 // <packageName>.<type> format. Package naming only applies to structures.
 func (s *Shape) GoTypeWithPkgName() string {
-	return goType(s, true)
+	return goType(s, true, true)
 }
 
 func (s *Shape) GoTypeWithPkgNameElem() string {
-	t := goType(s, true)
+	t := goType(s, true, true)
 	if strings.HasPrefix(t, "*") {
 		return t[1:]
 	}
@@ -219,7 +219,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 
 // GoType returns a shape's Go type
 func (s *Shape) GoType() string {
-	return goType(s, false)
+	return goType(s, false, true)
 }
 
 // GoType returns a shape ref's Go type.
@@ -256,7 +256,7 @@ func getPkgName(s *Shape) string {
 
 // Returns a string version of the Shape's type.
 // If withPkgName is true, the package name will be added as a prefix
-func goType(s *Shape, withPkgName bool) string {
+func goType(s *Shape, withPkgName, pointer bool) string {
 	if s.IsEnum() {
 		name := s.EnumType()
 		if withPkgName {
@@ -266,32 +266,37 @@ func goType(s *Shape, withPkgName bool) string {
 		return name
 	}
 
+	prefix := ""
+	if pointer {
+		prefix = "*"
+	}
+
 	switch s.Type {
 	case "structure":
 		if withPkgName || s.resolvePkg != "" {
 			pkg := getPkgName(s)
-			return fmt.Sprintf("*%s.%s", pkg, s.ShapeName)
+			return fmt.Sprintf("%s%s.%s", prefix, pkg, s.ShapeName)
 		}
-		return "*" + s.ShapeName
+		return prefix + s.ShapeName
 	case "map":
-		return "map[string]" + goType(s.ValueRef.Shape, withPkgName)
+		return "map[string]" + goType(s.ValueRef.Shape, withPkgName, false)
 	case "jsonvalue":
 		return "aws.JSONValue"
 	case "list":
-		return "[]" + goType(s.MemberRef.Shape, withPkgName)
+		return "[]" + goType(s.MemberRef.Shape, withPkgName, false)
 	case "boolean":
-		return "*bool"
+		return prefix + "bool"
 	case "string", "character":
-		return "*string"
+		return prefix + "string"
 	case "blob":
 		return "[]byte"
 	case "integer", "long":
-		return "*int64"
+		return prefix + "int64"
 	case "float", "double":
-		return "*float64"
+		return prefix + "float64"
 	case "timestamp":
 		s.API.imports["time"] = true
-		return "*time.Time"
+		return prefix + "time.Time"
 	default:
 		panic("Unsupported shape type: " + s.Type)
 	}

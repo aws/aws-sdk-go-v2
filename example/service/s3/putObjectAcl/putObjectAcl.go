@@ -72,7 +72,7 @@ func main() {
 				DisplayName: ownerNamePtr,
 				ID:          ownerIDPtr,
 			},
-			Grants: []*s3.Grant{
+			Grants: []s3.Grant{
 				{
 					Grantee: &s3.Grantee{
 						Type:         s3.Type(*granteeTypePtr),

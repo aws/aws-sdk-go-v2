@@ -235,14 +235,28 @@ func buildQueryString(query url.Values, v reflect.Value, name string, tag reflec
 		for _, item := range value {
 			query.Add(name, *item)
 		}
+	case []string:
+		for _, item := range value {
+			query.Add(name, item)
+		}
 	case map[string]*string:
 		for key, item := range value {
 			query.Add(key, *item)
+		}
+	case map[string]string:
+		for key, item := range value {
+			query.Add(key, item)
 		}
 	case map[string][]*string:
 		for key, items := range value {
 			for _, item := range items {
 				query.Add(key, *item)
+			}
+		}
+	case map[string][]string:
+		for key, items := range value {
+			for _, item := range items {
+				query.Add(key, item)
 			}
 		}
 	default:

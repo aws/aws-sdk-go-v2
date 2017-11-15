@@ -32,7 +32,7 @@ func TestQueueGetMessage(t *testing.T) {
 	}{
 		{ // Case 1, expect parsed responses
 			Resp: sqs.ReceiveMessageOutput{
-				Messages: []*sqs.Message{
+				Messages: []sqs.Message{
 					{Body: aws.String(`{"from":"user_1","to":"room_1","msg":"Hello!"}`)},
 					{Body: aws.String(`{"from":"user_2","to":"room_1","msg":"Hi user_1 :)"}`)},
 				},

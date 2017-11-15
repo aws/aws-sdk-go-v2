@@ -22,20 +22,20 @@ type ItemGetter struct {
 // {"id": "my primary key", "value": "valuable value"}
 func (ig *ItemGetter) Get(id string) (value string) {
 	var input = &dynamodb.GetItemInput{
-		Key: map[string]*dynamodb.AttributeValue{
+		Key: map[string]dynamodb.AttributeValue{
 			"id": {
 				S: aws.String(id),
 			},
 		},
 		TableName: aws.String("my_table"),
-		AttributesToGet: []*string{
-			aws.String("value"),
+		AttributesToGet: []string{
+			"value",
 		},
 	}
 	req := ig.DynamoDB.GetItemRequest(input)
 	if output, err := req.Send(); err == nil {
-		if _, ok := output.Item["value"]; ok {
-			dynamodbattribute.Unmarshal(output.Item["value"], &value)
+		if v, ok := output.Item["value"]; ok {
+			dynamodbattribute.Unmarshal(&v, &value)
 		}
 	}
 	return

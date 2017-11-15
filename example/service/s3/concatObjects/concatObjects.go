@@ -96,7 +96,7 @@ func main() {
 		Key:      &key3,
 		UploadId: output.UploadId,
 		MultipartUpload: &s3.CompletedMultipartUpload{
-			Parts: []*s3.CompletedPart{
+			Parts: []s3.CompletedPart{
 				{
 					ETag:       foo,
 					PartNumber: aws.Int64(1),

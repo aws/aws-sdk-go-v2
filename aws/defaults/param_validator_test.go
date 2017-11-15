@@ -264,7 +264,7 @@ func BenchmarkValidateAny(b *testing.B) {
 		StreamName: aws.String("stream"),
 	}
 	for i := 0; i < 100; i++ {
-		record := &kinesis.PutRecordsRequestEntry{
+		record := kinesis.PutRecordsRequestEntry{
 			Data:         make([]byte, 10000),
 			PartitionKey: aws.String("partition"),
 		}

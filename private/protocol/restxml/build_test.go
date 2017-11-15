@@ -834,11 +834,11 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 type InputService5TestShapeInputService5TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
-	ListParam []*string `type:"list"`
+	ListParam []string `type:"list"`
 }
 
 // SetListParam sets the ListParam field's value.
-func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetListParam(v []*string) *InputService5TestShapeInputService5TestCaseOperation1Input {
+func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetListParam(v []string) *InputService5TestShapeInputService5TestCaseOperation1Input {
 	s.ListParam = v
 	return s
 }
@@ -948,11 +948,11 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
-	ListParam []*string `locationName:"AlternateName" locationNameList:"NotMember" type:"list"`
+	ListParam []string `locationName:"AlternateName" locationNameList:"NotMember" type:"list"`
 }
 
 // SetListParam sets the ListParam field's value.
-func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetListParam(v []*string) *InputService6TestShapeInputService6TestCaseOperation1Input {
+func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetListParam(v []string) *InputService6TestShapeInputService6TestCaseOperation1Input {
 	s.ListParam = v
 	return s
 }
@@ -1062,11 +1062,11 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 type InputService7TestShapeInputService7TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
-	ListParam []*string `type:"list" flattened:"true"`
+	ListParam []string `type:"list" flattened:"true"`
 }
 
 // SetListParam sets the ListParam field's value.
-func (s *InputService7TestShapeInputService7TestCaseOperation1Input) SetListParam(v []*string) *InputService7TestShapeInputService7TestCaseOperation1Input {
+func (s *InputService7TestShapeInputService7TestCaseOperation1Input) SetListParam(v []string) *InputService7TestShapeInputService7TestCaseOperation1Input {
 	s.ListParam = v
 	return s
 }
@@ -1176,11 +1176,11 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 type InputService8TestShapeInputService8TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
-	ListParam []*string `locationName:"item" type:"list" flattened:"true"`
+	ListParam []string `locationName:"item" type:"list" flattened:"true"`
 }
 
 // SetListParam sets the ListParam field's value.
-func (s *InputService8TestShapeInputService8TestCaseOperation1Input) SetListParam(v []*string) *InputService8TestShapeInputService8TestCaseOperation1Input {
+func (s *InputService8TestShapeInputService8TestCaseOperation1Input) SetListParam(v []string) *InputService8TestShapeInputService8TestCaseOperation1Input {
 	s.ListParam = v
 	return s
 }
@@ -1290,11 +1290,11 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input
 type InputService9TestShapeInputService9TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
-	ListParam []*InputService9TestShapeSingleFieldStruct `locationName:"item" type:"list" flattened:"true"`
+	ListParam []InputService9TestShapeSingleFieldStruct `locationName:"item" type:"list" flattened:"true"`
 }
 
 // SetListParam sets the ListParam field's value.
-func (s *InputService9TestShapeInputService9TestCaseOperation1Input) SetListParam(v []*InputService9TestShapeSingleFieldStruct) *InputService9TestShapeInputService9TestCaseOperation1Input {
+func (s *InputService9TestShapeInputService9TestCaseOperation1Input) SetListParam(v []InputService9TestShapeSingleFieldStruct) *InputService9TestShapeInputService9TestCaseOperation1Input {
 	s.ListParam = v
 	return s
 }
@@ -1551,11 +1551,11 @@ func (c *InputService11ProtocolTest) InputService11TestCaseOperation1Request(inp
 type InputService11TestShapeInputService11TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
-	Foo map[string]*string `location:"headers" locationName:"x-foo-" type:"map"`
+	Foo map[string]string `location:"headers" locationName:"x-foo-" type:"map"`
 }
 
 // SetFoo sets the Foo field's value.
-func (s *InputService11TestShapeInputService11TestCaseOperation1Input) SetFoo(v map[string]*string) *InputService11TestShapeInputService11TestCaseOperation1Input {
+func (s *InputService11TestShapeInputService11TestCaseOperation1Input) SetFoo(v map[string]string) *InputService11TestShapeInputService11TestCaseOperation1Input {
 	s.Foo = v
 	return s
 }
@@ -1665,11 +1665,11 @@ func (c *InputService12ProtocolTest) InputService12TestCaseOperation1Request(inp
 type InputService12TestShapeInputService12TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	Items []*string `location:"querystring" locationName:"item" type:"list"`
+	Items []string `location:"querystring" locationName:"item" type:"list"`
 }
 
 // SetItems sets the Items field's value.
-func (s *InputService12TestShapeInputService12TestCaseOperation1Input) SetItems(v []*string) *InputService12TestShapeInputService12TestCaseOperation1Input {
+func (s *InputService12TestShapeInputService12TestCaseOperation1Input) SetItems(v []string) *InputService12TestShapeInputService12TestCaseOperation1Input {
 	s.Items = v
 	return s
 }
@@ -1781,7 +1781,7 @@ type InputService13TestShapeInputService13TestCaseOperation1Input struct {
 
 	PipelineId *string `location:"uri" type:"string"`
 
-	QueryDoc map[string]*string `location:"querystring" type:"map"`
+	QueryDoc map[string]string `location:"querystring" type:"map"`
 }
 
 // SetPipelineId sets the PipelineId field's value.
@@ -1791,7 +1791,7 @@ func (s *InputService13TestShapeInputService13TestCaseOperation1Input) SetPipeli
 }
 
 // SetQueryDoc sets the QueryDoc field's value.
-func (s *InputService13TestShapeInputService13TestCaseOperation1Input) SetQueryDoc(v map[string]*string) *InputService13TestShapeInputService13TestCaseOperation1Input {
+func (s *InputService13TestShapeInputService13TestCaseOperation1Input) SetQueryDoc(v map[string]string) *InputService13TestShapeInputService13TestCaseOperation1Input {
 	s.QueryDoc = v
 	return s
 }
@@ -1903,7 +1903,7 @@ type InputService14TestShapeInputService14TestCaseOperation1Input struct {
 
 	PipelineId *string `location:"uri" type:"string"`
 
-	QueryDoc map[string][]*string `location:"querystring" type:"map"`
+	QueryDoc map[string][]string `location:"querystring" type:"map"`
 }
 
 // SetPipelineId sets the PipelineId field's value.
@@ -1913,7 +1913,7 @@ func (s *InputService14TestShapeInputService14TestCaseOperation1Input) SetPipeli
 }
 
 // SetQueryDoc sets the QueryDoc field's value.
-func (s *InputService14TestShapeInputService14TestCaseOperation1Input) SetQueryDoc(v map[string][]*string) *InputService14TestShapeInputService14TestCaseOperation1Input {
+func (s *InputService14TestShapeInputService14TestCaseOperation1Input) SetQueryDoc(v map[string][]string) *InputService14TestShapeInputService14TestCaseOperation1Input {
 	s.QueryDoc = v
 	return s
 }
@@ -3419,9 +3419,9 @@ type InputService22TestShapeRecursiveStructType struct {
 
 	NoRecurse *string `type:"string"`
 
-	RecursiveList []*InputService22TestShapeRecursiveStructType `type:"list"`
+	RecursiveList []InputService22TestShapeRecursiveStructType `type:"list"`
 
-	RecursiveMap map[string]*InputService22TestShapeRecursiveStructType `type:"map"`
+	RecursiveMap map[string]InputService22TestShapeRecursiveStructType `type:"map"`
 
 	RecursiveStruct *InputService22TestShapeRecursiveStructType `type:"structure"`
 }
@@ -3433,13 +3433,13 @@ func (s *InputService22TestShapeRecursiveStructType) SetNoRecurse(v string) *Inp
 }
 
 // SetRecursiveList sets the RecursiveList field's value.
-func (s *InputService22TestShapeRecursiveStructType) SetRecursiveList(v []*InputService22TestShapeRecursiveStructType) *InputService22TestShapeRecursiveStructType {
+func (s *InputService22TestShapeRecursiveStructType) SetRecursiveList(v []InputService22TestShapeRecursiveStructType) *InputService22TestShapeRecursiveStructType {
 	s.RecursiveList = v
 	return s
 }
 
 // SetRecursiveMap sets the RecursiveMap field's value.
-func (s *InputService22TestShapeRecursiveStructType) SetRecursiveMap(v map[string]*InputService22TestShapeRecursiveStructType) *InputService22TestShapeRecursiveStructType {
+func (s *InputService22TestShapeRecursiveStructType) SetRecursiveMap(v map[string]InputService22TestShapeRecursiveStructType) *InputService22TestShapeRecursiveStructType {
 	s.RecursiveMap = v
 	return s
 }
@@ -4168,10 +4168,10 @@ func TestInputService5ProtocolTestNonFlattenedListsCase1(t *testing.T) {
 
 	svc := NewInputService5ProtocolTest(cfg)
 	input := &InputService5TestShapeInputService5TestCaseOperation1Input{
-		ListParam: []*string{
-			aws.String("one"),
-			aws.String("two"),
-			aws.String("three"),
+		ListParam: []string{
+			"one",
+			"two",
+			"three",
 		},
 	}
 
@@ -4204,10 +4204,10 @@ func TestInputService6ProtocolTestNonFlattenedListsWithLocationNameCase1(t *test
 
 	svc := NewInputService6ProtocolTest(cfg)
 	input := &InputService6TestShapeInputService6TestCaseOperation1Input{
-		ListParam: []*string{
-			aws.String("one"),
-			aws.String("two"),
-			aws.String("three"),
+		ListParam: []string{
+			"one",
+			"two",
+			"three",
 		},
 	}
 
@@ -4240,10 +4240,10 @@ func TestInputService7ProtocolTestFlattenedListsCase1(t *testing.T) {
 
 	svc := NewInputService7ProtocolTest(cfg)
 	input := &InputService7TestShapeInputService7TestCaseOperation1Input{
-		ListParam: []*string{
-			aws.String("one"),
-			aws.String("two"),
-			aws.String("three"),
+		ListParam: []string{
+			"one",
+			"two",
+			"three",
 		},
 	}
 
@@ -4276,10 +4276,10 @@ func TestInputService8ProtocolTestFlattenedListsWithLocationNameCase1(t *testing
 
 	svc := NewInputService8ProtocolTest(cfg)
 	input := &InputService8TestShapeInputService8TestCaseOperation1Input{
-		ListParam: []*string{
-			aws.String("one"),
-			aws.String("two"),
-			aws.String("three"),
+		ListParam: []string{
+			"one",
+			"two",
+			"three",
 		},
 	}
 
@@ -4312,7 +4312,7 @@ func TestInputService9ProtocolTestListOfStructuresCase1(t *testing.T) {
 
 	svc := NewInputService9ProtocolTest(cfg)
 	input := &InputService9TestShapeInputService9TestCaseOperation1Input{
-		ListParam: []*InputService9TestShapeSingleFieldStruct{
+		ListParam: []InputService9TestShapeSingleFieldStruct{
 			{
 				Element: aws.String("one"),
 			},
@@ -4389,9 +4389,9 @@ func TestInputService11ProtocolTestHeaderMapsCase1(t *testing.T) {
 
 	svc := NewInputService11ProtocolTest(cfg)
 	input := &InputService11TestShapeInputService11TestCaseOperation1Input{
-		Foo: map[string]*string{
-			"a": aws.String("b"),
-			"c": aws.String("d"),
+		Foo: map[string]string{
+			"a": "b",
+			"c": "d",
 		},
 	}
 
@@ -4423,9 +4423,9 @@ func TestInputService12ProtocolTestQuerystringListOfStringsCase1(t *testing.T) {
 
 	svc := NewInputService12ProtocolTest(cfg)
 	input := &InputService12TestShapeInputService12TestCaseOperation1Input{
-		Items: []*string{
-			aws.String("value1"),
-			aws.String("value2"),
+		Items: []string{
+			"value1",
+			"value2",
 		},
 	}
 
@@ -4452,9 +4452,9 @@ func TestInputService13ProtocolTestStringToStringMapsInQuerystringCase1(t *testi
 	svc := NewInputService13ProtocolTest(cfg)
 	input := &InputService13TestShapeInputService13TestCaseOperation1Input{
 		PipelineId: aws.String("foo"),
-		QueryDoc: map[string]*string{
-			"bar":  aws.String("baz"),
-			"fizz": aws.String("buzz"),
+		QueryDoc: map[string]string{
+			"bar":  "baz",
+			"fizz": "buzz",
 		},
 	}
 
@@ -4481,14 +4481,14 @@ func TestInputService14ProtocolTestStringToStringListMapsInQuerystringCase1(t *t
 	svc := NewInputService14ProtocolTest(cfg)
 	input := &InputService14TestShapeInputService14TestCaseOperation1Input{
 		PipelineId: aws.String("id"),
-		QueryDoc: map[string][]*string{
+		QueryDoc: map[string][]string{
 			"fizz": {
-				aws.String("buzz"),
-				aws.String("pop"),
+				"buzz",
+				"pop",
 			},
 			"foo": {
-				aws.String("bar"),
-				aws.String("baz"),
+				"bar",
+				"baz",
 			},
 		},
 	}
@@ -4990,7 +4990,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase4(t *testing.T) {
 	svc := NewInputService22ProtocolTest(cfg)
 	input := &InputService22TestShapeInputService22TestCaseOperation6Input{
 		RecursiveStruct: &InputService22TestShapeRecursiveStructType{
-			RecursiveList: []*InputService22TestShapeRecursiveStructType{
+			RecursiveList: []InputService22TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -5031,7 +5031,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase5(t *testing.T) {
 	svc := NewInputService22ProtocolTest(cfg)
 	input := &InputService22TestShapeInputService22TestCaseOperation6Input{
 		RecursiveStruct: &InputService22TestShapeRecursiveStructType{
-			RecursiveList: []*InputService22TestShapeRecursiveStructType{
+			RecursiveList: []InputService22TestShapeRecursiveStructType{
 				{
 					NoRecurse: aws.String("foo"),
 				},
@@ -5074,7 +5074,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase6(t *testing.T) {
 	svc := NewInputService22ProtocolTest(cfg)
 	input := &InputService22TestShapeInputService22TestCaseOperation6Input{
 		RecursiveStruct: &InputService22TestShapeRecursiveStructType{
-			RecursiveMap: map[string]*InputService22TestShapeRecursiveStructType{
+			RecursiveMap: map[string]InputService22TestShapeRecursiveStructType{
 				"bar": {
 					NoRecurse: aws.String("bar"),
 				},

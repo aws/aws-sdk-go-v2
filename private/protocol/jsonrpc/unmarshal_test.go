@@ -624,27 +624,27 @@ type OutputService4TestShapeOutputService4TestCaseOperation2Input struct {
 type OutputService4TestShapeOutputService4TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
-	ListMember []*string `type:"list"`
+	ListMember []string `type:"list"`
 
-	ListMemberMap []map[string]*string `type:"list"`
+	ListMemberMap []map[string]string `type:"list"`
 
-	ListMemberStruct []*OutputService4TestShapeStructType `type:"list"`
+	ListMemberStruct []OutputService4TestShapeStructType `type:"list"`
 }
 
 // SetListMember sets the ListMember field's value.
-func (s *OutputService4TestShapeOutputService4TestCaseOperation2Output) SetListMember(v []*string) *OutputService4TestShapeOutputService4TestCaseOperation2Output {
+func (s *OutputService4TestShapeOutputService4TestCaseOperation2Output) SetListMember(v []string) *OutputService4TestShapeOutputService4TestCaseOperation2Output {
 	s.ListMember = v
 	return s
 }
 
 // SetListMemberMap sets the ListMemberMap field's value.
-func (s *OutputService4TestShapeOutputService4TestCaseOperation2Output) SetListMemberMap(v []map[string]*string) *OutputService4TestShapeOutputService4TestCaseOperation2Output {
+func (s *OutputService4TestShapeOutputService4TestCaseOperation2Output) SetListMemberMap(v []map[string]string) *OutputService4TestShapeOutputService4TestCaseOperation2Output {
 	s.ListMemberMap = v
 	return s
 }
 
 // SetListMemberStruct sets the ListMemberStruct field's value.
-func (s *OutputService4TestShapeOutputService4TestCaseOperation2Output) SetListMemberStruct(v []*OutputService4TestShapeStructType) *OutputService4TestShapeOutputService4TestCaseOperation2Output {
+func (s *OutputService4TestShapeOutputService4TestCaseOperation2Output) SetListMemberStruct(v []OutputService4TestShapeStructType) *OutputService4TestShapeOutputService4TestCaseOperation2Output {
 	s.ListMemberStruct = v
 	return s
 }
@@ -756,11 +756,11 @@ type OutputService5TestShapeOutputService5TestCaseOperation1Input struct {
 type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	MapMember map[string][]*int64 `type:"map"`
+	MapMember map[string][]int64 `type:"map"`
 }
 
 // SetMapMember sets the MapMember field's value.
-func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetMapMember(v map[string][]*int64) *OutputService5TestShapeOutputService5TestCaseOperation1Output {
+func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetMapMember(v map[string][]int64) *OutputService5TestShapeOutputService5TestCaseOperation1Output {
 	s.MapMember = v
 	return s
 }
@@ -1051,7 +1051,7 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 	if e, a := int64(123), *out.Num; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "myname", *out.Str; e != a {
+	if e, a := string("myname"), *out.Str; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := true, *out.TrueBool; e != a {
@@ -1150,10 +1150,10 @@ func TestOutputService4ProtocolTestListsCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "a", *out.ListMember[0]; e != a {
+	if e, a := string("a"), out.ListMember[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := "b", *out.ListMember[1]; e != a {
+	if e, a := string("b"), out.ListMember[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -1183,23 +1183,11 @@ func TestOutputService4ProtocolTestListsCase2(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := "a", *out.ListMember[0]; e != a {
+	if e, a := string("a"), out.ListMember[0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e := out.ListMember[1]; e != nil {
-		t.Errorf("expect nil, got %v", e)
-	}
-	if e := out.ListMemberMap[1]; e != nil {
-		t.Errorf("expect nil, got %v", e)
-	}
-	if e := out.ListMemberMap[2]; e != nil {
-		t.Errorf("expect nil, got %v", e)
-	}
-	if e := out.ListMemberStruct[1]; e != nil {
-		t.Errorf("expect nil, got %v", e)
-	}
-	if e := out.ListMemberStruct[2]; e != nil {
-		t.Errorf("expect nil, got %v", e)
+	if e, a := "", out.ListMember[1]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1228,16 +1216,16 @@ func TestOutputService5ProtocolTestMapsCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := int64(1), *out.MapMember["a"][0]; e != a {
+	if e, a := int64(1), out.MapMember["a"][0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := int64(2), *out.MapMember["a"][1]; e != a {
+	if e, a := int64(2), out.MapMember["a"][1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := int64(3), *out.MapMember["b"][0]; e != a {
+	if e, a := int64(3), out.MapMember["b"][0]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := int64(4), *out.MapMember["b"][1]; e != a {
+	if e, a := int64(4), out.MapMember["b"][1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
